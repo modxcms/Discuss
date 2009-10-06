@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disBanGroup']= array (
   'package' => 'discuss',
-  'table' => 'dis_ban_groups',
+  'table' => 'ban_groups',
   'fields' => 
   array (
     'name' => '',

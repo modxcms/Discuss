@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disForumActivity']= array (
   'package' => 'discuss',
-  'table' => 'dis_forum_activity',
+  'table' => 'forum_activity',
   'fields' => 
   array (
     'day' => NULL,

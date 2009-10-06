@@ -17,24 +17,27 @@ class Discuss {
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
-        $core_path = $this->modx->getOption('core_path').'components/discuss/';
-        $assets_path = $this->modx->getOption('assets_path').'components/discuss/';
-        $assets_url = $this->modx->getOption('assets_url').'components/discuss/';
+        $corePath = $this->modx->getOption('discuss.core_path',$config,$this->modx->getOption('core_path').'components/discuss/');
+        $assetsPath = $this->modx->getOption('discuss.assets_path',$config,$this->modx->getOption('assets_path').'components/discuss/');
+        $assetsUrl = $this->modx->getOption('discuss.assets_url',$config,$this->modx->getOption('assets_url').'components/discuss/');
+
         $this->config = array_merge(array(
-            'cssUrl' => $assets_url.'css/',
-            'jsUrl' => $assets_url.'js/',
-            'imagesUrl' => $assets_url.'images/',
-            'connectorUrl' => $assets_url.'connector.php',
-            'modelPath' => $core_path.'model/',
-            'corePath' => $core_path,
-            'chunksPath' => $core_path.'chunks/',
+            'assetsUrl' => $assetsUrl,
+            'cssUrl' => $assetsUrl.'css/',
+            'jsUrl' => $assetsUrl.'js/',
+            'imagesUrl' => $assetsUrl.'images/',
+            'connectorUrl' => $assetsUrl.'connector.php',
+            'corePath' => $corePath,
+            'modelPath' => $corePath.'model/',
+            'chunksPath' => $corePath.'elements/chunks/',
+            'snippetsPath' => $corePath.'elements/snippets/',
+            'processorsPath' => $corePath.'processors/',
             'useCss' => true,
             'loadJQuery' => true,
-            'processorsPath' => $core_path.'processors/',
             'debug' => true,
         ),$config);
 
-        $this->modx->addPackage('discuss',$this->config['modelPath']);
+        $this->modx->addPackage('discuss',$this->config['modelPath'],'discuss_');
         if ($this->modx->getOption('discuss.debug',$this->config,true)) {
             $this->startDebugTimer();
         }

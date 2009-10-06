@@ -11,7 +11,7 @@ $mtime = $mtime[1] + $mtime[0];
 $tstart = $mtime;
 set_time_limit(0);
 
-define('MODX_CORE_PATH',dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/');
+require_once dirname(__FILE__).'/build.config.php';
 include_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 $modx= new modX();
 $modx->initialize('mgr');
@@ -20,7 +20,7 @@ echo '<pre>'; /* used for nice formatting of log messages */
 $modx->setLogLevel(MODX_LOG_LEVEL_INFO);
 $modx->setLogTarget('ECHO');
 
-$root = MODX_BASE_PATH;
+$root = dirname(dirname(__FILE__)).'/';
 $sources = array(
     'root' => $root,
     'core' => $root.'core/components/discuss/',
@@ -67,7 +67,12 @@ $generator->mapHeader= <<<EOD
  * [+phpdoc-package+]
  */
 EOD;
-$generator->parseSchema(dirname(__FILE__) . '/discuss.mysql.schema.xml', $sources['model']);
+
+if (!is_dir($sources['model'])) {
+    $modx->log(MODX_LOG_LEVEL_ERROR,'Model directory not found!');
+    die();
+}
+$generator->parseSchema(dirname(__FILE__) . '/schema/discuss.mysql.schema.xml',$sources['model']);
 
 
 $mtime= microtime();

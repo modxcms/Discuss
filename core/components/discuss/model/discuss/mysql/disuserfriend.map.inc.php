@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disUserFriend']= array (
   'package' => 'discuss',
-  'table' => 'dis_user_friends',
+  'table' => 'user_friends',
   'fields' => 
   array (
     'user' => 0,

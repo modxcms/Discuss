@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disBoard']= array (
   'package' => 'discuss',
-  'table' => 'dis_boards',
+  'table' => 'boards',
   'fields' => 
   array (
     'category' => 0,
