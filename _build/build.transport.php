@@ -23,6 +23,7 @@ $sources = array(
     'data' => $root . '_build/data/',
     'resolvers' => $root . '_build/resolvers/',
     'chunks' => $root.'core/components/discuss/chunks/',
+    'docs' => $root.'core/components/discuss/docs/',
     'source_assets' => $root.'assets/components/discuss',
     'source_core' => $root.'core/components/discuss',
 );
@@ -59,17 +60,35 @@ $attr = array(
     XPDO_TRANSPORT_UPDATE_OBJECT => true,
     XPDO_TRANSPORT_RELATED_OBJECTS => true,
     XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
-        'modSnippet' => array(
+        'Children' => array(
+            XPDO_TRANSPORT_PRESERVE_KEYS => false,
+            XPDO_TRANSPORT_UPDATE_OBJECT => true,
+            XPDO_TRANSPORT_UNIQUE_KEY => 'category',
+            XPDO_TRANSPORT_RELATED_OBJECTS => true,
+            XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
+                'Snippets' => array(
+                    XPDO_TRANSPORT_PRESERVE_KEYS => false,
+                    XPDO_TRANSPORT_UPDATE_OBJECT => true,
+                    XPDO_TRANSPORT_UNIQUE_KEY => 'name',
+                ),
+                'Chunks' => array(
+                    XPDO_TRANSPORT_PRESERVE_KEYS => false,
+                    XPDO_TRANSPORT_UPDATE_OBJECT => true,
+                    XPDO_TRANSPORT_UNIQUE_KEY => 'name',
+                ),
+            ),
+        ),
+        'Snippets' => array(
             XPDO_TRANSPORT_PRESERVE_KEYS => false,
             XPDO_TRANSPORT_UPDATE_OBJECT => true,
             XPDO_TRANSPORT_UNIQUE_KEY => 'name',
         ),
-        'modChunk' => array (
+        'Chunks' => array (
             XPDO_TRANSPORT_PRESERVE_KEYS => false,
             XPDO_TRANSPORT_UPDATE_OBJECT => true,
             XPDO_TRANSPORT_UNIQUE_KEY => 'name',
         ),
-    )
+    ),
 );
 $vehicle = $builder->createVehicle($category,$attr);
 
@@ -86,25 +105,31 @@ $builder->putVehicle($vehicle);
 /* load lexicon strings */
 $builder->buildLexicon($sources['lexicon']);
 
-/* load action/menu */
-$action= null;
-include_once $sources['data'].'transport.action.php';
+/* load menu */
+$menu= null;
+include_once $sources['data'].'transport.menu.php';
 
-$vehicle= $builder->createVehicle($action,array (
+$vehicle= $builder->createVehicle($menu,array (
     XPDO_TRANSPORT_PRESERVE_KEYS => false,
     XPDO_TRANSPORT_UPDATE_OBJECT => true,
-    XPDO_TRANSPORT_UNIQUE_KEY => array ('namespace','controller'),
+    XPDO_TRANSPORT_UNIQUE_KEY => 'text',
     XPDO_TRANSPORT_RELATED_OBJECTS => true,
     XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
-        'Menus' => array (
+        'Action' => array (
             XPDO_TRANSPORT_PRESERVE_KEYS => false,
             XPDO_TRANSPORT_UPDATE_OBJECT => true,
-            XPDO_TRANSPORT_UNIQUE_KEY => array ('action', 'text'),
+            XPDO_TRANSPORT_UNIQUE_KEY => array ('namespace','controller'),
         ),
     ),
 ));
 $builder->putVehicle($vehicle);
-unset($vehicle,$action);
+unset($vehicle,$menu);
+
+/* now pack in the license file, readme and setup options */
+$builder->setPackageAttributes(array(
+    'license' => file_get_contents($sources['docs'] . 'license.txt'),
+    'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+));
 
 /* zip up package */
 $builder->pack();

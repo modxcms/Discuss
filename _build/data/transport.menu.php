@@ -9,24 +9,23 @@ $action= $modx->newObject('modAction');
 $action->fromArray(array(
     'id' => 1,
     'namespace' => 'discuss',
-    'parent' => '0',
+    'parent' => 0,
     'controller' => 'index',
-    'haslayout' => '1',
+    'haslayout' => 1,
     'lang_topics' => 'discuss:default,file',
     'assets' => '',
 ),'',true,true);
 
-/* load menu into action */
+/* load action into menu */
 $menu= $modx->newObject('modMenu');
 $menu->fromArray(array(
-    'id' => 1,
-    'parent' => '2',
     'text' => 'discuss',
+    'parent' => 'components',
     'description' => 'discuss.menu_desc',
     'icon' => 'images/icons/plugin.gif',
-    'menuindex' => '0',
+    'menuindex' => 0,
     'params' => '',
     'handler' => '',
 ),'',true,true);
-$action->addMany($menu,'Menus');
-unset($menus);
+$menu->addOne($action);
+unset($action);
