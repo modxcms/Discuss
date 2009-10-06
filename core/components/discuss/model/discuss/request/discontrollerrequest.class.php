@@ -40,12 +40,14 @@ class DisControllerRequest extends modRequest {
      * @return boolean True if the response is properly prepared.
      */
     function _prepareResponse() {
-        $modx =& $this->modx;
-        $discuss =& $this->discuss;
         $viewHeader = include $this->discuss->config['corePath'].'controllers/mgr/header.php';
 
-        $f = $this->discuss->config['corePath'].'controllers/mgr/'.$this->action.'.php';
+        $f = $this->discuss->config['corePath'].'controllers/mgr/'.strtolower($this->action).'.php';
         if (file_exists($f)) {
+            $this->modx->lexicon->load('discuss:default');
+            $modx =& $this->modx;
+            $discuss =& $this->discuss;
+
             $viewOutput = include $f;
         } else {
             $viewOutput = 'Action not found: '.$f;

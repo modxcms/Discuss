@@ -224,7 +224,7 @@ class disPost extends xPDOSimpleObject {
         $c = $this->xpdo->newQuery('disPost');
         $c->select('
             disPost.*,
-            Descendants.depth AS depth,
+            Descendants.depth AS depth
         ');
         $c->innerJoin('disPostClosure','Descendants');
         $c->innerJoin('disPostClosure','Ancestors');
@@ -276,5 +276,49 @@ class disPost extends xPDOSimpleObject {
         $guests = $this->xpdo->getCount('disSession',$c);
 
         return $members.' and '.$guests.' guests are viewing this thread.';
+    }
+
+
+    /**
+     * Marks a post read by the currently logged in user.
+     *
+     * @access public
+     * @return boolean True if successful.
+     */
+    public function markAsRead() {
+        if (!$this->xpdo->user || $this->xpdo->user->get('id') == 0) return false;
+
+        $read = $this->xpdo->newObject('disPostRead');
+        $read->set('post',$this->get('id'));
+        $read->set('board',$this->get('board'));
+        $read->set('user',$this->xpdo->user->get('id'));
+
+        $saved = $read->save();
+        if (!$saved) {
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark read the post: '.print_r($read->toArray(),true));
+        }
+        return $saved;
+    }
+
+    /**
+     * Marks a post unread by the currently logged in user.
+     *
+     * @access public
+     * @return boolean True if successful.
+     */
+    public function markAsUnread() {
+        if (!$this->xpdo->user || $this->xpdo->user->get('id') == 0) return false;
+
+        $read = $this->xpdo->getObject('disPostRead',array(
+            'user' => $this->get('user'),
+            'post' => $this->get('id'),
+        ));
+        if ($read == null) return true;
+
+        $removed = $read->remove();
+        if (!$removed) {
+            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark unread the post: '.print_r($read->toArray(),true));
+        }
+        return $removed;
     }
 }

@@ -58,34 +58,43 @@ class Discuss {
      * @param string $ctx The context to load. Defaults to web.
      */
     public function initialize($ctx = 'web') {
-        if ($ctx != 'mgr') {
-            $this->modx->lexicon->load('discuss:web');
+        switch ($ctx) {
+            case 'mgr':
+                if (!$this->modx->loadClass('discuss.request.DisControllerRequest',$this->config['modelPath'],true,true)) {
+                    return 'Could not load controller request handler.';
+                }
+                $this->request = new DisControllerRequest($this);
+                return $this->request->handleRequest();
+            break;
+            case 'connector':
 
-            if ($this->config['useCss']) {
-                $this->modx->regClientCSS($this->config['cssUrl'].'index.css');
-            }
-            if ($this->config['loadJQuery']) {
-                $this->modx->regClientStartupScript($this->config['jsUrl'].'web/jquery-1.3.2.min.js');
-            }
-            $this->modx->regClientStartupScript($this->config['jsUrl'].'web/discuss.js');
-            $this->modx->regClientStartupScript('<script type="text/javascript">
-$(function() {
-    DIS.config.connector = "'.$this->config['connectorUrl'].'";
-    DIS.config.context = "'.$this->modx->context->get('key').'";
-    DIS.config.pollingInterval = "30000";
-});</script>
-            ');
-            $this->_initUser();
-            $this->_initSession();
+                if (!$this->modx->loadClass('discuss.request.DisConnectorRequest',$this->config['modelPath'],true,true)) {
+                    return 'Could not load connector request handler.';
+                }
+                $this->request = new DisConnectorRequest($this);
+                return $this->request->handle();
+            break;
+            default:
 
-        } else {
-            $this->modx->lexicon->load('discuss:default');
+                $this->modx->lexicon->load('discuss:web');
 
-            if (!$this->modx->loadClass('discuss.request.DisControllerRequest',$this->config['modelPath'],true,true)) {
-                return 'Could not load controller request handler.';
-            }
-            $this->request = new DisControllerRequest($this);
-            return $this->request->handleRequest();
+                if ($this->config['useCss']) {
+                    $this->modx->regClientCSS($this->config['cssUrl'].'index.css');
+                }
+                if ($this->config['loadJQuery']) {
+                    $this->modx->regClientStartupScript($this->config['jsUrl'].'web/jquery-1.3.2.min.js');
+                }
+                $this->modx->regClientStartupScript($this->config['jsUrl'].'web/discuss.js');
+                $this->modx->regClientStartupScript('<script type="text/javascript">
+    $(function() {
+        DIS.config.connector = "'.$this->config['connectorUrl'].'";
+        DIS.config.context = "'.$this->modx->context->get('key').'?ctx=mgr";
+        DIS.config.pollingInterval = "30000";
+    });</script>
+                ');
+                $this->_initUser();
+                $this->_initSession();
+            break;
         }
     }
 

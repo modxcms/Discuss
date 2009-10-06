@@ -34,12 +34,16 @@ unset($c);
 
 /* if marking unread */
 if (isset($_REQUEST['unread'])) {
-    $o = $discuss->loadProcessor('web/post/unread',$thread->toArray());
+    $props = $thread->toArray();
+    $props['recurse'] = true;
+    $o = $discuss->loadProcessor('web/post/unread',$props);
     if (!$o['success']) {
-        $modx->sendErrorPage();
-    } else {
-        $self = $modx->makeUrl($modx->resource->get('id')).'?thread='.$thread->get('id');
-        $modx->sendRedirect($self);
+        $modx->setPlaceholder('discuss.error',$o['message']);
+    }
+} else {
+    $children = $thread->getDescendants();
+    foreach ($children as $child) {
+        $child->markAsRead();
     }
 }
 
