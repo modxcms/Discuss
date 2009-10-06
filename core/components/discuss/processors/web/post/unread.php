@@ -14,5 +14,4 @@ if (!empty($scriptProperties['recurse'])) {
         $child->markAsUnread();
     }
 }
-
 return $modx->error->success();

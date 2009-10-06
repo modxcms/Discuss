@@ -288,6 +288,12 @@ class disPost extends xPDOSimpleObject {
     public function markAsRead() {
         if (!$this->xpdo->user || $this->xpdo->user->get('id') == 0) return false;
 
+        $read = $this->xpdo->getObject('disPostRead',array(
+            'post' => $this->get('id'),
+            'user' => $this->xpdo->user->get('id'),
+        ));
+        if ($read != null) return false;
+
         $read = $this->xpdo->newObject('disPostRead');
         $read->set('post',$this->get('id'));
         $read->set('board',$this->get('board'));
@@ -310,7 +316,7 @@ class disPost extends xPDOSimpleObject {
         if (!$this->xpdo->user || $this->xpdo->user->get('id') == 0) return false;
 
         $read = $this->xpdo->getObject('disPostRead',array(
-            'user' => $this->get('user'),
+            'user' => $this->xpdo->user->get('id'),
             'post' => $this->get('id'),
         ));
         if ($read == null) return true;

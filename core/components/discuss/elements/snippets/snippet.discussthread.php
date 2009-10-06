@@ -32,7 +32,7 @@ $thread = $modx->getObject('disPost',$c);
 if ($thread == null) $modx->sendErrorPage();
 unset($c);
 
-/* if marking unread */
+/* mark unread if user clicks mark unread */
 if (isset($_REQUEST['unread'])) {
     $props = $thread->toArray();
     $props['recurse'] = true;
@@ -40,13 +40,15 @@ if (isset($_REQUEST['unread'])) {
     if (!$o['success']) {
         $modx->setPlaceholder('discuss.error',$o['message']);
     }
-} else {
-    $children = $thread->getDescendants();
-    foreach ($children as $child) {
-        $child->markAsRead();
-    }
+    $boardUrl = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$thread->get('board'));
+    $modx->sendRedirect($boardUrl);
 }
 
+/* mark posts in thread read */
+$children = $thread->getDescendants();
+foreach ($children as $child) {
+    $child->markAsRead();
+}
 
 
 /* get all posts in thread */
