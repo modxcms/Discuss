@@ -37,9 +37,34 @@ if (isset($_REQUEST['unread'])) {
     $props = $thread->toArray();
     $props['recurse'] = true;
     $o = $discuss->loadProcessor('web/post/unread',$props);
-    if (!$o['success']) {
-        $modx->setPlaceholder('discuss.error',$o['message']);
-    }
+    $boardUrl = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$thread->get('board'));
+    $modx->sendRedirect($boardUrl);
+}
+if (!empty($_REQUEST['sticky'])) {
+    $props = $thread->toArray();
+    $props['recurse'] = true;
+    $o = $discuss->loadProcessor('web/post/stick',$props);
+    $boardUrl = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$thread->get('board'));
+    $modx->sendRedirect($boardUrl);
+}
+if (isset($_REQUEST['sticky']) && $_REQUEST['sticky'] == 0) {
+    $props = $thread->toArray();
+    $props['recurse'] = true;
+    $o = $discuss->loadProcessor('web/post/unstick',$props);
+    $boardUrl = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$thread->get('board'));
+    $modx->sendRedirect($boardUrl);
+}
+if (!empty($_REQUEST['lock'])) {
+    $props = $thread->toArray();
+    $props['recurse'] = true;
+    $o = $discuss->loadProcessor('web/post/lock',$props);
+    $boardUrl = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$thread->get('board'));
+    $modx->sendRedirect($boardUrl);
+}
+if (isset($_REQUEST['lock']) && $_REQUEST['lock'] == 0) {
+    $props = $thread->toArray();
+    $props['recurse'] = true;
+    $o = $discuss->loadProcessor('web/post/unlock',$props);
     $boardUrl = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$thread->get('board'));
     $modx->sendRedirect($boardUrl);
 }

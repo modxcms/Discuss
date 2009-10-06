@@ -1,9 +1,9 @@
-<div class="dis-post">
+<div class="dis-post" id="dis-post-[[+id]]">
 	<div class="dis-post-header">
 		<div class="dis-post-actions">
-		    <a href="javascript:void([[+id]]);" class="dis-post-remove" onclick="DISThread.removePost([[+id]],[[+parent]],'[[~[[++discuss.board_resource]]]]?board=[[+board]]');">[[%discuss.remove]]</a>
+		    <a href="[[~[[++discuss.board_resource]]]]?board=[[+board]]&parent=[[+parent]]" class="dis-post-remove">[[%discuss.remove]]</a>
 		    <a href="[[~[[++discuss.modify_post_resource]]]]?post=[[+id]]" class="dis-post-modify">[[%discuss.modify]]</a>
-		    <a href="javascript:void([[+id]]);" class="dis-post-reply-btn" onclick="DISThread.showReplyForm([[+id]]);">[[%discuss.reply]]</a>
+		    <a href="javascript:void(0);" class="dis-post-reply-btn">[[%discuss.reply]]</a>
 		</div>
 		<h3 class="dis-post-title" post="[[+id]]">[[+title]]</h3>
 		<div class="dis-post-author">

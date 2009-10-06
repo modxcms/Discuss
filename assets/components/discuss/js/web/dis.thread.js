@@ -9,6 +9,8 @@ var DISThread = {
     ,addEvents: function() {
         $('.dis-post-title').click(DISThread.togglePost);
         $('.dis-post-author').click(DISThread.toggleAuthor);
+        $('.dis-post-reply-btn').click(DISThread.showReplyForm);
+        $('.dis-post-remove').click(DISThread.removePost);
     }
     ,pollPosts: function() {
          var a = $.extend({},DIS.baseAjax,{
@@ -64,11 +66,13 @@ var DISThread = {
     
     ,toggleAuthor: function() {
         var p = $(this).attr('post');
-        //$(this).find('.dis-expand').show();
         $(this).find('.dis-author').slideToggle();
     }
     
-    ,showReplyForm: function(id) {
+    ,showReplyForm: function() {
+        var id = $(this).closest('.dis-post').attr('id');
+        id = id.replace(/dis-post-/,'');
+        
         var a = $.extend({},DIS.baseAjax,{
             url: DIS.config.connector
             ,data: {
@@ -111,33 +115,38 @@ var DISThread = {
         $.ajax(a);
     }
     
-    ,removePost: function(id,par,url) {
+    ,removePost: function() {
+        var p = $.q($(this).attr('href'));
+        p.id = $(this).closest('.dis-post').attr('id');
+        p.id = p.id.replace(/dis-post-/,'');      
+                
         var s = confirm('Are you sure you want to remove this post?');
         if (s) {
             var a = $.extend({},DIS.baseAjax,{
                 url: DIS.config.connector
                 ,data: {
                     action: 'web/post/remove'
-                    ,post: id
+                    ,post: p.id
                 }
                 ,success: function(r) {
                     if (r.success == false) { DIS._showError(r.message); return false; }
                     
-                    var ol = $('#dis-board-post-'+id).parent('ol');
+                    var ol = $('#dis-board-post-'+p.id).parent('ol');
                     var lis = ol.children('li');
                     if (lis.length == 1) {
                         ol.fadeOut().remove();
                     } else {
-                        $('#dis-board-post-'+id).fadeOut().remove();
+                        $('#dis-board-post-'+p.id).fadeOut().remove();
                     }
                     var ct = parseInt($('.dis-author-post-count').html());
                     $('.dis-author-post-count').html((ct-1));
-                    if (par == 0) {
-                        location.href = url;
+                    if (p['parent'] == 0) {
+                        location.href = p.url;
                     }
                 }
             });
             $.ajax(a);
         }
+        return false;
     }
 };

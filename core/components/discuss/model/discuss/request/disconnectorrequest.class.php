@@ -21,6 +21,8 @@ class disConnectorRequest extends modConnectorResponse {
             $modx =& $this->modx;
             $discuss =& $this->discuss;
 
+            $scriptProperties = $_REQUEST;
+
             $processorOutput = include $path;
         } else {
             $processorOutput = $this->modx->error->failure('No action specified.');
