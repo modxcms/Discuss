@@ -1,0 +1,112 @@
+.dis-thread-title {
+    background-repeat: no-repeat;
+    background-position: 0 center;
+    height: 25px;
+    padding-left: 30px;
+}
+.dis-collapsed { display: none; }
+.dis-post {
+    padding: 0;
+    }
+.dis-post-body {
+    background-color: white;
+    padding: .5em 1em;
+    }
+.dis-post h3 {
+    background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;
+    border-bottom: 1px solid lightgray;
+    color: white;
+    background-color: #b1d095;
+    padding: 3px 5px;
+    margin: 0;
+    cursor: pointer;
+}
+.dis-post-header {  
+    background-color: #eaeaea;
+}
+
+.dis-post-header .dis-post-author {
+    font-size: 10px;
+    display: block;
+    color: #23281F;
+    padding: 2px;
+    cursor: pointer;
+}
+.dis-post-footer {
+    text-align: right;
+    font-size: 11px;
+    }
+.dis-signature {
+    margin: 5px;
+    padding: 5px;
+    background-color: #fafafa;
+    color: gray;
+    }
+
+.dis-strikethrough {
+    font-style: strike;
+    }
+
+/* code block */
+.dis-code h5 {
+    background-color: gray;
+    color: black;
+    margin: 0;
+    padding: 2px 10px;
+    text-transform: uppercase;
+    }
+.dis-code {
+    width: 95%;
+    margin: 5px 0;
+    border-bottom: 1px solid gray;
+    }
+.dis-code pre {
+    margin: 0;
+    padding: 2px 10px;
+    background-color: lightgray;
+    font-size: 12px;
+    font-family: LiberationMono, consolas, monaco, 'courier new', courier, monospace;
+    }
+
+/* actions */
+.dis-post-header div.dis-post-actions {
+    float: right;
+    padding-right: 3px;
+}
+.dis-post-header div.dis-post-actions a {
+    display: block;
+    float: right;
+    font-size: 11px;
+    margin: 2px 3px;
+    color: #23281f;
+    
+}
+    
+/* thread view */
+ol.dis-board-thread {
+    border: 2px solid #ddd;
+    border-width: 0 0 2px 2px;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 10px 20px;
+    background-color: white;
+}
+
+ol.dis-board-thread li {
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+  
+.dis-post-avatar {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    margin: 2px;
+    float: left;
+}
+
+/* post li */
+.dis-post-li-desc a {
+    color: #a4a4a4;
+}

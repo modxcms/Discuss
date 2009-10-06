@@ -1,0 +1,124 @@
+@import url(./error.css);
+@import url(./actionbuttons.css);
+@import url(./form.css);
+@import url(./post.css);
+@import url(./misc.css);
+@import url(./bar.css);
+
+html, body {
+    padding: 0; margin: 0;
+    }
+a { text-decoration: none; color: rgb(0, 102, 204); }
+a:hover { text-decoration: underline; }
+br.clear { clear: both; height: 0; line-height: 0; }
+body {
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;
+    font: normal normal normal 75%/1.5 Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+    color: #555;
+}
+.right { float: right; }
+.left { float: left; }
+.dis-hidden { display: none; }
+.discuss { padding: 5px 10px; }
+.discuss { padding-top: 25px; }
+
+.discuss h2 { color: #5A8F34; }
+
+.discuss hr {
+    width: 100%;
+    text-align: center;
+    border: 0;
+    border-top: 1px solid lightgray;
+}
+
+/* board listing */
+ol.dis-board-list {
+    line-height: 1.1em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 5px solid #eee;
+}
+li.dis-board-li {
+    list-style: none;
+    border-top: 1px solid #eee;
+    padding-left: 50px;
+    background: transparent url(../images/icons/off.png) top left no-repeat;
+}
+ol.dis-board-list li.dis-unread {
+    background: transparent url(../images/icons/on.png) top left no-repeat;
+    }
+li.dis-board-li h3 {
+    padding: 10px 0 0;
+    margin: 0;
+    font-size: 16px;
+    }
+li.dis-board-li p {
+    padding: 3px 0; margin: 0; }
+    
+    
+li.dis-category-li {
+    background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;
+    border-bottom: 1px solid #aeaeae;
+    height: 33px;
+}
+li.dis-category-li h2 {
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0;
+    padding: 10px 14px;
+    cursor: pointer;
+    color: white;
+}
+
+/* board view */
+.dis-threads-header {
+    background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;
+    color: white;
+    background-color: #b1d095;
+    padding: 7px;
+}
+div.dis-threads ol {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+div.dis-threads {
+    border: 5px solid #ddd;
+    }
+div.dis-threads li {
+    line-height: 1.1em;
+    padding: 15px 40px 0;
+    height: 25px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f4f4f4;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+}
+.dis-new {
+    vertical-align: middle;
+}
+div.dis-thread-icons {
+    float: right;
+    margin-top: -5px;
+    padding-right: 10px;
+    }
+div.dis-thread-sticky {
+    width: 21px;
+    height: 22px;
+    float: right;
+    background: transparent url(../images/icons/show_sticky.gif) top left no-repeat;
+}
+div.dis-thread-locked { width: 21px; height: 22px; float: right; background: transparent url(../images/icons/quick_lock.gif) top left no-repeat; }
+div.dis-latest a.dis-last {
+    float: right;
+    height: 16px;
+    width: 14px;
+    cursor: pointer;
+    background: transparent url(../images/icons/last_post.gif) top right no-repeat;
+}
+
+div.dis-threads li, .dis-normal-thread { background-image: url(../images/icons/normal_post.gif); }
+.dis-my-normal-thread { background-image: url(../images/icons/my_normal_post.gif) !important; }
+.dis-veryhot-thread { background-image: url(../images/icons/veryhot_post.gif) !important; }
+.dis-my-veryhot-thread { background-image: url(../images/icons/my_veryhot_post.gif) !important; }
