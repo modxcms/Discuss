@@ -59,7 +59,7 @@ if (!empty($pa['author_avatar'])) {
 }
 $pa['content'] = $newPost->getContent();
 
-$o = $modx->discuss->getChunk('disThreadPost',$pa);
+$o = $discuss->getChunk('disThreadPost',$pa);
 
 $o = '<li class="dis-board-post" id="dis-board-post-'.$newPost->get('id').'">'.$o.'</li>';
 

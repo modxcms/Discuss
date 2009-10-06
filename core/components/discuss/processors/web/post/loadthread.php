@@ -22,7 +22,7 @@ foreach ($posts as $post) {
     $pa[] = $post->toArray();
 }
 
-$modx->discuss->loadTreeParser();
-$output = $modx->discuss->treeParser->parse($pa,'disBoardThread');
+$discuss->loadTreeParser();
+$output = $discuss->treeParser->parse($pa,'disBoardThread');
 
 return $modx->error->success($output);

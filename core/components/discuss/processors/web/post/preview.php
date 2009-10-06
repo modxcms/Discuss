@@ -12,6 +12,6 @@ $post->set('ip',$_SERVER['REMOTE_ADDR']);
 /* now output html back to browser */
 $post->set('username',$modx->user->get('username'));
 
-$o = $modx->discuss->getChunk('disPost',$post->toArray());
+$o = $discuss->getChunk('disPost',$post->toArray());
 
 return $modx->error->success($o,$post);

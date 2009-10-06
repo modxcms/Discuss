@@ -32,6 +32,19 @@ $thread = $modx->getObject('disPost',$c);
 if ($thread == null) $modx->sendErrorPage();
 unset($c);
 
+/* if marking unread */
+if (isset($_REQUEST['unread'])) {
+    $o = $discuss->loadProcessor('web/post/unread',$thread->toArray());
+    if (!$o['success']) {
+        $modx->sendErrorPage();
+    } else {
+        $self = $modx->makeUrl($modx->resource->get('id')).'?thread='.$thread->get('id');
+        $modx->sendRedirect($self);
+    }
+}
+
+
+
 /* get all posts in thread */
 $c = $modx->newQuery('disPost');
 $c->select('
@@ -61,7 +74,7 @@ $posts = $modx->getCollection('disPost',$c);
 /* loop through collected posts */
 $plist = array();
 $userUrl = $modx->makeUrl($modx->getOption('discuss.user_resource'));
-$profileUrl = $modx->getOption('discuss.assets_url').'/profile/';
+$profileUrl = $modx->getOption('discuss.files_url').'/profile/';
 foreach ($posts as $post) {
     $pa = $post->toArray();
     $pa['username'] = '<a href="'.$userUrl.'?user='.$post->get('author').'">'.$post->get('username').'</a>';

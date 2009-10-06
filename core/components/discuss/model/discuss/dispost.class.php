@@ -213,7 +213,39 @@ class disPost extends xPDOSimpleObject {
         return $thread;
     }
 
+    /**
+     * Grabs all descendants of this post.
+     *
+     * @access public
+     * @param int $depth If set, will limit to specified depth
+     * @return array A collection of disPost objects.
+     */
+    public function getDescendants($depth = 0) {
+        $c = $this->xpdo->newQuery('disPost');
+        $c->select('
+            disPost.*,
+            Descendants.depth AS depth,
+        ');
+        $c->innerJoin('disPostClosure','Descendants');
+        $c->innerJoin('disPostClosure','Ancestors');
+        $c->where(array(
+            'Descendants.ancestor' => $this->get('id'),
+        ));
+        if ($depth) {
+            $c->where(array(
+                'Descendants.depth:<=' => $depth,
+            ));
+        }
+        $c->sortby('disPost.rank','ASC');
+        return $this->xpdo->getCollection('disPost',$c);
+    }
 
+    /**
+     * Gets the viewing message for the bottom of the thread
+     *
+     * @access public
+     * @return string The who is viewing message
+     */
     public function getViewing() {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
 

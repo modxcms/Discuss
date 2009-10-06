@@ -21,12 +21,17 @@ class Discuss {
         $assetsPath = $this->modx->getOption('discuss.assets_path',$config,$this->modx->getOption('assets_path').'components/discuss/');
         $assetsUrl = $this->modx->getOption('discuss.assets_url',$config,$this->modx->getOption('assets_url').'components/discuss/');
 
+        $connectorId = $this->modx->getOption('discuss.connector_resource_id',$config,1);
+        $connectorUrl = $this->modx->makeUrl($connectorId);
+
         $this->config = array_merge(array(
             'assetsUrl' => $assetsUrl,
             'cssUrl' => $assetsUrl.'css/',
             'jsUrl' => $assetsUrl.'js/',
             'imagesUrl' => $assetsUrl.'images/',
-            'connectorUrl' => $assetsUrl.'connector.php',
+
+            'connectorUrl' => $connectorUrl,
+
             'corePath' => $corePath,
             'modelPath' => $corePath.'model/',
             'chunksPath' => $corePath.'elements/chunks/',
@@ -198,6 +203,22 @@ $(function() {
             $this->modx->log(MODX_LOG_LEVEL_ERROR,'Could not load '.$class.' from '.$path);
         }
         return $this->treeParser;
+    }
+
+    public function loadProcessor($name,$scriptProperties = array()) {
+        if (!isset($this->modx->error)) $this->modx->request->loadErrorHandler();
+
+        $path = $this->config['processorsPath'].$name.'.php';
+        $processorOutput = false;
+        if (file_exists($path)) {
+            $modx =& $this->modx;
+            $discuss =& $this;
+
+            $processorOutput = include $path;
+        } else {
+            $processorOutput = $this->modx->error->failure('No action specified.');
+        }
+        return $processorOutput;
     }
 
     /**
