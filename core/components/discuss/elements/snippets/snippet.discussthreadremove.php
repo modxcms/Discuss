@@ -39,15 +39,12 @@ if (!empty($_POST)) {
     $thread->remove();
     $modx->sendRedirect($url);
 }
+$properties = $thread->toArray();
 
 
 
 
 /* output */
-$properties = $thread->toArray();
-$output = $discuss->getChunk('disThreadRemove',$properties);
-
 $modx->setPlaceholder('discuss.thread',$thread->get('title'));
-
-return $discuss->output($output);
+return $discuss->output('thread/remove',$properties);
 

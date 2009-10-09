@@ -1,4 +1,4 @@
-
+[[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 <table class="dis-table">
 <thead>

@@ -1,4 +1,4 @@
-
+[[+usermenu]]
 <div class="dis-profile dis-form left" style="width: 80%; border: 0;">
     <h2>General Statistics for [[+username]]</h2>
     

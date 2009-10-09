@@ -1,4 +1,4 @@
-
+[[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 
 <form action="[[~[[*id]]]]?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">

@@ -12,7 +12,6 @@ $post = $modx->getObject('disPost',$_REQUEST['post']);
 if ($post == null) { $modx->sendErrorPage(); }
 
 /* setup defaults */
-$output = '';
 $properties = $post->toArray();
 
 /* get thread root */
@@ -47,10 +46,7 @@ if (!empty($_POST)) {
 
 /* output form to browser */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.post.modify.js');
-
-$output .= $discuss->getChunk('disModifyPost',$properties);
-$output .= $discuss->getChunk('disError');
-
+$modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
 $modx->setPlaceholder('discuss.post',$post->get('title'));
 
-return $discuss->output($output);
+return $discuss->output('thread/modify',$properties);

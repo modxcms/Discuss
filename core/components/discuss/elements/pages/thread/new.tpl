@@ -1,22 +1,22 @@
 <p class="dis-breadcrumbs">[[+trail]]</p>
 
-<div id="dis-modify-post-preview">[[+preview]]</div>
+<div id="dis-new-thread-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]]]?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form">
+<form action="[[~[[*id]]]]" method="post" class="dis-form" id="dis-new-thread-form">
 
-    <h2>Modify Post</h2>
+    <h2>Start New Thread</h2>
     
     <input type="hidden" name="board" value="[[+board]]" />
     
     <label for="dis-new-thread-title">Title:
         <span class="error">[[+error.title]]</span>
     </label>
-    <input type="text" name="title" id="dis-new-thread-title" value="[[+title]]" />
+    <input type="text" name="title" id="dis-new-thread-title" value="" />
     
     <label for="dis-new-thread-message">Message:
         <span class="error">[[+error.message]]</span>
     </label>
-    <textarea name="message" id="dis-new-thread-message" cols="80" rows="7">[[+message]]</textarea>
+    <textarea name="message" id="dis-new-thread-message" cols="80" rows="7"></textarea>
     <br class="clear" />
     
     <fieldset>
@@ -28,8 +28,9 @@
     </fieldset>
 
     <div class="dis-form-buttons">
-    <input type="submit" class="dis-action-btn" value="Save Changes" />
-    <input type="button" class="dis-action-btn" id="dis-new-thread-preview-btn" value="Preview" onclick="DISModifyPost.preview();" />
-    <input type="button" class="dis-action-btn" value="Cancel" onclick="location.href='[[~[[++discuss.thread_resource]]]]?thread=[[+thread]]';" />
+    <input type="submit" class="dis-action-btn" value="Post New Thread" />
+    <input type="button" class="dis-action-btn" id="dis-new-thread-preview-btn" value="Preview" onclick="DISNewThread.preview();" />
+    <input type="button" class="dis-action-btn" value="Cancel" onclick="location.href='[[~[[++discuss.board_resource]]]]?board=[[+board]]';" />
     </div>
 </form>
+[[+discuss.error_panel]]

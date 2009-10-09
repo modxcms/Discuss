@@ -71,8 +71,7 @@ $properties['recentPosts'] = implode("\n",$rps);
 
 
 /* do output */
-$o = $discuss->getChunk('disUserMenu',$properties);
-$o .= $discuss->getChunk('disUser',$properties);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
+$modx->setPlaceholder('usermenu',$discuss->getChunk('disUserMenu',$properties));
 
-return $discuss->output($o);
+return $discuss->output('user/view',$properties);

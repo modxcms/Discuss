@@ -10,6 +10,4 @@ $discuss->setSessionPlace('search');
 
 $properties = array();
 
-
-$o = $discuss->getChunk('disSearch',$properties);
-return $discuss->output($o);
+return $discuss->output('search',$properties);

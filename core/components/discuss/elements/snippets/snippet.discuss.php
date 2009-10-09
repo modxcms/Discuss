@@ -228,6 +228,4 @@ $properties = array_merge($properties,$la);
 unset($la,$latestPost,$c);
 
 /* output */
-$o = $discuss->getChunk('disHome',$properties);
-return $discuss->output($o);
-
+return $discuss->output('home',$properties);

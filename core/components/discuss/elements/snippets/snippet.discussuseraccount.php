@@ -62,8 +62,7 @@ if (!empty($properties['show_email'])) { $properties['show_email'] = ' checked="
 if (!empty($properties['show_online'])) { $properties['show_online'] = ' checked="checked"'; }
 
 /* do output */
-$o = $discuss->getChunk('disUserMenu',$properties);
-$o .= $discuss->getChunk('disUserAccount',$properties);
+$modx->setPlaceholder('usermenu',$discuss->getChunk('disUserMenu',$properties));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
-return $discuss->output($o);
+return $discuss->output('user/account',$properties);

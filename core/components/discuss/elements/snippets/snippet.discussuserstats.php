@@ -24,10 +24,8 @@ $properties['topics'] = $modx->getCount('disPost',array(
     'author' => $user->get('id'),
 ));
 
-
 /* do output */
-$o = $discuss->getChunk('disUserMenu',$properties);
-$o .= $discuss->getChunk('disUserStats',$properties);
+$modx->setPlaceholder('usermenu',$discuss->getChunk('disUserMenu',$properties));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
-return $discuss->output($o);
+return $discuss->output('user/stats',$properties);

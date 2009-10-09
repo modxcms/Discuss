@@ -14,5 +14,4 @@ if (!empty($_POST)) {
 }
 
 /* output */
-$o = $discuss->getChunk('disLogin',$properties);
-return $discuss->output($o);
+return $discuss->output('login',$properties);

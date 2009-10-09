@@ -18,3 +18,4 @@
 
 
 [[+threadactionbuttons]]
+[[+discuss.error_panel]]

@@ -23,6 +23,5 @@ $properties['trail'] = $trail;
 
 
 /* output */
-$o = $discuss->getChunk('disRegister',$properties);
-return $discuss->output($o);
+return $discuss->output('register',$properties);
 

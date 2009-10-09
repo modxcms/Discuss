@@ -3,13 +3,6 @@
  *
  * @package discuss
  */
-
-$mtime = microtime();
-$mtime = explode(' ', $mtime);
-$mtime = $mtime[1] + $mtime[0];
-$tstart = $mtime;
-set_time_limit(0);
-
 require_once $modx->getOption('discuss.core_path').'model/discuss/discuss.class.php';
 $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
@@ -230,8 +223,7 @@ $properties['threadactionbuttons'] = $discuss->buildActionButtons($actionButtons
 unset($actionButtons);
 
 /* output */
-$output = $discuss->getChunk('disThread',$properties);
-$output .= $discuss->getChunk('disError');
+$modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
 $modx->setPlaceholder('discuss.thread',$thread->get('title'));
 
 /* set last visited */
@@ -240,6 +232,5 @@ if ($discuss->user->profile) {
     $discuss->user->profile->save();
 }
 
-
-return $discuss->output($output);
+return $discuss->output('thread/view',$properties);
 

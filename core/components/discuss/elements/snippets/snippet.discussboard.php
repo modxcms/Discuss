@@ -256,9 +256,6 @@ $properties['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-
 unset($actionButtons);
 
 /* output */
-$output = $discuss->getChunk('disBoard',$properties);
 $modx->setPlaceholder('discuss.board',$board->get('name'));
-unset($properties,$board);
-
-return $discuss->output($output);
+return $discuss->output('board',$properties);
 

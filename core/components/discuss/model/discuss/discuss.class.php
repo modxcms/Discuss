@@ -35,11 +35,11 @@ class Discuss {
             'corePath' => $corePath,
             'modelPath' => $corePath.'model/',
             'chunksPath' => $corePath.'elements/chunks/',
+            'pagesPath' => $corePath.'elements/pages/',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
             'useCss' => true,
             'loadJQuery' => true,
-            'debug' => true,
         ),$config);
 
         $this->modx->addPackage('discuss',$this->config['modelPath'],'discuss_');
@@ -277,19 +277,46 @@ class Discuss {
     }
 
     /**
-     * Output the final forum output and wrap in the disWrapper chunk.
+     * Used for development and debugging
+     */
+    public function getPage($name,$properties = array()) {
+        $name = str_replace('.','/',$name);
+        $f = $this->config['pagesPath'].strtolower($name).'.tpl';
+        $o = '';
+        if (file_exists($f)) {
+            $o = file_get_contents($f);
+            $chunk = $this->modx->newObject('modChunk');
+            $chunk->setContent($o);
+            return $chunk->process($properties);
+        }
+        return false;
+    }
+
+
+    /**
+     * Output the final forum output and wrap in the disWrapper chunk, if in
+     * debug mode. The wrapper code will need to be in the Template if not in
+     * debug mode.
      *
      * @access public
      * @param string $output The output to process
-     * @return string The final wrapped output
+     * @return string The final wrapped output, or blank if not in debug.
      */
-    public function output($output) {
-        if ($this->debugTimer !== false) {
-            $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";
+    public function output($page = '',$properties = array()) {
+        if ($this->modx->getOption('discuss.debug',null,false)) {
+            $output = $this->getChunk('disWrapper',array(
+                'discuss.output' => $this->getPage($page,$properties),
+            ));
+
+            if ($this->debugTimer !== false) {
+                $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";
+            }
+
+            return $output;
         }
-        return $this->getChunk('disWrapper',array(
-            'discuss.output' => $output,
-        ));
+
+        $modx->toPlaceholders($properties);
+        return '';
     }
 
     /**

@@ -45,8 +45,7 @@ $properties['genders'] = $gs;
 unset($genders,$gs,$v,$d);
 
 /* do output */
-$o = $discuss->getChunk('disUserMenu',$properties);
-$o .= $discuss->getChunk('disUserEdit',$properties);
+$modx->setPlaceholder('usermenu',$discuss->getChunk('disUserMenu',$properties));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
-return $discuss->output($o);
+return $discuss->output('user/edit',$properties);

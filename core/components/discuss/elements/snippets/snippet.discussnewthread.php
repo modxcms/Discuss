@@ -13,7 +13,6 @@ $board = $modx->getObject('disBoard',$_REQUEST['board']);
 if ($board == null) { $modx->sendErrorPage(); }
 
 /* setup defaults */
-$output = '';
 $properties = array(
     'board' => $board->get('id'),
 );
@@ -45,9 +44,6 @@ if (!empty($_POST)) {
 
 /* output form to browser */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.new.js');
+$modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
 
-$output .= $discuss->getChunk('disNewThread',$properties);
-$output .= $discuss->getChunk('disError');
-
-
-return $discuss->output($output);
+return $discuss->output('thread/new',$properties);
