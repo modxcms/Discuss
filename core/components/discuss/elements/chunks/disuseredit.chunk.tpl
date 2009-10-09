@@ -3,7 +3,7 @@
 
 <form action="[[~[[*id]]]]?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
-    <h2>Edit Profile</h2>
+    <h2>Edit Profile for [[+username]]</h2>
     
     <input type="hidden" name="user" value="[[+id]]" />
     

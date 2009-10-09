@@ -122,3 +122,10 @@ div.dis-threads li, .dis-normal-thread { background-image: url(../images/icons/n
 .dis-my-normal-thread { background-image: url(../images/icons/my_normal_post.gif) !important; }
 .dis-veryhot-thread { background-image: url(../images/icons/veryhot_post.gif) !important; }
 .dis-my-veryhot-thread { background-image: url(../images/icons/my_veryhot_post.gif) !important; }
+
+
+
+dl.dis-datalist {   
+    }
+dl.dis-datalist dh, dl.dis-datalist dt { display: block; float: left; padding: 5px 0; }
+dl.dis-datalist dh { clear: left; width: 250px; font-weight: bold; }

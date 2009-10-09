@@ -84,6 +84,7 @@ var DISThread = {
                 if (r.success == false) { DIS._showError(r.message); return false; }
                 
                 $('#dis-post-reply-'+id).hide().html(r.message).slideDown();
+                $('#dis-reply-form-'+id+' textarea').focus();
             }
         });
         $.ajax(a);
