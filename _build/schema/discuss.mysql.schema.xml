@@ -53,6 +53,7 @@
         <composite alias="Posts" class="disPost" local="id" foreign="board" cardinality="many" owner="local" />
         <composite alias="PostReads" class="disPostRead" local="id" foreign="board" cardinality="many" owner="local" />
         <aggregate alias="LastPost" class="disPost" local="last_post" foreign="id" cardinality="many" owner="foreign" />
+        <composite alias="Notifications" class="disUserNotification" local="id" foreign="board" cardinality="many" owner="local" />
     </object>
     
     <object class="disBoardClosure" table="boards_closure" extends="xPDOObject">
@@ -127,6 +128,7 @@
         <composite alias="Ancestors" class="disPostClosure" local="id" foreign="ancestor" cardinality="many" owner="local" />
         <composite alias="Descendants" class="disPostClosure" local="id" foreign="descendant" cardinality="many" owner="local" />
         <composite alias="PostReads" class="disPostRead" local="id" foreign="post" cardinality="many" owner="local" />
+        <composite alias="Notifications" class="disUserNotification" local="id" foreign="post" cardinality="many" owner="local" />
     </object>
     
     <object class="disPostClosure" table="posts_closure" extends="xPDOObject">

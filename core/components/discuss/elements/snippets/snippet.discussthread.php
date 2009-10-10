@@ -8,16 +8,21 @@ $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('thread:'.$_REQUEST['thread']);
 
+$userId = $modx->user->get('id');
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.js');
 
 /* get thread root */
+$otherSelect = '';
 $c = $modx->newQuery('disPost');
+if (!empty($userId)) {
+    $c->leftJoin('disUserNotification','Notifications','disPost.id = Notifications.post AND Notifications.user = '.$userId);
+    $otherSelect = ', Notifications.user AS notification';
+}
 $c->select('disPost.*,
     (SELECT COUNT(*) FROM '.$modx->getTableName('disPostClosure').'
      WHERE
         ancestor = disPost.id
-    AND descendant != disPost.id) AS replies
-');
+    AND descendant != disPost.id) AS replies'.$otherSelect);
 $c->where(array(
     'id' => $_REQUEST['thread'],
 ));
@@ -59,6 +64,12 @@ if (isset($_REQUEST['lock']) && $_REQUEST['lock'] == 0) {
     $props['recurse'] = true;
     $o = $discuss->loadProcessor('web/post/unlock',$props);
     $boardUrl = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$thread->get('board'));
+    $modx->sendRedirect($boardUrl);
+}
+if (!empty($_REQUEST['notify'])) {
+    $props = $thread->toArray();
+    $o = $discuss->loadProcessor('web/post/notify',$props);
+    $boardUrl = $modx->makeUrl($modx->getOption('discuss.thread_resource'),'','?thread='.$thread->get('id'));
     $modx->sendRedirect($boardUrl);
 }
 
@@ -203,7 +214,9 @@ $properties['readers'] = $thread->getViewing();
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {
     $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
-    $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
+    if (!$thread->get('notification')) {
+        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&notify=1', 'text' => $modx->lexicon('discuss.notify'));
+    }
     $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
     $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.print'));
 }

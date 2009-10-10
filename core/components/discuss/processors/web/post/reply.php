@@ -8,6 +8,9 @@ if (empty($_POST['post'])) return $modx->error->failure('Parent Post not specifi
 $parent = $modx->getObject('disPost',$_POST['post']);
 if ($parent == null) return $modx->error->failure('Parent Post not found.');
 
+$thread = $parent->getThreadRoot();
+if ($thread == null) return $modx->error->failure('Thread not found.');
+
 $_POST['message'] = substr($_POST['message'],$modx->getOption('discuss.maximum_post_size',null,30000));
 
 $post = $modx->newObject('disPost');
@@ -21,6 +24,25 @@ $post->set('ip',$_SERVER['REMOTE_ADDR']);
 if ($post->save() == false) {
     return $modx->error->failure('An error occurred while trying to post a reply.');
 }
+
+/* send out notifications */
+$notifications = $modx->getCollection('dhUserNotification',array('post' => $thread->get('id')));
+foreach ($notifications as $notification) {
+    $user = $notification->getOne('User');
+    if ($user == null) { $notification->remove(); continue; }
+    $profile = $notification->getOne('UserProfile');
+    if ($profile == null) { $notification->remove(); continue; }
+
+    $subject = '[Discuss] A Reply Has Been Made';
+    $emailProperties = $user->toArray();
+    $emailProperties = array_merge($emailProperties,$profile->toArray());
+    $emailProperties['tpl'] = 'disNotificationEmail';
+    $emailProperties['type'] = 'post';
+    $emailProperties['name'] = $thread->get('title');
+    $emailProperties['url'] = $modx->makeUrl($modx->getOption('discuss.thread_resource')).'?thread='.$thread->get('id');
+    $sent = $discuss->sendEmail($profile->get('email'),$user->get('username'),$subject,$emailProperties);
+}
+
 
 /* now output html back to browser */
 $author = $post->getOne('Author');
