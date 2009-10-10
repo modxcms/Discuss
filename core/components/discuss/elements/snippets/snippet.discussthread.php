@@ -129,6 +129,15 @@ foreach ($posts as $post) {
     } else {
         $pa['author_title'] = ' - '.$pa['author_title'];
     }
+
+    /* load actions */
+    if (!$thread->get('locked')) {
+        $pa['action_reply'] = '<a class="dis-post-reply-btn">'.$modx->lexicon('discuss.reply').'</a>';
+        $pa['action_modify'] = '<a href="[[~[[++discuss.modify_post_resource]]]]?post=[[+id]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+        $pa['action_remove'] = '<a href="[[~[[++discuss.board_resource]]]]?board=[[+board]]&parent=[[+parent]]" class="dis-post-remove">'.$modx->lexicon('discuss.remove').'</a>';
+    }
+
+
     $plist[] = $pa;
 }
 
