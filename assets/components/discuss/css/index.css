@@ -8,7 +8,7 @@
 html, body {
     padding: 0; margin: 0;
     }
-a { text-decoration: none; color: rgb(0, 102, 204); }
+a { text-decoration: none; color: rgb(0, 102, 204); cursor: pointer; }
 a:hover { text-decoration: underline; }
 br.clear { clear: both; height: 0; line-height: 0; }
 body {
