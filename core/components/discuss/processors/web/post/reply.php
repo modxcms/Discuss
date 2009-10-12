@@ -11,6 +11,14 @@ if ($parent == null) return $modx->error->failure('Parent Post not found.');
 $thread = $parent->getThreadRoot();
 if ($thread == null) return $modx->error->failure('Thread not found.');
 
+/* validation */
+if (empty($_POST['title'])) { $modx->error->addField('title','Please enter a title for this post.'); }
+if (empty($_POST['message'])) { $modx->error->addField('message','Please enter a valid message.'); }
+
+if ($modx->error->hasError()) {
+    return $modx->error->failure('Please correct the errors in your form.');
+}
+
 $_POST['message'] = substr($_POST['message'],$modx->getOption('discuss.maximum_post_size',null,30000));
 
 $post = $modx->newObject('disPost');
@@ -25,8 +33,29 @@ if ($post->save() == false) {
     return $modx->error->failure('An error occurred while trying to post a reply.');
 }
 
+if (!empty($_POST['notify'])) {
+    $notify = $modx->newObject('disUserNotification');
+    $notify->set('user',$modx->user->get('id'));
+    $notify->set('post',$post->get('id'));
+    $notify->save();
+}
+
 /* send out notifications */
-$notifications = $modx->getCollection('dhUserNotification',array('post' => $thread->get('id')));
+$modx->hooks->load('notifications/send',array(
+    'board' => $board->get('id'),
+    'thread' => $thread->get('id'),
+    'title' => $thread->get('title'),
+    'subject' => '[Discuss] A New Post Has Been Made',
+));
+
+$c = $modx->newQuery('dhUserNotification');
+$c->where(array(
+    'post' => $thread->get('id'),
+));
+$c->orCondition(array(
+    'board' => $thread->get('board'),
+));
+$notifications = $modx->getCollection('dhUserNotification',$c);
 foreach ($notifications as $notification) {
     $user = $notification->getOne('User');
     if ($user == null) { $notification->remove(); continue; }

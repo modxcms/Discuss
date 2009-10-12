@@ -38,6 +38,7 @@ class Discuss {
             'pagesPath' => $corePath.'elements/pages/',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
+            'hooksPath' => $corePath.'hooks/',
             'useCss' => true,
             'loadJQuery' => true,
         ),$config);
@@ -58,6 +59,11 @@ class Discuss {
      * @param string $ctx The context to load. Defaults to web.
      */
     public function initialize($ctx = 'web') {
+
+        $this->modx->getService('hooks','discuss.disHooks',$this->config['modelPath'],array(
+            'discuss' => &$this,
+        ));
+
         switch ($ctx) {
             case 'mgr':
                 if (!$this->modx->loadClass('discuss.request.DisControllerRequest',$this->config['modelPath'],true,true)) {
@@ -399,6 +405,25 @@ class Discuss {
         $this->modx->mail->reset();
 
         return $sent;
+    }
+
+    /**
+     * Processes results from the error handler
+     *
+     * @access public
+     * @param array $result The result from the processor
+     * @return boolean The success of the processor
+     */
+    public function processResult($result = array()) {
+        if (!is_array($result) || !isset($result['success'])) return false;
+
+        if ($result['success'] == false) {
+            foreach ($result['errors'] as $error) {
+                $this->modx->toPlaceholder($error['id'],$error['msg'],'error');
+            }
+        }
+        if (!empty($_POST)) $this->modx->toPlaceholders($_POST,'post');
+        return $result['success'];
     }
 
     /**

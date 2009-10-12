@@ -6,7 +6,7 @@
     </div>
     <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
         <div class="dis-post-body">
-        [[+message]]
+        [[+content]]
         </div>
         <div class="dis-post-footer">
             IP: [[+ip]]

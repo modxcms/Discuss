@@ -33,4 +33,11 @@
     <input type="button" class="dis-action-btn" value="Cancel" onclick="location.href='[[~[[++discuss.thread_resource]]]]?thread=[[+thread]]';" />
     </div>
 </form>
+
+<br />
+<hr />
+<div class="dis-thread-posts">
+    <h2>Thread Summary</h2>
+[[+thread_posts]]
+</div>
 [[+discuss.error_panel]]

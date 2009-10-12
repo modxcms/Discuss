@@ -56,6 +56,8 @@
     line-height: 10px;
 }
 
+.dis-form label { cursor: pointer; }
+
 .dis-form .dis-cb {
     display: block;
     font-weight: normal;
@@ -64,13 +66,11 @@
     clear: none;
     line-height: 27px;
     color: #5a5a5a;
+    width: auto;
+    margin-left: 10em;
     }
-.dis-form fieldset {
-    border: 1px solid lightgray;
-    }
-.dis-form legend {
-    
-    }
+.dis-form .dis-cb input { margin: 5px; }
+.dis-form fieldset { border: 1px solid lightgray; }
 
 
 .dis-form input[type="submit"], .dis-form input[type="button"] {

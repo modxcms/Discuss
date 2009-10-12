@@ -34,16 +34,18 @@ foreach ($ancestors as $ancestor) {
     $trail .= '<a href="'.$url.'">'.$ancestor->get('name').'</a>';
     $trail .= ' / ';
 }
-$trail .= 'Modify Post: '.$post->get('title');
+$trail .= 'Reply to Post: <a href="[[~[[++discuss.thread_resource]]]]?thread='.$thread->get('id').'">'.$post->get('title').'</a>';
 $properties['trail'] = $trail;
 
 
 /* if POST, process new thread request */
 if (!empty($_POST)) {
     $modx->toPlaceholders($_POST,'post');
-    include $discuss->config['processorsPath'].'web/post/modify.php';
+    $result = include $discuss->config['processorsPath'].'web/post/reply.php';
+    $discuss->processResult($result);
+} else {
+    $modx->setPlaceholder('post.title','Re: '.$post->get('title'));
 }
-
 
 /* get thread */
 $properties['thread_posts'] = $modx->hooks->load('post/getthread',array(
@@ -52,9 +54,10 @@ $properties['thread_posts'] = $modx->hooks->load('post/getthread',array(
 ));
 
 
+
 /* output form to browser */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.post.modify.js');
+$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.post.reply.js');
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
 $modx->setPlaceholder('discuss.post',$post->get('title'));
 
-return $discuss->output('thread/modify',$properties);
+return $discuss->output('thread/reply',$properties);

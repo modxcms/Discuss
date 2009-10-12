@@ -20,24 +20,13 @@ if (empty($errors)) {
 
     $post->save();
 
-    /* send out notifications */
-    $notifications = $modx->getCollection('dhUserNotification',array('board' => $board->get('id')));
-    foreach ($notifications as $notification) {
-        $user = $notification->getOne('User');
-        if ($user == null) { $notification->remove(); continue; }
-        $profile = $notification->getOne('UserProfile');
-        if ($profile == null) { $notification->remove(); continue; }
-
-        $subject = '[Discuss] A New Post Has Been Made';
-        $emailProperties = $user->toArray();
-        $emailProperties = array_merge($emailProperties,$profile->toArray());
-        $emailProperties['tpl'] = 'disNotificationEmail';
-        $emailProperties['type'] = 'board';
-        $emailProperties['name'] = $thread->get('title');
-        $emailProperties['url'] = $modx->makeUrl($modx->getOption('discuss.thread_resource')).'?thread='.$thread->get('id');
-        $sent = $discuss->sendEmail($profile->get('email'),$user->get('username'),$subject,$emailProperties);
-    }
-
+    /* send notifications */
+    $modx->hooks->load('notifications/send',array(
+        'board' => $board->get('id'),
+        'thread' => $post->get('id'),
+        'title' => $post->get('title'),
+        'subject' => '[Discuss] A New Post Has Been Made',
+    ));
 
     $url = $modx->makeUrl($modx->getOption('discuss.board_resource')).'?board='.$board->get('id');
     $modx->sendRedirect($url);
