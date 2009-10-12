@@ -20,7 +20,7 @@ if (!empty($_REQUEST['s'])) {
             Board.name AS board_name,
             Thread.id AS thread,
             PostClosure.depth AS depth,
-            MATCH (Post.title,Post.message) AGAINST ("'.$s.'") AS score
+            MATCH (Post.title,Post.message) AGAINST ("'.$s.'" IN BOOLEAN MODE) AS score
 
         FROM '.$modx->getTableName('disPost').' AS Post
             INNER JOIN '.$modx->getTableName('modUser').' AS Author
@@ -36,7 +36,7 @@ if (!empty($_REQUEST['s'])) {
              ON PostClosure.ancestor = Thread.id
             AND Thread.parent = 0
         WHERE
-            MATCH (Post.title,Post.message) AGAINST ("'.$s.'")
+            MATCH (Post.title,Post.message) AGAINST ("'.$s.'" IN BOOLEAN MODE)
         ORDER BY score,Post.rank ASC
 
     ');
