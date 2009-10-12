@@ -38,9 +38,20 @@ $properties['trail'] = $trail;
 
 /* if POST, process new thread request */
 if (!empty($_POST)) {
-    $modx->toPlaceholders($_POST,'post');
     include $discuss->config['processorsPath'].'web/post/create.php';
+    if ($discuss->processResult($result)) {
+        $url = $modx->makeUrl($modx->getOption('discuss.board_resource')).'?board='.$board->get('id');
+        $modx->sendRedirect($url);
+    }
+    $modx->toPlaceholders($_POST,'post');
+    $modx->toPlaceholders($errors,'error');
 }
+
+/* set max attachment limit */
+$properties['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
+$modx->regClientStartupHTMLBlock('<script type="text/javascript">
+$(function() { DIS.config.attachments_max_per_post = '.$properties['max_attachments'].'; });
+</script>');
 
 /* output form to browser */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.new.js');

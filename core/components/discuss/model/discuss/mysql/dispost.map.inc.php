@@ -240,6 +240,14 @@ $xpdo_meta_map['disPost']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'Attachments' => 
+    array (
+      'class' => 'disPostAttachment',
+      'local' => 'id',
+      'foreign' => 'post',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
 );
 if (XPDO_PHP4_MODE) $xpdo_meta_map['disPost']['aggregates']= array_merge($xpdo_meta_map['disPost']['aggregates'], array_change_key_case($xpdo_meta_map['disPost']['aggregates']));

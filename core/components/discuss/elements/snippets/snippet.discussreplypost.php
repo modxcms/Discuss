@@ -42,7 +42,10 @@ $properties['trail'] = $trail;
 if (!empty($_POST)) {
     $modx->toPlaceholders($_POST,'post');
     $result = include $discuss->config['processorsPath'].'web/post/reply.php';
-    $discuss->processResult($result);
+    if ($discuss->processResult($result)) {
+        $url = $modx->makeUrl($modx->getOption('discuss.thread_resource')).'?thread='.$thread->get('id').'#dis-post-'.$result['object']['id'];
+        $modx->sendRedirect($url);
+    }
 } else {
     $modx->setPlaceholder('post.title','Re: '.$post->get('title'));
 }
@@ -53,7 +56,11 @@ $properties['thread_posts'] = $modx->hooks->load('post/getthread',array(
     'thread' => &$thread,
 ));
 
-
+/* set max attachment limit */
+$properties['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
+$modx->regClientStartupHTMLBlock('<script type="text/javascript">
+$(function() { DIS.config.attachments_max_per_post = '.$properties['max_attachments'].'; });
+</script>');
 
 /* output form to browser */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.post.reply.js');

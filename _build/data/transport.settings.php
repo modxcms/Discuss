@@ -178,6 +178,49 @@ $settings['discuss.enable_hot']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
+$settings['discuss.attachments_allowed_filetypes']= $modx->newObject('modSystemSetting');
+$settings['discuss.attachments_allowed_filetypes']->fromArray(array(
+    'key' => 'discuss.attachments_allowed_filetypes',
+    'value' => 'doc,gif,jpg,pdf,png,txt,zip,gz,bz2,xls,psd,css,tgz,odt,sql,tpl,rtf,xml',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Attachments',
+),'',true,true);
+$settings['discuss.attachments_max_filesize']= $modx->newObject('modSystemSetting');
+$settings['discuss.attachments_max_filesize']->fromArray(array(
+    'key' => 'discuss.attachments_max_filesize',
+    'value' => '11509760',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Attachments',
+),'',true,true);
+$settings['discuss.attachments_max_per_post']= $modx->newObject('modSystemSetting');
+$settings['discuss.attachments_max_per_post']->fromArray(array(
+    'key' => 'discuss.attachments_max_per_post',
+    'value' => '5',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Attachments',
+),'',true,true);
+
+
+$settings['discuss.attachments_path']= $modx->newObject('modSystemSetting');
+$settings['discuss.attachments_path']->fromArray(array(
+    'key' => 'discuss.attachments_path',
+    'value' => '{assets_path}components/discuss/attachments/',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Attachments',
+),'',true,true);
+$settings['discuss.attachments_url']= $modx->newObject('modSystemSetting');
+$settings['discuss.attachments_url']->fromArray(array(
+    'key' => 'discuss.attachments_url',
+    'value' => '{assets_url}components/discuss/attachments/',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Attachments',
+),'',true,true);
+
 /*
 $settings['discuss.']= $modx->newObject('modSystemSetting');
 $settings['discuss.']->fromArray(array(

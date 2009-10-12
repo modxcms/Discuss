@@ -21,15 +21,18 @@
 		          <br class="clear" />
                   <div class="dis-signature">[[+author_signature]]</div>
 		      </div>
-	    </div>  
-		
+	    </div>
 	</div>
 	<div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
 		<div class="dis-post-body">[[+content]]</div>
 		<div class="dis-post-footer">
-              <a href="javascript:void([[+id]]);">[[%discuss.report_to_mod]]</a>
-              - <a href="javascript:void([[+id]]);">[[+ip]]</a>
+		    <div class="dis-post-attachments">[[+attachments]]</div>
+		    <div class="dis-post-ip">
+                <a href="javascript:void([[+id]]);">[[%discuss.report_to_mod]]</a>
+                - <a href="javascript:void([[+id]]);">[[+ip]]</a>
+            </div>
 		</div>
+		<br class="clear" />
         <div class="dis-post-reply" id="dis-post-reply-[[+id]]"></div>
 	</div>
 </div>

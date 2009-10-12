@@ -21,12 +21,10 @@
     <br class="clear" />
     
     <label for="dis-reply-post-attachments">Attachments:
-        <span class="small dis-reply-post-add-attachment"><a href="[[~[[*id]]]]?post=[[+id]]">Add Attachment</a></a>
-        <span class="error">[[+error.attachment1]]</span>
+        <span class="small dis-reply-post-add-attachment"><a href="[[~[[*id]]]]?post=[[+id]]">Add Attachment</a><br />(max of [[+max_attachments]])</span>
+        <span class="error">[[+error.attachments]]</span>
     </label>
-    <input type="file" name="attachment1" id="dis-reply-post-attachment" />
-    
-    
+    <input type="file" name="attachment1" id="dis-reply-post-attachment" />    
     
     <div id="dis-attachments"></div>
     <br class="clear" />

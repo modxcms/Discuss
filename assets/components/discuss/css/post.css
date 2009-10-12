@@ -33,9 +33,17 @@
     cursor: pointer;
 }
 .dis-post-footer {
-    text-align: right;
     font-size: 11px;
     }
+.dis-post-ip { float: right; }
+.dis-post-attachments { float: left; margin-left: 4px; border-top: 1px solid #ddd; padding: 1px; }
+.dis-post-attachments ul {
+    list-style-type: none;
+    margin: 0;
+    }
+.dis-post-attachments li {
+    margin: 0;
+}
 .dis-signature {
     margin: 5px;
     padding: 5px;

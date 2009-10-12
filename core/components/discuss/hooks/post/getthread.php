@@ -78,6 +78,21 @@ foreach ($posts as $post) {
     if (!$thread->get('locked')) {
         $pa['action_reply'] = '<a href="[[~[[++discuss.reply_post_resource]]]]?post=[[+id]]" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
         $pa['action_modify'] = '<a href="[[~[[++discuss.modify_post_resource]]]]?post=[[+id]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+        $pa['action_remove'] = '<a class="dis-post-remove">'.$modx->lexicon('discuss.remove').'</a>';
+    }
+
+    /* get attachments */
+    $attachments = $post->getMany('Attachments');
+    if (!empty($attachments)) {
+        $attTpl = '<ul class="dis-attachments">';
+        foreach ($attachments as $attachment) {
+            $attachmentArray = $attachment->toArray();
+            $attachmentArray['filesize'] = $attachment->convert();
+            $attachmentArray['url'] = $attachment->getUrl();
+            $attTpl .= $discuss->getChunk('disPostAttachment',$attachmentArray);
+        }
+        $attTpl .= '</ul>';
+        $pa['attachments'] = $attTpl;
     }
 
 

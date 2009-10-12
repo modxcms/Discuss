@@ -129,6 +129,19 @@
         <composite alias="Descendants" class="disPostClosure" local="id" foreign="descendant" cardinality="many" owner="local" />
         <composite alias="PostReads" class="disPostRead" local="id" foreign="post" cardinality="many" owner="local" />
         <composite alias="Notifications" class="disUserNotification" local="id" foreign="post" cardinality="many" owner="local" />
+        <composite alias="Attachments" class="disPostAttachment" local="id" foreign="post" cardinality="many" owner="local" />
+    </object>
+    
+    <object class="disPostAttachment" table="posts_attachments" extends="xPDOSimpleObject">
+        <field key="post" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="filename" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="filesize" dbtype="int" precision="10" phptype="int" null="false" default="0" />
+        <field key="downloads" dbtype="int" precision="10" phptype="int" null="false" default="0" />
+        
+        <aggregate alias="Post" class="disPost" local="post" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
     <object class="disPostClosure" table="posts_closure" extends="xPDOObject">
