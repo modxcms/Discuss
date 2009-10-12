@@ -65,7 +65,7 @@ $settings['discuss.admin_email']->fromArray(array(
 $settings['discuss.date_format']= $modx->newObject('modSystemSetting');
 $settings['discuss.date_format']->fromArray(array(
     'key' => 'discuss.date_format',
-    'value' => '%e-%d-%Y, %I:%M %p',
+    'value' => '%b %d, %Y, %I:%M %p',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Administration',
