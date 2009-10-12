@@ -136,7 +136,7 @@ class Discuss {
                 'homeLink' => '<a href="[[~[[++discuss.board_list_resource]]]]">Home</a>',
                 'authLink' => '<a href="[[~[[++discuss.board_list_resource]]]]?logout=1">Logout</a>',
                 'profileLink' => '<a href="[[~[[++discuss.user_resource]]]]?user='.$userId.'">Profile</a>',
-                'searchLink' => '<a href="[[~[[++discuss.board_list_resource]]]]">Search</a>',
+                'searchLink' => '<a href="[[~[[++discuss.search_resource]]]]">Search</a>',
             );
         } else {
             $authphs = array(

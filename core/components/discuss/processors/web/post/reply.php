@@ -17,7 +17,7 @@ if (empty($_POST['message'])) { $modx->error->addField('message','Please enter a
 
 /* first check attachments for validity */
 $attachments = array();
-if (!empty($_FILES)) {
+if (!empty($_FILES) && $_FILES['attachment1']['error'] == 0) {
     $result = $modx->hooks->load('post/attachment/verify',array(
         'attachments' => &$_FILES,
     ));
