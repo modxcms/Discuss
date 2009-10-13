@@ -98,13 +98,11 @@ Ext.extend(Dis.panel.Board,MODx.FormPanel,{
                 if (r.success) {
                     this.getForm().setValues(r.object);
 
-                    if (r.object.moderators.length != 0) {
-                        Ext.getCmp('dis-grid-board-moderators').getStore().loadData(r.object.moderators);
-                    }
+                    var d = Ext.decode(r.object.moderators);
+                    Ext.getCmp('dis-grid-board-moderators').getStore().loadData(d);
                     
-                    if (r.object.usergroups.length != 0) {
-                        Ext.getCmp('dis-grid-board-usergroups').getStore().loadData(r.object.usergroups);
-                    }
+                    var u = Ext.decode(r.object.usergroups);
+                    Ext.getCmp('dis-grid-board-usergroups').getStore().loadData(u);
                     
                     Ext.getCmp('dis-board-name').getEl().update('<h2>'+'Board'+': '+r.object.name+'</h2>');
                 } else MODx.form.Handler.errorJSON(r);

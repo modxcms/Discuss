@@ -24,7 +24,7 @@ foreach ($moderators as $moderator) {
         $moderator->get('username'),
     );
 }
-$board->set('moderators',$mods);
+$board->set('moderators','('.$modx->toJSON($mods).')');
 
 /* get user groups */
 $c = $modx->newQuery('disBoardUserGroup');
@@ -45,7 +45,7 @@ foreach ($usergroups as $usergroup) {
         $usergroup->get('name'),
     );
 }
-$board->set('usergroups',$list);
+$board->set('usergroups','('.$modx->toJSON($list).')');
 
 /* output */
 $boardArray = $board->toArray('',true);
