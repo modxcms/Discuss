@@ -12,6 +12,7 @@
 	        <li>[[+discuss.homeLink]]</li>
 	        <li>[[+discuss.searchLink]]</li>
 	        <li>[[+discuss.profileLink]]</li>
+	        <li>[[+discuss.unreadLink]]</li>
 	    </ul>
 	    <br class="clear" />
     </div>

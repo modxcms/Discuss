@@ -98,6 +98,11 @@ class disPost extends xPDOSimpleObject {
             } else {
                 $activity->set('topics',$activity->get('topics')+1);
             }
+
+            /* set thread */
+            $thread = $this->getThreadRoot();
+            $this->set('thread',$thread->get('id'));
+            $this->save();
         }
         return $saved;
     }
@@ -201,6 +206,13 @@ class disPost extends xPDOSimpleObject {
             return $this;
         }
         $c = $this->xpdo->newQuery('disPost');
+        $c->select('
+            disPost.*,
+            Author.username AS author_username,
+            Board.name AS board_name
+        ');
+        $c->innerJoin('modUser','Author');
+        $c->innerJoin('disBoard','Board');
         $c->innerJoin('disPostClosure','Ancestors');
         $c->innerJoin('disPost','Thread','Thread.id = Ancestors.ancestor');
         $c->where(array(

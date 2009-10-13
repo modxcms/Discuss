@@ -8,6 +8,7 @@ $xpdo_meta_map['disPost']= array (
   'fields' => 
   array (
     'board' => 0,
+    'thread' => 0,
     'parent' => 0,
     'title' => '',
     'message' => NULL,
@@ -35,6 +36,16 @@ $xpdo_meta_map['disPost']= array (
       'null' => false,
       'index' => 'index',
     ),
+    'thread' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'default' => 0,
+      'null' => false,
+      'index' => 'index',
+    ),
     'parent' => 
     array (
       'dbtype' => 'int',
@@ -52,13 +63,16 @@ $xpdo_meta_map['disPost']= array (
       'phptype' => 'string',
       'default' => '',
       'null' => false,
-      'index' => 'index',
+      'index' => 'fulltext',
+      'indexgrp' => 'search',
     ),
     'message' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
+      'index' => 'fulltext',
+      'indexgrp' => 'search',
     ),
     'author' => 
     array (
@@ -153,6 +167,14 @@ $xpdo_meta_map['disPost']= array (
     array (
       'class' => 'disBoard',
       'local' => 'board',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Thread' => 
+    array (
+      'class' => 'disPost',
+      'local' => 'thread',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

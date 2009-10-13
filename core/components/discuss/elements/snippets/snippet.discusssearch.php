@@ -66,6 +66,11 @@ if (!empty($_REQUEST['s'])) {
     $properties['search'] = $s;
 }
 
+/* get board breadcrumb trail */
+$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">[[++discuss.forum_title]]</a> / ';
+$trail .= 'Search';
+$properties['trail'] = $trail;
+
 /* output */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.search.js');
 $modx->regClientCSS($discuss->config['cssUrl'].'search.css');

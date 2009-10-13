@@ -107,15 +107,7 @@ $c = $modx->newQuery('disPost');
 $c->select('
     disPost.*,
     Board.name AS board_name,
-    Author.username AS author_username,
-    (SELECT Post.id FROM '.$modx->getTableName('disPost').' AS Post
-        INNER JOIN '.$modx->getTableName('disPostClosure').' AS Ancestors
-        ON Ancestors.ancestor = Post.id
-     WHERE
-         Ancestors.descendant = disPost.id
-     AND Ancestors.ancestor != disPost.id
-     AND Post.parent = 0
-    ) AS thread
+    Author.username AS author_username
 ');
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('modUser','Author');
@@ -126,7 +118,6 @@ $rps = array();
 foreach ($recentPosts as $post) {
     $pa = $post->toArray('',true);
     $pa['class'] = 'dis-board-li';
-    if (empty($pa['thread'])) { $pa['thread'] = $pa['id']; }
 
     $rps[] = $discuss->getChunk('disPostLI',$pa);
 }
@@ -196,16 +187,9 @@ $c->select('
     disPost.title,
     disPost.createdon,
     disPost.author,
+    disPost.thread,
     Author.username AS username,
-    Board.name AS board,
-    (SELECT Post.id FROM '.$modx->getTableName('disPost').' AS Post
-        INNER JOIN '.$modx->getTableName('disPostClosure').' AS Ancestors
-        ON Ancestors.ancestor = Post.id
-     WHERE
-         Ancestors.descendant = disPost.id
-     AND Ancestors.ancestor != disPost.id
-     AND Post.parent = 0
-    ) AS thread
+    Board.name AS board
 ');
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('modUser','Author');

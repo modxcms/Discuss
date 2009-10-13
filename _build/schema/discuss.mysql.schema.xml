@@ -103,6 +103,7 @@
     
     <object class="disPost" table="posts" extends="xPDOSimpleObject">
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
+        <field key="thread" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="title" dbtype="varchar" precision="255" phptype="string" default="" null="false" index="fulltext" indexgrp="search" />
         <field key="message" dbtype="text" phptype="string" null="false" index="fulltext" indexgrp="search" />
@@ -119,6 +120,7 @@
         <field key="sticky" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
         
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Thread" class="disPost" local="thread" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Author" class="modUser" local="author" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="AuthorProfile" class="disUserProfile" local="author" foreign="user" cardinality="one" owner="foreign" />
         <aggregate alias="CreatedBy" class="modUser" local="author" foreign="id" cardinality="one" owner="foreign" />
