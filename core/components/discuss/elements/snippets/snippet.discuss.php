@@ -8,9 +8,6 @@ $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('home');
 
-$modx->setLogTarget('ECHO');
-
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.home.js');
 $properties = array();
 
 $_groups = implode(',',$modx->user->getUserGroups());
@@ -228,4 +225,5 @@ $properties = array_merge($properties,$la);
 unset($la,$latestPost,$c);
 
 /* output */
+$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.home.js');
 return $discuss->output('home',$properties);

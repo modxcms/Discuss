@@ -9,9 +9,6 @@ $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('board:'.$_REQUEST['board']);
 
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.board.js');
-$modx->setLogTarget('ECHO');
-
 /* get board */
 $board = $modx->getObject('disBoard',$_REQUEST['board']);
 if ($board == null) $modx->sendErrorPage();
@@ -256,6 +253,7 @@ $properties['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-
 unset($actionButtons);
 
 /* output */
+$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.board.js');
 $modx->setPlaceholder('discuss.board',$board->get('name'));
 return $discuss->output('board',$properties);
 
