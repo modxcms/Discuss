@@ -15,6 +15,7 @@ Dis.panel.UserGroup = function(config) {
             ,defaults: {
                 autoHeight: true, bodyStyle: 'padding: 1em;'
             }
+            ,forceLayout: true
             ,items: [{
                 title: _('general_information')
                 ,layout: 'form'
@@ -92,27 +93,24 @@ Dis.panel.UserGroup = function(config) {
 Ext.extend(Dis.panel.UserGroup,MODx.FormPanel,{
     setup: function() {
         if (!this.config.usergroup) return;
-        Ext.Ajax.request({
+        MODx.Ajax.request({
             url: this.config.url
             ,params: {
                 action: 'mgr/usergroup/get'
                 ,id: this.config.usergroup
             }
-            ,scope: this
-            ,success: function(r) {
-                r = Ext.decode(r.responseText);
-                if (r.success) {
+            ,listeners: {
+                'success': {fn:function(r) {
                     this.getForm().setValues(r.object);
                     
-                    if (r.object.members.length > 0) {
-                        Ext.getCmp('dis-grid-usergroup-members').getStore().loadData(r.object.members);
-                    }
-                    if (r.object.boards.length > 0) {
-                        Ext.getCmp('dis-grid-usergroup-boards').getStore().loadData(r.object.boards);
-                    }
+                    var d = Ext.decode(r.object.members);
+                    Ext.getCmp('dis-grid-usergroup-members').getStore().loadData(d);
+                    
+                    var b = Ext.decode(r.object.boards);
+                    Ext.getCmp('dis-grid-usergroup-boards').getStore().loadData(b);
                     
                     Ext.getCmp('dis-usergroup-header').getEl().update('<h2>'+'UserGroup'+': '+r.object.name+'</h2>');
-                } else MODx.form.Handler.errorJSON(r);
+                },scope:this}
             }
         });
     }

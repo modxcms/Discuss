@@ -20,6 +20,8 @@ $c->where(array(
 $usergroup = $modx->getObject('modUserGroup',$c);
 if ($usergroup == null) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_nf'));
 
+$usergroupArray = $usergroup->toArray();
+
 /* get members */
 $c = $modx->newQuery('modUserGroupMember');
 $c->select('modUserGroupMember.*,User.username AS username');
@@ -37,8 +39,9 @@ foreach ($members as $member) {
         $member->get('role'),
     );
 }
-$usergroup->set('members',$list);
+$usergroup->set('members','(' . $modx->toJSON($list) . ')');
 unset($members,$member,$list,$c);
+
 
 /* get boards */
 $c = $modx->newQuery('disBoard');
@@ -55,7 +58,6 @@ $c->groupby('disBoard.id');
 $boards = $modx->getCollection('disBoard',$c);
 $list = array();
 foreach ($boards as $board) {
-    $pad =
     $list[] = array(
         $board->get('id'),
         str_repeat('--',$board->get('depth')).$board->get('name'),
@@ -63,10 +65,8 @@ foreach ($boards as $board) {
         $board->get('category'),
     );
 }
-$usergroup->set('boards',$list);
+$usergroup->set('boards','(' . $modx->toJSON($list) . ')');
 unset($boards,$board,$list,$c);
 
-
 /* output */
-$usergroupArray = $usergroup->toArray('',true);
-return $modx->error->success('',$usergroupArray);
+return $modx->error->success('',$usergroup);
