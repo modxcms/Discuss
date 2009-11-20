@@ -80,5 +80,3 @@ $xpdo_meta_map['disPostRead']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disPostRead']['aggregates']= array_merge($xpdo_meta_map['disPostRead']['aggregates'], array_change_key_case($xpdo_meta_map['disPostRead']['aggregates']));
-$xpdo_meta_map['dispostread']= & $xpdo_meta_map['disPostRead'];

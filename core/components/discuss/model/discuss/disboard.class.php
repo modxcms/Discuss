@@ -12,20 +12,13 @@ class disBoard extends xPDOSimpleObject {
      */
     protected $parentChanged = false;
 
-    function disBoard(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
     /**
      * Overrides xPDOObject::set to provide custom functionality and automation
      * for the closure tables that persist the board map.
      *
      * {@inheritDoc}
      */
-    function set($k, $v= null, $vType= '') {
+    public function set($k, $v= null, $vType= '') {
         $oldParentId = $this->get('parent');
         $set = parent::set($k,$v,$vType);
         if ($set && $k == 'parent' && $v != $oldParentId && !$this->isNew()) {
@@ -40,7 +33,7 @@ class disBoard extends xPDOSimpleObject {
      *
      * {@inheritDoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $new = $this->isNew();
         $saved = parent::save($cacheFlag);
 
@@ -87,7 +80,7 @@ class disBoard extends xPDOSimpleObject {
                 'ancestor' => 0,
                 'descendant' => $id,
             ));
-            if ($rootcl == null) {
+            if (!$rootcl) {
                 $rootcl = $this->xpdo->newObject('disBoardClosure');
                 $rootcl->set('ancestor',0);
                 $rootcl->set('descendant',$id);

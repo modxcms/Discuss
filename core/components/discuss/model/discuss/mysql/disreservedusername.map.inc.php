@@ -62,4 +62,3 @@ $xpdo_meta_map['disReservedUsername']= array (
     ),
   ),
 );
-$xpdo_meta_map['disreservedusername']= & $xpdo_meta_map['disReservedUsername'];

@@ -275,6 +275,3 @@ $xpdo_meta_map['disUserProfile']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disUserProfile']['aggregates']= array_merge($xpdo_meta_map['disUserProfile']['aggregates'], array_change_key_case($xpdo_meta_map['disUserProfile']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disUserProfile']['composites']= array_merge($xpdo_meta_map['disUserProfile']['composites'], array_change_key_case($xpdo_meta_map['disUserProfile']['composites']));
-$xpdo_meta_map['disuserprofile']= & $xpdo_meta_map['disUserProfile'];

@@ -61,7 +61,7 @@ foreach ($attachments as $file) {
     if ($attachment->upload($file)) {
         $attachment->save();
     } else {
-        $modx->log(MODX_LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to upload the attachment: '.print_r($file,true));
+        $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to upload the attachment: '.print_r($file,true));
     }
 }
 

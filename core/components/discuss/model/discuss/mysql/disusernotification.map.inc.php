@@ -80,5 +80,3 @@ $xpdo_meta_map['disUserNotification']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disUserNotification']['aggregates']= array_merge($xpdo_meta_map['disUserNotification']['aggregates'], array_change_key_case($xpdo_meta_map['disUserNotification']['aggregates']));
-$xpdo_meta_map['disusernotification']= & $xpdo_meta_map['disUserNotification'];

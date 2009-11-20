@@ -128,6 +128,3 @@ $xpdo_meta_map['disBanGroup']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disBanGroup']['aggregates']= array_merge($xpdo_meta_map['disBanGroup']['aggregates'], array_change_key_case($xpdo_meta_map['disBanGroup']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disBanGroup']['composites']= array_merge($xpdo_meta_map['disBanGroup']['composites'], array_change_key_case($xpdo_meta_map['disBanGroup']['composites']));
-$xpdo_meta_map['disbangroup']= & $xpdo_meta_map['disBanGroup'];

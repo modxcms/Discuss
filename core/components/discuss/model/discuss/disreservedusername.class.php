@@ -4,11 +4,4 @@
  *
  * @package discuss
  */
-class disReservedUsername extends xPDOObject {
-    function disReservedUsername(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-}
+class disReservedUsername extends xPDOObject {}

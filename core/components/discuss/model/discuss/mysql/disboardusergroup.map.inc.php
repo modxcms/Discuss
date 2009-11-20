@@ -61,5 +61,3 @@ $xpdo_meta_map['disBoardUserGroup']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disBoardUserGroup']['aggregates']= array_merge($xpdo_meta_map['disBoardUserGroup']['aggregates'], array_change_key_case($xpdo_meta_map['disBoardUserGroup']['aggregates']));
-$xpdo_meta_map['disboardusergroup']= & $xpdo_meta_map['disBoardUserGroup'];

@@ -32,7 +32,7 @@ unset($root);
 $modx= new modX();
 $modx->initialize('mgr');
 echo '<pre>'; /* used for nice formatting of log messages */
-$modx->setLogLevel(MODX_LOG_LEVEL_INFO);
+$modx->setLogLevel(modX::LOG_LEVEL_INFO);
 $modx->setLogTarget('ECHO');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
@@ -55,38 +55,38 @@ $category->addMany($chunks);
 
 /* create category vehicle */
 $attr = array(
-    XPDO_TRANSPORT_UNIQUE_KEY => 'category',
-    XPDO_TRANSPORT_PRESERVE_KEYS => false,
-    XPDO_TRANSPORT_UPDATE_OBJECT => true,
-    XPDO_TRANSPORT_RELATED_OBJECTS => true,
-    XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
+    xPDOTransport::_UNIQUE_KEY => 'category',
+    xPDOTransport::_PRESERVE_KEYS => false,
+    xPDOTransport::_UPDATE_OBJECT => true,
+    xPDOTransport::_RELATED_OBJECTS => true,
+    xPDOTransport::_RELATED_OBJECT_ATTRIBUTES => array (
         'Children' => array(
-            XPDO_TRANSPORT_PRESERVE_KEYS => false,
-            XPDO_TRANSPORT_UPDATE_OBJECT => true,
-            XPDO_TRANSPORT_UNIQUE_KEY => 'category',
-            XPDO_TRANSPORT_RELATED_OBJECTS => true,
-            XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
+            xPDOTransport::_PRESERVE_KEYS => false,
+            xPDOTransport::_UPDATE_OBJECT => true,
+            xPDOTransport::_UNIQUE_KEY => 'category',
+            xPDOTransport::_RELATED_OBJECTS => true,
+            xPDOTransport::_RELATED_OBJECT_ATTRIBUTES => array (
                 'Snippets' => array(
-                    XPDO_TRANSPORT_PRESERVE_KEYS => false,
-                    XPDO_TRANSPORT_UPDATE_OBJECT => true,
-                    XPDO_TRANSPORT_UNIQUE_KEY => 'name',
+                    xPDOTransport::_PRESERVE_KEYS => false,
+                    xPDOTransport::_UPDATE_OBJECT => true,
+                    xPDOTransport::_UNIQUE_KEY => 'name',
                 ),
                 'Chunks' => array(
-                    XPDO_TRANSPORT_PRESERVE_KEYS => false,
-                    XPDO_TRANSPORT_UPDATE_OBJECT => true,
-                    XPDO_TRANSPORT_UNIQUE_KEY => 'name',
+                    xPDOTransport::_PRESERVE_KEYS => false,
+                    xPDOTransport::_UPDATE_OBJECT => true,
+                    xPDOTransport::_UNIQUE_KEY => 'name',
                 ),
             ),
         ),
         'Snippets' => array(
-            XPDO_TRANSPORT_PRESERVE_KEYS => false,
-            XPDO_TRANSPORT_UPDATE_OBJECT => true,
-            XPDO_TRANSPORT_UNIQUE_KEY => 'name',
+            xPDOTransport::_PRESERVE_KEYS => false,
+            xPDOTransport::_UPDATE_OBJECT => true,
+            xPDOTransport::_UNIQUE_KEY => 'name',
         ),
         'Chunks' => array (
-            XPDO_TRANSPORT_PRESERVE_KEYS => false,
-            XPDO_TRANSPORT_UPDATE_OBJECT => true,
-            XPDO_TRANSPORT_UNIQUE_KEY => 'name',
+            xPDOTransport::_PRESERVE_KEYS => false,
+            xPDOTransport::_UPDATE_OBJECT => true,
+            xPDOTransport::_UNIQUE_KEY => 'name',
         ),
     ),
 );
@@ -110,15 +110,15 @@ $menu= null;
 include_once $sources['data'].'transport.menu.php';
 
 $vehicle= $builder->createVehicle($menu,array (
-    XPDO_TRANSPORT_PRESERVE_KEYS => false,
-    XPDO_TRANSPORT_UPDATE_OBJECT => true,
-    XPDO_TRANSPORT_UNIQUE_KEY => 'text',
-    XPDO_TRANSPORT_RELATED_OBJECTS => true,
-    XPDO_TRANSPORT_RELATED_OBJECT_ATTRIBUTES => array (
+    xPDOTransport::_PRESERVE_KEYS => false,
+    xPDOTransport::_UPDATE_OBJECT => true,
+    xPDOTransport::_UNIQUE_KEY => 'text',
+    xPDOTransport::_RELATED_OBJECTS => true,
+    xPDOTransport::_RELATED_OBJECT_ATTRIBUTES => array (
         'Action' => array (
-            XPDO_TRANSPORT_PRESERVE_KEYS => false,
-            XPDO_TRANSPORT_UPDATE_OBJECT => true,
-            XPDO_TRANSPORT_UNIQUE_KEY => array ('namespace','controller'),
+            xPDOTransport::_PRESERVE_KEYS => false,
+            xPDOTransport::_UPDATE_OBJECT => true,
+            xPDOTransport::_UNIQUE_KEY => array ('namespace','controller'),
         ),
     ),
 ));
@@ -141,6 +141,6 @@ $tend= $mtime;
 $totalTime= ($tend - $tstart);
 $totalTime= sprintf("%2.4f s", $totalTime);
 
-$modx->log(MODX_LOG_LEVEL_INFO,"\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
+$modx->log(modX::LOG_LEVEL_INFO,"\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
 
 exit ();

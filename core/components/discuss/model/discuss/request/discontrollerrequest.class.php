@@ -30,16 +30,6 @@ class DisControllerRequest extends modRequest {
         /* save page to manager object. allow custom actionVar choice for extending classes. */
         $this->action = isset($_REQUEST[$this->actionVar]) ? $_REQUEST[$this->actionVar] : $this->defaultAction;
 
-        return $this->_prepareResponse();
-    }
-
-    /**
-     * Prepares the MODx response to a mgr request that is being handled.
-     *
-     * @access public
-     * @return boolean True if the response is properly prepared.
-     */
-    function _prepareResponse() {
         $modx =& $this->modx;
         $discuss =& $this->discuss;
         $viewHeader = include $this->discuss->config['corePath'].'controllers/mgr/header.php';

@@ -87,5 +87,3 @@ $xpdo_meta_map['disPostAttachment']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disPostAttachment']['aggregates']= array_merge($xpdo_meta_map['disPostAttachment']['aggregates'], array_change_key_case($xpdo_meta_map['disPostAttachment']['aggregates']));
-$xpdo_meta_map['dispostattachment']= & $xpdo_meta_map['disPostAttachment'];

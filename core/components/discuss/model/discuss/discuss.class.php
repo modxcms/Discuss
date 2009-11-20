@@ -216,12 +216,12 @@ class Discuss {
         if ($className = $this->modx->loadClass($class,$path,true,true)) {
             $this->treeParser= new $className($this);
         } else {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR,'Could not load '.$class.' from '.$path);
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$class.' from '.$path);
         }
         return $this->treeParser;
     }
 
-    public function loadProcessor($name,$scriptProperties = array()) {
+    public function loadProcessor($name,array $scriptProperties = array()) {
         if (!isset($this->modx->error)) $this->modx->request->loadErrorHandler();
 
         $path = $this->config['processorsPath'].$name.'.php';
@@ -246,7 +246,7 @@ class Discuss {
      * @param array $properties The properties for the Chunk
      * @return string The processed content of the Chunk
      */
-    public function getChunk($name,$properties = array()) {
+    public function getChunk($name,array $properties = array()) {
         $chunk = null;
         if (!isset($this->chunks[$name])) {
             /*$chunk = $this->modx->getObject('modChunk',array('name' => $name),true);*/
@@ -286,7 +286,7 @@ class Discuss {
     /**
      * Used for development and debugging
      */
-    public function getPage($name,$properties = array()) {
+    public function getPage($name,array $properties = array()) {
         $name = str_replace('.','/',$name);
         $f = $this->config['pagesPath'].strtolower($name).'.tpl';
         $o = '';
@@ -309,7 +309,7 @@ class Discuss {
      * @param string $output The output to process
      * @return string The final wrapped output, or blank if not in debug.
      */
-    public function output($page = '',$properties = array()) {
+    public function output($page = '',array $properties = array()) {
         if ($this->modx->getOption('discuss.debug',null,false)) {
             $output = $this->getChunk('disWrapper',array(
                 'discuss.output' => $this->getPage($page,$properties),
@@ -387,18 +387,18 @@ class Discuss {
      * @param array $properties A collection of properties.
      * @return array
      */
-    public function sendEmail($email,$name,$subject,$properties = array()) {
+    public function sendEmail($email,$name,$subject,array $properties = array()) {
         if (empty($properties['tpl'])) return false;
         if (empty($properties['tplType'])) $properties['tplType'] = 'modChunk';
 
         $msg = $this->getChunk($properties['tpl'],$properties,$properties['tplType']);
 
         $this->modx->getService('mail', 'mail.modPHPMailer');
-        $this->modx->mail->set(MODX_MAIL_BODY, $msg);
-        $this->modx->mail->set(MODX_MAIL_FROM, $this->modx->getOption('emailsender'));
-        $this->modx->mail->set(MODX_MAIL_FROM_NAME, $this->modx->getOption('site_name'));
-        $this->modx->mail->set(MODX_MAIL_SENDER, $this->modx->getOption('emailsender'));
-        $this->modx->mail->set(MODX_MAIL_SUBJECT, $subject);
+        $this->modx->mail->set(modMail::MAIL_BODY, $msg);
+        $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
+        $this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
+        $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
+        $this->modx->mail->set(modMail::MAIL_SUBJECT, $subject);
         $this->modx->mail->address('to', $email, $name);
         $this->modx->mail->address('reply-to', $this->modx->getOption('emailsender'));
         $this->modx->mail->setHTML(true);
@@ -415,7 +415,7 @@ class Discuss {
      * @param array $result The result from the processor
      * @return boolean The success of the processor
      */
-    public function processResult($result = array()) {
+    public function processResult(array $result = array()) {
         if (!is_array($result) || !isset($result['success'])) return false;
 
         if ($result['success'] == false) {

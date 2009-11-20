@@ -91,5 +91,3 @@ $xpdo_meta_map['disBanItem']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disBanItem']['aggregates']= array_merge($xpdo_meta_map['disBanItem']['aggregates'], array_change_key_case($xpdo_meta_map['disBanItem']['aggregates']));
-$xpdo_meta_map['disbanitem']= & $xpdo_meta_map['disBanItem'];

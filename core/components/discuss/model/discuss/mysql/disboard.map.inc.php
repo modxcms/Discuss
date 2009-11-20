@@ -215,6 +215,3 @@ $xpdo_meta_map['disBoard']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disBoard']['aggregates']= array_merge($xpdo_meta_map['disBoard']['aggregates'], array_change_key_case($xpdo_meta_map['disBoard']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disBoard']['composites']= array_merge($xpdo_meta_map['disBoard']['composites'], array_change_key_case($xpdo_meta_map['disBoard']['composites']));
-$xpdo_meta_map['disboard']= & $xpdo_meta_map['disBoard'];

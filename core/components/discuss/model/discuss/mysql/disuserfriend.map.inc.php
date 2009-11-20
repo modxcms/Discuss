@@ -59,5 +59,3 @@ $xpdo_meta_map['disUserFriend']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disUserFriend']['aggregates']= array_merge($xpdo_meta_map['disUserFriend']['aggregates'], array_change_key_case($xpdo_meta_map['disUserFriend']['aggregates']));
-$xpdo_meta_map['disuserfriend']= & $xpdo_meta_map['disUserFriend'];

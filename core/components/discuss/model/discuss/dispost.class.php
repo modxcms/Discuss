@@ -6,13 +6,6 @@
  * @package discuss
  */
 class disPost extends xPDOSimpleObject {
-    function disPost(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
     /**
      * Overrides xPDOObject::save to handle closure table edits.
      *
@@ -20,7 +13,7 @@ class disPost extends xPDOSimpleObject {
      *
      * {@inheritDoc}
      */
-    function save($cacheFlag = null) {
+    public function save($cacheFlag = null) {
         $new = $this->isNew();
         $saved = parent::save($cacheFlag);
 
@@ -113,7 +106,7 @@ class disPost extends xPDOSimpleObject {
      *
      * {@inheritDoc}
      */
-    function remove($ancestors= array ()) {
+    public function remove(array $ancestors = array()) {
         $profile = $this->getOne('AuthorProfile');
         $board = $this->getOne('Board');
         $parent = $this->get('parent');
@@ -313,7 +306,7 @@ class disPost extends xPDOSimpleObject {
 
         $saved = $read->save();
         if (!$saved) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark read the post: '.print_r($read->toArray(),true));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark read the post: '.print_r($read->toArray(),true));
         }
         return $saved;
     }
@@ -335,7 +328,7 @@ class disPost extends xPDOSimpleObject {
 
         $removed = $read->remove();
         if (!$removed) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark unread the post: '.print_r($read->toArray(),true));
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark unread the post: '.print_r($read->toArray(),true));
         }
         return $removed;
     }

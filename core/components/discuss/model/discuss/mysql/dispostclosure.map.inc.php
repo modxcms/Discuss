@@ -63,5 +63,3 @@ $xpdo_meta_map['disPostClosure']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disPostClosure']['aggregates']= array_merge($xpdo_meta_map['disPostClosure']['aggregates'], array_change_key_case($xpdo_meta_map['disPostClosure']['aggregates']));
-$xpdo_meta_map['dispostclosure']= & $xpdo_meta_map['disPostClosure'];

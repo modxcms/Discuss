@@ -61,5 +61,3 @@ $xpdo_meta_map['disUserModerated']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disUserModerated']['aggregates']= array_merge($xpdo_meta_map['disUserModerated']['aggregates'], array_change_key_case($xpdo_meta_map['disUserModerated']['aggregates']));
-$xpdo_meta_map['disusermoderated']= & $xpdo_meta_map['disUserModerated'];

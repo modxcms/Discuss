@@ -61,5 +61,3 @@ $xpdo_meta_map['disCategory']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disCategory']['composites']= array_merge($xpdo_meta_map['disCategory']['composites'], array_change_key_case($xpdo_meta_map['disCategory']['composites']));
-$xpdo_meta_map['discategory']= & $xpdo_meta_map['disCategory'];

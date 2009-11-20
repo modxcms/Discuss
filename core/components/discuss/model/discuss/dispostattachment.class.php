@@ -3,23 +3,16 @@
  * @package discuss
  */
 class disPostAttachment extends xPDOSimpleObject {
-    function disPostAttachment(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
-
     /**
      * Overrides the xPDOObject::remove method to remove the physical file for
      * the attachment
      */
-    function remove($ancestors = array()) {
+    public function remove(array $ancestors = array()) {
         $filename = $this->get('filename');
         if (!empty($filename)) {
             $filename = $this->getPath();
             if (!@unlink($filename)) {
-                $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to remove the attachment file at: '.$filename);
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to remove the attachment file at: '.$filename);
             }
         }
         return parent::remove($ancestors);
@@ -90,13 +83,13 @@ class disPostAttachment extends xPDOSimpleObject {
         /* if directory doesnt exist, create it */
         if (!file_exists($targetDir) || !is_dir($targetDir)) {
             if (!$cacheManager->writeTree($targetDir)) {
-               $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'[Discuss] Could not create directory: '.$targetDir);
+               $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] Could not create directory: '.$targetDir);
                return $uploaded;
             }
         }
         /* make sure directory is readable/writable */
         if (!is_readable($targetDir) || !is_writable($targetDir)) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'[Discuss] Could not write to directory: '.$targetDir);
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] Could not write to directory: '.$targetDir);
             return $uploaded;
         }
 
@@ -108,7 +101,7 @@ class disPostAttachment extends xPDOSimpleObject {
             @unlink($location.$fileNameLower);
         }
         if (!@move_uploaded_file($file['tmp_name'],$location)) {
-            $this->xpdo->log(MODX_LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to upload the file: '.$file['tmp_name'].' to '.$location);
+            $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to upload the file: '.$file['tmp_name'].' to '.$location);
         } else {
             $uploaded = true;
             $this->set('filename',$fileNameLower);

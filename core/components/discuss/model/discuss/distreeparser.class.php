@@ -13,7 +13,7 @@ class disTreeParser {
     public $openChildren =  '<ol class="[[+olClass]]">';
     public $closeChildren = '</ol>';
 
-    function disTreeParser(Discuss &$discuss,array $config = array()) {
+    function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
         $this->config = $config;
     }

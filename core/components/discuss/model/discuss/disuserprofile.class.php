@@ -13,10 +13,9 @@ define('DISCUSS_USER_AWAITING_MODERATION',4);
  * @package discuss
  */
 class disUserProfile extends xPDOSimpleObject {
-    function disUserProfile(& $xpdo) {
-        $this->__construct($xpdo);
-    }
-    function __construct(& $xpdo) {
-        parent :: __construct($xpdo);
-    }
+    const INACTIVE = 0;
+    const ACTIVE = 1;
+    const UNCONFIRMED = 2;
+    const BANNED = 3;
+    const AWAITING_MODERATION = 4;
 }

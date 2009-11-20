@@ -50,7 +50,7 @@ class disHooks {
 
             $success = include $hookFile;
         } else {
-            $this->modx->log(MODX_LOG_LEVEL_ERROR,'[Discuss] Hook not found: '.$hookFile);
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Hook not found: '.$hookFile);
         }
         return $success;
     }

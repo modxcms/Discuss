@@ -70,4 +70,3 @@ $xpdo_meta_map['disForumActivity']= array (
     ),
   ),
 );
-$xpdo_meta_map['disforumactivity']= & $xpdo_meta_map['disForumActivity'];

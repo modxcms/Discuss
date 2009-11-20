@@ -10,7 +10,7 @@ class disConnectorRequest extends modConnectorResponse {
         parent::__construct($discuss->modx,$config);
     }
 
-    function handle($action = '') {
+    public function handle($action = '') {
         if (empty($action) && !empty($_REQUEST['action'])) $action = $_REQUEST['action'];
         if (!isset($this->modx->error)) $this->loadErrorHandler();
 
@@ -28,7 +28,21 @@ class disConnectorRequest extends modConnectorResponse {
             $processorOutput = $this->modx->error->failure('No action specified.');
         }
         if (is_array($processorOutput)) {
-            $processorOutput = $this->toJSON($processorOutput);
+            $processorOutput = $this->modx->toJSON(array(
+                'success' => isset($processorOutput['success']) ? $processorOutput['success'] : 0,
+                'message' => isset($processorOutput['message']) ? $processorOutput['message'] : $this->modx->lexicon('error'),
+                'total' => (isset($processorOutput['total']) && $processorOutput['total'] > 0)
+                        ? intval($processorOutput['total'])
+                        : (isset($processorOutput['errors'])
+                                ? count($processorOutput['errors'])
+                                : 1),
+                'data' => isset($processorOutput['errors']) ? $processorOutput['errors'] : array(),
+                'object' => isset($processorOutput['object']) ? $processorOutput['object'] : array(),
+            ));
+        }
+
+        if (!isset($_FILES) && empty($_FILES)) {
+            header("Content-Type: text/json; charset=UTF-8");
         }
         return $processorOutput;
     }

@@ -59,12 +59,12 @@ if (empty($errors)) {
     $profile->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
     $profile->set('ip',$_SERVER['REMOTE_ADDR']);
     if ($moderateUser !== false) {
-        $profile->set('status',DISCUSS_USER_AWAITING_MODERATION);
+        $profile->set('status',disUserProfile::AWAITING_MODERATION);
         $userModed = $modx->newObject('disUserModerated');
         $userModed->set('register_ip',$_SERVER['REMOTE_ADDR']);
         $userModed->set('reason',$moderateUser);
     } else {
-        $profile->set('status',DISCUSS_USER_UNCONFIRMED);
+        $profile->set('status',disUserProfile::UNCONFIRMED);
     }
 
     $profile->set('last_login',strftime('%Y-%m-%d %H:%M:%S'));

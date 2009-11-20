@@ -272,6 +272,3 @@ $xpdo_meta_map['disPost']= array (
     ),
   ),
 );
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disPost']['aggregates']= array_merge($xpdo_meta_map['disPost']['aggregates'], array_change_key_case($xpdo_meta_map['disPost']['aggregates']));
-if (XPDO_PHP4_MODE) $xpdo_meta_map['disPost']['composites']= array_merge($xpdo_meta_map['disPost']['composites'], array_change_key_case($xpdo_meta_map['disPost']['composites']));
-$xpdo_meta_map['dispost']= & $xpdo_meta_map['disPost'];

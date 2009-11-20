@@ -23,17 +23,17 @@ if ($profile == null) $modx->sendUnauthorizedPage();
 
 $status = $profile->get('status');
 switch ($status) {
-    case DISCUSS_USER_ACTIVE: $ok = true; break;
-    case DISCUSS_USER_BANNED:
+    case disUserProfile::ACTIVE: $ok = true; break;
+    case disUserProfile::BANNED:
         $errorOutput = 'Your account has been banned.';
         break;
-    case DISCUSS_USER_INACTIVE:
+    case disUserProfile::INACTIVE:
         $errorOutput = 'Your account has been deactivated.';
         break;
-    case DISCUSS_USER_UNCONFIRMED:
+    case disUserProfile::UNCONFIRMED:
         $errorOutput = 'Please check your email for confirmation instructions before logging in.';
         break;
-    case DISCUSS_USER_AWAITING_MODERATION:
+    case disUserProfile::AWAITING_MODERATION:
         $errorOutput = 'Your account is awaiting manual approval from a moderator, due to your IP address being flagged as a possible spammer.';
         break;
     default:
