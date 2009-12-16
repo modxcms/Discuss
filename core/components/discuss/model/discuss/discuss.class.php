@@ -84,10 +84,10 @@ class Discuss {
 
                 $this->modx->lexicon->load('discuss:web');
 
-                if ($this->config['useCss']) {
+                if ($this->modx->getOption('discuss.use_css',null,true)) {
                     $this->modx->regClientCSS($this->config['cssUrl'].'index.css');
                 }
-                if ($this->config['loadJQuery']) {
+                if ($this->modx->getOption('discuss.load_jquery',null,true)) {
                     $this->modx->regClientStartupScript($this->config['jsUrl'].'web/jquery-1.3.2.min.js');
                 }
                 $this->modx->regClientStartupScript($this->config['jsUrl'].'web/discuss.js');

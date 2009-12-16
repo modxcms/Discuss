@@ -8,18 +8,33 @@
 /* set some default values */
 $forumTitle = 'My Forums';
 $demoDataChecked = '';
+$useCss = ' checked="checked"';
+$loadJQuery = '';
+
+/* get values based on mode */
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
         $demoDataChecked = ' checked="checked"';
         break;
     case xPDOTransport::ACTION_UPGRADE:
     case xPDOTransport::ACTION_UNINSTALL:
+        /* forum title */
         $setting = $modx->getObject('modSystemSetting',array(
             'key' => 'discuss.forum_title',
         ));
-        if ($setting) {
-            $forumTitle = $setting->get('value');
-        }
+        if ($setting) $forumTitle = $setting->get('value');
+
+        /* use css */
+        $setting = $modx->getObject('modSystemSetting',array(
+            'key' => 'discuss.use_css',
+        ));
+        if ($setting && !$setting->get('value')) $useCss = '';
+
+        /* load jquery from discuss */
+        $setting = $modx->getObject('modSystemSetting',array(
+            'key' => 'discuss.load_jquery',
+        ));
+        if ($setting && $setting->get('value')) $loadJQuery = ' checked="checked"';
         break;
 }
 
@@ -31,7 +46,7 @@ foreach ($templates as $template) {
     $templatesTpl .= '<option value="'.$template->get('id').'">'.$template->get('templatename').'</option>';
 }
 
-
+/* do output html */
 $output = '
 <h2>Discuss Installer</h2>
 <p>Thanks for installing Discuss! Please review the setup options below before proceeding.</p>
@@ -67,6 +82,16 @@ $output = '
 <label for="discuss-forum_title">Forums Resource Alias</label>
 <input type="text" name="forum_title" id="discuss-forum_title" value="'.$forumTitle.'" />
 <p>The title of your forums.</p>
+<br />
+
+<label for="discuss-use_css">Use Default CSS</label>
+<input type="checkbox" name="use_css" id="discuss-use_css" value="1"'.$use_css.' />
+<p>Whether or not to use the default provided CSS.</p>
+<br />
+
+<label for="discuss-load_jquery">Discuss Loads jQuery</label>
+<input type="checkbox" name="load_jquery" id="discuss-load_jquery" value="1"'.$use_css.' />
+<p>Whether or not to have Discuss load jQuery (leave off if you are doing so in the Template).</p>
 <br />
 ';
 

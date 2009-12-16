@@ -151,6 +151,16 @@ $settings['discuss.hot_thread_threshold']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
+$settings['discuss.load_jquery']= $modx->newObject('modSystemSetting');
+$settings['discuss.load_jquery']->fromArray(array(
+    'key' => 'discuss.load_jquery',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'General',
+),'',true,true);
+
+
 $settings['discuss.max_post_depth']= $modx->newObject('modSystemSetting');
 $settings['discuss.max_post_depth']->fromArray(array(
     'key' => 'discuss.max_post_depth',
@@ -210,6 +220,15 @@ $settings['discuss.threads_per_page']->fromArray(array(
     'key' => 'discuss.threads_per_page',
     'value' => 20,
     'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'General',
+),'',true,true);
+
+$settings['discuss.use_css']= $modx->newObject('modSystemSetting');
+$settings['discuss.use_css']->fromArray(array(
+    'key' => 'discuss.use_css',
+    'value' => true,
+    'xtype' => 'combo-boolean',
     'namespace' => 'discuss',
     'area' => 'General',
 ),'',true,true);
