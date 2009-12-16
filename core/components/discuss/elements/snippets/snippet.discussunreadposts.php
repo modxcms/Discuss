@@ -13,6 +13,8 @@ $properties = array();
 $limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
 $start = !empty($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 
+$cssRowCls = $modx->getOption('cssRowCls',$scriptProperties,'dis-board-li');
+$rowTpl = $modx->getOption('rowTpl',$scriptProperties,'disPostLi');
 
 /* get unread posts */
 $c = $modx->newQuery('disPost');
@@ -37,17 +39,16 @@ $posts = array();
 $threads = array();
 foreach ($unreadPosts as $post) {
     $pa = $post->toArray();
-    $pa['class'] = 'dis-board-li';
+    $pa['class'] = $cssRowCls;
     $pa['title'] = $post->get('thread_title');
 
-    $tpl = $discuss->getChunk('disPostLI',$pa);
-    $rps[] = $discuss->getChunk('disPostLI',$pa);
+    $rps[] = $discuss->getChunk($rowTpl,$pa);
 }
 $properties['posts'] = implode("\n",$rps);
 
 /* get board breadcrumb trail */
 $trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">[[++discuss.forum_title]]</a> / ';
-$trail .= 'Unread Posts';
+$trail .= $modx->lexicon('discuss.unread_posts');
 $properties['trail'] = $trail;
 
 return $discuss->output('unread',$properties);

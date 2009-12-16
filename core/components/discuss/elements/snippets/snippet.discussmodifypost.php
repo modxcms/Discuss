@@ -34,7 +34,7 @@ foreach ($ancestors as $ancestor) {
     $trail .= '<a href="'.$url.'">'.$ancestor->get('name').'</a>';
     $trail .= ' / ';
 }
-$trail .= 'Modify Post: '.$post->get('title');
+$trail .= $modx->lexicon('discuss.modify_post_header',array('post' => $post->get('title')));
 $properties['trail'] = $trail;
 
 
@@ -46,10 +46,11 @@ if (!empty($_POST)) {
 
 
 /* get thread */
-$properties['thread_posts'] = $modx->hooks->load('post/getthread',array(
+$props = array_merge($scriptProperties,array(
     'post' => &$post,
     'thread' => &$thread,
 ));
+$properties['thread_posts'] = $modx->hooks->load('post/getthread',$props);
 
 
 /* output form to browser */

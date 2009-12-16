@@ -12,7 +12,6 @@ function getSnippetContent($filename) {
 }
 $snippets = array();
 
-/* step1 snippet */
 $snippets[0]= $modx->newObject('modSnippet');
 $snippets[0]->fromArray(array(
     'id' => 0,
@@ -24,5 +23,180 @@ $properties = include $sources['build'].'properties/properties.discuss.php';
 $snippets[0]->setProperties($properties);
 unset($properties);
 
+$snippets[1]= $modx->newObject('modSnippet');
+$snippets[1]->fromArray(array(
+    'id' => 1,
+    'name' => 'DiscussBoard',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussboard.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussboard.php';
+$snippets[1]->setProperties($properties);
+unset($properties);
+
+$snippets[2]= $modx->newObject('modSnippet');
+$snippets[2]->fromArray(array(
+    'id' => 2,
+    'name' => 'DiscussConnector',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussconnector.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussconnector.php';
+$snippets[2]->setProperties($properties);
+unset($properties);
+
+$snippets[3]= $modx->newObject('modSnippet');
+$snippets[3]->fromArray(array(
+    'id' => 3,
+    'name' => 'DiscussLogin',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discusslogin.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discusslogin.php';
+$snippets[3]->setProperties($properties);
+unset($properties);
+
+$snippets[4]= $modx->newObject('modSnippet');
+$snippets[4]->fromArray(array(
+    'id' => 4,
+    'name' => 'DiscussModifyPost',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussmodifypost.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussmodifypost.php';
+$snippets[4]->setProperties($properties);
+unset($properties);
+
+$snippets[5]= $modx->newObject('modSnippet');
+$snippets[5]->fromArray(array(
+    'id' => 5,
+    'name' => 'DiscussNewThread',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussnewthread.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussnewthread.php';
+$snippets[5]->setProperties($properties);
+unset($properties);
+
+$snippets[6]= $modx->newObject('modSnippet');
+$snippets[6]->fromArray(array(
+    'id' => 6,
+    'name' => 'DiscussRegister',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussregister.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussregister.php';
+$snippets[6]->setProperties($properties);
+unset($properties);
+
+$snippets[7]= $modx->newObject('modSnippet');
+$snippets[7]->fromArray(array(
+    'id' => 7,
+    'name' => 'DiscussReplyPost',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussreplypost.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussreplypost.php';
+$snippets[7]->setProperties($properties);
+unset($properties);
+
+$snippets[8]= $modx->newObject('modSnippet');
+$snippets[8]->fromArray(array(
+    'id' => 8,
+    'name' => 'DiscussSearch',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discusssearch.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discusssearch.php';
+$snippets[8]->setProperties($properties);
+unset($properties);
+
+$snippets[9]= $modx->newObject('modSnippet');
+$snippets[9]->fromArray(array(
+    'id' => 9,
+    'name' => 'DiscussThread',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussthread.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussthread.php';
+$snippets[9]->setProperties($properties);
+unset($properties);
+
+$snippets[10]= $modx->newObject('modSnippet');
+$snippets[10]->fromArray(array(
+    'id' => 10,
+    'name' => 'DiscussThreadRemove',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussthreadremove.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussthreadremove.php';
+$snippets[10]->setProperties($properties);
+unset($properties);
+
+$snippets[11]= $modx->newObject('modSnippet');
+$snippets[11]->fromArray(array(
+    'id' => 11,
+    'name' => 'DiscussUnreadPosts',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussunreadposts.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussunreadposts.php';
+$snippets[11]->setProperties($properties);
+unset($properties);
+
+$snippets[12]= $modx->newObject('modSnippet');
+$snippets[12]->fromArray(array(
+    'id' => 12,
+    'name' => 'DiscussUser',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussuser.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussuser.php';
+$snippets[12]->setProperties($properties);
+unset($properties);
+
+$snippets[13]= $modx->newObject('modSnippet');
+$snippets[13]->fromArray(array(
+    'id' => 13,
+    'name' => 'DiscussUserAccount',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussuseraccount.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussuseraccount.php';
+$snippets[13]->setProperties($properties);
+unset($properties);
+
+$snippets[14]= $modx->newObject('modSnippet');
+$snippets[14]->fromArray(array(
+    'id' => 14,
+    'name' => 'DiscussUserEdit',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussuseredit.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussuseredit.php';
+$snippets[14]->setProperties($properties);
+unset($properties);
+
+$snippets[15]= $modx->newObject('modSnippet');
+$snippets[15]->fromArray(array(
+    'id' => 15,
+    'name' => 'DiscussUserNotifications',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discussusernotifications.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussusernotifications.php';
+$snippets[15]->setProperties($properties);
+unset($properties);
+
+$snippets[17]= $modx->newObject('modSnippet');
+$snippets[17]->fromArray(array(
+    'id' => 17,
+    'name' => 'DiscussUserStats',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['root'].'snippet.discuss.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussuserstats.php';
+$snippets[17]->setProperties($properties);
+unset($properties);
 
 return $snippets;

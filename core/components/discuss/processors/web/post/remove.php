@@ -2,15 +2,16 @@
 /**
  * @package discuss
  */
+$modx->lexicon->load('discuss:post');
 
-if (empty($_POST['post'])) return $modx->error->failure('Post not specified!');
+if (empty($_POST['post'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
 $post = $modx->getObject('disPost',$_POST['post']);
-if ($post == null) return $modx->error->failure('Post not found!');
+if ($post == null) return $modx->error->failure($modx->lexicon('discuss.post_err_nf'));
 
 $board = $post->getOne('Board');
 
 if ($post->remove() == false) {
-    return $modx->error->failure('An error occurred while trying to remove the post.');
+    return $modx->error->failure($modx->lexicon('discuss.post_err_remove'));
 }
 
 $board->set('num_posts',$board->get('num_posts')-1);

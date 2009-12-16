@@ -8,8 +8,12 @@ $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('thread:'.$_REQUEST['thread']);
 
+
+/* get default properties */
 $userId = $modx->user->get('id');
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.js');
+$thread = $modx->getOption('thread',$_REQUEST,$modx->getOption('thread',$scriptProperties,false));
+
+if (empty($thread)) $modx->sendErrorPage();
 
 /* get thread root */
 $otherSelect = '';
@@ -24,10 +28,10 @@ $c->select('disPost.*,
         ancestor = disPost.id
     AND descendant != disPost.id) AS replies'.$otherSelect);
 $c->where(array(
-    'id' => $_REQUEST['thread'],
+    'id' => $thread,
 ));
 $thread = $modx->getObject('disPost',$c);
-if ($thread == null) $modx->sendErrorPage();
+if ($thread === null) $modx->sendErrorPage();
 unset($c);
 
 /* mark unread if user clicks mark unread */
@@ -87,6 +91,7 @@ $thread->set('posts',$postsOutput);
 unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 
 /* register javascript */
+$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.js');
 $modx->regClientStartupScript('<script type="text/javascript">
 $(function() {
     DIS.config.postCount = "'.count($pa).'";
@@ -121,12 +126,12 @@ unset($views);
 $properties = $thread->toArray();
 
 /* set activity of thread */
-$class = 'dis-normal-thread';
+$class = $modx->getOption('cssNormalThreadCls',$scriptProperties,'dis-normal-thread');
 $threshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
 if ($modx->user->get('id') == $thread->get('author')) {
-    $class .= $thread->get('replies') < $threshold ? ' dis-my-normal-thread' : ' dis-my-veryhot-thread';
+    $class .= $thread->get('replies') < $threshold ? ' '.$modx->getOption('cssMyNormalThreadCls',$scriptProperties,'dis-my-normal-thread') : ' '.$modx->getOption('cssMyHotThreadCls',$scriptProperties,'dis-my-veryhot-thread');
 } else {
-    $class .= $thread->get('replies') < $threshold ? '' : ' dis-veryhot-thread';
+    $class .= $thread->get('replies') < $threshold ? '' : ' '.$modx->getOption('cssHotThreadCls',$scriptProperties,'dis-veryhot-thread');
 }
 $thread->set('class',$class);
 unset($class,$threshold);

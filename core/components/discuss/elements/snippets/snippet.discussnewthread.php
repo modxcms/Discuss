@@ -1,5 +1,6 @@
 <?php
 /**
+ * Display form to post a new thread
  *
  * @package discuss
  */
@@ -10,7 +11,7 @@ $discuss->setSessionPlace('newthread:'.$_REQUEST['board']);
 
 if (empty($_REQUEST['board'])) { $modx->sendErrorPage(); }
 $board = $modx->getObject('disBoard',$_REQUEST['board']);
-if ($board == null) { $modx->sendErrorPage(); }
+if ($board == null) $modx->sendErrorPage();
 
 /* setup defaults */
 $properties = array(
@@ -26,13 +27,13 @@ $c->where(array(
 $c->sortby('Ancestors.depth','ASC');
 $ancestors = $modx->getCollection('disBoard',$c);
 
-$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">Home</a> / ';
+$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">'.$modx->getOption('discuss.forum_title').'</a> / ';
 foreach ($ancestors as $ancestor) {
     $url = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id'));
     $trail .= '<a href="'.$url.'">'.$ancestor->get('name').'</a>';
     $trail .= ' / ';
 }
-$trail .= 'New Thread';
+$trail .= $modx->lexicon('new_thread');
 $properties['trail'] = $trail;
 
 

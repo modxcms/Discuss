@@ -55,38 +55,38 @@ $category->addMany($chunks);
 
 /* create category vehicle */
 $attr = array(
-    xPDOTransport::_UNIQUE_KEY => 'category',
-    xPDOTransport::_PRESERVE_KEYS => false,
-    xPDOTransport::_UPDATE_OBJECT => true,
-    xPDOTransport::_RELATED_OBJECTS => true,
-    xPDOTransport::_RELATED_OBJECT_ATTRIBUTES => array (
+    xPDOTransport::UNIQUE_KEY => 'category',
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
         'Children' => array(
-            xPDOTransport::_PRESERVE_KEYS => false,
-            xPDOTransport::_UPDATE_OBJECT => true,
-            xPDOTransport::_UNIQUE_KEY => 'category',
-            xPDOTransport::_RELATED_OBJECTS => true,
-            xPDOTransport::_RELATED_OBJECT_ATTRIBUTES => array (
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'category',
+            xPDOTransport::RELATED_OBJECTS => true,
+            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
                 'Snippets' => array(
-                    xPDOTransport::_PRESERVE_KEYS => false,
-                    xPDOTransport::_UPDATE_OBJECT => true,
-                    xPDOTransport::_UNIQUE_KEY => 'name',
+                    xPDOTransport::PRESERVE_KEYS => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => 'name',
                 ),
                 'Chunks' => array(
-                    xPDOTransport::_PRESERVE_KEYS => false,
-                    xPDOTransport::_UPDATE_OBJECT => true,
-                    xPDOTransport::_UNIQUE_KEY => 'name',
+                    xPDOTransport::PRESERVE_KEYS => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => 'name',
                 ),
             ),
         ),
         'Snippets' => array(
-            xPDOTransport::_PRESERVE_KEYS => false,
-            xPDOTransport::_UPDATE_OBJECT => true,
-            xPDOTransport::_UNIQUE_KEY => 'name',
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'name',
         ),
         'Chunks' => array (
-            xPDOTransport::_PRESERVE_KEYS => false,
-            xPDOTransport::_UPDATE_OBJECT => true,
-            xPDOTransport::_UNIQUE_KEY => 'name',
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'name',
         ),
     ),
 );
@@ -106,19 +106,17 @@ $builder->putVehicle($vehicle);
 $builder->buildLexicon($sources['lexicon']);
 
 /* load menu */
-$menu= null;
-include_once $sources['data'].'transport.menu.php';
-
+$menu = include $sources['data'].'transport.menu.php';
 $vehicle= $builder->createVehicle($menu,array (
-    xPDOTransport::_PRESERVE_KEYS => false,
-    xPDOTransport::_UPDATE_OBJECT => true,
-    xPDOTransport::_UNIQUE_KEY => 'text',
-    xPDOTransport::_RELATED_OBJECTS => true,
-    xPDOTransport::_RELATED_OBJECT_ATTRIBUTES => array (
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => 'text',
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
         'Action' => array (
-            xPDOTransport::_PRESERVE_KEYS => false,
-            xPDOTransport::_UPDATE_OBJECT => true,
-            xPDOTransport::_UNIQUE_KEY => array ('namespace','controller'),
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => array ('namespace','controller'),
         ),
     ),
 ));
@@ -126,10 +124,12 @@ $builder->putVehicle($vehicle);
 unset($vehicle,$menu);
 
 /* now pack in the license file, readme and setup options */
+/*
 $builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
 ));
+*/
 
 /* zip up package */
 $builder->pack();

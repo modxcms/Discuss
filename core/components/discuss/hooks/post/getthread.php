@@ -6,9 +6,13 @@
  * @subpackage hooks
  */
 if (empty($scriptProperties['post']) && empty($scriptProperties['thread'])) return false;
-
 $post = !empty($scriptProperties['post']) ? $scriptProperties['post'] : $scriptProperties['thread'];
 
+/* get default properties */
+$postTpl = $modx->getOption('postTpl',$scriptProperties,'disThreadPost');
+$postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'disPostAttachment');
+
+/* get thread or root of post */
 if (empty($scriptProperties['thread'])) {
     $thread = $post->getThreadRoot();
 } else { $thread = $scriptProperties['thread']; }
@@ -44,7 +48,7 @@ $plist = array();
 $userUrl = $modx->makeUrl($modx->getOption('discuss.user_resource'));
 $profileUrl = $modx->getOption('discuss.files_url').'/profile/';
 foreach ($posts as $post) {
-    $pa = $post->toArray();
+    $pa = $post->toArray('',true);
     $pa['username'] = '<a href="'.$userUrl.'?user='.$post->get('author').'">'.$post->get('username').'</a>';
 
     /* set author avatar */
@@ -70,8 +74,6 @@ foreach ($posts as $post) {
     /* check allowing of custom titles */
     if (!$modx->getOption('discuss.allow_custom_titles',null,true)) {
         $pa['author_title'] = '';
-    } else {
-        $pa['author_title'] = ' - '.$pa['author_title'];
     }
 
     /* load actions */
@@ -84,15 +86,13 @@ foreach ($posts as $post) {
     /* get attachments */
     $attachments = $post->getMany('Attachments');
     if (!empty($attachments)) {
-        $attTpl = '<ul class="dis-attachments">';
+        $pa['attachments'] = '';
         foreach ($attachments as $attachment) {
             $attachmentArray = $attachment->toArray();
             $attachmentArray['filesize'] = $attachment->convert();
             $attachmentArray['url'] = $attachment->getUrl();
-            $attTpl .= $discuss->getChunk('disPostAttachment',$attachmentArray);
+            $pa['attachments'] .= $discuss->getChunk($postAttachmentRowTpl,$attachmentArray);
         }
-        $attTpl .= '</ul>';
-        $pa['attachments'] = $attTpl;
     }
 
 
@@ -101,11 +101,7 @@ foreach ($posts as $post) {
 
 /* parse posts via tree parser */
 $discuss->loadTreeParser();
-if (count($plist) <= 0) {
-    $postsOutput = '<p>'.$modx->lexicon('discuss.thread_no_posts').'</p>';
-} else {
-    $postsOutput = $discuss->treeParser->parse($plist,'disThreadPost');
+if (count($plist) > 0) {
+    return $discuss->treeParser->parse($plist,$postTpl);
 }
-unset($pa,$plist,$userUrl,$profileUrl);
-
-return $postsOutput;
+return '';

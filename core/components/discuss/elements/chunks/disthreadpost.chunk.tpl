@@ -15,7 +15,10 @@
 		          <br />[[+author_email]]
 		          </span>
 		          <span>
-		          [[+username]] <em>[[+author_title]]</em><br />
+		              [[+username]] 
+	                  [[If? &subject=`[[+author_title]]` &operator=`!empty`
+		                  &then=`<em> - [[+author_title]]</em>`]]
+	                   <br />
 		          [[%discuss.posts]]: <span class="dis-author-post-count">[[+author_posts]]</span>
 		          </span>
 		          <br class="clear" />
@@ -26,7 +29,16 @@
 	<div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
 		<div class="dis-post-body">[[+content]]</div>
 		<div class="dis-post-footer">
-		    <div class="dis-post-attachments">[[+attachments]]</div>
+		    <div class="dis-post-attachments">
+		    [[If? &subject=`[[+attachments]]`
+		      &operator=`!empty`
+		      &then=`
+		      <ul class="dis-attachments">
+		      [[+attachments]]
+		      </ul>`
+		    ]]
+	        </ul>
+		    </div>
 		    <div class="dis-post-ip">
                 <a href="javascript:void([[+id]]);">[[%discuss.report_to_mod]]</a>
                 - <a href="javascript:void([[+id]]);">[[+ip]]</a>

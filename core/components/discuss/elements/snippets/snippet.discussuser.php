@@ -8,6 +8,15 @@ $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('user:'.$_REQUEST['user']);
 
+$modx->lexicon->load('discuss:user');
+
+/* get default properties */
+$cssPostRowCls = $modx->getOption('cssPostRowCls',$scriptProperties,'dis-board-li');
+$menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
+$numRecentPosts = $modx->getOption('numRecentPosts',$scriptProperties,10);
+$postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
+
+/* get user */
 if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('modUser',$_REQUEST['user']);
 if ($user == null) { $modx->sendErrorPage(); }
@@ -25,8 +34,8 @@ $properties['age'] = $age;
 
 /* format gender */
 switch ($user->profile->get('gender')) {
-    case 'm': $properties['gender'] = 'Male'; break;
-    case 'f': $properties['gender'] = 'Female'; break;
+    case 'm': $properties['gender'] = $modx->lexicon('discuss.male'); break;
+    case 'f': $properties['gender'] = $modx->lexicon('discuss.female'); break;
     default: $properties['gender'] = ''; break;
 }
 
@@ -57,21 +66,21 @@ $c->where(array(
     'disPost.author' => $user->get('id'),
 ));
 $c->sortby('createdon','DESC');
-$c->limit(10);
+$c->limit($numRecentPosts);
 $recentPosts = $modx->getCollection('disPost',$c);
 $rps = array();
 foreach ($recentPosts as $post) {
     $pa = $post->toArray('',true);
-    $pa['class'] = 'dis-board-li';
+    $pa['class'] = $cssPostRowCls;
     if (empty($pa['thread'])) { $pa['thread'] = $pa['id']; }
 
-    $rps[] = $discuss->getChunk('disPostLI',$pa);
+    $rps[] = $discuss->getChunk($postRowTpl,$pa);
 }
 $properties['recentPosts'] = implode("\n",$rps);
 
 
 /* do output */
 $modx->setPlaceholder('discuss.user',$user->get('username'));
-$modx->setPlaceholder('usermenu',$discuss->getChunk('disUserMenu',$properties));
+$modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$properties));
 
 return $discuss->output('user/view',$properties);

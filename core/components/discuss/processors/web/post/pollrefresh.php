@@ -3,6 +3,7 @@
  * Gets the post count for a thread
  *
  * @package discuss
+ * @subpackage processors
  */
 $c = $modx->newQuery('disPost');
 $c->innerJoin('disPostClosure','Descendants');

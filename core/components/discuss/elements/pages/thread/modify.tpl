@@ -38,6 +38,6 @@
 <hr />
 <div class="dis-thread-posts">
     <h2>Thread Summary</h2>
-[[+thread_posts]]
+[[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
 </div>
 [[+discuss.error_panel]]

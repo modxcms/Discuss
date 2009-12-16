@@ -4,16 +4,18 @@
  *
  * @package discuss
  */
-if (empty($_POST['post'])) return $modx->error->failure('Parent Post not specified');
+$modx->lexicon->load('discuss:post');
+
+if (empty($_POST['post'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
 $parent = $modx->getObject('disPost',$_POST['post']);
-if ($parent == null) return $modx->error->failure('Parent Post not found.');
+if ($parent == null) return $modx->error->failure($modx->lexicon('discuss.post_err_nf'));
 
 $thread = $parent->getThreadRoot();
-if ($thread == null) return $modx->error->failure('Thread not found.');
+if ($thread == null) return $modx->error->failure($modx->lexicon('discuss.thread_err_nf'));
 
 /* validation */
-if (empty($_POST['title'])) { $modx->error->addField('title','Please enter a title for this post.'); }
-if (empty($_POST['message'])) { $modx->error->addField('message','Please enter a valid message.'); }
+if (empty($_POST['title'])) { $modx->error->addField('title',$modx->lexicon('discuss.post_err_ns_title')); }
+if (empty($_POST['message'])) { $modx->error->addField('message',$modx->lexicon('discuss.post_err_ns_message')); }
 
 /* first check attachments for validity */
 $attachments = array();
@@ -29,7 +31,7 @@ if (!empty($_FILES) && $_FILES['attachment1']['error'] == 0) {
 
 /* if any errors, return */
 if ($modx->error->hasError()) {
-    return $modx->error->failure('Please correct the errors in your form.');
+    return $modx->error->failure($modx->lexicon('discuss.correct_errors'));
 }
 
 $maxSize = $modx->getOption('discuss.maximum_post_size',null,30000);
@@ -41,12 +43,9 @@ $post->fromArray($_POST);
 $post->set('author',$modx->user->get('id'));
 $post->set('parent',$parent->get('id'));
 $post->set('board',$parent->get('board'));
-$post->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
-$post->set('ip',$_SERVER['REMOTE_ADDR']);
-
 
 if ($post->save() == false) {
-    return $modx->error->failure('An error occurred while trying to post a reply.');
+    return $modx->error->failure($modx->lexicon('discuss.post_err_reply'));
 }
 
 /* upload attachments */

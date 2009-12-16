@@ -1,5 +1,6 @@
 <?php
 /**
+ * Search the forums
  *
  * @package discuss
  */
@@ -8,8 +9,14 @@ $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('search');
 
-$properties = array();
+/* setup default properties */
+$cssSearchResultCls = $modx->getOption('cssSearchResultCls',$scriptProperties,'dis-search-result');
+$cssSearchResultParentCls = $modx->getOption('cssSearchResultParentCls',$scriptProperties,'dis-search-parent-result');
+$resultRowTpl = $modx->getOption('resultRowTpl',$scriptProperties,'disSearchResult');
+$toggle = $modx->getOption('toggle',$scriptProperties,'+');
 
+/* do search */
+$placeholders = array();
 if (!empty($_REQUEST['s'])) {
     $s = strip_tags($_REQUEST['s']);
 
@@ -42,7 +49,7 @@ if (!empty($_REQUEST['s'])) {
     ');
     $posts = $modx->getCollection('disPost',$c);
 
-    $resultsTpl = '';
+    $placeholders['results'] = '';
     $maxScore = 0;
     foreach ($posts as $post) {
         $pa = $post->toArray();
@@ -54,24 +61,23 @@ if (!empty($_REQUEST['s'])) {
         $pa['relevancy'] = @number_format(($post->get('score')/$maxScore)*100,0);
 
         if ($post->get('parent') > 0) {
-            $pa['cls'] = 'dis-search-result dis-result-'.$post->get('thread');
+            $pa['cls'] = $cssSearchResultCls.' dis-result-'.$post->get('thread');
         } else {
-            $pa['toggle'] = '+';
-            $pa['cls'] = 'dis-search-parent-result dis-parent-result-'.$post->get('thread');
+            $pa['toggle'] = $toggle;
+            $pa['cls'] = $cssSearchResultParentCls.' dis-parent-result-'.$post->get('thread');
         }
         $pa['content'] = strip_tags(substr($post->getContent(),0,60));
-        $resultsTpl .= $discuss->getChunk('disSearchResult',$pa);
+        $placeholders['results'] .= $discuss->getChunk($resultRowTpl,$pa);
     }
-    $properties['results'] = $resultsTpl;
-    $properties['search'] = $s;
+    $placeholders['search'] = $s;
 }
 
 /* get board breadcrumb trail */
 $trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">[[++discuss.forum_title]]</a> / ';
-$trail .= 'Search';
-$properties['trail'] = $trail;
+$trail .= $modx->lexicon('discuss.search');
+$placeholders['trail'] = $trail;
 
 /* output */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.search.js');
 $modx->regClientCSS($discuss->config['cssUrl'].'search.css');
-return $discuss->output('search',$properties);
+return $discuss->output('search',$placeholders);

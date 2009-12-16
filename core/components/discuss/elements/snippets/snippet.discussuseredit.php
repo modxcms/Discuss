@@ -1,25 +1,30 @@
 <?php
 /**
+ * The edit user page
  *
  * @package discuss
  */
 require_once $modx->getOption('discuss.core_path').'model/discuss/discuss.class.php';
 $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
+$modx->lexicon->load('discuss:user');
 
+/* get user */
 if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('modUser',$_REQUEST['user']);
 if ($user == null) { $modx->sendErrorPage(); }
-
 $user->profile = $modx->getObject('disUserProfile',array(
     'user' => $user->get('id'),
 ));
 
+/* get default properties */
+$menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
+
 
 if (!empty($_POST)) {
-    if (empty($_POST['name_first'])) $errors['name_first'] = 'Please enter a valid first name.';
-    if (empty($_POST['name_last'])) $errors['name_last'] = 'Please enter a valid last name.';
-    if (empty($_POST['email'])) $errors['email'] = 'Please enter a valid email.';
+    if (empty($_POST['name_first'])) $errors['name_first'] = $modx->lexicon('discuss.user_err_name_first');
+    if (empty($_POST['name_last'])) $errors['name_last'] = $modx->lexicon('discuss.user_err_name_last');
+    if (empty($_POST['email'])) $errors['email'] = $modx->lexicon('discuss.user_err_email');
 
     if (empty($errors)) {
         $_POST['signature'] = substr($_POST['signature'],0,$modx->getOption('discuss.max_signature_length',null,2000));
@@ -30,22 +35,21 @@ if (!empty($_POST)) {
     $modx->toPlaceholders($errors,'error');
 }
 
-$properties = $user->toArray();
-$properties = array_merge($user->profile->toArray(),$properties);
+$placeholders = $user->toArray();
+$placeholders = array_merge($user->profile->toArray(),$properties);
 
 /* setup genders */
-$genders = array('' => '','m' => 'Male','f' => 'Female');
-$gs = '';
+$genders = array('' => '','m' => $modx->lexicon('discuss.male'),'f' => $modx->lexicon('discuss.female'));
+$placeholders['genders'] = '';
 foreach ($genders as $v => $d) {
-    $gs .= '<option value="'.$v.'"'
+    $placeholders['genders'] .= '<option value="'.$v.'"'
         .($user->profile->get('gender') == $v ? ' selected="selected"' : '')
         .'>'.$d.'</option>';
 }
-$properties['genders'] = $gs;
-unset($genders,$gs,$v,$d);
+unset($genders,$v,$d);
 
 /* do output */
-$modx->setPlaceholder('usermenu',$discuss->getChunk('disUserMenu',$properties));
+$modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$placeholders));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
 return $discuss->output('user/edit',$properties);

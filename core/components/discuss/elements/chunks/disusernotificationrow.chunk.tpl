@@ -6,7 +6,7 @@
 
     <a href="[[~[[++discuss.thread_resource]]]]?thread=[[+thread]]#dis-board-post-[[+id]]">[[+title]]</a>
     <p class="dis-post-li-desc">
-        by <a href="[[~[[++discuss.user_resource]]]]?user=[[+author]]">[[+author_username]]</a> 
+        [[%discuss.by? &author=`<a href="[[~[[++discuss.user_resource]]]]?user=[[+author]]">[[+author_username]]</a>`]] 
         (<a href="[[~[[++discuss.board_resource]]]]?board=[[+board]]">[[+board_name]]</a>)
     </p>
 </li>

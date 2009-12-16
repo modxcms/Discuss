@@ -17,6 +17,13 @@ if ($board == null) $modx->sendErrorPage();
 $limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
 $start = !empty($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 
+$cssLockedThreadCls = $modx->getOption('cssLockedThreadCls',$scriptProperties,'dis-thread-locked');
+$cssStickyThreadCls = $modx->getOption('cssStickyThreadCls',$scriptProperties,'dis-thread-sticky');
+$cssUnreadRowCls = $modx->getOption('cssUnreadRowCls',$scriptProperties,'dis-unread');
+$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'disBoardLi');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'disCategoryLi');
+$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
+
 /* grab all subboards */
 $c = $modx->newQuery('disBoard');
 $c->select('disBoard.*,
@@ -61,29 +68,30 @@ unset($c);
 $subboardOutput = '';
 foreach ($subboards as $subboard) {
     $subboard->getSubBoardList();
-    $subboard->set('category_name','Sub-Boards');
+    $subboard->set('category_name',$modx->lexicon('discuss.subboards'));
 
     if ($subboard->get('unread') > 0 && $modx->user->isAuthenticated()) {
-        $subboard->set('unread-cls','dis-unread');
+        $subboard->set('unread-cls',$cssUnreadRowCls);
     }
 
     if ($subboard->get('last_post_author')) {
-        $lp = $modx->lexicon('discuss.last_post').' ';
-        $lp .= strftime($modx->getOption('discuss.date_format'),strtotime($board->get('last_post_createdon')));
-        $lp .= '<br />'.'by <a href="[[~[[++discuss.user_resource]]]]?user=';
-        $lp .= $subboard->get('last_post_author').'">';
-        $lp .= $subboard->get('last_post_username').'</a>';
+        $phs = array(
+            'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($subboard->get('last_post_createdon'))),
+            'user' => $subboard->get('last_post_author'),
+            'username' => $subboard->get('last_post_username'),
+        );
+        $lp = $discuss->getChunk($lastPostByTpl,$phs);
         $subboard->set('lastPost',$lp);
     }
 
     $ba = $subboard->toArray('',true);
 
     if ($currentCategory != $subboard->get('category')) {
-        $subboardOutput .= $discuss->getChunk('disCategoryLI',$ba);
+        $subboardOutput .= $discuss->getChunk($categoryRowTpl,$ba);
         $currentCategory = $subboard->get('category');
     }
 
-    $subboardOutput .= $discuss->getChunk('disBoardLI',$ba);
+    $subboardOutput .= $discuss->getChunk($boardRowTpl,$ba);
 }
 unset($currentCategory,$ba,$lp,$subboard);
 
@@ -150,13 +158,18 @@ foreach ($posts as $post) {
     $c->sortby('disPost.createdon','DESC');
     $latestPost = $modx->getObject('disPost',$c);
     if ($latestPost != null) {
+        $phs = array(
+            'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($latestPost->get('createdon'))),
+            'user' => $latestPost->get('author'),
+            'username' => $latestPost->get('username'),
+        );
+        $latestText = $discuss->getChunk($lastPostByTpl,$phs);
+
         $createdon = strftime($modx->getOption('discuss.date_format'),strtotime($latestPost->get('createdon')));
-        $latestText = '<a href="'.$userUrl.'?user='.$latestPost->get('author').'">'.$latestPost->get('username').'</a>';
-        $latestText = $createdon.' by '.$latestText;
         $post->set('latest',$latestText);
         $post->set('latest.id',$latestPost->get('id'));
     } else {
-        $post->set('latest','No Replies Yet');
+        $post->set('latest',$modx->lexicon('discuss.no_replies_yet'));
     }
 
     /* set css class */
@@ -173,9 +186,9 @@ foreach ($posts as $post) {
 
     /* if sticky/locked */
     $icons = '';
-    if ($post->get('locked')) { $icons .= '<div class="dis-thread-locked"></div>'; }
+    if ($post->get('locked')) { $icons .= '<div class="'.$cssLockedThreadCls.'"></div>'; }
     if ($modx->getOption('discuss.enable_sticky',null,true) && $post->get('sticky')) {
-        $icons .= '<div class="dis-thread-sticky"></div>';
+        $icons .= '<div class="'.$cssStickyThreadCls.'"></div>';
     }
     $post->set('icons',$icons);
 
@@ -199,12 +212,10 @@ $(function() {
 
 /* parse threads with treeparser */
 $discuss->loadTreeParser();
-if (count($pa) <= 0) {
-    $postsOutput = '<p>'.$modx->lexicon('discuss.board_no_threads').'</p>';
-} else {
+if (count($pa) > 0) {
     $postsOutput = $discuss->treeParser->parse($pa,'disBoardPost');
+    $board->set('posts',$postsOutput);
 }
-$board->set('posts',$postsOutput);
 unset($postsOutput,$pa,$posts,$post);
 
 /* get board breadcrumb trail */

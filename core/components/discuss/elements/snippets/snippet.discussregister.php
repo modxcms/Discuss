@@ -18,7 +18,7 @@ if (!empty($_POST)) {
 
 /* get board breadcrumb trail */
 $trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">[[++discuss.forum_title]]</a> / ';
-$trail .= 'Register';
+$trail .= $modx->lexicon('discuss.register');
 $properties['trail'] = $trail;
 
 

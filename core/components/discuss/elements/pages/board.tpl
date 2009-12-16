@@ -22,7 +22,7 @@
     </div>
     <br class="clear" />
 </div>
-[[+posts]]
+[[+posts:default=`<p>[[%discuss.board_no_threads]]</p>`]]
 </div>
 
 <br class="clear" />

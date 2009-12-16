@@ -1,0 +1,6 @@
+Changelog for Discuss.
+
+Discuss 0.1 ($LastChangedRevision$, $LastChangedDate$)
+====================================
+- Started build script process, i18n work
+- Initial changelog started

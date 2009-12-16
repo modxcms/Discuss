@@ -7,8 +7,6 @@ require_once $modx->getOption('discuss.core_path').'model/discuss/discuss.class.
 $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.js');
-
 /* get thread root */
 $thread = $modx->getObject('disPost',$_REQUEST['thread']);
 if ($thread == null) $modx->sendErrorPage();
@@ -30,7 +28,7 @@ foreach ($ancestors as $ancestor) {
     $trail .= ' / ';
 }
 $trail .= '<a href="[[~[[++discuss.thread_resource]]]]?thread='.$thread->get('id').'">'.$thread->get('title').'</a>';
-$trail .= ' / Remove Thread';
+$trail .= ' / '.$modx->lexicon('discuss.thread_remove');
 $thread->set('trail',$trail);
 
 /* process form */
@@ -39,12 +37,9 @@ if (!empty($_POST)) {
     $thread->remove();
     $modx->sendRedirect($url);
 }
-$properties = $thread->toArray();
-
-
-
+$placeholders = $thread->toArray();
 
 /* output */
+$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.js');
 $modx->setPlaceholder('discuss.thread',$thread->get('title'));
-return $discuss->output('thread/remove',$properties);
-
+return $discuss->output('thread/remove',$placeholders);

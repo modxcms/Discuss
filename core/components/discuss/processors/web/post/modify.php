@@ -1,14 +1,15 @@
 <?php
 /**
- * courtesy_edit_wait
+ * Modify a post
  *
  * @package discuss
  * @subpackage processors
  */
+$modx->lexicon->load('discuss:post');
 
 $errors = array();
-if (empty($_POST['title'])) $errors['title'] = 'Please enter a valid post title.';
-if (empty($_POST['message'])) $errors['message'] = 'Please enter a message.';
+if (empty($_POST['title'])) $errors['title'] = $modx->lexicon('discuss.post_err_ns_title');
+if (empty($_POST['message'])) $errors['message'] = $modx->lexicon('discuss.post_err_ns_message');
 
 if (empty($errors)) {
     $_POST['message'] = substr($_POST['message'],0,$modx->getOption('discuss.maximum_post_size',null,30000));

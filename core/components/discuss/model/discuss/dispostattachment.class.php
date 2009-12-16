@@ -4,6 +4,20 @@
  */
 class disPostAttachment extends xPDOSimpleObject {
     /**
+     * Overrides xPDOObject::save to handle createdon date
+     *
+     * {@inheritDoc}
+     */
+    public function save($cacheFlag = null) {
+        if ($this->isNew()) {
+            if (!$this->get('createdon')) {
+                $this->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
+            }
+        }
+        return parent::save($cacheFlag);
+    }
+
+    /**
      * Overrides the xPDOObject::remove method to remove the physical file for
      * the attachment
      */

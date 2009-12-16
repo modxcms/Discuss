@@ -12,12 +12,19 @@ if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('modUser',$_REQUEST['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
+$modx->lexicon->load('discuss:user');
+
+/* get default properties */
+$cssRowCls = $modx->getOption('cssRowCls',$scriptProperties,'dis-board-li');
+$menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
+$rowTpl = $modx->getOption('rowTpl',$scriptProperties,'disUserNotificationRow');
+
 $user->profile = $modx->getObject('disUserProfile',array(
     'user' => $user->get('id'),
 ));
 
-$properties = $user->toArray();
-$properties = array_merge($user->profile->toArray(),$properties);
+$placeholders = $user->toArray();
+$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 /* handle unsubscribing */
 if (!empty($_POST) && !empty($_POST['remove'])) {
@@ -45,18 +52,17 @@ $c->where(array(
 ));
 $c->sortby('disPost.title','ASC');
 $notifications = $modx->getCollection('disPost',$c);
-$noteTpl = '';
+$placeholders['notifications'] = '';
 foreach ($notifications as $notification) {
     $notificationArray = $notification->toArray();
-    $notificationArray['class'] = 'dis-board-li';
-    $noteTpl .= $discuss->getChunk('disUserNotificationRow',$notificationArray);
+    $notificationArray['class'] = $cssRowCls;
+    $placeholders['notifications'] .= $discuss->getChunk($rowTpl,$notificationArray);
 }
-$properties['notifications'] = $noteTpl;
 
 
 /* output */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/user/dis.user.notifications.js');
-$modx->setPlaceholder('usermenu',$discuss->getChunk('disUserMenu',$properties));
+$modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$placeholders));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
-return $discuss->output('user/notifications',$properties);
+return $discuss->output('user/notifications',$placeholders);

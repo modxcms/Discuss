@@ -11,6 +11,12 @@ if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('modUser',$_REQUEST['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
+$modx->lexicon->load('discuss:user');
+
+/* get default properties */
+$menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
+
+
 $user->profile = $modx->getObject('disUserProfile',array(
     'user' => $user->get('id'),
 ));
@@ -18,14 +24,14 @@ $user->profile = $modx->getObject('disUserProfile',array(
 /* save form fields */
 if (!empty($_POST)) {
     if (empty($_POST['password']) || $user->get('password') !== md5($_POST['password'])) {
-        $errors['password'] = 'Your password was incorrect. Please provide the correct password.';
+        $errors['password'] = $modx->lexicon('discuss.user_err_password_incorrect');
     }
 
-    if (empty($_POST['username'])) $errors['username'] = 'Please enter a valid username.';
+    if (empty($_POST['username'])) $errors['username'] = $modx->lexicon('discuss.user_err_username');
     if (!empty($_POST['password_new'])) {
-        if (empty($_POST['password_new'])) $errors['password_new'] = 'Please enter a valid password.';
-        if (empty($_POST['password_confirm'])) $errors['password_confirm'] = 'Please confirm your password.';
-        if ($_POST['password_new'] != $_POST['password_confirm']) $errors['password_confirm'] = 'Your passwords do not match.';
+        if (empty($_POST['password_new'])) $errors['password_new'] = $modx->lexicon('discuss.user_err_password');
+        if (empty($_POST['password_confirm'])) $errors['password_confirm'] = $modx->lexicon('discuss.user_err_password_confirm');
+        if ($_POST['password_new'] != $_POST['password_confirm']) $errors['password_confirm'] = $modx->lexicon('discuss.user_err_password_match');
     }
 
     if (empty($_POST['show_email'])) { $_POST['show_email'] = 0; }
@@ -47,7 +53,7 @@ $properties = $user->toArray();
 $properties = array_merge($user->profile->toArray(),$properties);
 
 /* setup genders */
-$genders = array('' => '','m' => 'Male','f' => 'Female');
+$genders = array('' => '','m' => $modx->lexicon('discuss.male'),'f' => $modx->lexicon('discuss.female'));
 $gs = '';
 foreach ($genders as $v => $d) {
     $gs .= '<option value="'.$v.'"'
@@ -62,7 +68,7 @@ if (!empty($properties['show_email'])) { $properties['show_email'] = ' checked="
 if (!empty($properties['show_online'])) { $properties['show_online'] = ' checked="checked"'; }
 
 /* do output */
-$modx->setPlaceholder('usermenu',$discuss->getChunk('disUserMenu',$properties));
+$modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$properties));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
 return $discuss->output('user/account',$properties);

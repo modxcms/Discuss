@@ -8,7 +8,14 @@ $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('home');
 
-$properties = array();
+/* get default properties */
+$activeUserRowTpl = $modx->getOption('activeUserRowTpl',$scriptProperties,'disActiveUserRow');
+$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'disBoardLi');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'disCategoryLi');
+$cssBoardRowCls = $modx->getOption('cssBoardRowCls',$scriptProperties,'dis-board-li');
+$cssUnreadCls = $modx->getOption('cssUnreadCls',$scriptProperties,'dis-unread');
+$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
+$postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 
 $_groups = implode(',',$modx->user->getUserGroups());
 $c = $modx->newQuery('disBoard');
@@ -70,37 +77,37 @@ $c->sortby('disBoard.rank','ASC');
 $boards = $modx->getCollection('disBoard',$c);
 unset($c);
 
-$boardOutput = '';
+/* now loop through boards */
+$placeholders = array();
+$placeholders['boards'] = '';
 $currentCategory = 0;
 foreach ($boards as $board) {
     $board->getSubBoardList();
 
     if ($board->get('unread') > 0 && $modx->user->isAuthenticated()) {
-        $board->set('unread-cls','dis-unread');
+        $board->set('unread-cls',$cssUnreadCls);
     }
 
     if ($board->get('last_post_author')) {
-        $lp = $modx->lexicon('discuss.last_post').' ';
-        $lp .= strftime($modx->getOption('discuss.date_format'),strtotime($board->get('last_post_createdon')));
-        $lp .= '<br />'.'by <a href="[[~[[++discuss.user_resource]]]]?user=';
-        $lp .= $board->get('last_post_author').'">';
-        $lp .= $board->get('last_post_username').'</a>';
+        $phs = array(
+            'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($board->get('last_post_createdon'))),
+            'user' => $board->get('last_post_author'),
+            'username' => $board->get('last_post_username'),
+        );
+        $lp = $discuss->getChunk($lastPostByTpl,$phs);
         $board->set('lastPost',$lp);
     }
-
-
 
     $ba = $board->toArray('',true);
 
     if ($currentCategory != $board->get('category')) {
-        $boardOutput .= $discuss->getChunk('disCategoryLI',$ba);
+        $placeholders['boards'] .= $discuss->getChunk($categoryRowTpl,$ba);
         $currentCategory = $board->get('category');
     }
 
-    $boardOutput .= $discuss->getChunk('disBoardLI',$ba);
+    $placeholders['boards'] .= $discuss->getChunk($boardRowTpl,$ba);
 }
-$properties['boards'] = $boardOutput;
-unset($boardOutput,$currentCategory,$ba,$boards,$board);
+unset($currentCategory,$ba,$boards,$board,$lp);
 
 /* recent posts */
 $c = $modx->newQuery('disPost');
@@ -117,11 +124,11 @@ $recentPosts = $modx->getCollection('disPost',$c);
 $rps = array();
 foreach ($recentPosts as $post) {
     $pa = $post->toArray('',true);
-    $pa['class'] = 'dis-board-li';
+    $pa['class'] = $cssBoardRowCls;
 
-    $rps[] = $discuss->getChunk('disPostLI',$pa);
+    $rps[] = $discuss->getChunk($postRowTpl,$pa);
 }
-$properties['recentPosts'] = implode("\n",$rps);
+$placeholders['recentPosts'] = implode("\n",$rps);
 unset($rps,$pa,$recentPosts,$post);
 
 /* process logout */
@@ -150,13 +157,13 @@ if ($modx->user->isAuthenticated()) { /* if logged in */
 
     $modx->setPlaceholder('discuss.loginForm',$discuss->getChunk('disLogin'));
 }
-$properties['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
+$placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($authLink,$authMsg,$actionButtons);
 
 /* stats */
-$properties['totalPosts'] = $modx->getCount('disPost');
-$properties['totalTopics'] = $modx->getCount('disPost',array('parent' => 0));
-$properties['totalMembers'] = $modx->getCount('disUserProfile');
+$placeholders['totalPosts'] = $modx->getCount('disPost');
+$placeholders['totalTopics'] = $modx->getCount('disPost',array('parent' => 0));
+$placeholders['totalMembers'] = $modx->getCount('disUserProfile');
 
 /* active in last 40 */
 if ($modx->getOption('discuss.show_whos_online',null,true)) {
@@ -170,15 +177,18 @@ if ($modx->getOption('discuss.show_whos_online',null,true)) {
     $activeUsers = $modx->getCollection('modUser',$c);
     $as = '';
     foreach ($activeUsers as $activeUser) {
-        $as .= '<a href="[[~[[++discuss.user_resource]]]]?user='.$activeUser->get('id').'">'.$activeUser->get('username').'</a>,';
+        $as .= $discuss->getChunk($activeUserRowTpl,$activeUser->toArray());
     }
-    $properties['activeUsers'] = 'Users active in last '.$threshold.' minutes: '.trim($as,',');
+    $placeholders['activeUsers'] = $modx->lexicon('discuss.users_active_in_last',array(
+        'users' => trim($as,','),
+        'threshold' => $threshold,
+    ));
     unset($as,$activeUsers,$activeUser,$timeago,$threshold);
 }
 
 /* total active */
-$properties['totalMembersActive'] = $modx->getCount('disSession',array('user:!=' => 0));
-$properties['totalVisitorsActive'] = $modx->getCount('disSession',array('user' => 0));
+$placeholders['totalMembersActive'] = $modx->getCount('disSession',array('user:!=' => 0));
+$placeholders['totalVisitorsActive'] = $modx->getCount('disSession',array('user' => 0));
 
 /* latest post */
 $c = $modx->newQuery('disPost');
@@ -205,9 +215,9 @@ if (!empty($_groups)) {
 $c->sortby('createdon','DESC');
 $latestPost = $modx->getObject('disPost',$c);
 $la = $latestPost->toArray('latestPost.',true);
-$properties = array_merge($properties,$la);
+$placeholders = array_merge($placeholders,$la);
 unset($la,$latestPost,$c);
 
 /* output */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.home.js');
-return $discuss->output('home',$properties);
+return $discuss->output('home',$placeholders);

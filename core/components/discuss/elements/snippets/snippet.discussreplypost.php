@@ -1,5 +1,6 @@
 <?php
 /**
+ * Reply to a current post
  *
  * @package discuss
  */
@@ -34,7 +35,9 @@ foreach ($ancestors as $ancestor) {
     $trail .= '<a href="'.$url.'">'.$ancestor->get('name').'</a>';
     $trail .= ' / ';
 }
-$trail .= 'Reply to Post: <a href="[[~[[++discuss.thread_resource]]]]?thread='.$thread->get('id').'">'.$post->get('title').'</a>';
+$trail .= $modx->lexicon('reply_to_post',array(
+    'post' => '<a href="[[~[[++discuss.thread_resource]]]]?thread='.$thread->get('id').'">'.$post->get('title').'</a>',
+));
 $properties['trail'] = $trail;
 
 

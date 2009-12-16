@@ -1,6 +1,9 @@
 <?php
 /**
  * Load a thread from a post
+ *
+ * @package discuss
+ * @subpackage processors
  */
 $c = $modx->newQuery('disPost');
 $c->select('

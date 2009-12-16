@@ -38,8 +38,6 @@ $post->fromArray($_POST);
 $post->set('author',$modx->user->get('id'));
 $post->set('parent',0);
 $post->set('board',$board->get('id'));
-$post->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
-$post->set('ip',$_SERVER['REMOTE_ADDR']);
 
 if (!$post->save()) {
     $modx->error->failure('An error occurred while trying to save the new thread.');
@@ -52,7 +50,6 @@ foreach ($attachments as $file) {
     $attachment->set('board',$post->get('board'));
     $attachment->set('filename',$file['name']);
     $attachment->set('filesize',$file['size']);
-    $attachment->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
 
     if ($attachment->upload($file)) {
         $attachment->save();

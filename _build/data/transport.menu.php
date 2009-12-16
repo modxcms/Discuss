@@ -29,3 +29,5 @@ $menu->fromArray(array(
 ),'',true,true);
 $menu->addOne($action);
 unset($action);
+
+return $menu;

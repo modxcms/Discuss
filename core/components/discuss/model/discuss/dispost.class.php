@@ -15,6 +15,17 @@ class disPost extends xPDOSimpleObject {
      */
     public function save($cacheFlag = null) {
         $new = $this->isNew();
+
+        if ($new) {
+            if (!$this->get('createdon')) {
+                $this->set('createdon', strftime('%Y-%m-%d %H:%M:%S'));
+            }
+            $ip = $this->get('ip');
+            if (empty($ip)) {
+                $this->set('ip',$_SERVER['REMOTE_ADDR']);
+            }
+        }
+
         $saved = parent::save($cacheFlag);
 
         if ($saved && $new) {
@@ -271,7 +282,7 @@ class disPost extends xPDOSimpleObject {
                     .'">'.$r[1].'</a>,';
             }
             $members = trim($members,',');
-        } else { $members = '0 members'; }
+        } else { $members = $modx->lexicon('discuss.zero_members'); }
 
         $c = $this->xpdo->newQuery('disSession');
         $c->where(array(
@@ -280,7 +291,10 @@ class disPost extends xPDOSimpleObject {
         ));
         $guests = $this->xpdo->getCount('disSession',$c);
 
-        return $members.' and '.$guests.' guests are viewing this thread.';
+        return $this->xpdo->lexicon('discuss.thread_viewing',array(
+            'members' => $members,
+            'guests' => $guests,
+        ));
     }
 
 
