@@ -180,7 +180,7 @@ $settings['discuss.maximum_post_size']->fromArray(array(
 
 $settings['discuss.num_recent_posts']= $modx->newObject('modSystemSetting');
 $settings['discuss.num_recent_posts']->fromArray(array(
-    'key' => 'discuss.',
+    'key' => 'discuss.num_recent_posts',
     'value' => 10,
     'xtype' => 'textfield',
     'namespace' => 'discuss',

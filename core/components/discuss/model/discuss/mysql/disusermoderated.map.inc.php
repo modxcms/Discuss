@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disUserModerated']= array (
   'package' => 'discuss',
-  'table' => 'user_profile',
+  'table' => 'user_moderated',
   'fields' => 
   array (
     'user' => 0,

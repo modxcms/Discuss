@@ -1,21 +1,21 @@
 [[+usermenu]]
 <div class="dis-profile dis-form left" style="width: 80%; border: 0;">
-    <h2>General Statistics for [[+username]]</h2>
+    <h2>[[%discuss.general_stats? &user=`[[+username]]`]]</h2>
     
     <dl class="dis-datalist">
-        <dh>Joined:</dh>
+        <dh>[[%discuss.joined]]:</dh>
         <dt>[[+confirmedon:strtotime:date=`%b %d, %Y %I:%M %p`]]</dt>
         
-        <dh>Post Count:</dh>
+        <dh>[[%discuss.post_count]]:</dh>
         <dt>[[+posts]]</dt>
         
-        <dh>Topics Started:</dh>
+        <dh>[[%discuss.threads_started]]:</dh>
         <dt>[[+topics]]</dt>
         
-        <dh>Last Login:</dh>
+        <dh>[[%discuss.last_login]]:</dh>
         <dt>[[+last_login:strtotime:date=`%b %d, %Y %I:%M %p`]]</dt>
         
-        <dh>Last Active:</dh>
+        <dh>[[%discuss.last_active]]:</dh>
         <dt>[[+last_active:strtotime:date=`%b %d, %Y %I:%M %p`]]</dt>
     </dl>
 

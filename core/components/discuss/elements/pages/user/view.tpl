@@ -8,50 +8,50 @@
 </thead>
 <tbody>
 <tr>
-    <th>Name</th>
+    <th>[[%discuss.name? &namespace=`discuss` &topic=`user`]]:</th>
     <td>[[+name_first]] [[+name_last]]</td>
 </tr>
 <tr>
-    <th>Posts</th>
+    <th>[[%discuss.posts]]</th>
     <td>[[+posts]]</td>
 </tr>
 <tr>
-    <th>IP:</th>
+    <th>[[%discuss.ip? &namespace=`discuss` &topic=`web`]]:</th>
     <td>[[+ip]]</td>
 </tr>
 <tr>
-    <th>Date Registered:</th>
+    <th>[[%discuss.date_registered]]:</th>
     <td>[[+createdon:strtotime:date=`%b %d, %Y`]]</td>
 </tr>
 <tr>
-    <th>Last Online:</th>
+    <th>[[%discuss.last_online]]:</th>
     <td>[[+last_active:strtotime:date=`[[++discuss.date_format]]`]]</td>
 </tr>
 <tr>
-    <th>Last Reading:</th>
+    <th>[[%discuss.last_reading]]:</th>
     <td><a href="[[~[[++discuss.thread_resource]]]]?thread=[[+lastThread.id]]">[[+lastThread.title]]</a></td>
 </tr>
 <tr>
     <td colspan="2"><hr /></td>
 </tr>
 <tr>
-    <th>Email:</th>
+    <th>[[%discuss.email]]:</th>
     <td>[[+email]]</td>
 </tr>
 <tr>
-    <th>Website:</th>
+    <th>[[%discuss.website]]:</th>
     <td>[[+website]]</td>
 </tr>
 <tr>
-    <th>Gender</th>
+    <th>[[%discuss.gender]]</th>
     <td>[[+gender]]</td>
 </tr>
 <tr>
-    <th>Age:</th>
+    <th>[[%discuss.age]]:</th>
     <td>[[+age]]</td>
 </tr>
 <tr>
-    <th>Location:</th>
+    <th>[[%discuss.location]]:</th>
     <td>[[+location]]</td>
 </tr>
 </tbody>
@@ -60,7 +60,7 @@
 <br />
 
 <ol class="dis-board-list" style="border: 0;">
-    <li class="dis-category-li"><h2>[[%discuss.recent_posts]]</h2></li>
+    <li class="dis-category-li"><h2>[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</h2></li>
     [[+recentPosts]]
 </ol>
 

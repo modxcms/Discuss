@@ -322,7 +322,7 @@ class Discuss {
             return $output;
         }
 
-        $modx->toPlaceholders($properties);
+        $this->modx->toPlaceholders($properties);
         return '';
     }
 

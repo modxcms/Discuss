@@ -9,7 +9,7 @@
         [[+content]]
         </div>
         <div class="dis-post-footer">
-            IP: [[+ip]]
+            [[%discuss.ip]]: [[+ip]]
         </div>
         <div class="dis-post-reply" id="dis-post-reply-[[+id]]"></div>
     </div>

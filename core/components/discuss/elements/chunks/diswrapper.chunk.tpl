@@ -16,5 +16,5 @@
 	    </ul>
 	    <br class="clear" />
     </div>
-    <div class="dis-bar-tab"><a class="dis-bar-toggle" onclick="DISBar.toggle();">Close Bar</a></div>
+    <div class="dis-bar-tab"><a class="dis-bar-toggle" onclick="DISBar.toggle();">[[%discuss.close_bar]]</a></div>
 </div>

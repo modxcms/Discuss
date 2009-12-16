@@ -2,7 +2,7 @@
 
 [[+actionbuttons]]
 
-<h2 class="[[+class]] dis-thread-title">Topic: [[+title]] ([[+views]] Views)</h2>
+<h2 class="[[+class]] dis-thread-title">[[%discuss.thread? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[%discuss.views? &views=`[[+views]]`]])</h2>
 
 <br class="clear" />
 <div class="dis-posts">

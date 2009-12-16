@@ -47,7 +47,7 @@ $xpdo_meta_map['disUserProfile']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'name_first' => 
     array (

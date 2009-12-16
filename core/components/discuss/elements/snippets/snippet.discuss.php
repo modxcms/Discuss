@@ -214,8 +214,10 @@ if (!empty($_groups)) {
 }
 $c->sortby('createdon','DESC');
 $latestPost = $modx->getObject('disPost',$c);
-$la = $latestPost->toArray('latestPost.',true);
-$placeholders = array_merge($placeholders,$la);
+if ($latestPost) {
+    $la = $latestPost->toArray('latestPost.',true);
+    $placeholders = array_merge($placeholders,$la);
+}
 unset($la,$latestPost,$c);
 
 /* output */

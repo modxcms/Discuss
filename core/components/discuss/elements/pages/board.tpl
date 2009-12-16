@@ -8,7 +8,7 @@
 
 [[+actionbuttons]]
 
-<div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
+<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 
 <br class="clear" />
 
@@ -22,7 +22,7 @@
     </div>
     <br class="clear" />
 </div>
-[[+posts:default=`<p>[[%discuss.board_no_threads]]</p>`]]
+[[+posts]]
 </div>
 
 <br class="clear" />

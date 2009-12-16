@@ -13,7 +13,7 @@
 <br class="clear" />
 
 <ol class="dis-board-list">
-    <li class="dis-category-li"><h2>[[%discuss.recent_posts]]</h2></li>
+    <li class="dis-category-li"><h2>[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</h2></li>
     [[+recentPosts]]
 </ol>
 

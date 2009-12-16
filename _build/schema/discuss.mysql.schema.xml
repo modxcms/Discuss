@@ -210,7 +210,7 @@
     
     <object class="disUserProfile" table="user_profile" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
-        <field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="name_first" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="name_last" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="email" dbtype="varchar" precision="200" phptype="string" null="false" default="" />
@@ -245,7 +245,7 @@
         <composite alias="Friends" class="disUserFriend" local="user" foreign="user" cardinality="many" owner="local" />
     </object>
     
-    <object class="disUserModerated" table="user_profile" extends="xPDOSimpleObject">
+    <object class="disUserModerated" table="user_moderated" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="reason" dbtype="mediumint" precision="5" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="register_ip" dbtype="varchar" precision="20" phptype="string" null="false" default="0.0.0.0" />

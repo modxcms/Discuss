@@ -39,7 +39,7 @@ $properties['trail'] = $trail;
 
 /* if POST, process new thread request */
 if (!empty($_POST)) {
-    include $discuss->config['processorsPath'].'web/post/create.php';
+    $result = include $discuss->config['processorsPath'].'web/post/create.php';
     if ($discuss->processResult($result)) {
         $url = $modx->makeUrl($modx->getOption('discuss.board_resource')).'?board='.$board->get('id');
         $modx->sendRedirect($url);

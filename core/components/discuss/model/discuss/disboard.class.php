@@ -94,7 +94,7 @@ class disBoard extends xPDOSimpleObject {
             $this->set('map',$map);
 
             /* set rank to number of boards already with this parent */
-            $rank = $this->getCount('disBoard',array('parent'=>$this->get('parent')));
+            $rank = $this->xpdo->getCount('disBoard',array('parent'=>$this->get('parent')));
             $this->set('rank',$rank);
             parent::save();
         }

@@ -4,7 +4,7 @@
 <form class="dis-form" action="[[~[[*id]]]]?user=[[+id]]" method="post" style="border: 0;">
     <h2>
         <span class="right" style="padding: 4px;"><input type="checkbox" class="dis-remove-all" /></span>
-        Notifications
+        [[%discuss.notifications? &namespace=`discuss` &topic=`user`]]
     </h2>
 	<ol class="dis-board-list" style="border: 0;">	    
 	    [[+notifications]]

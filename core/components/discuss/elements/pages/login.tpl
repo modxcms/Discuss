@@ -1,5 +1,5 @@
 <form class="dis-form dis-login" action="[[~[[++discuss.login_resource]]]]?" method="post">
-    <h2>[[%discuss.login]]</h2>
+    <h2>[[%discuss.login? &namespace=`discuss` &topic=`web`]]</h2>
     
     <label>[[%discuss.username]]:</label>
     <input type="text" name="username" id="dis-login-username" value="[[+username]]" />
