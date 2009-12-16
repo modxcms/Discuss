@@ -2,5 +2,6 @@ Changelog for Discuss.
 
 Discuss 0.1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added auto-install Resources resolver and setup option 
 - Started build script process, i18n work
 - Initial changelog started

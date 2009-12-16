@@ -24,6 +24,7 @@ $sources = array(
     'resolvers' => $root . '_build/resolvers/',
     'chunks' => $root.'core/components/discuss/chunks/',
     'docs' => $root.'core/components/discuss/docs/',
+    'pages' => $root.'core/components/discuss/elements/pages/',
     'source_assets' => $root.'assets/components/discuss',
     'source_core' => $root.'core/components/discuss',
 );
@@ -120,16 +121,22 @@ $vehicle= $builder->createVehicle($menu,array (
         ),
     ),
 ));
+$vehicle->resolve('php',array(
+    'source' => $sources['resolvers'] . 'resolve.resources.php',
+));
 $builder->putVehicle($vehicle);
 unset($vehicle,$menu);
 
 /* now pack in the license file, readme and setup options */
-/*
 $builder->setPackageAttributes(array(
+/*
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+    */
+    'setup-options' => array(
+        'source' => $sources['build'].'setup.options.php',
+    ),
 ));
-*/
 
 /* zip up package */
 $builder->pack();

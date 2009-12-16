@@ -21,7 +21,7 @@ class Discuss {
         $assetsPath = $this->modx->getOption('discuss.assets_path',$config,$this->modx->getOption('assets_path').'components/discuss/');
         $assetsUrl = $this->modx->getOption('discuss.assets_url',$config,$this->modx->getOption('assets_url').'components/discuss/');
 
-        $connectorId = $this->modx->getOption('discuss.connector_resource_id',$config,1);
+        $connectorId = $this->modx->getOption('discuss.connector_resource',$config,1);
         $connectorUrl = $this->modx->makeUrl($connectorId);
 
         $this->config = array_merge(array(
