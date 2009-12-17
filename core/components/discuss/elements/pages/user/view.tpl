@@ -1,11 +1,10 @@
 [[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
+
+<form action="[[~[[*id]]]]?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
+
+<h2>[[+username]]</h2>
 <table class="dis-table">
-<thead>
-<tr>
-    <td colspan="2"><h2>[[+username]]</h2></td>
-</tr>
-</thead>
 <tbody>
 <tr>
     <th>[[%discuss.name? &namespace=`discuss` &topic=`user`]]:</th>
@@ -43,7 +42,7 @@
     <td>[[+website]]</td>
 </tr>
 <tr>
-    <th>[[%discuss.gender]]</th>
+    <th>[[%discuss.gender]]:</th>
     <td>[[+gender]]</td>
 </tr>
 <tr>
@@ -56,6 +55,7 @@
 </tr>
 </tbody>
 </table>
+</form>
 
 <br />
 

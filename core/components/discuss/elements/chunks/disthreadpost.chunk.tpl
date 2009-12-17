@@ -22,7 +22,9 @@
 		          [[%discuss.posts]]: <span class="dis-author-post-count">[[+author_posts]]</span>
 		          </span>
 		          <br class="clear" />
-                  <div class="dis-signature">[[+author_signature]]</div>
+                  [[If? &subject=`[[+author_signature]]`
+                        &operator=`!empty`
+                        &then=`<div class="dis-signature">[[+author_signature]]</div>`]]
 		      </div>
 	    </div>
 	</div>

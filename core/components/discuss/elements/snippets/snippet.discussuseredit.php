@@ -36,7 +36,7 @@ if (!empty($_POST)) {
 }
 
 $placeholders = $user->toArray();
-$placeholders = array_merge($user->profile->toArray(),$properties);
+$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 /* setup genders */
 $genders = array('' => '','m' => $modx->lexicon('discuss.male'),'f' => $modx->lexicon('discuss.female'));
@@ -52,4 +52,4 @@ unset($genders,$v,$d);
 $modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$placeholders));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
-return $discuss->output('user/edit',$properties);
+return $discuss->output('user/edit',$placeholders);

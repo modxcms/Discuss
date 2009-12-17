@@ -23,6 +23,8 @@ body {
 .discuss { padding-top: 25px; }
 
 .discuss h2 { color: #5A8F34; }
+.discuss li { margin-left: 0; }
+.dis-small { font-size: 10px; }
 
 .discuss hr {
     width: 100%;
@@ -61,6 +63,7 @@ li.dis-category-li {
     background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;
     border-bottom: 1px solid #aeaeae;
     height: 33px;
+    margin-left: 0;
 }
 li.dis-category-li h2 {
     font-size: 18px;
@@ -129,3 +132,6 @@ dl.dis-datalist {
     }
 dl.dis-datalist dh, dl.dis-datalist dt { display: block; float: left; padding: 5px 0; }
 dl.dis-datalist dh { clear: left; width: 250px; font-weight: bold; }
+
+/* stats footer */
+.dis-stats li.dis-board-li { background: none; padding: 5px 50px; }

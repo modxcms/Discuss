@@ -188,6 +188,24 @@ $settings['discuss.maximum_post_size']->fromArray(array(
     'area' => 'Posts',
 ),'',true,true);
 
+$settings['discuss.notification_new_post_subject']= $modx->newObject('modSystemSetting');
+$settings['discuss.notification_new_post_subject']->fromArray(array(
+    'key' => 'discuss.notification_new_post_subject',
+    'value' => '[Discuss] [[%discuss.new_post_made]]',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Notifications',
+),'',true,true);
+
+$settings['discuss.notification_new_post_chunk']= $modx->newObject('modSystemSetting');
+$settings['discuss.notification_new_post_chunk']->fromArray(array(
+    'key' => 'discuss.notification_new_post_chunk',
+    'value' => 'disNotificationEmail',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Notifications',
+),'',true,true);
+
 $settings['discuss.num_recent_posts']= $modx->newObject('modSystemSetting');
 $settings['discuss.num_recent_posts']->fromArray(array(
     'key' => 'discuss.num_recent_posts',
@@ -227,6 +245,15 @@ $settings['discuss.threads_per_page']->fromArray(array(
 $settings['discuss.use_css']= $modx->newObject('modSystemSetting');
 $settings['discuss.use_css']->fromArray(array(
     'key' => 'discuss.use_css',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'General',
+),'',true,true);
+
+$settings['discuss.use_stopforumspam']= $modx->newObject('modSystemSetting');
+$settings['discuss.use_stopforumspam']->fromArray(array(
+    'key' => 'discuss.use_stopforumspam',
     'value' => true,
     'xtype' => 'combo-boolean',
     'namespace' => 'discuss',

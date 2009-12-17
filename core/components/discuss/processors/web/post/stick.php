@@ -4,12 +4,12 @@
  * @subpackage processors
  */
 $thread = $modx->getObject('disPost',$scriptProperties['id']);
-if ($thread == null) return $modx->error->failure();
+if ($thread == null) return $modx->error->failure($modx->lexicon('discuss.post_err_nf'));
 
 $thread->set('sticky',true);
 
 if (!$thread->save()) {
-    return $modx->error->failure();
+    return $modx->error->failure($modx->lexicon('discuss.post_err_save'));
 }
 
 return $modx->error->success();

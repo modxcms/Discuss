@@ -109,28 +109,6 @@ foreach ($boards as $board) {
 }
 unset($currentCategory,$ba,$boards,$board,$lp);
 
-/* recent posts */
-$c = $modx->newQuery('disPost');
-$c->select('
-    disPost.*,
-    Board.name AS board_name,
-    Author.username AS author_username
-');
-$c->innerJoin('disBoard','Board');
-$c->innerJoin('modUser','Author');
-$c->sortby('createdon','DESC');
-$c->limit($modx->getOption('discuss.num_recent_posts',null,10));
-$recentPosts = $modx->getCollection('disPost',$c);
-$rps = array();
-foreach ($recentPosts as $post) {
-    $pa = $post->toArray('',true);
-    $pa['class'] = $cssBoardRowCls;
-
-    $rps[] = $discuss->getChunk($postRowTpl,$pa);
-}
-$placeholders['recentPosts'] = implode("\n",$rps);
-unset($rps,$pa,$recentPosts,$post);
-
 /* process logout */
 if (isset($_REQUEST['logout']) && $_REQUEST['logout']) {
     $response = $modx->executeProcessor(array(

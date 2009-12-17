@@ -2,8 +2,9 @@
 
 <form class="dis-form dis-register" action="[[~[[++discuss.register_resource]]]]" method="post">
     <h2>[[%discuss.register? &namespace=`discuss` &topic=`web`]]</h2>
+    
+    <span class="error">[[+error.spam_empty]]</span>
     <input type="hidden" name="spam_empty" value="" />
-    [[+error.spam_empty]]
     
     <label for="dis-register-username">[[%discuss.username]]:
         <span class="error">[[+error.username]]</span>

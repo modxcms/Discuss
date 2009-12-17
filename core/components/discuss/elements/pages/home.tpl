@@ -14,24 +14,25 @@
 
 <ol class="dis-board-list">
     <li class="dis-category-li"><h2>[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</h2></li>
-    [[+recentPosts]]
+    [[!DiscussRecentPosts]]
 </ol>
 
 <br class="clear" />
 
-
-<ol class="dis-board-list">
-    <li class="dis-category-li"><h2>Stats</h2></li>
-    <li class="dis-board-li" style="background: none; padding: 5px 50px;">
-        [[+totalPosts]] posts in [[+totalTopics]] topics by [[+totalMembers]] members.
+<ol class="dis-board-list dis-stats">
+    <li class="dis-category-li"><h2>[[%discuss.stats]]</h2></li>
+    <li class="dis-board-li">
+        [[%discuss.stats_totals? &posts=`[[+totalPosts]]` &threads=`[[+totalTopics]]` &members=`[[+totalMembers]]`]]
         <br />
-        Latest Post: <a href="[[~[[++discuss.thread_resource]]]]?thread=[[+latestPost.thread]]#dis-board-post-[[+latestPost.id]]">[[+latestPost.title]]</a>
-        by <a href="[[~[[++discuss.user_resource]]]]?user=[[+latestPost.author]]">[[+latestPost.username]]</a>
+        [[%discuss.stats_latest_post?
+            &post=`<a href="[[~[[++discuss.thread_resource]]]]?thread=[[+latestPost.thread]]#dis-board-post-[[+latestPost.id]]">[[+latestPost.title]]</a>`
+            &by=`<a href="[[~[[++discuss.user_resource]]]]?user=[[+latestPost.author]]">[[+latestPost.username]]</a>`
+        ]]
     </li>
-    <li class="dis-board-li" style="background: none; padding: 5px 50px;">
-        [[+totalVisitorsActive]] Visitors, [[+totalMembersActive]] Members
+    <li class="dis-board-li">
+        [[%discuss.stats_online? &visitors=`[[+totalVisitorsActive]]` &members=`[[+totalMembersActive]]`]]
         <br />
-        <span class="dis-active-users dis-small" style="font-size: 10px;">
+        <span class="dis-active-users dis-small">
         [[+activeUsers]]
         </span>
     </li>

@@ -2,6 +2,8 @@ Changelog for Discuss.
 
 Discuss 0.1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Lots of fixes to Registration, security
+- Fixes to CSS / layouts to work more properly within an existing design
 - Got setup and build working as expected
 - Lots of i18n work
 - Added auto-install Resources resolver and setup option 

@@ -5,10 +5,11 @@
  * @package discuss
  * @subpackage processors
  */
+$modx->lexicon->load('discuss:post');
 
 /* field validation */
-if (empty($_POST['title'])) $modx->error->addField('title','Please enter a valid post title.');
-if (empty($_POST['message'])) $modx->error->addField('message','Please enter a message.');
+if (empty($_POST['title'])) $modx->error->addField('title',$modx->lexicon('discuss.post_err_ns_title'));
+if (empty($_POST['message'])) $modx->error->addField('message',$modx->lexicon('discuss.post_err_ns_message'));
 
 /* first check attachments for validity */
 $attachments = array();
@@ -40,7 +41,7 @@ $post->set('parent',0);
 $post->set('board',$board->get('id'));
 
 if (!$post->save()) {
-    $modx->error->failure('An error occurred while trying to save the new thread.');
+    return $modx->error->failure($modx->lexicon('discuss.post_err_create'));
 }
 
 /* upload attachments */
@@ -54,7 +55,9 @@ foreach ($attachments as $file) {
     if ($attachment->upload($file)) {
         $attachment->save();
     } else {
-        $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to upload the attachment: '.print_r($file,true));
+        $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] '.$modx->lexicon('attachment_err_upload',array(
+            'error' => print_r($file,true),
+        )));
     }
 }
 
@@ -63,7 +66,8 @@ $modx->hooks->load('notifications/send',array(
     'board' => $board->get('id'),
     'thread' => $post->get('id'),
     'title' => $post->get('title'),
-    'subject' => '[Discuss] A New Post Has Been Made',
+    'subject' => $modx->getOption('discuss.notification_new_post_subject'),
+    'tpl' => $modx->getOption('discuss.notification_new_post_chunk'),
 ));
 
 return $modx->error->success();

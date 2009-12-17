@@ -1,7 +1,7 @@
-<div class="discuss">
 [[+discuss.output]]
-</div>
 
+<!--
+<div class="discuss"></div>
 <div class="dis-bar">    
     <div class="dis-bar-content">    
 	    <div class="right" style="padding: 5px 10px;">
@@ -18,3 +18,4 @@
     </div>
     <div class="dis-bar-tab"><a class="dis-bar-toggle" onclick="DISBar.toggle();">[[%discuss.close_bar]]</a></div>
 </div>
+-->

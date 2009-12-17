@@ -21,7 +21,7 @@ $user->profile = $modx->getObject('disUserProfile',array(
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
 
 $placeholders = $user->toArray();
-$placeholders = array_merge($user->profile->toArray(),$properties);
+$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 $placeholders['topics'] = $modx->getCount('disPost',array(
     'parent' => 0,
@@ -32,4 +32,4 @@ $placeholders['topics'] = $modx->getCount('disPost',array(
 $modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$placeholders));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
-return $discuss->output('user/stats',$properties);
+return $discuss->output('user/stats',$placeholders);

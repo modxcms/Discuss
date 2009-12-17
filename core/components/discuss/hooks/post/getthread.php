@@ -18,6 +18,11 @@ if (empty($scriptProperties['thread'])) {
 } else { $thread = $scriptProperties['thread']; }
 if (empty($thread)) $modx->sendErrorPage();
 
+$isModerator = $modx->getCount('disModerator',array(
+    'user' => $modx->user->get('id'),
+    'board' => $thread->get('board'),
+)) > 0 ? true : false;
+
 /* get posts */
 $c = $modx->newQuery('disPost');
 $c->select('
@@ -57,7 +62,7 @@ foreach ($posts as $post) {
             src="'.$profileUrl.$pa['author'].'/'.$pa['author_avatar'].'" />';
     }
     /* check if author wants to show email */
-    if (!empty($pa['author_show_email'])) {
+    if (!empty($pa['author_show_email']) && $modx->user->isAuthenticated()) {
         $pa['author_email'] = '<a href="mailto:'.$post->get('author_email').'">'.$modx->lexicon('discuss.email_author').'</a>';
     } else {
         $pa['author_email'] = '';
@@ -77,10 +82,18 @@ foreach ($posts as $post) {
     }
 
     /* load actions */
-    if (!$thread->get('locked')) {
+    if (!$thread->get('locked') && $modx->user->isAuthenticated()) {
         $pa['action_reply'] = '<a href="[[~[[++discuss.reply_post_resource]]]]?post=[[+id]]" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
-        $pa['action_modify'] = '<a href="[[~[[++discuss.modify_post_resource]]]]?post=[[+id]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
-        $pa['action_remove'] = '<a class="dis-post-remove">'.$modx->lexicon('discuss.remove').'</a>';
+
+        $canModifyPost = $modx->user->get('id') == $post->get('author') || $isModerator;
+        if ($canModifyPost) {
+            $pa['action_modify'] = '<a href="[[~[[++discuss.modify_post_resource]]]]?post=[[+id]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+        }
+
+        $canRemovePost = $modx->user->get('id') == $post->get('author') || $isModerator;
+        if ($canRemovePost) {
+            $pa['action_remove'] = '<a class="dis-post-remove">'.$modx->lexicon('discuss.remove').'</a>';
+        }
     }
 
     /* get attachments */

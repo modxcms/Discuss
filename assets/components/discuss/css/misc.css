@@ -26,10 +26,12 @@
 .dis-table td, .dis-table th {
     padding: 4px;
     margin: 0;
+    text-align: left;
     border-collapse: separate;
 }
 .dis-table th {
     text-align: left;
+    font-weight: bold;
     width: 20%;
 }
 

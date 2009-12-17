@@ -5,6 +5,9 @@
  * @package discuss
  * @subpackage processors
  */
+
+$tpl = $modx->getOption('tpl',$scriptProperties,'disBoardThread');
+
 $c = $modx->newQuery('disPost');
 $c->select('
     disPost.*,
@@ -26,6 +29,6 @@ foreach ($posts as $post) {
 }
 
 $discuss->loadTreeParser();
-$output = $discuss->treeParser->parse($pa,'disBoardThread');
+$output = $discuss->treeParser->parse($pa,$tpl);
 
 return $modx->error->success($output);

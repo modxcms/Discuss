@@ -193,10 +193,32 @@ $snippets[17]->fromArray(array(
     'id' => 17,
     'name' => 'DiscussUserStats',
     'description' => '',
-    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.discuss.php'),
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.discussuserstats.php'),
 ),'',true,true);
 $properties = include $sources['build'].'properties/properties.discussuserstats.php';
 $snippets[17]->setProperties($properties);
+unset($properties);
+
+$snippets[18]= $modx->newObject('modSnippet');
+$snippets[18]->fromArray(array(
+    'id' => 18,
+    'name' => 'DiscussRecentPosts',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.discussrecentposts.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussrecentposts.php';
+$snippets[18]->setProperties($properties);
+unset($properties);
+
+$snippets[19]= $modx->newObject('modSnippet');
+$snippets[19]->fromArray(array(
+    'id' => 19,
+    'name' => 'DiscussRegisterConfirm',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.discussregisterconfirm.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussregisterconfirm.php';
+$snippets[19]->setProperties($properties);
 unset($properties);
 
 return $snippets;

@@ -76,7 +76,8 @@ $modx->hooks->load('notifications/send',array(
     'board' => $post->get('board'),
     'thread' => $thread->get('id'),
     'title' => $thread->get('title'),
-    'subject' => '[Discuss] A Reply Has Been Made',
+    'subject' => $modx->getOption('discuss.notification_new_post_subject'),
+    'tpl' => $modx->getOption('discuss.notification_new_post_chunk'),
 ));
 
 return $modx->error->success('',$post);
