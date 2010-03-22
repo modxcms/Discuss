@@ -19,14 +19,15 @@ if (empty($thread)) $modx->sendErrorPage();
 $otherSelect = '';
 $c = $modx->newQuery('disPost');
 if (!empty($userId)) {
-    $c->leftJoin('disUserNotification','Notifications','disPost.id = Notifications.post AND Notifications.user = '.$userId);
-    $otherSelect = ', Notifications.user AS notification';
+    $c->leftJoin('disUserNotification','Notifications','`disPost`.`id` = `Notifications`.`post` AND `Notifications`.`user` = '.$userId);
+    $otherSelect = ', `Notifications`.`user` AS `notification`';
 }
-$c->select('disPost.*,
+$c->select('
+    `disPost`.*,
     (SELECT COUNT(*) FROM '.$modx->getTableName('disPostClosure').'
      WHERE
-        ancestor = disPost.id
-    AND descendant != disPost.id) AS replies'.$otherSelect);
+        `ancestor` = `disPost`.`id`
+    AND `descendant` != `disPost`.`id`) AS `replies`'.$otherSelect);
 $c->where(array(
     'id' => $thread,
 ));

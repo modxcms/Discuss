@@ -43,7 +43,7 @@ class Discuss {
             'loadJQuery' => true,
         ),$config);
 
-        $this->modx->addPackage('discuss',$this->config['modelPath'],'discuss_');
+        $this->modx->addPackage('discuss',$this->config['modelPath']);
         if ($this->modx->getOption('discuss.debug',$this->config,true)) {
             $this->startDebugTimer();
         }

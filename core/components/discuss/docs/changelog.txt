@@ -2,6 +2,8 @@ Changelog for Discuss.
 
 Discuss 0.1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed table schema to allow for dynamic table prefix, allowing for multiple forums per DB
+- Fixed disPost::getViewing
 - Lots of fixes to Registration, security
 - Fixes to CSS / layouts to work more properly within an existing design
 - Got setup and build working as expected

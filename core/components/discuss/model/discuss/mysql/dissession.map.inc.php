@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disSession']= array (
   'package' => 'discuss',
-  'table' => 'sessions',
+  'table' => 'discuss_sessions',
   'fields' => 
   array (
     'id' => '',

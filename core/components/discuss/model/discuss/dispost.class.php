@@ -266,7 +266,7 @@ class disPost extends xPDOSimpleObject {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
 
         $c = $this->xpdo->newQuery('disSession');
-        $c->select('disSession.id,GROUP_CONCAT(CONCAT_WS(":",User.id,User.username) SEPARATOR ",") AS readers');
+        $c->select('disSession.id,GROUP_CONCAT(DISTINCT CONCAT_WS(":",User.id,User.username)) AS readers');
         $c->innerJoin('modUser','User');
         $c->where(array(
             'disSession.place' => 'thread:'.$this->get('id'),
@@ -275,13 +275,14 @@ class disPost extends xPDOSimpleObject {
         $members = $this->xpdo->getObject('disSession',$c);
         if ($members) {
             $readers = explode(',',$members->get('readers'));
-            $members = '';
+            $readers = array_unique($readers);
+            $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members .= '<a href="[[~[[++discuss.user_resource]]]]?user='.$r[0]
-                    .'">'.$r[1].'</a>,';
+                $members[] = '<a href="[[~[[++discuss.user_resource]]]]?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>';
             }
-            $members = trim($members,',');
+            $members = array_unique($members);
+            $members = implode(',',$members);
         } else { $members = $modx->lexicon('discuss.zero_members'); }
 
         $c = $this->xpdo->newQuery('disSession');

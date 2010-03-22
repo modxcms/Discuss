@@ -19,7 +19,8 @@ $postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 
 $_groups = implode(',',$modx->user->getUserGroups());
 $c = $modx->newQuery('disBoard');
-$c->select('disBoard.*,
+$c->select('
+    disBoard.*,
     Category.name AS category_name,
 
     (SELECT COUNT(*) FROM '.$modx->getTableName('disPost').' AS dp
@@ -58,19 +59,19 @@ $c->innerJoin('disBoardClosure','Descendants');
 $c->leftJoin('disPost','LastPost');
 $c->leftJoin('modUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
 $c->leftJoin('disBoardUserGroup','UserGroups');
-$c->where(array(
+$where = array(
     'disBoard.parent' => 0,
-));
-$c->orCondition(array(
-    'UserGroups.usergroup IS NULL',
-),null,1);
-
+);
 /* restrict boards by user group if applicable */
+$g = array();
 if (!empty($_groups)) {
-    $c->orCondition(array(
+    $g = array(
         'UserGroups.usergroup IN ('.$_groups.')',
-    ),null,1);
+    );
 }
+$g['OR:UserGroups.usergroup:='] = null;
+$where[] = $g;
+$c->where($where);
 
 $c->sortby('Category.rank','ASC');
 $c->sortby('disBoard.rank','ASC');
@@ -148,7 +149,7 @@ if ($modx->getOption('discuss.show_whos_online',null,true)) {
     $threshold = $modx->getOption('discuss.user_active_threshold',null,40);
     $timeago = time() - (60*($threshold));
     $c = $modx->newQuery('modUser');
-    $c->innerJoin('disSession','Session','Session.user = modUser.id');
+    $c->innerJoin('disSession','Session','`Session`.`user` = `modUser`.`id`');
     $c->where(array(
         'Session.access:>=' => $timeago,
     ));
@@ -171,19 +172,19 @@ $placeholders['totalVisitorsActive'] = $modx->getCount('disSession',array('user'
 /* latest post */
 $c = $modx->newQuery('disPost');
 $c->select('
-    disPost.id,
-    disPost.title,
-    disPost.createdon,
-    disPost.author,
-    disPost.thread,
-    Author.username AS username,
-    Board.name AS board
+    `disPost`.`id`,
+    `disPost`.`title`,
+    `disPost`.`createdon`,
+    `disPost`.`author`,
+    `disPost`.`thread`,
+    `Author`.`username` AS `username`,
+    `Board`.`name` AS `board`
 ');
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('modUser','Author');
 $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
 $c->orCondition(array(
-    'UserGroups.usergroup IS NULL',
+    'UserGroups.usergroup' => null,
 ),null,1);
 if (!empty($_groups)) {
     $c->orCondition(array(

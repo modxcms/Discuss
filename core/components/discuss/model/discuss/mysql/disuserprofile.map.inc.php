@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disUserProfile']= array (
   'package' => 'discuss',
-  'table' => 'user_profile',
+  'table' => 'discuss_user_profile',
   'fields' => 
   array (
     'user' => 0,

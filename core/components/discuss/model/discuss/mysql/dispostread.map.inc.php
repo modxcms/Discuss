@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disPostRead']= array (
   'package' => 'discuss',
-  'table' => 'posts_read',
+  'table' => 'discuss_posts_read',
   'fields' => 
   array (
     'user' => 0,

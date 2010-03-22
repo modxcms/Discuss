@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model package="discuss" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" tablePrefix="discuss_">    
+<model package="discuss" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">    
     
-    <object class="disBanGroup" table="ban_groups" extends="xPDOSimpleObject">
+    <object class="disBanGroup" table="discuss_ban_groups" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="ip" dbtype="varchar" precision="20" phptype="string" null="false" default="" index="index" />
         <field key="reason" dbtype="text" phptype="string" null="false" default="" />
@@ -18,7 +18,7 @@
         <composite alias="BanItems" class="disBanItem" local="id" foreign="grp" cardinality="many" owner="local" />
     </object>
     
-    <object class="disBanItem" table="ban_items" extends="xPDOSimpleObject">
+    <object class="disBanItem" table="discuss_ban_items" extends="xPDOSimpleObject">
         <field key="grp" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="email" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="index" />
@@ -30,7 +30,7 @@
         <aggregate alias="User" class="modUser" local="user" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="disBoard" table="boards" extends="xPDOSimpleObject">
+    <object class="disBoard" table="discuss_boards" extends="xPDOSimpleObject">
         <field key="category" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" default="" null="false" index="index" />
@@ -56,7 +56,7 @@
         <composite alias="Notifications" class="disUserNotification" local="id" foreign="board" cardinality="many" owner="local" />
     </object>
     
-    <object class="disBoardClosure" table="boards_closure" extends="xPDOObject">
+    <object class="disBoardClosure" table="discuss_boards_closure" extends="xPDOObject">
         <field key="ancestor" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="descendant" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="depth" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" /> 
@@ -65,7 +65,7 @@
         <aggregate alias="Descendant" class="disBoard" local="descendant" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="disBoardUserGroup" table="board_usergroups" extends="xPDOSimpleObject">
+    <object class="disBoardUserGroup" table="discuss_board_usergroups" extends="xPDOSimpleObject">
         <field key="usergroup" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
                 
@@ -74,7 +74,7 @@
         <aggregate alias="UserGroupProfile" class="disUserGroupProfile" local="usergroup" foreign="usergroup" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="disCategory" table="categories" extends="xPDOSimpleObject">
+    <object class="disCategory" table="discuss_categories" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" default="" null="false" index="index" />
         <field key="description" dbtype="text" phptype="string" default="" null="false" />
         <field key="collapsible" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
@@ -83,7 +83,7 @@
         <composite alias="Boards" class="disBoard" local="id" foreign="category" cardinality="many" owner="local" />
     </object>
     
-    <object class="disForumActivity" table="forum_activity" extends="xPDOSimpleObject">
+    <object class="disForumActivity" table="discuss_forum_activity" extends="xPDOSimpleObject">
         <field key="day" dbtype="date" phptype="date" null="false" index="index" />
         <field key="hits" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="topics" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
@@ -92,7 +92,7 @@
         <field key="visitors" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
     </object>
     
-    <object class="disModerator" table="moderators" extends="xPDOSimpleObject">
+    <object class="disModerator" table="discuss_moderators" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         
@@ -101,7 +101,7 @@
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="disPost" table="posts" extends="xPDOSimpleObject">
+    <object class="disPost" table="discuss_posts" extends="xPDOSimpleObject">
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="thread" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
@@ -134,7 +134,7 @@
         <composite alias="Attachments" class="disPostAttachment" local="id" foreign="post" cardinality="many" owner="local" />
     </object>
     
-    <object class="disPostAttachment" table="posts_attachments" extends="xPDOSimpleObject">
+    <object class="disPostAttachment" table="discuss_posts_attachments" extends="xPDOSimpleObject">
         <field key="post" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="filename" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
@@ -146,7 +146,7 @@
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="disPostClosure" table="posts_closure" extends="xPDOObject">
+    <object class="disPostClosure" table="discuss_posts_closure" extends="xPDOObject">
         <field key="ancestor" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="descendant" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="depth" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" /> 
@@ -155,7 +155,7 @@
         <aggregate alias="Descendant" class="disPost" local="descendant" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="disPostRead" table="posts_read" extends="xPDOSimpleObject">
+    <object class="disPostRead" table="discuss_posts_read" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="post" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
@@ -166,7 +166,7 @@
         <aggregate alias="Post" class="disPost" local="post" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="disReservedUsername" table="reserved_usernames" extends="xPDOObject">
+    <object class="disReservedUsername" table="discuss_reserved_usernames" extends="xPDOObject">
         <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="pk" />
         <field key="whole_match" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
         <field key="case_sensitive" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
@@ -174,7 +174,7 @@
         <field key="check_realname" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
     </object>
     
-    <object class="disSession" table="sessions" extends="xPDOObject">
+    <object class="disSession" table="discuss_sessions" extends="xPDOObject">
         <field key="id" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="pk" />
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="access" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
@@ -188,7 +188,7 @@
     </object>
     
     <!-- delayed until 1.1 -->
-    <object class="disUserFriend" table="user_friends" extends="xPDOSimpleObject">
+    <object class="disUserFriend" table="discuss_user_friends" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="friend" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         
@@ -197,7 +197,7 @@
         <aggregate alias="Friend" class="modUser" local="friend" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
-    <object class="disUserGroupProfile" table="usergroup_profiles" extends="xPDOSimpleObject">
+    <object class="disUserGroupProfile" table="discuss_usergroup_profiles" extends="xPDOSimpleObject">
         <field key="usergroup" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="post_based" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
         <field key="min_posts" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
@@ -208,7 +208,7 @@
         <composite alias="Boards" class="disBoardUserGroup" local="usergroup" foreign="usergroup" cardinality="many" owner="local" />
     </object>
     
-    <object class="disUserProfile" table="user_profile" extends="xPDOSimpleObject">
+    <object class="disUserProfile" table="discuss_user_profile" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="name_first" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
@@ -245,7 +245,7 @@
         <composite alias="Friends" class="disUserFriend" local="user" foreign="user" cardinality="many" owner="local" />
     </object>
     
-    <object class="disUserModerated" table="user_moderated" extends="xPDOSimpleObject">
+    <object class="disUserModerated" table="discuss_user_moderated" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="reason" dbtype="mediumint" precision="5" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="register_ip" dbtype="varchar" precision="20" phptype="string" null="false" default="0.0.0.0" />
@@ -254,7 +254,7 @@
         <aggregate alias="UserProfile" class="disUserProfile" local="user" foreign="user" cardinality="one" owner="foreign" />        
     </object>
     
-    <object class="disUserNotification" table="user_notifications" extends="xPDOSimpleObject">
+    <object class="disUserNotification" table="discuss_user_notifications" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="post" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />

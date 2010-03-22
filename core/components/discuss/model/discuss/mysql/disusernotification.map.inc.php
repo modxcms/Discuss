@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disUserNotification']= array (
   'package' => 'discuss',
-  'table' => 'user_notifications',
+  'table' => 'discuss_user_notifications',
   'fields' => 
   array (
     'user' => 0,

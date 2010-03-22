@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disPostClosure']= array (
   'package' => 'discuss',
-  'table' => 'posts_closure',
+  'table' => 'discuss_posts_closure',
   'fields' => 
   array (
     'ancestor' => 0,

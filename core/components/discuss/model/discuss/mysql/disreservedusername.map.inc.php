@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['disReservedUsername']= array (
   'package' => 'discuss',
-  'table' => 'reserved_usernames',
+  'table' => 'discuss_reserved_usernames',
   'fields' => 
   array (
     'name' => '',
