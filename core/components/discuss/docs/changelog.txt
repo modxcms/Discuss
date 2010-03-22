@@ -2,6 +2,7 @@ Changelog for Discuss.
 
 Discuss 0.1 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Added in missing DiscussRecentPosts properties to build
 - Fixed table schema to allow for dynamic table prefix, allowing for multiple forums per DB
 - Fixed disPost::getViewing
 - Lots of fixes to Registration, security
