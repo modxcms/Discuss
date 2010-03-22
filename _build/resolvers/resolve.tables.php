@@ -10,7 +10,7 @@ if ($object->xpdo) {
         case xPDOTransport::ACTION_INSTALL:
             $modx =& $object->xpdo;
             $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
-            $modx->addPackage('discuss',$modelPath,'discuss_');
+            $modx->addPackage('discuss',$modelPath);
 
             $manager = $modx->getManager();
 

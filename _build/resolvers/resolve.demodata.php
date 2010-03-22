@@ -11,7 +11,7 @@ if ($object->xpdo && !empty($options['install_demodata'])) {
 
 $modx =& $object->xpdo;
 $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
-$modx->addPackage('discuss',$modelPath,'discuss_');
+$modx->addPackage('discuss',$modelPath);
 
 $modx->log(modX::LOG_LEVEL_INFO,'Installing demo data...');
 
