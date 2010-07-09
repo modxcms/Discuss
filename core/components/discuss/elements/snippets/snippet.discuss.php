@@ -18,46 +18,68 @@ $lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPost
 $postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 
 $_groups = implode(',',$modx->user->getUserGroups());
+
+$modx->setLogTarget('ECHO');
+
+/* begin query build */
+
+/* unread posts subquery */
+$unreadSubCriteria = $modx->newQuery('disPostRead');
+$unreadSubCriteria->setClassAlias('disPostRead');
+$unreadSubCriteria->select($modx->getSelectColumns('disPostRead','disPostRead','',array('post')));
+$unreadSubCriteria->where(array(
+    'disPostRead.user' => $modx->user->get('id'),
+    $modx->getSelectColumns('disPostRead','disPostRead','',array('board')).' = '.$modx->getSelectColumns('disBoard','disBoard','',array('id')),
+));
+$unreadSubCriteria->prepare();
+$unreadSubSql = $unreadSubCriteria->toSql();
+
+$unreadCriteria = $modx->newQuery('disPost');
+$unreadCriteria->setClassAlias('UnreadPosts');
+$unreadCriteria->select('COUNT(`UnreadPosts`.`id`)');
+$unreadCriteria->where(array(
+    $modx->getSelectColumns('disPost','UnreadPosts','',array('id')).' NOT IN ('.$unreadSubSql.')',
+    $modx->getSelectColumns('disPost','UnreadPosts','',array('board')).' = '.$modx->getSelectColumns('disBoard','disBoard','',array('id')),
+));
+$unreadCriteria->prepare();
+$unreadSql = $unreadCriteria->toSql();
+
+/* subboards subquery */
+$sbCriteria = $modx->newQuery('disBoard');
+$sbCriteria->setClassAlias('subBoard');
+$sbCriteria->select(array(
+    'GROUP_CONCAT(CONCAT_WS(":",'.$modx->getSelectColumns('disBoard','subBoardClosureBoard','',array('id','name')).') SEPARATOR ",") AS `name`',
+));
+$sbCriteria->innerJoin('disBoardClosure','subBoardClosure','`subBoardClosure`.`ancestor` = `subBoard`.`id`');
+$sbCriteria->innerJoin('disBoard','subBoardClosureBoard','`subBoardClosureBoard`.`id` = `subBoardClosure`.`descendant`');
+$sbCriteria->innerJoin('disBoardUserGroup','subBoardUserGroups','(`subBoardUserGroups`.`usergroup` IS NULL '.(empty($_groups) ? '' : '
+    OR `subBoardUserGroups`.`usergroup` IN ('.$_groups.')
+').')');
+$sbCriteria->where(array(
+    '`subBoard`.`id` = `disBoard`.`id`',
+    '`subBoardClosure`.`descendant` != `disBoard`.`id`',
+    'subBoardClosure.depth' => 1,
+));
+$sbCriteria->groupby('`subBoard`.`id`');
+$sbCriteria->prepare();
+$sbSql = $sbCriteria->toSql();
+
+/* create main query */
 $c = $modx->newQuery('disBoard');
 $c->select('
-    disBoard.*,
-    Category.name AS category_name,
-
-    (SELECT COUNT(*) FROM '.$modx->getTableName('disPost').' AS dp
-        WHERE
-            id NOT IN (
-                SELECT post FROM '.$modx->getTableName('disPostRead').' AS dp2
-                WHERE
-                    user = '.$modx->user->get('id').'
-                AND board = disBoard.id
-            )
-        AND board = disBoard.id
-    ) AS unread,
-    (SELECT GROUP_CONCAT(CONCAT_WS(":",subBoardClosureBoard.id,subBoardClosureBoard.name) SEPARATOR ",") AS name
-        FROM '.$modx->getTableName('disBoard').' AS subBoard
-            INNER JOIN '.$modx->getTableName('disBoardClosure').' AS subBoardClosure
-            ON subBoardClosure.ancestor = subBoard.id
-            INNER JOIN '.$modx->getTableName('disBoard').' AS subBoardClosureBoard
-            ON subBoardClosureBoard.id = subBoardClosure.descendant
-            INNER JOIN '.$modx->getTableName('disBoardUserGroup').' AS subBoardUserGroups
-            ON (subBoardUserGroups.usergroup IS NULL '.(empty($_groups) ? '' : '
-                OR subBoardUserGroups.usergroup IN ('.$_groups.')
-            ').')
-        WHERE
-            subBoard.id = disBoard.id
-        AND subBoardClosure.descendant != disBoard.id
-        AND subBoardClosure.depth = 1
-        GROUP BY subBoard.id
-    ) AS subboards,
-    LastPost.title AS last_post_title,
-    LastPost.author AS last_post_author,
-    LastPost.createdon AS last_post_createdon,
-    LastPostAuthor.username AS last_post_username
+    `disBoard`.*,
+    `Category`.`name` AS `category_name`,
+    ('.$unreadSql.') AS `unread`,
+    ('.$sbSql.') AS `subboards`,
+    `LastPost`.`title` AS `last_post_title`,
+    `LastPost`.`author` AS `last_post_author`,
+    `LastPost`.`createdon` AS `last_post_createdon`,
+    `LastPostAuthor`.`username` AS `last_post_username`
 ');
 $c->innerJoin('disCategory','Category');
 $c->innerJoin('disBoardClosure','Descendants');
 $c->leftJoin('disPost','LastPost');
-$c->leftJoin('modUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
+$c->leftJoin('modUser','LastPostAuthor','`LastPost`.`author` = `LastPostAuthor`.`id`');
 $c->leftJoin('disBoardUserGroup','UserGroups');
 $where = array(
     'disBoard.parent' => 0,
@@ -66,15 +88,15 @@ $where = array(
 $g = array();
 if (!empty($_groups)) {
     $g = array(
-        'UserGroups.usergroup IN ('.$_groups.')',
+        '`UserGroups`.`usergroup` IN ('.$_groups.')',
     );
 }
 $g['OR:UserGroups.usergroup:='] = null;
 $where[] = $g;
 $c->where($where);
 
-$c->sortby('Category.rank','ASC');
-$c->sortby('disBoard.rank','ASC');
+$c->sortby('`Category`.`rank`','ASC');
+$c->sortby('`disBoard`.`rank`','ASC');
 $boards = $modx->getCollection('disBoard',$c);
 unset($c);
 
@@ -149,7 +171,7 @@ if ($modx->getOption('discuss.show_whos_online',null,true)) {
     $threshold = $modx->getOption('discuss.user_active_threshold',null,40);
     $timeago = time() - (60*($threshold));
     $c = $modx->newQuery('modUser');
-    $c->innerJoin('disSession','Session','`Session`.`user` = `modUser`.`id`');
+    $c->innerJoin('disSession','Session',$modx->getSelectColumns('disSession','Session','',array('user')).' = '.$modx->getSelectColumns('modUser','modUser','',array('id')));
     $c->where(array(
         'Session.access:>=' => $timeago,
     ));
@@ -171,28 +193,28 @@ $placeholders['totalVisitorsActive'] = $modx->getCount('disSession',array('user'
 
 /* latest post */
 $c = $modx->newQuery('disPost');
-$c->select('
-    `disPost`.`id`,
-    `disPost`.`title`,
-    `disPost`.`createdon`,
-    `disPost`.`author`,
-    `disPost`.`thread`,
-    `Author`.`username` AS `username`,
-    `Board`.`name` AS `board`
-');
+$c->select(array(
+    'disPost.id',
+    'disPost.title',
+    'disPost.createdon',
+    'disPost.author',
+    'Author.username',
+));
+$c->select($modx->getSelectColumns('disBoard','Board','',array('name')).' AS `board`');
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('modUser','Author');
-$c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+$c->leftJoin('disBoardUserGroup','UserGroups',$modx->getSelectColumns('disBoard','Board','',array('id')).' = '.$modx->getSelectColumns('disBoardUserGroup','UserGroups','',array('board')));
 $c->orCondition(array(
     'UserGroups.usergroup' => null,
 ),null,1);
 if (!empty($_groups)) {
     $c->orCondition(array(
-        'UserGroups.usergroup IN ('.$_groups.')',
+        $modx->getSelectColumns('disBoardUserGroup','UserGroups','',array('usergroup')).' IN ('.$_groups.')',
     ),null,1);
 }
-$c->sortby('createdon','DESC');
+$c->sortby($modx->getSelectColumns('disPost','disPost','',array('createdon')),'DESC');
 $latestPost = $modx->getObject('disPost',$c);
+
 if ($latestPost) {
     $la = $latestPost->toArray('latestPost.',true);
     $placeholders = array_merge($placeholders,$la);

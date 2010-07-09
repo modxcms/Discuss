@@ -45,6 +45,7 @@ class Discuss {
 
         $this->modx->addPackage('discuss',$this->config['modelPath']);
         if ($this->modx->getOption('discuss.debug',$this->config,true)) {
+            $this->modx->setLogTarget('ECHO');
             $this->startDebugTimer();
         }
     }

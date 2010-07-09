@@ -143,19 +143,14 @@ $pa = array();
 foreach ($posts as $post) {
     /* get latest post in thread */
     $c = $modx->newQuery('disPost');
-    $c->select('
-        disPost.id,
-        disPost.title,
-        disPost.createdon,
-        disPost.author,
-        Author.username
-    ');
+    $c->select($modx->getSelectColumns('disPost','disPost','',array('id','title','createdon','author')));
+    $c->select($modx->getSelectColumns('modUser','Author','',array('username')));
     $c->innerJoin('disPostClosure','Descendants');
     $c->innerJoin('modUser','Author');
     $c->where(array(
         'Descendants.ancestor' => $post->get('id'),
     ));
-    $c->sortby('disPost.createdon','DESC');
+    $c->sortby($modx->getSelectColumns('disPost','disPost','',array('createdon')),'DESC');
     $latestPost = $modx->getObject('disPost',$c);
     if ($latestPost != null) {
         $phs = array(
@@ -204,8 +199,7 @@ foreach ($posts as $post) {
 unset($unread,$class,$threshold,$latestText,$createdon,$c);
 
 /* load thread count */
-$modx->regClientStartupScript('<script type="text/javascript">
-$(function() {
+$modx->regClientStartupScript('<script type="text/javascript">$(function() {
     DISBoard.threadCount = "'.count($pa).'";
 });</script>');
 
@@ -225,7 +219,7 @@ $c->where(array(
     'Ancestors.descendant' => $board->get('id'),
     'Ancestors.ancestor:!=' => $board->get('id'),
 ));
-$c->sortby('Ancestors.depth','DESC');
+$c->sortby($modx->getSelectColumns('disBoardClosure','Ancestors','',array('depth')),'DESC');
 $ancestors = $modx->getCollection('disBoard',$c);
 
 $trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">'

@@ -8,7 +8,6 @@ $discuss = new Discuss($modx,$scriptProperties);
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('thread:'.$_REQUEST['thread']);
 
-
 /* get default properties */
 $userId = $modx->user->get('id');
 $thread = $modx->getOption('thread',$_REQUEST,$modx->getOption('thread',$scriptProperties,false));
@@ -18,18 +17,24 @@ if (empty($thread)) $modx->sendErrorPage();
 /* get thread root */
 $otherSelect = '';
 $c = $modx->newQuery('disPost');
+$repliesCriteria = $modx->newQuery('disPostClosure');
+$repliesCriteria->select('COUNT('.$modx->getSelectColumns('disPostClosure','disPostClosure','',array('descendant')).')');
+$repliesCriteria->where(array(
+    'disPostClosure.ancestor = disPost.id',
+    'disPostClosure.descendant != disPost.id',
+));
+$repliesCriteria->prepare();
+$repliesSql = $repliesCriteria->toSql();
+$c->select($modx->getSelectColumns('disPost','disPost'));
+$c->select('('.$repliesSql.') AS `replies`');
 if (!empty($userId)) {
-    $c->leftJoin('disUserNotification','Notifications','`disPost`.`id` = `Notifications`.`post` AND `Notifications`.`user` = '.$userId);
-    $otherSelect = ', `Notifications`.`user` AS `notification`';
+    $c->leftJoin('disUserNotification','Notifications',''
+            .$modx->getSelectColumns('disPost','disPost','',array('id')).' = '.$modx->getSelectColumns('disUserNotification','Notifications','',array('post'))
+            .' AND '.$modx->getSelectColumns('disUserNotification','Notifications','',array('user')).' = '.$userId);
+    $c->select($modx->getSelectColumns('disUserNotification','Notifications','',array('user')).' AS `notification`');
 }
-$c->select('
-    `disPost`.*,
-    (SELECT COUNT(*) FROM '.$modx->getTableName('disPostClosure').'
-     WHERE
-        `ancestor` = `disPost`.`id`
-    AND `descendant` != `disPost`.`id`) AS `replies`'.$otherSelect);
 $c->where(array(
-    'id' => $thread,
+    'disPost.id' => $thread,
 ));
 $thread = $modx->getObject('disPost',$c);
 if ($thread === null) $modx->sendErrorPage();
