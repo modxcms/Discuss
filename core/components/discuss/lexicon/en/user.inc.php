@@ -53,6 +53,7 @@ $_lang['discuss.register_err_ns_username'] = 'Please specify a valid username.';
 $_lang['discuss.register_err_ns_password'] = 'Please specify a valid password.';
 $_lang['discuss.register_err_password_confirm'] = 'Please confirm your password.';
 $_lang['discuss.register_err_password_match'] = 'Your passwords do not match.';
+$_lang['discuss.register_err_username_reserved'] = 'This username is reserved by the system. Please choose another.';
 $_lang['discuss.registered_msg'] = 'You have been registered. A confirmation email will shortly be emailed to you. Please follow the instructions contained in the email to activate your account.';
 $_lang['discuss.show_email_public'] = 'Show Email to Public?';
 $_lang['discuss.show_online_status'] = 'Show Online Status?';

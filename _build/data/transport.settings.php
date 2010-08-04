@@ -215,6 +215,15 @@ $settings['discuss.num_recent_posts']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
+$settings['discuss.reserved_usernames']= $modx->newObject('modSystemSetting');
+$settings['discuss.reserved_usernames']->fromArray(array(
+    'key' => 'discuss.reserved_usernames',
+    'value' => 'admin,abc,administrator,superuser,root',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Security',
+),'',true,true);
+
 $settings['discuss.show_whos_online']= $modx->newObject('modSystemSetting');
 $settings['discuss.show_whos_online']->fromArray(array(
     'key' => 'discuss.show_whos_online',

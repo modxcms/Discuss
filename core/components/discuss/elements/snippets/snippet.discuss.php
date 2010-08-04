@@ -1,10 +1,11 @@
 <?php
 /**
- *
+ * Main front page snippet
+ * 
  * @package discuss
  */
-require_once $modx->getOption('discuss.core_path').'model/discuss/discuss.class.php';
-$discuss = new Discuss($modx,$scriptProperties);
+$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
+if (!($discuss instanceof Discuss)) return '';
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('home');
 
@@ -17,9 +18,7 @@ $cssUnreadCls = $modx->getOption('cssUnreadCls',$scriptProperties,'dis-unread');
 $lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
 $postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 
-$_groups = implode(',',$modx->user->getUserGroups());
-
-$modx->setLogTarget('ECHO');
+$_groups = $modx->user->getUserGroups();
 
 /* begin query build */
 
@@ -53,7 +52,7 @@ $sbCriteria->select(array(
 $sbCriteria->innerJoin('disBoardClosure','subBoardClosure','`subBoardClosure`.`ancestor` = `subBoard`.`id`');
 $sbCriteria->innerJoin('disBoard','subBoardClosureBoard','`subBoardClosureBoard`.`id` = `subBoardClosure`.`descendant`');
 $sbCriteria->innerJoin('disBoardUserGroup','subBoardUserGroups','(`subBoardUserGroups`.`usergroup` IS NULL '.(empty($_groups) ? '' : '
-    OR `subBoardUserGroups`.`usergroup` IN ('.$_groups.')
+    OR `subBoardUserGroups`.`usergroup` IN ('.implode(',',$_groups).')
 ').')');
 $sbCriteria->where(array(
     '`subBoard`.`id` = `disBoard`.`id`',
@@ -66,8 +65,10 @@ $sbSql = $sbCriteria->toSql();
 
 /* create main query */
 $c = $modx->newQuery('disBoard');
+$c->select(array(
+    'disBoard.*',
+));
 $c->select('
-    `disBoard`.*,
     `Category`.`name` AS `category_name`,
     ('.$unreadSql.') AS `unread`,
     ('.$sbSql.') AS `subboards`,
@@ -88,7 +89,7 @@ $where = array(
 $g = array();
 if (!empty($_groups)) {
     $g = array(
-        '`UserGroups`.`usergroup` IN ('.$_groups.')',
+        'UserGroups.usergroup' => $_groups,
     );
 }
 $g['OR:UserGroups.usergroup:='] = null;

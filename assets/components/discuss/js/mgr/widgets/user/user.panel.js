@@ -40,31 +40,31 @@ Dis.panel.User = function(config) {
                     ,fieldLabel: 'First Name'
                     ,name: 'name_first'
                     ,width: 250
-                    ,allowBlank: false
+                    ,allowBlank: true
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: 'Last Name'
                     ,name: 'name_last'
                     ,width: 250
-                    ,allowBlank: false
+                    ,allowBlank: true
                 },{
                     xtype: 'datefield'
                     ,fieldLabel: 'Birthdate'
                     ,name: 'birthdate'
                     ,width: 250
-                    ,allowBlank: false
+                    ,allowBlank: true
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: 'Website'
                     ,name: 'website'
                     ,width: 250
-                    ,allowBlank: false
+                    ,allowBlank: true
                 },{
                     xtype: 'textfield'
                     ,fieldLabel: 'Location'
                     ,name: 'location'
                     ,width: 250
-                    ,allowBlank: false
+                    ,allowBlank: true
                 },{
                     xtype: 'textarea'
                     ,fieldLabel: 'Signature'

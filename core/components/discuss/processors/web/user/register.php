@@ -32,10 +32,21 @@ if ($modx->getOption('discuss.use_stopforumspam',null,true)) {
     }
 }
 
+$reservedUsernames = $modx->getOption('discuss.reserved_usernames',null,'admin,abc,administrator,superuser,root');
+if (!empty($reservedUsernames)) {
+    $reservedUsernames = explode(',',$reservedUsernames);
+    if (in_array($_POST['username'],$reservedUsernames)) {
+        $errors['username'] = $modx->lexicon($modx->lexicon('discuss.register_err_username_reserved'));
+    }
+}
+
 /* make sure user does not already exist with that username */
 $c = $modx->newQuery('modUser');
-$c->select('modUser.*,Profile.email AS email');
-$c->leftJoin('disUserProfile','Profile','Profile.user = modUser.id');
+$c->select(array(
+    'modUser.*',
+    'Profile.email',
+));
+$c->leftJoin('disUserProfile','Profile','`Profile`.`user` = `modUser`.`id`');
 $c->where(array(
     'username' => $_POST['username'],
 ));

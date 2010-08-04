@@ -1,6 +1,7 @@
 <?php
 /**
- *
+ * Presents the Register form
+ * 
  * @package discuss
  */
 require_once $modx->getOption('discuss.core_path').'model/discuss/discuss.class.php';
