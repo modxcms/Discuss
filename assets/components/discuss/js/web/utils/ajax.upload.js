@@ -57,10 +57,11 @@ function removeClass(ele,cls) {
 }
 
 // getOffset function copied from jQuery lib (http://jquery.com/)
+var getOffset;
 if (document.documentElement["getBoundingClientRect"]){
     // Get Offset using getBoundingClientRect
     // http://ejohn.org/blog/getboundingclientrect-is-awesome/
-    var getOffset = function(el){
+    getOffset = function(el){
         var box = el.getBoundingClientRect(),
         doc = el.ownerDocument,
         body = doc.body,
@@ -96,7 +97,7 @@ if (document.documentElement["getBoundingClientRect"]){
     
 } else {
     // Get offset adding all offsets 
-    var getOffset = function(el){
+    getOffset = function(el){
         if (w.jQuery){
             return jQuery(el).offset();
         }       

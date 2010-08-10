@@ -82,7 +82,7 @@
 .dis-code pre {
     margin: 0;
     padding: 2px 10px;
-    background-color: lightgray;
+    background-color: #ccc;
     font-size: 12px;
     font-family: LiberationMono, consolas, monaco, 'courier new', courier, monospace;
     }

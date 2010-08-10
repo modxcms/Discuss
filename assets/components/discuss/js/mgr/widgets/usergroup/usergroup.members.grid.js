@@ -70,6 +70,7 @@ Ext.extend(Dis.grid.UserGroupMembers,MODx.grid.LocalGrid,{
                 'success': {fn:function(r) { this.refresh(); },scope:this}
             }
         });
+        return true;
     }
 });
 Ext.reg('dis-grid-usergroup-members',Dis.grid.UserGroupMembers);
@@ -113,6 +114,7 @@ Ext.extend(Dis.window.AddUserGroupMember,MODx.Window,{
         } else {
             MODx.msg.alert(_('error'),'Please select a user.');
         }
+        return true;
     }
 });
 Ext.reg('dis-window-usergroup-member-create',Dis.window.AddUserGroupMember);

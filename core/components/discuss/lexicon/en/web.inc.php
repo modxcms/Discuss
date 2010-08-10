@@ -8,6 +8,7 @@ $_lang['discuss.author'] = 'Author';
 $_lang['discuss.board_no_threads'] = 'There are currently no threads for this board.';
 $_lang['discuss.board_readers_viewing'] = '[[+readers]] are viewing this board.';
 $_lang['discuss.board_post_stats'] = '[[+posts]] posts, [[+topics]] topics, [[+unread]] unread';
+$_lang['discuss.board_viewing'] = '[[+members]] and [[+guests]] guests are viewing this thread.';
 $_lang['discuss.by'] = 'by [[+author]]';
 $_lang['discuss.cancel'] = 'Cancel';
 $_lang['discuss.close'] = 'Close';

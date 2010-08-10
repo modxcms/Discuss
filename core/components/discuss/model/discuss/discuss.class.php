@@ -364,7 +364,7 @@ class Discuss {
     /**
      * Builds action button HTML.
      *
-     * @todo chunk/tpl-ize this
+     * TODO: chunk/tpl-ize this
      *
      * @access public
      * @return string The HTML for the action buttons

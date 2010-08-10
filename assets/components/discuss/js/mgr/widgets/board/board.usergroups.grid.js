@@ -89,6 +89,7 @@ Ext.extend(Dis.window.CreateBoardAccess,MODx.Window,{
         } else {
             MODx.msg.alert(_('error'),'Please select a usergroup.');
         }
+        return true;
     }
 });
 Ext.reg('dis-window-board-usergroup-create',Dis.window.CreateBoardAccess);

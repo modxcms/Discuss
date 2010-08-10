@@ -7,4 +7,4 @@ Ext.extend(Dis,Ext.Component,{
 });
 Ext.reg('discuss',Dis);
 
-var Dis = new Dis();
+Dis = new Dis();

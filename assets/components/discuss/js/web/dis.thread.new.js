@@ -21,6 +21,7 @@ DIS.NewThread = function() {
                     if (r.success == false) { DIS._showError(r.message); return false; }
                     
                     $('#dis-new-thread-preview').hide().html(r.message).fadeIn();
+                    return true;
                 }
             });
             $.ajax(a);

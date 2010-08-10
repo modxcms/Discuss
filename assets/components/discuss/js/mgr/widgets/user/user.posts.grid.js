@@ -81,6 +81,7 @@ Ext.extend(Dis.grid.UserPosts,MODx.grid.Grid,{
                 'success': {fn:function(r) { this.refresh(); },scope:this}
             }
         });
+        return true;
     }
 });
 Ext.reg('dis-grid-user-posts',Dis.grid.UserPosts);

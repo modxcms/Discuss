@@ -179,7 +179,7 @@ if ($modx->user->isAuthenticated()) {
         $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&amp;sticky=1', 'text' => $modx->lexicon('discuss.thread_stick'));
     }
     /**
-     * TODO: Merge thread
+     * TODO: Merge thread - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_merge'));
      */
 }

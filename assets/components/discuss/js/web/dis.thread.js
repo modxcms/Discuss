@@ -30,12 +30,14 @@ DIS.Thread = function() {
                         postCount = r.message;
                     }
                     setTimeout('DIS.Thread.pollPosts();',DIS.config.pollingInterval);
+                    return true;
                 }
             });
             $.ajax(a);
         }
         
         ,displayRefreshMessage: function(d) {
+            /* TODO: move html to a chunk */
             $('.dis-poll-refresh').html('There have been '+d+' new posts since you last reloaded. Please ' +
                     '<a href="javascript:void(0);" onclick="DIS.Thread.reloadThread();">click here</a> ' +
                     'to refresh.').fadeIn();
@@ -54,6 +56,7 @@ DIS.Thread = function() {
                     
                     $('#dis-thread').hide().html(r.message).slideDown();
                     $('.dis-poll-refresh').fadeOut();
+                    return true;
                 }
             });
             $.ajax(a);
@@ -87,6 +90,7 @@ DIS.Thread = function() {
                     
                     $('#dis-post-reply-'+id).hide().html(r.message).slideDown();
                     $('#dis-reply-form-'+id+' textarea').focus();
+                    return true;
                 }
             });
             $.ajax(a);
@@ -113,6 +117,7 @@ DIS.Thread = function() {
                     $('.dis-author-post-count').html((ct+1));
                     DIS.Thread.hideReplyForm(id);
                     DIS.Thread.init();
+                    return true;
                 }
             });
             $.ajax(a);
@@ -146,6 +151,7 @@ DIS.Thread = function() {
                         if (p['parent'] == 0) {
                             location.href = p.url;
                         }
+                        return true;
                     }
                 });
                 $.ajax(a);

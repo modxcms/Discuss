@@ -107,6 +107,7 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
                 'success': {fn:function(r) { this.refresh(); },scope:this}
             }
         });
+        return true;
     }
     
     
@@ -120,6 +121,7 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
             });
         }
         this.windows.createCategory.show(e.target);
+        return true;
     }
     
     ,removeCategory: function(btn,e) {
@@ -136,6 +138,7 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
                 'success': {fn:function(r) { this.refresh(); },scope:this}
             }
         });
+        return true;
     }
     
     ,_handleDrag: function(dropEvent) {

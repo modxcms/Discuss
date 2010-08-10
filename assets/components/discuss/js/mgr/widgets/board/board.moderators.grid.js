@@ -90,6 +90,7 @@ Ext.extend(Dis.window.CreateBoardModerator,MODx.Window,{
         } else {
             MODx.msg.alert(_('error'),'Please select a user.');
         }
+        return true;
     }
 });
 Ext.reg('dis-window-board-moderator-create',Dis.window.CreateBoardModerator);

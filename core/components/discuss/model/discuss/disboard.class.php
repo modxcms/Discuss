@@ -153,8 +153,6 @@ class disBoard extends xPDOSimpleObject {
     /**
      * Grab the viewing text for the board.
      *
-     * @todo i18n this
-     *
      * @access public
      * @return string The text returned for the viewing users.
      */
@@ -187,7 +185,7 @@ class disBoard extends xPDOSimpleObject {
         ));
         $guests = $this->xpdo->getCount('disSession',$c);
 
-        return $members.' and '.$guests.' guests are viewing this board.';
+        return $this->xpdo->lexicon('discuss.board_viewing',array('members' => $members,'guests' => $guests));
     }
 
     /**

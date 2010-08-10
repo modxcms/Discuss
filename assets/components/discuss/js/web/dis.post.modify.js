@@ -11,6 +11,7 @@ var DISModifyPost = {
                 if (r.success == false) { DIS._showError(r.message); return false; }
                 
                 $('#dis-modify-post-preview').hide().html(r.message).fadeIn();
+                return true;
             }
         });
         $.ajax(a);
