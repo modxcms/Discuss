@@ -15,23 +15,25 @@ $start = !empty($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 
 $cssRowCls = $modx->getOption('cssRowCls',$scriptProperties,'dis-board-li');
 $rowTpl = $modx->getOption('rowTpl',$scriptProperties,'disPostLi');
+$sortBy = $modx->getOption('sortBy',$scriptProperties,'createdon');
+$sortDir = $modx->getOption('sortDir',$scriptProperties,'ASC');
 
 /* get unread posts */
 $c = $modx->newQuery('disPost');
 $c->select('
-    disPost.*,
-    Board.name AS board_name,
-    Author.username AS author_username,
-    Thread.title AS thread_title
+    `disPost`.*,
+    `Board`.`name` AS `board_name`,
+    `Author`.`username` AS `author_username`,
+    `Thread`.`title` AS `thread_title`
 ');
 $c->innerJoin('disPost','Thread');
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('modUser','Author');
 $c->leftJoin('disPostRead','PostReads');
 $c->where(array(
-    'PostReads.post IS NULL',
+    'PostReads.post' => null,
 ));
-$c->sortby('createdon','DESC');
+$c->sortby($sortBy,$sortDir);
 $c->groupby('thread');
 $c->limit($limit,$start);
 $unreadPosts = $modx->getCollection('disPost',$c);
@@ -42,9 +44,9 @@ foreach ($unreadPosts as $post) {
     $pa['class'] = $cssRowCls;
     $pa['title'] = $post->get('thread_title');
 
-    $rps[] = $discuss->getChunk($rowTpl,$pa);
+    $posts[] = $discuss->getChunk($rowTpl,$pa);
 }
-$properties['posts'] = implode("\n",$rps);
+$properties['posts'] = implode("\n",$posts);
 
 /* get board breadcrumb trail */
 $trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">[[++discuss.forum_title]]</a> / ';
