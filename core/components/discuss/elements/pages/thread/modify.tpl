@@ -21,7 +21,7 @@
     
    
     <label class="dis-cb"><input type="checkbox" name="locked" value="1" />[[%discuss.thread_lock? &namespace=`discuss` &topic=`web`]]</label>
-    <label class="dis-cb"><input type="checkbox" name="sticky" value="1" />[[%discuss.thread_sticky]]</label>
+    <label class="dis-cb"><input type="checkbox" name="sticky" value="1" />[[%discuss.thread_stick]]</label>
 
     <br class="clear" />
     <div class="dis-form-buttons">

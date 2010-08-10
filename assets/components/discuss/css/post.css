@@ -14,12 +14,13 @@
     }
 .dis-post h3 {
     background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid #ccc;
     color: white;
     background-color: #b1d095;
     padding: 3px 5px;
     margin: 0;
     cursor: pointer;
+    border: 0;
 }
 .dis-post-header {  
     background-color: #eaeaea;
@@ -35,8 +36,18 @@
 .dis-post-footer {
     font-size: 11px;
     }
-.dis-post-ip { float: right; }
-.dis-post-attachments { float: left; margin-left: 4px; border-top: 1px solid #ddd; padding: 1px; }
+.dis-post-ip { 
+    float: right;
+}
+.dis-post-ip a {
+    padding: 4px;
+    margin: 0 3px;
+}
+.dis-post-reply {
+    float: left;
+    padding: 1px 0 1px 4px;
+}
+.dis-post-attachments { float: left; clear: left; margin-left: 4px; border-top: 1px solid #ddd; padding: 1px; }
 .dis-post-attachments ul {
     list-style-type: none;
     margin: 0;
@@ -85,9 +96,10 @@
     display: block;
     float: right;
     font-size: 11px;
-    margin: 2px 3px;
+    margin: 0 3px;
     color: #23281f;
-    
+    color: #5A8F34;
+    font-weight: bold;
 }
     
 /* thread view */
@@ -98,6 +110,7 @@ ol.dis-board-thread {
     padding: 0;
     margin: 10px 0 10px 20px;
     background-color: white;
+    border-radius: 0 4px 4px;
 }
 
 ol.dis-board-thread li {

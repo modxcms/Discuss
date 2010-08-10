@@ -33,4 +33,8 @@ Where the include snippet is just:
 
 `<?php $o = include $file; return $o; ?>`
 
+If you further want to work on the content within a Resource, simply replace the
+entire Resource with that snippet call, and set the System Setting 'discuss.debug'
+to 1.
+
 And that's it!

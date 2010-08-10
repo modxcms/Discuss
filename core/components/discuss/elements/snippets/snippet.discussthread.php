@@ -152,7 +152,9 @@ if ($modx->user->isAuthenticated()) {
     if (!$thread->get('notification')) {
         $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&notify=1', 'text' => $modx->lexicon('discuss.notify'));
     }
-    $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
+    /* TODO: Send thread by email - 1.1
+     * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
+     */
     $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.print'));
 }
 $properties['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
@@ -161,7 +163,9 @@ unset($actionButtons);
 /* thread action buttons */
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {
-    $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
+    /** TODO: Move thread - 1.1
+     * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
+     */
     $actionButtons[] = array('url' => '[[~[[++discuss.thread_remove_resource]]]]?thread=[[+id]]', 'text' => $modx->lexicon('discuss.thread_remove'));
 
     if ($thread->get('locked')) {
@@ -174,7 +178,10 @@ if ($modx->user->isAuthenticated()) {
     } else {
         $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&amp;sticky=1', 'text' => $modx->lexicon('discuss.thread_stick'));
     }
-    $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_merge'));
+    /**
+     * TODO: Merge thread
+     * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_merge'));
+     */
 }
 $properties['threadactionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
