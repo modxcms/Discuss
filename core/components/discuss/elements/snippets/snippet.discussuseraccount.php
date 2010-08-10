@@ -68,6 +68,8 @@ if (!empty($properties['show_email'])) { $properties['show_email'] = ' checked="
 if (!empty($properties['show_online'])) { $properties['show_online'] = ' checked="checked"'; }
 
 /* do output */
+$properties['canEdit'] = $modx->user->get('username') == $user->get('username');
+$properties['canAccount'] = $modx->user->get('username') == $user->get('username');
 $modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$properties));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 

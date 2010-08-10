@@ -29,6 +29,8 @@ $placeholders['topics'] = $modx->getCount('disPost',array(
 ));
 
 /* do output */
+$placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
 $modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$placeholders));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 

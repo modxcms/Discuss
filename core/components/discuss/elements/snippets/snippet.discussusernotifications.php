@@ -61,8 +61,10 @@ foreach ($notifications as $notification) {
 
 
 /* output */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/user/dis.user.notifications.js');
+$placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
 $modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$placeholders));
 $modx->setPlaceholder('discuss.user',$user->get('username'));
+$modx->regClientStartupScript($discuss->config['jsUrl'].'web/user/dis.user.notifications.js');
 
 return $discuss->output('user/notifications',$placeholders);

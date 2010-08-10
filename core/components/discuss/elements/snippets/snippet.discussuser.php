@@ -80,6 +80,8 @@ $properties['recentPosts'] = implode("\n",$rps);
 
 
 /* do output */
+$properties['canEdit'] = $modx->user->get('username') == $user->get('username');
+$properties['canAccount'] = $modx->user->get('username') == $user->get('username');
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 $modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$properties));
 
