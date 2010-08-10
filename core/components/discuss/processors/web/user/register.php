@@ -22,16 +22,33 @@ if (empty($_POST['email'])) $errors['email'] = $modx->lexicon('discuss.register_
 if (empty($_POST['show_email'])) $_POST['show_email'] = 0;
 
 /* check for spammers with stopforumspam.com */
-if ($modx->getOption('discuss.use_stopforumspam',null,true)) {
+if ($modx->getOption('discuss.use_stopforumspam',null,true) && !empty($_POST['email'])) {
     $className = $modx->loadClass('discuss.spam.stopforumspam.disStopForumSpam',$discuss->config['modelPath'],true,true);
     if (empty($className)) $modx->log(modX::LOG_LEVEL_FATAL,'[Discuss] Could not find disStopForumSpam class!');
     $sfspam = new $className($discuss);
-    $spamResult = $sfspam->check($_SERVER['REMOTE_ADDR'],$_POST['email'],$_POST['username']);
+    $spamResult = $sfspam->check($_SERVER['REMOTE_ADDR'],$_POST['email']);
     if (!empty($spamResult)) {
         $errors['spam_empty'] = implode(' '.$modx->lexicon('discuss.spam_blocked_by_filter')." \n<br />",$spamResult).$modx->lexicon('discuss.spam_blocked_by_filter')." \n<br />";
     }
 }
 
+if ($modx->getOption('discuss.register_recaptcha',$scriptProperties,true)) {
+    $recaptcha = $modx->getService('recaptcha','reCaptcha',$discuss->config['modelPath'].'recaptcha/');
+    if (!($recaptcha instanceof reCaptcha)) {
+        $errors['recaptcha'] = $modx->lexicon('discuss.recaptcha_err_load');
+    } elseif (empty($recaptcha->config[reCaptcha::OPT_PRIVATE_KEY])) {
+        $errors['recaptcha'] = $modx->lexicon('recaptcha.no_api_key');
+    } else {
+        $response = $recaptcha->checkAnswer($_SERVER['REMOTE_ADDR'],$_POST['recaptcha_challenge_field'],$_POST['recaptcha_response_field']);
+        if (!$response->is_valid) {
+            $errors['recaptcha'] = $modx->lexicon('recaptcha.incorrect',array(
+                'error' => $response->error != 'incorrect-captcha-sol' ? $response->error : '',
+            ));
+        }
+    }
+}
+
+/* reserved usernames support */
 $reservedUsernames = $modx->getOption('discuss.reserved_usernames',null,'admin,abc,administrator,superuser,root');
 if (!empty($reservedUsernames)) {
     $reservedUsernames = explode(',',$reservedUsernames);
@@ -48,7 +65,7 @@ $c->select(array(
 ));
 $c->leftJoin('disUserProfile','Profile','`Profile`.`user` = `modUser`.`id`');
 $c->where(array(
-    'username' => $_POST['username'],
+    'modUser.username' => $_POST['username'],
 ));
 $user = $modx->getObject('modUser',$c);
 if ($user) {
@@ -66,10 +83,13 @@ if ($user) {
 
 /* if user might be registering multiple accounts, moderate */
 $moderateUser = false;
-$ip = $modx->getObject('disUserProfile',array(
-    'ip' => $_SERVER['REMOTE_ADDR'],
-    'username:!=' => $_POST['username'],
+$c = $modx->newQuery('disUserProfile');
+$c->innerJoin('modUser','User');
+$c->where(array(
+    'disUserProfile.ip' => $_SERVER['REMOTE_ADDR'],
+    'User.username:!=' => $_POST['username'],
 ));
+$ip = $modx->getObject('disUserProfile',$c);
 if ($ip) { $moderateUser = $modx->lexicon('discuss.duplicate_ip'); }
 
 $sc = $modx->user->getSessionContexts();

@@ -30,7 +30,12 @@
         <span class="error">[[+error.show_email]]</span>
     </label>
     <input type="checkbox" name="show_email" id="dis-register-show-email" value="1" [[+show_email]] />
-    
+
+    <div style="padding-left: 140px; clear:both;">
+    [[+recaptcha_html]]
+    [[+error.recaptcha]]
+    </div>
+
     <br class="clear" />
     
     [[+discuss.login_error]]

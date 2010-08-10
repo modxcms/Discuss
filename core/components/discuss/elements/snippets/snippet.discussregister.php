@@ -16,6 +16,17 @@ if ($modx->user->isAuthenticated($modx->context->get('key')) && !empty($discuss-
     $modx->sendRedirect($url);
 }
 
+/* recaptcha */
+if ($modx->getOption('discuss.register_recaptcha',$scriptProperties,true)) {
+    $recaptcha = $modx->getService('recaptcha','reCaptcha',$discuss->config['modelPath'].'recaptcha/');
+    if ($recaptcha instanceof reCaptcha) {
+        $html = $recaptcha->getHtml();
+        $placeholders['recaptcha_html'] = $html;
+    } else {
+        $placeholders['recaptcha_html'] = $modx->lexicon('discuss.recaptcha_err_load');
+    }
+}
+
 /* merge POST data */
 if (!empty($_POST)) $placeholders = array_merge($placeholders,$_POST);
 

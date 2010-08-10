@@ -89,7 +89,7 @@ foreach ($children as $child) {
     $child->markAsRead();
 }
 
-
+/* get posts */
 $postsOutput = $modx->hooks->load('post/getthread',array(
     'thread' => &$thread,
 ));

@@ -14,8 +14,8 @@ $board = $modx->getObject('disBoard',$_REQUEST['board']);
 if ($board == null) $modx->sendErrorPage();
 
 /* setup default properties */
-$limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
-$start = !empty($_REQUEST['start']) ? $_REQUEST['start'] : 0;
+$limit = $modx->getOption('limit',$_REQUEST,$modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.threads_per_page',null,20)));
+$start = $modx->getOption('start',$_REQUEST,$modx->getOption('start',$scriptProperties,0));
 
 $cssLockedThreadCls = $modx->getOption('cssLockedThreadCls',$scriptProperties,'dis-thread-locked');
 $cssStickyThreadCls = $modx->getOption('cssStickyThreadCls',$scriptProperties,'dis-thread-sticky');
@@ -25,45 +25,9 @@ $categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'disCatego
 $lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
 
 /* grab all subboards */
-$c = $modx->newQuery('disBoard');
-$c->select('disBoard.*,
-    (SELECT COUNT(*) FROM '.$modx->getTableName('disPost').' AS dp
-        WHERE
-            id NOT IN (
-                SELECT post FROM '.$modx->getTableName('disPostRead').' AS dp2
-                WHERE
-                    user = '.$modx->user->get('id').'
-                AND board = disBoard.id
-            )
-        AND board = disBoard.id
-    ) AS unread,
-    (SELECT GROUP_CONCAT(CONCAT_WS(":",subBoardClosureBoard.id,subBoardClosureBoard.name) SEPARATOR ",") AS name
-        FROM '.$modx->getTableName('disBoard').' AS subBoard
-            INNER JOIN '.$modx->getTableName('disBoardClosure').' AS subBoardClosure
-            ON subBoardClosure.ancestor = subBoard.id
-            INNER JOIN '.$modx->getTableName('disBoard').' AS subBoardClosureBoard
-            ON subBoardClosureBoard.id = subBoardClosure.descendant
-        WHERE
-            subBoard.id = disBoard.id
-        AND subBoardClosure.descendant != disBoard.id
-        AND subBoardClosure.depth = 1
-        GROUP BY subBoard.id
-    ) AS subboards,
-    LastPost.title AS last_post_title,
-    LastPost.author AS last_post_author,
-    LastPost.createdon AS last_post_createdon,
-    LastPostAuthor.username AS last_post_username
-');
-$c->innerJoin('disCategory','Category');
-$c->innerJoin('disBoardClosure','Descendants');
-$c->leftJoin('disPost','LastPost');
-$c->leftJoin('modUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
-$c->where(array(
-    'disBoard.parent' => $board->get('id'),
+$subboards = $modx->hooks->load('board/getList',array(
+    'board' => &$board,
 ));
-$c->sortby('Category.rank, disBoard.rank ASC','');
-$subboards = $modx->getCollection('disBoard',$c);
-unset($c);
 
 $subboardOutput = '';
 foreach ($subboards as $subboard) {
@@ -96,52 +60,18 @@ foreach ($subboards as $subboard) {
 unset($currentCategory,$ba,$lp,$subboard);
 
 /* get all threads in board */
-$c = $modx->newQuery('disPost');
-$c->select('
-    disPost.*,
-    Descendants.depth AS depth,
-    Author.username AS username,
-    AuthorProfile.fullname AS author_name,
-    (SELECT COUNT(*) FROM '.$modx->getTableName('disPostClosure').'
-     WHERE
-        ancestor = disPost.id
-    AND descendant != disPost.id) AS replies,
-    (SELECT COUNT(*) FROM '.$modx->getTableName('disPost').' AS dp
-        WHERE
-            id NOT IN (
-                SELECT post FROM '.$modx->getTableName('disPostRead').'
-                WHERE
-                    user = '.$modx->user->get('id').'
-                AND board = disPost.board
-            )
-        AND id IN (
-            SELECT descendant FROM '.$modx->getTableName('disPostClosure').'
-            WHERE ancestor = disPost.id
-        )
-        AND board = disPost.board
-    ) AS unread
-');
-$c->innerJoin('disPostClosure','Descendants');
-$c->innerJoin('disPostClosure','Ancestors');
-$c->innerJoin('modUser','Author');
-$c->innerJoin('modUserProfile','AuthorProfile','Author.id = AuthorProfile.internalKey');
-$c->where(array(
-    'Descendants.ancestor' => 0,
-    'Descendants.depth' => 0,
-    'disPost.board' => $board->get('id'),
+$posts = $modx->hooks->load('board/post/getList',array(
+    'board' => &$board,
 ));
-if ($modx->getOption('discuss.enable_sticky',null,true)) {
-    $c->sortby('disPost.sticky','DESC');
-}
-$c->sortby('disPost.rank','DESC');
-$c->limit($limit,$start);
-$posts = $modx->getCollection('disPost',$c);
 
 /* iterate through threads */
 $userUrl = $modx->makeUrl($modx->getOption('discuss.user_resource'));
 $pa = array();
 foreach ($posts as $post) {
-    /* get latest post in thread */
+    /* get latest post in thread
+     * TODO: eventually move this to post/getList hook, where it can be one query
+     * rather than in this foreach loop
+     */
     $c = $modx->newQuery('disPost');
     $c->select($modx->getSelectColumns('disPost','disPost','',array('id','title','createdon','author')));
     $c->select($modx->getSelectColumns('modUser','Author','',array('username')));
@@ -222,6 +152,7 @@ $c->where(array(
 $c->sortby($modx->getSelectColumns('disBoardClosure','Ancestors','',array('depth')),'DESC');
 $ancestors = $modx->getCollection('disBoard',$c);
 
+/* breadcrumbs */
 $trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">'
     .'[[++discuss.forum_title]]'
     .'</a> / ';
@@ -233,18 +164,19 @@ foreach ($ancestors as $ancestor) {
 $trail .= $board->get('name');
 $board->set('trail',$trail);
 
-$properties = $board->toArray();
-$properties['subboards'] = $subboardOutput;
-if (empty($subboardOutput)) $properties['subboards_toggle'] = 'display:none;';
+/* start placeholders */
+$placeholders = $board->toArray();
+$placeholders['subboards'] = $subboardOutput;
+if (empty($subboardOutput)) $placeholders['subboards_toggle'] = 'display:none;';
 unset($subboardOutput,$trail,$ancestors,$c);
 
 /* get viewing users */
-$properties['readers'] = $board->getViewing();
+$placeholders['readers'] = $board->getViewing();
 
 /* get pagination */
 $count = count($pa);
 $url = $modx->makeUrl($modx->getOption('discuss.board_resource'));
-$properties['pagination'] = $discuss->buildPagination($count,$limit,$start,$url);
+$placeholders['pagination'] = $discuss->buildPagination($count,$limit,$start,$url);
 unset($count,$start,$limit,$url);
 
 /* action buttons */
@@ -254,11 +186,11 @@ if ($modx->user->isAuthenticated()) {
     $actionButtons[] = array('url' => '[[~[[++discuss.board_resource]]]]?board=[[+id]]&read=1', 'text' => $modx->lexicon('discuss.mark_read'));
     $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
 }
-$properties['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
+$placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
 
 /* output */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.board.js');
 $modx->setPlaceholder('discuss.board',$board->get('name'));
-return $discuss->output('board',$properties);
+return $discuss->output('board',$placeholders);
 

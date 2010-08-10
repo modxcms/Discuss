@@ -45,6 +45,7 @@ li.dis-board-li {
     list-style: none;
     border-top: 1px solid #eee;
     padding-left: 50px;
+    padding-bottom: 5px;
     background: transparent url(../images/icons/off.png) top left no-repeat;
 }
 ol.dis-board-list li.dis-unread {
