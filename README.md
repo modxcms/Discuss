@@ -27,7 +27,7 @@ Then add these system settings:
 If you're wanting to modify the Snippets, simply replace the Discuss Snippet calls in the
 Resources with [[!include]] calls, such as this for the DiscussThread snippet:
 
-[[!include? &file=`[[++discuss.core_path]]elements/snippets/snippet.discussthread.php`]]
+[[!include? &file=\`[[++discuss.core_path]]elements/snippets/snippet.discussthread.php\`]]
 
 Where the include snippet is just:
 
