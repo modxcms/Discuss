@@ -210,7 +210,7 @@ $c->orCondition(array(
 ),null,1);
 if (!empty($_groups)) {
     $c->orCondition(array(
-        $modx->getSelectColumns('disBoardUserGroup','UserGroups','',array('usergroup')).' IN ('.$_groups.')',
+        'UserGroups.usergroup:IN' => $_groups,
     ),null,1);
 }
 $c->sortby($modx->getSelectColumns('disPost','disPost','',array('createdon')),'DESC');
