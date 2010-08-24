@@ -2,6 +2,7 @@ Changelog for Discuss.
 
 Discuss 0.1
 ====================================
+- Fixed bugs with URL generation
 - Added discuss.reserved_usernames setting
 - Fixed bugs in install resolvers
 - Added in missing DiscussRecentPosts properties to build

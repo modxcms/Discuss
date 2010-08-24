@@ -2,7 +2,7 @@
 
 <div id="dis-reply-post-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]]]?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]? &post=`[[+id]]`]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
     
@@ -21,7 +21,7 @@
     <br class="clear" />
     
     <label for="dis-reply-post-attachments">[[%discuss.attachments]]:
-        <span class="small dis-reply-post-add-attachment"><a href="[[~[[*id]]]]?post=[[+id]]">[[%discuss.attachment_add]]</a>
+        <span class="small dis-reply-post-add-attachment"><a href="[[~[[*id]]? &post=`[[+id]]`]]">[[%discuss.attachment_add]]</a>
         <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
     </label>
@@ -39,7 +39,7 @@
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.post_reply]]" />
     <input type="button" class="dis-action-btn dis-reply-post-preview" value="[[%discuss.preview]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[++discuss.thread_resource]]]]?thread=[[+thread]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[++discuss.thread_resource]]? &thread=`[[+thread]]`]]';" />
     </div>
 </form>
 

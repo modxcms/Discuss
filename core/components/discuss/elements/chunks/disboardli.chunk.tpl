@@ -4,7 +4,7 @@
     [[%discuss.board_post_stats? &posts=`[[+total_posts]]` &topics=`[[+num_topics]]` &unread=`[[+unread]]`]]
     </div>
 
-    <h3><a href="[[~[[++discuss.board_resource]]]]?board=[[+id]]">[[+name]]</a></h3>
+    <h3><a href="[[~[[++discuss.board_resource]]? &board=`[[+id]]`]]">[[+name]]</a></h3>
     <p>[[+description]]</p>
     <span class="dis-board-subs">[[+subforums]]</span>
 </li>

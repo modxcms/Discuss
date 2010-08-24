@@ -2,7 +2,7 @@
 
 <div id="dis-modify-post-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]]]?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form">
+<form action="[[~[[*id]]? &post=`[[+id]]`]]" method="post" class="dis-form" id="dis-modify-post-form">
 
     <h2>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h2>
     
@@ -27,7 +27,7 @@
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.save_changes]]" />
     <input type="button" class="dis-action-btn" id="dis-new-thread-preview-btn" value="[[%discuss.preview]]" onclick="DISModifyPost.preview();" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[++discuss.thread_resource]]]]?thread=[[+thread]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[++discuss.thread_resource]]? &thread=`[[+thread]]`]]';" />
     </div>
 </form>
 

@@ -25,8 +25,8 @@
         [[%discuss.stats_totals? &posts=`[[+totalPosts]]` &threads=`[[+totalTopics]]` &members=`[[+totalMembers]]`]]
         <br />
         [[%discuss.stats_latest_post?
-            &post=`<a href="[[~[[++discuss.thread_resource]]]]?thread=[[+latestPost.thread]]#dis-board-post-[[+latestPost.id]]">[[+latestPost.title]]</a>`
-            &by=`<a href="[[~[[++discuss.user_resource]]]]?user=[[+latestPost.author]]">[[+latestPost.username]]</a>`
+            &post=`<a href="[[~[[++discuss.thread_resource]]? &thread=`[[+latestPost.thread]]`]]#dis-board-post-[[+latestPost.id]]">[[+latestPost.title]]</a>`
+            &by=`<a href="[[~[[++discuss.user_resource]]? &user=`[[+latestPost.author]]`]]">[[+latestPost.username]]</a>`
         ]]
     </li>
     <li class="dis-board-li">

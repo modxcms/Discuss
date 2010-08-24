@@ -182,8 +182,8 @@ unset($count,$start,$limit,$url);
 /* action buttons */
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {
-    $actionButtons[] = array('url' => '[[~[[++discuss.new_thread_resource]]]]?board=[[+id]]', 'text' => $modx->lexicon('discuss.thread_new'));
-    $actionButtons[] = array('url' => '[[~[[++discuss.board_resource]]]]?board=[[+id]]&read=1', 'text' => $modx->lexicon('discuss.mark_read'));
+    $actionButtons[] = array('url' => '[[~[[++discuss.new_thread_resource]]? &board=`[[+id]]`]]', 'text' => $modx->lexicon('discuss.thread_new'));
+    $actionButtons[] = array('url' => '[[~[[++discuss.board_resource]]? &board=`[[+id]]` &read=`1`]]', 'text' => $modx->lexicon('discuss.mark_read'));
     $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');

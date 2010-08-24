@@ -1,7 +1,7 @@
 [[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 
-<form action="[[~[[*id]]]]?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
+<form action="[[~[[*id]]? &user=`[[+id]]`]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
     <h2>[[%discuss.edit_profile_for? &user=`[[+username]]` &namespace=`discuss` &topic=`user`]]</h2>
     
@@ -58,7 +58,7 @@
     
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.save_changes? &namespace=`discuss` &topic=`web`]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[++discuss.user_resource]]]]?user=[[+id]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[++discuss.user_resource]]? &user=`[[+id]]`]]" />
     </div>
 </form>
 

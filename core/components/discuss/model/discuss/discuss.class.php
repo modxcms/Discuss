@@ -135,8 +135,8 @@ class Discuss {
                 'username' => $this->user->get('username'),
                 'loggedInAs' => 'logged in as <a href="[[~[[++discuss.user_resource]]]]?user=1">[[+discuss.username]]</a> - ',
                 'homeLink' => '<a href="[[~[[++discuss.board_list_resource]]]]">Home</a>',
-                'authLink' => '<a href="[[~[[++discuss.board_list_resource]]]]?logout=1">Logout</a>',
-                'profileLink' => '<a href="[[~[[++discuss.user_resource]]]]?user='.$userId.'">Profile</a>',
+                'authLink' => '<a href="[[~[[++discuss.board_list_resource]]? &logout=`1`]]">Logout</a>',
+                'profileLink' => '<a href="[[~[[++discuss.user_resource]]? &user=`'.$userId.'`]]">Profile</a>',
                 'searchLink' => '<a href="[[~[[++discuss.search_resource]]]]">Search</a>',
                 'unreadLink' => '<a href="[[~[[++discuss.unread_posts_resource]]]]">Unread Posts</a>',
             );

@@ -148,9 +148,9 @@ $properties['readers'] = $thread->getViewing();
 /* action buttons */
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {
-    $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
+    $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]? &thread=`[[+id]]` &unread=`1`]]', 'text' => $modx->lexicon('discuss.mark_unread'));
     if (!$thread->get('notification')) {
-        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&notify=1', 'text' => $modx->lexicon('discuss.notify'));
+        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]? &thread=`[[+id]]` &notify=`1`]]', 'text' => $modx->lexicon('discuss.notify'));
     }
     /* TODO: Send thread by email - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
@@ -166,17 +166,17 @@ if ($modx->user->isAuthenticated()) {
     /** TODO: Move thread - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
      */
-    $actionButtons[] = array('url' => '[[~[[++discuss.thread_remove_resource]]]]?thread=[[+id]]', 'text' => $modx->lexicon('discuss.thread_remove'));
+    $actionButtons[] = array('url' => '[[~[[++discuss.thread_remove_resource]]? &thread=`[[+id]]`]]', 'text' => $modx->lexicon('discuss.thread_remove'));
 
     if ($thread->get('locked')) {
-        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&amp;lock=0', 'text' => $modx->lexicon('discuss.thread_unlock'));
+        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]? &thread=`[[+id]]` &lock=`0`]]', 'text' => $modx->lexicon('discuss.thread_unlock'));
     } else {
-        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&amp;lock=1', 'text' => $modx->lexicon('discuss.thread_lock'));
+        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]? &thread=`[[+id]]` &lock=`1`]]', 'text' => $modx->lexicon('discuss.thread_lock'));
     }
     if ($thread->get('sticky')) {
-        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&amp;sticky=0', 'text' => $modx->lexicon('discuss.thread_unstick'));
+        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]? &thread=`[[+id]]` &sticky=`0`]]', 'text' => $modx->lexicon('discuss.thread_unstick'));
     } else {
-        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]]]?thread=[[+id]]&amp;sticky=1', 'text' => $modx->lexicon('discuss.thread_stick'));
+        $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]? &thread=`[[+id]]` &sticky=`1`]]', 'text' => $modx->lexicon('discuss.thread_stick'));
     }
     /**
      * TODO: Merge thread - 1.1

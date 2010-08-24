@@ -27,7 +27,7 @@ foreach ($ancestors as $ancestor) {
     $trail .= '<a href="'.$url.'">'.$ancestor->get('name').'</a>';
     $trail .= ' / ';
 }
-$trail .= '<a href="[[~[[++discuss.thread_resource]]]]?thread='.$thread->get('id').'">'.$thread->get('title').'</a>';
+$trail .= '<a href="[[~[[++discuss.thread_resource]]? &thread=`'.$thread->get('id').'`]]">'.$thread->get('title').'</a>';
 $trail .= ' / '.$modx->lexicon('discuss.thread_remove');
 $thread->set('trail',$trail);
 

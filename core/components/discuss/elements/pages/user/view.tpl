@@ -1,7 +1,7 @@
 [[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 
-<form action="[[~[[*id]]]]?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
+<form action="[[~[[*id]]? &user=`[[+id]]`]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
 <h2>[[+username]]</h2>
 <table class="dis-table">

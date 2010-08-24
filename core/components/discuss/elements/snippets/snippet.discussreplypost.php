@@ -36,7 +36,7 @@ foreach ($ancestors as $ancestor) {
     $trail .= ' / ';
 }
 $trail .= $modx->lexicon('reply_to_post',array(
-    'post' => '<a href="[[~[[++discuss.thread_resource]]]]?thread='.$thread->get('id').'">'.$post->get('title').'</a>',
+    'post' => '<a href="[[~[[++discuss.thread_resource]]? &thread=`'.$thread->get('id').'`]]">'.$post->get('title').'</a>',
 ));
 $properties['trail'] = $trail;
 
