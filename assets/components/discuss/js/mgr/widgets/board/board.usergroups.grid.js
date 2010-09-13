@@ -12,12 +12,12 @@ Dis.grid.BoardUserGroups = function(config) {
         ,fields: ['id','name']
         ,autoHeight: true
         ,columns: [{
-            header: 'User Group'
+            header: _('discuss.usergroup')
             ,dataIndex: 'name'
             ,width: 600
         }]
         ,tbar: [{
-            text: 'Add User Group'
+            text: _('discuss.usergroup_add')
             ,handler: this.addUserGroup
             ,scope: this
         }]
@@ -28,10 +28,10 @@ Dis.grid.BoardUserGroups = function(config) {
 Ext.extend(Dis.grid.BoardUserGroups,MODx.grid.LocalGrid,{
     getMenu: function() {
         return [{
-            text: 'Remove User Group'
+            text: _('discuss.board_usergroup_remove')
             ,handler: this.remove.createDelegate(this,[{
-                title: 'Remove User Group Access?'
-                ,text: 'Are you sure you want to remove this User Group from accessing this Board?'
+                title: _('discuss.board_usergroup_remove_title')
+                ,text: _('discuss.board_usergroup_remove_confirm')
             }])
             ,scope: this
         }];
@@ -57,12 +57,12 @@ Dis.window.CreateBoardAccess = function(config) {
     config = config || {};
     this.ident = config.ident || 'cbacc'+Ext.id();
     Ext.applyIf(config,{
-        title: 'Add User Group Access'
+        title: _('discuss.board_usergroup_add')
         ,frame: true
         ,id: 'dis-window-board-usergroup-create'
         ,fields: [{
             xtype: 'modx-combo-usergroup'
-            ,fieldLabel: 'User Group'
+            ,fieldLabel: _('discuss.usergroup')
             ,name: 'usergroup'
             ,hiddenName: 'usergroup'
             ,id: 'dis-'+this.ident+'-usergroup'
@@ -87,7 +87,7 @@ Ext.extend(Dis.window.CreateBoardAccess,MODx.Window,{
                 return true;
             }
         } else {
-            MODx.msg.alert(_('error'),'Please select a usergroup.');
+            MODx.msg.alert(_('error'),_('discuss.usergroup_err_ns'));
         }
         return true;
     }

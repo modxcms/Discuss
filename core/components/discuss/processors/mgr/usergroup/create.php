@@ -5,21 +5,35 @@
  * @package discuss
  * @subpackage processors
  */
-
 /* validate form */
-if (empty($_POST['name'])) $modx->error->addField('name','Please specify a name.');
-$_POST['post_based'] = !empty($_POST['post_based']) ? $_POST['post_based'] : 0;
+if (empty($scriptProperties['name'])) $modx->error->addField('name',$modx->lexicon('discuss.usergroup_err_ns_name'));
 
-$usergroup = $modx->newObject('modUserGroup');
-$usergroup->set('parent',$_POST['parent']);
-$usergroup->set('name',$_POST['name']);
-if ($usergroup->save() === false) {
-    return $modx->error->failure('discuss.usergroup_err_save');
+/* check for existing */
+$alreadyExists = $modx->getObject('modUserGroup',array('name' => $scriptProperties['name']));
+if ($alreadyExists) $modx->error->addField('name',$modx->lexicon('discuss.usergroup_err_ae'));
+
+/* if any errors, return */
+if ($modx->error->hasError()) {
+    return $modx->error->failure();
 }
 
+/* create usergroup */
+$usergroup = $modx->newObject('modUserGroup');
+$usergroup->fromArray($scriptProperties);
+
+/* save usergroup */
+if ($usergroup->save() === false) {
+    return $modx->error->failure($modx->lexicon('discuss.usergroup_err_save'));
+}
+
+/* create discuss user group */
 $profile = $modx->newObject('disUserGroupProfile');
-$profile->fromArray($_POST);
+$scriptProperties['post_based'] = !empty($scriptProperties['post_based']) ? $scriptProperties['post_based'] : 0;
+$profile->fromArray($scriptProperties);
 $profile->set('usergroup',$usergroup->get('id'));
-$profile->save();
+if (!$profile->save()) {
+    $usergroup->remove();
+    return $modx->error->failure($modx->lexicon('discuss.usergroup_err_save'));
+}
 
 return $modx->error->success('',$usergroup);

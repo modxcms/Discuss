@@ -2,27 +2,21 @@
 Dis.panel.Boards = function(config) {
     config = config || {};
     Ext.apply(config,{
-        title: 'Boards'
+        title: _('discuss.boards')
         ,autoHeight: true
         ,items: [{
-            html: '<h2>Boards</h2>'
-            ,border: false
-        },{
-            html: '<p>Manage your boards.</p><br />'
+            html: '<p>'+_('discuss.boards.intro_msg')+'</p><br />'
             ,border: false
         },{
             xtype: 'dis-tree-boards'
             ,autoHeight: true
+            ,width: '97%'
         }]
     });
     Dis.panel.Boards.superclass.constructor.call(this,config);
 };
 Ext.extend(Dis.panel.Boards,MODx.Panel);
 Ext.reg('dis-panel-boards',Dis.panel.Boards);
-
-
-
-
 
 Dis.tree.Boards = function(config) {
     config = config || {};
@@ -31,15 +25,15 @@ Dis.tree.Boards = function(config) {
         ,url: Dis.config.connector_url
         ,action: 'mgr/board/getNodes'
         ,tbar: [{
-            text: 'Create Board'
+            text: _('discuss.board_create')
             ,handler: this.createBoard
             ,scope: this
         },'-',{
-            text: 'Create Category'
+            text: _('discuss.category_create')
             ,handler: this.createCategory
             ,scope: this
         },'-',{
-            text: 'Refresh'
+            text: _('discuss.refresh')
             ,handler: this.refresh
             ,scope: this
         }]
@@ -97,7 +91,7 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
         if (!this.cm.activeNode) return false;
         
         MODx.msg.confirm({
-            text: 'Are you sure you want to remove this board and all its subboards entirely?'
+            text: _('discuss.board_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'mgr/board/remove'
@@ -128,7 +122,7 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
         if (!this.cm.activeNode) return false;
         
         MODx.msg.confirm({
-            text: 'Are you sure you want to remove this category and all its boards entirely?'
+            text: _('discuss.category_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'mgr/category/remove'
@@ -161,6 +155,46 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
             }
         });
     }
+
+    ,getMenu: function(n) {
+        var a = n.attributes;
+        var m = [];
+        switch (a.classKey) {
+            case 'disBoard':
+                m.push({
+                    text: _('discuss.board_edit')
+                    ,handler: this.updateBoard
+                });
+                m.push('-');
+                m.push({
+                    text: _('discuss.board_create_here')
+                    ,handler: this.createBoard
+                });
+                m.push('-');
+                m.push({
+                    text: _('discuss.board_remove')
+                    ,handler: this.removeBoard
+                });
+                break;
+            case 'disCategory':
+                m.push({
+                    text: _('discuss.category_edit')
+                    ,handler: this.updateCategory
+                });
+                m.push('-');
+                m.push({
+                    text: _('discuss.board_create_here')
+                    ,handler: this.createBoard
+                })
+                m.push('-');
+                m.push({
+                    text: _('discuss.category_remove')
+                    ,handler: this.removeCategory
+                });
+                break;
+        }
+        return m;
+    }
 });
 Ext.reg('dis-tree-boards',Dis.tree.Boards);
 
@@ -170,7 +204,7 @@ Dis.window.CreateBoard = function(config) {
     config = config || {};
     this.ident = config.ident || 'cbrd'+Ext.id();
     Ext.applyIf(config,{
-        title: 'Create Board'
+        title: _('discuss.board_create')
         ,id: this.ident
         ,height: 150
         ,width: 475
@@ -183,7 +217,7 @@ Dis.window.CreateBoard = function(config) {
             ,id: 'dis-'+this.ident+'-name'
             ,width: 300
         },{
-            xtype: 'textfield'
+            xtype: 'hidden'
             ,name: 'parent'
             ,id: 'dis-'+this.ident+'-parent'
         },{
@@ -199,9 +233,9 @@ Dis.window.CreateBoard = function(config) {
             ,width: 300
         },{
             xtype: 'checkbox'
-            ,fieldLabel: 'Ignoreable'
+            ,fieldLabel: _('discuss.board_ignoreable')
             ,name: 'ignoreable'
-            ,description: 'If true, users can select to hide this board from their views.'
+            ,description: _('discuss.board_ignoreable_desc')
             ,id: 'dis-'+this.ident+'-ignoreable'
             ,checked: true
             ,inputValue: 1
@@ -238,9 +272,9 @@ Dis.window.CreateCategory = function(config) {
             ,width: 300
         },{
             xtype: 'checkbox'
-            ,fieldLabel: 'Collapsible'
+            ,fieldLabel: _('discuss.board_collapsible')
             ,name: 'collapsible'
-            ,description: 'If true, users can collapse the board to hide its contents.'
+            ,description: _('discuss.board_collapsible_desc')
             ,id: 'dis-'+this.ident+'-collapsible'
             ,checked: true
             ,inputValue: 1

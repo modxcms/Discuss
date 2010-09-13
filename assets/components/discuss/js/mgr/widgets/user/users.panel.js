@@ -2,13 +2,10 @@
 Dis.panel.Users = function(config) {
     config = config || {};
     Ext.apply(config,{
-        title: 'Users'
+        title: _('discuss.users')
         ,autoHeight: true
         ,items: [{
-            html: '<h2>Users</h2>'
-            ,border: false
-        },{
-            html: '<p>Manage users.</p><br />'
+            html: '<p>'+_('discuss.users.intro_msg')+'</p><br />'
             ,border: false
         },{
             xtype: 'dis-grid-users'
@@ -35,19 +32,19 @@ Dis.grid.Users = function(config) {
         ,remoteSort: true
         ,width: '95%'
         ,columns: [{
-            header: 'ID'
+            header: _('id')
             ,dataIndex: 'id'
             ,sortable: true
             ,width: 300
         },{
-            header: 'Username'
+            header: _('discuss.username')
             ,dataIndex: 'username'
             ,sortable: true
             ,width: 300
             ,editor: { xtype: 'textfield' ,allowBlank: true }
         }]
         ,tbar: [{
-            text: 'Create User'
+            text: _('discuss.user_create')
             ,handler: this.createUser
             ,scope: this
         }]
@@ -55,10 +52,24 @@ Dis.grid.Users = function(config) {
     Dis.grid.Users.superclass.constructor.call(this,config)
 };
 Ext.extend(Dis.grid.Users,MODx.grid.Grid,{
-    removeUser: function() {        
+
+    getMenu: function() {
+        var m = [];
+        m.push({
+            text: _('discuss.user_update')
+            ,handler: this.updateUser
+        });
+        m.push('-');
+        m.push({
+            text: _('discuss.user_remove')
+            ,handler: this.removeUser
+        });
+        this.addContextMenuItem(m);
+    }
+    ,removeUser: function() {
         MODx.msg.confirm({
             title: _('warning')
-            ,text: 'Are you sure you want to remove this user?'
+            ,text: _('discuss.user_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'mgr/user/remove'

@@ -5,12 +5,10 @@
  * @package discuss
  * @subpackage processors
  */
-
-$data = urldecode($_POST['data']);
+$data = urldecode($scriptProperties['data']);
 $data = $modx->fromJSON($data);
 $nodes = array();
 getNodesFormatted($nodes,$data);
-
 
 /* readjust cache */
 foreach ($nodes as $nodeArray) {

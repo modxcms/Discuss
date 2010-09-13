@@ -1,41 +1,33 @@
 <?php
 /**
- * Get a list of Categories
+ * Get a list of Posts for a User
  *
  * @package discuss
  * @subpackage processors
  */
-$limit = isset($_REQUEST['limit']);
-$combo = isset($_REQUEST['combo']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'title';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+$isLimit = !empty($scriptProperties['limit']);
+$isCombo = !empty($scriptProperties['combo']);
+$sort = $modx->getOption('sort',$scriptProperties,'title');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,20);
+$user = $modx->getOption('user',$scriptProperties,0);
+if (empty($user)) return $modx->error->failure($modx->lexicon('discuss.user_err_ns'));
 
 $c = $modx->newQuery('disPost');
 $c->where(array(
-    'author' => $_REQUEST['user'],
+    'author' => $user,
 ));
 $count = $modx->getCount('disPost',$c);
-if ($combo || $limit) {
-    $c->limit($_REQUEST['limit'], $_REQUEST['start']);
+if ($isCombo || $isLimit) {
+    $c->limit($limit,$start);
 }
-$c->sortby($_REQUEST['sort'],$_REQUEST['dir']);
+$c->sortby($sort,$dir);
 $posts = $modx->getCollection('disPost', $c);
 
 $list = array();
 foreach ($posts as $post) {
     $postArray = $post->toArray();
-    $postArray['menu'] = array();
-    $postArray['menu'][] = array(
-        'text' => 'Modify Post',
-        'handler' => 'this.updatePost',
-    );
-    $postArray['menu'][] = '-';
-    $postArray['menu'][] = array(
-        'text' => 'Remove Post',
-        'handler' => 'this.removePost',
-    );
     $list[]= $postArray;
 }
 return $this->outputArray($list,$count);

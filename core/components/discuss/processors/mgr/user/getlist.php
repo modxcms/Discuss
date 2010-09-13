@@ -26,15 +26,6 @@ $list = array();
 foreach ($users as $user) {
     $userArray = $user->toArray();
     $userArray['menu'] = array();
-    $userArray['menu'][] = array(
-        'text' => 'Update User',
-        'handler' => 'this.updateUser',
-    );
-    $userArray['menu'][] = '-';
-    $userArray['menu'][] = array(
-        'text' => 'Remove User',
-        'handler' => 'this.removeUser',
-    );
     $list[]= $userArray;
 }
 return $this->outputArray($list,$count);

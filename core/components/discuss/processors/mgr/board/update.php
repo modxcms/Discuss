@@ -4,20 +4,20 @@
  * @subpackage processors
  */
 /* get board */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('discuss.board_err_ns'));
-$board = $modx->getObject('disBoard',$_POST['id']);
-if ($board == null) return $modx->error->failure($modx->lexicon('discuss.board_err_nf'));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.board_err_ns'));
+$board = $modx->getObject('disBoard',$scriptProperties['id']);
+if (!$board) return $modx->error->failure($modx->lexicon('discuss.board_err_nf'));
 
 /* do validation */
-if (empty($_POST['name'])) $modx->error->addField('name','Please enter a valid name.');
-if (empty($_POST['category'])) $modx->error->addField('category','Please select a Category for this Board to belong in.');
+if (empty($scriptProperties['name'])) $modx->error->addField('name',$modx->lexicon('discuss.board_err_ns_name'));
+if (empty($scriptProperties['category'])) $modx->error->addField('category',$modx->lexicon('discuss.board_err_ns_category'));
 
 if ($modx->error->hasError()) {
     $modx->error->failure();
 }
 
 /* set fields */
-$board->fromArray($_POST);
+$board->fromArray($scriptProperties);
 
 /* save board */
 if ($board->save() == false) {
@@ -25,12 +25,12 @@ if ($board->save() == false) {
 }
 
 /* set moderators */
-if (isset($_POST['moderators'])) {
+if (isset($scriptProperties['moderators'])) {
     $mods = $modx->getCollection('disModerator',array('board' => $board->get('id')));
     foreach ($mods as $mod) { $mod->remove(); }
     unset($mods,$mod);
 
-    $moderators = $modx->fromJSON($_POST['moderators']);
+    $moderators = $modx->fromJSON($scriptProperties['moderators']);
     foreach ($moderators as $user) {
         $moderator = $modx->newObject('disModerator');
         $moderator->set('board',$board->get('id'));
@@ -41,12 +41,12 @@ if (isset($_POST['moderators'])) {
 
 
 /* set user groups */
-if (isset($_POST['usergroups'])) {
+if (isset($scriptProperties['usergroups'])) {
     $usergroups = $modx->getCollection('disBoardUserGroup',array('board' => $board->get('id')));
     foreach ($usergroups as $usergroup) { $usergroup->remove(); }
     unset($usergroups,$usergroup);
 
-    $usergroups = $modx->fromJSON($_POST['usergroups']);
+    $usergroups = $modx->fromJSON($scriptProperties['usergroups']);
     foreach ($usergroups as $usergroup) {
         $access = $modx->newObject('disBoardUserGroup');
         $access->set('board',$board->get('id'));

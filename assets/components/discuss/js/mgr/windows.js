@@ -4,7 +4,7 @@ Dis.window.UpdatePost = function(config) {
     config = config || {};
     this.ident = config.ident || 'updpost'+Ext.id();
     Ext.applyIf(config,{
-        title: 'Update Post'
+        title: _('discuss.post_modify')
         ,id: this.ident
         ,height: 150
         ,width: 565
@@ -19,44 +19,44 @@ Dis.window.UpdatePost = function(config) {
             ,width: 300
         },{
             xtype: 'textfield'
-            ,fieldLabel: 'Title'
+            ,fieldLabel: _('discuss.post_title')
             ,name: 'title'
             ,id: 'dis-'+this.ident+'-title'
             ,width: 300
         },{
             xtype: 'modx-combo-user'
-            ,fieldLabel: 'Author'
+            ,fieldLabel: _('discuss.post_author')
             ,name: 'author'
             ,id: 'dis-'+this.ident+'-author'
             ,width: 300
         },{
             xtype: 'textarea'
-            ,fieldLabel: 'Message'
+            ,fieldLabel: _('discuss.post_message')
             ,name: 'message'
             ,id: 'dis-'+this.ident+'-message'
             ,width: 400
             ,grow: true
         },{
             xtype: 'checkbox'
-            ,fieldLabel: 'Sticky'
+            ,fieldLabel: _('discuss.post_sticky')
+            ,description: _('discuss.post_sticky_desc')
             ,name: 'sticky'
-            ,description: 'If true, the post will appear at the beginning of a board.'
             ,id: 'dis-'+this.ident+'-sticky'
             ,checked: false
             ,inputValue: 1
         },{
             xtype: 'checkbox'
-            ,fieldLabel: 'Locked'
+            ,fieldLabel: _('discuss.post_locked')
+            ,description: _('discuss.post_locked_desc')
             ,name: 'locked'
-            ,description: 'If true, this post cannot be replied to or edited.'
             ,id: 'dis-'+this.ident+'-locked'
             ,checked: false
             ,inputValue: 1
         },{
             xtype: 'checkbox'
-            ,fieldLabel: 'Allow Replies'
+            ,fieldLabel: _('discuss.post_allow_replies')
+            ,description: _('discuss.post_allow_replies_desc')
             ,name: 'allow_replies'
-            ,description: 'If false, no replies can be posted to this post.'
             ,id: 'dis-'+this.ident+'-allow-replies'
             ,checked: true
             ,inputValue: 1

@@ -5,14 +5,14 @@ Dis.panel.Board = function(config) {
         ,url: Dis.config.connector_url
         ,baseParams: {}
         ,items: [{
-            html: '<h2>'+'New Board'+'</h2>'
+            html: '<h2>'+_('discuss.board_new')+'</h2>'
             ,border: false
             ,id: 'dis-board-name'
             ,cls: 'modx-page-header'
         },{
             xtype: 'modx-tabs'
             ,deferredRender: false
-            ,defaults: { autoHeight: true ,bodyStyle: 'padding: 1em;' }
+            ,defaults: { autoHeight: true ,bodyStyle: 'padding: 11px;' }
             ,border: true
             ,items: [{
                 title: _('general_information')
@@ -28,32 +28,32 @@ Dis.panel.Board = function(config) {
                     xtype: 'textfield'
                     ,fieldLabel: _('name')
                     ,name: 'name'
-                    ,width: 250
+                    ,width: 300
                     ,allowBlank: false
                 },{
                     xtype: 'dis-combo-category'
-                    ,fieldLabel: 'Category'
+                    ,fieldLabel: _('discuss.category')
                     ,name: 'category'
-                    ,width: 250
+                    ,width: 300
                     ,allowBlank: false
                 },{
                     xtype: 'textarea'
-                    ,fieldLabel: 'Description'
+                    ,fieldLabel: _('description')
                     ,name: 'description'
                     ,width: 500
-                    ,grow: true
                 },{
                     xtype: 'checkbox'
-                    ,fieldLabel: 'Ignoreable'
+                    ,fieldLabel: _('discuss.board_ignoreable')
+                    ,description: _('discuss.board_ignoreable_desc')
                     ,name: 'ignoreable'
                     ,labelSeparator: ''
                     ,inputValue: 1
                 }]
             },{
-                title: 'Moderators'
+                title: _('discuss.moderators')
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>'+'This is a list of all the Moderators for this current board.'+'</p>'
+                    html: '<p>'+_('discuss.board_moderators_msg')+'</p>'
                     ,border: false
                 },{
                     xtype: 'dis-grid-board-moderators'
@@ -62,10 +62,10 @@ Dis.panel.Board = function(config) {
                     ,width: '97%'
                 }]
             },{
-                title: 'User Group Access'
+                title: _('discuss.usergroup_access')
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>'+'This is a list of all the User Groups that can access this current board. If none are specified, the Board will be globally accessible.'+'</p>'
+                    html: '<p>'+_('discuss.board_usergroups_msg')+'</p>'
                     ,border: false
                 },{
                     xtype: 'dis-grid-board-usergroups'
@@ -116,7 +116,7 @@ Ext.extend(Dis.panel.Board,MODx.FormPanel,{
         });
     }
     ,success: function(o) {
-        if (!this.config['board']) { 
+        if (Ext.isEmpty(this.config['board'])) {
             location.href = '?a='+Dis.request.a+'&action=board/update&board='+o.result.object.id;
         } else {
             Ext.getCmp('dis-btn-save').setDisabled(false);

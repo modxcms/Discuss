@@ -4,13 +4,13 @@
  * @subpackage processors
  */
 /* get board */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('discuss.board_err_ns'));
-$board = $modx->getObject('disBoard',$_POST['id']);
-if ($board == null) return $modx->error->failure($modx->lexicon('discuss.board_err_nf'));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.board_err_ns'));
+$board = $modx->getObject('disBoard',$scriptProperties['id']);
+if (!$board) return $modx->error->failure($modx->lexicon('discuss.board_err_nf'));
 
 /* remove board */
 if ($board->remove() == false) {
-    return $modx->error->failure($modx->lexicon('discuss.board_err_save'));
+    return $modx->error->failure($modx->lexicon('discuss.board_err_remove'));
 }
 
 

@@ -9,7 +9,7 @@ Dis.grid.UserPosts = function(config) {
             ,user: config.user
         }
         ,action: 'mgr/user/post/getlist'
-        ,fields: ['id','board','parent','title','message','author','createdon','allow_replies','rank','ip','views','sticky','locked','menu']
+        ,fields: ['id','board','parent','title','message','author','createdon','allow_replies','rank','ip','views','sticky','locked']
         ,autoHeight: true
         ,paging: true
         ,columns: [{
@@ -17,19 +17,19 @@ Dis.grid.UserPosts = function(config) {
             ,dataIndex: 'id'
             ,width: 70
         },{
-            header: 'Title'
+            header: _('discuss.post_title')
             ,dataIndex: 'title'
             ,width: 250
         },{
-            header: 'Date'
+            header: _('discuss.post_date')
             ,dataIndex: 'createdon'
             ,width: 100
         },{
-            header: 'Views'
+            header: _('discuss.post_views')
             ,dataIndex: 'views'
             ,width: 70
         },{
-            header: 'IP'
+            header: _('discuss.post_ip')
             ,dataIndex: 'ip'
             ,width: 100
         }]
@@ -38,14 +38,18 @@ Dis.grid.UserPosts = function(config) {
 };
 Ext.extend(Dis.grid.UserPosts,MODx.grid.Grid,{
     getMenu: function() {
-        return [{
-            text: 'Remove Post'
-            ,handler: this.remove.createDelegate(this,[{
-                title: 'Remove Post?'
-                ,text: 'Are you sure you want to remove this post and all its children?'
-            }])
-            ,scope: this
-        }];
+        var m = [];
+        m.push({
+            text: _('discuss.post_modify')
+            ,handler: this.updatePost
+        });
+        m.push('-');
+        m.push({
+            text: _('discuss.post_remove')
+            ,handler: this.removePost
+        });
+
+        this.addContextMenuItem(m);
     }
     
     ,updatePost: function(btn,e) {
@@ -71,7 +75,7 @@ Ext.extend(Dis.grid.UserPosts,MODx.grid.Grid,{
         if (!this.menu.record) return false;
         
         MODx.msg.confirm({
-            text: 'Are you sure you want to remove this post and all its replies entirely?'
+            text: _('discuss.post_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'mgr/post/remove'

@@ -13,12 +13,12 @@ Dis.grid.UserGroupMembers = function(config) {
         ,autoHeight: true
         ,paging: true
         ,columns: [{
-            header: 'Username'
+            header: _('discuss.username')
             ,dataIndex: 'username'
             ,width: 250
         }]
         ,tbar: [{
-            text: 'Add Member'
+            text: _('discuss.member_add')
             ,handler: this.addMember
             ,scope: this
         }]
@@ -28,14 +28,11 @@ Dis.grid.UserGroupMembers = function(config) {
 };
 Ext.extend(Dis.grid.UserGroupMembers,MODx.grid.LocalGrid,{
     getMenu: function() {
-        return [{
-            text: 'Remove Member'
-            ,handler: this.remove.createDelegate(this,[{
-                title: 'Remove Member?'
-                ,text: 'Are you sure you want to remove this User from this User Group?'
-            }])
-            ,scope: this
+        var m = [{
+            text: _('discuss.member_remove')
+            ,handler: this.removeMember
         }];
+        return m;
     }
     
     ,addMember: function(btn,e) {
@@ -60,7 +57,7 @@ Ext.extend(Dis.grid.UserGroupMembers,MODx.grid.LocalGrid,{
         if (!this.menu.record) return false;
         
         MODx.msg.confirm({
-            text: 'Are you sure you want to remove this post and all its replies entirely?'
+            text: _('discuss.member_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'mgr/post/remove'
@@ -81,16 +78,18 @@ Dis.window.AddUserGroupMember = function(config) {
     config = config || {};
     this.ident = config.ident || 'disaugm'+Ext.id();
     Ext.applyIf(config,{
-        title: 'Add User Group Member'
+        title: _('discuss.member_add')
         ,frame: true
         ,id: 'dis-window-usergroup-member-create'
         ,fields: [{
             xtype: 'modx-combo-user'
-            ,fieldLabel: 'User'
+            ,fieldLabel: _('discuss.user')
             ,name: 'user'
             ,hiddenName: 'user'
             ,id: 'dis-'+this.ident+'-user'
             ,allowBlank: false
+            ,editable: true
+            ,typeAhead: true
             ,pageSize: 20
         }]
     });
@@ -112,7 +111,7 @@ Ext.extend(Dis.window.AddUserGroupMember,MODx.Window,{
                 return true;
             }
         } else {
-            MODx.msg.alert(_('error'),'Please select a user.');
+            MODx.msg.alert(_('error'),_('discuss.user_err_ns'));
         }
         return true;
     }

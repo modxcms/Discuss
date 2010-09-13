@@ -6,10 +6,7 @@ Dis.panel.UserGroups = function(config) {
         ,autoHeight: true
         ,forceLayout: true
         ,items: [{
-            html: '<h2>User Groups</h2>'
-            ,border: false
-        },{
-            html: '<p>Manage User Groups.</p><br />'
+            html: '<p>'+_('discuss.usergroups.intro_msg')+'</p><br />'
             ,border: false
         },{
             title: ''
@@ -21,10 +18,6 @@ Dis.panel.UserGroups = function(config) {
 };
 Ext.extend(Dis.panel.UserGroups,MODx.Panel);
 Ext.reg('dis-panel-usergroups',Dis.panel.UserGroups);
-
-
-
-
 
 Dis.tree.UserGroups = function(config) {
     config = config || {};
@@ -39,27 +32,45 @@ Dis.tree.UserGroups = function(config) {
         ,useDefaultToolbar: true
         ,remoteToolbar: false
         ,tbar: [{
-            text: 'Create User Group'
-            ,handler: function(btn,e) { this.createUserGroup(btn,e,false); }
+            text: _('discuss.usergroup_add')
+            ,handler: function(btn,e) {this.createUserGroup(btn,e,false);}
             ,scope: this
         }]
     })
     Dis.tree.UserGroups.superclass.constructor.call(this,config);
 };
 Ext.extend(Dis.tree.UserGroups,MODx.tree.UserGroup,{
-    createUserGroup: function(btn,e,n) {
+    getMenu: function() {
+        var m = [];
+        m.push({
+            text: _('discuss.usergroup_add')
+            ,handler: this.createUserGroup
+        });
+        m.push({
+            text: _('discuss.usergroup_update')
+            ,handler: this.updateUserGroup
+        });
+        m.push('-');
+        m.push({
+            text: _('discuss.usergroup_remove')
+            ,handler: this.removeUserGroup
+        });
+        return m;
+    }
+    
+    ,createUserGroup: function(btn,e,n) {
         var r = {};
         if (n !== false) {
-            var id = this.cm.activeNode.id.substr(2).split('_'); id = id[1];
+            var id = this.cm.activeNode.id.substr(2).split('_');id = id[1];
             r['parent'] = id;
-        } else { r['parent'] = 0; }
+        } else {r['parent'] = 0;}
         
         if (!this.windows.createUserGroup) {
             this.windows.createUserGroup = MODx.load({
                 xtype: 'dis-window-usergroup-create'
                 ,record: r
                 ,listeners: {
-                    'success':{fn:function() { this.refreshNode(this.cm.activeNode.id); },scope:this}
+                    'success':{fn:function() {this.refreshNode(this.cm.activeNode.id);},scope:this}
                 }
             });
         }
@@ -69,14 +80,14 @@ Ext.extend(Dis.tree.UserGroups,MODx.tree.UserGroup,{
     
     ,updateUserGroup: function(btn,e) {
         var n = this.cm.activeNode;
-        var id = n.id.substr(2).split('_'); id = id[1];
+        var id = n.id.substr(2).split('_');id = id[1];
         
         location.href = '?a=' + Dis.request.a + '&action=usergroup/update&id=' + id;
     }
     
     ,removeUserGroup: function(btn,e) {
         var n = this.cm.activeNode;
-        var id = n.id.substr(2).split('_'); id = id[1];
+        var id = n.id.substr(2).split('_');id = id[1];
         
         MODx.msg.confirm({
             title: _('warning')
@@ -99,7 +110,7 @@ Dis.window.CreateUserGroup = function(config) {
     config = config || {};
     this.ident = config.ident || 'ccat'+Ext.id();
     Ext.applyIf(config,{
-        title: 'Create User Group'
+        title: _('discuss.usergroup_add')
         ,id: this.ident
         ,height: 150
         ,width: 475
@@ -117,8 +128,8 @@ Dis.window.CreateUserGroup = function(config) {
             ,width: 300
         },{
             xtype: 'checkbox'
-            ,fieldLabel: 'Post-Based'
-            ,description: 'If true, this User Group will be based on Post counts. Once a User reaches the specified count, they will become a part of this User Group.'
+            ,fieldLabel: _('discuss.usergroup_post_based')
+            ,description: _('discuss.usergroup_post_based_desc')
             ,name: 'post_based'
             ,id: 'dis-'+this.ident+'-post-based'
             ,inputValue: true
@@ -130,21 +141,23 @@ Dis.window.CreateUserGroup = function(config) {
             }
         },{
             xtype: 'numberfield'
-            ,fieldLabel: 'Minimum Posts'
+            ,fieldLabel: _('discuss.usergroup_min_posts')
+            ,description: _('discuss.usergroup_min_posts_desc')
             ,name: 'min_posts'
             ,id: 'dis-'+this.ident+'-min-posts'
             ,width: 50
             ,disabled: true
         },{
             xtype: 'textfield'
-            ,fieldLabel: 'Name Color'
+            ,fieldLabel:  _('discuss.usergroup_name_color')
+            ,description: _('discuss.usergroup_name_color_desc')
             ,name: 'color'
-            ,description: 'The color a User in this User Group will have in the Online section.'
             ,id: 'dis-'+this.ident+'-color'
             ,width: 200
         },{
             xtype: 'textfield'
-            ,fieldLabel: 'Image'
+            ,fieldLabel: _('discuss.usergroup_image')
+            ,description: _('discuss.usergroup_image_desc')
             ,name: 'image'
             ,id: 'dis-'+this.ident+'-image'
             ,width: 200

@@ -204,7 +204,7 @@
         <field key="color" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
         <field key="image" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         
-        <aggregate alias="UserGroup" class="modUserGroup" local="user" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="UserGroup" class="modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Boards" class="disBoardUserGroup" local="usergroup" foreign="usergroup" cardinality="many" owner="local" />
     </object>
     

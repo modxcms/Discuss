@@ -1,17 +1,19 @@
 <?php
 /**
+ * Create a Board.
+ * 
  * @package discuss
  * @subpackage processors
  */
-if (empty($_POST['name'])) $modx->error->addField('name','Please enter a valid name.');
-if (empty($_POST['category'])) $modx->error->addField('category','Please select a Category for this Board to belong in.');
+if (empty($scriptProperties['name'])) $modx->error->addField('name',$modx->lexicon('discuss.board_err_ns_name'));
+if (empty($scriptProperties['category'])) $modx->error->addField('category',$modx->lexicon('discuss.board_err_ns_category'));
 
 if ($modx->error->hasError()) {
     return $modx->error->failure();
 }
 
 $board = $modx->newObject('disBoard');
-$board->fromArray($_POST);
+$board->fromArray($scriptProperties);
 
 if ($board->save() == false) {
     return $modx->error->failure($modx->lexicon('discuss.board_err_save'));

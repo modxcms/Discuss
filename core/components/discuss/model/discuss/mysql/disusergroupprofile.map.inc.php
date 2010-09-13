@@ -65,7 +65,7 @@ $xpdo_meta_map['disUserGroupProfile']= array (
     'UserGroup' => 
     array (
       'class' => 'modUserGroup',
-      'local' => 'user',
+      'local' => 'usergroup',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

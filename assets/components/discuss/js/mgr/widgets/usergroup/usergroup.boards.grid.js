@@ -2,7 +2,7 @@
 Dis.grid.UserGroupBoards = function(config) {
     config = config || {};
     var tt = new Ext.ux.grid.CheckColumn({
-        header: 'Access'
+        header: _('discuss.access')
         ,dataIndex: 'access'
         ,width: 40
         ,sortable: false
@@ -20,7 +20,7 @@ Dis.grid.UserGroupBoards = function(config) {
         ,autoHeight: true
         ,plugins: tt
         ,columns: [{
-            header: 'Name'
+            header: _('name')
             ,dataIndex: 'name'
             ,width: 250
         },tt]
@@ -28,7 +28,5 @@ Dis.grid.UserGroupBoards = function(config) {
     Dis.grid.UserGroupBoards.superclass.constructor.call(this,config);
     this.propRecord = Ext.data.Record.create([{name: 'id'},{name:'name'},{name:'access'}]);
 };
-Ext.extend(Dis.grid.UserGroupBoards,MODx.grid.LocalGrid,{
-    
-});
+Ext.extend(Dis.grid.UserGroupBoards,MODx.grid.LocalGrid);
 Ext.reg('dis-grid-usergroup-boards',Dis.grid.UserGroupBoards);

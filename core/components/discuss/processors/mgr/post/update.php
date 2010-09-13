@@ -1,20 +1,19 @@
 <?php
 /**
- * Remove a post
+ * Update a post
  *
  * @package discuss
  * @subpackage processors
  */
 /* get object */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
-$post = $modx->getObject('disPost',$_POST['id']);
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
+$post = $modx->getObject('disPost',$scriptProperties['id']);
 if ($post == null) return $modx->error->failure($modx->lexicon('discuss.post_err_nf'));
 
+/* set fields */
+$post->fromArray($scriptProperties);
 
-$post->fromArray($_POST);
-
-
-/* save */
+/* save post */
 if ($post->save() == false) {
     return $modx->error->failure($modx->lexicon('discuss.post_err_save'));
 }

@@ -7,7 +7,7 @@ Dis.page.UpdateUser = function(config) {
     Ext.applyIf(config,{
         formpanel: 'dis-panel-user'
         ,buttons: [{
-            text: 'Save'
+            text: _('save')
             ,id: 'dis-btn-save'
             ,process: 'mgr/user/update'
             ,method: 'remote'
@@ -17,7 +17,7 @@ Dis.page.UpdateUser = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            text: 'Back'
+            text: _('cancel')
             ,id: 'dis-btn-back'
             ,handler: function() {
                 location.href = '?a='+Dis.request.a+'&action=home';

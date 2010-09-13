@@ -1,17 +1,14 @@
 <?php
 /**
+ * Gets a tree node list of boards
+ * 
  * @package discuss
  */
-
-$curNode = !empty($_REQUEST['id']) ? $_REQUEST['id'] : 'root_0';
+$curNode = !empty($scriptProperties['id']) ? $scriptProperties['id'] : 'root_0';
 $curNode = explode('_',$curNode);
 $type = $curNode[0];
 $id = $curNode[1];
-
-
 $nodes = array();
-
-
 $parentFK = 'parent';
 switch ($type) {
     /* get all boards in category - will progress to next step after
@@ -30,7 +27,7 @@ switch ($type) {
         }
         $c = $modx->newQuery('disBoard');
         $c->where($where);
-        $c->sortby('disBoard.rank','ASC');
+        $c->sortby($modx->getSelectColumns('disBoard','disBoard','',array('rank')),'ASC');
         $boards = $modx->getCollection('disBoard',$c);
 
         foreach ($boards as $board) {
@@ -40,22 +37,6 @@ switch ($type) {
             $boardArray['text'] = $board->get('name').' ('.$board->get('id').')';
             $boardArray['leaf'] = false;
             $boardArray['classKey'] = 'disBoard';
-
-            $boardArray['menu'] = array('items' => array());
-            $boardArray['menu']['items'][] = array(
-                'text' => 'Edit Board',
-                'handler' => 'function(itm,e) { this.updateBoard(itm,e); }',
-            );
-            $boardArray['menu']['items'][] = '-';
-            $boardArray['menu']['items'][] = array(
-                'text' => 'Create Board Here',
-                'handler' => 'function(itm,e) { this.createBoard(itm,e); }',
-            );
-            $boardArray['menu']['items'][] = '-';
-            $boardArray['menu']['items'][] = array(
-                'text' => 'Remove Board',
-                'handler' => 'function(itm,e) {this.removeBoard(itm,e); }',
-            );
 
             unset($boardArray['id']);
             $boardArray['id'] = 'board_'.$board->get('id');
@@ -79,23 +60,6 @@ switch ($type) {
             $categoryArray['parent'] = 0;
             $categoryArray['category'] = $category->get('id');
             $categoryArray['classKey'] = 'disCategory';
-
-            $categoryArray['menu'] = array('items' => array());
-            $categoryArray['menu']['items'][] = array(
-                'text' => 'Edit Category',
-                'handler' => 'function(itm,e) { this.updateCategory(itm,e); }',
-            );
-            $categoryArray['menu']['items'][] = '-';
-            $categoryArray['menu']['items'][] = array(
-                'text' => 'Create Board Here',
-                'handler' => 'function(itm,e) { this.createBoard(itm,e); }',
-            );
-
-            $categoryArray['menu']['items'][] = '-';
-            $categoryArray['menu']['items'][] = array(
-                'text' => 'Remove Category',
-                'handler' => 'function(itm,e) { this.removeCategory(itm,e); }',
-            );
 
             unset($categoryArray['id']);
             $categoryArray['id'] = 'category_'.$category->get('id');

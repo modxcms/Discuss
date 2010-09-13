@@ -5,7 +5,7 @@ Dis.panel.User = function(config) {
         ,url: Dis.config.connector_url
         ,baseParams: {}
         ,items: [{
-            html: '<h2>'+'New User'+'</h2>'
+            html: '<h2>'+_('discuss.user_new')+'</h2>'
             ,border: false
             ,id: 'dis-user-header'
             ,cls: 'modx-page-header'
@@ -13,7 +13,7 @@ Dis.panel.User = function(config) {
             xtype: 'modx-tabs'
             ,border: true
             ,defaults: {
-                autoHeight: true, bodyStyle: 'padding: 1em;'
+                autoHeight: true, bodyStyle: 'padding: 10px;'
             }
             ,items: [{
                 title: _('general_information')
@@ -21,70 +21,70 @@ Dis.panel.User = function(config) {
                 ,items: [{                    
                     xtype: 'statictextfield'
                     ,fieldLabel: _('id')
-                    ,name: 'user'
+                    ,name: 'id'
                     ,submitValue: true
                 },{
                     xtype: 'textfield'
-                    ,fieldLabel: 'Username'
+                    ,fieldLabel: _('discuss.username')
                     ,name: 'username'
                     ,width: 250
                     ,allowBlank: false
                 },{
                     xtype: 'textfield'
-                    ,fieldLabel: 'Email'
+                    ,fieldLabel: _('discuss.user_email')
                     ,name: 'email'
                     ,width: 250
                     ,allowBlank: false
                 },{
                     xtype: 'textfield'
-                    ,fieldLabel: 'First Name'
+                    ,fieldLabel: _('discuss.user_name_first')
                     ,name: 'name_first'
                     ,width: 250
                     ,allowBlank: true
                 },{
                     xtype: 'textfield'
-                    ,fieldLabel: 'Last Name'
+                    ,fieldLabel: _('discuss.user_name_last')
                     ,name: 'name_last'
                     ,width: 250
                     ,allowBlank: true
                 },{
                     xtype: 'datefield'
-                    ,fieldLabel: 'Birthdate'
+                    ,fieldLabel: _('discuss.user_birthdate')
                     ,name: 'birthdate'
                     ,width: 250
                     ,allowBlank: true
                 },{
                     xtype: 'textfield'
-                    ,fieldLabel: 'Website'
+                    ,fieldLabel: _('discuss.user_website')
                     ,name: 'website'
                     ,width: 250
                     ,allowBlank: true
                 },{
                     xtype: 'textfield'
-                    ,fieldLabel: 'Location'
+                    ,fieldLabel: _('discuss.user_location')
                     ,name: 'location'
                     ,width: 250
                     ,allowBlank: true
                 },{
                     xtype: 'textarea'
-                    ,fieldLabel: 'Signature'
+                    ,fieldLabel: _('discuss.user_signature')
                     ,name: 'signature'
                     ,width: 500
                     ,grow: true
                 },{
                     xtype: 'checkbox'
-                    ,boxLabel: 'Show Email'
+                    ,boxLabel: _('discuss.user_show_email')
                     ,name: 'show_email'
                     ,labelSeparator: ''
                     ,inputValue: 1
                 },{
                     xtype: 'checkbox'
-                    ,boxLabel: 'Show Online'
+                    ,boxLabel: _('discuss.user_show_online')
                     ,name: 'show_online'
                     ,labelSeparator: ''
                     ,inputValue: 1
                 }]
-            },{
+            }/*,{
                 title: 'Activity'
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
@@ -92,12 +92,12 @@ Dis.panel.User = function(config) {
                     html: '<p>Activity info, including track IP and other usage, goes here.</p>'
                     ,border: false
                 }]
-            },{
-                title: 'Posts'
+            }*/,{
+                title: _('discuss.posts')
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>These are all the posts made by this user.</p>'
+                    html: '<p>'+_('discuss.user_posts.intro_msg')+'</p>'
                     ,border: false
                 },{
                     xtype: 'dis-grid-user-posts'
@@ -105,15 +105,15 @@ Dis.panel.User = function(config) {
                     ,user: config.user
                     ,preventRender: true
                 }]
-            },{
+            }/*,{
                 title: 'Permissions'
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>Here you can set permissions for this user.</p>'
+                    html: '<p>'+_('discuss.user_perms.intro_msg')+'</p>'
                     ,border: false
                 }]
-            }]
+            }*/]
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -144,7 +144,7 @@ Ext.extend(Dis.panel.User,MODx.FormPanel,{
     }
     ,beforeSubmit: function(o) {
         Ext.apply(o.form.baseParams,{
-            //tags: Ext.getCmp('rm-grid-package-tag').encode()            
+            //perms: Ext.getCmp('dis-user-permissions').encode()
         });
     }
     ,success: function(o) {

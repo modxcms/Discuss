@@ -5,7 +5,7 @@ Dis.panel.UserGroup = function(config) {
         ,url: Dis.config.connector_url
         ,baseParams: {}
         ,items: [{
-            html: '<h2>'+'New UserGroup'+'</h2>'
+            html: '<h2>'+_('discuss.usergroup_new')+'</h2>'
             ,border: false
             ,id: 'dis-usergroup-header'
             ,cls: 'modx-page-header'
@@ -13,7 +13,7 @@ Dis.panel.UserGroup = function(config) {
             xtype: 'modx-tabs'
             ,border: true
             ,defaults: {
-                autoHeight: true, bodyStyle: 'padding: 1em;'
+                autoHeight: true, bodyStyle: 'padding: 15px;'
             }
             ,forceLayout: true
             ,items: [{
@@ -32,34 +32,36 @@ Dis.panel.UserGroup = function(config) {
                     ,allowBlank: false
                 },{
                     xtype: 'checkbox'
-                    ,fieldLabel: 'Post-Based'
-                    ,description: 'If true, this User Group will be based on Post counts. Once a User reaches the specified count, they will become a part of this User Group.'
+                    ,fieldLabel: _('discuss.usergroup_post_based')
+                    ,description: _('discuss.usergroup_post_based_desc')
                     ,name: 'post_based'
                     ,inputValue: true
                 },{
                     xtype: 'numberfield'
-                    ,fieldLabel: 'Minimum Posts'
+                    ,fieldLabel: _('discuss.usergroup_min_posts')
+                    ,description: _('discuss.usergroup_min_posts_desc')
                     ,name: 'min_posts'
                     ,id: 'dis-usergroup-min-posts'
                     ,width: 50
                 },{
                     xtype: 'textfield'
-                    ,fieldLabel: 'Name Color'
+                    ,fieldLabel:  _('discuss.usergroup_name_color')
+                    ,description: _('discuss.usergroup_name_color_desc')
                     ,name: 'color'
-                    ,description: 'The color a User in this User Group will have in the Online section.'
                     ,width: 200
                 },{
                     xtype: 'textfield'
-                    ,fieldLabel: 'Image'
+                    ,fieldLabel: _('discuss.usergroup_image')
+                    ,description: _('discuss.usergroup_image_desc')
                     ,name: 'image'
                     ,width: 200
                 }]
             },{
-                title: 'Members'
+                title: _('discuss.members')
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>'+'View all the members of this Group.'+'</p>'
+                    html: '<p>'+_('discuss.user_members.intro_msg')+'</p>'
                     ,border: false
                 },{
                     xtype: 'dis-grid-usergroup-members'
@@ -68,11 +70,11 @@ Dis.panel.UserGroup = function(config) {
                     ,preventRender: true
                 }]
             },{
-                title: 'Boards'
+                title: _('discuss.boards')
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>'+'Here you can manage the Boards this User Group can view.'+'</p>'
+                    html: '<p>'+_('discuss.user_boards.intro_msg')+'</p>'
                     ,border: false
                 },{
                     xtype: 'dis-grid-usergroup-boards'

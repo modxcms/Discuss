@@ -1,21 +1,23 @@
 <?php
 /**
+ * Get a User Group
+ * 
  * @package discuss
  * @subpackage processors
  */
 /* get user group */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_ns'));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_ns'));
 $c = $modx->newQuery('modUserGroup');
-$c->select('
-    modUserGroup.*,
-    Profile.post_based AS post_based,
-    Profile.min_posts AS min_posts,
-    Profile.color AS color,
-    Profile.image AS image
-');
+$c->select(array(
+    'modUserGroup.*',
+    'Profile.post_based',
+    'Profile.min_posts',
+    'Profile.color',
+    'Profile.image',
+));
 $c->leftJoin('disUserGroupProfile','Profile','modUserGroup.id = Profile.usergroup');
 $c->where(array(
-    'modUserGroup.id' => $_REQUEST['id'],
+    'modUserGroup.id' => $scriptProperties['id'],
 ));
 $usergroup = $modx->getObject('modUserGroup',$c);
 if ($usergroup == null) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_nf'));
@@ -29,7 +31,7 @@ $c->leftJoin('modUser','User');
 $c->where(array(
     'user_group' => $usergroup->get('id'),
 ));
-$c->sortby('User.username','ASC');
+$c->sortby($modx->getSelectColumns('modUser','User','',array('username')),'ASC');
 $members = $modx->getCollection('modUserGroupMember',$c);
 $list = array();
 foreach ($members as $member) {

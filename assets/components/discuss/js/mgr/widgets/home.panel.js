@@ -9,10 +9,16 @@ Dis.panel.Home = function(config) {
             ,cls: 'modx-page-header'
         },{
             xtype: 'modx-tabs'
-            ,bodyStyle: 'padding: 1em'
+            ,bodyStyle: 'padding: 15px'
             ,defaults: { border: false ,autoHeight: true }
             ,border: true
             ,activeItem: 0
+            ,stateful: true
+            ,stateId: 'dis-home-tabpanel'
+            ,stateEvents: ['tabchange']
+            ,getState:function() {
+                return {activeTab:this.items.indexOf(this.getActiveTab())};
+            }
             ,items: [{
                 xtype: 'dis-panel-boards'
             },{

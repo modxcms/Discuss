@@ -13,12 +13,12 @@ Dis.grid.BoardModerators = function(config) {
         ,autoHeight: true
         ,primaryKey: 'user'
         ,columns: [{
-            header: 'User'
+            header: _('discuss.user')
             ,dataIndex: 'username'
             ,width: 600
         }]
         ,tbar: [{
-            text: 'Add Moderator'
+            text: _('discuss.moderator_add')
             ,handler: this.addModerator
             ,scope: this
         }]
@@ -29,10 +29,10 @@ Dis.grid.BoardModerators = function(config) {
 Ext.extend(Dis.grid.BoardModerators,MODx.grid.LocalGrid,{
     getMenu: function() {
         return [{
-            text: 'Remove User As Moderator'
+            text: _('discuss.moderator_remove')
             ,handler: this.remove.createDelegate(this,[{
-                title: 'Remove User As Moderator?'
-                ,text: 'Are you sure you want to remove this User as a Moderator?'
+                title: _('discuss.moderator_remove')
+                ,text: _('discuss.moderator_remove_confirm')
             }])
             ,scope: this
         }];
@@ -58,16 +58,18 @@ Dis.window.CreateBoardModerator = function(config) {
     config = config || {};
     this.ident = config.ident || 'cbmod'+Ext.id();
     Ext.applyIf(config,{
-        title: 'Add Moderator'
+        title: _('discuss.moderator_add')
         ,frame: true
         ,id: 'dis-window-board-moderator-create'
         ,fields: [{
             xtype: 'modx-combo-user'
-            ,fieldLabel: 'User'
+            ,fieldLabel: _('discuss.user')
             ,name: 'user'
             ,hiddenName: 'user'
             ,id: 'dis-'+this.ident+'-user'
             ,allowBlank: false
+            ,editable: true
+            ,typeAhead: true
             ,pageSize: 20
         }]
     });
@@ -88,7 +90,7 @@ Ext.extend(Dis.window.CreateBoardModerator,MODx.Window,{
                 return true;
             }
         } else {
-            MODx.msg.alert(_('error'),'Please select a user.');
+            MODx.msg.alert(_('error'),_('discuss.user_err_ns'));
         }
         return true;
     }

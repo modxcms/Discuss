@@ -7,7 +7,7 @@ Dis.page.UpdateBoard = function(config) {
     Ext.applyIf(config,{
         formpanel: 'dis-panel-board'
         ,buttons: [{
-            text: 'Save'
+            text: _('save')
             ,id: 'dis-btn-save'
             ,process: 'mgr/board/update'
             ,method: 'remote'
@@ -17,7 +17,7 @@ Dis.page.UpdateBoard = function(config) {
                 ,ctrl: true
             }]
         },'-',{
-            text: 'Back'
+            text: _('cancel')
             ,id: 'dis-btn-back'
             ,handler: function() {
                 location.href = '?a='+Dis.request.a+'&action=home';

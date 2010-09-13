@@ -2,6 +2,8 @@ Changelog for Discuss.
 
 Discuss 0.1
 ====================================
+- i18n of mgr processors and JS
+- Random bugfixes, optimizations, code tweaks
 - Fixed bugs with URL generation
 - Added discuss.reserved_usernames setting
 - Fixed bugs in install resolvers

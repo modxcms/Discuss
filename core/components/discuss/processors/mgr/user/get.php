@@ -3,19 +3,19 @@
  * @package discuss
  * @subpackage processors
  */
-/* get board */
-if (empty($_REQUEST['id'])) return $modx->error->failure($modx->lexicon('discuss.user_err_ns'));
+/* get user */
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.user_err_ns'));
 $c = $modx->newQuery('disUserProfile');
-$c->select('
-    disUserProfile.*,
-    User.username
-');
-$c->innerJoin('modUser','User','disUserProfile.user = User.id');
+$c->select(array(
+    'disUserProfile.*',
+    'User.username',
+));
+$c->innerJoin('modUser','User');
 $c->where(array(
-    'user' => $_REQUEST['id'],
+    'user' => $scriptProperties['id'],
 ));
 $user = $modx->getObject('disUserProfile',$c);
-if ($user == null) return $modx->error->failure($modx->lexicon('discuss.user_err_nf'));
+if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf'));
 
 $userArray = $user->toArray('',true);
 unset($userArray['password'],$userArray['cachepwd']);

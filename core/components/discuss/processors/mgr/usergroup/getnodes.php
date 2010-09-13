@@ -10,10 +10,10 @@
 if (!$modx->hasPermission('access_permissions')) return $modx->error->failure($modx->lexicon('permission_denied'));
 $modx->lexicon->load('user');
 
-$_REQUEST['id'] = !isset($_REQUEST['id']) ? 0 : str_replace('n_ug_','',$_REQUEST['id']);
+$scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : str_replace('n_ug_','',$scriptProperties['id']);
 
-$g = $modx->getObject('modUserGroup',$_REQUEST['id']);
-$groups = $modx->getCollection('modUserGroup',array('parent' => $_REQUEST['id']));
+$g = $modx->getObject('modUserGroup',$scriptProperties['id']);
+$groups = $modx->getCollection('modUserGroup',array('parent' => $scriptProperties['id']));
 
 $da = array();
 foreach ($groups as $group) {
@@ -23,29 +23,6 @@ foreach ($groups as $group) {
         'leaf' => 0,
         'type' => 'usergroup',
         'cls' => 'icon-group',
-        'menu' => array(
-            'items' => array(
-                array(
-                    'text' => $modx->lexicon('user_group_create'),
-                    'handler' => 'function(itm,e) {
-                        this.createUserGroup(itm,e);
-                    }',
-                ),
-                array(
-                    'text' => $modx->lexicon('user_group_update'),
-                    'handler' => 'function(itm,e) {
-                        this.updateUserGroup(itm,e);
-                    }',
-                ),
-                '-',
-                array(
-                    'text' => $modx->lexicon('user_group_remove'),
-                    'handler' => 'function(itm,e) {
-                        this.removeUserGroup(itm,e);
-                    }',
-                ),
-            ),
-        ),
     );
 }
 

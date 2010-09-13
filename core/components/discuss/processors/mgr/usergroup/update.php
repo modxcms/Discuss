@@ -4,32 +4,37 @@
  * @subpackage processors
  */
 /* get usergroup */
-if (empty($_POST['id'])) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_ns'));
-$usergroup = $modx->getObject('modUserGroup',$_POST['id']);
-if ($usergroup == null) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_nf'));
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_ns'));
+$profile = $modx->getObject('disUserGroupProfile',array('usergroup' => $scriptProperties['id']));
+if ($profile == null) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_nf'));
+
+$usergroup = $profile->getOne('UserGroup');
+if (!$usergroup) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_nf',array('id' => $scriptProperties['id'])));
 
 /* do validation */
-if (empty($_POST['name'])) $modx->error->addField('name','Please enter a valid name.');
+if (empty($scriptProperties['name'])) $modx->error->addField('name',$modx->lexicon('discuss.usergroup_err_ns_name'));
 
 if ($modx->error->hasError()) {
     $modx->error->failure();
 }
 
 /* set fields */
-$usergroup->fromArray($_POST);
+$scriptProperties['post_based'] = !empty($scriptProperties['post_based']) ? true : false;
+$profile->fromArray($scriptProperties);
+$usergroup->fromArray($scriptProperties);
 
 /* save board */
-if ($usergroup->save() == false) {
+if ($profile->save() == false || $usergroup->save() == false) {
     return $modx->error->failure($modx->lexicon('discuss.usergroup_err_save'));
 }
 
 /* set moderators */
-if (isset($_POST['members'])) {
+if (isset($scriptProperties['members'])) {
     $members = $modx->getCollection('modUserGroupMember',array('user_group' => $usergroup->get('id')));
     foreach ($members as $member) { $member->remove(); }
     unset($members,$member);
 
-    $members = $modx->fromJSON($_POST['members']);
+    $members = $modx->fromJSON($scriptProperties['members']);
     foreach ($members as $user) {
         $member = $modx->newObject('modUserGroupMember');
         $member->set('user_group',$usergroup->get('id'));
@@ -40,12 +45,12 @@ if (isset($_POST['members'])) {
 }
 
 /* set board access */
-if (isset($_POST['boards'])) {
+if (isset($scriptProperties['boards'])) {
     $bugs = $modx->getCollection('disBoardUserGroup',array('usergroup' => $usergroup->get('id')));
     foreach ($bugs as $bug) { $bug->remove(); }
     unset($bugs,$bug);
 
-    $boards = $modx->fromJSON($_POST['boards']);
+    $boards = $modx->fromJSON($scriptProperties['boards']);
     foreach ($boards as $board) {
         if (!$board['access']) continue;
 
