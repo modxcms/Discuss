@@ -2,6 +2,7 @@ Changelog for Discuss.
 
 Discuss 0.1
 ====================================
+- Enabled coloring of usernames based on usergroup
 - i18n of mgr processors and JS
 - Random bugfixes, optimizations, code tweaks
 - Fixed bugs with URL generation

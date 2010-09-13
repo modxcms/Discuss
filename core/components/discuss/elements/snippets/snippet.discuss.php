@@ -172,10 +172,18 @@ if ($modx->getOption('discuss.show_whos_online',null,true)) {
     $threshold = $modx->getOption('discuss.user_active_threshold',null,40);
     $timeago = time() - (60*($threshold));
     $c = $modx->newQuery('modUser');
+    $c->select(array(
+        'modUser.*',
+        'UserGroupProfile.color',
+    ));
     $c->innerJoin('disSession','Session',$modx->getSelectColumns('disSession','Session','',array('user')).' = '.$modx->getSelectColumns('modUser','modUser','',array('id')));
+    $c->leftJoin('modUserGroupMember','UserGroupMembers');
+    $c->leftJoin('modUserGroup','UserGroup','UserGroup.id = UserGroupMembers.user_group');
+    $c->leftJoin('disUserGroupProfile','UserGroupProfile','UserGroupProfile.usergroup = UserGroup.id AND UserGroupProfile.color != ""');
     $c->where(array(
         'Session.access:>=' => $timeago,
     ));
+    $c->sortby('`UserGroupProfile`.`color`,`Session`.`access`','ASC');
     $activeUsers = $modx->getCollection('modUser',$c);
     $as = '';
     foreach ($activeUsers as $activeUser) {
