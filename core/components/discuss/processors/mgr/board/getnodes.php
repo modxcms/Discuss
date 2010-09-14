@@ -36,6 +36,7 @@ switch ($type) {
             $boardArray['pk'] = $board->get('id');
             $boardArray['text'] = $board->get('name').' ('.$board->get('id').')';
             $boardArray['leaf'] = false;
+            $boardArray['cls'] = 'dis-icon-board';
             $boardArray['classKey'] = 'disBoard';
 
             unset($boardArray['id']);
@@ -58,6 +59,7 @@ switch ($type) {
             $categoryArray['text'] = $category->get('name').' ('.$category->get('id').')';
             $categoryArray['leaf'] = false;
             $categoryArray['parent'] = 0;
+            $categoryArray['cls'] = 'dis-icon-category';
             $categoryArray['category'] = $category->get('id');
             $categoryArray['classKey'] = 'disCategory';
 
