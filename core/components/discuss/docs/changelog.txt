@@ -2,6 +2,7 @@ Changelog for Discuss.
 
 Discuss 0.1
 ====================================
+- Fixed bug with disSession persistence
 - Added editedon support to posts
 - Added download attachment support
 - Added icons for board/category in mgr tree
