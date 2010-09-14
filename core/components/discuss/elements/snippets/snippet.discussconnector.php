@@ -2,7 +2,7 @@
 /**
  * @package discuss
  */
-require_once $modx->getOption('discuss.core_path').'model/discuss/discuss.class.php';
-$discuss = new Discuss($modx,$scriptProperties);
+$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
+if (!($discuss instanceof Discuss)) return '';
 echo $discuss->initialize('connector');
 die();

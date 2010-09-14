@@ -43,6 +43,12 @@
     padding: 4px;
     margin: 0 3px;
 }
+.dis-post-editedon {
+    float: left;
+    padding: 0 4px;
+    margin: 0 3px;
+}
+.dis-post-editedon a { padding: 0; margin: 0; }
 .dis-post-reply {
     float: left;
     padding: 1px 0 1px 4px;

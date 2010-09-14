@@ -37,11 +37,13 @@ $c->select('
     AuthorProfile.location AS author_location,
     AuthorProfile.email AS author_email,
     AuthorProfile.show_email AS author_show_email,
-    AuthorProfile.show_online AS author_show_online
+    AuthorProfile.show_online AS author_show_online,
+    EditedBy.username AS editedby_username
 ');
 $c->innerJoin('disPostClosure','Descendants');
 $c->innerJoin('disPostClosure','Ancestors');
 $c->innerJoin('modUser','Author');
+$c->leftJoin('modUser','EditedBy');
 $c->innerJoin('disUserProfile','AuthorProfile');
 $c->where(array(
     'Descendants.ancestor' => $post->get('id'),
@@ -83,11 +85,11 @@ foreach ($posts as $post) {
 
     /* load actions */
     if (!$thread->get('locked') && $modx->user->isAuthenticated()) {
-        $pa['action_reply'] = '<a href="[[~[[++discuss.reply_post_resource]]]]?post=[[+id]]" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+        $pa['action_reply'] = '<a href="[[~[[++discuss.reply_post_resource]]? &post=`[[+id]]`]]" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
 
         $canModifyPost = $modx->user->get('id') == $post->get('author') || $isModerator;
         if ($canModifyPost) {
-            $pa['action_modify'] = '<a href="[[~[[++discuss.modify_post_resource]]]]?post=[[+id]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $pa['action_modify'] = '<a href="[[~[[++discuss.modify_post_resource]]? &post=`[[+id]]`]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
         $canRemovePost = $modx->user->get('id') == $post->get('author') || $isModerator;

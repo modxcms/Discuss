@@ -350,6 +350,24 @@ $children[6]->fromArray(array(
 $children[6]->save();
 addMapSetting($modx,'connector',$children[6]->get('id'));
 
+/* download attachment page */
+$children[7] = $modx->newObject('modResource');
+$children[7]->fromArray(array(
+    'pagetitle' => 'Download Attachment',
+    'parent' => $resource->get('id'),
+    'alias' => 'download-attachment',
+    'content' => '[[!DiscussConnector]]',
+    'isfolder' => false,
+    'cacheable' => false,
+    'published' => true,
+    'hidemenu' => true,
+    'menuindex' => 6,
+    'context_key' => 'web',
+    'template' => 0,
+));
+$children[7]->save();
+addMapSetting($modx,'dl_attachment',$children[7]->get('id'));
+
 //$resource->addMany($children,'Children');
 $success = true;
 

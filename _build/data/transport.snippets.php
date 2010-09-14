@@ -221,4 +221,15 @@ $properties = include $sources['build'].'properties/properties.discussregisterco
 $snippets[19]->setProperties($properties);
 unset($properties);
 
+$snippets[20]= $modx->newObject('modSnippet');
+$snippets[20]->fromArray(array(
+    'id' => 20,
+    'name' => 'DiscussDownloadAttachment',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.discussdownloadattachment.php'),
+),'',true,true);
+$properties = include $sources['build'].'properties/properties.discussdownloadattachment.php';
+$snippets[20]->setProperties($properties);
+unset($properties);
+
 return $snippets;
