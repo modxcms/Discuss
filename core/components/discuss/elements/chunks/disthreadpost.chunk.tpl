@@ -1,4 +1,4 @@
-<div class="dis-post" id="dis-post-[[+id]]">
+<li class="dis-post" id="dis-post-[[+id]]">
     <div class="dis-post-header">
         <h3 class="dis-post-title" post="[[+id]]">[[+title]]</h3>
         <div class="dis-post-author">
@@ -48,5 +48,6 @@
             </div>
         </div>
         <br class="clear" />
+		[[+children:notempty=`<ol class="dis-board-thread [[+class]]">[[+children]]</ol>`]]
     </div>
-</div>
+</li>

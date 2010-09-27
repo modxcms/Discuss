@@ -6,7 +6,9 @@
 
 <br class="clear" />
 <div class="dis-posts">
-[[+posts]]
+	<ol class="dis-board-thread">
+		[[+posts]]
+	</ol>
 </div>
 
 [[+actionbuttons]]
