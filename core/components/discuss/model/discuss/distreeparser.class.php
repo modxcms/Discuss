@@ -7,18 +7,16 @@
  * @package discuss
  */
 class disTreeParser {
-    protected $last = '';
-    public $openItem =      '<li class="[[+class]]" id="[[+idPrefix]][[+id]]">';
-    public $closeItem =     '</li>';
-    public $openChildren =  '<ol class="[[+olClass]]">';
-    public $closeChildren = '</ol>';
+	protected $last = '';
+    protected $openThread = array();
+    protected $output = '';
 
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
         $this->config = $config;
     }
 
-    public function parse(array $array,$tpl = '') {
+     public function parse(array $array,$tpl = '') {
         /* set a value not possible in a LEVEL column to allow the
          * first row to know it's "firstness" */
         $this->last = null;
@@ -38,61 +36,68 @@ class disTreeParser {
     }
 
     private function _iterate($current){
-        /* last = the previous row's level, or null on the first row */
-
-        /* structural elements */
-        $structure = '';
-
-        /* set class/id for li */
-        $openItem = str_replace('[[+id]]',$current['id'],$this->openItem);
-        $idPrefix = !empty($current['idPrefix']) ? $current['idPrefix'] : 'dis-board-post-';
-        $openItem = str_replace('[[+idPrefix]]',$idPrefix,$openItem);
-        $class = !empty($current['class']) ? $current['class'] : 'dis-board-post';
-        $openItem = str_replace('[[+class]]',$class,$openItem);
-
-        /* set class for ol */
-        $class = !empty($current['olClass']) ? $current['olClass'] : 'dis-board-thread';
-        $openChildren = str_replace('[[+olClass]]',$class,$this->openChildren);
-
-        $closeItem = $this->closeItem;
-        $closeChildren = $this->closeChildren;
-
-        if (!isset($current['depth'])) {
-            /* add closing structure(s) equal to the very last row's level;
-             * this will only fire for the "dummy" */
-            return str_repeat($closeItem.$closeChildren,$this->last);
-        }
-
-        /* add the item itself */
-        if (empty($this->tpl)) {
-            $item = $current['title'];
-        } else {
-            $item = $this->discuss->getChunk($this->tpl,$current);
-        }
+        $depth = $current['depth'];
+        $parent = $current['parent'];
 
         if (is_null($this->last)) {
-            /* add the opening structure in the case of the first row */
-            $structure .= $openChildren;
-        } elseif ( $this->last < $current['depth'] ) {
-            /* add the structure to start new branches */
-            $structure .= $openChildren;
-        } elseif ( $this->last > $current['depth'] ){
-            /* add the structure to close branches equal to the difference
-             * between the previous and current levels */
-            $structure .= $closeItem
-                . str_repeat($closeChildren . $closeItem,
-                    $this->last - $current['depth']);
-        } else {
-            $structure .= $closeItem;
+            // Set first children in the tree
+            $this->setOpenThread($current, $depth);
+
+        } elseif ($this->last < $depth){
+
+            //Set current as new openthread for the current depth
+            $this->setOpenThread($current, $depth);
+
+        } elseif ($depth == $this->last) {
+
+            if ($depth == 0) {
+                //If last thread is on the root, close it and add it the output item
+                $item .= $this->getOpenThread(0);
+            }
+            //Set current as new openthread for the current depth
+            $this->setOpenThread($current, $depth);
+
+        } elseif ($this->last > $depth) {
+            $nb = $depth > 0 ? $depth : 0;
+
+            for ($i = $this->last; $i >= $nb; $i--) {
+                if ($i > 0) {
+                    //Process children and add id to parent children placeholder
+                    $children = $this->getOpenThread($i);
+                    $this->setOpenThreadChildren($i - 1, $children);
+                }
+            }
+
+            if ($depth == 0) {
+                // Close & chunkify the openThread only if we are on the root level
+                $item .= $this->getOpenThread(0);
+                //Set current thread as new root
+                $this->setOpenThread($current,0);
+            } else {
+                //Set current thread as the last open thread
+                $this->setOpenThread($current, $depth);
+            }
         }
 
-        /* add the item structure */
-        $structure .= $openItem;
+        $this->last = $depth;
+        return $item;
+    }
 
-        /* update last so the next row knows whether this row is really
-         * its parent */
-        $this->last = $current['depth'];
+    protected function setOpenThread($string, $depth) {
+        if (!empty($this->openThread[$depth]) && $depth > 0) {
+            $this->openThread[$depth - 1]['children'] .= $this->discuss->getChunk($this->tpl, $this->openThread[$depth]);
+        }
+        unset($this->openThread[$depth]);
+        $this->openThread[$depth] = $string;
+    }
 
-        return $structure.$item;
+    protected function setOpenThreadChildren($depth, $string) {
+        $this->openThread[$depth]['children'] .= $string;
+    }
+
+    protected function getOpenThread($depth) {
+        $thread = $this->discuss->getChunk($this->tpl, $this->openThread[$depth]);
+        unset($this->openThread[$depth]);
+        return $thread;
     }
 }

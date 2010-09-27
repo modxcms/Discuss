@@ -73,7 +73,8 @@ foreach ($posts as $post) {
     /* set depth and check max post depth */
     $pa['class'] = 'dis-board-post dis-depth-'.$pa['depth'];
     if ($post->get('depth') > $modx->getOption('discuss.max_post_depth',null,3)) {
-        $pa['class'] .= ' dis-collapsed';
+         /* Don't hide post if it exceed max depth, set its depth placeholder to max depth value instead */
+        $pa['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
     }
     /* format bbcode */
     $pa['content'] = $post->getContent();
