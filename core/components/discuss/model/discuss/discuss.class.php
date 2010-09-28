@@ -187,7 +187,7 @@ class Discuss {
 
         /* remove old sessions */
         $ss = $this->modx->removeCollection('disSession',array(
-            '(access + ttl) < UNIX_TIMESTAMP()'
+            '(access + ttl) > NOW()'
         ));
     }
 
