@@ -1,6 +1,6 @@
 <li class="dis-board-li dis-category-[[+category]] [[+unread-cls]]">
-    <div class="right" style="width: 18%; padding: 3px;">[[+lastPost]]</div>
-    <div class="right" style="width: 18%; padding: 3px;">
+    <div class="right dis-board-li-last-post">[[+lastPost]]</div>
+    <div class="right dis-board-li-stats">
     [[%discuss.board_post_stats? &posts=`[[+total_posts]]` &topics=`[[+num_topics]]` &unread=`[[+unread]]`]]
     </div>
 

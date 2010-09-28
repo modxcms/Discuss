@@ -7,7 +7,7 @@
  * @package discuss
  */
 class disTreeParser {
-	protected $last = '';
+    protected $last = '';
     protected $openThread = array();
     protected $output = '';
 
@@ -16,7 +16,7 @@ class disTreeParser {
         $this->config = $config;
     }
 
-     public function parse(array $array,$tpl = '') {
+    public function parse(array $array,$tpl = '') {
         /* set a value not possible in a LEVEL column to allow the
          * first row to know it's "firstness" */
         $this->last = null;

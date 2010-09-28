@@ -23,6 +23,7 @@ $cssUnreadRowCls = $modx->getOption('cssUnreadRowCls',$scriptProperties,'dis-unr
 $boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'disBoardLi');
 $categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'disCategoryLi');
 $lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
+$threadTpl = $modx->getOption('threadTpl',$scriptProperties,'disBoardPost');
 
 /* grab all subboards */
 $subboards = $modx->hooks->load('board/getList',array(
@@ -134,10 +135,12 @@ $modx->regClientStartupScript('<script type="text/javascript">$(function() {
 });</script>');
 
 
-/* parse threads with treeparser */
-$discuss->loadTreeParser();
+/* parse threads */
+$postsOutput = '';
 if (count($pa) > 0) {
-    $postsOutput = $discuss->treeParser->parse($pa,'disBoardPost');
+    foreach ($pa as $postArray) {
+        $postsOutput .= $discuss->getChunk($threadTpl,$postArray);
+    }
     $board->set('posts',$postsOutput);
 }
 unset($postsOutput,$pa,$posts,$post);

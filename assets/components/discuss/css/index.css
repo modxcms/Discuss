@@ -58,7 +58,15 @@ li.dis-board-li h3 {
     }
 li.dis-board-li p {
     padding: 3px 0; margin: 0; }
-    
+
+.dis-board-li-stats, .dis-board-li-last-post {
+    width: 18%;
+    padding: 3px;
+}
+
+li.dis-board-post {
+    list-style: none;
+}
     
 li.dis-category-li {
     background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;
@@ -92,7 +100,7 @@ div.dis-threads {
     }
 div.dis-threads li {
     line-height: 1.1em;
-    padding: 15px 40px 0;
+    padding: 13px 40px 3px;
     height: 25px;
     vertical-align: middle;
     border-bottom: 1px solid #f4f4f4;
@@ -114,6 +122,10 @@ div.dis-thread-sticky {
     background: transparent url(../images/icons/show_sticky.gif) top left no-repeat;
 }
 div.dis-thread-locked { width: 21px; height: 22px; float: right; background: transparent url(../images/icons/quick_lock.gif) top left no-repeat; }
+div.dis-latest {
+    vertical-align: middle;
+    margin-top: -5px;
+}
 div.dis-latest a.dis-last {
     float: right;
     height: 16px;
