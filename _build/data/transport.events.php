@@ -25,5 +25,17 @@ $events['OnDiscussPostFetchContent']->fromArray(array (
   'service' => 1,
   'groupname' => 'Discuss',
 ), '', true, true);
+$events['OnDiscussPostBeforeRemove']= $modx->newObject('modEvent');
+$events['OnDiscussPostBeforeRemove']->fromArray(array (
+  'name' => 'OnDiscussPostBeforeRemove',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+$events['OnDiscussPostRemove']= $modx->newObject('modEvent');
+$events['OnDiscussPostRemove']->fromArray(array (
+  'name' => 'OnDiscussPostRemove',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
 
 return $events;
