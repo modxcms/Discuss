@@ -459,4 +459,21 @@ class Discuss {
         $this->debugTimer = false;
         return $totalTime;
     }
+
+    /**
+     * Process MODx event results
+     */
+    public function getEventResult($rs) {
+        $success = '';
+        if (is_array($rs)) {
+            foreach ($rs as $msg) {
+                if (!empty($msg)) {
+                    $success .= $msg."\n";
+                }
+            }
+        } else {
+            $success = $rs;
+        }
+        return $success;
+    }
 }

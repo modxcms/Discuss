@@ -13,7 +13,7 @@ set_time_limit(0);
 
 define('PKG_NAME','Discuss');
 define('PKG_NAME_LOWER','discuss');
-define('PKG_VERSION','0.1');
+define('PKG_VERSION','0.1.0');
 define('PKG_RELEASE','alpha3');
 
 /* override with your own defines here (see build.config.sample.php) */
@@ -127,6 +127,21 @@ foreach ($settings as $setting) {
     $builder->putVehicle($vehicle);
 }
 unset($settings,$setting,$attributes);
+
+/* load events */
+$events = include $sources['data'].'transport.events.php';
+if (empty($events)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in events.');
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => array ('name'),
+);
+foreach ($events as $event) {
+    $vehicle = $builder->createVehicle($event,$attributes);
+    $builder->putVehicle($vehicle);
+}
+$modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' default events.'); flush();
+unset ($events,$event,$attributes);
 
 /* load lexicon strings */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in lexicon...');

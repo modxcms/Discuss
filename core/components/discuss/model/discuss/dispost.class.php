@@ -189,8 +189,23 @@ class disPost extends xPDOSimpleObject {
             $message = str_replace($tags,'',$message);
         }
 
-        return $this->_nl2br2($message);
+        $message = $this->_nl2br2($message);
 
+        /* Allow for plugin to change content of posts */
+        $rs = $this->xpdo->invokeEvent('OnDiscussPostFetchContent',array(
+            'content' => &$message,
+        ));
+        if (is_array($rs)) {
+            foreach ($rs as $msg) {
+                if (!empty($msg)) {
+                    $message = $msg;
+                }
+            }
+        } else if (!empty($rs)) {
+            $message = $rs;
+        }
+
+        return $message;
     }
 
     private function _nl2br2($str) {

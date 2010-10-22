@@ -38,12 +38,24 @@ $maxSize = $modx->getOption('discuss.maximum_post_size',null,30000);
 if ($maxSize > strlen($_POST['message'])) $maxSize = strlen($_POST['message']);
 $_POST['message'] = substr($_POST['message'],0,$maxSize);
 
+/* create post object and set fields */
 $post = $modx->newObject('disPost');
 $post->fromArray($_POST);
 $post->set('author',$modx->user->get('id'));
 $post->set('parent',$parent->get('id'));
 $post->set('board',$parent->get('board'));
 
+/* fire before post save event */
+$rs = $modx->invokeEvent('OnDiscussBeforePostSave',array(
+    'post' => &$post,
+    'mode' => 'reply',
+));
+$canSave = $discuss->getEventResult($rs);
+if (!empty($canSave)) {
+    return $modx->error->failure($canSave);
+}
+
+/* save post */
 if ($post->save() == false) {
     return $modx->error->failure($modx->lexicon('discuss.post_err_reply'));
 }
@@ -78,6 +90,12 @@ $modx->hooks->load('notifications/send',array(
     'title' => $thread->get('title'),
     'subject' => $modx->getOption('discuss.notification_new_post_subject'),
     'tpl' => $modx->getOption('discuss.notification_new_post_chunk'),
+));
+
+/* fire post save event */
+$modx->invokeEvent('OnDiscussPostSave',array(
+    'post' => &$post,
+    'mode' => 'reply',
 ));
 
 return $modx->error->success('',$post);

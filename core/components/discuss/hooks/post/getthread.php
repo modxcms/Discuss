@@ -51,6 +51,8 @@ $c->where(array(
 $c->sortby('disPost.rank','ASC');
 $posts = $modx->getCollection('disPost',$c);
 
+$isAuthenticated = $modx->user->isAuthenticated();
+
 $plist = array();
 $userUrl = $modx->makeUrl($modx->getOption('discuss.user_resource'));
 $profileUrl = $modx->getOption('discuss.files_url').'/profile/';
@@ -64,7 +66,7 @@ foreach ($posts as $post) {
             src="'.$profileUrl.$pa['author'].'/'.$pa['author_avatar'].'" />';
     }
     /* check if author wants to show email */
-    if (!empty($pa['author_show_email']) && $modx->user->isAuthenticated()) {
+    if (!empty($pa['author_show_email']) && $isAuthenticated) {
         $pa['author_email'] = '<a href="mailto:'.$post->get('author_email').'">'.$modx->lexicon('discuss.email_author').'</a>';
     } else {
         $pa['author_email'] = '';
@@ -85,7 +87,7 @@ foreach ($posts as $post) {
     }
 
     /* load actions */
-    if (!$thread->get('locked') && $modx->user->isAuthenticated()) {
+    if (!$thread->get('locked') && $isAuthenticated) {
         $pa['action_reply'] = '<a href="[[~[[++discuss.reply_post_resource]]? &post=`[[+id]]`]]" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
 
         $canModifyPost = $modx->user->get('id') == $post->get('author') || $isModerator;
@@ -110,7 +112,6 @@ foreach ($posts as $post) {
             $pa['attachments'] .= $discuss->getChunk($postAttachmentRowTpl,$attachmentArray);
         }
     }
-
 
     $plist[] = $pa;
 }
