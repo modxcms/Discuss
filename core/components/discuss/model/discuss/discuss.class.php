@@ -20,22 +20,26 @@ class Discuss {
         $corePath = $this->modx->getOption('discuss.core_path',$config,$this->modx->getOption('core_path').'components/discuss/');
         $assetsPath = $this->modx->getOption('discuss.assets_path',$config,$this->modx->getOption('assets_path').'components/discuss/');
         $assetsUrl = $this->modx->getOption('discuss.assets_url',$config,$this->modx->getOption('assets_url').'components/discuss/');
+		$themesUrl = $this->modx->getOption('discuss.themes_url',$config,$assetsUrl.'themes/');
+        $theme = $this->modx->getOption('discuss.theme',$config,'default');
 
         $connectorId = $this->modx->getOption('discuss.connector_resource',$config,1);
         $connectorUrl = $this->modx->makeUrl($connectorId);
 
         $this->config = array_merge(array(
             'assetsUrl' => $assetsUrl,
-            'cssUrl' => $assetsUrl.'css/',
-            'jsUrl' => $assetsUrl.'js/',
-            'imagesUrl' => $assetsUrl.'images/',
+			'themesUrl' => $themesUrl,
+            'theme' => $theme,
+            'cssUrl' => $themesUrl.$theme.'/css/',
+            'jsUrl' => $themesUrl.$theme.'/js/',
+            'imagesUrl' => $themesUrl.$theme.'/images/',
 
             'connectorUrl' => $connectorUrl,
 
             'corePath' => $corePath,
             'modelPath' => $corePath.'model/',
-            'chunksPath' => $corePath.'elements/chunks/',
-            'pagesPath' => $corePath.'elements/pages/',
+            'chunksPath' => $corePath.'elements/chunks/'.$theme.'/',
+            'pagesPath' => $corePath.'elements/pages/'.$theme.'/',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
             'hooksPath' => $corePath.'hooks/',
