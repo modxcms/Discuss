@@ -1,0 +1,162 @@
+/* Post Wrapper */
+	
+.board-posts{
+	margin:0; 
+	padding:0;
+}
+.board-posts a{
+	text-decoration: none; 
+	color: rgb(0, 102, 204); 
+}
+.board-posts li.post{
+	list-style-type:none; 
+	position:relative; 
+	margin-left:0;
+	border: 0 none;
+}
+.board-posts .post-wrapper{
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	border-color:#CFCFCF #CFCFCF #DEDEDE;
+	border-style:solid;
+	border-width:1px 1px 5px;
+	margin-bottom:5px;
+}
+.board-posts h3	{
+	background:url("../images/bgs/grad-bg-darkgrey.png") repeat-x scroll 0 bottom #E7E7E7;
+	border-bottom:1px solid #C5C5C5;
+	color:#575757;
+	cursor:pointer;
+	margin:0;
+	padding:8px 5px;
+	text-shadow:0 1px 0 #FFFFFF;
+}
+.board-posts ol						{border-left:1px dotted #E0E0E0; margin-bottom:0; padding-left:25px;}
+
+/* Post Header */
+
+.author_name						{font-weight:bold; font-style:normal; font-size:12px;}
+.author_name a						{color:#0066CC;}
+.author_name a:hover				{color:#363636;}
+
+.post-meta							{background-color:#F7F7F7; border-bottom:1px solid #EAEAEA; border-top:1px solid #AAAAAA; padding-left:5px;}
+
+/* Post Meta */
+
+.author_infos{
+	background-color:#EFEFEF;
+	border-bottom:1px solid #E0E0E0;
+	border-top:1px solid #F7F7F7;
+	height:42px;
+	padding:13px 7px 4px;
+	text-shadow:0 1px 0 #FFFFFF;
+}
+
+.author_infos img{
+	border:3px solid #676767;
+	position:absolute;
+	top:48px;
+}
+
+.author_infos cite{
+	font-size:13px;
+	font-style:normal;
+	font-weight:bold;
+	margin-left:55px;
+}
+
+.author_infos .postedon{
+	display:block;
+	margin-left:55px;
+	color:#9F0000;
+}
+
+.post-report {
+	position:absolute;
+	right:10px;
+	top:85px;
+}
+.post-report a{
+	padding:0 10px; 
+	color:#575757;
+	font-size:9px;
+}
+
+/* Post Content */
+.post-body	{
+	background-color:#FFFFFF; 
+	color:#565656; 
+	padding:15px 15px 30px;
+	font-family:Tahoma,"Lucida Grande","Trebuchet MS",Arial,Helvetica,sans-serif;
+	font-size:12px;
+	height: auto;
+	line-height:1.5;
+}
+
+#board-wrapper .post-body ul {
+	margin-left: 20px;
+}
+#board-wrapper .post-body li {
+	list-style:disc outside none;
+}
+
+.post-body blockquote{
+	border: 1px solid #eaeaea;
+	background-color: #FCFCFC;	
+}
+
+
+.post-body blockquote blockquote{
+	margin:0 10px 0;	
+}
+
+.post-body blockquote .title{
+	background-color: #E2EFC2;
+	border-bottom:1px solid #eaeaea;
+	font-size: 14px;
+	font-family: Arial;
+	padding: 10px;
+}
+
+.post-body blockquote .body, .post-body pre{
+	padding: 10px 20px;
+}
+
+.post-body pre{
+	font-family:Consolas,Monaco,"Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+	white-space:pre-wrap;
+}
+
+.post-attachments{
+	background-color:#F7F7F7;
+	margin:10px 0 0;
+	padding:5px;
+}
+.post-attachments li{
+list-style:none outside none;
+margin:0;
+padding:0;
+font-size:11px;
+}
+.post-attachments li a{font-style:italic;
+padding-right:20px;
+}
+.author_signature{
+
+}
+
+
+
+/* Post Footer */
+
+.post-footer{
+clear:both;
+height:30px;
+}
+.post-options						{margin-top:5px; float:right;}
+.post-options a						{padding:0 12px; font-size:12px;}
+
+/* Misc */
+
+.tree								{background-color:transparent; border-bottom:1px dotted #E0E0E0; float:left; height:1px; margin-left:-30px; margin-top:35px; position:absolute; width:20px;}

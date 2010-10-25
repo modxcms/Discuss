@@ -1,0 +1,118 @@
+/* Board breadcrumbs */
+
+.breadcrumbs {
+	-moz-border-radius: 5px 5px 0 0; 
+	-webkit-border-radius: 5px 5px 0 0; 
+	border-radius: 5px 5px 0 0; 
+	background:url("../images/bgs/bd.png") repeat-x scroll right -40px transparent; 
+	border-bottom:1px solid #BDBDBD; 
+	float:left;
+	margin:-20px -20px 0 !important;
+	padding:0 40px 0 0 !important;
+	width:100%;
+}
+#board-wrapper .breadcrumbs li{
+	background:url("../images/bgs/bd.png") no-repeat scroll right top transparent;
+	float:left;
+	color:#9F0000;
+	font-size:11px;
+	height:37px;
+	line-height:37px;
+	padding:0 20px 0 10px;
+}
+.breadcrumbs span	{
+	display:none;
+}
+.breadcrumbs a {
+	color:#575757;
+	display:block;
+	font-weight:bold;
+}
+
+.breadcrumbs a.active {
+	color:#9F0000;
+	display:inline;
+}
+.breadcrumbs a:hover {
+	text-decoration: underline;
+}
+
+/* Board pagination */
+
+#board-wrapper .pagination {	
+	font-size:11px;
+	-moz-border-radius:4px 4px 4px 4px;
+	-webkit-border-radius:4px 4px 4px 4px;
+	border-radius:4px 4px 4px 4px;
+	background:url("../images/bgs/grad-bg.png") repeat-x scroll 0 bottom #F8F8F8;
+	border:1px solid #CFCFCF;
+}
+
+
+#board-wrapper .pagination li  {
+	border-right:1px solid #CFCFCF;
+	display:block;
+	float:left;
+	font-size:12px;
+	font-weight:bold;
+	height:27px;
+	line-height:27px;
+	list-style-type:none;		
+	text-shadow:0 1px 0 #FFFFFF;
+}
+
+#board-wrapper .pagination li:last-child {
+	border-right:0 none;
+}
+
+#board-wrapper .pagination li a {
+	border:1px solid transparent;
+	color:#363636;
+	display:block;
+	line-height:25px;
+	outline:medium none;
+	text-decoration:none;
+	white-space:nowrap;
+	padding:0 10px;
+}
+
+#board-wrapper .pagination li a:hover {
+    -webkit-transition: -webkit-box-shadow 0.2s linear;
+	background:url("../images/bgs/grad-bg-green.png") repeat-x scroll 0 bottom #84A93C;
+	border:1px solid #5D7F2F;
+	text-shadow:0 -1px 0 #676767;
+	color: #fafafa;
+}
+
+#board-wrapper .pagination li.inactive {
+	text-shadow:0 1px 0 #eaeaea;
+	color: #dedede;
+	padding:0 10px;
+}
+
+#board-wrapper .pagination li.active {
+	background-color:#DFDFDF;
+	padding:0 10px;
+}
+
+/* readers */
+
+#board-wrapper .readers{
+	border-radius:5px 5px 5px 5px;
+	-moz-border-radius:5px 5px 5px 5px;
+	-webkit-border-radius:5px 5px 5px 5px;
+	background-color:#EFEFEF;
+	display:block;
+	font-size:11px;
+	padding:5px 8px;
+}
+
+#board-wrapper .readers a{
+	color:#575757;
+	font-weight:bold;
+	text-shadow:0 1px 0 #FFFFFF;
+}
+
+#board-wrapper .readers a:hover{
+	color:#769E3B;
+}
