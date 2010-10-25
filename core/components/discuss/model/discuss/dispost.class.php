@@ -156,45 +156,64 @@ class disPost extends xPDOSimpleObject {
     public function getContent() {
         $message = $this->get('message');
 
-        $tags = array(
-            '<','>',
-            '[b]','[/b]',
-            '[i]','[/i]',
-            '[img]','[/img]',
-            '[code]','[/code]',
-            '[quote]','[/quote]',
-            '[s]','[/s]',
-            '[url="','[/url]',
-            '[email="','[/email]',
-            '[hr]',
-            '[list]','[/list]','[li]','[/li]',
-            '"]',
-        );
-        if ($this->xpdo->getOption('discuss.bbcode_enabled',null,true)) {
-            $message = str_replace($tags,array(
-                '&lt;','&gt;',
-                '<strong>','</strong>',
-                '<em>','</em>',
-                '<img src="','">',
-                '<div class="dis-code"><h5>Code</h5><pre>','</pre></div>',
-                '<div class="dis-quote"><h5>Quote</h5><div>','</div></div>',
-                '<span class="dis-strikethrough">','</span>',
-                '<a href="','</a>',
-                '<a href="mailto:','</a>',
-                '<hr />',
-                '<ul>','</ul>','<li>','</li>',
-                '">',
-            ),$message);
+        /* Check custom content parser setting */
+        if($this->xpdo->getOption('discuss.use_custom_post_parser',null,false)){
+
+            /* Load custom parser */
+            $parsed = $this->xpdo->invokeEvent('OnDiscussPostCustomParser', array(
+                    'content' => &$message,
+            ));
+            if (is_array($parsed)) {
+                foreach ($parsed as $msg) {
+                    if (!empty($msg)) {
+                        $message = $msg;
+                    }
+                }
+            } else if (!empty($parsed)) {
+                $message = $parsed;
+            }
         } else {
-            $message = str_replace($tags,'',$message);
+            $tags = array(
+                '<','>',
+                '[b]','[/b]',
+                '[i]','[/i]',
+                '[img]','[/img]',
+                '[code]','[/code]',
+                '[quote]','[/quote]',
+                '[s]','[/s]',
+                '[url="','[/url]',
+                '[email="','[/email]',
+                '[hr]',
+                '[list]','[/list]','[li]','[/li]',
+                '"]',
+            );
+            if ($this->xpdo->getOption('discuss.bbcode_enabled',null,true)) {
+                $message = str_replace($tags,array(
+                    '&lt;','&gt;',
+                    '<strong>','</strong>',
+                    '<em>','</em>',
+                    '<img src="','">',
+                    '<div class="dis-code"><h5>Code</h5><pre>','</pre></div>',
+                    '<div class="dis-quote"><h5>Quote</h5><div>','</div></div>',
+                    '<span class="dis-strikethrough">','</span>',
+                    '<a href="','</a>',
+                    '<a href="mailto:','</a>',
+                    '<hr />',
+                    '<ul>','</ul>','<li>','</li>',
+                    '">',
+                ),$message);
+            } else {
+                $message = str_replace($tags,'',$message);
+            }
+
+            $message = $this->_nl2br2($message);
         }
 
-        $message = $this->_nl2br2($message);
-
-        /* Allow for plugin to change content of posts */
+        /* Allow for plugin to change content of posts after it has been parsed */
         $rs = $this->xpdo->invokeEvent('OnDiscussPostFetchContent',array(
             'content' => &$message,
         ));
+
         if (is_array($rs)) {
             foreach ($rs as $msg) {
                 if (!empty($msg)) {
@@ -298,7 +317,7 @@ class disPost extends xPDOSimpleObject {
             }
             $members = array_unique($members);
             $members = implode(',',$members);
-        } else { $members = $modx->lexicon('discuss.zero_members'); }
+        } else { $members = $this->xpdo->lexicon('discuss.zero_members'); }
 
         $c = $this->xpdo->newQuery('disSession');
         $c->where(array(
