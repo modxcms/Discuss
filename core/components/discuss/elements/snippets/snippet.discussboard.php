@@ -16,6 +16,7 @@ if ($board == null) $modx->sendErrorPage();
 /* setup default properties */
 $limit = $modx->getOption('limit',$_REQUEST,$modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.threads_per_page',null,20)));
 $start = $modx->getOption('start',$_REQUEST,$modx->getOption('start',$scriptProperties,0));
+$param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
 
 $cssLockedThreadCls = $modx->getOption('cssLockedThreadCls',$scriptProperties,'dis-thread-locked');
 $cssStickyThreadCls = $modx->getOption('cssStickyThreadCls',$scriptProperties,'dis-thread-sticky');
