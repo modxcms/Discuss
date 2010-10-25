@@ -111,15 +111,19 @@ $c->where(array(
 ));
 $c->sortby('Ancestors.depth','DESC');
 $ancestors = $modx->getCollection('disBoard',$c);
-$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">'
-    .'[[++discuss.forum_title]]'
-    .'</a> / ';
+
+$trail = $discuss->getChunk('BreadcrumbsLink',array(
+	'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+	'text' => '[[++discuss.forum_title]]',
+));
 foreach ($ancestors as $ancestor) {
-    $url = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id'));
-    $trail .= '<a href="'.$url.'">'.$ancestor->get('name').'</a>';
-    $trail .= ' / ';
+	$trail .= $discuss->getChunk('BreadcrumbsLink',array(
+		'url' => $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id')),
+		'text' => $ancestor->get('name'),
+	));
 }
-$trail .= $thread->get('title');
+
+$trail .= $discuss->getChunk('BreadcrumbsActive', array('text' => $thread->get('title')));
 $thread->set('trail',$trail);
 unset($trail,$url,$c,$ancestors);
 

@@ -27,15 +27,20 @@ $c->where(array(
 $c->sortby('Ancestors.depth','ASC');
 $ancestors = $modx->getCollection('disBoard',$c);
 
-$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">'.$modx->getOption('discuss.forum_title').'</a> / ';
+/* build breadcrumbs */
+$trail = $discuss->getChunk('BreadcrumbsLink',array(
+	'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+	'text' => $modx->lexicon('discuss.home'),
+));
 foreach ($ancestors as $ancestor) {
-    $url = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id'));
-    $trail .= '<a href="'.$url.'">'.$ancestor->get('name').'</a>';
-    $trail .= ' / ';
+	$trail .= $discuss->getChunk('BreadcrumbsLink',array(
+		'url' => '[[~[[++discuss.board_resource]]? &board=`'.$ancestor->get('id').'`]]',
+		'text' => $ancestor->get('name'),
+	));
 }
-$trail .= $modx->lexicon('new_thread');
+$activeTitle = $modx->lexicon('new_thread');
+$trail .= $discuss->getChunk('BreadcrumbsActive', array('text' => $activeTitle));
 $properties['trail'] = $trail;
-
 
 /* if POST, process new thread request */
 if (!empty($_POST)) {
