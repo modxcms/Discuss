@@ -46,7 +46,7 @@ $properties['trail'] = $trail;
 if (!empty($_POST)) {
     $result = include $discuss->config['processorsPath'].'web/post/create.php';
     if ($discuss->processResult($result)) {
-        $url = $modx->makeUrl($modx->getOption('discuss.board_resource')).'?board='.$board->get('id');
+        $url = $modx->makeUrl($modx->getOption('discuss.thread_resource')).'?thread='.$post->get('id');
         $modx->sendRedirect($url);
     }
     $modx->toPlaceholders($_POST,'post');
