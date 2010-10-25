@@ -8,6 +8,14 @@
 if (empty($scriptProperties['post']) && empty($scriptProperties['thread'])) return false;
 $post = !empty($scriptProperties['post']) ? $scriptProperties['post'] : $scriptProperties['thread'];
 
+/* Verify the posts output type - Flat or Threaded */
+$flat = $modx->getOption('discuss.post_flat',$scriptProperties, true);
+if($flat){
+    $postPerPage = $modx->getOption('discuss.post_per_page',$scriptProperties, 10);
+    $param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
+    $start = isset($_GET[$param]) ? ($_GET[$param] - 1) * $postPerPage : 0;
+}
+
 /* get default properties */
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'disPostAttachment');
@@ -48,7 +56,28 @@ $c->innerJoin('disUserProfile','AuthorProfile');
 $c->where(array(
     'Descendants.ancestor' => $post->get('id'),
 ));
-$c->sortby('disPost.rank','ASC');
+if($flat){
+    $ct = clone $c;
+    if($ct->prepare() && $ct->stmt->execute())
+    {
+        $total = $ct->stmt->rowCount();
+        $count = ceil($total/$postPerPage);
+    }
+    $modx->hooks->load('pagination/build',array(
+        'total' => $count,
+        'id' => $post->get('id'),
+        'view' => 'thread',
+        'limit' => $postPerPage,
+        'param' => $param,
+    ));
+    unset($ct,$count);
+
+    $c->sortby('disPost.id','ASC');
+    $c->limit($postPerPage, $start);
+} else {
+    $c->sortby('disPost.rank','ASC');
+}
+$c->groupBy('disPost.id');
 $posts = $modx->getCollection('disPost',$c);
 
 $isAuthenticated = $modx->user->isAuthenticated();
@@ -72,12 +101,15 @@ foreach ($posts as $post) {
         $pa['author_email'] = '';
     }
 
-    /* set depth and check max post depth */
-    $pa['class'] = 'dis-board-post dis-depth-'.$pa['depth'];
-    if ($post->get('depth') > $modx->getOption('discuss.max_post_depth',null,3)) {
-         /* Don't hide post if it exceed max depth, set its depth placeholder to max depth value instead */
-        $pa['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
+    if(!$flat){
+        /* set depth and check max post depth */
+        $pa['class'] = 'dis-board-post dis-depth-'.$pa['depth'];
+        if ($post->get('depth') > $modx->getOption('discuss.max_post_depth',null,3)) {
+            /* Don't hide post if it exceed max depth, set its depth placeholder to max depth value instead */
+            $pa['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
+        }
     }
+
     /* format bbcode */
     $pa['content'] = $post->getContent();
 
@@ -112,13 +144,20 @@ foreach ($posts as $post) {
             $pa['attachments'] .= $discuss->getChunk($postAttachmentRowTpl,$attachmentArray);
         }
     }
-
-    $plist[] = $pa;
+    if($flat){
+        $output .= $this->discuss->getChunk($postTpl,$pa);
+    } else {
+        $plist[] = $pa;
+    }
 }
 
-/* parse posts via tree parser */
-$discuss->loadTreeParser();
-if (count($plist) > 0) {
-    return $discuss->treeParser->parse($plist,$postTpl);
+if($flat){
+    return $output;
+} else {
+    /* parse posts via tree parser */
+    $discuss->loadTreeParser();
+    if (count($plist) > 0) {
+        return $discuss->treeParser->parse($plist,$postTpl);
+    }
 }
 return '';
