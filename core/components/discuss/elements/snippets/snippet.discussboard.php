@@ -178,15 +178,21 @@ $placeholders['readers'] = $board->getViewing();
 
 /* get pagination */
 $count = count($pa);
-$url = $modx->makeUrl($modx->getOption('discuss.board_resource'));
-$placeholders['pagination'] = $discuss->buildPagination($count,$limit,$start,$url);
+$modx->hooks->load('pagination/build',array(
+	'total' => $count,
+	'id' => $board->get('id'),
+	'view' => 'board',
+	'limit' => $limit,
+	'param' => $param,
+));
+
 unset($count,$start,$limit,$url);
 
 /* action buttons */
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {
-    $actionButtons[] = array('url' => '[[~[[++discuss.new_thread_resource]]? &board=`[[+id]]`]]', 'text' => $modx->lexicon('discuss.thread_new'));
-    $actionButtons[] = array('url' => '[[~[[++discuss.board_resource]]? &board=`[[+id]]` &read=`1`]]', 'text' => $modx->lexicon('discuss.mark_read'));
+    $actionButtons[] = array('url' => '[[~[[++discuss.new_thread_resource]]? &board=`'.$board->get('id').'`]]', 'text' => $modx->lexicon('discuss.thread_new'));
+    $actionButtons[] = array('url' => '[[~[[++discuss.board_resource]]? &board=`'.$board->get('id').'` &read=`1`]]', 'text' => $modx->lexicon('discuss.mark_read'));
     $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
@@ -196,4 +202,3 @@ unset($actionButtons);
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.board.js');
 $modx->setPlaceholder('discuss.board',$board->get('name'));
 return $discuss->output('board',$placeholders);
-
