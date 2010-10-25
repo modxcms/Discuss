@@ -31,9 +31,11 @@ $subboards = $modx->hooks->load('board/getList',array(
 ));
 
 $subboardOutput = '';
+$category = array();
+$category['category_name'] = $modx->lexicon('discuss.subboards');
+
 foreach ($subboards as $subboard) {
     $subboard->getSubBoardList();
-    $subboard->set('category_name',$modx->lexicon('discuss.subboards'));
 
     if ($subboard->get('unread') > 0 && $modx->user->isAuthenticated()) {
         $subboard->set('unread-cls',$cssUnreadRowCls);
@@ -50,15 +52,12 @@ foreach ($subboards as $subboard) {
     }
 
     $ba = $subboard->toArray('',true);
-
-    if ($currentCategory != $subboard->get('category')) {
-        $subboardOutput .= $discuss->getChunk($categoryRowTpl,$ba);
-        $currentCategory = $subboard->get('category');
+    $category['list'] .= $discuss->getChunk($boardRowTpl,$ba);
     }
-
-    $subboardOutput .= $discuss->getChunk($boardRowTpl,$ba);
+if(isset($category['list'])){
+	$subboardOutput = $discuss->getChunk($categoryRowTpl,$category);
 }
-unset($currentCategory,$ba,$lp,$subboard);
+unset($ba,$subboard,$category);
 
 /* get all threads in board */
 $posts = $modx->hooks->load('board/post/getList',array(
@@ -133,7 +132,6 @@ unset($unread,$class,$threshold,$latestText,$createdon,$c);
 $modx->regClientStartupScript('<script type="text/javascript">$(function() {
     DISBoard.threadCount = "'.count($pa).'";
 });</script>');
-
 
 /* parse threads */
 $postsOutput = '';
