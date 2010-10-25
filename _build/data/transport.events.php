@@ -19,6 +19,12 @@ $events['OnDiscussPostSave']->fromArray(array (
   'service' => 1,
   'groupname' => 'Discuss',
 ), '', true, true);
+$events['OnDiscussPostCustomParser']= $modx->newObject('modEvent');
+$events['OnDiscussPostCustomParser']->fromArray(array (
+  'name' => 'OnDiscussPostCustomParser',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
 $events['OnDiscussPostFetchContent']= $modx->newObject('modEvent');
 $events['OnDiscussPostFetchContent']->fromArray(array (
   'name' => 'OnDiscussPostFetchContent',

@@ -88,6 +88,33 @@ $settings['discuss.bbcode_enabled']->fromArray(array(
     'area' => 'Posts',
 ),'',true,true);
 
+$settings['discuss.theme']= $modx->newObject('modSystemSetting');
+$settings['discuss.theme']->fromArray(array(
+    'key' => 'discuss.theme',
+    'value' => 'default',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Administration',
+),'',true,true);
+
+$settings['discuss.post_per_page']= $modx->newObject('modSystemSetting');
+$settings['discuss.post_per_page']->fromArray(array(
+    'key' => 'discuss.post_per_page',
+    'value' => 10,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Posts',
+),'',true,true);
+
+$settings['discuss.use_custom_post_parser']= $modx->newObject('modSystemSetting');
+$settings['discuss.use_custom_post_parser']->fromArray(array(
+    'key' => 'discuss.use_custom_post_parser',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'Posts',
+),'',true,true);
+
 $settings['discuss.courtesy_edit_wait']= $modx->newObject('modSystemSetting');
 $settings['discuss.courtesy_edit_wait']->fromArray(array(
     'key' => 'discuss.courtesy_edit_wait',
@@ -219,6 +246,15 @@ $settings['discuss.reserved_usernames']= $modx->newObject('modSystemSetting');
 $settings['discuss.reserved_usernames']->fromArray(array(
     'key' => 'discuss.reserved_usernames',
     'value' => 'admin,abc,administrator,superuser,root',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Security',
+),'',true,true);
+
+$settings['discuss.page_param']= $modx->newObject('modSystemSetting');
+$settings['discuss.page_param']->fromArray(array(
+    'key' => 'discuss.page_param',
+    'value' => 'page',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Security',
