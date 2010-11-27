@@ -1,4 +1,4 @@
-<p class="dis-breadcrumbs">[[+trail]]</p>
+[[+trail]]
 
 <div id="dis-modify-post-preview">[[+preview]]</div>
 <br />

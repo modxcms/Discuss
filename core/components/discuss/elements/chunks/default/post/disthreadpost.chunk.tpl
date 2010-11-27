@@ -42,12 +42,12 @@
             ]]
             </div>
             <div class="dis-post-ip">
-                [[+editedby:notempty=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[++discuss.user_resource]]?user=`[[+editedby]]`]]">[[+editedby_username]]</a></span>`]]
+                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[++discuss.user_resource]]?user=`[[+editedby]]`]]">[[+editedby_username]]</a></span>`]]
                 <a href="javascript:void([[+id]]);">[[%discuss.report_to_mod]]</a>
                 <a href="javascript:void([[+id]]);">[[+ip]]</a>
             </div>
         </div>
         <br class="clear" />
-		[[+children:notempty=`<ol class="dis-board-thread [[+class]]">[[+children]]</ol>`]]
+        [[+children:notempty=`<ol class="dis-board-thread [[+class]]">[[+children]]</ol>`]]
     </div>
 </li>

@@ -1,6 +1,7 @@
 <?php
 /**
- *
+ * Get all unread posts by user
+ * 
  * @package discuss
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
@@ -49,8 +50,16 @@ foreach ($unreadPosts as $post) {
 $properties['posts'] = implode("\n",$posts);
 
 /* get board breadcrumb trail */
-$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">[[++discuss.forum_title]]</a> / ';
-$trail .= $modx->lexicon('discuss.unread_posts');
+$trail = array();
+$trail[] = array(
+    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+    'text' => $modx->getOption('discuss.forum_title'),
+);
+$trail[] = array('text' => $modx->lexicon('discuss.unread_posts'),'active' => true);
+
+$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+    'items' => &$trail,
+)));
 $properties['trail'] = $trail;
 
 return $discuss->output('unread',$properties);

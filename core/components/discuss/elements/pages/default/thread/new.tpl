@@ -1,4 +1,4 @@
-<p class="dis-breadcrumbs">[[+trail]]</p>
+[[+trail]]
 
 <div id="dis-new-thread-preview">[[+preview]]</div>
 <br />

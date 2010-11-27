@@ -1,4 +1,4 @@
-<p class="dis-breadcrumbs">[[++discuss.forum_title]]</p>
+[[+trail]]
 
 <ol class="dis-board-list">
 [[+boards]]

@@ -1,6 +1,6 @@
 <?php
 /**
- *
+ * Display a thread of posts
  * @package discuss
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
@@ -111,19 +111,21 @@ $c->where(array(
 ));
 $c->sortby('Ancestors.depth','DESC');
 $ancestors = $modx->getCollection('disBoard',$c);
-
-$trail = $discuss->getChunk('BreadcrumbsLink',array(
-	'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
-	'text' => '[[++discuss.forum_title]]',
-));
+$trail = array();
+$trail[] = array(
+    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+    'text' => '[[++discuss.forum_title]]',
+);
 foreach ($ancestors as $ancestor) {
-	$trail .= $discuss->getChunk('BreadcrumbsLink',array(
-		'url' => $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id')),
-		'text' => $ancestor->get('name'),
-	));
+    $trail[] = array(
+        'url' => $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id')),
+        'text' => $ancestor->get('name'),
+    );
 }
-
-$trail .= $discuss->getChunk('BreadcrumbsActive', array('text' => $thread->get('title')));
+$trail[] = array('text' => $thread->get('title'), 'active' => true);
+$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+    'items' => &$trail,
+)));
 $thread->set('trail',$trail);
 unset($trail,$url,$c,$ancestors);
 

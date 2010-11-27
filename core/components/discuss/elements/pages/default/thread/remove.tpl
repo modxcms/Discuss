@@ -1,4 +1,4 @@
-<p class="dis-breadcrumbs">[[+trail]]</p>
+[[+trail]]
 
 <br />
 <form action="[[~[[*id]]]]" method="post" class="dis-form" id="dis-remove-thread-form">

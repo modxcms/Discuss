@@ -1,5 +1,4 @@
-
-<p class="dis-breadcrumbs">[[+trail]]</p>
+[[+trail]]
 
 <ol class="dis-board-list" style="[[+subboards_toggle]]">
 [[+subboards]]

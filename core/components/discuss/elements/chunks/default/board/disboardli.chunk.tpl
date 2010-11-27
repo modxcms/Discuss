@@ -6,5 +6,5 @@
 
     <h3><a href="[[~[[++discuss.board_resource]]? &board=`[[+id]]`]]">[[+name]]</a></h3>
     <p>[[+description]]</p>
-    <span class="dis-board-subs">[[+subforums]]</span>
+    <span class="dis-board-subs">[[+subforums:notempty=`Sub-Forums: [[+subforums]]`]]</span>
 </li>

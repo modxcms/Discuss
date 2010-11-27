@@ -11,9 +11,9 @@ $discuss->setSessionPlace('home');
 
 /* get default properties */
 $activeUserRowTpl = $modx->getOption('activeUserRowTpl',$scriptProperties,'disActiveUserRow');
-$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'disBoardLi');
-$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'disCategoryLi');
-$subForumsRowTpl = $modx->getOption('subForumsRowTpl',$scriptProperties,'subForumsRowTpl');
+$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'board/disBoardLi');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'category/disCategoryLi');
+$subForumLinkTpl = $modx->getOption('subForumsLinkTpl',$scriptProperties,'board/disSubForumLink');
 $cssBoardRowCls = $modx->getOption('cssBoardRowCls',$scriptProperties,'dis-board-li');
 $cssUnreadCls = $modx->getOption('cssUnreadCls',$scriptProperties,'dis-unread');
 $lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
@@ -55,10 +55,9 @@ $sbCriteria->select(array(
 $sbCriteria->innerJoin('disBoardClosure','subBoardClosure','`subBoardClosure`.`ancestor` = `subBoard`.`id`');
 $sbCriteria->innerJoin('disBoard','subBoardClosureBoard','`subBoardClosureBoard`.`id` = `subBoardClosure`.`descendant`');
 /* The following commented part of the request play really bad with subboard query */
-/*
 $sbCriteria->innerJoin('disBoardUserGroup','subBoardUserGroups','(`subBoardUserGroups`.`usergroup` IS NULL '.(empty($_groups) ? '' : '
     OR `subBoardUserGroups`.`usergroup` IN ('.implode(',',$_groups).')
-').')');*/
+').')');
 $sbCriteria->where(array(
     '`subBoard`.`id` = `disBoard`.`id`',
     '`subBoardClosure`.`descendant` != `disBoard`.`id`',
@@ -94,7 +93,7 @@ $where = array(
 $g = array();
 if (!empty($_groups)) {
     $g = array(
-        'UserGroups.usergroup' => $_groups,
+        'UserGroups.usergroup:IN' => $_groups,
     );
 }
 $g['OR:UserGroups.usergroup:='] = null;
@@ -108,13 +107,11 @@ unset($c);
 
 /* now loop through boards */
 $placeholders = array();
-$placeholders['boards'] = '';
+$placeholders['boards'] = array();
 $currentCategory = 0;
-$lastCategory = false;
 $rowClass = $cssRowEven;
 
 foreach ($boards as $board) {
-
     if ($board->get('unread') > 0 && $modx->user->isAuthenticated()) {
         $board->set('unread-cls',$cssUnreadCls);
     }
@@ -129,51 +126,58 @@ foreach ($boards as $board) {
         $board->set('lastPost',$lp);
     }
 
-	$subBoards = $board->get('subboards');
-	$ba['subforums'] = '';
+    $subBoards = $board->get('subboards');
+    $ba['subforums'] = '';
 
-	if(!empty($subBoards)){
-		$subBoards = explode(',',$subBoards);
-		$ph = array();
-		$sbl = '';
-		foreach ($subBoards as $subboard) {
-			$sb = explode(':',$subboard);
-			$ph['id'] = $sb[0];
-			$ph['title'] = $sb[1];
+    if (!empty($subBoards)) {
+        $subBoards = explode(',',$subBoards);
+        $ph = array();
+        $sbl = '';
+        foreach ($subBoards as $subboard) {
+            $sb = explode(':',$subboard);
+            $ph['id'] = $sb[0];
+            $ph['title'] = $sb[1];
 
-			$sbl .= $discuss->getChunk($subForumsRowTpl,$ph);
+            $sbl .= $discuss->getChunk($subForumLinkTpl,$ph);
+        }
+        $board->set('subforums',$sbl);
     }
-		$board->set('subforums',$sbl);
-	}
 
-	$currentCategory = $board->get('category');
-	if(!$lastCategory)
-		$lastCategory = $board->get('category');
-
-	if ($currentCategory != $lastCategory) {
-		$ba['list'] = $boardList;
-		unset($ba['rowClass']);
-
-        $placeholders['boards'] .= $discuss->getChunk($categoryRowTpl,$ba);
+    /* get current category */
+    $currentCategory = $board->get('category');
+    if (!isset($lastCategory)) {
         $lastCategory = $board->get('category');
+    }
 
-		$ba = $board->toArray('',true);
-		$boardList = $discuss->getChunk($boardRowTpl,$ba);
+    /* if changing categories */
+    if ($currentCategory != $lastCategory) {
+        $ba['list'] = implode("\n",$boardList);
+        unset($ba['rowClass']);
 
-    } else {
+        $placeholders['boards'][] = $discuss->getChunk($categoryRowTpl,$ba);
+        
+        $boardList = array(); /* reset current category board list */
+        $ba = $board->toArray('',true);
+        $ba['rowClass'] = $rowClass;
 
-		$ba = $board->toArray('',true);
-		$ba['rowClass'] = $rowClass;
-		$lastCategory = $board->get('category');
-		$boardList .= $discuss->getChunk($boardRowTpl,$ba);
+        $lastCategory = $board->get('category');
+        $boardList[] = $discuss->getChunk($boardRowTpl,$ba);
 
-		$rowClass = ($rowClass == $cssRowAlt) ? $cssRowEven : $cssRowAlt;
-}
+    } else { /* otherwise add to temp board list */
+
+        $ba = $board->toArray('',true);
+        $ba['rowClass'] = $rowClass;
+        $lastCategory = $board->get('category');
+        $boardList[] = $discuss->getChunk($boardRowTpl,$ba);
+
+        $rowClass = ($rowClass == $cssRowAlt) ? $cssRowEven : $cssRowAlt;
+    }
 }
 /* Last category */
-$ba['list'] = $boardList;
+$ba['list'] = implode("\n",$boardList);
 $ba['rowClass'] = $rowClass;
-$placeholders['boards'] .= $discuss->getChunk($categoryRowTpl,$ba);
+$placeholders['boards'][] = $discuss->getChunk($categoryRowTpl,$ba);
+$placeholders['boards'] = implode("\n",$placeholders['boards']);
 unset($currentCategory,$ba,$boards,$board,$lp);
 
 /* process logout */
@@ -274,6 +278,13 @@ if ($latestPost) {
     $placeholders = array_merge($placeholders,$la);
 }
 unset($la,$latestPost,$c);
+
+/* breadcrumbs */
+$trail = array(array('text' => $modx->getOption('discuss.forum_title'),'active' => true));
+$placeholders['trail'] = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+    'items' => &$trail,
+)));
+unset($trail);
 
 /* output */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.home.js');

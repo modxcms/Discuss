@@ -1,6 +1,7 @@
 <?php
 /**
- *
+ * Remove Thread page
+ * 
  * @package discuss
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
@@ -19,16 +20,25 @@ $c->where(array(
 ));
 $c->sortby('Ancestors.depth','ASC');
 $ancestors = $modx->getCollection('disBoard',$c);
-$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">'
-    .'[[++discuss.forum_title]]'
-    .'</a> / ';
+$trail = array();
+$trail[] = array(
+    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+    'text' => $modx->getOption('discuss.forum_title'),
+);
 foreach ($ancestors as $ancestor) {
-    $url = $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id'));
-    $trail .= '<a href="'.$url.'">'.$ancestor->get('name').'</a>';
-    $trail .= ' / ';
+    $trail[] = array(
+        'url' => $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id')),
+        'text' => $ancestor->get('name'),
+    );
 }
-$trail .= '<a href="[[~[[++discuss.thread_resource]]? &thread=`'.$thread->get('id').'`]]">'.$thread->get('title').'</a>';
-$trail .= ' / '.$modx->lexicon('discuss.thread_remove');
+$trail[] = array( 
+    'url' => $modx->makeUrl($modx->getOption('discuss.thread_resource',null,1),'',array('thread' => $thread->get('id'))),
+    'text' => $thread->get('title'),
+);
+$trail[] = array('text' => $modx->lexicon('discuss.thread_remove'),'active' => true);
+$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+    'items' => &$trail,
+)));
 $thread->set('trail',$trail);
 
 /* process form */

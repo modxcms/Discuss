@@ -2,6 +2,7 @@ Changelog for Discuss.
 
 Discuss 0.1
 ====================================
+- Fixed breadcrumbs, board displays, etc
 - Added OnDiscussPostSave, OnDiscussPostBeforeSave, OnDiscussPostFetchContent system events
 - Added editedon support to posts
 - Added download attachment support

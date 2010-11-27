@@ -9,16 +9,16 @@ if (empty($scriptProperties['post']) && empty($scriptProperties['thread'])) retu
 $post = !empty($scriptProperties['post']) ? $scriptProperties['post'] : $scriptProperties['thread'];
 
 /* Verify the posts output type - Flat or Threaded */
-$flat = $modx->getOption('discuss.post_flat',$scriptProperties, true);
-if($flat){
+$flat = $modx->getOption('flat',$scriptProperties,false);
+if ($flat) {
     $postPerPage = $modx->getOption('discuss.post_per_page',$scriptProperties, 10);
     $param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
     $start = isset($_GET[$param]) ? ($_GET[$param] - 1) * $postPerPage : 0;
 }
 
 /* get default properties */
-$postTpl = $modx->getOption('postTpl',$scriptProperties,'disThreadPost');
-$postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'disPostAttachment');
+$postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
+$postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
 /* get thread or root of post */
 if (empty($scriptProperties['thread'])) {
@@ -56,10 +56,9 @@ $c->innerJoin('disUserProfile','AuthorProfile');
 $c->where(array(
     'Descendants.ancestor' => $post->get('id'),
 ));
-if($flat){
+if ($flat){
     $ct = clone $c;
-    if($ct->prepare() && $ct->stmt->execute())
-    {
+    if ($ct->prepare() && $ct->stmt->execute()) {
         $total = $ct->stmt->rowCount();
         $count = ceil($total/$postPerPage);
     }
@@ -151,13 +150,11 @@ foreach ($posts as $post) {
     }
 }
 
-if($flat){
-    return $output;
-} else {
+if (empty($flat)) {
     /* parse posts via tree parser */
     $discuss->loadTreeParser();
     if (count($plist) > 0) {
-        return $discuss->treeParser->parse($plist,$postTpl);
+        $output = $discuss->treeParser->parse($plist,$postTpl);
     }
 }
-return '';
+return $output;

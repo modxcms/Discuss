@@ -1,4 +1,4 @@
-<p class="dis-breadcrumbs">[[+trail]]</p>
+[[+trail]]
 
 <form class="dis-form" action="[[~[[*id]]]]" method="post">
     <h2>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h2>

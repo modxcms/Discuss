@@ -34,20 +34,26 @@ $c->sortby('Ancestors.depth','ASC');
 $ancestors = $modx->getCollection('disBoard',$c);
 
 /* build breadcrumbs */
-$trail = $discuss->getChunk('BreadcrumbsLink',array(
-	'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
-	'text' => $modx->lexicon('discuss.home'),
-));
+$trail = array();
+$trail[] = array(
+    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+    'text' => $modx->lexicon('discuss.home'),
+);
 foreach ($ancestors as $ancestor) {
-	$trail .= $discuss->getChunk('BreadcrumbsLink',array(
-		'url' => '[[~[[++discuss.board_resource]]? &board=`'.$ancestor->get('id').'`]]',
-		'text' => $ancestor->get('name'),
-	));
+    $trail[] = array(
+        'url' => '[[~[[++discuss.board_resource]]? &board=`'.$ancestor->get('id').'`]]',
+        'text' => $ancestor->get('name'),
+    );
 }
-$activeTitle = $modx->lexicon('discuss.reply_to_post',array(
-    'post' => '<a class="active" href="[[~[[++discuss.thread_resource]]? &thread=`'.$thread->get('id').'`]]">'.$post->get('title').'</a>',
-));
-$trail .= $discuss->getChunk('BreadcrumbsActive', array('text' => $activeTitle));
+$trail[] = array(
+    'text' => $modx->lexicon('discuss.reply_to_post',array(
+        'post' => '<a class="active" href="[[~[[++discuss.thread_resource]]? &thread=`'.$thread->get('id').'`]]">'.$post->get('title').'</a>',
+    )),
+    'active' => true,
+);
+$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+    'items' => &$trail,
+)));
 $placeholders['trail'] = $trail;
 
 /* if POST, process new thread request */

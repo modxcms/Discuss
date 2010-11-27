@@ -1,4 +1,4 @@
-<p class="dis-breadcrumbs">[[+trail]]</p>
+[[+trail]]
 
 <form class="dis-form dis-register" action="[[~[[++discuss.register_resource]]]]" method="post">
     <h2>[[%discuss.register? &namespace=`discuss` &topic=`web`]]</h2>

@@ -21,8 +21,8 @@ $param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
 $cssLockedThreadCls = $modx->getOption('cssLockedThreadCls',$scriptProperties,'dis-thread-locked');
 $cssStickyThreadCls = $modx->getOption('cssStickyThreadCls',$scriptProperties,'dis-thread-sticky');
 $cssUnreadRowCls = $modx->getOption('cssUnreadRowCls',$scriptProperties,'dis-unread');
-$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'disBoardLi');
-$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'disCategoryLi');
+$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'board/disBoardLi');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'category/disCategoryLi');
 $lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
 $threadTpl = $modx->getOption('threadTpl',$scriptProperties,'disBoardPost');
 
@@ -31,10 +31,10 @@ $subboards = $modx->hooks->load('board/getList',array(
     'board' => &$board,
 ));
 
-$subboardOutput = '';
 $category = array();
 $category['category_name'] = $modx->lexicon('discuss.subboards');
 
+$category['list'] = array();
 foreach ($subboards as $subboard) {
     $subboard->getSubBoardList();
 
@@ -53,10 +53,11 @@ foreach ($subboards as $subboard) {
     }
 
     $ba = $subboard->toArray('',true);
-    $category['list'] .= $discuss->getChunk($boardRowTpl,$ba);
-    }
-if(isset($category['list'])){
-	$subboardOutput = $discuss->getChunk($categoryRowTpl,$category);
+    $category['list'][] = $discuss->getChunk($boardRowTpl,$ba);
+}
+if (!empty($category['list'])) {
+    $category['list'] = implode("\n",$category['list']);
+    $subboardOutput = $discuss->getChunk($categoryRowTpl,$category);
 }
 unset($ba,$subboard,$category);
 
@@ -155,17 +156,21 @@ $c->sortby($modx->getSelectColumns('disBoardClosure','Ancestors','',array('depth
 $ancestors = $modx->getCollection('disBoard',$c);
 
 /* breadcrumbs */
-$trail = $discuss->getChunk('BreadcrumbsLink',array(
-	'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
-	'text' => '[[++discuss.forum_title]]',
-));
+$trail = array();
+$trail[] = array(
+    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+    'text' => '[[++discuss.forum_title]]',
+);
 foreach ($ancestors as $ancestor) {
-	$trail .= $discuss->getChunk('BreadcrumbsLink',array(
-		'url' => $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id')),
-		'text' => $ancestor->get('name'),
-	));
+    $trail[] = array(
+        'url' => $modx->makeUrl($modx->getOption('discuss.board_resource'),'','?board='.$ancestor->get('id')),
+        'text' => $ancestor->get('name'),
+    );
 }
-$trail .= $discuss->getChunk('BreadcrumbsActive', array('text' => $board->get('name')));
+$trail[] = array('text' => $board->get('name'), 'active' => true);
+$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+    'items' => &$trail,
+)));
 $board->set('trail',$trail);
 
 /* start placeholders */
@@ -180,11 +185,11 @@ $placeholders['readers'] = $board->getViewing();
 /* get pagination */
 $count = count($pa);
 $modx->hooks->load('pagination/build',array(
-	'total' => $count,
-	'id' => $board->get('id'),
-	'view' => 'board',
-	'limit' => $limit,
-	'param' => $param,
+    'total' => $count,
+    'id' => $board->get('id'),
+    'view' => 'board',
+    'limit' => $limit,
+    'param' => $param,
 ));
 
 unset($count,$start,$limit,$url);

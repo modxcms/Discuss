@@ -73,8 +73,18 @@ if (!empty($_REQUEST['s'])) {
 }
 
 /* get board breadcrumb trail */
-$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">[[++discuss.forum_title]]</a> / ';
-$trail .= $modx->lexicon('discuss.search');
+$trail = array();
+$trail[] = array(
+    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+    'text' => $modx->getOption('discuss.forum_title'),
+);
+$trail[] = array(
+    'text' => $modx->lexicon('discuss.search'),
+    'active' => true,
+);
+$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+    'items' => &$trail,
+)));
 $placeholders['trail'] = $trail;
 
 /* output */
