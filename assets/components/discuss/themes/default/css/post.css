@@ -38,10 +38,12 @@
     }
 .dis-post-ip { 
     float: right;
+    vertical-align: bottom;
 }
 .dis-post-ip a {
     padding: 4px;
     margin: 0 3px;
+    vertical-align: bottom;
 }
 .dis-post-editedon {
     float: left;
@@ -59,6 +61,20 @@
     margin: 0;
     }
 .dis-post-attachments li {
+    margin: 0;
+}
+.dis-existing-attachments {
+    float: left;
+    margin-left: 4px;
+    padding: 1px;
+    clear: left;
+}
+.dis-existing-attachments ul {
+    list-style: none;
+    margin: 0;
+}
+.dis-existing-attachments li {
+    list-style: none;
     margin: 0;
 }
 .dis-signature {

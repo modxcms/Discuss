@@ -56,9 +56,9 @@ if ($flat){
 } else {
     $c->sortby($modx->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
 }
-$c->bindGraph('{"Author":{},"AuthorProfile":{},"Descendants":{},"EditedBy":{},"Attachments":{}}');
+$c->bindGraph('{"Author":{},"AuthorProfile":{},"Descendants":{},"EditedBy":{}}');
 $c->groupBy($modx->getSelectColumns('disPost','disPost','',array('id')));
-$posts = $modx->getCollectionGraph('disPost','{"Author":{},"AuthorProfile":{},"Descendants":{},"EditedBy":{},"Attachments":{}}',$c);
+$posts = $modx->getCollectionGraph('disPost','{"Author":{},"AuthorProfile":{},"Descendants":{},"EditedBy":{}}',$c);
 $isAuthenticated = $modx->user->isAuthenticated();
 
 $plist = array();
@@ -124,15 +124,17 @@ foreach ($posts as $post) {
     }
 
     /* get attachments */
-    $attachments = $post->Attachments;
+    $attachments = $post->getMany('Attachments');
+
     if (!empty($attachments)) {
-        $postArray['attachments'] = '';
+        $postArray['attachments'] = array();
         foreach ($attachments as $attachment) {
             $attachmentArray = $attachment->toArray();
             $attachmentArray['filesize'] = $attachment->convert();
             $attachmentArray['url'] = $attachment->getUrl();
-            $postArray['attachments'] .= $discuss->getChunk($postAttachmentRowTpl,$attachmentArray);
+            $postArray['attachments'][] = $discuss->getChunk($postAttachmentRowTpl,$attachmentArray);
         }
+        $postArray['attachments'] = implode("\n",$postArray['attachments']);
     }
     if ($flat) {
         $output .= $this->discuss->getChunk($postTpl,$pa);

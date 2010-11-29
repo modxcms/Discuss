@@ -2,6 +2,7 @@ Changelog for Discuss.
 
 Discuss 0.1
 ====================================
+- Added ability to modify attachments on a post when modifying post in FE
 - Fixed breadcrumbs, board displays, etc
 - Added OnDiscussPostSave, OnDiscussPostBeforeSave, OnDiscussPostFetchContent system events
 - Added editedon support to posts

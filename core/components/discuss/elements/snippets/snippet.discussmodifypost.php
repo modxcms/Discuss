@@ -12,12 +12,31 @@ $post = $modx->getObject('disPost',$_REQUEST['post']);
 if ($post == null) { $modx->sendErrorPage(); }
 
 /* setup defaults */
-$properties = $post->toArray();
+$placeholders = $post->toArray();
 
 /* get thread root */
 $thread = $post->getThreadRoot();
 if ($thread == null) $modx->sendErrorPage();
-$properties['thread'] = $thread->get('id');
+$placeholders['thread'] = $thread->get('id');
+
+/* get attachments for post */
+$attachments = $post->getMany('Attachments');
+$idx = 1;
+$atts = array();
+$postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostEditAttachment');
+foreach ($attachments as $attachment) {
+    $attachmentArray = $attachment->toArray();
+    $attachmentArray['filesize'] = $attachment->convert();
+    $attachmentArray['url'] = $attachment->getUrl();
+    $attachmentArray['idx'] = $idx;
+    $atts[] = $discuss->getChunk($postAttachmentRowTpl,$attachmentArray);
+    $idx++;
+}
+$placeholders['attachments'] = implode("\n",$atts);
+$placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
+$placeholders['attachmentCurIdx'] = count($attachments)+1;
+
+
 
 /* get board breadcrumb trail */
 $c = $modx->newQuery('disBoard');
@@ -47,7 +66,7 @@ $trail[] = array(
 $trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
-$properties['trail'] = $trail;
+$placeholders['trail'] = $trail;
 
 /* if POST, process new thread request */
 if (!empty($_POST)) {
@@ -61,12 +80,18 @@ $props = array_merge($scriptProperties,array(
     'post' => &$post,
     'thread' => &$thread,
 ));
-$properties['thread_posts'] = $modx->hooks->load('post/getthread',$props);
-
+$placeholders['thread_posts'] = $modx->hooks->load('post/getthread',$props);
 
 /* output form to browser */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.post.modify.js');
+$modx->regClientScript($discuss->config['jsUrl'].'web/dis.post.modify.js');
+$modx->regClientHTMLBlock('<script type="text/javascript">
+var DISModifyPost = $(function() {
+    DIS.config.attachments_max_per_post = '.$placeholders['max_attachments'].';
+    DIS.DISModifyPost.init({
+        attachments: '.(count($attachments)+1).'
+    });
+});</script>');
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
 $modx->setPlaceholder('discuss.post',$post->get('title'));
 
-return $discuss->output('thread/modify',$properties);
+return $discuss->output('thread/modify',$placeholders);

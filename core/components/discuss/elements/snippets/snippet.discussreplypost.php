@@ -61,7 +61,7 @@ if (!empty($_POST)) {
     $modx->toPlaceholders($_POST,'post');
     $result = include $discuss->config['processorsPath'].'web/post/reply.php';
     if ($discuss->processResult($result)) {
-        $url = $modx->makeUrl($modx->getOption('discuss.thread_resource'),'','?thread='.$thread->get('id')).'#dis-post-'.$result['object']['id'];
+        $url = $modx->makeUrl($modx->getOption('discuss.thread_resource'),'',array('thread' => $thread->get('id'))).'#dis-post-'.$result['object']['id'];
         $modx->sendRedirect($url);
     }
 } else {
