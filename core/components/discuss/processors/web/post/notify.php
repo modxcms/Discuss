@@ -12,7 +12,9 @@ if (empty($userId)) return $modx->error->failure();
 $notify = $modx->newObject('disUserNotification');
 $notify->set('user',$modx->user->get('id'));
 $notify->set('post',$thread->get('id'));
-$notify->save();
+if (!$notify->save()) {
+    $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not create notification: '.print_r($notify->toArray(),true));
+}
 
 
 return $modx->error->success();

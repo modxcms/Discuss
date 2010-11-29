@@ -137,7 +137,7 @@ foreach ($posts as $post) {
         $postArray['attachments'] = implode("\n",$postArray['attachments']);
     }
     if ($flat) {
-        $output .= $this->discuss->getChunk($postTpl,$pa);
+        $output[] = $this->discuss->getChunk($postTpl,$pa);
     } else {
         $plist[] = $postArray;
     }
@@ -149,5 +149,7 @@ if (empty($flat)) {
     if (count($plist) > 0) {
         $output = $discuss->treeParser->parse($plist,$postTpl);
     }
+} else {
+    $output = implode("\n",$output);
 }
 return $output;

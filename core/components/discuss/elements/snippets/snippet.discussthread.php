@@ -161,7 +161,7 @@ if ($modx->user->isAuthenticated()) {
     /* TODO: Send thread by email - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
      */
-    $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.print'));
+    $actionButtons[] = array('url' => '[[~[[++discuss.thread_resource]]? &thread=`[[+id]]` &print=`1`]]', 'text' => $modx->lexicon('discuss.print'));
 }
 $properties['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);

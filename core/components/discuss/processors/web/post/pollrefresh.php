@@ -13,6 +13,4 @@ $c->where(array(
 $c->sortby('disPost.rank','ASC');
 $postCount = $modx->getCount('disPost',$c);
 
-
-
 return $modx->error->success($postCount);
