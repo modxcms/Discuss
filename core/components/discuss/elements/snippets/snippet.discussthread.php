@@ -26,7 +26,7 @@ $repliesCriteria->where(array(
 $repliesCriteria->prepare();
 $repliesSql = $repliesCriteria->toSql();
 $c->select($modx->getSelectColumns('disPost','disPost'));
-$c->select('('.$repliesSql.') AS `replies`');
+$c->select('('.$repliesSql.') AS '.$modx->escape('replies'));
 if (!empty($userId)) {
     $c->leftJoin('disUserNotification','Notifications',''
             .$modx->getSelectColumns('disPost','disPost','',array('id')).' = '.$modx->getSelectColumns('disUserNotification','Notifications','',array('post'))
@@ -114,7 +114,7 @@ $ancestors = $modx->getCollection('disBoard',$c);
 $trail = array();
 $trail[] = array(
     'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
-    'text' => '[[++discuss.forum_title]]',
+    'text' => $modx->getOption('discuss.forum_title'),
 );
 foreach ($ancestors as $ancestor) {
     $trail[] = array(

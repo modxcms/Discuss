@@ -230,6 +230,7 @@
         <field key="signature" dbtype="text" phptype="string" null="false" default="" />
         <field key="title" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="avatar" dbtype="mediumtext" phptype="string" null="false" default="" />
+        <field key="avatar_service" dbtype="varchar" precision="255" phptype="string" null="false" default="gravatar" />
         
         <field key="thread_last_visited" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="posts" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />

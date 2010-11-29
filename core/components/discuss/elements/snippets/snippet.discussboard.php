@@ -22,6 +22,7 @@ $cssLockedThreadCls = $modx->getOption('cssLockedThreadCls',$scriptProperties,'d
 $cssStickyThreadCls = $modx->getOption('cssStickyThreadCls',$scriptProperties,'dis-thread-sticky');
 $cssUnreadRowCls = $modx->getOption('cssUnreadRowCls',$scriptProperties,'dis-unread');
 $boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'board/disBoardLi');
+$boardCls = $modx->getOption('boardCls',$scriptProperties,'board-post');
 $categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'category/disCategoryLi');
 $lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
 $threadTpl = $modx->getOption('threadTpl',$scriptProperties,'disBoardPost');
@@ -100,7 +101,7 @@ foreach ($posts as $post) {
     }
 
     /* set css class */
-    $class = 'board-post';
+    $class = $boardCls;
     if ($modx->getOption('discuss.enable_hot',null,true)) {
         $threshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
         if ($modx->user->get('id') == $post->get('author') && $modx->user->isAuthenticated()) {
@@ -159,7 +160,7 @@ $ancestors = $modx->getCollection('disBoard',$c);
 $trail = array();
 $trail[] = array(
     'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
-    'text' => '[[++discuss.forum_title]]',
+    'text' => $modx->getOption('discuss.forum_title'),
 );
 foreach ($ancestors as $ancestor) {
     $trail[] = array(

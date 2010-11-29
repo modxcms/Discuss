@@ -1,1 +1,0 @@
-<li><a href="[[~[[++discuss.board_resource]]]]?board=[[+id]]">[[+title]]</a></li>

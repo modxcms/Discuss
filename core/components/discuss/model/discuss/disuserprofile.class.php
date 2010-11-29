@@ -18,4 +18,25 @@ class disUserProfile extends xPDOSimpleObject {
     const UNCONFIRMED = 2;
     const BANNED = 3;
     const AWAITING_MODERATION = 4;
+
+    /**
+     * Gets the avatar URL for this user, depending on the avatar service.
+     * @return string
+     */
+    public function getAvatarUrl() {
+        $avatarUrl = '';
+        
+        $avatarService = $this->get('avatar_service');
+        $avatar = $this->get('avatar');
+        if (!empty($avatar) || !empty($avatarService)) {
+            if (!empty($avatarService)) {
+                if ($avatarService == 'gravatar') {
+                    $avatarUrl = $this->xpdo->getOption('discuss.gravatar_url',$scriptProperties,'http://www.gravatar.com/avatar/').md5($this->get('email'));
+                }
+            } else {
+                $avatarUrl = $this->xpdo->getOption('discuss.files_url').'/profile/'.$this->get('user').'/'.$this->get('avatar');
+            }
+        }
+        return $avatarUrl;
+    }
 }

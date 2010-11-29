@@ -7,24 +7,21 @@
                 [[+action_modify]]
                 [[+action_reply]]
             </div>
-            <div class="dis-author">- [[%discuss.post_author_short? &user=`[[+username]]` &date=`[[+createdon:strtotime:date=`[[++discuss.date_format]]`]]`]]</div>
+            <div class="dis-author">- [[%discuss.post_author_short? &user=`[[+author.username_link]]` &date=`[[+createdon:strtotime:date=`[[++discuss.date_format]]`]]`]]</div>
             <div class="dis-author dis-hidden">
-                [[+author_avatar]]
+                [[+author.avatar]]
                 <span class="right">
                     [[+createdon:strtotime:date=`[[++discuss.date_format]]`]]
-                    <br />[[+author_email]]
+                    <br />[[+author.email]]
                 </span>
                 <span>
                     [[+username]]
-                    [[If? &subject=`[[+author_title]]` &operator=`!empty`
-                          &then=`<em> - [[+author_title]]</em>`]]
+                    [[+author.title:notempty=`<em>[[+author.title]]</em>`]]
                     <br />
-                    [[%discuss.posts]]: <span class="dis-author-post-count">[[+author_posts]]</span>
+                    [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
                 </span>
                 <br class="clear" />
-                [[If? &subject=`[[+author_signature]]`
-                    &operator=`!empty`
-                    &then=`<div class="dis-signature">[[+author_signature]]</div>`]]
+                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
             </div>
         </div>
     </div>
@@ -33,16 +30,10 @@
         <div class="dis-post-footer">
             <div class="dis-post-reply" id="dis-post-reply-[[+id]]">[[+action_reply]]</div>
             <div class="dis-post-attachments">
-            [[If? &subject=`[[+attachments]]`
-              &operator=`!empty`
-              &then=`
-              <ul class="dis-attachments">
-              [[+attachments]]
-              </ul>`
-            ]]
+            [[+attachments:notempty=`<ul class="dis-attachments">[[+attachments]]</ul>`]]
             </div>
             <div class="dis-post-ip">
-                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[++discuss.user_resource]]?user=`[[+editedby]]`]]">[[+editedby_username]]</a></span>`]]
+                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[++discuss.user_resource]]?user=`[[+editedby]]`]]">[[+editedby.username]]</a></span>`]]
                 <a href="javascript:void([[+id]]);">[[%discuss.report_to_mod]]</a>
                 <a href="javascript:void([[+id]]);">[[+ip]]</a>
             </div>

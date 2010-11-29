@@ -26,6 +26,7 @@ $xpdo_meta_map['disUserProfile']= array (
     'signature' => '',
     'title' => '',
     'avatar' => '',
+    'avatar_service' => 'gravatar',
     'thread_last_visited' => 0,
     'posts' => 0,
     'show_email' => 1,
@@ -176,6 +177,14 @@ $xpdo_meta_map['disUserProfile']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'avatar_service' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'gravatar',
     ),
     'thread_last_visited' => 
     array (
