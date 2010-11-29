@@ -12,6 +12,7 @@ $_lang['discuss.account_nonexistent'] = 'Please register before logging in.';
 $_lang['discuss.account_settings'] = 'Account Settings';
 $_lang['discuss.account_unconfirmed'] = 'Please check your email for confirmation instructions before logging in.';
 $_lang['discuss.age'] = 'Age';
+$_lang['discuss.avatar_service'] = 'Avatar Service';
 $_lang['discuss.birthdate'] = 'Birthdate';
 $_lang['discuss.custom_title'] = 'Custom Title';
 $_lang['discuss.date_registered'] = 'Date Registered';

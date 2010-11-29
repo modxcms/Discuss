@@ -48,11 +48,19 @@
         <span class="error">[[+error.title]]</span>
     </label>
     <input type="text" name="title" id="dis-title" value="[[+title]]" />
-    
+
+    <label for="dis-title">[[%discuss.avatar_service]]:
+        <span class="error">[[+error.title]]</span>
+    </label>
+    <select name="avatar_service" id="dis-avatar-service" value="[[+avatar_service]]">
+        <option value="gravatar">Gravatar</option>
+    </select>
+
     <label for="dis-signature">[[%discuss.signature]]:
         <span class="error">[[+error.signature]]</span>
     </label>
     <textarea type="text" name="signature" id="dis-signature" rows="7" cols="54">[[+signature]]</textarea>
+
     
     <br class="clear" />
     
