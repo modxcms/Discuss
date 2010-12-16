@@ -96,12 +96,9 @@ $postsOutput = $modx->hooks->load('post/getthread',array(
 $thread->set('posts',$postsOutput);
 unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 
-/* register javascript */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.js');
-$modx->regClientStartupScript('<script type="text/javascript">
-$(function() {
-    DIS.config.postCount = "'.count($pa).'";
-});</script>');
+/* load theme options */
+$discuss->config['pa'] = $pa;
+$discuss->loadThemeOptions('thread');
 
 /* get board breadcrumb trail */
 $c = $modx->newQuery('disBoard');
@@ -138,12 +135,12 @@ unset($views);
 $properties = $thread->toArray();
 
 /* set activity of thread */
-$class = $modx->getOption('cssNormalThreadCls',$scriptProperties,'dis-normal-thread');
+$class = $modx->getOption('cssNormalThread',$scriptProperties,'dis-normal-thread');
 $threshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
 if ($modx->user->get('id') == $thread->get('author')) {
-    $class .= $thread->get('replies') < $threshold ? ' '.$modx->getOption('cssMyNormalThreadCls',$scriptProperties,'dis-my-normal-thread') : ' '.$modx->getOption('cssMyHotThreadCls',$scriptProperties,'dis-my-veryhot-thread');
+    $class .= $thread->get('replies') < $threshold ? ' '.$modx->getOption('cssMyNormalThread',$scriptProperties,'dis-my-normal-thread') : ' '.$modx->getOption('cssMyHotThread',$scriptProperties,'dis-my-veryhot-thread');
 } else {
-    $class .= $thread->get('replies') < $threshold ? '' : ' '.$modx->getOption('cssHotThreadCls',$scriptProperties,'dis-veryhot-thread');
+    $class .= $thread->get('replies') < $threshold ? '' : ' '.$modx->getOption('cssHotThread',$scriptProperties,'dis-veryhot-thread');
 }
 $thread->set('class',$class);
 unset($class,$threshold);
@@ -193,7 +190,7 @@ $properties['threadactionbuttons'] = $discuss->buildActionButtons($actionButtons
 unset($actionButtons);
 
 /* output */
-$modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
+$modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('Error'));
 $modx->setPlaceholder('discuss.thread',$thread->get('title'));
 
 /* set last visited */
@@ -203,4 +200,3 @@ if ($discuss->user->profile) {
 }
 
 return $discuss->output('thread/view',$properties);
-
