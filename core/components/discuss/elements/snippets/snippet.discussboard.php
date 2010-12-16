@@ -135,6 +135,7 @@ foreach ($posts as $post) {
 unset($unread,$class,$threshold,$latestText,$createdon,$c);
 
 /* load theme options */
+$discuss->config['pa'] = $pa;
 $discuss->loadThemeOptions('board');
 
 /* parse threads */
