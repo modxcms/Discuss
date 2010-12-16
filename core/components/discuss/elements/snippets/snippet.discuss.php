@@ -207,7 +207,7 @@ if ($modx->user->isAuthenticated()) { /* if logged in */
     $authMsg = $modx->lexicon('discuss.login');
     $modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
 
-    $modx->setPlaceholder('discuss.loginForm',$discuss->getChunk('disLogin'));
+    $modx->setPlaceholder('discuss.loginForm',$discuss->getChunk('Login'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($authLink,$authMsg,$actionButtons);
@@ -290,5 +290,5 @@ $placeholders['trail'] = $modx->hooks->load('breadcrumbs',array_merge($scriptPro
 unset($trail);
 
 /* output */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.home.js');
+$discuss->loadThemeOptions();
 return $discuss->output('home',$placeholders);
