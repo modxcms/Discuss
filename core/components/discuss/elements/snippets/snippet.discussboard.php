@@ -18,14 +18,17 @@ $limit = $modx->getOption('limit',$_REQUEST,$modx->getOption('limit',$scriptProp
 $start = $modx->getOption('start',$_REQUEST,$modx->getOption('start',$scriptProperties,0));
 $param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
 
-$cssLockedThreadCls = $modx->getOption('cssLockedThreadCls',$scriptProperties,'dis-thread-locked');
-$cssStickyThreadCls = $modx->getOption('cssStickyThreadCls',$scriptProperties,'dis-thread-sticky');
-$cssUnreadRowCls = $modx->getOption('cssUnreadRowCls',$scriptProperties,'dis-unread');
-$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'board/disBoardLi');
-$boardCls = $modx->getOption('boardCls',$scriptProperties,'board-post');
-$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'category/disCategoryLi');
-$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
-$threadTpl = $modx->getOption('threadTpl',$scriptProperties,'disBoardPost');
+/* get default chunk properties */
+$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'boardRow');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'categoryRow');
+$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'lastPostBy');
+$threadTpl = $modx->getOption('threadTpl',$scriptProperties,'thread');
+
+/* get default css classes properties */
+$cssLockedThreadCls = $modx->getOption('cssLockedThread',$scriptProperties,'dis-thread-locked');
+$cssStickyThreadCls = $modx->getOption('cssStickyThread',$scriptProperties,'dis-thread-sticky');
+$cssUnreadRowCls = $modx->getOption('cssUnreadRow',$scriptProperties,'dis-unread');
+$cssBoardCls = $modx->getOption('cssBoard',$scriptProperties,'board-post');
 
 /* grab all subboards */
 $subboards = $modx->hooks->load('board/getList',array(
@@ -101,7 +104,7 @@ foreach ($posts as $post) {
     }
 
     /* set css class */
-    $class = $boardCls;
+    $class = $cssBoardCls;
     if ($modx->getOption('discuss.enable_hot',null,true)) {
         $threshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
         if ($modx->user->get('id') == $post->get('author') && $modx->user->isAuthenticated()) {
@@ -131,10 +134,8 @@ foreach ($posts as $post) {
 }
 unset($unread,$class,$threshold,$latestText,$createdon,$c);
 
-/* load thread count */
-$modx->regClientStartupScript('<script type="text/javascript">$(function() {
-    DISBoard.threadCount = "'.count($pa).'";
-});</script>');
+/* load theme options */
+$discuss->loadThemeOptions('board');
 
 /* parse threads */
 $postsOutput = '';
@@ -206,6 +207,5 @@ $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'di
 unset($actionButtons);
 
 /* output */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.board.js');
 $modx->setPlaceholder('discuss.board',$board->get('name'));
 return $discuss->output('board',$placeholders);
