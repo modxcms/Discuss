@@ -61,12 +61,13 @@ if (!empty($_POST)) {
 
 /* set max attachment limit */
 $properties['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
-$modx->regClientStartupHTMLBlock('<script type="text/javascript">
-$(function() { DIS.config.attachments_max_per_post = '.$properties['max_attachments'].'; });
-</script>');
+
+/* load theme options */
+$discuss->config['max_attachments'] = $properties['max_attachments'];
+$discuss->loadThemeOptions('newthread');
 
 /* output form to browser */
 $modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.new.js');
-$modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
+$modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('Error'));
 
 return $discuss->output('thread/new',$properties);
