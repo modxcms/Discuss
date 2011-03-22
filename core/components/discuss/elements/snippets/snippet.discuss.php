@@ -1,7 +1,7 @@
 <?php
 /**
  * Main front page snippet
- * 
+ *
  * @package discuss
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
@@ -10,13 +10,13 @@ $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('home');
 
 /* get default chunk properties */
-$activeUserRowTpl = $modx->getOption('activeUserRowTpl',$scriptProperties,'activeUserRow');
-$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'boardRow');
-$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'categoryRow');
-$subForumLinkTpl = $modx->getOption('subForumsLinkTpl',$scriptProperties,'subForumsLink');
-$subForumsRowTpl = $modx->getOption('subForumsRowTpl',$scriptProperties,'subForumsRow');
-$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'lastPostBy');
-$postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'postRow');
+$activeUserRowTpl = $modx->getOption('activeUserRowTpl',$scriptProperties,'disActiveUserRow');
+$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'board/disBoardLi');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'category/disCategoryLi');
+$subForumLinkTpl = $modx->getOption('subForumsLinkTpl',$scriptProperties,'board/disSubForumLink');
+$cssUnreadCls = $modx->getOption('cssUnreadCls',$scriptProperties,'dis-unread');
+$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
+$postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 
 /* get default css classes properties */
 $cssBoardRow = $modx->getOption('cssBoardRow',$scriptProperties,'dis-board-li');
@@ -59,7 +59,7 @@ $sbCriteria->innerJoin('disBoardClosure','subBoardClosure','`subBoardClosure`.`a
 $sbCriteria->innerJoin('disBoard','subBoardClosureBoard','`subBoardClosureBoard`.`id` = `subBoardClosure`.`descendant`');
 /* The following commented part of the request play really bad with subboard query */
 // $sbCriteria->innerJoin('disBoardUserGroup','subBoardUserGroups','(`subBoardUserGroups`.`usergroup` IS NULL '.(empty($_groups) ? '' : '
-    // OR `subBoardUserGroups`.`usergroup` IN ('.implode(',',$_groups).')
+// OR `subBoardUserGroups`.`usergroup` IN ('.implode(',',$_groups).')
 // ').')');
 $sbCriteria->where(array(
     '`subBoard`.`id` = `disBoard`.`id`',
@@ -158,7 +158,7 @@ foreach ($boards as $board) {
         unset($ba['rowClass']);
 
         $placeholders['boards'][] = $discuss->getChunk($categoryRowTpl,$ba);
-        
+
         $boardList = array(); /* reset current category board list */
         $ba = $board->toArray('',true);
         $ba['rowClass'] = $rowClass;
@@ -185,10 +185,7 @@ unset($currentCategory,$ba,$boards,$board,$lp);
 
 /* process logout */
 if (isset($_REQUEST['logout']) && $_REQUEST['logout']) {
-    $response = $modx->executeProcessor(array(
-        'action' => 'logout',
-        'location' => 'security'
-    ));
+    $response = $modx->runProcessor('security/logout');
     $url = $modx->makeUrl($modx->resource->get('id'));
     $modx->sendRedirect($url);
 }
@@ -207,7 +204,7 @@ if ($modx->user->isAuthenticated()) { /* if logged in */
     $authMsg = $modx->lexicon('discuss.login');
     $modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
 
-    $modx->setPlaceholder('discuss.loginForm',$discuss->getChunk('Login'));
+    $modx->setPlaceholder('discuss.loginForm',$discuss->getChunk('disLogin'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($authLink,$authMsg,$actionButtons);
@@ -258,7 +255,6 @@ $c->select(array(
     'disPost.createdon',
     'disPost.author',
     'Author.username',
-    '`Thread`.`id` AS `thread`',
 ));
 $c->select($modx->getSelectColumns('disBoard','Board','',array('name')).' AS `board`');
 $c->innerJoin('disBoard','Board');
@@ -290,5 +286,6 @@ $placeholders['trail'] = $modx->hooks->load('breadcrumbs',array_merge($scriptPro
 unset($trail);
 
 /* output */
+$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.home.js');
 $discuss->loadThemeOptions();
 return $discuss->output('home',$placeholders);

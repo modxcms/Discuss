@@ -265,9 +265,9 @@ class Discuss {
      * @return modChunk/boolean Returns the modChunk object if found, otherwise
      * false.
      */
-    private function _getTplChunk($name) {
+    private function _getTplChunk($name,$postFix = '.chunk.tpl') {
         $chunk = false;
-        $f = $this->config['chunksPath'].strtolower($name).'.tpl';
+        $f = $this->config['chunksPath'].strtolower($name).$postFix;
         if (file_exists($f)) {
             $o = file_get_contents($f);
             $chunk = $this->modx->newObject('modChunk');
@@ -280,9 +280,9 @@ class Discuss {
     /**
      * Used for development and debugging
      */
-    public function getPage($name,array $properties = array()) {
+    public function getPage($name,array $properties = array(),$postFix = '.tpl') {
         $name = str_replace('.','/',$name);
-        $f = $this->config['pagesPath'].strtolower($name).'.tpl';
+        $f = $this->config['pagesPath'].strtolower($name).$postFix;
         $o = '';
         if (file_exists($f)) {
             $o = file_get_contents($f);
@@ -290,7 +290,7 @@ class Discuss {
             $chunk->setContent($o);
             return $chunk->process($properties);
         }
-        return false;
+        return $o;
     }
 
 
@@ -305,7 +305,7 @@ class Discuss {
      */
     public function output($page = '',array $properties = array()) {
         if ($this->modx->getOption('discuss.debug',null,false)) {
-            $output = $this->getChunk('debugWrapper',array(
+            $output = $this->getChunk('disWrapper',array(
                 'discuss.output' => $this->getPage($page,$properties),
             ));
 
@@ -476,7 +476,7 @@ class Discuss {
      * @access public
      * @return void
      */
-	public function loadThemeOptions($additional = null){
+	public function loadThemeOptions($additional = null) {
 		$manifest = false;
         $f = $this->config['chunksPath'].'manifest.php';
         if (file_exists($f)) {
@@ -527,6 +527,8 @@ class Discuss {
 					}
 				}
 			}
+        } else {
+            $this->modx->regClientCSS($this->config['cssUrl'].'index.css');
         }
 	}
 }
