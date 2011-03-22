@@ -19,10 +19,10 @@ $start = $modx->getOption('start',$_REQUEST,$modx->getOption('start',$scriptProp
 $param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
 
 /* get default chunk properties */
-$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'boardRow');
-$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'categoryRow');
-$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'lastPostBy');
-$threadTpl = $modx->getOption('threadTpl',$scriptProperties,'thread');
+$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'board/disBoardLi');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'category/disCategoryLi');
+$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
+$threadTpl = $modx->getOption('threadTpl',$scriptProperties,'disBoardPost');
 
 /* get default css classes properties */
 $cssLockedThreadCls = $modx->getOption('cssLockedThread',$scriptProperties,'dis-thread-locked');
@@ -69,7 +69,6 @@ unset($ba,$subboard,$category);
 $posts = $modx->hooks->load('board/post/getList',array(
     'board' => &$board,
 ));
-
 /* iterate through threads */
 $userUrl = $modx->makeUrl($modx->getOption('discuss.user_resource'));
 $pa = array();

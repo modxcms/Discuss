@@ -12,9 +12,9 @@ $c->select(array(
     'Author.username',
 ));
 /* TODO: abstract these subqueries */
-$c->select('
-    `AuthorProfile`.`fullname` AS `author_name`,
-    (SELECT COUNT(*) FROM '.$modx->getTableName('disPostClosure').'
+$c->select(array(
+    'author_name' => 'AuthorProfile.fullname',
+    '(SELECT COUNT(*) FROM '.$modx->getTableName('disPostClosure').'
      WHERE
         ancestor = disPost.id
     AND descendant != disPost.id) AS `replies`,
@@ -31,8 +31,8 @@ $c->select('
             WHERE ancestor = disPost.id
         )
         AND board = disPost.board
-    ) AS `unread`
-');
+    ) AS `unread`',
+));
 $c->innerJoin('disPostClosure','Descendants');
 $c->innerJoin('disPostClosure','Ancestors');
 $c->innerJoin('modUser','Author');

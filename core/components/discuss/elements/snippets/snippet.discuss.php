@@ -74,20 +74,18 @@ $sbSql = $sbCriteria->toSql();
 $c = $modx->newQuery('disBoard');
 $c->select(array(
     'disBoard.*',
+    'category_name' => 'Category.name',
+    '('.$unreadSql.') AS '.$modx->escape('unread'),
+    '('.$sbSql.') AS '.$modx->escape('subboards'),
+    'last_post_title' => 'LastPost.title',
+    'last_post_author' => 'LastPost.author',
+    'last_post_createdon' => 'LastPost.createdon',
+    'last_post_username' => 'LastPostAuthor.username',
 ));
-$c->select('
-    `Category`.`name` AS `category_name`,
-    ('.$unreadSql.') AS `unread`,
-    ('.$sbSql.') AS `subboards`,
-    `LastPost`.`title` AS `last_post_title`,
-    `LastPost`.`author` AS `last_post_author`,
-    `LastPost`.`createdon` AS `last_post_createdon`,
-    `LastPostAuthor`.`username` AS `last_post_username`
-');
 $c->innerJoin('disCategory','Category');
 $c->innerJoin('disBoardClosure','Descendants');
 $c->leftJoin('disPost','LastPost');
-$c->leftJoin('modUser','LastPostAuthor','`LastPost`.`author` = `LastPostAuthor`.`id`');
+$c->leftJoin('modUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
 $c->leftJoin('disBoardUserGroup','UserGroups');
 $where = array(
     'disBoard.parent' => 0,
@@ -103,8 +101,8 @@ $g['OR:UserGroups.usergroup:='] = null;
 $where[] = $g;
 $c->where($where);
 
-$c->sortby('`Category`.`rank`','ASC');
-$c->sortby('`disBoard`.`rank`','ASC');
+$c->sortby('Category.rank','ASC');
+$c->sortby('disBoard.rank','ASC');
 $boards = $modx->getCollection('disBoard',$c);
 unset($c);
 
@@ -230,7 +228,8 @@ if ($modx->getOption('discuss.show_whos_online',null,true)) {
     $c->where(array(
         'Session.access:>=' => $timeago,
     ));
-    $c->sortby('`UserGroupProfile`.`color`,`Session`.`access`','ASC');
+    $c->sortby('UserGroupProfile.color','ASC');
+    $c->sortby('Session.access','ASC');
     $activeUsers = $modx->getCollection('modUser',$c);
     $as = '';
     foreach ($activeUsers as $activeUser) {
@@ -255,6 +254,7 @@ $c->select(array(
     'disPost.createdon',
     'disPost.author',
     'Author.username',
+    'thread' => 'Thread.id',
 ));
 $c->select($modx->getSelectColumns('disBoard','Board','',array('name')).' AS `board`');
 $c->innerJoin('disBoard','Board');
