@@ -18,6 +18,9 @@ class Discuss {
         $this->modx =& $modx;
 
         $corePath = $this->modx->getOption('discuss.core_path',$config,$this->modx->getOption('core_path').'components/discuss/');
+		if ($this->modx->getOption('discuss.debug',null,false)) {
+			$corePath = $this->modx->getOption('discuss.core_path');
+		}
         $assetsPath = $this->modx->getOption('discuss.assets_path',$config,$this->modx->getOption('assets_path').'components/discuss/');
         $assetsUrl = $this->modx->getOption('discuss.assets_url',$config,$this->modx->getOption('assets_url').'components/discuss/');
 		$themesUrl = $this->modx->getOption('discuss.themes_url',$config,$assetsUrl.'themes/');
@@ -89,20 +92,6 @@ class Discuss {
 
                 $this->modx->lexicon->load('discuss:web');
 
-                if ($this->modx->getOption('discuss.use_css',null,true)) {
-                    $this->modx->regClientCSS($this->config['cssUrl'].'index.css');
-                }
-                if ($this->modx->getOption('discuss.load_jquery',null,true)) {
-                    $this->modx->regClientStartupScript($this->config['jsUrl'].'web/jquery-1.3.2.min.js');
-                }
-                $this->modx->regClientStartupScript($this->config['jsUrl'].'web/discuss.js');
-                $this->modx->regClientStartupScript('<script type="text/javascript">
-    $(function() {
-        DIS.config.connector = "'.$this->config['connectorUrl'].'";
-        DIS.config.context = "'.$this->modx->context->get('key').'?ctx=mgr";
-        DIS.config.pollingInterval = "30000";
-    });</script>
-                ');
                 $this->_initUser();
                 $this->_initSession();
             break;
@@ -278,7 +267,7 @@ class Discuss {
      */
     private function _getTplChunk($name) {
         $chunk = false;
-        $f = $this->config['chunksPath'].strtolower($name).'.chunk.tpl';
+        $f = $this->config['chunksPath'].strtolower($name).'.tpl';
         if (file_exists($f)) {
             $o = file_get_contents($f);
             $chunk = $this->modx->newObject('modChunk');
@@ -316,7 +305,7 @@ class Discuss {
      */
     public function output($page = '',array $properties = array()) {
         if ($this->modx->getOption('discuss.debug',null,false)) {
-            $output = $this->getChunk('disWrapper',array(
+            $output = $this->getChunk('debugWrapper',array(
                 'discuss.output' => $this->getPage($page,$properties),
             ));
 
@@ -480,4 +469,64 @@ class Discuss {
         }
         return $success;
     }
+	
+	 /**
+     * Load current theme options for Front end
+     *
+     * @access public
+     * @return void
+     */
+	public function loadThemeOptions($additional = null){
+		$manifest = false;
+        $f = $this->config['chunksPath'].'manifest.php';
+        if (file_exists($f)) {
+            $manifest = require_once($f);
+			
+			if(array_key_exists('global', $manifest)){
+				$global = $manifest['global'];
+				
+				/* Load global forum CSS */
+				if(array_key_exists('css', $global)){
+					$css = $global['css'];
+					foreach($css['header'] as $val){
+						$this->modx->regClientCSS($this->config['cssUrl'].$val.'.css');
+					}
+				}
+				
+				/* Load global forum JS */
+				if(array_key_exists('js', $global)){
+					$js = $global['js'];
+					foreach($js['header'] as $val){
+						$this->modx->regClientStartupScript($this->config['jsUrl'].$val.'.js');
+					}
+					if(isset($js['inline'])){
+						$this->modx->regClientHTMLBlock('<script type="text/javascript">'.$js['inline'].'</script>');
+					}
+				}
+			}
+			
+			if(isset($additional) && array_key_exists($additional, $manifest)){
+				$specific = $manifest[$additional];
+				
+				/* Load specific forum CSS */
+				if(array_key_exists('css', $specific)){
+					$css = $specific['css'];
+					foreach($css['header'] as $val){
+						$this->modx->regClientCSS($this->config['cssUrl'].$val.'.css');
+					}
+				}
+				
+				/* Load specific forum JS */
+				if(array_key_exists('js', $specific)){
+					$js = $specific['js'];
+					foreach($js['header'] as $val){
+						$this->modx->regClientStartupScript($this->config['jsUrl'].$val.'.js');
+					}
+					if(isset($js['inline'])){
+						$this->modx->regClientHTMLBlock('<script type="text/javascript">'.$js['inline'].'</script>');
+					}
+				}
+			}
+        }
+	}
 }

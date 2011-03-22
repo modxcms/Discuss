@@ -9,15 +9,18 @@ if (!($discuss instanceof Discuss)) return '';
 $discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('home');
 
-/* get default properties */
-$activeUserRowTpl = $modx->getOption('activeUserRowTpl',$scriptProperties,'disActiveUserRow');
-$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'board/disBoardLi');
-$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'category/disCategoryLi');
-$subForumLinkTpl = $modx->getOption('subForumsLinkTpl',$scriptProperties,'board/disSubForumLink');
-$cssBoardRowCls = $modx->getOption('cssBoardRowCls',$scriptProperties,'dis-board-li');
-$cssUnreadCls = $modx->getOption('cssUnreadCls',$scriptProperties,'dis-unread');
-$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'disLastPostBy');
-$postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
+/* get default chunk properties */
+$activeUserRowTpl = $modx->getOption('activeUserRowTpl',$scriptProperties,'activeUserRow');
+$boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'boardRow');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$scriptProperties,'categoryRow');
+$subForumLinkTpl = $modx->getOption('subForumsLinkTpl',$scriptProperties,'subForumsLink');
+$subForumsRowTpl = $modx->getOption('subForumsRowTpl',$scriptProperties,'subForumsRow');
+$lastPostByTpl = $modx->getOption('lastPostByTpl',$scriptProperties,'lastPostBy');
+$postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'postRow');
+
+/* get default css classes properties */
+$cssBoardRow = $modx->getOption('cssBoardRow',$scriptProperties,'dis-board-li');
+$cssUnread = $modx->getOption('cssUnread',$scriptProperties,'dis-unread');
 $cssRowAlt = $modx->getOption('cssRowAlt',$scriptProperties,'alt');
 $cssRowEven = $modx->getOption('cssRowEven',$scriptProperties,'even');
 
@@ -55,9 +58,9 @@ $sbCriteria->select(array(
 $sbCriteria->innerJoin('disBoardClosure','subBoardClosure','`subBoardClosure`.`ancestor` = `subBoard`.`id`');
 $sbCriteria->innerJoin('disBoard','subBoardClosureBoard','`subBoardClosureBoard`.`id` = `subBoardClosure`.`descendant`');
 /* The following commented part of the request play really bad with subboard query */
-$sbCriteria->innerJoin('disBoardUserGroup','subBoardUserGroups','(`subBoardUserGroups`.`usergroup` IS NULL '.(empty($_groups) ? '' : '
-    OR `subBoardUserGroups`.`usergroup` IN ('.implode(',',$_groups).')
-').')');
+// $sbCriteria->innerJoin('disBoardUserGroup','subBoardUserGroups','(`subBoardUserGroups`.`usergroup` IS NULL '.(empty($_groups) ? '' : '
+    // OR `subBoardUserGroups`.`usergroup` IN ('.implode(',',$_groups).')
+// ').')');
 $sbCriteria->where(array(
     '`subBoard`.`id` = `disBoard`.`id`',
     '`subBoardClosure`.`descendant` != `disBoard`.`id`',
@@ -204,7 +207,7 @@ if ($modx->user->isAuthenticated()) { /* if logged in */
     $authMsg = $modx->lexicon('discuss.login');
     $modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
 
-    $modx->setPlaceholder('discuss.loginForm',$discuss->getChunk('disLogin'));
+    $modx->setPlaceholder('discuss.loginForm',$discuss->getChunk('Login'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($authLink,$authMsg,$actionButtons);
@@ -287,5 +290,5 @@ $placeholders['trail'] = $modx->hooks->load('breadcrumbs',array_merge($scriptPro
 unset($trail);
 
 /* output */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.home.js');
+$discuss->loadThemeOptions();
 return $discuss->output('home',$placeholders);

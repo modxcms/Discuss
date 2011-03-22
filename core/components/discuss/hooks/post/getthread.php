@@ -17,8 +17,8 @@ if ($flat) {
 }
 
 /* get default properties */
-$postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
-$postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
+$postTpl = $modx->getOption('postTpl',$scriptProperties,'post');
+$postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'PostAttachment');
 
 /* get thread or root of post */
 if (empty($scriptProperties['thread'])) {
