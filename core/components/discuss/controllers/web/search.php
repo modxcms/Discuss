@@ -4,9 +4,6 @@
  *
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('search');
 
 /* setup default properties */
@@ -87,7 +84,4 @@ $trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
 )));
 $placeholders['trail'] = $trail;
 
-/* output */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.search.js');
-$modx->regClientCSS($discuss->config['cssUrl'].'search.css');
-return $discuss->output('search',$placeholders);
+return $placeholders;

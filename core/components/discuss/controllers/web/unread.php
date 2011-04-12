@@ -4,11 +4,8 @@
  * 
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('unread');
-$properties = array();
+$placeholders = array();
 
 /* setup default properties */
 $limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
@@ -47,7 +44,7 @@ foreach ($unreadPosts as $post) {
 
     $posts[] = $discuss->getChunk($rowTpl,$pa);
 }
-$properties['posts'] = implode("\n",$posts);
+$placeholders['posts'] = implode("\n",$posts);
 
 /* get board breadcrumb trail */
 $trail = array();
@@ -60,6 +57,6 @@ $trail[] = array('text' => $modx->lexicon('discuss.unread_posts'),'active' => tr
 $trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
-$properties['trail'] = $trail;
+$placeholders['trail'] = $trail;
 
-return $discuss->output('unread',$properties);
+return $placeholders;

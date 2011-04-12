@@ -62,7 +62,8 @@ $posts = $modx->getCollectionGraph('disPost','{"Author":{},"AuthorProfile":{},"D
 $isAuthenticated = $modx->user->isAuthenticated();
 
 $plist = array();
-$userUrl = $modx->makeUrl($modx->getOption('discuss.user_resource'));
+$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
+$userUrl = $currentResourceUrl.'user/';
 foreach ($posts as $post) {
     $postArray = $post->toArray('',true);
     $postArray = array_merge($postArray,$post->AuthorProfile->toArray('author.'));
@@ -110,11 +111,11 @@ foreach ($posts as $post) {
 
     /* load actions */
     if (!$thread->get('locked') && $isAuthenticated) {
-        $postArray['action_reply'] = '<a href="[[~[[++discuss.reply_post_resource]]? &post=`[[+id]]`]]" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+        $postArray['action_reply'] = '<a href="'.$currentResourceUrl.'thread/reply?post=[[+id]]" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
 
         $canModifyPost = $modx->user->get('id') == $post->get('author') || $isModerator;
         if ($canModifyPost) {
-            $postArray['action_modify'] = '<a href="[[~[[++discuss.modify_post_resource]]? &post=`[[+id]]`]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $postArray['action_modify'] = '<a href="'.$currentResourceUrl.'thread/modify?post=[[+id]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
         $canRemovePost = $modx->user->get('id') == $post->get('author') || $isModerator;

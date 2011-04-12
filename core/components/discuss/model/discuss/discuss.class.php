@@ -42,6 +42,7 @@ class Discuss {
             'corePath' => $corePath,
             'modelPath' => $corePath.'model/',
             'chunksPath' => $corePath.'elements/chunks/'.$theme.'/',
+            'controllersPath' => $corePath.'controllers/',
             'pagesPath' => $corePath.'elements/pages/'.$theme.'/',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
@@ -51,10 +52,6 @@ class Discuss {
         ),$config);
 
         $this->modx->addPackage('discuss',$this->config['modelPath']);
-        if ($this->modx->getOption('discuss.debug',$this->config,true)) {
-            $this->modx->setLogTarget('ECHO');
-            $this->startDebugTimer();
-        }
     }
 
     /**
@@ -94,8 +91,20 @@ class Discuss {
 
                 $this->_initUser();
                 $this->_initSession();
+                $this->loadRequest();
             break;
         }
+    }
+
+    public function loadRequest($class = 'discuss.request.DisRequest',$path = '') {
+        if (empty($path)) $path = $this->config['modelPath'];
+        if ($className = $this->modx->loadClass($class,$path,true,true)) {
+            $this->request = new $className($this);
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$class.' from '.$path);
+        }
+        return $this->request;
+        
     }
 
     /**
@@ -278,49 +287,6 @@ class Discuss {
     }
 
     /**
-     * Used for development and debugging
-     */
-    public function getPage($name,array $properties = array(),$postFix = '.tpl') {
-        $name = str_replace('.','/',$name);
-        $f = $this->config['pagesPath'].strtolower($name).$postFix;
-        $o = '';
-        if (file_exists($f)) {
-            $o = file_get_contents($f);
-            $chunk = $this->modx->newObject('modChunk');
-            $chunk->setContent($o);
-            return $chunk->process($properties);
-        }
-        return $o;
-    }
-
-
-    /**
-     * Output the final forum output and wrap in the disWrapper chunk, if in
-     * debug mode. The wrapper code will need to be in the Template if not in
-     * debug mode.
-     *
-     * @access public
-     * @param string $output The output to process
-     * @return string The final wrapped output, or blank if not in debug.
-     */
-    public function output($page = '',array $properties = array()) {
-        if ($this->modx->getOption('discuss.debug',null,false)) {
-            $output = $this->getChunk('disWrapper',array(
-                'discuss.output' => $this->getPage($page,$properties),
-            ));
-
-            if ($this->debugTimer !== false) {
-                $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";
-            }
-
-            return $output;
-        }
-
-        $this->modx->toPlaceholders($properties);
-        return '';
-    }
-
-    /**
      * Builds pagination
      *
      * @access public
@@ -422,38 +388,6 @@ class Discuss {
     }
 
     /**
-     * Starts the debug timer.
-     *
-     * @access protected
-     * @return int The start time.
-     */
-    protected function startDebugTimer() {
-        $mtime = microtime();
-        $mtime = explode(' ', $mtime);
-        $mtime = $mtime[1] + $mtime[0];
-        $tstart = $mtime;
-        $this->debugTimer = $tstart;
-        return $this->debugTimer;
-    }
-    /**
-     * Ends the debug timer and returns the total number of seconds Discuss took
-     * to run.
-     *
-     * @access protected
-     * @return int The end total time to execute the script.
-     */
-    protected function endDebugTimer() {
-        $mtime= microtime();
-        $mtime= explode(" ", $mtime);
-        $mtime= $mtime[1] + $mtime[0];
-        $tend= $mtime;
-        $totalTime= ($tend - $this->debugTimer);
-        $totalTime= sprintf("%2.4f s", $totalTime);
-        $this->debugTimer = false;
-        return $totalTime;
-    }
-
-    /**
      * Process MODx event results
      */
     public function getEventResult($rs) {
@@ -470,65 +404,4 @@ class Discuss {
         return $success;
     }
 	
-	 /**
-     * Load current theme options for Front end
-     *
-     * @access public
-     * @return void
-     */
-	public function loadThemeOptions($additional = null) {
-		$manifest = false;
-        $f = $this->config['chunksPath'].'manifest.php';
-        if (file_exists($f)) {
-            $manifest = require_once($f);
-			
-			if(array_key_exists('global', $manifest)){
-				$global = $manifest['global'];
-				
-				/* Load global forum CSS */
-				if(array_key_exists('css', $global)){
-					$css = $global['css'];
-					foreach($css['header'] as $val){
-						$this->modx->regClientCSS($this->config['cssUrl'].$val.'.css');
-					}
-				}
-				
-				/* Load global forum JS */
-				if(array_key_exists('js', $global)){
-					$js = $global['js'];
-					foreach($js['header'] as $val){
-						$this->modx->regClientStartupScript($this->config['jsUrl'].$val.'.js');
-					}
-					if(isset($js['inline'])){
-						$this->modx->regClientHTMLBlock('<script type="text/javascript">'.$js['inline'].'</script>');
-					}
-				}
-			}
-			
-			if(isset($additional) && array_key_exists($additional, $manifest)){
-				$specific = $manifest[$additional];
-				
-				/* Load specific forum CSS */
-				if(array_key_exists('css', $specific)){
-					$css = $specific['css'];
-					foreach($css['header'] as $val){
-						$this->modx->regClientCSS($this->config['cssUrl'].$val.'.css');
-					}
-				}
-				
-				/* Load specific forum JS */
-				if(array_key_exists('js', $specific)){
-					$js = $specific['js'];
-					foreach($js['header'] as $val){
-						$this->modx->regClientStartupScript($this->config['jsUrl'].$val.'.js');
-					}
-					if(isset($js['inline'])){
-						$this->modx->regClientHTMLBlock('<script type="text/javascript">'.$js['inline'].'</script>');
-					}
-				}
-			}
-        } else {
-            $this->modx->regClientCSS($this->config['cssUrl'].'index.css');
-        }
-	}
 }

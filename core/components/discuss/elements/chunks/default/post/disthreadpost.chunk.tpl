@@ -33,7 +33,7 @@
             [[+attachments:notempty=`<ul class="dis-attachments">[[+attachments]]</ul>`]]
             </div>
             <div class="dis-post-ip">
-                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[++discuss.user_resource]]?user=`[[+editedby]]`]]">[[+editedby.username]]</a></span>`]]
+                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
                 <a href="javascript:void([[+id]]);">[[%discuss.report_to_mod]]</a>
                 <a href="javascript:void([[+id]]);">[[+ip]]</a>
             </div>

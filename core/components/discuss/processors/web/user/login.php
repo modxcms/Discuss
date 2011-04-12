@@ -67,10 +67,7 @@ if ($ok) {
     $oldSessionId = session_id();
 
     /* send to login processor and handle response */
-    $response = $modx->executeProcessor(array(
-        'action' => 'login',
-        'location' => 'security'
-    ));
+    $response = $modx->runProcessor('security/login',$_POST);
     if (!empty($response) && is_array($response)) {
         if (!empty($response['success']) && isset($response['object'])) {
             /* remove old session to prevent duplicates */

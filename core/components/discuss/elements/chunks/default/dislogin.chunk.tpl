@@ -1,4 +1,4 @@
-<form class="dis-form dis-login" action="[[~[[++discuss.login_resource]]]]" method="post">
+<form class="dis-form dis-login" action="[[~[[*id]]]]login" method="post">
     <h2>[[%discuss.login]]</h2>
     
     <label>[[%discuss.username]]:</label>
@@ -13,6 +13,6 @@
     
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.login]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.register]]" onclick="location.href='[[~[[++discuss.register_resource]]]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.register]]" onclick="location.href='[[~[[*id]]]]register';" />
     </div>
 </form>

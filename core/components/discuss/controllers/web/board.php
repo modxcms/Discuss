@@ -4,13 +4,10 @@
  *
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('board:'.$_REQUEST['board']);
 
 /* get board */
-$board = $modx->getObject('disBoard',$_REQUEST['board']);
+$board = $modx->getObject('disBoard',$scriptProperties['board']);
 if ($board == null) $modx->sendErrorPage();
 
 /* setup default properties */
@@ -135,7 +132,6 @@ unset($unread,$class,$threshold,$latestText,$createdon,$c);
 
 /* load theme options */
 $discuss->config['pa'] = $pa;
-$discuss->loadThemeOptions('board');
 
 /* parse threads */
 $postsOutput = '';
@@ -199,8 +195,8 @@ unset($count,$start,$limit,$url);
 /* action buttons */
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {
-    $actionButtons[] = array('url' => '[[~[[++discuss.new_thread_resource]]? &board=`'.$board->get('id').'`]]', 'text' => $modx->lexicon('discuss.thread_new'));
-    $actionButtons[] = array('url' => '[[~[[++discuss.board_resource]]? &board=`'.$board->get('id').'` &read=`1`]]', 'text' => $modx->lexicon('discuss.mark_read'));
+    $actionButtons[] = array('url' => '[[~[[*id]]? &action=`thread/new` &board=`'.$board->get('id').'`]]', 'text' => $modx->lexicon('discuss.thread_new'));
+    $actionButtons[] = array('url' => '[[~[[*id]]]]board?board='.$board->get('id').'&read=1', 'text' => $modx->lexicon('discuss.mark_read'));
     $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
@@ -208,4 +204,5 @@ unset($actionButtons);
 
 /* output */
 $modx->setPlaceholder('discuss.board',$board->get('name'));
-return $discuss->output('board',$placeholders);
+
+return $placeholders;

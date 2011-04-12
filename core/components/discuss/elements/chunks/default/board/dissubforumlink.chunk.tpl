@@ -1,1 +1,1 @@
-<a href="[[~[[++discuss.board_resource]]? &board=`[[+id]]`]]">[[+title]]</a>
+<a href="[[~[[*id]]]]board/?board=[[+id]]">[[+title]]</a>

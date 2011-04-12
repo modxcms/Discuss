@@ -3,12 +3,8 @@
  *
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
-
-if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('modUser',$_REQUEST['user']);
+if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
+$user = $modx->getObject('modUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
 $modx->lexicon->load('discuss:user');
@@ -49,8 +45,8 @@ if (!empty($_POST)) {
     $modx->toPlaceholders($errors,'error');
 }
 
-$properties = $user->toArray();
-$properties = array_merge($user->profile->toArray(),$properties);
+$placeholders = $user->toArray();
+$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 /* setup genders */
 $genders = array('' => '','m' => $modx->lexicon('discuss.male'),'f' => $modx->lexicon('discuss.female'));
@@ -60,17 +56,17 @@ foreach ($genders as $v => $d) {
         .($user->profile->get('gender') == $v ? ' selected="selected"' : '')
         .'>'.$d.'</option>';
 }
-$properties['genders'] = $gs;
+$placeholders['genders'] = $gs;
 unset($genders,$gs,$v,$d);
 
 /* format checkbox settings */
-if (!empty($properties['show_email'])) { $properties['show_email'] = ' checked="checked"'; }
-if (!empty($properties['show_online'])) { $properties['show_online'] = ' checked="checked"'; }
+if (!empty($placeholders['show_email'])) { $placeholders['show_email'] = ' checked="checked"'; }
+if (!empty($placeholders['show_online'])) { $placeholders['show_online'] = ' checked="checked"'; }
 
 /* do output */
-$properties['canEdit'] = $modx->user->get('username') == $user->get('username');
-$properties['canAccount'] = $modx->user->get('username') == $user->get('username');
-$modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$properties));
+$placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
+$placeholders['usermenu'] = $discuss->getChunk($menuTpl,$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 
-return $discuss->output('user/account',$properties);
+return $placeholders;

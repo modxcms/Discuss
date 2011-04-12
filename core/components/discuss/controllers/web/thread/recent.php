@@ -1,11 +1,4 @@
 <?php
-/**
- *
- * @package discuss
- */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('home');
 
 /* get default options */
@@ -35,5 +28,4 @@ foreach ($recentPosts as $post) {
 $list = implode("\n",$rps);
 unset($rps,$pa,$recentPosts,$post);
 
-
-return $list;
+return $placeholders;

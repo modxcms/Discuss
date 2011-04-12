@@ -17,32 +17,32 @@ $numRecentPosts = $modx->getOption('numRecentPosts',$scriptProperties,10);
 $postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 
 /* get user */
-if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('modUser',$_REQUEST['user']);
+if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
+$user = $modx->getObject('modUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
 $user->profile = $modx->getObject('disUserProfile',array(
     'user' => $user->get('id'),
 ));
-$properties = $user->toArray();
-$properties = array_merge($user->profile->toArray(),$properties);
+$placeholders = $user->toArray();
+$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 /* format age */
 $age = strtotime($user->profile->get('birthdate'));
 $age = round((time() - $age) / 60 / 60 / 24 / 365);
-$properties['age'] = $age;
+$placeholders['age'] = $age;
 
 /* format gender */
 switch ($user->profile->get('gender')) {
-    case 'm': $properties['gender'] = $modx->lexicon('discuss.male'); break;
-    case 'f': $properties['gender'] = $modx->lexicon('discuss.female'); break;
-    default: $properties['gender'] = ''; break;
+    case 'm': $placeholders['gender'] = $modx->lexicon('discuss.male'); break;
+    case 'f': $placeholders['gender'] = $modx->lexicon('discuss.female'); break;
+    default: $placeholders['gender'] = ''; break;
 }
 
 /* get last visited thread */
 $lastThread = $user->profile->getOne('ThreadLastVisited');
 if ($lastThread) {
-    $properties = array_merge($properties,$lastThread->toArray('lastThread.'));
+    $placeholders = array_merge($placeholders,$lastThread->toArray('lastThread.'));
 }
 
 /* recent posts */
@@ -76,13 +76,12 @@ foreach ($recentPosts as $post) {
 
     $rps[] = $discuss->getChunk($postRowTpl,$pa);
 }
-$properties['recentPosts'] = implode("\n",$rps);
+$placeholders['recentPosts'] = implode("\n",$rps);
 
 
 /* do output */
-$properties['canEdit'] = $modx->user->get('username') == $user->get('username');
-$properties['canAccount'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
+$placeholders['usermenu'] = $discuss->getChunk($menuTpl,$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
-$modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$properties));
-
-return $discuss->output('user/view',$properties);
+return $placeholders;

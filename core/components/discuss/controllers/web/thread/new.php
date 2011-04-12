@@ -4,9 +4,6 @@
  *
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
 $discuss->setSessionPlace('newthread:'.$_REQUEST['board']);
 
 if (empty($_REQUEST['board'])) { $modx->sendErrorPage(); }
@@ -14,7 +11,7 @@ $board = $modx->getObject('disBoard',$_REQUEST['board']);
 if ($board == null) $modx->sendErrorPage();
 
 /* setup defaults */
-$properties = array(
+$placeholders = array(
     'board' => $board->get('id'),
 );
 
@@ -46,7 +43,7 @@ $trail[] = array(
 $trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
-$properties['trail'] = $trail;
+$placeholders['trail'] = $trail;
 
 /* if POST, process new thread request */
 if (!empty($_POST)) {
@@ -60,14 +57,12 @@ if (!empty($_POST)) {
 }
 
 /* set max attachment limit */
-$properties['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
+$placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
 
 /* load theme options */
-$discuss->config['max_attachments'] = $properties['max_attachments'];
-$discuss->loadThemeOptions('newthread');
+$discuss->config['max_attachments'] = $placeholders['max_attachments'];
 
 /* output form to browser */
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/dis.thread.new.js');
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('Error'));
 
-return $discuss->output('thread/new',$properties);
+return $placeholders;

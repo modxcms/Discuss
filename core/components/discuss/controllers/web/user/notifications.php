@@ -3,13 +3,10 @@
  *
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
 
 /* get user */
-if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('modUser',$_REQUEST['user']);
+if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
+$user = $modx->getObject('modUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
 $modx->lexicon->load('discuss:user');
@@ -39,11 +36,11 @@ if (!empty($_POST) && !empty($_POST['remove'])) {
 
 /* get notifications */
 $c = $modx->newQuery('disPost');
-$c->select('
-    disPost.*,
-    Board.name AS board_name,
-    Author.username AS author_username
-');
+$c->select($modx->getSelectColumns('disPost','disPost'));
+$c->select(array(
+    'board_name' => 'Board.name',
+    'author_username' => 'Author.username',
+));
 $c->innerJoin('disUserNotification','Notifications');
 $c->innerJoin('modUser','Author');
 $c->innerJoin('disBoard','Board');
@@ -63,8 +60,6 @@ foreach ($notifications as $notification) {
 /* output */
 $placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
 $placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
-$modx->setPlaceholder('usermenu',$discuss->getChunk($menuTpl,$placeholders));
+$placeholders['usermenu'] = $discuss->getChunk($menuTpl,$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
-$modx->regClientStartupScript($discuss->config['jsUrl'].'web/user/dis.user.notifications.js');
-
-return $discuss->output('user/notifications',$placeholders);
+return $placeholders;

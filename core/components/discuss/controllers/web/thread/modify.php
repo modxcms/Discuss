@@ -3,10 +3,6 @@
  *
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
-
 if (empty($_REQUEST['post'])) { $modx->sendErrorPage(); }
 $post = $modx->getObject('disPost',$_REQUEST['post']);
 if ($post == null) { $modx->sendErrorPage(); }
@@ -94,4 +90,4 @@ var DISModifyPost = $(function() {
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
 $modx->setPlaceholder('discuss.post',$post->get('title'));
 
-return $discuss->output('thread/modify',$placeholders);
+return $placeholders;
