@@ -3,6 +3,7 @@ $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_
 if (!($discuss instanceof Discuss)) return '';
 $discuss->initialize($modx->context->get('key'));
 
+require dirname(__FILE__).'/systems.inc.php';
 //$smfPassMethod = @sha1(strtolower($username) . $password);
 
 /**
@@ -16,7 +17,7 @@ $discuss->initialize($modx->context->get('key'));
  */
 
 try {
-    $pdo = new PDO($dsn, $user, $password);
+    $pdo = new PDO($systems['smf']['dsn'], $systems['smf']['username'], $systems['smf']['password']);
 } catch (PDOException $e) {
     return 'Connection failed: ' . $e->getMessage();
 }
