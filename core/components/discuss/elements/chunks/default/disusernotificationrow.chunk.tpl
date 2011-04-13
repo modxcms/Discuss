@@ -4,9 +4,9 @@
     </div>
     <div class="right" style="padding: 4px;">[[+createdon:strtotime:date=`[[++discuss.date_format]]`]]</div>
 
-    <a href="[[~[[++discuss.thread_resource]]? &thread=`[[+thread]]`]]#dis-board-post-[[+id]]">[[+title]]</a>
+    <a href="[[~[[*id]]]]thread/?thread=[[+thread]]]]#dis-board-post-[[+id]]">[[+title]]</a>
     <p class="dis-post-li-desc">
-        [[%discuss.by? &author=`<a href="[[~[[++discuss.user_resource]]? &user=`[[+author]]`]]">[[+author_username]]</a>`]]
-        (<a href="[[~[[++discuss.board_resource]]? &board=`[[+board]]`]]">[[+board_name]]</a>)
+        [[%discuss.by? &author=`<a href="[[~[[*id]]]]user/?user=[[+author]]">[[+author_username]]</a>`]]
+        (<a href="[[~[[*id]]]]board/?board=[[+board]]">[[+board_name]]</a>)
     </p>
 </li>

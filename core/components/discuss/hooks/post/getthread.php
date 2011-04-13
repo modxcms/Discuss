@@ -30,25 +30,29 @@ $isModerator = $modx->getCount('disModerator',array(
     'user' => $modx->user->get('id'),
     'board' => $thread->get('board'),
 )) > 0 ? true : false;
+$isAuthenticated = $modx->user->isAuthenticated();
+$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
+$userUrl = $currentResourceUrl.'user/';
 
 /* get posts */
 $c = $modx->newQuery('disPost');
 $c->where(array(
     'Descendants.ancestor' => $post->get('id'),
 ));
-if ($flat){
+if ($flat) {
     $ct = clone $c;
     if ($ct->prepare() && $ct->stmt->execute()) {
         $total = $ct->stmt->rowCount();
         $count = ceil($total/$postPerPage);
     }
+    /*
     $modx->hooks->load('pagination/build',array(
         'total' => $count,
         'id' => $post->get('id'),
         'view' => 'thread',
         'limit' => $postPerPage,
         'param' => $param,
-    ));
+    ));*/
     unset($ct,$count);
 
     $c->sortby($modx->getSelectColumns('disPost','disPost','',array('id')),'ASC');
@@ -58,12 +62,12 @@ if ($flat){
 }
 $c->bindGraph('{"Author":{},"AuthorProfile":{},"Descendants":{},"EditedBy":{}}');
 $c->groupBy($modx->getSelectColumns('disPost','disPost','',array('id')));
-$posts = $modx->getCollectionGraph('disPost','{"Author":{},"AuthorProfile":{},"Descendants":{},"EditedBy":{}}',$c);
-$isAuthenticated = $modx->user->isAuthenticated();
 
+
+$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
+$posts = $modx->getCollectionGraph('disPost','{"Author":{},"AuthorProfile":{},"Descendants":{},"EditedBy":{}}',$c);
 $plist = array();
-$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
-$userUrl = $currentResourceUrl.'user/';
+
 foreach ($posts as $post) {
     $postArray = $post->toArray('',true);
     $postArray = array_merge($postArray,$post->AuthorProfile->toArray('author.'));
@@ -73,7 +77,7 @@ foreach ($posts as $post) {
         $postArray = array_merge($postArray,$post->EditedBy->toArray('editedby.'));
         unset($postArray['editedby.password'],$postArray['editedby.cachepwd']);
     }
-    
+
     $postArray['author.username_link'] = '<a href="'.$userUrl.'?user='.$post->get('author').'">'.$post->Author->get('username').'</a>';
 
     /* set author avatar */
@@ -81,7 +85,7 @@ foreach ($posts as $post) {
     if (!empty($avatarUrl)) {
         $postArray['author.avatar'] = '<img class="dis-post-avatar" alt="'.$postArray['author'].'" src="'.$avatarUrl.'" />';
     }
-    
+
     /* check if author wants to show email */
     if ($post->AuthorProfile->get('show_email') && $isAuthenticated) {
         $postArray['author.email'] = '<a href="mailto:'.$post->AuthorProfile->get('email').'">'.$modx->lexicon('discuss.email_author').'</a>';
@@ -91,7 +95,7 @@ foreach ($posts as $post) {
 
     if (!$flat && !empty($post->Descendants)) {
         $desc = array_pop($post->Descendants);
-        
+
         /* set depth and check max post depth */
         $postArray['depth'] = $desc->get('depth');
         $postArray['class'] = 'dis-board-post dis-depth-'.$desc->get('depth');
@@ -138,12 +142,11 @@ foreach ($posts as $post) {
         $postArray['attachments'] = implode("\n",$postArray['attachments']);
     }
     if ($flat) {
-        $output[] = $this->discuss->getChunk($postTpl,$pa);
+        $output[] = $this->discuss->getChunk($postTpl,$postArray);
     } else {
         $plist[] = $postArray;
     }
 }
-
 if (empty($flat)) {
     /* parse posts via tree parser */
     $discuss->loadTreeParser();

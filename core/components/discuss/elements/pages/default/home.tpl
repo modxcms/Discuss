@@ -14,7 +14,7 @@
 
 <ol class="dis-board-list">
     <li class="dis-category-li"><h2>[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</h2></li>
-    [[!DiscussRecentPosts]]
+    [[+recent_posts]]
 </ol>
 
 <br class="clear" />

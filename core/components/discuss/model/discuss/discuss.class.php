@@ -64,7 +64,6 @@ class Discuss {
      * @param string $ctx The context to load. Defaults to web.
      */
     public function initialize($ctx = 'web') {
-
         $this->modx->getService('hooks','discuss.disHooks',$this->config['modelPath'],array(
             'discuss' => &$this,
         ));
@@ -78,7 +77,6 @@ class Discuss {
                 return $this->request->handleRequest();
             break;
             case 'connector':
-
                 if (!$this->modx->loadClass('discuss.request.DisConnectorRequest',$this->config['modelPath'],true,true)) {
                     return 'Could not load connector request handler.';
                 }
@@ -86,7 +84,6 @@ class Discuss {
                 return $this->request->handle();
             break;
             default:
-
                 $this->modx->lexicon->load('discuss:web');
 
                 $this->_initUser();

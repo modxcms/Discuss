@@ -107,6 +107,9 @@ class disPost extends xPDOSimpleObject {
             $thread = $this->getThreadRoot();
             $this->set('thread',$thread->get('id'));
             $this->save();
+
+            /* clear cache */
+            $this->clearCache();
         }
         return $saved;
     }
@@ -149,6 +152,7 @@ class disPost extends xPDOSimpleObject {
                 $board->set('num_replies',($board->get('num_replies')-1));
             }
             $board->save();
+            $this->clearCache();
         }
         return $removed;
     }
@@ -157,8 +161,7 @@ class disPost extends xPDOSimpleObject {
         $message = $this->get('message');
 
         /* Check custom content parser setting */
-        if($this->xpdo->getOption('discuss.use_custom_post_parser',null,false)){
-
+        if ($this->xpdo->getOption('discuss.use_custom_post_parser',null,false)) {
             /* Load custom parser */
             $parsed = $this->xpdo->invokeEvent('OnDiscussPostCustomParser', array(
                     'content' => &$message,
@@ -244,11 +247,11 @@ class disPost extends xPDOSimpleObject {
             return $this;
         }
         $c = $this->xpdo->newQuery('disPost');
-        $c->select('
-            disPost.*,
-            Author.username AS author_username,
-            Board.name AS board_name
-        ');
+        $c->select($this->xpdo->getSelectColumns('disPost','disPost'));
+        $c->select(array(
+            'author_username' => 'Author.username',
+            'board_name' => 'Board.name',
+        ));
         $c->innerJoin('modUser','Author');
         $c->innerJoin('disBoard','Board');
         $c->innerJoin('disPostClosure','Ancestors');
@@ -272,10 +275,10 @@ class disPost extends xPDOSimpleObject {
      */
     public function getDescendants($depth = 0) {
         $c = $this->xpdo->newQuery('disPost');
-        $c->select('
-            disPost.*,
-            Descendants.depth AS depth
-        ');
+        $c->select($this->xpdo->getSelectColumns('disPost','disPost'));
+        $c->select(array(
+            'depth' => 'Descendants.depth',
+        ));
         $c->innerJoin('disPostClosure','Descendants');
         $c->innerJoin('disPostClosure','Ancestors');
         $c->where(array(
@@ -300,8 +303,11 @@ class disPost extends xPDOSimpleObject {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
 
         $c = $this->xpdo->newQuery('disSession');
-        $c->select('disSession.id,GROUP_CONCAT(DISTINCT CONCAT_WS(":",User.id,User.username)) AS readers');
         $c->innerJoin('modUser','User');
+        $c->select($this->xpdo->getSelectColumns('disSession','disSession','',array('id')));
+        $c->select(array(
+            'GROUP_CONCAT(DISTINCT CONCAT_WS(":",User.id,User.username)) AS readers',
+        ));
         $c->where(array(
             'disSession.place' => 'thread:'.$this->get('id'),
         ));
@@ -313,7 +319,7 @@ class disPost extends xPDOSimpleObject {
             $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members[] = '<a href="[[~[[++discuss.user_resource]]]]?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>';
+                $members[] = '<a href="[[~[[*id]]]]user/?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>';
             }
             $members = array_unique($members);
             $members = implode(',',$members);
@@ -380,5 +386,20 @@ class disPost extends xPDOSimpleObject {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark unread the post: '.print_r($read->toArray(),true));
         }
         return $removed;
+    }
+
+    public function clearCache() {
+        $this->xpdo->getCacheManager();
+        $this->xpdo->cacheManager->delete('discuss/post/'.$this->get('id'));
+        $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
+        $root = $this->getThreadRoot();
+        if ($root->get('id') != $this->get('id')) {
+            $this->xpdo->cacheManager->delete('discuss/thread/'.$root->get('id'));
+        }
+    }
+
+    public static function clearAllCache(xPDO $xpdo) {
+        $xpdo->getCacheManager();
+        return $xpdo->cacheManager->delete('discuss/post/');
     }
 }

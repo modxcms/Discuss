@@ -84,14 +84,9 @@ class DisRequest {
      */
     public function output($output = '',array $properties = array()) {
         if ($this->modx->getOption('discuss.debug',null,false)) {
-            $output = $this->discuss->getChunk('disWrapper',array(
-                'discuss.output' => $output,
-            ));
-
             if ($this->debugTimer !== false) {
                 $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";
             }
-
             return $output;
         }
 

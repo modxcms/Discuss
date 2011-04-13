@@ -6,5 +6,5 @@
 
     <h3><a href="[[~[[*id]]]]board/?board=[[+id]]">[[+name]]</a></h3>
     <p>[[+description]]</p>
-    <span class="dis-board-subs">[[+subforums:notempty=`Sub-Forums: [[+subforums]]`]]</span>
+    <span class="dis-board-subs">[[+subforums:notempty=`[[+subforums]]`]]</span>
 </li>

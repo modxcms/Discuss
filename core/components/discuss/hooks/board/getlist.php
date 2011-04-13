@@ -5,6 +5,7 @@
  * @package discuss
  */
 
+$board = !empty($scriptProperties['board']) ? (is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board']) : 0;
 /* unread sql */
 $ucs = $modx->newQuery('disPostRead');
 $ucs->select($modx->getSelectColumns('disPostRead','disPostRead','',array('post')));
@@ -53,14 +54,14 @@ $c->innerJoin('disCategory','Category');
 $c->innerJoin('disBoardClosure','Descendants');
 $c->leftJoin('disPost','LastPost');
 $c->leftJoin('modUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
-if (!empty($scriptProperties['board'])) {
+if (!empty($board)) {
     $c->where(array(
-        'disBoard.parent' => is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board'],
+        'disBoard.parent' => $board,
     ));
 }
 $c->sortby('Category.rank','ASC');
 $c->sortby('disBoard.rank','ASC');
-$subboards = $modx->getCollection('disBoard',$c);
+$subBoards = $modx->getCollection('disBoard',$c);
 unset($c);
 
-return $subboards;
+return $subBoards;

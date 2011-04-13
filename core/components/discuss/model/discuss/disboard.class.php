@@ -160,8 +160,11 @@ class disBoard extends xPDOSimpleObject {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
 
         $c = $this->xpdo->newQuery('disSession');
-        $c->select('disSession.id,GROUP_CONCAT(CONCAT_WS(":",User.id,User.username) SEPARATOR ",") AS readers');
         $c->innerJoin('modUser','User');
+        $c->select($this->xpdo->getSelectColumns('disSession','disSession','',array('id')));
+        $c->select(array(
+            'GROUP_CONCAT(CONCAT_WS(":",User.id,User.username) SEPARATOR ",") AS readers',
+        ));
         $c->where(array(
             'disSession.place' => 'board:'.$this->get('id'),
         ));
@@ -169,13 +172,13 @@ class disBoard extends xPDOSimpleObject {
         $members = $this->xpdo->getObject('disSession',$c);
         if ($members) {
             $readers = explode(',',$members->get('readers'));
-            $members = '';
+            $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members .= '<a href="[[~[[++discuss.user_resource]]]]?user='.$r[0]
-                    .'">'.$r[1].'</a>,';
+                $members[] = '<a href="[[~[[++discuss.user_resource]]]]?user='.$r[0].'">'.$r[1].'</a>';
             }
-            $members = trim($members,',');
+            $members = array_unique($members);
+            $members = implode(',',$members);
         } else { $members = '0 members'; }
 
         $c = $this->xpdo->newQuery('disSession');
@@ -202,11 +205,47 @@ class disBoard extends xPDOSimpleObject {
             $sbs = array();
             foreach ($subboards as $subboard) {
                 $sb = explode(':',$subboard);
-                $sbs[] = '<a href="[[~[[++discuss.board_resource]]]]?board='.$sb[0].'">'.$sb[1].'</a>';
+                $sbs[] = '<a href="[[~[[*id]]]]board/?board='.$sb[0].'">'.$sb[1].'</a>';
             }
             $sbl = $this->xpdo->lexicon('discuss.subforums').': '.implode(',',$sbs);
         }
         $this->set('subforums',$sbl);
         return $sbl;
+    }
+
+    public function buildBreadcrumbs() {
+        $currentResourceUrl = $this->xpdo->makeUrl($this->xpdo->resource->get('id'));
+
+        $cacheKey = 'discuss/board/'.$this->get('id').'/breadcrumbs';
+        $trail = $this->xpdo->cacheManager->get($cacheKey);
+        if (empty($trail)) {
+            /* get board breadcrumb trail */
+            $c = $this->xpdo->newQuery('disBoard');
+            $c->innerJoin('disBoardClosure','Ancestors');
+            $c->where(array(
+                'Ancestors.descendant' => $this->get('id'),
+                'Ancestors.ancestor:!=' => $this->get('id'),
+            ));
+            $c->sortby($this->xpdo->getSelectColumns('disBoardClosure','Ancestors','',array('depth')),'DESC');
+            $ancestors = $this->xpdo->getCollection('disBoard',$c);
+
+            /* breadcrumbs */
+            $trail = array();
+            $trail[] = array(
+                'url' => $currentResourceUrl,
+                'text' => $this->xpdo->getOption('discuss.forum_title'),
+            );
+            foreach ($ancestors as $ancestor) {
+                $trail[] = array(
+                    'url' => $currentResourceUrl.'board?board='.$ancestor->get('id'),
+                    'text' => $ancestor->get('name'),
+                );
+            }
+            $trail[] = array('text' => $this->get('name'), 'active' => true);
+            $trail = $this->xpdo->hooks->load('breadcrumbs',array(
+                'items' => &$trail,
+            ));
+        }
+        $this->set('trail',$trail);
     }
 }
