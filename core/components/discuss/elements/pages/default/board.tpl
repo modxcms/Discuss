@@ -1,7 +1,7 @@
 [[+trail]]
 
-<ol class="dis-board-list" style="[[+subboards_toggle]]">
-[[+subboards]]
+<ol class="dis-board-list" style="[[+boards_toggle]]">
+[[+boards]]
 </ol>
 <br class="clear" />
 

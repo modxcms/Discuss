@@ -4,32 +4,22 @@
  * @package discuss
  * @subpackage hooks
  */
-function addParam($action, $param)
-{
-	if($param['page'] == 1){
-		unset($param['page']);
-	}
-	$queryString = http_build_query($param, '', '&amp;');
-	if(empty($queryString)){
-		return '';
-	}	
-	return '?'.$queryString;
+function addParam() {
+    return '';
 }
- 
-$param = $scriptProperties['param'];
+$param = $modx->getOption('param',$scriptProperties,'page');
 $current = (!empty($_GET[$param]) && is_numeric($_GET[$param])) ? $_GET[$param] : 1 ;
-$limit = $scriptProperties['limit'];
-$total = $scriptProperties['total'];
-$view = $scriptProperties['view'];
+$limit = $modx->getOption('limit',$scriptProperties,20);
+$count = $modx->getOption('count',$scriptProperties,0);
+$total = ceil($count / 10);
+
+$view = $modx->getOption('view',$scriptProperties,'');
 $viewId = $scriptProperties['id'];
-$landing = 'discuss.'.$view.'_resource';
-$action = $modx->makeUrl($modx->getOption($landing));
+$params = $modx->request->getParameters();
+unset($params[$param]);
+$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'),'',$params);
 
-if(empty($action)){
-	return '';
-}
-
-if($total <= 1){
+if ($total <= 1) {
 	$pagination = '<div class="inactive">Page 1 of 1</div>';
 	$modx->toPlaceholders(array('pagination' => $pagination));
 	return;
@@ -37,110 +27,101 @@ if($total <= 1){
 
 /* Declare variable */
 $prev = $current - 1; // Previous page number
-$urlPrev = addParam($action, array($view => $viewId, $param => $prev));
+$urlPrev = $currentResourceUrl;//.'&page='.$prev;
 $next = $current + 1; // Next page number
-$urlNext = addParam($action, array($view => $viewId, $param => $next)); 
+$urlNext = $currentResourceUrl;//.'&page='.$next;
 $n2l = $total - 1; // Next to last page number	
-$urlN2l = addParam($action, array($view => $viewId, $param => $total - 1)); 
-$urlLast = addParam($action,array($view => $viewId, $param => $total));
-$truncateText = ' ... ';
+$urlN2l = $currentResourceUrl;//.'&page='.($total - 1);
+$urlLast = $currentResourceUrl;//.'&page='.$total;
+$truncateText = '<li>...</li>';
 $pagination = '';
-$list = '';	
-		
+$list = array();
+
 /* Previous button */
-switch($current){
-	case ($current == 2):
-		$list .= $discuss->getChunk('PaginationLink',Array('url' => $urlPrev, 'text' => '◄'));
-	break;
-	case ($current > 2):
-		$list .= $discuss->getChunk('PaginationLink',Array('url' => $urlPrev, 'text' => '◄'));
+switch ($current) {
+	case ($current >= 2):
+		$list[] = $discuss->getChunk('pagination/PaginationLink',array('url' => $urlPrev, 'text' => '◄'));
 	break;
 	default:
-		$list .= $discuss->getChunk('PaginationActive',Array('class' => 'inactive', 'text' => '◄'));
+		$list[] = $discuss->getChunk('pagination/PaginationActive',array('class' => 'inactive', 'text' => '◄'));
 	break;
 }
 
-/* If total pages under 12, don't truncate */
-if($total < 12){
-	$list .= ($current == 1) 
-		? 	$discuss->getChunk('PaginationActive', Array('class' => 'active', 'text' => '1')) 
-		: 	$discuss->getChunk('PaginationLink',Array('url' => addParam($action, array($view => $viewId)), 'text' => '1'));
-	for ($i = 2; $i<=$total; $i++)
-	{
-		$list .= ($i == $current) 
-			? $discuss->getChunk('PaginationActive', Array('class' => 'active', 'text' => $i)) 
-			: $discuss->getChunk('PaginationLink', Array( 'url' => addParam($action, array($view => $viewId, $param => $i)), 'text' => $i));
+/* If total pages under 10, don't truncate */
+if ($total < 10) {
+	for ($i = 1; $i <= $total; $i++) {
+		$list[] = ($i == $current)
+			? $discuss->getChunk('pagination/PaginationActive', array('class' => 'active', 'text' => $i))
+			: $discuss->getChunk('pagination/PaginationLink', array( 'url' => $currentResourceUrl.'&page='.$i, 'text' => $i));
 	}
+
+    
 /* Truncate */
-}else{
+} else {
 	switch($total){
 		/* If the current page near the begginning */
-		case ($current < 2 + ($adj * 2)):
+		case $current <= 3:
 			/* first page */
-			$list .= ($current == 1) 
-				? $discuss->getChunk('PaginationActive', Array('class' => 'active', 'text' => '1')) 
-				: $discuss->getChunk('PaginationLink',Array('url' => addParam($action, array($view => $viewId)), 'text' => '1'));
+			$list[] = ($current == 1)
+				? $discuss->getChunk('pagination/PaginationActive', array('class' => 'active', 'text' => 1))
+				: $discuss->getChunk('pagination/PaginationLink',array('url' => $currentResourceUrl.'&page=', 'text' => 1));
 
 			/* And the followings */
-			for ($i = 2; $i < 4 + ($adj * 2); $i++)
-			{
-				$list .= ($i == $current) 
-				? $discuss->getChunk('PaginationActive', Array('class' => 'active', 'text' => $i)) 
-				: $discuss->getChunk('PaginationLink', Array('url' => addParam($action, array($view => $viewId, $param => $i)), 'text' => $i));
+			for ($i = 2; $i < 4; $i++) {
+				$list[] = ($i == $current)
+				? $discuss->getChunk('pagination/PaginationActive', array('class' => 'active', 'text' => $i))
+				: $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page='.$i, 'text' => $i));
 			}
-			/* truncate */
-			$list .= $truncateText;
-
+                
 			/* and the remaining pages */
-			$list .= $discuss->getChunk('PaginationLink', Array('url' => $urlN2l, 'text' => $n2l));
-			$list .= $discuss->getChunk('PaginationLink', Array('url' => $urlCount, 'text' => $total));
+			$list[] = $truncateText;
+			$list[] = $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page='.$n2l, 'text' => $n2l));
+			$list[] = $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page='.$total, 'text' => $total));
 		break;
 		/* If current page is in the middle */
-		case ( (($adj * 2) + 1 < $current) && ($current < $total - ($adj * 2)) ):
-			
-			$list .= $discuss->getChunk('PaginationLink', Array('url' => addParam($action, array($view => $viewId)), 'text' => '1'));
-			$list .= $discuss->getChunk('PaginationLink', Array('url' => addParam($action, array($view => $viewId, $param => 2)), 'text' => '2'));
+		default:
+            echo 'middle';
 
-			$list .= $truncateText;
+			$list[] = $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page=', 'text' => '1'));
+			$list[] = $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page='.(2), 'text' => '2'));
+			$list[] = $truncateText;
 
-			for ($i = $current - $adj; $i <= $current + $adj; $i++)
-			{
-				$list .= ($i == $current) ? 
-					$discuss->getChunk('PaginationActive', Array('class' => 'active', 'text' => $i)) : 
-					$discuss->getChunk('PaginationLink', Array('url' => addParam($action, array($view => $viewId, $param => $i)), 'text' => $i));
+			for ($i = $current-1; $i <= $current + 1; $i++) {
+				$list[] = ($i == $current) ?
+					$discuss->getChunk('pagination/PaginationActive',array('class' => 'active', 'text' => $i)) :
+					$discuss->getChunk('pagination/PaginationLink',array('url' => $currentResourceUrl.'&page='.$i, 'text' => $i));
 			}
 
-			$pagination .= $truncateText;
-
-			$list .= $discuss->getChunk('PaginationLink', Array('url' => $urlN2l, 'text' => $n2l));
-			$list .= $discuss->getChunk('PaginationLink', Array('url' => $urlCount, 'text' => $total));
+			$list[] = $truncateText;
+			$list[] = $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page='.$n2l, 'text' => $n2l));
+			$list[] = $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page='.$total, 'text' => $total));
 		break;
 		/* If current page is near the end */
-		default:
+		case $total - $current <= 3:
 		
-			$list .= $discuss->getChunk('PaginationLink', Array('url' => addParam($action, array($view => $viewId)), 'text' => '1'));
-			$list .= $discuss->getChunk('PaginationLink', Array('url' => addParam($action, array($view => $viewId, $param => 2)), 'text' => '2'));
+			$list[] = $discuss->getChunk('pagination/PaginationLink', Array('url' => $currentResourceUrl.'&page=', 'text' => '1'));
+			$list[] = $discuss->getChunk('pagination/PaginationLink', Array('url' => $currentResourceUrl.'&page='.(2), 'text' => '2'));
+			$list[] = $truncateText;
 
-			$list .= $truncateText;
-
-			for ($i = $total - (2 + ($adj * 2)); $i <= $total; $i++)
-			{
-				$list .= ($i == $current) ? 
-					$discuss->getChunk('PaginationActive', Array('class' => 'active', 'text' => $i)) : 
-					$discuss->getChunk('PaginationLink', Array('url' => addParam($action, array($view => $viewId, $param => $i)), 'text' => $i));
+			for ($i = $total - (2 + ($adj * 2)); $i <= $total; $i++) {
+				$list[] = ($i == $current) ?
+					$discuss->getChunk('pagination/PaginationActive', Array('class' => 'active', 'text' => $i)) :
+					$discuss->getChunk('pagination/PaginationLink', Array('url' => $currentResourceUrl.'&page='.($i), 'text' => $i));
 			}
 		break;
 	}
 }
 
 /* Next button */
-if ($current == $total)
-	$list .= $discuss->getChunk('PaginationActive',Array('class' => 'inactive', 'text' => '►'));
-else
-	$list .= $discuss->getChunk('PaginationLink',Array('url' => $urlNext, 'text' => '►'));
+if ($current == $total) {
+	$list[] = $discuss->getChunk('pagination/PaginationActive',Array('class' => 'inactive', 'text' => '►'));
+} else {
+	$list[] = $discuss->getChunk('pagination/PaginationLink',Array('url' => $currentResourceUrl.'&page='.($current+1), 'text' => '►'));
+}
 
+$list = implode("\n",$list);
 /* wrap the pagination */
-$pagination = $discuss->getChunk('PaginationWrapper',Array('content' => $list));
+$pagination = $discuss->getChunk('pagination/PaginationWrapper',Array('content' => $list));
 
 /* Send it to the browser */
 $modx->toPlaceholders(array('pagination' => $pagination));

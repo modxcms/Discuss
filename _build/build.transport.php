@@ -171,9 +171,10 @@ $vehicle->resolve('php',array(
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'resolve.tables.php',
 ));
+/*
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'resolve.resources.php',
-));
+));*/
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'resolve.demodata.php',
 ));

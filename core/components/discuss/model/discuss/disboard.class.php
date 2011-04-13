@@ -218,7 +218,7 @@ class disBoard extends xPDOSimpleObject {
 
         $cacheKey = 'discuss/board/'.$this->get('id').'/breadcrumbs';
         $trail = $this->xpdo->cacheManager->get($cacheKey);
-        if (empty($trail)) {
+        if (empty($trail) || true) {
             /* get board breadcrumb trail */
             $c = $this->xpdo->newQuery('disBoard');
             $c->innerJoin('disBoardClosure','Ancestors');
@@ -247,5 +247,6 @@ class disBoard extends xPDOSimpleObject {
             ));
         }
         $this->set('trail',$trail);
+        return $trail;
     }
 }
