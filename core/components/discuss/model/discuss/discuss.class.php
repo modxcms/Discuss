@@ -26,9 +26,6 @@ class Discuss {
 		$themesUrl = $this->modx->getOption('discuss.themes_url',$config,$assetsUrl.'themes/');
         $theme = $this->modx->getOption('discuss.theme',$config,'default');
 
-        $connectorId = $this->modx->getOption('discuss.connector_resource',$config,1);
-        $connectorUrl = $this->modx->makeUrl($connectorId);
-
         $this->config = array_merge(array(
             'assetsUrl' => $assetsUrl,
 			'themesUrl' => $themesUrl,
@@ -37,7 +34,7 @@ class Discuss {
             'jsUrl' => $themesUrl.$theme.'/js/',
             'imagesUrl' => $themesUrl.$theme.'/images/',
 
-            'connectorUrl' => $connectorUrl,
+            'connectorUrl' => $assetsUrl.'connector.php',
 
             'corePath' => $corePath,
             'modelPath' => $corePath.'model/',
