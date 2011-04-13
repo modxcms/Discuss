@@ -1,7 +1,7 @@
 [[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 
-<form action="[[~[[*id]]? &user=`[[+id]]`]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
 <h2>[[+username]]</h2>
 <table class="dis-table">
@@ -28,7 +28,7 @@
 </tr>
 <tr>
     <th>[[%discuss.last_reading]]:</th>
-    <td><a href="[[~[[++discuss.thread_resource]]]]?thread=[[+lastThread.id]]">[[+lastThread.title]]</a></td>
+    <td><a href="[[~[[*id]]]]thread/?thread=[[+lastThread.id]]">[[+lastThread.title]]</a></td>
 </tr>
 <tr>
     <td colspan="2"><hr /></td>

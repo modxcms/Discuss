@@ -4,18 +4,13 @@
  * @package discuss
  */
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('modUser',$scriptProperties['user']);
+$user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
 $modx->lexicon->load('discuss:user');
 
 /* get default properties */
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
-
-
-$user->profile = $modx->getObject('disUserProfile',array(
-    'user' => $user->get('id'),
-));
 
 /* save form fields */
 if (!empty($_POST)) {
@@ -38,22 +33,20 @@ if (!empty($_POST)) {
         if (!empty($_POST['password'])) {
             $user->changePassword($_POST['password_current'],$_POST['password']);
         }
+        $user->fromArray($_POST);
         $user->save();
-        $user->profile->fromArray($_POST);
-        $user->profile->save();
     }
     $modx->toPlaceholders($errors,'error');
 }
 
 $placeholders = $user->toArray();
-$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 /* setup genders */
 $genders = array('' => '','m' => $modx->lexicon('discuss.male'),'f' => $modx->lexicon('discuss.female'));
 $gs = '';
 foreach ($genders as $v => $d) {
     $gs .= '<option value="'.$v.'"'
-        .($user->profile->get('gender') == $v ? ' selected="selected"' : '')
+        .($user->get('gender') == $v ? ' selected="selected"' : '')
         .'>'.$d.'</option>';
 }
 $placeholders['genders'] = $gs;

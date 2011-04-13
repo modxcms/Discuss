@@ -181,23 +181,15 @@ $xpdo_meta_map['disPost']= array (
     ),
     'Author' => 
     array (
-      'class' => 'modUser',
+      'class' => 'disUser',
       'local' => 'author',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'AuthorProfile' => 
-    array (
-      'class' => 'disUserProfile',
-      'local' => 'author',
-      'foreign' => 'user',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
     'CreatedBy' => 
     array (
-      'class' => 'modUser',
+      'class' => 'disUser',
       'local' => 'author',
       'foreign' => 'id',
       'cardinality' => 'one',
@@ -205,7 +197,7 @@ $xpdo_meta_map['disPost']= array (
     ),
     'EditedBy' => 
     array (
-      'class' => 'modUser',
+      'class' => 'disUser',
       'local' => 'author',
       'foreign' => 'id',
       'cardinality' => 'one',

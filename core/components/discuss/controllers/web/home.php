@@ -38,14 +38,14 @@ if (isset($scriptProperties['logout']) && $scriptProperties['logout']) {
 /* action buttons */
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) { /* if logged in */
-    $actionButtons[] = array('url' => '[[~[[*id]]]]?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
+    $actionButtons[] = array('url' => $discuss->url.'?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
 
-    $authLink = $modx->makeUrl($modx->getOption('discuss.board_list_resource'),'','logout=1');
+    $authLink = $discuss->url.'logout';
     $authMsg = $modx->lexicon('discuss.logout');
     $modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
     $actionButtons[] = array('url' => $authLink, 'text' => $authMsg);
 } else { /* if logged out */
-    $authLink = $modx->makeUrl($modx->getOption('discuss.login_resource'));
+    $authLink = $discuss->url.'login';
     $authMsg = $modx->lexicon('discuss.login');
     $modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
 

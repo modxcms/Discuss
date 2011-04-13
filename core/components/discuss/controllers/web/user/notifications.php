@@ -6,7 +6,7 @@
 
 /* get user */
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('modUser',$scriptProperties['user']);
+$user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
 $modx->lexicon->load('discuss:user');
@@ -16,12 +16,7 @@ $cssRowCls = $modx->getOption('cssRowCls',$scriptProperties,'dis-board-li');
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
 $rowTpl = $modx->getOption('rowTpl',$scriptProperties,'disUserNotificationRow');
 
-$user->profile = $modx->getObject('disUserProfile',array(
-    'user' => $user->get('id'),
-));
-
 $placeholders = $user->toArray();
-$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 /* handle unsubscribing */
 if (!empty($_POST) && !empty($_POST['remove'])) {
@@ -30,7 +25,7 @@ if (!empty($_POST) && !empty($_POST['remove'])) {
         if ($notification == null) continue;
         $notification->remove();
     }
-    $url = $modx->makeUrl($modx->resource->get('id')).'?user='.$user->get('id');
+    $url = $discuss->url.'?user='.$user->get('id');
     $modx->sendRedirect($url);
 }
 

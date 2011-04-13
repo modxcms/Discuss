@@ -12,8 +12,8 @@ if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
 if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
 if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
 
-$c = $modx->newQuery('modUser');
-$c->innerJoin('disUserProfile','Profile','Profile.user = modUser.id');
+$c = $modx->newQuery('disUser');
+$c->innerJoin('modUser','User');
 
 if ($combo || $limit) {
     $c->limit($_REQUEST['limit'], $_REQUEST['start']);

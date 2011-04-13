@@ -83,7 +83,7 @@ $xpdo_meta_map['disBanItem']= array (
     ),
     'User' => 
     array (
-      'class' => 'modUser',
+      'class' => 'disUser',
       'local' => 'user',
       'foreign' => 'id',
       'cardinality' => 'one',

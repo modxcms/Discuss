@@ -2,21 +2,26 @@
 /**
  * @package discuss
  */
-$xpdo_meta_map['disUserProfile']= array (
+$xpdo_meta_map['disUser']= array (
   'package' => 'discuss',
-  'table' => 'discuss_user_profile',
+  'table' => 'discuss_users',
   'fields' => 
   array (
     'user' => 0,
+    'username' => '',
+    'password' => '',
+    'email' => '',
+    'ip' => '0.0.0.0',
+    'synced' => 0,
+    'source' => 'internal',
+    'syncedat' => NULL,
     'createdon' => NULL,
     'name_first' => '',
     'name_last' => '',
-    'email' => '',
     'gender' => '',
     'birthdate' => NULL,
     'website' => '',
     'location' => '',
-    'ip' => '0.0.0.0',
     'status' => 0,
     'confirmed' => 0,
     'confirmedon' => NULL,
@@ -37,12 +42,67 @@ $xpdo_meta_map['disUserProfile']= array (
     'user' => 
     array (
       'dbtype' => 'int',
-      'precision' => '10',
+      'precision' => '11',
       'phptype' => 'integer',
-      'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
       'index' => 'index',
+    ),
+    'username' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '120',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'password' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '120',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'email' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '200',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'ip' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '20',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '0.0.0.0',
+    ),
+    'synced' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'source' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '20',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'internal',
+    ),
+    'syncedat' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
     ),
     'createdon' => 
     array (
@@ -62,14 +122,6 @@ $xpdo_meta_map['disUserProfile']= array (
     array (
       'dbtype' => 'varchar',
       'precision' => '100',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => '',
-    ),
-    'email' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '200',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -103,14 +155,6 @@ $xpdo_meta_map['disUserProfile']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
-    ),
-    'ip' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '20',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => '0.0.0.0',
     ),
     'status' => 
     array (
@@ -242,6 +286,14 @@ $xpdo_meta_map['disUserProfile']= array (
   ),
   'composites' => 
   array (
+    'Profile' => 
+    array (
+      'class' => 'disUserProfile',
+      'local' => 'id',
+      'foreign' => 'user',
+      'cardinality' => 'one',
+      'owner' => 'local',
+    ),
     'UserModerated' => 
     array (
       'class' => 'disUserModerated',
@@ -269,7 +321,7 @@ $xpdo_meta_map['disUserProfile']= array (
     'Session' => 
     array (
       'class' => 'disSession',
-      'local' => 'user',
+      'local' => 'id',
       'foreign' => 'user',
       'cardinality' => 'one',
       'owner' => 'local',
@@ -277,7 +329,7 @@ $xpdo_meta_map['disUserProfile']= array (
     'Friends' => 
     array (
       'class' => 'disUserFriend',
-      'local' => 'user',
+      'local' => 'id',
       'foreign' => 'user',
       'cardinality' => 'many',
       'owner' => 'local',

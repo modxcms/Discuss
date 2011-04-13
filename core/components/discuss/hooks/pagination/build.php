@@ -12,6 +12,7 @@ $current = (!empty($_GET[$param]) && is_numeric($_GET[$param])) ? $_GET[$param] 
 $limit = $modx->getOption('limit',$scriptProperties,20);
 $count = $modx->getOption('count',$scriptProperties,0);
 $total = ceil($count / 10);
+$total = 10;
 
 $view = $modx->getOption('view',$scriptProperties,'');
 $viewId = $scriptProperties['id'];
@@ -80,8 +81,6 @@ if ($total < 10) {
 		break;
 		/* If current page is in the middle */
 		default:
-            echo 'middle';
-
 			$list[] = $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page=', 'text' => '1'));
 			$list[] = $discuss->getChunk('pagination/PaginationLink', array('url' => $currentResourceUrl.'&page='.(2), 'text' => '2'));
 			$list[] = $truncateText;

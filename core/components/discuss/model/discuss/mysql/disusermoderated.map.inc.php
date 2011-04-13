@@ -45,17 +45,9 @@ $xpdo_meta_map['disUserModerated']= array (
   array (
     'User' => 
     array (
-      'class' => 'modUser',
+      'class' => 'disUser',
       'local' => 'user',
       'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'UserProfile' => 
-    array (
-      'class' => 'disUserProfile',
-      'local' => 'user',
-      'foreign' => 'user',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),

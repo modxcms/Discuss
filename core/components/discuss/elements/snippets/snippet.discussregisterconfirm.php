@@ -13,12 +13,12 @@ if (!$modx->user->isAuthenticated($modx->context->get('key'))) {
 
 $placeholders = array();
 
-$profile = $modx->getObject('disUserProfile',array(
+$user = $modx->getObject('disUser',array(
     'user' => $modx->user->get('id'),
 ));
-if (empty($profile)) $modx->sendUnauthorizedPage();
+if (empty($user)) $modx->sendUnauthorizedPage();
 
-$status = $profile->get('status');
+$status = $user->get('status');
 switch ($status) {
     case disUserProfile::ACTIVE:
         $url = $modx->makeUrl($modx->getOption('discuss.board_list_resource'));
@@ -28,13 +28,13 @@ switch ($status) {
         $placeholders['registration_message'] = $modx->lexicon('discuss.register_conf_deactivated');
         break;
     case disUserProfile::UNCONFIRMED:
-        $profile->set('status',disUserProfile::ACTIVE);
-        $profile->set('confirmed',1);
-        $profile->set('confirmedon',strftime('%Y-%m-%d %H:%M:%S'));
-        $profile->set('last_login',strftime('%Y-%m-%d %H:%M:%S'));
-        $profile->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
-        $profile->save();
-        $url = $modx->makeUrl($modx->getOption('discuss.board_list_resource'));
+        $user->set('status',disUserProfile::ACTIVE);
+        $user->set('confirmed',1);
+        $user->set('confirmedon',strftime('%Y-%m-%d %H:%M:%S'));
+        $user->set('last_login',strftime('%Y-%m-%d %H:%M:%S'));
+        $user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
+        $user->save();
+        $url = $modx->makeUrl($modx->resource->get('id'));
         $modx->sendRedirect($url);
         break;
     case disUserProfile::BANNED:
@@ -46,7 +46,7 @@ switch ($status) {
 }
 
 /* get board breadcrumb trail */
-$trail = '<a href="'.$modx->makeUrl($modx->getOption('discuss.board_list_resource')).'">[[++discuss.forum_title]]</a> / ';
+$trail = '<a href="'.$modx->makeUrl($modx->resource->get('id')).'">[[++discuss.forum_title]]</a> / ';
 $trail .= $modx->lexicon('discuss.register_confirm');
 $placeholders['trail'] = $trail;
 

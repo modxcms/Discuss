@@ -8,11 +8,8 @@ $modx->lexicon->load('discuss:user');
 
 /* get user */
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('modUser',$scriptProperties['user']);
+$user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
-$user->profile = $modx->getObject('disUserProfile',array(
-    'user' => $user->get('id'),
-));
 
 /* get default properties */
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
@@ -33,14 +30,13 @@ if (!empty($_POST)) {
 }
 
 $placeholders = $user->toArray();
-$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 /* setup genders */
 $genders = array('' => '','m' => $modx->lexicon('discuss.male'),'f' => $modx->lexicon('discuss.female'));
 $placeholders['genders'] = '';
 foreach ($genders as $v => $d) {
     $placeholders['genders'] .= '<option value="'.$v.'"'
-        .($user->profile->get('gender') == $v ? ' selected="selected"' : '')
+        .($user->get('gender') == $v ? ' selected="selected"' : '')
         .'>'.$d.'</option>';
 }
 unset($genders,$v,$d);

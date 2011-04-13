@@ -109,7 +109,7 @@ $xpdo_meta_map['disBanGroup']= array (
   array (
     'CreatedBy' => 
     array (
-      'class' => 'modUser',
+      'class' => 'disUser',
       'local' => 'createdby',
       'foreign' => 'id',
       'cardinality' => 'one',

@@ -77,9 +77,9 @@ class disPost extends xPDOSimpleObject {
             $this->save();
 
             /* up author post count */
-            $profile = $this->getOne('AuthorProfile');
-            $profile->set('posts',($profile->get('posts')+1));
-            $profile->save();
+            $author = $this->getOne('Author');
+            $author->set('posts',($author->get('posts')+1));
+            $author->save();
 
             /* adjust board total replies/posts, and last post */
             $board = $this->getOne('Board');
@@ -121,15 +121,15 @@ class disPost extends xPDOSimpleObject {
      * {@inheritDoc}
      */
     public function remove(array $ancestors = array()) {
-        $profile = $this->getOne('AuthorProfile');
+        $author = $this->getOne('Author');
         $board = $this->getOne('Board');
         $parent = $this->get('parent');
 
         $removed = parent::remove();
         if ($removed) {
             /* decrease profile posts */
-            $profile->set('posts',($profile->get('posts')-1));
-            $profile->save();
+            $author->set('posts',($author->get('posts')-1));
+            $author->save();
 
             /* fix board last post */
             $c = $this->xpdo->newQuery('disPost');

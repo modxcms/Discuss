@@ -4,13 +4,10 @@
  */
 $threshold = $modx->getOption('discuss.user_active_threshold',null,40);
 $timeAgo = time() - (60*($threshold));
-$c = $modx->newQuery('modUser');
-$c->select(array(
-    'modUser.*',
-    'UserGroupProfile.color',
-));
-$c->innerJoin('disSession','Session',$modx->getSelectColumns('disSession','Session','',array('user')).' = '.$modx->getSelectColumns('modUser','modUser','',array('id')));
-$c->leftJoin('modUserGroupMember','UserGroupMembers');
+$c = $modx->newQuery('disUser');
+$c->innerJoin('disSession','Session',$modx->getSelectColumns('disSession','Session','',array('user')).' = '.$modx->getSelectColumns('disUser','disUser','',array('id')));
+$c->innerJoin('modUser','User');
+$c->leftJoin('modUserGroupMember','UserGroupMembers','User.id = UserGroupMembers.member');
 $c->leftJoin('modUserGroup','UserGroup','UserGroup.id = UserGroupMembers.user_group');
 $c->leftJoin('disUserGroupProfile','UserGroupProfile','UserGroupProfile.usergroup = UserGroup.id AND UserGroupProfile.color != ""');
 $c->where(array(
@@ -18,7 +15,7 @@ $c->where(array(
 ));
 $c->sortby('UserGroupProfile.color','ASC');
 $c->sortby('Session.access','ASC');
-$activeUsers = $modx->getCollection('modUser',$c);
+$activeUsers = $modx->getCollection('disUser',$c);
 $as = '';
 foreach ($activeUsers as $activeUser) {
     $as .= $discuss->getChunk('disActiveUserRow',$activeUser->toArray());

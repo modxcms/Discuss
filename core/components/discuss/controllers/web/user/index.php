@@ -18,29 +18,25 @@ $postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 
 /* get user */
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('modUser',$scriptProperties['user']);
+$user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
-$user->profile = $modx->getObject('disUserProfile',array(
-    'user' => $user->get('id'),
-));
 $placeholders = $user->toArray();
-$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 /* format age */
-$age = strtotime($user->profile->get('birthdate'));
+$age = strtotime($user->get('birthdate'));
 $age = round((time() - $age) / 60 / 60 / 24 / 365);
 $placeholders['age'] = $age;
 
 /* format gender */
-switch ($user->profile->get('gender')) {
+switch ($user->get('gender')) {
     case 'm': $placeholders['gender'] = $modx->lexicon('discuss.male'); break;
     case 'f': $placeholders['gender'] = $modx->lexicon('discuss.female'); break;
     default: $placeholders['gender'] = ''; break;
 }
 
 /* get last visited thread */
-$lastThread = $user->profile->getOne('ThreadLastVisited');
+$lastThread = $user->getOne('ThreadLastVisited');
 if ($lastThread) {
     $placeholders = array_merge($placeholders,$lastThread->toArray('lastThread.'));
 }

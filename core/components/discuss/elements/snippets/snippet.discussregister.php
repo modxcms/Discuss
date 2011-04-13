@@ -11,7 +11,7 @@ $discuss->initialize($modx->context->get('key'));
 $placeholders = array();
 
 /* if user is already logged in to Discuss, redirect to forums */
-if ($modx->user->isAuthenticated($modx->context->get('key')) && !empty($discuss->user->profile)) {
+if ($modx->user->isAuthenticated($modx->context->get('key')) && !empty($discuss->user->user)) {
     $url = $modx->makeUrl($modx->getOption('discuss.board_list_resource'));
     $modx->sendRedirect($url);
 }

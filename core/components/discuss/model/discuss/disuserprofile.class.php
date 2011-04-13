@@ -31,7 +31,7 @@ class disUserProfile extends xPDOSimpleObject {
         if (!empty($avatar) || !empty($avatarService)) {
             if (!empty($avatarService)) {
                 if ($avatarService == 'gravatar') {
-                    $avatarUrl = $this->xpdo->getOption('discuss.gravatar_url',$scriptProperties,'http://www.gravatar.com/avatar/').md5($this->get('email'));
+                    $avatarUrl = $this->xpdo->getOption('discuss.gravatar_url',null,'http://www.gravatar.com/avatar/').md5($this->get('email'));
                 }
             } else {
                 $avatarUrl = $this->xpdo->getOption('discuss.files_url').'/profile/'.$this->get('user').'/'.$this->get('avatar');

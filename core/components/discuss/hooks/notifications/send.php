@@ -25,15 +25,12 @@ $notifications = $modx->getCollection('dhUserNotification',$c);
 foreach ($notifications as $notification) {
     $user = $notification->getOne('User');
     if ($user == null) { $notification->remove(); continue; }
-    $profile = $notification->getOne('UserProfile');
-    if ($profile == null) { $notification->remove(); continue; }
 
     $emailProperties = $user->toArray();
-    $emailProperties = array_merge($emailProperties,$profile->toArray());
     $emailProperties['tpl'] = $tpl;
     $emailProperties['name'] = $scriptProperties['title'];
     $emailProperties['url'] = $modx->makeUrl($modx->getOption('discuss.thread_resource')).'?thread='.$scriptProperties['thread'];
-    $sent = $discuss->sendEmail($profile->get('email'),$user->get('username'),$subject,$emailProperties);
+    $sent = $discuss->sendEmail($user->get('email'),$user->get('username'),$subject,$emailProperties);
     unset($emailProperties);
 }
 

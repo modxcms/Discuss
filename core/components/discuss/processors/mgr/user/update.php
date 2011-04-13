@@ -6,16 +6,12 @@
  */
 /* get user */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.user_err_ns'));
-$c = $modx->newQuery('disUserProfile');
-$c->select(array(
-    'disUserProfile.*',
-    'User.username',
-));
+$c = $modx->newQuery('disUser');
 $c->innerJoin('modUser','User');
 $c->where(array(
     'user' => $scriptProperties['id'],
 ));
-$user = $modx->getObject('disUserProfile',$c);
+$user = $modx->getObject('disUser',$c);
 if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf'));
 
 /* set fields */

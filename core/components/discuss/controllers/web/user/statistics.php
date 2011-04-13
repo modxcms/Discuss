@@ -11,17 +11,13 @@ $modx->lexicon->load('discuss:user');
 
 /* get user */
 if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('modUser',$_REQUEST['user']);
+$user = $modx->getObject('disUser',$_REQUEST['user']);
 if ($user == null) { $modx->sendErrorPage(); }
-$user->profile = $modx->getObject('disUserProfile',array(
-    'user' => $user->get('id'),
-));
 
 /* get default properties */
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
 
 $placeholders = $user->toArray();
-$placeholders = array_merge($user->profile->toArray(),$placeholders);
 
 $placeholders['topics'] = $modx->getCount('disPost',array(
     'parent' => 0,

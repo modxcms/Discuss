@@ -91,7 +91,7 @@ class DisRequest {
         }
 
         $this->modx->toPlaceholders($properties);
-        return '';
+        return $output;
     }
 
 	/**

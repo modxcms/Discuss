@@ -80,7 +80,7 @@ unset($c);
 $list = array();
 $currentCategory = 0;
 $rowClass = 'even';
-
+$boardList = array();
 
 foreach ($boards as $board) {
     if ($board->get('unread') > 0 && $modx->user->isAuthenticated()) {

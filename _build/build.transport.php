@@ -14,7 +14,7 @@ set_time_limit(0);
 define('PKG_NAME','Discuss');
 define('PKG_NAME_LOWER','discuss');
 define('PKG_VERSION','0.1.0');
-define('PKG_RELEASE','alpha3');
+define('PKG_RELEASE','beta1');
 
 /* override with your own defines here (see build.config.sample.php) */
 require_once dirname(__FILE__) . '/build.config.php';
@@ -58,10 +58,10 @@ if (empty($snippets)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in sni
 $category->addMany($snippets);
 
 /* add chunks */
-$modx->log(modX::LOG_LEVEL_INFO,'Packaging in chunks...');
+/*$modx->log(modX::LOG_LEVEL_INFO,'Packaging in chunks...');
 $chunks = include $sources['data'].'transport.chunks.php';
 if (empty($chunks)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in chunks.');
-$category->addMany($chunks);
+$category->addMany($chunks);*/
 
 /* create category vehicle */
 $attr = array(
@@ -143,10 +143,6 @@ foreach ($events as $event) {
 $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' default events.'); flush();
 unset ($events,$event,$attributes);
 
-/* load lexicon strings */
-$modx->log(modX::LOG_LEVEL_INFO,'Packaging in lexicon...');
-$builder->buildLexicon($sources['lexicon']);
-
 /* load menu */
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in menu...');
 $menu = include $sources['data'].'transport.menu.php';
@@ -189,6 +185,7 @@ $modx->log(modX::LOG_LEVEL_INFO,'Adding package attributes and setup options...'
 $builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+    'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
     'setup-options' => array(
         'source' => $sources['build'].'setup.options.php',
     ),

@@ -13,6 +13,7 @@ class Discuss {
      * @access public
      */
     public $debugTimer = false;
+    public $url = '';
 
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
@@ -86,6 +87,7 @@ class Discuss {
                 $this->_initUser();
                 $this->_initSession();
                 $this->loadRequest();
+                $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
             break;
         }
     }
@@ -112,33 +114,61 @@ class Discuss {
         $userId = $this->modx->user->get('id');
         if ($userId == null) {
             $this->modx->user->set('id',0);
+        } else {
+            $this->user = $this->modx->getObject('disUser',array('user' => $userId));
+        }
+        if (empty($this->user) && $this->modx->user->get('id') != null) {
+            /* if no disUser exists but there is a modUser, import! */
+            $profile = $this->modx->user->getOne('Profile');
+
+            $this->user = $this->modx->newObject('disUser');
+            $this->user->fromArray(array(
+                'user' => $this->modx->user->get('id'),
+                'username' => $this->modx->user->get('username'),
+                'password' => $this->modx->user->get('password'),
+                'synced' => true,
+                'syncedat' => date('Y-m-d H:I:S'),
+                'source' => 'internal',
+                'ip' => $_SERVER['REMOTE_ADDR'],
+            ));
+            if ($profile) {
+                $this->user->fromArray($profile->toArray());
+                $name = $profile->get('fullname');
+                $name = explode(' ',$name);
+                $this->user->fromArray(array(
+                    'name_first' => $name[0],
+                    'name_last' => isset($name[1]) ? $name[1] : '',
+                ));
+            }
+            $this->user->save();
+            
+        } else if (empty($this->user)) {
+            $this->user =& $this->modx->newObject('disUser');
+            $this->user->set('user',0);
+            $this->user->set('username','(anonymous)');
+        } else {
+            $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
+            $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
+            $this->user->save();
         }
         /* assign user */
-        $this->user =& $this->modx->user;
-        $this->user->profile = $this->modx->getObject('disUserProfile',array('user' => $this->user->get('id')));
-        if ($this->user->profile == null) {
-            /* @TODO: auto-create profile if not exists as fallback */
-        } else {
-            $this->user->profile->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
-            $this->user->profile->set('ip',$_SERVER['REMOTE_ADDR']);
-            $this->user->profile->save();
-        }
-
+        
         /* topbar profile links. @TODO: Move this somewhere else. */
+        $currentResourceUrl = $this->modx->makeUrl($this->modx->resource->get('id'));
         if ($this->modx->user->isAuthenticated()) {
             $authphs = array(
                 'user' => $userId,
                 'username' => $this->user->get('username'),
-                'loggedInAs' => 'logged in as <a href="[[~[[++discuss.user_resource]]]]?user=1">[[+discuss.username]]</a> - ',
-                'homeLink' => '<a href="[[~[[++discuss.board_list_resource]]]]">Home</a>',
-                'authLink' => '<a href="[[~[[++discuss.board_list_resource]]? &logout=`1`]]">Logout</a>',
-                'profileLink' => '<a href="[[~[[++discuss.user_resource]]? &user=`'.$userId.'`]]">Profile</a>',
-                'searchLink' => '<a href="[[~[[++discuss.search_resource]]]]">Search</a>',
-                'unreadLink' => '<a href="[[~[[++discuss.unread_posts_resource]]]]">Unread Posts</a>',
+                'loggedInAs' => 'logged in as <a href="[[~[[*id]]]]?user=1">[[+discuss.username]]</a> - ',
+                'homeLink' => '<a href="'.$currentResourceUrl.'">Home</a>',
+                'authLink' => '<a href="'.$currentResourceUrl.'logout">Logout</a>',
+                'profileLink' => '<a href="'.$currentResourceUrl.'user/?user='.$userId.'">Profile</a>',
+                'searchLink' => '<a href="'.$currentResourceUrl.'search">Search</a>',
+                'unreadLink' => '<a href="'.$currentResourceUrl.'unread">Unread Posts</a>',
             );
         } else {
             $authphs = array(
-                'authLink' => '<a href="[[~[[++discuss.login_resource]]]]">Login</a>',
+                'authLink' => '<a href="'.$currentResourceUrl.'login">Login</a>',
             );
         }
         $this->modx->toPlaceholders($authphs,'discuss');
@@ -182,7 +212,7 @@ class Discuss {
         $this->session =& $session;
 
         /* remove old sessions */
-        $ss = $this->modx->removeCollection('disSession',array(
+        $this->modx->removeCollection('disSession',array(
             '(access + ttl) > NOW()'
         ));
     }

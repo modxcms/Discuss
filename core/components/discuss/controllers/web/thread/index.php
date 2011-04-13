@@ -192,9 +192,9 @@ $placeholders['discuss.error_panel'] = $discuss->getChunk('Error');
 $placeholders['discuss.thread'] = $thread->get('title');
 
 /* set last visited */
-if ($discuss->user->profile) {
-    $discuss->user->profile->set('thread_last_visited',$thread->get('id'));
-    $discuss->user->profile->save();
+if ($discuss->user->get('user') != 0) {
+    $discuss->user->set('thread_last_visited',$thread->get('id'));
+    $discuss->user->save();
 }
 
 return $placeholders;

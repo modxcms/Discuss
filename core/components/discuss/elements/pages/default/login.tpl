@@ -1,4 +1,4 @@
-<form class="dis-form dis-login" action="[[~[[++discuss.login_resource]]]]?" method="post">
+<form class="dis-form dis-login" action="[[~[[*id]]]]login" method="post">
     <h2>[[%discuss.login? &namespace=`discuss` &topic=`web`]]</h2>
     
     <label>[[%discuss.username]]:</label>
