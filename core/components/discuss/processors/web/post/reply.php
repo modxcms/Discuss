@@ -20,7 +20,7 @@ if (empty($_POST['message'])) { $modx->error->addField('message',$modx->lexicon(
 /* first check attachments for validity */
 $attachments = array();
 if (!empty($_FILES) && $_FILES['attachment1']['error'] == 0) {
-    $result = $modx->hooks->load('post/attachment/verify',array(
+    $result = $discuss->hooks->load('post/attachment/verify',array(
         'attachments' => &$_FILES,
     ));
     if (!empty($result['errors'])) {
@@ -84,7 +84,7 @@ if (!empty($_POST['notify'])) {
 }
 
 /* send out notifications */
-$modx->hooks->load('notifications/send',array(
+$discuss->hooks->load('notifications/send',array(
     'board' => $post->get('board'),
     'thread' => $thread->get('id'),
     'title' => $thread->get('title'),

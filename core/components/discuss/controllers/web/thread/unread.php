@@ -94,13 +94,13 @@ $trail[] = array(
 );
 $trail[] = array('text' => $modx->lexicon('discuss.unread_posts'),'active' => true);
 
-$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
 $placeholders['trail'] = $trail;
 
 /* build pagination */
-$modx->hooks->load('pagination/build',array(
+$discuss->hooks->load('pagination/build',array(
     'count' => $total,
     'id' => 0,
     'view' => 'thread/unread',

@@ -125,6 +125,7 @@
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Reads" class="disThreadRead" local="id" foreign="thread" cardinality="many" owner="local" />
         <composite alias="Posts" class="disPost" local="id" foreign="thread" cardinality="many" owner="local" />
+        <composite alias="Notifications" class="disUserNotification" local="id" foreign="thread" cardinality="many" owner="local" />
     </object>
 
     <object class="disThreadRead" table="discuss_threads_read" extends="xPDOSimpleObject">
@@ -163,7 +164,6 @@
         <composite alias="Children" class="disPost" local="id" foreign="parent" cardinality="many" owner="local" />
         <composite alias="Ancestors" class="disPostClosure" local="id" foreign="ancestor" cardinality="many" owner="local" />
         <composite alias="Descendants" class="disPostClosure" local="id" foreign="descendant" cardinality="many" owner="local" />
-        <composite alias="Notifications" class="disUserNotification" local="id" foreign="post" cardinality="many" owner="local" />
         <composite alias="Attachments" class="disPostAttachment" local="id" foreign="post" cardinality="many" owner="local" />
     </object>
     
@@ -271,7 +271,7 @@
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="ThreadLastVisited" class="disPost" local="thread_last_visited" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="ThreadLastVisited" class="disThread" local="thread_last_visited" foreign="id" cardinality="one" owner="foreign" />
 
         <composite alias="UserModerated" class="disUserModerated" local="id" foreign="user" cardinality="one" owner="local" />
         <composite alias="Posts" class="disPost" local="id" foreign="author" cardinality="many" owner="local" />

@@ -28,7 +28,7 @@
 </tr>
 <tr>
     <th>[[%discuss.last_reading]]:</th>
-    <td><a href="[[~[[*id]]]]thread/?thread=[[+lastThread.id]]">[[+lastThread.title]]</a></td>
+    <td><a href="[[~[[*id]]]]thread/?thread=[[+lastThread.thread]]#dis-post-[[+lastThread.id]]">[[+lastThread.title]]</a></td>
 </tr>
 <tr>
     <td colspan="2"><hr /></td>
@@ -59,9 +59,13 @@
 
 <br />
 
-<ol class="dis-board-list" style="border: 0;">
-    <li class="dis-category-li"><h2>[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</h2></li>
-    [[+recentPosts]]
-</ol>
+<div class="dis-threads">
+    <div class="dis-threads-header">
+    <h2 style="margin: 0; padding: 0">[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</h2>
+    </div>
+    <ol class="dis-board-list">
+        [[+recent_posts]]
+    </ol>
+</div>
 
 </div>

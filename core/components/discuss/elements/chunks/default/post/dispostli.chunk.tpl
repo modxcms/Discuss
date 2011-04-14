@@ -1,4 +1,4 @@
-<li class="dis-board-post">
+<li class="dis-board-post [[+class]]">
     <div class="right dis-latest" style="width: 25%"><a class="dis-last" href="[[~[[*id]]]]thread/?thread=[[+thread]]#dis-board-post-[[+post_id]]"></a>
         [[%discuss.last_post]] [[+createdon]]
         <br />[[%discuss.by? &author=`<a href="[[~[[*id]]]]user/?user=[[+author]]">[[+author_username]]</a>`]]

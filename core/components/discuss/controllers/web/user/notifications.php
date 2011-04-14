@@ -3,58 +3,59 @@
  *
  * @package discuss
  */
-
 /* get user */
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
 $modx->lexicon->load('discuss:user');
-
-/* get default properties */
-$cssRowCls = $modx->getOption('cssRowCls',$scriptProperties,'dis-board-li');
-$menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
-$rowTpl = $modx->getOption('rowTpl',$scriptProperties,'disUserNotificationRow');
-
 $placeholders = $user->toArray();
 
 /* handle unsubscribing */
 if (!empty($_POST) && !empty($_POST['remove'])) {
-    foreach ($_POST['remove'] as $postId) {
-        $notification = $modx->getObject('disUserNotification',array('post' => $postId));
+    foreach ($_POST['remove'] as $threadId) {
+        $notification = $modx->getObject('disUserNotification',array('thread' => $threadId));
         if ($notification == null) continue;
         $notification->remove();
     }
-    $url = $discuss->url.'?user='.$user->get('id');
+    $url = $discuss->url.'user/notifications?user='.$user->get('id');
     $modx->sendRedirect($url);
 }
 
 /* get notifications */
-$c = $modx->newQuery('disPost');
-$c->select($modx->getSelectColumns('disPost','disPost'));
+$c = $modx->newQuery('disThread');
+$c->select($modx->getSelectColumns('disThread','disThread'));
 $c->select(array(
+    'first_post_id' => 'FirstPost.id',
+    'last_post_id' => 'LastPost.id',
+    'title' => 'FirstPost.title',
+    'createdon' => 'LastPost.createdon',
     'board_name' => 'Board.name',
-    'author_username' => 'Author.username',
+    'author' => 'FirstPost.author',
+    'author_username' => 'FirstAuthor.username',
 ));
 $c->innerJoin('disUserNotification','Notifications');
-$c->innerJoin('modUser','Author');
+$c->innerJoin('disUser','FirstAuthor');
+$c->innerJoin('disPost','FirstPost');
+$c->innerJoin('disPost','LastPost');
 $c->innerJoin('disBoard','Board');
 $c->where(array(
     'Notifications.user' => $user->get('id'),
 ));
-$c->sortby('disPost.title','ASC');
-$notifications = $modx->getCollection('disPost',$c);
-$placeholders['notifications'] = '';
+$c->sortby('FirstPost.title','ASC');
+$notifications = $modx->getCollection('disThread',$c);
+$placeholders['notifications'] = array();
 foreach ($notifications as $notification) {
     $notificationArray = $notification->toArray();
-    $notificationArray['class'] = $cssRowCls;
-    $placeholders['notifications'] .= $discuss->getChunk($rowTpl,$notificationArray);
+    $notificationArray['class'] = 'dis-board-li';
+    $notificationArray['createdon'] = strftime($discuss->dateFormat,strtotime($notificationArray['createdon']));
+    $placeholders['notifications'][] = $discuss->getChunk('user/disUserNotificationRow',$notificationArray);
 }
-
+$placeholders['notifications'] = implode("\n",$placeholders['notifications']);
 
 /* output */
 $placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
 $placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
-$placeholders['usermenu'] = $discuss->getChunk($menuTpl,$placeholders);
+$placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 return $placeholders;

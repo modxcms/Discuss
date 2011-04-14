@@ -3,10 +3,7 @@
  *
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
-$discuss->setSessionPlace('user:'.$_REQUEST['user']);
+$discuss->setSessionPlace('user:'.$scriptProperties['user']);
 
 $modx->lexicon->load('discuss:user');
 
@@ -38,41 +35,19 @@ switch ($user->get('gender')) {
 /* get last visited thread */
 $lastThread = $user->getOne('ThreadLastVisited');
 if ($lastThread) {
+    $firstPost = $modx->getObject('disPost',$lastThread->get('post_first'));
     $placeholders = array_merge($placeholders,$lastThread->toArray('lastThread.'));
+    if ($firstPost) {
+        $placeholders = array_merge($placeholders,$firstPost->toArray('lastThread.'));
+    }
 }
 
 /* recent posts */
-$c = $modx->newQuery('disPost');
-$c->select('
-    disPost.*,
-    Board.name AS board_name,
-    Author.username AS author_username,
-    (SELECT Post.id FROM '.$modx->getTableName('disPost').' AS Post
-        INNER JOIN '.$modx->getTableName('disPostClosure').' AS Ancestors
-        ON Ancestors.ancestor = Post.id
-     WHERE
-         Ancestors.descendant = disPost.id
-     AND Ancestors.ancestor != disPost.id
-     AND Post.parent = 0
-    ) AS thread
-');
-$c->innerJoin('disBoard','Board');
-$c->innerJoin('modUser','Author');
-$c->where(array(
-    'disPost.author' => $user->get('id'),
+$recent = $discuss->hooks->load('post/recent',array(
+    'user' => $user->get('id'),
 ));
-$c->sortby('createdon','DESC');
-$c->limit($numRecentPosts);
-$recentPosts = $modx->getCollection('disPost',$c);
-$rps = array();
-foreach ($recentPosts as $post) {
-    $pa = $post->toArray('',true);
-    $pa['class'] = $cssPostRowCls;
-    if (empty($pa['thread'])) { $pa['thread'] = $pa['id']; }
-
-    $rps[] = $discuss->getChunk($postRowTpl,$pa);
-}
-$placeholders['recentPosts'] = implode("\n",$rps);
+$placeholders['recent_posts'] = $recent['results'];
+unset($recent);
 
 
 /* do output */

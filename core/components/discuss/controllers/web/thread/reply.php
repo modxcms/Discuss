@@ -48,7 +48,7 @@ $trail[] = array(
     )),
     'active' => true,
 );
-$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
 $placeholders['trail'] = $trail;
@@ -66,7 +66,7 @@ if (!empty($_POST)) {
 }
 
 /* get thread */
-$placeholders['thread_posts'] = $modx->hooks->load('post/getthread',array(
+$placeholders['thread_posts'] = $discuss->hooks->load('post/getthread',array(
     'post' => &$post,
     'thread' => &$thread,
 ));

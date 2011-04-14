@@ -33,7 +33,7 @@ $trail[] = array(
     'text' => $thread->get('title'),
 );
 $trail[] = array('text' => $modx->lexicon('discuss.thread_remove'),'active' => true);
-$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
 $thread->set('trail',$trail);

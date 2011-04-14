@@ -64,9 +64,7 @@ class Discuss {
      * @param string $ctx The context to load. Defaults to web.
      */
     public function initialize($ctx = 'web') {
-        $this->modx->getService('hooks','discuss.disHooks',$this->config['modelPath'],array(
-            'discuss' => &$this,
-        ));
+        $this->loadHooks();
 
         switch ($ctx) {
             case 'mgr':
@@ -93,6 +91,16 @@ class Discuss {
                 $this->loadRequest();
             break;
         }
+    }
+
+    public function loadHooks($class = 'discuss.disHooks',$path = '') {
+        if (empty($path)) $path = $this->config['modelPath'];
+        if ($className = $this->modx->loadClass($class,$path,true,true)) {
+            $this->hooks = new $className($this);
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$class.' from '.$path);
+        }
+        return $this->hooks;
     }
 
     public function loadRequest($class = 'discuss.request.DisRequest',$path = '') {
@@ -176,12 +184,12 @@ class Discuss {
         /* topbar profile links. @TODO: Move this somewhere else. */
         if ($this->modx->user->isAuthenticated()) {
             $authphs = array(
-                'user' => $userId,
+                'user' => $this->user->get('id'),
                 'username' => $this->user->get('username'),
-                'loggedInAs' => 'logged in as <a href="'.$this->url.'user/?user=1">'.$this->user->get('username').'</a> - ',
+                'loggedInAs' => 'logged in as <a href="'.$this->url.'user/?user='.$this->user->get('id').'">'.$this->user->get('username').'</a> - ',
                 'homeLink' => '<a href="'.$this->url.'">Home</a>',
                 'authLink' => '<a href="'.$this->url.'logout">Logout</a>',
-                'profileLink' => '<a href="'.$this->url.'user/?user='.$userId.'">Profile</a>',
+                'profileLink' => '<a href="'.$this->url.'user/?user='.$this->user->get('id').'">Profile</a>',
                 'searchLink' => '<a href="'.$this->url.'search">Search</a>',
                 'unreadLink' => '<a href="'.$this->url.'unread">Unread Posts</a>',
             );

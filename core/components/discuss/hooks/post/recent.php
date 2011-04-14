@@ -1,6 +1,7 @@
 <?php
 /* get default options */
 $limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.num_recent_posts',null,10));
+$start = $modx->getOption('start',$scriptProperties,0);
 
 /* recent posts */
 $c = $modx->newQuery('disThread');
@@ -8,56 +9,61 @@ $c->innerJoin('disBoard','Board');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
 $c->innerJoin('disUser','LastAuthor');
-$c->select($modx->getSelectColumns('disPost','FirstPost'));
+if (!empty($scriptProperties['user'])) {
+    $c->where(array(
+        'LastPost.author' => $scriptProperties['user'],
+    ));
+}
+$total = $modx->getCount('disThread',$c);
+$c->select($modx->getSelectColumns('disPost','LastPost'));
 $c->select(array(
     'disThread.id',
-    'post_id' => 'LastPost.id',
+    'disThread.replies',
+    'disThread.views',
+    'disThread.sticky',
+    'disThread.locked',
+    'FirstPost.title',
     'board_name' => 'Board.name',
+    'post_id' => 'LastPost.id',
+    'author' => 'LastPost.author',
     'author_username' => 'LastAuthor.username',
 ));
+if (!empty($scriptProperties['showIfParticipating'])) {
+    $c->select(array(
+        '(SELECT GROUP_CONCAT(pAuthor.id)
+            FROM '.$modx->getTableName('disPost').' AS pPost
+            INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+            WHERE pPost.thread = disThread.id
+         ) AS participants',
+    ));
+}
 $c->sortby('LastPost.createdon','DESC');
-$c->limit($limit);
+$c->limit($limit,$start);
 $recentPosts = $modx->getCollection('disThread',$c);
-$rps = array();
+
+/* iterate */
+$list = array();
 $idx = 0;
-
-foreach ($recentPosts as $post) {
-    $threadArray = $post->toArray('',true);
+foreach ($recentPosts as $thread) {
+    $thread->buildIcons();
+    $thread->buildCssClass('board-post');
+    $threadArray = $thread->toArray();
     $threadArray['idx'] = $idx;
-    $threadArray['class'] = 'dis-board-li';
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
-    $threadArray['icons'] = '';
     
-    /* set css class */
-    $class = array('board-post');
-    if ($enableHot) {
-        $threshold = $hotThreadThreshold;
-        if ($discuss->user->get('id') == $threadArray['author'] && $discuss->isLoggedIn) {
-            $class[] = $threadArray['replies'] < $threshold ? 'dis-my-normal-thread' : 'dis-my-veryhot-thread';
-        } else {
-            $class[] = $threadArray['replies'] < $threshold ? '' : 'dis-veryhot-thread';
-        }
-    }
-    $threadArray['class'] = implode(' ',$class);
-
-    /* if sticky/locked */
-    $icons = array();
-    if ($threadArray['locked']) { $icons[] = '<div class="dis-thread-locked"></div>'; }
-    if ($enableSticky && $threadArray['sticky']) {
-        $icons[] = '<div class="dis-thread-sticky"></div>';
-    }
-    $threadArray['icons'] = implode("\n",$icons);
-
     $threadArray['views'] = number_format($threadArray['views']);
     $threadArray['replies'] = number_format($threadArray['replies']);
 
     /* unread class */
-    $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
-
-    $rps[] = $discuss->getChunk('post/disPostLi',$threadArray);
+    $list[] = $discuss->getChunk('post/disPostLi',$threadArray);
     $idx++;
 }
-$list = implode("\n",$rps);
+$list = implode("\n",$list);
 unset($rps,$pa,$recentPosts,$post);
 
-return $list;
+return array(
+    'results' => $list,
+    'total' => $total,
+    'start' => $start,
+    'limit' => $limit,
+);

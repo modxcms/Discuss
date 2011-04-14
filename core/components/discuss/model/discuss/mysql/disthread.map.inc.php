@@ -196,5 +196,13 @@ $xpdo_meta_map['disThread']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'Notifications' => 
+    array (
+      'class' => 'disUserNotification',
+      'local' => 'id',
+      'foreign' => 'thread',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
 );

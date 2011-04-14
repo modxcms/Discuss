@@ -18,16 +18,16 @@ class disHooks {
     public $discuss = null;
 
     /**
-     * The hubHooks constructor.
+     * The disHooks constructor.
      *
-     * @param modX &$modx A reference to a modX instance.
+     * @param Discuss &$discuss A reference to the Discuss class
      * @param array $config An array of configuration options. May also pass in
      * a reference to the Discuss instance as 'discuss' which will be assigned
      * to the disHooks instance.
      */
-    function __construct(modX &$modx,array $config = array()) {
-        $this->modx =& $modx;
-        if (!empty($config) && $config['discuss']) $this->discuss =& $config['discuss'];
+    function __construct(Discuss &$discuss,array $config = array()) {
+        $this->discuss =& $discuss;
+        $this->modx =& $discuss->modx;
     }
 
     /**

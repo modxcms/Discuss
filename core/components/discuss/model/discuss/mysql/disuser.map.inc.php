@@ -296,7 +296,7 @@ $xpdo_meta_map['disUser']= array (
     ),
     'ThreadLastVisited' => 
     array (
-      'class' => 'disPost',
+      'class' => 'disThread',
       'local' => 'thread_last_visited',
       'foreign' => 'id',
       'cardinality' => 'one',

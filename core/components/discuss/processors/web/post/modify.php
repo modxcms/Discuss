@@ -14,7 +14,7 @@ if (empty($_POST['message'])) $errors['message'] = $modx->lexicon('discuss.post_
 /* first check attachments for validity */
 $attachments = array();
 if (!empty($_FILES)) {
-    $result = $modx->hooks->load('post/attachment/verify',array(
+    $result = $discuss->hooks->load('post/attachment/verify',array(
         'attachments' => &$_FILES,
     ));
     if (!empty($result['errors'])) {

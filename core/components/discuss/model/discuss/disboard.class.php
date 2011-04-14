@@ -256,7 +256,7 @@ class disBoard extends xPDOSimpleObject {
                     $trail[] = $ad;
                 }
             }
-            $trail = $this->xpdo->hooks->load('breadcrumbs',array(
+            $trail = $this->xpdo->discuss->hooks->load('breadcrumbs',array(
                 'items' => &$trail,
             ));
         }

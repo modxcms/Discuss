@@ -68,7 +68,7 @@ $trail[] = array(
     'text' => $modx->lexicon('discuss.search'),
     'active' => true,
 );
-$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
 $placeholders['trail'] = $trail;

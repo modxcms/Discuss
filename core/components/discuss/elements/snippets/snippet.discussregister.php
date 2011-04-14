@@ -46,7 +46,7 @@ $trail[] = array(
     'text' => $modx->lexicon('discuss.register'),
     'active' => true,
 );
-$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
 $placeholders['trail'] = $trail;

@@ -115,17 +115,26 @@ class disThread extends xPDOSimpleObject {
         return $this->save();
     }
 
+
+    public function hasNotification($userId) {
+        return $this->xpdo->getCount('disUserNotification',array(
+            'user' => $userId,
+            'thread' => $this->get('id'),
+        )) > 0;
+    }
+
     public function addNotify($userId) {
-        $notify = $this->modx->getObject('disUserNotification',array(
+        $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
         ));
         if (!$notify) {
-            $notify = $this->modx->newObject('disUserNotification');
+            $notify = $this->xpdo->newObject('disUserNotification');
             $notify->set('user',$userId);
             $notify->set('thread',$this->get('id'));
+            $notify->set('board',$this->get('board'));
             if (!$notify->save()) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not create notification: '.print_r($notify->toArray(),true));
+                $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] Could not create notification: '.print_r($notify->toArray(),true));
             }
         }
         return true;
@@ -172,7 +181,7 @@ class disThread extends xPDOSimpleObject {
             );
         }
         $trail[] = array('text' => $this->get('title'), 'active' => true);
-        $trail = $this->xpdo->hooks->load('breadcrumbs',array(
+        $trail = $this->xpdo->discuss->hooks->load('breadcrumbs',array(
             'items' => &$trail,
         ));
         $this->set('trail',$trail);

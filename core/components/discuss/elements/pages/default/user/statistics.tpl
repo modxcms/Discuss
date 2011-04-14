@@ -11,6 +11,9 @@
         
         <dh>[[%discuss.threads_started]]:</dh>
         <dt>[[+topics]]</dt>
+
+        <dh>[[%discuss.replies]]:</dh>
+        <dt>[[+replies]]</dt>
         
         <dh>[[%discuss.last_login]]:</dh>
         <dt>[[+last_login:strtotime:date=`%b %d, %Y %I:%M %p`]]</dt>

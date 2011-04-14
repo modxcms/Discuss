@@ -4,9 +4,6 @@
  *
  * @package discuss
  */
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
 $modx->lexicon->load('discuss:user');
 
 /* get user */
@@ -19,10 +16,21 @@ $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
 
 $placeholders = $user->toArray();
 
-$placeholders['topics'] = $modx->getCount('disPost',array(
-    'parent' => 0,
-    'author' => $user->get('id'),
+/* # of topics started */
+$placeholders['topics'] = $modx->getCount('disThread',array(
+    'author_first' => $user->get('id'),
 ));
+$placeholders['topics'] = number_format($placeholders['topics']);
+
+/* # of replies to topics */
+$placeholders['replies'] = $modx->getCount('disPost',array(
+    'author' => $user->get('id'),
+    'parent:!=' => 0,
+));
+$placeholders['replies'] = number_format($placeholders['replies']);
+
+/* # of total posts */
+$placeholders['posts'] = number_format($placeholders['posts']);
 
 /* do output */
 $placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');

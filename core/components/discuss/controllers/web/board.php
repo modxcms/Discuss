@@ -25,7 +25,7 @@ $category['list'] = array();
 $currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
 
 /* grab all subboards */
-$placeholders['boards'] = $modx->hooks->load('board/getList',array(
+$placeholders['boards'] = $discuss->hooks->load('board/getList',array(
     'board' => &$board,
 ));
 
@@ -34,7 +34,7 @@ $limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('dis
 $page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
 $page = $page <= 0 ? $page = 1 : $page;
 $start = ($page-1) * $limit;
-$posts = $modx->hooks->load('board/post/getList',array(
+$posts = $discuss->hooks->load('board/post/getList',array(
     'board' => &$board,
     'limit' => $limit,
     'start' => $start,
@@ -53,7 +53,7 @@ unset($trail,$ancestors,$c);
 $placeholders['readers'] = $board->getViewing();
 
 /* get pagination */
-$modx->hooks->load('pagination/build',array(
+$discuss->hooks->load('pagination/build',array(
     'count' => $posts['total'],
     'id' => $board->get('id'),
     'view' => 'board',

@@ -26,7 +26,7 @@ $placeholders = array();
 $cacheKey = 'discuss/board/index/'.$discuss->user->get('id');
 $boardIndex = $modx->cacheManager->get($cacheKey);
 if (empty($boardIndex)) {
-    $boardIndex = $modx->hooks->load('board/getlist',array(
+    $boardIndex = $discuss->hooks->load('board/getlist',array(
         'board' => 0,
         'groups' => $_groups,
     ));
@@ -68,18 +68,20 @@ $placeholders['totalMembers'] = number_format((int)$modx->getCount('disUser'));
 
 /* active in last 40 */
 if ($modx->getOption('discuss.show_whos_online',null,true)) {
-    $placeholders['activeUsers'] = $modx->hooks->load('user/active_in_last');
+    $placeholders['activeUsers'] = $discuss->hooks->load('user/active_in_last');
 }
 
 /* total active */
 $placeholders['totalMembersActive'] = number_format((int)$modx->getCount('disSession',array('user:!=' => 0)));
 $placeholders['totalVisitorsActive'] = number_format((int)$modx->getCount('disSession',array('user' => 0)));
 
-$placeholders['recent_posts'] = $modx->hooks->load('post/recent');
+$recent = $discuss->hooks->load('post/recent');
+$placeholders['recent_posts'] = $recent['results'];
+unset($recent);
 
 /* breadcrumbs */
 $trail = array(array('text' => $modx->getOption('discuss.forum_title'),'active' => true));
-$placeholders['trail'] = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+$placeholders['trail'] = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
 unset($trail);

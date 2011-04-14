@@ -59,7 +59,7 @@ $trail[] = array(
     'text' => $modx->lexicon('discuss.modify_post_header',array('post' => $post->get('title'))),
     'active' => true,
 );
-$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
+$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
 $placeholders['trail'] = $trail;
@@ -76,7 +76,7 @@ $props = array_merge($scriptProperties,array(
     'post' => &$post,
     'thread' => &$thread,
 ));
-$placeholders['thread_posts'] = $modx->hooks->load('post/getthread',$props);
+$placeholders['thread_posts'] = $discuss->hooks->load('post/getthread',$props);
 
 /* output form to browser */
 $modx->regClientScript($discuss->config['jsUrl'].'web/dis.post.modify.js');

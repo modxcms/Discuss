@@ -230,14 +230,6 @@ $xpdo_meta_map['disPost']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'Notifications' => 
-    array (
-      'class' => 'disUserNotification',
-      'local' => 'id',
-      'foreign' => 'post',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
     'Attachments' => 
     array (
       'class' => 'disPostAttachment',

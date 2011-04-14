@@ -52,13 +52,13 @@ if (isset($scriptProperties['lock']) && $scriptProperties['lock'] == 0) {
     }
 }
 if (!empty($scriptProperties['notify'])) {
-    if ($thread->addNotify()) {
+    if ($thread->addNotify($discuss->user->get('id'))) {
         $modx->sendRedirect($discuss->url.'thread?thread='.$thread->get('id'));
     }
 }
 
 /* get posts */
-$posts = $modx->hooks->load('post/getThread',array(
+$posts = $discuss->hooks->load('post/getThread',array(
     'thread' => &$thread,
 ));
 $thread->set('posts',$posts['results']);
@@ -89,7 +89,7 @@ $placeholders['readers'] = $thread->getViewing();
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {
     $actionButtons[] = array('url' => $discuss->url.'thread?thread=[[+id]]&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
-    if (!$thread->get('notification')) {
+    if (!$thread->hasNotification($discuss->user->get('id'))) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread=[[+id]]&notify=1', 'text' => $modx->lexicon('discuss.notify'));
     }
     /* TODO: Send thread by email - 1.1
@@ -137,7 +137,7 @@ if ($discuss->user->get('user') != 0) {
 }
 
 /* get pagination */
-$modx->hooks->load('pagination/build',array(
+$discuss->hooks->load('pagination/build',array(
     'count' => $posts['total'],
     'id' => $thread->get('id'),
     'view' => 'thread/',
