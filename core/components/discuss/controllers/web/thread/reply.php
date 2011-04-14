@@ -8,7 +8,6 @@
 if (empty($_REQUEST['post'])) { $modx->sendErrorPage(); }
 $post = $modx->getObject('disPost',$_REQUEST['post']);
 if ($post == null) { $modx->sendErrorPage(); }
-$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
 
 /* setup default snippet properties */
 $replyPrefix = $modx->getOption('replyPrefix',$scriptProperties,'Re: ');
@@ -17,7 +16,7 @@ $replyPrefix = $modx->getOption('replyPrefix',$scriptProperties,'Re: ');
 $placeholders = $post->toArray();
 
 /* get thread root */
-$thread = $post->getThreadRoot();
+$thread = $post->getOne('Thread');
 if ($thread == null) $modx->sendErrorPage();
 $placeholders['thread'] = $thread->get('id');
 
@@ -33,18 +32,18 @@ $ancestors = $modx->getCollection('disBoard',$c);
 /* build breadcrumbs */
 $trail = array();
 $trail[] = array(
-    'url' => $currentResourceUrl,
+    'url' => $discuss->url,
     'text' => $modx->lexicon('discuss.home'),
 );
 foreach ($ancestors as $ancestor) {
     $trail[] = array(
-        'url' => $currentResourceUrl.'board?board='.$ancestor->get('id'),
+        'url' => $discuss->url.'board?board='.$ancestor->get('id'),
         'text' => $ancestor->get('name'),
     );
 }
 $trail[] = array(
     'text' => $modx->lexicon('discuss.reply_to_post',array(
-        'post' => '<a class="active" href="'.$currentResourceUrl.'thread?thread='.$thread->get('id').'">'.$post->get('title').'</a>',
+        'post' => '<a class="active" href="'.$discuss->url.'thread?thread='.$thread->get('id').'">'.$post->get('title').'</a>',
     )),
     'active' => true,
 );
