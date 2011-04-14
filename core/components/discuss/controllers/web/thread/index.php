@@ -65,10 +65,10 @@ if (!empty($_REQUEST['notify'])) {
 }
 
 /* get posts */
-$postsOutput = $modx->hooks->load('post/getthread',array(
+$posts = $modx->hooks->load('post/getthread',array(
     'thread' => &$thread,
 ));
-$thread->set('posts',$postsOutput);
+$thread->set('posts',$posts['results']);
 unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 
 /* load theme options */
@@ -174,6 +174,14 @@ if ($discuss->user->get('user') != 0) {
     $discuss->user->set('thread_last_visited',$thread->get('id'));
     $discuss->user->save();
 }
+
+/* get pagination */
+$modx->hooks->load('pagination/build',array(
+    'count' => $posts['total'],
+    'id' => $thread->get('id'),
+    'view' => 'thread/',
+    'limit' => $posts['limit'],
+));
 
 /* mark as read */
 $thread->markAsRead($discuss->user->get('id'));

@@ -9,15 +9,12 @@
 $thread = $modx->getOption('thread',$scriptProperties,'');
 if (empty($thread)) return false;
 
+$limit = (int)$modx->getOption('discuss.post_per_page',$scriptProperties, 10);
+$start = intval(isset($_GET['page']) ? ($_GET['page'] - 1) * $limit : 0);
+
 /* Verify the posts output type - Flat or Threaded */
 $flat = $modx->getOption('flat',$scriptProperties,false);
 $flat = true;
-if ($flat) {
-    $postPerPage = $modx->getOption('discuss.post_per_page',$scriptProperties, 10);
-    $param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
-    $start = isset($_GET[$param]) ? ($_GET[$param] - 1) * $postPerPage : 0;
-}
-
 /* get default properties */
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
@@ -27,7 +24,7 @@ $isModerator = $modx->getCount('disModerator',array(
     'board' => $thread->get('board'),
 )) > 0 ? true : false;
 $isAuthenticated = $modx->user->isAuthenticated();
-$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
+$currentResourceUrl = $discuss->url;
 $userUrl = $currentResourceUrl.'user/';
 
 /* get posts */
@@ -36,24 +33,11 @@ $c->innerJoin('disThread','Thread');
 $c->where(array(
     'thread' => $thread->get('id'),
 ));
+$cc = clone $c;
+$total = $modx->getCount('disPost',$cc);
 if ($flat) {
-    $ct = clone $c;
-    if ($ct->prepare() && $ct->stmt->execute()) {
-        $total = $ct->stmt->rowCount();
-        $count = ceil($total/$postPerPage);
-    }
-    $modx->hooks->load('pagination/build',array(
-        'total' => $count,
-        'id' => $thread->get('id'),
-        'view' => 'thread',
-        'limit' => $postPerPage,
-        'param' => $param,
-    ));
-    unset($ct,$count);
-
-    $c->sortby($modx->getSelectColumns('disPost','disPost','',array('id')),'ASC');
-    $c->limit($postPerPage, $start);
-    $c->limit(10,0);
+    $c->sortby($modx->getSelectColumns('disPost','disPost','',array('createdon')),'ASC');
+    $c->limit($limit, $start);
 } else {
     $c->sortby($modx->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
 }
@@ -66,6 +50,7 @@ $posts = $modx->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
 /* iterate */
 $plist = array();
+$output = array();
 foreach ($posts as $post) {
     $postArray = $post->toArray('',true);
 
@@ -152,6 +137,11 @@ foreach ($posts as $post) {
         $plist[] = $postArray;
     }
 }
+$response = array(
+    'total' => $total,
+    'start' => $start,
+    'limit' => $limit,
+);
 if (empty($flat)) {
     /* parse posts via tree parser */
     $discuss->loadTreeParser();
@@ -161,5 +151,5 @@ if (empty($flat)) {
 } else {
     $output = implode("\n",$output);
 }
-$output = str_replace(array('[',']'),array('&#91;','&#93;'),$output);
-return $output;
+$response['results'] = str_replace(array('[',']'),array('&#91;','&#93;'),$output);
+return $response;
