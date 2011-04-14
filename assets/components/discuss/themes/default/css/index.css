@@ -199,3 +199,7 @@ dl.dis-datalist dh { clear: left; width: 250px; font-weight: bold; }
 .dis-bar-toggle {
     cursor: pointer;
 }
+
+.dis-board-gray {
+    color: #666 !important;
+}

@@ -9,7 +9,7 @@ $xpdo_meta_map['disUserNotification']= array (
   array (
     'user' => 0,
     'board' => 0,
-    'post' => 0,
+    'thread' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -33,7 +33,7 @@ $xpdo_meta_map['disUserNotification']= array (
       'null' => false,
       'index' => 'index',
     ),
-    'post' => 
+    'thread' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -62,9 +62,9 @@ $xpdo_meta_map['disUserNotification']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Post' => 
+    'Thread' => 
     array (
-      'class' => 'disPost',
+      'class' => 'disThread',
       'local' => 'post',
       'foreign' => 'id',
       'cardinality' => 'one',

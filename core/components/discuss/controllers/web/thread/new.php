@@ -4,10 +4,10 @@
  *
  * @package discuss
  */
-$discuss->setSessionPlace('newthread:'.$_REQUEST['board']);
+$discuss->setSessionPlace('newthread:'.$scriptProperties['board']);
 
-if (empty($_REQUEST['board'])) { $modx->sendErrorPage(); }
-$board = $modx->getObject('disBoard',$_REQUEST['board']);
+if (empty($scriptProperties['board'])) { $modx->sendErrorPage(); }
+$board = $modx->getObject('disBoard',$scriptProperties['board']);
 if ($board == null) $modx->sendErrorPage();
 
 /* setup defaults */
@@ -25,31 +25,18 @@ $c->sortby('Ancestors.depth','ASC');
 $ancestors = $modx->getCollection('disBoard',$c);
 
 /* build breadcrumbs */
-$trail = array();
-$trail[] = array(
-    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
-    'text' => $modx->lexicon('discuss.home'),
-);
-foreach ($ancestors as $ancestor) {
-    $trail[] = array(
-        'url' => '[[~[[++discuss.board_resource]]? &board=`'.$ancestor->get('id').'`]]',
-        'text' => $ancestor->get('name'),
-    );
-}
-$trail[] = array(
-    'text' => $modx->lexicon('discuss.thread_new'),
-    'active' => true,
-);
-$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
-    'items' => &$trail,
-)));
-$placeholders['trail'] = $trail;
+$placeholders['trail'] = $board->buildBreadcrumbs(array(
+    array(
+        'text' => $modx->lexicon('discuss.thread_new'),
+        'active' => true,
+    ),
+),true);
 
 /* if POST, process new thread request */
 if (!empty($_POST)) {
     $result = include $discuss->config['processorsPath'].'web/post/create.php';
     if ($discuss->processResult($result)) {
-        $url = $modx->makeUrl($modx->getOption('discuss.thread_resource')).'?thread='.$post->get('id');
+        $url = $scriptProperties.'thread/?thread='.$post->get('id');
         $modx->sendRedirect($url);
     }
     $modx->toPlaceholders($_POST,'post');

@@ -45,11 +45,10 @@ if (!empty($scriptProperties['limit'])) {
 $threads = $modx->getCollection('disThread',$c);
 
 /* iterate through threads */
-$hotThreadThreshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
-$enableSticky = $modx->getOption('discuss.enable_sticky',null,true);
-$enableHot = $modx->getOption('discuss.enable_hot',null,true);
 $response['results'] = array();
 foreach ($threads as $thread) {
+    $thread->buildCssClass('board-post');
+    $thread->buildIcons();
     $threadArray = $thread->toArray();
 
     $phs = array(
@@ -61,35 +60,14 @@ foreach ($threads as $thread) {
 
     $threadArray['latest'] = $latestText;
     $threadArray['latest.id'] = $thread->get('last_post_id');
-
-    /* set css class */
-    $class = array('board-post');
-    if ($enableHot) {
-        $threshold = $hotThreadThreshold;
-        $participants = explode(',',$threadArray['participants']);
-        if (in_array($discuss->user->get('id'),$participants) && $discuss->isLoggedIn) {
-            $class[] = $threadArray['replies'] < $threshold ? 'dis-my-normal-thread' : 'dis-my-veryhot-thread';
-        } else {
-            $class[] = $threadArray['replies'] < $threshold ? '' : 'dis-veryhot-thread';
-        }
-    }
-    $threadArray['class'] = implode(' ',$class);
-
-    /* if sticky/locked */
-    $icons = array();
-    if ($threadArray['locked']) { $icons[] = '<div class="dis-thread-locked"></div>'; }
-    if ($enableSticky && $threadArray['sticky']) {
-        $icons[] = '<div class="dis-thread-sticky"></div>';
-    }
-    $threadArray['icons'] = implode("\n",$icons);
+    $threadArray['views'] = number_format($threadArray['views']);
+    $threadArray['replies'] = number_format($threadArray['replies']);
 
     /* unread class */
-    $unread = '';
+    $threadArray['unread'] = '';
     if (!$threadArray['viewed'] && $discuss->isLoggedIn) {
-        $unread = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
+        $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
     }
-    $threadArray['unread'] = $unread;
-
     $response['results'][] = $discuss->getChunk('post/disBoardPost',$threadArray);
 }
 

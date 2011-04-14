@@ -215,8 +215,8 @@ class disBoard extends xPDOSimpleObject {
         return $sbl;
     }
 
-    public function buildBreadcrumbs() {
-        $currentResourceUrl = $this->xpdo->makeUrl($this->xpdo->resource->get('id'));
+    public function buildBreadcrumbs($additional = array(),$linkToSelf = false) {
+        $currentResourceUrl = $this->xpdo->discuss->url;
 
         $cacheKey = 'discuss/board/'.$this->get('id').'/breadcrumbs';
         $trail = $this->xpdo->cacheManager->get($cacheKey);
@@ -243,7 +243,19 @@ class disBoard extends xPDOSimpleObject {
                     'text' => $ancestor->get('name'),
                 );
             }
-            $trail[] = array('text' => $this->get('name'), 'active' => true);
+            $self = array(
+                'text' => $this->get('name'),
+            );
+            if ($linkToSelf) {
+                $self['url'] = $this->xpdo->discuss->url.'board/?board='.$this->get('id');
+            }
+            if (empty($additional)) { $self['active'] = true; }
+            $trail[] = $self;
+            if (!empty($additional)) {
+                foreach ($additional as $ad) {
+                    $trail[] = $ad;
+                }
+            }
             $trail = $this->xpdo->hooks->load('breadcrumbs',array(
                 'items' => &$trail,
             ));

@@ -15,64 +15,53 @@ $toggle = $modx->getOption('toggle',$scriptProperties,'+');
 /* do search */
 $placeholders = array();
 if (!empty($_REQUEST['s'])) {
-    $s = strip_tags($_REQUEST['s']);
-
-    $c = new xPDOCriteria($modx,'
-        SELECT
-            Post.*,
-            Author.username AS username,
-            Board.name AS board_name,
-            Thread.id AS thread,
-            PostClosure.depth AS depth,
-            MATCH (Post.title,Post.message) AGAINST ("'.$s.'" IN BOOLEAN MODE) AS score
-
-        FROM '.$modx->getTableName('disPost').' AS Post
-            INNER JOIN '.$modx->getTableName('modUser').' AS Author
-            ON Author.id = Post.author
-            INNER JOIN '.$modx->getTableName('disBoard').' AS Board
-            ON Board.id = Post.board
-
-            INNER JOIN '.$modx->getTableName('disPostClosure').' AS PostClosure
-             ON PostClosure.descendant = Post.id
-            AND PostClosure.ancestor != 0
-
-            INNER JOIN '.$modx->getTableName('disPost').' AS Thread
-             ON PostClosure.ancestor = Thread.id
-            AND Thread.parent = 0
-        WHERE
-            MATCH (Post.title,Post.message) AGAINST ("'.$s.'" IN BOOLEAN MODE)
-        ORDER BY score,Post.rank ASC
-
-    ');
+    $s = str_replace(array(';',':'),'',strip_tags($_REQUEST['s']));
+    $c = $modx->newQuery('disPost');
+    $c->innerJoin('disThread','Thread');
+    $c->innerJoin('disBoard','Board');
+    $c->innerJoin('disUser','Author');
+    $c->innerJoin('disPostClosure','PostClosure','PostClosure.descendant = disPost.id AND PostClosure.ancestor != 0');
+    $c->where(array(
+        'MATCH (disPost.title,disPost.message) AGAINST ("'.$s.'" IN BOOLEAN MODE)',
+    ));
+    $c->select($modx->getSelectColumns('disPost','disPost'));
+    $c->select(array(
+        'username' => 'Author.username',
+        'board_name' => 'Board.name',
+        'MATCH (disPost.title,disPost.message) AGAINST ("'.$s.'" IN BOOLEAN MODE) AS score',
+    ));
+    $c->sortby('score','ASC');
+    $c->sortby('disPost.rank','ASC');
+    $c->limit(10);
     $posts = $modx->getCollection('disPost',$c);
 
-    $placeholders['results'] = '';
+    $placeholders['results'] = array();
     $maxScore = 0;
     foreach ($posts as $post) {
-        $pa = $post->toArray();
+        $postArray = $post->toArray();
 
-        if ($post->get('score') > $maxScore) {
-            $maxScore = $post->get('score');
+        if ($postArray['score'] > $maxScore) {
+            $maxScore = $postArray['score'];
         }
 
-        $pa['relevancy'] = @number_format(($post->get('score')/$maxScore)*100,0);
-
-        if ($post->get('parent') > 0) {
-            $pa['cls'] = $cssSearchResultCls.' dis-result-'.$post->get('thread');
+        $postArray['relevancy'] = @number_format(($post->get('score')/$maxScore)*100,0);
+        if ($postArray['parent']) {
+            $postArray['cls'] = 'dis-search-result dis-result-'.$postArray['thread'];
         } else {
-            $pa['toggle'] = $toggle;
-            $pa['cls'] = $cssSearchResultParentCls.' dis-parent-result-'.$post->get('thread');
+            $postArray['toggle'] = $toggle;
+            $postArray['cls'] = 'dis-search-parent-result dis-parent-result-'.$postArray['thread'];
         }
-        $pa['content'] = strip_tags(substr($post->getContent(),0,60));
-        $placeholders['results'] .= $discuss->getChunk($resultRowTpl,$pa);
+        $postArray['content'] = strip_tags(substr($post->getContent(),0,100));
+        $placeholders['results'][] = $discuss->getChunk('disSearchResult',$postArray);
     }
+    $placeholders['results'] = implode("\n",$placeholders['results']);
     $placeholders['search'] = $s;
 }
 
 /* get board breadcrumb trail */
 $trail = array();
 $trail[] = array(
-    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
+    'url' => $discuss->url,
     'text' => $modx->getOption('discuss.forum_title'),
 );
 $trail[] = array(

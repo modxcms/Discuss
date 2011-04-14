@@ -86,11 +86,11 @@ class Discuss {
             default:
                 $this->modx->lexicon->load('discuss:web');
 
+                $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
+                $this->dateFormat = $this->modx->getOption('discuss.date_format');
                 $this->_initUser();
                 $this->_initSession();
                 $this->loadRequest();
-                $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
-                $this->dateFormat = $this->modx->getOption('discuss.date_format');
             break;
         }
     }
@@ -178,7 +178,7 @@ class Discuss {
             $authphs = array(
                 'user' => $userId,
                 'username' => $this->user->get('username'),
-                'loggedInAs' => 'logged in as <a href="'.$this->url.'user/?user=1">[[+discuss.username]]</a> - ',
+                'loggedInAs' => 'logged in as <a href="'.$this->url.'user/?user=1">'.$this->user->get('username').'</a> - ',
                 'homeLink' => '<a href="'.$this->url.'">Home</a>',
                 'authLink' => '<a href="'.$this->url.'logout">Logout</a>',
                 'profileLink' => '<a href="'.$this->url.'user/?user='.$userId.'">Profile</a>',

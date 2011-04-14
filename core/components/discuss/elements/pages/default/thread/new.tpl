@@ -2,7 +2,7 @@
 
 <div id="dis-new-thread-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]? &board=`[[+board]]`]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]]]thread/new?board=[[+board]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h2>
     
@@ -37,7 +37,7 @@
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.thread_post_new]]" />
     <input type="button" class="dis-action-btn dis-new-thread-preview" id="dis-new-thread-preview-btn" value="[[%discuss.preview]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[++discuss.board_resource]]? &board=`[[+board]]`]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+board]]';" />
     </div>
 </form>
 [[+discuss.error_panel]]

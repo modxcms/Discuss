@@ -7,7 +7,8 @@
     <div class="right" style="width: 10%">[[+views]]</div>
     <div class="dis-thread-icons">[[+icons]]</div>
     <div class="dis-thread-body">
-        <a href="[[~[[*id]]]]thread/?thread=[[+thread]]#dis-board-post-[[+post_id]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a>
+        [<a class="dis-board-gray" href="[[~[[*id]]]]board/?board=[[+board]]">[[+board_name]]</a>] <a href="[[~[[*id]]]]thread/?thread=[[+thread]]#dis-board-post-[[+post_id]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a>
+
         [[+unread]]
     </div>
 </li>

@@ -3,8 +3,7 @@
  * Display a thread of posts
  * @package discuss
  */
-$discuss->setSessionPlace('thread:'.$_REQUEST['thread']);
-$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
+$discuss->setSessionPlace('thread:'.$scriptProperties['thread']);
 
 /* get default properties */
 $userId = $modx->user->get('id');
@@ -16,56 +15,50 @@ $c->innerJoin('disPost','FirstPost');
 $c->select($modx->getSelectColumns('disThread','disThread'));
 $c->select(array(
     'FirstPost.title',
+    '(SELECT GROUP_CONCAT(pAuthor.id)
+        FROM '.$modx->getTableName('disPost').' AS pPost
+        INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+        WHERE pPost.thread = disThread.id
+     ) AS participants',
 ));
 $c->where(array('id' => $thread));
 $thread = $modx->getObject('disThread',$c);
 if (empty($thread)) $modx->sendErrorPage();
 
 /* mark unread if user clicks mark unread */
-if (isset($_REQUEST['unread'])) {
-    $props = $thread->toArray();
-    $props['recurse'] = true;
-    $o = $discuss->loadProcessor('web/post/unread',$props);
-    $boardUrl = $currentResourceUrl.'board?board='.$thread->get('board');
-    $modx->sendRedirect($boardUrl);
+if (isset($scriptProperties['unread'])) {
+    if ($thread->unread($discuss->user->get('id'))) {
+        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+    }
 }
-if (!empty($_REQUEST['sticky'])) {
-    $props = $thread->toArray();
-    $props['recurse'] = true;
-    $o = $discuss->loadProcessor('web/post/stick',$props);
-    $boardUrl = $currentResourceUrl.'board?board='.$thread->get('board');
-    $modx->sendRedirect($boardUrl);
+if (!empty($scriptProperties['sticky'])) {
+    if ($thread->stick()) {
+        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+    }
 }
-if (isset($_REQUEST['sticky']) && $_REQUEST['sticky'] == 0) {
-    $props = $thread->toArray();
-    $props['recurse'] = true;
-    $o = $discuss->loadProcessor('web/post/unstick',$props);
-    $boardUrl = $currentResourceUrl.'board?board='.$thread->get('board');
-    $modx->sendRedirect($boardUrl);
+if (isset($scriptProperties['sticky']) && $scriptProperties['sticky'] == 0) {
+    if ($thread->unstick()) {
+        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+    }
 }
-if (!empty($_REQUEST['lock'])) {
-    $props = $thread->toArray();
-    $props['recurse'] = true;
-    $o = $discuss->loadProcessor('web/post/lock',$props);
-    $boardUrl = $currentResourceUrl.'board?board='.$thread->get('board');
-    $modx->sendRedirect($boardUrl);
+if (!empty($scriptProperties['lock'])) {
+    if ($thread->lock()) {
+        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+    }
 }
-if (isset($_REQUEST['lock']) && $_REQUEST['lock'] == 0) {
-    $props = $thread->toArray();
-    $props['recurse'] = true;
-    $o = $discuss->loadProcessor('web/post/unlock',$props);
-    $boardUrl = $currentResourceUrl.'board?board='.$thread->get('board');
-    $modx->sendRedirect($boardUrl);
+if (isset($scriptProperties['lock']) && $scriptProperties['lock'] == 0) {
+    if ($thread->unlock()) {
+        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+    }
 }
-if (!empty($_REQUEST['notify'])) {
-    $props = $thread->toArray();
-    $o = $discuss->loadProcessor('web/post/notify',$props);
-    $boardUrl = $currentResourceUrl.'thread?thread='.$thread->get('id');
-    $modx->sendRedirect($boardUrl);
+if (!empty($scriptProperties['notify'])) {
+    if ($thread->addNotify()) {
+        $modx->sendRedirect($discuss->url.'thread?thread='.$thread->get('id'));
+    }
 }
 
 /* get posts */
-$posts = $modx->hooks->load('post/getthread',array(
+$posts = $modx->hooks->load('post/getThread',array(
     'thread' => &$thread,
 ));
 $thread->set('posts',$posts['results']);
@@ -75,29 +68,7 @@ unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 //$discuss->config['pa'] = $pa;
 
 /* get board breadcrumb trail */
-$c = $modx->newQuery('disBoard');
-$c->innerJoin('disBoardClosure','Ancestors');
-$c->where(array(
-    'Ancestors.descendant' => $thread->get('board'),
-));
-$c->sortby('Ancestors.depth','DESC');
-$ancestors = $modx->getCollection('disBoard',$c);
-$trail = array();
-$trail[] = array(
-    'url' => $currentResourceUrl,
-    'text' => $modx->getOption('discuss.forum_title'),
-);
-foreach ($ancestors as $ancestor) {
-    $trail[] = array(
-        'url' => $currentResourceUrl.'board?board='.$ancestor->get('id'),
-        'text' => $ancestor->get('name'),
-    );
-}
-$trail[] = array('text' => $thread->get('title'), 'active' => true);
-$trail = $modx->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
-    'items' => &$trail,
-)));
-$thread->set('trail',$trail);
+$thread->buildBreadcrumbs();
 unset($trail,$url,$c,$ancestors);
 
 /* up the view count for this thread */
@@ -108,33 +79,23 @@ unset($views);
 
 $placeholders = $thread->toArray();
 
-/* set activity of thread */
-$class = $modx->getOption('cssNormalThread',$scriptProperties,'dis-normal-thread');
-$threshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
-if ($modx->user->get('id') == $thread->get('author')) {
-    $class .= $thread->get('replies') < $threshold ? ' '.$modx->getOption('cssMyNormalThread',$scriptProperties,'dis-my-normal-thread') : ' '.$modx->getOption('cssMyHotThread',$scriptProperties,'dis-my-veryhot-thread');
-} else {
-    $class .= $thread->get('replies') < $threshold ? '' : ' '.$modx->getOption('cssHotThread',$scriptProperties,'dis-veryhot-thread');
-}
-$thread->set('class',$class);
-unset($class,$threshold);
+/* set css class of thread */
+$thread->buildCssClass();
 
 /* get viewing users */
 $placeholders['readers'] = $thread->getViewing();
 
 /* action buttons */
 $actionButtons = array();
-$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
-
 if ($modx->user->isAuthenticated()) {
-    $actionButtons[] = array('url' => $currentResourceUrl.'thread?thread=[[+id]]&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
+    $actionButtons[] = array('url' => $discuss->url.'thread?thread=[[+id]]&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
     if (!$thread->get('notification')) {
-        $actionButtons[] = array('url' => $currentResourceUrl.'thread?thread=[[+id]]&notify=1', 'text' => $modx->lexicon('discuss.notify'));
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread=[[+id]]&notify=1', 'text' => $modx->lexicon('discuss.notify'));
     }
     /* TODO: Send thread by email - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
      */
-    $actionButtons[] = array('url' => $currentResourceUrl.'thread?thread=[[+id]]&print=1', 'text' => $modx->lexicon('discuss.print'));
+    $actionButtons[] = array('url' => $discuss->url.'thread?thread=[[+id]]&print=1', 'text' => $modx->lexicon('discuss.print'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
@@ -145,17 +106,17 @@ if ($modx->user->isAuthenticated()) {
     /** TODO: Move thread - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
      */
-    $actionButtons[] = array('url' => $currentResourceUrl.'thread/remove?thread=[[+id]]', 'text' => $modx->lexicon('discuss.thread_remove'));
+    $actionButtons[] = array('url' => $discuss->url.'thread/remove?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_remove'));
 
     if ($thread->get('locked')) {
-        $actionButtons[] = array('url' => $currentResourceUrl.'thread?thread=[[+id]]&lock=0', 'text' => $modx->lexicon('discuss.thread_unlock'));
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&lock=0', 'text' => $modx->lexicon('discuss.thread_unlock'));
     } else {
-        $actionButtons[] = array('url' => $currentResourceUrl.'thread?thread=[[+id]]&lock=1', 'text' => $modx->lexicon('discuss.thread_lock'));
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&lock=1', 'text' => $modx->lexicon('discuss.thread_lock'));
     }
     if ($thread->get('sticky')) {
-        $actionButtons[] = array('url' => $currentResourceUrl.'thread?thread=[[+id]]&sticky=0', 'text' => $modx->lexicon('discuss.thread_unstick'));
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&sticky=0', 'text' => $modx->lexicon('discuss.thread_unstick'));
     } else {
-        $actionButtons[] = array('url' => $currentResourceUrl.'thread?thread=[[+id]]&sticky=1', 'text' => $modx->lexicon('discuss.thread_stick'));
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&sticky=1', 'text' => $modx->lexicon('discuss.thread_stick'));
     }
     /**
      * TODO: Merge thread - 1.1
@@ -184,6 +145,6 @@ $modx->hooks->load('pagination/build',array(
 ));
 
 /* mark as read */
-$thread->markAsRead($discuss->user->get('id'));
+$thread->read($discuss->user->get('id'));
 
 return $placeholders;
