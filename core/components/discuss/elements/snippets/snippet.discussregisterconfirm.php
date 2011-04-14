@@ -20,15 +20,15 @@ if (empty($user)) $modx->sendUnauthorizedPage();
 
 $status = $user->get('status');
 switch ($status) {
-    case disUserProfile::ACTIVE:
+    case disUser::ACTIVE:
         $url = $modx->makeUrl($modx->getOption('discuss.board_list_resource'));
         $modx->sendRedirect($url);
         break;
-    case disUserProfile::INACTIVE:
+    case disUser::INACTIVE:
         $placeholders['registration_message'] = $modx->lexicon('discuss.register_conf_deactivated');
         break;
-    case disUserProfile::UNCONFIRMED:
-        $user->set('status',disUserProfile::ACTIVE);
+    case disUser::UNCONFIRMED:
+        $user->set('status',disUser::ACTIVE);
         $user->set('confirmed',1);
         $user->set('confirmedon',strftime('%Y-%m-%d %H:%M:%S'));
         $user->set('last_login',strftime('%Y-%m-%d %H:%M:%S'));
@@ -37,10 +37,10 @@ switch ($status) {
         $url = $modx->makeUrl($modx->resource->get('id'));
         $modx->sendRedirect($url);
         break;
-    case disUserProfile::BANNED:
+    case disUser::BANNED:
         $placeholders['registration_message'] = $modx->lexicon('discuss.register_conf_banned');
         break;
-    case disUserProfile::AWAITING_MODERATION:
+    case disUser::AWAITING_MODERATION:
         $placeholders['registration_message'] = $modx->lexicon('discuss.register_conf_moderated');
         break;
 }

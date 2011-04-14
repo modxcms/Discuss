@@ -12,9 +12,6 @@ $xpdo_meta_map['disUser']= array (
     'password' => '',
     'email' => '',
     'ip' => '0.0.0.0',
-    'synced' => 0,
-    'source' => 'internal',
-    'syncedat' => NULL,
     'createdon' => NULL,
     'name_first' => '',
     'name_last' => '',
@@ -36,6 +33,11 @@ $xpdo_meta_map['disUser']= array (
     'posts' => 0,
     'show_email' => 1,
     'show_online' => 1,
+    'synced' => 0,
+    'source' => 'internal',
+    'syncedat' => NULL,
+    'salt' => '',
+    'integrated_id' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -80,29 +82,6 @@ $xpdo_meta_map['disUser']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '0.0.0.0',
-    ),
-    'synced' => 
-    array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'phptype' => 'boolean',
-      'null' => false,
-      'default' => 0,
-      'index' => 'index',
-    ),
-    'source' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '20',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => 'internal',
-    ),
-    'syncedat' => 
-    array (
-      'dbtype' => 'datetime',
-      'phptype' => 'datetime',
-      'null' => true,
     ),
     'createdon' => 
     array (
@@ -264,6 +243,46 @@ $xpdo_meta_map['disUser']= array (
       'null' => false,
       'default' => 1,
     ),
+    'synced' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'source' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '20',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'internal',
+    ),
+    'syncedat' => 
+    array (
+      'dbtype' => 'datetime',
+      'phptype' => 'datetime',
+      'null' => true,
+    ),
+    'salt' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'integrated_id' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
   ),
   'aggregates' => 
   array (
@@ -286,14 +305,6 @@ $xpdo_meta_map['disUser']= array (
   ),
   'composites' => 
   array (
-    'Profile' => 
-    array (
-      'class' => 'disUserProfile',
-      'local' => 'id',
-      'foreign' => 'user',
-      'cardinality' => 'one',
-      'owner' => 'local',
-    ),
     'UserModerated' => 
     array (
       'class' => 'disUserModerated',

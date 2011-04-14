@@ -2,14 +2,14 @@
 /**
  * @package discuss
  */
-$xpdo_meta_map['disPostRead']= array (
+$xpdo_meta_map['disThreadRead']= array (
   'package' => 'discuss',
-  'table' => 'discuss_posts_read',
+  'table' => 'discuss_threads_read',
   'fields' => 
   array (
     'user' => 0,
     'board' => 0,
-    'post' => 0,
+    'thread' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -33,7 +33,7 @@ $xpdo_meta_map['disPostRead']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'post' => 
+    'thread' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -62,10 +62,10 @@ $xpdo_meta_map['disPostRead']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Post' => 
+    'Thread' => 
     array (
-      'class' => 'disPost',
-      'local' => 'post',
+      'class' => 'disThread',
+      'local' => 'thread',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

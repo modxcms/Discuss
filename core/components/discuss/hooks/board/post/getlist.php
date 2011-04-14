@@ -4,112 +4,93 @@
  *
  * @package discuss
  */
+$response = array(
+    'start' => $scriptProperties['start'],
+    'limit' => $scriptProperties['limit'],
+);
 
-$c = $modx->newQuery('disPost');
-$c->select(array(
-    'disPost.*',
-    'Descendants.depth',
-    'Author.username',
-));
-/* TODO: abstract these subqueries */
-$c->select(array(
-    'author_name' => 'AuthorProfile.fullname',
-    '(SELECT COUNT(*) FROM '.$modx->getTableName('disPostClosure').'
-     WHERE
-        ancestor = disPost.id
-    AND descendant != disPost.id) AS `replies`,
-    (SELECT COUNT(*) FROM '.$modx->getTableName('disPost').' AS dp
-        WHERE
-            id NOT IN (
-                SELECT post FROM '.$modx->getTableName('disPostRead').'
-                WHERE
-                    user = '.$modx->user->get('id').'
-                AND board = disPost.board
-            )
-        AND id IN (
-            SELECT descendant FROM '.$modx->getTableName('disPostClosure').'
-            WHERE ancestor = disPost.id
-        )
-        AND board = disPost.board
-    ) AS `unread`',
-));
-$c->innerJoin('disPostClosure','Descendants');
-$c->innerJoin('disPostClosure','Ancestors');
-$c->innerJoin('modUser','Author');
-$c->innerJoin('modUserProfile','AuthorProfile','`Author`.`id` = `AuthorProfile`.`internalKey`');
+$c = $modx->newQuery('disThread');
+$c->innerJoin('disPost','FirstPost');
+$c->innerJoin('disPost','LastPost');
+$c->innerJoin('disUser','LastAuthor');
+$c->leftJoin('disThreadRead','Reads','Reads.user = '.$discuss->user->get('id').' AND disThread.id = Reads.thread');
 $c->where(array(
-    'Descendants.ancestor' => 0,
-    'Descendants.depth' => 0,
-    'disPost.board' => is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board'],
+    'disThread.board' => is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board'],
+));
+$response['total'] = $modx->getCount('disThread',$c);
+$c->select(array(
+    'LastPost.*',
+    'last_post_id' => 'LastPost.id',
+    'FirstPost.title',
+    'LastAuthor.username',
+    'disThread.id',
+    'disThread.replies',
+    'disThread.views',
+    'disThread.sticky',
+    'disThread.locked',
+    'viewed' => 'Reads.thread',
+    '(SELECT GROUP_CONCAT(pAuthor.id)
+        FROM '.$modx->getTableName('disPost').' AS pPost
+        INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+        WHERE pPost.thread = disThread.id
+     ) AS participants',
 ));
 if ($modx->getOption('discuss.enable_sticky',null,true)) {
-    $c->sortby('disPost.sticky','DESC');
+    $c->sortby('disThread.sticky','DESC');
 }
-$c->sortby('disPost.rank','DESC');
-$c->limit($scriptProperties['limit'],$scriptProperties['start']);
-$posts = $modx->getCollection('disPost',$c);
-
+$c->sortby('LastPost.createdon','DESC');
+if (!empty($scriptProperties['limit'])) {
+    $c->limit($scriptProperties['limit'],$scriptProperties['start']);
+}
+$threads = $modx->getCollection('disThread',$c);
 
 /* iterate through threads */
-$pa = array();
-foreach ($posts as $post) {
-    /* get latest post in thread
-     * TODO: eventually move this to post/getList hook, where it can be one query
-     * rather than in this foreach loop
-     */
-    $c = $modx->newQuery('disPost');
-    $c->select($modx->getSelectColumns('disPost','disPost','',array('id','title','createdon','author')));
-    $c->select($modx->getSelectColumns('modUser','Author','',array('username')));
-    $c->innerJoin('disPostClosure','Descendants');
-    $c->innerJoin('modUser','Author');
-    $c->where(array(
-        'Descendants.ancestor' => $post->get('id'),
-    ));
-    $c->sortby($modx->getSelectColumns('disPost','disPost','',array('createdon')),'DESC');
-    $latestPost = $modx->getObject('disPost',$c);
-    if ($latestPost != null) {
-        $phs = array(
-            'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($latestPost->get('createdon'))),
-            'user' => $latestPost->get('author'),
-            'username' => $latestPost->get('username'),
-        );
-        $latestText = $discuss->getChunk('disLastPostBy',$phs);
+$hotThreadThreshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
+$enableSticky = $modx->getOption('discuss.enable_sticky',null,true);
+$enableHot = $modx->getOption('discuss.enable_hot',null,true);
+$response['results'] = array();
+foreach ($threads as $thread) {
+    $threadArray = $thread->toArray();
 
-        $createdon = strftime($modx->getOption('discuss.date_format'),strtotime($latestPost->get('createdon')));
-        $post->set('latest',$latestText);
-        $post->set('latest.id',$latestPost->get('id'));
-    } else {
-        $post->set('latest',$modx->lexicon('discuss.no_replies_yet'));
-    }
+    $phs = array(
+        'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($threadArray['createdon'])),
+        'user' => $threadArray['author'],
+        'username' => $threadArray['username'],
+    );
+    $latestText = $discuss->getChunk('board/disLastPostBy',$phs);
+
+    $threadArray['latest'] = $latestText;
+    $threadArray['latest.id'] = $thread->get('last_post_id');
 
     /* set css class */
-    $class = 'board-post';
-    if ($modx->getOption('discuss.enable_hot',null,true)) {
-        $threshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
-        if ($modx->user->get('id') == $post->get('author') && $modx->user->isAuthenticated()) {
-            $class .= $post->get('replies') < $threshold ? ' dis-my-normal-thread' : ' dis-my-veryhot-thread';
+    $class = array('board-post');
+    if ($enableHot) {
+        $threshold = $hotThreadThreshold;
+        $participants = explode(',',$threadArray['participants']);
+        if (in_array($discuss->user->get('id'),$participants) && $discuss->isLoggedIn) {
+            $class[] = $threadArray['replies'] < $threshold ? 'dis-my-normal-thread' : 'dis-my-veryhot-thread';
         } else {
-            $class .= $post->get('replies') < $threshold ? '' : ' dis-veryhot-thread';
+            $class[] = $threadArray['replies'] < $threshold ? '' : 'dis-veryhot-thread';
         }
     }
-    $post->set('class',$class);
+    $threadArray['class'] = implode(' ',$class);
 
     /* if sticky/locked */
     $icons = array();
-    if ($post->get('locked')) { $icons[] = '<div class="dis-thread-locked"></div>'; }
-    if ($modx->getOption('discuss.enable_sticky',null,true) && $post->get('sticky')) {
+    if ($threadArray['locked']) { $icons[] = '<div class="dis-thread-locked"></div>'; }
+    if ($enableSticky && $threadArray['sticky']) {
         $icons[] = '<div class="dis-thread-sticky"></div>';
     }
-    $post->set('icons',implode("\n",$icons));
+    $threadArray['icons'] = implode("\n",$icons);
 
     /* unread class */
     $unread = '';
-    if ($post->get('unread') > 0 && $modx->user->isAuthenticated()) {
+    if (!$threadArray['viewed'] && $discuss->isLoggedIn) {
         $unread = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
     }
-    $post->set('unread',$unread);
+    $threadArray['unread'] = $unread;
 
-    $pa[] = $post->toArray();
+    $response['results'][] = $discuss->getChunk('post/disBoardPost',$threadArray);
 }
 
-return $pa;
+return $response;

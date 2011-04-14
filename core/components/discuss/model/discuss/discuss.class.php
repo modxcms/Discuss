@@ -14,6 +14,8 @@ class Discuss {
      */
     public $debugTimer = false;
     public $url = '';
+    public $user;
+    public $isLoggedIn = false;
 
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
@@ -88,6 +90,7 @@ class Discuss {
                 $this->_initSession();
                 $this->loadRequest();
                 $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
+                $this->dateFormat = $this->modx->getOption('discuss.date_format');
             break;
         }
     }
@@ -101,6 +104,19 @@ class Discuss {
         }
         return $this->request;
         
+    }
+
+
+
+    public function loadImporter($class = 'DisSmfImport',$path = '') {
+        if (empty($path)) $path = $this->config['modelPath'];
+        if ($className = $this->modx->loadClass('discuss.import.'.$class,$path,true,true)) {
+            $this->import = new $className($this);
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$class.' from '.$path);
+        }
+        return $this->import;
+
     }
 
     /**
@@ -140,35 +156,38 @@ class Discuss {
                     'name_last' => isset($name[1]) ? $name[1] : '',
                 ));
             }
+            $this->isLoggedIn = true;
+            $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
+            $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
             $this->user->save();
             
         } else if (empty($this->user)) {
+            $this->isLoggedIn = false;
             $this->user =& $this->modx->newObject('disUser');
             $this->user->set('user',0);
             $this->user->set('username','(anonymous)');
         } else {
+            $this->isLoggedIn = true;
             $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
             $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
             $this->user->save();
         }
-        /* assign user */
-        
+
         /* topbar profile links. @TODO: Move this somewhere else. */
-        $currentResourceUrl = $this->modx->makeUrl($this->modx->resource->get('id'));
         if ($this->modx->user->isAuthenticated()) {
             $authphs = array(
                 'user' => $userId,
                 'username' => $this->user->get('username'),
-                'loggedInAs' => 'logged in as <a href="[[~[[*id]]]]?user=1">[[+discuss.username]]</a> - ',
-                'homeLink' => '<a href="'.$currentResourceUrl.'">Home</a>',
-                'authLink' => '<a href="'.$currentResourceUrl.'logout">Logout</a>',
-                'profileLink' => '<a href="'.$currentResourceUrl.'user/?user='.$userId.'">Profile</a>',
-                'searchLink' => '<a href="'.$currentResourceUrl.'search">Search</a>',
-                'unreadLink' => '<a href="'.$currentResourceUrl.'unread">Unread Posts</a>',
+                'loggedInAs' => 'logged in as <a href="'.$this->url.'user/?user=1">[[+discuss.username]]</a> - ',
+                'homeLink' => '<a href="'.$this->url.'">Home</a>',
+                'authLink' => '<a href="'.$this->url.'logout">Logout</a>',
+                'profileLink' => '<a href="'.$this->url.'user/?user='.$userId.'">Profile</a>',
+                'searchLink' => '<a href="'.$this->url.'search">Search</a>',
+                'unreadLink' => '<a href="'.$this->url.'unread">Unread Posts</a>',
             );
         } else {
             $authphs = array(
-                'authLink' => '<a href="'.$currentResourceUrl.'login">Login</a>',
+                'authLink' => '<a href="'.$this->url.'login">Login</a>',
             );
         }
         $this->modx->toPlaceholders($authphs,'discuss');

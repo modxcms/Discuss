@@ -71,42 +71,55 @@ class disPost extends xPDOSimpleObject {
             $cl->set('depth',$cgps);
             $cl->save();
 
-            /* set rank */
+            /* set rank + depth */
             $rank = implode('-',$gps);
             $this->set('rank',$rank);
+            if (!defined('DISCUSS_IMPORT_MODE')) {
+                $this->set('depth',$cgps);
+            }
             $this->save();
 
             /* up author post count */
             $author = $this->getOne('Author');
-            $author->set('posts',($author->get('posts')+1));
-            $author->save();
+            if ($author && !defined('DISCUSS_IMPORT_MODE')) {
+                $author->set('posts',($author->get('posts')+1));
+                $author->save();
+            }
 
             /* adjust board total replies/posts, and last post */
             $board = $this->getOne('Board');
-            $board->set('last_post',$this->get('id'));
-            $board->set('total_posts',$board->get('total_posts')+1);
-            if ($this->get('parent') != 0) {
-                $board->set('num_replies',$board->get('num_replies')+1);
-            } else {
-                $board->set('num_topics',$board->get('num_topics')+1);
+            if ($board  && !defined('DISCUSS_IMPORT_MODE')) {
+                $board->set('last_post',$this->get('id'));
+                $board->set('total_posts',$board->get('total_posts')+1);
+                if ($this->get('parent') != 0) {
+                    $board->set('num_replies',$board->get('num_replies')+1);
+                } else {
+                    $board->set('num_topics',$board->get('num_topics')+1);
+                }
+                $board->save();
             }
-            $board->save();
 
             /* adjust forum activity */
-            $now = date('Y-m-d');
-            $activity = $this->xpdo->getObject('disForumActivity',array(
-                'day' => $now,
-            ));
-            if ($this->get('parent') != 0) {
-                $activity->set('replies',$activity->get('replies')+1);
-            } else {
-                $activity->set('topics',$activity->get('topics')+1);
+            if (!defined('DISCUSS_IMPORT_MODE')) {
+                $now = date('Y-m-d');
+                $activity = $this->xpdo->getObject('disForumActivity',array(
+                    'day' => $now,
+                ));
+                if ($this->get('parent') != 0) {
+                    $activity->set('replies',$activity->get('replies')+1);
+                } else {
+                    $activity->set('topics',$activity->get('topics')+1);
+                }
             }
 
             /* set thread */
-            $thread = $this->getThreadRoot();
-            $this->set('thread',$thread->get('id'));
-            $this->save();
+            if (!defined('DISCUSS_IMPORT_MODE')) {
+                $thread = $this->getThreadRoot();
+                if ($thread) {
+                    $this->set('thread',$thread->get('id'));
+                    $this->save();
+                }
+            }
 
             /* clear cache */
             $this->clearCache();
@@ -159,7 +172,7 @@ class disPost extends xPDOSimpleObject {
 
     public function getContent() {
         $message = $this->get('message');
-
+        
         /* Check custom content parser setting */
         if ($this->xpdo->getOption('discuss.use_custom_post_parser',null,false)) {
             /* Load custom parser */
@@ -175,14 +188,15 @@ class disPost extends xPDOSimpleObject {
             } else if (!empty($parsed)) {
                 $message = $parsed;
             }
-        } else {
+        } else if (true) {
             $tags = array(
+                '<br />','<br/>','<br>',
                 '<','>',
                 '[b]','[/b]',
                 '[i]','[/i]',
                 '[img]','[/img]',
                 '[code]','[/code]',
-                '[quote]','[/quote]',
+                //'[quote','[/quote]',
                 '[s]','[/s]',
                 '[url="','[/url]',
                 '[email="','[/email]',
@@ -192,12 +206,13 @@ class disPost extends xPDOSimpleObject {
             );
             if ($this->xpdo->getOption('discuss.bbcode_enabled',null,true)) {
                 $message = str_replace($tags,array(
+                    "\n","\n","\n",
                     '&lt;','&gt;',
                     '<strong>','</strong>',
                     '<em>','</em>',
                     '<img src="','">',
                     '<div class="dis-code"><h5>Code</h5><pre>','</pre></div>',
-                    '<div class="dis-quote"><h5>Quote</h5><div>','</div></div>',
+                    //'<div class="dis-quote"><h5>Quote</h5><div>','</div></div>',
                     '<span class="dis-strikethrough">','</span>',
                     '<a href="','</a>',
                     '<a href="mailto:','</a>',
@@ -227,7 +242,14 @@ class disPost extends xPDOSimpleObject {
             $message = $rs;
         }
 
+        $message = $this->stripBBCode($message);
         return $message;
+    }
+
+    public function stripBBCode($str) {
+         $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
+         $replace = '';
+         return preg_replace($pattern, $replace, $str);
     }
 
     private function _nl2br2($str) {
@@ -338,63 +360,15 @@ class disPost extends xPDOSimpleObject {
         ));
     }
 
-
-    /**
-     * Marks a post read by the currently logged in user.
-     *
-     * @access public
-     * @return boolean True if successful.
-     */
-    public function markAsRead() {
-        if (!$this->xpdo->user || $this->xpdo->user->get('id') == 0) return false;
-
-        $read = $this->xpdo->getObject('disPostRead',array(
-            'post' => $this->get('id'),
-            'user' => $this->xpdo->user->get('id'),
-        ));
-        if ($read != null) return false;
-
-        $read = $this->xpdo->newObject('disPostRead');
-        $read->set('post',$this->get('id'));
-        $read->set('board',$this->get('board'));
-        $read->set('user',$this->xpdo->user->get('id'));
-
-        $saved = $read->save();
-        if (!$saved) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark read the post: '.print_r($read->toArray(),true));
-        }
-        return $saved;
-    }
-
-    /**
-     * Marks a post unread by the currently logged in user.
-     *
-     * @access public
-     * @return boolean True if successful.
-     */
-    public function markAsUnread() {
-        if (!$this->xpdo->user || $this->xpdo->user->get('id') == 0) return false;
-
-        $read = $this->xpdo->getObject('disPostRead',array(
-            'user' => $this->xpdo->user->get('id'),
-            'post' => $this->get('id'),
-        ));
-        if ($read == null) return true;
-
-        $removed = $read->remove();
-        if (!$removed) {
-            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] An error occurred while trying to mark unread the post: '.print_r($read->toArray(),true));
-        }
-        return $removed;
-    }
-
     public function clearCache() {
-        $this->xpdo->getCacheManager();
-        $this->xpdo->cacheManager->delete('discuss/post/'.$this->get('id'));
-        $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
-        $root = $this->getThreadRoot();
-        if ($root->get('id') != $this->get('id')) {
-            $this->xpdo->cacheManager->delete('discuss/thread/'.$root->get('id'));
+        if (!defined('DISCUSS_IMPORT_MODE')) {
+            $this->xpdo->getCacheManager();
+            $this->xpdo->cacheManager->delete('discuss/post/'.$this->get('id'));
+            $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
+            $root = $this->getThreadRoot();
+            if ($root->get('id') != $this->get('id')) {
+                $this->xpdo->cacheManager->delete('discuss/thread/'.$root->get('id'));
+            }
         }
     }
 
@@ -402,4 +376,5 @@ class disPost extends xPDOSimpleObject {
         $xpdo->getCacheManager();
         return $xpdo->cacheManager->delete('discuss/post/');
     }
+    
 }

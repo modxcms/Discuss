@@ -23,10 +23,17 @@ $_groups = $modx->user->getUserGroups();
 $placeholders = array();
 
 /* get boards */
-$placeholders['boards'] = $modx->hooks->load('board/getlist',array(
-    'board' => 0,
-    'groups' => $_groups,
-));
+$cacheKey = 'discuss/board/index/'.$discuss->user->get('id');
+$boardIndex = $modx->cacheManager->get($cacheKey);
+if (empty($boardIndex)) {
+    $boardIndex = $modx->hooks->load('board/getlist',array(
+        'board' => 0,
+        'groups' => $_groups,
+    ));
+    $modx->cacheManager->set($cacheKey,$boardIndex,3600);
+}
+$placeholders['boards'] = $boardIndex;
+unset($boardIndex);
 
 /* process logout */
 if (isset($scriptProperties['logout']) && $scriptProperties['logout']) {
@@ -55,9 +62,9 @@ $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'di
 unset($authLink,$authMsg,$actionButtons);
 
 /* stats */
-$placeholders['totalPosts'] = $modx->getCount('disPost');
-$placeholders['totalTopics'] = $modx->getCount('disPost',array('parent' => 0));
-$placeholders['totalMembers'] = $modx->getCount('disUserProfile');
+$placeholders['totalPosts'] = number_format((int)$modx->getCount('disPost'));
+$placeholders['totalTopics'] = number_format((int)$modx->getCount('disPost',array('parent' => 0)));
+$placeholders['totalMembers'] = number_format((int)$modx->getCount('disUser'));
 
 /* active in last 40 */
 if ($modx->getOption('discuss.show_whos_online',null,true)) {
@@ -65,18 +72,8 @@ if ($modx->getOption('discuss.show_whos_online',null,true)) {
 }
 
 /* total active */
-$placeholders['totalMembersActive'] = $modx->getCount('disSession',array('user:!=' => 0));
-$placeholders['totalVisitorsActive'] = $modx->getCount('disSession',array('user' => 0));
-
-/* latest post */
-$latestPost = $modx->hooks->load('post/latest',array(
-    'groups' => $_groups,
-));
-if ($latestPost) {
-    $la = $latestPost->toArray('latestPost.',true);
-    $placeholders = array_merge($placeholders,$la);
-    unset($la,$latestPost);
-}
+$placeholders['totalMembersActive'] = number_format((int)$modx->getCount('disSession',array('user:!=' => 0)));
+$placeholders['totalVisitorsActive'] = number_format((int)$modx->getCount('disSession',array('user' => 0)));
 
 $placeholders['recent_posts'] = $modx->hooks->load('post/recent');
 

@@ -11,6 +11,7 @@ $xpdo_meta_map['disCategory']= array (
     'description' => '',
     'collapsible' => 1,
     'rank' => 0,
+    'integrated_id' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -42,6 +43,15 @@ $xpdo_meta_map['disCategory']= array (
     'rank' => 
     array (
       'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
+    'integrated_id' => 
+    array (
+      'dbtype' => 'integer',
       'precision' => '10',
       'phptype' => 'integer',
       'attributes' => 'unsigned',

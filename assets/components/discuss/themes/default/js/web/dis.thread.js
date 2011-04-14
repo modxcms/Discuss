@@ -66,6 +66,7 @@ DIS.Thread = function() {
             var p = $(this).attr('post');
             $('#dis-board-post-'+p).find('ol').slideToggle();
             $('#dis-thread-ct-'+p).slideToggle();
+            $('#dis-post-author-'+p).slideToggle();
         }
         
         ,toggleAuthor: function() {

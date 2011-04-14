@@ -12,9 +12,8 @@ a { text-decoration: none; color: rgb(0, 102, 204); cursor: pointer; }
 a:hover { text-decoration: underline; }
 br.clear { clear: both; height: 0; line-height: 0; }
 body {
-    font-family: 'Lucida Grande', 'Lucida Sans Unicode', Verdana, Arial, Helvetica, sans-serif;
-    font: normal normal normal 75%/1.5 Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
-    color: #555;
+    font: normal 13px/19px "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+    color: #333;
 }
 .right { float: right; }
 .left { float: left; }
@@ -75,7 +74,8 @@ li.dis-category-li {
     height: 33px;
     margin-left: 0;
 }
-li.dis-category-li h2 {
+li.dis-category-li h2,
+.dis-threads-header h2 {
     font-size: 18px;
     font-weight: normal;
     margin: 0;

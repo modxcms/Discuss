@@ -7,18 +7,19 @@
 function addParam() {
     return '';
 }
-$param = $modx->getOption('param',$scriptProperties,'page');
-$current = (!empty($_GET[$param]) && is_numeric($_GET[$param])) ? $_GET[$param] : 1 ;
+$current = (!empty($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
+$current = $current <= 0 ? 1 : $current;
 $limit = $modx->getOption('limit',$scriptProperties,20);
 $count = $modx->getOption('count',$scriptProperties,0);
-$total = ceil($count / 10);
-$total = 10;
+$total = ceil($count / $limit);
+
 
 $view = $modx->getOption('view',$scriptProperties,'');
 $viewId = $scriptProperties['id'];
 $params = $modx->request->getParameters();
-unset($params[$param]);
-$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'),'',$params);
+unset($params['page']);
+unset($params['action']);
+$currentResourceUrl = $discuss->url.$view.'?'.http_build_query($params);
 
 if ($total <= 1) {
 	$pagination = '<div class="inactive">Page 1 of 1</div>';
@@ -48,15 +49,15 @@ switch ($current) {
 	break;
 }
 
-/* If total pages under 10, don't truncate */
-if ($total < 10) {
+/* If total pages under limit, don't truncate */
+if ($total < $limit) {
 	for ($i = 1; $i <= $total; $i++) {
 		$list[] = ($i == $current)
 			? $discuss->getChunk('pagination/PaginationActive', array('class' => 'active', 'text' => $i))
 			: $discuss->getChunk('pagination/PaginationLink', array( 'url' => $currentResourceUrl.'&page='.$i, 'text' => $i));
 	}
 
-    
+
 /* Truncate */
 } else {
 	switch($total){

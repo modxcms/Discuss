@@ -12,6 +12,7 @@ $xpdo_meta_map['disUserGroupProfile']= array (
     'min_posts' => 0,
     'color' => '',
     'image' => '',
+    'integrated_id' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -58,6 +59,15 @@ $xpdo_meta_map['disUserGroupProfile']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'integrated_id' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'aggregates' => 

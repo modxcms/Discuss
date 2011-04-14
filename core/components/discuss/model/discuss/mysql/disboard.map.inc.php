@@ -18,6 +18,7 @@ $xpdo_meta_map['disBoard']= array (
     'ignoreable' => 1,
     'rank' => 0,
     'map' => '',
+    'integrated_id' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -118,6 +119,15 @@ $xpdo_meta_map['disBoard']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'integrated_id' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'aggregates' => 

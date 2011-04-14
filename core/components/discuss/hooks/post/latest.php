@@ -14,7 +14,7 @@ $c->select(array(
 ));
 $c->select($modx->getSelectColumns('disBoard','Board','',array('name')).' AS `board`');
 $c->innerJoin('disBoard','Board');
-$c->innerJoin('modUser','Author');
+$c->innerJoin('disUser','Author');
 $c->innerJoin('disPost','Thread');
 $c->leftJoin('disBoardUserGroup','UserGroups',$modx->getSelectColumns('disBoard','Board','',array('id')).' = '.$modx->getSelectColumns('disBoardUserGroup','UserGroups','',array('board')));
 $c->orCondition(array(

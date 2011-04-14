@@ -27,15 +27,22 @@
 }
 
 .dis-post-header .dis-post-author {
-    font-size: 10px;
+    font-size: 12px;
     display: block;
     color: #23281F;
     padding: 2px;
     cursor: pointer;
 }
+
+.dis-username {
+    font-weight: bold;
+}
+
+
 .dis-post-footer {
     font-size: 11px;
     }
+
 .dis-post-ip { 
     float: right;
     vertical-align: bottom;

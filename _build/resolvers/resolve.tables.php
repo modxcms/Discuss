@@ -22,17 +22,18 @@ if ($object->xpdo) {
             $manager->createObjectContainer('disCategory');
             $manager->createObjectContainer('disForumActivity');
             $manager->createObjectContainer('disModerator');
+            $manager->createObjectContainer('disThread');
+            $manager->createObjectContainer('disThreadRead');
             $manager->createObjectContainer('disPost');
             $manager->createObjectContainer('disPostAttachment');
             $manager->createObjectContainer('disPostClosure');
-            $manager->createObjectContainer('disPostRead');
             $manager->createObjectContainer('disReservedUsername');
             $manager->createObjectContainer('disSession');
             $manager->createObjectContainer('disUserFriend');
             $manager->createObjectContainer('disUserGroupProfile');
             $manager->createObjectContainer('disUserModerated');
             $manager->createObjectContainer('disUserNotification');
-            $manager->createObjectContainer('disUserProfile');
+            $manager->createObjectContainer('disUser');
 
             break;
         case xPDOTransport::ACTION_UPGRADE:

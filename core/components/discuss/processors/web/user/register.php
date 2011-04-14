@@ -61,9 +61,9 @@ if (!empty($reservedUsernames)) {
 $c = $modx->newQuery('modUser');
 $c->select(array(
     'modUser.*',
-    'Profile.email',
+    'disUser.email',
 ));
-$c->leftJoin('disUserProfile','Profile','`Profile`.`user` = `modUser`.`id`');
+$c->leftJoin('disUser','disUser','`disUser`.`user` = `modUser`.`id`');
 $c->where(array(
     'modUser.username' => $_POST['username'],
 ));
@@ -83,13 +83,13 @@ if ($user) {
 
 /* if user might be registering multiple accounts, moderate */
 $moderateUser = false;
-$c = $modx->newQuery('disUserProfile');
+$c = $modx->newQuery('disUser');
 $c->innerJoin('modUser','User');
 $c->where(array(
-    'disUserProfile.ip' => $_SERVER['REMOTE_ADDR'],
+    'disUser.ip' => $_SERVER['REMOTE_ADDR'],
     'User.username:!=' => $_POST['username'],
 ));
-$ip = $modx->getObject('disUserProfile',$c);
+$ip = $modx->getObject('disUser',$c);
 if ($ip) { $moderateUser = $modx->lexicon('discuss.duplicate_ip'); }
 
 $sc = $modx->user->getSessionContexts();
@@ -107,7 +107,7 @@ if (empty($errors)) {
     }
 
     /* create Discuss User Profile */
-    $profile = $modx->newObject('disUserProfile');
+    $profile = $modx->newObject('disUser');
     $profile->fromArray($_POST);
     $profile->set('user',$user->get('id'));
     $profile->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
@@ -115,12 +115,12 @@ if (empty($errors)) {
 
     /* if user needs to be moderated, do so here */
     if ($moderateUser !== false) {
-        $profile->set('status',disUserProfile::AWAITING_MODERATION);
+        $profile->set('status',disUser::AWAITING_MODERATION);
         $userModed = $modx->newObject('disUserModerated');
         $userModed->set('register_ip',$_SERVER['REMOTE_ADDR']);
         $userModed->set('reason',$moderateUser);
     } else {
-        $profile->set('status',disUserProfile::UNCONFIRMED);
+        $profile->set('status',disUser::UNCONFIRMED);
     }
 
     $profile->set('last_login',strftime('%Y-%m-%d %H:%M:%S'));

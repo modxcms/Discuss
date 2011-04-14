@@ -1,10 +1,51 @@
 <?php
-$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
-if (!($discuss instanceof Discuss)) return '';
-$discuss->initialize($modx->context->get('key'));
+$mtime = microtime();
+$mtime = explode(' ', $mtime);
+$mtime = $mtime[1] + $mtime[0];
+$tstart = $mtime;
+set_time_limit(0);
 
-require dirname(__FILE__).'/systems.inc.php';
-//$smfPassMethod = @sha1(strtolower($username) . $password);
+/* override with your own defines here (see build.config.sample.php) */
+require_once '/www/discuss/_build/build.config.php';
+require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
+$modx= new modX();
+$modx->initialize('mgr');
+$modx->setLogLevel(modX::LOG_LEVEL_INFO);
+$modx->setLogTarget('ECHO');
+
+/* load Discuss */
+$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
+if (!($discuss instanceof Discuss)) return '';
+
+
+
+/* setup mem limits */
+ini_set('memory_limit','1024M');
+set_time_limit(0);
+@ob_end_clean();
+echo '<pre>';
+
+/* load and run importer */
+if ($discuss->loadImporter('disSmfImport')) {
+    $discuss->import->live = true;
+    $discuss->import->postsOnly = true;
+    $discuss->import->run();
+} else {
+    $modx->log(xPDO::LOG_LEVEL_ERROR,'Failed to load Import class.');
+}
+
+$mtime= microtime();
+$mtime= explode(" ", $mtime);
+$mtime= $mtime[1] + $mtime[0];
+$tend= $mtime;
+$totalTime= ($tend - $tstart);
+$totalTime= sprintf("%2.4f s", $totalTime);
+
+$modx->log(modX::LOG_LEVEL_INFO,"\nExecution time: {$totalTime}\n");
+
+exit ();
+@session_write_close();
+die();
 
 /**
  * disBoard - smf_boards
@@ -15,23 +56,3 @@ require dirname(__FILE__).'/systems.inc.php';
  * disModerator - smf_moderators
  * disUser/modUser - smf_members
  */
-
-try {
-    $pdo = new PDO($systems['smf']['dsn'], $systems['smf']['username'], $systems['smf']['password']);
-} catch (PDOException $e) {
-    return 'Connection failed: ' . $e->getMessage();
-}
-
-echo '<pre>';
-
-$stmt = $pdo->query('SELECT * FROM smf_categories LIMIT 10');
-if ($stmt) {
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        if ($row) {
-            print_r($row);
-        }
-    }
-    $stmt->closeCursor();
-}
-
-return 'Done.';

@@ -30,22 +30,17 @@ $placeholders['boards'] = $modx->hooks->load('board/getList',array(
 ));
 
 /* get all threads in board */
+$limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
+$page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+$page = $page <= 0 ? $page = 1 : $page;
+$start = ($page-1) * $limit;
 $posts = $modx->hooks->load('board/post/getList',array(
     'board' => &$board,
+    'limit' => $limit,
+    'start' => $start,
 ));
-
-/* load theme options */
-$discuss->config['pa'] = $posts;
-
-/* parse threads */
-$postsOutput = array();
-if (count($posts) > 0) {
-    foreach ($posts as $postArray) {
-        $postsOutput[] = $discuss->getChunk('disBoardPost',$postArray);
-    }
-    $placeholders['posts'] = implode("\n",$postsOutput);
-}
-unset($postsOutput,$pa,$post);
+$placeholders['posts'] = implode("\n",$posts['results']);
+$discuss->config['pa'] = $posts['total'];
 
 /* get board breadcrumb trail */
 $placeholders['trail'] = $board->buildBreadcrumbs();
@@ -58,9 +53,8 @@ unset($trail,$ancestors,$c);
 $placeholders['readers'] = $board->getViewing();
 
 /* get pagination */
-$count = count($posts);
 $modx->hooks->load('pagination/build',array(
-    'count' => $count,
+    'count' => $posts['total'],
     'id' => $board->get('id'),
     'view' => 'board',
     'limit' => $limit,

@@ -16,12 +16,12 @@ $c->where(array(
 $c->sortby('UserGroupProfile.color','ASC');
 $c->sortby('Session.access','ASC');
 $activeUsers = $modx->getCollection('disUser',$c);
-$as = '';
+$as = array();
 foreach ($activeUsers as $activeUser) {
-    $as .= $discuss->getChunk('disActiveUserRow',$activeUser->toArray());
+    $as[] = $discuss->getChunk('user/disActiveUserRow',$activeUser->toArray());
 }
 $list = $modx->lexicon('discuss.users_active_in_last',array(
-    'users' => trim($as,','),
+    'users' => implode(',',$as),
     'threshold' => $threshold,
 ));
 unset($as,$activeUsers,$activeUser,$timeago,$threshold);

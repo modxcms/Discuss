@@ -11,31 +11,15 @@ $userId = $modx->user->get('id');
 $thread = $modx->getOption('thread',$scriptProperties,false);
 if (empty($thread)) $modx->sendErrorPage();
 
-/* get thread root */
-$otherSelect = '';
-$c = $modx->newQuery('disPost');
-$repliesCriteria = $modx->newQuery('disPostClosure');
-$repliesCriteria->select('COUNT('.$modx->getSelectColumns('disPostClosure','disPostClosure','',array('descendant')).')');
-$repliesCriteria->where(array(
-    'disPostClosure.ancestor = disPost.id',
-    'disPostClosure.descendant != disPost.id',
+$c = $modx->newQuery('disThread');
+$c->innerJoin('disPost','FirstPost');
+$c->select($modx->getSelectColumns('disThread','disThread'));
+$c->select(array(
+    'FirstPost.title',
 ));
-$repliesCriteria->prepare();
-$repliesSql = $repliesCriteria->toSql();
-$c->select($modx->getSelectColumns('disPost','disPost'));
-$c->select('('.$repliesSql.') AS '.$modx->escape('replies'));
-if (!empty($userId)) {
-    $c->leftJoin('disUserNotification','Notifications',''
-            .$modx->getSelectColumns('disPost','disPost','',array('id')).' = '.$modx->getSelectColumns('disUserNotification','Notifications','',array('post'))
-            .' AND '.$modx->getSelectColumns('disUserNotification','Notifications','',array('user')).' = '.$userId);
-    $c->select($modx->getSelectColumns('disUserNotification','Notifications','',array('user')).' AS `notification`');
-}
-$c->where(array(
-    'disPost.id' => $thread,
-));
-$thread = $modx->getObject('disPost',$c);
-if ($thread === null) $modx->sendErrorPage();
-unset($c);
+$c->where(array('id' => $thread));
+$thread = $modx->getObject('disThread',$c);
+if (empty($thread)) $modx->sendErrorPage();
 
 /* mark unread if user clicks mark unread */
 if (isset($_REQUEST['unread'])) {
@@ -80,12 +64,6 @@ if (!empty($_REQUEST['notify'])) {
     $modx->sendRedirect($boardUrl);
 }
 
-/* mark posts in thread read */
-$children = $thread->getDescendants();
-foreach ($children as $child) {
-    $child->markAsRead();
-}
-
 /* get posts */
 $postsOutput = $modx->hooks->load('post/getthread',array(
     'thread' => &$thread,
@@ -94,7 +72,7 @@ $thread->set('posts',$postsOutput);
 unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 
 /* load theme options */
-$discuss->config['pa'] = $pa;
+//$discuss->config['pa'] = $pa;
 
 /* get board breadcrumb trail */
 $c = $modx->newQuery('disBoard');
@@ -196,5 +174,8 @@ if ($discuss->user->get('user') != 0) {
     $discuss->user->set('thread_last_visited',$thread->get('id'));
     $discuss->user->save();
 }
+
+/* mark as read */
+$thread->markAsRead($discuss->user->get('id'));
 
 return $placeholders;

@@ -20,9 +20,8 @@ $xpdo_meta_map['disPost']= array (
     'allow_replies' => 1,
     'rank' => NULL,
     'ip' => '0.0.0.0',
-    'views' => 0,
-    'locked' => 0,
-    'sticky' => 0,
+    'integrated_id' => 0,
+    'depth' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -135,28 +134,21 @@ $xpdo_meta_map['disPost']= array (
       'null' => false,
       'default' => '0.0.0.0',
     ),
-    'views' => 
+    'integrated_id' => 
     array (
-      'dbtype' => 'int',
+      'dbtype' => 'integer',
       'precision' => '10',
       'phptype' => 'integer',
       'attributes' => 'unsigned',
-      'default' => 0,
-      'null' => false,
-    ),
-    'locked' => 
-    array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
     ),
-    'sticky' => 
+    'depth' => 
     array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'phptype' => 'boolean',
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
     ),
@@ -173,7 +165,7 @@ $xpdo_meta_map['disPost']= array (
     ),
     'Thread' => 
     array (
-      'class' => 'disPost',
+      'class' => 'disThread',
       'local' => 'thread',
       'foreign' => 'id',
       'cardinality' => 'one',
@@ -235,14 +227,6 @@ $xpdo_meta_map['disPost']= array (
       'class' => 'disPostClosure',
       'local' => 'id',
       'foreign' => 'descendant',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'PostReads' => 
-    array (
-      'class' => 'disPostRead',
-      'local' => 'id',
-      'foreign' => 'post',
       'cardinality' => 'many',
       'owner' => 'local',
     ),

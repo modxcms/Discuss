@@ -1,1 +1,0 @@
-<a href="[[~[[*id]]]]user/?user=[[+id]]"[[+color:notempty=` style="color: [[+color]]"`]]>[[+username]]</a>,

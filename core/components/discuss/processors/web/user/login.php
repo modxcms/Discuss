@@ -8,16 +8,16 @@
 $modx->lexicon->load('discuss:user');
 $ok = false;
 
-/* check for disUserProfile */
+/* check for disUser */
 if (empty($_POST['username'])) $modx->sendUnauthorizedPage();
-$c = $modx->newQuery('disUserProfile');
+$c = $modx->newQuery('disUser');
 $c->innerJoin('modUser','User');
 $c->where(array(
     'User.username' => $_POST['username'],
 ));
-$profile = $modx->getObject('disUserProfile',$c);
+$profile = $modx->getObject('disUser',$c);
 if (empty($profile)) {
-    /* couldnt find a disUserProfile. Check to see if there is a MODx user
+    /* couldnt find a disUser. Check to see if there is a MODx user
      * and compare the passwords. If not, send to unauth page.
      */
     $user = $modx->getObject('modUser',array(
@@ -25,37 +25,21 @@ if (empty($profile)) {
     ));
     if (empty($user)) $modx->sendUnauthorizedPage();
     if (md5($_POST['password']) != $user->get('password')) $modx->sendUnauthorizedPage();
-
-    /* found a modx user with the right password, now create a Discuss profile */
-    $profile = $modx->newObject('disUserProfile');
-    $profile->fromArray(array(
-        'user' => $user->get('id'),
-        'createdon' => strftime('%Y-%m-%d %H:%M:%S'),
-        'ip' => $_SERVER['REMOTE_ADDR'],
-        'status' => disUserProfile::ACTIVE,
-        'confirmed' => true,
-        'confirmedon' => strftime('%Y-%m-%d %H:%M:%S'),
-    ));
-    $userProfile = $user->getOne('Profile');
-    if ($userProfile) {
-        $profile->set('email',$userProfile->get('email'));
-    }
-    $profile->save();
 }
 
 $status = $profile->get('status');
 switch ($status) {
-    case disUserProfile::ACTIVE: $ok = true; break;
-    case disUserProfile::BANNED:
+    case disUser::ACTIVE: $ok = true; break;
+    case disUser::BANNED:
         $errorOutput = $modx->lexicon('discuss.account_banned');
         break;
-    case disUserProfile::INACTIVE:
+    case disUser::INACTIVE:
         $errorOutput = $modx->lexicon('discuss.account_deactivated');
         break;
-    case disUserProfile::UNCONFIRMED:
+    case disUser::UNCONFIRMED:
         $errorOutput = $modx->lexicon('discuss.account_unconfirmed');
         break;
-    case disUserProfile::AWAITING_MODERATION:
+    case disUser::AWAITING_MODERATION:
         $errorOutput = $modx->lexicon('discuss.account_awaiting_moderation');
         break;
     default:

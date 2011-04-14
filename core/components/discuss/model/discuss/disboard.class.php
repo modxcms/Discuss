@@ -94,8 +94,10 @@ class disBoard extends xPDOSimpleObject {
             $this->set('map',$map);
 
             /* set rank to number of boards already with this parent */
-            $rank = $this->xpdo->getCount('disBoard',array('parent'=>$this->get('parent')));
-            $this->set('rank',$rank);
+            if (!defined('DISCUSS_IMPORT_MODE')) {
+                $rank = $this->xpdo->getCount('disBoard',array('parent'=>$this->get('parent')));
+                $this->set('rank',$rank);
+            }
             parent::save();
         }
         /* if parent changed on existing object, rebuild closure table */
@@ -160,7 +162,7 @@ class disBoard extends xPDOSimpleObject {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
 
         $c = $this->xpdo->newQuery('disSession');
-        $c->innerJoin('modUser','User');
+        $c->innerJoin('disUser','User');
         $c->select($this->xpdo->getSelectColumns('disSession','disSession','',array('id')));
         $c->select(array(
             'GROUP_CONCAT(CONCAT_WS(":",User.id,User.username) SEPARATOR ",") AS readers',
@@ -175,7 +177,7 @@ class disBoard extends xPDOSimpleObject {
             $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members[] = '<a href="[[~[[++discuss.user_resource]]]]?user='.$r[0].'">'.$r[1].'</a>';
+                $members[] = '<a href="[[~[[*id]]]]user?user='.$r[0].'">'.$r[1].'</a>';
             }
             $members = array_unique($members);
             $members = implode(',',$members);
