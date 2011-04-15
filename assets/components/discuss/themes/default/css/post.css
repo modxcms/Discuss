@@ -116,6 +116,29 @@
     font-family: LiberationMono, consolas, monaco, 'courier new', courier, monospace;
     }
 
+
+.dis-post blockquote {
+    margin: 0 0 0 5px;
+    padding: 5px 1px 5px 10px;
+    
+    border-bottom: 1px solid #9c0;
+    background: #f3f6f0;
+    overflow: auto;
+}
+.dis-post cite {
+    border-top: 1px solid #9c0;
+    border-bottom: 1px solid #9c0;
+    
+    display: block;
+    background: #dbedc9;
+
+    margin: 0 0 0 5px;
+    padding: 5px 10px;
+    line-height: 1.2em;
+
+}
+
+
 /* actions */
 .dis-post-header div.dis-post-actions {
     float: right;

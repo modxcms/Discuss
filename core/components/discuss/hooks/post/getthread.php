@@ -107,12 +107,12 @@ foreach ($posts as $post) {
     if (!$thread->get('locked') && $discuss->isLoggedIn) {
         $postArray['action_reply'] = '<a href="'.$currentResourceUrl.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
 
-        $canModifyPost = $modx->user->get('id') == $post->get('author') || $isModerator;
+        $canModifyPost = $discuss->user->get('id') == $post->get('author') || $isModerator;
         if ($canModifyPost) {
             $postArray['action_modify'] = '<a href="'.$currentResourceUrl.'thread/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
-        $canRemovePost = $modx->user->get('id') == $post->get('author') || $isModerator;
+        $canRemovePost = $discuss->user->get('id') == $post->get('author') || $isModerator;
         if ($canRemovePost) {
             $postArray['action_remove'] = '<a class="dis-post-remove">'.$modx->lexicon('discuss.remove').'</a>';
         }
@@ -153,7 +153,10 @@ if (empty($flat)) {
         $output = $discuss->treeParser->parse($plist,'post/disThreadPost');
     }
 } else {
+    //echo '<pre>'; foreach ($output as $o) { var_export(htmlentities($o)); } die();
+
     $output = implode("\n",$output);
+//    echo '<pre>';var_export(htmlentities($output)); die();
 }
 $response['results'] = str_replace(array('[',']'),array('&#91;','&#93;'),$output);
 return $response;

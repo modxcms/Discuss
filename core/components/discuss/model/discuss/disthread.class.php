@@ -170,10 +170,12 @@ class disThread extends xPDOSimpleObject {
         foreach ($ancestors as $ancestor) {
             if (empty($category)) {
                 $category = $ancestor->getOne('Category');
-                $trail[] = array(
-                    'url' => $this->xpdo->discuss->url.'?category='.$category->get('id'),
-                    'text' => $category->get('name'),
-                );
+                if ($category) {
+                    $trail[] = array(
+                        'url' => $this->xpdo->discuss->url.'?category='.$category->get('id'),
+                        'text' => $category->get('name'),
+                    );
+                }
             }
             $trail[] = array(
                 'url' => $this->xpdo->discuss->url.'board?board='.$ancestor->get('id'),

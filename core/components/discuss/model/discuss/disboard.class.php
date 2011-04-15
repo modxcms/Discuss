@@ -216,8 +216,6 @@ class disBoard extends xPDOSimpleObject {
     }
 
     public function buildBreadcrumbs($additional = array(),$linkToSelf = false) {
-        $currentResourceUrl = $this->xpdo->discuss->url;
-
         $cacheKey = 'discuss/board/'.$this->get('id').'/breadcrumbs';
         $trail = $this->xpdo->cacheManager->get($cacheKey);
         if (empty($trail) || true) {
@@ -234,14 +232,23 @@ class disBoard extends xPDOSimpleObject {
             /* breadcrumbs */
             $trail = array();
             $trail[] = array(
-                'url' => $currentResourceUrl,
+                'url' => $this->xpdo->discuss->url,
                 'text' => $this->xpdo->getOption('discuss.forum_title'),
             );
-            foreach ($ancestors as $ancestor) {
+            $category = $this->getOne('Category');
+            if ($category) {
                 $trail[] = array(
-                    'url' => $currentResourceUrl.'board?board='.$ancestor->get('id'),
-                    'text' => $ancestor->get('name'),
+                    'url' => $this->xpdo->discuss->url.'?category='.$category->get('id'),
+                    'text' => $category->get('name'),
                 );
+            }
+            if (!empty($ancestors)) {
+                foreach ($ancestors as $ancestor) {
+                    $trail[] = array(
+                        'url' => $this->xpdo->discuss->url.'board?board='.$ancestor->get('id'),
+                        'text' => $ancestor->get('name'),
+                    );
+                }
             }
             $self = array(
                 'text' => $this->get('name'),
