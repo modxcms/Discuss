@@ -40,6 +40,7 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'web/dis.thread.new.js',
+                'web/dis.post.buttons.js',
             ),
         ),
     ),
@@ -47,6 +48,7 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'web/dis.post.reply.js',
+                'web/dis.post.buttons.js',
             ),
         ),
     ),
@@ -54,6 +56,7 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'web/dis.post.modify.js',
+                'web/dis.post.buttons.js',
             ),
         ),
     ),

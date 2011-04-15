@@ -10,6 +10,7 @@ if ($post == null) { $modx->sendErrorPage(); }
 /* setup defaults */
 $placeholders = $post->toArray();
 $placeholders['post'] = $post->get('id');
+$placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 
 /* get thread root */
 $thread = $post->getOne('Thread');

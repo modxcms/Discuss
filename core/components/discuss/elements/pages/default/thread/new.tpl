@@ -19,11 +19,17 @@
         <span class="error">[[!+fi.error.title]]</span>
     </label>
     <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
-    
-    <label for="dis-new-thread-message">[[%discuss.message]]:
+
+    <div style="margin-left: 150px;">
+        <br class="clear" />
+        [[+buttons]]
+        <br class="clear" />
+    </div>
+
+    <label for="dis-thread-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>
     </label>
-    <textarea name="message" id="dis-new-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
+    <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
     
     <label for="dis-new-thread-attachment">[[%discuss.attachments]]:
         <span class="small dis-new-thread-add-attachment"><a href="[[~[[*id]]]]board/?board=[[+id]]">[[%discuss.attachment_add]]</a>

@@ -14,10 +14,11 @@ if ($board == null) $modx->sendErrorPage();
 $board->buildBreadcrumbs(array(array(
     'text' => $modx->lexicon('discuss.thread_new'),
     'active' => true,
-)));
+)),true);
 
 /* setup defaults */
 $placeholders = $board->toArray();
+$placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 
 /* set max attachment limit */
 $placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);

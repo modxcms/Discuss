@@ -193,7 +193,7 @@ class disThread extends xPDOSimpleObject {
                 }
             }
             $trail[] = array(
-                'url' => $this->xpdo->discuss->url.'board?board='.$ancestor->get('id'),
+                'url' => $this->xpdo->discuss->url.'board/?board='.$ancestor->get('id'),
                 'text' => $ancestor->get('name'),
             );
         }
