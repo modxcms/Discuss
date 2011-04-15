@@ -3,17 +3,20 @@
  *
  * @package discuss
  */
-if (empty($_REQUEST['post'])) { $modx->sendErrorPage(); }
-$post = $modx->getObject('disPost',$_REQUEST['post']);
+if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
+$post = $modx->getObject('disPost',$scriptProperties['post']);
 if ($post == null) { $modx->sendErrorPage(); }
 
 /* setup defaults */
 $placeholders = $post->toArray();
+$placeholders['post'] = $post->get('id');
 
 /* get thread root */
-$thread = $post->getThreadRoot();
+$thread = $post->getOne('Thread');
 if ($thread == null) $modx->sendErrorPage();
 $placeholders['thread'] = $thread->get('id');
+$placeholders['locked'] = $thread->get('locked');
+$placeholders['sticky'] = $thread->get('sticky');
 
 /* get attachments for post */
 $attachments = $post->getMany('Attachments');
@@ -32,8 +35,6 @@ $placeholders['attachments'] = implode("\n",$atts);
 $placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
 $placeholders['attachmentCurIdx'] = count($attachments)+1;
 
-
-
 /* get board breadcrumb trail */
 $c = $modx->newQuery('disBoard');
 $c->innerJoin('disBoardClosure','Ancestors');
@@ -44,39 +45,24 @@ $c->sortby('Ancestors.depth','ASC');
 $ancestors = $modx->getCollection('disBoard',$c);
 
 /* build breadcrumbs */
-$trail = array();
-$trail[] = array(
-    'url' => $modx->makeUrl($modx->getOption('discuss.board_list_resource')),
-    'text' => $modx->lexicon('discuss.home'),
-);
-foreach ($ancestors as $ancestor) {
-    $trail[] = array(
-        'url' => '[[~[[++discuss.board_resource]]? &board=`'.$ancestor->get('id').'`]]',
-        'text' => $ancestor->get('name'),
-    );
+$board = $thread->getOne('Board');
+if ($board) {
+    $board->buildBreadcrumbs(array(array(
+        'text' => $modx->lexicon('discuss.modify_post_header',array(
+            'post' => $post->get('title'),
+        )),
+        'active' => true,
+    )),true);
 }
-$trail[] = array(
-    'text' => $modx->lexicon('discuss.modify_post_header',array('post' => $post->get('title'))),
-    'active' => true,
-);
-$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
-    'items' => &$trail,
-)));
-$placeholders['trail'] = $trail;
-
-/* if POST, process new thread request */
-if (!empty($_POST)) {
-    $modx->toPlaceholders($_POST,'post');
-    include $discuss->config['processorsPath'].'web/post/modify.php';
-}
-
+$placeholders['trail'] = $board->get('trail');
 
 /* get thread */
-$props = array_merge($scriptProperties,array(
+$thread = $discuss->hooks->load('post/getthread',array(
     'post' => &$post,
-    'thread' => &$thread,
+    'thread' => $post->get('thread'),
+    'limit' => 5,
 ));
-$placeholders['thread_posts'] = $discuss->hooks->load('post/getthread',$props);
+$placeholders['thread_posts'] = $thread['results'];
 
 /* output form to browser */
 $modx->regClientScript($discuss->config['jsUrl'].'web/dis.post.modify.js');
@@ -88,6 +74,6 @@ var DISModifyPost = $(function() {
     });
 });</script>');
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
-$modx->setPlaceholder('discuss.post',$post->get('title'));
+$modx->setPlaceholders($placeholders,'fi.');
 
 return $placeholders;

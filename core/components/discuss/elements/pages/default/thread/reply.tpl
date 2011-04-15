@@ -2,7 +2,7 @@
 
 [[!FormIt?
   &submitVar=`dis-post-reply`
-  &hooks=`postHook.DiscussReplyThread`
+  &hooks=`postHook.DiscussReplyPost`
   &validate=`title:required,message:required:allowTags`
 ]]
 
@@ -12,9 +12,9 @@
 
     <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
     
-    <input type="hidden" name="board" value="[[+board]]" />
-    <input type="hidden" name="thread" value="[[+thread]]" />
-    <input type="hidden" name="post" value="[[+id]]" />
+    <input type="hidden" name="board" value="[[!+fi.board]]" />
+    <input type="hidden" name="thread" value="[[!+fi.thread]]" />
+    <input type="hidden" name="post" value="[[!+fi.post]]" />
     
     <label for="dis-reply-post-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
@@ -46,7 +46,7 @@
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-post-reply" value="[[%discuss.post_reply]]" />
         <input type="button" class="dis-action-btn dis-reply-post-preview" name="dis-post-preview" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]?thread=[[+thread]]';" />
+        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]thread/?thread=[[+thread]]';" />
     </div>
 </form>
 

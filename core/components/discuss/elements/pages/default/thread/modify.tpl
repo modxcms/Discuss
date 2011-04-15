@@ -1,25 +1,33 @@
 [[+trail]]
 
+[[!FormIt?
+  &submitVar=`dis-post-modify`
+  &hooks=`postHook.DiscussModifyPost`
+  &validate=`title:required,message:required:allowTags`
+]]
+
 <div id="dis-modify-post-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]? &post=`[[+id]]`]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h2>
     
-    <input type="hidden" name="board" value="[[+board]]" />
+    <input type="hidden" name="board" value="[[!+fi.board]]" />
+    <input type="hidden" name="post" value="[[!+fi.post]]" />
+    <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     
     <label for="dis-new-thread-title">[[%discuss.title]]:
-        <span class="error">[[+error.title]]</span>
+        <span class="error">[[!+fi.error.title]]</span>
     </label>
-    <input type="text" name="title" id="dis-new-thread-title" value="[[+title]]" />
+    <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
     
     <label for="dis-new-thread-message">[[%discuss.message]]:
-        <span class="error">[[+error.message]]</span>
+        <span class="error">[[!+fi.error.message]]</span>
     </label>
-    <textarea name="message" id="dis-new-thread-message" cols="80" rows="7">[[+message]]</textarea>
+    <textarea name="message" id="dis-new-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
     <br class="clear" />
 
-    <label for="dis-add-attachments">[[%discuss.attachments]]:
+    <label for="dis-attachment">[[%discuss.attachments]]:
         <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
         <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
@@ -32,14 +40,14 @@
     </div>`]]
     <br class="clear" />
    
-    <label class="dis-cb"><input type="checkbox" name="locked" value="1" />[[%discuss.thread_lock? &namespace=`discuss` &topic=`web`]]</label>
-    <label class="dis-cb"><input type="checkbox" name="sticky" value="1" />[[%discuss.thread_stick]]</label>
+    <label class="dis-cb"><input type="checkbox" name="locked" value="1" [[!+fi.locked:FormItIsChecked=`1`]] />[[%discuss.thread_lock? &namespace=`discuss` &topic=`web`]]</label>
+    <label class="dis-cb"><input type="checkbox" name="sticky" value="1" [[!+fi.sticky:FormItIsChecked=`1`]] />[[%discuss.thread_stick]]</label>
 
     <br class="clear" />
     <div class="dis-form-buttons">
-    <input type="submit" class="dis-action-btn" value="[[%discuss.save_changes]]" />
-    <input type="button" class="dis-action-btn" id="dis-new-thread-preview-btn" value="[[%discuss.preview]]" onclick="DISModifyPost.preview();" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[++discuss.thread_resource]]? &thread=`[[+thread]]`]]';" />
+        <input type="submit" class="dis-action-btn" name="dis-post-modify" value="[[%discuss.save_changes]]" />
+        <input type="button" class="dis-action-btn" id="dis-new-thread-preview-btn" value="[[%discuss.preview]]" onclick="DISModifyPost.preview();" />
+        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]thread/?thread=[[+thread]]#dis-post-[[+id]]';" />
     </div>
 </form>
 

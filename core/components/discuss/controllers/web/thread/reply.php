@@ -18,6 +18,8 @@ $placeholders = $post->toArray();
 /* get thread root */
 $thread = $post->getOne('Thread');
 if ($thread == null) $modx->sendErrorPage();
+
+$placeholders['post'] = $placeholders['id'];
 $placeholders['thread'] = $thread->get('id');
 
 /* get board breadcrumb trail */
@@ -30,27 +32,16 @@ $c->sortby('Ancestors.depth','ASC');
 $ancestors = $modx->getCollection('disBoard',$c);
 
 /* build breadcrumbs */
-$trail = array();
-$trail[] = array(
-    'url' => $discuss->url,
-    'text' => $modx->lexicon('discuss.home'),
-);
-foreach ($ancestors as $ancestor) {
-    $trail[] = array(
-        'url' => $discuss->url.'board?board='.$ancestor->get('id'),
-        'text' => $ancestor->get('name'),
-    );
+$board = $thread->getOne('Board');
+if ($board) {
+    $board->buildBreadcrumbs(array(array(
+        'text' => $modx->lexicon('discuss.reply_to_post',array(
+            'post' => '<a class="active" href="'.$discuss->url.'thread?thread='.$thread->get('id').'">'.$post->get('title').'</a>',
+        )),
+        'active' => true,
+    )),true);
 }
-$trail[] = array(
-    'text' => $modx->lexicon('discuss.reply_to_post',array(
-        'post' => '<a class="active" href="'.$discuss->url.'thread?thread='.$thread->get('id').'">'.$post->get('title').'</a>',
-    )),
-    'active' => true,
-);
-$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
-    'items' => &$trail,
-)));
-$placeholders['trail'] = $trail;
+$placeholders['trail'] = $board->get('trail');
 
 /* get thread */
 $thread = $discuss->hooks->load('post/getthread',array(
@@ -68,6 +59,6 @@ $(function() { DIS.config.attachments_max_per_post = '.$placeholders['max_attach
 
 /* output form to browser */
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
-$modx->setPlaceholder('fi.title',$post->get('title'));
+$modx->setPlaceholders($placeholders,'fi.');
 
 return $placeholders;

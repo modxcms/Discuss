@@ -39,9 +39,7 @@ $isModerator = $modx->getCount('disModerator',array(
     'user' => $discuss->user->get('id'),
     'board' => $thread->get('board'),
 )) > 0 ? true : false;
-$isAuthenticated = $modx->user->hasSessionContext($modx->context->get('key'));
-$currentResourceUrl = $discuss->url;
-$userUrl = $currentResourceUrl.'user/';
+$userUrl = $discuss->url.'user/';
 
 /* get posts */
 $c = $modx->newQuery('disPost');
@@ -135,11 +133,11 @@ foreach ($posts as $post) {
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
     if (!$thread->get('locked') && $discuss->isLoggedIn) {
-        $postArray['action_reply'] = '<a href="'.$currentResourceUrl.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+        $postArray['action_reply'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
 
         $canModifyPost = $discuss->user->get('id') == $post->get('author') || $isModerator;
         if ($canModifyPost) {
-            $postArray['action_modify'] = '<a href="'.$currentResourceUrl.'thread/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $postArray['action_modify'] = '<a href="'.$discuss->url.'thread/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
         $canRemovePost = $discuss->user->get('id') == $post->get('author') || $isModerator;
