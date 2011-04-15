@@ -5,6 +5,21 @@
 class disThread extends xPDOSimpleObject {
 
 
+    public function remove(array $ancestors = array()) {
+        $removed = parent::remove($ancestors);
+        $this->clearCache();
+        return $removed;
+    }
+
+    public function clearCache() {
+        if (!defined('DISCUSS_IMPORT_MODE')) {
+            $this->xpdo->getCacheManager();
+            $this->xpdo->cacheManager->delete('discuss/thread/'.$this->get('id'));
+            $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
+        }
+    }
+
+    
     /**
      * Gets the viewing message for the bottom of the thread
      *

@@ -117,7 +117,7 @@ class disPost extends xPDOSimpleObject {
                 $activity->save();
             }
 
-            /* set thread, up thread  */
+            /* set thread, update thread  */
             if (!defined('DISCUSS_IMPORT_MODE')) {
                 $thread = $this->getOne('Thread');
                 if (!$thread) {
@@ -131,12 +131,12 @@ class disPost extends xPDOSimpleObject {
                     ));
                 }
 
-                $this->set('thread',$thread->get('id'));
-                $this->save();
-
                 $thread->set('post_last',$this->get('id'));
                 $thread->set('author_last',$this->get('author'));
                 $thread->save();
+
+                $this->set('thread',$thread->get('id'));
+                $this->save();
             }
 
             /* clear cache */

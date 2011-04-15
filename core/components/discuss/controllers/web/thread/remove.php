@@ -5,46 +5,32 @@
  * @package discuss
  */
 /* get thread root */
-$thread = $modx->getObject('disPost',$_REQUEST['thread']);
-if ($thread == null) $modx->sendErrorPage();
-$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
+$c = $modx->newQuery('disThread');
+$c->innerJoin('disPost','FirstPost');
+$c->select($modx->getSelectColumns('disThread','disThread'));
+$c->select(array(
+    'FirstPost.title',
+    '(SELECT GROUP_CONCAT(pAuthor.id)
+        FROM '.$modx->getTableName('disPost').' AS pPost
+        INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+        WHERE pPost.thread = disThread.id
+     ) AS participants',
+));
+$c->where(array('id' => $scriptProperties['thread']));
+$thread = $modx->getObject('disThread',$c);
+if (empty($thread)) $modx->sendErrorPage();
 
 /* get breadcrumb trail */
-$c = $modx->newQuery('disBoard');
-$c->innerJoin('disBoardClosure','Ancestors');
-$c->where(array(
-    'Ancestors.descendant' => $thread->get('board'),
-));
-$c->sortby('Ancestors.depth','ASC');
-$ancestors = $modx->getCollection('disBoard',$c);
-$trail = array();
-$trail[] = array(
-    'url' => $currentResourceUrl,
-    'text' => $modx->getOption('discuss.forum_title'),
-);
-foreach ($ancestors as $ancestor) {
-    $trail[] = array(
-        'url' => $currentResourceUrl.'board?board='.$ancestor->get('id'),
-        'text' => $ancestor->get('name'),
-    );
-}
-$trail[] = array( 
-    'url' => $currentResourceUrl.'thread?thread='.$thread->get('id'),
-    'text' => $thread->get('title'),
-);
-$trail[] = array('text' => $modx->lexicon('discuss.thread_remove'),'active' => true);
-$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
-    'items' => &$trail,
-)));
-$thread->set('trail',$trail);
+$thread->buildBreadcrumbs();
+$placeholders = $thread->toArray();
 
 /* process form */
-if (!empty($_POST)) {
-    $url = $currentResourceUrl.'board?board='.$thread->get('board');
-    $thread->remove();
-    $modx->sendRedirect($url);
+if (!empty($scriptProperties['remove-thread'])) {
+    if ($thread->remove()) {
+        $url = $discuss->url.'board?board='.$thread->get('board');
+        $modx->sendRedirect($url);
+    }
 }
-$placeholders = $thread->toArray();
 
 /* output */
 $modx->setPlaceholder('discuss.thread',$thread->get('title'));
