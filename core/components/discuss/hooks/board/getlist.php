@@ -17,7 +17,7 @@ if (!empty($list)) {
 $unreadSubCriteria = $modx->newQuery('disThreadRead');
 $unreadSubCriteria->select($modx->getSelectColumns('disThreadRead','disThreadRead','',array('thread')));
 $unreadSubCriteria->where(array(
-    'disThreadRead.user' => $modx->user->get('id'),
+    'disThreadRead.user' => $discuss->user->get('id'),
     $modx->getSelectColumns('disThreadRead','disThreadRead','',array('board')).' = '.$modx->getSelectColumns('disBoard','disBoard','',array('id')),
 ));
 $unreadSubCriteria->prepare();
@@ -87,7 +87,6 @@ $boards = array();
 foreach ($boardObjects as $board) {
     $boards[] = $board->toArray();
 }
-
 unset($c);
 
 /* now loop through boards */

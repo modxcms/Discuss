@@ -27,6 +27,12 @@ class disBoard extends xPDOSimpleObject {
         return $set;
     }
 
+    public function remove(array $ancestors = array()) {
+        $removed = parent::remove($ancestors);
+        $this->clearCache();
+        return $removed;
+    }
+
     /**
      * Overrides the xPDOObject::save method to provide custom functionality and
      * automation for the closure tables that persist the board map.
@@ -98,7 +104,7 @@ class disBoard extends xPDOSimpleObject {
                 $rank = $this->xpdo->getCount('disBoard',array('parent'=>$this->get('parent')));
                 $this->set('rank',$rank);
             }
-            parent::save();
+            $saved = parent::save();
         }
         /* if parent changed on existing object, rebuild closure table */
         if (!$new && $this->parentChanged) {
@@ -146,7 +152,9 @@ class disBoard extends xPDOSimpleObject {
             $grandParents[] = $this->get('id');
             $map = implode('-',$grandParents);
             $this->set('map',$map);
-            parent::save();
+            $saved = parent::save();
+
+            $this->clearCache();
         }
 
         return $saved;
@@ -296,6 +304,14 @@ class disBoard extends xPDOSimpleObject {
                 $read->save();
             }
         }
+        $this->clearCache();
         return true;
+    }
+
+    public function clearCache() {
+        if (!defined('DISCUSS_IMPORT_MODE')) {
+            $this->xpdo->getCacheManager();
+            $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('id'));
+        }
     }
 }
