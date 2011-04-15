@@ -52,11 +52,12 @@ $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p')
 $plist = array();
 $output = array();
 foreach ($posts as $post) {
-    $postArray = $post->toArray('',true);
+    $postArray = $post->toArray();
 
     if ($post->Author) {
         $postArray = array_merge($postArray,$post->Author->toArray('author.'));
         $postArray['author.signature'] = $post->Author->parseSignature();
+        $postArray['author.posts'] = number_format($postArray['author.posts']);
     }
     unset($postArray['author.password'],$postArray['author.cachepwd']);
     if (!empty($post->EditedBy)) {
@@ -81,9 +82,10 @@ foreach ($posts as $post) {
         }
     }
 
+    $postArray['class'] = array('dis-board-post');
     if (!$flat) {
         /* set depth and check max post depth */
-        $postArray['class'] = 'dis-board-post dis-depth-'.$postArray['depth'];
+        $postArray['class'][] = 'dis-depth-'.$postArray['depth'];
         if ($postArray['depth'] > $modx->getOption('discuss.max_post_depth',null,3)) {
             /* Don't hide post if it exceed max depth, set its depth placeholder to max depth value instead */
             $postArray['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
@@ -102,12 +104,12 @@ foreach ($posts as $post) {
     $postArray['action_reply'] = '';
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
-    if (!$thread->get('locked') && $isAuthenticated) {
-        $postArray['action_reply'] = '<a href="'.$currentResourceUrl.'thread/reply?post=[[+id]]" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+    if (!$thread->get('locked') && $discuss->isLoggedIn) {
+        $postArray['action_reply'] = '<a href="'.$currentResourceUrl.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
 
         $canModifyPost = $modx->user->get('id') == $post->get('author') || $isModerator;
         if ($canModifyPost) {
-            $postArray['action_modify'] = '<a href="'.$currentResourceUrl.'thread/modify?post=[[+id]]" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $postArray['action_modify'] = '<a href="'.$currentResourceUrl.'thread/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
         $canRemovePost = $modx->user->get('id') == $post->get('author') || $isModerator;
@@ -131,6 +133,8 @@ foreach ($posts as $post) {
     }
     $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
 
+    $postArray['class'] = implode(' ',$postArray['class']);
+    
     if ($flat) {
         $output[] = $discuss->getChunk('post/disThreadPost',$postArray);
     } else {

@@ -10,6 +10,10 @@ $discuss->setSessionPlace('board:'.$scriptProperties['board']);
 $board = $modx->getObject('disBoard',$scriptProperties['board']);
 if ($board == null) $modx->sendErrorPage();
 
+if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
+    $board->read($discuss->user->get('id'));
+}
+
 $placeholders = $board->toArray();
 
 /* setup default properties */
@@ -17,17 +21,11 @@ $limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.th
 $start = $modx->getOption('start',$scriptProperties,0);
 $param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
 
-$category = array();
-$category['category_name'] = $modx->lexicon('discuss.subboards');
-
-$category['list'] = array();
-
-$currentResourceUrl = $modx->makeUrl($modx->resource->get('id'));
-
 /* grab all subboards */
 $placeholders['boards'] = $discuss->hooks->load('board/getList',array(
     'board' => &$board,
 ));
+if (empty($placeholders['boards'])) $placeholders['boards_toggle'] = 'display:none;';
 
 /* get all threads in board */
 $limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
@@ -44,10 +42,6 @@ $discuss->config['pa'] = $posts['total'];
 
 /* get board breadcrumb trail */
 $placeholders['trail'] = $board->buildBreadcrumbs();
-
-/* start placeholders */
-if (empty($placeholders['boards'])) $placeholders['boards_toggle'] = 'display:none;';
-unset($trail,$ancestors,$c);
 
 /* get viewing users */
 $placeholders['readers'] = $board->getViewing();
@@ -66,9 +60,9 @@ unset($count,$start,$limit,$url);
 /* action buttons */
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {
-    $actionButtons[] = array('url' => $currentResourceUrl.'thread/new?board='.$board->get('id'), 'text' => $modx->lexicon('discuss.thread_new'));
-    $actionButtons[] = array('url' => $currentResourceUrl.'board?board='.$board->get('id').'&read=1', 'text' => $modx->lexicon('discuss.mark_read'));
-    $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
+    $actionButtons[] = array('url' => $discuss->url.'thread/new?board='.$board->get('id'), 'text' => $modx->lexicon('discuss.thread_new'));
+    $actionButtons[] = array('url' => $discuss->url.'board?board='.$board->get('id').'&read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
+    //$actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);

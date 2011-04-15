@@ -78,6 +78,8 @@ $thread->save();
 unset($views);
 
 $placeholders = $thread->toArray();
+$placeholders['views'] = number_format($placeholders['views']);
+$placeholders['replies'] = number_format($placeholders['replies']);
 
 /* set css class of thread */
 $thread->buildCssClass();
@@ -87,22 +89,22 @@ $placeholders['readers'] = $thread->getViewing();
 
 /* action buttons */
 $actionButtons = array();
-if ($modx->user->isAuthenticated()) {
-    $actionButtons[] = array('url' => $discuss->url.'thread?thread=[[+id]]&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
+if ($discuss->isLoggedIn) {
+    $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
     if (!$thread->hasNotification($discuss->user->get('id'))) {
-        $actionButtons[] = array('url' => $discuss->url.'thread?thread=[[+id]]&notify=1', 'text' => $modx->lexicon('discuss.notify'));
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&notify=1', 'text' => $modx->lexicon('discuss.notify'));
     }
     /* TODO: Send thread by email - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
      */
-    $actionButtons[] = array('url' => $discuss->url.'thread?thread=[[+id]]&print=1', 'text' => $modx->lexicon('discuss.print'));
+    //$actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&print=1', 'text' => $modx->lexicon('discuss.print'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
 
 /* thread action buttons */
 $actionButtons = array();
-if ($modx->user->isAuthenticated()) {
+if ($discuss->isLoggedIn) {
     /** TODO: Move thread - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
      */

@@ -263,4 +263,32 @@ class disBoard extends xPDOSimpleObject {
         $this->set('trail',$trail);
         return $trail;
     }
+
+    /**
+     * Mark all threads in this board as read for a user.
+     * 
+     * @param  $userId
+     * @return bool
+     */
+    public function read($userId) {
+        $stmt = $this->xpdo->query('SELECT id FROM '.$this->xpdo->getTableName('disThread').' WHERE board = '.$this->get('id').' ORDER BY id DESC');
+        if (!$stmt) return false;
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $read = $this->xpdo->getCount('disThreadRead',array(
+                'thread' => $row['id'],
+                'user' => $userId,
+            ));
+            if ($read == 0) {
+                $read = $this->xpdo->newObject('disThreadRead');
+                $read->fromArray(array(
+                    'thread' => $row['id'],
+                    'board' => $this->get('id'),
+                    'user' => $userId,
+                ));
+                $read->save();
+            }
+        }
+        return true;
+    }
 }
