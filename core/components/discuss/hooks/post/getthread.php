@@ -36,10 +36,10 @@ $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
 $isModerator = $modx->getCount('disModerator',array(
-    'user' => $modx->user->get('id'),
+    'user' => $discuss->user->get('id'),
     'board' => $thread->get('board'),
 )) > 0 ? true : false;
-$isAuthenticated = $modx->user->isAuthenticated();
+$isAuthenticated = $modx->user->hasSessionContext($modx->context->get('key'));
 $currentResourceUrl = $discuss->url;
 $userUrl = $currentResourceUrl.'user/';
 
@@ -144,7 +144,7 @@ foreach ($posts as $post) {
 
         $canRemovePost = $discuss->user->get('id') == $post->get('author') || $isModerator;
         if ($canRemovePost) {
-            $postArray['action_remove'] = '<a class="dis-post-remove">'.$modx->lexicon('discuss.remove').'</a>';
+            $postArray['action_remove'] = '<a href="'.$discuss->url.'post/remove?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
         }
     }
 

@@ -105,20 +105,38 @@ class disPost extends xPDOSimpleObject {
                 $activity = $this->xpdo->getObject('disForumActivity',array(
                     'day' => $now,
                 ));
+                if (!$activity) {
+                    $activity = $this->xpdo->newObject('disForumActivity');
+                    $activity->set('day',$now);
+                }
                 if ($this->get('parent') != 0) {
                     $activity->set('replies',$activity->get('replies')+1);
                 } else {
                     $activity->set('topics',$activity->get('topics')+1);
                 }
+                $activity->save();
             }
 
-            /* set thread */
+            /* set thread, up thread  */
             if (!defined('DISCUSS_IMPORT_MODE')) {
-                $thread = $this->getThreadRoot();
-                if ($thread) {
-                    $this->set('thread',$thread->get('id'));
-                    $this->save();
+                $thread = $this->getOne('Thread');
+                if (!$thread) {
+                    $thread = $this->xpdo->newObject('disThread');
+                    $thread->fromArray(array(
+                        'board' => $this->get('board'),
+                        'post_first' => $this->get('id'),
+                        'author_first' => $this->get('author'),
+                        'replies' => 0,
+                        'views' => 0,
+                    ));
                 }
+
+                $this->set('thread',$thread->get('id'));
+                $this->save();
+
+                $thread->set('post_last',$this->get('id'));
+                $thread->set('author_last',$this->get('author'));
+                $thread->save();
             }
 
             /* clear cache */
@@ -141,30 +159,70 @@ class disPost extends xPDOSimpleObject {
         $removed = parent::remove();
         if ($removed) {
             /* decrease profile posts */
-            $author->set('posts',($author->get('posts')-1));
-            $author->save();
+            if ($author) {
+                $author->set('posts',($author->get('posts')-1));
+                $author->save();
+            }
 
             /* fix board last post */
-            $c = $this->xpdo->newQuery('disPost');
-            $c->where(array(
-                'board' => $board->get('id'),
-            ));
-            $c->sortby('createdon','DESC');
-            $c->limit(1);
-            $latestPost = $this->xpdo->getObject('disPost',$c);
-            if ($latestPost) {
-                $board->set('last_post',$latestPost->get('id'));
-            } else {
-                $board->set('last_post',0);
+            if ($board) {
+                $c = $this->xpdo->newQuery('disPost');
+                $c->where(array(
+                    'board' => $board->get('id'),
+                ));
+                $c->sortby('createdon','DESC');
+                $c->limit(1);
+                $latestPost = $this->xpdo->getObject('disPost',$c);
+                if ($latestPost) {
+                    $board->set('last_post',$latestPost->get('id'));
+                } else {
+                    $board->set('last_post',0);
+                }
+
+                /* fix board total post/replies/topics counts */
+                $board->set('total_posts',($board->get('total_posts')-1));
+                if ($parent == 0) {
+                    $board->set('num_topics',($board->get('num_topics')-1));
+                } else {
+                    $board->set('num_replies',($board->get('num_replies')-1));
+                }
+                $board->save();
             }
-            /* fix total post/replies/topics counts */
-            $board->set('total_posts',($board->get('total_posts')-1));
-            if ($parent == 0) {
-                $board->set('num_topics',($board->get('num_topics')-1));
-            } else {
-                $board->set('num_replies',($board->get('num_replies')-1));
+
+            /* fix thread posts/data */
+            $thread = $this->getOne('Thread');
+            if ($thread) {
+                $thread->set('replies',$thread->get('replies') - 1);
+                $c = $this->xpdo->newQuery('disPost');
+                $c->where(array('id:!=' => $this->get('id')));
+                $c->sortby('createdon','DESC');
+                $c->limit(1);
+                $priorPost = $this->xpdo->getObject('disPost',$c);
+                if ($priorPost) {
+                    $thread->set('post_last',$priorPost->get('id'));
+                    $thread->set('author_last',$priorPost->get('author'));
+                    $thread->save();
+                } else {
+                    $thread->remove();
+                }
             }
-            $board->save();
+            
+            /* adjust forum activity */
+            if (!defined('DISCUSS_IMPORT_MODE')) {
+                $now = date('Y-m-d');
+                $activity = $this->xpdo->getObject('disForumActivity',array(
+                    'day' => $now,
+                ));
+                if ($activity) {
+                    if ($this->get('parent') != 0) {
+                        $activity->set('replies',$activity->get('replies')-1);
+                    } else {
+                        $activity->set('topics',$activity->get('topics')-1);
+                    }
+                    $activity->save();
+                }
+            }
+
             $this->clearCache();
         }
         return $removed;
@@ -332,9 +390,9 @@ class disPost extends xPDOSimpleObject {
             $this->xpdo->getCacheManager();
             $this->xpdo->cacheManager->delete('discuss/post/'.$this->get('id'));
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
-            $root = $this->getThreadRoot();
-            if ($root->get('id') != $this->get('id')) {
-                $this->xpdo->cacheManager->delete('discuss/thread/'.$root->get('id'));
+            $thread = $this->getOne('Thread');
+            if ($thread) {
+                $this->xpdo->cacheManager->delete('discuss/thread/'.$thread->get('id'));
             }
         }
     }

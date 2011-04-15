@@ -8,6 +8,7 @@
  * @package discuss
  */
 class Discuss {
+    const DATETIME_FORMATTED = '%Y-%m-%d %H:%M:%S';
     /**
      * @var int/boolean $debugTimer The starting value of the execution time.
      * @access public
@@ -454,5 +455,12 @@ class Discuss {
         }
         return $success;
     }
-	
+
+    public function now() {
+        return strftime(Discuss::DATETIME_FORMATTED);
+    }
+
+    public function getIp() {
+        return $_SERVER['REMOTE_ADDR'];
+    }
 }

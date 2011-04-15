@@ -5,8 +5,8 @@
  * @package discuss
  */
 /* get post */
-if (empty($_REQUEST['post'])) { $modx->sendErrorPage(); }
-$post = $modx->getObject('disPost',$_REQUEST['post']);
+if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
+$post = $modx->getObject('disPost',$scriptProperties['post']);
 if ($post == null) { $modx->sendErrorPage(); }
 
 /* setup default snippet properties */
@@ -52,18 +52,6 @@ $trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array
 )));
 $placeholders['trail'] = $trail;
 
-/* if POST, process new thread request */
-if (!empty($_POST)) {
-    $modx->toPlaceholders($_POST,'post');
-    $result = include $discuss->config['processorsPath'].'web/post/reply.php';
-    if ($discuss->processResult($result)) {
-        $url = $currentResourceUrl.'thread/?thread='.$thread->get('id').'#dis-post-'.$result['object']['id'];
-        $modx->sendRedirect($url);
-    }
-} else {
-    $modx->setPlaceholder('post.title',$replyPrefix.$post->get('title'));
-}
-
 /* get thread */
 $thread = $discuss->hooks->load('post/getthread',array(
     'post' => &$post,
@@ -80,6 +68,6 @@ $(function() { DIS.config.attachments_max_per_post = '.$placeholders['max_attach
 
 /* output form to browser */
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
-$modx->setPlaceholder('discuss.post',$post->get('title'));
+$modx->setPlaceholder('fi.title',$post->get('title'));
 
 return $placeholders;
