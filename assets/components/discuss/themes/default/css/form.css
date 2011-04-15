@@ -120,3 +120,8 @@
     float: left;
     margin: 20px 0 30px;
 }
+
+#dis-thread-message {
+    width: 80%;
+    height: 160px;
+}
