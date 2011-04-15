@@ -90,6 +90,7 @@ $placeholders['readers'] = $thread->getViewing();
 /* action buttons */
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
+    $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
     $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
     if (!$thread->hasNotification($discuss->user->get('id'))) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&notify=1', 'text' => $modx->lexicon('discuss.notify'));

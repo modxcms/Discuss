@@ -155,7 +155,7 @@ $xpdo_meta_map['disThread']= array (
     ),
     'FirstPost' => 
     array (
-      'class' => 'disUser',
+      'class' => 'disPost',
       'local' => 'post_first',
       'foreign' => 'id',
       'cardinality' => 'one',
@@ -163,7 +163,7 @@ $xpdo_meta_map['disThread']= array (
     ),
     'LastPost' => 
     array (
-      'class' => 'disUser',
+      'class' => 'disPost',
       'local' => 'post_last',
       'foreign' => 'id',
       'cardinality' => 'one',

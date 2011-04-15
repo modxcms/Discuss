@@ -54,6 +54,7 @@ $_lang['discuss.remove'] = 'Remove';
 $_lang['discuss.replies'] = 'Replies';
 $_lang['discuss.reply'] = 'Reply';
 $_lang['discuss.reply_to_post'] = 'Reply to Post: [[+post]]';
+$_lang['discuss.reply_to_thread'] = 'Reply to Thread';
 $_lang['discuss.report_to_mod'] = 'Report to Moderator';
 $_lang['discuss.save_changes'] = 'Save Changes';
 $_lang['discuss.search'] = 'Search';

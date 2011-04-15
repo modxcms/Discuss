@@ -120,8 +120,8 @@
 
         <aggregate alias="FirstAuthor" class="disUser" local="author_first" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="LastAuthor" class="disUser" local="author_last" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="FirstPost" class="disUser" local="post_first" foreign="id" cardinality="one" owner="foreign" />
-        <aggregate alias="LastPost" class="disUser" local="post_last" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="FirstPost" class="disPost" local="post_first" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="LastPost" class="disPost" local="post_last" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Reads" class="disThreadRead" local="id" foreign="thread" cardinality="many" owner="local" />
         <composite alias="Posts" class="disPost" local="id" foreign="thread" cardinality="many" owner="local" />

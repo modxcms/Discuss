@@ -5,19 +5,26 @@
  * @package discuss
  */
 /* get post */
-if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
-$post = $modx->getObject('disPost',$scriptProperties['post']);
-if ($post == null) { $modx->sendErrorPage(); }
+if (empty($scriptProperties['thread'])) {
+    if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
+    $post = $modx->getObject('disPost',$scriptProperties['post']);
+    if (empty($post)) $modx->sendErrorPage();
+
+    /* get thread root */
+    $thread = $post->getOne('Thread');
+    if (empty($thread)) $modx->sendErrorPage();
+} else {
+    $thread = $modx->getObject('disThread',$scriptProperties['thread']);
+    if (empty($thread)) $modx->sendErrorPage();
+    $post = $thread->getOne('FirstPost');
+    if (empty($post)) $modx->sendErrorPage();
+}
 
 /* setup default snippet properties */
 $replyPrefix = $modx->getOption('replyPrefix',$scriptProperties,'Re: ');
 
 /* setup placeholders */
 $placeholders = $post->toArray();
-
-/* get thread root */
-$thread = $post->getOne('Thread');
-if ($thread == null) $modx->sendErrorPage();
 
 $placeholders['post'] = $placeholders['id'];
 $placeholders['thread'] = $thread->get('id');
