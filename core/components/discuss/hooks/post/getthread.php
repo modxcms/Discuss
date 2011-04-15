@@ -8,8 +8,24 @@
 /* get thread or root of post */
 $thread = $modx->getOption('thread',$scriptProperties,'');
 if (empty($thread)) return false;
+if (!is_object($thread)) {
+    $c = $modx->newQuery('disThread');
+    $c->innerJoin('disPost','FirstPost');
+    $c->select($modx->getSelectColumns('disThread','disThread'));
+    $c->select(array(
+        'FirstPost.title',
+        '(SELECT GROUP_CONCAT(pAuthor.id)
+            FROM '.$modx->getTableName('disPost').' AS pPost
+            INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+            WHERE pPost.thread = disThread.id
+         ) AS participants',
+    ));
+    $c->where(array('id' => $thread));
+    $thread = $modx->getObject('disThread',$c);
+    if (empty($thread)) return false;
+}
 
-$limit = (int)$modx->getOption('discuss.post_per_page',$scriptProperties, 10);
+$limit = $modx->getOption('limit',$scriptProperties,(int)$modx->getOption('discuss.post_per_page',$scriptProperties, 10));
 $start = intval(isset($_GET['page']) ? ($_GET['page'] - 1) * $limit : 0);
 
 /* Verify the posts output type - Flat or Threaded */
@@ -41,10 +57,24 @@ if ($flat) {
 } else {
     $c->sortby($modx->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
 }
-$c->bindGraph('{"Author":{},"EditedBy":{}}');
-$c->prepare();
-//$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
 
+
+if (!empty($scriptProperties['post'])) {
+    if (!is_object($scriptProperties['post'])) {
+        $post = $modx->getObject('disPost',$scriptProperties['post']);
+    } else {
+        $post =& $scriptProperties['post'];
+    }
+    if ($post) {
+        $c->where(array(
+            'disPost.createdon:>=' => $post->get('createdon'),
+        ));
+    }
+}
+
+$c->bindGraph('{"Author":{},"EditedBy":{}}');
+//$c->prepare();
+//$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
 $posts = $modx->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
 
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');

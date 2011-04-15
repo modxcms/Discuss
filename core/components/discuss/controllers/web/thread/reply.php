@@ -65,10 +65,12 @@ if (!empty($_POST)) {
 }
 
 /* get thread */
-$placeholders['thread_posts'] = $discuss->hooks->load('post/getthread',array(
+$thread = $discuss->hooks->load('post/getthread',array(
     'post' => &$post,
-    'thread' => &$thread,
+    'thread' => $post->get('thread'),
+    'limit' => 5,
 ));
+$placeholders['thread_posts'] = $thread['results'];
 
 /* set max attachment limit */
 $placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);

@@ -2,12 +2,12 @@
 
 <div id="dis-reply-post-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]]]?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]]]?thread=[[+thread]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
     
     <input type="hidden" name="board" value="[[+board]]" />
-    <input type="hidden" name="post" value="[[+id]]" />
+    <input type="hidden" name="thread" value="[[+id]]" />
     
     <label for="dis-reply-post-title">[[%discuss.title]]:
         <span class="error">[[+error.title]]</span>
