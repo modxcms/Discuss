@@ -70,6 +70,11 @@ if (isset($board) && $board !== null) {
         'disBoard.parent' => $board,
     ));
 }
+if (!empty($scriptProperties['category'])) {
+    $c->where(array(
+        'disBoard.category' => (int)(is_object($scriptProperties['category']) ? $scriptProperties['category']->get('id') : $scriptProperties['category']),
+    ));
+}
 if (!empty($scriptProperties['groups'])) {
     /* restrict boards by user group if applicable */
     $g = array(

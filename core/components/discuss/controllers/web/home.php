@@ -23,13 +23,15 @@ $_groups = $modx->user->getUserGroups();
 $placeholders = array();
 
 /* get boards */
-$cacheKey = 'discuss/board/index/'.$discuss->user->get('id');
+$c = array(
+    'board' => 0,
+    'groups' => $_groups,
+);
+if (!empty($scriptProperties['category'])) $c['category'] = (int)$scriptProperties['category'];
+$cacheKey = 'discuss/board/index/'.$discuss->user->get('id').'-'.md5(serialize($c));
 $boardIndex = $modx->cacheManager->get($cacheKey);
 if (empty($boardIndex)) {
-    $boardIndex = $discuss->hooks->load('board/getlist',array(
-        'board' => 0,
-        'groups' => $_groups,
-    ));
+    $boardIndex = $discuss->hooks->load('board/getlist',$c);
     $modx->cacheManager->set($cacheKey,$boardIndex,3600);
 }
 $placeholders['boards'] = $boardIndex;
@@ -80,7 +82,22 @@ $placeholders['recent_posts'] = $recent['results'];
 unset($recent);
 
 /* breadcrumbs */
-$trail = array(array('text' => $modx->getOption('discuss.forum_title'),'active' => true));
+$trail = array();
+if (!empty($scriptProperties['category'])) {
+    $category = $modx->getObject('disCategory',$scriptProperties['category']);
+}
+if (!empty($category)) {
+    $trail[] = array(
+        'text' => $modx->getOption('discuss.forum_title'),
+        'url' => $discuss->url
+    );
+    $trail[] = array(
+        'text' => $category->get('name'),
+        'active' => true
+    );
+} else {
+    $trail[] = array('text' => $modx->getOption('discuss.forum_title'),'active' => true);
+}
 $placeholders['trail'] = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
 )));
