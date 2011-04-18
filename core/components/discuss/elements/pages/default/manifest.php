@@ -85,6 +85,13 @@ $manifest = array(
                 'web/user/dis.user.notifications.js',
             )
         ),
-    )
+    ),
+    'user/ignoreboards' => array(
+        'js' => array(
+            'header' => array(
+                'web/user/dis.user.ignoreboards.js',
+            )
+        ),
+    ),
 );
 return $manifest;

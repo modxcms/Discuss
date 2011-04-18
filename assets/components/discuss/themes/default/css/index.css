@@ -203,3 +203,29 @@ dl.dis-datalist dh { clear: left; width: 250px; font-weight: bold; }
 .dis-board-gray {
     color: #666 !important;
 }
+
+/* ignore boards page */
+.dis-board-ignores ul {
+    list-style-type: none;
+    border: 0;
+}
+.dis-board-ignores input {
+    padding: 0;
+    margin: 0 3px;
+    float: none;
+}
+.dis-board-ignores label {
+    line-height: 19px;
+    width: auto;
+    display: inline;
+    text-align: left;
+    clear: none;
+    float: none;
+    font-weight: normal;
+}
+.dis-category-li-simple {
+    font-weight: bold;
+}
+.dis-category-li-simple .dis-category {
+    font-weight: bold;
+}
