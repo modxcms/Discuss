@@ -42,7 +42,7 @@ $list = array();
 /* Previous button */
 switch ($current) {
 	case ($current >= 2):
-		$list[] = $discuss->getChunk('pagination/PaginationLink',array('url' => $urlPrev, 'text' => '◄'));
+		$list[] = $discuss->getChunk('pagination/PaginationLink',array('url' => $currentResourceUrl.'&page='.$prev, 'text' => '◄'));
 	break;
 	default:
 		$list[] = $discuss->getChunk('pagination/PaginationActive',array('class' => 'inactive', 'text' => '◄'));
@@ -66,7 +66,7 @@ if ($total < $limit) {
 			/* first page */
 			$list[] = ($current == 1)
 				? $discuss->getChunk('pagination/PaginationActive', array('class' => 'active', 'text' => 1))
-				: $discuss->getChunk('pagination/PaginationLink',array('url' => $currentResourceUrl.'&page=', 'text' => 1));
+				: $discuss->getChunk('pagination/PaginationLink',array('url' => $currentResourceUrl.'&page='.$prev, 'text' => 1));
 
 			/* And the followings */
 			for ($i = 2; $i < 4; $i++) {
