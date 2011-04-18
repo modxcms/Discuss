@@ -21,6 +21,7 @@ if (!empty($_POST) && !empty($scriptProperties['boards'])) {
     sort($ignores);
     $user->set('ignore_boards',implode(',',$ignores));
     if ($user->save()) {
+        $user->clearCache();
         $url = $discuss->url.'user/ignoreboards?user='.$user->get('id');
         $modx->sendRedirect($url);
     }

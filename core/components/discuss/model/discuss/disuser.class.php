@@ -72,4 +72,12 @@ class disUser extends xPDOSimpleObject {
         }
         return $message;
     }
+
+    public function clearCache() {
+        if (!defined('DISCUSS_IMPORT_MODE')) {
+            $this->xpdo->getCacheManager();
+            $this->xpdo->cacheManager->delete('discuss/user/'.$this->get('id'));
+        }
+    }
+
 }
