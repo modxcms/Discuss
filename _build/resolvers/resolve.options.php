@@ -27,10 +27,6 @@ if ($object->xpdo && !empty($options['install_demodata'])) {
         case xPDOTransport::ACTION_UPGRADE:
             $modx =& $object->xpdo;
 
-            adjustSetting($modx,'forum_title',$options);
-            adjustSetting($modx,'use_css',$options);
-            adjustSetting($modx,'load_jquery',$options);
-
             break;
     }
 }

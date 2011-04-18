@@ -16,53 +16,39 @@ $toggle = $modx->getOption('toggle',$scriptProperties,'+');
 $placeholders = array();
 if (!empty($_REQUEST['s'])) {
     $s = str_replace(array(';',':'),'',strip_tags($_REQUEST['s']));
-    $c = $modx->newQuery('disPost');
-    $c->innerJoin('disThread','Thread');
-    $c->innerJoin('disBoard','Board');
-    $c->innerJoin('disUser','Author');
-    $c->innerJoin('disPostClosure','PostClosure','PostClosure.descendant = disPost.id AND PostClosure.ancestor != 0');
-    $c->where(array(
-        'MATCH (disPost.title,disPost.message) AGAINST ("'.$s.'" IN BOOLEAN MODE)',
-    ));
-    if ($discuss->isLoggedIn) {
-        $ignoreBoards = $discuss->user->get('ignore_boards');
-        if (!empty($ignoreBoards)) {
-            $c->where(array(
-                'Board.id:NOT IN' => explode(',',$ignoreBoards),
-            ));
-        }
+
+    $searchClass = $modx->getOption('discuss.search_class',null,'discuss.search.disSearch');
+    $searchClassPath = $modx->getOption('discuss.search_class_path',null,$discuss->config['modelPath']);
+    if ($className = $this->modx->loadClass($searchClass,$searchClassPath,true,true)) {
+        $discuss->search = new $className($discuss);
+    } else {
+        $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$searchClass.' from '.$searchClassPath);
+        return array();
     }
-    $c->select($modx->getSelectColumns('disPost','disPost'));
-    $c->select(array(
-        'username' => 'Author.username',
-        'board_name' => 'Board.name',
-        'MATCH (disPost.title,disPost.message) AGAINST ("'.$s.'" IN BOOLEAN MODE) AS score',
-    ));
-    $c->sortby('score','ASC');
-    $c->sortby('disPost.rank','ASC');
-    $c->limit(10);
-    $posts = $modx->getCollection('disPost',$c);
+    $posts = $discuss->search->run($s);
 
     $placeholders['results'] = array();
     $maxScore = 0;
-    foreach ($posts as $post) {
-        $postArray = $post->toArray();
+    if (!empty($posts)) {
+        foreach ($posts as $postArray) {
+            if ($postArray['score'] > $maxScore) {
+                $maxScore = $postArray['score'];
+            }
 
-        if ($postArray['score'] > $maxScore) {
-            $maxScore = $postArray['score'];
+            $postArray['relevancy'] = @number_format(($postArray['score']/$maxScore)*100,0);
+            if ($postArray['parent']) {
+                $postArray['cls'] = 'dis-search-result dis-result-'.$postArray['thread'];
+            } else {
+                $postArray['toggle'] = $toggle;
+                $postArray['cls'] = 'dis-search-parent-result dis-parent-result-'.$postArray['thread'];
+            }
+            $postArray['content'] = strip_tags(substr($postArray['content'],0,100));
+            $placeholders['results'][] = $discuss->getChunk('disSearchResult',$postArray);
         }
-
-        $postArray['relevancy'] = @number_format(($post->get('score')/$maxScore)*100,0);
-        if ($postArray['parent']) {
-            $postArray['cls'] = 'dis-search-result dis-result-'.$postArray['thread'];
-        } else {
-            $postArray['toggle'] = $toggle;
-            $postArray['cls'] = 'dis-search-parent-result dis-parent-result-'.$postArray['thread'];
-        }
-        $postArray['content'] = strip_tags(substr($post->getContent(),0,100));
-        $placeholders['results'][] = $discuss->getChunk('disSearchResult',$postArray);
+        $placeholders['results'] = implode("\n",$placeholders['results']);
+    } else {
+        $placeholders['results'] = $modx->lexicon('discuss.search_no_results');
     }
-    $placeholders['results'] = implode("\n",$placeholders['results']);
     $placeholders['search'] = $s;
 }
 

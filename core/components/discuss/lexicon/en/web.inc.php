@@ -60,6 +60,7 @@ $_lang['discuss.reply_to_thread'] = 'Reply to Thread';
 $_lang['discuss.report_to_mod'] = 'Report to Moderator';
 $_lang['discuss.save_changes'] = 'Save Changes';
 $_lang['discuss.search'] = 'Search';
+$_lang['discuss.search_no_results'] = 'No results found.';
 $_lang['discuss.show_email'] = 'Show Email to Public';
 $_lang['discuss.stats'] = 'Stats';
 $_lang['discuss.stats_latest_post'] = 'Latest Post: [[+post]] by [[+by]]';
