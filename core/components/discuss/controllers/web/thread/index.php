@@ -117,16 +117,18 @@ if ($discuss->isLoggedIn && $isModerator) {
     /** TODO: Move thread - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
      */
-    $actionButtons[] = array('url' => $discuss->url.'thread/remove?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_remove'));
+    if ($modx->hasPermission('discuss.thread_remove')) {
+        $actionButtons[] = array('url' => $discuss->url.'thread/remove?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_remove'));
+    }
 
-    if ($thread->get('locked')) {
+    if ($thread->get('locked') && $modx->hasPermission('discuss.thread_unlock')) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&lock=0', 'text' => $modx->lexicon('discuss.thread_unlock'));
-    } else {
+    } else if ($modx->hasPermission('discuss.thread_lock')) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&lock=1', 'text' => $modx->lexicon('discuss.thread_lock'));
     }
-    if ($thread->get('sticky')) {
+    if ($thread->get('sticky') && $modx->hasPermission('discuss.thread_unstick')) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&sticky=0', 'text' => $modx->lexicon('discuss.thread_unstick'));
-    } else {
+    } else if ($modx->hasPermission('discuss.thread_stick')) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&sticky=1', 'text' => $modx->lexicon('discuss.thread_stick'));
     }
     /**

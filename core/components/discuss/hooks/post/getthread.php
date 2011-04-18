@@ -35,10 +35,7 @@ $flat = true;
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
-$isModerator = $modx->getCount('disModerator',array(
-    'user' => $discuss->user->get('id'),
-    'board' => $thread->get('board'),
-)) > 0 ? true : false;
+$isModerator = $thread->isModerator($discuss->user->get('id'));
 $userUrl = $discuss->url.'user/';
 
 /* get posts */
@@ -137,12 +134,12 @@ foreach ($posts as $post) {
         $postArray['action_reply'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
         $postArray['action_quote'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
 
-        $canModifyPost = $discuss->user->get('id') == $post->get('author') || $isModerator;
+        $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $modx->hasPermission('discuss.thread_modify'));
         if ($canModifyPost) {
             $postArray['action_modify'] = '<a href="'.$discuss->url.'thread/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
-        $canRemovePost = $discuss->user->get('id') == $post->get('author') || $isModerator;
+        $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $modx->hasPermission('discuss.thread_remove'));
         if ($canRemovePost) {
             $postArray['action_remove'] = '<a href="'.$discuss->url.'post/remove?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
         }
