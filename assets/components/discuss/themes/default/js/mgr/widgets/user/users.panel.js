@@ -26,7 +26,7 @@ Dis.grid.Users = function(config) {
         ,url: Dis.config.connector_url
         ,baseParams: { action: 'mgr/user/getList' }
         ,save_action: 'mgr/user/updateFromGrid'
-        ,fields: ['id','username','menu']
+        ,fields: ['id','username','email','ip','last_active']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
@@ -42,11 +42,54 @@ Dis.grid.Users = function(config) {
             ,sortable: true
             ,width: 300
             ,editor: { xtype: 'textfield' ,allowBlank: true }
+        },{
+            header: _('email')
+            ,dataIndex: 'email'
+            ,sortable: true
+            ,width: 300
+            ,editor: { xtype: 'textfield' ,allowBlank: true }
+        },{
+            header: _('discuss.ip')
+            ,dataIndex: 'ip'
+            ,sortable: true
+            ,width: 300
+            ,editor: { xtype: 'textfield' ,allowBlank: true }
+        },{
+            header: _('discuss.last_active')
+            ,dataIndex: 'last_active'
+            ,sortable: true
+            ,width: 300
+            ,editor: { xtype: 'textfield' ,allowBlank: true }
         }]
         ,tbar: [{
             text: _('discuss.user_create')
             ,handler: this.createUser
             ,scope: this
+        },'->',{
+            xtype: 'textfield'
+            ,name: 'search'
+            ,id: 'modx-user-search'
+            ,emptyText: _('search_ellipsis')
+            ,listeners: {
+                'change': {fn: this.search, scope: this}
+                ,'render': {fn: function(cmp) {
+                    new Ext.KeyMap(cmp.getEl(), {
+                        key: Ext.EventObject.ENTER
+                        ,fn: function() {
+                            this.fireEvent('change',this.getValue());
+                            this.blur();
+                            return true;}
+                        ,scope: cmp
+                    });
+                },scope:this}
+            }
+        },{
+            xtype: 'button'
+            ,id: 'modx-filter-clear'
+            ,text: _('filter_clear')
+            ,listeners: {
+                'click': {fn: this.clearFilter, scope: this}
+            }
         }]
     });
     Dis.grid.Users.superclass.constructor.call(this,config)
@@ -86,6 +129,21 @@ Ext.extend(Dis.grid.Users,MODx.grid.Grid,{
     ,updateUser: function() {
         var id = this.menu.record.id;
         location.href = '?a='+MODx.request.a+'&user='+id+'&action=user/update';
+    }
+    ,search: function(tf,newValue,oldValue) {
+        var nv = newValue || tf;
+        this.getStore().baseParams.query = Ext.isEmpty(nv) || Ext.isObject(nv) ? '' : nv;
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+        return true;
+    }
+    ,clearFilter: function() {
+    	this.getStore().baseParams = {
+            action: 'mgr/user/getList'
+    	};
+        Ext.getCmp('modx-user-search').reset();
+    	this.getBottomToolbar().changePage(1);
+        this.refresh();
     }
 });
 Ext.reg('dis-grid-users',Dis.grid.Users);

@@ -6,7 +6,7 @@ Dis.grid.UserGroupMembers = function(config) {
         ,url: Dis.config.connector_url
         ,baseParams: {
             action: 'mgr/usergroup/member/getlist'
-            ,user: config.user
+            ,usergroup: config.usergroup
         }
         ,action: 'mgr/usergroup/member/getlist'
         ,fields: ['id','username','role']
@@ -30,7 +30,7 @@ Ext.extend(Dis.grid.UserGroupMembers,MODx.grid.LocalGrid,{
     getMenu: function() {
         var m = [{
             text: _('discuss.member_remove')
-            ,handler: this.removeMember
+            ,handler: this.remove
         }];
         return m;
     }
@@ -52,23 +52,6 @@ Ext.extend(Dis.grid.UserGroupMembers,MODx.grid.LocalGrid,{
         this.windows.addMember.setValues(r);
         this.windows.addMember.show(e.target);
     }
-    
-    ,removeMember: function(btn,e) {
-        if (!this.menu.record) return false;
-        
-        MODx.msg.confirm({
-            text: _('discuss.member_remove_confirm')
-            ,url: this.config.url
-            ,params: {
-                action: 'mgr/post/remove'
-                ,id: this.menu.record.id
-            }
-            ,listeners: {
-                'success': {fn:function(r) { this.refresh(); },scope:this}
-            }
-        });
-        return true;
-    }
 });
 Ext.reg('dis-grid-usergroup-members',Dis.grid.UserGroupMembers);
 
@@ -82,7 +65,7 @@ Dis.window.AddUserGroupMember = function(config) {
         ,frame: true
         ,id: 'dis-window-usergroup-member-create'
         ,fields: [{
-            xtype: 'modx-combo-user'
+            xtype: 'dis-combo-user'
             ,fieldLabel: _('discuss.user')
             ,name: 'user'
             ,hiddenName: 'user'

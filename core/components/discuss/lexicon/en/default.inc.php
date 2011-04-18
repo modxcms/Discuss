@@ -47,6 +47,7 @@ $_lang['discuss.category_remove'] = 'Remove Category';
 $_lang['discuss.category_remove_confirm'] = 'Are you sure you want to remove this category and all its boards entirely?';
 $_lang['discuss.editedon_post'] = 'Edited [[+on]] by [[+user]]';
 $_lang['discuss.ip'] = 'IP';
+$_lang['discuss.last_active'] = 'Last Active';
 $_lang['discuss.member_add'] = 'Add Member';
 $_lang['discuss.member_remove'] = 'Remove Member';
 $_lang['discuss.member_remove_confirm'] = 'Are you sure you want to remove this User from this User Group?';

@@ -66,6 +66,7 @@ class Discuss {
      */
     public function initialize($ctx = 'web') {
         $this->loadHooks();
+        $this->dateFormat = $this->modx->getOption('discuss.date_format');
 
         switch ($ctx) {
             case 'mgr':
@@ -86,7 +87,6 @@ class Discuss {
                 $this->modx->lexicon->load('discuss:web');
 
                 $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
-                $this->dateFormat = $this->modx->getOption('discuss.date_format');
                 $this->_initUser();
                 $this->_initSession();
                 $this->loadRequest();

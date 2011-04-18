@@ -7,8 +7,8 @@
  */
 $isLimit = !empty($scriptProperties['limit']);
 $isCombo = !empty($scriptProperties['combo']);
-$sort = $modx->getOption('sort',$scriptProperties,'title');
-$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$sort = $modx->getOption('sort',$scriptProperties,'createdon');
+$dir = $modx->getOption('dir',$scriptProperties,'DESC');
 $start = $modx->getOption('start',$scriptProperties,0);
 $limit = $modx->getOption('limit',$scriptProperties,20);
 $user = $modx->getOption('user',$scriptProperties,0);

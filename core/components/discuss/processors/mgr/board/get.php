@@ -12,15 +12,15 @@ if (!$board) return $modx->error->failure($modx->lexicon('discuss.board_err_nf',
 
 /* get moderators */
 $c = $modx->newQuery('disModerator');
+$c->select($modx->getSelectColumns('disModerator','disModerator'));
 $c->select(array(
-    'disModerator.*',
     'User.username',
 ));
-$c->innerJoin('modUser','User');
+$c->innerJoin('disUser','User');
 $c->where(array(
     'board' => $board->get('id'),
 ));
-$c->sortby($modx->getSelectColumns('modUser','User','',array('username')),'ASC');
+$c->sortby($modx->getSelectColumns('disUser','User','',array('username')),'ASC');
 $moderators = $board->getMany('Moderators',$c);
 $mods = array();
 foreach ($moderators as $moderator) {

@@ -28,19 +28,23 @@ if ($profile->save() == false || $usergroup->save() == false) {
     return $modx->error->failure($modx->lexicon('discuss.usergroup_err_save'));
 }
 
-/* set moderators */
+/* set members */
 if (isset($scriptProperties['members'])) {
+
     $members = $modx->getCollection('modUserGroupMember',array('user_group' => $usergroup->get('id')));
     foreach ($members as $member) { $member->remove(); }
     unset($members,$member);
 
     $members = $modx->fromJSON($scriptProperties['members']);
-    foreach ($members as $user) {
-        $member = $modx->newObject('modUserGroupMember');
-        $member->set('user_group',$usergroup->get('id'));
-        $member->set('member',$user['id']);
-        $member->set('role',$user['role']);
-        $member->save();
+    foreach ($members as $member) {
+        $user = $modx->getObject('disUser',$member['id']);
+        if ($user) {
+            $membership = $modx->newObject('modUserGroupMember');
+            $membership->set('user_group',$usergroup->get('id'));
+            $membership->set('member',$user->get('user'));
+            $membership->set('role',empty($member['role']) ? 1 : $member['role']);
+            $membership->save();
+        }
     }
 }
 

@@ -5,27 +5,37 @@
  * @package discuss
  * @subpackage processors
  */
-$limit = isset($_REQUEST['limit']);
-$combo = isset($_REQUEST['combo']);
-if (!isset($_REQUEST['start'])) $_REQUEST['start'] = 0;
-if (!isset($_REQUEST['limit'])) $_REQUEST['limit'] = 20;
-if (!isset($_REQUEST['sort'])) $_REQUEST['sort'] = 'name';
-if (!isset($_REQUEST['dir'])) $_REQUEST['dir'] = 'ASC';
+$isLimit = !empty($scriptProperties['limit']);
+$isCombo = !empty($scriptProperties['combo']);
+$sort = $modx->getOption('sort',$scriptProperties,'username');
+$dir = $modx->getOption('dir',$scriptProperties,'ASC');
+$start = $modx->getOption('start',$scriptProperties,0);
+$limit = $modx->getOption('limit',$scriptProperties,20);
+$query = $modx->getOption('query',$scriptProperties,'');
 
+/* build query */
 $c = $modx->newQuery('disUser');
 $c->innerJoin('modUser','User');
-
-if ($combo || $limit) {
-    $c->limit($_REQUEST['limit'], $_REQUEST['start']);
+if (!empty($query)) {
+    $c->where(array(
+        'disUser.username:LIKE' => '%'.$query.'%',
+    ));
 }
+$count = $modx->getCount('disUser',$c);
+if ($isLimit || $isCombo) {
+    $c->limit($limit,$start);
+}
+$users = $modx->getCollection('disUser', $c);
 
-$users = $modx->getCollection('modUser', $c);
-$count = $modx->getCount('modUser',$c);
-
+/* iterate */
 $list = array();
 foreach ($users as $user) {
     $userArray = $user->toArray();
-    $userArray['menu'] = array();
+    if (!empty($userArray['last_active']) && $userArray['last_active'] != '0000-00-00 00:00:00' && $userArray['last_active'] != '-001-11-30 00:00:00') {
+        $userArray['last_active'] = strftime('%b %d, %Y %I:%M %p',strtotime($userArray['last_active']));
+    } else {
+        $userArray['last_active'] = '';
+    }
     $list[]= $userArray;
 }
 return $this->outputArray($list,$count);

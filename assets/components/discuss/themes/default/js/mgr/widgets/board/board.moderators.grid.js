@@ -62,7 +62,7 @@ Dis.window.CreateBoardModerator = function(config) {
         ,frame: true
         ,id: 'dis-window-board-moderator-create'
         ,fields: [{
-            xtype: 'modx-combo-user'
+            xtype: 'dis-combo-user'
             ,fieldLabel: _('discuss.user')
             ,name: 'user'
             ,hiddenName: 'user'

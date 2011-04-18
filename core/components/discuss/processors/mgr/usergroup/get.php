@@ -26,17 +26,23 @@ $usergroupArray = $usergroup->toArray();
 
 /* get members */
 $c = $modx->newQuery('modUserGroupMember');
-$c->select('modUserGroupMember.*,User.username AS username');
-$c->leftJoin('modUser','User');
+$c->innerJoin('modUser','User');
+$c->leftJoin('disUser','disUser','disUser.user = User.id');
 $c->where(array(
     'user_group' => $usergroup->get('id'),
 ));
-$c->sortby($modx->getSelectColumns('modUser','User','',array('username')),'ASC');
+
+$c->select($modx->getSelectColumns('modUserGroupMember','modUserGroupMember'));
+$c->select($modx->getSelectColumns('disUser','disUser','',array('username','email')));
+$c->select(array(
+    'disuser_id' => 'disUser.id',
+));
+$c->sortby($modx->getSelectColumns('disUser','User','',array('username')),'ASC');
 $members = $modx->getCollection('modUserGroupMember',$c);
 $list = array();
 foreach ($members as $member) {
     $list[] = array(
-        $member->get('member'),
+        $member->get('disuser_id'),
         $member->get('username'),
         $member->get('role'),
     );
@@ -47,11 +53,11 @@ unset($members,$member,$list,$c);
 
 /* get boards */
 $c = $modx->newQuery('disBoard');
-$c->select('
-    disBoard.*,
-    IF(UserGroups.usergroup = "'.$usergroup->get('id').'",1,0) AS access,
-    MAX(Descendants.depth) AS depth
-');
+$c->select($modx->getSelectColumns('disBoard','disBoard'));
+$c->select(array(
+    'IF(UserGroups.usergroup = "'.$usergroup->get('id').'",1,0) AS access',
+    'MAX(Descendants.depth) AS depth',
+));
 $c->innerJoin('disBoardClosure','Descendants');
 $c->leftJoin('disBoardUserGroup','UserGroups');
 $c->sortby('disBoard.category','ASC');

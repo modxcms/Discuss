@@ -211,7 +211,7 @@ class disBoard extends xPDOSimpleObject {
     public function getModerators() {
         $c = $this->xpdo->newQuery('disModerator');
         $c->innerJoin('disUser','User');
-        $c->select($this->xpdo->getSelectColumns('disModerator','disModerator','',array('id')));
+        $c->select($this->xpdo->getSelectColumns('disModerator','disModerator','',array('id','user')));
         $c->select(array(
             'User.username',
         ));

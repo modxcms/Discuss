@@ -12,7 +12,7 @@ $c->select(array(
 ));
 $c->innerJoin('modUser','User');
 $c->where(array(
-    'user' => $scriptProperties['id'],
+    'id' => $scriptProperties['id'],
 ));
 $user = $modx->getObject('disUser',$c);
 if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf'));

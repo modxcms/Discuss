@@ -13,7 +13,14 @@ $modx->lexicon->load('user');
 $scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : str_replace('n_ug_','',$scriptProperties['id']);
 
 $g = $modx->getObject('modUserGroup',$scriptProperties['id']);
-$groups = $modx->getCollection('modUserGroup',array('parent' => $scriptProperties['id']));
+
+
+$c = $modx->newQuery('modUserGroup');
+$c->where(array(
+    'parent' => $scriptProperties['id'],
+    'AND:modUserGroup.name:!=' => 'Administrator',
+));
+$groups = $modx->getCollection('modUserGroup',$c);
 
 $da = array();
 foreach ($groups as $group) {
