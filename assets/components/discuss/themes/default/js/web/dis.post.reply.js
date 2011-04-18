@@ -14,19 +14,15 @@ DIS.ReplyPost = function() {
         
         ,preview: function() {
             var f = $('#dis-reply-post-form');
-            var p = f.serialize()+'&action=web/post/preview&ctx='+DIS.config.context;
-            
+            var p = f.serialize()+'&action=thread/preview';
+
             var a = $.extend({},DIS.baseAjax,{
-                url: DIS.config.connector
+                url: DIS.url
+                ,async: false
                 ,data: p
-                ,success: function(r) {
-                    if (r.success == false) { DIS._showError(r.message); return false; }
-                    
-                    $('#dis-reply-post-preview').hide().html(r.message).fadeIn();
-                    return true;
-                }
             });
-            $.ajax(a);
+            var a = $.ajax(a);
+            $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();
         }        
         
         ,togglePost: function() {

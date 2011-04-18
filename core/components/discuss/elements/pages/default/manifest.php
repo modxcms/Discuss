@@ -11,8 +11,10 @@ $manifest = array(
         ),
         'js' => array(
             'header' => array(
+                'web/jquery-1.3.2.min.js',
                 'web/discuss.js',
             ),
+            'inline' => 'DIS.url = "'.$this->discuss->url.'";',
         ),
     ),
     'home' => array(

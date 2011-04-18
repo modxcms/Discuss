@@ -75,5 +75,5 @@ $(function() { DIS.config.attachments_max_per_post = '.$placeholders['max_attach
 /* output form to browser */
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));
 $modx->setPlaceholders($placeholders,'fi.');
-
+echo 'got to reply.php';
 return $placeholders;

@@ -183,3 +183,9 @@ ol.dis-board-thread li {
 .dis-post-li-desc a {
     color: #a4a4a4;
 }
+
+.dis-post-preview {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}

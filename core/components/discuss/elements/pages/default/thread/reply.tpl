@@ -6,7 +6,7 @@
   &validate=`title:required,message:required:allowTags`
 ]]
 
-<div id="dis-reply-post-preview">[[+preview]]</div>
+<div id="dis-reply-post-preview"></div>
 <br />
 <form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 

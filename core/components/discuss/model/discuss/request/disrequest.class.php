@@ -8,6 +8,7 @@
  * @extends modRequest
  */
 class DisRequest {
+    public $controller = 'home';
 
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
@@ -21,56 +22,84 @@ class DisRequest {
         }
     }
 
-    public function getController() {
+    /**
+     * Get the controller to load
+     * 
+     * @return string The controller to load
+     */
+    public function getControllerValue() {
         $controller = !empty($_REQUEST[$this->config['actionVar']]) ? $_REQUEST[$this->config['actionVar']] : 'home';
         $controller = str_replace(array('../','./'),'',$controller);
         $controller = strip_tags(trim($controller,'/'));
-        return $controller;
+        $c = $this->getControllerFile($controller);
+        $this->controller = $c;
+        return $c['controller'];
     }
 
+    /**
+     * Handle the current Discuss request
+     * 
+     * @return string The output HTML
+     */
     public function handle() {
-        $controller = $this->getController();
+        $this->getControllerValue();
+        $this->loadThemeOptions();
+        $placeholders = $this->loadController();
+        $output = $this->getPage($this->controller,$placeholders);
 
-        $discuss =& $this->discuss;
-        $modx =& $this->modx;
-        $scriptProperties = $_REQUEST;
-        
-        $placeholders = array();
-        $controllerFile = $this->discuss->config['controllersPath'].'web/'.$controller;
-        if (!file_exists($controllerFile.'.php') && file_exists($controllerFile.'/index.php')) {
-            $controllerFile .= '/index';
-            $controller .= '/index';
-        }
-        $controllerFile .= '.php';
+        return $this->output($output,$placeholders);
+    }
 
-        $this->loadThemeOptions($controller);
+    /**
+     * Load the appropriate controller file.
+     * 
+     * @param $controller The controller to load
+     * @return array An array of placeholders
+     */
+    public function loadController($controller = array()) {
+        if (empty($controller)) $controller = $this->controller;
 
-        if (file_exists($controllerFile)) {
-            $placeholders = require $controllerFile;
+        if (file_exists($controller['file'])) {
+            $discuss =& $this->discuss;
+            $modx =& $this->modx;
+            $scriptProperties = $_REQUEST;
+
+            $placeholders = require $controller['file'];
         } else {
             @session_write_close();
-            die('Could not find: '.$controllerFile);
+            die('Could not find: '.$controller['file']);
         }
-
-        $output = $this->getPage($controller,$placeholders);
-        /* output */
-        return $this->output($output,$placeholders);
+        return is_array($placeholders) ? $placeholders : array();
     }
 
     /**
      * Get the current template page
      */
-    public function getPage($view,array $properties = array(),$postFix = '.tpl') {
-        $view = str_replace('.','/',$view);
-        $f = $this->discuss->config['pagesPath'].strtolower($view).$postFix;
+    public function getPage(array $controller = array(),array $properties = array()) {
+        if (empty($controller)) $controller = $this->controller;
+        
+        $f = $controller['tpl'];
         $o = '';
         if (file_exists($f)) {
             $o = file_get_contents($f);
             $chunk = $this->modx->newObject('modChunk');
             $chunk->setContent($o);
-            return $chunk->process($properties);
+            $o = $chunk->process($properties);
         }
         return $o;
+    }
+
+    public function getControllerFile($controller = 'home') {
+        $controllerFile = $this->discuss->config['controllersPath'].'web/'.$controller;
+        if (!file_exists($controllerFile.'.php') && file_exists($controllerFile.'/index.php')) {
+            $controllerFile .= '/index';
+            $controller .= '/index';
+        }
+        return array(
+            'file' => $controllerFile.'.php',
+            'tpl' => $this->discuss->config['pagesPath'].strtolower($controller).'.tpl',
+            'controller' => $controller,
+        );
     }
 
     /**
@@ -84,10 +113,14 @@ class DisRequest {
      */
     public function output($output = '',array $properties = array()) {
         if ($this->modx->getOption('discuss.debug',null,false)) {
-            if ($this->debugTimer !== false) {
+            $emptyTpl = in_array($this->controller['controller'],array('thread/preview'));
+            if (!$emptyTpl && $this->debugTimer !== false) {
                 $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";
             }
-            return $output;
+            $c = $this->getControllerFile('wrapper');
+            $placeholders = $this->loadController($c);
+            $placeholders['content'] = $output;
+            return $emptyTpl ? $output : $this->getPage($c,$placeholders);
         }
 
         $this->modx->toPlaceholders($properties);
@@ -100,7 +133,9 @@ class DisRequest {
      * @access public
      * @return void
      */
-	public function loadThemeOptions($additional = null) {
+	public function loadThemeOptions() {
+        $additional = $this->controller['controller'];
+        
         $f = $this->discuss->config['pagesPath'].'manifest.php';
         if (file_exists($f)) {
             $manifest = require $f;
@@ -123,7 +158,7 @@ class DisRequest {
 						$this->modx->regClientStartupScript($this->discuss->config['jsUrl'].$val);
 					}
 					if(isset($js['inline'])){
-						$this->modx->regClientHTMLBlock('<script type="text/javascript">'.$js['inline'].'</script>');
+						$this->modx->regClientStartupHTMLBlock('<script type="text/javascript">// <![CDATA['."\n".$js['inline']."\n".'// ]]></script>');
 					}
 				}
 			}
