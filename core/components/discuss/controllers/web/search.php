@@ -16,6 +16,7 @@ $limit = !empty($scriptProperties['limit']) ? $scriptProperties['limit'] : $modx
 $page = !empty($scriptProperties['page']) ? $scriptProperties['page'] : 1;
 $page = $page <= 0 ? $page = 1 : $page;
 $start = ($page-1) * $limit;
+$end = $start+$limit;
 
 /* do search */
 $placeholders = array();
@@ -55,6 +56,9 @@ if (!empty($scriptProperties['s'])) {
         $placeholders['results'] = $modx->lexicon('discuss.search_no_results');
     }
     $placeholders['search'] = $string;
+    $placeholders['total'] = number_format($searchResponse['total']);
+    $placeholders['start'] = number_format($start+1);
+    $placeholders['end'] = number_format($end > $searchResponse['total'] ? $searchResponse['total'] : $end);
 
     /* get pagination */
     $discuss->hooks->load('pagination/build',array(

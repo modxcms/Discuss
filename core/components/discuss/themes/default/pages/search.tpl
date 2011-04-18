@@ -18,6 +18,7 @@
 
 <div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 
+[[+results:notempty=`<h2>Displaying [[+start]]-[[+end]] of [[+total]] Results</h2>`]]
 <table class="dis-search-results dis-table">
 <thead>
 <tr>
