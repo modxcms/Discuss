@@ -161,6 +161,7 @@ foreach ($posts as $post) {
     $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
 
     $postArray['class'] = implode(' ',$postArray['class']);
+    if (!$isModerator) $postArray['ip'] = '';
     
     if ($flat) {
         $output[] = $discuss->getChunk('post/disThreadPost',$postArray);
