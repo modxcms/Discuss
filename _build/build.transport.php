@@ -26,10 +26,10 @@ $sources = array(
     'build' => $root . '_build/',
     'data' => $root . '_build/data/',
     'resolvers' => $root . '_build/resolvers/',
-    'chunks' => $root.'core/components/discuss/chunks/',
     'lexicon' => $root . 'core/components/discuss/lexicon/',
     'docs' => $root.'core/components/discuss/docs/',
-    'pages' => $root.'core/components/discuss/elements/pages/',
+    'chunks' => $root.'core/components/discuss/themes/default/chunks/',
+    'pages' => $root.'core/components/discuss/themes/default/pages/',
     'source_assets' => $root.'assets/components/discuss',
     'source_core' => $root.'core/components/discuss',
 );

@@ -9,12 +9,12 @@ if (empty($scriptProperties['title']) || empty($scriptProperties['thread'])) ret
 /* setup default properties */
 $type = $modx->getOption('type',$scriptProperties,'post');
 $subject = $modx->getOption('subject',$scriptProperties,$modx->getOption('discuss.notification_new_post_subject'));
-$tpl = $modx->getOption('tpl',$scriptProperties,$modx->getOption('discuss.notification_new_post_chunk'));
+$tpl = $modx->getOption('tpl',$scriptProperties,$modx->getOption('discuss.notification_new_post_chunk',null,'emails/disNotificationEmail'));
 
 /* get notification subscriptions */
 $c = $modx->newQuery('dhUserNotification');
 $c->where(array(
-    'post' => $scriptProperties['thread'],
+    'thread' => $scriptProperties['thread'],
 ));
 if (!empty($scriptProperties['board'])) {
     $c->orCondition(array(
@@ -29,7 +29,7 @@ foreach ($notifications as $notification) {
     $emailProperties = $user->toArray();
     $emailProperties['tpl'] = $tpl;
     $emailProperties['name'] = $scriptProperties['title'];
-    $emailProperties['url'] = $modx->makeUrl($modx->getOption('discuss.thread_resource')).'?thread='.$scriptProperties['thread'];
+    $emailProperties['url'] = $modx->makeUrl($modx->resource->get('id'),'','','full').'?thread='.$scriptProperties['thread'];
     $sent = $discuss->sendEmail($user->get('email'),$user->get('username'),$subject,$emailProperties);
     unset($emailProperties);
 }

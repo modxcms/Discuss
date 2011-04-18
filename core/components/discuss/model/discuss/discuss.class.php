@@ -42,9 +42,9 @@ class Discuss {
 
             'corePath' => $corePath,
             'modelPath' => $corePath.'model/',
-            'chunksPath' => $corePath.'elements/chunks/'.$theme.'/',
+            'chunksPath' => $corePath.'themes/'.$theme.'/chunks/',
+            'pagesPath' => $corePath.'themes/'.$theme.'/pages/',
             'controllersPath' => $corePath.'controllers/',
-            'pagesPath' => $corePath.'elements/pages/'.$theme.'/',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
             'hooksPath' => $corePath.'hooks/',
@@ -183,17 +183,12 @@ class Discuss {
         }
 
         /* topbar profile links. @TODO: Move this somewhere else. */
-        if ($this->modx->user->isAuthenticated()) {
+        if ($this->isLoggedIn) {
             $authphs = array(
-                'user' => $this->user->get('id'),
-                'username' => $this->user->get('username'),
-                'loggedInAs' => 'logged in as <a href="'.$this->url.'user/?user='.$this->user->get('id').'">'.$this->user->get('username').'</a> - ',
-                'homeLink' => '<a href="'.$this->url.'">Home</a>',
                 'authLink' => '<a href="'.$this->url.'logout">Logout</a>',
-                'profileLink' => '<a href="'.$this->url.'user/?user='.$this->user->get('id').'">Profile</a>',
-                'searchLink' => '<a href="'.$this->url.'search">Search</a>',
-                'unreadLink' => '<a href="'.$this->url.'unread">Unread Posts</a>',
             );
+            $authphs = array_merge($this->user->toArray('user.'),$authphs);
+            $authphs['user.avatar_url'] = $this->user->getAvatarUrl();
         } else {
             $authphs = array(
                 'authLink' => '<a href="'.$this->url.'login">Login</a>',
