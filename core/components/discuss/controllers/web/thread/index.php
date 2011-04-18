@@ -70,9 +70,6 @@ $posts = $discuss->hooks->load('post/getThread',array(
 $thread->set('posts',$posts['results']);
 unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 
-/* load theme options */
-//$discuss->config['pa'] = $pa;
-
 /* get board breadcrumb trail */
 $thread->buildBreadcrumbs();
 unset($trail,$url,$c,$ancestors);
@@ -93,6 +90,9 @@ $thread->buildCssClass();
 /* get viewing users */
 $placeholders['readers'] = $thread->getViewing();
 
+/* get moderator status */
+$isModerator = $thread->isModerator($discuss->user->get('id'));
+        
 /* action buttons */
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
@@ -113,7 +113,7 @@ unset($actionButtons);
 
 /* thread action buttons */
 $actionButtons = array();
-if ($discuss->isLoggedIn) {
+if ($discuss->isLoggedIn && $isModerator) {
     /** TODO: Move thread - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
      */

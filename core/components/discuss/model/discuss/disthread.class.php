@@ -168,6 +168,14 @@ class disThread extends xPDOSimpleObject {
         return true;
     }
 
+    public function isModerator($userId) {
+        $moderator = $this->xpdo->getCount('disModerator',array(
+            'user' => $userId,
+            'board' => $this->get('board'),
+        ));
+        return $moderator > 0;
+    }
+
 
     public function buildBreadcrumbs($trail = array()) {
         $c = $this->xpdo->newQuery('disBoard');

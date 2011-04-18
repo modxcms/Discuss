@@ -201,6 +201,13 @@ class disBoard extends xPDOSimpleObject {
         return $this->xpdo->lexicon('discuss.board_viewing',array('members' => $members,'guests' => $guests));
     }
 
+    public function isModerator($userId) {
+        $moderator = $this->xpdo->getCount('disModerator',array(
+            'user' => $userId,
+            'board' => $this->get('id'),
+        ));
+        return $moderator > 0;
+    }
 
     /**
      * Grab the moderators text for the board.
@@ -208,7 +215,7 @@ class disBoard extends xPDOSimpleObject {
      * @access public
      * @return string The text returned for the viewing users.
      */
-    public function getModerators() {
+    public function getModeratorsList() {
         $c = $this->xpdo->newQuery('disModerator');
         $c->innerJoin('disUser','User');
         $c->select($this->xpdo->getSelectColumns('disModerator','disModerator','',array('id','user')));
