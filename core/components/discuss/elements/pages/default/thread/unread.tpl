@@ -1,6 +1,8 @@
 [[+trail]]
 <br class="clear" />
 
+[[+actionbuttons]]
+
 <div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 <br class="clear" />
 <div class="dis-threads">
@@ -19,3 +21,5 @@
 </div>
 <br class="clear" />
 <div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
+
+[[+actionbuttons]]

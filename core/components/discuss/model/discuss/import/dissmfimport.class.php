@@ -74,6 +74,7 @@ class DisSmfImport {
                 $this->memberCache[$row['integrated_id']] = $row['id'];
                 $this->memberNameCache[$row['integrated_id']] = $row['username'];
             }
+            $stmt->closeCursor();
         }
 
         $this->log('Collecting User Group cache...');
@@ -83,6 +84,7 @@ class DisSmfImport {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $this->memberGroupCache[$row['integrated_id']] = $row['id'];
             }
+            $stmt->closeCursor();
         }
     }
 
@@ -120,6 +122,7 @@ class DisSmfImport {
 
             $this->memberGroupCache[$row['ID_GROUP']] = $usergroup->get('id');
         }
+        $stmt->closeCursor();
     }
 
     public function importUsers() {
@@ -326,6 +329,7 @@ class DisSmfImport {
             
             $bIdx++;
         }
+        $bst->closeCursor();
     }
 
     public function importTopics(disBoard $board,array $brow) {
@@ -402,6 +406,7 @@ class DisSmfImport {
                 $thread->save();
             }
         }
+        $tst->closeCursor();
     }
 
     public function now() {
@@ -420,6 +425,7 @@ class DisSmfImport {
             ORDER BY posterTime ASC
         '.(!$this->live ? 'LIMIT 10' : '');
         $pst = $this->pdo->query($sql);
+        if (!$pst) return array('total' => 0);
         $pIdx = 0;
         while ($prow = $pst->fetch(PDO::FETCH_ASSOC)) {
             $this->log('Importing response: '.$prow['subject']);
@@ -450,6 +456,7 @@ class DisSmfImport {
             $this->importAttachments($post,$prow);
             $pIdx++;
         }
+        $pst->closeCursor();
         return array(
             'total' => $pIdx,
             'lastPost' => isset($post) ? $post : null,
@@ -481,5 +488,6 @@ class DisSmfImport {
             }
             $aIdx++;
         }
+        $ast->closeCursor();
     }
 }

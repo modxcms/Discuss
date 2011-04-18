@@ -16,6 +16,18 @@ $start = ($page-1) * $limit;
 $sortBy = $modx->getOption('sortBy',$scriptProperties,'LastPost.createdon');
 $sortDir = $modx->getOption('sortDir',$scriptProperties,'DESC');
 
+/* handle marking all as read */
+if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
+    /* TODO: Write code to mark every thread as read */
+
+    $discuss->hooks->load('thread/read_all',array(
+        'board' => &$board,
+        'limit' => $limit,
+        'start' => $start,
+    ));
+}
+
+
 /* get unread threads */
 $c = $modx->newQuery('disThread');
 $c->select($modx->getSelectColumns('disThread','disThread'));
@@ -98,6 +110,14 @@ $trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array
     'items' => &$trail,
 )));
 $placeholders['trail'] = $trail;
+
+/* action buttons */
+$actionButtons = array();
+if ($modx->user->isAuthenticated()) {
+    $actionButtons[] = array('url' => $discuss->url.'thread/unread?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
+}
+$placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
+unset($actionButtons);
 
 /* build pagination */
 $discuss->hooks->load('pagination/build',array(
