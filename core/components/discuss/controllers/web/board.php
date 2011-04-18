@@ -57,6 +57,9 @@ $discuss->hooks->load('pagination/build',array(
 
 unset($count,$start,$limit,$url);
 
+/* get moderators */
+$placeholders['moderators'] = $board->getModerators();
+
 /* action buttons */
 $actionButtons = array();
 if ($modx->user->isAuthenticated()) {

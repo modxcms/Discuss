@@ -32,9 +32,6 @@
 
 <div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
 
-<div class="dis-thread-viewing" style="clear: both;">
-[[+readers]]
-</div>
-
-
+<p class="dis-thread-viewing" style="clear: both;">[[+readers]]</p>
+<p class="dis-moderators">[[+moderators]]</p>
 <p class="dis-breadcrumbs" style="clear: both;">[[+trail]]</p>

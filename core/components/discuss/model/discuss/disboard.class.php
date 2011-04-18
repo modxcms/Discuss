@@ -201,6 +201,36 @@ class disBoard extends xPDOSimpleObject {
         return $this->xpdo->lexicon('discuss.board_viewing',array('members' => $members,'guests' => $guests));
     }
 
+
+    /**
+     * Grab the moderators text for the board.
+     *
+     * @access public
+     * @return string The text returned for the viewing users.
+     */
+    public function getModerators() {
+        $c = $this->xpdo->newQuery('disModerator');
+        $c->innerJoin('disUser','User');
+        $c->select($this->xpdo->getSelectColumns('disModerator','disModerator','',array('id')));
+        $c->select(array(
+            'User.username',
+        ));
+        $c->where(array(
+            'disModerator.board' => $this->get('id'),
+        ));
+        $moderators = $this->xpdo->getCollection('disModerator',$c);
+        $mods = array();
+        if ($moderators) {
+            foreach ($moderators as $moderator) {
+                $mods[] = '<a href="'.$this->xpdo->discuss->url.'user?user='.$moderator->get('user').'">'.$moderator->get('username').'</a>';
+            }
+            $mods = array_unique($mods);
+            $mods = implode(',',$mods);
+        }
+
+        return !empty($mods) ? $this->xpdo->lexicon('discuss.board_moderators',array('moderators' => $mods)) : '';
+    }
+
     /**
      * Grabs a comma-separated list of direct subboards for this board.
      *
