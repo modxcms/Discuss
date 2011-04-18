@@ -12,10 +12,15 @@ $cssSearchResultParentCls = $modx->getOption('cssSearchResultParentCls',$scriptP
 $resultRowTpl = $modx->getOption('resultRowTpl',$scriptProperties,'disSearchResult');
 $toggle = $modx->getOption('toggle',$scriptProperties,'+');
 
+$limit = !empty($scriptProperties['limit']) ? $scriptProperties['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
+$page = !empty($scriptProperties['page']) ? $scriptProperties['page'] : 1;
+$page = $page <= 0 ? $page = 1 : $page;
+$start = ($page-1) * $limit;
+
 /* do search */
 $placeholders = array();
-if (!empty($_REQUEST['s'])) {
-    $s = str_replace(array(';',':'),'',strip_tags($_REQUEST['s']));
+if (!empty($scriptProperties['s'])) {
+    $string = urldecode(str_replace(array(';',':'),'',strip_tags($scriptProperties['s'])));
 
     $searchClass = $modx->getOption('discuss.search_class',null,'discuss.search.disSearch');
     $searchClassPath = $modx->getOption('discuss.search_class_path',null,$discuss->config['modelPath']);
@@ -25,12 +30,12 @@ if (!empty($_REQUEST['s'])) {
         $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$searchClass.' from '.$searchClassPath);
         return array();
     }
-    $posts = $discuss->search->run($s);
+    $searchResponse = $discuss->search->run($string,$limit,$start);
 
     $placeholders['results'] = array();
     $maxScore = 0;
-    if (!empty($posts)) {
-        foreach ($posts as $postArray) {
+    if (!empty($searchResponse['results'])) {
+        foreach ($searchResponse['results'] as $postArray) {
             if ($postArray['score'] > $maxScore) {
                 $maxScore = $postArray['score'];
             }
@@ -49,7 +54,14 @@ if (!empty($_REQUEST['s'])) {
     } else {
         $placeholders['results'] = $modx->lexicon('discuss.search_no_results');
     }
-    $placeholders['search'] = $s;
+    $placeholders['search'] = $string;
+
+    /* get pagination */
+    $discuss->hooks->load('pagination/build',array(
+        'count' => $searchResponse['total'],
+        'view' => 'search',
+        'limit' => $limit,
+    ));
 }
 
 /* get board breadcrumb trail */

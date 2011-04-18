@@ -1,11 +1,11 @@
 [[+trail]]
 <br />
 
-<form class="dis-form" action="[[~[[*id]]]]search/" method="post">
+<form class="dis-form" action="[[~[[*id]]]]search/" method="get">
     <h2>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h2>
     
     <label for="dis-search">[[%discuss.search]]</label>
-    <input type="text" name="s" value="[[+search]]" />
+    <input type="text" id="dis-search" name="s" value="[[+search]]" />
     
     <br class="clear" />
     
@@ -15,6 +15,8 @@
 </form>
 
 <hr />
+
+<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 
 <table class="dis-search-results dis-table">
 <thead>
@@ -30,3 +32,5 @@
 [[+results]]
 </tbody>
 </table>
+
+<div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
