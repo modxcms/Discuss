@@ -495,4 +495,8 @@ class Discuss {
         if ($ip == '::1') $ip = '127.0.0.1'; /* ipv6->4 conv for now */
         return $ip;
     }
+
+    public function setPageTitle($title) {
+        $this->modx->setPlaceholder('discuss.pagetitle',$title);
+    }
 }

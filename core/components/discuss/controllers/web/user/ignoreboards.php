@@ -10,6 +10,7 @@ if ($user == null) { $modx->sendErrorPage(); }
 
 $modx->lexicon->load('discuss:user');
 $placeholders = $user->toArray();
+$discuss->setPageTitle($modx->lexicon('discuss.user_ignore_boards_header',array('user' => $user->get('username'))));
 
 /* handle ignoring */
 if (!empty($_POST) && !empty($scriptProperties['boards'])) {

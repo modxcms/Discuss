@@ -1,6 +1,6 @@
 <?php
 $discuss->setSessionPlace('home');
-
+$discuss->setPageTitle($modx->lexicon('recent_posts'));
 /* get default options */
 $cssPostRowCls = $modx->getOption('cssBoardRowCls',$scriptProperties,'dis-board-li');
 $postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');

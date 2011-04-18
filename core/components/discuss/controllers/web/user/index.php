@@ -4,7 +4,6 @@
  * @package discuss
  */
 $discuss->setSessionPlace('user:'.$scriptProperties['user']);
-
 $modx->lexicon->load('discuss:user');
 
 /* get default properties */
@@ -17,6 +16,7 @@ $postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
+$discuss->setPageTitle($user->get('username'));
 
 $placeholders = $user->toArray();
 

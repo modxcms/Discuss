@@ -10,6 +10,7 @@ $modx->lexicon->load('discuss:user');
 if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('disUser',$_REQUEST['user']);
 if ($user == null) { $modx->sendErrorPage(); }
+$discuss->setPageTitle($modx->lexicon('discuss.user_statistics_header',array('user' => $user->get('username'))));
 
 /* get default properties */
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');

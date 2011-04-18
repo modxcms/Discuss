@@ -5,6 +5,7 @@
  * @package discuss
  */
 $discuss->setSessionPlace('search');
+$discuss->setPageTitle($modx->lexicon('discuss.search_forums'));
 
 /* setup default properties */
 $cssSearchResultCls = $modx->getOption('cssSearchResultCls',$scriptProperties,'dis-search-result');

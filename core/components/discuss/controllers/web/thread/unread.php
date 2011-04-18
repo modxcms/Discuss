@@ -5,6 +5,7 @@
  * @package discuss
  */
 $discuss->setSessionPlace('unread');
+$discuss->setPageTitle($modx->lexicon('discuss.unread_posts'));
 $placeholders = array();
 
 /* setup default properties */

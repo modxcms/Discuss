@@ -160,4 +160,5 @@ $discuss->hooks->load('pagination/build',array(
 /* mark as read */
 $thread->read($discuss->user->get('id'));
 
+$discuss->setPageTitle($thread->get('title'));
 return $placeholders;

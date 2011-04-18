@@ -9,6 +9,7 @@ $discuss->setSessionPlace('board:'.$scriptProperties['board']);
 /* get board */
 $board = $modx->getObject('disBoard',$scriptProperties['board']);
 if ($board == null) $modx->sendErrorPage();
+$discuss->setPageTitle($board->get('name'));
 
 if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
     $board->read($discuss->user->get('id'));

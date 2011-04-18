@@ -6,6 +6,7 @@
 if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
 $post = $modx->getObject('disPost',$scriptProperties['post']);
 if ($post == null) { $modx->sendErrorPage(); }
+$discuss->setPageTitle($modx->lexicon('discuss.modify_post_header',array('title' => $post->get('title'))));
 
 /* setup defaults */
 $placeholders = $post->toArray();

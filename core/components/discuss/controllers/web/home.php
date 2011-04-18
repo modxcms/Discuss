@@ -3,6 +3,7 @@
  * Handle the home page
  */
 $discuss->setSessionPlace('home');
+$discuss->setPageTitle($modx->getOption('discuss.forum_title'));
 
 /* get default chunk properties */
 $boardRowTpl = $modx->getOption('boardRowTpl',$scriptProperties,'board/disBoardLi');

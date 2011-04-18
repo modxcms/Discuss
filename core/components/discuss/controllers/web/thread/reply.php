@@ -19,6 +19,7 @@ if (empty($scriptProperties['thread'])) {
     $post = $thread->getOne('FirstPost');
     if (empty($post)) $modx->sendErrorPage();
 }
+$discuss->setPageTitle($modx->lexicon('discuss.reply_to_post',array('title' => $post->get('title'))));
 
 $author = $post->getOne('Author');
 

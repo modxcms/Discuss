@@ -7,6 +7,7 @@
 /* get thread root */
 $post = $modx->getObject('disPost',$scriptProperties['post']);
 if ($post == null) $modx->sendErrorPage();
+$discuss->setPageTitle($modx->lexicon('discuss.post_remove_header',array('title' => $post->get('title'))));
 
 $isModerator = $modx->getCount('disModerator',array(
     'user' => $discuss->user->get('id'),

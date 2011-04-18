@@ -20,6 +20,8 @@ $c->where(array('id' => $scriptProperties['thread']));
 $thread = $modx->getObject('disThread',$c);
 if (empty($thread)) $modx->sendErrorPage();
 
+$discuss->setPageTitle($modx->lexicon('discuss.remove_thread_header',array('title' => $thread->get('title'))));
+
 /* get breadcrumb trail */
 $thread->buildBreadcrumbs();
 $placeholders = $thread->toArray();

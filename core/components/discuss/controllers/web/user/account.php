@@ -6,6 +6,7 @@
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
+$discuss->setPageTitle($modx->lexicon('discuss.user_account_header',array('user' => $user->get('username'))));
 
 $modx->lexicon->load('discuss:user');
 

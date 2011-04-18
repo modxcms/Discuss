@@ -5,6 +5,7 @@
  * @package discuss
  */
 $discuss->setSessionPlace('newthread:'.$scriptProperties['board']);
+$discuss->setPageTitle($modx->lexicon('discuss.thread_new'));
 
 if (empty($scriptProperties['board'])) { $modx->sendErrorPage(); }
 $board = $modx->getObject('disBoard',$scriptProperties['board']);

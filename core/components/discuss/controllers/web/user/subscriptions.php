@@ -10,6 +10,7 @@ if ($user == null) { $modx->sendErrorPage(); }
 
 $modx->lexicon->load('discuss:user');
 $placeholders = $user->toArray();
+$discuss->setPageTitle($modx->lexicon('discuss.user_subscriptions_header',array('user' => $user->get('username'))));
 
 /* handle unsubscribing */
 if (!empty($_POST) && !empty($_POST['remove'])) {
