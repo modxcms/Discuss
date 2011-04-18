@@ -20,6 +20,8 @@ if (empty($scriptProperties['thread'])) {
     if (empty($post)) $modx->sendErrorPage();
 }
 
+$author = $post->getOne('Author');
+
 /* setup default snippet properties */
 $replyPrefix = $modx->getOption('replyPrefix',$scriptProperties,'Re: ');
 
@@ -58,6 +60,11 @@ $thread = $discuss->hooks->load('post/getthread',array(
     'limit' => 5,
 ));
 $placeholders['thread_posts'] = $thread['results'];
+
+/* quote functionality */
+if (empty($_POST)) {
+    $placeholders['message'] = '[quote author='.$author->get('username').' date='.strtotime($post->get('createdon')).']'.$post->get('message').'[/quote]'."\n";
+}
 
 /* set max attachment limit */
 $placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);

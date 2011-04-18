@@ -5,6 +5,7 @@
             <div class="dis-post-actions">
                 [[+action_remove]]
                 [[+action_modify]]
+                [[+action_quote]]
                 [[+action_reply]]
             </div>
             <div class="dis-author dis-hidden">- [[%discuss.post_author_short? &user=`[[+author.username_link]]` &date=`[[+createdon]]`]]</div>

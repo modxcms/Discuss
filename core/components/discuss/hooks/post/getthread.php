@@ -130,10 +130,12 @@ foreach ($posts as $post) {
 
     /* load actions */
     $postArray['action_reply'] = '';
+    $postArray['action_quote'] = '';
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
     if (!$thread->get('locked') && $discuss->isLoggedIn) {
         $postArray['action_reply'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+        $postArray['action_quote'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
 
         $canModifyPost = $discuss->user->get('id') == $post->get('author') || $isModerator;
         if ($canModifyPost) {

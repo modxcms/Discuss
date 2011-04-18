@@ -46,6 +46,7 @@ $_lang['discuss.post_author_short'] = 'by [[+user]] on [[+date]]';
 $_lang['discuss.posted_on'] = 'Posted On';
 $_lang['discuss.posts'] = 'Posts';
 $_lang['discuss.print'] = 'Print';
+$_lang['discuss.quote'] = 'Quote';
 $_lang['discuss.recent_posts'] = 'Recent Posts';
 $_lang['discuss.register'] = 'Register';
 $_lang['discuss.register_confirm'] = 'Confirm Registration';

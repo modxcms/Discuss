@@ -30,7 +30,7 @@
     <label for="dis-thread-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>
     </label>
-    <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[+post.message]]</textarea>
+    <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
     <br class="clear" />
     
     <label for="dis-reply-post-attachment">[[%discuss.attachments]]:
