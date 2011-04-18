@@ -247,7 +247,7 @@ class disPost extends xPDOSimpleObject {
                 $message = $parsed;
             }
         } else if (true) {
-            $message = str_replace(array('<br/>','<br />','<br>'),'',$message);
+            //$message = str_replace(array('<br/>','<br />','<br>'),'',$message);
             $message = $this->_nl2br2($message);
             $message = $this->parseBBCode($message);
         }
