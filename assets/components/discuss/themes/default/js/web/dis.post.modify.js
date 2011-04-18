@@ -4,24 +4,21 @@ DIS.DISModifyPost = function() {
         init: function(o) {
             $('.dis-add-attachment').click(this.addAttachment);
             $('.dis-remove-attachment').click(this.removeAttachment);
+            $('.dis-modify-post-preview-btn').click(this.preview);
             attachments = o.attachments || 1;
         }
     
         ,preview: function() {
             var f = $('#dis-modify-post-form');
-            var p = f.serialize()+'&action=web/post/preview&ctx='+DIS.config.context;
+            var p = f.serialize()+'&action=thread/preview';
 
             var a = $.extend({},DIS.baseAjax,{
-                url: DIS.config.connector
+                url: DIS.url
+                ,async: false
                 ,data: p
-                ,success: function(r) {
-                    if (r.success == false) { DIS._showError(r.message); return false; }
-
-                    $('#dis-modify-post-preview').hide().html(r.message).fadeIn();
-                    return true;
-                }
             });
-            $.ajax(a);
+            var a = $.ajax(a);
+            $('#dis-modify-post-preview').hide().html(a.responseText).fadeIn();
         }
 
         ,addAttachment: function() {

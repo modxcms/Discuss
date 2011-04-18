@@ -23,7 +23,7 @@ DIS.ReplyPost = function() {
             });
             var a = $.ajax(a);
             $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();
-        }        
+        }
         
         ,togglePost: function() {
             var p = $(this).attr('post');

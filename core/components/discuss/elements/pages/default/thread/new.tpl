@@ -7,7 +7,7 @@
 ]]
 
 
-<div id="dis-new-thread-preview">[[+preview]]</div>
+<div id="dis-new-thread-preview"></div>
 <br />
 <form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
 
