@@ -1,15 +1,15 @@
 $(function() {
-    DIS.UserNotifications.init();
+    DIS.UserSubscriptions.init();
 });
 
-DIS.UserNotifications = function() {    
+DIS.UserSubscriptions = function() {
     return {
         init: function() {
             $('.dis-remove-all').change(this.checkAll);
         }
         
         ,checkAll: function() {
-            var v = $('.dis-remove-cb').attr('checked',$(this).attr('checked'));
+            $('.dis-remove-cb').attr('checked',$(this).attr('checked'));
         }
     };
 }();

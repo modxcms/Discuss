@@ -18,7 +18,7 @@ if (!empty($_POST) && !empty($_POST['remove'])) {
         if ($notification == null) continue;
         $notification->remove();
     }
-    $url = $discuss->url.'user/notifications?user='.$user->get('id');
+    $url = $discuss->url.'user/subscriptions?user='.$user->get('id');
     $modx->sendRedirect($url);
 }
 
@@ -43,15 +43,15 @@ $c->where(array(
     'Notifications.user' => $user->get('id'),
 ));
 $c->sortby('FirstPost.title','ASC');
-$notifications = $modx->getCollection('disThread',$c);
-$placeholders['notifications'] = array();
-foreach ($notifications as $notification) {
-    $notificationArray = $notification->toArray();
-    $notificationArray['class'] = 'dis-board-li';
-    $notificationArray['createdon'] = strftime($discuss->dateFormat,strtotime($notificationArray['createdon']));
-    $placeholders['notifications'][] = $discuss->getChunk('user/disUserNotificationRow',$notificationArray);
+$subscriptions = $modx->getCollection('disThread',$c);
+$placeholders['subscriptions'] = array();
+foreach ($subscriptions as $subscription) {
+    $subscriptionArray = $subscription->toArray();
+    $subscriptionArray['class'] = 'dis-board-li';
+    $subscriptionArray['createdon'] = strftime($discuss->dateFormat,strtotime($subscriptionArray['createdon']));
+    $placeholders['subscriptions'][] = $discuss->getChunk('user/disUserSubscriptionRow',$subscriptionArray);
 }
-$placeholders['notifications'] = implode("\n",$placeholders['notifications']);
+$placeholders['subscriptions'] = implode("\n",$placeholders['subscriptions']);
 
 /* output */
 $placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');

@@ -51,11 +51,17 @@ if (isset($scriptProperties['lock']) && $scriptProperties['lock'] == 0) {
         $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
     }
 }
-if (!empty($scriptProperties['notify'])) {
-    if ($thread->addNotify($discuss->user->get('id'))) {
+if (!empty($scriptProperties['subscribe'])) {
+    if ($thread->addSubscription($discuss->user->get('id'))) {
         $modx->sendRedirect($discuss->url.'thread?thread='.$thread->get('id'));
     }
 }
+if (!empty($scriptProperties['unsubscribe'])) {
+    if ($thread->removeSubscription($discuss->user->get('id'))) {
+        $modx->sendRedirect($discuss->url.'thread?thread='.$thread->get('id'));
+    }
+}
+
 
 /* get posts */
 $posts = $discuss->hooks->load('post/getThread',array(
@@ -92,8 +98,10 @@ $actionButtons = array();
 if ($discuss->isLoggedIn) {
     $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
     $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
-    if (!$thread->hasNotification($discuss->user->get('id'))) {
-        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&notify=1', 'text' => $modx->lexicon('discuss.notify'));
+    if ($thread->hasSubscription($discuss->user->get('id'))) {
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unsubscribe=1', 'text' => $modx->lexicon('discuss.unsubscribe'));
+    } else {
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&subscribe=1', 'text' => $modx->lexicon('discuss.subscribe'));
     }
     /* TODO: Send thread by email - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));

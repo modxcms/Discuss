@@ -81,10 +81,10 @@ $manifest = array(
             ),
         )
     ),
-    'user/notifications' => array(
+    'user/subscriptions' => array(
         'js' => array(
             'header' => array(
-                'web/user/dis.user.notifications.js',
+                'web/user/dis.user.subscriptions.js',
             )
         ),
     ),

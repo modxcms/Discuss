@@ -131,14 +131,14 @@ class disThread extends xPDOSimpleObject {
     }
 
 
-    public function hasNotification($userId) {
+    public function hasSubscription($userId) {
         return $this->xpdo->getCount('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
         )) > 0;
     }
 
-    public function addNotify($userId) {
+    public function addSubscription($userId) {
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
@@ -155,7 +155,7 @@ class disThread extends xPDOSimpleObject {
         return true;
     }
 
-    public function removeNotify($userId) {
+    public function removeSubscription($userId) {
         $notify = $this->modx->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
