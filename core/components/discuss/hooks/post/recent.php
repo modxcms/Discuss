@@ -14,6 +14,14 @@ if (!empty($scriptProperties['user'])) {
         'LastPost.author' => $scriptProperties['user'],
     ));
 }
+if ($discuss->isLoggedIn) {
+    $ignoreBoards = $discuss->user->get('ignore_boards');
+    if (!empty($ignoreBoards)) {
+        $c->where(array(
+            'Board.id:NOT IN' => explode(',',$ignoreBoards),
+        ));
+    }
+}
 $total = $modx->getCount('disThread',$c);
 $c->select($modx->getSelectColumns('disPost','LastPost'));
 $c->select(array(

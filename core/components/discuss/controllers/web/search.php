@@ -24,6 +24,14 @@ if (!empty($_REQUEST['s'])) {
     $c->where(array(
         'MATCH (disPost.title,disPost.message) AGAINST ("'.$s.'" IN BOOLEAN MODE)',
     ));
+    if ($discuss->isLoggedIn) {
+        $ignoreBoards = $discuss->user->get('ignore_boards');
+        if (!empty($ignoreBoards)) {
+            $c->where(array(
+                'Board.id:NOT IN' => explode(',',$ignoreBoards),
+            ));
+        }
+    }
     $c->select($modx->getSelectColumns('disPost','disPost'));
     $c->select(array(
         'username' => 'Author.username',

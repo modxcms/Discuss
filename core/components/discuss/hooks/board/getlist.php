@@ -84,6 +84,14 @@ if (!empty($scriptProperties['groups'])) {
     $where[] = $g;
     $c->andCondition($where,null,2);
 }
+if ($discuss->isLoggedIn) {
+    $ignoreBoards = $discuss->user->get('ignore_boards');
+    if (!empty($ignoreBoards)) {
+        $c->where(array(
+            'id:NOT IN' => explode(',',$ignoreBoards),
+        ));
+    }
+}
 $c->sortby('Category.rank','ASC');
 $c->sortby('disBoard.rank','ASC');
 $boardObjects = $modx->getCollection('disBoard',$c);

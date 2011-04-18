@@ -50,6 +50,14 @@ $c->leftJoin('disThreadRead','Reads');
 $c->where(array(
     'Reads.thread' => null,
 ));
+if ($discuss->isLoggedIn) {
+    $ignoreBoards = $discuss->user->get('ignore_boards');
+    if (!empty($ignoreBoards)) {
+        $c->where(array(
+            'Board.id:NOT IN' => explode(',',$ignoreBoards),
+        ));
+    }
+}
 $total = $modx->getCount('disThread',$c);
 $c->sortby($sortBy,$sortDir);
 $c->limit($limit,$start);
@@ -104,7 +112,7 @@ $trail[] = array(
     'url' => $discuss->url,
     'text' => $modx->getOption('discuss.forum_title'),
 );
-$trail[] = array('text' => $modx->lexicon('discuss.unread_posts'),'active' => true);
+$trail[] = array('text' => $modx->lexicon('discuss.unread_posts').' ('.number_format($total).')','active' => true);
 
 $trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
