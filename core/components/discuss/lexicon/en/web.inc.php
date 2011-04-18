@@ -34,6 +34,7 @@ $_lang['discuss.message'] = 'Message';
 $_lang['discuss.modify'] = 'Modify';
 $_lang['discuss.modify_post_header'] = 'Modify Post: [[+post]]';
 $_lang['discuss.name'] = 'Name';
+$_lang['discuss.new_post_made'] = 'New Reply Posted';
 $_lang['discuss.new_thread'] = 'New Thread';
 $_lang['discuss.no_replies_yet'] = 'No Replies Yet';
 $_lang['discuss.notify'] = 'Notify';

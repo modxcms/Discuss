@@ -89,9 +89,9 @@ $discuss->hooks->load('notifications/send',array(
     'board' => $post->get('board'),
     'post' => $post->get('id'),
     'thread' => $thread->get('id'),
-    'title' => $thread->get('title'),
-    'subject' => $modx->getOption('discuss.notification_new_post_subject'),
-    'tpl' => $modx->getOption('discuss.notification_new_post_chunk'),
+    'title' => $post->get('title'),
+    'subject' => $modx->getOption('discuss.notification_new_post_subject',null,'New Post'),
+    'tpl' => $modx->getOption('discuss.notification_new_post_chunk',null,'emails/disNotificationEmail'),
 ));
 
 /* fire post save event */
