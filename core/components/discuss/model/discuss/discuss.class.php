@@ -205,7 +205,18 @@ class Discuss {
     private function _initSession() {
         if (defined('DIS_CONNECTOR') && DIS_CONNECTOR) return false;
         $sessionId = session_id();
-        $session = $this->modx->getObject('disSession',$sessionId);
+        if ($this->isLoggedIn) {
+            $session = $this->modx->getObject('disSession',array('user' => $this->user->get('id')));
+            if (!empty($session)) {
+                $this->modx->removeCollection('disSession',array(
+                    'id:!=' => $session->get('id'),
+                    'user' => $this->user->get('id'),
+                ));
+            }
+        }
+        if (empty($session)) {
+            $session = $this->modx->getObject('disSession',$sessionId);
+        }
         /* only log activity if first visit */
         if ($session == null) {
             $now = date('Y-m-d');
@@ -226,6 +237,7 @@ class Discuss {
             }
             $activity->set('hits',($activity->get('hits')+1));
             $activity->save();
+            echo 'new';
         }
         $session->set('user',$this->user->get('id'));
         $session->set('access',time());
