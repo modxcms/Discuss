@@ -73,6 +73,19 @@ class disUser extends xPDOSimpleObject {
         return $message;
     }
 
+    /* get a count of # of messages */
+    public function countUnreadMessages() {
+        $c = $this->xpdo->newQuery('disThread');
+        $c->innerJoin('disThreadUser','Users');
+        $c->leftJoin('disThreadRead','Reads','Reads.user = '.$this->get('id').' AND disThread.id = Reads.thread');
+        $c->where(array(
+            'disThread.private' => true,
+            'Users.user' => $this->get('id'),
+            'Reads.thread:IS' => null,
+        ));
+        return $this->xpdo->getCount('disThread',$c);
+    }
+
     public function clearCache() {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             $this->xpdo->getCacheManager();

@@ -179,7 +179,7 @@ class disThread extends xPDOSimpleObject {
     }
 
 
-    public function buildBreadcrumbs($trail = array()) {
+    public function buildBreadcrumbs($defaultTrail = array()) {
         $c = $this->xpdo->newQuery('disBoard');
         $c->innerJoin('disBoardClosure','Ancestors');
         $c->where(array(
@@ -187,10 +187,10 @@ class disThread extends xPDOSimpleObject {
         ));
         $c->sortby('Ancestors.depth','DESC');
         $ancestors = $this->xpdo->getCollection('disBoard',$c);
-        $trail[] = array(
+        $trail = empty($defaultTrail) ? array(array(
             'url' => $this->xpdo->discuss->url,
             'text' => $this->xpdo->getOption('discuss.forum_title'),
-        );
+        )) : $defaultTrail;
         $category = false;
         foreach ($ancestors as $ancestor) {
             if (empty($category)) {

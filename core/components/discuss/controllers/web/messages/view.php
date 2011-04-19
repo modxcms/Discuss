@@ -34,7 +34,13 @@ $thread->set('posts',$posts['results']);
 unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 
 /* get board breadcrumb trail */
-$thread->buildBreadcrumbs();
+$thread->buildBreadcrumbs(array(array(
+    'url' => $discuss->url,
+    'text' => $modx->getOption('discuss.forum_title'),
+),array(
+    'url' => $discuss->url.'messages',
+    'text' => $modx->lexicon('discuss.messages'),
+)));
 unset($trail,$url,$c,$ancestors);
 
 /* up the view count for this thread */
