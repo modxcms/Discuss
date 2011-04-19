@@ -168,6 +168,8 @@ class disBoard extends xPDOSimpleObject {
      */
     public function getViewing() {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
+        if (!$this->xpdo->hasPermission('discuss.view_online')) return '';
+        $canViewProfiles = $this->xpdo->hasPermission('discuss.view_profiles');
 
         $c = $this->xpdo->newQuery('disSession');
         $c->innerJoin('disUser','User');
@@ -185,7 +187,7 @@ class disBoard extends xPDOSimpleObject {
             $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members[] = '<a href="[[~[[*id]]]]user?user='.$r[0].'">'.$r[1].'</a>';
+                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user?user='.$r[0].'">'.$r[1].'</a>' : $r[1];
             }
             $members = array_unique($members);
             $members = implode(',',$members);
@@ -216,6 +218,8 @@ class disBoard extends xPDOSimpleObject {
      * @return string The text returned for the viewing users.
      */
     public function getModeratorsList() {
+        $canViewProfiles = $this->xpdo->hasPermission('discuss.view_profiles');
+
         $c = $this->xpdo->newQuery('disModerator');
         $c->innerJoin('disUser','User');
         $c->select($this->xpdo->getSelectColumns('disModerator','disModerator','',array('id','user')));
@@ -229,7 +233,7 @@ class disBoard extends xPDOSimpleObject {
         $mods = array();
         if ($moderators) {
             foreach ($moderators as $moderator) {
-                $mods[] = '<a href="'.$this->xpdo->discuss->url.'user?user='.$moderator->get('user').'">'.$moderator->get('username').'</a>';
+                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user?user='.$moderator->get('user').'">'.$moderator->get('username').'</a>' : $moderator->get('username');
             }
             $mods = array_unique($mods);
             $mods = implode(',',$mods);

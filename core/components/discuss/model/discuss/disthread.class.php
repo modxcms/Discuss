@@ -28,6 +28,8 @@ class disThread extends xPDOSimpleObject {
      */
     public function getViewing() {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
+        if (!$this->xpdo->hasPermission('discuss.view_online')) return '';
+        $canViewProfiles = $this->xpdo->hasPermission('discuss.view_profiles');
 
         $c = $this->xpdo->newQuery('disSession');
         $c->innerJoin('disUser','User');
@@ -46,7 +48,7 @@ class disThread extends xPDOSimpleObject {
             $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members[] = '<a href="'.$this->xpdo->discuss->url.'user/?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>';
+                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user/?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>' : $r[1];
             }
             $members = array_unique($members);
             $members = implode(',',$members);

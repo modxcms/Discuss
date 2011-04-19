@@ -64,7 +64,9 @@ $placeholders['moderators'] = $board->getModeratorsList();
 /* action buttons */
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
-    $actionButtons[] = array('url' => $discuss->url.'thread/new?board='.$board->get('id'), 'text' => $modx->lexicon('discuss.thread_new'));
+    if ($modx->hasPermission('discuss.thread_create')) {
+        $actionButtons[] = array('url' => $discuss->url.'thread/new?board='.$board->get('id'), 'text' => $modx->lexicon('discuss.thread_new'));
+    }
     $actionButtons[] = array('url' => $discuss->url.'board?board='.$board->get('id').'&read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
     //$actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
 }

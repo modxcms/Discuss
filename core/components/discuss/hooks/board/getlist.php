@@ -14,6 +14,7 @@ if (!empty($list)) {
     //return $list;
 }*/
 
+/* unread sql */
 $unreadSubCriteria = $modx->newQuery('disThreadRead');
 $unreadSubCriteria->select($modx->getSelectColumns('disThreadRead','disThreadRead','',array('thread')));
 $unreadSubCriteria->where(array(
@@ -108,16 +109,17 @@ $currentCategory = 0;
 $rowClass = 'even';
 $boardList = array();
 
-$isAuthenticated = $modx->user->isAuthenticated();
+/* setup perms */
+$canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 
 foreach ($boards as $board) {
-    $board['unread-cls'] = ($board['unread'] > 0 && $isAuthenticated) ? 'dis-unread' : 'dis-read';
-
+    $board['unread-cls'] = ($board['unread'] > 0 && $discuss->isLoggedIn) ? 'dis-unread' : 'dis-read';
     if (!empty($board['last_post_createdon'])) {
         $phs = array(
             'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($board['last_post_createdon'])),
             'user' => $board['last_post_author'],
             'username' => $board['last_post_username'],
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$board['last_post_author'].'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
         );
         $lp = $discuss->getChunk('board/disLastPostBy',$phs);
         $board['lastPost'] = $lp;

@@ -16,7 +16,7 @@
                     <br />[[+author.email]]
                 </span>
                 <span>
-                    <a class="dis-username" href="[[~[[*id]]]]user?user=[[+author.id]]">[[+author.username]]</a>
+                    [[+author.username_link]]
                     [[+author.title:notempty=`<em>[[+author.title]]</em>`]]
                     <br />
                     [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
@@ -35,7 +35,7 @@
             </div>
             <div class="dis-post-ip">
                 [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
-                <a href="javascript:void([[+id]]);">[[%discuss.report_to_mod]]</a>
+                [[+report_link]]
                 <a href="javascript:void([[+id]]);">[[+ip]]</a>
             </div>
         </div>

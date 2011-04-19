@@ -3,6 +3,9 @@
 $limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.num_recent_posts',null,10));
 $start = $modx->getOption('start',$scriptProperties,0);
 
+/* setup perms */
+$canViewProfiles = $modx->hasPermission('discuss.view_profiles');
+
 /* recent posts */
 $c = $modx->newQuery('disThread');
 $c->innerJoin('disBoard','Board');
@@ -58,7 +61,8 @@ foreach ($recentPosts as $thread) {
     $threadArray = $thread->toArray();
     $threadArray['idx'] = $idx;
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
-    
+
+    $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->url.'user/?user='.$threadArray['author'].'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
     $threadArray['views'] = number_format($threadArray['views']);
     $threadArray['replies'] = number_format($threadArray['replies']);
 

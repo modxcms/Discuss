@@ -47,7 +47,7 @@ if (isset($scriptProperties['logout']) && $scriptProperties['logout']) {
 
 /* action buttons */
 $actionButtons = array();
-if ($modx->user->isAuthenticated()) { /* if logged in */
+if ($discuss->isLoggedIn) { /* if logged in */
     $actionButtons[] = array('url' => $discuss->url.'?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
 
     $authLink = $discuss->url.'logout';
@@ -70,8 +70,10 @@ $placeholders['totalTopics'] = number_format((int)$modx->getCount('disPost',arra
 $placeholders['totalMembers'] = number_format((int)$modx->getCount('disUser'));
 
 /* active in last 40 */
-if ($modx->getOption('discuss.show_whos_online',null,true)) {
+if ($modx->getOption('discuss.show_whos_online',null,true) && $modx->hasPermission('discuss.view_online')) {
     $placeholders['activeUsers'] = $discuss->hooks->load('user/active_in_last');
+} else {
+    $placeholders['activeUsers'] = '';
 }
 
 /* total active */

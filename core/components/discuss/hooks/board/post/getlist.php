@@ -44,6 +44,9 @@ if (!empty($scriptProperties['limit'])) {
 }
 $threads = $modx->getCollection('disThread',$c);
 
+/* setup perms */
+$canViewProfiles = $modx->hasPermission('discuss.view_profiles');
+
 /* iterate through threads */
 $response['results'] = array();
 foreach ($threads as $thread) {
@@ -55,6 +58,7 @@ foreach ($threads as $thread) {
         'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($threadArray['createdon'])),
         'user' => $threadArray['author'],
         'username' => $threadArray['username'],
+        'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$threadArray['user'].'">'.$threadArray['username'].'</a>' : $threadArray['username'],
     );
     $latestText = $discuss->getChunk('board/disLastPostBy',$phs);
 

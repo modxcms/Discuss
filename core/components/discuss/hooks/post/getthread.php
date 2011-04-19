@@ -72,7 +72,18 @@ $c->bindGraph('{"Author":{},"EditedBy":{}}');
 //$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
 $posts = $modx->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
 
+/* setup basic settings/permissions */
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
+$allowCustomTitles = $modx->getOption('discuss.allow_custom_titles',null,true);
+$canModifyPost = $modx->hasPermission('discuss.thread_modify');
+$canRemovePost = $modx->hasPermission('discuss.thread_remove');
+$canReplyPost = $modx->hasPermission('discuss.thread_reply');
+$canViewAttachments = $modx->hasPermission('discuss.view_attachments');
+$canTrackIp = $modx->hasPermission('discuss.track_ip');
+$canViewEmails = $modx->hasPermission('discuss.view_emails');
+$canViewProfiles = $modx->hasPermission('discuss.view_profiles');
+$canReportPost = $modx->hasPermission('discuss.thread_report');
+
 /* iterate */
 $plist = array();
 $output = array();
@@ -91,7 +102,11 @@ foreach ($posts as $post) {
     }
 
     if ($post->Author) {
-        $postArray['author.username_link'] = '<a href="'.$userUrl.'?user='.$post->get('author').'">'.$post->Author->get('username').'</a>';
+        if ($canViewProfiles) {
+            $postArray['author.username_link'] = '<a href="'.$userUrl.'?user='.$post->get('author').'">'.$post->Author->get('username').'</a>';
+        } else {
+            $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('username').'</span>';
+        }
 
         /* set author avatar */
         $avatarUrl = $post->Author->getAvatarUrl();
@@ -100,7 +115,7 @@ foreach ($posts as $post) {
         }
 
         /* check if author wants to show email */
-        if ($post->Author->get('show_email') && $discuss->isLoggedIn) {
+        if ($post->Author->get('show_email') && $discuss->isLoggedIn && $canViewEmails) {
             $postArray['author.email'] = '<a href="mailto:'.$post->Author->get('email').'">'.$modx->lexicon('discuss.email_author').'</a>';
         } else {
             $postArray['author.email'] = '';
@@ -121,7 +136,7 @@ foreach ($posts as $post) {
     $postArray['content'] = $post->getContent();
 
     /* check allowing of custom titles */
-    if (!$modx->getOption('discuss.allow_custom_titles',null,true)) {
+    if (!$allowCustomTitles) {
         $postArray['author.title'] = '';
     }
 
@@ -131,37 +146,48 @@ foreach ($posts as $post) {
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
     if (!$thread->get('locked') && $discuss->isLoggedIn) {
-        $postArray['action_reply'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
-        $postArray['action_quote'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
+        if ($canReplyPost) {
+            $postArray['action_reply'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['action_quote'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
+        }
 
-        $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $modx->hasPermission('discuss.thread_modify'));
+        $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
         if ($canModifyPost) {
             $postArray['action_modify'] = '<a href="'.$discuss->url.'thread/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
-        $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $modx->hasPermission('discuss.thread_remove'));
+        $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
         if ($canRemovePost) {
             $postArray['action_remove'] = '<a href="'.$discuss->url.'post/remove?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
         }
     }
 
     /* get attachments */
-    $attachments = $post->getMany('Attachments');
-
-    if (!empty($attachments)) {
-        $postArray['attachments'] = array();
-        foreach ($attachments as $attachment) {
-            $attachmentArray = $attachment->toArray();
-            $attachmentArray['filesize'] = $attachment->convert();
-            $attachmentArray['url'] = $attachment->getUrl();
-            $postArray['attachments'][] = $discuss->getChunk('post/disPostAttachment',$attachmentArray);
+    if ($canViewAttachments) {
+        $attachments = $post->getMany('Attachments');
+        if (!empty($attachments)) {
+            $postArray['attachments'] = array();
+            foreach ($attachments as $attachment) {
+                $attachmentArray = $attachment->toArray();
+                $attachmentArray['filesize'] = $attachment->convert();
+                $attachmentArray['url'] = $attachment->getUrl();
+                $postArray['attachments'][] = $discuss->getChunk('post/disPostAttachment',$attachmentArray);
+            }
+            $postArray['attachments'] = implode("\n",$postArray['attachments']);
         }
-        $postArray['attachments'] = implode("\n",$postArray['attachments']);
     }
-    $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
 
+    $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
     $postArray['class'] = implode(' ',$postArray['class']);
-    if (!$isModerator) $postArray['ip'] = '';
+    if ($canReportPost) {
+        $postArray['report_link'] = '<a class="dis-report-link" href="javascript:void('.$postArray['id'].');">'.$modx->lexicon('discuss.report_to_mod').'</a>';
+    } else {
+        $postArray['report_link'] = '';
+    }
+    
+    if (!$isModerator || !$canTrackIp) {
+        $postArray['ip'] = '';
+    }
     
     if ($flat) {
         $output[] = $discuss->getChunk('post/disThreadPost',$postArray);
