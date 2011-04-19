@@ -127,18 +127,18 @@ foreach ($posts as $post) {
     $postArray['action_remove'] = '';
     if (!$thread->get('locked') && $discuss->isLoggedIn) {
         if ($canReplyPost) {
-            $postArray['action_reply'] = '<a href="'.$discuss->url.'message/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
-            $postArray['action_quote'] = '<a href="'.$discuss->url.'message/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
+            $postArray['action_reply'] = '<a href="'.$discuss->url.'messages/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['action_quote'] = '<a href="'.$discuss->url.'messages/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
         }
 
         $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
         if ($canModifyPost) {
-            $postArray['action_modify'] = '<a href="'.$discuss->url.'message/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $postArray['action_modify'] = '<a href="'.$discuss->url.'messages/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
         $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
         if ($canRemovePost) {
-            $postArray['action_remove'] = '<a href="'.$discuss->url.'message/remove?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
+            $postArray['action_remove'] = '<a href="'.$discuss->url.'messages/remove_post?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
         }
     }
 

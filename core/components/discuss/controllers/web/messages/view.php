@@ -67,11 +67,11 @@ $isModerator = $thread->isModerator($discuss->user->get('id'));
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
     if ($modx->hasPermission('discuss.pm_send')) {
-        $actionButtons[] = array('url' => $discuss->url.'message/reply?message='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_message'));
+        $actionButtons[] = array('url' => $discuss->url.'messages/reply?message='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_message'));
     }
-    $actionButtons[] = array('url' => $discuss->url.'message/view?message='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
+    $actionButtons[] = array('url' => $discuss->url.'messages/view?message='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
     if ($modx->hasPermission('discuss.pm_remove')) {
-        $actionButtons[] = array('url' => $discuss->url.'message/remove?message='.$thread->get('id'), 'text' => $modx->lexicon('discuss.message_remove'));
+        $actionButtons[] = array('url' => $discuss->url.'messages/remove?message='.$thread->get('id'), 'text' => $modx->lexicon('discuss.message_remove'));
     }
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
