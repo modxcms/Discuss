@@ -13,7 +13,7 @@
         <div id="metaheader">
             <div id="signin">
                 <ul>
-                    <li><a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a></li>
+                    [[+discuss.user.id:notempty=`<li><a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a></li>`]]
                     <li><a href="http://modx.com/">modx.com</a></li>
                     <li><a href="[[~[[*id]]]]search">Search</a></li>
                     <li><a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">Profile</a></li>
@@ -27,9 +27,10 @@
         <div id="mainheader">
             <div id="avvy" style="float: right; padding: 5px;">
                 <div style="float: right;"><img src="[[+discuss.user.avatar_url]]" alt="" /></div>
-                <div style="float: left; padding-right: 5px; text-align: right">
-                    <a href="[[~[[*id]]]]thread/unread">View Unread Posts</a><br />
-                    <a href="[[~[[*id]]]]thread/unread_last_visit">View Unread Posts Since Last Visit</a><br />
+                <div style="float: left; padding-right: 5px; text-align: right;">
+                    [[+discuss.user.id:notempty=`<a href="[[~[[*id]]]]thread/unread">View Unread Posts</a><br />`]]
+                    [[+discuss.user.id:notempty=`<a href="[[~[[*id]]]]thread/unread_last_visit">View Unread Posts Since Last Visit</a><br />`]]
+                    <a href="[[~[[*id]]]]thread/recent">View Recent Posts</a><br />
                 </div>
             </div>
             <h1 id="logo" class="pngfix"><a href="[[~4]]"><span>modx</span></a></h1>

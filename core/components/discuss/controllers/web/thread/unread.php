@@ -9,8 +9,8 @@ $discuss->setPageTitle($modx->lexicon('discuss.unread_posts'));
 $placeholders = array();
 
 /* setup default properties */
-$limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
-$page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+$limit = !empty($scriptProperties['limit']) ? $scriptProperties['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
+$page = !empty($scriptProperties['page']) ? $scriptProperties['page'] : 1;
 $page = $page <= 0 ? $page = 1 : $page;
 $start = ($page-1) * $limit;
 

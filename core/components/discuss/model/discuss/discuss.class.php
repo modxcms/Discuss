@@ -237,7 +237,6 @@ class Discuss {
             }
             $activity->set('hits',($activity->get('hits')+1));
             $activity->save();
-            echo 'new';
         }
         $session->set('user',$this->user->get('id'));
         $session->set('access',time());
