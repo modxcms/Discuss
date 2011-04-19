@@ -6,6 +6,7 @@
  */
 if (!$discuss->isLoggedIn) $modx->sendUnauthorizedPage();
 $discuss->setSessionPlace('messages');
+$discuss->setPageTitle($modx->lexicon('discuss.messages'));
 $placeholders = array();
 
 $limit = !empty($scriptProperties['limit']) ? $scriptProperties['limit'] : $modx->getOption('discuss.threads_per_page',null,20);

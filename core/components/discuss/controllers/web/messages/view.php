@@ -25,6 +25,7 @@ $c->select(array(
 $c->where(array('id' => $thread));
 $thread = $modx->getObject('disThread',$c);
 if (empty($thread)) $modx->sendErrorPage();
+$discuss->setPageTitle($thread->get('title'));
 
 /* get posts */
 $posts = $discuss->hooks->load('message/get',array(
