@@ -33,9 +33,4 @@ $_lang['discuss.perm.thread_print'] = 'To print a thread.';
 $_lang['discuss.perm.pm_view'] = 'To view private messages.';
 $_lang['discuss.perm.pm_send'] = 'To send private messages.';
 
-
-$_lang['discuss.perm.'] = '';
-$_lang['discuss.perm.'] = '';
-$_lang['discuss.perm.'] = '';
-
-$_lang['discuss.perm.'] = '';
+//$_lang['discuss.perm.'] = '';

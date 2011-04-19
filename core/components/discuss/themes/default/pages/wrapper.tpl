@@ -27,7 +27,10 @@
         <div id="mainheader">
             <div id="avvy" style="float: right; padding: 5px;">
                 <div style="float: right;"><img src="[[+discuss.user.avatar_url]]" alt="" /></div>
-                <div style="float: left; padding-right: 5px;"><a href="[[~[[*id]]]]thread/unread">View Unread Posts</a><br /></div>
+                <div style="float: left; padding-right: 5px; text-align: right">
+                    <a href="[[~[[*id]]]]thread/unread">View Unread Posts</a><br />
+                    <a href="[[~[[*id]]]]thread/unread_last_visit">View Unread Posts Since Last Visit</a><br />
+                </div>
             </div>
             <h1 id="logo" class="pngfix"><a href="[[~4]]"><span>modx</span></a></h1>
         </div>

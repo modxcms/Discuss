@@ -9,7 +9,8 @@ $userId = $discuss->user->get('id');
 if (empty($userId)) return false;
 
 $c = $modx->newQuery('disThread');
-$c->select($modx->getSelectColumns('disThread','disThread','',array('id','board')));
+$c->innerJoin('disPost','FirstPost');
+$c->innerJoin('disPost','LastPost');
 $c->leftJoin('disThreadRead','Reads',array(
     $modx->getSelectColumns('disThreadRead','Reads','',array('thread')).' = '.$modx->getSelectColumns('disThread','disThread','',array('id')),
     'Reads.user' => $userId,
@@ -17,6 +18,12 @@ $c->leftJoin('disThreadRead','Reads',array(
 $c->where(array(
     'Reads.id:IS' => null,
 ));
+if (!empty($scriptProperties['lastLogin'])) {
+    $c->where(array(
+        'LastPost.createdon:>=' => $scriptProperties['lastLogin'],
+    ));
+}
+$c->select($modx->getSelectColumns('disThread','disThread','',array('id','board')));
 $c->sortby($modx->getSelectColumns('disThread','disThread','',array('id')));
 $c->prepare();
 $sql = $c->toSql();
