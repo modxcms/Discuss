@@ -74,7 +74,7 @@ $placeholders['messages'] = $list;
 $placeholders['total'] = $total;
 
 
-/* get board breadcrumb trail */
+/* get breadcrumb trail */
 $trail = array();
 $trail[] = array(
     'url' => $discuss->url,
@@ -90,6 +90,12 @@ $placeholders['trail'] = $trail;
 /* action buttons */
 $actionButtons = array();
 //$actionButtons[] = array('url' => $discuss->url.'thread/unread?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
+
+/* action buttons */
+$actionButtons = array();
+if ($modx->hasPermission('discuss.pm_send')) {
+    $actionButtons[] = array('url' => $discuss->url.'messages/new', 'text' => $modx->lexicon('discuss.message_new'));
+}
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
 
