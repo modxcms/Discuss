@@ -133,6 +133,7 @@ class disPost extends xPDOSimpleObject {
 
                 $thread->set('post_last',$this->get('id'));
                 $thread->set('author_last',$this->get('author'));
+                $thread->set('replies',$thread->get('replies')+1);
                 $thread->save();
 
                 $this->set('thread',$thread->get('id'));

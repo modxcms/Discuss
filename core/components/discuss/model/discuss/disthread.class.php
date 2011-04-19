@@ -158,13 +158,13 @@ class disThread extends xPDOSimpleObject {
     }
 
     public function removeSubscription($userId) {
-        $notify = $this->modx->getObject('disUserNotification',array(
+        $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
         ));
         if ($notify) {
             if (!$notify->remove()) {
-                $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove notification: '.print_r($notify->toArray(),true));
+                $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove notification: '.print_r($notify->toArray(),true));
             }
         }
         return true;
