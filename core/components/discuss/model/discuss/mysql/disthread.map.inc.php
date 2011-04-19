@@ -204,5 +204,13 @@ $xpdo_meta_map['disThread']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'Users' => 
+    array (
+      'class' => 'disThreadUser',
+      'local' => 'id',
+      'foreign' => 'thread',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
   ),
 );

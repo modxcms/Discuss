@@ -21,6 +21,7 @@ class disSearch {
         $c->innerJoin('disPostClosure','PostClosure','PostClosure.descendant = disPost.id AND PostClosure.ancestor != 0');
         $c->where(array(
             'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE)',
+            'disThread.private' => false,
         ));
         if ($this->discuss->isLoggedIn) {
             $ignoreBoards = $this->discuss->user->get('ignore_boards');

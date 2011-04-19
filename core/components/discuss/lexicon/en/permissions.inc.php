@@ -30,7 +30,8 @@ $_lang['discuss.perm.thread_subscribe'] = 'To subscribe to a thread.';
 $_lang['discuss.perm.thread_send'] = 'To email a thread to someone.';
 $_lang['discuss.perm.thread_print'] = 'To print a thread.';
 
-$_lang['discuss.perm.pm_view'] = 'To view private messages.';
+$_lang['discuss.perm.pm_remove'] = 'To delete private messages.';
 $_lang['discuss.perm.pm_send'] = 'To send private messages.';
+$_lang['discuss.perm.pm_view'] = 'To view private messages.';
 
 //$_lang['discuss.perm.'] = '';

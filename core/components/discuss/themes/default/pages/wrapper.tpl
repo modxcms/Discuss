@@ -16,7 +16,8 @@
                     [[+discuss.user.id:notempty=`<li><a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a></li>`]]
                     <li><a href="http://modx.com/">modx.com</a></li>
                     <li><a href="[[~[[*id]]]]search">Search</a></li>
-                    <li><a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">Profile</a></li>
+                    [[+discuss.user.id:notempty=`<li><a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">Profile</a></li>`]]
+                    [[+discuss.user.id:notempty=`<li><a href="[[~[[*id]]]]messages/">Messages</a></li>`]]
                     <li class="last">[[+discuss.authLink]]</li>
                 </ul>
             </div>

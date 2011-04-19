@@ -126,6 +126,7 @@
         <composite alias="Reads" class="disThreadRead" local="id" foreign="thread" cardinality="many" owner="local" />
         <composite alias="Posts" class="disPost" local="id" foreign="thread" cardinality="many" owner="local" />
         <composite alias="Notifications" class="disUserNotification" local="id" foreign="thread" cardinality="many" owner="local" />
+        <composite alias="Users" class="disThreadUser" local="id" foreign="thread" cardinality="many" owner="local" />
     </object>
 
     <object class="disThreadRead" table="discuss_threads_read" extends="xPDOSimpleObject">
@@ -135,6 +136,16 @@
 
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />
+    </object>
+
+    <!-- used for private messages -->
+    <object class="disThreadUser" table="discuss_threads_users" extends="xPDOObject">
+        <field key="thread" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
+        <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
+        <field key="author" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" index="index" />
+        
+        <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />
     </object>
     

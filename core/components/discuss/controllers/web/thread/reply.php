@@ -51,8 +51,10 @@ if ($board) {
         )),
         'active' => true,
     )),true);
+    $placeholders['trail'] = $board->get('trail');
+} else {
+    $placeholders['trail'] = '';
 }
-$placeholders['trail'] = $board->get('trail');
 
 /* get thread */
 $thread = $discuss->hooks->load('post/getthread',array(
