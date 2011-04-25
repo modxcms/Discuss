@@ -143,14 +143,16 @@ class DisSmfImport {
                 'modUser.username' => $row['memberName'],
             ));
             $modxUser = $this->modx->getObject('modUser',$c);
-            if ($modxUser && $modxUser->get('email') != $row['emailAddress']) {
+            if ($modxUser/* && $modxUser->get('email') != $row['emailAddress']*/) {
                 /*
                  * Not the same user, so do not create a modUser object. We will create a disUser object
                  * that will, on authentication, check to see if the passwords match.
                  * If not, it will ask the user to choose a different username on a separate login page (a Discuss-specific one).
                  * If they match, it will auto-sync the disUser account to the modUser account.
+                 *
+                 * (On 2nd thought, this is such a small case, skipping for now)
                  */
-                $modxUser = false;
+                //$modxUser = false;
             } elseif (!$modxUser) {
                 /**
                  * No modUser exists with that username and email, so we'll create one.
@@ -190,9 +192,8 @@ class DisSmfImport {
                 'password' => $row['passwd'],
                 'email' => $row['emailAddress'],
                 'ip' => $row['memberIP'],
-                'synced' => true,
+                'synced' => false, /* will sync on first login */
                 'source' => 'smf',
-                'syncedat' => $this->now(),
                 'createdon' => strftime(DisSmfImport::DATETIME_FORMATTED,$row['dateRegistered']),
                 'name_first' => $name[0],
                 'name_last' => isset($name[1]) ? $name[1] : '',

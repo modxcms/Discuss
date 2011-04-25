@@ -18,7 +18,7 @@
                     <li><a href="[[~[[*id]]]]search">Search</a></li>
                     [[+discuss.user.id:notempty=`<li><a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">Profile</a></li>`]]
                     [[+discuss.user.id:notempty=`<li><a href="[[~[[*id]]]]messages/">Messages ([[+discuss.user.unread_messages]])</a></li>`]]
-                    [[+discuss.user.id:is=`0`:then=`<li><a href="[[~[[*id]]]]register">Register</a></li>`]]
+                    [[+discuss.user.id:is=``:then=`<li><a href="[[~[[*id]]]]register">Register</a></li>`]]
                     <li class="last">[[+discuss.authLink]]</li>
 
                 </ul>

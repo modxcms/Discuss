@@ -288,7 +288,7 @@ $xpdo_meta_map['disUser']= array (
   array (
     'User' => 
     array (
-      'class' => 'disUser',
+      'class' => 'modUser',
       'local' => 'user',
       'foreign' => 'id',
       'cardinality' => 'one',
