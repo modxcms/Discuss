@@ -189,6 +189,8 @@ class Discuss {
         } else {
             $authphs = array(
                 'authLink' => '<a href="'.$this->url.'login">Login</a>',
+                'user.avatar_url' => '',
+                'user.unread_messages' => '',
             );
         }
         $this->modx->toPlaceholders($authphs,'discuss');
