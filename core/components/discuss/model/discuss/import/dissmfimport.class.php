@@ -17,15 +17,21 @@ class DisSmfImport {
 
     public $live = true;
 
-    public $importOptions = array(
+    public $runImport = array(
         'users' => false,
         'categories' => false,
         'private_messages' => true,
     );
+    public $importOptions = array(
+        'default_user_group' => 'Forum Full Member',
+    );
 
     /**
      * Left TODO:
-     * - Private Messages
+     * - User Group management
+     * - auto-assign all users to one group
+     * - add threadnotification for PMs
+     * - Mark all PMs as read when imported
      */
 
     function __construct(Discuss &$discuss) {
@@ -57,16 +63,16 @@ class DisSmfImport {
 
     public function run() {
         if ($this->getConnection()) {
-            if ($this->importOptions['users']) {
+            if ($this->runImport['users']) {
                 $this->importUserGroups();
                 $this->importUsers();
             } else {
                 $this->collectUserCaches();
             }
-            if ($this->importOptions['categories']) {
+            if ($this->runImport['categories']) {
                 $this->importCategories();
             }
-            if ($this->importOptions['private_messages']) {
+            if ($this->runImport['private_messages']) {
                 $this->importPrivateMessages();
             }
         } else {
@@ -241,12 +247,22 @@ class DisSmfImport {
 
     public function importUserGroupMemberships(disUser $user,array $row) {
         $groups = array();
+        /* if a default group */
         if (!empty($row['ID_GROUP'])) $groups[] = $row['ID_GROUP'];
+        /* if any additional SMF groups */
         if (!empty($row['additionalGroups'])) {
             $groups = array_merge(explode(',',$row['additionalGroups']));
         }
-        $groups = array_unique($groups);
 
+        /* default user group import option */
+        if (!empty($this->importOptions['default_user_group'])) {
+            $dug = $this->modx->getObject('modUserGroup',array('name' => $this->importOptions['default_user_group']));
+            if ($dug) {
+                $groups[] = $dug->get('id');
+            }
+        }
+
+        $groups = array_unique($groups);
         foreach ($groups as $group) {
             if (!empty($this->memberGroupCache[$group])) {
                 $member = $this->modx->newObject('modUserGroupMember');
