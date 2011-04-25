@@ -153,10 +153,13 @@ class Discuss {
                     'user' => $this->modx->user->get('id'),
                     'username' => $this->modx->user->get('username'),
                     'password' => $this->modx->user->get('password'),
+                    'salt' => $this->modx->user->get('salt'),
                     'synced' => true,
                     'syncedat' => date('Y-m-d H:I:S'),
+                    'confirmed' => true,
+                    'confirmedon' => date('Y-m-d H:I:S'),
                     'source' => 'internal',
-                    'ip' => $_SERVER['REMOTE_ADDR'],
+                    'ip' => $this->getIp(),
                 ));
                 if ($profile) {
                     $this->user->fromArray($profile->toArray());
@@ -168,12 +171,12 @@ class Discuss {
                     ));
                 }
                 $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
-                $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
+                $this->user->set('ip',$this->getIp());
                 $this->user->save();
             } else {
                 /* active user, update the disUser record */
                 $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
-                $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
+                $this->user->set('ip',$this->getIp());
                 $this->user->save();
             }
         }

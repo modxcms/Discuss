@@ -1,6 +1,14 @@
+[[!Register?
+    &submitVar=`dis-register-btn`
+    &activationResourceId=`[[*id]]`
+    &activationEmailTpl=`disActivationEmailTpl`
+    &activationEmailSubject=`Thanks for Registering!`
+    &usergroups=`Forum New Member`
+]]
+
 [[+trail]]
 
-<form class="dis-form dis-register" action="[[~[[++discuss.register_resource]]]]" method="post">
+<form class="dis-form dis-register" action="[[~[[*id]]]]register" method="post">
     <h2>[[%discuss.register? &namespace=`discuss` &topic=`web`]]</h2>
     
     <span class="error">[[+error.spam_empty]]</span>
@@ -41,6 +49,6 @@
     [[+discuss.login_error]]
     
     <div class="dis-form-buttons">
-    <input type="submit" class="dis-action-btn" value="[[%discuss.register]]" />
+    <input type="submit" class="dis-action-btn" name="dis-register-btn" value="[[%discuss.register]]" />
     </div>
 </form>

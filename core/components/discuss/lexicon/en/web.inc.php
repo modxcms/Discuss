@@ -60,6 +60,7 @@ $_lang['discuss.recent_posts'] = 'Recent Posts';
 $_lang['discuss.register'] = 'Register';
 $_lang['discuss.register_confirm'] = 'Confirm Registration';
 $_lang['discuss.relevancy'] = 'Relevancy';
+$_lang['discuss.rememberme'] = 'Remember Me';
 $_lang['discuss.remove'] = 'Remove';
 $_lang['discuss.remove_message_header'] = 'Remove Message: [[+title]]';
 $_lang['discuss.remove_thread_header'] = 'Remove Thread: [[+title]]';

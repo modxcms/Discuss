@@ -3,10 +3,12 @@
  * @package discuss
  */
 $placeholders = array();
+$discuss->setPageTitle($modx->lexicon('discuss.login'));
 
-if (!empty($_POST)) {
-    $properties = array_merge($placeholders,$_POST);
-    $errors = include $discuss->config['processorsPath'].'web/user/login.php';
+$loginResourceId = $modx->getOption('discuss.login_resource_id',null,0);
+if (!empty($loginResourceId)) {
+    $url = $modx->makeUrl($loginResourceId,'',array('discuss' => 1));
+    $modx->sendRedirect($url);
 }
 
 /* output */
