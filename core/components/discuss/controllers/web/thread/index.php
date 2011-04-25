@@ -11,6 +11,8 @@ $thread = $modx->getOption('thread',$scriptProperties,false);
 if (empty($thread)) $modx->sendErrorPage();
 
 $c = $modx->newQuery('disThread');
+$c->innerJoin('disBoard','Board');
+$c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
 $c->innerJoin('disPost','FirstPost');
 $c->select($modx->getSelectColumns('disThread','disThread'));
 $c->select(array(
@@ -22,6 +24,16 @@ $c->select(array(
      ) AS participants',
 ));
 $c->where(array('id' => $thread));
+$groups = $discuss->user->getUserGroups();
+if (!empty($groups) && !$discuss->user->isAdmin) {
+    /* restrict boards by user group if applicable */
+    $g = array(
+        'UserGroups.usergroup:IN' => $groups,
+    );
+    $g['OR:UserGroups.usergroup:='] = null;
+    $where[] = $g;
+    $c->andCondition($where,null,2);
+}
 $thread = $modx->getObject('disThread',$c);
 if (empty($thread)) $modx->sendErrorPage();
 
