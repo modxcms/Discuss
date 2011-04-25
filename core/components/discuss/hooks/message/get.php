@@ -101,6 +101,7 @@ foreach ($posts as $post) {
             $postArray['author.email'] = '';
         }
     }
+    $postArray['title'] = str_replace(array('[',']'),array('&#91;','&#93;'),$postArray['title']);
 
     $postArray['class'] = array('dis-board-post');
     if (!$flat) {

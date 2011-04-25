@@ -19,6 +19,7 @@ $c = $modx->newQuery('disThread');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
 $c->innerJoin('disUser','LastAuthor');
+$c->innerJoin('disUser','FirstAuthor');
 $c->innerJoin('disThreadUser','Users');
 $c->leftJoin('disThreadRead','Reads','Reads.user = '.$discuss->user->get('id').' AND disThread.id = Reads.thread');
 $c->where(array(
@@ -37,6 +38,8 @@ $c->select(array(
     'post_id' => 'LastPost.id',
     'author' => 'LastPost.author',
     'author_username' => 'LastAuthor.username',
+    'author_first' => 'FirstAuthor.id',
+    'author_first_username' => 'FirstAuthor.username',
     'viewed' => 'Reads.thread',
 ));
 $c->sortby('LastPost.createdon','DESC');
@@ -58,6 +61,7 @@ foreach ($messages as $message) {
     $threadArray['views'] = number_format($threadArray['views']);
     $threadArray['replies'] = number_format($threadArray['replies']);
     $threadArray['read'] = 1;
+    $threadArray['title'] = str_replace(array('[',']'),array('&#91;','&#93;'),$threadArray['title']);
 
     $threadArray['unread'] = '';
     if (!$threadArray['viewed'] && $discuss->isLoggedIn) {

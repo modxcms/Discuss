@@ -207,7 +207,8 @@ class disThread extends xPDOSimpleObject {
                 'text' => $ancestor->get('name'),
             );
         }
-        $trail[] = array('text' => $this->get('title'), 'active' => true);
+        $title = str_replace(array('[',']'),array('&#91;','&#93;'),$this->get('title'));
+        $trail[] = array('text' => $title, 'active' => true);
         $trail = $this->xpdo->discuss->hooks->load('breadcrumbs',array(
             'items' => &$trail,
         ));

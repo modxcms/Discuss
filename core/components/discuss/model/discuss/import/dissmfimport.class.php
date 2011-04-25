@@ -15,8 +15,13 @@ class DisSmfImport {
     protected $memberGroupCache = array();
     protected $postCache = array();
 
-    public $live = false;
-    public $postsOnly = false;
+    public $live = true;
+
+    public $importOptions = array(
+        'users' => false,
+        'categories' => false,
+        'private_messages' => true,
+    );
 
     /**
      * Left TODO:
@@ -29,7 +34,6 @@ class DisSmfImport {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             define('DISCUSS_IMPORT_MODE',true);
         }
-        //$smfPassMethod = @sha1(strtolower($username) . $password);
     }
 
     protected function log($msg) {
@@ -53,13 +57,18 @@ class DisSmfImport {
 
     public function run() {
         if ($this->getConnection()) {
-            if ($this->postsOnly) {
-                $this->collectUserCaches();
-            } else {
+            if ($this->importOptions['users']) {
                 $this->importUserGroups();
                 $this->importUsers();
+            } else {
+                $this->collectUserCaches();
             }
-            $this->importCategories();
+            if ($this->importOptions['categories']) {
+                $this->importCategories();
+            }
+            if ($this->importOptions['private_messages']) {
+                $this->importPrivateMessages();
+            }
         } else {
             $this->log('Could not start import because could not get connection to SMF database.');
         }
@@ -490,5 +499,122 @@ class DisSmfImport {
             $aIdx++;
         }
         $ast->closeCursor();
+    }
+
+    public function importPrivateMessages() {
+        $sql = '
+            SELECT
+                `Message`.*,
+                `MessageThread`.`group_id` AS `group_id`,
+                `MessageThread`.`subject2` AS `subject`,
+                `MessageThread`.`from_id` AS `from_id`
+                
+            FROM `smf_personal_messages` AS `Message`
+                INNER JOIN `smf_smfpm` AS `MessageThread`
+                ON `MessageThread`.`id` = `Message`.`ID_PM`
+
+            WHERE `MessageThread`.`group_id` IS NOT NULL
+
+            ORDER BY `MessageThread`.`group_id`, `Message`.`msgtime` ASC
+        ';
+        $tst = $this->pdo->query($sql);
+        if (!$tst) return array();
+        $tIdx = 0;
+        $rIdx = 0;
+        $currentGroup = false;
+        $thread = false;
+        $post = false;
+        $participants = array();
+        while ($trow = $tst->fetch(PDO::FETCH_ASSOC)) {
+            $isFirstPostOfThread = false;
+            if ($currentGroup !== $trow['group_id']) {
+                /* save old thread */
+                if ($thread) {
+                    $participants = array_unique($participants);
+                    $thread->set('users',implode(',',$participants));
+                    foreach ($participants as $participant) {
+                        $pmUser = $this->modx->newObject('disThreadUser');
+                        $pmUser->set('thread',$thread->get('id'));
+                        $pmUser->set('user',$participant);
+                        $pmUser->set('author',$participant == $thread->get('author_first') ? 1 : 0);
+                        $this->log('--- Adding Participant '.$participant.' to Thread');
+                        if ($this->live) {
+                            $pmUser->save();
+                        }
+                    }
+                    $thread->set('replies',$rIdx);
+                    if ($post) {
+                        $thread->set('post_last',$post->get('id'));
+                        $thread->set('author_last',$post->get('author'));
+                    }
+                    if ($this->live) {
+                        $thread->save();
+                    }
+                }
+
+                /* create new thread */
+                $participants = array();
+                $rIdx = 0;
+                $firstAuthorId = isset($this->memberCache[$trow['ID_MEMBER_FROM']]) ? $this->memberCache[$trow['ID_MEMBER_FROM']] : 0;
+                $thread = $this->modx->newObject('disThread');
+                $thread->fromArray(array(
+                    'replies' => 0,
+                    'views' => 0,
+                    'locked' => 0,
+                    'sticky' => 0,
+                    'private' => true,
+                    'author_first' => $firstAuthorId,
+                    'integrated_id' => $trow['ID_PM'],
+                ));
+                if ($this->live) {
+                    $thread->save();
+                }
+                $isFirstPostOfThread = true;
+                $currentGroup = $trow['group_id'];
+                $this->log('Importing Message Thread: '.$trow['group_id'].' - '.$trow['subject'].' by '.$firstAuthorId);
+            }
+
+            /* create post in thread */
+
+            $this->log('- Importing Message: '.$trow['fromName']);
+            $postAuthor = isset($this->memberCache[$trow['ID_MEMBER_FROM']]) ? $this->memberCache[$trow['ID_MEMBER_FROM']] : 0;
+            $post = $this->modx->newObject('disPost');
+            $post->fromArray(array(
+                'board' => 0,
+                'thread' => $thread->get('id'),
+                'parent' => 0,
+                'title' => $trow['subject'],
+                'message' => $trow['body'],
+                'author' => $postAuthor,
+                'createdon' => strftime(DisSmfImport::DATETIME_FORMATTED,$trow['msgtime']),
+                'allow_replies' => 1,
+                'integrated_id' => $trow['ID_PM'],
+            ));
+            $participants[] = $postAuthor;
+            if ($this->live) {
+                $post->save();
+            }
+            if ($isFirstPostOfThread) {
+                if ($this->live) {
+                    $thread->set('post_first',$post->get('id'));
+                    $thread->save();
+                }
+            }
+            $tIdx++;
+            $rIdx++;
+        }
+        /* save final PM thread */
+        if ($thread) {
+            $thread->set('users',implode(',',$participants));
+            $thread->set('replies',$rIdx);
+            if ($post) {
+                $thread->set('post_last',$post->get('id'));
+                $thread->set('author_last',$post->get('author'));
+            }
+            if ($this->live) {
+                $thread->save();
+            }
+        }
+        $tst->closeCursor();
     }
 }
