@@ -76,10 +76,11 @@ if (!empty($scriptProperties['category'])) {
         'disBoard.category' => (int)(is_object($scriptProperties['category']) ? $scriptProperties['category']->get('id') : $scriptProperties['category']),
     ));
 }
-if (!empty($scriptProperties['groups'])) {
+$groups = $discuss->user->getUserGroups();
+if (!empty($groups) && !$discuss->user->isAdmin) {
     /* restrict boards by user group if applicable */
     $g = array(
-        'UserGroups.usergroup:IN' => $scriptProperties['groups'],
+        'UserGroups.usergroup:IN' => $groups,
     );
     $g['OR:UserGroups.usergroup:='] = null;
     $where[] = $g;

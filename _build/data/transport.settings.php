@@ -16,6 +16,15 @@ $settings['discuss.admin_email']->fromArray(array(
     'area' => 'Administration',
 ),'',true,true);
 
+$settings['discuss.admin_groups']= $modx->newObject('modSystemSetting');
+$settings['discuss.admin_groups']->fromArray(array(
+    'key' => 'discuss.admin_groups',
+    'value' => 'Administrator,Forum Administrator',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Administration',
+),'',true,true);
+
 $settings['discuss.allow_custom_titles']= $modx->newObject('modSystemSetting');
 $settings['discuss.allow_custom_titles']->fromArray(array(
     'key' => 'discuss.allow_custom_titles',
