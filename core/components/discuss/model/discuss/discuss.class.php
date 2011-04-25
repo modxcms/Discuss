@@ -136,50 +136,46 @@ class Discuss {
      */
     private function _initUser() {
         /* if no user, set id to 0 */
-        $userId = $this->modx->user->get('id');
-        if ($userId == null) {
-            $this->modx->user->set('id',0);
-        } else {
-            $this->user = $this->modx->getObject('disUser',array('user' => $userId));
-        }
-        if (empty($this->user) && $this->modx->user->get('id') != null) {
-            /* if no disUser exists but there is a modUser, import! */
-            $profile = $this->modx->user->getOne('Profile');
-
-            $this->user = $this->modx->newObject('disUser');
-            $this->user->fromArray(array(
-                'user' => $this->modx->user->get('id'),
-                'username' => $this->modx->user->get('username'),
-                'password' => $this->modx->user->get('password'),
-                'synced' => true,
-                'syncedat' => date('Y-m-d H:I:S'),
-                'source' => 'internal',
-                'ip' => $_SERVER['REMOTE_ADDR'],
-            ));
-            if ($profile) {
-                $this->user->fromArray($profile->toArray());
-                $name = $profile->get('fullname');
-                $name = explode(' ',$name);
-                $this->user->fromArray(array(
-                    'name_first' => $name[0],
-                    'name_last' => isset($name[1]) ? $name[1] : '',
-                ));
-            }
-            $this->isLoggedIn = true;
-            $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
-            $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
-            $this->user->save();
-            
-        } else if (empty($this->user)) {
-            $this->isLoggedIn = false;
+        $this->isLoggedIn = $this->modx->user->hasSessionContext($this->modx->context->get('key'));
+        if (!$this->isLoggedIn) {
             $this->user =& $this->modx->newObject('disUser');
             $this->user->set('user',0);
             $this->user->set('username','(anonymous)');
         } else {
-            $this->isLoggedIn = true;
-            $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
-            $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
-            $this->user->save();
+            /* we are logged into MODX, check for user in Discuss */
+            $this->user = $this->modx->getObject('disUser',array('user' => $this->modx->user->get('id')));
+            if (empty($this->user)) {
+                /* if no disUser exists but there is a modUser, import! */
+                $profile = $this->modx->user->getOne('Profile');
+
+                $this->user = $this->modx->newObject('disUser');
+                $this->user->fromArray(array(
+                    'user' => $this->modx->user->get('id'),
+                    'username' => $this->modx->user->get('username'),
+                    'password' => $this->modx->user->get('password'),
+                    'synced' => true,
+                    'syncedat' => date('Y-m-d H:I:S'),
+                    'source' => 'internal',
+                    'ip' => $_SERVER['REMOTE_ADDR'],
+                ));
+                if ($profile) {
+                    $this->user->fromArray($profile->toArray());
+                    $name = $profile->get('fullname');
+                    $name = explode(' ',$name);
+                    $this->user->fromArray(array(
+                        'name_first' => $name[0],
+                        'name_last' => isset($name[1]) ? $name[1] : '',
+                    ));
+                }
+                $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
+                $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
+                $this->user->save();
+            } else {
+                /* active user, update the disUser record */
+                $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
+                $this->user->set('ip',$_SERVER['REMOTE_ADDR']);
+                $this->user->save();
+            }
         }
 
         /* topbar profile links. @TODO: Move this somewhere else. */
