@@ -53,6 +53,7 @@ class Discuss {
         ),$config);
 
         $this->modx->addPackage('discuss',$this->config['modelPath']);
+        $this->ssoMode = $this->modx->getOption('discuss.sso_mode',$config,false);
     }
 
     /**

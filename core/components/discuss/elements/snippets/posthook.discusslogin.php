@@ -30,8 +30,6 @@ if (empty($disUser)) {
         'username' => $user->get('username'),
         'password' => $user->get('password'),
         'salt' => $user->get('salt'),
-        'synced' => true,
-        'syncedat' => date('Y-m-d H:I:S'),
         'confirmed' => true,
         'confirmedon' => date('Y-m-d H:I:S'),
         'source' => 'internal',

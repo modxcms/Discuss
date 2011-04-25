@@ -1,6 +1,7 @@
 <?php
 /**
  *
+ * @deprecated true
  * @package discuss
  */
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }

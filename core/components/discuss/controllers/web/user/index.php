@@ -6,6 +6,14 @@
 $discuss->setSessionPlace('user:'.$scriptProperties['user']);
 $modx->lexicon->load('discuss:user');
 
+/* allow external profile page */
+$profileResourceId = $modx->getOption('discuss.profile_resource_id',null,0);
+if (!empty($profileResourceId) && $discuss->ssoMode) {
+    $url = $modx->makeUrl($profileResourceId,'',array('discuss' => 1,'user' => $scriptProperties['user']));
+    $modx->sendRedirect($url);
+}
+
+
 /* get default properties */
 $cssPostRowCls = $modx->getOption('cssPostRowCls',$scriptProperties,'dis-board-li');
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');

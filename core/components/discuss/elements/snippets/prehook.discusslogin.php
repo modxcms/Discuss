@@ -46,7 +46,7 @@ if ($disUser) {
                     $disUser->set('syncedat',$discuss->now());
                     $disUser->save();
                 } else {
-                    $hook->addError('password','The username or password you entered is incorrect. Please check the username, re-type the password, and try again.');
+                    $hook->addError('password',$modx->lexicon('discuss.login_err'));
                     return false;
                 }
                 break;

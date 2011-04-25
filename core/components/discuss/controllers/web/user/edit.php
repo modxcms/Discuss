@@ -6,6 +6,13 @@
  */
 $modx->lexicon->load('discuss:user');
 
+/* allow external update profile page */
+$upResourceId = $modx->getOption('discuss.update_profile_resource_id',null,0);
+if (!empty($upResourceId) && $discuss->ssoMode) {
+    $url = $modx->makeUrl($upResourceId,'',array('discuss' => 1));
+    $modx->sendRedirect($url);
+}
+
 /* get user */
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('disUser',$scriptProperties['user']);

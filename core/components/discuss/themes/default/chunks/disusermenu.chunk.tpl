@@ -14,7 +14,6 @@
     [[+canAccount:notempty=`
     <h4>[[%discuss.account_settings]]</h4>
     <ul>
-        <li><a href="[[~[[*id]]]]user/account?user=[[+id]]">[[%discuss.account]]</a></li>
         <li><a href="[[~[[*id]]]]user/subscriptions?user=[[+id]]">[[%discuss.subscriptions]]</a></li>
         <!--<li><a href="[[~[[*id]]]]user/preferences?user=[[+id]]">[[%discuss.layout_preferences]]</a></li>-->
         <li><a href="[[~[[*id]]]]user/ignoreboards?user=[[+id]]">[[%discuss.ignore_preferences]]</a></li>

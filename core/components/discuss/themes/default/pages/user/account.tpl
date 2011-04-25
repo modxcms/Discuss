@@ -17,16 +17,6 @@
     </label>
     <input type="text" name="email" id="dis-email" value="[[+email]]" />
     
-    <label for="dis-show-email">[[%discuss.show_email_public]]
-        <span class="error">[[+error.show_email]]</span>
-    </label>
-    <input type="checkbox" name="show_email" id="dis-show-email" value="1" [[+show_email]] />
-    
-    <label for="dis-show-online">[[%discuss.show_online_status]]
-        <span class="error">[[+error.show_online]]</span>
-    </label>
-    <input type="checkbox" name="show_online" id="dis-show-online" value="1" [[+show_online]] />
-    
     <hr />
     
     

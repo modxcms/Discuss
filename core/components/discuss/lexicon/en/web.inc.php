@@ -27,6 +27,7 @@ $_lang['discuss.last_reading'] = 'Last Reading';
 $_lang['discuss.last_visited'] = 'Last Visited';
 $_lang['discuss.location'] = 'Location';
 $_lang['discuss.login'] = 'Login';
+$_lang['discuss.login_err'] = 'The username or password you entered is incorrect. Please check the username, re-type the password, and try again.';
 $_lang['discuss.logout'] = 'Logout';
 $_lang['discuss.mark_all_as_read'] = 'Mark ALL Messages as Read';
 $_lang['discuss.mark_read'] = 'Mark Read';
