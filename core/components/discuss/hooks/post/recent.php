@@ -12,6 +12,18 @@ $c->innerJoin('disBoard','Board');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
 $c->innerJoin('disUser','LastAuthor');
+$c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+$groups = $discuss->user->getUserGroups();
+if (!empty($groups) && !$discuss->user->isAdmin) {
+    /* restrict boards by user group if applicable */
+    $g = array(
+        'UserGroups.usergroup:IN' => $groups,
+    );
+    $g['OR:UserGroups.usergroup:='] = null;
+    $where[] = $g;
+    $c->andCondition($where,null,2);
+}
+
 if (!empty($scriptProperties['user'])) {
     $c->where(array(
         'LastPost.author' => $scriptProperties['user'],

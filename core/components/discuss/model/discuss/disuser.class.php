@@ -199,11 +199,12 @@ class disUser extends xPDOSimpleObject {
         $this->getOne('User');
         if ($this->User) {
             $groups = $this->User->getUserGroups();
-        }
-        $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'Forum Administrator,Administrator');
-        $adminGroups = explode(',',$adminGroups);
-        if ($this->User->isMember($adminGroups)) {
-            $this->isAdmin = true;
+
+            $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'Forum Administrator,Administrator');
+            $adminGroups = explode(',',$adminGroups);
+            if ($this->User->isMember($adminGroups)) {
+                $this->isAdmin = true;
+            }
         }
         return $groups;
     }

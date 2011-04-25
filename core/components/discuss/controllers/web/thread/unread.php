@@ -31,23 +31,22 @@ if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
 
 /* get unread threads */
 $c = $modx->newQuery('disThread');
-$c->select($modx->getSelectColumns('disThread','disThread'));
-$c->select(array(
-    'board_name' => 'Board.name',
-
-    'title' => 'FirstPost.title',
-    'thread' => 'FirstPost.thread',
-    'author_username' => 'FirstAuthor.username',
-    
-    'post_id' => 'LastPost.id',
-    'createdon' => 'LastPost.createdon',
-    'author' => 'LastPost.author',
-));
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
 $c->innerJoin('disUser','FirstAuthor');
 $c->leftJoin('disThreadRead','Reads');
+$c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+$groups = $discuss->user->getUserGroups();
+if (!empty($groups) && !$discuss->user->isAdmin) {
+    /* restrict boards by user group if applicable */
+    $g = array(
+        'UserGroups.usergroup:IN' => $groups,
+    );
+    $g['OR:UserGroups.usergroup:='] = null;
+    $where[] = $g;
+    $c->andCondition($where,null,2);
+}
 $c->where(array(
     'Reads.thread' => null,
 ));
@@ -60,6 +59,18 @@ if ($discuss->isLoggedIn) {
     }
 }
 $total = $modx->getCount('disThread',$c);
+$c->select($modx->getSelectColumns('disThread','disThread'));
+$c->select(array(
+    'board_name' => 'Board.name',
+
+    'title' => 'FirstPost.title',
+    'thread' => 'FirstPost.thread',
+    'author_username' => 'FirstAuthor.username',
+
+    'post_id' => 'LastPost.id',
+    'createdon' => 'LastPost.createdon',
+    'author' => 'LastPost.author',
+));
 $c->sortby($sortBy,$sortDir);
 $c->limit($limit,$start);
 $threads = $modx->getCollection('disThread',$c);

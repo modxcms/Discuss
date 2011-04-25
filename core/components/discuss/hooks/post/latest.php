@@ -23,14 +23,12 @@ if ($discuss->isLoggedIn) {
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('disUser','Author');
 $c->innerJoin('disPost','Thread');
-$c->leftJoin('disBoardUserGroup','UserGroups',$modx->getSelectColumns('disBoard','Board','',array('id')).' = '.$modx->getSelectColumns('disBoardUserGroup','UserGroups','',array('board')));
-$c->orCondition(array(
-    'UserGroups.usergroup' => null,
-),null,1);
-if (!empty($scriptProperties['groups'])) {
+$c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+$groups = $discuss->user->getUserGroups();
+if (!empty($groups) && !$discuss->user->isAdmin) {
     /* restrict boards by user group if applicable */
     $g = array(
-        'UserGroups.usergroup:IN' => $scriptProperties['groups'],
+        'UserGroups.usergroup:IN' => $groups,
     );
     $g['OR:UserGroups.usergroup:='] = null;
     $where[] = $g;

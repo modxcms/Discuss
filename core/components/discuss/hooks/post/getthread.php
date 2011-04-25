@@ -20,6 +20,18 @@ if (!is_object($thread)) {
             WHERE pPost.thread = disThread.id
          ) AS participants',
     ));
+    $c->leftJoin('disBoard','Board');
+    $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+    $groups = $discuss->user->getUserGroups();
+    if (!empty($groups) && !$discuss->user->isAdmin) {
+        /* restrict boards by user group if applicable */
+        $g = array(
+            'UserGroups.usergroup:IN' => $groups,
+        );
+        $g['OR:UserGroups.usergroup:='] = null;
+        $where[] = $g;
+        $c->andCondition($where,null,2);
+    }
     $c->where(array('id' => $thread));
     $thread = $modx->getObject('disThread',$c);
     if (empty($thread)) return false;
