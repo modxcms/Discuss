@@ -30,8 +30,6 @@ class DisSmfImport {
      * Left TODO:
      * - User Group management
      * - auto-assign all users to one group
-     * - add threadnotification for PMs
-     * - Mark all PMs as read when imported
      */
 
     function __construct(Discuss &$discuss) {
@@ -556,6 +554,24 @@ class DisSmfImport {
                         $this->log('--- Adding Participant '.$participant.' to Thread');
                         if ($this->live) {
                             $pmUser->save();
+                        }
+
+                        /* add read status so we can assume all messages are read */
+                        $pmRead = $this->modx->newObject('disThreadRead');
+                        $pmRead->set('user',$participant);
+                        $pmRead->set('thread',$thread->get('id'));
+                        $pmRead->set('board',0);
+                        if ($this->live) {
+                            $pmRead->save();
+                        }
+
+                        /* add email notification automatically to PM threads */
+                        $pmNotify = $this->modx->newObject('disUserNotification');
+                        $pmNotify->set('user',$participant);
+                        $pmNotify->set('thread',$thread->get('id'));
+                        $pmNotify->set('board',0);
+                        if ($this->live) {
+                            $pmNotify->save();
                         }
                     }
                     $thread->set('replies',$rIdx);
