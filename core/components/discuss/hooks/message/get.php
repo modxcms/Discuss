@@ -186,4 +186,8 @@ if (empty($flat)) {
     $output = implode("\n",$output);
 }
 $response['results'] = str_replace(array('[',']'),array('&#91;','&#93;'),$output);
+
+/* mark as read */
+$thread->read($discuss->user->get('id'));
+
 return $response;

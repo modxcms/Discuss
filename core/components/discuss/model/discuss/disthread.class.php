@@ -26,7 +26,7 @@ class disThread extends xPDOSimpleObject {
      * @access public
      * @return string The who is viewing message
      */
-    public function getViewing() {
+    public function getViewing($placePrefix = 'thread') {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
         if (!$this->xpdo->hasPermission('discuss.view_online')) return '';
         $canViewProfiles = $this->xpdo->hasPermission('discuss.view_profiles');
@@ -38,7 +38,7 @@ class disThread extends xPDOSimpleObject {
             'GROUP_CONCAT(DISTINCT CONCAT_WS(":",User.id,User.username)) AS readers',
         ));
         $c->where(array(
-            'disSession.place' => 'thread:'.$this->get('id'),
+            'disSession.place' => $placePrefix.':'.$this->get('id'),
         ));
         $c->groupby('disSession.user');
         $members = $this->xpdo->getObject('disSession',$c);
@@ -56,7 +56,7 @@ class disThread extends xPDOSimpleObject {
 
         $c = $this->xpdo->newQuery('disSession');
         $c->where(array(
-            'place' => 'thread:'.$this->get('id'),
+            'place' => $placePrefix.':'.$this->get('id'),
             'user' => 0,
         ));
         $guests = $this->xpdo->getCount('disSession',$c);

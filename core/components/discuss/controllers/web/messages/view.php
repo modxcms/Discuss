@@ -4,12 +4,12 @@
  * @package discuss
  */
 if (!$discuss->isLoggedIn) $modx->sendUnauthorizedPage();
-$discuss->setSessionPlace('message:'.$scriptProperties['message']);
 
 /* get default properties */
 $userId = $modx->user->get('id');
 $thread = $modx->getOption('message',$scriptProperties,false);
 if (empty($thread)) $modx->sendErrorPage();
+$discuss->setSessionPlace('message:'.$thread);
 
 $c = $modx->newQuery('disThread');
 $c->innerJoin('disPost','FirstPost');
@@ -58,7 +58,7 @@ $placeholders['replies'] = number_format($placeholders['replies']);
 $thread->buildCssClass();
 
 /* get viewing users */
-$placeholders['readers'] = $thread->getViewing();
+$placeholders['readers'] = $thread->getViewing('message');
 
 /* get moderator status */
 $isModerator = $thread->isModerator($discuss->user->get('id'));
