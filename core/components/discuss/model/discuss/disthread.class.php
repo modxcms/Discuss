@@ -3,7 +3,51 @@
  * @package discuss
  */
 class disThread extends xPDOSimpleObject {
-
+    const TYPE_POST = 'post';
+    const TYPE_MESSAGE = 'message';
+    /**
+     * @static
+     * @param xPDO $modx
+     * @param $id The ID of the thread
+     * @return disThread/null
+     */
+    public static function fetch(xPDO &$modx, $id, $type = disThread::TYPE_POST) {
+        $c = $modx->newQuery('disThread');
+        $c->innerJoin('disPost','FirstPost');
+        $c->select($modx->getSelectColumns('disThread','disThread'));
+        $c->select(array(
+            'FirstPost.title',
+            '(SELECT GROUP_CONCAT(pAuthor.id)
+                FROM '.$modx->getTableName('disPost').' AS pPost
+                INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+                WHERE pPost.thread = disThread.id
+             ) AS participants',
+        ));
+        $c->where(array(
+            'disThread.id' => $id,
+        ));
+        if ($type == disThread::TYPE_POST) {
+            $c->leftJoin('disBoard','Board');
+            $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+            $groups = $modx->discuss->user->getUserGroups();
+            if (!empty($groups) && !$modx->discuss->user->isAdmin) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:='] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            }
+        }
+        if ($type == disThread::TYPE_MESSAGE) {
+            $c->innerJoin('disThreadUser','Users');
+            $c->where(array(
+                'Users.user' => $modx->discuss->user->get('id'),
+            ));
+        }
+        return $modx->getObject('disThread',$c);
+    }
 
     public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);

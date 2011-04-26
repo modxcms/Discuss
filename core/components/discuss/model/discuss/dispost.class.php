@@ -496,4 +496,14 @@ class disPost extends xPDOSimpleObject {
         }
         return $message;
     }
+
+    public function getBoardAncestors() {
+        $c = $this->xpdo->newQuery('disBoard');
+        $c->innerJoin('disBoardClosure','Ancestors');
+        $c->where(array(
+            'Ancestors.descendant' => $this->get('board'),
+        ));
+        $c->sortby('Ancestors.depth','ASC');
+        return $this->xpdo->getCollection('disBoard',$c);
+    }
 }

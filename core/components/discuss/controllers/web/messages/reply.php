@@ -5,17 +5,15 @@
  * @package discuss
  */
 /* get post */
-if (empty($scriptProperties['thread'])) {
-    if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
+if (empty($scriptProperties['message']) && empty($scriptProperties['post'])) $modx->sendErrorPage();
+if (!empty($scriptProperties['post']) && empty($scriptProperties['thread'])) {
     $post = $modx->getObject('disPost',$scriptProperties['post']);
     if (empty($post)) $modx->sendErrorPage();
-
-    /* get thread root */
-    $thread = $post->getOne('Thread');
-    if (empty($thread)) $modx->sendErrorPage();
-} else {
-    $thread = $modx->getObject('disThread',$scriptProperties['thread']);
-    if (empty($thread)) $modx->sendErrorPage();
+    $scriptProperties['message'] = $post->get('thread');
+}
+$thread = $modx->call('disThread', 'fetch', array(&$modx,$scriptProperties['message'],disThread::TYPE_MESSAGE));
+if (empty($thread)) $modx->sendErrorPage();
+if (empty($post)) {
     $post = $thread->getOne('FirstPost');
     if (empty($post)) $modx->sendErrorPage();
 }
@@ -33,25 +31,29 @@ $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_ur
 $placeholders['post'] = $placeholders['id'];
 $placeholders['thread'] = $thread->get('id');
 
-/* build breadcrumbs */
-$board = $thread->getOne('Board');
-if ($board) {
-    $board->buildBreadcrumbs(array(array(
-        'text' => $modx->lexicon('discuss.reply_to_post',array(
-            'post' => '<a class="active" href="'.$discuss->url.'thread?thread='.$thread->get('id').'">'.$post->get('title').'</a>',
-        )),
-        'active' => true,
-    )),true);
-    $placeholders['trail'] = $board->get('trail');
-} else {
-    $placeholders['trail'] = '';
-}
+/* get board breadcrumb trail */
+$trail = array(array(
+    'url' => $discuss->url,
+    'text' => $modx->getOption('discuss.forum_title'),
+),array(
+    'text' => $modx->lexicon('discuss.messages'),
+    'url' => $discuss->url.'messages',
+),array(
+    'text' => $post->get('title'),
+    'url' => $discuss->url.'messages/view?message='.$thread->get('id'),
+),array(
+    'text' => $modx->lexicon('discuss.reply'),
+    'active' => true,
+));
+$placeholders['trail'] = $discuss->hooks->load('breadcrumbs',array(
+    'items' => &$trail,
+));
 
 /* get thread */
 $thread = $discuss->hooks->load('post/getthread',array(
     'post' => &$post,
     'thread' => $post->get('thread'),
-    'limit' => 5,
+    'limit' => 10,
 ));
 $placeholders['thread_posts'] = $thread['results'];
 
@@ -60,6 +62,11 @@ if (empty($_POST) && !empty($scriptProperties['quote'])) {
     $placeholders['message'] = '[quote author='.$author->get('username').' date='.strtotime($post->get('createdon')).']'.$post->get('message').'[/quote]'."\n";
 } elseif (empty($_POST) && empty($scriptProperties['quote'])) {
     $placeholders['message'] = '';
+}
+
+/* default values */
+if (empty($_POST)) {
+    $placeholders['title'] = $replyPrefix.$placeholders['title'];
 }
 
 /* set max attachment limit */

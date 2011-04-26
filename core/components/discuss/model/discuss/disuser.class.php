@@ -70,7 +70,6 @@ class disUser extends xPDOSimpleObject {
             } else if (!empty($rs)) {
                 $message = $rs;
             }
-
             $message = $this->stripBBCode($message);
         }
         return $message;
