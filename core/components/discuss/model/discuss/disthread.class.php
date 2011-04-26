@@ -47,10 +47,11 @@ class disThread extends xPDOSimpleObject {
                 'Users.user' => $modx->discuss->user->get('id'),
             ));
             $c->select(array(
-                'participants_usernames' => '(SELECT GROUP_CONCAT(pAuthor.username)
-                    FROM '.$modx->getTableName('disPost').' AS pPost
-                    INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
-                    WHERE pPost.thread = disThread.id
+                'participants_usernames' => '(SELECT GROUP_CONCAT(sqThreadUser.username)
+                    FROM '.$modx->getTableName('disThreadUser').' AS sqThreadUsers
+                        INNER JOIN '.$modx->getTableName('disUser').' AS sqThreadUser
+                        ON sqThreadUser.id = sqThreadUsers.user
+                    WHERE sqThreadUsers.thread = disThread.id
                  )',
             ));
         }

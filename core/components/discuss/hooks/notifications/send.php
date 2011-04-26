@@ -24,7 +24,8 @@ if (!empty($scriptProperties['board'])) {
 $notifications = $modx->getCollection('disUserNotification',$c);
 
 /* build thread url */
-$url = $modx->makeUrl($modx->resource->get('id'),'','','full').'thread/?thread='.$scriptProperties['thread'];
+$url = $type == 'message' ? 'messages/view' : 'thread';
+$url = $modx->makeUrl($modx->resource->get('id'),'','','full').$url.'?thread='.$scriptProperties['thread'];
 if (!empty($scriptProperties['post'])) {
     $url .= '#dis-post-'.$scriptProperties['post'];
 }
@@ -34,7 +35,7 @@ foreach ($notifications as $notification) {
     $user = $notification->getOne('User');
     if ($user == null) { $notification->remove(); continue; }
 
-    $emailProperties = $user->toArray();
+    $emailProperties = array_merge($scriptProperties,$user->toArray());
     $emailProperties['tpl'] = $tpl;
     $emailProperties['name'] = $scriptProperties['title'];
     $emailProperties['type'] = $type;

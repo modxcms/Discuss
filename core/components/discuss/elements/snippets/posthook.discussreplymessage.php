@@ -80,28 +80,29 @@ if ($post->save() == false) {
 }
 
 /* set participants, add notifications */
-$thread->set('users',$participantsIds);
+$thread->set('users',implode(',',$participantsIds));
 $thread->save();
-$modx->removeCollection('disThreadUser',array(
+$c = $modx->newQuery('disThreadUser');
+$c->where(array(
     'thread' => $thread->get('id'),
 ));
-$modx->removeCollection('disUserNotification',array(
+$modx->removeCollection('disThreadUser',$c);
+$c = $modx->newQuery('disUserNotification');
+$c->where(array(
     'thread' => $thread->get('id'),
 ));
+$modx->removeCollection('disUserNotification',$c);
 foreach ($participantsIds as $participant) {
     $threadUser = $modx->newObject('disThreadUser');
-    $threadUser->fromArray(array(
-        'thread' => $thread->get('id'),
-        'user' => $participant,
-        'author' => $thread->get('author_first') == $participant ? true : false,
-    ));
+    $threadUser->set('thread',$thread->get('id'));
+    $threadUser->set('user',$participant);
+    $threadUser->set('author',$thread->get('author_first') == $participant ? true : false);
     $threadUser->save();
+    
     $notify = $modx->newObject('disUserNotification');
-    $notify->fromArray(array(
-        'thread' => $thread->get('id'),
-        'user' => $participant,
-        'board' => 0,
-    ));
+    $notify->set('thread',$thread->get('id'));
+    $notify->set('user',$participant);
+    $notify->set('board',0);
     $notify->save();
 }
 
@@ -128,6 +129,7 @@ $discuss->hooks->load('notifications/send',array(
     'title' => $post->get('title'),
     'message' => $post->getContent(),
     'sender' => $discuss->user->get('username'),
+    'type' => 'message',
     'subject' => $modx->getOption('discuss.notification_new_message_subject',null,'New Message'),
     'tpl' => $modx->getOption('discuss.notification_new_message_chunk',null,'emails/disMessageNotificationEmail'),
 ));
