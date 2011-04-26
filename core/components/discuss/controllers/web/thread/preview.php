@@ -1,6 +1,5 @@
 <?php
 $placeholders = array();
-
 $postArray = $scriptProperties;
 $postArray['action_remove'] = '';
 $postArray['action_modify'] = '';
@@ -14,14 +13,13 @@ foreach ($author as $k => $v) {
 
 $post = $modx->newObject('disPost');
 $post->fromArray($postArray);
-
 $postArray = $post->toArray();
+/* handle MODX tags */
+$post->set('message',str_replace(array('[[',']]'),array('&#91;&#91;','&#93;&#93;'),$postArray['message']));
+
+/* get formatted content */
 $postArray['message'] = $post->getContent();
 $postArray['createdon'] = strftime($discuss->dateFormat,time());
-if (!empty($postArray['author.signature'])) {
-   // $postArray['author.signature'] = $post->parseBBCode($postArray['author.signature']);
- //   $postArray['author.signature'] = $post->stripBBCode($postArray['author.signature']);
-}
 
 $output = $discuss->getChunk('post/disPostPreview',$postArray);
 $placeholders = array('post' => $output);

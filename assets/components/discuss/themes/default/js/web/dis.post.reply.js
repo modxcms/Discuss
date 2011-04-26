@@ -20,6 +20,7 @@ DIS.ReplyPost = function() {
                 url: DIS.url
                 ,async: false
                 ,data: p
+                ,type: 'POST'
             });
             var a = $.ajax(a);
             $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();

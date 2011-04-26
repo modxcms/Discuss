@@ -13,10 +13,6 @@
             <div class="dis-post-attachments">
             [[+attachments:notempty=`<ul class="dis-attachments">[[+attachments]]</ul>`]]
             </div>
-            <div class="dis-post-ip">
-                <a href="javascript:void([[+id]]);">[[%discuss.report_to_mod]]</a>
-                <a href="javascript:void([[+id]]);">[[+ip]]</a>
-            </div>
         </div>
         <br class="clear" />
     </div>

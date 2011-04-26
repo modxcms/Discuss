@@ -62,7 +62,7 @@ class DisRequest {
         if (file_exists($controller['file'])) {
             $discuss =& $this->discuss;
             $modx =& $this->modx;
-            $scriptProperties = $_REQUEST;
+            $scriptProperties = array_merge($_REQUEST,$_GET,$_POST);
 
             $placeholders = require $controller['file'];
         } else {

@@ -15,11 +15,11 @@ DIS.ReplyMessage = function() {
         ,preview: function() {
             var f = $('#dis-reply-post-form');
             var p = f.serialize()+'&action=thread/preview';
-
             var a = $.extend({},DIS.baseAjax,{
                 url: DIS.url
                 ,async: false
                 ,data: p
+                ,type: 'POST'
             });
             var a = $.ajax(a);
             $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();
