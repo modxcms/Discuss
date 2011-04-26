@@ -111,5 +111,13 @@ $manifest = array(
             ),
         ),
     ),
+    'messages/modify' => array(
+        'js' => array(
+            'header' => array(
+                'web/messages/dis.message.modify.js',
+                'web/dis.post.buttons.js',
+            ),
+        ),
+    ),
 );
 return $manifest;

@@ -6,19 +6,25 @@
   &validate=`title:required,message:required:allowTags`
 ]]
 
-<div id="dis-modify-post-preview">[[+preview]]</div>
+<div id="dis-modify-message-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]]]message/modify?post=[[+id]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]]]messages/modify?post=[[!+fi.id]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</h2>
 
-    <input type="hidden" name="post" value="[[!+fi.post]]" />
+    <input type="hidden" name="post" value="[[!+fi.id]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
 
     <label for="dis-message-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
     </label>
     <input type="text" name="title" id="dis-message-title" value="[[!+fi.title]]" />
+
+    <label for="dis-reply-participants">[[%discuss.participants]]:
+        <span class="error">[[!+fi.error.participants_usernames]]</span>
+        <span class="small">[[%discuss.participants_desc]]</span>
+    </label>
+    <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" />
 
     <div style="margin-left: 150px;">
         <br class="clear" />
