@@ -9,6 +9,8 @@
     <div class="dis-threads-header">
         <div class="dis-threads-ct">
             <div class="right" style="width: 25%">[[%discuss.last_post]]</div>
+            <div class="right" style="width: 10%">[[%discuss.replies]]</div>
+            <div class="right" style="width: 10%">[[%discuss.views]]</div>
             <div class="dis-threads-body right" style="width: 55%">[[%discuss.message]]</div>
         </div>
         <br class="clear" />

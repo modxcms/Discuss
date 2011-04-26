@@ -3,6 +3,8 @@
         [[%discuss.last_post]] [[+createdon]]
         <br />[[%discuss.by? &author=`[[+author_link]]`]]
     </div>
+    <div class="right" style="width: 10%">[[+replies]]</div>
+    <div class="right" style="width: 10%">[[+views]]</div>
     <div class="dis-thread-icons">[[+icons]]</div>
     <div class="dis-thread-body dis-message-li-body">
         <a href="[[~[[*id]]]]messages/view?thread=[[+thread]]#dis-post-[[+post_id]]">[[+title]]</a>

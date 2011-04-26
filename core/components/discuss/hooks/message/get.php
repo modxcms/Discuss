@@ -19,7 +19,6 @@ $flat = true;
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
-$isModerator = $thread->isModerator($discuss->user->get('id'));
 $userUrl = $discuss->url.'user/';
 
 /* get posts */
@@ -57,8 +56,9 @@ $posts = $modx->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
 /* setup basic settings/permissions */
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
 $allowCustomTitles = $modx->getOption('discuss.allow_custom_titles',null,true);
-$canRemovePost = $modx->hasPermission('discuss.pm_remove');
-$canReplyPost = $modx->hasPermission('discuss.pm_send');
+$globalCanRemovePost = $modx->hasPermission('discuss.pm_remove');
+$globalCanReplyPost = $modx->hasPermission('discuss.pm_send');
+$globalCanModifyPost = true;
 $canViewAttachments = $modx->hasPermission('discuss.view_attachments');
 $canTrackIp = $modx->hasPermission('discuss.track_ip');
 $canViewEmails = $modx->hasPermission('discuss.view_emails');
@@ -127,17 +127,17 @@ foreach ($posts as $post) {
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
     if (!$thread->get('locked') && $discuss->isLoggedIn) {
-        if ($canReplyPost) {
+        if ($globalCanReplyPost) {
             $postArray['action_reply'] = '<a href="'.$discuss->url.'messages/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
             $postArray['action_quote'] = '<a href="'.$discuss->url.'messages/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
         }
 
-        $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
+        $canModifyPost = $discuss->user->get('id') == $post->get('author') && $globalCanModifyPost;
         if ($canModifyPost) {
             $postArray['action_modify'] = '<a href="'.$discuss->url.'messages/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
-        $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
+        $canRemovePost = $discuss->user->get('id') == $post->get('author') && $globalCanRemovePost;
         if ($canRemovePost) {
             $postArray['action_remove'] = '<a href="'.$discuss->url.'messages/remove_post?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
         }
@@ -161,10 +161,7 @@ foreach ($posts as $post) {
     $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
     $postArray['class'] = implode(' ',$postArray['class']);
     $postArray['report_link'] = '';
-    
-    if (!$isModerator || !$canTrackIp) {
-        $postArray['ip'] = '';
-    }
+    $postArray['ip'] = '';
     
     if ($flat) {
         $output[] = $discuss->getChunk('post/disThreadPost',$postArray);
