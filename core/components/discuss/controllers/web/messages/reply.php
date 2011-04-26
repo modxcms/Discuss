@@ -5,13 +5,13 @@
  * @package discuss
  */
 /* get post */
-if (empty($scriptProperties['message']) && empty($scriptProperties['post'])) $modx->sendErrorPage();
+if (empty($scriptProperties['thread']) && empty($scriptProperties['post'])) $modx->sendErrorPage();
 if (!empty($scriptProperties['post']) && empty($scriptProperties['thread'])) {
     $post = $modx->getObject('disPost',$scriptProperties['post']);
     if (empty($post)) $modx->sendErrorPage();
-    $scriptProperties['message'] = $post->get('thread');
+    $scriptProperties['thread'] = $post->get('thread');
 }
-$thread = $modx->call('disThread', 'fetch', array(&$modx,$scriptProperties['message'],disThread::TYPE_MESSAGE));
+$thread = $modx->call('disThread', 'fetch', array(&$modx,$scriptProperties['thread'],disThread::TYPE_MESSAGE));
 if (empty($thread)) $modx->sendErrorPage();
 if (empty($post)) {
     $post = $thread->getOne('FirstPost');
@@ -26,6 +26,7 @@ $replyPrefix = $modx->getOption('replyPrefix',$scriptProperties,'Re: ');
 
 /* setup placeholders */
 $placeholders = $post->toArray();
+$placeholders['participants_usernames'] = $thread->get('participants_usernames');
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 
 $placeholders['post'] = $placeholders['id'];
@@ -52,7 +53,7 @@ $placeholders['trail'] = $discuss->hooks->load('breadcrumbs',array(
 /* get thread */
 $thread = $discuss->hooks->load('post/getthread',array(
     'post' => &$post,
-    'thread' => $post->get('thread'),
+    'thread' => &$thread,
     'limit' => 10,
 ));
 $placeholders['thread_posts'] = $thread['results'];

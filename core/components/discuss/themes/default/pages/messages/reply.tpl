@@ -8,10 +8,9 @@
 
 <div id="dis-reply-post-preview"></div>
 <br />
-<form action="[[~[[*id]]]]message/reply?message=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]]]messages/reply?thread=[[!+fi.thread]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
-    
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     <input type="hidden" name="post" value="[[!+fi.post]]" />
     
@@ -19,6 +18,13 @@
         <span class="error">[[!+fi.error.title]]</span>
     </label>
     <input type="text" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" />
+
+
+    <label for="dis-reply-participants">[[%discuss.participants]]:
+        <span class="error">[[!+fi.error.participants_usernames]]</span>
+        <span class="small">[[%discuss.participants_desc]]</span>
+    </label>
+    <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" />
 
     <div style="margin-left: 150px;">
         <br class="clear" />

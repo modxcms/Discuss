@@ -4,7 +4,7 @@
  *
  * @package discuss
  */
-$discuss->setSessionPlace('newthread:'.$scriptProperties['board']);
+$discuss->setSessionPlace('newmessage');
 $discuss->setPageTitle($modx->lexicon('discuss.message_new'));
 $placeholders = array();
 

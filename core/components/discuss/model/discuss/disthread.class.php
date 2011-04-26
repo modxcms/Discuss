@@ -42,11 +42,25 @@ class disThread extends xPDOSimpleObject {
         }
         if ($type == disThread::TYPE_MESSAGE) {
             $c->innerJoin('disThreadUser','Users');
+            $c->leftJoin('disUser','ThreadUser','Users.user = ThreadUser.id');
             $c->where(array(
                 'Users.user' => $modx->discuss->user->get('id'),
             ));
+            $c->select(array(
+                'participants_usernames' => '(SELECT GROUP_CONCAT(pAuthor.username)
+                    FROM '.$modx->getTableName('disPost').' AS pPost
+                    INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+                    WHERE pPost.thread = disThread.id
+                 )',
+            ));
         }
-        return $modx->getObject('disThread',$c);
+        $thread = $modx->getObject('disThread',$c);
+        if ($thread && $type == disThread::TYPE_MESSAGE) {
+            $pu = array_unique(explode(',',$thread->get('participants_usernames')));
+            asort($pu);
+            $thread->set('participants_usernames',implode(',',$pu));
+        }
+        return $thread;
     }
 
     public function remove(array $ancestors = array()) {

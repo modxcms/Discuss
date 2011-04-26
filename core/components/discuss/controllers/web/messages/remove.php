@@ -16,7 +16,7 @@ $c->select(array(
         WHERE pPost.thread = disThread.id
      ) AS participants',
 ));
-$c->where(array('id' => $scriptProperties['message']));
+$c->where(array('id' => $scriptProperties['thread']));
 $thread = $modx->getObject('disThread',$c);
 if (empty($thread)) $modx->sendErrorPage();
 
