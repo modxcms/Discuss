@@ -36,7 +36,7 @@ $snippets[2]->fromArray(array(
     'id' => 2,
     'name' => 'postHook.DiscussModifyMessage',
     'description' => '',
-    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/posthook.discussmodifymesssage.php'),
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/posthook.discussmodifymessage.php'),
 ),'',true,true);
 
 $snippets[3]= $modx->newObject('modSnippet');
