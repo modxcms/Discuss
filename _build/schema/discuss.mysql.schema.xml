@@ -42,6 +42,7 @@
         <field key="ignoreable" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
         <field key="rank" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="map" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+        <field key="minimum_post_level" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="9999" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         
         <aggregate alias="Category" class="disCategory" local="category" foreign="id" cardinality="one" owner="foreign" />

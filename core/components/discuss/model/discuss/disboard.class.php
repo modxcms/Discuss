@@ -374,4 +374,26 @@ class disBoard extends xPDOSimpleObject {
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('id'));
         }
     }
+
+    /**
+     * See if the active user can post on this board
+     * @return boolean
+     */
+    public function canPost() {
+        $canPost = false;
+        if ($this->xpdo->discuss->isLoggedIn) {
+            $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'');
+            $adminGroups = explode(',',$adminGroups);
+            $level = 9999;
+            if ($this->xpdo->user->isMember($adminGroups)) {
+                $level = 0;
+            } elseif ($this->isModerator($this->xpdo->discuss->user->get('id'))) {
+                $level = 1;
+            }
+            if ($level <= $this->get('minimum_post_level')) {
+                $canPost = true;
+            }
+        }
+        return $canPost;
+    }
 }

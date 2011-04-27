@@ -18,6 +18,7 @@ $xpdo_meta_map['disBoard']= array (
     'ignoreable' => 1,
     'rank' => 0,
     'map' => '',
+    'minimum_post_level' => 'member',
     'integrated_id' => 0,
   ),
   'fieldMeta' => 
@@ -119,6 +120,14 @@ $xpdo_meta_map['disBoard']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+    ),
+    'minimum_post_level' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'member',
     ),
     'integrated_id' => 
     array (

@@ -67,7 +67,7 @@ $placeholders['moderators'] = $board->getModeratorsList();
 /* action buttons */
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
-    if ($modx->hasPermission('discuss.thread_create')) {
+    if ($modx->hasPermission('discuss.thread_create') && $board->canPost()) {
         $actionButtons[] = array('url' => $discuss->url.'thread/new?board='.$board->get('id'), 'text' => $modx->lexicon('discuss.thread_new'));
     }
     $actionButtons[] = array('url' => $discuss->url.'board?board='.$board->get('id').'&read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));

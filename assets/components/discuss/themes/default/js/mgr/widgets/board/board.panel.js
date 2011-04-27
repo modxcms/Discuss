@@ -14,6 +14,7 @@ Dis.panel.Board = function(config) {
             ,deferredRender: false
             ,defaults: { autoHeight: true ,bodyStyle: 'padding: 11px;' }
             ,border: true
+            ,labelWidth: 150
             ,items: [{
                 title: _('general_information')
                 ,layout: 'form'
@@ -34,6 +35,15 @@ Dis.panel.Board = function(config) {
                     xtype: 'dis-combo-category'
                     ,fieldLabel: _('discuss.category')
                     ,name: 'category'
+                    ,hiddenName: 'category'
+                    ,width: 300
+                    ,allowBlank: false
+                },{
+                    xtype: 'dis-combo-minimum-post-level'
+                    ,fieldLabel: _('discuss.minimum_post_level')
+                    ,description: _('discuss.minimum_post_level_desc')
+                    ,name: 'minimum_post_level'
+                    ,hiddenName: 'minimum_post_level'
                     ,width: 300
                     ,allowBlank: false
                 },{

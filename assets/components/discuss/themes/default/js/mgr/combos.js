@@ -45,3 +45,27 @@ Dis.combo.User = function(config) {
 };
 Ext.extend(Dis.combo.User,MODx.combo.ComboBox);
 Ext.reg('dis-combo-user',Dis.combo.User);
+
+Dis.combo.MinimumPostLevel = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [[_('discuss.member'),''],[_('discuss.moderator'),'moderator'],[_('discuss.admin'),'admin']]
+        })
+        ,name: 'minimum_post_level'
+        ,hiddenName: 'minimum_post_level'
+        ,width: 200
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,pageSize: 20
+        ,selectOnFocus: false
+        ,preventRender: true
+    });
+    Dis.combo.MinimumPostLevel.superclass.constructor.call(this,config);
+};
+Ext.extend(Dis.combo.MinimumPostLevel,MODx.combo.ComboBox);
+Ext.reg('dis-combo-minimum-post-level',Dis.combo.MinimumPostLevel);

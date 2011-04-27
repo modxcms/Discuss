@@ -80,7 +80,8 @@ $isModerator = $thread->isModerator($discuss->user->get('id'));
 /* action buttons */
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
-    if ($modx->hasPermission('discuss.thread_create')) {
+    $board = $thread->getOne('Board');
+    if ($modx->hasPermission('discuss.thread_create') && $board->canPost()) {
         $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
     }
     $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
