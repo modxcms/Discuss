@@ -27,38 +27,8 @@ $isModerator = $thread->isModerator($discuss->user->get('id'));
 $userUrl = $discuss->url.'user/';
 
 /* get posts */
-$c = $modx->newQuery('disPost');
-$c->innerJoin('disThread','Thread');
-$c->where(array(
-    'thread' => $thread->get('id'),
-));
-$cc = clone $c;
-$total = $modx->getCount('disPost',$cc);
-if ($flat) {
-    $c->sortby($modx->getSelectColumns('disPost','disPost','',array('createdon')),'ASC');
-    $c->limit($limit, $start);
-} else {
-    $c->sortby($modx->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
-}
-
-
-if (!empty($scriptProperties['post'])) {
-    if (!is_object($scriptProperties['post'])) {
-        $post = $modx->getObject('disPost',$scriptProperties['post']);
-    } else {
-        $post =& $scriptProperties['post'];
-    }
-    if ($post) {
-        $c->where(array(
-            'disPost.createdon:>=' => $post->get('createdon'),
-        ));
-    }
-}
-
-$c->bindGraph('{"Author":{},"EditedBy":{}}');
-//$c->prepare();
-//$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
-$posts = $modx->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
+$post = $modx->getOption('post',$scriptProperties,false);
+$posts = $thread->fetchPosts($post,$limit,$start,$flat);
 
 /* setup basic settings/permissions */
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
@@ -75,7 +45,7 @@ $canReportPost = $modx->hasPermission('discuss.thread_report');
 /* iterate */
 $plist = array();
 $output = array();
-foreach ($posts as $post) {
+foreach ($posts['results'] as $post) {
     $postArray = $post->toArray();
 
     if ($post->Author) {
@@ -184,7 +154,7 @@ foreach ($posts as $post) {
     }
 }
 $response = array(
-    'total' => $total,
+    'total' => $posts['total'],
     'start' => $start,
     'limit' => $limit,
 );

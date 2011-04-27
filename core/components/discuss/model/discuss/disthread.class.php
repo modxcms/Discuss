@@ -143,6 +143,51 @@ class disThread extends xPDOSimpleObject {
     }
 
     /**
+     * Fetch all posts for this thread
+     *
+     * @param xPDO $modx A reference to the modX object
+     * @param mixed $post A reference to a disPost or ID of disPost to start the posts from
+     * @param int $limit The number of posts to limit to
+     * @param int $start The starting index of posts to start at
+     * @param bool $flat If true, will render posts flat
+     * @return array
+     */
+    public function fetchPosts($post = false,$limit = 0,$start = 0,$flat = true) {
+        $response = array();
+        $c = $this->xpdo->newQuery('disPost');
+        $c->innerJoin('disThread','Thread');
+        $c->where(array(
+            'thread' => $this->get('id'),
+        ));
+        $cc = clone $c;
+        $response['total'] = $this->xpdo->getCount('disPost',$cc);
+        if ($flat) {
+            $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('createdon')),'ASC');
+            $c->limit($limit, $start);
+        } else {
+            $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
+        }
+
+        if (!empty($post)) {
+            if (!is_object($post)) {
+                $post = $this->xpdo->getObject('disPost',$post);
+            }
+            if ($post) {
+                $c->where(array(
+                    'disPost.createdon:>=' => $post->get('createdon'),
+                ));
+            }
+        }
+
+        $c->bindGraph('{"Author":{},"EditedBy":{}}');
+        //$c->prepare();
+        //$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
+        $response['results'] = $this->xpdo->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
+
+        return $response;
+    }
+
+    /**
      * Override remove() to clear thread cache
      *
      * @param array $ancestors
