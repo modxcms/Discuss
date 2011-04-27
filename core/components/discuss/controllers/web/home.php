@@ -31,7 +31,7 @@ $c = array(
 if (!empty($scriptProperties['category'])) $c['category'] = (int)$scriptProperties['category'];
 $cacheKey = 'discuss/user/'.$discuss->user->get('id').'/index-'.md5(serialize($c));
 $boardIndex = $modx->cacheManager->get($cacheKey);
-if (empty($boardIndex)) {
+if (empty($boardIndex) || true) {
     $boardIndex = $discuss->hooks->load('board/getlist',$c);
     $modx->cacheManager->set($cacheKey,$boardIndex,3600);
 }

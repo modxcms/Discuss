@@ -51,6 +51,7 @@ $sbSql = $sbCriteria->toSql();
 
 /* get main query */
 $c = $modx->newQuery('disBoard');
+$c->query['distinct'] = 'DISTINCT';
 $c->select($modx->getSelectColumns('disBoard','disBoard'));
 $c->select(array(
     'category_name' => 'Category.name',
@@ -82,9 +83,13 @@ if (!empty($groups) && !$discuss->user->isAdmin) {
     $g = array(
         'UserGroups.usergroup:IN' => $groups,
     );
-    $g['OR:UserGroups.usergroup:='] = null;
+    $g['OR:UserGroups.usergroup:IS'] = null;
     $where[] = $g;
     $c->andCondition($where,null,2);
+} else {
+    $c->where(array(
+        'UserGroups.usergroup:IS' => null,
+    ));
 }
 if ($discuss->isLoggedIn) {
     $ignoreBoards = $discuss->user->get('ignore_boards');
