@@ -24,6 +24,10 @@ $c->innerJoin('disBoard','Board');
 $c->innerJoin('disUser','Author');
 $c->innerJoin('disPost','Thread');
 $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+$c->where(array(
+    'Board.status:!=' => disBoard::STATUS_INACTIVE,
+));
+
 $groups = $discuss->user->getUserGroups();
 if (!empty($groups) && !$discuss->user->isAdmin) {
     /* restrict boards by user group if applicable */

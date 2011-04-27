@@ -31,7 +31,10 @@ class disThread extends xPDOSimpleObject {
             'disThread.id' => $id,
         ));
         if ($type == disThread::TYPE_POST) {
-            $c->leftJoin('disBoard','Board');
+            $c->innerJoin('disBoard','Board');
+            $c->where(array(
+                'Board.status:!=' => disBoard::STATUS_INACTIVE,
+            ));
             $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
             $groups = $modx->discuss->user->getUserGroups();
             if (!empty($groups) && !$modx->discuss->user->isAdmin) {
@@ -101,6 +104,7 @@ class disThread extends xPDOSimpleObject {
         }
         $c->where(array(
             'Reads.thread' => null,
+            'Board.status:!=' => disBoard::STATUS_INACTIVE,
         ));
         if ($sinceLastLogin) {
             $lastLogin = $modx->discuss->user->get('last_login');
