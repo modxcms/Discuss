@@ -35,16 +35,26 @@ $board->save();
 if ($modx->user && $modx->user instanceof modUser) {
     $modx->user->profile = $modx->user->getOne('Profile');
     if ($modx->user->profile && $modx->user->profile instanceof modUserProfile) {
-        $profile = $modx->newObject('disUserProfile');
-        $profile->fromArray(array(
+        $disUser = $modx->newObject('disUser');
+        $disUser->fromArray($modx->user->profile->toArray());
+        $name = $modx->user->profile = $profile->get('fullname');
+        $name = explode(' ',$name);
+        $disUser->fromArray(array(
             'user' => $modx->user->get('id'),
+            'username' => $modx->user->get('username'),
             'createdon' => strftime('%Y-%m-%d %H:%M:%S'),
-            'email' => $modx->user->profile->get('email'),
+            'ip' => $_SERVER['REMOTE_ADDR'],
+            'synced' => true,
+            'syncedat' => strftime('%Y-%m-%d %H:%M:%S'),
+            'source' => 'internal',
             'confirmed' => true,
             'confirmedon' => strftime('%Y-%m-%d %H:%M:%S'),
-            'status' => disUserProfile::ACTIVE,
+            'status' => disUser::ACTIVE,
+            'name_first' => $name[0],
+            'name_last' => !empty($name[1]) ? $name[1] : '',
+            'salt' => $modx->user->get('salt'),
         ));
-        $profile->save();
+        $disUser->save();
     }
 }
             break;
