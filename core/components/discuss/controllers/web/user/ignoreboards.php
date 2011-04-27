@@ -32,17 +32,17 @@ if (!empty($_POST) && !empty($scriptProperties['boards'])) {
 $_groups = $modx->user->getUserGroups();
 $cacheKey = 'discuss/user/'.$user->get('id').'/ignoreboards';
 $boards = $modx->cacheManager->get($cacheKey);
-if (empty($boards)) {
+if (empty($boards) || !$modx->getOption('discuss.caching_enabled',null,false)) {
     $boards = array();
     $c = $modx->newQuery('disBoard');
     $c->select($modx->getSelectColumns('disBoard','disBoard'));
     $c->select(array(
-        'category_name' => 'Category.name',
-        'last_post_title' => 'LastPost.title',
-        'last_post_author' => 'LastPost.author',
-        'last_post_createdon' => 'LastPost.createdon',
-        'last_post_username' => 'LastPostAuthor.username',
-        'depth' => 'Ancestors.depth',
+        'Category.name AS category_name',
+        'LastPost.title AS last_post_title',
+        'LastPost.author AS last_post_author',
+        'LastPost.createdon AS last_post_createdon',
+        'LastPostAuthor.username AS last_post_username',
+        'Ancestors.depth AS depth',
     ));
     $c->innerJoin('disCategory','Category');
     $c->innerJoin('disBoardClosure','Descendants');

@@ -21,7 +21,7 @@ class disSearch {
         $c->innerJoin('disPostClosure','PostClosure','PostClosure.descendant = disPost.id AND PostClosure.ancestor != 0');
         $c->where(array(
             'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE)',
-            'disThread.private' => false,
+            'Thread.private' => false,
         ));
         if ($this->discuss->isLoggedIn) {
             $ignoreBoards = $this->discuss->user->get('ignore_boards');
@@ -34,8 +34,8 @@ class disSearch {
         $response['total'] = $this->modx->getCount('disPost',$c);
         $c->select($this->modx->getSelectColumns('disPost','disPost'));
         $c->select(array(
-            'username' => 'Author.username',
-            'board_name' => 'Board.name',
+            'Author.username AS username',
+            'Board.name AS board_name',
             'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE) AS score',
         ));
         $c->sortby('score','ASC');

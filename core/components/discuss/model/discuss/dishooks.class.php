@@ -43,7 +43,7 @@ class disHooks {
         if (empty($name)) return false;
 
         $success = false;
-        $hookFile = $this->discuss->config['hooksPath'].$name.'.php';
+        $hookFile = $this->discuss->config['hooksPath'].strtolower($name).'.php';
         if (file_exists($hookFile)) {
             $discuss =& $this->discuss;
             $modx =& $this->modx;

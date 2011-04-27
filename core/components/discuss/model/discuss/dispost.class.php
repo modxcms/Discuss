@@ -297,8 +297,8 @@ class disPost extends xPDOSimpleObject {
         $c = $this->xpdo->newQuery('disPost');
         $c->select($this->xpdo->getSelectColumns('disPost','disPost'));
         $c->select(array(
-            'author_username' => 'Author.username',
-            'board_name' => 'Board.name',
+            'Author.username AS author_username',
+            'Board.name AS board_name',
         ));
         $c->innerJoin('modUser','Author');
         $c->innerJoin('disBoard','Board');
@@ -325,7 +325,7 @@ class disPost extends xPDOSimpleObject {
         $c = $this->xpdo->newQuery('disPost');
         $c->select($this->xpdo->getSelectColumns('disPost','disPost'));
         $c->select(array(
-            'depth' => 'Descendants.depth',
+            'Descendants.depth AS depth',
         ));
         $c->innerJoin('disPostClosure','Descendants');
         $c->innerJoin('disPostClosure','Ancestors');

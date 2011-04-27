@@ -22,8 +22,9 @@ if (!$disUser->save()) {
 }
 
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);
+/*
 if (!empty($_REQUEST['discuss']) && !empty($forumsResourceId)) {
     $url = $modx->makeUrl($forumsResourceId,'','','full').'user/?user='.$disUser->get('id');
     $modx->sendRedirect($url);
-}
+}*/
 return true;

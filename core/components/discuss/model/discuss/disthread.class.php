@@ -54,12 +54,12 @@ class disThread extends xPDOSimpleObject {
                 'Users.user' => $modx->discuss->user->get('id'),
             ));
             $c->select(array(
-                'participants_usernames' => '(SELECT GROUP_CONCAT(sqThreadUser.username)
+                '(SELECT GROUP_CONCAT(sqThreadUser.username)
                     FROM '.$modx->getTableName('disThreadUser').' AS sqThreadUsers
                         INNER JOIN '.$modx->getTableName('disUser').' AS sqThreadUser
                         ON sqThreadUser.id = sqThreadUsers.user
                     WHERE sqThreadUsers.thread = disThread.id
-                 )',
+                 ) AS participants_usernames',
             ));
         }
         $thread = $modx->getObject('disThread',$c);
@@ -90,7 +90,7 @@ class disThread extends xPDOSimpleObject {
         $c->innerJoin('disPost','FirstPost');
         $c->innerJoin('disPost','LastPost');
         $c->innerJoin('disUser','FirstAuthor');
-        $c->leftJoin('disThreadRead','Reads');
+        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
         $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
         $groups = $modx->discuss->user->getUserGroups();
         if (!empty($groups) && !$modx->discuss->user->isAdmin) {
@@ -103,7 +103,7 @@ class disThread extends xPDOSimpleObject {
             $c->andCondition($where,null,2);
         }
         $c->where(array(
-            'Reads.thread' => null,
+            'Reads.thread:IS' => null,
             'Board.status:!=' => disBoard::STATUS_INACTIVE,
         ));
         if ($sinceLastLogin) {
@@ -125,15 +125,14 @@ class disThread extends xPDOSimpleObject {
         $response['total'] = $modx->getCount('disThread',$c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
-            'board_name' => 'Board.name',
+            'Board.name AS board_name',
+            'FirstPost.title AS title',
+            'FirstPost.thread AS thread',
+            'FirstAuthor.username AS author_username',
 
-            'title' => 'FirstPost.title',
-            'thread' => 'FirstPost.thread',
-            'author_username' => 'FirstAuthor.username',
-
-            'post_id' => 'LastPost.id',
-            'createdon' => 'LastPost.createdon',
-            'author' => 'LastPost.author',
+            'LastPost.id AS post_id',
+            'LastPost.createdon AS createdon',
+            'LastPost.author AS author',
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);

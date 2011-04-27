@@ -10,7 +10,7 @@ $c->select(array(
     'disPost.createdon',
     'disPost.author',
     'Author.username',
-    'thread' => 'Thread.id',
+    'Thread.id AS thread',
 ));
 if ($discuss->isLoggedIn) {
     $ignoreBoards = $discuss->user->get('ignore_boards');

@@ -50,10 +50,10 @@ $c->select(array(
     'disThread.sticky',
     'disThread.locked',
     'FirstPost.title',
-    'board_name' => 'Board.name',
-    'post_id' => 'LastPost.id',
-    'author' => 'LastPost.author',
-    'author_username' => 'LastAuthor.username',
+    'Board.name AS board_name',
+    'LastPost.id AS post_id',
+    'LastPost.author AS author',
+    'LastAuthor.username AS author_username',
 ));
 if (!empty($scriptProperties['showIfParticipating'])) {
     $c->select(array(

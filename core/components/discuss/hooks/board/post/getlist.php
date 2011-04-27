@@ -20,15 +20,16 @@ $c->where(array(
 $response['total'] = $modx->getCount('disThread',$c);
 $c->select(array(
     'LastPost.*',
-    'last_post_id' => 'LastPost.id',
+    'LastPost.id AS last_post_id',
     'FirstPost.title',
     'LastAuthor.username',
+    'LastAuthor.user AS user',
     'disThread.id',
     'disThread.replies',
     'disThread.views',
     'disThread.sticky',
     'disThread.locked',
-    'viewed' => 'Reads.thread',
+    'Reads.thread AS viewed',
     '(SELECT GROUP_CONCAT(pAuthor.id)
         FROM '.$modx->getTableName('disPost').' AS pPost
         INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author

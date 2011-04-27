@@ -493,13 +493,13 @@ class disBoard extends xPDOSimpleObject {
         $c->query['distinct'] = 'DISTINCT';
         $c->select($modx->getSelectColumns('disBoard','disBoard'));
         $c->select(array(
-            'category_name' => 'Category.name',
+            'Category.name AS category_name',
             '('.$sbSql.') AS '.$modx->escape('subboards'),
             '('.$unreadSql.') AS '.$modx->escape('unread'),
-            'last_post_title' => 'LastPost.title',
-            'last_post_author' => 'LastPost.author',
-            'last_post_createdon' => 'LastPost.createdon',
-            'last_post_username' => 'LastPostAuthor.username',
+            'LastPost.title AS last_post_title',
+            'LastPost.author AS last_post_author',
+            'LastPost.createdon AS last_post_createdon',
+            'LastPostAuthor.username AS last_post_username',
         ));
         $c->sortby('Category.rank','ASC');
         $c->sortby('disBoard.rank','ASC');
