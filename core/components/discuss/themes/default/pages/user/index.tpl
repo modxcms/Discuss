@@ -14,29 +14,29 @@
     <th>[[%discuss.posts]]</th>
     <td>[[+posts]]</td>
 </tr>
-<tr>
+[[+ip:notempty=`<tr>
     <th>[[%discuss.ip? &namespace=`discuss` &topic=`web`]]:</th>
     <td>[[+ip]]</td>
-</tr>
+</tr>`]]
 <tr>
     <th>[[%discuss.date_registered]]:</th>
     <td>[[+createdon:strtotime:date=`%b %d, %Y`]]</td>
 </tr>
-<tr>
+[[+last_active:notempty=`<tr>
     <th>[[%discuss.last_online]]:</th>
-    <td>[[+last_active:strtotime:date=`[[++discuss.date_format]]`]]</td>
+    <td>[[+last_active]]</td>
 </tr>
 <tr>
     <th>[[%discuss.last_reading]]:</th>
     <td><a href="[[~[[*id]]]]thread/?thread=[[+lastThread.thread]]#dis-post-[[+lastThread.id]]">[[+lastThread.title]]</a></td>
-</tr>
+</tr>`]]
 <tr>
     <td colspan="2"><hr /></td>
 </tr>
-<tr>
+[[+email:notempty=`<tr>
     <th>[[%discuss.email]]:</th>
     <td>[[+email]]</td>
-</tr>
+</tr>`]]
 <tr>
     <th>[[%discuss.website]]:</th>
     <td>[[+website]]</td>

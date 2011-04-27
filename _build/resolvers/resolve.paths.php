@@ -25,12 +25,12 @@ if ($object->xpdo) {
             $modx =& $object->xpdo;
 
             /* setup paths */
-            createSetting($modx,'core_path',$modx->getOption('core_path').'components/discuss/');
-            createSetting($modx,'assets_path',$modx->getOption('assets_path').'components/discuss/');
+            //createSetting($modx,'core_path',$modx->getOption('core_path').'components/discuss/');
+            //createSetting($modx,'assets_path',$modx->getOption('assets_path').'components/discuss/');
             createSetting($modx,'attachments_path',$modx->getOption('assets_path').'components/discuss/attachments/');
 
             /* setup urls */
-            createSetting($modx,'assets_url',$modx->getOption('assets_url').'components/discuss/');
+            //createSetting($modx,'assets_url',$modx->getOption('assets_url').'components/discuss/');
             createSetting($modx,'files_url',$modx->getOption('assets_url').'components/discuss/files/');
             createSetting($modx,'attachments_url',$modx->getOption('assets_url').'components/discuss/attachments/');
         break;

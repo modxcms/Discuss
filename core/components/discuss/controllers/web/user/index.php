@@ -41,7 +41,8 @@ switch ($user->get('gender')) {
 }
 
 /* get last visited thread */
-$lastThread = $user->getOne('ThreadLastVisited');
+$placeholders['last_reading'] = '';
+$lastThread = $user->getLastVisitedThread();
 if ($lastThread) {
     $firstPost = $modx->getObject('disPost',$lastThread->get('post_first'));
     $placeholders = array_merge($placeholders,$lastThread->toArray('lastThread.'));
@@ -57,6 +58,19 @@ $recent = $discuss->hooks->load('post/recent',array(
 $placeholders['recent_posts'] = $recent['results'];
 unset($recent);
 
+if (!$user->get('show_email') && !$discuss->user->isAdmin()) {
+    $placeholders['email'] = '';
+}
+if (!$user->get('show_online') && !$discuss->user->isAdmin()) {
+    $placeholders['last_active'] = '';
+} elseif (!empty($placeholders['last_active']) && $placeholders['last_active'] != '-001-11-30 00:00:00') {
+    $placeholders['last_active'] = strftime($discuss->dateFormat,strtotime($placeholders['last_active']));
+} else {
+    $placeholders['last_active'] = '';
+}
+if ($modx->hasPermission('discuss.track_ip')) {
+    $placeholders['ip'] = '';
+}
 
 /* do output */
 $placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');

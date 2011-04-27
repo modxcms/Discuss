@@ -187,16 +187,6 @@ $settings['discuss.hot_thread_threshold']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
-$settings['discuss.load_jquery']= $modx->newObject('modSystemSetting');
-$settings['discuss.load_jquery']->fromArray(array(
-    'key' => 'discuss.load_jquery',
-    'value' => false,
-    'xtype' => 'combo-boolean',
-    'namespace' => 'discuss',
-    'area' => 'General',
-),'',true,true);
-
-
 $settings['discuss.max_post_depth']= $modx->newObject('modSystemSetting');
 $settings['discuss.max_post_depth']->fromArray(array(
     'key' => 'discuss.max_post_depth',
@@ -321,6 +311,52 @@ $settings['discuss.user_active_threshold']->fromArray(array(
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'General',
+),'',true,true);
+
+/* SSO Settings */
+$settings['discuss.login_resource_id']= $modx->newObject('modSystemSetting');
+$settings['discuss.login_resource_id']->fromArray(array(
+    'key' => 'discuss.login_resource_id',
+    'value' => 0,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'SSO',
+),'',true,true);
+
+$settings['discuss.register_resource_id']= $modx->newObject('modSystemSetting');
+$settings['discuss.register_resource_id']->fromArray(array(
+    'key' => 'discuss.register_resource_id',
+    'value' => 0,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'SSO',
+),'',true,true);
+
+$settings['discuss.update_profile_resource_id']= $modx->newObject('modSystemSetting');
+$settings['discuss.update_profile_resource_id']->fromArray(array(
+    'key' => 'discuss.update_profile_resource_id',
+    'value' => 0,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'SSO',
+),'',true,true);
+
+$settings['discuss.forums_resource_id']= $modx->newObject('modSystemSetting');
+$settings['discuss.forums_resource_id']->fromArray(array(
+    'key' => 'discuss.forums_resource_id',
+    'value' => 0,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'SSO',
+),'',true,true);
+
+$settings['discuss.sso_mode']= $modx->newObject('modSystemSetting');
+$settings['discuss.sso_mode']->fromArray(array(
+    'key' => 'discuss.sso_mode',
+    'value' => 1,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'SSO',
 ),'',true,true);
 
 /*

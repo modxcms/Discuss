@@ -279,4 +279,25 @@ class disUser extends xPDOSimpleObject {
         $response['results'] = $modx->getCollection('disUser',$c);
         return $response;
     }
+
+    public function getLastVisitedThread() {
+        $c = $this->xpdo->newQuery('disThread');
+        $c->innerJoin('disBoard','Board');
+        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+        $groups = $this->xpdo->discuss->user->getUserGroups();
+        if (!empty($groups) && !$this->xpdo->discuss->user->isAdmin()) {
+            /* restrict boards by user group if applicable */
+            $g = array(
+                'UserGroups.usergroup:IN' => $groups,
+            );
+            $g['OR:UserGroups.usergroup:='] = null;
+            $where[] = $g;
+            $c->andCondition($where,null,2);
+        }
+        $c->where(array(
+            'Board.status:!=' => disBoard::STATUS_INACTIVE,
+            'id' => $this->get('thread_last_visited'),
+        ));
+        return $this->xpdo->getObject('disThread',$c);
+    }
 }

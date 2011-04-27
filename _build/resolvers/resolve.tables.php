@@ -24,6 +24,7 @@ if ($object->xpdo) {
             $manager->createObjectContainer('disModerator');
             $manager->createObjectContainer('disThread');
             $manager->createObjectContainer('disThreadRead');
+            $manager->createObjectContainer('disThreadUser');
             $manager->createObjectContainer('disPost');
             $manager->createObjectContainer('disPostAttachment');
             $manager->createObjectContainer('disPostClosure');
