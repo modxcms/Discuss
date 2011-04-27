@@ -35,12 +35,12 @@ $c->select(array(
     'disThread.sticky',
     'disThread.locked',
     'FirstPost.title',
-    'post_id' => 'LastPost.id',
-    'author' => 'LastPost.author',
-    'author_username' => 'LastAuthor.username',
-    'author_first' => 'FirstAuthor.id',
-    'author_first_username' => 'FirstAuthor.username',
-    'viewed' => 'Reads.thread',
+    'LastPost.id AS post_id',
+    'LastPost.author AS author',
+    'LastAuthor.username AS author_username',
+    'FirstAuthor.id AS author_first',
+    'FirstAuthor.username AS author_first_username',
+    'Reads.thread AS viewed',
 ));
 $c->sortby('LastPost.createdon','DESC');
 $c->limit($limit,$start);

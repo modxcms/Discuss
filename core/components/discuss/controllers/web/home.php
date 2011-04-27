@@ -80,6 +80,7 @@ if ($modx->getOption('discuss.show_whos_online',null,true) && $modx->hasPermissi
 $placeholders['totalMembersActive'] = number_format((int)$modx->getCount('disSession',array('user:!=' => 0)));
 $placeholders['totalVisitorsActive'] = number_format((int)$modx->getCount('disSession',array('user' => 0)));
 
+/* recent posts */
 $recent = $discuss->hooks->load('post/recent');
 $placeholders['recent_posts'] = $recent['results'];
 unset($recent);

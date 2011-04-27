@@ -91,7 +91,7 @@ if ($discuss->user->get('user') != 0) {
 $discuss->hooks->load('pagination/build',array(
     'count' => $posts['total'],
     'id' => $thread->get('id'),
-    'view' => 'thread/',
+    'view' => 'messages/view',
     'limit' => $posts['limit'],
 ));
 
