@@ -37,7 +37,7 @@ if ($modx->user && $modx->user instanceof modUser) {
     if ($modx->user->profile && $modx->user->profile instanceof modUserProfile) {
         $disUser = $modx->newObject('disUser');
         $disUser->fromArray($modx->user->profile->toArray());
-        $name = $modx->user->profile = $profile->get('fullname');
+        $name = $modx->user->profile = $modx->user->profile->get('fullname');
         $name = explode(' ',$name);
         $disUser->fromArray(array(
             'user' => $modx->user->get('id'),

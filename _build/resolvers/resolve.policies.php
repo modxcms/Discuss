@@ -44,7 +44,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $adminGroup = $modx->getObject('modUserGroup',array('name' => 'Administrator'));
         if ($policy && $adminGroup) {
             $access = $modx->getObject('modAccessContext',array(
-                'target' => 'mgr',
+                'target' => 'web',
                 'principal_class' => 'modUserGroup',
                 'principal' => $adminGroup->get('id'),
                 'authority' => 9999,
@@ -53,7 +53,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             if (!$access) {
                 $access = $modx->newObject('modAccessContext');
                 $access->fromArray(array(
-                    'target' => 'mgr',
+                    'target' => 'web',
                     'principal_class' => 'modUserGroup',
                     'principal' => $adminGroup->get('id'),
                     'authority' => 9999,

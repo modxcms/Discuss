@@ -112,19 +112,16 @@ class DisRequest {
      * @return string The final wrapped output, or blank if not in debug.
      */
     public function output($output = '',array $properties = array()) {
-        if ($this->modx->getOption('discuss.debug',null,false)) {
-            $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview'));
+        $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview'));
+        if ($this->modx->getOption('discuss.debug',null,false) && false) {
             if (!$emptyTpl && $this->debugTimer !== false) {
                 $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";
             }
-            $c = $this->getControllerFile('wrapper');
-            $placeholders = $this->loadController($c);
-            $placeholders['content'] = $output;
-            return $emptyTpl ? $output : $this->getPage($c,$placeholders);
         }
-
-        $this->modx->toPlaceholders($properties);
-        return $output;
+        $c = $this->getControllerFile('wrapper');
+        $placeholders = $this->loadController($c);
+        $placeholders['content'] = $output;
+        return $emptyTpl ? $output : $this->getPage($c,$placeholders);
     }
 
 	/**

@@ -22,9 +22,6 @@ class Discuss {
         $this->modx =& $modx;
 
         $corePath = $this->modx->getOption('discuss.core_path',$config,$this->modx->getOption('core_path').'components/discuss/');
-		if ($this->modx->getOption('discuss.debug',null,false)) {
-			$corePath = $this->modx->getOption('discuss.core_path');
-		}
         $assetsPath = $this->modx->getOption('discuss.assets_path',$config,$this->modx->getOption('assets_path').'components/discuss/');
         $assetsUrl = $this->modx->getOption('discuss.assets_url',$config,$this->modx->getOption('assets_url').'components/discuss/');
 		$themesUrl = $this->modx->getOption('discuss.themes_url',$config,$assetsUrl.'themes/');
@@ -141,6 +138,7 @@ class Discuss {
         $this->isLoggedIn = $this->modx->user->hasSessionContext($this->modx->context->get('key'));
         if (!$this->isLoggedIn) {
             $this->user =& $this->modx->newObject('disUser');
+            $this->user->set('id',0);
             $this->user->set('user',0);
             $this->user->set('username','(anonymous)');
             $this->user->isLoggedIn = false;
@@ -244,7 +242,7 @@ class Discuss {
             $activity->set('hits',($activity->get('hits')+1));
             $activity->save();
         }
-        $session->set('user',$this->user->get('id'));
+        $session->set('user',$this->user->get('id') < 1 ? 0 : $this->user->get('id'));
         $session->set('access',time());
         $session->set('data','');
         $session->save();
