@@ -42,6 +42,7 @@ class Discuss {
 
             'corePath' => $corePath,
             'modelPath' => $corePath.'model/',
+            'themePath' => $corePath.'themes/'.$theme.'/',
             'chunksPath' => $corePath.'themes/'.$theme.'/chunks/',
             'pagesPath' => $corePath.'themes/'.$theme.'/pages/',
             'controllersPath' => $corePath.'controllers/',

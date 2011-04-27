@@ -3,6 +3,7 @@
  * Theme manifest for default theme
  */
 $manifest = array(
+    'preview' => 'preview.png',
     'global' => array(
         'css' => array(
             'header' => array(

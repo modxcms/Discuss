@@ -136,7 +136,7 @@ class DisRequest {
 	public function loadThemeOptions() {
         $additional = $this->controller['controller'];
         
-        $f = $this->discuss->config['pagesPath'].'manifest.php';
+        $f = $this->discuss->config['themePath'].'manifest.php';
         if (file_exists($f)) {
             $manifest = require $f;
 
