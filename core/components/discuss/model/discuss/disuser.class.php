@@ -33,6 +33,10 @@ class disUser extends xPDOSimpleObject {
         return $avatarUrl;
     }
 
+    /**
+     * Parse and return the signature for this user
+     * @return string
+     */
     public function parseSignature() {
         $message = $this->get('signature');
         if (!empty($message)) {
@@ -122,13 +126,23 @@ class disUser extends xPDOSimpleObject {
         return $message;
     }
 
+    /**
+     * Strip BBCode from a string
+     * 
+     * @param $str
+     * @return mixed
+     */
     public function stripBBCode($str) {
          $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
          $replace = '';
          return preg_replace($pattern, $replace, $str);
     }
     
-    /* get a count of # of messages */
+    /**
+     * Get a count of # of unread messages for the user
+     * 
+     * @return int
+     */
     public function countUnreadMessages() {
         $c = $this->xpdo->newQuery('disThread');
         $c->innerJoin('disThreadUser','Users');
@@ -141,6 +155,11 @@ class disUser extends xPDOSimpleObject {
         return $this->xpdo->getCount('disThread',$c);
     }
 
+    /**
+     * Clear the cache for this User
+     * 
+     * @return void
+     */
     public function clearCache() {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             $this->xpdo->getCacheManager();
@@ -196,21 +215,25 @@ class disUser extends xPDOSimpleObject {
         return $message;
     }
 
+    /**
+     * Get user groups for the active user
+     *
+     * @return array An array of user groups
+     */
     public function getUserGroups() {
         $groups = array();
         $this->getOne('User');
         if ($this->User) {
             $groups = $this->User->getUserGroups();
-
-            $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'Forum Administrator,Administrator');
-            $adminGroups = explode(',',$adminGroups);
-            if ($this->User->isMember($adminGroups)) {
-                $this->isAdmin = true;
-            }
+            $this->isAdmin();
         }
         return $groups;
     }
 
+    /**
+     * Return whether or not the user is an Administrator
+     * @return boolean
+     */
     public function isAdmin() {
         if (!isset($this->isAdmin)) {
             $this->isAdmin = false;
@@ -222,5 +245,38 @@ class disUser extends xPDOSimpleObject {
             }
         }
         return $this->isAdmin;
+    }
+
+    /**
+     * Fetch a list of active users in the forum
+     *
+     * @static
+     * @param xPDO $modx A reference to the modX object
+     * @param int $timeAgo If set, will grab within X seconds
+     * @param int $limit Limit results to this number
+     * @param int $start Start at this index
+     * @return array A response array of active users
+     */
+    public static function fetchActive(xPDO &$modx,$timeAgo = 0,$limit = 0,$start = 0) {
+        $response = array();
+        $c = $modx->newQuery('disUser');
+        $c->innerJoin('disSession','Session',$modx->getSelectColumns('disSession','Session','',array('user')).' = '.$modx->getSelectColumns('disUser','disUser','',array('id')));
+        $c->innerJoin('modUser','User');
+        $c->leftJoin('modUserGroupMember','UserGroupMembers','User.id = UserGroupMembers.member');
+        $c->leftJoin('modUserGroup','UserGroup','UserGroup.id = UserGroupMembers.user_group');
+        $c->leftJoin('disUserGroupProfile','UserGroupProfile','UserGroupProfile.usergroup = UserGroup.id AND UserGroupProfile.color != ""');
+        if (!empty($timeAgo)) {
+            $c->where(array(
+                'Session.access:>=' => $timeAgo,
+            ));
+        }
+        if (!empty($limit)) {
+            $c->limit($limit,$start);
+        }
+        $response['total'] = $modx->getCount('disUser',$c);
+        $c->sortby('UserGroupProfile.color','ASC');
+        $c->sortby('Session.access','ASC');
+        $response['results'] = $modx->getCollection('disUser',$c);
+        return $response;
     }
 }
