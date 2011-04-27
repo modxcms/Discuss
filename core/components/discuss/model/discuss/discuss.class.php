@@ -143,6 +143,7 @@ class Discuss {
             $this->user =& $this->modx->newObject('disUser');
             $this->user->set('user',0);
             $this->user->set('username','(anonymous)');
+            $this->user->isLoggedIn = false;
         } else {
             /* we are logged into MODX, check for user in Discuss */
             $this->user = $this->modx->getObject('disUser',array('user' => $this->modx->user->get('id')));
@@ -181,6 +182,7 @@ class Discuss {
                 $this->user->set('ip',$this->getIp());
                 $this->user->save();
             }
+            $this->user->isLoggedIn = true;
         }
 
         /* topbar profile links. @TODO: Move this somewhere else. */

@@ -47,6 +47,14 @@ Dis.panel.Board = function(config) {
                     ,width: 300
                     ,allowBlank: false
                 },{
+                    xtype: 'dis-combo-board-status'
+                    ,fieldLabel: _('discuss.board_status')
+                    ,description: _('discuss.board_status')
+                    ,name: 'status'
+                    ,hiddenName: 'status'
+                    ,width: 300
+                    ,allowBlank: false
+                },{
                     xtype: 'textarea'
                     ,fieldLabel: _('description')
                     ,name: 'description'

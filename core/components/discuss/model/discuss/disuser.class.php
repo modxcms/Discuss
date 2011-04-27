@@ -9,6 +9,9 @@ class disUser extends xPDOSimpleObject {
     const BANNED = 3;
     const AWAITING_MODERATION = 4;
 
+    public $isAdmin;
+    public $isLoggedIn = false;
+
     /**
      * Gets the avatar URL for this user, depending on the avatar service.
      * @return string
@@ -206,5 +209,18 @@ class disUser extends xPDOSimpleObject {
             }
         }
         return $groups;
+    }
+
+    public function isAdmin() {
+        if (!isset($this->isAdmin)) {
+            $this->isAdmin = false;
+            $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'');
+            $adminGroups = explode(',',$adminGroups);
+            $level = 9999;
+            if ($this->xpdo->user->isMember($adminGroups)) {
+                $this->isAdmin = true;
+            }
+        }
+        return $this->isAdmin;
     }
 }

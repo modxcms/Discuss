@@ -6,6 +6,10 @@
  * @package discuss
  */
 class disBoard extends xPDOSimpleObject {
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_ARCHIVED = 2;
+    
     /**
      *  @var boolean $parentChanged Monitors whether parent has been changed.
      *  @access protected
@@ -275,7 +279,7 @@ class disBoard extends xPDOSimpleObject {
             $sbs = array();
             foreach ($subboards as $subboard) {
                 $sb = explode(':',$subboard);
-                $sbs[] = '<a href="[[~[[*id]]]]board/?board='.$sb[0].'">'.$sb[1].'</a>';
+                $sbs[] = '<a href="'.$this->xpdo->discuss->url.'board/?board='.$sb[0].'">'.$sb[1].'</a>';
             }
             $sbl = $this->xpdo->lexicon('discuss.subforums').': '.implode(',',$sbs);
         }
@@ -368,6 +372,11 @@ class disBoard extends xPDOSimpleObject {
         return true;
     }
 
+    /**
+     * Clear the cache for this board
+     * 
+     * @return void
+     */
     public function clearCache() {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             $this->xpdo->getCacheManager();
@@ -381,19 +390,121 @@ class disBoard extends xPDOSimpleObject {
      */
     public function canPost() {
         $canPost = false;
-        if ($this->xpdo->discuss->isLoggedIn) {
-            $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'');
-            $adminGroups = explode(',',$adminGroups);
+        if ($this->xpdo->discuss->user->isLoggedIn) {
             $level = 9999;
-            if ($this->xpdo->user->isMember($adminGroups)) {
+            if ($this->xpdo->discuss->user->isAdmin()) {
                 $level = 0;
             } elseif ($this->isModerator($this->xpdo->discuss->user->get('id'))) {
                 $level = 1;
             }
-            if ($level <= $this->get('minimum_post_level')) {
+            /* only allow posts if meeting minimum level
+             * AND if board is not archived (and user is not an admin, who can post to archived boards)
+            */
+            if ($level <= $this->get('minimum_post_level') && ($this->get('status') != disBoard::STATUS_ARCHIVED || $level == 0)) {
                 $canPost = true;
             }
         }
         return $canPost;
+    }
+
+    public static function getList(xPDO &$modx,$board = 0,$category = false) {
+        $response = array();
+        
+        $unreadSubCriteria = $modx->newQuery('disThreadRead');
+        $unreadSubCriteria->select($modx->getSelectColumns('disThreadRead','disThreadRead','',array('thread')));
+        $unreadSubCriteria->where(array(
+            'disThreadRead.user' => $modx->discuss->user->get('id'),
+            $modx->getSelectColumns('disThreadRead','disThreadRead','',array('board')).' = '.$modx->getSelectColumns('disBoard','disBoard','',array('id')),
+        ));
+        $unreadSubCriteria->prepare();
+        $unreadSubCriteriaSql = $unreadSubCriteria->toSql();
+        $unreadCriteria = $modx->newQuery('disThread');
+        $unreadCriteria->setClassAlias('dp');
+        $unreadCriteria->select('COUNT('.$modx->getSelectColumns('disThread','','',array('id')).')');
+        $unreadCriteria->where(array(
+            $modx->getSelectColumns('disThread','','',array('id')).' NOT IN ('.$unreadSubCriteriaSql.')',
+            $modx->getSelectColumns('disThread','','',array('board')).' = '.$modx->getSelectColumns('disBoard','disBoard','',array('id')),
+        ));
+        $unreadCriteria->prepare();
+        $unreadSql = $unreadCriteria->toSql();
+
+
+        /* subboards sql */
+        $sbCriteria = $modx->newQuery('disBoard');
+        $sbCriteria->setClassAlias('subBoard');
+        $sbCriteria->select('GROUP_CONCAT(CONCAT_WS(":",subBoardClosureBoard.id,subBoardClosureBoard.name) SEPARATOR "||") AS name');
+        $sbCriteria->innerJoin('disBoardClosure','subBoardClosure','subBoardClosure.ancestor = subBoard.id');
+        $sbCriteria->innerJoin('disBoard','subBoardClosureBoard','subBoardClosureBoard.id = subBoardClosure.descendant');
+        $sbCriteria->where(array(
+            'subBoard.id = disBoard.id',
+            'subBoard.status:!=' => disBoard::STATUS_INACTIVE,
+            'subBoardClosureBoard.status:!=' => disBoard::STATUS_INACTIVE,
+            'subBoardClosure.descendant != disBoard.id',
+            'subBoardClosure.depth' => 1,
+        ));
+        $sbCriteria->groupby($modx->getSelectColumns('disBoard','subBoard','',array('id')));
+        $sbCriteria->prepare();
+        $sbSql = $sbCriteria->toSql();
+
+        /* get main query */
+        $c = $modx->newQuery('disBoard');
+        $c->innerJoin('disCategory','Category');
+        $c->innerJoin('disBoardClosure','Descendants');
+        $c->leftJoin('disPost','LastPost');
+        $c->leftJoin('disUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
+        $c->leftJoin('disBoardUserGroup','UserGroups');
+        $c->where(array(
+            'disBoard.status:!=' => disBoard::STATUS_INACTIVE,
+        ));
+        if (isset($board) && $board !== null) {
+            $c->where(array(
+                'disBoard.parent' => $board,
+            ));
+        }
+        if (!empty($category)) {
+            $c->where(array(
+                'disBoard.category' => $category,
+            ));
+        }
+        $groups = $modx->discuss->user->getUserGroups();
+        if (!empty($groups) && !$modx->discuss->user->isAdmin()) {
+            /* restrict boards by user group if applicable */
+            $g = array(
+                'UserGroups.usergroup:IN' => $groups,
+            );
+            $g['OR:UserGroups.usergroup:IS'] = null;
+            $where[] = $g;
+            $c->andCondition($where,null,2);
+        } else {
+            $c->where(array(
+                'UserGroups.usergroup:IS' => null,
+            ));
+        }
+        if ($modx->discuss->isLoggedIn) {
+            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
+            if (!empty($ignoreBoards)) {
+                $c->where(array(
+                    'id:NOT IN' => explode(',',$ignoreBoards),
+                ));
+            }
+        }
+
+        $response['total'] = $modx->getCount('disBoard',$c);
+        $c->query['distinct'] = 'DISTINCT';
+        $c->select($modx->getSelectColumns('disBoard','disBoard'));
+        $c->select(array(
+            'category_name' => 'Category.name',
+            '('.$sbSql.') AS '.$modx->escape('subboards'),
+            '('.$unreadSql.') AS '.$modx->escape('unread'),
+            'last_post_title' => 'LastPost.title',
+            'last_post_author' => 'LastPost.author',
+            'last_post_createdon' => 'LastPost.createdon',
+            'last_post_username' => 'LastPostAuthor.username',
+        ));
+        $c->sortby('Category.rank','ASC');
+        $c->sortby('disBoard.rank','ASC');
+        $response['results'] = $modx->getCollection('disBoard',$c);
+
+        return $response;
     }
 }

@@ -51,7 +51,7 @@ Dis.combo.MinimumPostLevel = function(config) {
     Ext.applyIf(config,{
         store: new Ext.data.SimpleStore({
             fields: ['d','v']
-            ,data: [[_('discuss.member'),''],[_('discuss.moderator'),'moderator'],[_('discuss.admin'),'admin']]
+            ,data: [[_('discuss.member'),9999],[_('discuss.moderator'),1],[_('discuss.admin'),0]]
         })
         ,name: 'minimum_post_level'
         ,hiddenName: 'minimum_post_level'
@@ -69,3 +69,28 @@ Dis.combo.MinimumPostLevel = function(config) {
 };
 Ext.extend(Dis.combo.MinimumPostLevel,MODx.combo.ComboBox);
 Ext.reg('dis-combo-minimum-post-level',Dis.combo.MinimumPostLevel);
+
+
+Dis.combo.BoardStatus = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [[_('discuss.active'),1],[_('discuss.inactive'),0],[_('discuss.archived'),2]]
+        })
+        ,name: 'status'
+        ,hiddenName: 'status'
+        ,width: 200
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,pageSize: 20
+        ,selectOnFocus: false
+        ,preventRender: true
+    });
+    Dis.combo.BoardStatus.superclass.constructor.call(this,config);
+};
+Ext.extend(Dis.combo.BoardStatus,MODx.combo.ComboBox);
+Ext.reg('dis-combo-board-status',Dis.combo.BoardStatus);
