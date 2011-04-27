@@ -5,11 +5,15 @@
 class disThread extends xPDOSimpleObject {
     const TYPE_POST = 'post';
     const TYPE_MESSAGE = 'message';
+    
     /**
+     * Fetch a thread, but check permissions first
+     * 
      * @static
-     * @param xPDO $modx
+     * @param xPDO $modx A reference to the modX instance
      * @param $id The ID of the thread
-     * @return disThread/null
+     * @param string $type The type of thread: post/message
+     * @return disThread/null The returned, grabbed thread; or false/null if not found/accessible
      */
     public static function fetch(xPDO &$modx, $id, $type = disThread::TYPE_POST) {
         $c = $modx->newQuery('disThread');
@@ -65,13 +69,16 @@ class disThread extends xPDOSimpleObject {
     }
 
     /**
+     * Fetch all unread, accessible threads
+     * 
      * @static
-     * @param xPDO $modx
-     * @param string $sortBy
-     * @param string $sortDir
-     * @param int $limit
-     * @param int $start
-     * @return array
+     * @param xPDO $modx A reference to the modX instance
+     * @param string $sortBy The column to sort by
+     * @param string $sortDir The direction to sort
+     * @param int $limit The # of threads to limit
+     * @param int $start The index to start by
+     * @param boolean $sinceLastLogin
+     * @return array An array in results/total format
      */
     public static function fetchUnread(xPDO &$modx,$sortBy = 'LastPost.createdon',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
         $response = array();
@@ -131,12 +138,23 @@ class disThread extends xPDOSimpleObject {
         return $response;
     }
 
+    /**
+     * Override remove() to clear thread cache
+     *
+     * @param array $ancestors
+     * @return boolean
+     */
     public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
         $this->clearCache();
         return $removed;
     }
 
+    /**
+     * Clear cache for this thread
+     *
+     * @return void
+     */
     public function clearCache() {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             $this->xpdo->getCacheManager();
@@ -150,6 +168,7 @@ class disThread extends xPDOSimpleObject {
      * Gets the viewing message for the bottom of the thread
      *
      * @access public
+     * @param string $placePrefix
      * @return string The who is viewing message
      */
     public function getViewing($placePrefix = 'thread') {
@@ -197,6 +216,7 @@ class disThread extends xPDOSimpleObject {
      * Marks a post read by the currently logged in user.
      *
      * @access public
+     * @param int $user
      * @return boolean True if successful.
      */
     public function read($user) {
@@ -222,6 +242,7 @@ class disThread extends xPDOSimpleObject {
      * Marks a post unread by the currently logged in user.
      *
      * @access public
+     * @param int $user
      * @return boolean True if successful.
      */
     public function unread($user) {
@@ -238,27 +259,52 @@ class disThread extends xPDOSimpleObject {
         return $removed;
     }
 
+    /**
+     * Make thread sticky
+     * 
+     * @return boolean
+     */
     public function stick() {
         $this->set('sticky',true);
         return $this->save();
     }
 
+    /**
+     * Make thread unsticky
+     *
+     * @return boolean
+     */
     public function unstick() {
         $this->set('sticky',false);
         return $this->save();
     }
 
+    /**
+     * Lock thread
+     *
+     * @return boolean
+     */
     public function lock() {
         $this->set('locked',true);
         return $this->save();
     }
 
+    /**
+     * Unlock thread
+     *
+     * @return boolean
+     */
     public function unlock() {
         $this->set('locked',false);
         return $this->save();
     }
 
-
+    /**
+     * Check if a user (by id) has a subscription to this thread
+     *
+     * @param int $userId ID of disUser
+     * @return bool True if has a subscription
+     */
     public function hasSubscription($userId) {
         return $this->xpdo->getCount('disUserNotification',array(
             'user' => $userId,
@@ -266,7 +312,14 @@ class disThread extends xPDOSimpleObject {
         )) > 0;
     }
 
+    /**
+     * Add a subscription to this thread for the User
+     * 
+     * @param int $userId ID of disUser
+     * @return bool True if successful
+     */
     public function addSubscription($userId) {
+        $success = false;
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
@@ -278,12 +331,21 @@ class disThread extends xPDOSimpleObject {
             $notify->set('board',$this->get('board'));
             if (!$notify->save()) {
                 $this->xpdo->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] Could not create notification: '.print_r($notify->toArray(),true));
+            } else {
+                $success = true;
             }
         }
-        return true;
+        return $success;
     }
 
+    /**
+     * Remove a subscription to this thread for the User
+     *
+     * @param int $userId ID of disUser
+     * @return bool True if successful
+     */
     public function removeSubscription($userId) {
+        $success = false;
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
@@ -291,11 +353,19 @@ class disThread extends xPDOSimpleObject {
         if ($notify) {
             if (!$notify->remove()) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove notification: '.print_r($notify->toArray(),true));
+            } else {
+                $success = true;
             }
         }
-        return true;
+        return $success;
     }
 
+    /**
+     * Check to see if given user (by id) is a Moderator for this thread's board
+     *
+     * @param int $userId The ID of the user
+     * @return bool True if they are a moderator
+     */
     public function isModerator($userId) {
         $moderator = $this->xpdo->getCount('disModerator',array(
             'user' => $userId,
@@ -304,7 +374,12 @@ class disThread extends xPDOSimpleObject {
         return $moderator > 0;
     }
 
-
+    /**
+     * Build the breadcrumb trail for this thread
+     *
+     * @param array $defaultTrail
+     * @return array
+     */
     public function buildBreadcrumbs($defaultTrail = array()) {
         $c = $this->xpdo->newQuery('disBoard');
         $c->innerJoin('disBoardClosure','Ancestors');
@@ -342,6 +417,12 @@ class disThread extends xPDOSimpleObject {
         return $trail;
     }
 
+    /**
+     * Build the CSS class for this thread
+     *
+     * @param string $defaultClass
+     * @return array|string
+     */
     public function buildCssClass($defaultClass = 'dis-normal-thread') {
         $class = array($defaultClass);
         $threshold = $this->xpdo->getOption('discuss.hot_thread_threshold',null,10);
@@ -356,6 +437,12 @@ class disThread extends xPDOSimpleObject {
         return $class;
     }
 
+    /**
+     * Build the icon list for this thread
+     *
+     * @param array $icons
+     * @return array|string
+     */
     public function buildIcons($icons = array()) {
         if ($this->get('locked')) {
             $icons[] = '<div class="dis-thread-locked"></div>';
