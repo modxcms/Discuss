@@ -199,11 +199,11 @@ class disPost extends xPDOSimpleObject {
                 $c->sortby('createdon','DESC');
                 $c->limit(1);
                 $priorPost = $this->xpdo->getObject('disPost',$c);
-                if ($priorPost) {
+                if ($priorPost) { /* set last post anew */
                     $thread->set('post_last',$priorPost->get('id'));
                     $thread->set('author_last',$priorPost->get('author'));
                     $thread->save();
-                } else {
+                } else { /* if no more posts, remove thread */
                     $thread->remove();
                 }
             }

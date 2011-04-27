@@ -3,7 +3,7 @@
 [[!FormIt?
   &submitVar=`dis-message-modify`
   &hooks=`postHook.DiscussModifyMessage`
-  &validate=`title:required,message:required:allowTags`
+  &validate=`title:required,message:required:allowTags,participants_usernames:required`
 ]]
 
 <div id="dis-modify-message-preview">[[+preview]]</div>

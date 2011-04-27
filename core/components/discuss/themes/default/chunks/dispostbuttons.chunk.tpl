@@ -28,13 +28,6 @@ function bbc_highlight(something, mode) {
         style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
 <img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/><a
         href="javascript:void(0);"
-        onclick="surroundText('[move]', '[/move]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]move.gif" align="bottom" width="23" height="22"
-        alt="Marquee" title="Marquee"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/><a
-        href="javascript:void(0);"
         onclick="surroundText('[pre]', '[/pre]'); return false;"><img
         onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
         src="[[+buttons_url]]pre.gif" align="bottom" width="23" height="22"
@@ -77,24 +70,6 @@ function bbc_highlight(something, mode) {
         src="[[+buttons_url]]face.gif" align="bottom" width="23" height="22"
         alt="Font Face" title="Font Face"
         style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<select onchange="surroundText('[color=' + this.options[this.selectedIndex].value.toLowerCase() + ']', '[/color]'); this.selectedIndex = 0; $('#dis-thread-message').focus($('#dis-thread-message').caretPos);"
-        style="margin-bottom: 1ex;">
-    <option value="" selected="selected">Change Color</option>
-    <option value="Black">Black</option>
-    <option value="Red">Red</option>
-    <option value="Yellow">Yellow</option>
-    <option value="Pink">Pink</option>
-    <option value="Green">Green</option>
-    <option value="Orange">Orange</option>
-    <option value="Purple">Purple</option>
-    <option value="Blue">Blue</option>
-    <option value="Beige">Beige</option>
-    <option value="Brown">Brown</option>
-    <option value="Teal">Teal</option>
-    <option value="Navy">Navy</option>
-    <option value="Maroon">Maroon</option>
-    <option value="LimeGreen">Lime Green</option>
-</select>
 <br/>
 <a href="javascript:void(0);"
    onclick="surroundText('[img]', '[/img]'); return false;"><img

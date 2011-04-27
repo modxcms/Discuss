@@ -3,7 +3,7 @@
 [[!FormIt?
   &submitVar=`dis-message-new`
   &hooks=`postHook.DiscussNewMessage`
-  &validate=`title:required,message:required:allowTags`
+  &validate=`title:required,message:required:allowTags,participants_usernames:required`
 ]]
 
 <div id="dis-message-preview"></div>
@@ -12,12 +12,16 @@
 
     <h2>[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h2>
 
-    <input type="hidden" name="board" value="[[+id]]" />
-
     <label for="dis-message-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
     </label>
     <input type="text" name="title" id="dis-message-title" value="[[!+fi.title]]" />
+
+    <label for="dis-message-participants">[[%discuss.participants]]:
+        <span class="error">[[!+fi.error.participants_usernames]]</span>
+        <span class="small">[[%discuss.participants_desc]]</span>
+    </label>
+    <input type="text" name="participants_usernames" id="dis-message-participants" value="[[!+fi.participants_usernames]]" />
 
     <div style="margin-left: 150px;">
         <br class="clear" />

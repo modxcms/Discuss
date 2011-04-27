@@ -23,6 +23,9 @@ $trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array
 $placeholders['trail'] = $trail;
 
 /* setup defaults */
+if (empty($_POST)) {
+    $placeholders['participants_usernames'] = $modx->user->get('username');
+}
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 
 /* set max attachment limit */
@@ -34,4 +37,5 @@ $discuss->config['max_attachments'] = $placeholders['max_attachments'];
 /* output form to browser */
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('Error'));
 
+$modx->toPlaceholders($placeholders,'fi');
 return $placeholders;

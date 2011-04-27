@@ -3,7 +3,7 @@
 [[!FormIt?
   &submitVar=`dis-post-reply`
   &hooks=`postHook.DiscussReplyMessage`
-  &validate=`title:required,message:required:allowTags`
+  &validate=`title:required,message:required:allowTags,participants_usernames:required`
 ]]
 
 <div id="dis-reply-post-preview"></div>

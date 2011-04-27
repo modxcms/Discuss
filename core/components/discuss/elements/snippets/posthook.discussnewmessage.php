@@ -9,10 +9,6 @@ $modx->lexicon->load('discuss:post');
 $fields = $hook->getValues();
 unset($fields[$submitVar]);
 
-if (empty($fields['board'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
-$board = $modx->getObject('disBoard',$fields['board']);
-if ($board == null) return false;
-
 /* first check attachments for validity */
 $attachments = array();
 if (!empty($_FILES) && $_FILES['attachment1']['error'] == 0) {
@@ -37,12 +33,23 @@ if ($maxSize > 0) {
     $fields['message'] = substr($fields['message'],0,$maxSize);
 }
 
+/* get participants */
+$participantsIds = array();
+$participants = explode(',',$fields['participants_usernames']);
+foreach ($participants as $participant) {
+    $user = $modx->getObject('disUser',array('username' => $participant));
+    if ($user) {
+        $participantsIds[] = $user->get('id');
+    }
+}
+$participantsIds = array_unique($participantsIds);
+
 /* create post object and set fields */
 $post = $modx->newObject('disPost');
 $post->fromArray($fields);
 $post->set('author',$discuss->user->get('id'));
 $post->set('parent',0);
-$post->set('board',$board->get('id'));
+$post->set('board',0);
 $post->set('thread',0);
 $post->set('createdon',$discuss->now());
 $post->set('ip',$discuss->getIp());
@@ -50,7 +57,6 @@ $post->set('ip',$discuss->getIp());
 /* fire before post save event */
 $rs = $modx->invokeEvent('OnDiscussBeforePostSave',array(
     'post' => &$post,
-    'board' => &$board,
     'mode' => 'new',
 ));
 $canSave = $discuss->getEventResult($rs);
@@ -64,6 +70,27 @@ if (!$post->save()) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not create new thread: '.print_r($post->toArray(),true));
     $hook->addError('title',$modx->lexicon('discuss.post_err_create'));
     return false;
+}
+
+/* update thread */
+$thread = $post->getOne('Thread');
+$thread->set('private',true);
+$thread->set('users',implode(',',$participantsIds));
+$thread->save();
+
+/* set participants, add notifications */
+foreach ($participantsIds as $participant) {
+    $threadUser = $modx->newObject('disThreadUser');
+    $threadUser->set('thread',$thread->get('id'));
+    $threadUser->set('user',$participant);
+    $threadUser->set('author',$thread->get('author_first') == $participant ? true : false);
+    $threadUser->save();
+
+    $notify = $modx->newObject('disUserNotification');
+    $notify->set('thread',$thread->get('id'));
+    $notify->set('user',$participant);
+    $notify->set('board',0);
+    $notify->save();
 }
 
 /* upload attachments */
@@ -85,21 +112,25 @@ foreach ($attachments as $file) {
 
 /* send notifications */
 $discuss->hooks->load('notifications/send',array(
-    'board' => $board->get('id'),
-    'thread' => $post->get('thread'),
     'post' => $post->get('id'),
+    'thread' => $thread->get('id'),
     'title' => $post->get('title'),
-    'subject' => $modx->getOption('discuss.notification_new_post_subject'),
-    'tpl' => $modx->getOption('discuss.notification_new_post_chunk'),
+    'message' => $post->getContent(),
+    'sender' => $discuss->user->get('username'),
+    'type' => 'message',
+    'subject' => $modx->getOption('discuss.notification_new_message_subject',null,'New Message'),
+    'tpl' => $modx->getOption('discuss.notification_new_message_chunk',null,'emails/disMessageNotificationEmail'),
 ));
+
 
 /* fire post save event */
 $modx->invokeEvent('OnDiscussPostSave',array(
     'post' => &$post,
+    'thread' => &$thread,
     'board' => &$board,
     'mode' => 'new',
 ));
 
-$url = $discuss->url.'thread/?thread='.$post->get('thread').'#dis-post-'.$post->get('id');
+$url = $discuss->url.'messages/view?thread='.$post->get('thread').'#dis-post-'.$post->get('id');
 $modx->sendRedirect($url);
 return true;
