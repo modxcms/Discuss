@@ -3,7 +3,10 @@
 [[+actionbuttons]]
 
 <br class="clear" />
-<h2 class="[[+class]] dis-thread-title">[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[%discuss.views? &views=`[[+views]]`]])</h2>
+<h2 class="[[+class]] dis-thread-title">
+    [[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[%discuss.views? &views=`[[+views]]`]])
+</h2>
+<h4 class="right">[[%discuss.participants]]: [[+participants_usernames]]</h4>
 
 <div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
 

@@ -98,12 +98,24 @@ foreach ($participantsIds as $participant) {
     $threadUser->set('user',$participant);
     $threadUser->set('author',$thread->get('author_first') == $participant ? true : false);
     $threadUser->save();
-    
+
+    /* add new notification */
     $notify = $modx->newObject('disUserNotification');
     $notify->set('thread',$thread->get('id'));
     $notify->set('user',$participant);
     $notify->set('board',0);
     $notify->save();
+
+    /* remove read status for all-non-replier participants */
+    if ($participant != $discuss->user->get('id')) {
+        $read = $modx->getObject('disThreadRead',array(
+            'thread' => $thread->get('id'),
+            'user' => $participant,
+        ));
+        if ($read) {
+            $read->remove();
+        }
+    }
 }
 
 /* upload attachments */

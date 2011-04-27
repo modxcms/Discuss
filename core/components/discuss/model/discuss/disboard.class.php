@@ -391,7 +391,7 @@ class disBoard extends xPDOSimpleObject {
     public function canPost() {
         $canPost = false;
         if ($this->xpdo->discuss->user->isLoggedIn) {
-            $level = 9999;
+            $level = 9998;
             if ($this->xpdo->discuss->user->isAdmin()) {
                 $level = 0;
             } elseif ($this->isModerator($this->xpdo->discuss->user->get('id'))) {
@@ -400,7 +400,7 @@ class disBoard extends xPDOSimpleObject {
             /* only allow posts if meeting minimum level
              * AND if board is not archived (and user is not an admin, who can post to archived boards)
             */
-            if ($level <= $this->get('minimum_post_level') && ($this->get('status') != disBoard::STATUS_ARCHIVED || $level == 0)) {
+            if ($level <= ((int)$this->get('minimum_post_level')) && ($this->get('status') != disBoard::STATUS_ARCHIVED || $level == 0)) {
                 $canPost = true;
             }
         }

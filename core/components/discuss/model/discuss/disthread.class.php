@@ -183,19 +183,18 @@ class disThread extends xPDOSimpleObject {
         $c->innerJoin('disUser','User');
         $c->select($this->xpdo->getSelectColumns('disSession','disSession','',array('id')));
         $c->select(array(
-            'GROUP_CONCAT(DISTINCT CONCAT_WS(":",User.id,User.username)) AS readers',
+            'CONCAT_WS(":",User.id,User.username) AS reader',
         ));
         $c->where(array(
             'disSession.place' => $placePrefix.':'.$this->get('id'),
         ));
         $c->groupby('disSession.user');
-        $members = $this->xpdo->getObject('disSession',$c);
-        if ($members) {
-            $readers = explode(',',$members->get('readers'));
-            $readers = array_unique($readers);
+        $sessions = $this->xpdo->getCollection('disSession',$c);
+
+        if (!empty($sessions)) {
             $members = array();
-            foreach ($readers as $reader) {
-                $r = explode(':',$reader);
+            foreach ($sessions as $member) {
+                $r = explode(':',$member->get('reader'));
                 $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user/?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>' : $r[1];
             }
             $members = array_unique($members);

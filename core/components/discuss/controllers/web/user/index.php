@@ -16,7 +16,7 @@ if (!empty($profileResourceId) && $discuss->ssoMode) {
 
 /* get default properties */
 $cssPostRowCls = $modx->getOption('cssPostRowCls',$scriptProperties,'dis-board-li');
-$menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
+$menuTpl = $modx->getOption('menuTpl',$scriptProperties,'');
 $numRecentPosts = $modx->getOption('numRecentPosts',$scriptProperties,10);
 $postRowTpl = $modx->getOption('postRowTpl',$scriptProperties,'disPostLi');
 
@@ -75,6 +75,6 @@ if ($modx->hasPermission('discuss.track_ip')) {
 /* do output */
 $placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
 $placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
-$placeholders['usermenu'] = $discuss->getChunk($menuTpl,$placeholders);
+$placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 return $placeholders;
