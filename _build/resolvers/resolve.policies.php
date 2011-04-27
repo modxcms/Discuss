@@ -11,29 +11,36 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
         $modx =& $object->xpdo;
-        $modelPath = $modx->getOption('quip.core_path',null,$modx->getOption('core_path').'components/quip/').'model/';
-        $modx->addPackage('quip',$modelPath);
+        $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
+        $modx->addPackage('discuss',$modelPath);
 
         $modx->setLogLevel(modX::LOG_LEVEL_ERROR);
 
-        /* assign policy to template */
-        $policy = $transport->xpdo->getObject('modAccessPolicy',array(
-            'name' => 'QuipModeratorPolicy'
-        ));
-        if ($policy) {
-            $template = $transport->xpdo->getObject('modAccessPolicyTemplate',array('name' => 'QuipModeratorPolicyTemplate'));
-            if ($template) {
-                $policy->set('template',$template->get('id'));
-                $policy->save();
-            } else {
-                $modx->log(xPDO::LOG_LEVEL_ERROR,'[Quip] Could not find QuipModeratorPolicyTemplate Access Policy Template!');
+        /* assign policies to DiscussTemplate ACL Policy Template */
+        $policies = array(
+            'Discuss Administrator Policy',
+            'Discuss Moderator Policy',
+        );
+        $template = $modx->getObject('modAccessPolicyTemplate',array('name' => 'DiscussTemplate'));
+        if ($template) {
+            foreach ($policies as $policyName) {
+                $policy = $transport->xpdo->getObject('modAccessPolicy',array(
+                    'name' => $policyName,
+                ));
+                if ($policy) {
+                    $policy->set('template',$template->get('id'));
+                    $policy->save();
+                } else {
+                    $modx->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] Could not find "'.$policyName.'" Access Policy!');
+                }
             }
         } else {
-            $modx->log(xPDO::LOG_LEVEL_ERROR,'[Quip] Could not find QuipModeratorPolicy Access Policy!');
+            $modx->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] Could not find DiscussTemplate Access Policy Template!');
         }
 
+
         /* assign policy to admin group */
-        $policy = $modx->getObject('modAccessPolicy',array('name' => 'QuipModeratorPolicy'));
+        $policy = $modx->getObject('modAccessPolicy',array('name' => 'Discuss Administrator Policy'));
         $adminGroup = $modx->getObject('modUserGroup',array('name' => 'Administrator'));
         if ($policy && $adminGroup) {
             $access = $modx->getObject('modAccessContext',array(
