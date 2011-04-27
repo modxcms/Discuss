@@ -160,6 +160,25 @@ class disBoard extends xPDOSimpleObject {
         return $saved;
     }
 
+    public static function fetch(xPDO &$modx,$id) {
+        $c = $modx->newQuery('disBoard');
+        $c->leftJoin('disBoardUserGroup','UserGroups');
+        $c->where(array(
+            'id' => $id,
+        ));
+        $groups = $modx->discuss->user->getUserGroups();
+        if (!empty($groups) && !$modx->discuss->user->isAdmin) {
+            /* restrict boards by user group if applicable */
+            $g = array(
+                'UserGroups.usergroup:IN' => $groups,
+            );
+            $g['OR:UserGroups.usergroup:='] = null;
+            $where[] = $g;
+            $c->andCondition($where,null,2);
+        }
+        return $modx->getObject('disBoard',$c);
+    }
+
     /**
      * Grab the viewing text for the board.
      *

@@ -9,32 +9,7 @@ $discuss->setSessionPlace('thread:'.$scriptProperties['thread']);
 $userId = $modx->user->get('id');
 $thread = $modx->getOption('thread',$scriptProperties,false);
 if (empty($thread)) $modx->sendErrorPage();
-
-$c = $modx->newQuery('disThread');
-$c->innerJoin('disBoard','Board');
-$c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
-$c->innerJoin('disPost','FirstPost');
-$c->select($modx->getSelectColumns('disThread','disThread'));
-$c->select(array(
-    'FirstPost.title',
-    '(SELECT GROUP_CONCAT(pAuthor.id)
-        FROM '.$modx->getTableName('disPost').' AS pPost
-        INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
-        WHERE pPost.thread = disThread.id
-     ) AS participants',
-));
-$c->where(array('id' => $thread));
-$groups = $discuss->user->getUserGroups();
-if (!empty($groups) && !$discuss->user->isAdmin) {
-    /* restrict boards by user group if applicable */
-    $g = array(
-        'UserGroups.usergroup:IN' => $groups,
-    );
-    $g['OR:UserGroups.usergroup:='] = null;
-    $where[] = $g;
-    $c->andCondition($where,null,2);
-}
-$thread = $modx->getObject('disThread',$c);
+$thread = $modx->call('disThread', 'fetch', array(&$modx,$thread));
 if (empty($thread)) $modx->sendErrorPage();
 
 /* mark unread if user clicks mark unread */
@@ -86,11 +61,8 @@ unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 $thread->buildBreadcrumbs();
 unset($trail,$url,$c,$ancestors);
 
-/* up the view count for this thread */
-$views = $thread->get('views');
-$thread->set('views',($views+1));
-$thread->save();
-unset($views);
+/* up view count for thread */
+$thread->view();
 
 $placeholders = $thread->toArray();
 $placeholders['views'] = number_format($placeholders['views']);
@@ -162,12 +134,6 @@ unset($actionButtons);
 /* output */
 $placeholders['discuss.error_panel'] = $discuss->getChunk('Error');
 $placeholders['discuss.thread'] = $thread->get('title');
-
-/* set last visited */
-if ($discuss->user->get('user') != 0) {
-    $discuss->user->set('thread_last_visited',$thread->get('id'));
-    $discuss->user->save();
-}
 
 /* get pagination */
 $discuss->hooks->load('pagination/build',array(

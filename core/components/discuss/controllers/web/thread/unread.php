@@ -30,50 +30,7 @@ if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
 
 
 /* get unread threads */
-$c = $modx->newQuery('disThread');
-$c->innerJoin('disBoard','Board');
-$c->innerJoin('disPost','FirstPost');
-$c->innerJoin('disPost','LastPost');
-$c->innerJoin('disUser','FirstAuthor');
-$c->leftJoin('disThreadRead','Reads');
-$c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
-$groups = $discuss->user->getUserGroups();
-if (!empty($groups) && !$discuss->user->isAdmin) {
-    /* restrict boards by user group if applicable */
-    $g = array(
-        'UserGroups.usergroup:IN' => $groups,
-    );
-    $g['OR:UserGroups.usergroup:='] = null;
-    $where[] = $g;
-    $c->andCondition($where,null,2);
-}
-$c->where(array(
-    'Reads.thread' => null,
-));
-if ($discuss->isLoggedIn) {
-    $ignoreBoards = $discuss->user->get('ignore_boards');
-    if (!empty($ignoreBoards)) {
-        $c->where(array(
-            'Board.id:NOT IN' => explode(',',$ignoreBoards),
-        ));
-    }
-}
-$total = $modx->getCount('disThread',$c);
-$c->select($modx->getSelectColumns('disThread','disThread'));
-$c->select(array(
-    'board_name' => 'Board.name',
-
-    'title' => 'FirstPost.title',
-    'thread' => 'FirstPost.thread',
-    'author_username' => 'FirstAuthor.username',
-
-    'post_id' => 'LastPost.id',
-    'createdon' => 'LastPost.createdon',
-    'author' => 'LastPost.author',
-));
-$c->sortby($sortBy,$sortDir);
-$c->limit($limit,$start);
-$threads = $modx->getCollection('disThread',$c);
+$threads = $modx->call('disThread','fetchUnread',array(&$modx,$sortBy,$sortDir,$limit,$start));
 $posts = array();
 
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
@@ -81,7 +38,7 @@ $hotThreadThreshold = $modx->getOption('discuss.hot_thread_threshold',null,10);
 $enableSticky = $modx->getOption('discuss.enable_sticky',null,true);
 $enableHot = $modx->getOption('discuss.enable_hot',null,true);
 $list = array();
-foreach ($threads as $thread) {
+foreach ($threads['results'] as $thread) {
     $threadArray = $thread->toArray();
     $threadArray['class'] = 'dis-board-li';
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
@@ -124,7 +81,7 @@ $trail[] = array(
     'url' => $discuss->url,
     'text' => $modx->getOption('discuss.forum_title'),
 );
-$trail[] = array('text' => $modx->lexicon('discuss.unread_posts').' ('.number_format($total).')','active' => true);
+$trail[] = array('text' => $modx->lexicon('discuss.unread_posts').' ('.number_format($threads['total']).')','active' => true);
 
 $trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
@@ -141,7 +98,7 @@ unset($actionButtons);
 
 /* build pagination */
 $discuss->hooks->load('pagination/build',array(
-    'count' => $total,
+    'count' => $threads['total'],
     'id' => 0,
     'view' => 'thread/unread',
     'limit' => $limit,

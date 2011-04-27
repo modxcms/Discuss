@@ -4,28 +4,16 @@
  *
  * @package discuss
  */
-$discuss->setSessionPlace('board:'.$scriptProperties['board']);
-
 /* get board */
-$c = $modx->newQuery('disBoard');
-$c->leftJoin('disBoardUserGroup','UserGroups');
-$c->where(array(
-    'id' => $scriptProperties['board'],
-));
-$groups = $discuss->user->getUserGroups();
-if (!empty($groups) && !$discuss->user->isAdmin) {
-    /* restrict boards by user group if applicable */
-    $g = array(
-        'UserGroups.usergroup:IN' => $groups,
-    );
-    $g['OR:UserGroups.usergroup:='] = null;
-    $where[] = $g;
-    $c->andCondition($where,null,2);
-}
-$board = $modx->getObject('disBoard',$c);
+if (empty($scriptProperties['board'])) $modx->sendErrorPage();
+$board = $modx->call('disBoard','fetch',array(&$modx,$scriptProperties['board']));
 if ($board == null) $modx->sendErrorPage();
+
+/* set meta */
+$discuss->setSessionPlace('board:'.$scriptProperties['board']);
 $discuss->setPageTitle($board->get('name'));
 
+/* add user to board readers */
 if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
     $board->read($discuss->user->get('id'));
 }

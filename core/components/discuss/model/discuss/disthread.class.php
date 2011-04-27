@@ -64,6 +64,73 @@ class disThread extends xPDOSimpleObject {
         return $thread;
     }
 
+    /**
+     * @static
+     * @param xPDO $modx
+     * @param string $sortBy
+     * @param string $sortDir
+     * @param int $limit
+     * @param int $start
+     * @return array
+     */
+    public static function fetchUnread(xPDO &$modx,$sortBy = 'LastPost.createdon',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
+        $response = array();
+        $c = $modx->newQuery('disThread');
+        $c->innerJoin('disBoard','Board');
+        $c->innerJoin('disPost','FirstPost');
+        $c->innerJoin('disPost','LastPost');
+        $c->innerJoin('disUser','FirstAuthor');
+        $c->leftJoin('disThreadRead','Reads');
+        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+        $groups = $modx->discuss->user->getUserGroups();
+        if (!empty($groups) && !$modx->discuss->user->isAdmin) {
+            /* restrict boards by user group if applicable */
+            $g = array(
+                'UserGroups.usergroup:IN' => $groups,
+            );
+            $g['OR:UserGroups.usergroup:='] = null;
+            $where[] = $g;
+            $c->andCondition($where,null,2);
+        }
+        $c->where(array(
+            'Reads.thread' => null,
+        ));
+        if ($sinceLastLogin) {
+            $lastLogin = $modx->discuss->user->get('last_login');
+            if ($lastLogin) {
+                $c->where(array(
+                    'LastPost.createdon:>=' => $lastLogin,
+                ));
+            }
+        }
+        if ($modx->discuss->isLoggedIn) {
+            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
+            if (!empty($ignoreBoards)) {
+                $c->where(array(
+                    'Board.id:NOT IN' => explode(',',$ignoreBoards),
+                ));
+            }
+        }
+        $response['total'] = $modx->getCount('disThread',$c);
+        $c->select($modx->getSelectColumns('disThread','disThread'));
+        $c->select(array(
+            'board_name' => 'Board.name',
+
+            'title' => 'FirstPost.title',
+            'thread' => 'FirstPost.thread',
+            'author_username' => 'FirstAuthor.username',
+
+            'post_id' => 'LastPost.id',
+            'createdon' => 'LastPost.createdon',
+            'author' => 'LastPost.author',
+        ));
+        $c->sortby($sortBy,$sortDir);
+        $c->limit($limit,$start);
+        $response['results'] = $modx->getCollection('disThread',$c);
+
+        return $response;
+    }
+
     public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
         $this->clearCache();
@@ -299,5 +366,24 @@ class disThread extends xPDOSimpleObject {
         $icons = implode("\n",$icons);
         $this->set('icons',$icons);
         return $icons;
+    }
+
+    /**
+     * Up the view count and set last visited for the Thread.
+     * @return void
+     */
+    public function view() {
+        /* up the view count for this thread */
+        $views = $this->get('views');
+        $this->set('views',($views+1));
+        $this->save();
+        unset($views);
+
+        /* set last visited */
+        if ($this->xpdo->discuss->user->get('user') != 0) {
+            $this->xpdo->discuss->user->set('thread_last_visited',$this->get('id'));
+            $this->xpdo->discuss->user->save();
+        }
+        return true;
     }
 }

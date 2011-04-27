@@ -14,7 +14,7 @@ $placeholders['post'] = $post->get('id');
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 
 /* get thread root */
-$thread = $post->getOne('Thread');
+$thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
 if ($thread == null) $modx->sendErrorPage();
 $placeholders['thread'] = $thread->get('id');
 $placeholders['locked'] = $thread->get('locked');
@@ -67,7 +67,6 @@ $thread = $discuss->hooks->load('post/getthread',array(
 $placeholders['thread_posts'] = $thread['results'];
 
 /* output form to browser */
-$modx->regClientScript($discuss->config['jsUrl'].'web/dis.post.modify.js');
 $modx->regClientHTMLBlock('<script type="text/javascript">
 var DISModifyPost = $(function() {
     DIS.config.attachments_max_per_post = '.$placeholders['max_attachments'].';
