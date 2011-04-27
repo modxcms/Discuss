@@ -574,7 +574,7 @@ class DisSmfImport {
                             $pmNotify->save();
                         }
                     }
-                    $thread->set('replies',$rIdx);
+                    $thread->set('replies',$rIdx-1);
                     if ($post) {
                         $thread->set('post_last',$post->get('id'));
                         $thread->set('author_last',$post->get('author'));
