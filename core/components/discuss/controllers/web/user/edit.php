@@ -6,6 +6,10 @@
  */
 $modx->lexicon->load('discuss:user');
 
+if (!$discuss->user->isLoggedIn) {
+    $discuss->sendUnauthorizedPage();
+}
+
 /* allow external update profile page */
 $upResourceId = $modx->getOption('discuss.update_profile_resource_id',null,0);
 if (!empty($upResourceId) && $discuss->ssoMode) {

@@ -518,4 +518,14 @@ class Discuss {
     public function formatDate($datetime) {
         return !empty($datetime) && $datetime != '0000-00-00 00:00:00' ? strftime($this->dateFormat,strtotime($datetime)) : '';
     }
+
+    public function sendUnauthorizedPage() {
+        $loginPage = $this->modx->getOption('discuss.login_resource_id',null,0);
+        if (!empty($loginPage) && $this->ssoMode) {
+            $url = $this->modx->makeUrl($loginPage,'','?discuss=1','full');
+            $this->modx->sendRedirect($url);
+        } else {
+            $this->modx->sendUnauthorizedPage();
+        }
+    }
 }

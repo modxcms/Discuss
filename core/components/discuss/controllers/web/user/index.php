@@ -6,6 +6,10 @@
 $discuss->setSessionPlace('user:'.$scriptProperties['user']);
 $modx->lexicon->load('discuss:user');
 
+if (!$discuss->user->isLoggedIn) {
+    $discuss->sendUnauthorizedPage();
+}
+
 /* allow external profile page */
 $profileResourceId = $modx->getOption('discuss.profile_resource_id',null,0);
 if (!empty($profileResourceId) && $discuss->ssoMode) {

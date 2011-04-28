@@ -9,6 +9,11 @@ $user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.user_account_header',array('user' => $user->get('username'))));
 
+
+if (!$discuss->user->isLoggedIn) {
+    $discuss->sendUnauthorizedPage();
+}
+
 $modx->lexicon->load('discuss:user');
 
 /* get default properties */

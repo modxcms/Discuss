@@ -6,6 +6,10 @@
  */
 $modx->lexicon->load('discuss:user');
 
+if (!$discuss->user->isLoggedIn) {
+    $discuss->sendUnauthorizedPage();
+}
+
 /* get user */
 if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('disUser',$_REQUEST['user']);

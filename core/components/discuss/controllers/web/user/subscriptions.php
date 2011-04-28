@@ -8,6 +8,10 @@ if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
 $user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 
+if (!$discuss->user->isLoggedIn) {
+    $discuss->sendUnauthorizedPage();
+}
+
 $modx->lexicon->load('discuss:user');
 $placeholders = $user->toArray();
 $discuss->setPageTitle($modx->lexicon('discuss.user_subscriptions_header',array('user' => $user->get('username'))));
