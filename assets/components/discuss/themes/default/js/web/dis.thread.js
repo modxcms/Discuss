@@ -70,8 +70,7 @@ DIS.Thread = function() {
         }
         
         ,toggleAuthor: function() {
-            var p = $(this).attr('post');
-            $(this).find('.dis-author').slideToggle();
+            $(this).find('.dis-sig-ct').slideToggle();
         }
         
     

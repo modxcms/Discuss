@@ -8,7 +8,6 @@
                 [[+action_quote]]
                 [[+action_reply]]
             </div>
-            <div class="dis-author dis-hidden">- [[%discuss.post_author_short? &user=`[[+author.username_link]]` &date=`[[+createdon]]`]]</div>
             <div class="dis-author">
                 [[+author.avatar]]
                 <span class="right">
@@ -22,6 +21,8 @@
                     [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
                 </span>
                 <br class="clear" />
+            </div>
+            <div class="dis-author dis-hidden dis-sig-ct-[[+id]]">
                 [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div><div class="clear"></div>`]]
             </div>
         </div>
