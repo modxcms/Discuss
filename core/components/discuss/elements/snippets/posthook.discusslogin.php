@@ -36,6 +36,8 @@ if (empty($disUser)) {
     ));
     if ($profile) {
         $disUser->fromArray($profile->toArray());
+        $disUser->set('birthdate',strftime($discuss->dateFormat,$profile->get('dob')));
+        $disUser->set('gender',$profile->get('gender') == 2 ? 'f' : 'm');
         $name = $profile->get('fullname');
         $name = explode(' ',$name);
         $disUser->fromArray(array(

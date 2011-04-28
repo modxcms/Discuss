@@ -27,7 +27,7 @@ $usergroupArray = $usergroup->toArray();
 /* get members */
 $c = $modx->newQuery('modUserGroupMember');
 $c->innerJoin('modUser','User');
-$c->leftJoin('disUser','disUser','disUser.user = User.id');
+$c->innerJoin('disUser','disUser','disUser.user = User.id');
 $c->where(array(
     'user_group' => $usergroup->get('id'),
 ));
