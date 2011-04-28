@@ -89,29 +89,7 @@ function bbc_highlight(something, mode) {
         src="[[+buttons_url]]email.gif" align="bottom" width="23" height="22"
         alt="Insert Email" title="Insert Email"
         style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<a href="javascript:void(0);"
-   onclick="surroundText('[ftp]', '[/ftp]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]ftp.gif" align="bottom" width="23" height="22"
-        alt="Insert FTP Link" title="Insert FTP Link"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/><a
-        href="javascript:void(0);"
-        onclick="surroundText('[table]', '[/table]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]table.gif" align="bottom" width="23" height="22"
-        alt="Insert Table" title="Insert Table"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<a href="javascript:void(0);" onclick="surroundText('[tr]', '[/tr]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]tr.gif" align="bottom" width="23" height="22"
-        alt="Insert Table Row" title="Insert Table Row"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<a href="javascript:void(0);" onclick="surroundText('[td]', '[/td]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]td.gif" align="bottom" width="23" height="22"
-        alt="Insert Table Column" title="Insert Table Column"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
+
 <img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/><a
         href="javascript:void(0);"
         onclick="surroundText('[sup]', '[/sup]'); return false;"><img

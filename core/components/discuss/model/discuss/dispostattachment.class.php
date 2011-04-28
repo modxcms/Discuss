@@ -76,8 +76,8 @@ class disPostAttachment extends xPDOSimpleObject {
             '{base_url}',
             '{assets_url}',
         ),array(
-            $this->xpdo->getOption('base_url'),
-            $this->xpdo->getOption('assets_url'),
+            $this->xpdo->context->getOption('base_url'),
+            $this->xpdo->context->getOption('assets_url'),
         ),$url);
         return $url;
     }

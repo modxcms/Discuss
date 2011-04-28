@@ -118,15 +118,15 @@ class disThread extends xPDOSimpleObject {
             'Reads.thread:IS' => null,
             'Board.status:!=' => disBoard::STATUS_INACTIVE,
         ));
-        if ($sinceLastLogin) {
-            $lastLogin = $modx->discuss->user->get('last_login');
-            if ($lastLogin) {
-                $c->where(array(
-                    'LastPost.createdon:>=' => $lastLogin,
-                ));
-            }
-        }
         if ($modx->discuss->isLoggedIn) {
+            if ($sinceLastLogin) {
+                $lastLogin = $modx->discuss->user->get('last_login');
+                if (!empty($lastLogin)) {
+                    $c->where(array(
+                        'LastPost.createdon:>=' => $lastLogin,
+                    ));
+                }
+            }
             $ignoreBoards = $modx->discuss->user->get('ignore_boards');
             if (!empty($ignoreBoards)) {
                 $c->where(array(

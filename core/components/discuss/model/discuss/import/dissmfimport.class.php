@@ -383,7 +383,6 @@ class DisSmfImport {
             WHERE
                 `Topic`.`ID_BOARD` = '.$brow['ID_BOARD'].'
             ORDER BY `FirstPost`.`posterTime` ASC
-            LIMIT 25
         '.(!$this->live ? 'LIMIT 10' : '');
         $tst = $this->pdo->query($sql);
         if (!$tst) return array();

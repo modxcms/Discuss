@@ -29,6 +29,7 @@ if ($profile->save() == false || $usergroup->save() == false) {
 }
 
 /* set members */
+/* doesnt work atm
 if (isset($scriptProperties['members'])) {
 
     $members = $modx->getCollection('modUserGroupMember',array('user_group' => $usergroup->get('id')));
@@ -46,7 +47,7 @@ if (isset($scriptProperties['members'])) {
             $membership->save();
         }
     }
-}
+}*/
 
 /* set board access */
 if (isset($scriptProperties['boards'])) {
