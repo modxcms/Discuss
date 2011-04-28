@@ -467,18 +467,20 @@ class disBoard extends xPDOSimpleObject {
             ));
         }
         $groups = $modx->discuss->user->getUserGroups();
-        if (!empty($groups) && !$modx->discuss->user->isAdmin()) {
-            /* restrict boards by user group if applicable */
-            $g = array(
-                'UserGroups.usergroup:IN' => $groups,
-            );
-            $g['OR:UserGroups.usergroup:IS'] = null;
-            $where[] = $g;
-            $c->andCondition($where,null,2);
-        } else {
-            $c->where(array(
-                'UserGroups.usergroup:IS' => null,
-            ));
+        if (!$modx->discuss->user->isAdmin()) {
+            if (!empty($groups)) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:IS'] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            } else {
+                $c->where(array(
+                    'UserGroups.usergroup:IS' => null,
+                ));
+            }
         }
         if ($modx->discuss->isLoggedIn) {
             $ignoreBoards = $modx->discuss->user->get('ignore_boards');

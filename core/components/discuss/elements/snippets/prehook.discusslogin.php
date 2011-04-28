@@ -11,9 +11,10 @@
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
 if (!($discuss instanceof Discuss)) return true;
+$modx->lexicon->load('core:login','discuss:web');
 
 /* only run on login */
-if ($scriptProperties['mode'] != Login::MODE_LOGIN) {
+if ($scriptProperties['mode'] != 'login') {
     return true;
 }
 
@@ -31,7 +32,7 @@ if ($disUser) {
         return true;
     }
 
-    if (!$disUser->get('synced')) {
+    if (!$disUser->get('synced') && $user->get('password') != '') {
         /* sync user passwords for imported users */
         switch ($disUser->get('source')) {
             case 'smf':
@@ -64,7 +65,7 @@ if (empty($user)) {
     ));
 }
 if (empty($user)) {
-    $hook->addError('username',$modx->lexicon('discuss.user_err_nf'));
+    $hook->addError('username',$modx->lexicon('login_username_password_incorrect'));
     return false;
 }
 if (empty($disUser)) {

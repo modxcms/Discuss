@@ -10,6 +10,8 @@ class DisSmfImport {
     public $modx;
     public $discuss;
     public $pdo;
+    public $tablePrefix = 'smf_';
+
     protected $memberCache = array();
     protected $memberNameCache = array();
     protected $memberGroupCache = array();
@@ -20,7 +22,8 @@ class DisSmfImport {
     public $runImport = array(
         'users' => false,
         'categories' => false,
-        'private_messages' => true,
+        'private_messages' => false,
+        'ignore_boards' => false,
     );
     public $importOptions = array(
         'default_user_group' => 'Forum Full Member',
@@ -52,6 +55,7 @@ class DisSmfImport {
         } else {
             try {
                 $this->pdo = new PDO($systems['smf']['dsn'], $systems['smf']['username'], $systems['smf']['password']);
+                $this->tablePrefix = $systems['smf']['tablePrefix'];
             } catch (PDOException $e) {
                 $this->log('Connection failed: ' . $e->getMessage());
             }
@@ -72,6 +76,9 @@ class DisSmfImport {
             }
             if ($this->runImport['private_messages']) {
                 $this->importPrivateMessages();
+            }
+            if ($this->runImport['ignore_boards']) {
+                $this->migrateIgnoreBoards();
             }
         } else {
             $this->log('Could not start import because could not get connection to SMF database.');
@@ -101,9 +108,13 @@ class DisSmfImport {
         }
     }
 
+    protected function getFullTableName($table) {
+        return '`'.$this->tablePrefix.$table.'`';
+    }
+
     public function importUserGroups() {
         $stmt = $this->pdo->query('
-            SELECT * FROM `smf_membergroups`
+            SELECT * FROM '.$this->getFullTableName('membergroups').'
             ORDER BY `groupName` ASC
         '.(!$this->live ? 'LIMIT 10' : ''));
         if (!$stmt) { return 'Failed grabbing members.'; }
@@ -140,7 +151,7 @@ class DisSmfImport {
 
     public function importUsers() {
         $stmt = $this->pdo->query('
-            SELECT * FROM `smf_members`
+            SELECT * FROM '.$this->getFullTableName('members').'
             ORDER BY `memberName` ASC
         '.(!$this->live ? 'LIMIT 10' : ''));
         if (!$stmt) { return 'Failed grabbing members.'; }
@@ -275,7 +286,7 @@ class DisSmfImport {
 
     public function importCategories() {
         $stmt = $this->pdo->query('
-            SELECT * FROM `smf_categories`
+            SELECT * FROM '.$this->getFullTableName('categories').'
             ORDER BY `catOrder` ASC
         ');
         if ($stmt) {
@@ -305,7 +316,7 @@ class DisSmfImport {
 
     public function importBoards(disCategory $category,array $row,$parentBoard = null,$smfParent = 0) {
         $bst = $this->pdo->query('
-            SELECT * FROM `smf_boards`
+            SELECT * FROM '.$this->getFullTableName('boards').'
             WHERE
                 `ID_CAT` = '.$row['ID_CAT'].'
             AND `ID_PARENT` = '.$smfParent.'
@@ -366,9 +377,9 @@ class DisSmfImport {
                 Topic.isSticky AS isSticky,
                 Topic.ID_TOPIC AS ID_TOPIC,
                 LastPost.posterTime AS latest_reply
-            FROM `smf_topics` AS `Topic`
-            INNER JOIN `smf_messages` AS `FirstPost` ON `FirstPost`.`ID_MSG` = `Topic`.`ID_FIRST_MSG`
-            INNER JOIN `smf_messages` AS `LastPost` ON `LastPost`.`ID_MSG` = `Topic`.`ID_LAST_MSG`
+            FROM '.$this->getFullTableName('topics').' AS `Topic`
+            INNER JOIN '.$this->getFullTableName('messages').' AS `FirstPost` ON `FirstPost`.`ID_MSG` = `Topic`.`ID_FIRST_MSG`
+            INNER JOIN '.$this->getFullTableName('messages').' AS `LastPost` ON `LastPost`.`ID_MSG` = `Topic`.`ID_LAST_MSG`
             WHERE
                 `Topic`.`ID_BOARD` = '.$brow['ID_BOARD'].'
             ORDER BY `FirstPost`.`posterTime` ASC
@@ -441,7 +452,7 @@ class DisSmfImport {
         $sql = '
             SELECT
                 *
-            FROM `smf_messages`
+            FROM '.$this->getFullTableName('messages').'
             WHERE
                 `ID_TOPIC` = '.$trow['ID_TOPIC'].'
             AND `ID_MSG` != '.$trow['ID_MSG'].'
@@ -491,7 +502,7 @@ class DisSmfImport {
         $ast = $this->pdo->query('
             SELECT
                 *
-            FROM `smf_attachments`
+            FROM '.$this->getFullTableName('attachments').'
             WHERE
                 `ID_MSG` = '.$prow['ID_MSG'].'
         ');
@@ -523,8 +534,8 @@ class DisSmfImport {
                 `MessageThread`.`subject2` AS `subject`,
                 `MessageThread`.`from_id` AS `from_id`
                 
-            FROM `smf_personal_messages` AS `Message`
-                INNER JOIN `smf_smfpm` AS `MessageThread`
+            FROM '.$this->getFullTableName('personal_messages').' AS `Message`
+                INNER JOIN '.$this->getFullTableName('smfpm').' AS `MessageThread`
                 ON `MessageThread`.`id` = `Message`.`ID_PM`
 
             WHERE `MessageThread`.`group_id` IS NOT NULL
@@ -648,5 +659,37 @@ class DisSmfImport {
             }
         }
         $tst->closeCursor();
+    }
+
+    public function migrateIgnoreBoards() {
+        $this->log('Migrating Ignore Boards...');
+        $this->log('Collecting User cache...');
+        $c = $this->modx->newQuery('disUser');
+        $c->sortby('username','ASC');
+        $c->where(array(
+            'ignore_boards:!=' => '',
+        ));
+        $users = $this->modx->getCollection('disUser',$c);
+        foreach ($users as $user) {
+            $boards = explode(',',$user->get('ignore_boards'));
+            if (!empty($boards)) {
+                $this->log('Migrating '.count($boards).' boards for '.$user->get('username'));
+                $newBoards = array();
+                foreach ($boards as $board) {
+                    $b = $this->modx->getObject('disBoard',array(
+                        'integrated_id' => $board,
+                    ));
+                    if ($b) {
+                        $newBoards[] = $b->get('id');
+                    }
+                }
+
+                if (!empty($newBoards)) {
+                    $user->set('ignore_boards',implode(',',$newBoards));
+                    $user->save();
+                }
+            }
+        }
+
     }
 }

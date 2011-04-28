@@ -3,14 +3,19 @@
  * Handle post-login data manipulation
  */
 $discuss =& $modx->discuss;
-$modx->lexicon->load('discuss:user');
+$modx->lexicon->load('discuss:user','core:login');
+
+if (empty($fields['username'])) {
+    $hook->addError('username',$modx->lexicon('login_username_password_incorrect'));
+    return false;
+}
 
 /* get modUser object */
 $user = $modx->getObject('modUser',array(
     'username' => $fields['username'],
 ));
 if (empty($user)) {
-    $hook->addError('username',$modx->lexicon('discuss.user_err_nf'));
+    $hook->addError('username',$modx->lexicon('login_username_password_incorrect'));
     return false;
 }
 
@@ -32,7 +37,9 @@ if (empty($disUser)) {
         'salt' => $user->get('salt'),
         'confirmed' => true,
         'confirmedon' => date('Y-m-d H:I:S'),
+        'createdon' => date('Y-m-d H:I:S'),
         'source' => 'internal',
+        'status' => disUser::ACTIVE,
     ));
     if ($profile) {
         $disUser->fromArray($profile->toArray());
@@ -50,7 +57,10 @@ if (empty($disUser)) {
 
 /* remove old session to prevent duplicates */
 $oldSessionId = session_id();
-$session = $modx->removeObject('disSession',array('id' => $oldSessionId));
+$session = $modx->getObject('disSession',array('id' => $oldSessionId));
+if ($session) {
+    $session->remove();
+}
 
 
 /* update profile with activity/last login dates and IP */
