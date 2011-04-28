@@ -9,7 +9,6 @@ if (!$object->xpdo) return true;
 
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
-    case xPDOTransport::ACTION_UPGRADE:
         $modx =& $object->xpdo;
         $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
         $modx->addPackage('discuss',$modelPath);
@@ -63,6 +62,8 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             }
         }
         $modx->setLogLevel(modX::LOG_LEVEL_INFO);
+        break;
+    case xPDOTransport::ACTION_UPGRADE:
         break;
 }
 return true;

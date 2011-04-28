@@ -21,7 +21,6 @@ function createSetting(&$modx,$key,$value) {
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
-        case xPDOTransport::ACTION_UPGRADE:
             $modx =& $object->xpdo;
 
             /* setup paths */
@@ -33,6 +32,8 @@ if ($object->xpdo) {
             //createSetting($modx,'assets_url',$modx->getOption('assets_url').'components/discuss/');
             createSetting($modx,'files_url',$modx->getOption('assets_url').'components/discuss/files/');
             createSetting($modx,'attachments_url',$modx->getOption('assets_url').'components/discuss/attachments/');
+        break;
+        case xPDOTransport::ACTION_UPGRADE:
         break;
     }
 }
