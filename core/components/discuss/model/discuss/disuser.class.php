@@ -235,6 +235,9 @@ class disUser extends xPDOSimpleObject {
      * @return boolean
      */
     public function isAdmin() {
+        if (!$this->isLoggedIn) {
+            $this->isAdmin = false;
+        }
         if (!isset($this->isAdmin)) {
             $this->isAdmin = false;
             $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'');
