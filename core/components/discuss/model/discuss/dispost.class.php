@@ -488,9 +488,12 @@ class disPost extends xPDOSimpleObject {
         return disPost::encodeEmail($message);
     }
 
-    public static function encodeEmail($email) {
+    public static function encodeEmail($email,$emailText = '') {
         $email = disPost::obfuscate($email);
-        return '<a href="mailto:'.$email.'" rel="nofollow">'.str_replace(array('&#64;','@'),'<em>&#64;</em>',$email).'</a>';
+        if (empty($emailText)) {
+            $emailText = str_replace(array('&#64;','@'),'<em>&#64;</em>',$email);
+        }
+        return '<a href="mailto:'.$email.'" rel="nofollow">'.$emailText.'</a>';
     }
     
     public static function obfuscate($text) {

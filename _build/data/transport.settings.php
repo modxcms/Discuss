@@ -92,9 +92,27 @@ $settings['discuss.bbcode_enabled']= $modx->newObject('modSystemSetting');
 $settings['discuss.bbcode_enabled']->fromArray(array(
     'key' => 'discuss.bbcode_enabled',
     'value' => true,
-    'xtype' => 'textfield',
+    'xtype' => 'combo-boolean',
     'namespace' => 'discuss',
     'area' => 'Posts',
+),'',true,true);
+
+$settings['discuss.email_reported_post_subject']= $modx->newObject('modSystemSetting');
+$settings['discuss.email_reported_post_subject']->fromArray(array(
+    'key' => 'discuss.email_reported_post_subject',
+    'value' => 'Reported Post: [[+title]]',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
+),'',true,true);
+
+$settings['discuss.email_reported_post_chunk']= $modx->newObject('modSystemSetting');
+$settings['discuss.email_reported_post_chunk']->fromArray(array(
+    'key' => 'discuss.email_reported_post_chunk',
+    'value' => 'emails/disReportedEmail',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
 ),'',true,true);
 
 $settings['discuss.theme']= $modx->newObject('modSystemSetting');

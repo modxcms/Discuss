@@ -37,7 +37,7 @@
             <div class="dis-post-ip">
                 [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
                 [[+report_link]]
-                <a href="javascript:void([[+id]]);">[[+ip]]</a>
+                <a href="[[~[[*id]]]]post/track?thread=[[+thread]]&post=[[+id]]">[[+ip]]</a>
             </div>
         </div>
         <br class="clear" />

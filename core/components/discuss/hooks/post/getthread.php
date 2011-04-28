@@ -74,7 +74,7 @@ foreach ($posts['results'] as $post) {
 
         /* check if author wants to show email */
         if ($post->Author->get('show_email') && $discuss->isLoggedIn && $canViewEmails) {
-            $postArray['author.email'] = '<a href="mailto:'.$post->Author->get('email').'">'.$modx->lexicon('discuss.email_author').'</a>';
+            $postArray['author.email'] = disPost::encodeEmail($post->Author->get('email'),$modx->lexicon('discuss.email_author'));
         } else {
             $postArray['author.email'] = '';
         }
@@ -138,7 +138,7 @@ foreach ($posts['results'] as $post) {
     $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
     $postArray['class'] = implode(' ',$postArray['class']);
     if ($canReportPost) {
-        $postArray['report_link'] = '<a class="dis-report-link" href="javascript:void('.$postArray['id'].');">'.$modx->lexicon('discuss.report_to_mod').'</a>';
+        $postArray['report_link'] = '<a class="dis-report-link" href="'.$discuss->url.'post/report?thread='.$postArray['thread'].'&post='.$postArray['id'].'">'.$modx->lexicon('discuss.report_to_mod').'</a>';
     } else {
         $postArray['report_link'] = '';
     }
