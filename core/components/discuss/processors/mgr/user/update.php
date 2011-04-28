@@ -9,10 +9,10 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $c = $modx->newQuery('disUser');
 $c->innerJoin('modUser','User');
 $c->where(array(
-    'user' => $scriptProperties['id'],
+    'id' => $scriptProperties['id'],
 ));
 $user = $modx->getObject('disUser',$c);
-if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf'));
+if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf',array('id' => $scriptProperties['id'])));
 
 /* set fields */
 $scriptProperties['show_email'] = !empty($scriptProperties['show_email']) ? true : false;

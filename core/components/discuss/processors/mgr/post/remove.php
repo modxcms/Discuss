@@ -18,7 +18,7 @@ $rs = $modx->invokeEvent('OnDiscussBeforePostRemove',array(
     'board' => &$board,
     'mode' => 'remove',
 ));
-$canRemove = $discuss->getEventResult($rs);
+$canRemove = $modx->discuss->getEventResult($rs);
 if (!empty($canRemove)) {
     return $modx->error->failure($canSave);
 }

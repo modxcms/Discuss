@@ -20,4 +20,9 @@ if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf'));
 $userArray = $user->toArray('',true);
 unset($userArray['password'],$userArray['cachepwd']);
 
+$userArray['createdon'] = $modx->discuss->formatDate($userArray['createdon']);
+$userArray['last_login'] = $modx->discuss->formatDate($userArray['last_login']);
+$userArray['last_active'] = $modx->discuss->formatDate($userArray['last_active']);
+$userArray['syncedat'] = $modx->discuss->formatDate($userArray['syncedat']);
+
 return $modx->error->success('',$userArray);

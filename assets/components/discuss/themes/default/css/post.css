@@ -4,6 +4,11 @@
     height: 25px;
     padding-left: 30px;
 }
+.dis-post-title a {
+    color: white;
+    font-weight: normal;
+}
+.dis-author-title { color: #aaa; }
 .dis-collapsed { display: none; }
 .dis-post {
     padding: 0;

@@ -17,7 +17,7 @@ $rs = $modx->invokeEvent('OnDiscussBeforePostSave',array(
     'post' => &$post,
     'mode' => 'modify',
 ));
-$canSave = $discuss->getEventResult($rs);
+$canSave = $modx->discuss->getEventResult($rs);
 if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }

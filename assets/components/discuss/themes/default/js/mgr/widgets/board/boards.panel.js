@@ -117,6 +117,21 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
         this.windows.createCategory.show(e.target);
         return true;
     }
+    ,updateCategory: function(btn,e) {
+        var r = this.cm.activeNode.attributes;
+        if (!this.windows.updateCategory) {
+            this.windows.updateCategory = MODx.load({
+                xtype: 'dis-window-category-update'
+                ,record: r
+                ,listeners: {
+                    'success': {fn:function() { this.refresh(); },scope:this}
+                }
+            });
+        }
+        this.windows.updateCategory.setValues(r);
+        this.windows.updateCategory.show(e.target);
+        return true;
+    }
     
     ,removeCategory: function(btn,e) {
         if (!this.cm.activeNode) return false;
@@ -252,7 +267,7 @@ Dis.window.CreateCategory = function(config) {
     config = config || {};
     this.ident = config.ident || 'ccat'+Ext.id();
     Ext.applyIf(config,{
-        title: 'Create Category'
+        title: _('discuss.category_create')
         ,id: this.ident
         ,height: 150
         ,width: 475
@@ -284,3 +299,43 @@ Dis.window.CreateCategory = function(config) {
 };
 Ext.extend(Dis.window.CreateCategory,MODx.Window);
 Ext.reg('dis-window-category-create',Dis.window.CreateCategory);
+
+Dis.window.UpdateCategory = function(config) {
+    config = config || {};
+    this.ident = config.ident || 'ucat'+Ext.id();
+    Ext.applyIf(config,{
+        title: _('discuss.category_update')
+        ,id: this.ident
+        ,height: 150
+        ,width: 475
+        ,url: Dis.config.connector_url
+        ,action: 'mgr/category/update'
+        ,fields: [{
+            xtype: 'hidden'
+            ,name: 'id'
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('name')
+            ,name: 'name'
+            ,id: 'dis-'+this.ident+'-name'
+            ,width: 300
+        },{
+            xtype: 'textarea'
+            ,fieldLabel: _('description')
+            ,name: 'description'
+            ,id: 'dis-'+this.ident+'-description'
+            ,width: 300
+        },{
+            xtype: 'checkbox'
+            ,fieldLabel: _('discuss.board_collapsible')
+            ,name: 'collapsible'
+            ,description: _('discuss.board_collapsible_desc')
+            ,id: 'dis-'+this.ident+'-collapsible'
+            ,checked: true
+            ,inputValue: 1
+        }]
+    });
+    Dis.window.UpdateCategory.superclass.constructor.call(this,config);
+};
+Ext.extend(Dis.window.UpdateCategory,MODx.Window);
+Ext.reg('dis-window-category-update',Dis.window.UpdateCategory);

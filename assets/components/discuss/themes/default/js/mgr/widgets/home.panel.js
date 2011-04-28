@@ -12,7 +12,6 @@ Dis.panel.Home = function(config) {
             ,bodyStyle: 'padding: 15px'
             ,defaults: { border: false ,autoHeight: true }
             ,border: true
-            ,activeItem: 0
             ,stateful: true
             ,stateId: 'dis-home-tabpanel'
             ,stateEvents: ['tabchange']

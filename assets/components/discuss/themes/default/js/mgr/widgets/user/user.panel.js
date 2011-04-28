@@ -24,7 +24,7 @@ Dis.panel.User = function(config) {
                     ,name: 'id'
                     ,submitValue: true
                 },{
-                    xtype: 'textfield'
+                    xtype: 'statictextfield'
                     ,fieldLabel: _('discuss.username')
                     ,name: 'username'
                     ,width: 250
@@ -66,23 +66,78 @@ Dis.panel.User = function(config) {
                     ,width: 250
                     ,allowBlank: true
                 },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('discuss.custom_title')
+                    ,name: 'title'
+                    ,width: 250
+                    ,allowBlank: true
+                },{
                     xtype: 'textarea'
                     ,fieldLabel: _('discuss.user_signature')
                     ,name: 'signature'
                     ,width: 500
                     ,grow: true
                 },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('discuss.posts')
+                    ,name: 'posts'
+                    ,width: 250
+                    ,allowBlank: true
+                },{
                     xtype: 'checkbox'
-                    ,boxLabel: _('discuss.user_show_email')
+                    ,fieldLabel: _('discuss.user_show_email')
                     ,name: 'show_email'
                     ,labelSeparator: ''
                     ,inputValue: 1
                 },{
                     xtype: 'checkbox'
-                    ,boxLabel: _('discuss.user_show_online')
+                    ,fieldLabel: _('discuss.user_show_online')
                     ,name: 'show_online'
                     ,labelSeparator: ''
                     ,inputValue: 1
+                },{ html: "<hr />" ,border: false },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('discuss.registered_on')
+                    ,name: 'createdon'
+                    ,width: 250
+                    ,allowBlank: true
+                },{
+                    xtype: 'checkbox'
+                    ,fieldLabel: _('discuss.synced')
+                    ,name: 'synced'
+                    ,labelSeparator: ''
+                    ,inputValue: 1
+                    ,disabled: true
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('discuss.synced_at')
+                    ,name: 'syncedat'
+                    ,width: 250
+                    ,allowBlank: true
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('discuss.source')
+                    ,name: 'source'
+                    ,width: 250
+                    ,allowBlank: true
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('discuss.last_login')
+                    ,name: 'last_login'
+                    ,width: 250
+                    ,allowBlank: true
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('discuss.last_active')
+                    ,name: 'last_active'
+                    ,width: 250
+                    ,allowBlank: true
+                },{
+                    xtype: 'statictextfield'
+                    ,fieldLabel: _('discuss.ip')
+                    ,name: 'ip'
+                    ,width: 250
+                    ,allowBlank: true
                 }]
             }/*,{
                 title: 'Activity'

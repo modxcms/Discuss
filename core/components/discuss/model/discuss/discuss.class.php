@@ -52,6 +52,7 @@ class Discuss {
 
         $this->modx->addPackage('discuss',$this->config['modelPath']);
         $this->ssoMode = $this->modx->getOption('discuss.sso_mode',$config,false);
+        $this->dateFormat = $this->modx->getOption('discuss.date_format',$config,'%b %d, %Y, %I:%M %p');
     }
 
     /**
@@ -65,7 +66,6 @@ class Discuss {
      */
     public function initialize($ctx = 'web') {
         $this->loadHooks();
-        $this->dateFormat = $this->modx->getOption('discuss.date_format');
 
         switch ($ctx) {
             case 'mgr':
@@ -513,5 +513,9 @@ class Discuss {
 
     public function setPageTitle($title) {
         $this->modx->setPlaceholder('discuss.pagetitle',$title);
+    }
+
+    public function formatDate($datetime) {
+        return !empty($datetime) && $datetime != '0000-00-00 00:00:00' ? strftime($this->dateFormat,strtotime($datetime)) : '';
     }
 }

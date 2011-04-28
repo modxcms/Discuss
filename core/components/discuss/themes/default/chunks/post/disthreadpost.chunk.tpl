@@ -1,6 +1,6 @@
 <li class="dis-post" id="dis-post-[[+id]]">
     <div class="dis-post-header">
-        <h3 class="dis-post-title" post="[[+id]]">[[+title]]</h3>
+        <h3 class="dis-post-title" post="[[+id]]"><a href="[[~[[*id]]]]thread/?thread=[[+thread]]#dis-post-[[+id]]">[[+title]]</h3>
         <div class="dis-post-author" id="dis-post-author-[[+id]]">
             <div class="dis-post-actions">
                 [[+action_remove]]
@@ -17,7 +17,7 @@
                 </span>
                 <span>
                     [[+author.username_link]]
-                    [[+author.title:notempty=`<em>[[+author.title]]</em>`]]
+                    [[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
                     <br />
                     [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
                 </span>
