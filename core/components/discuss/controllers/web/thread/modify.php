@@ -12,6 +12,7 @@ $discuss->setPageTitle($modx->lexicon('discuss.modify_post_header',array('title'
 $placeholders = $post->toArray();
 $placeholders['post'] = $post->get('id');
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
+$placeholders['message'] = $post->br2nl($placeholders['message']);
 
 /* get thread root */
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));

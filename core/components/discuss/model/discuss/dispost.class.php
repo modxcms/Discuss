@@ -567,6 +567,10 @@ class disPost extends xPDOSimpleObject {
         return $message;
     }
 
+    public function br2nl($str) {
+        return str_replace(array('<br>','<br />','<br/>'),"\n",$str);
+    }
+
     /**
      * Get an array of all the ancestors of this Post's board
      * @return array
