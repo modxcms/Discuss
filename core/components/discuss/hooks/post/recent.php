@@ -96,7 +96,6 @@ foreach ($recentPosts as $thread) {
     $idx++;
 }
 $list = implode("\n",$list);
-unset($rps,$pa,$recentPosts,$post);
 
 return array(
     'results' => $list,

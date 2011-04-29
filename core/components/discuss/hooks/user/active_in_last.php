@@ -13,8 +13,13 @@ $activeUsers = $modx->call('disUser','fetchActive',array(&$modx,$timeAgo));
 /* iterate */
 $as = array();
 foreach ($activeUsers['results'] as $activeUser) {
+    $activeUserArray = $activeUser->toArray();
+    $activeUserArray['style'] = '';
+    if (!empty($activeUserArray['color'])) {
+        $activeUserArray['style'] .= 'color: '.$activeUserArray['color'].';';
+    }
     if ($canViewProfiles) {
-        $as[] = $discuss->getChunk('user/disActiveUserRow',$activeUser->toArray());
+        $as[] = $discuss->getChunk('user/disActiveUserRow',$activeUserArray);
     } else {
         $as[] = $activeUser->get('username');
     }

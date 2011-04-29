@@ -263,6 +263,7 @@ class disUser extends xPDOSimpleObject {
     public static function fetchActive(xPDO &$modx,$timeAgo = 0,$limit = 0,$start = 0) {
         $response = array();
         $c = $modx->newQuery('disUser');
+        $c->query['distinct'] = 'DISTINCT';
         $c->innerJoin('disSession','Session',$modx->getSelectColumns('disSession','Session','',array('user')).' = '.$modx->getSelectColumns('disUser','disUser','',array('id')));
         $c->innerJoin('modUser','User');
         $c->leftJoin('modUserGroupMember','UserGroupMembers','User.id = UserGroupMembers.member');
@@ -277,6 +278,7 @@ class disUser extends xPDOSimpleObject {
             $c->limit($limit,$start);
         }
         $response['total'] = $modx->getCount('disUser',$c);
+        $c->select(array('disUser.id','disUser.username'));
         $c->sortby('UserGroupProfile.color','ASC');
         $c->sortby('Session.access','ASC');
         $response['results'] = $modx->getCollection('disUser',$c);
