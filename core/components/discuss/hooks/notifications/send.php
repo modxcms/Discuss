@@ -34,6 +34,8 @@ if (!empty($scriptProperties['post'])) {
 foreach ($notifications as $notification) {
     $user = $notification->getOne('User');
     if ($user == null) { $notification->remove(); continue; }
+    /* dont notify on own posts! */
+    if ($user->get('id') == $discuss->user->get('id')) { continue; }
 
     $emailProperties = array_merge($scriptProperties,$user->toArray());
     $emailProperties['tpl'] = $tpl;

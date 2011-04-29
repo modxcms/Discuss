@@ -32,6 +32,7 @@ $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_ur
 
 $placeholders['post'] = $placeholders['id'];
 $placeholders['thread'] = $thread->get('id');
+$placeholders['title'] = $replyPrefix.str_replace($replyPrefix,'',$post->get('title'));
 
 /* build breadcrumbs */
 $board = $thread->getOne('Board');

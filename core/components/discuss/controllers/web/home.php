@@ -44,6 +44,9 @@ if (isset($scriptProperties['logout']) && $scriptProperties['logout']) {
     $url = $modx->makeUrl($modx->resource->get('id'));
     $modx->sendRedirect($url);
 }
+if (isset($scriptProperties['read']) && !empty($scriptProperties['read'])) {
+    $discuss->hooks->load('thread/read_all',$c);
+}
 
 /* action buttons */
 $actionButtons = array();

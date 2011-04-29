@@ -19,13 +19,7 @@ $sortDir = $modx->getOption('sortDir',$scriptProperties,'DESC');
 
 /* handle marking all as read */
 if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
-    /* TODO: Write code to mark every thread as read */
-
-    $discuss->hooks->load('thread/read_all',array(
-        'board' => &$board,
-        'limit' => $limit,
-        'start' => $start,
-    ));
+    $discuss->hooks->load('thread/read_all');
 }
 
 

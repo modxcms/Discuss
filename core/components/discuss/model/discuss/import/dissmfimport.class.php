@@ -685,7 +685,9 @@ class DisSmfImport {
 
                 if (!empty($newBoards)) {
                     $user->set('ignore_boards',implode(',',$newBoards));
-                    $user->save();
+                    if ($this->live) {
+                        $user->save();
+                    }
                 }
             }
         }
