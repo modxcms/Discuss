@@ -32,4 +32,4 @@ $_lang['discuss.thread_remove'] = 'Remove Thread';
 $_lang['discuss.thread_remove_confirm'] = 'Are you sure you want to permanently remove the thread "[[+thread]]"?';
 $_lang['discuss.thread_summary'] = 'Thread Summary';
 $_lang['discuss.title'] = 'Title';
-$_lang['discuss.views'] = '[[+views]] Views';
+$_lang['discuss.views'] = 'Views';

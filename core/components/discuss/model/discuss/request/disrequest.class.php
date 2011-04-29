@@ -112,7 +112,7 @@ class DisRequest {
      * @return string The final wrapped output, or blank if not in debug.
      */
     public function output($output = '',array $properties = array()) {
-        $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview'));
+        $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview','board.xml'));
         if ($this->modx->getOption('discuss.debug',null,false)) {
             if (!$emptyTpl && $this->debugTimer !== false) {
                 $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";

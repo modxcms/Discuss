@@ -47,6 +47,7 @@ $plist = array();
 $output = array();
 foreach ($posts['results'] as $post) {
     $postArray = $post->toArray();
+    $postArray['children'] = '';
 
     if ($post->Author) {
         $postArray = array_merge($postArray,$post->Author->toArray('author.'));
@@ -121,6 +122,7 @@ foreach ($posts['results'] as $post) {
     }
 
     /* get attachments */
+    $postArray['attachments'] = '';
     if ($canViewAttachments) {
         $attachments = $post->getMany('Attachments');
         if (!empty($attachments)) {
@@ -165,10 +167,7 @@ if (empty($flat)) {
         $output = $discuss->treeParser->parse($plist,'post/disThreadPost');
     }
 } else {
-    //echo '<pre>'; foreach ($output as $o) { var_export(htmlentities($o)); } die();
-
     $output = implode("\n",$output);
-//    echo '<pre>';var_export(htmlentities($output)); die();
 }
 $response['results'] = str_replace(array('[',']'),array('&#91;','&#93;'),$output);
 return $response;

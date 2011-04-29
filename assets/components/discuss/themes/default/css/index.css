@@ -48,21 +48,31 @@ li.dis-board-li {
     padding-left: 50px;
     padding-bottom: 5px;
     background: transparent url(../images/icons/off.png) top left no-repeat;
+    background: transparent url(../images/icons/off.png) 6px left no-repeat;
 }
 ol.dis-board-list li.dis-unread {
     background: transparent url(../images/icons/on.png) top left no-repeat;
-    }
+    background: transparent url(../images/icons/on.png) 6px left no-repeat;
+}
 li.dis-board-li h3 {
     padding: 10px 0 0;
     margin: 0;
     font-size: 16px;
-    }
+}
 li.dis-board-li p {
     padding: 3px 0; margin: 0; }
 
 .dis-board-li-stats, .dis-board-li-last-post {
     width: 18%;
-    padding: 3px;
+}
+.dis-board-li-stats, .dis-board-li-last-post, .dis-board-rss-icon {
+    margin-top: 6px;
+    margin-right: 15px;
+}
+li.dis-board-li .dis-board-rss-icon {
+    background: transparent url(../images/icons/rss2.gif) top left no-repeat;
+    width: 14px;
+    height: 14px;
 }
 
 li.dis-board-post {
