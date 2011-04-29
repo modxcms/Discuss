@@ -23,7 +23,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $template = $modx->getObject('modAccessPolicyTemplate',array('name' => 'DiscussTemplate'));
         if ($template) {
             foreach ($policies as $policyName) {
-                $policy = $transport->xpdo->getObject('modAccessPolicy',array(
+                $policy = $modx->getObject('modAccessPolicy',array(
                     'name' => $policyName,
                 ));
                 if ($policy) {

@@ -99,6 +99,7 @@ $xpdo_meta_map['disThread']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'sticky' => 
     array (
@@ -117,6 +118,7 @@ $xpdo_meta_map['disThread']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'users' => 
     array (

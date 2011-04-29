@@ -35,15 +35,15 @@
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="name" dbtype="varchar" precision="255" phptype="string" default="" null="false" index="index" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
-        <field key="last_post" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-        <field key="num_topics" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-        <field key="num_replies" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-        <field key="total_posts" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-        <field key="ignoreable" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
-        <field key="rank" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <field key="last_post" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="num_topics" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="num_replies" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="total_posts" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="ignoreable" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" index="index" />
+        <field key="rank" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="map" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="minimum_post_level" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="9999" />
-        <field key="status" dbtype="integer" precision="4" phptype="integer" attributes="unsigned" null="false" default="1" />
+        <field key="minimum_post_level" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="9999" index="index" />
+        <field key="status" dbtype="integer" precision="4" phptype="integer" attributes="unsigned" null="false" default="1" index="index" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         
         <aggregate alias="Category" class="disCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
@@ -115,9 +115,9 @@
         <field key="views" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="locked" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="sticky" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
-        <field key="private" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
+        <field key="private" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
         <field key="users" dbtype="mediumtext" phptype="string" null="true" default="" />
-        <field key="locked" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
+        <field key="locked" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 
         <aggregate alias="FirstAuthor" class="disUser" local="author_first" foreign="id" cardinality="one" owner="foreign" />
@@ -162,11 +162,11 @@
         <field key="editedby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" />
         <field key="editedon" dbtype="datetime" phptype="datetime" null="false" />
         <field key="icon" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="allow_replies" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" />
+        <field key="allow_replies" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" index="index" />
         <field key="rank" dbtype="tinytext" phptype="string" null="false" />
         <field key="ip" dbtype="varchar" precision="255" phptype="string" null="false" default="0.0.0.0" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-        <field key="depth" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <field key="depth" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />

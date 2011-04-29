@@ -119,6 +119,7 @@ $xpdo_meta_map['disPost']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 1,
+      'index' => 'index',
     ),
     'rank' => 
     array (
@@ -151,6 +152,7 @@ $xpdo_meta_map['disPost']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
   ),
   'aggregates' => 

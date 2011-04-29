@@ -8,7 +8,6 @@ $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 
 /* recent posts */
 $c = $modx->newQuery('disThread');
-$c->query['distinct'] = 'DISTINCT';
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
@@ -21,7 +20,7 @@ $c->where(array(
 $groups = $discuss->user->getUserGroups();
 if (!$discuss->user->isAdmin()) {
     if (!empty($groups)) {
-        /* restrict boards by user group if applicable */
+        // restrict boards by user group if applicable
         $g = array(
             'UserGroups.usergroup:IN' => $groups,
         );
@@ -47,18 +46,22 @@ if ($discuss->isLoggedIn) {
         ));
     }
 }
-$total = $modx->getCount('disThread',$c);
-$c->select($modx->getSelectColumns('disPost','LastPost'));
+if (!empty($scriptProperties['getTotal'])) {
+    $total = $modx->getCount('disThread',$c);
+}
 $c->select(array(
     'disThread.id',
     'disThread.replies',
     'disThread.views',
     'disThread.sticky',
     'disThread.locked',
+    'disThread.board',
     'FirstPost.title',
     'Board.name AS board_name',
     'LastPost.id AS post_id',
-    'LastPost.author AS author',
+    'LastPost.thread',
+    'LastPost.author',
+    'LastPost.createdon',
     'LastAuthor.username AS author_username',
 ));
 if (!empty($scriptProperties['showIfParticipating'])) {
@@ -83,10 +86,10 @@ foreach ($recentPosts as $thread) {
     $threadArray = $thread->toArray();
     $threadArray['idx'] = $idx;
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
-
     $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->url.'user/?user='.$threadArray['author'].'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
     $threadArray['views'] = number_format($threadArray['views']);
     $threadArray['replies'] = number_format($threadArray['replies']);
+    $threadArray['unread'] = '';
 
     /* unread class */
     $list[] = $discuss->getChunk('post/disPostLi',$threadArray);
@@ -97,7 +100,7 @@ unset($rps,$pa,$recentPosts,$post);
 
 return array(
     'results' => $list,
-    'total' => $total,
+    'total' => isset($total) ? $total : null,
     'start' => $start,
     'limit' => $limit,
 );

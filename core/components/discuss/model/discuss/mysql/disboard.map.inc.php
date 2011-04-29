@@ -68,6 +68,7 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'num_topics' => 
     array (
@@ -77,6 +78,7 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'num_replies' => 
     array (
@@ -86,6 +88,7 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'total_posts' => 
     array (
@@ -95,6 +98,7 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'ignoreable' => 
     array (
@@ -104,6 +108,7 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 1,
+      'index' => 'index',
     ),
     'rank' => 
     array (
@@ -113,6 +118,7 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+      'index' => 'index',
     ),
     'map' => 
     array (
@@ -130,6 +136,7 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 9999,
+      'index' => 'index',
     ),
     'status' => 
     array (
@@ -139,6 +146,7 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 1,
+      'index' => 'index',
     ),
     'integrated_id' => 
     array (
