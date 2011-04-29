@@ -85,6 +85,17 @@ $recent = $discuss->hooks->load('post/recent');
 $placeholders['recent_posts'] = $recent['results'];
 unset($recent);
 
+/* forum activity */
+$activity = $modx->getObject('disForumActivity',array(
+    'day' => date('Y-m-d'),
+));
+if (!$activity) {
+    $activity = $modx->newObject('disForumActivity');
+    $activity->set('day',date('Y-m-d'));
+    $activity->save();
+}
+$placeholders = array_merge($placeholders,$activity->toArray('activity.'));
+
 /* breadcrumbs */
 $trail = array();
 if (!empty($scriptProperties['category'])) {

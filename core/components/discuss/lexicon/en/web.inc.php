@@ -82,7 +82,8 @@ $_lang['discuss.show_email'] = 'Show Email to Public';
 $_lang['discuss.stats'] = 'Stats';
 $_lang['discuss.stats_latest_post'] = 'Latest Post: [[+post]] by [[+by]]';
 $_lang['discuss.stats_totals'] = '[[+posts]] posts in [[+threads]] threads by [[+members]] members.';
-$_lang['discuss.stats_online'] = '[[+visitors]] Visitors, [[+members]] Members Online';
+$_lang['discuss.stats_online'] = 'Online - Visitors: [[+visitors]], Members: [[+members]]';
+$_lang['discuss.stats_today'] = 'Today&apos;s Total - Visitors: [[+hits]], Topics: [[+topics]], Replies: [[+replies]], Members logged in: [[+visitors]]';
 $_lang['discuss.subboards'] = 'Sub-Boards';
 $_lang['discuss.subforums'] = 'Sub-Forums';
 $_lang['discuss.subscribe'] = 'Subscribe';
@@ -116,4 +117,3 @@ $_lang['discuss.users_active_in_last'] = '[[+total]] members active in last [[+t
 $_lang['discuss.views'] = 'Views';
 $_lang['discuss.website'] = 'Website';
 $_lang['discuss.zero_members'] = '0 members';
-

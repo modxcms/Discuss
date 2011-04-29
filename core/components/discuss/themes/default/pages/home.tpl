@@ -34,4 +34,7 @@
         [[+activeUsers]]
         </span>
     </li>
+    <li class="dis-board-li">
+        <span class="dis-today-stats">[[%discuss.stats_today? &hits=`[[+activity.hits]]` &topics=`[[+activity.topics]]` &replies=`[[+activity.replies]]` &visitors=`[[+activity.visitors]]`]]</span>
+    </li>
 </ol>
