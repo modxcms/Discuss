@@ -39,4 +39,5 @@ $posts = $discuss->hooks->load('board/post/getList',array(
 ));
 $placeholders['posts'] = implode("\n",$posts['results']);
 
+@header('Content-type: application/xhtml+xml');
 return $placeholders;

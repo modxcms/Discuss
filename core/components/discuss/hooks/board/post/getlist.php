@@ -106,5 +106,4 @@ foreach ($threads as $thread) {
 
     $response['results'][] = $discuss->getChunk($tpl,$threadArray);
 }
-
 return $response;
