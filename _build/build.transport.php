@@ -203,6 +203,9 @@ $vehicle= $builder->createVehicle($menu,array (
 ));
 $modx->log(modX::LOG_LEVEL_INFO,'Adding in PHP resolvers...');
 $vehicle->resolve('php',array(
+    'source' => $sources['resolvers'] . 'resolve.dbchanges.php',
+));
+$vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'resolve.policies.php',
 ));
 $vehicle->resolve('php',array(

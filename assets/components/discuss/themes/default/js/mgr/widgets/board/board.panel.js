@@ -61,6 +61,13 @@ Dis.panel.Board = function(config) {
                     ,width: 500
                 },{
                     xtype: 'checkbox'
+                    ,fieldLabel: _('discuss.board_locked')
+                    ,description: _('discuss.board_locked_desc')
+                    ,name: 'locked'
+                    ,labelSeparator: ''
+                    ,inputValue: 1
+                },{
+                    xtype: 'checkbox'
                     ,fieldLabel: _('discuss.board_ignoreable')
                     ,description: _('discuss.board_ignoreable_desc')
                     ,name: 'ignoreable'

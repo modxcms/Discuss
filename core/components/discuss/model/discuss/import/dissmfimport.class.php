@@ -293,16 +293,21 @@ class DisSmfImport {
             $idx = 0;
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 if (!$row) continue;
-                $category = $this->modx->newObject('disCategory');
-                $category->fromArray(array(
+                $category = $this->modx->getObject('disCategory',array(
                     'name' => $row['name'],
-                    'collapsible' => $row['canCollapse'] ? true : false,
-                    'rank' => $idx,
-                    'integrated_id' => $row['ID_CAT'],
                 ));
-                $this->log('Importing category '.$row['name']);
-                if ($this->live) {
-                    $category->save();
+                if (!$category) {
+                    $category = $this->modx->newObject('disCategory');
+                    $category->fromArray(array(
+                        'name' => $row['name'],
+                        'collapsible' => $row['canCollapse'] ? true : false,
+                        'rank' => $idx,
+                        'integrated_id' => $row['ID_CAT'],
+                    ));
+                    $this->log('Importing category '.$row['name']);
+                    if ($this->live) {
+                        $category->save();
+                    }
                 }
 
                 $this->importBoards($category,$row);
@@ -327,25 +332,35 @@ class DisSmfImport {
         while ($brow = $bst->fetch(PDO::FETCH_ASSOC)) {
             if (!$brow) continue;
 
-            $board = $this->modx->newObject('disBoard');
-            $board->fromArray(array(
-                'parent' => 0,
-                'name' => $brow['name'],
-                'description' => $brow['description'],
-                'num_topics' => $brow['numTopics'],
-                'num_replies' => $brow['numPosts']-$brow['numTopics'],
-                'total_posts' => $brow['numPosts'],
-                'ignoreable' => $brow['allowIgnore'],
-                'rank' => $bIdx,
-                'integrated_id' => $brow['ID_BOARD'],
+            $c = $this->modx->newQuery('disBoard');
+            $c->innerJoin('disCategory','Category');
+            $c->where(array(
+                'disBoard.name' => $brow['name'],
+                'Category.name' => $category->get('name'),
             ));
-            if ($parentBoard) {
-                $board->set('parent',$parentBoard->get('id'));
-            }
-            $this->log('Importing board '.$brow['name']);
-            if ($this->live) {
-                $board->set('category',$category->get('id'));
-                $board->save();
+            $board = $this->modx->getObject('disBoard',$c);
+
+            if (!$board) {
+                $board = $this->modx->newObject('disBoard');
+                $board->fromArray(array(
+                    'parent' => 0,
+                    'name' => $brow['name'],
+                    'description' => $brow['description'],
+                    'num_topics' => $brow['numTopics'],
+                    'num_replies' => $brow['numPosts']-$brow['numTopics'],
+                    'total_posts' => $brow['numPosts'],
+                    'ignoreable' => $brow['allowIgnore'],
+                    'rank' => $bIdx,
+                    'integrated_id' => $brow['ID_BOARD'],
+                ));
+                if ($parentBoard) {
+                    $board->set('parent',$parentBoard->get('id'));
+                }
+                $this->log('Importing board '.$brow['name']);
+                if ($this->live) {
+                    $board->set('category',$category->get('id'));
+                    $board->save();
+                }
             }
             $this->importTopics($board,$brow);
             $this->importBoards($category,$row,$board,$brow['ID_BOARD']);

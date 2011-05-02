@@ -17,6 +17,9 @@ if ($object->xpdo) {
             //$modx->query("ALTER TABLE ".$modx->getTableName('disUserProfile')." ADD COLUMN `use_gravatar` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER `avatar`");
             //$modx->query("ALTER TABLE ".$modx->getTableName('disUserProfile')." ADD COLUMN `avatar_service` VARCHAR(255) NOT NULL DEFAULT 'gravatar' AFTER `avatar`");
 
+            $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD COLUMN `locked` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER `status`");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD INDEX (`locked`)");
+
             break;
         case xPDOTransport::ACTION_UPGRADE:
             break;

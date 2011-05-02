@@ -20,6 +20,7 @@ $xpdo_meta_map['disBoard']= array (
     'map' => '',
     'minimum_post_level' => 9999,
     'status' => 1,
+    'locked' => 1,
     'integrated_id' => 0,
   ),
   'fieldMeta' => 
@@ -143,6 +144,16 @@ $xpdo_meta_map['disBoard']= array (
       'dbtype' => 'integer',
       'precision' => '4',
       'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 1,
+      'index' => 'index',
+    ),
+    'locked' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 1,

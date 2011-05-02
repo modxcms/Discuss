@@ -76,6 +76,8 @@ foreach ($boards as $board) {
         'unread' => number_format($board['unread']),
     ));
 
+    $board['is_locked'] = !empty($board['locked']) ? '<div class="dis-board-locked"></div>' : '';
+
     /* if changing categories */
     if ($currentCategory != $lastCategory) {
         $ba['list'] = implode("\n",$boardList);

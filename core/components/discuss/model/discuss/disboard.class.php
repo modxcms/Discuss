@@ -323,7 +323,7 @@ class disBoard extends xPDOSimpleObject {
                 }
             }
             $self = array(
-                'text' => $this->get('name'),
+                'text' => $this->get('name').($this->get('locked') ? $this->xpdo->lexicon('discuss.board_is_locked') : ''),
             );
             if ($linkToSelf) {
                 $self['url'] = $this->xpdo->discuss->url.'board/?board='.$this->get('id');
@@ -399,8 +399,9 @@ class disBoard extends xPDOSimpleObject {
             }
             /* only allow posts if meeting minimum level
              * AND if board is not archived (and user is not an admin, who can post to archived boards)
+             * AND if board not locked
             */
-            if ($level <= ((int)$this->get('minimum_post_level')) && ($this->get('status') != disBoard::STATUS_ARCHIVED || $level == 0)) {
+            if ($level <= ((int)$this->get('minimum_post_level')) && ($this->get('status') != disBoard::STATUS_ARCHIVED || $level == 0) && !$this->get('locked')) {
                 $canPost = true;
             }
         }

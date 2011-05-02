@@ -5,6 +5,7 @@
  */
 $_lang['discuss.age'] = 'Age';
 $_lang['discuss.author'] = 'Author';
+$_lang['discuss.board_is_locked'] = ' (Locked)';
 $_lang['discuss.board_moderators'] = 'Moderators: [[+moderators]]';
 $_lang['discuss.board_no_threads'] = 'There are currently no threads for this board.';
 $_lang['discuss.board_readers_viewing'] = '[[+readers]] are viewing this board.';

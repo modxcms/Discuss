@@ -74,6 +74,13 @@ li.dis-board-li .dis-board-rss-icon {
     width: 14px;
     height: 14px;
 }
+li.dis-board-li .dis-board-locked {
+    width: 21px;
+    height: 22px;
+    float: right;
+    background: transparent url(../images/icons/quick_lock.gif) top left no-repeat;
+}
+
 
 li.dis-board-post {
     list-style: none;

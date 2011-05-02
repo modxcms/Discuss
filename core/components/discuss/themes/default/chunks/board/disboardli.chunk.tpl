@@ -2,6 +2,7 @@
     <div class="right dis-board-li-last-post">[[+lastPost]]</div>
     <a class="right dis-board-rss-icon" href="[[~[[*id]]]]board.xml?board=[[+id]]"></a>
     <div class="right dis-board-li-stats">[[+post_stats]]</div>
+    [[+is_locked]]
 
     <h3><a href="[[~[[*id]]]]board/?board=[[+id]]">[[+name]]</a></h3>
     <p>[[+description]]</p>
