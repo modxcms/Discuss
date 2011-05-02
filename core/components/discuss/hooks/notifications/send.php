@@ -6,6 +6,9 @@
  */
 if (empty($scriptProperties['title']) || empty($scriptProperties['thread'])) return false;
 
+if (!$modx->getOption('discuss.enable_notifications',null,true)) {
+    return true;
+}
 /* setup default properties */
 $type = $modx->getOption('type',$scriptProperties,'thread');
 $subject = $modx->getOption('subject',$scriptProperties,$modx->getOption('discuss.notification_new_post_subject',null,'New Post'));

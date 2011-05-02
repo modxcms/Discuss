@@ -31,13 +31,13 @@ if (!empty($_POST) && !empty($_POST['remove'])) {
 $c = $modx->newQuery('disThread');
 $c->select($modx->getSelectColumns('disThread','disThread'));
 $c->select(array(
-    'first_post_id' => 'FirstPost.id',
-    'last_post_id' => 'LastPost.id',
-    'title' => 'FirstPost.title',
-    'createdon' => 'LastPost.createdon',
-    'board_name' => 'Board.name',
-    'author' => 'FirstPost.author',
-    'author_username' => 'FirstAuthor.username',
+    'Board.name AS board_name',
+    'LastPost.id AS last_post_id',
+    'LastPost.createdon AS createdon',
+    'FirstPost.id AS first_post_id',
+    'FirstPost.title AS title',
+    'FirstPost.author AS author',
+    'FirstAuthor.username AS author_username',
 ));
 $c->innerJoin('disUserNotification','Notifications');
 $c->innerJoin('disUser','FirstAuthor');

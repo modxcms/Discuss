@@ -178,6 +178,15 @@ $settings['discuss.enable_hot']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
+$settings['discuss.enable_notifications']= $modx->newObject('modSystemSetting');
+$settings['discuss.enable_notifications']->fromArray(array(
+    'key' => 'discuss.enable_notifications',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'Notifications',
+),'',true,true);
+
 $settings['discuss.enable_sticky']= $modx->newObject('modSystemSetting');
 $settings['discuss.enable_sticky']->fromArray(array(
     'key' => 'discuss.enable_sticky',
