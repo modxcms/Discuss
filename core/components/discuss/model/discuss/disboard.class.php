@@ -226,7 +226,15 @@ class disBoard extends xPDOSimpleObject {
         return $this->xpdo->lexicon('discuss.board_viewing',array('members' => $members,'guests' => $guests));
     }
 
+    /**
+     * Determine if a user is a moderator of this board
+     * 
+     * @param int $userId
+     * @return bool
+     */
     public function isModerator($userId) {
+        if ($this->xpdo->discuss->user->isGlobalModerator()) return true;
+         
         $moderator = $this->xpdo->getCount('disModerator',array(
             'user' => $userId,
             'board' => $this->get('id'),

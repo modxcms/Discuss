@@ -10,6 +10,7 @@ class disUser extends xPDOSimpleObject {
     const AWAITING_MODERATION = 4;
 
     public $isAdmin;
+    public $isGlobalModerator;
     public $isLoggedIn = false;
 
     /**
@@ -248,6 +249,25 @@ class disUser extends xPDOSimpleObject {
             }
         }
         return $this->isAdmin;
+    }
+
+    /**
+     * Return whether or not the user is a global Moderator
+     * @return boolean
+     */
+    public function isGlobalModerator() {
+        if (!$this->isLoggedIn) {
+            $this->isGlobalModerator = false;
+        }
+        if (!isset($this->isGlobalModerator)) {
+            $this->isGlobalModerator = false;
+            $moderators = $this->xpdo->getOption('discuss.global_moderators',null,'');
+            $moderators = explode(',',$moderators);
+            if (in_array($this->xpdo->user->get('username'),$moderators)) {
+                $this->isGlobalModerator = true;
+            }
+        }
+        return $this->isGlobalModerator;
     }
 
     /**

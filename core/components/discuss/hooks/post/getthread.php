@@ -23,7 +23,7 @@ $flat = true;
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
-$isModerator = $thread->isModerator($discuss->user->get('id')) || $discuss->user->isAdmin();
+$isModerator = $discuss->user->isGlobalModerator() || $thread->isModerator($discuss->user->get('id')) || $discuss->user->isAdmin();
 $userUrl = $discuss->url.'user/';
 
 /* get posts */

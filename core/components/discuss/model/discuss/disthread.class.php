@@ -436,6 +436,8 @@ class disThread extends xPDOSimpleObject {
      * @return bool True if they are a moderator
      */
     public function isModerator($userId) {
+        if ($this->xpdo->discuss->user->isGlobalModerator()) return true;
+        
         $moderator = $this->xpdo->getCount('disModerator',array(
             'user' => $userId,
             'board' => $this->get('board'),

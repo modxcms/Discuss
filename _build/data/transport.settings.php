@@ -196,6 +196,15 @@ $settings['discuss.forum_title']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
+$settings['discuss.global_moderators']= $modx->newObject('modSystemSetting');
+$settings['discuss.global_moderators']->fromArray(array(
+    'key' => 'discuss.global_moderators',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
+),'',true,true);
+
 $settings['discuss.hot_thread_threshold']= $modx->newObject('modSystemSetting');
 $settings['discuss.hot_thread_threshold']->fromArray(array(
     'key' => 'discuss.hot_thread_threshold',
