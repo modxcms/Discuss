@@ -18,6 +18,7 @@ $xpdo_meta_map['disThread']= array (
     'sticky' => 0,
     'private' => 0,
     'users' => '',
+    'last_view_ip' => '',
     'integrated_id' => 0,
   ),
   'fieldMeta' => 
@@ -125,6 +126,14 @@ $xpdo_meta_map['disThread']= array (
       'dbtype' => 'mediumtext',
       'phptype' => 'string',
       'null' => true,
+      'default' => '',
+    ),
+    'last_view_ip' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '120',
+      'phptype' => 'string',
+      'null' => false,
       'default' => '',
     ),
     'integrated_id' => 

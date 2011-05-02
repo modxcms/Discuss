@@ -20,6 +20,8 @@ if ($object->xpdo) {
             $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD COLUMN `locked` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER `status`");
             $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD INDEX (`locked`)");
 
+            $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD COLUMN `last_view_ip` TINYINT(1) UNSIGNED NOT NULL DEFAULT '' AFTER `locked`");
+
             break;
         case xPDOTransport::ACTION_UPGRADE:
             break;
