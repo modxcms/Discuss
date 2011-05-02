@@ -140,5 +140,132 @@ $_lang['discuss.username'] = 'Username';
 $_lang['discuss.users'] = 'Users';
 $_lang['discuss.users.intro_msg'] = 'Manage your Users across your Discuss installation.';
 
+
+/* System Settings */
 $_lang['setting_discuss.reserved_usernames'] = 'Reserved Usernames';
 $_lang['setting_discuss.reserved_usernames_desc'] = 'A comma-separated list of reserved usernames.';
+
+$_lang['setting_discuss.admin_email'] = 'Administrator Email';
+$_lang['setting_discuss.admin_email_desc'] = 'An email to use when sending forum notifications.';
+
+$_lang['setting_discuss.admin_groups'] = 'Administrator User Groups';
+$_lang['setting_discuss.admin_groups_desc'] = 'A comma-separated list of User Group names that are given Admin access to the forums.';
+
+$_lang['setting_discuss.allow_custom_titles'] = 'Allow Custom Titles';
+$_lang['setting_discuss.allow_custom_titles_desc'] = 'Whether or not to allow users to have custom titles.';
+
+$_lang['setting_discuss.allow_guests'] = 'Allow Guests';
+$_lang['setting_discuss.allow_guests_desc'] = 'Whether or not to allow anonymous users to browse the forums.';
+
+$_lang['setting_discuss.attachments_allowed_filetypes'] = 'Allowed Filetypes for Attachments';
+$_lang['setting_discuss.attachments_allowed_filetypes_desc'] = 'A comma-separated list of filetypes to allow in attachments.';
+
+$_lang['setting_discuss.attachments_max_filesize'] = 'Max File Size of Attachments';
+$_lang['setting_discuss.attachments_max_filesize_desc'] = 'In bytes, how large attachments may be in posts.';
+
+$_lang['setting_discuss.attachments_max_per_post'] = 'Maximum Number of Attachments Per Post';
+$_lang['setting_discuss.attachments_max_per_post_desc'] = 'The total number of attachments that may be attached to any given post.';
+
+$_lang['setting_discuss.attachments_path'] = 'Attachments Absolute Path';
+$_lang['setting_discuss.attachments_path_desc'] = 'The absolute path to the directory where attachments are stored.';
+
+$_lang['setting_discuss.attachments_url'] = 'Attachments URL';
+$_lang['setting_discuss.attachments_url_desc'] = 'The URL by which attachments can be accessed.';
+
+$_lang['setting_discuss.bbcode_enabled'] = 'Enable BBCode';
+$_lang['setting_discuss.bbcode_enabled_desc'] = 'Whether or not to enable BBCode on posts.';
+
+$_lang['setting_discuss.courtesy_edit_wait'] = 'Courtesy Edit Wait';
+$_lang['setting_discuss.courtesy_edit_wait_desc'] = 'The amount of time, in seconds, in which a user may edit their post without "Edited On" showing up in the post.';
+
+$_lang['setting_discuss.date_format'] = 'Date Format';
+$_lang['setting_discuss.date_format_desc'] = 'The date format, in strftime syntax, by which to format all dates in Discuss.';
+
+$_lang['setting_discuss.debug'] = 'Debug Mode';
+$_lang['setting_discuss.debug_desc'] = 'If true, will turn on error reporting and show execution times at the end of each page.';
+
+$_lang['setting_discuss.email_reported_post_chunk'] = 'Reported Post Email Chunk';
+$_lang['setting_discuss.email_reported_post_chunk_desc'] = 'The Chunk to use for emails sent when someone reports a post.';
+
+$_lang['setting_discuss.email_reported_post_subject'] = 'Reported Post Email Subject';
+$_lang['setting_discuss.email_reported_post_subject_desc'] = 'The Subject line to use for emails sent when someone reports a post.';
+
+$_lang['setting_discuss.enable_hot'] = 'Enable Hot Threads';
+$_lang['setting_discuss.enable_hot_desc'] = 'If yes, will enable flagging of threads as Hot, where their icon will be differently colored.';
+
+$_lang['setting_discuss.enable_notifications'] = 'Enable Notifications';
+$_lang['setting_discuss.enable_notifications_desc'] = 'If no, all email notifications will be turned off.';
+
+$_lang['setting_discuss.enable_sticky'] = 'Enable Sticky Threads';
+$_lang['setting_discuss.enable_sticky_desc'] = 'Whether or not to allow sticking of threads to the top of board post lists.';
+
+$_lang['setting_discuss.forum_title'] = 'Forum Title';
+$_lang['setting_discuss.forum_title_desc'] = 'The title of your Discuss forum.';
+
+$_lang['setting_discuss.global_moderators'] = 'Global Moderators List';
+$_lang['setting_discuss.global_moderators_desc'] = 'A comma-separated list of usernames who are Global Moderators, or moderators for all boards on the forums.';
+
+$_lang['setting_discuss.hot_thread_threshold'] = 'Hot Thread Threshold';
+$_lang['setting_discuss.hot_thread_threshold_desc'] = 'The number of posts a thread must have to achieve Hot status.';
+
+$_lang['setting_discuss.max_post_depth'] = 'Maximum Post Depth';
+$_lang['setting_discuss.max_post_depth_desc'] = 'If threading is enabled, the maximum depth of posts a thread may go.';
+
+$_lang['setting_discuss.max_signature_length'] = 'Maximum Signature Length';
+$_lang['setting_discuss.max_signature_length_desc'] = 'The maximum number of characters a signature may be for any user.';
+
+$_lang['setting_discuss.maximum_post_size'] = 'Maximum Post Size';
+$_lang['setting_discuss.maximum_post_size_desc'] = 'The maximum number of characters a post may be in a thread.';
+
+$_lang['setting_discuss.notification_new_post_chunk'] = 'New Post Notification Email Chunk';
+$_lang['setting_discuss.notification_new_post_chunk_desc'] = 'The Chunk used for the email sent to subscribers of a thread when a new post is made.';
+
+$_lang['setting_discuss.notification_new_post_subject'] = 'New Post Notification Email Subject';
+$_lang['setting_discuss.notification_new_post_subject_desc'] = 'The subject line for the email sent to subscribers of a thread when a new post is made.';
+
+$_lang['setting_discuss.num_recent_posts'] = 'Number of Recent Posts';
+$_lang['setting_discuss.num_recent_posts_desc'] = 'The number of recent posts to show on the main board index.';
+
+$_lang['setting_discuss.post_per_page'] = 'Posts Per Page';
+$_lang['setting_discuss.post_per_page_desc'] = 'The default number of posts to show per page on the thread view.';
+
+$_lang['setting_discuss.use_custom_post_parser'] = 'Use Custom Post Parser';
+$_lang['setting_discuss.use_custom_post_parser_desc'] = 'If set, will use a custom post parser for thread posts instead of BBCode.';
+
+$_lang['setting_discuss.recycle_bin_board'] = 'Recycle Bin Board';
+$_lang['setting_discuss.recycle_bin_board_desc'] = 'If set to non-zero, will move any posts marked to be removed by Moderators to this board instead. If set to 0, they will be removed instead.';
+
+$_lang['setting_discuss.show_whos_online'] = 'Show Whos Online';
+$_lang['setting_discuss.show_whos_online_desc'] = 'If set to yes, will display the users currently online.';
+
+$_lang['setting_discuss.spam_bucket_board'] = 'Spam Box Board';
+$_lang['setting_discuss.spam_bucket_board_desc'] = 'If set to non-zero, will move any posts marked as spam by Moderators to this board instead. If set to 0, they will be deleted instead.';
+
+$_lang['setting_discuss.stats_enabled'] = 'Enable Statistics';
+$_lang['setting_discuss.stats_enabled_desc'] = 'If set to yes, enables forum-wide statistcs.';
+
+$_lang['setting_discuss.theme'] = 'Theme';
+$_lang['setting_discuss.theme_desc'] = 'The theme to use for the board. Must be lowercase and the name of the theme directory.';
+
+$_lang['setting_discuss.threads_per_page'] = 'Threads Per Page';
+$_lang['setting_discuss.threads_per_page_desc'] = 'The default number of threads to show per page on the board view.';
+
+$_lang['setting_discuss.user_active_threshold'] = 'Active User Threshold';
+$_lang['setting_discuss.user_active_threshold_desc'] = 'The number of minutes a user must be active in to stay within the Active User threshold.';
+
+
+/* SSO Mode */
+$_lang['setting_discuss.sso_mode'] = 'SSO Mode';
+$_lang['setting_discuss.sso_mode_desc'] = 'If set to yes, Discuss will attempt to redirect Profile, Login, Logout and other SSO functionality to external MODX pages to allow you to integrate into the MODX user system. This is recommended.';
+
+$_lang['setting_discuss.forums_resource_id'] = 'Forums Resource ID';
+$_lang['setting_discuss.forums_resource_id_desc'] = 'The ID of the Resource your Discuss call is on.';
+
+$_lang['setting_discuss.login_resource_id'] = 'Login Resource ID';
+$_lang['setting_discuss.login_resource_id_desc'] = 'The ID of the Resource your Login call is on.';
+
+$_lang['setting_discuss.register_resource_id'] = 'Register Resource ID';
+$_lang['setting_discuss.register_resource_id_desc'] = 'The ID of the Resource your Register call is on.';
+
+$_lang['setting_discuss.update_profile_resource_id'] = 'Update Profile Resource ID';
+$_lang['setting_discuss.update_profile_resource_id_desc'] = 'The ID of the Resource your UpdateProfile call is on.';
