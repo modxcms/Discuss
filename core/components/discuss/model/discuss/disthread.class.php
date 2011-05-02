@@ -656,4 +656,15 @@ class disThread extends xPDOSimpleObject {
         }
         return true;
     }
+
+
+    public function canPostNew() {
+        if ($this->xpdo->discuss->user->isAdmin()) return true;
+        return $this->xpdo->hasPermission('discuss.thread_create') && !$this->get('locked');
+    }
+
+    public function canReply() {
+        if ($this->xpdo->discuss->user->isAdmin()) return true;
+        return $this->xpdo->hasPermission('discuss.thread_reply') && !$this->get('locked');
+    }
 }

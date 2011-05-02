@@ -637,5 +637,13 @@ class disPost extends xPDOSimpleObject {
         $c->sortby('Ancestors.depth','ASC');
         return $this->xpdo->getCollection('disBoard',$c);
     }
-    
+
+
+    public function canReply() {
+        if ($this->xpdo->discuss->user->isAdmin()) return true;
+        $thread = $this->getOne('Thread');
+        if (!$thread) return false;
+        
+        return $this->xpdo->hasPermission('discuss.thread_reply') && !$thread->get('locked');
+    }
 }

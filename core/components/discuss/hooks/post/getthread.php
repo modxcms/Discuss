@@ -35,7 +35,6 @@ $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p')
 $allowCustomTitles = $modx->getOption('discuss.allow_custom_titles',null,true);
 $canModifyPost = $modx->hasPermission('discuss.thread_modify');
 $canRemovePost = $modx->hasPermission('discuss.thread_remove');
-$canReplyPost = $modx->hasPermission('discuss.thread_reply');
 $canViewAttachments = $modx->hasPermission('discuss.view_attachments');
 $canTrackIp = $modx->hasPermission('discuss.track_ip');
 $canViewEmails = $modx->hasPermission('discuss.view_emails');
@@ -74,7 +73,7 @@ foreach ($posts['results'] as $post) {
         }
 
         /* check if author wants to show email */
-        if ($post->Author->get('show_email') && $discuss->isLoggedIn && $canViewEmails) {
+        if ($post->Author->get('show_email') && $discuss->user->isLoggedIn && $canViewEmails) {
             $postArray['author.email'] = disPost::encodeEmail($post->Author->get('email'),$modx->lexicon('discuss.email_author'));
         } else {
             $postArray['author.email'] = '';
@@ -104,8 +103,8 @@ foreach ($posts['results'] as $post) {
     $postArray['action_quote'] = '';
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
-    if (!$thread->get('locked') && $discuss->isLoggedIn) {
-        if ($canReplyPost) {
+    if (!$thread->get('locked') && $discuss->user->isLoggedIn) {
+        if ($post->canReply()) {
             $postArray['action_reply'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
             $postArray['action_quote'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
         }

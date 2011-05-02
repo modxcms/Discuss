@@ -81,7 +81,7 @@ $isModerator = $thread->isModerator($discuss->user->get('id'));
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
     $board = $thread->getOne('Board');
-    if ($modx->hasPermission('discuss.thread_create') && $board->canPost()) {
+    if ($board->canPost() && $thread->canPostNew()) {
         $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
     }
     $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
@@ -106,7 +106,7 @@ unset($actionButtons);
 
 /* thread action buttons */
 $actionButtons = array();
-if ($discuss->isLoggedIn && $isModerator) {
+if ($discuss->user->isLoggedIn && $isModerator) {
     /** TODO: Move thread - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
      */

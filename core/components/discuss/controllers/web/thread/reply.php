@@ -21,6 +21,9 @@ if (empty($scriptProperties['thread'])) {
 }
 $discuss->setPageTitle($modx->lexicon('discuss.reply_to_post',array('title' => $post->get('title'))));
 
+/* ensure user can actually reply */
+if (!$post->canReply()) $modx->sendErrorPage();
+
 $author = $post->getOne('Author');
 
 /* setup default snippet properties */
