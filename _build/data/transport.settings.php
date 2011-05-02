@@ -259,19 +259,28 @@ $settings['discuss.num_recent_posts']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
-$settings['discuss.reserved_usernames']= $modx->newObject('modSystemSetting');
-$settings['discuss.reserved_usernames']->fromArray(array(
-    'key' => 'discuss.reserved_usernames',
-    'value' => 'admin,abc,administrator,superuser,root',
+$settings['discuss.page_param']= $modx->newObject('modSystemSetting');
+$settings['discuss.page_param']->fromArray(array(
+    'key' => 'discuss.page_param',
+    'value' => 'page',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Security',
 ),'',true,true);
 
-$settings['discuss.page_param']= $modx->newObject('modSystemSetting');
-$settings['discuss.page_param']->fromArray(array(
-    'key' => 'discuss.page_param',
-    'value' => 'page',
+$settings['discuss.recycle_bin_board']= $modx->newObject('modSystemSetting');
+$settings['discuss.recycle_bin_board']->fromArray(array(
+    'key' => 'discuss.recycle_bin_board',
+    'value' => 0,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
+),'',true,true);
+
+$settings['discuss.reserved_usernames']= $modx->newObject('modSystemSetting');
+$settings['discuss.reserved_usernames']->fromArray(array(
+    'key' => 'discuss.reserved_usernames',
+    'value' => 'admin,abc,administrator,superuser,root',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Security',
@@ -284,6 +293,15 @@ $settings['discuss.show_whos_online']->fromArray(array(
     'xtype' => 'combo-boolean',
     'namespace' => 'discuss',
     'area' => 'General',
+),'',true,true);
+
+$settings['discuss.spam_bucket_board']= $modx->newObject('modSystemSetting');
+$settings['discuss.spam_bucket_board']->fromArray(array(
+    'key' => 'discuss.spam_bucket_board',
+    'value' => 0,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
 ),'',true,true);
 
 $settings['discuss.stats_enabled']= $modx->newObject('modSystemSetting');

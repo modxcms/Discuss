@@ -146,19 +146,72 @@ class disPost extends xPDOSimpleObject {
         return $saved;
     }
 
+    public function move($boardId) {
+        /* check to see if only post in thread, if so, just move thread */
+        $thread = $this->getOne('Thread');
+        $newBoard = is_object($boardId) && $boardId instanceof disBoard ? $boardId : $this->xpdo->getObject('disBoard',$boardId);
+        $oldBoard = $this->getOne('Board');
+        if (!$thread || !$newBoard || !$oldBoard) return false;
+
+        $postCount = $this->xpdo->getCount('disPost',array('thread' => $this->get('thread')));
+        if ($postCount == 1) {
+            return $thread->move($boardId);
+        }
+
+        /* is multiple posts in thread, so split post out and move new thread */
+        $newThread = $this->xpdo->newObject('disThread');
+        $newThread->fromArray($thread->toArray());
+        $newThread->set('board',$newBoard->get('id'));
+        $newThread->set('post_first',$this->get('id'));
+        $newThread->set('post_last',$this->get('id'));
+        $newThread->set('author_first',$this->get('author'));
+        $newThread->set('author_last',$this->get('author'));
+        $newThread->set('replies',0);
+        if ($newThread->save()) {
+            $this->set('thread',$newThread->get('id'));
+            $this->set('board',$newBoard->get('id'));
+            $this->addOne($newThread,'Thread');
+            $this->addOne($newBoard,'Board');
+            $this->save();
+        }
+        return true;
+    }
+
     /**
      * Overrides xPDOObject::remove to handle closure tables, post counts, fix
      * the forum activity and user profile counts.
      *
-     * {@inheritDoc}
+     * @param array $ancestors
+     * @param boolean $doBoardMoveChecks
+     * @param boolean $moveToSpam
+     * @return boolean
      */
-    public function remove(array $ancestors = array()) {
-        $author = $this->getOne('Author');
-        $board = $this->getOne('Board');
-        $parent = $this->get('parent');
+    public function remove(array $ancestors = array(),$doBoardMoveChecks = false,$moveToSpam = false) {
+        /* first check to see if moving to spam/trash */
+        if (!empty($doBoardMoveChecks) && !$this->get('private')) {
+            $board = $this->getOne('Board');
+            if (!empty($board)) {
+                $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
+                $isAdmin = $this->xpdo->discuss->user->isAdmin();
+                if (!$isAdmin && $isModerator) { /* move to spambox/recyclebin */
+                    $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
+                    if ($moveToSpam && !empty($spamBoard)) {
+                        return $this->move($spamBoard);
+                    } else {
+                        $trashBoard = $this->xpdo->getOption('discuss.recycle_bin_board',null,false);
+                        if (!empty($trashBoard)) {
+                            return $this->move($trashBoard);
+                        }
+                    }
+                }
+            }
+        }
 
         $removed = parent::remove();
         if ($removed) {
+            $author = $this->getOne('Author');
+            $board = $this->getOne('Board');
+            $parent = $this->get('parent');
             /* decrease profile posts */
             if ($author) {
                 $author->set('posts',($author->get('posts')-1));

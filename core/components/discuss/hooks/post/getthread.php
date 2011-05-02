@@ -118,6 +118,7 @@ foreach ($posts['results'] as $post) {
         $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
         if ($canRemovePost) {
             $postArray['action_remove'] = '<a href="'.$discuss->url.'post/remove?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
+            $postArray['action_remove'] .= '<a href="'.$discuss->url.'post/spam?post='.$post->get('id').'">'.$modx->lexicon('discuss.post_spam').'</a>';
         }
     }
 

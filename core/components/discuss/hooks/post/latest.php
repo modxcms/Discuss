@@ -28,6 +28,20 @@ $c->where(array(
     'Board.status:!=' => disBoard::STATUS_INACTIVE,
 ));
 
+/* ignore spam/recycle bin boards */
+$spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
+if (!empty($spamBoard)) {
+    $c->where(array(
+        'Board.id:!=' => $spamBoard,
+    ));
+}
+$trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
+if (!empty($trashBoard)) {
+    $c->where(array(
+        'Board.id:!=' => $trashBoard,
+    ));
+}
+
 $groups = $discuss->user->getUserGroups();
 if (!$discuss->user->isAdmin()) {
     if (!empty($groups)) {

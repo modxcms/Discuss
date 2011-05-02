@@ -1,13 +1,13 @@
 <?php
 /**
- * Remove Post page
+ * Mark Post as Spam page
  *
  * @package discuss
  */
 /* get thread root */
 $post = $modx->getObject('disPost',$scriptProperties['post']);
 if ($post == null) $modx->sendErrorPage();
-$discuss->setPageTitle($modx->lexicon('discuss.post_remove_header',array('title' => $post->get('title'))));
+$discuss->setPageTitle($modx->lexicon('discuss.post_spam_header',array('title' => $post->get('title'))));
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
 if (empty($thread)) { $modx->sendErrorPage(); }
 
@@ -22,13 +22,13 @@ if (!$canRemovePost) {
 }
 
 
-if (!$post->remove(array(),true)) {
+if (!$post->remove(array(),true,true)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove post: '.print_r($post->toArray(),true));
 }
 
 if ($thread->get('post_first') == $post->get('id')) {
     $redirectTo = $discuss->url.'board/?board='.$post->get('board');
 } else {
-    $redirectTo = $discuss->url.'thread/?thread='.$thread->get('id');
+    $redirectTo = $discuss->url.'thread/?thread='.$post->get('thread');
 }
 $modx->sendRedirect($redirectTo);

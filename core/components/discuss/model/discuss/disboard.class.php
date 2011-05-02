@@ -509,4 +509,18 @@ class disBoard extends xPDOSimpleObject {
 
         return $response;
     }
+
+    public function get2ndLatestPost() {
+        $c = $this->xpdo->newQuery('disPost');
+        $c->innerJoin('disBoard','Board');
+        $c->innerJoin('disPost','LastPost','Board.last_post = LastPost.id');
+        $c->where(array(
+            'board' => $this->get('id'),
+            'LastPost.id != disPost.id',
+            'LastPost.thread != disPost.thread',
+        ));
+        $c->sortby('disPost.createdon','DESC');
+        $c->limit(1);
+        return $this->xpdo->getObject('disPost',$c);
+    }
 }

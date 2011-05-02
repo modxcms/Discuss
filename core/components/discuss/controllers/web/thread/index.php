@@ -112,6 +112,7 @@ if ($discuss->isLoggedIn && $isModerator) {
      */
     if ($modx->hasPermission('discuss.thread_remove')) {
         $actionButtons[] = array('url' => $discuss->url.'thread/remove?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_remove'));
+        $actionButtons[] = array('url' => $discuss->url.'thread/spam?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_spam'));
     }
 
     if ($thread->get('locked') && $modx->hasPermission('discuss.thread_unlock')) {

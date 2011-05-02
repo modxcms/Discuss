@@ -118,6 +118,22 @@ class disThread extends xPDOSimpleObject {
             'Reads.thread:IS' => null,
             'Board.status:!=' => disBoard::STATUS_INACTIVE,
         ));
+                
+        /* ignore spam/recycle bin boards */
+        $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
+        if (!empty($spamBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $spamBoard,
+            ));
+        }
+        $trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
+        if (!empty($trashBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $trashBoard,
+            ));
+        }
+
+        /* usergroup protection */
         if ($modx->discuss->isLoggedIn) {
             if ($sinceLastLogin) {
                 $lastLogin = $modx->discuss->user->get('last_login');
@@ -157,11 +173,50 @@ class disThread extends xPDOSimpleObject {
      * Override remove() to clear thread cache
      *
      * @param array $ancestors
+     * @param boolean $doBoardMoveChecks
+     * @param boolean $moveToSpam
      * @return boolean
      */
-    public function remove(array $ancestors = array()) {
-        $removed = parent::remove($ancestors);
-        $this->clearCache();
+    public function remove(array $ancestors = array(),$doBoardMoveChecks = false,$moveToSpam = false) {
+        $remove = false;
+        $removed = false;
+
+        if (!empty($doBoardMoveChecks)) {
+            $board = $this->getOne('Board');
+            if (!empty($board)) {
+                $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
+                $isAdmin = $this->xpdo->discuss->user->isAdmin();
+                if ($isAdmin) { /* admins can always remove threads */
+                    $remove = true;
+                } else if ($isModerator) { /* move to spambox/recyclebin */
+                    $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
+                    if ($moveToSpam && !empty($spamBoard)) {
+                        if ($this->move($spamBoard)) {
+                            $removed = true;
+                        }
+                    } else {
+                        $trashBoard = $this->xpdo->getOption('discuss.recycle_bin_board',null,false);
+                        if (!empty($trashBoard) && $this->move($trashBoard)) {
+                            $removed = true;
+                        } else {
+                            $remove = true;
+                        }
+                    }
+                }
+            } else { /* is a PM */
+                $remove = true;
+            }
+        } else { /* skipping, usually used for related objs */
+            $remove = true;
+        }
+
+        if ($remove) {
+            $removed = parent::remove($ancestors);
+        }
+
+        if ($removed) {
+            $this->clearCache();
+        }
         return $removed;
     }
 
@@ -530,5 +585,75 @@ class disThread extends xPDOSimpleObject {
         $response['results'] = $this->xpdo->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
 
         return $response;
+    }
+
+    /**
+     * Move a thread to a new board
+     *
+     * @param int $boardId
+     * @return boolean True if successful
+     */
+    public function move($boardId) {
+        $oldBoard = $this->getOne('Board');
+        $newBoard = is_object($boardId) && $boardId instanceof disBoard ? $boardId : $this->xpdo->getObject('disBoard',$boardId);
+        if (!$oldBoard || !$newBoard) {
+            return false;
+        }
+        $this->addOne($newBoard);
+        if ($this->save()) {
+            /* readjust all posts */
+            $posts = $this->getMany('Posts');
+            foreach ($posts as $post) {
+                $post->set('board',$newBoard->get('id'));
+                $post->save();
+            }
+
+            /* adjust old board topics/reply counts */
+            $oldBoard->set('num_topics',$oldBoard->get('num_topics')-1);
+
+            $replies = $oldBoard->get('num_replies') - $this->get('replies');
+            $oldBoard->set('num_replies',$replies);
+
+            $total_posts = $oldBoard->get('total_posts') - $this->get('replies') - 1;
+            $oldBoard->set('total_posts',$total_posts);
+
+            /* recalculate latest post */
+            $oldBoardLastPost = $this->xpdo->getObject('disPost',array('id' => $oldBoard->get('last_post')));
+            if ($oldBoardLastPost && $oldBoardLastPost->get('id') == $this->get('post_last')) {
+                $newLastPost = $oldBoard->get2ndLatestPost();
+                if ($newLastPost) {
+                    $oldBoard->set('last_post',$newLastPost->get('id'));
+                    $oldBoard->addOne($newLastPost,'LastPost');
+                }
+            }
+            $oldBoard->save();
+
+            /* adjust new board topics/reply counts */
+            $newBoard->set('num_topics',$oldBoard->get('num_topics')-1);
+
+            $replies = $newBoard->get('num_replies') + $this->get('replies');
+            $newBoard->set('num_replies',$replies);
+
+            $total_posts = $newBoard->get('total_posts') + $this->get('replies') + 1;
+            $newBoard->set('total_posts',$total_posts);
+
+            /* recalculate latest post */
+            $newBoardLastPost = $this->xpdo->getObject('disPost',array('id' => $newBoard->get('last_post')));
+            $thisThreadPost = $this->getOne('LastPost');
+            if ($newBoardLastPost && $thisThreadPost && $newBoardLastPost->get('createdon') < $thisThreadPost->get('createdon')) {
+                $newBoard->set('last_post',$thisThreadPost->get('id'));
+                $newBoard->addOne($thisThreadPost,'LastPost');
+            }
+            $newBoard->save();
+
+            /* clear caches */
+            if (!defined('DISCUSS_IMPORT_MODE')) {
+                $this->xpdo->getCacheManager();
+                $this->xpdo->cacheManager->delete('discuss/thread/'.$this->get('id'));
+                $this->xpdo->cacheManager->delete('discuss/board/'.$newBoard->get('id'));
+                $this->xpdo->cacheManager->delete('discuss/board/'.$oldBoard->get('id'));
+            }
+        }
+        return true;
     }
 }

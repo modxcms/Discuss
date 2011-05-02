@@ -17,6 +17,21 @@ $c->where(array(
     'Board.status:!=' => disBoard::STATUS_INACTIVE,
 ));
 
+/* ignore spam/recycle bin boards */
+$spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
+if (!empty($spamBoard)) {
+    $c->where(array(
+        'Board.id:!=' => $spamBoard,
+    ));
+}
+$trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
+if (!empty($trashBoard)) {
+    $c->where(array(
+        'Board.id:!=' => $trashBoard,
+    ));
+}
+
+/* usergroup protection */
 $groups = $discuss->user->getUserGroups();
 if (!$discuss->user->isAdmin()) {
     if (!empty($groups)) {
@@ -33,11 +48,13 @@ if (!$discuss->user->isAdmin()) {
         ));
     }
 }
+/* if showing only recent posts for a user */
 if (!empty($scriptProperties['user'])) {
     $c->where(array(
         'LastPost.author' => $scriptProperties['user'],
     ));
 }
+/* ignore boards */
 if ($discuss->isLoggedIn) {
     $ignoreBoards = $discuss->user->get('ignore_boards');
     if (!empty($ignoreBoards)) {
@@ -46,6 +63,7 @@ if ($discuss->isLoggedIn) {
         ));
     }
 }
+/* if requesting total */
 if (!empty($scriptProperties['getTotal'])) {
     $total = $modx->getCount('disThread',$c);
 }
