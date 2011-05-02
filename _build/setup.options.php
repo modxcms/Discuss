@@ -10,7 +10,11 @@ $demoDataChecked = '';
 /* get values based on mode */
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
-        $demoDataChecked = ' checked="checked"';
+        $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
+        $modx->addPackage('discuss',$modelPath);
+        $cat = $modx->getObject('disCategory',array('name' => 'Welcome'));
+        $demoDataChecked = $cat ? '' : ' checked="checked"';
+
         break;
     case xPDOTransport::ACTION_UPGRADE:
     case xPDOTransport::ACTION_UNINSTALL:
