@@ -44,15 +44,17 @@ if ($maxSize > 0) {
 }
 
 /* get participants */
-$participantsIds = array();
-$participants = explode(',',$fields['participants_usernames']);
-foreach ($participants as $participant) {
-    $user = $modx->getObject('disUser',array('username' => $participant));
-    if ($user) {
-        $participantsIds[] = $user->get('id');
+if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
+    $participantsIds = array();
+    $participants = explode(',',$fields['participants_usernames']);
+    foreach ($participants as $participant) {
+        $user = $modx->getObject('disUser',array('username' => $participant));
+        if ($user) {
+            $participantsIds[] = $user->get('id');
+        }
     }
+    $participantsIds = array_unique($participantsIds);
 }
-$participantsIds = array_unique($participantsIds);
 
 /* create post object and set fields */
 $post = $modx->newObject('disPost');
@@ -80,40 +82,42 @@ if ($post->save() == false) {
 }
 
 /* set participants, add notifications */
-$thread->set('users',implode(',',$participantsIds));
-$thread->save();
-$c = $modx->newQuery('disThreadUser');
-$c->where(array(
-    'thread' => $thread->get('id'),
-));
-$modx->removeCollection('disThreadUser',$c);
-$c = $modx->newQuery('disUserNotification');
-$c->where(array(
-    'thread' => $thread->get('id'),
-));
-$modx->removeCollection('disUserNotification',$c);
-foreach ($participantsIds as $participant) {
-    $threadUser = $modx->newObject('disThreadUser');
-    $threadUser->set('thread',$thread->get('id'));
-    $threadUser->set('user',$participant);
-    $threadUser->set('author',$thread->get('author_first') == $participant ? true : false);
-    $threadUser->save();
+if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
+    $thread->set('users',implode(',',$participantsIds));
+    $thread->save();
+    $c = $modx->newQuery('disThreadUser');
+    $c->where(array(
+        'thread' => $thread->get('id'),
+    ));
+    $modx->removeCollection('disThreadUser',$c);
+    $c = $modx->newQuery('disUserNotification');
+    $c->where(array(
+        'thread' => $thread->get('id'),
+    ));
+    $modx->removeCollection('disUserNotification',$c);
+    foreach ($participantsIds as $participant) {
+        $threadUser = $modx->newObject('disThreadUser');
+        $threadUser->set('thread',$thread->get('id'));
+        $threadUser->set('user',$participant);
+        $threadUser->set('author',$thread->get('author_first') == $participant ? true : false);
+        $threadUser->save();
 
-    /* add new notification */
-    $notify = $modx->newObject('disUserNotification');
-    $notify->set('thread',$thread->get('id'));
-    $notify->set('user',$participant);
-    $notify->set('board',0);
-    $notify->save();
+        /* add new notification */
+        $notify = $modx->newObject('disUserNotification');
+        $notify->set('thread',$thread->get('id'));
+        $notify->set('user',$participant);
+        $notify->set('board',0);
+        $notify->save();
 
-    /* remove read status for all-non-replier participants */
-    if ($participant != $discuss->user->get('id')) {
-        $read = $modx->getObject('disThreadRead',array(
-            'thread' => $thread->get('id'),
-            'user' => $participant,
-        ));
-        if ($read) {
-            $read->remove();
+        /* remove read status for all-non-replier participants */
+        if ($participant != $discuss->user->get('id')) {
+            $read = $modx->getObject('disThreadRead',array(
+                'thread' => $thread->get('id'),
+                'user' => $participant,
+            ));
+            if ($read) {
+                $read->remove();
+            }
         }
     }
 }

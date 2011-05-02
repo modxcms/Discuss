@@ -19,12 +19,13 @@
     </label>
     <input type="text" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" />
 
-
+[[+is_author:notempty=`
     <label for="dis-reply-participants">[[%discuss.participants]]:
         <span class="error">[[!+fi.error.participants_usernames]]</span>
         <span class="small">[[%discuss.participants_desc]]</span>
     </label>
     <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" />
+`]]
 
     <div style="margin-left: 150px;">
         <br class="clear" />

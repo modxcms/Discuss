@@ -49,6 +49,7 @@ $trail = array(array(
 $placeholders['trail'] = $discuss->hooks->load('breadcrumbs',array(
     'items' => &$trail,
 ));
+$placeholders['is_author'] = ($thread->get('author_first') == $modx->discuss->user->get('id')) ? true : false;
 
 /* get thread */
 $thread = $discuss->hooks->load('post/getthread',array(

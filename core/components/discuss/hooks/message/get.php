@@ -69,6 +69,7 @@ $plist = array();
 $output = array();
 foreach ($posts as $post) {
     $postArray = $post->toArray();
+    $postArray['children'] = '';
 
     if ($post->Author) {
         $postArray = array_merge($postArray,$post->Author->toArray('author.'));
@@ -144,6 +145,7 @@ foreach ($posts as $post) {
     }
 
     /* get attachments */
+    $postArray['attachments'] = '';
     if ($canViewAttachments) {
         $attachments = $post->getMany('Attachments');
         if (!empty($attachments)) {
