@@ -8,6 +8,7 @@
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
+        case xPDOTransport::ACTION_UPGRADE:
             $modx =& $object->xpdo;
             $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
             $modx->addPackage('discuss',$modelPath);
@@ -18,12 +19,9 @@ if ($object->xpdo) {
             //$modx->query("ALTER TABLE ".$modx->getTableName('disUserProfile')." ADD COLUMN `avatar_service` VARCHAR(255) NOT NULL DEFAULT 'gravatar' AFTER `avatar`");
 
             $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD COLUMN `locked` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER `status`");
-            $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD INDEX (`locked`)");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD INDEX `locked` (`locked`)");
 
             $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD COLUMN `last_view_ip` TINYINT(1) UNSIGNED NOT NULL DEFAULT '' AFTER `locked`");
-
-            break;
-        case xPDOTransport::ACTION_UPGRADE:
             break;
     }
 }

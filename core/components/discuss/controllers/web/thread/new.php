@@ -12,7 +12,7 @@ $board = $modx->getObject('disBoard',$scriptProperties['board']);
 if ($board == null) $modx->sendErrorPage();
 
 /* ensure user can actually post new */
-if (!$board->canPostNew()) $modx->sendErrorPage();
+if (!$board->canPost()) $modx->sendErrorPage();
 
 /* get board breadcrumb trail */
 $board->buildBreadcrumbs(array(array(
