@@ -101,7 +101,7 @@ unset($actionButtons);
 $discuss->hooks->load('pagination/build',array(
     'count' => $threads['total'],
     'id' => 0,
-    'view' => 'thread/unread',
+    'view' => 'thread/unread_last_visit',
     'limit' => $limit,
 ));
 
