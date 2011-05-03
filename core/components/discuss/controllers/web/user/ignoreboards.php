@@ -36,9 +36,10 @@ if (!empty($_POST) && !empty($scriptProperties['boards'])) {
 $_groups = $modx->user->getUserGroups();
 $cacheKey = 'discuss/user/'.$user->get('id').'/ignoreboards';
 $boards = $modx->cacheManager->get($cacheKey);
-if (empty($boards) || !$modx->getOption('discuss.caching_enabled',null,false)) {
+if (empty($boards) || !$modx->getOption('discuss.caching_enabled',null,false) || true) {
     $boards = array();
     $c = $modx->newQuery('disBoard');
+    $c->query['distinct'] = 'DISTINCT';
     $c->select($modx->getSelectColumns('disBoard','disBoard'));
     $c->select(array(
         'Category.name AS category_name',
@@ -46,15 +47,14 @@ if (empty($boards) || !$modx->getOption('discuss.caching_enabled',null,false)) {
         'LastPost.author AS last_post_author',
         'LastPost.createdon AS last_post_createdon',
         'LastPostAuthor.username AS last_post_username',
-        'Ancestors.depth AS depth',
+        'RootDescendant.depth AS depth',
     ));
     $c->innerJoin('disCategory','Category');
-    $c->innerJoin('disBoardClosure','Descendants');
-    $c->innerJoin('disBoardClosure','Ancestors');
+    $c->leftJoin('disBoardClosure','RootDescendant','RootDescendant.descendant = disBoard.id AND RootDescendant.ancestor = 0');
     $c->leftJoin('disPost','LastPost');
     $c->leftJoin('disUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
-    $c->leftJoin('disBoardUserGroup','UserGroups');
     if (!empty($_groups)) {
+        $c->leftJoin('disBoardUserGroup','UserGroups');
         $g = array(
             'UserGroups.usergroup:IN' => $_groups,
         );
@@ -63,8 +63,9 @@ if (empty($boards) || !$modx->getOption('discuss.caching_enabled',null,false)) {
         $c->andCondition($where,null,2);
     }
     $c->sortby('Category.rank','ASC');
-    $c->sortby('disBoard.rank','ASC');
+    $c->sortby('map','ASC');
     $boardObjects = $modx->getCollection('disBoard',$c);
+    
     foreach ($boardObjects as $board) {
         $boards[] = $board->toArray();
     }
@@ -111,8 +112,8 @@ foreach ($boards as $board) {
         $boardList[] = $discuss->getChunk('board/disBoardCheckbox',$ba);
 
     } else { /* otherwise add to temp board list */
-        if ($boardArray['depth'] > 0) {
-            $boardArray['name'] = str_repeat('---',$boardArray['depth']).$boardArray['name'];
+        if ($boardArray['depth'] - 1 > 0) {
+            $boardArray['name'] = str_repeat('---',$boardArray['depth'] - 1).$boardArray['name'];
         }
         $boardList[] = $discuss->getChunk('board/disBoardCheckbox',$boardArray);
         $rowClass = ($rowClass == 'alt') ? 'even' : 'alt';

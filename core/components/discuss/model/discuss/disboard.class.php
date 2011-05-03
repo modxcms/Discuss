@@ -113,55 +113,57 @@ class disBoard extends xPDOSimpleObject {
         /* if parent changed on existing object, rebuild closure table */
         if (!$new && $this->parentChanged) {
             /* first remove old tree path */
-            $this->xpdo->removeCollection('disBoardClosure',array(
-                'descendant' => $this->get('id'),
-                'ancestor:!=' => $this->get('id'),
-            ));
-
-            /* now create new tree path from new parent */
-            $newParentId = $this->get('parent');
             $c = $this->xpdo->newQuery('disBoardClosure');
             $c->where(array(
-                'descendant' => $newParentId,
+                'descendant:=' => $this->get('id'),
+                'AND:ancestor:!=' => $this->get('id'),
             ));
-            $c->sortby('depth','DESC');
-            $ancestors= $this->xpdo->getCollection('disBoardClosure',$c);
-            $grandParents = array();
-            foreach ($ancestors as $ancestor) {
-                $depth = $ancestor->get('depth');
-                $grandParentId = $ancestor->get('ancestor');
-                /* if already has a depth, inc by 1 */
-                if ($depth > 0) $depth++;
-                /* if is the new parent node, set depth to 1 */
-                if ($grandParentId == $newParentId && $newParentId != 0) { $depth = 1; }
-                if ($grandParentId != 0) {
-                    $grandParents[] = $grandParentId;
+            $rs = $this->xpdo->getCollection('disBoardClosure',$c);
+            foreach ($rs as $r) {
+                $r->remove();
+            }
+
+            $parents = $this->getRecursiveParentIds();
+            array_unshift($parents,$this->get('id'));
+
+            $idx = 0;
+            $map = array();
+            foreach ($parents as $parent) {
+                $cl = $this->xpdo->newObject('disBoardClosure');
+                $cl->set('ancestor',$parent);
+                $cl->set('descendant',$this->get('id'));
+                $cl->set('depth',$idx);
+                $cl->save();
+                if ($parent != 0) {
+                    array_unshift($map,$parent);
                 }
-
-                $cl = $this->xpdo->newObject('disBoardClosure');
-                $cl->set('ancestor',$ancestor->get('ancestor'));
-                $cl->set('descendant',$this->get('id'));
-                $cl->set('depth',$depth);
-                $cl->save();
+                $idx++;
             }
-            /* if parent is root, make sure to set the root closure */
-            if ($newParentId == 0) {
-                $cl = $this->xpdo->newObject('disBoardClosure');
-                $cl->set('ancestor',0);
-                $cl->set('descendant',$this->get('id'));
-                $cl->save();
-            }
+            $this->set('depth',($idx-1));
+            $this->set('map',implode('.',$map));
 
-            /* set map */
-            $grandParents[] = $this->get('id');
-            $map = implode('-',$grandParents);
-            $this->set('map',$map);
+            /* save */
             $saved = parent::save();
 
             $this->clearCache();
         }
 
         return $saved;
+    }
+
+    public function getRecursiveParentIds($id = false,array $ids = array()) {
+        if ($id === false) {
+            $board =& $this;
+        } else {
+            $board = $this->xpdo->getObject('disBoard',$id);
+            $ids[] = $board->get('id');
+        }
+        if ($board->get('parent') == 0) {
+            $ids[] = 0;
+        } else {
+            $ids = $this->getRecursiveParentIds($board->get('parent'),$ids);
+        }
+        return $ids;
     }
 
     public static function fetch(xPDO &$modx,$id) {
