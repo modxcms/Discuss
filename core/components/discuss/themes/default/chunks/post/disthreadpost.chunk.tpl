@@ -9,7 +9,7 @@
                 [[+action_reply]]
             </div>
             <div class="dis-author">
-                [[+author.avatar]]
+                <a href="[[~[[*id]]]]user/?user=[[+author.id]]">[[+author.avatar]]</a>
                 <span class="right">
                     [[+createdon]]
                     <br />[[+author.email]]
