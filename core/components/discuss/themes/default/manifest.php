@@ -14,8 +14,11 @@ $manifest = array(
             'header' => array(
                 'web/jquery-1.3.2.min.js',
                 'web/discuss.js',
+                'web/sh/shCore.js',
+                'web/sh/shAutoloader.js',
+                'web/sh/shDiscuss.js',
             ),
-            'inline' => 'DIS.url = "'.$this->discuss->url.'";',
+            'inline' => 'DIS.url = "'.$this->discuss->url.'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'web/sh/";',
         ),
     ),
     'home' => array(

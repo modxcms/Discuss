@@ -520,6 +520,9 @@ class disPost extends xPDOSimpleObject {
 
         /* now do code blocks where we dont want linebreaks, so they can strip them out */
         $message = preg_replace_callback("#\[code\](.*?)\[/code\]#si",array('disPost','parseCodeCallback'),$message);
+        $message = preg_replace_callback("#\[code=[\"']?(.*?)[\"']?\](.*?)\[/code\]#si",array('disPost','parseCodeSpecificCallback'),$message);
+        $message = preg_replace('#\[/?code\]#si', '', $message);
+
         $message = $this->parseSmileys($message);
         
         /* strip all remaining bbcode */
@@ -531,7 +534,12 @@ class disPost extends xPDOSimpleObject {
 
     public static function parseCodeCallback($matches) {
         $code = disPost::stripBRTags($matches[1]);
-        return '<div class="dis-code"><h5>Code</h5><pre>'.$code.'</pre></div>';
+        return '<div class="dis-code"><pre class="brush: php; toolbar: false">'.$code.'</pre></div>';
+    }
+    public static function parseCodeSpecificCallback($matches) {
+        $type = !empty($matches[1]) ? $matches[1] : 'php';
+        $code = disPost::stripBRTags($matches[2]);
+        return '<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">'.$code.'</pre></div>';
     }
 
     public static function parseLinksCallback($matches) {
