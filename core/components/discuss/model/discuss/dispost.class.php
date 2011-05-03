@@ -494,9 +494,10 @@ class disPost extends xPDOSimpleObject {
         $message = preg_replace("#\[url\](.*?)\[/url\]#si",'\\1',$message);
         $message = preg_replace("#\[magic\](.*?)\[/magic\]#si",'<marquee>\\1</marquee>',$message);
         $message = preg_replace("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",'<a href="\\1">\\2</a>',$message);
-        $message = preg_replace("#\[php\](.*?)\[/php\]#si",'<code>\\1</code>',$message);
-        $message = preg_replace("#\[mysql\](.*?)\[/mysql\]#si",'<code>\\1</code>',$message);
-        $message = preg_replace("#\[css\](.*?)\[/css\]#si",'<code>\\1</code>',$message);
+        $message = preg_replace("#\[php\](.*?)\[/php\]#si",'<pre class="brush:php">\\1</pre>',$message);
+        $message = preg_replace("#\[mysql\](.*?)\[/mysql\]#si",'<pre class="brush:sql">\\1</pre>',$message);
+        $message = preg_replace("#\[css\](.*?)\[/css\]#si",'<pre class="brush:css">\\1</pre>',$message);
+        $message = preg_replace("#\[pre\](.*?)\[/pre\]#si",'<pre>\\1</pre>',$message);
         $message = preg_replace("#\[img=[\"']?(.*?)[\"']?\](.*?)\[/img\]#si",'<img src="\\1" alt="\\2" />',$message);
         $message = preg_replace("#\[img\](.*?)\[/img\]#si",'<img src="\\1" border="0" />',$message);
         $message = str_ireplace(array('[indent]', '[/indent]'), array('<div class="Indent">', '</div>'), $message);
@@ -526,7 +527,7 @@ class disPost extends xPDOSimpleObject {
         $message = $this->parseSmileys($message);
         
         /* strip all remaining bbcode */
-        $message = $this->stripBBCode($message);
+        //$message = $this->stripBBCode($message);
         /* strip MODX tags */
         $message = str_replace(array('[',']'),array('&#91;','&#93;'),$message);
         return $message;
