@@ -43,6 +43,15 @@ $settings['discuss.allow_guests']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
+$settings['discuss.archive_threads_after']= $modx->newObject('modSystemSetting');
+$settings['discuss.archive_threads_after']->fromArray(array(
+    'key' => 'discuss.archive_threads_after',
+    'value' => 0,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Threads',
+),'',true,true);
+
 $settings['discuss.attachments_allowed_filetypes']= $modx->newObject('modSystemSetting');
 $settings['discuss.attachments_allowed_filetypes']->fromArray(array(
     'key' => 'discuss.attachments_allowed_filetypes',
@@ -94,7 +103,7 @@ $settings['discuss.bbcode_enabled']->fromArray(array(
     'value' => true,
     'xtype' => 'combo-boolean',
     'namespace' => 'discuss',
-    'area' => 'Posts',
+    'area' => 'Threads',
 ),'',true,true);
 
 $settings['discuss.email_reported_post_subject']= $modx->newObject('modSystemSetting');
@@ -130,7 +139,7 @@ $settings['discuss.post_per_page']->fromArray(array(
     'value' => 10,
     'xtype' => 'textfield',
     'namespace' => 'discuss',
-    'area' => 'Posts',
+    'area' => 'General',
 ),'',true,true);
 
 $settings['discuss.use_custom_post_parser']= $modx->newObject('modSystemSetting');
@@ -139,7 +148,7 @@ $settings['discuss.use_custom_post_parser']->fromArray(array(
     'value' => false,
     'xtype' => 'combo-boolean',
     'namespace' => 'discuss',
-    'area' => 'Posts',
+    'area' => 'Threads',
 ),'',true,true);
 
 $settings['discuss.courtesy_edit_wait']= $modx->newObject('modSystemSetting');
@@ -148,7 +157,7 @@ $settings['discuss.courtesy_edit_wait']->fromArray(array(
     'value' => '60',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
-    'area' => 'Posts',
+    'area' => 'Posting',
 ),'',true,true);
 
 $settings['discuss.date_format']= $modx->newObject('modSystemSetting');
@@ -175,7 +184,7 @@ $settings['discuss.enable_hot']->fromArray(array(
     'value' => true,
     'xtype' => 'combo-boolean',
     'namespace' => 'discuss',
-    'area' => 'General',
+    'area' => 'Threads',
 ),'',true,true);
 
 $settings['discuss.enable_notifications']= $modx->newObject('modSystemSetting');
@@ -193,7 +202,7 @@ $settings['discuss.enable_sticky']->fromArray(array(
     'value' => true,
     'xtype' => 'combo-boolean',
     'namespace' => 'discuss',
-    'area' => 'General',
+    'area' => 'Threads',
 ),'',true,true);
 
 $settings['discuss.forum_title']= $modx->newObject('modSystemSetting');
@@ -220,7 +229,7 @@ $settings['discuss.hot_thread_threshold']->fromArray(array(
     'value' => 10,
     'xtype' => 'textfield',
     'namespace' => 'discuss',
-    'area' => 'General',
+    'area' => 'Threads',
 ),'',true,true);
 
 $settings['discuss.max_post_depth']= $modx->newObject('modSystemSetting');
@@ -247,7 +256,7 @@ $settings['discuss.maximum_post_size']->fromArray(array(
     'value' => '30000',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
-    'area' => 'Posts',
+    'area' => 'Threads',
 ),'',true,true);
 
 $settings['discuss.notification_new_post_subject']= $modx->newObject('modSystemSetting');
@@ -283,7 +292,7 @@ $settings['discuss.page_param']->fromArray(array(
     'value' => 'page',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
-    'area' => 'Security',
+    'area' => 'General',
 ),'',true,true);
 
 $settings['discuss.recycle_bin_board']= $modx->newObject('modSystemSetting');
@@ -293,15 +302,6 @@ $settings['discuss.recycle_bin_board']->fromArray(array(
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Moderation',
-),'',true,true);
-
-$settings['discuss.reserved_usernames']= $modx->newObject('modSystemSetting');
-$settings['discuss.reserved_usernames']->fromArray(array(
-    'key' => 'discuss.reserved_usernames',
-    'value' => 'admin,abc,administrator,superuser,root',
-    'xtype' => 'textfield',
-    'namespace' => 'discuss',
-    'area' => 'Security',
 ),'',true,true);
 
 $settings['discuss.show_whos_online']= $modx->newObject('modSystemSetting');
@@ -336,24 +336,6 @@ $settings['discuss.threads_per_page']->fromArray(array(
     'key' => 'discuss.threads_per_page',
     'value' => 20,
     'xtype' => 'textfield',
-    'namespace' => 'discuss',
-    'area' => 'General',
-),'',true,true);
-
-$settings['discuss.use_css']= $modx->newObject('modSystemSetting');
-$settings['discuss.use_css']->fromArray(array(
-    'key' => 'discuss.use_css',
-    'value' => true,
-    'xtype' => 'combo-boolean',
-    'namespace' => 'discuss',
-    'area' => 'General',
-),'',true,true);
-
-$settings['discuss.use_stopforumspam']= $modx->newObject('modSystemSetting');
-$settings['discuss.use_stopforumspam']->fromArray(array(
-    'key' => 'discuss.use_stopforumspam',
-    'value' => true,
-    'xtype' => 'combo-boolean',
     'namespace' => 'discuss',
     'area' => 'General',
 ),'',true,true);

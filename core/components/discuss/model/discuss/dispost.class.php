@@ -710,6 +710,6 @@ class disPost extends xPDOSimpleObject {
         $thread = $this->getOne('Thread');
         if (!$thread) return false;
         
-        return $this->xpdo->hasPermission('discuss.thread_reply') && !$thread->get('locked');
+        return $thread->canReply();
     }
 }

@@ -709,6 +709,14 @@ class disThread extends xPDOSimpleObject {
 
     public function canReply() {
         if ($this->xpdo->discuss->user->isAdmin()) return true;
+        $archiveAfter = $this->xpdo->getOption('discuss.archive_threads_after',null,0);
+        if (!empty($archiveAfter) && $this->getOne('FirstPost')) {
+            $diff = time() - strtotime($this->FirstPost->get('createdon'));
+            if ($diff > ($archiveAfter * 24 * 60 * 60)) {
+                return false;
+            }
+        }
+
         return $this->xpdo->hasPermission('discuss.thread_reply') && !$this->get('locked');
     }
 

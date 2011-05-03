@@ -157,6 +157,9 @@ $_lang['setting_discuss.allow_custom_titles_desc'] = 'Whether or not to allow us
 $_lang['setting_discuss.allow_guests'] = 'Allow Guests';
 $_lang['setting_discuss.allow_guests_desc'] = 'Whether or not to allow anonymous users to browse the forums.';
 
+$_lang['setting_discuss.archive_threads_after'] = 'Archive Threads After';
+$_lang['setting_discuss.archive_threads_after_desc'] = 'After X days since the first post on the thread, disallow replies. Set to 0 to always allow replies.';
+
 $_lang['setting_discuss.attachments_allowed_filetypes'] = 'Allowed Filetypes for Attachments';
 $_lang['setting_discuss.attachments_allowed_filetypes_desc'] = 'A comma-separated list of filetypes to allow in attachments.';
 

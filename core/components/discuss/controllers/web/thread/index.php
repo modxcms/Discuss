@@ -81,7 +81,7 @@ $isModerator = $thread->isModerator($discuss->user->get('id'));
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
     $board = $thread->getOne('Board');
-    if ($board->canPost() && $thread->canPostNew()) {
+    if ($board->canPost() && $thread->canReply()) {
         $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
     }
     $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
