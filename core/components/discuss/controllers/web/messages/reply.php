@@ -61,7 +61,8 @@ $placeholders['thread_posts'] = $thread['results'];
 
 /* quote functionality */
 if (empty($_POST) && !empty($scriptProperties['quote'])) {
-    $placeholders['message'] = '[quote author='.$author->get('username').' date='.strtotime($post->get('createdon')).']'.$post->get('message').'[/quote]'."\n";
+    $placeholders['message'] = str_replace(array('[',']'),array('&#91;','&#93;'),$post->br2nl($post->get('message')));
+    $placeholders['message'] = '[quote author='.$author->get('username').' date='.strtotime($post->get('createdon')).']'.$placeholders['message'].'[/quote]'."\n";
 } elseif (empty($_POST) && empty($scriptProperties['quote'])) {
     $placeholders['message'] = '';
 }

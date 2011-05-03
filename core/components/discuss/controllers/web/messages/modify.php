@@ -17,6 +17,8 @@ $placeholders['post'] = $post->get('id');
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 $placeholders['participants_usernames'] = $thread->get('participants_usernames');
 $placeholders['thread'] = $thread->get('id');
+$placeholders['message'] = $post->br2nl($placeholders['message']);
+$placeholders['message'] = str_replace(array('[',']'),array('&#91;','&#93;'),$placeholders['message']);
 
 /* get attachments for post */
 $attachments = $post->getMany('Attachments');
