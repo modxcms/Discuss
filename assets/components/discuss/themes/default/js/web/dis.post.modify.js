@@ -19,6 +19,7 @@ DIS.DISModifyPost = function() {
             });
             var a = $.ajax(a);
             $('#dis-modify-post-preview').hide().html(a.responseText).fadeIn();
+            if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
         }
 
         ,addAttachment: function() {

@@ -23,6 +23,7 @@ DIS.ReplyMessage = function() {
             });
             var a = $.ajax(a);
             $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();
+            if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
         }
         
         ,togglePost: function() {

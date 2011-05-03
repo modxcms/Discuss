@@ -22,6 +22,7 @@ DIS.NewMessage = function() {
             });
             var a = $.ajax(a);
             $('#dis-message-preview').hide().html(a.responseText).fadeIn();
+            if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
         }
         
         ,addAttachment: function() {
