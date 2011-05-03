@@ -134,6 +134,9 @@ class disPost extends xPDOSimpleObject {
                 $thread->set('post_last',$this->get('id'));
                 $thread->set('author_last',$this->get('author'));
                 $thread->set('replies',$thread->get('replies')+1);
+                if ($thread->get('post_last') == $thread->get('post_first')) {
+                    $thread->set('replies',0);
+                }
                 $thread->save();
 
                 $this->set('thread',$thread->get('id'));
@@ -515,6 +518,8 @@ class disPost extends xPDOSimpleObject {
         /* auto-convert links */
         $message = preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftp):\/\/)([\@a-z0-9\x21\x23-\x27\x2a-\x2e\x3a\x3b\/;\x3f-\x7a\x7e\x3d]+)/msxi",array('disPost', 'parseLinksCallback'),$message);
 
+        $message = $this->parseSmileys($message);
+        
         /* strip all remaining bbcode */
         $message = $this->stripBBCode($message);
         /* strip MODX tags */
@@ -618,6 +623,47 @@ class disPost extends xPDOSimpleObject {
             }
         }
         return $message;
+    }
+
+    public function parseSmileys($message) {
+        $imagesUrl = $this->xpdo->discuss->config['imagesUrl'].'smileys/';
+        $smiley = array(
+            '::)' => 'rolleyes',
+            ':)' => 'smiley',
+            ';)' => 'wink',
+            ':D' => 'laugh',
+            ';D' => 'grin',
+            '>>:(' => 'angry2',
+            '>:(' => 'angry',
+            ':(' => 'sad',
+            ':o' => 'shocked',
+            '8)' => 'cool',
+            '???' => 'huh',
+            ':P' => 'tongue',
+            ':-[' => 'embarrassed',
+            ':-X' => 'lipsrsealed',
+            ':-*' => 'kiss',
+            ':-\\' => 'undecided',
+            ":'(" => 'cry',
+            '[hug]' => 'bear2',
+            '[brew]' => 'brew',
+            '[ryan2]' => 'ryan2',
+            '[locke]' => 'locke',
+            '[zelda]' => 'zelda',
+            '[surrender]' => 'surrender',
+            '[ninja]' => 'ninja',
+            '[spam]' => 'spam',
+            '[welcome]' => 'welcome',
+            '[offtopic]' => 'offtopic',
+            '[hijack]' => 'hijack',
+            '[helpme]' => 'help',
+            '[banned]' => 'banned',
+        );
+        $v = array_values($smiley);
+        for ($i =0; $i < count($v); $i++) {
+            $v[$i] = '<img src="'.$imagesUrl.$v[$i].'" alt="" />';
+        }
+        return str_replace(array_keys($smiley),$v,$message);
     }
 
     public function br2nl($str) {
