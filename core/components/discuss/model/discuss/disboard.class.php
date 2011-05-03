@@ -508,6 +508,8 @@ class disBoard extends xPDOSimpleObject {
             'Category.name AS category_name',
             '('.$sbSql.') AS '.$modx->escape('subboards'),
             '('.$unreadSql.') AS '.$modx->escape('unread'),
+            'LastPost.id AS last_post_id',
+            'LastPost.thread AS last_post_thread',
             'LastPost.title AS last_post_title',
             'LastPost.author AS last_post_author',
             'LastPost.createdon AS last_post_createdon',

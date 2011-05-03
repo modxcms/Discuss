@@ -41,6 +41,8 @@ foreach ($boards as $board) {
             'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($board['last_post_createdon'])),
             'user' => $board['last_post_author'],
             'username' => $board['last_post_username'],
+            'thread' => $board['last_post_thread'],
+            'id' => $board['last_post_id'],
             'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$board['last_post_author'].'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
         );
         $lp = $discuss->getChunk('board/disLastPostBy',$phs);
