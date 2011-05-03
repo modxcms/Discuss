@@ -33,6 +33,8 @@ $enableSticky = $modx->getOption('discuss.enable_sticky',null,true);
 $enableHot = $modx->getOption('discuss.enable_hot',null,true);
 $list = array();
 foreach ($threads['results'] as $thread) {
+    $thread->calcLastPostPage();
+    $thread->getUrl();
     $threadArray = $thread->toArray();
     $threadArray['class'] = 'dis-board-li';
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));

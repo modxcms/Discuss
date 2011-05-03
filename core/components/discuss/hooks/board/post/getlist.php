@@ -17,6 +17,7 @@ $mode = $modx->getOption('mode',$scriptProperties,'post');
 $c = $modx->newQuery('disThread');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
+$c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
 $c->innerJoin('disUser','LastAuthor');
 $c->leftJoin('disThreadRead','Reads','Reads.user = '.$discuss->user->get('id').' AND disThread.id = Reads.thread');
 $c->where(array(
@@ -26,6 +27,8 @@ $response['total'] = $modx->getCount('disThread',$c);
 $c->select(array(
     'LastPost.*',
     'LastPost.id AS last_post_id',
+    'LastPost.id AS post_id',
+    'LastPostThread.replies AS last_post_replies',
     'FirstPost.title',
     'LastAuthor.username',
     'LastAuthor.user AS user',
@@ -68,6 +71,8 @@ foreach ($threads as $thread) {
         $thread->buildCssClass('board-post');
         $thread->buildIcons();
     }
+    $thread->calcLastPostPage();
+    $thread->getUrl();
     $threadArray = $thread->toArray();
 
     if ($mode != 'rss') {

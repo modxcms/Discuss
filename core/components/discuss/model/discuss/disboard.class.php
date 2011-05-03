@@ -464,6 +464,7 @@ class disBoard extends xPDOSimpleObject {
         $c->innerJoin('disBoardClosure','Descendants');
         $c->leftJoin('disPost','LastPost');
         $c->leftJoin('disUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
+        $c->leftJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
         $c->leftJoin('disBoardUserGroup','UserGroups');
         $c->where(array(
             'disBoard.status:!=' => disBoard::STATUS_INACTIVE,
@@ -515,6 +516,7 @@ class disBoard extends xPDOSimpleObject {
             'LastPost.title AS last_post_title',
             'LastPost.author AS last_post_author',
             'LastPost.createdon AS last_post_createdon',
+            'LastPostThread.replies AS last_post_replies',
             'LastPostAuthor.username AS last_post_username',
         ));
         $c->sortby('Category.rank','ASC');
@@ -536,5 +538,16 @@ class disBoard extends xPDOSimpleObject {
         $c->sortby('disPost.createdon','DESC');
         $c->limit(1);
         return $this->xpdo->getObject('disPost',$c);
+    }
+
+    public function calcLastPostPage() {
+        $page = 1;
+        $replies = $this->get('last_post_replies');
+        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
+        if ($replies > $perPage) {
+            $page = ceil($replies / $perPage);
+        }
+        $this->set('last_post_page',$page);
+        return $page;
     }
 }

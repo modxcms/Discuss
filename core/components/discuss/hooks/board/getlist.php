@@ -21,6 +21,7 @@ $response = $modx->call('disBoard','getList',array(&$modx,$board,$category));
 
 $boards = array();
 foreach ($response['results'] as $board) {
+    $board->calcLastPostPage();
     $boards[] = $board->toArray();
 }
 unset($c);
@@ -43,6 +44,7 @@ foreach ($boards as $board) {
             'username' => $board['last_post_username'],
             'thread' => $board['last_post_thread'],
             'id' => $board['last_post_id'],
+            'url' => $discuss->url.'thread/?thread='.$board['last_post_thread'].($board['last_post_page'] != 1 ? '&page='.$board['last_post_page'] : '').'#dis-post-'.$board['last_post_id'],
             'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$board['last_post_author'].'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
         );
         $lp = $discuss->getChunk('board/disLastPostBy',$phs);

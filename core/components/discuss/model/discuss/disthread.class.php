@@ -95,6 +95,7 @@ class disThread extends xPDOSimpleObject {
         $c->innerJoin('disBoard','Board');
         $c->innerJoin('disPost','FirstPost');
         $c->innerJoin('disPost','LastPost');
+        $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
         $c->innerJoin('disUser','FirstAuthor');
         $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
         $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
@@ -161,6 +162,7 @@ class disThread extends xPDOSimpleObject {
             'LastPost.id AS post_id',
             'LastPost.createdon AS createdon',
             'LastPost.author AS author',
+            'LastPostThread.replies AS last_post_replies',
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);
@@ -708,5 +710,28 @@ class disThread extends xPDOSimpleObject {
     public function canReply() {
         if ($this->xpdo->discuss->user->isAdmin()) return true;
         return $this->xpdo->hasPermission('discuss.thread_reply') && !$this->get('locked');
+    }
+
+    public function calcLastPostPage() {
+        $page = 1;
+        $replies = $this->get('last_post_replies');
+        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
+        if ($replies > $perPage) {
+            $page = ceil($replies / $perPage);
+        }
+        $this->set('last_post_page',$page);
+        return $page;
+    }
+
+    public function getUrl() {
+        $url = $this->xpdo->discuss->url.'thread/?thread='.$this->get('id');
+        if ($this->get('last_post_page') != 1) {
+            $url .= '&page='.$this->get('last_post_page');
+        }
+        if ($this->get('post_id')) {
+            $url .= '#dis-post-'.$this->get('post_id');
+        }
+        $this->set('url',$url);
+        return $url;
     }
 }

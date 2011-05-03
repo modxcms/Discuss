@@ -11,6 +11,7 @@ $c = $modx->newQuery('disThread');
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
+$c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
 $c->innerJoin('disUser','LastAuthor');
 $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
 $c->where(array(
@@ -80,6 +81,7 @@ $c->select(array(
     'LastPost.thread',
     'LastPost.author',
     'LastPost.createdon',
+    'LastPostThread.replies AS last_post_replies',
     'LastAuthor.username AS author_username',
 ));
 if (!empty($scriptProperties['showIfParticipating'])) {
@@ -101,6 +103,8 @@ $idx = 0;
 foreach ($recentPosts as $thread) {
     $thread->buildIcons();
     $thread->buildCssClass('board-post');
+    $thread->calcLastPostPage();
+    $thread->getUrl();
     $threadArray = $thread->toArray();
     $threadArray['idx'] = $idx;
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
