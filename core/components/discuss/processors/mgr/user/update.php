@@ -15,6 +15,7 @@ $user = $modx->getObject('disUser',$c);
 if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf',array('id' => $scriptProperties['id'])));
 
 /* set fields */
+unset($scriptProperties['id']);
 $scriptProperties['show_email'] = !empty($scriptProperties['show_email']) ? true : false;
 $scriptProperties['show_online'] = !empty($scriptProperties['show_online']) ? true : false;
 $user->fromArray($scriptProperties);

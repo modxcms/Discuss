@@ -196,7 +196,7 @@ class disPost extends xPDOSimpleObject {
             if (!empty($board)) {
                 $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
                 $isAdmin = $this->xpdo->discuss->user->isAdmin();
-                if (!$isAdmin && $isModerator) { /* move to spambox/recyclebin */
+                if ($isAdmin || $isModerator) { /* move to spambox/recyclebin */
                     $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
                     if ($moveToSpam && !empty($spamBoard)) {
                         return $this->move($spamBoard);
@@ -206,6 +206,8 @@ class disPost extends xPDOSimpleObject {
                             return $this->move($trashBoard);
                         }
                     }
+                } else {
+                    return false;
                 }
             }
         }

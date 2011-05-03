@@ -223,9 +223,7 @@ class disThread extends xPDOSimpleObject {
             if (!empty($board)) {
                 $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
                 $isAdmin = $this->xpdo->discuss->user->isAdmin();
-                if ($isAdmin) { /* admins can always remove threads */
-                    $remove = true;
-                } else if ($isModerator) { /* move to spambox/recyclebin */
+                if ($isModerator || $isAdmin) { /* move to spambox/recyclebin */
                     $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
                     if ($moveToSpam && !empty($spamBoard)) {
                         if ($this->move($spamBoard)) {
@@ -701,25 +699,46 @@ class disThread extends xPDOSimpleObject {
         return true;
     }
 
-
-    public function canPostNew() {
-        if ($this->xpdo->discuss->user->isAdmin()) return true;
-        return $this->xpdo->hasPermission('discuss.thread_create') && !$this->get('locked');
-    }
-
-    public function canReply() {
-        if ($this->xpdo->discuss->user->isAdmin()) return true;
+    /**
+     * Determines if a thread has been auto-archived or not.
+     * @return bool
+     */
+    public function isArchived() {
+        $archived = false;
         $archiveAfter = $this->xpdo->getOption('discuss.archive_threads_after',null,0);
         if (!empty($archiveAfter) && $this->getOne('FirstPost')) {
             $diff = time() - strtotime($this->FirstPost->get('createdon'));
             if ($diff > ($archiveAfter * 24 * 60 * 60)) {
-                return false;
+                $archived = true;
             }
         }
-
-        return $this->xpdo->hasPermission('discuss.thread_reply') && !$this->get('locked');
+        return $archived;
     }
 
+    /**
+     * Determines if the active user can post or not
+     *
+     * @param xPDO $modx A reference to the modX object
+     * @return bool
+     */
+    public static function canPostNew(xPDO &$modx) {
+        if ($modx->discuss->user->isAdmin()) return true;
+        return $modx->hasPermission('discuss.thread_create');
+    }
+
+    /**
+     * Determines if the active user can post a reply or not
+     * @return bool
+     */
+    public function canReply() {
+        if ($this->xpdo->discuss->user->isAdmin()) return true;
+        return !$this->isArchived() && $this->xpdo->hasPermission('discuss.thread_reply') && !$this->get('locked');
+    }
+
+    /**
+     * Calculate the last post pagination page for a thread
+     * @return int
+     */
     public function calcLastPostPage() {
         $page = 1;
         $replies = $this->get('last_post_replies');
@@ -731,13 +750,21 @@ class disThread extends xPDOSimpleObject {
         return $page;
     }
 
-    public function getUrl() {
+    /**
+     * Get the proper URL for the thread, optionally with the post anchor and page
+     *
+     * @param boolean $lastPost If true, will get URL for last Post of thread
+     * @return string
+     */
+    public function getUrl($lastPost = true) {
         $url = $this->xpdo->discuss->url.'thread/?thread='.$this->get('id');
-        if ($this->get('last_post_page') != 1) {
-            $url .= '&page='.$this->get('last_post_page');
-        }
-        if ($this->get('post_id')) {
-            $url .= '#dis-post-'.$this->get('post_id');
+        if ($lastPost) {
+            if ($this->get('last_post_page') != 1) {
+                $url .= '&page='.$this->get('last_post_page');
+            }
+            if ($this->get('post_id')) {
+                $url .= '#dis-post-'.$this->get('post_id');
+            }
         }
         $this->set('url',$url);
         return $url;
