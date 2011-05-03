@@ -14,6 +14,11 @@ $page = !empty($scriptProperties['page']) ? $scriptProperties['page'] : 1;
 $page = $page <= 0 ? $page = 1 : $page;
 $start = ($page-1) * $limit;
 
+/* add user to board readers */
+if (!empty($scriptProperties['read']) && $discuss->user->isLoggedIn) {
+    $modx->call('disThread','readAll',array(&$modx,'message'));
+}
+
 /* get all messages */
 $c = $modx->newQuery('disThread');
 $c->innerJoin('disPost','FirstPost');
@@ -97,8 +102,9 @@ $actionButtons = array();
 
 /* action buttons */
 $actionButtons = array();
-if ($modx->hasPermission('discuss.pm_send')) {
+if ($modx->hasPermission('discuss.pm_send') && $discuss->user->isLoggedIn) {
     $actionButtons[] = array('url' => $discuss->url.'messages/new', 'text' => $modx->lexicon('discuss.message_new'));
+    $actionButtons[] = array('url' => $discuss->url.'messages?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);

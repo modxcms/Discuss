@@ -4,7 +4,7 @@
 
 <br class="clear" />
 <h2 class="[[+class]] dis-thread-title">
-    [[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[%discuss.views? &views=`[[+views]]`]])
+    [[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[+views]] [[%discuss.views]])
 </h2>
 <h4 class="right">[[%discuss.participants]]: [[+participants_usernames]]</h4>
 

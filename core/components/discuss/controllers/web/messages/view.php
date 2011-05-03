@@ -16,13 +16,19 @@ $thread = $modx->call('disThread', 'fetch', array(&$modx,$thread,disThread::TYPE
 if (empty($thread)) $modx->sendErrorPage();
 $discuss->setPageTitle($thread->get('title'));
 
+/* handle actions */
+if (isset($scriptProperties['unread'])) {
+    if ($thread->unread($discuss->user->get('id'))) {
+        $modx->sendRedirect($discuss->url.'messages');
+    }
+}
+
 /* get posts */
 $posts = $discuss->hooks->load('message/get',array(
     'thread' => &$thread,
 ));
 $thread->set('posts',$posts['results']);
 unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
-
 /* get board breadcrumb trail */
 $thread->buildBreadcrumbs(array(array(
     'url' => $discuss->url,
@@ -34,10 +40,7 @@ $thread->buildBreadcrumbs(array(array(
 unset($trail,$url,$c,$ancestors);
 
 /* up the view count for this thread */
-$views = $thread->get('views');
-$thread->set('views',($views+1));
-$thread->save();
-unset($views);
+$thread->view();
 
 $placeholders = $thread->toArray();
 $placeholders['views'] = number_format($placeholders['views']);
@@ -69,12 +72,6 @@ unset($actionButtons);
 /* output */
 $placeholders['discuss.error_panel'] = $discuss->getChunk('Error');
 $placeholders['discuss.thread'] = $thread->get('title');
-
-/* set last visited */
-if ($discuss->user->get('user') != 0) {
-    $discuss->user->set('thread_last_visited',$thread->get('id'));
-    $discuss->user->save();
-}
 
 /* get pagination */
 $discuss->hooks->load('pagination/build',array(

@@ -169,6 +169,41 @@ class disThread extends xPDOSimpleObject {
         return $response;
     }
 
+    public static function readAll(xPDO &$modx,$type = 'message') {
+        $userId = $modx->discuss->user->get('id');
+        $sql = 'SELECT `disThread`.`id`
+        FROM '.$modx->getTableName('disThread').' `disThread`
+            INNER JOIN '.$modx->getTableName('disThreadUser').' `ThreadUser`
+            ON `ThreadUser`.`thread` = `disThread`.`id`
+            LEFT JOIN '.$modx->getTableName('disThreadRead').' `ThreadRead`
+            ON `ThreadRead`.`thread` = `disThread`.`id`
+        WHERE
+            `ThreadUser`.`user` = '.$userId.'
+        AND `ThreadRead`.`id` IS NULL
+        AND `private` = 1
+        ORDER BY `disThread`.`id` DESC';
+        $stmt = $modx->query($sql);
+        if (!$stmt) return false;
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $read = $modx->getCount('disThreadRead',array(
+                'thread' => $row['id'],
+                'user' => $userId,
+            ));
+            if ($read == 0) {
+                $read = $modx->newObject('disThreadRead');
+                $read->fromArray(array(
+                    'thread' => $row['id'],
+                    'board' => 0,
+                    'user' => $userId,
+                ));
+                $read->save();
+            }
+        }
+        $stmt->closeCursor();
+        return true;
+    }
+
     /**
      * Override remove() to clear thread cache
      *

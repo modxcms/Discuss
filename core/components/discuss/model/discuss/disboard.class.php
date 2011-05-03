@@ -376,6 +376,7 @@ class disBoard extends xPDOSimpleObject {
                 $read->save();
             }
         }
+        $stmt->closeCursor();
         $this->clearCache();
         return true;
     }
