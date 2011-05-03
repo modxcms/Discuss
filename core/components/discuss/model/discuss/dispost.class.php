@@ -304,8 +304,6 @@ class disPost extends xPDOSimpleObject {
                 $message = $parsed;
             }
         } else if (true) {
-            //$message = str_replace(array('<br/>','<br />','<br>'),'',$message);
-            $message = $this->_nl2br2($message);
             $message = $this->parseBBCode($message);
         }
 
@@ -490,7 +488,6 @@ class disPost extends xPDOSimpleObject {
 
         $message = preg_replace("#\[quote\](.*?)\[/quote\]#si",'<blockquote>\\1</blockquote>',$message);
         $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
-        $message = preg_replace("#\[code\](.*?)\[/code\]#si",'<div class="dis-code"><h5>Code</h5><pre>\\1</pre></div>',$message);
         $message = preg_replace("#\[hide\](.*?)\[/hide\]#si",'\\1',$message);
         $message = preg_replace_callback("#\[email\]([^/]*?)\[/email\]#si",array('disPost','parseEmailCallback'),$message);
         $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
@@ -518,6 +515,11 @@ class disPost extends xPDOSimpleObject {
         /* auto-convert links */
         $message = preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftp):\/\/)([\@a-z0-9\x21\x23-\x27\x2a-\x2e\x3a\x3b\/;\x3f-\x7a\x7e\x3d]+)/msxi",array('disPost', 'parseLinksCallback'),$message);
 
+        /* auto-add br tags to linebreaks for pretty formatting */
+        $message = $this->_nl2br2($message);
+
+        /* now do code blocks where we dont want linebreaks, so they can strip them out */
+        $message = preg_replace_callback("#\[code\](.*?)\[/code\]#si",array('disPost','parseCodeCallback'),$message);
         $message = $this->parseSmileys($message);
         
         /* strip all remaining bbcode */
@@ -525,6 +527,11 @@ class disPost extends xPDOSimpleObject {
         /* strip MODX tags */
         $message = str_replace(array('[',']'),array('&#91;','&#93;'),$message);
         return $message;
+    }
+
+    public static function parseCodeCallback($matches) {
+        $code = disPost::stripBRTags($matches[1]);
+        return '<div class="dis-code"><h5>Code</h5><pre>'.$code.'</pre></div>';
     }
 
     public static function parseLinksCallback($matches) {
@@ -535,7 +542,7 @@ class disPost extends xPDOSimpleObject {
 
     public static function parseListCallback($matches) {
         if (empty($matches[1])) return '';
-        $message = str_replace(array('<br>','<br />','<br/>'),'',$matches[1]);
+        $message = str_replace(array('<br>','<br />','<br/>'),'',disPost::stripBRTags($matches[1]));
         $message = '<ul style="margin-top:0;margin-bottom:0;">'.$message.'</ul>';
         return $message;
     }
@@ -544,6 +551,10 @@ class disPost extends xPDOSimpleObject {
         if (empty($matches[1])) return '';
         $message = str_replace(array('<br>','<br />','<br/>'),'',$matches[1]);
         return disPost::encodeEmail($message);
+    }
+
+    public static function stripBRTags($str) {
+        return str_replace(array('<br>','<br />','<br/>'),'',$str);
     }
 
     public static function encodeEmail($email,$emailText = '') {
@@ -661,7 +672,7 @@ class disPost extends xPDOSimpleObject {
         );
         $v = array_values($smiley);
         for ($i =0; $i < count($v); $i++) {
-            $v[$i] = '<img src="'.$imagesUrl.$v[$i].'" alt="" />';
+            $v[$i] = '<img src="'.$imagesUrl.$v[$i].'.gif" alt="" />';
         }
         return str_replace(array_keys($smiley),$v,$message);
     }
