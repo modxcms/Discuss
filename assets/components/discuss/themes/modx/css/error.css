@@ -1,0 +1,65 @@
+.dis-poll-refresh {
+    position: fixed; 
+    bottom: 0; right: 0;
+    z-index: 999;
+    padding: 3px;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid green;
+    background-color: #caff9a;
+}
+
+/* error */
+.dis-error {
+    position: fixed; top: 0; right: 0;
+    z-index: 999;
+    width: 100%;
+}
+
+.dis-error a {
+    color: black;
+    text-decoration: none;
+}
+
+.dis-error a:hover {
+    text-decoration: underline;
+}
+
+.dis-error .dis-close {
+    float: right;
+    color: black;
+    font-size: 10px;
+    vertical-align: middle;
+}
+
+.dis-error .content {
+    padding: 0 4em 1em;
+    width: 100%;
+    text-align: center;
+    clear: both;
+    float: left;
+    margin: 0 auto;
+}
+.dis-error br.clear {
+    clear: both;
+}
+
+.field_error {
+    font-size:0.8em;
+    color: red;
+}
+.ok, .notok { 
+    color: green;
+    font-weight: bold;
+}
+.notok { color: red; }
+
+.dis-error.error {
+    border-bottom: 1px solid red;
+    background-color: #f8c7c7;
+}
+.dis-error.success {
+    border-top: 1px solid green;
+    border-left: 1px solid green;
+    background-color: #CAFF9A;
+}
