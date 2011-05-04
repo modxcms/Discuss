@@ -195,3 +195,8 @@ ol.dis-board-thread li {
     margin: 0;
     padding: 0;
 }
+
+.dis-post .idx {
+    float: right;
+    font-size: 12px;
+}

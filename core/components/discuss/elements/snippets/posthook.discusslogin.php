@@ -2,7 +2,8 @@
 /**
  * Handle post-login data manipulation
  */
-$discuss =& $modx->discuss;
+$discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
+if (!($discuss instanceof Discuss)) return true;
 $modx->lexicon->load('discuss:user','core:login');
 
 if (empty($fields['username'])) {
