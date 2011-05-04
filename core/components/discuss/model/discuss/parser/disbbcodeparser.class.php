@@ -85,6 +85,23 @@ class disBBCodeParser {
 
         return $message;
     }
+    
+    public static function parseCodeCallback($matches) {
+        $code = disBBCodeParser::stripBRTags($matches[1]);
+        return '<div class="dis-code"><pre class="brush: php; toolbar: false">'.$code.'</pre></div>';
+    }
+    public static function parseCodeSpecificCallback($matches) {
+        $type = !empty($matches[1]) ? $matches[1] : 'php';
+        $availableTypes = array('applescript','actionscript3','as3','bash','shell','coldfusion','cf','cpp','c','c#','c-sharp','csharp','css','delphi','pascal','diff','patch','pas','erl','erlang','groovy','java','jfx','javafx','js','jscript','javascript','perl','pl','php','text','plain','py','python','ruby','rails','ror','rb','sass','scss','scala','sql','vb','vbnet','xml','xhtml','xslt','html');
+        if (!in_array($type,$availableTypes)) $type = 'php';
+        $code = disBBCodeParser::stripBRTags($matches[2]);
+        return '<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">'.$code.'</pre></div>';
+    }
+    public static function parseEmailCallback($matches) {
+        if (empty($matches[1])) return '';
+        $message = str_replace(array('<br>','<br />','<br/>'),'',$matches[1]);
+        return disBBCodeParser::encodeEmail($message);
+    }
 
     /**
      * Parse code blocks where we dont wan't linebreaks, strip them out
@@ -131,34 +148,27 @@ class disBBCodeParser {
         return '<a href="'.$url.'" target="_blank"'.$noFollow.'>'.$url.'</a>';
     }
 
-
+    /**
+     * Strip all BBCode from a string
+     *
+     * @param string $str
+     * @return string
+     */
     public function stripBBCode($str) {
          $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
          $replace = '';
          return preg_replace($pattern, $replace, $str);
     }
 
+    /**
+     * A better working nl2br
+     *
+     * @param string $str
+     * @return string
+     */
     private function _nl2br2($str) {
         $str = str_replace("\r", '', $str);
         return preg_replace('/(?<!>)\n/', "<br />\n", $str);
-    }
-
-
-    public static function parseCodeCallback($matches) {
-        $code = disBBCodeParser::stripBRTags($matches[1]);
-        return '<div class="dis-code"><pre class="brush: php; toolbar: false">'.$code.'</pre></div>';
-    }
-    public static function parseCodeSpecificCallback($matches) {
-        $type = !empty($matches[1]) ? $matches[1] : 'php';
-        $availableTypes = array('applescript','actionscript3','as3','bash','shell','coldfusion','cf','cpp','c','c#','c-sharp','csharp','css','delphi','pascal','diff','patch','pas','erl','erlang','groovy','java','jfx','javafx','js','jscript','javascript','perl','pl','php','text','plain','py','python','ruby','rails','ror','rb','sass','scss','scala','sql','vb','vbnet','xml','xhtml','xslt','html');
-        if (!in_array($type,$availableTypes)) $type = 'php';
-        $code = disBBCodeParser::stripBRTags($matches[2]);
-        return '<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">'.$code.'</pre></div>';
-    }
-    public static function parseEmailCallback($matches) {
-        if (empty($matches[1])) return '';
-        $message = str_replace(array('<br>','<br />','<br/>'),'',$matches[1]);
-        return disBBCodeParser::encodeEmail($message);
     }
 
     /**
@@ -224,47 +234,34 @@ class disBBCodeParser {
      * @return string The quoted message
      */
     public function parseQuote($message) {
-        preg_match_all("#\[quote=?(.*?)[\"']?\](.*?)\[/quote\]#si",$message,$matches);
-        if (!empty($matches)) {
-            $quotes = array();
-            $replace = array();
-            $meta = array();
-            $with = array();
-            if (!empty($matches[0])) {
-                foreach ($matches[0] as $match) { $replace[] = $match; }
-                foreach ($matches[1] as $match) { $meta[] = $match; }
-                foreach ($matches[2] as $match) { $with[] = $match; }
-            }
-            for ($i=0;$i<count($replace);$i++) {
-                $auth = array();
-                $mt = explode(' ',$meta[$i]);
-                foreach ($mt as $m) {
-                    if (empty($m)) continue;
-                    $m = explode('=',$m);
-                    switch ($m[0]) {
-                        case 'author': $auth['user'] = $m[1]; break;
-                        case 'date': $auth['date'] = $m[1]; break;
-                        case 'link': $auth['link'] = $m[1]; break;
-                    }
-                }
-                $cite = '';
-                if (!empty($auth['user']) || !empty($auth['date'])) {
-                    $cite = '<cite>Quote';
-                    if (!empty($auth['user'])) $cite .= ' from: '.$auth['user'];
-                    if (!empty($auth['date'])) $cite .= ' at '.strftime($this->discuss->dateFormat,$auth['date']);
-                    $cite .= '</cite>';
-                }
-
-                /* strip annoying starting br tags */
-                $with[$i] = substr($with[$i],0,6) == '<br />' ? $with[$i] = substr($with[$i],6) : $with[$i];
-
-                /* now insert our quote */
-                $message = str_replace($replace[$i],$cite.'<blockquote>'.$with[$i].'</blockquote>',$message);
-            }
-        }
+        $new_string = str_replace('[/quote]', '</blockquote>', $message);
+        $message = preg_replace_callback('/\[quote(.*?)\]/msi',array('disBBCodeParser','parseQuoteCallback'), $new_string);
         return $message;
     }
+    public static function parseQuoteCallback($matches) {
+        $attributes = array();
+        $attrs = explode(' ',$matches[1]);
+        foreach ($attrs as $v) {
+            if (empty($v)) continue;
+            $as = explode('=',$v);
+            if (!empty($as[1])) {
+                $attributes[$as[0]] = $as[1];
+            }
+        }
+        $citation = '';
+        if (!empty($attributes)) {
+            if (!empty($attributes['user']) || !empty($attributes['date']) || !empty($attributes['author'])) {
+                $citation = '<cite>Quote';
+                if (!empty($attributes['author'])) $citation .= ' from: '.$attributes['author'];
+                if (!empty($attributes['user'])) $citation .= ' from: '.$attributes['user'];
+                if (!empty($attributes['date'])) $citation .= ' at '.strftime('%b %d, %Y, %I:%M %p',$attributes['date']);
+                $citation .= '</cite>';
+            }
+        }
 
+        return $citation.'<blockquote class="dis-quote">';
+    }
+    
     /**
      * Parse Smileys
      * 
