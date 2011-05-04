@@ -1,0 +1,67 @@
+ul.dis-action-btns {
+    margin: 0 0 10px;
+    padding: 3px 0; /* accommodate border on buttons - */
+    background: none;
+    width: auto;
+}
+.dis-action-btns li {
+    display: inline;
+    list-style-type: none;
+    margin-right: 10px;
+    padding: 0;
+}
+.dis-action-btns img {
+    vertical-align: top;
+    margin-top: 1px;
+}
+.dis-action-btns a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    background: #81AD2A url(../images/bgs/button-gradient.png) repeat-x top left;
+    padding: 4px 6px;
+    white-space: nowrap;
+    vertical-align: top;
+    text-decoration: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-text-shadow: 0 1px 1px #555;
+    -moz-text-shadow: 0 1px 1px #555;
+    text-shadow: 0 1px 1px #555;
+    border:1px solid #8EBE2F;
+    outline: none;
+}
+.dis-action-btns a:hover {
+    background-position: bottom left;
+    -webkit-box-shadow: 0 0 10px #8EBE2F;
+    -moz-box-shadow: 0 0 10px #8EBE2F;
+    box-shadow:  0 0 10px #8EBE2F;
+    -webkit-transition: -webkit-box-shadow 0.2s linear;
+    text-decoration: none;
+}
+.dis-action-btns a:active {
+    background-color: #8EBE2F;
+    background-position: bottom left;
+    -webkit-box-shadow: 0 0 10px #8EBE2F;
+    -moz-box-shadow: 0 0 10px #8EBE2F;
+    box-shadow:  0 0 10px #8EBE2F;
+}
+.dis-action-btns a.disabled {
+    border: 1px solid #657587;
+    padding: 2px 4px;
+    color: #777;
+    border-width: 0;
+}
+.dis-action-btns a.disabled img {
+    opacity: .3;
+    filter: alpha(opacity=30);
+}
+.dis-action-btns .and{
+    margin:0 2px 0 5px;
+    color: #3b454f;
+    font-weight: bold;
+}
+ 
+ 
+ 
