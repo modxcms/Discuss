@@ -1,1 +1,0 @@
-<a href="[[~[[*id]]]]user/?user=[[+id]]"[[+style]]>[[+username]]</a>

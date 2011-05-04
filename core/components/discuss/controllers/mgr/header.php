@@ -5,10 +5,10 @@
  * @package discuss
  * @subpackage controllers
  */
-$modx->regClientCSS($discuss->config['cssUrl'].'mgr.css');
-$modx->regClientStartupScript($discuss->config['jsUrl'].'mgr/discuss.js');
-$modx->regClientStartupScript($discuss->config['jsUrl'].'mgr/combos.js');
-$modx->regClientStartupScript($discuss->config['jsUrl'].'mgr/windows.js');
+$modx->regClientCSS($discuss->config['mgrCssUrl'].'mgr.css');
+$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'discuss.js');
+$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'combos.js');
+$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'windows.js');
 $modx->regClientStartupHTMLBlock('<script type="text/javascript">
 Ext.onReady(function() {
     Dis.config = '.$modx->toJSON($discuss->config).';

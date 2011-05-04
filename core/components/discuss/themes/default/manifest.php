@@ -12,71 +12,71 @@ $manifest = array(
         ),
         'js' => array(
             'header' => array(
-                'web/jquery-1.3.2.min.js',
-                'web/discuss.js',
-                'web/sh/shCore.js',
-                'web/sh/shAutoloader.js',
-                'web/sh/shDiscuss.js',
+                'jquery-1.3.2.min.js',
+                'discuss.js',
+                'sh/shCore.js',
+                'sh/shAutoloader.js',
+                'sh/shDiscuss.js',
             ),
-            'inline' => 'DIS.url = "'.$this->discuss->url.'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'web/sh/";',
+            'inline' => 'DIS.url = "'.$this->discuss->url.'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";',
         ),
     ),
     'home' => array(
         'js' => array(
             'header' => array(
-                'web/dis.home.js',
+                'dis.home.js',
             ),
         ),
     ),
     'board' => array(
         'js' => array(
             'header' => array(
-                'web/dis.board.js',
+                'dis.board.js',
             ),
         ),
     ),
     'thread/index' => array(
         'js' => array(
             'header' => array(
-                'web/dis.thread.js',
+                'dis.thread.js',
             )
         ),
     ),
     'thread/new' => array(
         'js' => array(
             'header' => array(
-                'web/dis.thread.new.js',
-                'web/dis.post.buttons.js',
+                'dis.thread.new.js',
+                'dis.post.buttons.js',
             ),
         ),
     ),
     'thread/reply' => array(
         'js' => array(
             'header' => array(
-                'web/dis.post.reply.js',
-                'web/dis.post.buttons.js',
+                'dis.post.reply.js',
+                'dis.post.buttons.js',
             ),
         ),
     ),
     'thread/modify' => array(
         'js' => array(
             'header' => array(
-                'web/dis.post.modify.js',
-                'web/dis.post.buttons.js',
+                'dis.post.modify.js',
+                'dis.post.buttons.js',
             ),
         ),
     ),
     'thread/remove' => array(
         'js' => array(
             'header' => array(
-                'web/dis.thread.js',
+                'dis.thread.js',
             )
         ),
     ),
     'search' => array(
         'js' => array(
             'header' => array(
-                'web/dis.search.js',
+                'dis.search.js',
             ),
         ),
         'css' => array(
@@ -88,38 +88,38 @@ $manifest = array(
     'user/subscriptions' => array(
         'js' => array(
             'header' => array(
-                'web/user/dis.user.subscriptions.js',
+                'user/dis.user.subscriptions.js',
             )
         ),
     ),
     'user/ignoreboards' => array(
         'js' => array(
             'header' => array(
-                'web/user/dis.user.ignoreboards.js',
+                'user/dis.user.ignoreboards.js',
             )
         ),
     ),
     'messages/new' => array(
         'js' => array(
             'header' => array(
-                'web/messages/dis.message.new.js',
-                'web/dis.post.buttons.js',
+                'messages/dis.message.new.js',
+                'dis.post.buttons.js',
             ),
         ),
     ),
     'messages/reply' => array(
         'js' => array(
             'header' => array(
-                'web/messages/dis.message.reply.js',
-                'web/dis.post.buttons.js',
+                'messages/dis.message.reply.js',
+                'dis.post.buttons.js',
             ),
         ),
     ),
     'messages/modify' => array(
         'js' => array(
             'header' => array(
-                'web/messages/dis.message.modify.js',
-                'web/dis.post.buttons.js',
+                'messages/dis.message.modify.js',
+                'dis.post.buttons.js',
             ),
         ),
     ),

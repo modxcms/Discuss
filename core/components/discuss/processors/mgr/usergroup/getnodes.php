@@ -22,9 +22,9 @@ $c->where(array(
 ));
 $groups = $modx->getCollection('modUserGroup',$c);
 
-$da = array();
+$list = array();
 foreach ($groups as $group) {
-    $da[] = array(
+    $list[] = array(
         'text' => $group->get('name'),
         'id' => 'n_ug_'.$group->get('id'),
         'leaf' => 0,
@@ -33,4 +33,23 @@ foreach ($groups as $group) {
     );
 }
 
-return $this->toJSON($da);
+if (!empty($scriptProperties['id'])) {
+    $c = $modx->newQuery('modUser');
+    $c->innerJoin('modUserGroupMember','UserGroupMembers');
+    $c->where(array(
+        'UserGroupMembers.user_group' => $scriptProperties['id'],
+    ));
+    $users = $modx->getCollection('modUser',$c);
+    foreach ($users as $user) {
+        $list[] = array(
+            'text' => $user->get('username'),
+            'id' => 'n_user_'.$user->get('id'),
+            'leaf' => 1,
+            'type' => 'user',
+            'cls' => 'icon-user',
+        );
+    }
+
+}
+
+return $this->toJSON($list);

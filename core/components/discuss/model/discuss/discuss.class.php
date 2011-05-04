@@ -33,6 +33,8 @@ class Discuss {
             'theme' => $theme,
             'cssUrl' => $themesUrl.$theme.'/css/',
             'jsUrl' => $themesUrl.$theme.'/js/',
+            'mgrCssUrl' => $assetsUrl.'/mgr/css/',
+            'mgrJsUrl' => $assetsUrl.'/mgr/js/',
             'imagesUrl' => $themesUrl.$theme.'/images/',
 
             'connectorUrl' => $assetsUrl.'connector.php',

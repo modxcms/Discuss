@@ -1,1 +1,0 @@
-<li><a href="[[+url]]">[[+text]]</a> &nbsp; / &nbsp;</li>
