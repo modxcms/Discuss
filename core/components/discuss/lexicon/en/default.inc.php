@@ -42,6 +42,10 @@ $_lang['discuss.boards.intro_msg'] = 'Manage all the boards for your forum. Firs
 $_lang['discuss.categories'] = 'Categories';
 $_lang['discuss.category'] = 'Category';
 $_lang['discuss.category_create'] = 'Create Category';
+$_lang['discuss.category_default_moderators'] = 'Default Board Moderators';
+$_lang['discuss.category_default_moderators_desc'] = 'A comma-separated list of Moderator usernames that will automatically be added to new Boards in this Category. Leave blank to ignore.';
+$_lang['discuss.category_default_usergroups'] = 'Default Board User Groups';
+$_lang['discuss.category_default_usergroups_desc'] = 'A comma-separated list of User Group names that will automatically be added to new Boards in this Category, restricting them to those User Groups. Leave blank to ignore.';
 $_lang['discuss.category_edit'] = 'Edit Category';
 $_lang['discuss.category_err_ae'] = 'A Category already exists with that name.';
 $_lang['discuss.category_err_nf'] = 'Category not found with ID [[+id]]';
@@ -191,6 +195,12 @@ $_lang['setting_discuss.date_format_desc'] = 'The date format, in strftime synta
 
 $_lang['setting_discuss.debug'] = 'Debug Mode';
 $_lang['setting_discuss.debug_desc'] = 'If true, will turn on error reporting and show execution times at the end of each page.';
+
+$_lang['setting_discuss.default_board_moderators'] = 'Default Board Moderators';
+$_lang['setting_discuss.default_board_moderators_desc'] = 'A comma-separated list of Moderator usernames that will automatically be added to new Boards created in the manager. Leave blank to ignore. Category defaults will override this setting.';;
+
+$_lang['setting_discuss.default_board_usergroups'] = 'Default Board User Groups';
+$_lang['setting_discuss.default_board_usergroups_desc'] = 'A comma-separated list of User Group names that will automatically be added to new Boards created in the manager. Adding Groups to this will automatically restrict all new boards to just those User Groups. Leave blank to ignore. Category defaults will override this setting.';
 
 $_lang['setting_discuss.email_reported_post_chunk'] = 'Reported Post Email Chunk';
 $_lang['setting_discuss.email_reported_post_chunk_desc'] = 'The Chunk to use for emails sent when someone reports a post.';

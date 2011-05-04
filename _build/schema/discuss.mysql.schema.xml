@@ -83,6 +83,8 @@
         <field key="description" dbtype="text" phptype="string" default="" null="false" />
         <field key="collapsible" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" />
         <field key="rank" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <field key="default_moderators" dbtype="text" phptype="string" />
+        <field key="default_usergroups" dbtype="text" phptype="string" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         
         <composite alias="Boards" class="disBoard" local="id" foreign="category" cardinality="many" owner="local" />

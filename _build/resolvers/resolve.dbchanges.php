@@ -22,6 +22,9 @@ if ($object->xpdo) {
             $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD INDEX `locked` (`locked`)");
 
             $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD COLUMN `last_view_ip` TINYINT(1) UNSIGNED NOT NULL DEFAULT '' AFTER `locked`");
+
+            $modx->query("ALTER TABLE ".$modx->getTableName('disCategory')." ADD COLUMN `default_moderators` TEXT AFTER `rank`");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disCategory')." ADD COLUMN `default_usergroups` TEXT AFTER `default_moderators`");
             break;
     }
 }
