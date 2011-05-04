@@ -26,40 +26,41 @@ Dis.grid.Users = function(config) {
         ,url: Dis.config.connector_url
         ,baseParams: { action: 'mgr/user/getList' }
         ,save_action: 'mgr/user/updateFromGrid'
-        ,fields: ['id','username','email','ip','last_active']
+        ,fields: ['id','user','username','email','ip','last_active','posts']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
         ,width: '95%'
         ,columns: [{
             header: _('id')
-            ,dataIndex: 'id'
+            ,dataIndex: 'user'
             ,sortable: true
-            ,width: 300
+            ,width: 90
         },{
             header: _('discuss.username')
             ,dataIndex: 'username'
             ,sortable: true
             ,width: 300
-            ,editor: { xtype: 'textfield' ,allowBlank: true }
         },{
             header: _('email')
             ,dataIndex: 'email'
             ,sortable: true
             ,width: 300
-            ,editor: { xtype: 'textfield' ,allowBlank: true }
         },{
             header: _('discuss.ip')
             ,dataIndex: 'ip'
             ,sortable: true
-            ,width: 300
-            ,editor: { xtype: 'textfield' ,allowBlank: true }
+            ,width: 120
+        },{
+            header: _('discuss.posts')
+            ,dataIndex: 'posts'
+            ,sortable: true
+            ,width: 90
         },{
             header: _('discuss.last_active')
             ,dataIndex: 'last_active'
             ,sortable: true
             ,width: 300
-            ,editor: { xtype: 'textfield' ,allowBlank: true }
         }]
         ,tbar: [{
             text: _('discuss.user_create')

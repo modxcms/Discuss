@@ -14,18 +14,32 @@ $scriptProperties['id'] = !isset($scriptProperties['id']) ? 0 : str_replace('n_u
 
 $g = $modx->getObject('modUserGroup',$scriptProperties['id']);
 
+$c = $modx->newQuery('modUserGroupMember');
+$c->select(array(
+    'COUNT(`member`)',
+));
+$c->where(array(
+    'modUserGroupMember.user_group = modUserGroup.id',
+));
+$c->prepare();
+$memberCtSql = $c->toSql();
 
 $c = $modx->newQuery('modUserGroup');
+$c->select($modx->getSelectColumns('modUserGroup','modUserGroup'));
+$c->select(array(
+    '('.$memberCtSql.') AS members',
+));
 $c->where(array(
     'parent' => $scriptProperties['id'],
     'AND:modUserGroup.name:!=' => 'Administrator',
 ));
+$c->sortby('name','ASC');
 $groups = $modx->getCollection('modUserGroup',$c);
 
 $list = array();
 foreach ($groups as $group) {
     $list[] = array(
-        'text' => $group->get('name'),
+        'text' => $group->get('name').' ('.$group->get('id').') - <i>'.$modx->lexicon('discuss.members_ct',array('members' => $group->get('members'))).'</i>',
         'id' => 'n_ug_'.$group->get('id'),
         'leaf' => 0,
         'type' => 'usergroup',
@@ -39,6 +53,7 @@ if (!empty($scriptProperties['id'])) {
     $c->where(array(
         'UserGroupMembers.user_group' => $scriptProperties['id'],
     ));
+    $c->sortby('username','ASC');
     $users = $modx->getCollection('modUser',$c);
     foreach ($users as $user) {
         $list[] = array(

@@ -9,12 +9,16 @@ Dis.grid.UserGroupMembers = function(config) {
             ,usergroup: config.usergroup
         }
         ,action: 'mgr/usergroup/member/getlist'
-        ,fields: ['id','username','role']
+        ,fields: ['id','username','role','role_name']
         ,autoHeight: true
         ,paging: true
         ,columns: [{
             header: _('discuss.username')
             ,dataIndex: 'username'
+            ,width: 250
+        },{
+            header: _('discuss.role')
+            ,dataIndex: 'role_name'
             ,width: 250
         }]
         ,tbar: [{
@@ -65,7 +69,7 @@ Dis.window.AddUserGroupMember = function(config) {
         ,frame: true
         ,id: 'dis-window-usergroup-member-create'
         ,fields: [{
-            xtype: 'dis-combo-user'
+            xtype: 'modx-combo-user'
             ,fieldLabel: _('discuss.user')
             ,name: 'user'
             ,hiddenName: 'user'
@@ -74,6 +78,13 @@ Dis.window.AddUserGroupMember = function(config) {
             ,editable: true
             ,typeAhead: true
             ,pageSize: 20
+        },{
+            xtype: 'modx-combo-role'
+            ,fieldLabel: _('discuss.role')
+            ,name: 'role'
+            ,hiddenName: 'role'
+            ,id: 'dis-'+this.ident+'-role'
+            ,allowBlank: false
         }]
     });
     Dis.window.AddUserGroupMember.superclass.constructor.call(this,config);
@@ -87,7 +98,8 @@ Ext.extend(Dis.window.AddUserGroupMember,MODx.Window,{
             if (this.fireEvent('success',{
                 id: fld.getValue()
                 ,username: fld.getRawValue()
-                ,role: 0
+                ,role: f.findField('role').getValue()
+                ,role_name: f.findField('role').getRawValue()
             })) {
                 this.fp.getForm().reset();
                 this.hide();

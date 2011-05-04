@@ -29,7 +29,6 @@ if ($profile->save() == false || $usergroup->save() == false) {
 }
 
 /* set members */
-/* doesnt work atm
 if (isset($scriptProperties['members'])) {
 
     $members = $modx->getCollection('modUserGroupMember',array('user_group' => $usergroup->get('id')));
@@ -38,16 +37,16 @@ if (isset($scriptProperties['members'])) {
 
     $members = $modx->fromJSON($scriptProperties['members']);
     foreach ($members as $member) {
-        $user = $modx->getObject('disUser',$member['id']);
+        $user = $modx->getObject('modUser',$member['id']);
         if ($user) {
             $membership = $modx->newObject('modUserGroupMember');
             $membership->set('user_group',$usergroup->get('id'));
-            $membership->set('member',$user->get('user'));
+            $membership->set('member',$user->get('id'));
             $membership->set('role',empty($member['role']) ? 1 : $member['role']);
             $membership->save();
         }
     }
-}*/
+}
 
 /* set board access */
 if (isset($scriptProperties['boards'])) {

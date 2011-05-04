@@ -27,24 +27,29 @@ $usergroupArray = $usergroup->toArray();
 /* get members */
 $c = $modx->newQuery('modUserGroupMember');
 $c->innerJoin('modUser','User');
-$c->innerJoin('disUser','disUser','disUser.user = User.id');
+$c->leftJoin('disUser','disUser','disUser.user = User.id');
+$c->innerJoin('modUserGroupRole','UserGroupRole');
 $c->where(array(
     'user_group' => $usergroup->get('id'),
 ));
 
 $c->select($modx->getSelectColumns('modUserGroupMember','modUserGroupMember'));
-$c->select($modx->getSelectColumns('disUser','disUser','',array('username','email')));
 $c->select(array(
-    'disuser_id' => 'disUser.id',
+    'User.username',
+    'User.id AS user',
+    'disUser.email',
+    'disUser.id AS disuser_id',
+    'UserGroupRole.name AS role_name',
 ));
 $c->sortby($modx->getSelectColumns('disUser','User','',array('username')),'ASC');
 $members = $modx->getCollection('modUserGroupMember',$c);
 $list = array();
 foreach ($members as $member) {
     $list[] = array(
-        $member->get('disuser_id'),
+        $member->get('user'),
         $member->get('username'),
         $member->get('role'),
+        $member->get('role_name'),
     );
 }
 $usergroup->set('members','(' . $modx->toJSON($list) . ')');
@@ -53,13 +58,15 @@ unset($members,$member,$list,$c);
 
 /* get boards */
 $c = $modx->newQuery('disBoard');
+$c->innerJoin('disBoardClosure','Descendants');
+$c->leftJoin('disBoardUserGroup','UserGroups');
+$c->innerJoin('disCategory','Category');
 $c->select($modx->getSelectColumns('disBoard','disBoard'));
 $c->select(array(
     'IF(UserGroups.usergroup = "'.$usergroup->get('id').'",1,0) AS access',
     'MAX(Descendants.depth) AS depth',
+    'Category.name AS category_name',
 ));
-$c->innerJoin('disBoardClosure','Descendants');
-$c->leftJoin('disBoardUserGroup','UserGroups');
 $c->sortby('disBoard.category','ASC');
 $c->sortby('disBoard.map','ASC');
 $c->groupby('disBoard.id');
@@ -68,9 +75,10 @@ $list = array();
 foreach ($boards as $board) {
     $list[] = array(
         $board->get('id'),
-        str_repeat('--',$board->get('depth')).$board->get('name'),
+        str_repeat('--',$board->get('depth')-1).$board->get('name'),
         $board->get('access') ? true : false,
         $board->get('category'),
+        $board->get('category_name'),
     );
 }
 $usergroup->set('boards','(' . $modx->toJSON($list) . ')');

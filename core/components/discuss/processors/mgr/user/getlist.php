@@ -36,6 +36,7 @@ foreach ($users as $user) {
     } else {
         $userArray['last_active'] = '';
     }
+    $userArray['posts'] = number_format($userArray['posts']);
     $list[]= $userArray;
 }
 return $this->outputArray($list,$count);
