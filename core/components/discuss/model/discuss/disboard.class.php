@@ -231,14 +231,13 @@ class disBoard extends xPDOSimpleObject {
     /**
      * Determine if a user is a moderator of this board
      * 
-     * @param int $userId
      * @return bool
      */
-    public function isModerator($userId) {
+    public function isModerator() {
         if ($this->xpdo->discuss->user->isGlobalModerator()) return true;
          
         $moderator = $this->xpdo->getCount('disModerator',array(
-            'user' => $userId,
+            'user' => $this->xpdo->discuss->user->get('id'),
             'board' => $this->get('id'),
         ));
         return $moderator > 0;
@@ -549,5 +548,15 @@ class disBoard extends xPDOSimpleObject {
         }
         $this->set('last_post_page',$page);
         return $page;
+    }
+
+    public function canPostStickyThread() {
+        return $this->xpdo->hasPermission('discuss.thread_stick') &&
+            ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
+    }
+
+    public function canPostLockedThread() {
+        return $this->xpdo->hasPermission('discuss.thread_lock') &&
+            ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
 }

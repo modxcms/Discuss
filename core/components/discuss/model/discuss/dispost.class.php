@@ -546,6 +546,8 @@ class disPost extends xPDOSimpleObject {
     }
     public static function parseCodeSpecificCallback($matches) {
         $type = !empty($matches[1]) ? $matches[1] : 'php';
+        $availableTypes = array('applescript','actionscript3','as3','bash','shell','coldfusion','cf','cpp','c','c#','c-sharp','csharp','css','delphi','pascal','diff','patch','pas','erl','erlang','groovy','java','jfx','javafx','js','jscript','javascript','perl','pl','php','text','plain','py','python','ruby','rails','ror','rb','sass','scss','scala','sql','vb','vbnet','xml','xhtml','xslt','html');
+        if (!in_array($type,$availableTypes)) $type = 'php';
         $code = disPost::stripBRTags($matches[2]);
         return '<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">'.$code.'</pre></div>';
     }

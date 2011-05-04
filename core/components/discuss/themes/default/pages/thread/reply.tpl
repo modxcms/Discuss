@@ -42,9 +42,9 @@
     
     <div id="dis-attachments"></div>
     <br class="clear" />
-    
-    <label class="dis-cb"><input type="checkbox" name="locked" value="1" />[[%discuss.thread_lock? &namespace=`discuss` &topic=`web`]]</label>
-    <label class="dis-cb"><input type="checkbox" name="sticky" value="1" />[[%discuss.thread_stick]]</label>
+
+    [[+locked_cb]]
+    [[+sticky_cb]]
     <label class="dis-cb"><input type="checkbox" name="notify" value="1" />[[%discuss.notify_of_replies]]</label>
     
     <br class="clear" />

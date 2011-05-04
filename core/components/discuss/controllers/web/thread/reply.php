@@ -52,12 +52,24 @@ if ($board) {
 }
 
 /* get thread */
-$thread = $discuss->hooks->load('post/getthread',array(
+$threadData = $discuss->hooks->load('post/getthread',array(
     'post' => &$post,
     'thread' => $post->get('thread'),
     'limit' => 5,
 ));
-$placeholders['thread_posts'] = $thread['results'];
+$placeholders['thread_posts'] = $threadData['results'];
+
+/* perms */
+if ($thread->canLock()) {
+    $placeholders['locked'] = !empty($_POST['locked']) ? ' checked="checked"' : '';
+    $placeholders['locked_cb'] = '<label class="dis-cb"><input type="checkbox" name="locked" value="1" '.$placeholders['locked'].' />'.$modx->lexicon('discuss.thread_lock').'</label>';
+    $placeholders['can_lock'] = true;
+}
+if ($thread->canStick()) {
+    $placeholders['sticky'] = !empty($_POST['sticky']) ? ' checked="checked"' : '';
+    $placeholders['sticky_cb'] = '<label class="dis-cb"><input type="checkbox" name="sticky" value="1" '.$placeholders['sticky'].' />'.$modx->lexicon('discuss.thread_stick').'</label>';
+    $placeholders['can_stick'] = true;
+}
 
 /* quote functionality */
 if (empty($_POST) && !empty($scriptProperties['quote'])) {
