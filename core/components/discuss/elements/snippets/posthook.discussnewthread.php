@@ -83,6 +83,8 @@ foreach ($attachments as $file) {
     }
 }
 
+$discuss->user->checkForPostGroupAdvance();
+
 /* send notifications */
 $discuss->hooks->load('notifications/send',array(
     'board' => $board->get('id'),

@@ -84,6 +84,8 @@ if (!empty($fields['notify'])) {
     $thread->addNotify($discuss->user->get('id'));
 }
 
+$discuss->user->checkForPostGroupAdvance();
+
 /* send out notifications */
 $discuss->hooks->load('notifications/send',array(
     'board' => $post->get('board'),

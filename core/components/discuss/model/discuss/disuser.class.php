@@ -83,6 +83,11 @@ class disUser extends xPDOSimpleObject {
         return $message;
     }
 
+    /**
+     * Convert all linebreaks to br tags
+     * @param string $str
+     * @return mixed
+     */
     private function _nl2br2($str) {
         $str = str_replace("\r", '', $str);
         return preg_replace('/(?<!>)\n/', "<br />\n", $str);
@@ -305,6 +310,10 @@ class disUser extends xPDOSimpleObject {
         return $response;
     }
 
+    /**
+     * Return the last visited thread by the User
+     * @return disThread
+     */
     public function getLastVisitedThread() {
         $c = $this->xpdo->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
@@ -324,5 +333,30 @@ class disUser extends xPDOSimpleObject {
             'id' => $this->get('thread_last_visited'),
         ));
         return $this->xpdo->getObject('disThread',$c);
+    }
+
+    /**
+     * Check to see if the user qualifies for any post-based groups
+     * and if so, grant it to them
+     * 
+     * @return bool
+     */
+    public function checkForPostGroupAdvance() {
+        $joined = false;
+        $c = $this->xpdo->newQuery('disUserGroupProfile');
+        $c->innerJoin('modUserGroup','UserGroup');
+        $c->where(array(
+            'post_based' => true,
+            'min_posts:<=' => $this->get('posts'),
+        ));
+        $postGroups = $this->xpdo->getCollection('disUserGroupProfile',$c);
+        if (!empty($postGroups)) {
+            $joined = true;
+            $user = $this->getOne('User');
+            foreach ($postGroups as $group) {
+                $user->joinGroup($group->get('usergroup'));
+            }
+        }
+        return $joined;
     }
 }
