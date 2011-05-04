@@ -27,6 +27,7 @@ class DisSmfImport {
     );
     public $importOptions = array(
         'default_user_group' => 'Forum Full Member',
+        'attachments_path' => false,
     );
 
     /**
@@ -64,6 +65,9 @@ class DisSmfImport {
     }
 
     public function run() {
+        if (empty($this->importOptions['attachments_path'])) {
+            $this->importOptions['attachments_path'] = $this->modx->getOption('assets_path').'attachments/';
+        }
         if ($this->getConnection()) {
             if ($this->runImport['users']) {
                 $this->importUserGroups();
