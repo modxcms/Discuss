@@ -24,6 +24,18 @@ $board->buildBreadcrumbs(array(array(
 $placeholders = $board->toArray();
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 
+/* perms */
+if ($board->canPostLockedThread()) {
+    $placeholders['locked'] = !empty($_POST['locked']) ? ' checked="checked"' : '';
+    $placeholders['locked_cb'] = '<label class="dis-cb"><input type="checkbox" name="locked" value="1" '.$placeholders['locked'].' />'.$modx->lexicon('discuss.thread_lock').'</label>';
+    $placeholders['can_lock'] = true;
+}
+if ($board->canPostStickyThread()) {
+    $placeholders['sticky'] = !empty($_POST['sticky']) ? ' checked="checked"' : '';
+    $placeholders['sticky_cb'] = '<label class="dis-cb"><input type="checkbox" name="sticky" value="1" '.$placeholders['sticky'].' />'.$modx->lexicon('discuss.thread_stick').'</label>';
+    $placeholders['can_stick'] = true;
+}
+
 /* set max attachment limit */
 $placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
 

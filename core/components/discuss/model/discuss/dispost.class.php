@@ -546,6 +546,8 @@ class disPost extends xPDOSimpleObject {
     }
     public static function parseCodeSpecificCallback($matches) {
         $type = !empty($matches[1]) ? $matches[1] : 'php';
+        $availableTypes = array('applescript','actionscript3','as3','bash','shell','coldfusion','cf','cpp','c','c#','c-sharp','csharp','css','delphi','pascal','diff','patch','pas','erl','erlang','groovy','java','jfx','javafx','js','jscript','javascript','perl','pl','php','text','plain','py','python','ruby','rails','ror','rb','sass','scss','scala','sql','vb','vbnet','xml','xhtml','xslt','html');
+        if (!in_array($type,$availableTypes)) $type = 'php';
         $code = disPost::stripBRTags($matches[2]);
         return '<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">'.$code.'</pre></div>';
     }
@@ -711,12 +713,51 @@ class disPost extends xPDOSimpleObject {
         return $this->xpdo->getCollection('disBoard',$c);
     }
 
-
+    /**
+     * Return if the active user can reply to this post
+     * @return bool
+     */
     public function canReply() {
         if ($this->xpdo->discuss->user->isAdmin()) return true;
         $thread = $this->getOne('Thread');
         if (!$thread) return false;
         
         return $thread->canReply();
+    }
+
+    /**
+     * Get the thread page that this post would be on
+     * @return int
+     */
+    public function getThreadPage() {
+        $thread = $this->getOne('Thread');
+        if (!$thread) return 1;
+
+        $page = 1;
+        $replies = $thread->get('replies');
+        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
+        if ($replies > $perPage) {
+            $page = ceil($replies / $perPage);
+        }
+        $this->set('page',$page);
+        return $page;
+    }
+
+    /**
+     * Get the URL of this post
+     *
+     * @param string $view
+     * @return string
+     */
+    public function getUrl($view = 'thread/') {
+        $url = $this->xpdo->discuss->url.$view.'?thread='.$this->get('thread');
+        $page = $this->getThreadPage();
+        if ($page != 1) {
+            $url .= '&page='.$page;
+        }
+        $url .= '#dis-post-'.$this->get('id');
+        $this->set('url',$url);
+        
+        return $url;
     }
 }

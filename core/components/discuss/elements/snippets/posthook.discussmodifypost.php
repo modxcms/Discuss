@@ -78,7 +78,7 @@ if (!$post->save()) {
     return false;
 }
 
-$url = $discuss->url.'thread/?thread='.$thread->get('id').'#dis-post-'.$post->get('id');
+$url = $post->getUrl();
 $modx->sendRedirect($url);
 
 return true;

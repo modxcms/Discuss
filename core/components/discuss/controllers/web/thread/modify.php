@@ -60,13 +60,27 @@ if ($board) {
 }
 $placeholders['trail'] = $board->get('trail');
 
+/* perms */
+if ($thread->canLock()) {
+    $checked = !empty($_POST) ? !empty($_POST['locked']) : $thread->get('locked');
+    $placeholders['locked'] = $checked ? ' checked="checked"' : '';
+    $placeholders['locked_cb'] = '<label class="dis-cb"><input type="checkbox" name="locked" value="1" '.$placeholders['locked'].' />'.$modx->lexicon('discuss.thread_lock').'</label>';
+    $placeholders['can_lock'] = true;
+}
+if ($thread->canStick()) {
+    $checked = !empty($_POST) ? !empty($_POST['sticky']) : $thread->get('sticky');
+    $placeholders['sticky'] = $checked ? ' checked="checked"' : '';
+    $placeholders['sticky_cb'] = '<label class="dis-cb"><input type="checkbox" name="sticky" value="1" '.$placeholders['sticky'].' />'.$modx->lexicon('discuss.thread_stick').'</label>';
+    $placeholders['can_stick'] = true;
+}
+
 /* get thread */
-$thread = $discuss->hooks->load('post/getthread',array(
+$threadData = $discuss->hooks->load('post/getthread',array(
     'post' => &$post,
     'thread' => $post->get('thread'),
     'limit' => 5,
 ));
-$placeholders['thread_posts'] = $thread['results'];
+$placeholders['thread_posts'] = $threadData['results'];
 
 /* output form to browser */
 $modx->regClientHTMLBlock('<script type="text/javascript">

@@ -465,16 +465,15 @@ class disThread extends xPDOSimpleObject {
     }
 
     /**
-     * Check to see if given user (by id) is a Moderator for this thread's board
+     * Check to see if active user is a Moderator for this thread's board
      *
-     * @param int $userId The ID of the user
      * @return bool True if they are a moderator
      */
-    public function isModerator($userId) {
+    public function isModerator() {
         if ($this->xpdo->discuss->user->isGlobalModerator()) return true;
         
         $moderator = $this->xpdo->getCount('disModerator',array(
-            'user' => $userId,
+            'user' => $this->xpdo->discuss->user->get('id'),
             'board' => $this->get('board'),
         ));
         return $moderator > 0;
@@ -768,5 +767,15 @@ class disThread extends xPDOSimpleObject {
         }
         $this->set('url',$url);
         return $url;
+    }
+
+    public function canStick() {
+        return $this->xpdo->hasPermission('discuss.thread_stick') &&
+            ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
+    }
+
+    public function canLock() {
+        return $this->xpdo->hasPermission('discuss.thread_lock') &&
+            ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
 }

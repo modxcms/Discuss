@@ -132,6 +132,6 @@ $modx->invokeEvent('OnDiscussPostSave',array(
     'mode' => 'new',
 ));
 
-$url = $discuss->url.'messages/view?thread='.$post->get('thread').'#dis-post-'.$post->get('id');
+$url = $post->getUrl('messages/view');
 $modx->sendRedirect($url);
 return true;

@@ -23,6 +23,7 @@ $flat = true;
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
+$isAdmin = $discuss->user->isAdmin();
 $isModerator = $discuss->user->isGlobalModerator() || $thread->isModerator($discuss->user->get('id')) || $discuss->user->isAdmin();
 $userUrl = $discuss->url.'user/';
 
@@ -103,7 +104,7 @@ foreach ($posts['results'] as $post) {
     $postArray['action_quote'] = '';
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
-    if (!$thread->get('locked') && $discuss->user->isLoggedIn) {
+    if (($isAdmin || $isModerator || !$thread->get('locked')) && $discuss->user->isLoggedIn) {
         if ($post->canReply()) {
             $postArray['action_reply'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
             $postArray['action_quote'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
