@@ -45,6 +45,7 @@ $canReportPost = $modx->hasPermission('discuss.thread_report');
 /* iterate */
 $plist = array();
 $output = array();
+$idx = $start;
 foreach ($posts['results'] as $post) {
     $postArray = $post->toArray();
     $postArray['children'] = '';
@@ -149,12 +150,14 @@ foreach ($posts['results'] as $post) {
     if (!$isModerator || !$canTrackIp) {
         $postArray['ip'] = '';
     }
+    $postArray['idx'] = $idx+1;
     
     if ($flat) {
         $output[] = $discuss->getChunk('post/disThreadPost',$postArray);
     } else {
         $plist[] = $postArray;
     }
+    $idx++;
 }
 $response = array(
     'total' => $posts['total'],
