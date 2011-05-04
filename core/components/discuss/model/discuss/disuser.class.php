@@ -287,13 +287,26 @@ class disUser extends xPDOSimpleObject {
      */
     public static function fetchActive(xPDO &$modx,$timeAgo = 0,$limit = 0,$start = 0) {
         $response = array();
+
+        $c = $modx->newQuery('disUserGroupProfile');
+        $c->innerJoin('modUserGroup','UserGroup');
+        $c->innerJoin('modUserGroupMember','UserGroupMembers','UserGroup.id = UserGroupMembers.user_group');
+        $c->where(array(
+            'color:!=' => '',
+            'UserGroupMembers.member = disUser.user',
+        ));
+        $c->select(array(
+            'color',
+        ));
+        $c->sortby('disUserGroupProfile.min_posts','DESC');
+        $c->limit(1);
+        $c->prepare();
+        $subSql = $c->toSql();
+
         $c = $modx->newQuery('disUser');
-        $c->query['distinct'] = 'DISTINCT';
+        //$c->query['distinct'] = 'DISTINCT';
         $c->innerJoin('disSession','Session',$modx->getSelectColumns('disSession','Session','',array('user')).' = '.$modx->getSelectColumns('disUser','disUser','',array('id')));
         $c->innerJoin('modUser','User');
-        $c->leftJoin('modUserGroupMember','UserGroupMembers','User.id = UserGroupMembers.member');
-        $c->leftJoin('modUserGroup','UserGroup','UserGroup.id = UserGroupMembers.user_group');
-        $c->leftJoin('disUserGroupProfile','UserGroupProfile','UserGroupProfile.usergroup = UserGroup.id AND UserGroupProfile.color != ""');
         if (!empty($timeAgo)) {
             $c->where(array(
                 'Session.access:>=' => $timeAgo,
@@ -303,8 +316,11 @@ class disUser extends xPDOSimpleObject {
             $c->limit($limit,$start);
         }
         $response['total'] = $modx->getCount('disUser',$c);
-        $c->select(array('disUser.id','disUser.username'));
-        $c->sortby('UserGroupProfile.color','ASC');
+        $c->select(array(
+            'disUser.id',
+            'disUser.username',
+            '('.$subSql.') AS color',
+        ));
         $c->sortby('Session.access','ASC');
         $response['results'] = $modx->getCollection('disUser',$c);
         return $response;
