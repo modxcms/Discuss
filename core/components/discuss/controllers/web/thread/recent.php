@@ -18,6 +18,7 @@ $start = ($page-1) * $limit;
 $recent = $discuss->hooks->load('post/recent',array(
     'limit' => $limit,
     'start' => $start,
+    'getTotal' => true,
 ));
 $placeholders['recent_posts'] = $recent['results'];
 
