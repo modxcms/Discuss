@@ -26,9 +26,47 @@ echo '<pre>';
 
 /* load and run importer */
 if ($discuss->loadImporter('disSmfImport')) {
-    $discuss->import->live = true;
-    $discuss->import->postsOnly = true;
-    $discuss->import->run();
+    $discuss->import->getConnection();
+    $ast = $discuss->import->pdo->query('
+        SELECT
+            *
+        FROM '.$discuss->import->getFullTableName('attachments').'
+        WHERE
+            `ID_MSG` != 0
+    ');
+    if (!$ast) return array();
+    $aIdx = 0;
+    while ($arow = $ast->fetch(PDO::FETCH_ASSOC)) {
+        $post = $modx->getObject('disPost',array(
+            'integrated_id' => $arow['ID_MSG'],
+        ));
+        if ($post) {
+            $discuss->import->log('Adding attachment: '.$arow['filename']);
+            $attachment = $modx->newObject('disPostAttachment');
+            $attachment->fromArray(array(
+                'post' => $post->get('id'),
+                'board' => $post->get('board'),
+                'filename' => $arow['filename'],
+                'filesize' => $arow['size'],
+                'downloads' => $arow['downloads'],
+                'integrated_id' => $arow['ID_ATTACH'],
+                'integrated_data' => $modx->toJSON(array(
+                    'filename' => $arow['filename'],
+                    'file_hash' => $arow['file_hash'],
+                    'width' => $arow['width'],
+                    'height' => $arow['height'],
+                    'attachmentType' => $arow['attachmentType'],
+                    'ID_MEMBER' => $arow['ID_MEMBER'],
+                    'ID_MSG' => $arow['ID_MSG'],
+                    'ID_THUMB' => $arow['ID_THUMB'],
+                )),
+            ));
+            $attachment->save();
+            $aIdx++;
+        }
+    }
+    $ast->closeCursor();
+
 } else {
     $modx->log(xPDO::LOG_LEVEL_ERROR,'Failed to load Import class.');
 }

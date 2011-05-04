@@ -11,6 +11,8 @@ $xpdo_meta_map['disCategory']= array (
     'description' => '',
     'collapsible' => 1,
     'rank' => 0,
+    'default_moderators' => NULL,
+    'default_usergroups' => NULL,
     'integrated_id' => 0,
   ),
   'fieldMeta' => 
@@ -48,6 +50,16 @@ $xpdo_meta_map['disCategory']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+    ),
+    'default_moderators' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+    ),
+    'default_usergroups' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
     ),
     'integrated_id' => 
     array (

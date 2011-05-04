@@ -119,6 +119,7 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
     }
     ,updateCategory: function(btn,e) {
         var r = this.cm.activeNode.attributes;
+        r.id = r.pk;
         if (!this.windows.updateCategory) {
             this.windows.updateCategory = MODx.load({
                 xtype: 'dis-window-category-update'
@@ -128,6 +129,7 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
                 }
             });
         }
+        this.windows.updateCategory.reset();
         this.windows.updateCategory.setValues(r);
         this.windows.updateCategory.show(e.target);
         return true;
@@ -286,6 +288,20 @@ Dis.window.CreateCategory = function(config) {
             ,id: 'dis-'+this.ident+'-description'
             ,width: 300
         },{
+            xtype: 'textfield'
+            ,fieldLabel: _('discuss.category_default_moderators')
+            ,description: _('discuss.category_default_moderators_desc')
+            ,name: 'default_moderators'
+            ,id: 'dis-'+this.ident+'-default-board-moderators'
+            ,width: 300
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('discuss.category_default_usergroups')
+            ,description: _('discuss.category_default_usergroups_desc')
+            ,name: 'default_usergroups'
+            ,id: 'dis-'+this.ident+'-default-board-usergroups'
+            ,width: 300
+        },{
             xtype: 'checkbox'
             ,fieldLabel: _('discuss.board_collapsible')
             ,name: 'collapsible'
@@ -324,6 +340,20 @@ Dis.window.UpdateCategory = function(config) {
             ,fieldLabel: _('description')
             ,name: 'description'
             ,id: 'dis-'+this.ident+'-description'
+            ,width: 300
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('discuss.category_default_moderators')
+            ,description: _('discuss.category_default_moderators_desc')
+            ,name: 'default_moderators'
+            ,id: 'dis-'+this.ident+'-default-board-moderators'
+            ,width: 300
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('discuss.category_default_usergroups')
+            ,description: _('discuss.category_default_usergroups_desc')
+            ,name: 'default_usergroups'
+            ,id: 'dis-'+this.ident+'-default-board-usergroups'
             ,width: 300
         },{
             xtype: 'checkbox'

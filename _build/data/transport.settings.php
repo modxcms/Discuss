@@ -106,6 +106,24 @@ $settings['discuss.bbcode_enabled']->fromArray(array(
     'area' => 'Threads',
 ),'',true,true);
 
+$settings['discuss.default_board_moderators']= $modx->newObject('modSystemSetting');
+$settings['discuss.default_board_moderators']->fromArray(array(
+    'key' => 'discuss.default_board_moderators',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
+),'',true,true);
+
+$settings['discuss.default_board_usergroups']= $modx->newObject('modSystemSetting');
+$settings['discuss.default_board_usergroups']->fromArray(array(
+    'key' => 'discuss.default_board_usergroups',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Security',
+),'',true,true);
+
 $settings['discuss.email_reported_post_subject']= $modx->newObject('modSystemSetting');
 $settings['discuss.email_reported_post_subject']->fromArray(array(
     'key' => 'discuss.email_reported_post_subject',
