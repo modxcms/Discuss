@@ -119,7 +119,7 @@ foreach ($participantsIds as $participant) {
 }
 
 /* redirect */
-$url = $discuss->url.'messages/view?thread='.$thread->get('id').'#dis-post-'.$post->get('id');
+$url = $post->getUrl('messages/view');
 $modx->sendRedirect($url);
 
 return true;

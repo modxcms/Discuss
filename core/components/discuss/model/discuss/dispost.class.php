@@ -713,12 +713,51 @@ class disPost extends xPDOSimpleObject {
         return $this->xpdo->getCollection('disBoard',$c);
     }
 
-
+    /**
+     * Return if the active user can reply to this post
+     * @return bool
+     */
     public function canReply() {
         if ($this->xpdo->discuss->user->isAdmin()) return true;
         $thread = $this->getOne('Thread');
         if (!$thread) return false;
         
         return $thread->canReply();
+    }
+
+    /**
+     * Get the thread page that this post would be on
+     * @return int
+     */
+    public function getThreadPage() {
+        $thread = $this->getOne('Thread');
+        if (!$thread) return 1;
+
+        $page = 1;
+        $replies = $thread->get('replies');
+        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
+        if ($replies > $perPage) {
+            $page = ceil($replies / $perPage);
+        }
+        $this->set('page',$page);
+        return $page;
+    }
+
+    /**
+     * Get the URL of this post
+     *
+     * @param string $view
+     * @return string
+     */
+    public function getUrl($view = 'thread/') {
+        $url = $this->xpdo->discuss->url.$view.'?thread='.$this->get('thread');
+        $page = $this->getThreadPage();
+        if ($page != 1) {
+            $url .= '&page='.$page;
+        }
+        $url .= '#dis-post-'.$this->get('id');
+        $this->set('url',$url);
+        
+        return $url;
     }
 }
