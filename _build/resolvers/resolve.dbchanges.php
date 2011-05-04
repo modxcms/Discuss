@@ -25,6 +25,9 @@ if ($object->xpdo) {
 
             $modx->query("ALTER TABLE ".$modx->getTableName('disCategory')." ADD COLUMN `default_moderators` TEXT AFTER `rank`");
             $modx->query("ALTER TABLE ".$modx->getTableName('disCategory')." ADD COLUMN `default_usergroups` TEXT AFTER `default_moderators`");
+
+            $modx->query("ALTER TABLE ".$modx->getTableName('disPostAttachment')." ADD COLUMN `integrated_id` INT(10) NOT NULL DEFAULT '0' AFTER `downloads`");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disPostAttachment')." ADD COLUMN `integrated_data` TEXT AFTER `integrated_id`");
             break;
     }
 }

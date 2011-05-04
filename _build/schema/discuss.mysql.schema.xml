@@ -191,6 +191,8 @@
         <field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
         <field key="filesize" dbtype="int" precision="10" phptype="int" null="false" default="0" />
         <field key="downloads" dbtype="int" precision="10" phptype="int" null="false" default="0" />
+        <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <field key="integrated_data" dbtype="text" phptype="string" null="true" />
         
         <aggregate alias="Post" class="disPost" local="post" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />

@@ -13,6 +13,8 @@ $xpdo_meta_map['disPostAttachment']= array (
     'createdon' => NULL,
     'filesize' => 0,
     'downloads' => 0,
+    'integrated_id' => 0,
+    'integrated_data' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -65,6 +67,21 @@ $xpdo_meta_map['disPostAttachment']= array (
       'phptype' => 'int',
       'null' => false,
       'default' => 0,
+    ),
+    'integrated_id' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
+    'integrated_data' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => true,
     ),
   ),
   'aggregates' => 

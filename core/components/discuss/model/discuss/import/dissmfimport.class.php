@@ -43,7 +43,7 @@ class DisSmfImport {
         }
     }
 
-    protected function log($msg) {
+    public function log($msg) {
         $this->modx->log(modX::LOG_LEVEL_INFO,$msg); flush();
     }
 
@@ -108,7 +108,7 @@ class DisSmfImport {
         }
     }
 
-    protected function getFullTableName($table) {
+    public function getFullTableName($table) {
         return '`'.$this->tablePrefix.$table.'`';
     }
 
@@ -531,6 +531,17 @@ class DisSmfImport {
                 'filename' => $arow['filename'],
                 'filesize' => $arow['size'],
                 'downloads' => $arow['downloads'],
+                'integrated_id' => $arow['ID_ATTACH'],
+                'integrated_data' => $this->modx->toJSON(array(
+                    'filename' => $arow['filename'],
+                    'file_hash' => $arow['file_hash'],
+                    'width' => $arow['width'],
+                    'height' => $arow['height'],
+                    'attachmentType' => $arow['attachmentType'],
+                    'ID_MEMBER' => $arow['ID_MEMBER'],
+                    'ID_MESSAGE' => $arow['ID_MESSAGE'],
+                    'ID_THUMB' => $arow['ID_THUMB'],
+                )),
             ));
             if ($this->live) {
                 $attachment->save();
