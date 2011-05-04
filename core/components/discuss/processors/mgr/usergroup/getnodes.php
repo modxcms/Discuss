@@ -45,6 +45,8 @@ if (!empty($scriptProperties['id'])) {
             'text' => $user->get('username'),
             'id' => 'n_user_'.$user->get('id'),
             'leaf' => 1,
+            'user' => $user->get('id'),
+            'usergroup' => $scriptProperties['id'],
             'type' => 'user',
             'cls' => 'icon-user',
         );

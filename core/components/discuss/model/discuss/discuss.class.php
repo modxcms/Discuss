@@ -388,6 +388,8 @@ class Discuss {
      * TODO: chunk/tpl-ize this
      *
      * @access public
+     * @param array $btns
+     * @param string $cls
      * @return string The HTML for the action buttons
      */
     public function buildActionButtons($btns,$cls) {
