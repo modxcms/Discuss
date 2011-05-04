@@ -14,6 +14,10 @@
     <th>[[%discuss.posts]]</th>
     <td>[[+posts]]</td>
 </tr>
+<tr>
+    <th>[[%discuss.groups]]:</th>
+    <td>[[+groups]]</td>
+</tr>
 [[+ip:notempty=`<tr>
     <th>[[%discuss.ip? &namespace=`discuss` &topic=`web`]]:</th>
     <td>[[+ip]]</td>

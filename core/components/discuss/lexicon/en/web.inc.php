@@ -20,6 +20,7 @@ $_lang['discuss.downloaded_times'] = 'Downloaded [[+num]] times.';
 $_lang['discuss.email'] = 'Email';
 $_lang['discuss.email_author'] = 'Email Author';
 $_lang['discuss.excerpt'] = 'Excerpt';
+$_lang['discuss.groups'] = 'Groups';
 $_lang['discuss.home'] = 'Home';
 $_lang['discuss.ip'] = 'IP';
 $_lang['discuss.last_online'] = 'Last Online';
