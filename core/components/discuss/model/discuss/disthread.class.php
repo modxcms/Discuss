@@ -96,7 +96,7 @@ class disThread extends xPDOSimpleObject {
         $c->innerJoin('disPost','FirstPost');
         $c->innerJoin('disPost','LastPost');
         $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
-        $c->innerJoin('disUser','FirstAuthor');
+        $c->innerJoin('disUser','LastAuthor');
         $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
         $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
         $groups = $modx->discuss->user->getUserGroups();
@@ -157,7 +157,7 @@ class disThread extends xPDOSimpleObject {
             'Board.name AS board_name',
             'FirstPost.title AS title',
             'FirstPost.thread AS thread',
-            'FirstAuthor.username AS author_username',
+            'LastAuthor.username AS author_username',
 
             'LastPost.id AS post_id',
             'LastPost.createdon AS createdon',
