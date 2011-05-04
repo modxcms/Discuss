@@ -46,8 +46,8 @@
     </div>`]]
     <br class="clear" />
    
-    <label class="dis-cb"><input type="checkbox" name="locked" value="1" [[!+fi.locked:FormItIsChecked=`1`]] />[[%discuss.thread_lock? &namespace=`discuss` &topic=`web`]]</label>
-    <label class="dis-cb"><input type="checkbox" name="sticky" value="1" [[!+fi.sticky:FormItIsChecked=`1`]] />[[%discuss.thread_stick]]</label>
+    [[+locked_cb]]
+    [[+sticky_cb]]
 
     <br class="clear" />
     <div class="dis-form-buttons">
