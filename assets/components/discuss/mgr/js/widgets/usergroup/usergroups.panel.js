@@ -42,20 +42,32 @@ Dis.tree.UserGroups = function(config) {
 };
 Ext.extend(Dis.tree.UserGroups,MODx.tree.UserGroup,{
     getMenu: function() {
+        var n = this.cm.activeNode.attributes;
         var m = [];
-        m.push({
-            text: _('discuss.usergroup_add')
-            ,handler: this.createUserGroup
-        });
-        m.push({
-            text: _('discuss.usergroup_update')
-            ,handler: this.updateUserGroup
-        });
-        m.push('-');
-        m.push({
-            text: _('discuss.usergroup_remove')
-            ,handler: this.removeUserGroup
-        });
+        switch (n.type) {
+            case 'usergroup':
+                m.push({
+                    text: _('discuss.usergroup_add')
+                    ,handler: this.createUserGroup
+                });
+                m.push({
+                    text: _('discuss.usergroup_update')
+                    ,handler: this.updateUserGroup
+                });
+                m.push('-');
+                m.push({
+                    text: _('discuss.usergroup_remove')
+                    ,handler: this.removeUserGroup
+                });
+                break;
+            case 'user':
+                m.push({
+                    text: _('discuss.usergroup_user_remove')
+                    ,handler: this.removeUserFromGroup
+                });
+                break;
+
+        }
         return m;
     }
     
@@ -92,11 +104,28 @@ Ext.extend(Dis.tree.UserGroups,MODx.tree.UserGroup,{
         
         MODx.msg.confirm({
             title: _('warning')
-            ,text: _('user_group_remove_confirm')
+            ,text: _('discuss.usergroup_remove_confirm')
             ,url: this.config.url
             ,params: {
                 action: 'mgr/usergroup/remove'
                 ,id: id
+            }
+            ,listeners: {
+                'success': {fn:this.refresh,scope:this}
+            }
+        });
+    }
+
+    ,removeUserFromGroup: function(btn,e) {
+        var n = this.cm.activeNode.attributes;
+        MODx.msg.confirm({
+            title: _('warning')
+            ,text: _('discuss.usergroup_user_remove_confirm')
+            ,url: this.config.url
+            ,params: {
+                action: 'mgr/usergroup/user/remove'
+                ,user: n.user
+                ,usergroup: n.usergroup
             }
             ,listeners: {
                 'success': {fn:this.refresh,scope:this}

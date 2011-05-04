@@ -76,6 +76,9 @@ if ($modx->hasPermission('discuss.track_ip')) {
     $placeholders['ip'] = '';
 }
 
+$user->getOne('User');
+$placeholders['groups'] = implode(', ',$user->User->getUserGroupNames());
+
 /* do output */
 $placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
 $placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');

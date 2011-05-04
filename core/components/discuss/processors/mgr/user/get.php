@@ -6,11 +6,11 @@
 /* get user */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.user_err_ns'));
 $c = $modx->newQuery('disUser');
+$c->innerJoin('modUser','User');
+$c->select($modx->getSelectColumns('disUser','disUser'));
 $c->select(array(
-    'disUser.*',
     'User.username',
 ));
-$c->innerJoin('modUser','User');
 $c->where(array(
     'id' => $scriptProperties['id'],
 ));

@@ -64,6 +64,7 @@ $post->set('parent',$post->get('id'));
 $post->set('board',0);
 $post->set('createdon',$discuss->now());
 $post->set('ip',$discuss->getIp());
+$post->set('private',true);
 
 /* fire before post save event */
 $rs = $modx->invokeEvent('OnDiscussBeforeMessageSave',array(

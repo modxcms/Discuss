@@ -79,13 +79,6 @@ class disPost extends xPDOSimpleObject {
             }
             $this->save();
 
-            /* up author post count */
-            $author = $this->getOne('Author');
-            if ($author && !defined('DISCUSS_IMPORT_MODE')) {
-                $author->set('posts',($author->get('posts')+1));
-                $author->save();
-            }
-
             /* adjust board total replies/posts, and last post */
             $board = $this->getOne('Board');
             if ($board  && !defined('DISCUSS_IMPORT_MODE')) {
@@ -99,27 +92,11 @@ class disPost extends xPDOSimpleObject {
                 $board->save();
             }
 
-            /* adjust forum activity */
-            if (!defined('DISCUSS_IMPORT_MODE')) {
-                $now = date('Y-m-d');
-                $activity = $this->xpdo->getObject('disForumActivity',array(
-                    'day' => $now,
-                ));
-                if (!$activity) {
-                    $activity = $this->xpdo->newObject('disForumActivity');
-                    $activity->set('day',$now);
-                }
-                if ($this->get('parent') != 0) {
-                    $activity->set('replies',$activity->get('replies')+1);
-                } else {
-                    $activity->set('topics',$activity->get('topics')+1);
-                }
-                $activity->save();
-            }
+            $thread = $this->getOne('Thread');
+            $privatePost = $this->get('private');
 
             /* set thread, update thread  */
             if (!defined('DISCUSS_IMPORT_MODE')) {
-                $thread = $this->getOne('Thread');
                 if (!$thread) {
                     $thread = $this->xpdo->newObject('disThread');
                     $thread->fromArray(array(
@@ -141,6 +118,34 @@ class disPost extends xPDOSimpleObject {
 
                 $this->set('thread',$thread->get('id'));
                 $this->save();
+            }
+
+            /* adjust forum activity */
+            if (!defined('DISCUSS_IMPORT_MODE') && $thread && !$thread->get('private') && empty($privatePost)) {
+                $now = date('Y-m-d');
+                $activity = $this->xpdo->getObject('disForumActivity',array(
+                    'day' => $now,
+                ));
+                if (!$activity) {
+                    $activity = $this->xpdo->newObject('disForumActivity');
+                    $activity->set('day',$now);
+                }
+                if ($this->get('parent') != 0) {
+                    $activity->set('replies',$activity->get('replies')+1);
+                } else {
+                    $activity->set('topics',$activity->get('topics')+1);
+                }
+                $activity->save();
+            }
+
+
+            /* up author post count */
+            if ($thread && !$thread->get('private') && empty($privatePost)) {
+                $author = $this->getOne('Author');
+                if ($author && !defined('DISCUSS_IMPORT_MODE')) {
+                    $author->set('posts',($author->get('posts')+1));
+                    $author->save();
+                }
             }
 
             /* clear cache */

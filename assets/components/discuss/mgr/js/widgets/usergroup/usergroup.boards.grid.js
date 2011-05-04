@@ -15,13 +15,19 @@ Dis.grid.UserGroupBoards = function(config) {
             ,user: config.user
         }
         ,action: 'mgr/usergroup/board/getlist'
-        ,fields: ['id','name','access','category']
+        ,fields: ['id','name','access','category','category_name']
         ,data: []
         ,autoHeight: true
+        ,grouping: false
+        ,groupBy: 'category_name'
         ,plugins: tt
         ,columns: [{
             header: _('name')
             ,dataIndex: 'name'
+            ,width: 250
+        },{
+            header: _('category')
+            ,dataIndex: 'category_name'
             ,width: 250
         },tt]
     });
