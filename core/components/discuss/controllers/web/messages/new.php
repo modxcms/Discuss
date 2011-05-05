@@ -24,7 +24,13 @@ $placeholders['trail'] = $trail;
 
 /* setup defaults */
 if (empty($_POST)) {
-    $placeholders['participants_usernames'] = $modx->user->get('username');
+    $participants = array($modx->user->get('username'));
+    if (!empty($scriptProperties['user'])) {
+        $ps = explode(',',$scriptProperties['user']);
+        $participants = array_merge($ps,$participants);
+    }
+    asort($participants);
+    $placeholders['participants_usernames'] = implode(',',array_unique($participants));
 }
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 

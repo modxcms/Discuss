@@ -19,4 +19,11 @@
         <li><a href="[[~[[*id]]]]user/ignoreboards?user=[[+id]]">[[%discuss.ignore_preferences]]</a></li>
     </ul>
     `]]
+
+    [[+modx.user.id:notempty=`
+    <h4>[[%discuss.actions]]</h4>
+    <ul>
+        <li><a href="[[~[[*id]]]]messages/new?user=[[+username]]">[[%discuss.send_pm]]</a></li>
+    </ul>
+    `]]
 </div>

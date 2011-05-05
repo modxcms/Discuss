@@ -3,6 +3,7 @@
  * @package discuss
  * @subpackage lexicon
  */
+$_lang['discuss.actions'] = 'Actions';
 $_lang['discuss.age'] = 'Age';
 $_lang['discuss.author'] = 'Author';
 $_lang['discuss.board_is_locked'] = ' (Locked)';
@@ -81,6 +82,7 @@ $_lang['discuss.save_changes'] = 'Save Changes';
 $_lang['discuss.search'] = 'Search';
 $_lang['discuss.search_forums'] = 'Search Forums';
 $_lang['discuss.search_no_results'] = 'No results found.';
+$_lang['discuss.send_pm'] = 'Send a Private Message';
 $_lang['discuss.show_email'] = 'Show Email to Public';
 $_lang['discuss.stats'] = 'Stats';
 $_lang['discuss.stats_latest_post'] = 'Latest Post: [[+post]] by [[+by]]';
