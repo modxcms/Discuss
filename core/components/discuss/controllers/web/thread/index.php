@@ -59,10 +59,11 @@ unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 
 /* get board breadcrumb trail */
 $thread->buildBreadcrumbs();
-unset($trail,$url,$c,$ancestors);
 
 /* up view count for thread */
-$thread->view();
+if (!empty($scriptProperties['print'])) {
+    $thread->view();
+}
 
 $placeholders = $thread->toArray();
 $placeholders['views'] = number_format($placeholders['views']);
@@ -72,14 +73,14 @@ $placeholders['replies'] = number_format($placeholders['replies']);
 $thread->buildCssClass();
 
 /* get viewing users */
-$placeholders['readers'] = $thread->getViewing();
+$placeholders['readers'] = empty($scriptProperties['print']) ? $thread->getViewing() : '';
 
 /* get moderator status */
 $isModerator = $thread->isModerator($discuss->user->get('id'));
         
 /* action buttons */
 $actionButtons = array();
-if ($discuss->isLoggedIn) {
+if ($discuss->isLoggedIn && empty($scriptProperties['print'])) {
     $board = $thread->getOne('Board');
     if ($board->canPost() && $thread->canReply()) {
         $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
@@ -97,16 +98,16 @@ if ($discuss->isLoggedIn) {
      *   $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
      * }
      */
-    // if ($modx->hasPermission('discuss.thread_print')) {
-    //   $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&print=1', 'text' => $modx->lexicon('discuss.print'));
-    // }
+     if ($modx->hasPermission('discuss.thread_print')) {
+       $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&print=1', 'text' => $modx->lexicon('discuss.print'));
+     }
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
 
 /* thread action buttons */
 $actionButtons = array();
-if ($discuss->user->isLoggedIn && $isModerator) {
+if ($discuss->user->isLoggedIn && $isModerator && empty($scriptProperties['print'])) {
     /** TODO: Move thread - 1.1
      * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
      */
@@ -138,15 +139,21 @@ $placeholders['discuss.error_panel'] = $discuss->getChunk('Error');
 $placeholders['discuss.thread'] = $thread->get('title');
 
 /* get pagination */
-$discuss->hooks->load('pagination/build',array(
-    'count' => $posts['total'],
-    'id' => $thread->get('id'),
-    'view' => 'thread/',
-    'limit' => $posts['limit'],
-));
+if (empty($scriptProperties['print'])) {
+    $discuss->hooks->load('pagination/build',array(
+        'count' => $posts['total'],
+        'id' => $thread->get('id'),
+        'view' => 'thread/',
+        'limit' => $posts['limit'],
+    ));
+} else {
+    $placeholders['pagination'] = '';
+}
 
 /* mark as read */
-$thread->read($discuss->user->get('id'));
+if (empty($scriptProperties['print'])) {
+    $thread->read($discuss->user->get('id'));
+}
 
 $discuss->setPageTitle($thread->get('title'));
 return $placeholders;

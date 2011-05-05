@@ -621,7 +621,9 @@ class disThread extends xPDOSimpleObject {
         $response['total'] = $this->xpdo->getCount('disPost',$cc);
         if ($flat) {
             $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('createdon')),'ASC');
-            $c->limit($limit, $start);
+            if (empty($_REQUEST['print'])) {
+                $c->limit($limit, $start);
+            }
         } else {
             $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
         }

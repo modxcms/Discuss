@@ -21,6 +21,13 @@ $manifest = array(
             'inline' => 'DIS.url = "'.$this->discuss->url.'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";',
         ),
     ),
+    'print' => array(
+        'css' => array(
+            'header' => array(
+                'print.css',
+            ),
+        ),
+    ),
     'home' => array(
         'js' => array(
             'header' => array(
