@@ -45,6 +45,7 @@ class disSearch {
                 ));
             }
         }
+        if (!empty($conditions['board'])) $c->where(array('disBoard.id' => $conditions['board']));
         $response['total'] = $this->modx->getCount('disPost',$c);
         $c->select($this->modx->getSelectColumns('disPost','disPost'));
         $c->select(array(
