@@ -480,6 +480,23 @@ class disThread extends xPDOSimpleObject {
     }
 
     /**
+     * Get an array of disUser objects who are Moderators of this thread's board
+     * @return array
+     */
+    public function getModerators() {
+        $gms = $this->xpdo->getOption('discuss.global_moderators',null,'');
+        $gms = explode(',',$gms);
+
+        $c = $this->xpdo->newQuery('disUser');
+        $c->leftJoin('disModerator','Moderator','Moderator.user = disUser.id AND Moderator.board = '.$this->get('board'));
+        $c->where(array(
+            'disUser.username:IN' => $gms,
+            'OR:Moderator.id:!=' => null,
+        ));
+        return $this->xpdo->getCollection('disUser',$c);
+    }
+
+    /**
      * Build the breadcrumb trail for this thread
      *
      * @param array $defaultTrail

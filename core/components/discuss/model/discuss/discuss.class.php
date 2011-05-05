@@ -419,12 +419,12 @@ class Discuss {
 
         $this->modx->getService('mail', 'mail.modPHPMailer');
         $this->modx->mail->set(modMail::MAIL_BODY, $msg);
-        $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
+        $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('discuss.admin_email'));
         $this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
-        $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
+        $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('discuss.admin_email'));
         $this->modx->mail->set(modMail::MAIL_SUBJECT, $subject);
         $this->modx->mail->address('to', $email, $name);
-        $this->modx->mail->address('reply-to', $this->modx->getOption('emailsender'));
+        $this->modx->mail->address('reply-to', $this->modx->getOption('discuss.admin_email'));
         $this->modx->mail->setHTML(true);
         $sent = $this->modx->mail->send();
         $this->modx->mail->reset();

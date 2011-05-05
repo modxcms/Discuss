@@ -26,7 +26,7 @@ if (!empty($scriptProperties['report-thread'])) {
     $tpl = $modx->getOption('tpl',$scriptProperties,$modx->getOption('discuss.email_reported_post_chunk',null,'emails/disReportedEmail'));
 
     /* build post url */
-    $url = $modx->makeUrl($modx->resource->get('id'),'','','full').'thread/?thread='.$post->get('thread').'#dis-post-'.$post->get('id');
+    $url = $modx->getOption('site_url',null,MODX_SITE_URL).$post->getUrl();
 
     /* setup email properties */
     $emailProperties = array_merge($scriptProperties,$post->toArray());
@@ -41,11 +41,13 @@ if (!empty($scriptProperties['report-thread'])) {
     $emailProperties['message'] = nl2br(strip_tags($scriptProperties['message']));
 
     /* send reported email */
-    $sent = $discuss->sendEmail($discuss->user->get('email'),$discuss->user->get('username'),$subject,$emailProperties);
+    $moderators = $thread->getModerators();
+    foreach ($moderators as $moderator) {
+        $sent = $discuss->sendEmail($moderator->get('email'),$moderator->get('username'),$subject,$emailProperties);
+    }
     unset($emailProperties);
 
     /* redirect to thread */
-    $url = $discuss->url.'thread?thread='.$thread->get('id').'#dis-post-'.$post->get('id');
     $modx->sendRedirect($url);
 }
 
