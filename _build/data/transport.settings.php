@@ -413,6 +413,151 @@ $settings['discuss.sso_mode']->fromArray(array(
     'area' => 'SSO',
 ),'',true,true);
 
+/* SOLR Settings */
+$settings['discuss.solr.hostname']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.hostname']->fromArray(array(
+    'key' => 'discuss.solr.hostname',
+    'value' => '127.0.0.1',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.port']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.port']->fromArray(array(
+    'key' => 'discuss.solr.port',
+    'value' => '8080',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.path']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.path']->fromArray(array(
+    'key' => 'discuss.solr.path',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.username']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.username']->fromArray(array(
+    'key' => 'discuss.solr.username',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.password']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.password']->fromArray(array(
+    'key' => 'discuss.solr.password',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.timeout']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.timeout']->fromArray(array(
+    'key' => 'discuss.solr.',
+    'value' => 30,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.ssl']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.ssl']->fromArray(array(
+    'key' => 'discuss.solr.ssl',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.ssl_cert']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.ssl_cert']->fromArray(array(
+    'key' => 'discuss.solr.ssl_cert',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.ssl_key']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.ssl_key']->fromArray(array(
+    'key' => 'discuss.solr.ssl_key',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.ssl_keypassword']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.ssl_keypassword']->fromArray(array(
+    'key' => 'discuss.solr.ssl_keypassword',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.ssl_cainfo']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.ssl_cainfo']->fromArray(array(
+    'key' => 'discuss.solr.ssl_cainfo',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.ssl_capath']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.ssl_capath']->fromArray(array(
+    'key' => 'discuss.solr.ssl_capath',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.proxy_host']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.proxy_host']->fromArray(array(
+    'key' => 'discuss.solr.proxy_host',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.proxy_port']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.proxy_port']->fromArray(array(
+    'key' => 'discuss.solr.proxy_port',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.proxy_username']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.proxy_username']->fromArray(array(
+    'key' => 'discuss.solr.proxy_username',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.solr.proxy_password']= $modx->newObject('modSystemSetting');
+$settings['discuss.solr.proxy_password']->fromArray(array(
+    'key' => 'discuss.solr.proxy_password',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
 /*
 $settings['discuss.']= $modx->newObject('modSystemSetting');
 $settings['discuss.']->fromArray(array(
