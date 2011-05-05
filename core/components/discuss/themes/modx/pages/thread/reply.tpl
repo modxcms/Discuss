@@ -42,7 +42,7 @@
     
     <div id="dis-attachments"></div>
     <br class="clear" />
-    
+
     [[+locked_cb]]
     [[+sticky_cb]]
     <label class="dis-cb"><input type="checkbox" name="notify" value="1" />[[%discuss.notify_of_replies]]</label>

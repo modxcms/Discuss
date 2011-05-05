@@ -45,7 +45,7 @@
         <ul>[[+attachments]]</ul>
     </div>`]]
     <br class="clear" />
-   
+
     [[+locked_cb]]
     [[+sticky_cb]]
 

@@ -40,11 +40,12 @@
     
     <div id="dis-attachments"></div>
     <br class="clear" />
-            
+
+
     [[+locked_cb]]
     [[+sticky_cb]]
-    <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]</label>
-    <br class="clear" />
+
+    <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]</label><br class="clear" />
 
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-post-new" value="[[%discuss.thread_post_new]]" />
