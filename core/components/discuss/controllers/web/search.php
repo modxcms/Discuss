@@ -23,57 +23,62 @@ $end = $start+$limit;
 $placeholders = array();
 if (!empty($scriptProperties['s'])) {
     $string = urldecode(str_replace(array(';',':'),'',strip_tags($scriptProperties['s'])));
-
-    $searchClass = $modx->getOption('discuss.search_class',null,'discuss.search.disSearch');
-    $searchClassPath = $modx->getOption('discuss.search_class_path',null,$discuss->config['modelPath']);
-    if ($className = $this->modx->loadClass($searchClass,$searchClassPath,true,true)) {
-        $discuss->search = new $className($discuss);
-    } else {
-        $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$searchClass.' from '.$searchClassPath);
-        return array();
-    }
-    $searchResponse = $discuss->search->run($string,$limit,$start);
-
-    $placeholders['results'] = array();
-    $maxScore = 0;
-    if (!empty($searchResponse['results'])) {
-        foreach ($searchResponse['results'] as $postArray) {
-            if ($postArray['score'] > $maxScore) {
-                $maxScore = $postArray['score'];
-            }
-
-            $postArray['relevancy'] = @number_format(($postArray['score']/$maxScore)*100,0);
-            if ($postArray['parent']) {
-                $postArray['cls'] = 'dis-search-result dis-result-'.$postArray['thread'];
-            } else {
-                $postArray['toggle'] = $toggle;
-                $postArray['cls'] = 'dis-search-parent-result dis-parent-result-'.$postArray['thread'];
-            }
-            $postArray['content'] = strip_tags($postArray['content']);
-            $position = intval(strpos($postArray['content'],$string));
-            $length = strlen($postArray['content']);
-            if ($position > 0 && $length > $position) {
-                $postArray['content'] = ($position != 0 ? '...' : '').substr($postArray['content'],$position,$position+100).'...';
-            } else {
-                $postArray['content'] = substr($postArray['content'],0,100).($length > 100 ? '...' : '');
-            }
-            $placeholders['results'][] = $discuss->getChunk('disSearchResult',$postArray);
-        }
-        $placeholders['results'] = implode("\n",$placeholders['results']);
-    } else {
-        $placeholders['results'] = $modx->lexicon('discuss.search_no_results');
-    }
     $placeholders['search'] = $string;
-    $placeholders['total'] = number_format($searchResponse['total']);
     $placeholders['start'] = number_format($start+1);
-    $placeholders['end'] = number_format($end > $searchResponse['total'] ? $searchResponse['total'] : $end);
 
-    /* get pagination */
-    $discuss->hooks->load('pagination/build',array(
-        'count' => $searchResponse['total'],
-        'view' => 'search',
-        'limit' => $limit,
-    ));
+    if ($discuss->loadSearch()) {
+        $searchResponse = $discuss->search->run($string,$limit,$start);
+
+        $placeholders['results'] = array();
+        $maxScore = 0;
+        if (!empty($searchResponse['results'])) {
+            foreach ($searchResponse['results'] as $postArray) {
+                if (isset($postArray['score'])) {
+                    if ($postArray['score'] > $maxScore) {
+                        $maxScore = $postArray['score'];
+                    }
+
+                    $postArray['relevancy'] = @number_format(($postArray['score']/$maxScore)*100,0);
+                }
+                
+                if ($postArray['parent']) {
+                    $postArray['cls'] = 'dis-search-result dis-result-'.$postArray['thread'];
+                } else {
+                    $postArray['toggle'] = $toggle;
+                    $postArray['cls'] = 'dis-search-parent-result dis-parent-result-'.$postArray['thread'];
+                }
+                $postArray['message'] = strip_tags($postArray['message']);
+                $position = intval(strpos($postArray['message'],$string));
+                $length = strlen($postArray['message']);
+                if ($position > 0 && $length > $position) {
+                    $postArray['message'] = ($position != 0 ? '...' : '').substr($postArray['message'],$position,$position+100).'...';
+                } else {
+                    $postArray['message'] = substr($postArray['message'],0,100).($length > 100 ? '...' : '');
+                }
+                if (empty($postArray['url'])) {
+                    $postArray['url'] = $discuss->url.'thread/?thread='.$postArray['thread'].'#dis-post-'.$postArray['id'];
+                }
+
+                $placeholders['results'][] = $discuss->getChunk('disSearchResult',$postArray);
+            }
+            $placeholders['results'] = implode("\n",$placeholders['results']);
+        } else {
+            $placeholders['results'] = $modx->lexicon('discuss.search_no_results');
+        }
+        $placeholders['total'] = number_format($searchResponse['total']);
+        $placeholders['end'] = number_format($end > $searchResponse['total'] ? $searchResponse['total'] : $end);
+
+        /* get pagination */
+        $discuss->hooks->load('pagination/build',array(
+            'count' => $searchResponse['total'],
+            'view' => 'search',
+            'limit' => $limit,
+        ));
+    } else {
+        $placeholders['pagination'] = '';
+        $placeholders['total'] = 0;
+        $placeholders['results'] = 'Could not load search class.';
+    }
 }
 
 /* get board breadcrumb trail */

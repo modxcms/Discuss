@@ -17,6 +17,8 @@ class Discuss {
     public $url = '';
     public $user;
     public $isLoggedIn = false;
+    public $search;
+    public $hooks;
 
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
@@ -65,6 +67,7 @@ class Discuss {
      *
      * @access public
      * @param string $ctx The context to load. Defaults to web.
+     * @return void
      */
     public function initialize($ctx = 'web') {
         $this->loadHooks();
@@ -114,6 +117,17 @@ class Discuss {
         }
         return $this->request;
         
+    }
+
+    public function loadSearch() {
+        $searchClass = $this->modx->getOption('discuss.search_class',null,'disSearch');
+        $searchClassPath = $this->modx->getOption('discuss.search_class_path',null,$this->config['modelPath'].'discuss/search/');
+        if ($className = $this->modx->loadClass($searchClass,$searchClassPath,true,true)) {
+            $this->search = new $className($this);
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$searchClass.' from '.$searchClassPath);
+        }
+        return $this->search;
     }
 
 
