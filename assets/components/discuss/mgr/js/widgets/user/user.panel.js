@@ -84,6 +84,15 @@ Dis.panel.User = function(config) {
                     ,width: 250
                     ,allowBlank: true
                 },{
+                    xtype: 'modx-combo-usergroup'
+                    ,fieldLabel: _('discuss.primary_group')
+                    ,description: _('discuss.primary_group_desc')
+                    ,name: 'primary_group'
+                    ,hiddenName: 'primary_group'
+                    ,width: 250
+                    ,allowBlank: true
+
+                },{
                     xtype: 'checkbox'
                     ,fieldLabel: _('discuss.user_show_email')
                     ,name: 'show_email'

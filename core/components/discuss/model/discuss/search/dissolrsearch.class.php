@@ -28,11 +28,14 @@ class disSolrSearch extends disSearch {
             'proxy_password' => $this->modx->getOption('discuss.solr.proxy_password',null,''),
         );
 
-        $this->client = new SolrClient($this->_connectionOptions);
+        try {
+            $this->client = new SolrClient($this->_connectionOptions);
+        } catch (Exception $e) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR,'Error connecting to Solr server: '.$e->getMessage());
+        }
     }
 
-    public function run($string,$limit = 10,$start = 0) {
-
+    public function run($string,$limit = 10,$start = 0,array $conditions = array()) {
         $query = new SolrQuery();
         $query->setQuery($string);
         $query->setStart($start);
@@ -42,6 +45,8 @@ class disSolrSearch extends disSearch {
               ->addField('message')
               ->addField('thread')
               ->addField('board')
+              ->addField('category')
+              ->addField('category_name')
               ->addField('author')
               ->addField('username')
               ->addField('createdon')
@@ -49,8 +54,9 @@ class disSolrSearch extends disSearch {
               ->addField('url')
               ->addField('score');
 
-        $queryResponse = $this->client->query($query);
-        $responseObject = $queryResponse->getResponse();
+        foreach ($conditions as $k => $v) {
+            $query->addFilterQuery($k.':'.$v);
+        }
 
         $response = array(
             'total' => 0,
@@ -60,26 +66,29 @@ class disSolrSearch extends disSearch {
             'query_time' => 0,
             'results' => array(),
         );
-        if ($responseObject) {
-            $response['total'] = $responseObject->response->numFound;
-            $response['query_time'] = $responseObject->responseHeader->QTime;
-            $response['status'] = $responseObject->responseHeader->status;
-            $response['results'] = array();
-            if (!empty($responseObject->response->docs)) {
-                foreach ($responseObject->response->docs as $doc) {
-                    $d = array();
-                    $pns = $doc->getPropertyNames();
-                    foreach ($pns as $k) {
+        try {
+            $queryResponse = $this->client->query($query);
+            $responseObject = $queryResponse->getResponse();
+            if ($responseObject) {
+                $response['total'] = $responseObject->response->numFound;
+                $response['query_time'] = $responseObject->responseHeader->QTime;
+                $response['status'] = $responseObject->responseHeader->status;
+                $response['results'] = array();
+                if (!empty($responseObject->response->docs)) {
+                    foreach ($responseObject->response->docs as $doc) {
+                        $d = array();
                         foreach ($doc as $k => $v) {
                             if ($k == 'createdon') {
                                 $v = strftime($this->discuss->dateFormat,strtotime($v));
                             }
                             $d[$k] = $v;
                         }
+                        $response['results'][] = $d;
                     }
-                    $response['results'][] = $d;
                 }
             }
+        } catch (Exception $e) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR,'Error running query on Solr server: '.$e->getMessage());
         }
         return $response;
     }

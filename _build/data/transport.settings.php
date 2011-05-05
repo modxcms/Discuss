@@ -420,7 +420,7 @@ $settings['discuss.search_class']->fromArray(array(
     'value' => 'disSearch',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
-    'area' => 'Solr',
+    'area' => 'Search',
 ),'',true,true);
 
 $settings['discuss.search_class_path']= $modx->newObject('modSystemSetting');
@@ -429,7 +429,7 @@ $settings['discuss.search_class_path']->fromArray(array(
     'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
-    'area' => 'Solr',
+    'area' => 'Search',
 ),'',true,true);
 
 

@@ -173,6 +173,11 @@ class disPost extends xPDOSimpleObject {
                 $this->getOne('Board');
                 if ($this->Board) {
                     $postArray['board_name'] = $this->Board->get('name');
+                    $postArray['category'] = $this->Board->get('category');
+                    $this->Board->getOne('Category');
+                    if ($this->Board->Category) {
+                        $postArray['category_name'] = $this->Board->Category->get('name');
+                    }
                 }
             }
             $postArray['message'] = $this->getContent();

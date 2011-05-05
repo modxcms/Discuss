@@ -27,7 +27,20 @@ if (!empty($scriptProperties['s'])) {
     $placeholders['start'] = number_format($start+1);
 
     if ($discuss->loadSearch()) {
-        $searchResponse = $discuss->search->run($string,$limit,$start);
+        $conditions = array();
+        if (!empty($scriptProperties['board'])) { $conditions['board'] = $scriptProperties['board']; }
+        if (!empty($scriptProperties['category'])) { $conditions['category'] = $scriptProperties['category']; }
+        if (!empty($scriptProperties['user'])) {
+            if (intval($scriptProperties['user']) <= 0) {
+                $user = $modx->getObject('disUser',array('username' => $scriptProperties['user']));
+                if ($user) {
+                    $conditions['author'] = $user->get('id');
+                }
+            } else {
+                $conditions['author'] = $scriptProperties['user'];
+            }
+        }
+        $searchResponse = $discuss->search->run($string,$limit,$start,$conditions);
 
         $placeholders['results'] = array();
         $maxScore = 0;

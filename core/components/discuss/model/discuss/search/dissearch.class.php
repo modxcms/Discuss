@@ -23,7 +23,7 @@ class disSearch {
         return true;
     }
 
-    public function run($string,$limit = 10,$start = 0) {
+    public function run($string,$limit = 10,$start = 0,array $conditions = array()) {
         $response = array(
             'results' => array(),
             'total' => 0,

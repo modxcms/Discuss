@@ -28,6 +28,8 @@ if ($object->xpdo) {
 
             $modx->query("ALTER TABLE ".$modx->getTableName('disPostAttachment')." ADD COLUMN `integrated_id` INT(10) NOT NULL DEFAULT '0' AFTER `downloads`");
             $modx->query("ALTER TABLE ".$modx->getTableName('disPostAttachment')." ADD COLUMN `integrated_data` TEXT AFTER `integrated_id`");
+
+            $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD COLUMN `primary_group` INT(10) NOT NULL DEFAULT '0' AFTER `show_online`");
             break;
     }
 }

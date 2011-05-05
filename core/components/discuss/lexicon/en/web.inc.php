@@ -80,6 +80,7 @@ $_lang['discuss.report_to_mod'] = 'Report to Moderator';
 $_lang['discuss.report_to_mod_confirm'] = 'Use this function to inform moderators and administrators of this board of spam, abuse or improper posts. If you report a post, your email address must be revealed to the moderators for security reasons. Please enter a message describing the nature of the reported post below.';
 $_lang['discuss.save_changes'] = 'Save Changes';
 $_lang['discuss.search'] = 'Search';
+$_lang['discuss.search_this_board'] = 'Search this Board...';
 $_lang['discuss.search_forums'] = 'Search Forums';
 $_lang['discuss.search_no_results'] = 'No results found.';
 $_lang['discuss.send_pm'] = 'Send a Private Message';
