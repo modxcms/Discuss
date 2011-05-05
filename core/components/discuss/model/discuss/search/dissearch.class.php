@@ -18,10 +18,9 @@ class disSearch {
         $c->innerJoin('disThread','Thread');
         $c->innerJoin('disBoard','Board');
         $c->innerJoin('disUser','Author');
-        $c->innerJoin('disPostClosure','PostClosure','PostClosure.descendant = disPost.id AND PostClosure.ancestor != 0');
         $c->where(array(
             'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE)',
-            'Thread.private' => false,
+            'Thread.private' => 0,
         ));
         if ($this->discuss->isLoggedIn) {
             $ignoreBoards = $this->discuss->user->get('ignore_boards');
@@ -38,6 +37,7 @@ class disSearch {
             'Board.name AS board_name',
             'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE) AS score',
         ));
+        $c->groupby('disPost.thread');
         $c->sortby('score','ASC');
         $c->sortby('disPost.rank','ASC');
         $c->limit($limit,$start);

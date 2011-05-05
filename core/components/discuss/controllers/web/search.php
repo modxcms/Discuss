@@ -49,7 +49,14 @@ if (!empty($scriptProperties['s'])) {
                 $postArray['toggle'] = $toggle;
                 $postArray['cls'] = 'dis-search-parent-result dis-parent-result-'.$postArray['thread'];
             }
-            $postArray['content'] = strip_tags(substr($postArray['content'],0,100));
+            $postArray['content'] = strip_tags($postArray['content']);
+            $position = intval(strpos($postArray['content'],$string));
+            $length = strlen($postArray['content']);
+            if ($position > 0 && $length > $position) {
+                $postArray['content'] = ($position != 0 ? '...' : '').substr($postArray['content'],$position,$position+100).'...';
+            } else {
+                $postArray['content'] = substr($postArray['content'],0,100).($length > 100 ? '...' : '');
+            }
             $placeholders['results'][] = $discuss->getChunk('disSearchResult',$postArray);
         }
         $placeholders['results'] = implode("\n",$placeholders['results']);
