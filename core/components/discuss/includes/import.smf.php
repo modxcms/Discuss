@@ -42,7 +42,6 @@ $totalTime= sprintf("%2.4f s", $totalTime);
 
 $modx->log(modX::LOG_LEVEL_INFO,"\nExecution time: {$totalTime}\n");
 
-exit ();
 @session_write_close();
 die();
 

@@ -31,7 +31,8 @@ class disSolrSearch extends disSearch {
               ->addField('username')
               ->addField('createdon')
               ->addField('board_name')
-              ->addField('url');
+              ->addField('url')
+              ->addField('score');
 
         $queryResponse = $this->client->query($query);
         $responseObject = $queryResponse->getResponse();
