@@ -17,6 +17,8 @@ class Discuss {
     public $url = '';
     public $user;
     public $isLoggedIn = false;
+    public $search;
+    public $hooks;
 
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
@@ -65,6 +67,7 @@ class Discuss {
      *
      * @access public
      * @param string $ctx The context to load. Defaults to web.
+     * @return void
      */
     public function initialize($ctx = 'web') {
         $this->loadHooks();
@@ -114,6 +117,17 @@ class Discuss {
         }
         return $this->request;
         
+    }
+
+    public function loadSearch() {
+        $searchClass = $this->modx->getOption('discuss.search_class',null,'disSearch');
+        $searchClassPath = $this->modx->getOption('discuss.search_class_path',null,$this->config['modelPath'].'discuss/search/');
+        if ($className = $this->modx->loadClass($searchClass,$searchClassPath,true,true)) {
+            $this->search = new $className($this);
+        } else {
+            $this->modx->log(modX::LOG_LEVEL_ERROR,'Could not load '.$searchClass.' from '.$searchClassPath);
+        }
+        return $this->search;
     }
 
 
@@ -419,12 +433,12 @@ class Discuss {
 
         $this->modx->getService('mail', 'mail.modPHPMailer');
         $this->modx->mail->set(modMail::MAIL_BODY, $msg);
-        $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('emailsender'));
+        $this->modx->mail->set(modMail::MAIL_FROM, $this->modx->getOption('discuss.admin_email'));
         $this->modx->mail->set(modMail::MAIL_FROM_NAME, $this->modx->getOption('site_name'));
-        $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('emailsender'));
+        $this->modx->mail->set(modMail::MAIL_SENDER, $this->modx->getOption('discuss.admin_email'));
         $this->modx->mail->set(modMail::MAIL_SUBJECT, $subject);
         $this->modx->mail->address('to', $email, $name);
-        $this->modx->mail->address('reply-to', $this->modx->getOption('emailsender'));
+        $this->modx->mail->address('reply-to', $this->modx->getOption('discuss.admin_email'));
         $this->modx->mail->setHTML(true);
         $sent = $this->modx->mail->send();
         $this->modx->mail->reset();

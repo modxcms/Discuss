@@ -53,7 +53,7 @@ class DisRequest {
     /**
      * Load the appropriate controller file.
      * 
-     * @param $controller The controller to load
+     * @param array $controller The controller to load
      * @return array An array of placeholders
      */
     public function loadController($controller = array()) {
@@ -74,6 +74,10 @@ class DisRequest {
 
     /**
      * Get the current template page
+     *
+     * @param array $controller
+     * @param array $properties
+     * @return string
      */
     public function getPage(array $controller = array(),array $properties = array()) {
         if (empty($controller)) $controller = $this->controller;
@@ -109,9 +113,13 @@ class DisRequest {
      *
      * @access public
      * @param string $output The output to process
+     * @param array $properties
      * @return string The final wrapped output, or blank if not in debug.
      */
     public function output($output = '',array $properties = array()) {
+        if (!empty($_REQUEST['print'])) {
+            return $output;
+        }
         $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview','board.xml'));
         if ($this->modx->getOption('discuss.debug',null,false)) {
             if (!$emptyTpl && $this->debugTimer !== false) {
@@ -137,7 +145,18 @@ class DisRequest {
         if (file_exists($f)) {
             $manifest = require $f;
 
-			if (is_array($manifest) && array_key_exists('global', $manifest)){
+            if (is_array($manifest) && array_key_exists('print', $manifest) && !empty($_REQUEST['print'])) {
+                $print = $manifest['print'];
+
+				/* Load global print CSS */
+				if(array_key_exists('css', $print)){
+					$css = $print['css'];
+					foreach($css['header'] as $val){
+						$this->modx->regClientCSS($this->discuss->config['cssUrl'].$val);
+					}
+				}
+
+            } else if (is_array($manifest) && array_key_exists('global', $manifest)){
 				$global = $manifest['global'];
 
 				/* Load global forum CSS */

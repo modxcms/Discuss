@@ -15,6 +15,7 @@ if (!is_object($thread)) {
 
 $limit = $modx->getOption('limit',$scriptProperties,(int)$modx->getOption('discuss.post_per_page',$scriptProperties, 10));
 $start = intval(isset($_GET['page']) ? ($_GET['page'] - 1) * $limit : 0);
+$tpl = !empty($_REQUEST['print']) ? 'post/disThreadPostPrint' : 'post/disThreadPost';
 
 /* Verify the posts output type - Flat or Threaded */
 $flat = $modx->getOption('flat',$scriptProperties,false);
@@ -154,7 +155,7 @@ foreach ($posts['results'] as $post) {
     $postArray['idx'] = $idx+1;
     
     if ($flat) {
-        $output[] = $discuss->getChunk('post/disThreadPost',$postArray);
+        $output[] = $discuss->getChunk($tpl,$postArray);
     } else {
         $plist[] = $postArray;
     }
@@ -169,7 +170,7 @@ if (empty($flat)) {
     /* parse posts via tree parser */
     $discuss->loadTreeParser();
     if (count($plist) > 0) {
-        $output = $discuss->treeParser->parse($plist,'post/disThreadPost');
+        $output = $discuss->treeParser->parse($plist,$tpl);
     }
 } else {
     $output = implode("\n",$output);

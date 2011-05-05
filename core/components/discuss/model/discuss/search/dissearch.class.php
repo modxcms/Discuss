@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package discuss
+ * @subpackage search
+ */
 class disSearch {
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
@@ -6,6 +10,17 @@ class disSearch {
         $this->config = array_merge($config,array(
 
         ));
+        $this->initialize();
+    }
+
+    public function initialize() {
+        return true;
+    }
+    public function index(array $fields = array()) {
+        return true;
+    }
+    public function removeIndex($id) {
+        return true;
     }
 
     public function run($string,$limit = 10,$start = 0) {
@@ -46,7 +61,7 @@ class disSearch {
         if (!empty($postObjects)) {
             foreach ($postObjects as $post) {
                 $postArray = $post->toArray();
-                $postArray['content'] = $post->getContent();
+                $postArray['message'] = $post->getContent();
                 $response['results'][] = $postArray;
             }
         }

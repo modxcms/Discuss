@@ -73,6 +73,11 @@ foreach ($attachments as $file) {
     }
 }
 
+if (!empty($fields['notify'])) {
+    $thread->addSubscription($discuss->user->get('id'));
+}
+
+
 if (!$post->save()) {
     $hook->addError('title',$modx->lexicon('discuss.post_err_modify'));
     return false;

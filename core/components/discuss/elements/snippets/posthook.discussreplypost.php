@@ -81,7 +81,7 @@ foreach ($attachments as $file) {
 }
 
 if (!empty($fields['notify'])) {
-    $thread->addNotify($discuss->user->get('id'));
+    $thread->addSubscription($discuss->user->get('id'));
 }
 
 $discuss->user->checkForPostGroupAdvance();

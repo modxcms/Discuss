@@ -148,11 +148,41 @@ class disPost extends xPDOSimpleObject {
                     $author->save();
                 }
             }
+        }
+        if ($saved) {
+            $this->index();
 
             /* clear cache */
             $this->clearCache();
         }
         return $saved;
+    }
+
+    public function index() {
+        $indexed = false;
+        if ($this->xpdo->discuss->loadSearch()) {
+            $postArray = $this->toArray();
+            $postArray['url'] = $this->getUrl();
+            $this->getOne('Author');
+            if ($this->Author) {
+                $postArray['username'] = $this->Author->get('username');
+            }
+            $this->getOne('Board');
+            if ($this->Board) {
+                $postArray['board_name'] = $this->Board->get('name');
+            }
+            $postArray['message'] = $this->getContent();
+            $indexed = $this->xpdo->discuss->search->index($postArray);
+        }
+        return $indexed;
+    }
+
+    public function removeFromIndex() {
+        $removed = false;
+        if ($this->xpdo->discuss->loadSearch()) {
+            $removed = $this->xpdo->discuss->search->removeIndex($this->get('id'));
+        }
+        return $removed;
     }
 
     public function move($boardId) {
@@ -204,11 +234,13 @@ class disPost extends xPDOSimpleObject {
                 $isAdmin = $this->xpdo->discuss->user->isAdmin();
                 if ($isAdmin || $isModerator) { /* move to spambox/recyclebin */
                     $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
-                    if ($moveToSpam && !empty($spamBoard)) {
+                    if ($moveToSpam && !empty($spamBoard) && $this->get('board') != $spamBoard) {
+                        $this->removeFromIndex();
                         return $this->move($spamBoard);
                     } else {
                         $trashBoard = $this->xpdo->getOption('discuss.recycle_bin_board',null,false);
-                        if (!empty($trashBoard)) {
+                        if (!empty($trashBoard) && $this->get('board') != $trashBoard) {
+                            $this->removeFromIndex();
                             return $this->move($trashBoard);
                         }
                     }
@@ -287,6 +319,8 @@ class disPost extends xPDOSimpleObject {
                     $activity->save();
                 }
             }
+
+            $this->removeFromIndex();
 
             $this->clearCache();
         }

@@ -275,6 +275,23 @@ class disBoard extends xPDOSimpleObject {
     }
 
     /**
+     * Get an array of disUser objects who are Moderators of this board
+     * @return array
+     */
+    public function getModerators() {
+        $gms = $this->xpdo->getOption('discuss.global_moderators',null,'');
+        $gms = explode(',',$gms);
+
+        $c = $this->xpdo->newQuery('disUser');
+        $c->leftJoin('disModerator','Moderator','Moderator.user = disUser.id AND Moderator.board = '.$this->get('id'));
+        $c->where(array(
+            'disUser.username:IN' => $gms,
+            'OR:Moderator.id:!=' => null,
+        ));
+        return $this->xpdo->getCollection('disUser',$c);
+    }
+
+    /**
      * Grabs a comma-separated list of direct subboards for this board.
      *
      * @access public
