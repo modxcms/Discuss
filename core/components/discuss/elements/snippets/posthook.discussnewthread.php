@@ -85,6 +85,13 @@ foreach ($attachments as $file) {
 
 $discuss->user->checkForPostGroupAdvance();
 
+if (!empty($fields['notify'])) {
+    $thread = $post->getOne('Thread');
+    if ($thread) {
+        $thread->addSubscription($discuss->user->get('id'));
+    }
+}
+
 /* send notifications */
 $discuss->hooks->load('notifications/send',array(
     'board' => $board->get('id'),
