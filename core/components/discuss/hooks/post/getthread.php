@@ -76,7 +76,8 @@ foreach ($posts['results'] as $post) {
 
         /* check if author wants to show email */
         if ($post->Author->get('show_email') && $discuss->user->isLoggedIn && $canViewEmails) {
-            $postArray['author.email'] = disPost::encodeEmail($post->Author->get('email'),$modx->lexicon('discuss.email_author'));
+            $post->loadParser();
+            $postArray['author.email'] = disBBCodeParser::encodeEmail($post->Author->get('email'),$modx->lexicon('discuss.email_author'));
         } else {
             $postArray['author.email'] = '';
         }
