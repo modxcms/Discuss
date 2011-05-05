@@ -122,6 +122,8 @@ class Discuss {
     public function loadSearch() {
         $searchClass = $this->modx->getOption('discuss.search_class',null,'disSearch');
         $searchClassPath = $this->modx->getOption('discuss.search_class_path',null,$this->config['modelPath'].'discuss/search/');
+        if (empty($searchClassPath)) $searchClassPath = $this->config['modelPath'].'discuss/search/';
+        
         if ($className = $this->modx->loadClass($searchClass,$searchClassPath,true,true)) {
             $this->search = new $className($this);
         } else {

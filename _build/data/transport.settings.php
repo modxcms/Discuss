@@ -413,6 +413,26 @@ $settings['discuss.sso_mode']->fromArray(array(
     'area' => 'SSO',
 ),'',true,true);
 
+/* Search Settings */
+$settings['discuss.search_class']= $modx->newObject('modSystemSetting');
+$settings['discuss.search_class']->fromArray(array(
+    'key' => 'discuss.search_class',
+    'value' => 'disSearch',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+$settings['discuss.search_class_path']= $modx->newObject('modSystemSetting');
+$settings['discuss.search_class_path']->fromArray(array(
+    'key' => 'discuss.search_class_path',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Solr',
+),'',true,true);
+
+
 /* SOLR Settings */
 $settings['discuss.solr.hostname']= $modx->newObject('modSystemSetting');
 $settings['discuss.solr.hostname']->fromArray(array(

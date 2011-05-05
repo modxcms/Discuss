@@ -253,6 +253,12 @@ $_lang['setting_discuss.use_custom_post_parser_desc'] = 'If set, will use a cust
 $_lang['setting_discuss.recycle_bin_board'] = 'Recycle Bin Board';
 $_lang['setting_discuss.recycle_bin_board_desc'] = 'If set to non-zero, will move any posts marked to be removed by Moderators to this board instead. If set to 0, they will be removed instead.';
 
+$_lang['setting_discuss.search_class'] = 'Search Class';
+$_lang['setting_discuss.search_class_desc'] = 'The PHP class to use for Search. Can be overridden to provide custom search implementations.';
+
+$_lang['setting_discuss.search_class_path'] = 'Search Class Path';
+$_lang['setting_discuss.search_class_path_desc'] = 'The absolute path to the Search Class, as set in the discuss.search_class setting. Leave blank to use the default path.';
+
 $_lang['setting_discuss.show_whos_online'] = 'Show Whos Online';
 $_lang['setting_discuss.show_whos_online_desc'] = 'If set to yes, will display the users currently online.';
 
