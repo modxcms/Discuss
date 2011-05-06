@@ -26,6 +26,8 @@ class disUser extends xPDOSimpleObject {
             if (!empty($avatarService)) {
                 if ($avatarService == 'gravatar') {
                     $avatarUrl = $this->xpdo->getOption('discuss.gravatar_url',null,'http://www.gravatar.com/avatar/').md5($this->get('email'));
+                    $avatarUrl .= '?d='.$this->xpdo->getOption('discuss.gravatar_default',null,'mm');
+                    $avatarUrl .= '&r='.$this->xpdo->getOption('discuss.gravatar_rating',null,'g');
                 }
             } else {
                 $avatarUrl = $this->xpdo->getOption('discuss.files_url').'/profile/'.$this->get('user').'/'.$this->get('avatar');

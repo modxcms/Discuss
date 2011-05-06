@@ -4,7 +4,12 @@
 <form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
 <h2>[[+username]]</h2>
-<table class="dis-table">
+
+<div class="right">
+    <img src="[[+avatarUrl]]" alt="[[+username]]" />
+    <br /><span class="small">[[+title]]</span>
+</div>
+<table class="dis-table" style="width: 80%;">
 <tbody>
 <tr>
     <th>[[%discuss.name? &namespace=`discuss` &topic=`user`]]:</th>
