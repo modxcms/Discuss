@@ -163,13 +163,22 @@ class disPost extends xPDOSimpleObject {
         if ($this->xpdo->discuss->loadSearch()) {
             $postArray = $this->toArray();
             $postArray['url'] = $this->getUrl();
-            $this->getOne('Author');
-            if ($this->Author) {
-                $postArray['username'] = $this->Author->get('username');
+            if (empty($postArray['username'])) {
+                $this->getOne('Author');
+                if ($this->Author) {
+                    $postArray['username'] = $this->Author->get('username');
+                }
             }
-            $this->getOne('Board');
-            if ($this->Board) {
-                $postArray['board_name'] = $this->Board->get('name');
+            if (empty($postArray['board_name'])) {
+                $this->getOne('Board');
+                if ($this->Board) {
+                    $postArray['board_name'] = $this->Board->get('name');
+                    $postArray['category'] = $this->Board->get('category');
+                    $this->Board->getOne('Category');
+                    if ($this->Board->Category) {
+                        $postArray['category_name'] = $this->Board->Category->get('name');
+                    }
+                }
             }
             $postArray['message'] = $this->getContent();
             $indexed = $this->xpdo->discuss->search->index($postArray);

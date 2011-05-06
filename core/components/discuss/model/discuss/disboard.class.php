@@ -144,7 +144,9 @@ class disBoard extends xPDOSimpleObject {
 
             /* save */
             $saved = parent::save();
+        }
 
+        if ($saved) {
             $this->clearCache();
         }
 
@@ -407,6 +409,7 @@ class disBoard extends xPDOSimpleObject {
     public function clearCache() {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             $this->xpdo->getCacheManager();
+            $this->xpdo->cacheManager->delete('discuss/board/user/');
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('id'));
         }
     }
@@ -540,6 +543,58 @@ class disBoard extends xPDOSimpleObject {
         $response['results'] = $modx->getCollection('disBoard',$c);
 
         return $response;
+    }
+
+    public static function fetchList(xPDO &$modx) {
+        $cacheKey = 'discuss/board/user/'.$modx->discuss->user->get('id').'/select-options';
+        $boards = $modx->cacheManager->get($cacheKey);
+        if (empty($boards)) {
+            $c = $modx->newQuery('disBoard');
+            $c->innerJoin('disBoardClosure','Descendants');
+            $c->leftJoin('disBoardUserGroup','UserGroups');
+            $c->innerJoin('disCategory','Category');
+            $groups = $modx->discuss->user->getUserGroups();
+            if (!$modx->discuss->user->isAdmin()) {
+                if (!empty($groups)) {
+                    /* restrict boards by user group if applicable */
+                    $g = array(
+                        'UserGroups.usergroup:IN' => $groups,
+                    );
+                    $g['OR:UserGroups.usergroup:IS'] = null;
+                    $where[] = $g;
+                    $c->andCondition($where,null,2);
+                } else {
+                    $c->where(array(
+                        'UserGroups.usergroup:IS' => null,
+                    ));
+                }
+            }
+            if ($modx->discuss->isLoggedIn) {
+                $ignoreBoards = $modx->discuss->user->get('ignore_boards');
+                if (!empty($ignoreBoards)) {
+                    $c->where(array(
+                        'id:NOT IN' => explode(',',$ignoreBoards),
+                    ));
+                }
+            }
+            $c->select($modx->getSelectColumns('disBoard','disBoard'));
+            $c->select(array(
+                'MAX(Descendants.depth) AS depth',
+                'Category.name AS category_name',
+            ));
+            $c->sortby('disBoard.category','ASC');
+            $c->sortby('disBoard.map','ASC');
+            $c->groupby('disBoard.id');
+            $boardObjects = $modx->getCollection('disBoard',$c);
+            foreach ($boardObjects as $board) {
+                $boards[] = $board->toArray();
+            }
+            if (!empty($boards)) {
+                $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,3600));
+            }
+        }
+        return $boards;
+
     }
 
     public function get2ndLatestPost() {

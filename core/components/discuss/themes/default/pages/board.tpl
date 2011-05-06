@@ -1,3 +1,11 @@
+<div class="right">
+    <form action="[[~[[*id]]]]search" method="GET">
+        <input type="hidden" name="board" value="[[+id]]" />
+        <input type="text" name="s" value="" class="dis-form-field-solo" style="width: 200px; margin-right: 5px;" placeholder="[[%discuss.search_this_board]]" />
+
+        <input type="submit" class="dis-action-btn-solo"  value="[[%discuss.search]]" />
+    </form>
+</div>
 [[+trail]]
 
 <ol class="dis-board-list" style="[[+boards_toggle]]">

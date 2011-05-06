@@ -33,6 +33,7 @@ $xpdo_meta_map['disUser']= array (
     'posts' => 0,
     'show_email' => 1,
     'show_online' => 1,
+    'primary_group' => 0,
     'synced' => 0,
     'source' => 'internal',
     'syncedat' => NULL,
@@ -242,6 +243,15 @@ $xpdo_meta_map['disUser']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 1,
+    ),
+    'primary_group' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
     ),
     'synced' => 
     array (

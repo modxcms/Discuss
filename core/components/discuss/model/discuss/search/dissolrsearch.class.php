@@ -12,12 +12,30 @@ class disSolrSearch extends disSearch {
         $this->_connectionOptions = array(
             'hostname' => $this->modx->getOption('discuss.solr.hostname',null,'127.0.0.1'),
             'port' => $this->modx->getOption('discuss.solr.port',null,'8080'),
+            'path' => $this->modx->getOption('discuss.solr.path',null,''),
+            'login' => $this->modx->getOption('discuss.solr.username',null,''),
+            'password' => $this->modx->getOption('discuss.solr.password',null,''),
+            'timeout' => $this->modx->getOption('discuss.solr.timeout',null,30),
+            'secure' => $this->modx->getOption('discuss.solr.ssl',null,false),
+            'ssl_cert' => $this->modx->getOption('discuss.solr.ssl_cert',null,''),
+            'ssl_key' => $this->modx->getOption('discuss.solr.ssl_key',null,''),
+            'ssl_keypassword' => $this->modx->getOption('discuss.solr.ssl_keypassword',null,''),
+            'ssl_cainfo' => $this->modx->getOption('discuss.solr.ssl_cainfo',null,''),
+            'ssl_capath' => $this->modx->getOption('discuss.solr.ssl_capath',null,''),
+            'proxy_host' => $this->modx->getOption('discuss.solr.proxy_host',null,''),
+            'proxy_port' => $this->modx->getOption('discuss.solr.proxy_port',null,''),
+            'proxy_login' => $this->modx->getOption('discuss.solr.proxy_username',null,''),
+            'proxy_password' => $this->modx->getOption('discuss.solr.proxy_password',null,''),
         );
-        $this->client = new SolrClient($this->_connectionOptions);
+
+        try {
+            $this->client = new SolrClient($this->_connectionOptions);
+        } catch (Exception $e) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR,'Error connecting to Solr server: '.$e->getMessage());
+        }
     }
 
-    public function run($string,$limit = 10,$start = 0) {
-
+    public function run($string,$limit = 10,$start = 0,array $conditions = array()) {
         $query = new SolrQuery();
         $query->setQuery($string);
         $query->setStart($start);
@@ -27,35 +45,50 @@ class disSolrSearch extends disSearch {
               ->addField('message')
               ->addField('thread')
               ->addField('board')
+              ->addField('category')
+              ->addField('category_name')
               ->addField('author')
               ->addField('username')
               ->addField('createdon')
               ->addField('board_name')
-              ->addField('url');
+              ->addField('url')
+              ->addField('score');
 
-        $queryResponse = $this->client->query($query);
-        $responseObject = $queryResponse->getResponse();
+        foreach ($conditions as $k => $v) {
+            $query->addFilterQuery($k.':'.$v);
+        }
 
-        $response = array();
-        $response['total'] = $responseObject->response->numFound;
-        $response['start'] = $responseObject->response->start;
-        $response['query_time'] = $responseObject->responseHeader->QTime;
-        $response['status'] = $responseObject->responseHeader->status;
-        $response['results'] = array();
-        if (!empty($responseObject->response->docs)) {
-            foreach ($responseObject->response->docs as $doc) {
-                $d = array();
-                $pns = $doc->getPropertyNames();
-                foreach ($pns as $k) {
-                    foreach ($doc as $k => $v) {
-                        if ($k == 'createdon') {
-                            $v = strftime($this->discuss->dateFormat,strtotime($v));
+        $response = array(
+            'total' => 0,
+            'start' => $start,
+            'limit' => $limit,
+            'status' => 0,
+            'query_time' => 0,
+            'results' => array(),
+        );
+        try {
+            $queryResponse = $this->client->query($query);
+            $responseObject = $queryResponse->getResponse();
+            if ($responseObject) {
+                $response['total'] = $responseObject->response->numFound;
+                $response['query_time'] = $responseObject->responseHeader->QTime;
+                $response['status'] = $responseObject->responseHeader->status;
+                $response['results'] = array();
+                if (!empty($responseObject->response->docs)) {
+                    foreach ($responseObject->response->docs as $doc) {
+                        $d = array();
+                        foreach ($doc as $k => $v) {
+                            if ($k == 'createdon') {
+                                $v = strftime($this->discuss->dateFormat,strtotime($v));
+                            }
+                            $d[$k] = $v;
                         }
-                        $d[$k] = $v;
+                        $response['results'][] = $d;
                     }
                 }
-                $response['results'][] = $d;
             }
+        } catch (Exception $e) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR,'Error running query on Solr server: '.$e->getMessage());
         }
         return $response;
     }
@@ -81,7 +114,11 @@ class disSolrSearch extends disSearch {
             $document->addField('createdon',''.strftime('%Y-%m-%dT%H:%M:%SZ',strtotime($fields['createdon'])));
         }
 
-        $response = $this->client->addDocument($document);
+        $response = false;
+        try {
+            $response = $this->client->addDocument($document);
+        } catch (Exception $e) {
+        }
         $this->commit();
         return $response;
     }
@@ -92,6 +129,9 @@ class disSolrSearch extends disSearch {
     }
 
     public function commit() {
-        $this->client->commit();
+        try {
+            $this->client->commit();
+        } catch (Exception $e) {
+        }
     }
 }

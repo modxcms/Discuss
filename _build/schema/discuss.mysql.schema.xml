@@ -281,6 +281,7 @@
         <field key="posts" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="show_email" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" />
         <field key="show_online" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" />
+        <field key="primary_group" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 
         <!-- these fields are used for SSO integration, or imports from other systems -->
         <field key="synced" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />

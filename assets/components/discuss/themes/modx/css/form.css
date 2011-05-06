@@ -35,7 +35,7 @@
     line-height: 1em;
     
 }
-.dis-form input, .dis-form select, .dis-form textarea {   
+.dis-form input, .dis-form select, .dis-form textarea, .dis-form-field-solo {
     float: left;
     padding: .4em .2em; 
     border: solid 1px lightgray;
@@ -73,7 +73,7 @@
 .dis-form fieldset { border: 1px solid lightgray; }
 
 
-.dis-form input[type="submit"], .dis-form input[type="button"] {
+.dis-form input[type="submit"], .dis-form input[type="button"], .dis-action-btn-solo {
     font: bold 12px/1 "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
     color: #fff;
     background: #81AD2A url(../images/bgs/button-gradient.png) repeat-x top left;

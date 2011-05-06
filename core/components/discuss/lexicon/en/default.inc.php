@@ -96,6 +96,8 @@ $_lang['discuss.post_title'] = 'Title';
 $_lang['discuss.post_update'] = 'Update Post';
 $_lang['discuss.post_views'] = 'Views';
 $_lang['discuss.posts'] = 'Posts';
+$_lang['discuss.primary_group'] = 'Primary Group';
+$_lang['discuss.primary_group_desc'] = 'The primary User Group this User is a part of. This is used for username coloring and forum badges.';
 $_lang['discuss.refresh'] = 'Refresh';
 $_lang['discuss.registered_on'] = 'Registered On';
 $_lang['discuss.role'] = 'Role';
@@ -253,8 +255,62 @@ $_lang['setting_discuss.use_custom_post_parser_desc'] = 'If set, will use a cust
 $_lang['setting_discuss.recycle_bin_board'] = 'Recycle Bin Board';
 $_lang['setting_discuss.recycle_bin_board_desc'] = 'If set to non-zero, will move any posts marked to be removed by Moderators to this board instead. If set to 0, they will be removed instead.';
 
+$_lang['setting_discuss.search_class'] = 'Search Class';
+$_lang['setting_discuss.search_class_desc'] = 'The PHP class to use for Search. Can be overridden to provide custom search implementations.';
+
+$_lang['setting_discuss.search_class_path'] = 'Search Class Path';
+$_lang['setting_discuss.search_class_path_desc'] = 'The absolute path to the Search Class, as set in the discuss.search_class setting. Leave blank to use the default path.';
+
 $_lang['setting_discuss.show_whos_online'] = 'Show Whos Online';
 $_lang['setting_discuss.show_whos_online_desc'] = 'If set to yes, will display the users currently online.';
+
+$_lang['setting_discuss.solr.hostname'] = 'Solr Hostname';
+$_lang['setting_discuss.solr.hostname_desc'] = 'The hostname for the Solr server.';
+
+$_lang['setting_discuss.solr.port'] = 'Solr Port';
+$_lang['setting_discuss.solr.port_desc'] = 'The port number for the Solr server.';
+
+$_lang['setting_discuss.solr.path'] = 'Solr Path';
+$_lang['setting_discuss.solr.path_desc'] = 'The absolute path to Solr.';
+
+$_lang['setting_discuss.solr.username'] = 'Solr Username';
+$_lang['setting_discuss.solr.username_desc'] = 'The username used for HTTP Authentication, if any.';
+
+$_lang['setting_discuss.solr.password'] = 'Solr Password';
+$_lang['setting_discuss.solr.password_desc'] = 'The HTTP Authentication password, if any.';
+
+$_lang['setting_discuss.solr.proxy_host'] = 'Solr Proxy Hostname';
+$_lang['setting_discuss.solr.proxy_host_desc'] = 'The hostname for the proxy server to Solr, if any.';
+
+$_lang['setting_discuss.solr.proxy_port'] = 'Solr Proxy Port';
+$_lang['setting_discuss.solr.proxy_port_desc'] = 'The port number for the proxy server to Solr, if any.';
+
+$_lang['setting_discuss.solr.proxy_username'] = 'Solr Proxy Username';
+$_lang['setting_discuss.solr.proxy_username_desc'] = 'The username for the proxy server to Solr, if any.';
+
+$_lang['setting_discuss.solr.proxy_password'] = 'Solr Proxy Password';
+$_lang['setting_discuss.solr.proxy_password_desc'] = 'The password for the proxy server to Solr, if any.';
+
+$_lang['setting_discuss.solr.timeout'] = 'Solr Request Timeout';
+$_lang['setting_discuss.solr.timeout_desc'] = 'This is maximum time in seconds allowed for the http data transfer operation to Solr.';
+
+$_lang['setting_discuss.solr.ssl'] = 'Solr Use SSL';
+$_lang['setting_discuss.solr.ssl_desc'] = 'If Yes, will connect to Solr via SSL.';
+
+$_lang['setting_discuss.solr.ssl_cert'] = 'Solr SSL Cert';
+$_lang['setting_discuss.solr.ssl_cert_desc'] = 'File name to a PEM-formatted file containing the private key + private certificate (concatenated in that order)';
+
+$_lang['setting_discuss.solr.ssl_key'] = 'Solr SSL Key';
+$_lang['setting_discuss.solr.ssl_key_desc'] = 'File name to a PEM-formatted private key file only.';
+
+$_lang['setting_discuss.solr.ssl_keypassword'] = 'Solr SSL Key Password';
+$_lang['setting_discuss.solr.ssl_keypassword_desc'] = 'Password for private key for SSL key.';
+
+$_lang['setting_discuss.solr.ssl_cainfo'] = 'Solr SSL CA Certificates';
+$_lang['setting_discuss.solr.ssl_cainfo_desc'] = 'Name of file holding one or more CA certificates to verify peer with';
+
+$_lang['setting_discuss.solr.ssl_capath'] = 'Solr SSL CA Certificate Path';
+$_lang['setting_discuss.solr.ssl_capath_desc'] = 'Name of directory holding multiple CA certificates to verify peer with.';
 
 $_lang['setting_discuss.spam_bucket_board'] = 'Spam Box Board';
 $_lang['setting_discuss.spam_bucket_board_desc'] = 'If set to non-zero, will move any posts marked as spam by Moderators to this board instead. If set to 0, they will be deleted instead.';

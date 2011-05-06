@@ -23,7 +23,7 @@ class disSearch {
         return true;
     }
 
-    public function run($string,$limit = 10,$start = 0) {
+    public function run($string,$limit = 10,$start = 0,array $conditions = array()) {
         $response = array(
             'results' => array(),
             'total' => 0,
@@ -45,6 +45,8 @@ class disSearch {
                 ));
             }
         }
+        if (!empty($conditions['board'])) $c->where(array('disBoard.id' => $conditions['board']));
+        if (!empty($conditions['user'])) $c->where(array('disPost.author' => $conditions['user']));
         $response['total'] = $this->modx->getCount('disPost',$c);
         $c->select($this->modx->getSelectColumns('disPost','disPost'));
         $c->select(array(
