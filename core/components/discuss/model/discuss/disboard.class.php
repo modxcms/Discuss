@@ -545,8 +545,11 @@ class disBoard extends xPDOSimpleObject {
         return $response;
     }
 
-    public static function fetchList(xPDO &$modx) {
-        $cacheKey = 'discuss/board/user/'.$modx->discuss->user->get('id').'/select-options';
+    public static function fetchList(xPDO &$modx,$ignoreBoards = true) {
+        $c = array(
+            'ignore_boards' => $ignoreBoards,
+        );
+        $cacheKey = 'discuss/board/user/'.$modx->discuss->user->get('id').'/select-options-'.md5(serialize($c));
         $boards = $modx->cacheManager->get($cacheKey);
         if (empty($boards)) {
             $c = $modx->newQuery('disBoard');
@@ -569,7 +572,7 @@ class disBoard extends xPDOSimpleObject {
                     ));
                 }
             }
-            if ($modx->discuss->isLoggedIn) {
+            if ($modx->discuss->isLoggedIn && $ignoreBoards) {
                 $ignoreBoards = $modx->discuss->user->get('ignore_boards');
                 if (!empty($ignoreBoards)) {
                     $c->where(array(

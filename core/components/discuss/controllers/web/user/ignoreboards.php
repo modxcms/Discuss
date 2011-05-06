@@ -33,44 +33,8 @@ if (!empty($_POST) && !empty($scriptProperties['boards'])) {
 }
 
 /* build query */
-$_groups = $modx->user->getUserGroups();
-$cacheKey = 'discuss/user/'.$user->get('id').'/ignoreboards';
-$boards = $modx->cacheManager->get($cacheKey);
-if (empty($boards) || !$modx->getOption('discuss.caching_enabled',null,false) || true) {
-    $boards = array();
-    $c = $modx->newQuery('disBoard');
-    $c->query['distinct'] = 'DISTINCT';
-    $c->select($modx->getSelectColumns('disBoard','disBoard'));
-    $c->select(array(
-        'Category.name AS category_name',
-        'LastPost.title AS last_post_title',
-        'LastPost.author AS last_post_author',
-        'LastPost.createdon AS last_post_createdon',
-        'LastPostAuthor.username AS last_post_username',
-        'RootDescendant.depth AS depth',
-    ));
-    $c->innerJoin('disCategory','Category');
-    $c->leftJoin('disBoardClosure','RootDescendant','RootDescendant.descendant = disBoard.id AND RootDescendant.ancestor = 0');
-    $c->leftJoin('disPost','LastPost');
-    $c->leftJoin('disUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
-    if (!empty($_groups)) {
-        $c->leftJoin('disBoardUserGroup','UserGroups');
-        $g = array(
-            'UserGroups.usergroup:IN' => $_groups,
-        );
-        $g['OR:UserGroups.usergroup:='] = null;
-        $where[] = $g;
-        $c->andCondition($where,null,2);
-    }
-    $c->sortby('Category.rank','ASC');
-    $c->sortby('map','ASC');
-    $boardObjects = $modx->getCollection('disBoard',$c);
-    
-    foreach ($boardObjects as $board) {
-        $boards[] = $board->toArray();
-    }
-    $modx->cacheManager->set($cacheKey,$boards,3600);
-}
+$boards = $modx->call('disBoard','fetchList',array(&$modx,false));
+
 /* now loop through boards */
 $list = array();
 $currentCategory = 0;
@@ -104,10 +68,9 @@ foreach ($boards as $board) {
         $list[] = $discuss->getChunk('board/disBoardCategoryIb',$ba);
         $categoryIgnoreList = array('checked' => array(),'all' => array());
 
-        $ba = $board;
+        $ba = $boardArray;
         $boardList = array(); /* reset current category board list */
         $ba['cls'] = 'dis-board-cb '.$rowClass;
-        $ba['checked'] = '';
         $lastCategory = $board['category'];
         $boardList[] = $discuss->getChunk('board/disBoardCheckbox',$ba);
 
