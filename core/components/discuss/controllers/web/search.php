@@ -23,7 +23,7 @@ $end = $start+$limit;
 $placeholders = array();
 if (!empty($scriptProperties['s'])) {
     $string = urldecode(str_replace(array(';',':'),'',strip_tags($scriptProperties['s'])));
-    $placeholders['search'] = $string;
+    $placeholders['search'] = $discuss->convertMODXTags($string);
     $placeholders['start'] = number_format($start+1);
 
     if ($discuss->loadSearch()) {
@@ -94,7 +94,24 @@ if (!empty($scriptProperties['s'])) {
     }
 }
 
-/* get board breadcrumb trail */
+/* board dropdown list */
+$boards = $modx->call('disBoard','fetchList',array(&$modx));
+$placeholders['boards'] = array();
+$placeholders['boards'][] = $discuss->getChunk('board/disBoardOpt',array('id' => '','name' => $modx->lexicon('discuss.board_all'),'selected' => ''));
+foreach ($boards as $board) {
+    $board['selected'] = !empty($scriptProperties['board']) && $scriptProperties['board'] == $board['id'] ? ' selected="selected"' : '';
+    $board['name'] = str_repeat('--',$board['depth']-1).$board['name'];
+    $placeholders['boards'][] = $discuss->getChunk('board/disBoardOpt',$board);
+}
+$placeholders['boards'] = implode("\n",$placeholders['boards']);
+
+unset($boards,$board,$list,$c);
+
+if (!empty($scriptProperties['user'])) {
+    $placeholders['user'] = strip_tags($discuss->convertMODXTags($scriptProperties['user']));
+}
+
+/* get breadcrumb trail */
 $trail = array();
 $trail[] = array(
     'url' => $discuss->url,

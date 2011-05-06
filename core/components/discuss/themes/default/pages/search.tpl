@@ -4,9 +4,17 @@
 <form class="dis-form" action="[[~[[*id]]]]search/" method="get">
     <h2>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h2>
     
-    <label for="dis-search">[[%discuss.search]]</label>
+    <label for="dis-search">[[%discuss.search]]:</label>
     <input type="text" id="dis-search" name="s" value="[[+search]]" />
-    
+
+    <label for="dis-search-board">[[%discuss.board]]:
+        <span class="error">[[+error.board]]</span>
+    </label>
+    <select name="board" id="dis-search-board">[[+boards]]</select>
+
+    <label for="dis-author">[[%discuss.author]]:</label>
+    <input type="text" id="dis-author" name="user" value="[[+user]]" />
+
     <br class="clear" />
     
     <div class="dis-form-buttons">

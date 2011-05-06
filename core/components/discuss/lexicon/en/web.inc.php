@@ -6,6 +6,8 @@
 $_lang['discuss.actions'] = 'Actions';
 $_lang['discuss.age'] = 'Age';
 $_lang['discuss.author'] = 'Author';
+$_lang['discuss.board'] = 'Board';
+$_lang['discuss.board_all'] = '(All Boards)';
 $_lang['discuss.board_is_locked'] = ' (Locked)';
 $_lang['discuss.board_moderators'] = 'Moderators: [[+moderators]]';
 $_lang['discuss.board_no_threads'] = 'There are currently no threads for this board.';

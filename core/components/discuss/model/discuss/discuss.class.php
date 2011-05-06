@@ -546,4 +546,8 @@ class Discuss {
             $this->modx->sendUnauthorizedPage();
         }
     }
+
+    public function convertMODXTags($message) {
+        return str_replace(array('[',']'),array('&#91;','&#93;'),$message);
+    }
 }
