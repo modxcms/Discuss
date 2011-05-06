@@ -227,14 +227,16 @@ class disThread extends xPDOSimpleObject {
                 $isAdmin = $this->xpdo->discuss->user->isAdmin();
                 if ($isModerator || $isAdmin) { /* move to spambox/recyclebin */
                     $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
-                    if ($moveToSpam && !empty($spamBoard)) {
+                    if ($moveToSpam && !empty($spamBoard) && $spamBoard != $this->get('board')) {
                         if ($this->move($spamBoard)) {
                             $removed = true;
                         }
                     } else {
                         $trashBoard = $this->xpdo->getOption('discuss.recycle_bin_board',null,false);
-                        if (!empty($trashBoard) && $this->move($trashBoard)) {
-                            $removed = true;
+                        if (!empty($trashBoard) && $trashBoard != $this->get('board')) {
+                            if ($this->move($trashBoard)) {
+                                $removed = true;
+                            }
                         } else {
                             $remove = true;
                         }
