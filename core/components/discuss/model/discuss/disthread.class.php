@@ -5,6 +5,8 @@
 class disThread extends xPDOSimpleObject {
     const TYPE_POST = 'post';
     const TYPE_MESSAGE = 'message';
+
+    public $hasSubscription;
     
     /**
      * Fetch a thread, but check permissions first
@@ -225,14 +227,16 @@ class disThread extends xPDOSimpleObject {
                 $isAdmin = $this->xpdo->discuss->user->isAdmin();
                 if ($isModerator || $isAdmin) { /* move to spambox/recyclebin */
                     $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
-                    if ($moveToSpam && !empty($spamBoard)) {
+                    if ($moveToSpam && !empty($spamBoard) && $spamBoard != $this->get('board')) {
                         if ($this->move($spamBoard)) {
                             $removed = true;
                         }
                     } else {
                         $trashBoard = $this->xpdo->getOption('discuss.recycle_bin_board',null,false);
-                        if (!empty($trashBoard) && $this->move($trashBoard)) {
-                            $removed = true;
+                        if (!empty($trashBoard) && $trashBoard != $this->get('board')) {
+                            if ($this->move($trashBoard)) {
+                                $removed = true;
+                            }
                         } else {
                             $remove = true;
                         }
@@ -409,11 +413,16 @@ class disThread extends xPDOSimpleObject {
      * @param int $userId ID of disUser
      * @return bool True if has a subscription
      */
-    public function hasSubscription($userId) {
-        return $this->xpdo->getCount('disUserNotification',array(
-            'user' => $userId,
-            'thread' => $this->get('id'),
-        )) > 0;
+    public function hasSubscription($userId = 0) {
+        if (!isset($this->hasSubscription)) {
+            if (empty($userId)) $userId = $this->xpdo->discuss->user->get('id');
+
+            $this->hasSubscription = $this->xpdo->getCount('disUserNotification',array(
+                'user' => $userId,
+                'thread' => $this->get('id'),
+            )) > 0;
+        }
+        return $this->hasSubscription;
     }
 
     /**
@@ -789,12 +798,36 @@ class disThread extends xPDOSimpleObject {
     }
 
     public function canStick() {
-        return $this->xpdo->hasPermission('discuss.thread_stick') &&
+        return !$this->get('sticky') && $this->xpdo->hasPermission('discuss.thread_stick') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
-
-    public function canLock() {
-        return $this->xpdo->hasPermission('discuss.thread_lock') &&
+    public function canUnstick() {
+        return $this->get('sticky') && $this->xpdo->hasPermission('discuss.thread_unstick') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
+    }
+    public function canLock() {
+        return !$this->get('locked') && $this->xpdo->hasPermission('discuss.thread_lock') &&
+            ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
+    }
+    public function canUnlock() {
+        return $this->get('locked') && $this->xpdo->hasPermission('discuss.thread_unlock') &&
+            ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
+    }
+    public function canMove() {
+        return $this->xpdo->hasPermission('discuss.thread_move') &&
+            ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
+    }
+    public function canRemove() {
+        return $this->xpdo->hasPermission('discuss.thread_remove') &&
+            ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
+    }
+    public function canPrint() {
+        return $this->xpdo->hasPermission('discuss.thread_print');
+    }
+    public function canSubscribe() {
+        return !$this->hasSubscription() && $this->xpdo->hasPermission('discuss.thread_subscribe');
+    }
+    public function canUnsubscribe() {
+        return $this->hasSubscription() && $this->xpdo->hasPermission('discuss.thread_subscribe');
     }
 }

@@ -26,6 +26,8 @@ class disUser extends xPDOSimpleObject {
             if (!empty($avatarService)) {
                 if ($avatarService == 'gravatar') {
                     $avatarUrl = $this->xpdo->getOption('discuss.gravatar_url',null,'http://www.gravatar.com/avatar/').md5($this->get('email'));
+                    $avatarUrl .= '?d='.$this->xpdo->getOption('discuss.gravatar_default',null,'mm');
+                    $avatarUrl .= '&r='.$this->xpdo->getOption('discuss.gravatar_rating',null,'g');
                 }
             } else {
                 $avatarUrl = $this->xpdo->getOption('discuss.files_url').'/profile/'.$this->get('user').'/'.$this->get('avatar');
@@ -170,6 +172,7 @@ class disUser extends xPDOSimpleObject {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             $this->xpdo->getCacheManager();
             $this->xpdo->cacheManager->delete('discuss/user/'.$this->get('id'));
+            $this->xpdo->cacheManager->delete('discuss/board/user/'.$this->get('id'));
         }
     }
 
@@ -288,25 +291,10 @@ class disUser extends xPDOSimpleObject {
     public static function fetchActive(xPDO &$modx,$timeAgo = 0,$limit = 0,$start = 0) {
         $response = array();
 
-        $c = $modx->newQuery('disUserGroupProfile');
-        $c->innerJoin('modUserGroup','UserGroup');
-        $c->innerJoin('modUserGroupMember','UserGroupMembers','UserGroup.id = UserGroupMembers.user_group');
-        $c->where(array(
-            'color:!=' => '',
-            'UserGroupMembers.member = disUser.user',
-        ));
-        $c->select(array(
-            'color',
-        ));
-        $c->sortby('disUserGroupProfile.min_posts','DESC');
-        $c->limit(1);
-        $c->prepare();
-        $subSql = $c->toSql();
-
         $c = $modx->newQuery('disUser');
-        //$c->query['distinct'] = 'DISTINCT';
         $c->innerJoin('disSession','Session',$modx->getSelectColumns('disSession','Session','',array('user')).' = '.$modx->getSelectColumns('disUser','disUser','',array('id')));
         $c->innerJoin('modUser','User');
+        $c->leftJoin('disUserGroupProfile','PrimaryDiscussGroup');
         if (!empty($timeAgo)) {
             $c->where(array(
                 'Session.access:>=' => $timeAgo,
@@ -319,8 +307,9 @@ class disUser extends xPDOSimpleObject {
         $c->select(array(
             'disUser.id',
             'disUser.username',
-            '('.$subSql.') AS color',
+            'PrimaryDiscussGroup.color',
         ));
+        $c->groupby('disUser.id');
         $c->sortby('Session.access','ASC');
         $response['results'] = $modx->getCollection('disUser',$c);
         return $response;

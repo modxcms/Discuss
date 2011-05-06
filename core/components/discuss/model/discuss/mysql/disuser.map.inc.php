@@ -304,6 +304,22 @@ $xpdo_meta_map['disUser']= array (
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
+    'PrimaryGroup' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'primary_group',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'PrimaryDiscussGroup' => 
+    array (
+      'class' => 'disUserGroupProfile',
+      'local' => 'primary_group',
+      'foreign' => 'usergroup',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'ThreadLastVisited' => 
     array (
       'class' => 'disThread',

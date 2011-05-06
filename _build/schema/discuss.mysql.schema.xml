@@ -291,6 +291,8 @@
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 
         <aggregate alias="User" class="modUser" local="user" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="PrimaryGroup" class="modUserGroup" local="primary_group" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="PrimaryDiscussGroup" class="disUserGroupProfile" local="primary_group" foreign="usergroup" cardinality="one" owner="foreign" />
         <aggregate alias="ThreadLastVisited" class="disThread" local="thread_last_visited" foreign="id" cardinality="one" owner="foreign" />
 
         <composite alias="UserModerated" class="disUserModerated" local="id" foreign="user" cardinality="one" owner="local" />

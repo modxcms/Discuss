@@ -77,6 +77,7 @@ $placeholders['readers'] = empty($scriptProperties['print']) ? $thread->getViewi
 
 /* get moderator status */
 $isModerator = $thread->isModerator($discuss->user->get('id'));
+$isAdmin = $discuss->user->isAdmin();
         
 /* action buttons */
 $actionButtons = array();
@@ -86,20 +87,18 @@ if ($discuss->isLoggedIn && empty($scriptProperties['print'])) {
         $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
     }
     $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
-    if ($modx->hasPermission('discuss.thread_subscribe')) {
-        if ($thread->hasSubscription($discuss->user->get('id'))) {
-            $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unsubscribe=1', 'text' => $modx->lexicon('discuss.unsubscribe'));
-        } else {
-            $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&subscribe=1', 'text' => $modx->lexicon('discuss.subscribe'));
-        }
+    if ($thread->canUnsubscribe()) {
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unsubscribe=1', 'text' => $modx->lexicon('discuss.unsubscribe'));
+    } elseif ($thread->canSubscribe()) {
+        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&subscribe=1', 'text' => $modx->lexicon('discuss.subscribe'));
     }
     /* TODO: Send thread by email - 1.1
      * if ($modx->hasPermission('discuss.thread_send') {
      *   $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_send'));
      * }
      */
-     if ($modx->hasPermission('discuss.thread_print')) {
-       $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&print=1', 'text' => $modx->lexicon('discuss.print'));
+     if ($thread->canPrint()) {
+         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&print=1', 'text' => $modx->lexicon('discuss.print'));
      }
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
@@ -108,22 +107,22 @@ unset($actionButtons);
 /* thread action buttons */
 $actionButtons = array();
 if ($discuss->user->isLoggedIn && $isModerator && empty($scriptProperties['print'])) {
-    /** TODO: Move thread - 1.1
-     * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.thread_move'));
-     */
-    if ($modx->hasPermission('discuss.thread_remove')) {
+    if ($thread->canMove()) {
+        $actionButtons[] = array('url' => $discuss->url.'thread/move?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_move'));
+    }
+    if ($thread->canRemove()) {
         $actionButtons[] = array('url' => $discuss->url.'thread/remove?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_remove'));
         $actionButtons[] = array('url' => $discuss->url.'thread/spam?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_spam'));
     }
 
-    if ($thread->get('locked') && $modx->hasPermission('discuss.thread_unlock')) {
+    if ($thread->canUnlock()) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&lock=0', 'text' => $modx->lexicon('discuss.thread_unlock'));
-    } else if ($modx->hasPermission('discuss.thread_lock')) {
+    } else if ($thread->canLock()) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&lock=1', 'text' => $modx->lexicon('discuss.thread_lock'));
     }
-    if ($thread->get('sticky') && $modx->hasPermission('discuss.thread_unstick')) {
+    if ($thread->canUnstick()) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&sticky=0', 'text' => $modx->lexicon('discuss.thread_unstick'));
-    } else if ($modx->hasPermission('discuss.thread_stick')) {
+    } else if ($thread->canStick()) {
         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&sticky=1', 'text' => $modx->lexicon('discuss.thread_stick'));
     }
     /**

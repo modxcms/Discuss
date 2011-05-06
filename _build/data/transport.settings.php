@@ -413,6 +413,34 @@ $settings['discuss.sso_mode']->fromArray(array(
     'area' => 'SSO',
 ),'',true,true);
 
+/* Gravatar Settings */
+$settings['discuss.gravatar_url']= $modx->newObject('modSystemSetting');
+$settings['discuss.gravatar_url']->fromArray(array(
+    'key' => 'discuss.gravatar_url',
+    'value' => 'http://www.gravatar.com/avatar/',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Gravatar',
+),'',true,true);
+
+$settings['discuss.gravatar_default']= $modx->newObject('modSystemSetting');
+$settings['discuss.gravatar_default']->fromArray(array(
+    'key' => 'discuss.gravatar_default',
+    'value' => 'mm',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Gravatar',
+),'',true,true);
+
+$settings['discuss.gravatar_rating']= $modx->newObject('modSystemSetting');
+$settings['discuss.gravatar_rating']->fromArray(array(
+    'key' => 'discuss.gravatar_rating',
+    'value' => 'g',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Gravatar',
+),'',true,true);
+
 /* Search Settings */
 $settings['discuss.search_class']= $modx->newObject('modSystemSetting');
 $settings['discuss.search_class']->fromArray(array(
