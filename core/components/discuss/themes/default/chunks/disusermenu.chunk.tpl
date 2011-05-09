@@ -24,6 +24,7 @@
     <h4>[[%discuss.actions]]</h4>
     <ul>
         <li><a href="[[~[[*id]]]]messages/new?user=[[+username]]">[[%discuss.send_pm]]</a></li>
+        <li><a href="[[~[[*id]]]]user/merge">[[%discuss.account_merge]]</a></li>
     </ul>
     `]]
 </div>

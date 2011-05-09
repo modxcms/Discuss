@@ -364,4 +364,164 @@ class disUser extends xPDOSimpleObject {
         }
         return $joined;
     }
+
+    /**
+     * Merge another user into this account
+     *
+     * @param disUser $oldUser
+     * @return boolean
+     */
+    public function merge(disUser &$oldUser) {
+        $success = true;
+        $user = $this->getOne('User');
+        if (empty($user)) return false;
+
+        $oldModxUser = $oldUser->getOne('User');
+        if (empty($oldModxUser)) return false;
+        
+        $this->xpdo->beginTransaction();
+
+        /* merge post count */
+        $posts = $user->get('posts');
+        $posts = $posts + $oldUser->get('posts');
+        $this->set('posts',$posts);
+
+        /* merge ignore boards */
+        $ibs = $this->get('ignore_boards');
+        $ibs = explode(',',$ibs);
+        $oldIbs = $oldUser->get('ignore_boards');
+        $oldIbs = explode(',',$oldIbs);
+        $ibs = array_merge($oldIbs,$ibs);
+        $this->set('ignore_boards',implode(',',$ibs));
+
+        /* merge signature if needed */
+        $signature = $this->get('signature');
+        $oldSignature = $oldUser->get('signature');
+        if (empty($signature) && !empty($oldSignature)) {
+            $this->set('signature',$oldSignature);
+        }
+
+        /* merge title if needed */
+        $title = $this->get('title');
+        $oldTitle = $oldUser->get('title');
+        if (empty($title) && !empty($oldTitle)) {
+            $this->set('title',$oldTitle);
+        }
+
+        /* merge primary_group if needed */
+        $pg = $this->get('primary_group');
+        $oldPg = $oldUser->get('primary_group');
+        if (empty($pg) && !empty($oldPg)) {
+            $this->set('primary_group',$oldPg);
+        }
+
+        $this->set('integrated_id',$oldUser->get('integrated_id'));
+        $this->set('synced',true);
+        $this->set('syncedat',$this->xpdo->discuss->now());
+
+        $this->save();
+
+        /* grant old usergroups to this user */
+        $oldUserGroups = $this->xpdo->getCollection('modUserGroupMember',array('member' => $oldModxUser->get('id')));
+        $ugs = array();
+        foreach ($oldUserGroups as $oldUserGroup) {
+            $ugs[] = $oldUserGroup->get('user_group');
+        }
+        $ugs = array_unique($ugs);
+        foreach ($ugs as $ug) {
+            $user->joinGroup($ug);
+        }
+        
+        /* merge in posts, change authors */
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disPost').'
+            SET `author` = '.$this->get('id').'
+            WHERE `author` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disThread').'
+            SET `author_first` = '.$this->get('id').'
+            WHERE `author_first` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disThread').'
+            SET `author_last` = '.$this->get('id').'
+            WHERE `author_last` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+
+        /* merge in disThreadRead */
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disThreadRead').'
+            SET `user` = '.$this->get('id').'
+            WHERE `user` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+
+        /* merge in disThreadUser */
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disThreadUser').'
+            SET `user` = '.$this->get('id').'
+            WHERE `user` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+
+
+        /* merge in disUserFriend */
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disUserFriend').'
+            SET `user` = '.$this->get('id').'
+            WHERE `user` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disUserFriend').'
+            SET `friend` = '.$this->get('id').'
+            WHERE `friend` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+
+        /* merge in disUserNotification */
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disUserNotification').'
+            SET `user` = '.$this->get('id').'
+            WHERE `user` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+
+        /* merge in disModerator */
+        $sql = 'UPDATE '.$this->xpdo->getTableName('disModerator').'
+            SET `user` = '.$this->get('id').'
+            WHERE `user` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+
+        /* remove old user sessions */
+        $sql = 'DELETE FROM '.$this->xpdo->getTableName('disUserFriend').'
+            WHERE `user` = '.$oldUser->get('id').'
+        ';
+        $this->xpdo->query($sql);
+
+        /* merge all PMs users fields for user */
+        $c = $this->xpdo->newQuery('disThread');
+        $c->innerJoin('disThreadUser','Users');
+        $c->leftJoin('disThreadRead','Reads','Reads.user = '.$oldUser->get('id').' AND disThread.id = Reads.thread');
+        $c->where(array(
+            'disThread.private' => true,
+            'Users.user' => $oldUser->get('id'),
+        ));
+        $pms = $this->xpdo->getCollection('disThread',$c);
+        foreach ($pms as $pm) {
+            $users = $pm->get('users');
+            $users = explode(',',$users);
+            $users = array_diff($users,array($oldUser->get('id')));
+            $users[] = $this->get('id');
+            $pm->set('users',implode(',',$users));
+            $pm->save();
+        }
+
+        /* remove old users */
+        $oldUser->remove();
+        $oldModxUser->remove();
+
+        /* check for post group advance */
+        $this->checkForPostGroupAdvance();
+
+        $this->xpdo->commit();
+        return $success;
+    }
 }
