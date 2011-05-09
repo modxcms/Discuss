@@ -16,6 +16,7 @@
                 </span>
                 <span>
                     [[+author.username_link]]
+                    [[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
                     [[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
                     <br />
                     [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
@@ -23,7 +24,7 @@
                 <br class="clear" />
             </div>
             <div class="dis-author dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
-                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div><div class="clear"></div>`]]
+                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]<div class="clear"></div></div><div class="clear"></div>`]]
             </div>
         </div>
     </div>

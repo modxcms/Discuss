@@ -42,6 +42,9 @@ class DisSmfImport {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             define('DISCUSS_IMPORT_MODE',true);
         }
+        if (empty($this->importOptions['attachments_path'])) {
+            $this->importOptions['attachments_path'] = $this->modx->getOption('assets_path').'attachments/';
+        }
     }
 
     public function log($msg) {
@@ -65,9 +68,6 @@ class DisSmfImport {
     }
 
     public function run() {
-        if (empty($this->importOptions['attachments_path'])) {
-            $this->importOptions['attachments_path'] = $this->modx->getOption('assets_path').'attachments/';
-        }
         if ($this->getConnection()) {
             if ($this->runImport['users']) {
                 $this->importUserGroups();

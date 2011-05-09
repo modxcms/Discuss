@@ -28,6 +28,13 @@ if ($profile->save() == false || $usergroup->save() == false) {
     return $modx->error->failure($modx->lexicon('discuss.usergroup_err_save'));
 }
 
+/* upload badge */
+if (!empty($_FILES['image'])) {
+    $profile->uploadBadge($_FILES['image'],true);
+    $profile->save();
+}
+
+
 /* set members */
 if (isset($scriptProperties['members'])) {
 
