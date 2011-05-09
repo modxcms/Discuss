@@ -23,7 +23,7 @@
                 <br class="clear" />
             </div>
             <div class="dis-author dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
-                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div><div class="clear"></div>`]]
+                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]<div class="clear"></div></div><div class="clear"></div>`]]
             </div>
         </div>
     </div>
