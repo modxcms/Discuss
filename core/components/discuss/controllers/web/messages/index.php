@@ -67,6 +67,7 @@ foreach ($messages as $message) {
     $threadArray['replies'] = number_format($threadArray['replies']);
     $threadArray['read'] = 1;
     $threadArray['title'] = str_replace(array('[',']'),array('&#91;','&#93;'),$threadArray['title']);
+    $threadArray['idx'] = $idx+1;
 
     $threadArray['unread'] = '';
     if (!$threadArray['viewed'] && $discuss->isLoggedIn) {

@@ -3,6 +3,9 @@
  * @package discuss
  * @subpackage lexicon
  */
+$_lang['discuss.account_merge'] = 'Merge Account';
+$_lang['discuss.account_merge_msg'] = 'Here you can merge 2 existing accounts of yours. This is useful if you are wanting to merge your MODX account with an older system account, such as SMF. Simply enter your old account username and password below, and Discuss will automatically merge that old account into your current one.';
+$_lang['discuss.account_merge_success'] = 'Account successfully merged! Please logout and back in to refresh your permissions.';
 $_lang['discuss.actions'] = 'Actions';
 $_lang['discuss.age'] = 'Age';
 $_lang['discuss.author'] = 'Author';
