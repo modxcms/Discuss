@@ -84,5 +84,13 @@ foreach ($boards as $board) {
 $usergroup->set('boards','(' . $modx->toJSON($list) . ')');
 unset($boards,$board,$list,$c);
 
+/* get badge */
+$disUserGroup = $modx->getObject('disUserGroupProfile',array(
+    'usergroup' => $usergroup->get('id'),
+));
+if ($disUserGroup) {
+    $usergroup->set('badge_full',$disUserGroup->getBadge());
+}
+
 /* output */
 return $modx->error->success('',$usergroup);

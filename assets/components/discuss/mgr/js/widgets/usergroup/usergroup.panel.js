@@ -4,6 +4,7 @@ Dis.panel.UserGroup = function(config) {
         id: 'dis-panel-usergroup'
         ,url: Dis.config.connector_url
         ,baseParams: {}
+        ,fileUpload: true
         ,items: [{
             html: '<h2>'+_('discuss.usergroup_new')+'</h2>'
             ,border: false
@@ -50,9 +51,18 @@ Dis.panel.UserGroup = function(config) {
                     ,name: 'color'
                     ,width: 200
                 },{
-                    xtype: 'textfield'
+                    xtype: 'displayfield'
                     ,fieldLabel: _('discuss.usergroup_image')
                     ,description: _('discuss.usergroup_image_desc')
+                    ,name: 'image'
+                    ,width: 200
+                },{
+                    id: 'ug-image-preview'
+                    ,html: ''
+                    ,border: false
+                },{
+                    xtype: 'textfield'
+                    ,inputType: 'file'
                     ,name: 'image'
                     ,width: 200
                 }]
@@ -112,6 +122,10 @@ Ext.extend(Dis.panel.UserGroup,MODx.FormPanel,{
                     Ext.getCmp('dis-grid-usergroup-boards').getStore().loadData(b);
                     
                     Ext.getCmp('dis-usergroup-header').getEl().update('<h2>'+'UserGroup'+': '+r.object.name+'</h2>');
+
+                    if (r.object.badge_full) {
+                        Ext.get('ug-image-preview').update('<img src="'+r.object.badge_full+'?pq='+Math.floor(Math.random()*11)+'" alt="" />');
+                    }
                 },scope:this}
             }
         });

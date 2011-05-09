@@ -524,4 +524,20 @@ class disUser extends xPDOSimpleObject {
         $this->xpdo->commit();
         return $success;
     }
+
+    /**
+     * Gets the badge for the Primary Group for this user
+     *
+     * @return string
+     */
+    public function getGroupBadge() {
+        $badge = '';
+        if (!$this->PrimaryDiscussGroup) {
+            $this->getOne('PrimaryDiscussGroup');
+        }
+        if ($this->PrimaryDiscussGroup) {
+            $badge = $this->PrimaryDiscussGroup->getBadge();
+        }
+        return $badge;
+    }
 }
