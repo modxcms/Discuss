@@ -1,6 +1,6 @@
 <li class="dis-post" id="dis-post-[[+id]]">
     <div class="dis-post-header">
-        <h3 class="dis-post-title" post="[[+id]]"><a href="[[~[[*id]]]]thread/?thread=[[+thread]]#dis-post-[[+id]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h3>
+        <h3 class="dis-post-title" post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h3>
         <div class="dis-post-author" id="dis-post-author-[[+id]]">
             <div class="dis-post-actions">
                 [[+action_remove]]
