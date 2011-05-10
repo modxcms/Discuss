@@ -49,6 +49,15 @@ if (!$disUser->save()) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not sync profile information during UpdateProfile snippet posthook: '.print_r($fields,true));
 }
 
+/* handle post_sort_dir setting */
+if (!empty($fields['post_sort_dir'])) {
+    switch (strtoupper($fields['post_sort_dir'])) {
+        case 'DESC': $fields['post_sort_dir'] = 'DESC'; break;
+        default: $fields['post_sort_dir'] = 'ASC'; break;
+    }
+    $disUser->setSetting('discuss.post_sort_dir',$fields['post_sort_dir'],'ASC');
+}
+
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);
 
 if (!empty($_REQUEST['discuss']) && !empty($forumsResourceId)) {

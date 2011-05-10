@@ -562,4 +562,49 @@ class disUser extends xPDOSimpleObject {
         }
         return $badge;
     }
+
+    /**
+     * Set a custom User Setting for this user
+     *
+     * @param string $key The key of the Setting
+     * @param string $value The value to set
+     * @param string $default The default value of the setting
+     * @return bool True if successfully updated
+     */
+    public function setSetting($key,$value,$default = null) {
+        $saved = false;
+        $setting = $this->xpdo->getObject('modUserSetting',array(
+            'key' => $key,
+            'user' => $this->xpdo->user->get('id'),
+        ));
+        if ($setting) {
+            if ($value == $default) {
+                $setting->remove();
+            } else {
+                $setting->set('value',$value);
+                $saved = $setting->save();
+            }
+        } else if ($value != $default) {
+            $sysSetting = $this->xpdo->getObject('modSystemSetting',array(
+                'key' => $key,
+            ));
+            $setting = $this->xpdo->newObject('modUserSetting');
+            $setting->set('user',$this->xpdo->user->get('id'));
+            $setting->set('key',$key);
+            $setting->set('value',$value);
+            $setting->set('namespace','discuss');
+            if ($sysSetting) {
+                $setting->set('xtype',$sysSetting->get('xtype'));
+                $setting->set('area',$sysSetting->get('area'));
+            } else {
+                $setting->set('xtype','textfield');
+                $setting->set('area','General');
+            }
+            $saved = $setting->save();
+        }
+        if ($saved) {
+            $this->xpdo->reloadConfig();
+        }
+        return $saved;
+    }
 }

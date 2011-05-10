@@ -593,10 +593,20 @@ class disPost extends xPDOSimpleObject {
         if (!$thread) return 1;
 
         $page = 1;
+        $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
         $replies = $thread->get('replies');
         $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
+
         if ($replies > $perPage) {
-            $page = ceil($replies / $perPage);
+            $idx = $this->get('idx');
+            if (empty($idx)) $idx = 1;
+
+            if ($sortDir == 'ASC') {
+                $page = ceil(($idx+1) / $perPage);
+            } else {
+                $page = ceil(($replies - $idx + 1) / $perPage);
+                $page = $page < 1 ? 1 : $page;
+            }
         }
         $this->set('page',$page);
         return $page;

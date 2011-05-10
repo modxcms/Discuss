@@ -33,6 +33,7 @@ $qs = $_SERVER['QUERY_STRING'];
 $u = strpos($qs,';u=');
 if ($u !== false) {
     $params['user'] = substr($qs,$u+3);
+    $params['i'] = true;
 }
 $url = $modx->makeUrl($modx->resource->get('id'),'',$params);
 $modx->sendRedirect($url);

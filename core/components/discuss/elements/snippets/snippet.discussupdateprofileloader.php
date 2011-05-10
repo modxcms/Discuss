@@ -40,6 +40,7 @@ if ($disUser) {
     $fields = array_merge($fields,$disUser->toArray());
     $fields['show_email'] = !empty($fields['show_email']) ? 1 : 0;
     $fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
+    $fields['post_sort_dir'] = $modx->getOption('discuss.post_sort_dir',null,'ASC');
 }
 
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);
