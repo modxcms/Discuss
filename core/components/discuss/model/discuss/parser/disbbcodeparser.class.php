@@ -1,17 +1,33 @@
 <?php
 /**
+ * Discuss
+ *
+ * Copyright 2010-11 by Shaun McCormick <shaun@modx.com>
+ *
+ * This file is part of Discuss, a native forum for MODx Revolution.
+ *
+ * Discuss is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package discuss
+ */
+require_once dirname(__FILE__).'/disparser.class.php';
+
+/**
  * @package discuss
  * @subpackage parser
  */
-class disBBCodeParser {
-    public $modx;
-    public $discuss;
-
-    function __construct(xPDO &$modx) {
-        $this->modx =& $modx;
-        $this->discuss =& $modx->discuss;
-    }
-
+class disBBCodeParser extends disParser {
     /**
      * Parse BBCode in post and return proper HTML. Supports SMF/Vanilla formats.
      *
@@ -160,16 +176,6 @@ class disBBCodeParser {
          return preg_replace($pattern, $replace, $str);
     }
 
-    /**
-     * A better working nl2br
-     *
-     * @param string $str
-     * @return string
-     */
-    private function _nl2br2($str) {
-        $str = str_replace("\r", '', $str);
-        return preg_replace('/(?<!>)\n/', "<br />\n", $str);
-    }
 
     /**
      * Strip all BR tags from a string
@@ -308,15 +314,4 @@ class disBBCodeParser {
         }
         return str_replace(array_keys($smiley),$v,$message);
     }
-
-    /**
-     * Convert BR tags to newlines
-     *
-     * @param string $str
-     * @return string
-     */
-    public function br2nl($str) {
-        return str_replace(array('<br>','<br />','<br/>'),"\n",$str);
-    }
-
 }

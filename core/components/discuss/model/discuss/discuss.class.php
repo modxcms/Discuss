@@ -1,5 +1,24 @@
 <?php
 /**
+ * Discuss
+ *
+ * Copyright 2010-11 by Shaun McCormick <shaun@modx.com>
+ *
+ * This file is part of Discuss, a native forum for MODx Revolution.
+ *
+ * Discuss is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
+ *
  * @package discuss
  */
 /**
@@ -9,10 +28,7 @@
  */
 class Discuss {
     const DATETIME_FORMATTED = '%Y-%m-%d %H:%M:%S';
-    /**
-     * @var int/boolean $debugTimer The starting value of the execution time.
-     * @access public
-     */
+    /** @var int/boolean $debugTimer The starting value of the execution time. */
     public $debugTimer = false;
     public $url = '';
     public $user;
@@ -223,6 +239,7 @@ class Discuss {
      * Initializes the user session and updates forum activity
      *
      * @access private
+     * @return void
      */
     private function _initSession() {
         if (defined('DIS_CONNECTOR') && DIS_CONNECTOR) return false;
@@ -344,11 +361,13 @@ class Discuss {
         $chunk->setCacheable(false);
         return $chunk->process($properties);
     }
+
     /**
      * Returns a modChunk object from a template file.
      *
      * @access private
      * @param string $name The name of the Chunk. Will parse to name.chunk.tpl
+     * @param string $postFix
      * @return modChunk/boolean Returns the modChunk object if found, otherwise
      * false.
      */
@@ -469,6 +488,8 @@ class Discuss {
 
     /**
      * Process MODx event results
+     * @param array $rs
+     * @return string
      */
     public function getEventResult($rs) {
         $success = '';

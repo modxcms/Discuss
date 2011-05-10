@@ -1,5 +1,27 @@
 <?php
 /**
+ * Discuss
+ *
+ * Copyright 2010-11 by Shaun McCormick <shaun@modx.com>
+ *
+ * This file is part of Discuss, a native forum for MODx Revolution.
+ *
+ * Discuss is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package discuss
+ */
+/**
  * @package discuss
  * @subpackage lexicon
  */
@@ -8,6 +30,9 @@ $_lang['discuss.account_merge_msg'] = 'Here you can merge 2 existing accounts of
 $_lang['discuss.account_merge_success'] = 'Account successfully merged! Please logout and back in to refresh your permissions.';
 $_lang['discuss.actions'] = 'Actions';
 $_lang['discuss.age'] = 'Age';
+$_lang['discuss.attachment_bad_type'] = 'Attachment [[+idx]] is not an allowed file type.';
+$_lang['discuss.attachment_err_upload'] = 'An error occurred while trying to upload attachment [[+idx]].';
+$_lang['discuss.attachment_too_large'] = 'Attachment [[+idx]] cannot be larger than [[+maxSize]] bytes; this one is [[+size]] bytes. Please specify a smaller attachment.';
 $_lang['discuss.author'] = 'Author';
 $_lang['discuss.board'] = 'Board';
 $_lang['discuss.board_all'] = '(All Boards)';
@@ -117,6 +142,7 @@ $_lang['discuss.thread_unlock'] = 'Unlock Thread';
 $_lang['discuss.thread_unstick'] = 'Unstick Thread';
 $_lang['discuss.thread_viewing'] = '[[+members]] and [[+guests]] guests are viewing this thread.';
 $_lang['discuss.title'] = 'Title';
+$_lang['discuss.track_ip'] = 'Track IP';
 $_lang['discuss.unread_posts'] = 'Unread Posts';
 $_lang['discuss.unread_posts_all'] = 'View All Unread Posts';
 $_lang['discuss.unread_posts_last_visit'] = 'Unread Posts Since Last Visit';

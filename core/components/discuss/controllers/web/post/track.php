@@ -22,27 +22,26 @@
  * @package discuss
  */
 /**
- * Show Recent Posts
- * 
- * @package discuss
+ * Get all posts by an IP address
  */
-$discuss->setSessionPlace('home');
-$discuss->setPageTitle($modx->lexicon('discuss.recent_posts'));
+if (!$discuss->user->isLoggedIn) $modx->sendUnauthorizedPage();
+$discuss->setPageTitle($modx->lexicon('discuss.track_ip'));
 
 /* get default options */
-$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.num_recent_posts',null,10));
+$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.post_per_page',null,10));
 $start = $modx->getOption('start',$scriptProperties,0);
 $page = !empty($scriptProperties['page']) ? $scriptProperties['page'] : 1;
 $page = $page <= 0 ? $page = 1 : $page;
 $start = ($page-1) * $limit;
 
-/* recent posts */
-$recent = $discuss->hooks->load('post/recent',array(
+/* posts by ip */
+$posts = $discuss->hooks->load('post/byip',array(
+    'ip' => $scriptProperties['ip'],
     'limit' => $limit,
     'start' => $start,
     'getTotal' => true,
 ));
-$placeholders['recent_posts'] = $recent['results'];
+$placeholders['posts'] = $posts['results'];
 
 /* get board breadcrumb trail */
 $trail = array();
@@ -50,7 +49,7 @@ $trail[] = array(
     'url' => $discuss->url,
     'text' => $modx->getOption('discuss.forum_title'),
 );
-$trail[] = array('text' => $modx->lexicon('discuss.recent_posts').' ('.number_format($recent['total']).')','active' => true);
+$trail[] = array('text' => $modx->lexicon('discuss.track_ip').': '.$scriptProperties['ip'].' ('.number_format($posts['total']).')','active' => true);
 
 $trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,
@@ -59,9 +58,9 @@ $placeholders['trail'] = $trail;
 
 /* build pagination */
 $discuss->hooks->load('pagination/build',array(
-    'count' => $recent['total'],
+    'count' => $posts['total'],
     'id' => 0,
-    'view' => 'thread/recent',
+    'view' => 'post/track',
     'limit' => $limit,
 ));
 

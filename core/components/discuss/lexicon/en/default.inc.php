@@ -1,5 +1,27 @@
 <?php
 /**
+ * Discuss
+ *
+ * Copyright 2010-11 by Shaun McCormick <shaun@modx.com>
+ *
+ * This file is part of Discuss, a native forum for MODx Revolution.
+ *
+ * Discuss is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package discuss
+ */
+/**
  * Default English Lexicon Entries for Discuss
  *
  * @package discuss
@@ -245,6 +267,12 @@ $_lang['setting_discuss.notification_new_post_subject_desc'] = 'The subject line
 
 $_lang['setting_discuss.num_recent_posts'] = 'Number of Recent Posts';
 $_lang['setting_discuss.num_recent_posts_desc'] = 'The number of recent posts to show on the main board index.';
+
+$_lang['setting_discuss.parser_class'] = 'Parser Class';
+$_lang['setting_discuss.parser_class_desc'] = 'The name of the class to use for parsing posts.';
+
+$_lang['setting_discuss.parser_class_path'] = 'Parser Class Path';
+$_lang['setting_discuss.parser_class_path_desc'] = 'The path to the directory of the parser class. Leave blank to use the default directory.';
 
 $_lang['setting_discuss.post_per_page'] = 'Posts Per Page';
 $_lang['setting_discuss.post_per_page_desc'] = 'The default number of posts to show per page on the thread view.';
