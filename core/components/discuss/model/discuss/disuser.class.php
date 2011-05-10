@@ -564,6 +564,23 @@ class disUser extends xPDOSimpleObject {
     }
 
     /**
+     * Gets a User Setting (bypasses cache) 
+     * @param string $key
+     * @param string $default
+     * @return string
+     */
+    public function getSetting($key,$default = '') {
+        $setting = $this->xpdo->getObject('modUserSetting',array(
+            'key' => $key,
+            'user' => $this->xpdo->user->get('id'),
+        ));
+        if ($setting) {
+            $default = $setting->get('value');
+        }
+        return $default;
+    }
+
+    /**
      * Set a custom User Setting for this user
      *
      * @param string $key The key of the Setting
