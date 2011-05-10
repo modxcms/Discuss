@@ -784,6 +784,10 @@ class disThread extends xPDOSimpleObject {
         return !$this->isArchived() && $this->xpdo->hasPermission('discuss.thread_reply') && !$this->get('locked');
     }
 
+    public function canPostAttachments() {
+        return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_attach');
+    }
+
     /**
      * Calculate the last post pagination page for a thread
      * @return int

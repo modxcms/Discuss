@@ -29,6 +29,7 @@ if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
 $post = $modx->getObject('disPost',$scriptProperties['post']);
 if ($post == null) { $modx->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.modify_post_header',array('title' => $post->get('title'))));
+$modx->lexicon->load('discuss:post');
 
 /* setup defaults */
 $placeholders = $post->toArray();
@@ -57,9 +58,15 @@ foreach ($attachments as $attachment) {
     $atts[] = $discuss->getChunk($postAttachmentRowTpl,$attachmentArray);
     $idx++;
 }
+
+/* attachments */
+$placeholders['attachment_fields'] = '';
 $placeholders['attachments'] = implode("\n",$atts);
 $placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
 $placeholders['attachmentCurIdx'] = count($attachments)+1;
+if ($thread->canPostAttachments()) {
+    $placeholders['attachment_fields'] = $discuss->getChunk('post/disAttachmentFields',$placeholders);
+}
 
 /* get board breadcrumb trail */
 $c = $modx->newQuery('disBoard');
