@@ -354,7 +354,12 @@ class disPost extends xPDOSimpleObject {
 
     public function loadParser() {
         if (empty($this->parser)) {
-            $this->parser = $this->xpdo->getService('disParser','disBBCodeParser',$this->xpdo->discuss->config['modelPath'].'discuss/parser/');
+            $parserClass = $this->xpdo->getOption('discuss.parser_class',null,'disBBCodeParser');
+            $parserClassPath = $this->xpdo->getOption('discuss.parser_class_path');
+            if (empty($parserClassPath)) {
+                $parserClassPath = $this->xpdo->discuss->config['modelPath'].'discuss/parser/';
+            }
+            $this->parser = $this->xpdo->getService('disParser',$parserClass,$parserClassPath);
         }
         return $this->parser;
     }

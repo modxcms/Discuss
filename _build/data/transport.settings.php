@@ -313,6 +313,24 @@ $settings['discuss.page_param']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
+$settings['discuss.parser_class']= $modx->newObject('modSystemSetting');
+$settings['discuss.parser_class']->fromArray(array(
+    'key' => 'discuss.parser_class',
+    'value' => 'disBBCodeParser',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Posts',
+),'',true,true);
+
+$settings['discuss.parser_class_path']= $modx->newObject('modSystemSetting');
+$settings['discuss.parser_class_path']->fromArray(array(
+    'key' => 'discuss.parser_class_path',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Posts',
+),'',true,true);
+
 $settings['discuss.recycle_bin_board']= $modx->newObject('modSystemSetting');
 $settings['discuss.recycle_bin_board']->fromArray(array(
     'key' => 'discuss.recycle_bin_board',
