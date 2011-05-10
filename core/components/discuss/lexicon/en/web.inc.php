@@ -142,6 +142,7 @@ $_lang['discuss.thread_unlock'] = 'Unlock Thread';
 $_lang['discuss.thread_unstick'] = 'Unstick Thread';
 $_lang['discuss.thread_viewing'] = '[[+members]] and [[+guests]] guests are viewing this thread.';
 $_lang['discuss.title'] = 'Title';
+$_lang['discuss.track_ip'] = 'Track IP';
 $_lang['discuss.unread_posts'] = 'Unread Posts';
 $_lang['discuss.unread_posts_all'] = 'View All Unread Posts';
 $_lang['discuss.unread_posts_last_visit'] = 'Unread Posts Since Last Visit';

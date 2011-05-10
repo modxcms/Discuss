@@ -26,7 +26,7 @@
  *
  * @package discuss
  */
-if (!$discuss->isLoggedIn) $modx->sendUnauthorizedPage();
+if (!$discuss->user->isLoggedIn) $modx->sendUnauthorizedPage();
 $discuss->setSessionPlace('messages');
 $discuss->setPageTitle($modx->lexicon('discuss.messages'));
 $placeholders = array();
