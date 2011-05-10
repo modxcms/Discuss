@@ -33,17 +33,7 @@
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
     <br class="clear" />
 
-    <label for="dis-attachment">[[%discuss.attachments]]:
-        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
-        <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
-        <span class="error">[[+error.attachments]]</span>
-    </label>
-    <input type="file" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
-
-    <div id="dis-attachments"></div>
-    [[+attachments:notempty=`<div class="dis-existing-attachments">
-        <ul>[[+attachments]]</ul>
-    </div>`]]
+    [[+attachment_fields]]
     <br class="clear" />
 
     [[+locked_cb]]

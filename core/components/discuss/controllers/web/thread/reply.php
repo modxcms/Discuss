@@ -42,6 +42,7 @@ if (empty($scriptProperties['thread'])) {
     if (empty($post)) $modx->sendErrorPage();
 }
 $discuss->setPageTitle($modx->lexicon('discuss.reply_to_post',array('title' => $post->get('title'))));
+$modx->lexicon->load('discuss:post');
 
 /* ensure user can actually reply */
 if (!$post->canReply()) $modx->sendErrorPage();
@@ -93,6 +94,16 @@ if ($thread->canStick()) {
     $placeholders['can_stick'] = true;
 }
 
+/* attachments */
+$placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
+$placeholders['attachment_fields'] = '';
+if ($thread->canPostAttachments()) {
+    $placeholders['attachment_fields'] = $discuss->getChunk('post/disAttachmentFields',$placeholders);
+}
+$modx->regClientStartupHTMLBlock('<script type="text/javascript">
+$(function() { DIS.config.attachments_max_per_post = '.$placeholders['max_attachments'].'; });
+</script>');
+
 /* quote functionality */
 if (empty($_POST) && !empty($scriptProperties['quote'])) {
     $placeholders['message'] = str_replace(array('[',']'),array('&#91;','&#93;'),$post->br2nl($post->get('message')));
@@ -101,11 +112,6 @@ if (empty($_POST) && !empty($scriptProperties['quote'])) {
     $placeholders['message'] = '';
 }
 
-/* set max attachment limit */
-$placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per_post',null,5);
-$modx->regClientStartupHTMLBlock('<script type="text/javascript">
-$(function() { DIS.config.attachments_max_per_post = '.$placeholders['max_attachments'].'; });
-</script>');
 
 /* output form to browser */
 $modx->setPlaceholder('discuss.error_panel',$discuss->getChunk('disError'));

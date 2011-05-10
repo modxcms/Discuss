@@ -26,6 +26,7 @@
  *
  * @package discuss
  */
+$modx->lexicon->load('discuss:post');
 $discuss->setSessionPlace('newthread:'.$scriptProperties['board']);
 $discuss->setPageTitle($modx->lexicon('discuss.thread_new'));
 
@@ -56,6 +57,13 @@ if ($board->canPostStickyThread()) {
     $placeholders['sticky'] = !empty($_POST['sticky']) ? ' checked="checked"' : '';
     $placeholders['sticky_cb'] = '<label class="dis-cb"><input type="checkbox" name="sticky" value="1" '.$placeholders['sticky'].' />'.$modx->lexicon('discuss.thread_stick').'</label>';
     $placeholders['can_stick'] = true;
+}
+
+$placeholders['attachment_fields'] = '';
+if ($board->canPostAttachments()) {
+    $placeholders['attachmentCurIdx'] = 1;
+    $placeholders['attachments'] = '';
+    $placeholders['attachment_fields'] = $discuss->getChunk('post/disAttachmentFields',$placeholders);
 }
 
 /* set max attachment limit */

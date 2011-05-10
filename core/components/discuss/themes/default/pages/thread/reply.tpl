@@ -32,15 +32,8 @@
     </label>
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
     <br class="clear" />
-    
-    <label for="dis-reply-post-attachment">[[%discuss.attachments]]:
-        <span class="small dis-reply-post-add-attachment"><a href="[[~[[*id]]]]?post=[[+id]]">[[%discuss.attachment_add]]</a>
-        <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
-        <span class="error">[[+error.attachments]]</span>
-    </label>
-    <input type="file" name="attachment1" id="dis-reply-post-attachment" />    
-    
-    <div id="dis-attachments"></div>
+
+    [[+attachment_fields]]
     <br class="clear" />
 
     [[+locked_cb]]

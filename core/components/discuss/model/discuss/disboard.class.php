@@ -656,4 +656,8 @@ class disBoard extends xPDOSimpleObject {
         return $this->xpdo->hasPermission('discuss.thread_lock') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
+
+    public function canPostAttachments() {
+        return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_attach');
+    }
 }
