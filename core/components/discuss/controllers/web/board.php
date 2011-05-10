@@ -28,7 +28,9 @@
  */
 /* get board */
 if (empty($scriptProperties['board'])) $modx->sendErrorPage();
-$board = $modx->call('disBoard','fetch',array(&$modx,$scriptProperties['board']));
+$integrated = $modx->getOption('i',$scriptProperties,false);
+if (!empty($integrated)) $integrated = true;
+$board = $modx->call('disBoard','fetch',array(&$modx,$scriptProperties['board'],$integrated));
 if ($board == null) $modx->sendErrorPage();
 
 /* set meta */
@@ -55,9 +57,12 @@ if (empty($placeholders['boards'])) $placeholders['boards_toggle'] = 'display:no
 
 /* get all threads in board */
 $limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
-$page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-$page = $page <= 0 ? $page = 1 : $page;
-$start = ($page-1) * $limit;
+if (empty($start)) {
+    $page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+    $page = $page <= 0 ? $page = 1 : $page;
+    $start = ($page-1) * $limit;
+} else {
+}
 $posts = $discuss->hooks->load('board/post/getList',array(
     'board' => &$board,
     'limit' => $limit,

@@ -37,9 +37,10 @@ class disThread extends xPDOSimpleObject {
      * @param xPDO $modx A reference to the modX instance
      * @param $id The ID of the thread
      * @param string $type The type of thread: post/message
+     * @param boolean $integrated Grab by the integrated_id instead of the id
      * @return disThread/null The returned, grabbed thread; or false/null if not found/accessible
      */
-    public static function fetch(xPDO &$modx, $id, $type = disThread::TYPE_POST) {
+    public static function fetch(xPDO &$modx, $id, $type = disThread::TYPE_POST, $integrated = false) {
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disPost','FirstPost');
         $c->select($modx->getSelectColumns('disThread','disThread'));
@@ -51,9 +52,15 @@ class disThread extends xPDOSimpleObject {
                 WHERE pPost.thread = disThread.id
              ) AS participants',
         ));
-        $c->where(array(
-            'disThread.id' => $id,
-        ));
+        if ($integrated) {
+            $c->where(array(
+                'disThread.integrated_id' => trim($id,'.'),
+            ));
+        } else {
+            $c->where(array(
+                'disThread.id' => $id,
+            ));
+        }
         if ($type == disThread::TYPE_POST) {
             $c->innerJoin('disBoard','Board');
             $c->where(array(

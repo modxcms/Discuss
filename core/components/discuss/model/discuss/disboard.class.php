@@ -190,11 +190,11 @@ class disBoard extends xPDOSimpleObject {
         return $ids;
     }
 
-    public static function fetch(xPDO &$modx,$id) {
+    public static function fetch(xPDO &$modx,$id,$integrated = false) {
         $c = $modx->newQuery('disBoard');
         $c->leftJoin('disBoardUserGroup','UserGroups');
         $c->where(array(
-            'id' => $id,
+            ($integrated ? 'integrated_id' : 'id') => trim($id,'.'),
         ));
         $groups = $modx->discuss->user->getUserGroups();
         if (!empty($groups) && !$modx->discuss->user->isAdmin) {
