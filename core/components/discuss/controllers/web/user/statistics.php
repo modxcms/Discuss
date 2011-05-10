@@ -33,12 +33,13 @@ if (!$discuss->user->isLoggedIn) {
 }
 
 /* get user */
-if (empty($_REQUEST['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('disUser',$_REQUEST['user']);
+if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
+$user = $modx->getObject('disUser',$scriptProperties['user']);
 if ($user == null) { $modx->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.user_statistics_header',array('user' => $user->get('username'))));
 
 /* get default properties */
+$isSelf = strtolower($modx->user->get('username')) == strtolower($user->get('username'));
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
 
 $placeholders = $user->toArray();
@@ -60,8 +61,8 @@ $placeholders['replies'] = number_format($placeholders['replies']);
 $placeholders['posts'] = number_format($placeholders['posts']);
 
 /* do output */
-$placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
-$placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canEdit'] = $isSelf;
+$placeholders['canAccount'] = $isSelf;
 $placeholders['usermenu'] = $discuss->getChunk($menuTpl,$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 

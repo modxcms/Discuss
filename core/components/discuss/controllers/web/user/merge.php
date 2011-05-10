@@ -26,14 +26,17 @@
  *
  * @package discuss
  */
-$modx->lexicon->load('discuss:user');
-$discuss->setPageTitle($modx->lexicon('discuss.account_merge'));
-
 if (!$discuss->user->isLoggedIn) {
     $discuss->sendUnauthorizedPage();
 }
+$modx->lexicon->load('discuss:user');
+$discuss->setPageTitle($modx->lexicon('discuss.account_merge'));
+
 
 $placeholders = $discuss->user->toArray();
+$isSelf = strtolower($modx->user->get('username')) == strtolower($discuss->user->get('username'));
+$placeholders['canEdit'] = $isSelf;
+$placeholders['canAccount'] = $isSelf;
 $placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 $modx->setPlaceholder('discuss.user',$discuss->user->get('username'));
 
