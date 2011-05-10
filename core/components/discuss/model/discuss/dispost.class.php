@@ -235,6 +235,15 @@ class disPost extends xPDOSimpleObject {
      * @return boolean
      */
     public function remove(array $ancestors = array(),$doBoardMoveChecks = false,$moveToSpam = false) {
+        $canRemove = $this->xpdo->invokeEvent('OnDiscussPostBeforeRemove',array(
+            'post' => &$this,
+            'doBoardMoveChecks' => $doBoardMoveChecks,
+            'moveToSpam' => $moveToSpam,
+        ));
+        if (!empty($canRemove)) {
+            return false;
+        }
+
         /* first check to see if moving to spam/trash */
         if (!empty($doBoardMoveChecks) && !$this->get('private')) {
             $board = $this->getOne('Board');
@@ -330,6 +339,13 @@ class disPost extends xPDOSimpleObject {
             }
 
             $this->removeFromIndex();
+
+            $this->xpdo->invokeEvent('OnDiscussPostRemove',array(
+                'post' => &$this,
+                'thread' => &$thread,
+                'doBoardMoveChecks' => $doBoardMoveChecks,
+                'moveToSpam' => $moveToSpam,
+            ));
 
             $this->clearCache();
         }

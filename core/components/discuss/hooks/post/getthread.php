@@ -160,6 +160,17 @@ foreach ($posts['results'] as $post) {
         $postArray['ip'] = '';
     }
     $postArray['idx'] = $idx+1;
+
+    /* fire OnDiscussPostBeforeRender */
+    $modx->invokeEvent('OnDiscussPostBeforeRender',array(
+        'post' => &$post,
+        'postArray' => &$postArray,
+        'idx' => $idx+1,
+        'tpl' => $tpl,
+        'flat' => $flat,
+        'isAdmin' => $isAdmin,
+        'isModerator' => $isModerator,
+    ));
     
     if ($flat) {
         $output[] = $discuss->getChunk($tpl,$postArray);

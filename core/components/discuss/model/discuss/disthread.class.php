@@ -648,10 +648,10 @@ class disThread extends xPDOSimpleObject {
             }
         }
 
-        $c->bindGraph('{"Author":{"PrimaryDiscussGroup":{},"PrimaryGroup":{}},"EditedBy":{}}');
+        $c->bindGraph('{"Author":{},"EditedBy":{}}');
         //$c->prepare();
         //$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
-        $response['results'] = $this->xpdo->getCollectionGraph('disPost','{"Author":{"PrimaryDiscussGroup":{},"PrimaryGroup":{}},"EditedBy":{}}',$c);
+        $response['results'] = $this->xpdo->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
 
         return $response;
     }
