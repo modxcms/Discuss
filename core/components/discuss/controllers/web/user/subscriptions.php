@@ -26,17 +26,12 @@
  * @package discuss
  */
 /* get user */
-if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('disUser',$scriptProperties['user']);
-if ($user == null) { $modx->sendErrorPage(); }
-
 if (!$discuss->user->isLoggedIn) {
     $discuss->sendUnauthorizedPage();
 }
-
 $modx->lexicon->load('discuss:user');
-$placeholders = $user->toArray();
-$discuss->setPageTitle($modx->lexicon('discuss.user_subscriptions_header',array('user' => $user->get('username'))));
+$placeholders = $discuss->user->toArray();
+$discuss->setPageTitle($modx->lexicon('discuss.user_subscriptions_header',array('user' => $discuss->user->get('username'))));
 
 /* handle unsubscribing */
 if (!empty($_POST) && !empty($_POST['remove'])) {
@@ -45,7 +40,7 @@ if (!empty($_POST) && !empty($_POST['remove'])) {
         if ($notification == null) continue;
         $notification->remove();
     }
-    $url = $discuss->url.'user/subscriptions?user='.$user->get('id');
+    $url = $discuss->url.'user/subscriptions';
     $modx->sendRedirect($url);
 }
 
@@ -67,7 +62,7 @@ $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
 $c->innerJoin('disBoard','Board');
 $c->where(array(
-    'Notifications.user' => $user->get('id'),
+    'Notifications.user' => $discuss->user->get('id'),
 ));
 $c->sortby('FirstPost.title','ASC');
 $subscriptions = $modx->getCollection('disThread',$c);
@@ -81,8 +76,8 @@ foreach ($subscriptions as $subscription) {
 $placeholders['subscriptions'] = implode("\n",$placeholders['subscriptions']);
 
 /* output */
-$placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
-$placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canEdit'] = true;
+$placeholders['canAccount'] = true;
 $placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
-$modx->setPlaceholder('discuss.user',$user->get('username'));
+$modx->setPlaceholder('discuss.user',$discuss->user->get('username'));
 return $placeholders;

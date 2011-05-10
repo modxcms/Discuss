@@ -25,18 +25,12 @@
  *
  * @package discuss
  */
-/* get user */
-if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('disUser',$scriptProperties['user']);
-if ($user == null) { $modx->sendErrorPage(); }
-
 if (!$discuss->user->isLoggedIn) {
     $discuss->sendUnauthorizedPage();
 }
-
 $modx->lexicon->load('discuss:user');
-$placeholders = $user->toArray();
-$discuss->setPageTitle($modx->lexicon('discuss.user_ignore_boards_header',array('user' => $user->get('username'))));
+$placeholders = $discuss->user->toArray();
+$discuss->setPageTitle($modx->lexicon('discuss.user_ignore_boards_header',array('user' => $discuss->user->get('username'))));
 
 /* handle ignoring */
 if (!empty($_POST) && !empty($scriptProperties['boards'])) {
@@ -46,10 +40,10 @@ if (!empty($_POST) && !empty($scriptProperties['boards'])) {
     }
     $ignores = array_unique($ignores);
     sort($ignores);
-    $user->set('ignore_boards',implode(',',$ignores));
-    if ($user->save()) {
-        $user->clearCache();
-        $url = $discuss->url.'user/ignoreboards?user='.$user->get('id');
+    $discuss->user->set('ignore_boards',implode(',',$ignores));
+    if ($discuss->user->save()) {
+        $discuss->user->clearCache();
+        $url = $discuss->url.'user/ignoreboards';
         $modx->sendRedirect($url);
     }
 }
@@ -63,7 +57,7 @@ $currentCategory = 0;
 $rowClass = 'even';
 $boardList = array();
 $categoryIgnoreList = array('checked' => array(),'all' => array());
-$ignores = $user->get('ignore_boards');
+$ignores = $discuss->user->get('ignore_boards');
 $ignores = explode(',',$ignores);
 $idx = 0;
 foreach ($boards as $board) {
@@ -116,8 +110,8 @@ if (count($boards) > 0) {
 $placeholders['boards'] = implode("\n",$list);
 
 /* get left menu */
-$placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
-$placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canEdit'] = true;
+$placeholders['canAccount'] = true;
 $placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 
 return $placeholders;

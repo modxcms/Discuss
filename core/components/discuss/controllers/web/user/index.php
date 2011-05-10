@@ -25,6 +25,7 @@
  *
  * @package discuss
  */
+if (empty($scriptProperties['user'])) $scriptProperties['user'] = $discuss->user->get('id');
 $discuss->setSessionPlace('user:'.$scriptProperties['user']);
 $modx->lexicon->load('discuss:user');
 
@@ -46,6 +47,7 @@ $c[!empty($scriptProperties['i']) ? 'integrated_id' : 'id'] = $scriptProperties[
 $user = $modx->getObject('disUser',$c);
 if ($user == null) { $modx->sendErrorPage(); }
 $discuss->setPageTitle($user->get('username'));
+$isSelf = strtolower($modx->user->get('username')) == strtolower($user->get('username'));
 
 $placeholders = $user->toArray();
 $placeholders['avatarUrl'] = $user->getAvatarUrl();
@@ -97,8 +99,8 @@ $user->getOne('User');
 $placeholders['groups'] = implode(', ',$user->User->getUserGroupNames());
 
 /* do output */
-$placeholders['canEdit'] = $modx->user->get('username') == $user->get('username');
-$placeholders['canAccount'] = $modx->user->get('username') == $user->get('username');
+$placeholders['canEdit'] = $isSelf;
+$placeholders['canAccount'] = $isSelf;
 $placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 return $placeholders;
