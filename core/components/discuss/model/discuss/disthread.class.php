@@ -37,9 +37,10 @@ class disThread extends xPDOSimpleObject {
      * @param xPDO $modx A reference to the modX instance
      * @param $id The ID of the thread
      * @param string $type The type of thread: post/message
+     * @param boolean $integrated Grab by the integrated_id instead of the id
      * @return disThread/null The returned, grabbed thread; or false/null if not found/accessible
      */
-    public static function fetch(xPDO &$modx, $id, $type = disThread::TYPE_POST) {
+    public static function fetch(xPDO &$modx, $id, $type = disThread::TYPE_POST, $integrated = false) {
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disPost','FirstPost');
         $c->select($modx->getSelectColumns('disThread','disThread'));
@@ -51,9 +52,15 @@ class disThread extends xPDOSimpleObject {
                 WHERE pPost.thread = disThread.id
              ) AS participants',
         ));
-        $c->where(array(
-            'disThread.id' => $id,
-        ));
+        if ($integrated) {
+            $c->where(array(
+                'disThread.integrated_id' => trim($id,'.'),
+            ));
+        } else {
+            $c->where(array(
+                'disThread.id' => $id,
+            ));
+        }
         if ($type == disThread::TYPE_POST) {
             $c->innerJoin('disBoard','Board');
             $c->where(array(
@@ -195,6 +202,13 @@ class disThread extends xPDOSimpleObject {
         return $response;
     }
 
+    /**
+     * Mark all posts in this thread as read
+     * @static
+     * @param xPDO $modx
+     * @param string $type
+     * @return bool
+     */
     public static function readAll(xPDO &$modx,$type = 'message') {
         $userId = $modx->discuss->user->get('id');
         $sql = 'SELECT `disThread`.`id`
@@ -636,12 +650,10 @@ class disThread extends xPDOSimpleObject {
      * Fetch all posts for this thread
      *
      * @param mixed $post A reference to a disPost or ID of disPost to start the posts from
-     * @param int $limit The number of posts to limit to
-     * @param int $start The starting index of posts to start at
-     * @param bool $flat If true, will render posts flat
+     * @param array $options An array of options for sorting, limiting and display
      * @return array
      */
-    public function fetchPosts($post = false,$limit = 0,$start = 0,$flat = true) {
+    public function fetchPosts($post = false,array $options = array()) {
         $response = array();
         $c = $this->xpdo->newQuery('disPost');
         $c->innerJoin('disThread','Thread');
@@ -650,8 +662,13 @@ class disThread extends xPDOSimpleObject {
         ));
         $cc = clone $c;
         $response['total'] = $this->xpdo->getCount('disPost',$cc);
+        $flat = $this->xpdo->getOption('flat',$options,true);
+        $limit = $this->xpdo->getOption('limit',$options,(int)$this->xpdo->getOption('discuss.post_per_page',$options, 10));
+        $start = $this->xpdo->getOption('start',$options,0);
         if ($flat) {
-            $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('createdon')),'ASC');
+            $sortBy = $this->xpdo->getOption('sortBy',$options,'createdon');
+            $sortDir = $this->xpdo->getOption('sortDir',$options,'ASC');
+            $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array($sortBy)),$sortDir);
             if (empty($_REQUEST['print'])) {
                 $c->limit($limit, $start);
             }
@@ -811,8 +828,9 @@ class disThread extends xPDOSimpleObject {
      */
     public function getUrl($lastPost = true) {
         $url = $this->xpdo->discuss->url.'thread/?thread='.$this->get('id');
+        $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
         if ($lastPost) {
-            if ($this->get('last_post_page') != 1) {
+            if ($this->get('last_post_page') != 1 && $sortDir == 'ASC') {
                 $url .= '&page='.$this->get('last_post_page');
             }
             if ($this->get('post_id')) {

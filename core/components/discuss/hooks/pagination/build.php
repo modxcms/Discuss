@@ -41,6 +41,7 @@ $viewId = $scriptProperties['id'];
 $params = $modx->request->getParameters();
 unset($params['page']);
 unset($params['action']);
+unset($params['start']);
 $currentResourceUrl = $discuss->url.$view.'?'.http_build_query($params);
 
 if ($total <= 1) {

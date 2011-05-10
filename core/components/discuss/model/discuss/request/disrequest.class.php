@@ -52,6 +52,10 @@ class DisRequest {
     public function getControllerValue() {
         $controller = !empty($_REQUEST[$this->config['actionVar']]) ? $_REQUEST[$this->config['actionVar']] : 'home';
         $controller = str_replace(array('../','./'),'',$controller);
+        $colon = strpos($controller,';');
+        if ($colon !== false) {
+            $controller = substr($controller,0,$colon);
+        }
         $controller = strip_tags(trim($controller,'/'));
         $c = $this->getControllerFile($controller);
         $this->controller = $c;

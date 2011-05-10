@@ -28,10 +28,12 @@
 $discuss->setSessionPlace('thread:'.$scriptProperties['thread']);
 
 /* get default properties */
+$integrated = $modx->getOption('i',$scriptProperties,false);
+if (!empty($integrated)) $integrated = true;
 $userId = $modx->user->get('id');
 $thread = $modx->getOption('thread',$scriptProperties,false);
 if (empty($thread)) $modx->sendErrorPage();
-$thread = $modx->call('disThread', 'fetch', array(&$modx,$thread));
+$thread = $modx->call('disThread', 'fetch', array(&$modx,$thread,disThread::TYPE_POST,$integrated));
 if (empty($thread)) $modx->sendErrorPage();
 
 /* mark unread if user clicks mark unread */

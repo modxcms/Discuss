@@ -28,7 +28,9 @@
  */
 /* get board */
 if (empty($scriptProperties['board'])) $modx->sendErrorPage();
-$board = $modx->call('disBoard','fetch',array(&$modx,$scriptProperties['board']));
+$integrated = $modx->getOption('i',$scriptProperties,false);
+if (!empty($integrated)) $integrated = true;
+$board = $modx->call('disBoard','fetch',array(&$modx,$scriptProperties['board'],$integrated));
 if ($board == null) $modx->sendErrorPage();
 
 /* set meta */

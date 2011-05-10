@@ -49,10 +49,16 @@ $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptPropertie
 $isAdmin = $discuss->user->isAdmin();
 $isModerator = $discuss->user->isGlobalModerator() || $thread->isModerator($discuss->user->get('id')) || $discuss->user->isAdmin();
 $userUrl = $discuss->url.'user/';
+$sortDir = $modx->getOption('discuss.post_sort_dir',$scriptProperties,'ASC');
 
 /* get posts */
 $post = $modx->getOption('post',$scriptProperties,false);
-$posts = $thread->fetchPosts($post,$limit,$start,$flat);
+$posts = $thread->fetchPosts($post,array(
+    'limit' => $limit,
+    'start' => $start,
+    'flat' => $flat,
+    'sortDir' => $sortDir,
+));
 
 /* setup basic settings/permissions */
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
@@ -68,9 +74,11 @@ $canReportPost = $modx->hasPermission('discuss.thread_report');
 /* iterate */
 $plist = array();
 $output = array();
-$idx = $start;
+$idx = $sortDir == 'ASC' ? $start : $posts['total'] - $start - 1;
 foreach ($posts['results'] as $post) {
+    $post->set('idx',$idx);
     $postArray = $post->toArray();
+    $postArray['url'] = $post->getUrl();
     $postArray['children'] = '';
 
     if ($post->Author) {
@@ -199,7 +207,7 @@ foreach ($posts['results'] as $post) {
     } else {
         $plist[] = $postArray;
     }
-    $idx++;
+    $idx = $sortDir == 'ASC' ? $idx + 1 : $idx - 1;
 }
 $response = array(
     'total' => $posts['total'],

@@ -277,6 +277,9 @@ $_lang['setting_discuss.parser_class_path_desc'] = 'The path to the directory of
 $_lang['setting_discuss.post_per_page'] = 'Posts Per Page';
 $_lang['setting_discuss.post_per_page_desc'] = 'The default number of posts to show per page on the thread view.';
 
+$_lang['setting_discuss.post_sort_dir'] = 'Default Post Sort Direction';
+$_lang['setting_discuss.post_sort_dir_desc'] = 'The direction to sort posts in a Thread, with ASC being most recent at end, or DESC being most recent at beginning of the thread.';
+
 $_lang['setting_discuss.use_custom_post_parser'] = 'Use Custom Post Parser';
 $_lang['setting_discuss.use_custom_post_parser_desc'] = 'If set, will use a custom post parser for thread posts instead of BBCode.';
 

@@ -353,6 +353,15 @@ $settings['discuss.parser_class_path']->fromArray(array(
     'area' => 'Posts',
 ),'',true,true);
 
+$settings['discuss.post_sort_dir']= $modx->newObject('modSystemSetting');
+$settings['discuss.post_sort_dir']->fromArray(array(
+    'key' => 'discuss.post_sort_dir',
+    'value' => 'ASC',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Posts',
+),'',true,true);
+
 $settings['discuss.recycle_bin_board']= $modx->newObject('modSystemSetting');
 $settings['discuss.recycle_bin_board']->fromArray(array(
     'key' => 'discuss.recycle_bin_board',

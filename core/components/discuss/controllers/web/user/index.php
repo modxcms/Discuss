@@ -41,7 +41,9 @@ if (!empty($profileResourceId) && $discuss->ssoMode) {
 
 /* get user */
 if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
-$user = $modx->getObject('disUser',$scriptProperties['user']);
+$c = array();
+$c[!empty($scriptProperties['i']) ? 'integrated_id' : 'id'] = $scriptProperties['user'];
+$user = $modx->getObject('disUser',$c);
 if ($user == null) { $modx->sendErrorPage(); }
 $discuss->setPageTitle($user->get('username'));
 
