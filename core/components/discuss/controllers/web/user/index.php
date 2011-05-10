@@ -47,7 +47,7 @@ $c[!empty($scriptProperties['i']) ? 'integrated_id' : 'id'] = $scriptProperties[
 $user = $modx->getObject('disUser',$c);
 if ($user == null) { $modx->sendErrorPage(); }
 $discuss->setPageTitle($user->get('username'));
-$isSelf = strtolower($modx->user->get('username')) == strtolower($user->get('username'));
+$isSelf = $modx->user->get('id') == $user->get('user');
 
 $placeholders = $user->toArray();
 $placeholders['avatarUrl'] = $user->getAvatarUrl();
