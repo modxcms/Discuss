@@ -33,6 +33,6 @@ $contexts = $modx->user->getSessionContexts();
 foreach ($contexts as $context => $level) {
     if ($context == 'mgr') continue;
     $modx->user->removeSessionContext($context);
+    $modx->getUser($context,true);
 }
-
 $modx->sendRedirect($discuss->url.'home');
