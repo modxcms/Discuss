@@ -35,6 +35,9 @@ class disBBCodeParser extends disParser {
      * @return string The parsed string with HTML instead of BBCode, and all code stripped
      */
     public function parse($message) {
+
+        $message = $this->preClean($message);
+        
         /* handle quotes better, to allow for citing */
         $message = $this->parseQuote($message);
         $message = $this->parseBasic($message);
@@ -79,11 +82,12 @@ class disBBCodeParser extends disParser {
 
         $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
         $message = preg_replace("#\[hide\](.*?)\[/hide\]#si",'\\1',$message);
+       // $message = preg_replace("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",'<a href="\\1">\\2</a>',$message);
+        $message = preg_replace_callback("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",array('disBBCodeParser','parseUrlCallback'),$message);
         $message = preg_replace_callback("#\[email\]([^/]*?)\[/email\]#si",array('disBBCodeParser','parseEmailCallback'),$message);
         $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
         $message = preg_replace("#\[url\](.*?)\[/url\]#si",'\\1',$message);
         $message = preg_replace("#\[magic\](.*?)\[/magic\]#si",'<marquee>\\1</marquee>',$message);
-        $message = preg_replace("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",'<a href="\\1">\\2</a>',$message);
         $message = preg_replace("#\[php\](.*?)\[/php\]#si",'<pre class="brush:php">\\1</pre>',$message);
         $message = preg_replace("#\[mysql\](.*?)\[/mysql\]#si",'<pre class="brush:sql">\\1</pre>',$message);
         $message = preg_replace("#\[css\](.*?)\[/css\]#si",'<pre class="brush:css">\\1</pre>',$message);
@@ -100,6 +104,18 @@ class disBBCodeParser extends disParser {
         $message = preg_replace('#\[/?left\]#si', '', $message);
 
         return $message;
+    }
+
+    /**
+     * Prevent javascript:/ftp: injections via URLs
+     * 
+     * @static
+     * @param array $matches
+     * @return string
+     */
+    public static function parseUrlCallback($matches) {
+        $url = str_replace(array('javascript:','ftp:'),'',strip_tags($matches[1]));
+        return '<a href="'.$url.'">'.$matches[2].'</a>';
     }
     
     public static function parseCodeCallback($matches) {
@@ -313,5 +329,85 @@ class disBBCodeParser extends disParser {
             $v[$i] = '<img src="'.$imagesUrl.$v[$i].'.gif" alt="" />';
         }
         return str_replace(array_keys($smiley),$v,$message);
+    }
+
+    /**
+     * Do some SMF-style BBCode cleaning
+     * 
+     * @param string $message
+     * @return string
+     */
+    public function preClean($message) {
+        /* leave only \n linebreaks */
+	    $message = strtr($message, array("\r" => ''));
+
+        /* nuke any extra [/quote] tags */
+        while (substr($message, -7) == '[quote]') {
+            $message = substr($message, 0, -7);
+        }
+        while (substr($message, 0, 8) == '[/quote]') {
+            $message = substr($message, 8);
+        }
+
+        $codeopen = preg_match_all('~(\[code(?:=[^\]]+)?\])~is', $message, $dummy);
+        $codeclose = preg_match_all('~(\[/code\])~is', $message, $dummy);
+
+        // Close/open all code tags...
+        if ($codeopen > $codeclose)
+            $message .= str_repeat('[/code]', $codeopen - $codeclose);
+        elseif ($codeclose > $codeopen)
+            $message = str_repeat('[code]', $codeclose - $codeopen) . $message;
+
+        // Now that we've fixed all the code tags, let's fix the img and url tags...
+        $parts = preg_split('~(\[/code\]|\[code(?:=[^\]]+)?\])~i', $message, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+        $nbs = '\xA0';
+        $charset = $this->modx->getOption('modx_charset',null,'UTF-8');
+        /* Only mess with stuff outside [code] tags. */
+        for ($i = 0, $n = count($parts); $i < $n; $i++) {
+            /* It goes 0 = outside, 1 = begin tag, 2 = inside, 3 = close tag, repeat. */
+            if ($i % 4 == 0) {
+                $parts[$i] = $this->checkTags($parts[$i]);
+
+                $list_open = substr_count($parts[$i], '[list]') + substr_count($parts[$i], '[list ');
+                $list_close = substr_count($parts[$i], '[/list]');
+                if ($list_close - $list_open > 0)
+                    $parts[$i] = str_repeat('[list]', $list_close - $list_open) . $parts[$i];
+                if ($list_open - $list_close > 0)
+                    $parts[$i] = $parts[$i] . str_repeat('[/list]', $list_open - $list_close);
+
+                // Make sure all tags are lowercase.
+                $parts[$i] = preg_replace('~\[([/]?)(list|li)((\s[^\]]+)*)\]~ie', '\'[$1\' . strtolower(\'$2\') . \'$3]\'', $parts[$i]);
+
+                $mistakeFixes = array(
+                    /* Look for properly opened [li]s which aren't closed. */
+                    '~\[li\]([^\[\]]+?)\[li\]~s' => '[li]$1[_/li_][_li_]',
+                    '~\[li\]([^\[\]]+?)$~s' => '[li]$1[/li]',
+                    /* Lists - find correctly closed items/lists. */
+                    '~\[/li\]([\s' . $nbs . ']*)\[/list\]~s' . ($charset == 'UTF-8' ? 'u' : '') => '[_/li_]$1[/list]',
+                    /* Find list items closed and then opened.*/
+                    '~\[/li\]([\s' . $nbs . ']*)\[li\]~s' . ($charset == 'UTF-8' ? 'u' : '') => '[_/li_]$1[_li_]',
+                    /* Now, find any [list]s or [/li]s followed by [li].*/
+                    '~\[(list(?: [^\]]*?)?|/li)\]([\s' . $nbs . ']*)\[li\]~s' . ($charset == 'UTF-8' ? 'u' : '') => '[$1]$2[_li_]',
+                    /* Any remaining [li]s weren't inside a [list].*/
+                    '~\[li\]~' => '[list][li]',
+                    /* Any remaining [/li]s weren't before a [/list].*/
+                    '~\[/li\]~' => '[/li][/list]',
+                    /* Put the correct ones back how we found them. */
+                    '~\[_(li|/li)_\]~' => '[$1]',
+                );
+                for ($j = 0; $j < 3; $j++) {
+                    $parts[$i] = preg_replace(array_keys($mistakeFixes), $mistakeFixes, $parts[$i]);
+                }
+            }
+
+            $message = strtr(implode('', $parts), array('  ' => '&nbsp; ', "\n" => '<br />', $charset == 'UTF-8' ? "\xC2\xA0" : "\xA0" => '&nbsp;'));
+        }
+        return $message;
+    }
+
+    public function checkTags($message) {
+        $message = preg_replace('~(\[img.*?\])(.+?)\[/img\]~eis', '\'$1\' . preg_replace(\'~action(=|%3d)(?!dlattach)~i\', \'action-\', \'$2\') . \'[/img]\'', $message);
+        return $message;
     }
 }

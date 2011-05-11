@@ -384,40 +384,6 @@ class Discuss {
     }
 
     /**
-     * Builds pagination
-     *
-     * @access public
-     * @param int $count The total number of records
-     * @param int $limit The # of records per page
-     * @param int $start The current starting record
-     * @param string $url The URL for the links to go to.
-     * @return string
-     */
-    public function buildPagination($count,$limit,$start,$url) {
-        $pageCount = $count / $limit;
-        $curPage = $start / $limit;
-        $pages = '';
-
-        $params = $_GET;
-        unset($params['q']);
-
-        for ($i=0;$i<$pageCount;$i++) {
-            $newStart = $i*$limit;
-            $u = $url.'?'.http_build_query(array_merge($params,array(
-                'start' => $newStart,
-                'limit' => $limit,
-            )));
-            if ($i != $curPage) {
-                $pages .= '<li class="dis-page-number"><a href="'.$u.'">'.($i+1).'</a></li>';
-            } else {
-                $pages .= '<li class="dis-page-number dis-page-current">'.($i+1).'</li>';
-            }
-        }
-        if (empty($pages)) $pages = '<li class="dis-page-number dis-page-current">1</li>';
-        return $pages;
-    }
-
-    /**
      * Builds action button HTML.
      *
      * TODO: chunk/tpl-ize this
@@ -428,12 +394,11 @@ class Discuss {
      * @return string The HTML for the action buttons
      */
     public function buildActionButtons($btns,$cls) {
-        $abs = '<ul class="dis-action-btns right">';
+        $abs = array();
         foreach ($btns as $ar) {
-            $abs .= '<li><a href="'.$ar['url'].'">'.$ar['text'].'</a></li>';
+            $abs[] = $this->getChunk('disActionButton',$ar);
         }
-        $abs .= '</ul>';
-        return $abs;
+        return $this->getChunk('disActionButtons',array('buttons' => implode("\n",$abs)));
     }
 
     /**

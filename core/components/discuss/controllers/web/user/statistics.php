@@ -39,7 +39,7 @@ if ($user == null) { $modx->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.user_statistics_header',array('user' => $user->get('username'))));
 
 /* get default properties */
-$isSelf = strtolower($modx->user->get('username')) == strtolower($user->get('username'));
+$isSelf = $modx->user->get('id') == $user->get('user');
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
 
 $placeholders = $user->toArray();
