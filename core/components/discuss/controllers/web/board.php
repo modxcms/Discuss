@@ -38,58 +38,75 @@ $discuss->setSessionPlace('board:'.$scriptProperties['board']);
 $discuss->setPageTitle($board->get('name'));
 
 /* add user to board readers */
-if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
+if (!empty($scriptProperties['read']) && $discuss->user->isLoggedIn) {
     $board->read($discuss->user->get('id'));
 }
 
 $placeholders = $board->toArray();
 
-/* setup default properties */
-$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.threads_per_page',null,20));
-$start = $modx->getOption('start',$scriptProperties,0);
-$param = $modx->getOption('discuss.page_param',$scriptProperties,'page');
-
 /* grab all subboards */
-$placeholders['boards'] = $discuss->hooks->load('board/getList',array(
-    'board' => &$board,
-));
-if (empty($placeholders['boards'])) $placeholders['boards_toggle'] = 'display:none;';
+if (!empty($options['showSubBoards'])) {
+    $cacheKey = 'discuss/board/user/'.$discuss->user->get('id').'/board-'.$board->get('id');
+    $boardIndex = $modx->cacheManager->get($cacheKey);
+    if (empty($boardIndex)) {
+        $boardIndex = $discuss->hooks->load('board/getList',array(
+            'board' => &$board,
+        ));
+        $modx->cacheManager->set($cacheKey,$boardIndex,$modx->getOption('discuss.cache_time',null,3600));
+    }
+    $placeholders['boards'] = $boardIndex;
+    if (empty($placeholders['boards'])) $placeholders['boards_toggle'] = 'display:none;';
+}
 
 /* get all threads in board */
-$limit = !empty($_REQUEST['limit']) ? $_REQUEST['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
+$limit = !empty($scriptProperties['limit']) ? $scriptProperties['limit'] : $modx->getOption('discuss.threads_per_page',null,20);
+$start = $modx->getOption('start',$scriptProperties,0);
 if (empty($start)) {
-    $page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-    $page = $page <= 0 ? $page = 1 : $page;
+    $page = !empty($scriptProperties['page']) ? $scriptProperties['page'] : 1;
+    $page = $page <= 0 ? 1 : $page;
     $start = ($page-1) * $limit;
-} else {
 }
-$posts = $discuss->hooks->load('board/post/getList',array(
-    'board' => &$board,
-    'limit' => $limit,
-    'start' => $start,
-));
-$placeholders['posts'] = implode("\n",$posts['results']);
-$discuss->config['pa'] = $posts['total'];
+
+if (!empty($options['showPosts'])) {
+    $cacheKey = 'discuss/board/user/'.$discuss->user->get('id').'/board-'.$board->get('id').'-posts';
+    $posts = $modx->cacheManager->get($cacheKey);
+    if (empty($posts)) {
+        $posts = $discuss->hooks->load('board/post/getList',array(
+            'board' => &$board,
+            'limit' => $limit,
+            'start' => $start,
+        ));
+        $modx->cacheManager->set($cacheKey,$posts,$modx->getOption('discuss.cache_time',null,3600));
+    }
+    $placeholders['posts'] = implode("\n",$posts['results']);
+    $discuss->config['pa'] = $posts['total'];
+}
 
 /* get board breadcrumb trail */
-$placeholders['trail'] = $board->buildBreadcrumbs();
+if (!empty($options['showBreadcrumbs'])) {
+    $placeholders['trail'] = $board->buildBreadcrumbs();
+}
 
 /* get viewing users */
-$placeholders['readers'] = $board->getViewing();
+if (!empty($options['showReaders'])) {
+    $placeholders['readers'] = $board->getViewing();
+}
 
 /* get pagination */
 $discuss->hooks->load('pagination/build',array(
-    'count' => $posts['total'],
+    'count' => !empty($posts) ? $posts['total'] : 0,
     'id' => $board->get('id'),
     'view' => 'board',
     'limit' => $limit,
-    'param' => $param,
+    'param' => $modx->getOption('discuss.page_param',$scriptProperties,'page'),
 ));
 
 unset($count,$start,$limit,$url);
 
 /* get moderators */
-$placeholders['moderators'] = $board->getModeratorsList();
+if (!empty($options['showModerators'])) {
+    $placeholders['moderators'] = $board->getModeratorsList();
+}
 
 /* action buttons */
 $actionButtons = array();

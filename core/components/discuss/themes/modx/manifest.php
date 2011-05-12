@@ -1,5 +1,27 @@
 <?php
 /**
+ * Discuss
+ *
+ * Copyright 2010-11 by Shaun McCormick <shaun@modx.com>
+ *
+ * This file is part of Discuss, a native forum for MODx Revolution.
+ *
+ * Discuss is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package discuss
+ */
+/**
  * Theme manifest for default theme
  */
 $manifest = array(
@@ -34,6 +56,13 @@ $manifest = array(
                 'dis.home.js',
             ),
         ),
+        'options' => array(
+            'showBoards' => true,
+            'showBreadcrumbs' => true,
+            'showRecentPosts' => true,
+            'showStatistics' => true,
+            'showLoginForm' => false,
+        ),
     ),
     'board' => array(
         'js' => array(
@@ -41,12 +70,24 @@ $manifest = array(
                 'dis.board.js',
             ),
         ),
+        'options' => array(
+            'showSubBoards' => true,
+            'showPosts' => true,
+            'showBreadcrumbs' => true,
+            'showReaders' => true,
+            'showModerators' => true,
+        ),
     ),
     'thread/index' => array(
         'js' => array(
             'header' => array(
                 'dis.thread.js',
             )
+        ),
+        'options' => array(
+            'showPosts' => true,
+            'showBreadcrumbs' => true,
+            'showViewing' => true,
         ),
     ),
     'thread/new' => array(
@@ -91,6 +132,11 @@ $manifest = array(
                 'search.css',
             ),
         )
+    ),
+    'user/index' => array(
+        'options' => array(
+            'showRecentPosts' => true,
+        ),
     ),
     'user/subscriptions' => array(
         'js' => array(

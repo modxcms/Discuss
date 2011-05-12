@@ -31,6 +31,7 @@
  */
 class DisRequest {
     public $controller = 'home';
+    public $pageOptions = array();
 
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
@@ -89,6 +90,7 @@ class DisRequest {
             $discuss =& $this->discuss;
             $modx =& $this->modx;
             $scriptProperties = array_merge($_REQUEST,$_GET,$_POST);
+            $options = $this->pageOptions;
 
             $placeholders = require $controller['file'];
         } else {
@@ -175,12 +177,17 @@ class DisRequest {
                 $print = $manifest['print'];
 
 				/* Load global print CSS */
-				if(array_key_exists('css', $print)){
+				if (array_key_exists('css', $print)){
 					$css = $print['css'];
 					foreach($css['header'] as $val){
 						$this->modx->regClientCSS($this->discuss->config['cssUrl'].$val);
 					}
 				}
+
+				/* load global print page options */
+				if (array_key_exists('options', $print)){
+					$this->pageOptions = array_merge($this->pageOptions,$print['options']);
+                }
 
             } else if (is_array($manifest) && array_key_exists('global', $manifest)){
 				$global = $manifest['global'];
@@ -203,6 +210,11 @@ class DisRequest {
 						$this->modx->regClientStartupHTMLBlock('<script type="text/javascript">// <![CDATA['."\n".$js['inline']."\n".'// ]]></script>');
 					}
 				}
+
+				/* load global page options */
+				if (array_key_exists('options', $global)){
+					$this->pageOptions = array_merge($this->pageOptions,$global['options']);
+                }
 			}
 
 			if (isset($additional) && is_array($manifest) && array_key_exists($additional, $manifest)){
@@ -226,6 +238,11 @@ class DisRequest {
 						$this->modx->regClientHTMLBlock('<script type="text/javascript">'.$js['inline'].'</script>');
 					}
 				}
+
+				/* load page-specific options */
+				if (array_key_exists('options', $specific)){
+					$this->pageOptions = array_merge($this->pageOptions,$specific['options']);
+                }
 			}
         } else {
             $this->modx->regClientCSS($this->discuss->config['cssUrl'].'index.css');
