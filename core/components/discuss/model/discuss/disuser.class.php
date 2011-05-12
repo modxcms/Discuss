@@ -34,6 +34,37 @@ class disUser extends xPDOSimpleObject {
     public $isAdmin;
     public $isGlobalModerator;
     public $isLoggedIn = false;
+    public $readThreads = array();
+
+    public function init() {
+        $this->isLoggedIn = true;
+        
+        /* get cache of read threads */
+        $this->prepareReadThreads();
+
+        /* active user, update the disUser record */
+        $this->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
+        $this->set('ip',$this->xpdo->discuss->getIp());
+        $this->save();
+
+        return true;
+    }
+
+    /**
+     * Prepare a cache of all read thread IDs for this user
+     * 
+     * @return array
+     */
+    public function prepareReadThreads() {
+        $stmt = $this->xpdo->query('SELECT `thread` FROM '.$this->xpdo->getTableName('disThreadRead').' WHERE `user` = '.$this->get('id'));
+        if ($stmt) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $this->readThreads[] = (int)$row['thread'];
+            }
+            sort($this->readThreads);
+        }
+        return $this->readThreads;
+    }
 
     /**
      * Gets the avatar URL for this user, depending on the avatar service.

@@ -46,15 +46,9 @@ $placeholders = $board->toArray();
 
 /* grab all subboards */
 if (!empty($options['showSubBoards'])) {
-    $cacheKey = 'discuss/board/user/'.$discuss->user->get('id').'/board-'.$board->get('id');
-    $boardIndex = $modx->cacheManager->get($cacheKey);
-    if (empty($boardIndex)) {
-        $boardIndex = $discuss->hooks->load('board/getList',array(
-            'board' => &$board,
-        ));
-        $modx->cacheManager->set($cacheKey,$boardIndex,$modx->getOption('discuss.cache_time',null,3600));
-    }
-    $placeholders['boards'] = $boardIndex;
+    $placeholders['boards'] = $discuss->hooks->load('board/getlist',array(
+        'board' => &$board,
+    ));
     if (empty($placeholders['boards'])) $placeholders['boards_toggle'] = 'display:none;';
 }
 
@@ -68,16 +62,12 @@ if (empty($start)) {
 }
 
 if (!empty($options['showPosts'])) {
-    $cacheKey = 'discuss/board/user/'.$discuss->user->get('id').'/board-'.$board->get('id').'-posts';
-    $posts = $modx->cacheManager->get($cacheKey);
-    if (empty($posts)) {
-        $posts = $discuss->hooks->load('board/post/getList',array(
-            'board' => &$board,
-            'limit' => $limit,
-            'start' => $start,
-        ));
-        $modx->cacheManager->set($cacheKey,$posts,$modx->getOption('discuss.cache_time',null,3600));
-    }
+    $c = array(
+        'limit' => $limit,
+        'start' => $start,
+        'board' => &$board,
+    );
+    $posts = $discuss->hooks->load('board/post/getlist',$c);
     $placeholders['posts'] = implode("\n",$posts['results']);
     $discuss->config['pa'] = $posts['total'];
 }
