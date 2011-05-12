@@ -205,16 +205,9 @@ class Discuss {
                         'name_last' => isset($name[1]) ? $name[1] : '',
                     ));
                 }
-                $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
-                $this->user->set('ip',$this->getIp());
-                $this->user->save();
-            } else {
-                /* active user, update the disUser record */
-                $this->user->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
-                $this->user->set('ip',$this->getIp());
                 $this->user->save();
             }
-            $this->user->isLoggedIn = true;
+            $this->user->init();
         }
 
         /* topbar profile links. @TODO: Move this somewhere else. */

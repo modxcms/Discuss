@@ -34,17 +34,9 @@ $placeholders = array();
 if (!empty($options['showBoards'])) {
     $c = array(
         'board' => 0,
-        'groups' => $_groups,
     );
     if (!empty($scriptProperties['category'])) $c['category'] = (int)$scriptProperties['category'];
-    $cacheKey = 'discuss/board/user/'.$discuss->user->get('id').'/index-'.md5(serialize($c));
-    $boardIndex = $modx->cacheManager->get($cacheKey);
-    if (empty($boardIndex)) {
-        $boardIndex = $discuss->hooks->load('board/getlist',$c);
-        $modx->cacheManager->set($cacheKey,$boardIndex,3600);
-    }
-    $placeholders['boards'] = $boardIndex;
-    unset($boardIndex);
+    $placeholders['boards'] = $discuss->hooks->load('board/getlist',$c);
 }
 
 /* process logout */
@@ -109,7 +101,12 @@ if (!empty($options['showStatistics'])) {
 
 /* recent posts */
 if (!empty($options['showRecentPosts'])) {
-    $recent = $discuss->hooks->load('post/recent');
+    $cacheKey = 'discuss/board/user/'.$discuss->user->get('id').'/recent-posts';
+    $recent = $modx->cacheManager->get($cacheKey);
+    if (empty($recent)) {
+        $recent = $discuss->hooks->load('post/recent');
+        $modx->cacheManager->set($cacheKey,$recent,$modx->getOption('discuss.cache_time',null,3600));
+    }
     $placeholders['recent_posts'] = $recent['results'];
     unset($recent);
 } else {

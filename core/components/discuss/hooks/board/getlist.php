@@ -29,24 +29,26 @@
 
 $board = isset($scriptProperties['board']) ? (is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board']) : 0;
 
-$cacheKey = 'discuss/board/index';
-/* cant use caching yet b/c of unread status
-$list = $modx->cacheManager->get($cacheKey);
-if (!empty($list)) {
-    //return $list;
-}*/
-
-/* get main query */
+/* check cache first */
 $category = $modx->getOption('category',$scriptProperties,false);
-$category = (int)(is_object($scriptProperties['category']) ? $scriptProperties['category']->get('id') : $scriptProperties['category']);
-$response = $modx->call('disBoard','getList',array(&$modx,$board,$category));
+$category = (int)(is_object($category) ? $category->get('id') : $category);
+$c = array(
+    'board' => $board,
+    'category' => $category,
+);
+$cacheKey = 'discuss/board/index/'.md5(serialize($c));
+$boards = $modx->cacheManager->get($cacheKey);
+if (empty($boards)) {
+    /* get main query */
+    $response = $modx->call('disBoard','getList',array(&$modx,$board,$category));
 
-$boards = array();
-foreach ($response['results'] as $board) {
-    $board->calcLastPostPage();
-    $boards[] = $board->toArray();
+    $boards = array();
+    foreach ($response['results'] as $board) {
+        $board->calcLastPostPage();
+        $boards[] = $board->toArray();
+    }
+    $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,3600));
 }
-unset($c);
 
 /* now loop through boards */
 $list = array();
@@ -59,7 +61,9 @@ $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 $sortDir = $modx->getOption('discuss.post_sort_dir',null,'ASC');
 
 foreach ($boards as $board) {
-    $board['unread-cls'] = ($board['unread'] > 0 && $discuss->isLoggedIn) ? 'dis-unread' : 'dis-read';
+    $unreadThreads = array_diff(explode(',',$board['threads']),$discuss->user->readThreads);
+    $board['unread'] = count($unreadThreads) > 0;
+    $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
     if (!empty($board['last_post_createdon'])) {
         $phs = array(
             'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($board['last_post_createdon'])),
@@ -132,8 +136,6 @@ if (count($boards) > 0) {
     $list[] = $discuss->getChunk('category/disCategoryLi',$ba);
     $list = implode("\n",$list);
     unset($currentCategory,$ba,$boards,$board,$lp);
-
-    $modx->cacheManager->set($cacheKey,$list,3600);
 }
 
 return $list;

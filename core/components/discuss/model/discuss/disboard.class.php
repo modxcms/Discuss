@@ -433,6 +433,7 @@ class disBoard extends xPDOSimpleObject {
             $this->xpdo->getCacheManager();
             $this->xpdo->cacheManager->delete('discuss/board/user/');
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('id'));
+            $this->xpdo->cacheManager->delete('discuss/board/index/');
         }
     }
 
@@ -462,25 +463,18 @@ class disBoard extends xPDOSimpleObject {
 
     public static function getList(xPDO &$modx,$board = 0,$category = false) {
         $response = array();
-        
-        $unreadSubCriteria = $modx->newQuery('disThreadRead');
-        $unreadSubCriteria->select($modx->getSelectColumns('disThreadRead','disThreadRead','',array('thread')));
-        $unreadSubCriteria->where(array(
-            'disThreadRead.user' => $modx->discuss->user->get('id'),
-            $modx->getSelectColumns('disThreadRead','disThreadRead','',array('board')).' = '.$modx->getSelectColumns('disBoard','disBoard','',array('id')),
-        ));
-        $unreadSubCriteria->prepare();
-        $unreadSubCriteriaSql = $unreadSubCriteria->toSql();
-        $unreadCriteria = $modx->newQuery('disThread');
-        $unreadCriteria->setClassAlias('dp');
-        $unreadCriteria->select('COUNT('.$modx->getSelectColumns('disThread','','',array('id')).')');
-        $unreadCriteria->where(array(
-            $modx->getSelectColumns('disThread','','',array('id')).' NOT IN ('.$unreadSubCriteriaSql.')',
-            $modx->getSelectColumns('disThread','','',array('board')).' = '.$modx->getSelectColumns('disBoard','disBoard','',array('id')),
-        ));
-        $unreadCriteria->prepare();
-        $unreadSql = $unreadCriteria->toSql();
 
+        /* get a comma-sep-list of thread IDs for comparing to read ids for user */
+        $threadsCriteria = $modx->newQuery('disThread');
+        $threadsCriteria->setClassAlias('Threadr');
+        $threadsCriteria->select(array(
+            'GROUP_CONCAT(Threadr.id)',
+        ));
+        $threadsCriteria->where(array(
+            'Threadr.board = disBoard.id',
+        ));
+        $threadsCriteria->prepare();
+        $threadsSql = $threadsCriteria->toSql();
 
         /* subboards sql */
         $sbCriteria = $modx->newQuery('disBoard');
@@ -551,7 +545,7 @@ class disBoard extends xPDOSimpleObject {
         $c->select(array(
             'Category.name AS category_name',
             '('.$sbSql.') AS '.$modx->escape('subboards'),
-            '('.$unreadSql.') AS '.$modx->escape('unread'),
+            '('.$threadsSql.') AS '.$modx->escape('threads'),
             'LastPost.id AS last_post_id',
             'LastPost.thread AS last_post_thread',
             'LastPost.title AS last_post_title',
