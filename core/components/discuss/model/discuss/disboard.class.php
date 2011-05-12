@@ -530,7 +530,7 @@ class disBoard extends xPDOSimpleObject {
                 ));
             }
         }
-        if ($modx->discuss->isLoggedIn) {
+        if ($modx->discuss->user->isLoggedIn) {
             $ignoreBoards = $modx->discuss->user->get('ignore_boards');
             if (!empty($ignoreBoards)) {
                 $c->where(array(

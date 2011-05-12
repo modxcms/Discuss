@@ -36,7 +36,7 @@ $c = array(
     'board' => $board,
     'category' => $category,
 );
-$cacheKey = 'discuss/board/index/'.md5(serialize($c));
+$cacheKey = 'discuss/board/user/index-'.md5(serialize($c));
 $boards = $modx->cacheManager->get($cacheKey);
 if (empty($boards)) {
     /* get main query */

@@ -376,7 +376,7 @@ class disBBCodeParser extends disParser {
                 if ($list_open - $list_close > 0)
                     $parts[$i] = $parts[$i] . str_repeat('[/list]', $list_open - $list_close);
 
-                // Make sure all tags are lowercase.
+                /* Make sure all tags are lowercase. */
                 $parts[$i] = preg_replace('~\[([/]?)(list|li)((\s[^\]]+)*)\]~ie', '\'[$1\' . strtolower(\'$2\') . \'$3]\'', $parts[$i]);
 
                 $mistakeFixes = array(
@@ -401,7 +401,7 @@ class disBBCodeParser extends disParser {
                 }
             }
 
-            $message = strtr(implode('', $parts), array('  ' => '&nbsp; ', "\n" => '<br />', $charset == 'UTF-8' ? "\xC2\xA0" : "\xA0" => '&nbsp;'));
+            $message = implode('', $parts);
         }
         return $message;
     }

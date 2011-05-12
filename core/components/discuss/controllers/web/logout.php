@@ -29,6 +29,7 @@
  */
 $discuss->setPageTitle($modx->lexicon('discuss.logout'));
 
+$discuss->user->clearCache();
 $contexts = $modx->user->getSessionContexts();
 foreach ($contexts as $context => $level) {
     if ($context == 'mgr') continue;

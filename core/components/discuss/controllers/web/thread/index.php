@@ -34,7 +34,7 @@ if (empty($thread)) $modx->sendErrorPage();
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$thread,disThread::TYPE_POST,$integrated));
 if (empty($thread)) $modx->sendErrorPage();
 
-$discuss->setSessionPlace('thread:'.$scriptProperties['thread']);
+$discuss->setSessionPlace('thread:'.$thread->get('id'));
 
 /* mark unread if user clicks mark unread */
 if (isset($scriptProperties['unread'])) {
