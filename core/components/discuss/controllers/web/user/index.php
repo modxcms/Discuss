@@ -75,11 +75,13 @@ if ($lastThread) {
 }
 
 /* recent posts */
-$recent = $discuss->hooks->load('post/recent',array(
-    'user' => $user->get('id'),
-));
-$placeholders['recent_posts'] = $recent['results'];
-unset($recent);
+if (!empty($options['showRecentPosts'])) {
+    $recent = $discuss->hooks->load('post/recent',array(
+        'user' => $user->get('id'),
+    ));
+    $placeholders['recent_posts'] = $recent['results'];
+    unset($recent);
+}
 
 if (!$user->get('show_email') && !$discuss->user->isAdmin()) {
     $placeholders['email'] = '';

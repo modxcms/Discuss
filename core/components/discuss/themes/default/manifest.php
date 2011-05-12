@@ -56,6 +56,13 @@ $manifest = array(
                 'dis.home.js',
             ),
         ),
+        'options' => array(
+            'showBoards' => true,
+            'showBreadcrumbs' => true,
+            'showRecentPosts' => true,
+            'showStatistics' => true,
+            'showLoginForm' => false,
+        ),
     ),
     'board' => array(
         'js' => array(
@@ -63,12 +70,24 @@ $manifest = array(
                 'dis.board.js',
             ),
         ),
+        'options' => array(
+            'showSubBoards' => true,
+            'showPosts' => true,
+            'showBreadcrumbs' => true,
+            'showReaders' => true,
+            'showModerators' => true,
+        ),
     ),
     'thread/index' => array(
         'js' => array(
             'header' => array(
                 'dis.thread.js',
             )
+        ),
+        'options' => array(
+            'showPosts' => true,
+            'showBreadcrumbs' => true,
+            'showViewing' => true,
         ),
     ),
     'thread/new' => array(
@@ -113,6 +132,11 @@ $manifest = array(
                 'search.css',
             ),
         )
+    ),
+    'user/index' => array(
+        'options' => array(
+            'showRecentPosts' => true,
+        ),
     ),
     'user/subscriptions' => array(
         'js' => array(

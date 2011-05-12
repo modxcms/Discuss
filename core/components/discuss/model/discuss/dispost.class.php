@@ -537,11 +537,17 @@ class disPost extends xPDOSimpleObject {
         ));
     }
 
+    /**
+     * Clears the cache on post save/remove
+     *
+     * @return void
+     */
     public function clearCache() {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             $this->xpdo->getCacheManager();
             $this->xpdo->cacheManager->delete('discuss/post/'.$this->get('id'));
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
+            $this->xpdo->cacheManager->delete('discuss/board/user/');
             $thread = $this->getOne('Thread');
             if ($thread) {
                 $this->xpdo->cacheManager->delete('discuss/thread/'.$thread->get('id'));

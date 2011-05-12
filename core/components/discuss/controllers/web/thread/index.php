@@ -25,8 +25,6 @@
  * Display a thread of posts
  * @package discuss
  */
-$discuss->setSessionPlace('thread:'.$scriptProperties['thread']);
-
 /* get default properties */
 $integrated = $modx->getOption('i',$scriptProperties,false);
 if (!empty($integrated)) $integrated = true;
@@ -35,6 +33,8 @@ $thread = $modx->getOption('thread',$scriptProperties,false);
 if (empty($thread)) $modx->sendErrorPage();
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$thread,disThread::TYPE_POST,$integrated));
 if (empty($thread)) $modx->sendErrorPage();
+
+$discuss->setSessionPlace('thread:'.$scriptProperties['thread']);
 
 /* mark unread if user clicks mark unread */
 if (isset($scriptProperties['unread'])) {
@@ -75,14 +75,18 @@ if (!empty($scriptProperties['unsubscribe'])) {
 
 
 /* get posts */
-$posts = $discuss->hooks->load('post/getThread',array(
-    'thread' => &$thread,
-));
-$thread->set('posts',$posts['results']);
-unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
+if (!empty($options['showPosts'])) {
+    $posts = $discuss->hooks->load('post/getThread',array(
+        'thread' => &$thread,
+    ));
+    $thread->set('posts',$posts['results']);
+    unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
+}
 
 /* get board breadcrumb trail */
-$thread->buildBreadcrumbs();
+if (!empty($options['showBreadcrumbs'])) {
+    $thread->buildBreadcrumbs();
+}
 
 /* up view count for thread */
 if (!empty($scriptProperties['print'])) {
@@ -97,7 +101,9 @@ $placeholders['replies'] = number_format($placeholders['replies']);
 $thread->buildCssClass();
 
 /* get viewing users */
-$placeholders['readers'] = empty($scriptProperties['print']) ? $thread->getViewing() : '';
+if (!empty($options['showViewing'])) {
+    $placeholders['readers'] = empty($scriptProperties['print']) ? $thread->getViewing() : '';
+}
 
 /* get moderator status */
 $isModerator = $thread->isModerator($discuss->user->get('id'));
@@ -105,7 +111,7 @@ $isAdmin = $discuss->user->isAdmin();
         
 /* action buttons */
 $actionButtons = array();
-if ($discuss->isLoggedIn && empty($scriptProperties['print'])) {
+if ($discuss->user->isLoggedIn && empty($scriptProperties['print'])) {
     $board = $thread->getOne('Board');
     if ($board->canPost() && $thread->canReply()) {
         $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
