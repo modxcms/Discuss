@@ -1,2 +1,1 @@
-<li><a href="[[+url]]" rel="nofollow">[[+text]]</a>Bob Costas
-</li>
+<li>Jane<a href="[[+url]]" rel="nofollow">[[+text]]</a></li>
