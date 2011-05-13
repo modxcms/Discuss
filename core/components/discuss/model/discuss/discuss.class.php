@@ -529,4 +529,15 @@ class Discuss {
     public function convertMODXTags($message) {
         return str_replace(array('[',']'),array('&#91;','&#93;'),$message);
     }
+
+    public function arrayDiffFast($data1, $data2) {
+        $data1 = array_flip($data1);
+        $data2 = array_flip($data2);
+
+        foreach($data2 as $hash => $key) {
+           if (isset($data1[$hash])) unset($data1[$hash]);
+        }
+
+        return array_flip($data1);
+    }
 }

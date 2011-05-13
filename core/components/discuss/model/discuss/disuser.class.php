@@ -56,13 +56,19 @@ class disUser extends xPDOSimpleObject {
      * @return array
      */
     public function prepareReadThreads() {
-        $stmt = $this->xpdo->query('SELECT `thread` FROM '.$this->xpdo->getTableName('disThreadRead').' WHERE `user` = '.$this->get('id'));
+        $this->xpdo->exec('SET SESSION group_concat_max_len = 1000000');
+        $stmt = $this->xpdo->query('SELECT GROUP_CONCAT(`thread`) AS `threads` FROM '.$this->xpdo->getTableName('disThreadRead').' WHERE `user` = '.$this->get('id').' GROUP BY `user`');
         if ($stmt) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $this->readThreads[] = (int)$row['thread'];
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!empty($row)) {
+                $this->readThreads = explode(',',$row['threads']);
             }
+            //while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                //$this->readThreads[] = (int)$row['threads'];
+            //}
             sort($this->readThreads);
         }
+        $this->xpdo->exec('SET SESSION group_concat_max_len = 6000');
         return $this->readThreads;
     }
 
