@@ -109,6 +109,7 @@
 
     <object class="disThread" table="discuss_threads" extends="xPDOSimpleObject">
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
+        <field key="title" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="post_first" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="post_last" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="author_first" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />

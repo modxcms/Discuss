@@ -35,6 +35,7 @@ $discuss->setPageTitle($modx->lexicon('discuss.move_thread_header',array('title'
 /* get breadcrumb trail */
 $thread->buildBreadcrumbs();
 $placeholders = $thread->toArray();
+$placeholders['url'] = $thread->getUrl();
 
 /* process form */
 if (!empty($scriptProperties['move-thread']) && !empty($scriptProperties['board'])) {

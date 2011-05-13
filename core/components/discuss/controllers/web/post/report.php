@@ -36,6 +36,7 @@ $discuss->setPageTitle($modx->lexicon('discuss.report_to_mod',array('title' => $
 
 /* get breadcrumb trail */
 $placeholders = $post->toArray();
+$placeholders['url'] = $post->getUrl();
 $placeholders['trail'] = $thread->buildBreadcrumbs();
 
 /* process form */

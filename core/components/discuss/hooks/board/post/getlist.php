@@ -42,7 +42,7 @@ $c['start'] = !empty($scriptProperties['start']) ? $scriptProperties['start'] : 
 $cacheKey = 'discuss/board/'.$board.'/posts/'.$mode.'-'.md5(serialize($c));
 $threadCollection = $modx->cacheManager->get($cacheKey);
 
-if (empty($threadCollection)) {
+if (empty($threadCollection) || true) {
     /* build query */
     $c = $modx->newQuery('disThread');
     $c->innerJoin('disPost','FirstPost');

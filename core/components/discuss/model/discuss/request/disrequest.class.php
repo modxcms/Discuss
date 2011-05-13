@@ -250,6 +250,11 @@ class DisRequest {
         }
 	}
 
+    public function makeUrl($action,array $params = array()) {
+        $params = http_build_query($params);
+        if (!empty($params)) $params = '?'.$params;
+        return $this->discuss->url.$action.$params;
+    }
     
     /**
      * Starts the debug timer.

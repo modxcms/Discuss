@@ -45,6 +45,8 @@ if (empty($boards)) {
     $boards = array();
     foreach ($response['results'] as $board) {
         $board->calcLastPostPage();
+        $board->getLastPostTitle();
+        $board->getLastPostUrl();
         $boards[] = $board->toArray();
     }
     $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,3600));
@@ -58,7 +60,6 @@ $boardList = array();
 
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
-$sortDir = $modx->getOption('discuss.post_sort_dir',null,'ASC');
 $groups = $discuss->user->getUserGroups();
 $isAdmin = $discuss->user->isAdmin();
 foreach ($boards as $board) {
@@ -94,7 +95,7 @@ foreach ($boards as $board) {
             'username' => $board['last_post_username'],
             'thread' => $board['last_post_thread'],
             'id' => $board['last_post_id'],
-            'url' => $discuss->url.'thread/?thread='.$board['last_post_thread'].($board['last_post_page'] != 1 && $sortDir == 'ASC' ? '&page='.$board['last_post_page'] : '').'#dis-post-'.$board['last_post_id'],
+            'url' => $board['last_post_url'],
             'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$board['last_post_author'].'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
         );
         $lp = $discuss->getChunk('board/disLastPostBy',$phs);

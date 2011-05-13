@@ -54,6 +54,7 @@ $replyPrefix = $modx->getOption('replyPrefix',$scriptProperties,'Re: ');
 
 /* setup placeholders */
 $placeholders = $post->toArray();
+$placeholders['url'] = $post->getUrl();
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 
 $placeholders['post'] = $placeholders['id'];

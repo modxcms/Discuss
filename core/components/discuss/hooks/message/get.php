@@ -92,6 +92,7 @@ $output = array();
 $idx = 0;
 foreach ($posts as $post) {
     $postArray = $post->toArray();
+    $postArray['url'] = $discuss->request->makeUrl('messages/view',array('thread' => $post->get('thread'))).'#dis-post-'.$post->get('id');
     $postArray['children'] = '';
     if ($post->Author) {
         $postArray = array_merge($postArray,$post->Author->toArray('author.'));

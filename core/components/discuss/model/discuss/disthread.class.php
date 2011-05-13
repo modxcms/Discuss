@@ -850,18 +850,42 @@ class disThread extends xPDOSimpleObject {
      * @return string
      */
     public function getUrl($lastPost = true) {
-        $url = $this->xpdo->discuss->url.'thread/?thread='.$this->get('id');
-        $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
+        $view = 'thread/'.$this->get('id').'/'.$this->getUrlTitle();
+        $params = array();
+
         if ($lastPost) {
+            $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
             if ($this->get('last_post_page') != 1 && $sortDir == 'ASC') {
-                $url .= '&page='.$this->get('last_post_page');
+                $params['page'] = $this->get('last_post_page');
             }
-            if ($this->get('post_id')) {
-                $url .= '#dis-post-'.$this->get('post_id');
-            }
+        }
+
+        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+        if ($this->get('post_id') && $lastPost) {
+            $url .= '#dis-post-'.$this->get('post_id');
         }
         $this->set('url',$url);
         return $url;
+    }
+
+    public function getUrlTitle() {
+        $title = $this->get('title');
+        if (empty($title)) {
+            $post = $this->getOne('FirstPost');
+            if ($post) {
+                $title = $post->get('title');
+                $this->set('title',$title);
+                $this->save();
+            }
+        }
+
+        if (!empty($title)) {
+            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
+        } else {
+            $title = $this->get('id');
+        }
+        return $title;
+
     }
 
     public function canStick() {

@@ -35,6 +35,7 @@ $discuss->setPageTitle($modx->lexicon('discuss.remove_thread_header',array('titl
 /* get breadcrumb trail */
 $thread->buildBreadcrumbs();
 $placeholders = $thread->toArray();
+$placeholders['url'] = $thread->getUrl();
 
 /* process form */
 if (!empty($scriptProperties['remove-thread'])) {

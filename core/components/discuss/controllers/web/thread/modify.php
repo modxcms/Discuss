@@ -33,6 +33,7 @@ $modx->lexicon->load('discuss:post');
 
 /* setup defaults */
 $placeholders = $post->toArray();
+$placeholders['url'] = $post->getUrl();
 $placeholders['post'] = $post->get('id');
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 $placeholders['message'] = $post->br2nl($placeholders['message']);

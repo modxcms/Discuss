@@ -461,6 +461,14 @@ class disBoard extends xPDOSimpleObject {
         return $canPost;
     }
 
+    /**
+     * Get a full list of all boards on the forum, for any user
+     * @static
+     * @param xPDO $modx
+     * @param int $board
+     * @param bool $category
+     * @return array
+     */
     public static function getList(xPDO &$modx,$board = 0,$category = false) {
         $response = array();
 
@@ -535,10 +543,10 @@ class disBoard extends xPDOSimpleObject {
             '('.$userGroupsSql.') AS '.$modx->escape('usergroups'),
             'LastPost.id AS last_post_id',
             'LastPost.thread AS last_post_thread',
-            'LastPost.title AS last_post_title',
             'LastPost.author AS last_post_author',
             'LastPost.createdon AS last_post_createdon',
             'LastPostThread.replies AS last_post_replies',
+            'LastPostThread.title AS last_post_title',
             'LastPostAuthor.username AS last_post_username',
         ));
         $c->sortby('Category.rank','ASC');
@@ -548,6 +556,14 @@ class disBoard extends xPDOSimpleObject {
         return $response;
     }
 
+    /**
+     * Fetch a full list of boards for the forum with restrictions based on current user
+     * 
+     * @static
+     * @param xPDO $modx
+     * @param bool $ignoreBoards
+     * @return array
+     */
     public static function fetchList(xPDO &$modx,$ignoreBoards = true) {
         $c = array(
             'ignore_boards' => $ignoreBoards,
@@ -603,6 +619,10 @@ class disBoard extends xPDOSimpleObject {
 
     }
 
+    /**
+     * Get the 2nd to last Post
+     * @return disPost
+     */
     public function get2ndLatestPost() {
         $c = $this->xpdo->newQuery('disPost');
         $c->innerJoin('disBoard','Board');
@@ -617,6 +637,10 @@ class disBoard extends xPDOSimpleObject {
         return $this->xpdo->getObject('disPost',$c);
     }
 
+    /**
+     * Calc the page of the last post on this board (requires prior data filled)
+     * @return float|int
+     */
     public function calcLastPostPage() {
         $page = 1;
         $replies = $this->get('last_post_replies');
@@ -628,17 +652,64 @@ class disBoard extends xPDOSimpleObject {
         return $page;
     }
 
+    /**
+     * Can active user post a sticky thread on this board
+     * @return bool
+     */
     public function canPostStickyThread() {
         return $this->xpdo->hasPermission('discuss.thread_stick') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
 
+    /**
+     * Can active user post a locked thread on this board
+     * 
+     * @return bool
+     */
     public function canPostLockedThread() {
         return $this->xpdo->hasPermission('discuss.thread_lock') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
 
+    /**
+     * Can active user post attachments on this board
+     * 
+     * @return bool
+     */
     public function canPostAttachments() {
         return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_attach');
+    }
+
+    /**
+     * Get the title of the last post on this board (requires prior data filled)
+     * @param string $key
+     * @return string
+     */
+    public function getLastPostTitle($key = 'last_post_title') {
+        $title = $this->get($key);
+        if (!empty($title)) {
+            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-').'/';
+            $this->set($key,$title);
+        }
+        return $title;
+    }
+
+    /**
+     * Get the URL of the last post on this board (requires prior data filled)
+     * @return string
+     */
+    public function getLastPostUrl() {
+        $view = 'thread/'.$this->get('last_post_thread').'/'.$this->getLastPostTitle();
+
+        $params = array();
+        $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
+        if ($this->get('last_post_page') > 1 && $sortDir == 'ASC') {
+            $params['page'] = $this->get('last_post_page');
+        }
+        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+
+        $url = $url.'#dis-post-'.$this->get('last_post_id');
+        $this->set('last_post_url',$url);
+        return $url;
     }
 }

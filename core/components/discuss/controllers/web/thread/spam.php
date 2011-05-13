@@ -35,6 +35,7 @@ $discuss->setPageTitle($modx->lexicon('discuss.spam_thread_header',array('title'
 /* get breadcrumb trail */
 $thread->buildBreadcrumbs();
 $placeholders = $thread->toArray();
+$placeholders['url'] = $thread->getUrl();
 
 /* process form */
 if (!empty($scriptProperties['spam-thread'])) {

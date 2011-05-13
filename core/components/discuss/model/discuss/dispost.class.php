@@ -120,6 +120,7 @@ class disPost extends xPDOSimpleObject {
                     $thread = $this->xpdo->newObject('disThread');
                     $thread->fromArray(array(
                         'board' => $this->get('board'),
+                        'title' => $this->get('title'),
                         'post_first' => $this->get('id'),
                         'author_first' => $this->get('author'),
                         'replies' => 0,
@@ -339,7 +340,6 @@ class disPost extends xPDOSimpleObject {
                 $c->limit(1);
                 $priorPost = $this->xpdo->getObject('disPost',$c);
                 if ($priorPost) { /* set last post anew */
-                    var_dump($priorPost->toArray());
                     $thread->set('post_last',$priorPost->get('id'));
                     $thread->set('author_last',$priorPost->get('author'));
                     $saved = $thread->save();
@@ -633,14 +633,22 @@ class disPost extends xPDOSimpleObject {
      * @return string
      */
     public function getUrl($view = 'thread/') {
-        $url = $this->xpdo->discuss->url.$view.'?thread='.$this->get('thread');
+        $params = array();
+        $params['thread'] = $this->get('thread');
         $page = $this->getThreadPage();
         if ($page != 1) {
-            $url .= '&page='.$page;
+            $params['page'] = $page;
         }
+
+        $thread = $this->getOne('Thread');
+        if ($thread) {
+            $view = 'thread/'.$this->get('thread').'/'.$thread->getUrlTitle();
+            unset($params['thread']);
+        }
+
+        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
         $url .= '#dis-post-'.$this->get('id');
         $this->set('url',$url);
-        
         return $url;
     }
 }
