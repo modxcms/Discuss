@@ -62,6 +62,7 @@ $manifest = array(
             'showRecentPosts' => true,
             'showStatistics' => true,
             'showLoginForm' => false,
+            'bypassUnreadCheck' => false,
         ),
     ),
     'board' => array(

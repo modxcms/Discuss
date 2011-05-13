@@ -642,7 +642,7 @@ class disThread extends xPDOSimpleObject {
 
         /* prevent view pushing */
         $ip = $this->xpdo->discuss->getIp();
-        if ($this->get('last_view_ip') != $ip) $lastViewed = true;
+        if ($this->get('last_view_ip') == $ip) $lastViewed = true;
 
         /* up the view count for this thread */
         if (!$lastViewed) {

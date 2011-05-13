@@ -85,7 +85,7 @@ foreach ($boards as $board) {
         }
     }
     /* check for read status */
-    $unreadThreads = !empty($board['threads']) ? $discuss->arrayDiffFast(explode(',',trim(trim($board['threads']),',')),$discuss->user->readThreads) : array();
+    $unreadThreads = empty($options['bypassUnreadCheck']) && !empty($board['threads']) ? $discuss->arrayDiffFast(explode(',',trim(trim($board['threads']),',')),$discuss->user->readThreads) : array();
     $board['unread'] = count($unreadThreads) > 0;
     $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
     if (!empty($board['last_post_createdon'])) {
