@@ -38,7 +38,7 @@ $c = array(
 );
 $cacheKey = 'discuss/board/user/index-'.md5(serialize($c));
 $boards = $modx->cacheManager->get($cacheKey);
-if (empty($boards)) {
+if (empty($boards) || true) {
     /* get main query */
     $response = $modx->call('disBoard','getList',array(&$modx,$board,$category));
 
@@ -62,6 +62,11 @@ $sortDir = $modx->getOption('discuss.post_sort_dir',null,'ASC');
 
 foreach ($boards as $board) {
     $unreadThreads = array_diff(explode(',',$board['threads']),$discuss->user->readThreads);
+    if ($discuss->user->isLoggedIn) {
+        if (in_array($board['id'],explode(',',$discuss->user->get('ignore_boards')))) {
+            continue;
+        }
+    }
     $board['unread'] = count($unreadThreads) > 0;
     $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
     if (!empty($board['last_post_createdon'])) {
@@ -113,7 +118,9 @@ foreach ($boards as $board) {
     if ($currentCategory != $lastCategory) {
         $ba['list'] = implode("\n",$boardList);
         unset($ba['rowClass']);
-        $list[] = $discuss->getChunk('category/disCategoryLi',$ba);
+        if (!empty($ba['list'])) {
+            $list[] = $discuss->getChunk('category/disCategoryLi',$ba);
+        }
 
         $ba = $board;
         $boardList = array(); /* reset current category board list */

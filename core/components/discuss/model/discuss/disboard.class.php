@@ -530,15 +530,7 @@ class disBoard extends xPDOSimpleObject {
                 ));
             }
         }
-        if ($modx->discuss->user->isLoggedIn) {
-            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
-            if (!empty($ignoreBoards)) {
-                $c->where(array(
-                    'id:NOT IN' => explode(',',$ignoreBoards),
-                ));
-            }
-        }
-
+        
         $response['total'] = $modx->getCount('disBoard',$c);
         $c->query['distinct'] = 'DISTINCT';
         $c->select($modx->getSelectColumns('disBoard','disBoard'));
