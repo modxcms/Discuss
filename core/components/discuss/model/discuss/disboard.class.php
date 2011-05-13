@@ -500,7 +500,6 @@ class disBoard extends xPDOSimpleObject {
         $c->leftJoin('disPost','LastPost');
         $c->leftJoin('disUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
         $c->leftJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
-        //$c->leftJoin('disBoardUserGroup','UserGroups');
         $c->where(array(
             'disBoard.status:!=' => disBoard::STATUS_INACTIVE,
         ));
@@ -515,23 +514,6 @@ class disBoard extends xPDOSimpleObject {
             ));
         }
 
-        $groups = $modx->discuss->user->getUserGroups();
-        /*
-        if (!$modx->discuss->user->isAdmin()) {
-            if (!empty($groups)) {
-                // restrict boards by user group if applicable
-                $g = array(
-                    'UserGroups.usergroup:IN' => $groups,
-                );
-                $g['OR:UserGroups.usergroup:IS'] = null;
-                $where[] = $g;
-                $c->andCondition($where,null,2);
-            } else {
-                $c->where(array(
-                    'UserGroups.usergroup:IS' => null,
-                ));
-            }
-        }*/
         $ugc = $modx->newQuery('disBoardUserGroup');
         $ugc->select(array(
             'GROUP_CONCAT(usergroup)',

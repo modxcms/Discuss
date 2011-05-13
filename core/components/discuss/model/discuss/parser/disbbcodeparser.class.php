@@ -44,6 +44,8 @@ class disBBCodeParser extends disParser {
         $message = $this->parseSmileys($message);
         $message = $this->parseList($message);
         $message = $this->convertLinks($message);
+        $message = $this->stripHtml($message);
+        $message = $this->stripBadWords($message);
 
         /* auto-add br tags to linebreaks for pretty formatting */
         $message = $this->_nl2br2($message);
@@ -103,6 +105,37 @@ class disBBCodeParser extends disParser {
 
         $message = preg_replace('#\[/?left\]#si', '', $message);
 
+        return $message;
+    }
+
+    public function stripHtml($message) {
+        $message = preg_replace(array(
+            "@<iframe[^>]*?>.*?</iframe>@siu",
+            "@<frameset[^>]*?>.*?</frameset>@siu",
+            "@<form[^>]*?>.*?</form>@siu",
+            "@<input[^>]*?>.*?</input>@siu",
+            "@<select[^>]*?>.*?</select>@siu",
+            "@<frame[^>]*?>.*?</frame>@siu",
+            '@<style[^>]*?>.*?</style>@siu',
+            '@<script[^>]*?.*?</script>@siu',
+            '@<object[^>]*?.*?</object>@siu',
+            '@<embed[^>]*?.*?</embed>@siu',
+            '@<applet[^>]*?.*?</applet>@siu',
+            '@<noframes[^>]*?.*?</noframes>@siu',
+            '@<noscript[^>]*?.*?</noscript>@siu',
+            '@<noembed[^>]*?.*?</noembed>@siu',
+        ),'',$message);
+        
+        return $message;
+    }
+
+    public function stripBadWords($message) {
+        $badWords = $this->modx->getOption('discuss.bad_words',null,'');
+        $badWords = explode(',',$badWords);
+        if (!empty($badWords)) {
+            $message = str_replace($badWords,'',$message);
+            $message = preg_replace('/\b('.implode('|',$badWords).')\b/i','',$message);
+        }
         return $message;
     }
 

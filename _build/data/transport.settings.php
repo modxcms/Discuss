@@ -119,6 +119,15 @@ $settings['discuss.attachments_url']->fromArray(array(
     'area' => 'Attachments',
 ),'',true,true);
 
+$settings['discuss.bad_words']= $modx->newObject('modSystemSetting');
+$settings['discuss.bad_words']->fromArray(array(
+    'key' => 'discuss.bad_words',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
+),'',true,true);
+
 $settings['discuss.bbcode_enabled']= $modx->newObject('modSystemSetting');
 $settings['discuss.bbcode_enabled']->fromArray(array(
     'key' => 'discuss.bbcode_enabled',

@@ -638,16 +638,20 @@ class disThread extends xPDOSimpleObject {
      * @return void
      */
     public function view() {
+        $lastViewed = false;
+
         /* prevent view pushing */
         $ip = $this->xpdo->discuss->getIp();
-        if ($this->get('last_view_ip') == $ip) return false;
+        if ($this->get('last_view_ip') != $ip) $lastViewed = true;
 
         /* up the view count for this thread */
-        $views = $this->get('views');
-        $this->set('views',($views+1));
-        $this->set('last_view_ip',$ip);
-        $this->save(null,false);
-        unset($views);
+        if (!$lastViewed) {
+            $views = $this->get('views');
+            $this->set('views',($views+1));
+            $this->set('last_view_ip',$ip);
+            $this->save(null,false);
+            unset($views);
+        }
 
         /* set last visited */
         if ($this->xpdo->discuss->user->get('user') != 0) {
@@ -655,11 +659,13 @@ class disThread extends xPDOSimpleObject {
             $this->xpdo->discuss->user->save();
         }
 
-        $this->xpdo->getCacheManager();
-        $this->xpdo->cacheManager->delete('discuss/thread/'.$this->get('id'));
-        $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
-        $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board').'/');
-        $this->xpdo->cacheManager->delete('discuss/board/recent/');
+        if (!$lastViewed) {
+            $this->xpdo->getCacheManager();
+            $this->xpdo->cacheManager->delete('discuss/thread/'.$this->get('id'));
+            $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
+            $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board').'/');
+            $this->xpdo->cacheManager->delete('discuss/board/recent/');
+        }
         return true;
     }
     

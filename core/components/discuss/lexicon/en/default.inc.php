@@ -208,6 +208,9 @@ $_lang['setting_discuss.attachments_path_desc'] = 'The absolute path to the dire
 $_lang['setting_discuss.attachments_url'] = 'Attachments URL';
 $_lang['setting_discuss.attachments_url_desc'] = 'The URL by which attachments can be accessed.';
 
+$_lang['setting_discuss.bad_words'] = 'Bad Words';
+$_lang['setting_discuss.bad_words_desc'] = 'A comma-separated list of words to strip out of posts.';
+
 $_lang['setting_discuss.bbcode_enabled'] = 'Enable BBCode';
 $_lang['setting_discuss.bbcode_enabled_desc'] = 'Whether or not to enable BBCode on posts.';
 
