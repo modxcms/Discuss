@@ -60,13 +60,22 @@ $placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per
 $placeholders['attachmentCurIdx'] = count($attachments)+1;
 
 /* get board breadcrumb trail */
-$c = $modx->newQuery('disBoard');
-$c->innerJoin('disBoardClosure','Ancestors');
-$c->where(array(
-    'Ancestors.descendant' => $post->get('board'),
+$trail = array(array(
+    'url' => $discuss->url,
+    'text' => $modx->getOption('discuss.forum_title'),
+),array(
+    'text' => $modx->lexicon('discuss.messages'),
+    'url' => $discuss->url.'messages',
+),array(
+    'text' => $post->get('title'),
+    'url' => $discuss->url.'messages/view?thread='.$thread->get('id'),
+),array(
+    'text' => $modx->lexicon('discuss.modify'),
+    'active' => true,
 ));
-$c->sortby('Ancestors.depth','ASC');
-$ancestors = $modx->getCollection('disBoard',$c);
+$placeholders['trail'] = $discuss->hooks->load('breadcrumbs',array(
+    'items' => &$trail,
+));
 
 /* get thread */
 $thread = $discuss->hooks->load('post/getthread',array(

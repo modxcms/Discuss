@@ -74,9 +74,6 @@ $thread->buildCssClass();
 /* get viewing users */
 $placeholders['readers'] = $thread->getViewing('message');
 
-/* get moderator status */
-$isModerator = $thread->isModerator($discuss->user->get('id'));
-
 /* action buttons */
 $actionButtons = array();
 if ($discuss->isLoggedIn) {

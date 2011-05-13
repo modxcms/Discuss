@@ -74,8 +74,9 @@ if (!$discuss->user->isAdmin()) {
 }
 /* if showing only recent posts for a user */
 if (!empty($scriptProperties['user'])) {
+    $c->innerJoin('disPost','Posts');
     $c->where(array(
-        'LastPost.author' => $scriptProperties['user'],
+        'Posts.author' => $scriptProperties['user'],
     ));
 }
 /* ignore boards */

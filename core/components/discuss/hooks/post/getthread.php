@@ -36,7 +36,8 @@ if (!is_object($thread)) {
 }
 
 $limit = $modx->getOption('limit',$scriptProperties,(int)$modx->getOption('discuss.post_per_page',$scriptProperties, 10));
-$start = intval(isset($_GET['page']) ? ($_GET['page'] - 1) * $limit : 0);
+$page = !empty($_GET['page']) ? $_GET['page'] - 1 : 0;
+$start = $page * $limit;
 $tpl = !empty($_REQUEST['print']) ? 'post/disThreadPostPrint' : 'post/disThreadPost';
 
 /* Verify the posts output type - Flat or Threaded */

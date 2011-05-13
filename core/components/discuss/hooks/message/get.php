@@ -93,7 +93,6 @@ $idx = 0;
 foreach ($posts as $post) {
     $postArray = $post->toArray();
     $postArray['children'] = '';
-
     if ($post->Author) {
         $postArray = array_merge($postArray,$post->Author->toArray('author.'));
         $postArray['author.signature'] = $post->Author->parseSignature();
@@ -123,6 +122,13 @@ foreach ($posts as $post) {
             $postArray['author.email'] = '<a href="mailto:'.$post->Author->get('email').'">'.$modx->lexicon('discuss.email_author').'</a>';
         } else {
             $postArray['author.email'] = '';
+        }
+        
+        /* get primary group badge/name, if applicable */
+        $postArray['author.group_badge'] = $post->Author->getGroupBadge();
+        $postArray['author.group_name'] = '';
+        if (!empty($post->Author->PrimaryGroup)) {
+            $postArray['author.group_name'] = $post->Author->PrimaryGroup->get('name');
         }
     }
     $postArray['title'] = str_replace(array('[',']'),array('&#91;','&#93;'),$postArray['title']);

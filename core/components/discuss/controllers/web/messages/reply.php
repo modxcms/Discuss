@@ -63,7 +63,7 @@ $trail = array(array(
     'url' => $discuss->url.'messages',
 ),array(
     'text' => $post->get('title'),
-    'url' => $discuss->url.'messages/view?message='.$thread->get('id'),
+    'url' => $discuss->url.'messages/view?thread='.$thread->get('id'),
 ),array(
     'text' => $modx->lexicon('discuss.reply'),
     'active' => true,
