@@ -36,9 +36,9 @@ $c = array(
     'board' => $board,
     'category' => $category,
 );
-$cacheKey = 'discuss/board/user/index-'.md5(serialize($c));
+$cacheKey = 'discuss/board/index/'.md5(serialize($c));
 $boards = $modx->cacheManager->get($cacheKey);
-if (empty($boards) || true) {
+if (empty($boards)) {
     /* get main query */
     $response = $modx->call('disBoard','getList',array(&$modx,$board,$category));
 
@@ -59,14 +59,32 @@ $boardList = array();
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 $sortDir = $modx->getOption('discuss.post_sort_dir',null,'ASC');
-
+$groups = $discuss->user->getUserGroups();
+$isAdmin = $discuss->user->isAdmin();
 foreach ($boards as $board) {
-    $unreadThreads = array_diff(explode(',',$board['threads']),$discuss->user->readThreads);
+    /* check usergroup perms */
+    if (!$isAdmin) {
+        $bgroups = explode(',',$board['usergroups']);
+        if (!empty($groups) && !empty($board['usergroups'])) {
+            $in = false;
+            foreach ($bgroups as $bg) {
+                if (in_array((int)$bg,$groups)) {
+                    $in = true;
+                }
+            }
+            if (!$in) continue;
+        } else if (!empty($board['usergroups'])) {
+            continue;
+        }
+    }
+    /* check ignore boards */
     if ($discuss->user->isLoggedIn) {
         if (in_array($board['id'],explode(',',$discuss->user->get('ignore_boards')))) {
             continue;
         }
     }
+    /* check for read status */
+    $unreadThreads = array_diff(explode(',',$board['threads']),$discuss->user->readThreads);
     $board['unread'] = count($unreadThreads) > 0;
     $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
     if (!empty($board['last_post_createdon'])) {

@@ -177,7 +177,7 @@ class disBBCodeParser extends disParser {
     public static function parseLinksCallback($matches) {
         $url = $matches[1].$matches[2];
         $noFollow = ' rel="nofollow"';
-        return '<a href="'.$url.'" target="_blank"'.$noFollow.'>'.$url.'</a>';
+        return '<a href="'.$url.'" target="_blank"'.$noFollow.'>'.$url.'</a>'."\n";
     }
 
     /**

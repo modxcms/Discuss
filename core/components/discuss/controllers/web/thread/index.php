@@ -89,7 +89,7 @@ if (!empty($options['showBreadcrumbs'])) {
 }
 
 /* up view count for thread */
-if (!empty($scriptProperties['print'])) {
+if (empty($scriptProperties['print'])) {
     $thread->view();
 }
 
@@ -108,7 +108,7 @@ if (!empty($options['showViewing'])) {
 /* get moderator status */
 $isModerator = $thread->isModerator($discuss->user->get('id'));
 $isAdmin = $discuss->user->isAdmin();
-        
+
 /* action buttons */
 $actionButtons = array();
 if ($discuss->user->isLoggedIn && empty($scriptProperties['print'])) {
@@ -136,7 +136,7 @@ unset($actionButtons);
 
 /* thread action buttons */
 $actionButtons = array();
-if ($discuss->user->isLoggedIn && $isModerator && empty($scriptProperties['print'])) {
+if ($discuss->user->isLoggedIn && ($isModerator || $isAdmin) && empty($scriptProperties['print'])) {
     if ($thread->canMove()) {
         $actionButtons[] = array('url' => $discuss->url.'thread/move?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_move'));
     }

@@ -39,7 +39,7 @@ $board = (int)(is_object($scriptProperties['board']) ? $scriptProperties['board'
 $c = array();
 $c['limit'] = !empty($scriptProperties['limit']) ? $scriptProperties['limit'] : 0;
 $c['start'] = !empty($scriptProperties['start']) ? $scriptProperties['start'] : 0;
-$cacheKey = 'discuss/board/'.$board.'/posts-'.$mode.'-'.md5(serialize($c));
+$cacheKey = 'discuss/board/'.$board.'/posts/'.$mode.'-'.md5(serialize($c));
 $threadCollection = $modx->cacheManager->get($cacheKey);
 
 if (empty($threadCollection)) {

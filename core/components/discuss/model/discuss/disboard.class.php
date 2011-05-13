@@ -500,7 +500,7 @@ class disBoard extends xPDOSimpleObject {
         $c->leftJoin('disPost','LastPost');
         $c->leftJoin('disUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
         $c->leftJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
-        $c->leftJoin('disBoardUserGroup','UserGroups');
+        //$c->leftJoin('disBoardUserGroup','UserGroups');
         $c->where(array(
             'disBoard.status:!=' => disBoard::STATUS_INACTIVE,
         ));
@@ -514,10 +514,12 @@ class disBoard extends xPDOSimpleObject {
                 'disBoard.category' => $category,
             ));
         }
+
         $groups = $modx->discuss->user->getUserGroups();
+        /*
         if (!$modx->discuss->user->isAdmin()) {
             if (!empty($groups)) {
-                /* restrict boards by user group if applicable */
+                // restrict boards by user group if applicable
                 $g = array(
                     'UserGroups.usergroup:IN' => $groups,
                 );
@@ -529,7 +531,17 @@ class disBoard extends xPDOSimpleObject {
                     'UserGroups.usergroup:IS' => null,
                 ));
             }
-        }
+        }*/
+        $ugc = $modx->newQuery('disBoardUserGroup');
+        $ugc->select(array(
+            'GROUP_CONCAT(usergroup)',
+        ));
+        $ugc->where(array(
+            'board = disBoard.id',
+        ));
+        $ugc->groupby('board');
+        $ugc->prepare();
+        $userGroupsSql = $ugc->toSql();
         
         $response['total'] = $modx->getCount('disBoard',$c);
         $c->query['distinct'] = 'DISTINCT';
@@ -538,6 +550,7 @@ class disBoard extends xPDOSimpleObject {
             'Category.name AS category_name',
             '('.$sbSql.') AS '.$modx->escape('subboards'),
             '('.$threadsSql.') AS '.$modx->escape('threads'),
+            '('.$userGroupsSql.') AS '.$modx->escape('usergroups'),
             'LastPost.id AS last_post_id',
             'LastPost.thread AS last_post_thread',
             'LastPost.title AS last_post_title',

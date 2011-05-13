@@ -101,7 +101,7 @@ if (!empty($options['showStatistics'])) {
 
 /* recent posts */
 if (!empty($options['showRecentPosts'])) {
-    $cacheKey = 'discuss/board/user/'.$discuss->user->get('id').'/recent-posts';
+    $cacheKey = 'discuss/board/recent/'.$discuss->user->get('id');
     $recent = $modx->cacheManager->get($cacheKey);
     if (empty($recent)) {
         $recent = $discuss->hooks->load('post/recent');

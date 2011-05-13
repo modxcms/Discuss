@@ -295,6 +295,14 @@ class disThread extends xPDOSimpleObject {
         return $removed;
     }
 
+    public function save($cacheFlag = null,$clearCache = true) {
+        $saved = parent::save($cacheFlag);
+        if ($saved && $clearCache) {
+            $this->clearCache();
+        }
+        return $saved;
+    }
+
     /**
      * Clear cache for this thread
      *
@@ -638,7 +646,7 @@ class disThread extends xPDOSimpleObject {
         $views = $this->get('views');
         $this->set('views',($views+1));
         $this->set('last_view_ip',$ip);
-        $this->save();
+        $this->save(null,false);
         unset($views);
 
         /* set last visited */
@@ -646,6 +654,12 @@ class disThread extends xPDOSimpleObject {
             $this->xpdo->discuss->user->set('thread_last_visited',$this->get('id'));
             $this->xpdo->discuss->user->save();
         }
+
+        $this->xpdo->getCacheManager();
+        $this->xpdo->cacheManager->delete('discuss/thread/'.$this->get('id'));
+        $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
+        $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board').'/');
+        $this->xpdo->cacheManager->delete('discuss/board/recent/');
         return true;
     }
     
