@@ -63,9 +63,6 @@ class disUser extends xPDOSimpleObject {
             if (!empty($row)) {
                 $this->readThreads = explode(',',$row['threads']);
             }
-            //while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                //$this->readThreads[] = (int)$row['threads'];
-            //}
             sort($this->readThreads);
         }
         $this->xpdo->exec('SET SESSION group_concat_max_len = 6000');
