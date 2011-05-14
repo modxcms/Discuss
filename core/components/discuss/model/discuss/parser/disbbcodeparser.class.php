@@ -455,6 +455,15 @@ class disBBCodeParser extends disParser {
                     }
                 }
 
+                // now attributes without quotes
+                preg_match_all('/[a-z]+=.+/iU', $parts[$i], $attributes);
+                foreach ($attributes[0] as $attribute) {
+                    $attributeName = stristr($attribute, '=', true);
+                    if (!in_array($attributeName, $keepAttributes)) {
+                        $parts[$i] = str_replace(' ' . $attribute, '', $parts[$i]);
+                    }
+                }
+
                 // strip script tags properly
                 $parts[$i] = preg_replace("@<script[^>]*>.+</script[^>]*>@i",'',$parts[$i]);
                 $parts[$i] = $this->stripHtml($parts[$i]);
