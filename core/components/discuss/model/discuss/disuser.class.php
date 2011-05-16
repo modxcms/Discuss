@@ -34,13 +34,11 @@ class disUser extends xPDOSimpleObject {
     public $isAdmin;
     public $isGlobalModerator;
     public $isLoggedIn = false;
-    public $readThreads = array();
+    public $readBoards = array();
+    public $readBoardsPrepared = false;
 
     public function init() {
         $this->isLoggedIn = true;
-        
-        /* get cache of read threads */
-        $this->prepareReadThreads();
 
         /* active user, update the disUser record */
         $this->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
@@ -51,22 +49,65 @@ class disUser extends xPDOSimpleObject {
     }
 
     /**
-     * Prepare a cache of all read thread IDs for this user
+     * Prepare a cache of all read boards for this user
      * 
      * @return array
      */
-    public function prepareReadThreads() {
-        $this->xpdo->exec('SET SESSION group_concat_max_len = 1000000');
-        $stmt = $this->xpdo->query('SELECT GROUP_CONCAT(`thread`) AS `threads` FROM '.$this->xpdo->getTableName('disThreadRead').' WHERE `user` = '.$this->get('id').' GROUP BY `user`');
+    public function prepareReadBoards() {
+        if (!$this->readBoardsPrepared) {
+            $stmt = $this->xpdo->query('
+            SELECT
+                `board`,
+                COUNT(`id`) AS `read`,
+                (
+                    SELECT num_topics FROM '.$this->xpdo->getTableName('disBoard').' AS `Board`
+                    WHERE `Board`.`id` = `Read`.`board`
+                ) AS `threads`
+            FROM '.$this->xpdo->getTableName('disThreadRead').' `Read`
+            WHERE `user` = '.$this->get('id').'
+            GROUP BY `board`');
+
+            if ($stmt) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $this->readBoards[$row['board']] = $row['threads'] - $row['read'] > 0;
+                }
+                $stmt->closeCursor();
+            }
+            $this->readBoardsPrepared = true;
+        }
+        return $this->readBoards;
+    }
+
+    /**
+     * See if a board is read by this user
+     * 
+     * @param int $boardId
+     * @return bool
+     */
+    public function isBoardRead($boardId) {
+        $this->prepareReadBoards();
+        return !empty($this->readBoards[$boardId]);
+    }
+
+    public function getUnreadThreadsForBoard($boardId) {
+        $threads = array();
+        $stmt = $this->xpdo->query('
+            SELECT
+                GROUP_CONCAT(`disThread`.`id`) AS `threads`
+            FROM '.$this->xpdo->getTableName('disThread').' `disThread`
+                LEFT JOIN '.$this->xpdo->getTableName('disThreadRead').' `Read`
+                ON `Read`.`thread` = `disThread`.`id`
+            WHERE `Read`.`id` IS NULL
+            GROUP BY `disThread`.`board`
+        ');
         if ($stmt) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if (!empty($row)) {
-                $this->readThreads = explode(',',$row['threads']);
+                $threads = explode(',',$row['threads']);
             }
-            sort($this->readThreads);
+            $stmt->closeCursor();
         }
-        $this->xpdo->exec('SET SESSION group_concat_max_len = 6000');
-        return $this->readThreads;
+        return $threads;
     }
 
     /**

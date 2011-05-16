@@ -30,7 +30,7 @@ $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 
 /* recent posts */
 $c = $modx->newQuery('disThread');
-$c->query['distinct'] = 'DISTINCT';
+//$c->query['distinct'] = 'DISTINCT';
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');

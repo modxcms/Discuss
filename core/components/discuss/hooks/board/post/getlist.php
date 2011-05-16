@@ -126,6 +126,8 @@ if (empty($threadCollection)) {
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 
+$unread = $discuss->user->getUnreadThreadsForBoard($board);
+
 /* iterate through threads */
 reset($threadCollection);
 $response['results'] = array();
@@ -143,7 +145,7 @@ foreach ($threadCollection as $threadArray) {
         
         /* unread class */
         $threadArray['unread'] = '';
-        if ($discuss->user->isLoggedIn && !in_array($threadArray['id'],$discuss->user->readThreads)) {
+        if ($discuss->user->isLoggedIn && in_array($threadArray['id'],$unread)) {
             $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
         }
     }
