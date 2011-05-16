@@ -647,7 +647,7 @@ class disPost extends xPDOSimpleObject {
         }
 
         $thread = $this->getOne('Thread');
-        if ($thread) {
+        if ($thread && $view == 'thread/') {
             $view = 'thread/'.$this->get('thread').'/'.$thread->getUrlTitle();
             unset($params['thread']);
         }

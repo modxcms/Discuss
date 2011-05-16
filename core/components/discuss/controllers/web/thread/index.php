@@ -30,7 +30,7 @@ $integrated = $modx->getOption('i',$scriptProperties,false);
 if (!empty($integrated)) $integrated = true;
 $thread = $modx->getOption('thread',$scriptProperties,false);
 if (empty($thread)) $modx->sendErrorPage();
-$thread = $modx->call('disThread', 'fetch', array(&$modx,$thread,disThread::TYPE_POST,$integrated));
+$thread = $modx->call('disThread', 'fetch', array(&$modx,$thread,'post',$integrated));
 if (empty($thread)) $modx->sendErrorPage();
 
 $discuss->setSessionPlace('thread:'.$thread->get('id'));

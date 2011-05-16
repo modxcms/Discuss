@@ -64,13 +64,13 @@ $posts = $thread->fetchPosts($post,array(
 /* setup basic settings/permissions */
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
 $allowCustomTitles = $modx->getOption('discuss.allow_custom_titles',null,true);
-$canModifyPost = $modx->hasPermission('discuss.thread_modify');
-$canRemovePost = $modx->hasPermission('discuss.thread_remove');
+$canModifyPost = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.thread_modify');
+$canRemovePost = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.thread_remove');
 $canViewAttachments = $modx->hasPermission('discuss.view_attachments');
-$canTrackIp = $modx->hasPermission('discuss.track_ip');
-$canViewEmails = $modx->hasPermission('discuss.view_emails');
-$canViewProfiles = $modx->hasPermission('discuss.view_profiles');
-$canReportPost = $modx->hasPermission('discuss.thread_report');
+$canTrackIp = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.track_ip');
+$canViewEmails = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.view_emails');
+$canViewProfiles = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.view_profiles');
+$canReportPost = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.thread_report');
 
 /* iterate */
 $plist = array();
