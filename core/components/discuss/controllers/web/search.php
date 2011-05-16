@@ -62,6 +62,7 @@ if (!empty($scriptProperties['s'])) {
                 $conditions['author'] = $scriptProperties['user'];
             }
         }
+        $conditions['private'] = 0;
         $searchResponse = $discuss->search->run($string,$limit,$start,$conditions);
 
         $placeholders['results'] = array();

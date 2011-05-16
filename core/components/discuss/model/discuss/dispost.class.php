@@ -177,6 +177,11 @@ class disPost extends xPDOSimpleObject {
         return $saved;
     }
 
+    /**
+     * Index the post into the search system
+     * 
+     * @return bool
+     */
     public function index() {
         $indexed = false;
         if ($this->xpdo->discuss->loadSearch()) {
@@ -198,6 +203,11 @@ class disPost extends xPDOSimpleObject {
                         $postArray['category_name'] = $this->Board->Category->get('name');
                     }
                 }
+            }
+            $this->getOne('Thread');
+            if ($this->Thread) {
+                $postArray['private'] = $this->Thread->get('private');
+                $postArray['users'] = $this->Thread->get('users');
             }
             $postArray['message'] = $this->getContent();
             $indexed = $this->xpdo->discuss->search->index($postArray);

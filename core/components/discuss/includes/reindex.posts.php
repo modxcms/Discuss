@@ -68,6 +68,8 @@ $c->select(array(
     'Board.name AS board_name',
     'Author.username AS username',
     'Thread.replies AS replies',
+    'Thread.users AS users',
+    'Thread.private AS private',
 ));
 $c->sortby('id','ASC');
 
