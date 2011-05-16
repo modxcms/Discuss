@@ -9,7 +9,7 @@ DIS.ReplyMessage = function() {
             $('.dis-reply-post-preview').click(this.preview);
             $('.dis-post-title').click(this.togglePost);
             $('.dis-post-author').click(this.toggleAuthor);
-            $('.dis-reply-post-add-attachment').click(this.addAttachment);
+            $('.dis-add-attachment').click(this.addAttachment);
         }
         
         ,preview: function() {

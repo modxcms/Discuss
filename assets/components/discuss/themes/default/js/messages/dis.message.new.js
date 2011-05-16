@@ -7,7 +7,7 @@ DIS.NewMessage = function() {
     return {
         init: function() {
             $('.dis-message-preview').click(this.preview);
-            $('.dis-message-add-attachment').click(this.addAttachment);
+            $('.dis-add-attachment').click(this.addAttachment);
             
         }
 

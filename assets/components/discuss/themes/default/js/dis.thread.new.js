@@ -7,7 +7,7 @@ DIS.NewThread = function() {
     return {
         init: function() {
             $('.dis-new-thread-preview').click(this.preview);
-            $('.dis-new-thread-add-attachment').click(this.addAttachment);
+            $('.dis-add-attachment').click(this.addAttachment);
             
         }
 
