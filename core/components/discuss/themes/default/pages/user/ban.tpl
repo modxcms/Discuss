@@ -6,7 +6,7 @@
 [[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 
-<form action="[[~[[*id]]]]user/ban?id=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form" style="border: 0;">
 
 <h2>[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</h2>
 

@@ -33,9 +33,9 @@ if (!$discuss->user->isLoggedIn || !$discuss->user->isAdmin()) {
 }
 
 /* get user */
-if (empty($scriptProperties['id'])) { $modx->sendErrorPage(); }
+if (empty($scriptProperties['u'])) { $modx->sendErrorPage(); }
 $c = array();
-$c[!empty($scriptProperties['i']) ? 'integrated_id' : 'id'] = $scriptProperties['id'];
+$c[!empty($scriptProperties['i']) ? 'integrated_id' : 'id'] = $scriptProperties['u'];
 $user = $modx->getObject('disUser',$c);
 if ($user == null) { $modx->sendErrorPage(); }
 

@@ -23,6 +23,6 @@
     <ul>
         [[+modx.user.id:notempty=`<li><a href="[[~[[*id]]]]messages/new?user=[[+username]]">[[%discuss.send_pm]]</a></li>`]]
         [[+modx.user.id:notempty=`<li><a href="[[~[[*id]]]]user/merge">[[%discuss.account_merge]]</a></li>`]]
-        [[+discuss.user.isAdmin:notempty=`<li><a href="[[~[[*id]]]]user/ban?id=[[+id]]">[[%discuss.ban_user]]</a></li>`]]
+        [[+discuss.user.isAdmin:notempty=`<li><a href="[[~[[*id]]]]user/ban?u=[[+id]]">[[%discuss.ban_user]]</a></li>`]]
     </ul>
 </div>
