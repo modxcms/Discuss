@@ -45,6 +45,8 @@ class disUser extends xPDOSimpleObject {
         $this->set('ip',$this->xpdo->discuss->getIp());
         $this->save();
 
+        $this->isAdmin();
+
         return true;
     }
 
@@ -353,6 +355,7 @@ class disUser extends xPDOSimpleObject {
                 $this->isAdmin = true;
             }
         }
+        $this->xpdo->setPlaceholder('discuss.user.isAdmin',$this->isAdmin);
         return $this->isAdmin;
     }
 

@@ -81,4 +81,19 @@ $events['OnDiscussPostSave']->fromArray(array (
   'groupname' => 'Discuss',
 ), '', true, true);
 
+/* Ban/Moderation */
+$events['OnDiscussBeforeBanUser']= $modx->newObject('modEvent');
+$events['OnDiscussBeforeBanUser']->fromArray(array (
+  'name' => 'OnDiscussBeforeBanUser',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+$events['OnDiscussBanUser']= $modx->newObject('modEvent');
+$events['OnDiscussBanUser']->fromArray(array (
+  'name' => 'OnDiscussBanUser',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+
+
 return $events;

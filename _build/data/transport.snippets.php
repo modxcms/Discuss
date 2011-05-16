@@ -125,4 +125,12 @@ $snippets[10]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.discussupdateprofileloader.php'),
 ),'',true,true);
 
+$snippets[11]= $modx->newObject('modSnippet');
+$snippets[11]->fromArray(array(
+    'id' => 11,
+    'name' => 'postHook.DiscussAddBan',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/posthook.discussaddban.php'),
+),'',true,true);
+
 return $snippets;

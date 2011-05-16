@@ -99,6 +99,9 @@ foreach ($posts['results'] as $post) {
         } else {
             $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('username').'</span>';
         }
+        if ($post->Author->get('status') == disUser::BANNED) {
+            $postArray['author.username_link'] .= '<span class="dis-banned">'.$modx->lexicon('discuss.banned').'</span>';
+        }
 
         /* set author avatar */
         $avatarUrl = $post->Author->getAvatarUrl();
