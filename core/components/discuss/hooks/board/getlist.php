@@ -47,7 +47,7 @@ if (empty($boards)) {
         $board->calcLastPostPage();
         $board->getLastPostTitle();
         $board->getLastPostUrl();
-        $boards[] = $board->toArray();
+        $boards[] = $board->toArray('',true,true);
     }
     $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,3600));
 }

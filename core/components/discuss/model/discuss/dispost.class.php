@@ -600,20 +600,25 @@ class disPost extends xPDOSimpleObject {
 
     /**
      * Get the thread page that this post would be on
+     *
+     * @param boolean $last
      * @return int
      */
-    public function getThreadPage() {
+    public function getThreadPage($last = false) {
         $thread = $this->getOne('Thread');
         if (!$thread) return 1;
 
         $page = 1;
         $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
         $replies = $thread->get('replies');
-        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
-
+        $perPage = (int)$this->xpdo->getOption('discuss.post_per_page',null, 10);
         if ($replies > $perPage) {
-            $idx = $this->get('idx');
-            if (empty($idx)) $idx = 1;
+            if (!$last) {
+                $idx = $this->get('idx');
+                if (empty($idx)) $idx = 1;
+            } else {
+                $idx = $replies - 1;
+            }
 
             if ($sortDir == 'ASC') {
                 $page = ceil(($idx+1) / $perPage);
@@ -630,12 +635,13 @@ class disPost extends xPDOSimpleObject {
      * Get the URL of this post
      *
      * @param string $view
+     * @param boolean $last
      * @return string
      */
-    public function getUrl($view = 'thread/') {
+    public function getUrl($view = 'thread/',$last = false) {
         $params = array();
         $params['thread'] = $this->get('thread');
-        $page = $this->getThreadPage();
+        $page = $this->getThreadPage($last);
         if ($page != 1) {
             $params['page'] = $page;
         }

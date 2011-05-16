@@ -105,7 +105,6 @@ if (!$post->save()) {
     return false;
 }
 
-$url = $post->getUrl();
+$url = $post->getUrl(null,true);
 $modx->sendRedirect($url);
-
 return true;

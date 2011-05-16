@@ -131,6 +131,6 @@ $modx->invokeEvent('OnDiscussPostSave',array(
     'mode' => 'new',
 ));
 
-$url = $post->getUrl();
+$url = $post->getUrl(null,true);
 $modx->sendRedirect($url);
 return true;

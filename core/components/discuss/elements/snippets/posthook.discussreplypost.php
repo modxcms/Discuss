@@ -62,17 +62,17 @@ if ($maxSize > 0) {
 }
 
 /* create post object and set fields */
-$post = $modx->newObject('disPost');
-$post->fromArray($fields);
-$post->set('author',$discuss->user->get('id'));
-$post->set('parent',$post->get('id'));
-$post->set('board',$post->get('board'));
-$post->set('createdon',$discuss->now());
-$post->set('ip',$discuss->getIp());
+$newPost = $modx->newObject('disPost');
+$newPost->fromArray($fields);
+$newPost->set('author',$discuss->user->get('id'));
+$newPost->set('parent',$post->get('id'));
+$newPost->set('board',$post->get('board'));
+$newPost->set('createdon',$discuss->now());
+$newPost->set('ip',$discuss->getIp());
 
 /* fire before post save event */
 $rs = $modx->invokeEvent('OnDiscussBeforePostSave',array(
-    'post' => &$post,
+    'post' => &$newPost,
     'thread' => &$thread,
     'mode' => 'reply',
 ));
@@ -80,17 +80,16 @@ $canSave = $discuss->getEventResult($rs);
 if (!empty($canSave)) {
     return $modx->error->failure($canSave);
 }
-
 /* save post */
-if ($post->save() == false) {
+if ($newPost->save() == false) {
     return $modx->error->failure($modx->lexicon('discuss.post_err_reply'));
 }
 
 /* upload attachments */
 foreach ($attachments as $file) {
     $attachment = $modx->newObject('disPostAttachment');
-    $attachment->set('post',$post->get('id'));
-    $attachment->set('board',$post->get('board'));
+    $attachment->set('post',$newPost->get('id'));
+    $attachment->set('board',$newPost->get('board'));
     $attachment->set('filename',$file['name']);
     $attachment->set('filesize',$file['size']);
     $attachment->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
@@ -110,21 +109,21 @@ $discuss->user->checkForPostGroupAdvance();
 
 /* send out notifications */
 $discuss->hooks->load('notifications/send',array(
-    'board' => $post->get('board'),
-    'post' => $post->get('id'),
+    'board' => $newPost->get('board'),
+    'post' => $newPost->get('id'),
     'thread' => $thread->get('id'),
-    'title' => $post->get('title'),
+    'title' => $newPost->get('title'),
     'subject' => $modx->getOption('discuss.notification_new_post_subject',null,'New Post'),
     'tpl' => $modx->getOption('discuss.notification_new_post_chunk',null,'emails/disNotificationEmail'),
 ));
 
 /* fire post save event */
 $modx->invokeEvent('OnDiscussPostSave',array(
-    'post' => &$post,
+    'post' => &$newPost,
     'thread' => &$thread,
     'mode' => 'reply',
 ));
 
-$url = $post->getUrl();
+$url = $newPost->getUrl(null,true);
 $modx->sendRedirect($url);
 return true;

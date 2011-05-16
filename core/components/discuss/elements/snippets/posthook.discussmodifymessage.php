@@ -141,7 +141,6 @@ foreach ($participantsIds as $participant) {
 }
 
 /* redirect */
-$url = $post->getUrl('messages/view');
+$url = $post->getUrl('messages/view',true);
 $modx->sendRedirect($url);
-
 return true;
