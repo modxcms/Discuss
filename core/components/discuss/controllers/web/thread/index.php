@@ -83,7 +83,7 @@ if (!empty($options['showPosts'])) {
 }
 
 /* get board breadcrumb trail */
-if (!empty($options['showBreadcrumbs'])) {
+if (!empty($options['showBreadcrumbs']) && empty($scriptProperties['print'])) {
     $thread->buildBreadcrumbs();
 }
 
@@ -100,7 +100,7 @@ $placeholders['replies'] = number_format($placeholders['replies']);
 $thread->buildCssClass();
 
 /* get viewing users */
-if (!empty($options['showViewing'])) {
+if (!empty($options['showViewing']) && empty($scriptProperties['print'])) {
     $placeholders['readers'] = empty($scriptProperties['print']) ? $thread->getViewing() : '';
 }
 

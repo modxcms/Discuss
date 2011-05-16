@@ -146,7 +146,8 @@ class DisRequest {
      */
     public function output($output = '',array $properties = array()) {
         if (!empty($_REQUEST['print'])) {
-            return $output;
+            $c = $this->getControllerFile('print-wrapper');
+            return $this->getPage($c,array('content' => $output));
         }
         $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview','board.xml'));
         if ($this->modx->getOption('discuss.debug',null,false)) {
