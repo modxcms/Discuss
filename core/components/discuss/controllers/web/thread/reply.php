@@ -30,22 +30,22 @@
 if (empty($scriptProperties['thread'])) {
     if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
     $post = $modx->getObject('disPost',$scriptProperties['post']);
-    if (empty($post)) $modx->sendErrorPage();
+    if (empty($post)) $discuss->sendErrorPage();
 
     /* get thread root */
     $thread = $post->getOne('Thread');
-    if (empty($thread)) $modx->sendErrorPage();
+    if (empty($thread)) $discuss->sendErrorPage();
 } else {
     $thread = $modx->getObject('disThread',$scriptProperties['thread']);
-    if (empty($thread)) $modx->sendErrorPage();
+    if (empty($thread)) $discuss->sendErrorPage();
     $post = $thread->getOne('FirstPost');
-    if (empty($post)) $modx->sendErrorPage();
+    if (empty($post)) $discuss->sendErrorPage();
 }
 $discuss->setPageTitle($modx->lexicon('discuss.reply_to_post',array('title' => $post->get('title'))));
 $modx->lexicon->load('discuss:post');
 
 /* ensure user can actually reply */
-if (!$post->canReply()) $modx->sendErrorPage();
+if (!$post->canReply()) $discuss->sendErrorPage();
 
 $author = $post->getOne('Author');
 

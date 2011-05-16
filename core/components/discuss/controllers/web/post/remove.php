@@ -28,10 +28,10 @@
  */
 /* get thread root */
 $post = $modx->getObject('disPost',$scriptProperties['post']);
-if ($post == null) $modx->sendErrorPage();
+if ($post == null) $discuss->sendErrorPage();
 $discuss->setPageTitle($modx->lexicon('discuss.post_remove_header',array('title' => $post->get('title'))));
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
-if (empty($thread)) { $modx->sendErrorPage(); }
+if (empty($thread)) { $discuss->sendErrorPage(); }
 
 $isModerator = $thread->isModerator($discuss->user->get('id'));
 $canRemovePost = $discuss->user->get('id') == $post->get('author') || $isModerator || $discuss->user->isAdmin();

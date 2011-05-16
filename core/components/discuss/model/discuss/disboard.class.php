@@ -190,6 +190,15 @@ class disBoard extends xPDOSimpleObject {
         return $ids;
     }
 
+    /**
+     * Fetch a board by ID
+     * 
+     * @static
+     * @param xPDO $modx
+     * @param int $id
+     * @param bool $integrated
+     * @return disBoard
+     */
     public static function fetch(xPDO &$modx,$id,$integrated = false) {
         $c = $modx->newQuery('disBoard');
         $c->leftJoin('disBoardUserGroup','UserGroups');
@@ -197,15 +206,23 @@ class disBoard extends xPDOSimpleObject {
             ($integrated ? 'integrated_id' : 'id') => trim($id,'.'),
         ));
         $groups = $modx->discuss->user->getUserGroups();
-        if (!empty($groups) && !$modx->discuss->user->isAdmin) {
-            /* restrict boards by user group if applicable */
-            $g = array(
-                'UserGroups.usergroup:IN' => $groups,
-            );
-            $g['OR:UserGroups.usergroup:='] = null;
-            $where[] = $g;
-            $c->andCondition($where,null,2);
+        /* restrict boards by user group if applicable */
+        if (!$modx->discuss->user->isAdmin()) {
+            if (!empty($groups)) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:IS'] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            } else {
+                $c->where(array(
+                    'UserGroups.usergroup:IS' => null,
+                ));
+            }
         }
+        $c->andCondition($where,null,2);
         return $modx->getObject('disBoard',$c);
     }
 

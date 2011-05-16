@@ -27,11 +27,17 @@
  */
 if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
 $post = $modx->getObject('disPost',$scriptProperties['post']);
-if ($post == null) { $modx->sendErrorPage(); }
+if ($post == null) { $discuss->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.modify_post_header',array('title' => $post->get('title'))));
 
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread'),disThread::TYPE_MESSAGE));
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
+
+/* ensure user is IN this PM */
+$users = explode(',',$thread->get('users'));
+if (!in_array($discuss->user->get('id'),$users)) {
+    $discuss->sendErrorPage();
+}
 
 /* setup defaults */
 $placeholders = $post->toArray();

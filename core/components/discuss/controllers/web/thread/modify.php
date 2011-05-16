@@ -25,9 +25,9 @@
  *
  * @package discuss
  */
-if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
+if (empty($scriptProperties['post'])) { $discuss->sendErrorPage(); }
 $post = $modx->getObject('disPost',$scriptProperties['post']);
-if ($post == null) { $modx->sendErrorPage(); }
+if ($post == null) { $discuss->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.modify_post_header',array('title' => $post->get('title'))));
 $modx->lexicon->load('discuss:post');
 
@@ -41,7 +41,7 @@ $placeholders['message'] = str_replace(array('[',']'),array('&#91;','&#93;'),$pl
 
 /* get thread root */
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
-if ($thread == null) $modx->sendErrorPage();
+if ($thread == null) $discuss->sendErrorPage();
 $placeholders['thread'] = $thread->get('id');
 $placeholders['locked'] = $thread->get('locked');
 $placeholders['sticky'] = $thread->get('sticky');

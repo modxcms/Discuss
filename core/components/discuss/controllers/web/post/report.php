@@ -28,9 +28,9 @@
  */
 /* get thread root */
 $post = $modx->getObject('disPost',$scriptProperties['post']);
-if (empty($post)) $modx->sendErrorPage();
+if (empty($post)) $discuss->sendErrorPage();
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
 
 $discuss->setPageTitle($modx->lexicon('discuss.report_to_mod',array('title' => $thread->get('title'))));
 

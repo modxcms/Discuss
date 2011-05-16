@@ -28,12 +28,18 @@
  */
 /* get thread root */
 $post = $modx->getObject('disPost',$scriptProperties['post']);
-if (empty($post)) $modx->sendErrorPage();
+if (empty($post)) $discuss->sendErrorPage();
 
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread'),disThread::TYPE_MESSAGE));
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
 
 $discuss->setPageTitle($modx->lexicon('discuss.remove_message_header',array('title' => $thread->get('title'))));
+
+/* ensure user is IN this PM */
+$users = explode(',',$thread->get('users'));
+if (!in_array($discuss->user->get('id'),$users)) {
+    $discuss->sendErrorPage();
+}
 
 if ($post->remove()) {
     $posts = $thread->getMany('Posts');

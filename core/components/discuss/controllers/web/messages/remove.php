@@ -40,7 +40,13 @@ $c->select(array(
 ));
 $c->where(array('id' => $scriptProperties['thread']));
 $thread = $modx->getObject('disThread',$c);
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
+
+/* ensure user is IN this PM */
+$users = explode(',',$thread->get('users'));
+if (!in_array($discuss->user->get('id'),$users)) {
+    $discuss->sendErrorPage();
+}
 
 $discuss->setPageTitle($modx->lexicon('discuss.remove_message_header',array('title' => $thread->get('title'))));
 

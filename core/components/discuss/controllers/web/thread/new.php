@@ -32,10 +32,10 @@ $discuss->setPageTitle($modx->lexicon('discuss.thread_new'));
 
 if (empty($scriptProperties['board'])) { $modx->sendErrorPage(); }
 $board = $modx->getObject('disBoard',$scriptProperties['board']);
-if ($board == null) $modx->sendErrorPage();
+if ($board == null) $discuss->sendErrorPage();
 
 /* ensure user can actually post new */
-if (!$board->canPost()) $modx->sendErrorPage();
+if (!$board->canPost()) $discuss->sendErrorPage();
 
 /* get board breadcrumb trail */
 $board->buildBreadcrumbs(array(array(

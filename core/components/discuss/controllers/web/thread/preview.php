@@ -21,6 +21,9 @@
  *
  * @package discuss
  */
+if (!$discuss->user->isLoggedIn) {
+    $discuss->sendErrorPage();
+}
 $placeholders = array();
 $postArray = $scriptProperties;
 $postArray['action_remove'] = '';

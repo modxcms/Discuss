@@ -27,11 +27,11 @@
  * @package discuss
  */
 /* get board */
-if (empty($scriptProperties['board'])) $modx->sendErrorPage();
+if (empty($scriptProperties['board'])) $discuss->sendErrorPage();
 $integrated = $modx->getOption('i',$scriptProperties,false);
 if (!empty($integrated)) $integrated = true;
 $board = $modx->call('disBoard','fetch',array(&$modx,$scriptProperties['board'],$integrated));
-if ($board == null) $modx->sendErrorPage();
+if ($board == null) $discuss->sendErrorPage();
 
 /* set meta */
 $discuss->setSessionPlace('board:'.$scriptProperties['board']);
