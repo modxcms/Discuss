@@ -518,7 +518,9 @@ class disBoard extends xPDOSimpleObject {
         /* subboards sql */
         $sbCriteria = $modx->newQuery('disBoard');
         $sbCriteria->setClassAlias('subBoard');
-        $sbCriteria->select('GROUP_CONCAT(CONCAT_WS(":",subBoardClosureBoard.id,subBoardClosureBoard.name) SEPARATOR "||") AS name');
+        $sbCriteria->select(array(
+            'GROUP_CONCAT(CONCAT_WS(":",subBoardClosureBoard.id,subBoardClosureBoard.name) SEPARATOR "||") AS name'
+        ));
         $sbCriteria->innerJoin('disBoardClosure','subBoardClosure','subBoardClosure.ancestor = subBoard.id');
         $sbCriteria->innerJoin('disBoard','subBoardClosureBoard','subBoardClosureBoard.id = subBoardClosure.descendant');
         $sbCriteria->where(array(

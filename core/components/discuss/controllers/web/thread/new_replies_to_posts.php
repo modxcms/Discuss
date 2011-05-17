@@ -22,12 +22,12 @@
  * @package discuss
  */
 /**
- * Get all unread posts by user
- * 
+ * Get all new replies to posts authored by user
+ *
  * @package discuss
  */
 if (!$discuss->user->isLoggedIn) $discuss->sendUnauthorizedPage();
-$discuss->setSessionPlace('unread');
+$discuss->setSessionPlace('new_replies_to_posts');
 $discuss->setPageTitle($modx->lexicon('discuss.unread_posts'));
 $placeholders = array();
 
@@ -46,8 +46,8 @@ if (!empty($scriptProperties['read']) && $discuss->user->isLoggedIn) {
 }
 
 
-/* get unread threads */
-$threads = $modx->call('disThread','fetchUnread',array(&$modx,$sortBy,$sortDir,$limit,$start));
+/* get new replies threads */
+$threads = $modx->call('disThread','fetchNewReplies',array(&$modx,$sortBy,$sortDir,$limit,$start));
 $posts = array();
 
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
@@ -62,12 +62,12 @@ foreach ($threads['results'] as $thread) {
     $threadArray['class'] = 'dis-board-li';
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
     $threadArray['icons'] = '';
-    
+
     /* set css class */
     $class = array('board-post');
     if ($enableHot) {
         $threshold = $hotThreadThreshold;
-        if ($discuss->user->get('id') == $threadArray['author'] && $discuss->user->isLoggedIn) {
+        if ($discuss->user->get('id') == $threadArray['author'] && $discuss->isLoggedIn) {
             $class[] = $threadArray['replies'] < $threshold ? 'dis-my-normal-thread' : 'dis-my-veryhot-thread';
         } else {
             $class[] = $threadArray['replies'] < $threshold ? '' : 'dis-veryhot-thread';
@@ -100,7 +100,7 @@ $trail[] = array(
     'url' => $discuss->url,
     'text' => $modx->getOption('discuss.forum_title'),
 );
-$trail[] = array('text' => $modx->lexicon('discuss.unread_posts').' ('.number_format($threads['total']).')','active' => true);
+$trail[] = array('text' => $modx->lexicon('discuss.new_replies_to_posts').' ('.number_format($threads['total']).')','active' => true);
 
 $trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
     'items' => &$trail,

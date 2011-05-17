@@ -80,7 +80,7 @@ if (!empty($scriptProperties['user'])) {
     ));
 }
 /* ignore boards */
-if ($discuss->isLoggedIn) {
+if ($discuss->user->isLoggedIn) {
     $ignoreBoards = $discuss->user->get('ignore_boards');
     if (!empty($ignoreBoards)) {
         $c->where(array(
