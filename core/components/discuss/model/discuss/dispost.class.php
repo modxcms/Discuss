@@ -283,7 +283,7 @@ class disPost extends xPDOSimpleObject {
         if (!empty($doBoardMoveChecks) && !$this->get('private') && !empty($board)) {
             $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
             $isAdmin = $this->xpdo->discuss->user->isAdmin();
-            if ($isAdmin || $isModerator) { /* move to spambox/recyclebin */
+            if ($isAdmin || $isModerator || $this->xpdo->discuss->user->get('id') == $this->get('author')) { /* move to spambox/recyclebin */
                 $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
                 if ($moveToSpam && !empty($spamBoard) && $this->get('board') != $spamBoard) {
                     $removed = $this->move($spamBoard);
@@ -295,8 +295,6 @@ class disPost extends xPDOSimpleObject {
                         $moved = true;
                     }
                 }
-            } else {
-                return false;
             }
         }
 
