@@ -30,7 +30,7 @@ $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 
 /* recent posts */
 $c = $modx->newQuery('disThread');
-//$c->query['distinct'] = 'DISTINCT';
+$c->query['distinct'] = 'DISTINCT';
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
@@ -133,7 +133,7 @@ foreach ($recentPosts as $thread) {
     $threadArray['idx'] = $idx;
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
     $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->url.'user/?user='.$threadArray['author'].'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
-    $threadArray['views'] = number_format($threadArray['views']);
+    $threadArray['views'] = '';
     $threadArray['replies'] = number_format($threadArray['replies']);
     $threadArray['unread'] = '';
 

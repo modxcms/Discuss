@@ -291,10 +291,19 @@ class disThread extends xPDOSimpleObject {
 
         if ($removed) {
             $this->clearCache();
+            /* clear recent posts cache */
+            $this->xpdo->cacheManager->delete('discuss/board/recent/');
         }
         return $removed;
     }
 
+    /**
+     * Save the Thread
+     *
+     * @param null $cacheFlag
+     * @param bool $clearCache
+     * @return boolean
+     */
     public function save($cacheFlag = null,$clearCache = true) {
         $saved = parent::save($cacheFlag);
         if ($saved && $clearCache) {
@@ -664,7 +673,6 @@ class disThread extends xPDOSimpleObject {
             $this->xpdo->cacheManager->delete('discuss/thread/'.$this->get('id'));
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board').'/');
-            $this->xpdo->cacheManager->delete('discuss/board/recent/');
         }
         return true;
     }
