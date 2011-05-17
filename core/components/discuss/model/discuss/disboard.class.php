@@ -175,6 +175,13 @@ class disBoard extends xPDOSimpleObject {
         return $saved;
     }
 
+    /**
+     * Get all the IDs of the parents of this board up the tree
+     *
+     * @param bool $id
+     * @param array $ids
+     * @return array
+     */
     public function getRecursiveParentIds($id = false,array $ids = array()) {
         if ($id === false) {
             $board =& $this;
@@ -354,6 +361,13 @@ class disBoard extends xPDOSimpleObject {
         return $sbl;
     }
 
+    /**
+     * Build the breadcrumb navigation for this board
+     * 
+     * @param array $additional
+     * @param bool $linkToSelf
+     * @return array
+     */
     public function buildBreadcrumbs($additional = array(),$linkToSelf = false) {
         $cacheKey = 'discuss/board/'.$this->get('id').'/breadcrumbs';
         $trail = $this->xpdo->cacheManager->get($cacheKey);

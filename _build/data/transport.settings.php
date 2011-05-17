@@ -128,6 +128,24 @@ $settings['discuss.bad_words']->fromArray(array(
     'area' => 'Moderation',
 ),'',true,true);
 
+$settings['discuss.bad_words_replace']= $modx->newObject('modSystemSetting');
+$settings['discuss.bad_words_replace']->fromArray(array(
+    'key' => 'discuss.bad_words_replace',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
+),'',true,true);
+
+$settings['discuss.bad_words_replace_string']= $modx->newObject('modSystemSetting');
+$settings['discuss.bad_words_replace_string']->fromArray(array(
+    'key' => 'discuss.bad_words_replace_string',
+    'value' => '****',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Moderation',
+),'',true,true);
+
 $settings['discuss.bbcode_enabled']= $modx->newObject('modSystemSetting');
 $settings['discuss.bbcode_enabled']->fromArray(array(
     'key' => 'discuss.bbcode_enabled',

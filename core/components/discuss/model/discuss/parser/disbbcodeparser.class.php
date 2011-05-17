@@ -127,16 +127,6 @@ class disBBCodeParser extends disParser {
         return $message;
     }
 
-    public function stripBadWords($message) {
-        $badWords = $this->modx->getOption('discuss.bad_words',null,'');
-        $badWords = explode(',',$badWords);
-        if (!empty($badWords)) {
-            $message = str_replace($badWords,'',$message);
-            $message = preg_replace('/\b('.implode('|',$badWords).')\b/i','',$message);
-        }
-        return $message;
-    }
-
     /**
      * Prevent javascript:/ftp: injections via URLs
      * 
