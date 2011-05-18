@@ -161,7 +161,9 @@ foreach ($posts['results'] as $post) {
         $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
         if ($canRemovePost) {
             $postArray['action_remove'] = '<a href="'.$discuss->request->makeUrl('post/remove',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.remove').'</a>';
-            $postArray['action_remove'] .= '<a href="'.$discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.post_spam').'</a>';
+            if ($isModerator || $isAdmin) {
+                $postArray['action_remove'] .= '<a href="'.$discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.post_spam').'</a>';
+            }
         }
     }
 

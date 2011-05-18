@@ -384,7 +384,7 @@ class disBBCodeParser extends disParser {
 
         $nbs = '\xA0';
         $charset = $this->modx->getOption('modx_charset',null,'UTF-8');
-        $keepAttributes = $this->modx->getOption('discuss.allowed_html_attributes',null,'href,target,src');
+        $keepAttributes = $this->modx->getOption('discuss.allowed_html_attributes',null,'href,target,src,author,date');
         $keepAttributes = explode(',',$keepAttributes);
         
         /* Only mess with stuff outside [code] tags. */

@@ -112,6 +112,7 @@ $placeholders['boards'] = implode("\n",$list);
 /* get left menu */
 $placeholders['canEdit'] = true;
 $placeholders['canAccount'] = true;
+$placeholders['canMerge'] = true;
 $placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 
 return $placeholders;

@@ -83,6 +83,7 @@ if (!empty($placeholders['show_online'])) { $placeholders['show_online'] = ' che
 /* do output */
 $placeholders['canEdit'] = true;
 $placeholders['canAccount'] = true;
+$placeholders['canMerge'] = true;
 $placeholders['usermenu'] = $discuss->getChunk($menuTpl,$placeholders);
 $modx->setPlaceholder('discuss.user',$discuss->user->get('username'));
 

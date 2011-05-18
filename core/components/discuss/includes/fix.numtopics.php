@@ -61,7 +61,7 @@ if ($discuss->loadImporter('disSmfImport')) {
     $stmt = $modx->query($sql);
     if ($stmt) {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if (!empty($row['real_count']) && $row['real_count'] < $row['num_topics']) {
+            if (!empty($row['real_count']) && $row['real_count'] != $row['num_topics']) {
                 $discuss->import->log('Setting "'.$row['name'].'" to '.$row['real_count'].' from '.$row['num_topics']);
                 $modx->exec('UPDATE '.$modx->getTableName('disBoard').'
                     SET `num_topics` = '.$row['real_count'].'

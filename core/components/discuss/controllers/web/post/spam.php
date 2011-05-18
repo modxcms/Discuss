@@ -46,8 +46,8 @@ if (!$post->remove(array(),true,true)) {
 }
 
 if ($thread->get('post_first') == $post->get('id')) {
-    $redirectTo = $discuss->url.'board/?board='.$post->get('board');
+    $redirectTo = $discuss->request->makeUrl('board',array('board' => $post->get('board')));
 } else {
-    $redirectTo = $discuss->url.'thread/?thread='.$post->get('thread');
+    $redirectTo = $discuss->request->makeUrl('thread',array('thread' => $post->get('thread')));
 }
 $modx->sendRedirect($redirectTo);

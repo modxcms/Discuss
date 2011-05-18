@@ -103,6 +103,7 @@ $placeholders['groups'] = implode(', ',$user->User->getUserGroupNames());
 /* do output */
 $placeholders['canEdit'] = $isSelf;
 $placeholders['canAccount'] = $isSelf;
+$placeholders['canMerge'] = $isSelf;
 $placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 return $placeholders;
