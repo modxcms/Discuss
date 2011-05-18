@@ -45,7 +45,7 @@ $placeholders['url'] = $thread->getUrl();
 /* process form */
 if (!empty($scriptProperties['remove-thread'])) {
     if ($thread->remove(array(),true)) {
-        $url = $discuss->url.'board?board='.$thread->get('board');
+        $url = $discuss->request->makeUrl('board',array('board' => $thread->get('board')));
         $modx->sendRedirect($url);
     }
 }

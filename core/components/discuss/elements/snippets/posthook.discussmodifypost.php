@@ -105,6 +105,6 @@ if (!$post->save()) {
     return false;
 }
 
-$url = $post->getUrl(null,true);
+$url = $post->getUrl('thread/',true);
 $modx->sendRedirect($url);
 return true;
