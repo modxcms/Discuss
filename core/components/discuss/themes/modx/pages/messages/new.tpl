@@ -35,7 +35,7 @@
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
 
     <label for="dis-message-attachment">[[%discuss.attachments]]:
-        <span class="small dis-message-add-attachment"><a href="[[~[[*id]]]]messages/new">[[%discuss.attachment_add]]</a>
+        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
         <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
     </label>

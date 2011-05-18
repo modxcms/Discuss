@@ -21,6 +21,6 @@
     
     <div class="dis-form-buttons">
     <input type="submit" name="move-thread" class="dis-action-btn" value="[[%discuss.thread_move]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]thread?thread=[[+id]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>

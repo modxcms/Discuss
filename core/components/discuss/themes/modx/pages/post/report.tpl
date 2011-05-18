@@ -22,6 +22,6 @@
 
     <div class="dis-form-buttons">
     <input type="submit" name="report-thread" class="dis-action-btn" value="[[%discuss.report_to_mod]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]thread?thread=[[+thread]]#dis-post-[[+id]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>

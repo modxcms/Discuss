@@ -43,7 +43,7 @@
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-post-modify" value="[[%discuss.save_changes]]" />
         <input type="button" class="dis-action-btn dis-modify-post-preview-btn" id="dis-modify-post-preview-btn" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]thread/?thread=[[+thread]]#dis-post-[[+id]]';" />
+        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
 

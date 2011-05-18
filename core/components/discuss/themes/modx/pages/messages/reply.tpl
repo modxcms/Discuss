@@ -40,7 +40,7 @@
     <br class="clear" />
     
     <label for="dis-reply-post-attachment">[[%discuss.attachments]]:
-        <span class="small dis-reply-post-add-attachment"><a href="[[~[[*id]]]]?post=[[+id]]">[[%discuss.attachment_add]]</a>
+        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
         <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
     </label>
@@ -52,7 +52,7 @@
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-post-reply" value="[[%discuss.message_send]]" />
         <input type="button" class="dis-action-btn dis-reply-post-preview" name="dis-post-preview" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]thread/?thread=[[+thread]]';" />
+        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages/view?thread=[[+thread]]';" />
     </div>
 </form>
 

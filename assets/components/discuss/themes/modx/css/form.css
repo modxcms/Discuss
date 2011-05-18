@@ -125,3 +125,27 @@
     width: 80%;
     height: 160px;
 }
+
+span.label-inline {
+    float: left;
+    display: block;
+    clear: left;
+    font-weight:bold;
+    line-height: 27px;
+    color: #5a5a5a;
+}
+.label-inline-th,.label-inline-td {
+    display: block;
+    float: left;
+}
+.label-inline-td {
+    margin-left: 5px;
+}
+.label-inline-th {
+    width: 150px;
+    text-align: right
+}
+.label-inline-text {
+    margin-right: 5px;
+    float: left;
+}
