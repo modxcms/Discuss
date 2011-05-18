@@ -71,7 +71,7 @@ foreach ($postObjects as $post) {
     $postArray['idx'] = $idx;
     $postArray['sticky'] = '';
     $postArray['createdon'] = strftime($discuss->dateFormat,strtotime($postArray['createdon']));
-    $postArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->url.'user/?user='.$postArray['author'].'">'.$postArray['author_username'].'</a>' : $postArray['author_username'];
+    $postArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->request->makeUrl('user',array('user' => $postArray['author'])).'">'.$postArray['author_username'].'</a>' : $postArray['author_username'];
     $postArray['unread'] = '';
 
     /* unread class */

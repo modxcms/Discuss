@@ -356,12 +356,11 @@ class disThread extends xPDOSimpleObject {
      * @return boolean
      */
     public function remove(array $ancestors = array(),$doBoardMoveChecks = false,$moveToSpam = false) {
-        $remove = false;
         $removed = false;
 
         if (!empty($doBoardMoveChecks)) {
             $board = $this->getOne('Board');
-            if (!empty($board)) {
+            if (!empty($board) && !$this->get('private')) {
                 $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
                 $isAdmin = $this->xpdo->discuss->user->isAdmin();
                 if ($isModerator || $isAdmin) { /* move to spambox/recyclebin */
@@ -376,19 +375,13 @@ class disThread extends xPDOSimpleObject {
                             if ($this->move($trashBoard)) {
                                 $removed = true;
                             }
-                        } else {
-                            $remove = true;
                         }
                     }
                 }
-            } else { /* is a PM */
-                $remove = true;
             }
-        } else { /* skipping, usually used for related objs */
-            $remove = true;
         }
 
-        if ($remove) {
+        if (!$removed) {
             $removed = parent::remove($ancestors);
         }
 
@@ -460,7 +453,9 @@ class disThread extends xPDOSimpleObject {
             $members = array();
             foreach ($sessions as $member) {
                 $r = explode(':',$member->get('reader'));
-                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user/?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>' : $r[1];
+                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array(
+                    'user' => str_replace('%20','',$r[0])
+                )).'">'.$r[1].'</a>' : $r[1];
             }
             $members = array_unique($members);
             $members = implode(',',$members);
@@ -638,7 +633,7 @@ class disThread extends xPDOSimpleObject {
      * @return bool True if they are a moderator
      */
     public function isModerator() {
-        if ($this->xpdo->discuss->user->isGlobalModerator()) return true;
+        if ($this->xpdo->discuss->user->isGlobalModerator() || $this->xpdo->discuss->user->isAdmin()) return true;
         
         $moderator = $this->xpdo->getCount('disModerator',array(
             'user' => $this->xpdo->discuss->user->get('id'),
@@ -679,7 +674,7 @@ class disThread extends xPDOSimpleObject {
         $c->sortby('Ancestors.depth','DESC');
         $ancestors = $this->xpdo->getCollection('disBoard',$c);
         $trail = empty($defaultTrail) ? array(array(
-            'url' => $this->xpdo->discuss->url,
+            'url' => $this->xpdo->discuss->request->makeUrl(),
             'text' => $this->xpdo->getOption('discuss.forum_title'),
         )) : $defaultTrail;
         $category = false;
@@ -688,13 +683,13 @@ class disThread extends xPDOSimpleObject {
                 $category = $ancestor->getOne('Category');
                 if ($category) {
                     $trail[] = array(
-                        'url' => $this->xpdo->discuss->url.'?category='.$category->get('id'),
+                        'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
                         'text' => $category->get('name'),
                     );
                 }
             }
             $trail[] = array(
-                'url' => $this->xpdo->discuss->url.'board/?board='.$ancestor->get('id'),
+                'url' => $this->xpdo->discuss->request->makeUrl('board',array('board' => $ancestor->get('id'))),
                 'text' => $ancestor->get('name'),
             );
         }
@@ -717,7 +712,7 @@ class disThread extends xPDOSimpleObject {
         $class = array($defaultClass);
         $threshold = $this->xpdo->getOption('discuss.hot_thread_threshold',null,10);
         $participants = explode(',',$this->get('participants'));
-        if (in_array($this->xpdo->discuss->user->get('id'),$participants) && $this->xpdo->discuss->isLoggedIn) {
+        if (in_array($this->xpdo->discuss->user->get('id'),$participants) && $this->xpdo->discuss->user->isLoggedIn) {
             $class[] = $this->get('replies') < $threshold ? 'dis-my-normal-thread' : 'dis-my-veryhot-thread';
         } else {
             $class[] = $this->get('replies') < $threshold ? '' : 'dis-veryhot-thread';
@@ -935,6 +930,10 @@ class disThread extends xPDOSimpleObject {
         return !$this->isArchived() && $this->xpdo->hasPermission('discuss.thread_reply') && !$this->get('locked');
     }
 
+    /**
+     * Determines if the active user can post attachments to this thread
+     * @return bool
+     */
     public function canPostAttachments() {
         return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_attach');
     }
@@ -944,13 +943,16 @@ class disThread extends xPDOSimpleObject {
      * @return int
      */
     public function calcLastPostPage() {
-        $page = 1;
-        $replies = $this->get('last_post_replies');
-        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
-        if ($replies > $perPage) {
-            $page = ceil($replies / $perPage);
+        $page = $this->get('last_post_page');
+        if (empty($page)) {
+            $page = 1;
+            $replies = $this->get('last_post_replies');
+            $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
+            if ($replies > $perPage) {
+                $page = ceil($replies / $perPage);
+            }
+            $this->set('last_post_page',$page);
         }
-        $this->set('last_post_page',$page);
         return $page;
     }
 
@@ -958,27 +960,36 @@ class disThread extends xPDOSimpleObject {
      * Get the proper URL for the thread, optionally with the post anchor and page
      *
      * @param boolean $lastPost If true, will get URL for last Post of thread
+     * @param array $params Any extra params to append to the thread
+     * @param boolean $regenerate If true, will regenerate the url even if it has already been set
      * @return string
      */
-    public function getUrl($lastPost = true) {
-        $view = 'thread/'.$this->get('id').'/'.$this->getUrlTitle();
-        $params = array();
+    public function getUrl($lastPost = true,array $params = array(),$regenerate = false) {
+        $url = $this->get('url');
+        if (empty($url) || $regenerate || !empty($params)) {
+            $view = 'thread/'.$this->get('id').'/'.$this->getUrlTitle();
 
-        if ($lastPost) {
-            $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
-            if ($this->get('last_post_page') != 1 && $sortDir == 'ASC') {
-                $params['page'] = $this->get('last_post_page');
+            if ($lastPost) {
+                $page = $this->calcLastPostPage();
+                $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
+                if ($page > 1 && $sortDir == 'ASC') {
+                    $params['page'] = $this->get('last_post_page');
+                }
             }
-        }
 
-        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
-        if ($this->get('post_id') && $lastPost) {
-            $url .= '#dis-post-'.$this->get('post_id');
+            $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+            if ($this->get('post_id') && $lastPost) {
+                $url .= '#dis-post-'.$this->get('post_id');
+            }
+            $this->set('url',$url);
         }
-        $this->set('url',$url);
         return $url;
     }
 
+    /**
+     * Get the URL-friendly title of this thread
+     * @return string
+     */
     public function getUrlTitle() {
         $title = $this->get('title');
         if (empty($title)) {

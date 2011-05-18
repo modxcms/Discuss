@@ -251,10 +251,23 @@ class DisRequest {
         }
 	}
 
-    public function makeUrl($action,array $params = array()) {
-        $params = http_build_query($params);
-        if (!empty($params)) $params = '?'.$params;
-        return $this->discuss->url.$action.$params;
+    /**
+     * Makes a proper URL for the Discuss system
+     *
+     * @param string $action
+     * @param array $params
+     * @return string
+     */
+    public function makeUrl($action = '',array $params = array()) {
+        if (is_array($params)) {
+            $params = http_build_query($params);
+            if (!empty($params)) $params = '?'.$params;
+        }
+        $url = $this->discuss->url.$action.$params;
+        if ($this->modx->getOption('discuss.absolute_urls',null,true)) {
+            $url = $this->modx->getOption('site_url',null,MODX_SITE_URL).ltrim($url,'/');
+        }
+        return $url;
     }
     
     /**

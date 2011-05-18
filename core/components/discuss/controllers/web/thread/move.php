@@ -30,6 +30,11 @@
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$scriptProperties['thread']));
 if (empty($thread)) $discuss->sendErrorPage();
 
+/* ensure user can move this thread */
+if (!$thread->canMove()) {
+    $modx->sendRedirect($thread->getUrl());
+}
+
 $discuss->setPageTitle($modx->lexicon('discuss.move_thread_header',array('title' => $thread->get('title'))));
 
 /* get breadcrumb trail */

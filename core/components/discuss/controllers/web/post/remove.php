@@ -36,17 +36,16 @@ if (empty($thread)) { $discuss->sendErrorPage(); }
 $isModerator = $thread->isModerator($discuss->user->get('id'));
 $canRemovePost = $discuss->user->get('id') == $post->get('author') || $isModerator || $discuss->user->isAdmin();
 if (!$canRemovePost) {
-    $modx->sendErrorPage();
+    $modx->sendRedirect($thread->getUrl());
 }
-
 
 if (!$post->remove(array(),true)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove post: '.print_r($post->toArray(),true));
 }
 
 if ($thread->get('post_first') == $post->get('id')) {
-    $redirectTo = $discuss->url.'board/?board='.$post->get('board');
+    $redirectTo = $discuss->request->makeUrl('board/',array('board' => $post->get('board')));
 } else {
-    $redirectTo = $discuss->url.'thread/?thread='.$thread->get('id');
+    $redirectTo = $thread->getUrl();
 }
 $modx->sendRedirect($redirectTo);

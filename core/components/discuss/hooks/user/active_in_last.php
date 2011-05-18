@@ -35,6 +35,7 @@ $activeUsers = $modx->call('disUser','fetchActive',array(&$modx,$timeAgo));
 /* iterate */
 $as = array();
 foreach ($activeUsers['results'] as $activeUser) {
+    $activeUser->getUrl();
     $activeUserArray = $activeUser->toArray();
     $activeUserArray['style'] = ' style="';
     if (!empty($activeUserArray['color'])) {

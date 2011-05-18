@@ -22,7 +22,7 @@
  * @package discuss
  */
 /**
- * Remove Post page
+ * Report Post page
  *
  * @package discuss
  */
@@ -33,6 +33,11 @@ $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
 if (empty($thread)) $discuss->sendErrorPage();
 
 $discuss->setPageTitle($modx->lexicon('discuss.report_to_mod',array('title' => $thread->get('title'))));
+
+/* ensure user can report this post */
+if (!$post->canReport()) {
+    $modx->sendRedirect($thread->getUrl());
+}
 
 /* get breadcrumb trail */
 $placeholders = $post->toArray();

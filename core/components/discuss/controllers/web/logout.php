@@ -36,4 +36,4 @@ foreach ($contexts as $context => $level) {
     $modx->user->removeSessionContext($context);
     $modx->getUser($context,true);
 }
-$modx->sendRedirect($discuss->url.'home');
+$modx->sendRedirect($discuss->request->makeUrl('home'));

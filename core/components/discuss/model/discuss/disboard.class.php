@@ -42,7 +42,10 @@ class disBoard extends xPDOSimpleObject {
      * Overrides xPDOObject::set to provide custom functionality and automation
      * for the closure tables that persist the board map.
      *
-     * {@inheritDoc}
+     * @param string $k
+     * @param mixed $v
+     * @param string $vType
+     * @return boolean
      */
     public function set($k, $v= null, $vType= '') {
         $oldParentId = $this->get('parent');
@@ -53,6 +56,11 @@ class disBoard extends xPDOSimpleObject {
         return $set;
     }
 
+    /**
+     * Override xPDOObject::remove to clear cache on remove
+     * @param array $ancestors
+     * @return boolean
+     */
     public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
         $this->clearCache();
@@ -63,7 +71,8 @@ class disBoard extends xPDOSimpleObject {
      * Overrides the xPDOObject::save method to provide custom functionality and
      * automation for the closure tables that persist the board map.
      *
-     * {@inheritDoc}
+     * @param boolean $cacheFlag
+     * @return boolean
      */
     public function save($cacheFlag = null) {
         $new = $this->isNew();
@@ -260,7 +269,7 @@ class disBoard extends xPDOSimpleObject {
             $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user?user='.$r[0].'">'.$r[1].'</a>' : $r[1];
+                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array('user' => $r[0])).'">'.$r[1].'</a>' : $r[1];
             }
             $members = array_unique($members);
             $members = implode(',',$members);
@@ -313,7 +322,7 @@ class disBoard extends xPDOSimpleObject {
         $mods = array();
         if ($moderators) {
             foreach ($moderators as $moderator) {
-                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user?user='.$moderator->get('user').'">'.$moderator->get('username').'</a>' : $moderator->get('username');
+                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array('user' => $moderator->get('user'))).'">'.$moderator->get('username').'</a>' : $moderator->get('username');
             }
             $mods = array_unique($mods);
             $mods = implode(',',$mods);
@@ -353,7 +362,7 @@ class disBoard extends xPDOSimpleObject {
             $sbs = array();
             foreach ($subboards as $subboard) {
                 $sb = explode(':',$subboard);
-                $sbs[] = '<a href="'.$this->xpdo->discuss->url.'board/?board='.$sb[0].'">'.$sb[1].'</a>';
+                $sbs[] = '<a href="'.$this->xpdo->discuss->request->makeUrl('board/',array('board' => $sb[0])).'">'.$sb[1].'</a>';
             }
             $sbl = $this->xpdo->lexicon('discuss.subforums').': '.implode(',',$sbs);
         }
@@ -385,20 +394,20 @@ class disBoard extends xPDOSimpleObject {
             /* breadcrumbs */
             $trail = array();
             $trail[] = array(
-                'url' => $this->xpdo->discuss->url,
+                'url' => $this->xpdo->discuss->request->makeUrl(),
                 'text' => $this->xpdo->getOption('discuss.forum_title'),
             );
             $category = $this->getOne('Category');
             if ($category) {
                 $trail[] = array(
-                    'url' => $this->xpdo->discuss->url.'?category='.$category->get('id'),
+                    'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
                     'text' => $category->get('name'),
                 );
             }
             if (!empty($ancestors)) {
                 foreach ($ancestors as $ancestor) {
                     $trail[] = array(
-                        'url' => $this->xpdo->discuss->url.'board?board='.$ancestor->get('id'),
+                        'url' => $this->xpdo->discuss->request->makeUrl('board',array('board' => $ancestor->get('id'))),
                         'text' => $ancestor->get('name'),
                     );
                 }
@@ -407,7 +416,7 @@ class disBoard extends xPDOSimpleObject {
                 'text' => $this->get('name').($this->get('locked') ? $this->xpdo->lexicon('discuss.board_is_locked') : ''),
             );
             if ($linkToSelf) {
-                $self['url'] = $this->xpdo->discuss->url.'board/?board='.$this->get('id');
+                $self['url'] = $this->xpdo->discuss->request->makeUrl('board/',array('board' => $this->get('id')));
             }
             if (empty($additional)) { $self['active'] = true; }
             $trail[] = $self;

@@ -41,8 +41,6 @@ $flat = true;
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
-$userUrl = $discuss->url.'user/';
-
 /* get posts */
 $c = $modx->newQuery('disPost');
 $c->innerJoin('disThread','Thread');
@@ -107,7 +105,7 @@ foreach ($posts as $post) {
 
     if ($post->Author) {
         if ($canViewProfiles) {
-            $postArray['author.username_link'] = '<a href="'.$userUrl.'?user='.$post->get('author').'">'.$post->Author->get('username').'</a>';
+            $postArray['author.username_link'] = '<a href="'.$discuss->request->makeUrl('user',array('user' => $post->get('author'))).'">'.$post->Author->get('username').'</a>';
         } else {
             $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('username').'</span>';
         }
@@ -119,7 +117,7 @@ foreach ($posts as $post) {
         }
 
         /* check if author wants to show email */
-        if ($post->Author->get('show_email') && $discuss->isLoggedIn && $canViewEmails) {
+        if ($post->Author->get('show_email') && $discuss->user->isLoggedIn && $canViewEmails) {
             $postArray['author.email'] = '<a href="mailto:'.$post->Author->get('email').'">'.$modx->lexicon('discuss.email_author').'</a>';
         } else {
             $postArray['author.email'] = '';
@@ -159,18 +157,18 @@ foreach ($posts as $post) {
     $postArray['action_remove'] = '';
     if (!$thread->get('locked') && $discuss->isLoggedIn) {
         if ($globalCanReplyPost) {
-            $postArray['action_reply'] = '<a href="'.$discuss->url.'messages/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
-            $postArray['action_quote'] = '<a href="'.$discuss->url.'messages/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
+            $postArray['action_reply'] = '<a href="'.$discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['action_quote'] = '<a href="'.$discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
         }
 
         $canModifyPost = $discuss->user->get('id') == $post->get('author') && $globalCanModifyPost;
         if ($canModifyPost) {
-            $postArray['action_modify'] = '<a href="'.$discuss->url.'messages/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $postArray['action_modify'] = '<a href="'.$discuss->request->makeUrl('messages/modify',array('post' => $post->get('id'))).'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
         $canRemovePost = $discuss->user->get('id') == $post->get('author') && $globalCanRemovePost;
         if ($canRemovePost) {
-            $postArray['action_remove'] = '<a href="'.$discuss->url.'messages/remove_post?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
+            $postArray['action_remove'] = '<a href="'.$discuss->request->makeUrl('messages/remove_post',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.remove').'</a>';
         }
     }
 

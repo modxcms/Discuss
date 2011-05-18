@@ -46,6 +46,14 @@ $placeholders['thread'] = $thread->get('id');
 $placeholders['locked'] = $thread->get('locked');
 $placeholders['sticky'] = $thread->get('sticky');
 
+/* ensure user can modify this post */
+$isModerator = $discuss->user->isGlobalModerator() || $thread->isModerator($discuss->user->get('id')) || $discuss->user->isAdmin();
+$canModifyPost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_modify');
+$canModify = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
+if (!$canModify) {
+    $modx->sendRedirect($thread->getUrl());
+}
+
 /* get attachments for post */
 $attachments = $post->getMany('Attachments');
 $idx = 1;

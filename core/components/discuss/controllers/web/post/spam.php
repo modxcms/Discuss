@@ -33,14 +33,11 @@ $discuss->setPageTitle($modx->lexicon('discuss.post_spam_header',array('title' =
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
 if (empty($thread)) { $discuss->sendErrorPage(); }
 
-$isModerator = $modx->getCount('disModerator',array(
-    'user' => $discuss->user->get('id'),
-    'board' => $post->get('board'),
-)) > 0 ? true : false;
-
+/* ensure user can mark this post as spam */
+$isModerator = $thread->isModerator($discuss->user->get('id'));
 $canRemovePost = $discuss->user->get('id') == $post->get('author') || $isModerator || $discuss->user->isAdmin();
 if (!$canRemovePost) {
-    $modx->sendErrorPage();
+    $modx->sendRedirect($thread->getUrl());
 }
 
 

@@ -642,6 +642,16 @@ class disUser extends xPDOSimpleObject {
     }
 
     /**
+     * Makes a link to the profile page for this user
+     * @return void
+     */
+    public function getUrl() {
+        $url = $this->xpdo->discuss->request->makeUrl('user',array('user' => $this->get('id')));
+        $this->set('url',$url);
+        return $url;
+    }
+
+    /**
      * Gets a User Setting (bypasses cache) 
      * @param string $key
      * @param string $default

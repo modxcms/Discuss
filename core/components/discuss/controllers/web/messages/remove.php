@@ -57,7 +57,7 @@ $placeholders = $thread->toArray();
 /* process form */
 if (!empty($scriptProperties['remove-message'])) {
     if ($thread->remove()) {
-        $url = $discuss->url.'messages';
+        $url = $discuss->request->makeUrl('messages');
         $modx->sendRedirect($url);
     }
 }

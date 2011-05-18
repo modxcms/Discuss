@@ -95,7 +95,7 @@ foreach ($boards as $board) {
             'thread' => $board['last_post_thread'],
             'id' => $board['last_post_id'],
             'url' => $board['last_post_url'],
-            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$board['last_post_author'].'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('user',array('user' => $board['last_post_author'])).'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
         );
         $lp = $discuss->getChunk('board/disLastPostBy',$phs);
         $board['lastPost'] = $lp;

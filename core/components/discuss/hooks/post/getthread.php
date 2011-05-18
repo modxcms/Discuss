@@ -49,7 +49,6 @@ $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptPropertie
 
 $isAdmin = $discuss->user->isAdmin();
 $isModerator = $discuss->user->isGlobalModerator() || $thread->isModerator($discuss->user->get('id')) || $discuss->user->isAdmin();
-$userUrl = $discuss->url.'user/';
 $sortDir = $modx->getOption('discuss.post_sort_dir',$scriptProperties,'ASC');
 
 /* get posts */
@@ -64,13 +63,13 @@ $posts = $thread->fetchPosts($post,array(
 /* setup basic settings/permissions */
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
 $allowCustomTitles = $modx->getOption('discuss.allow_custom_titles',null,true);
-$canModifyPost = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.thread_modify');
-$canRemovePost = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.thread_remove');
+$canModifyPost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_modify');
+$canRemovePost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_remove');
 $canViewAttachments = $modx->hasPermission('discuss.view_attachments');
-$canTrackIp = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.track_ip');
-$canViewEmails = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.view_emails');
-$canViewProfiles = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.view_profiles');
-$canReportPost = $modx->discuss->isLoggedIn && $modx->hasPermission('discuss.thread_report');
+$canTrackIp = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.track_ip');
+$canViewEmails = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.view_emails');
+$canViewProfiles = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.view_profiles');
+$canReportPost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_report');
 
 /* iterate */
 $plist = array();
@@ -95,7 +94,7 @@ foreach ($posts['results'] as $post) {
 
     if ($post->Author) {
         if ($canViewProfiles) {
-            $postArray['author.username_link'] = '<a href="'.$userUrl.'?user='.$post->get('author').'">'.$post->Author->get('username').'</a>';
+            $postArray['author.username_link'] = '<a href="'.$discuss->request->makeUrl('user',array('user' => $post->get('author'))).'">'.$post->Author->get('username').'</a>';
         } else {
             $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('username').'</span>';
         }
@@ -150,19 +149,19 @@ foreach ($posts['results'] as $post) {
     $postArray['action_remove'] = '';
     if (($isAdmin || $isModerator || !$thread->get('locked')) && $discuss->user->isLoggedIn) {
         if ($post->canReply()) {
-            $postArray['action_reply'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
-            $postArray['action_quote'] = '<a href="'.$discuss->url.'thread/reply?post='.$post->get('id').'&quote=1" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
+            $postArray['action_reply'] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['action_quote'] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
         }
 
         $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
         if ($canModifyPost) {
-            $postArray['action_modify'] = '<a href="'.$discuss->url.'thread/modify?post='.$post->get('id').'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $postArray['action_modify'] = '<a href="'.$discuss->request->makeUrl('thread/modify',array('post' => $post->get('id'))).'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
         $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
         if ($canRemovePost) {
-            $postArray['action_remove'] = '<a href="'.$discuss->url.'post/remove?post='.$post->get('id').'">'.$modx->lexicon('discuss.remove').'</a>';
-            $postArray['action_remove'] .= '<a href="'.$discuss->url.'post/spam?post='.$post->get('id').'">'.$modx->lexicon('discuss.post_spam').'</a>';
+            $postArray['action_remove'] = '<a href="'.$discuss->request->makeUrl('post/remove',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.remove').'</a>';
+            $postArray['action_remove'] .= '<a href="'.$discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.post_spam').'</a>';
         }
     }
 
@@ -185,7 +184,10 @@ foreach ($posts['results'] as $post) {
     $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
     $postArray['class'] = implode(' ',$postArray['class']);
     if ($canReportPost) {
-        $postArray['report_link'] = '<a class="dis-report-link" href="'.$discuss->url.'post/report?thread='.$postArray['thread'].'&post='.$postArray['id'].'">'.$modx->lexicon('discuss.report_to_mod').'</a>';
+        $postArray['report_link'] = '<a class="dis-report-link" href="'.$discuss->request->makeUrl('post/report',array(
+            'thread' => $postArray['thread'],
+            'post' => $postArray['id']
+        )).'">'.$modx->lexicon('discuss.report_to_mod').'</a>';
     } else {
         $postArray['report_link'] = '';
     }

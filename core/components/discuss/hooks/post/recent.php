@@ -132,7 +132,7 @@ foreach ($recentPosts as $thread) {
     $threadArray = $thread->toArray();
     $threadArray['idx'] = $idx;
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
-    $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->url.'user/?user='.$threadArray['author'].'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+    $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
     $threadArray['views'] = '';
     $threadArray['replies'] = number_format($threadArray['replies']);
     $threadArray['unread'] = '';

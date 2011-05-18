@@ -278,9 +278,10 @@ class disPost extends xPDOSimpleObject {
         $author = $this->getOne('Author');
         $thread = $this->xpdo->getObject('disThread',array('id' => $this->get('thread')));
         $board = $this->xpdo->getObject('disBoard',array('id' => $this->get('board')));
+        $isPrivateMessage = !$thread || $thread->get('private');
 
         /* first check to see if moving to spam/trash */
-        if (!empty($doBoardMoveChecks) && !$this->get('private') && !empty($board)) {
+        if (!empty($doBoardMoveChecks) && !$isPrivateMessage && !empty($board)) {
             $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
             $isAdmin = $this->xpdo->discuss->user->isAdmin();
             if ($isAdmin || $isModerator || $this->xpdo->discuss->user->get('id') == $this->get('author')) { /* move to spambox/recyclebin */
@@ -305,13 +306,13 @@ class disPost extends xPDOSimpleObject {
         if ($removed) {
             $parent = $this->get('parent');
             /* decrease profile posts */
-            if ($author) {
+            if ($author && !$isPrivateMessage) {
                 $author->set('posts',($author->get('posts')-1));
                 $author->save();
             }
 
             /* fix board last post */
-            if ($board) {
+            if ($board && !$isPrivateMessage) {
                 $c = $this->xpdo->newQuery('disPost');
                 $c->where(array(
                     'id:!=' => $this->get('id'),
@@ -357,7 +358,7 @@ class disPost extends xPDOSimpleObject {
             }
             
             /* adjust forum activity */
-            if (!defined('DISCUSS_IMPORT_MODE')) {
+            if (!defined('DISCUSS_IMPORT_MODE') && !$isPrivateMessage) {
                 $now = date('Y-m-d');
                 $activity = $this->xpdo->getObject('disForumActivity',array(
                     'day' => $now,
@@ -380,6 +381,7 @@ class disPost extends xPDOSimpleObject {
                 'doBoardMoveChecks' => $doBoardMoveChecks,
                 'moveToSpam' => $moveToSpam,
                 'moved' => $moved,
+                'isPrivateMessage' => $isPrivateMessage,
             ));
 
             $this->clearCache();
@@ -604,6 +606,10 @@ class disPost extends xPDOSimpleObject {
         if (!$thread) return false;
         
         return $thread->canReply();
+    }
+
+    public function canReport() {
+        return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_report');
     }
 
     /**

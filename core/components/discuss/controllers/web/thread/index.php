@@ -38,37 +38,37 @@ $discuss->setSessionPlace('thread:'.$thread->get('id'));
 /* mark unread if user clicks mark unread */
 if (isset($scriptProperties['unread'])) {
     if ($thread->unread($discuss->user->get('id'))) {
-        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
     }
 }
 if (!empty($scriptProperties['sticky'])) {
     if ($thread->stick()) {
-        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
     }
 }
 if (isset($scriptProperties['sticky']) && $scriptProperties['sticky'] == 0) {
     if ($thread->unstick()) {
-        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
     }
 }
 if (!empty($scriptProperties['lock'])) {
     if ($thread->lock()) {
-        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
     }
 }
 if (isset($scriptProperties['lock']) && $scriptProperties['lock'] == 0) {
     if ($thread->unlock()) {
-        $modx->sendRedirect($discuss->url.'board?board='.$thread->get('board'));
+        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
     }
 }
 if (!empty($scriptProperties['subscribe'])) {
     if ($thread->addSubscription($discuss->user->get('id'))) {
-        $modx->sendRedirect($discuss->url.'thread?thread='.$thread->get('id'));
+        $modx->sendRedirect($thread->getUrl());
     }
 }
 if (!empty($scriptProperties['unsubscribe'])) {
     if ($thread->removeSubscription($discuss->user->get('id'))) {
-        $modx->sendRedirect($discuss->url.'thread?thread='.$thread->get('id'));
+        $modx->sendRedirect($thread->getUrl());
     }
 }
 
@@ -113,13 +113,13 @@ $actionButtons = array();
 if ($discuss->user->isLoggedIn && empty($scriptProperties['print'])) {
     $board = $thread->getOne('Board');
     if ($board->canPost() && $thread->canReply()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_thread'));
+        $actionButtons[] = array('url' => $discuss->request->makeUrl('thread/reply',array('thread' => $thread->get('id'))), 'text' => $modx->lexicon('discuss.reply_to_thread'));
     }
-    $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
+    $actionButtons[] = array('url' => $thread->getUrl(false,array('unread' => 1)), 'text' => $modx->lexicon('discuss.mark_unread'));
     if ($thread->canUnsubscribe()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&unsubscribe=1', 'text' => $modx->lexicon('discuss.unsubscribe'));
+        $actionButtons[] = array('url' => $thread->getUrl(false,array('unsubscribe' => 1)), 'text' => $modx->lexicon('discuss.unsubscribe'));
     } elseif ($thread->canSubscribe()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&subscribe=1', 'text' => $modx->lexicon('discuss.subscribe'));
+        $actionButtons[] = array('url' => $thread->getUrl(false,array('subscribe' => 1)), 'text' => $modx->lexicon('discuss.subscribe'));
     }
     /* TODO: Send thread by email - 1.1
      * if ($modx->hasPermission('discuss.thread_send') {
@@ -127,7 +127,7 @@ if ($discuss->user->isLoggedIn && empty($scriptProperties['print'])) {
      * }
      */
      if ($thread->canPrint()) {
-         $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&print=1', 'text' => $modx->lexicon('discuss.print'));
+         $actionButtons[] = array('url' => $thread->getUrl(false,array('print' => 1)), 'text' => $modx->lexicon('discuss.print'));
      }
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
@@ -137,22 +137,22 @@ unset($actionButtons);
 $actionButtons = array();
 if ($discuss->user->isLoggedIn && ($isModerator || $isAdmin) && empty($scriptProperties['print'])) {
     if ($thread->canMove()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread/move?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_move'));
+        $actionButtons[] = array('url' => $discuss->request->makeUrl('thread/move',array('thread' => $thread->get('id'))), 'text' => $modx->lexicon('discuss.thread_move'));
     }
     if ($thread->canRemove()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread/remove?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_remove'));
-        $actionButtons[] = array('url' => $discuss->url.'thread/spam?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.thread_spam'));
+        $actionButtons[] = array('url' => $discuss->request->makeUrl('thread/remove',array('thread' => $thread->get('id'))), 'text' => $modx->lexicon('discuss.thread_remove'));
+        $actionButtons[] = array('url' => $discuss->request->makeUrl('thread/spam',array('thread' => $thread->get('id'))), 'text' => $modx->lexicon('discuss.thread_spam'));
     }
 
     if ($thread->canUnlock()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&lock=0', 'text' => $modx->lexicon('discuss.thread_unlock'));
+        $actionButtons[] = array('url' => $thread->getUrl(false,array('lock' => 0)), 'text' => $modx->lexicon('discuss.thread_unlock'));
     } else if ($thread->canLock()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&lock=1', 'text' => $modx->lexicon('discuss.thread_lock'));
+        $actionButtons[] = array('url' => $thread->getUrl(false,array('lock' => 1)), 'text' => $modx->lexicon('discuss.thread_lock'));
     }
     if ($thread->canUnstick()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&sticky=0', 'text' => $modx->lexicon('discuss.thread_unstick'));
+        $actionButtons[] = array('url' => $thread->getUrl(false,array('sticky' => 0)), 'text' => $modx->lexicon('discuss.thread_unstick'));
     } else if ($thread->canStick()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread?thread='.$thread->get('id').'&sticky=1', 'text' => $modx->lexicon('discuss.thread_stick'));
+        $actionButtons[] = array('url' => $thread->getUrl(false,array('sticky' => 1)), 'text' => $modx->lexicon('discuss.thread_stick'));
     }
     /**
      * TODO: Merge thread - 1.1

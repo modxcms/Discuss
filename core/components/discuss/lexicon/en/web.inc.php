@@ -102,6 +102,7 @@ $_lang['discuss.new_thread'] = 'New Thread';
 $_lang['discuss.no_replies_yet'] = 'No Replies Yet';
 $_lang['discuss.notify'] = 'Notify';
 $_lang['discuss.on'] = 'on';
+$_lang['discuss.page_one_of_one'] = 'Page 1 of 1';
 $_lang['discuss.pages'] = 'Pages';
 $_lang['discuss.participants'] = 'Participants';
 $_lang['discuss.participants_desc'] = 'A comma-separated list of usernames';

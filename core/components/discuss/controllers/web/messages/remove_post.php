@@ -44,9 +44,9 @@ if (!in_array($discuss->user->get('id'),$users)) {
 if ($post->remove()) {
     $posts = $thread->getMany('Posts');
     if (count($posts) <= 0) {
-        $url = $discuss->url.'messages';
+        $url = $discuss->request->makeUrl('messages');
     } else {
-        $url = $discuss->url.'messages/view?thread='.$thread->get('id');
+        $url = $discuss->request->makeUrl('messages/view',array('thread' => $thread->get('id')));
     }
     $modx->sendRedirect($url);
 }
