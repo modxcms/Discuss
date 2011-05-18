@@ -131,6 +131,9 @@ $modx->invokeEvent('OnDiscussPostSave',array(
     'mode' => 'new',
 ));
 
-$url = $post->getUrl();
+/* clear recent posts cache */
+$modx->cacheManager->delete('discuss/board/recent/');
+
+$url = $post->getUrl(null,true);
 $modx->sendRedirect($url);
 return true;

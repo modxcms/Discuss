@@ -62,6 +62,7 @@ if (!empty($scriptProperties['s'])) {
                 $conditions['author'] = $scriptProperties['user'];
             }
         }
+        $conditions['private'] = 0;
         $searchResponse = $discuss->search->run($string,$limit,$start,$conditions);
 
         $placeholders['results'] = array();
@@ -91,7 +92,7 @@ if (!empty($scriptProperties['s'])) {
                     $postArray['message'] = substr($postArray['message'],0,100).($length > 100 ? '...' : '');
                 }
                 if (empty($postArray['url'])) {
-                    $postArray['url'] = $discuss->url.'thread/?thread='.$postArray['thread'].'#dis-post-'.$postArray['id'];
+                    $postArray['url'] = $discuss->request->makeUrl('thread',array('thread' => $postArray['thread'])).'#dis-post-'.$postArray['id'];
                 }
 
                 $placeholders['results'][] = $discuss->getChunk('disSearchResult',$postArray);

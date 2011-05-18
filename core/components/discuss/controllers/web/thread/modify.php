@@ -25,14 +25,15 @@
  *
  * @package discuss
  */
-if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
+if (empty($scriptProperties['post'])) { $discuss->sendErrorPage(); }
 $post = $modx->getObject('disPost',$scriptProperties['post']);
-if ($post == null) { $modx->sendErrorPage(); }
+if ($post == null) { $discuss->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.modify_post_header',array('title' => $post->get('title'))));
 $modx->lexicon->load('discuss:post');
 
 /* setup defaults */
 $placeholders = $post->toArray();
+$placeholders['url'] = $post->getUrl();
 $placeholders['post'] = $post->get('id');
 $placeholders['buttons'] = $discuss->getChunk('disPostButtons',array('buttons_url' => $discuss->config['imagesUrl'].'buttons/'));
 $placeholders['message'] = $post->br2nl($placeholders['message']);
@@ -40,10 +41,18 @@ $placeholders['message'] = str_replace(array('[',']'),array('&#91;','&#93;'),$pl
 
 /* get thread root */
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
-if ($thread == null) $modx->sendErrorPage();
+if ($thread == null) $discuss->sendErrorPage();
 $placeholders['thread'] = $thread->get('id');
 $placeholders['locked'] = $thread->get('locked');
 $placeholders['sticky'] = $thread->get('sticky');
+
+/* ensure user can modify this post */
+$isModerator = $discuss->user->isGlobalModerator() || $thread->isModerator($discuss->user->get('id')) || $discuss->user->isAdmin();
+$canModifyPost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_modify');
+$canModify = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
+if (!$canModify) {
+    $modx->sendRedirect($thread->getUrl());
+}
 
 /* get attachments for post */
 $attachments = $post->getMany('Attachments');

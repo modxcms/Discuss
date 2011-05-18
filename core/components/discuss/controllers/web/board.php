@@ -27,11 +27,11 @@
  * @package discuss
  */
 /* get board */
-if (empty($scriptProperties['board'])) $modx->sendErrorPage();
+if (empty($scriptProperties['board'])) $discuss->sendErrorPage();
 $integrated = $modx->getOption('i',$scriptProperties,false);
 if (!empty($integrated)) $integrated = true;
 $board = $modx->call('disBoard','fetch',array(&$modx,$scriptProperties['board'],$integrated));
-if ($board == null) $modx->sendErrorPage();
+if ($board == null) $discuss->sendErrorPage();
 
 /* set meta */
 $discuss->setSessionPlace('board:'.$scriptProperties['board']);
@@ -100,12 +100,11 @@ if (!empty($options['showModerators'])) {
 
 /* action buttons */
 $actionButtons = array();
-if ($discuss->isLoggedIn) {
+if ($discuss->user->isLoggedIn) {
     if ($modx->hasPermission('discuss.thread_create') && $board->canPost()) {
-        $actionButtons[] = array('url' => $discuss->url.'thread/new?board='.$board->get('id'), 'text' => $modx->lexicon('discuss.thread_new'));
+        $actionButtons[] = array('url' => $discuss->request->makeUrl('thread/new',array('board' => $board->get('id'))), 'text' => $modx->lexicon('discuss.thread_new'));
     }
-    $actionButtons[] = array('url' => $discuss->url.'board?board='.$board->get('id').'&read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
-    //$actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $modx->lexicon('discuss.notify'));
+    $actionButtons[] = array('url' => $discuss->request->makeUrl('board',array('board' => $board->get('id'),'read' => 1)), 'text' => $modx->lexicon('discuss.mark_all_as_read'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);

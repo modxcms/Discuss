@@ -25,4 +25,15 @@
  * Top-level aggregator for disBoard objects
  * @package discuss
  */
-class disCategory extends xPDOSimpleObject {}
+class disCategory extends xPDOSimpleObject {
+    /**
+     * Gets the URL for the category
+     * 
+     * @return string
+     */
+    public function getUrl() {
+        $url = $this->xpdo->discuss->request->makeUrl('',array('category' => $this->get('id')));
+        $this->set('url',$url);
+        return $url;
+    }
+}

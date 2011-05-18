@@ -27,11 +27,17 @@
  */
 if (empty($scriptProperties['post'])) { $modx->sendErrorPage(); }
 $post = $modx->getObject('disPost',$scriptProperties['post']);
-if ($post == null) { $modx->sendErrorPage(); }
+if ($post == null) { $discuss->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.modify_post_header',array('title' => $post->get('title'))));
 
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread'),disThread::TYPE_MESSAGE));
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
+
+/* ensure user is IN this PM */
+$users = explode(',',$thread->get('users'));
+if (!in_array($discuss->user->get('id'),$users)) {
+    $discuss->sendErrorPage();
+}
 
 /* setup defaults */
 $placeholders = $post->toArray();
@@ -60,13 +66,22 @@ $placeholders['max_attachments'] = $modx->getOption('discuss.attachments_max_per
 $placeholders['attachmentCurIdx'] = count($attachments)+1;
 
 /* get board breadcrumb trail */
-$c = $modx->newQuery('disBoard');
-$c->innerJoin('disBoardClosure','Ancestors');
-$c->where(array(
-    'Ancestors.descendant' => $post->get('board'),
+$trail = array(array(
+    'url' => $discuss->url,
+    'text' => $modx->getOption('discuss.forum_title'),
+),array(
+    'text' => $modx->lexicon('discuss.messages'),
+    'url' => $discuss->url.'messages',
+),array(
+    'text' => $post->get('title'),
+    'url' => $discuss->url.'messages/view?thread='.$thread->get('id'),
+),array(
+    'text' => $modx->lexicon('discuss.modify'),
+    'active' => true,
 ));
-$c->sortby('Ancestors.depth','ASC');
-$ancestors = $modx->getCollection('disBoard',$c);
+$placeholders['trail'] = $discuss->hooks->load('breadcrumbs',array(
+    'items' => &$trail,
+));
 
 /* get thread */
 $thread = $discuss->hooks->load('post/getthread',array(

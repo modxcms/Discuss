@@ -39,7 +39,7 @@ $board = (int)(is_object($scriptProperties['board']) ? $scriptProperties['board'
 $c = array();
 $c['limit'] = !empty($scriptProperties['limit']) ? $scriptProperties['limit'] : 0;
 $c['start'] = !empty($scriptProperties['start']) ? $scriptProperties['start'] : 0;
-$cacheKey = 'discuss/board/'.$board.'/posts-'.$mode.'-'.md5(serialize($c));
+$cacheKey = 'discuss/board/'.$board.'/posts/'.$mode.'-'.md5(serialize($c));
 $threadCollection = $modx->cacheManager->get($cacheKey);
 
 if (empty($threadCollection)) {
@@ -92,7 +92,6 @@ if (empty($threadCollection)) {
     $threadCollection = array();
     foreach ($threads as $thread) {
         $thread->getUrl();
-        $thread->calcLastPostPage();
         $thread->buildCssClass('board-post');
         $thread->buildIcons();
         $threadArray = $thread->toArray();
@@ -126,6 +125,8 @@ if (empty($threadCollection)) {
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 
+$unread = $discuss->user->getUnreadThreadsForBoard($board);
+
 /* iterate through threads */
 reset($threadCollection);
 $response['results'] = array();
@@ -136,14 +137,14 @@ foreach ($threadCollection as $threadArray) {
             'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($threadArray['createdon'])),
             'user' => $threadArray['author'],
             'username' => $threadArray['username'],
-            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$threadArray['user'].'">'.$threadArray['username'].'</a>' : $threadArray['username'],
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('user/',array('user' => $threadArray['user'])).'">'.$threadArray['username'].'</a>' : $threadArray['username'],
         );
         $latestText = $discuss->getChunk('board/disLastPostBy',$phs);
         $threadArray['latest'] = $latestText;
         
         /* unread class */
         $threadArray['unread'] = '';
-        if ($discuss->user->isLoggedIn && !in_array($threadArray['id'],$discuss->user->readThreads)) {
+        if ($discuss->user->isLoggedIn && in_array($threadArray['id'],$unread)) {
             $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
         }
     }

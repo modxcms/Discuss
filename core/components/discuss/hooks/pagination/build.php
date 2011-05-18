@@ -42,10 +42,10 @@ $params = $modx->request->getParameters();
 unset($params['page']);
 unset($params['action']);
 unset($params['start']);
-$currentResourceUrl = $discuss->url.$view.'?'.http_build_query($params);
+$currentResourceUrl = $discuss->request->makeUrl($view,$params);
 
 if ($total <= 1) {
-	$pagination = '<div class="inactive">Page 1 of 1</div>';
+	$pagination = '<div class="inactive">'.$modx->lexicon('discuss.page_one_of_one').'</div>';
 	$modx->toPlaceholders(array('pagination' => $pagination));
 	return;
 }

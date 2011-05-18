@@ -28,13 +28,19 @@
  */
 /* get thread root */
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$scriptProperties['thread']));
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
 
 $discuss->setPageTitle($modx->lexicon('discuss.remove_thread_header',array('title' => $thread->get('title'))));
+
+/* ensure user can remove this thread */
+if (!$thread->canRemove()) {
+    $modx->sendRedirect($thread->getUrl());
+}
 
 /* get breadcrumb trail */
 $thread->buildBreadcrumbs();
 $placeholders = $thread->toArray();
+$placeholders['url'] = $thread->getUrl();
 
 /* process form */
 if (!empty($scriptProperties['remove-thread'])) {

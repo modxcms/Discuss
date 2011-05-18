@@ -208,6 +208,15 @@ $_lang['setting_discuss.attachments_path_desc'] = 'The absolute path to the dire
 $_lang['setting_discuss.attachments_url'] = 'Attachments URL';
 $_lang['setting_discuss.attachments_url_desc'] = 'The URL by which attachments can be accessed.';
 
+$_lang['setting_discuss.bad_words'] = 'Bad Words';
+$_lang['setting_discuss.bad_words_desc'] = 'A comma-separated list of words to strip out of posts.';
+
+$_lang['setting_discuss.bad_words_replace'] = 'Replace Bad Words With Censor';
+$_lang['setting_discuss.bad_words_replace_desc'] = 'If set to Yes, will replace bad words with the value found in the discuss.bad_words_replace_string setting.';
+
+$_lang['setting_discuss.bad_words_replace_string'] = 'Bad Words Replace String';
+$_lang['setting_discuss.bad_words_replace_string_desc'] = 'The censor string to replace bad words with.';
+
 $_lang['setting_discuss.bbcode_enabled'] = 'Enable BBCode';
 $_lang['setting_discuss.bbcode_enabled_desc'] = 'Whether or not to enable BBCode on posts.';
 

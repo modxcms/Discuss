@@ -21,6 +21,9 @@
  *
  * @package discuss
  */
+if (!$discuss->user->isLoggedIn) {
+    $discuss->sendErrorPage();
+}
 $placeholders = array();
 $postArray = $scriptProperties;
 $postArray['action_remove'] = '';
@@ -41,6 +44,7 @@ $post->set('message',str_replace(array('[[',']]'),array('&#91;&#91;','&#93;&#93;
 
 /* get formatted content */
 $postArray['message'] = $post->getContent();
+$postArray['title'] = $post->parser->parse($postArray['title']);
 $postArray['createdon'] = strftime($discuss->dateFormat,time());
 
 $output = $discuss->getChunk('post/disPostPreview',$postArray);

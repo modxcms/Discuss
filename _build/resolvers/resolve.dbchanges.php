@@ -52,6 +52,9 @@ if ($object->xpdo) {
             $modx->query("ALTER TABLE ".$modx->getTableName('disPostAttachment')." ADD COLUMN `integrated_data` TEXT AFTER `integrated_id`");
 
             $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD COLUMN `primary_group` INT(10) NOT NULL DEFAULT '0' AFTER `show_online`");
+
+            $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD COLUMN `title` VARCHAR(255) NOT NULL DEFAULT '' AFTER `board`");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD INDEX `title` (`title`)");
             break;
     }
 }

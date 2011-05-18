@@ -42,7 +42,7 @@ if (!empty($options['showBoards'])) {
 /* process logout */
 if (isset($scriptProperties['logout']) && $scriptProperties['logout']) {
     $response = $modx->runProcessor('security/logout');
-    $url = $modx->makeUrl($modx->resource->get('id'));
+    $url = $discuss->request->makeUrl();
     $modx->sendRedirect($url);
 }
 if (isset($scriptProperties['read']) && !empty($scriptProperties['read'])) {
@@ -52,14 +52,14 @@ if (isset($scriptProperties['read']) && !empty($scriptProperties['read'])) {
 /* action buttons */
 $actionButtons = array();
 if ($discuss->user->isLoggedIn) { /* if logged in */
-    $actionButtons[] = array('url' => $discuss->url.'?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
+    $actionButtons[] = array('url' => $discuss->request->makeUrl('',array('read' => 1)), 'text' => $modx->lexicon('discuss.mark_all_as_read'));
 
-    $authLink = $discuss->url.'logout';
+    $authLink = $discuss->request->makeUrl('logout');
     $authMsg = $modx->lexicon('discuss.logout');
     $modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
     $actionButtons[] = array('url' => $authLink, 'text' => $authMsg);
 } else { /* if logged out */
-    $authLink = $discuss->url.'login';
+    $authLink = $discuss->request->makeUrl('login');
     $authMsg = $modx->lexicon('discuss.login');
     $modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
 
@@ -101,7 +101,7 @@ if (!empty($options['showStatistics'])) {
 
 /* recent posts */
 if (!empty($options['showRecentPosts'])) {
-    $cacheKey = 'discuss/board/user/'.$discuss->user->get('id').'/recent-posts';
+    $cacheKey = 'discuss/board/recent/'.$discuss->user->get('id');
     $recent = $modx->cacheManager->get($cacheKey);
     if (empty($recent)) {
         $recent = $discuss->hooks->load('post/recent');
@@ -123,7 +123,7 @@ if (!empty($options['showBreadcrumbs'])) {
     if (!empty($category)) {
         $trail[] = array(
             'text' => $modx->getOption('discuss.forum_title'),
-            'url' => $discuss->url
+            'url' => $discuss->request->makeUrl(),
         );
         $trail[] = array(
             'text' => $category->get('name'),

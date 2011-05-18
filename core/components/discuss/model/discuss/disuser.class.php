@@ -34,36 +34,82 @@ class disUser extends xPDOSimpleObject {
     public $isAdmin;
     public $isGlobalModerator;
     public $isLoggedIn = false;
-    public $readThreads = array();
+    public $readBoards = array();
+    public $readBoardsPrepared = false;
 
     public function init() {
         $this->isLoggedIn = true;
-        
-        /* get cache of read threads */
-        $this->prepareReadThreads();
 
         /* active user, update the disUser record */
         $this->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
         $this->set('ip',$this->xpdo->discuss->getIp());
         $this->save();
 
+        $this->isAdmin();
+
         return true;
     }
 
     /**
-     * Prepare a cache of all read thread IDs for this user
+     * Prepare a cache of all read boards for this user
      * 
      * @return array
      */
-    public function prepareReadThreads() {
-        $stmt = $this->xpdo->query('SELECT `thread` FROM '.$this->xpdo->getTableName('disThreadRead').' WHERE `user` = '.$this->get('id'));
-        if ($stmt) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $this->readThreads[] = (int)$row['thread'];
+    public function prepareReadBoards() {
+        if (!$this->readBoardsPrepared) {
+            $stmt = $this->xpdo->query('
+            SELECT
+                `board`,
+                COUNT(`id`) AS `read`,
+                (
+                    SELECT num_topics FROM '.$this->xpdo->getTableName('disBoard').' AS `Board`
+                    WHERE `Board`.`id` = `Read`.`board`
+                ) AS `threads`
+            FROM '.$this->xpdo->getTableName('disThreadRead').' `Read`
+            WHERE `user` = '.$this->get('id').'
+            GROUP BY `board`');
+
+            if ($stmt) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $this->readBoards[$row['board']] = $row['threads'] - $row['read'] > 0;
+                }
+                $stmt->closeCursor();
             }
-            sort($this->readThreads);
+            $this->readBoardsPrepared = true;
         }
-        return $this->readThreads;
+        return $this->readBoards;
+    }
+
+    /**
+     * See if a board is read by this user
+     * 
+     * @param int $boardId
+     * @return bool
+     */
+    public function isBoardRead($boardId) {
+        $this->prepareReadBoards();
+        return !empty($this->readBoards[$boardId]);
+    }
+
+    public function getUnreadThreadsForBoard($boardId) {
+        $threads = array();
+        $stmt = $this->xpdo->query('
+            SELECT
+                GROUP_CONCAT(`disThread`.`id`) AS `threads`
+            FROM '.$this->xpdo->getTableName('disThread').' `disThread`
+                LEFT JOIN '.$this->xpdo->getTableName('disThreadRead').' `Read`
+                ON `Read`.`thread` = `disThread`.`id`
+            WHERE `Read`.`id` IS NULL
+            GROUP BY `disThread`.`board`
+        ');
+        if ($stmt) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!empty($row)) {
+                $threads = explode(',',$row['threads']);
+            }
+            $stmt->closeCursor();
+        }
+        return $threads;
     }
 
     /**
@@ -309,6 +355,7 @@ class disUser extends xPDOSimpleObject {
                 $this->isAdmin = true;
             }
         }
+        $this->xpdo->setPlaceholder('discuss.user.isAdmin',$this->isAdmin);
         return $this->isAdmin;
     }
 
@@ -592,6 +639,16 @@ class disUser extends xPDOSimpleObject {
             $badge = $this->PrimaryDiscussGroup->getBadge();
         }
         return $badge;
+    }
+
+    /**
+     * Makes a link to the profile page for this user
+     * @return void
+     */
+    public function getUrl() {
+        $url = $this->xpdo->discuss->request->makeUrl('user',array('user' => $this->get('id')));
+        $this->set('url',$url);
+        return $url;
     }
 
     /**

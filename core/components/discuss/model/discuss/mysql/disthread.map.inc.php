@@ -8,6 +8,7 @@ $xpdo_meta_map['disThread']= array (
   'fields' => 
   array (
     'board' => 0,
+    'title' => '',
     'post_first' => 0,
     'post_last' => 0,
     'author_first' => 0,
@@ -31,6 +32,15 @@ $xpdo_meta_map['disThread']= array (
       'attributes' => 'unsigned',
       'default' => 0,
       'null' => false,
+      'index' => 'index',
+    ),
+    'title' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
       'index' => 'index',
     ),
     'post_first' => 

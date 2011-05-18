@@ -30,6 +30,7 @@ $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 
 /* recent posts */
 $c = $modx->newQuery('disThread');
+$c->query['distinct'] = 'DISTINCT';
 $c->innerJoin('disBoard','Board');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
@@ -73,12 +74,13 @@ if (!$discuss->user->isAdmin()) {
 }
 /* if showing only recent posts for a user */
 if (!empty($scriptProperties['user'])) {
+    $c->innerJoin('disPost','Posts');
     $c->where(array(
-        'LastPost.author' => $scriptProperties['user'],
+        'Posts.author' => $scriptProperties['user'],
     ));
 }
 /* ignore boards */
-if ($discuss->isLoggedIn) {
+if ($discuss->user->isLoggedIn) {
     $ignoreBoards = $discuss->user->get('ignore_boards');
     if (!empty($ignoreBoards)) {
         $c->where(array(
@@ -130,8 +132,8 @@ foreach ($recentPosts as $thread) {
     $threadArray = $thread->toArray();
     $threadArray['idx'] = $idx;
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
-    $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->url.'user/?user='.$threadArray['author'].'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
-    $threadArray['views'] = number_format($threadArray['views']);
+    $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+    $threadArray['views'] = '';
     $threadArray['replies'] = number_format($threadArray['replies']);
     $threadArray['unread'] = '';
 

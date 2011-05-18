@@ -22,20 +22,26 @@
  * @package discuss
  */
 /**
- * Remove Post page
+ * Report Post page
  *
  * @package discuss
  */
 /* get thread root */
 $post = $modx->getObject('disPost',$scriptProperties['post']);
-if (empty($post)) $modx->sendErrorPage();
+if (empty($post)) $discuss->sendErrorPage();
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$post->get('thread')));
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
 
 $discuss->setPageTitle($modx->lexicon('discuss.report_to_mod',array('title' => $thread->get('title'))));
 
+/* ensure user can report this post */
+if (!$post->canReport()) {
+    $modx->sendRedirect($thread->getUrl());
+}
+
 /* get breadcrumb trail */
 $placeholders = $post->toArray();
+$placeholders['url'] = $post->getUrl();
 $placeholders['trail'] = $thread->buildBreadcrumbs();
 
 /* process form */

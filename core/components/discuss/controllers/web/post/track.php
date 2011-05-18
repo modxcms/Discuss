@@ -46,7 +46,7 @@ $placeholders['posts'] = $posts['results'];
 /* get board breadcrumb trail */
 $trail = array();
 $trail[] = array(
-    'url' => $discuss->url,
+    'url' => $discuss->request->makeUrl(),
     'text' => $modx->getOption('discuss.forum_title'),
 );
 $trail[] = array('text' => $modx->lexicon('discuss.track_ip').': '.$scriptProperties['ip'].' ('.number_format($posts['total']).')','active' => true);

@@ -43,7 +43,7 @@ if (!empty($_POST) && !empty($scriptProperties['boards'])) {
     $discuss->user->set('ignore_boards',implode(',',$ignores));
     if ($discuss->user->save()) {
         $discuss->user->clearCache();
-        $url = $discuss->url.'user/ignoreboards';
+        $url = $discuss->request->makeUrl('user/ignoreboards');
         $modx->sendRedirect($url);
     }
 }

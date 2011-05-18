@@ -33,9 +33,9 @@ if (!$discuss->user->isLoggedIn) {
 }
 
 /* get user */
-if (empty($scriptProperties['user'])) { $modx->sendErrorPage(); }
+if (empty($scriptProperties['user'])) { $discuss->sendErrorPage(); }
 $user = $modx->getObject('disUser',$scriptProperties['user']);
-if ($user == null) { $modx->sendErrorPage(); }
+if ($user == null) { $discuss->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.user_statistics_header',array('user' => $user->get('username'))));
 
 /* get default properties */

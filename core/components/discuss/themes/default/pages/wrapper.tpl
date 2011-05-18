@@ -33,6 +33,7 @@
                 <div style="float: left; padding-right: 5px; text-align: right;">
                     [[+discuss.user.id:notempty=`<a href="[[~[[*id]]]]thread/unread">View Unread Posts</a><br />`]]
                     [[+discuss.user.id:notempty=`<a href="[[~[[*id]]]]thread/unread_last_visit">View Unread Posts Since Last Visit</a><br />`]]
+                    [[+discuss.user.id:notempty=`<a href="[[~[[*id]]]]thread/new_replies_to_posts">[[%discuss.new_replies_to_posts]]</a><br />`]]
                     <a href="[[~[[*id]]]]thread/recent">View Recent Posts</a><br />
                 </div>
             </div>

@@ -30,13 +30,19 @@ if (!$discuss->isLoggedIn) $modx->sendUnauthorizedPage();
 /* get default properties */
 $userId = $modx->user->get('id');
 $thread = $modx->getOption('thread',$scriptProperties,false);
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
 $discuss->setSessionPlace('message:'.$thread);
 
 /* get thread */
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$thread,disThread::TYPE_MESSAGE));
 if (empty($thread)) $modx->sendErrorPage();
 $discuss->setPageTitle($thread->get('title'));
+
+/* ensure user is IN this PM */
+$users = explode(',',$thread->get('users'));
+if (!in_array($discuss->user->get('id'),$users)) {
+    $discuss->sendErrorPage();
+}
 
 /* handle actions */
 if (isset($scriptProperties['unread'])) {
@@ -73,9 +79,6 @@ $thread->buildCssClass();
 
 /* get viewing users */
 $placeholders['readers'] = $thread->getViewing('message');
-
-/* get moderator status */
-$isModerator = $thread->isModerator($discuss->user->get('id'));
 
 /* action buttons */
 $actionButtons = array();

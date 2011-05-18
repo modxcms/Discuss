@@ -30,16 +30,22 @@
 if (empty($scriptProperties['thread']) && empty($scriptProperties['post'])) $modx->sendErrorPage();
 if (!empty($scriptProperties['post']) && empty($scriptProperties['thread'])) {
     $post = $modx->getObject('disPost',$scriptProperties['post']);
-    if (empty($post)) $modx->sendErrorPage();
+    if (empty($post)) $discuss->sendErrorPage();
     $scriptProperties['thread'] = $post->get('thread');
 }
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$scriptProperties['thread'],disThread::TYPE_MESSAGE));
 if (empty($thread)) $modx->sendErrorPage();
 if (empty($post)) {
     $post = $thread->getOne('FirstPost');
-    if (empty($post)) $modx->sendErrorPage();
+    if (empty($post)) $discuss->sendErrorPage();
 }
 $discuss->setPageTitle($modx->lexicon('discuss.reply_to_post',array('title' => $post->get('title'))));
+
+/* ensure user is IN this PM */
+$users = explode(',',$thread->get('users'));
+if (!in_array($discuss->user->get('id'),$users)) {
+    $discuss->sendErrorPage();
+}
 
 $author = $post->getOne('Author');
 
@@ -63,7 +69,7 @@ $trail = array(array(
     'url' => $discuss->url.'messages',
 ),array(
     'text' => $post->get('title'),
-    'url' => $discuss->url.'messages/view?message='.$thread->get('id'),
+    'url' => $discuss->url.'messages/view?thread='.$thread->get('id'),
 ),array(
     'text' => $modx->lexicon('discuss.reply'),
     'active' => true,

@@ -120,6 +120,7 @@ class disPost extends xPDOSimpleObject {
                     $thread = $this->xpdo->newObject('disThread');
                     $thread->fromArray(array(
                         'board' => $this->get('board'),
+                        'title' => $this->get('title'),
                         'post_first' => $this->get('id'),
                         'author_first' => $this->get('author'),
                         'replies' => 0,
@@ -176,6 +177,11 @@ class disPost extends xPDOSimpleObject {
         return $saved;
     }
 
+    /**
+     * Index the post into the search system
+     * 
+     * @return bool
+     */
     public function index() {
         $indexed = false;
         if ($this->xpdo->discuss->loadSearch()) {
@@ -197,6 +203,11 @@ class disPost extends xPDOSimpleObject {
                         $postArray['category_name'] = $this->Board->Category->get('name');
                     }
                 }
+            }
+            $this->getOne('Thread');
+            if ($this->Thread) {
+                $postArray['private'] = $this->Thread->get('private');
+                $postArray['users'] = $this->Thread->get('users');
             }
             $postArray['message'] = $this->getContent();
             $indexed = $this->xpdo->discuss->search->index($postArray);
@@ -267,12 +278,13 @@ class disPost extends xPDOSimpleObject {
         $author = $this->getOne('Author');
         $thread = $this->xpdo->getObject('disThread',array('id' => $this->get('thread')));
         $board = $this->xpdo->getObject('disBoard',array('id' => $this->get('board')));
+        $isPrivateMessage = !$thread || $thread->get('private');
 
         /* first check to see if moving to spam/trash */
-        if (!empty($doBoardMoveChecks) && !$this->get('private') && !empty($board)) {
+        if (!empty($doBoardMoveChecks) && !$isPrivateMessage && !empty($board)) {
             $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
             $isAdmin = $this->xpdo->discuss->user->isAdmin();
-            if ($isAdmin || $isModerator) { /* move to spambox/recyclebin */
+            if ($isAdmin || $isModerator || $this->xpdo->discuss->user->get('id') == $this->get('author')) { /* move to spambox/recyclebin */
                 $spamBoard = $this->xpdo->getOption('discuss.spam_bucket_board',null,false);
                 if ($moveToSpam && !empty($spamBoard) && $this->get('board') != $spamBoard) {
                     $removed = $this->move($spamBoard);
@@ -284,8 +296,6 @@ class disPost extends xPDOSimpleObject {
                         $moved = true;
                     }
                 }
-            } else {
-                return false;
             }
         }
 
@@ -296,13 +306,13 @@ class disPost extends xPDOSimpleObject {
         if ($removed) {
             $parent = $this->get('parent');
             /* decrease profile posts */
-            if ($author) {
+            if ($author && !$isPrivateMessage) {
                 $author->set('posts',($author->get('posts')-1));
                 $author->save();
             }
 
             /* fix board last post */
-            if ($board) {
+            if ($board && !$isPrivateMessage) {
                 $c = $this->xpdo->newQuery('disPost');
                 $c->where(array(
                     'id:!=' => $this->get('id'),
@@ -339,7 +349,6 @@ class disPost extends xPDOSimpleObject {
                 $c->limit(1);
                 $priorPost = $this->xpdo->getObject('disPost',$c);
                 if ($priorPost) { /* set last post anew */
-                    var_dump($priorPost->toArray());
                     $thread->set('post_last',$priorPost->get('id'));
                     $thread->set('author_last',$priorPost->get('author'));
                     $saved = $thread->save();
@@ -349,7 +358,7 @@ class disPost extends xPDOSimpleObject {
             }
             
             /* adjust forum activity */
-            if (!defined('DISCUSS_IMPORT_MODE')) {
+            if (!defined('DISCUSS_IMPORT_MODE') && !$isPrivateMessage) {
                 $now = date('Y-m-d');
                 $activity = $this->xpdo->getObject('disForumActivity',array(
                     'day' => $now,
@@ -372,6 +381,7 @@ class disPost extends xPDOSimpleObject {
                 'doBoardMoveChecks' => $doBoardMoveChecks,
                 'moveToSpam' => $moveToSpam,
                 'moved' => $moved,
+                'isPrivateMessage' => $isPrivateMessage,
             ));
 
             $this->clearCache();
@@ -555,6 +565,7 @@ class disPost extends xPDOSimpleObject {
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board').'/');
             $this->xpdo->cacheManager->delete('discuss/board/user/');
             $this->xpdo->cacheManager->delete('discuss/board/index/');
+            $this->xpdo->cacheManager->delete('discuss/board/recent/');
             $thread = $this->getOne('Thread');
             if ($thread) {
                 $this->xpdo->cacheManager->delete('discuss/thread/'.$thread->get('id'));
@@ -597,22 +608,31 @@ class disPost extends xPDOSimpleObject {
         return $thread->canReply();
     }
 
+    public function canReport() {
+        return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_report');
+    }
+
     /**
      * Get the thread page that this post would be on
+     *
+     * @param boolean $last
      * @return int
      */
-    public function getThreadPage() {
+    public function getThreadPage($last = false) {
         $thread = $this->getOne('Thread');
         if (!$thread) return 1;
 
         $page = 1;
         $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
         $replies = $thread->get('replies');
-        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
-
+        $perPage = (int)$this->xpdo->getOption('discuss.post_per_page',null, 10);
         if ($replies > $perPage) {
-            $idx = $this->get('idx');
-            if (empty($idx)) $idx = 1;
+            if (!$last) {
+                $idx = $this->get('idx');
+                if (empty($idx)) $idx = 1;
+            } else {
+                $idx = $replies - 1;
+            }
 
             if ($sortDir == 'ASC') {
                 $page = ceil(($idx+1) / $perPage);
@@ -629,17 +649,26 @@ class disPost extends xPDOSimpleObject {
      * Get the URL of this post
      *
      * @param string $view
+     * @param boolean $last
      * @return string
      */
-    public function getUrl($view = 'thread/') {
-        $url = $this->xpdo->discuss->url.$view.'?thread='.$this->get('thread');
-        $page = $this->getThreadPage();
+    public function getUrl($view = 'thread/',$last = false) {
+        $params = array();
+        $params['thread'] = $this->get('thread');
+        $page = $this->getThreadPage($last);
         if ($page != 1) {
-            $url .= '&page='.$page;
+            $params['page'] = $page;
         }
+
+        $thread = $this->getOne('Thread');
+        if ($thread && $view == 'thread/') {
+            $view = 'thread/'.$this->get('thread').'/'.$thread->getUrlTitle();
+            unset($params['thread']);
+        }
+
+        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
         $url .= '#dis-post-'.$this->get('id');
         $this->set('url',$url);
-        
         return $url;
     }
 }

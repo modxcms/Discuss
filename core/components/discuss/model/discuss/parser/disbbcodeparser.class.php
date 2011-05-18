@@ -44,6 +44,7 @@ class disBBCodeParser extends disParser {
         $message = $this->parseSmileys($message);
         $message = $this->parseList($message);
         $message = $this->convertLinks($message);
+        $message = $this->stripBadWords($message);
 
         /* auto-add br tags to linebreaks for pretty formatting */
         $message = $this->_nl2br2($message);
@@ -82,7 +83,6 @@ class disBBCodeParser extends disParser {
 
         $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
         $message = preg_replace("#\[hide\](.*?)\[/hide\]#si",'\\1',$message);
-       // $message = preg_replace("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",'<a href="\\1">\\2</a>',$message);
         $message = preg_replace_callback("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",array('disBBCodeParser','parseUrlCallback'),$message);
         $message = preg_replace_callback("#\[email\]([^/]*?)\[/email\]#si",array('disBBCodeParser','parseEmailCallback'),$message);
         $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
@@ -102,6 +102,27 @@ class disBBCodeParser extends disParser {
         $message = str_ireplace(array("[/size]", "[/font]", "[/color]"), "</span>", $message);
 
         $message = preg_replace('#\[/?left\]#si', '', $message);
+
+        return $message;
+    }
+
+    public function stripHtml($message) {
+        $message = preg_replace(array(
+            "@<iframe[^>]*?>.*?</iframe>@siu",
+            "@<frameset[^>]*?>.*?</frameset>@siu",
+            "@<form[^>]*?>.*?</form>@siu",
+            "@<input[^>]*?>.*?</input>@siu",
+            "@<select[^>]*?>.*?</select>@siu",
+            "@<frame[^>]*?>.*?</frame>@siu",
+            '@<style[^>]*?>.*?</style>@siu',
+            '@<script[^>]*?.*?</script>@siu',
+            '@<object[^>]*?.*?</object>@siu',
+            '@<embed[^>]*?.*?</embed>@siu',
+            '@<applet[^>]*?.*?</applet>@siu',
+            '@<noframes[^>]*?.*?</noframes>@siu',
+            '@<noscript[^>]*?.*?</noscript>@siu',
+            '@<noembed[^>]*?.*?</noembed>@siu',
+        ),'',$message);
 
         return $message;
     }
@@ -177,7 +198,7 @@ class disBBCodeParser extends disParser {
     public static function parseLinksCallback($matches) {
         $url = $matches[1].$matches[2];
         $noFollow = ' rel="nofollow"';
-        return '<a href="'.$url.'" target="_blank"'.$noFollow.'>'.$url.'</a>';
+        return '<a href="'.$url.'" target="_blank"'.$noFollow.'>'.$url.'</a>'."\n";
     }
 
     /**
@@ -363,20 +384,31 @@ class disBBCodeParser extends disParser {
 
         $nbs = '\xA0';
         $charset = $this->modx->getOption('modx_charset',null,'UTF-8');
+        $keepAttributes = $this->modx->getOption('discuss.allowed_html_attributes',null,'href,target,src');
+        $keepAttributes = explode(',',$keepAttributes);
+        
         /* Only mess with stuff outside [code] tags. */
+        $z = 0;
         for ($i = 0, $n = count($parts); $i < $n; $i++) {
-            /* It goes 0 = outside, 1 = begin tag, 2 = inside, 3 = close tag, repeat. */
-            if ($i % 4 == 0) {
-                $parts[$i] = $this->checkTags($parts[$i]);
+            /* $z #s -> 0 = outside, 1 = begin tag, 2 = inside, 3 = close tag, repeat. */
+            if ($z == 2) {
+                /* convert all code in [code] to htmlent */
+                $parts[$i] = htmlentities($parts[$i]);
+            }
+            if ($z == 0 || $z == 4) {
+                $z = 0;
+                $parts[$i] = preg_replace('~(\[img.*?\])(.+?)\[/img\]~eis', '\'$1\' . preg_replace(\'~action(=|%3d)(?!dlattach)~i\', \'action-\', \'$2\') . \'[/img]\'', $parts[$i]);
 
-                $list_open = substr_count($parts[$i], '[list]') + substr_count($parts[$i], '[list ');
-                $list_close = substr_count($parts[$i], '[/list]');
-                if ($list_close - $list_open > 0)
-                    $parts[$i] = str_repeat('[list]', $list_close - $list_open) . $parts[$i];
-                if ($list_open - $list_close > 0)
-                    $parts[$i] = $parts[$i] . str_repeat('[/list]', $list_open - $list_close);
+                $listOpen = substr_count($parts[$i], '[list]') + substr_count($parts[$i], '[list ');
+                $listClose = substr_count($parts[$i], '[/list]');
+                if ($listClose - $listOpen > 0) {
+                    $parts[$i] = str_repeat('[list]', $listClose - $listOpen) . $parts[$i];
+                }
+                if ($listOpen - $listClose > 0) {
+                    $parts[$i] = $parts[$i] . str_repeat('[/list]', $listOpen - $listClose);
+                }
 
-                // Make sure all tags are lowercase.
+                /* Make sure all tags are lowercase. */
                 $parts[$i] = preg_replace('~\[([/]?)(list|li)((\s[^\]]+)*)\]~ie', '\'[$1\' . strtolower(\'$2\') . \'$3]\'', $parts[$i]);
 
                 $mistakeFixes = array(
@@ -399,15 +431,84 @@ class disBBCodeParser extends disParser {
                 for ($j = 0; $j < 3; $j++) {
                     $parts[$i] = preg_replace(array_keys($mistakeFixes), $mistakeFixes, $parts[$i]);
                 }
+
+
+                $parts[$i] = preg_replace('~&lt;a\s+href=((?:&quot;)?)((?:https?://|ftps?://|mailto:)\S+?)\\1&gt;~i', '[url=$2]', $parts[$i]);
+                $parts[$i] = preg_replace('~&lt;/a&gt;~i', '[/url]', $parts[$i]);
+
+                // strip all unwanted html attributes
+                preg_match_all('/[a-z]+=".+"/iU', $parts[$i], $attributes);
+                foreach ($attributes[0] as $attribute) {
+                    $attributeName = stristr($attribute, '=', true);
+                    if (!in_array($attributeName, $keepAttributes)) {
+                        $parts[$i] = str_replace(' ' . $attribute, '', $parts[$i]);
+                    }
+                }
+
+                // now attributes without quotes
+                preg_match_all('/[a-z]+=.+/iU', $parts[$i], $attributes);
+                foreach ($attributes[0] as $attribute) {
+                    $attributeName = stristr($attribute, '=', true);
+                    if (!in_array($attributeName, $keepAttributes)) {
+                        $parts[$i] = str_replace(' ' . $attribute, '', $parts[$i]);
+                    }
+                }
+
+                // strip script tags properly
+                $parts[$i] = preg_replace("@<script[^>]*>.+</script[^>]*>@i",'',$parts[$i]);
+                $parts[$i] = $this->stripHtml($parts[$i]);
+
+                $parts[$i] = $this->cleanupImg($parts[$i]);
             }
 
-            $message = strtr(implode('', $parts), array('  ' => '&nbsp; ', "\n" => '<br />', $charset == 'UTF-8' ? "\xC2\xA0" : "\xA0" => '&nbsp;'));
+            $z++;
+
+
+            $message = implode('', $parts);
         }
         return $message;
     }
 
-    public function checkTags($message) {
-        $message = preg_replace('~(\[img.*?\])(.+?)\[/img\]~eis', '\'$1\' . preg_replace(\'~action(=|%3d)(?!dlattach)~i\', \'action-\', \'$2\') . \'[/img]\'', $message);
+    public function cleanupImg($message) {
+        preg_match_all('~&lt;img\s+src=((?:&quot;)?)((?:https?://|ftps?://)\S+?)\\1(?:\s+alt=(&quot;.*?&quot;|\S*?))?(?:\s?/)?&gt;~i', $message, $matches, PREG_PATTERN_ORDER);
+        if (!empty($matches[0])) {
+            $replaces = array();
+            foreach ($matches[2] as $match => $imgTag) {
+                $alt = empty($matches[3][$match]) ? '' : ' alt=' . preg_replace('~^&quot;|&quot;$~', '', $matches[3][$match]);
+
+                // Remove action= from the URL - no funny business, now.
+                if (preg_match('~action(=|%3d)(?!dlattach)~i', $imgTag) != 0) {
+                    $imgTag = preg_replace('~action(=|%3d)(?!dlattach)~i', 'action-', $imgTag);
+                }
+
+                // Check if the image is larger than allowed.
+                /*
+                if (!empty($modSettings['max_image_width']) && !empty($modSettings['max_image_height'])) {
+                    list ($width, $height) = url_image_size($imgtag);
+
+                    if (!empty($modSettings['max_image_width']) && $width > $modSettings['max_image_width'])
+                    {
+                        $height = (int) (($modSettings['max_image_width'] * $height) / $width);
+                        $width = $modSettings['max_image_width'];
+                    }
+
+                    if (!empty($modSettings['max_image_height']) && $height > $modSettings['max_image_height'])
+                    {
+                        $width = (int) (($modSettings['max_image_height'] * $width) / $height);
+                        $height = $modSettings['max_image_height'];
+                    }
+
+                    // Set the new image tag.
+                    $replaces[$matches[0][$match]] = '[img width=' . $width . ' height=' . $height . $alt . ']' . $imgtag . '[/img]';
+                }
+                else
+                    $replaces[$matches[0][$match]] = '[img' . $alt . ']' . $imgtag . '[/img]';
+                */
+                $replaces[$matches[0][$match]] = '[img' . $alt . ']' . $imgTag . '[/img]';
+            }
+
+            $message = strtr($message, $replaces);
+        }
         return $message;
     }
 }

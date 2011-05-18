@@ -27,8 +27,6 @@ $mtime = $mtime[1] + $mtime[0];
 $tstart = $mtime;
 set_time_limit(0);
 
-$forumsResourceUrl = 'forums/';
-
 /* override with your own defines here (see build.config.sample.php) */
 require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/config.core.php';
 require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
@@ -48,64 +46,37 @@ set_time_limit(0);
 @ob_end_clean();
 echo '<pre>';
 
-$discuss->loadRequest();
-$discuss->url = $forumsResourceUrl;
-if (!$discuss->loadSearch()) {
-    die('No search class!');
-}
+/* load and run importer */
+if ($discuss->loadImporter('disSmfImport')) {
 
-/* grab all posts and reindex */
-$c = $modx->newQuery('disPost');
-$c->innerJoin('disBoard','Board');
-$c->innerJoin('disThread','Thread');
-$c->innerJoin('disUser','Author');
-$c->where(array(
-    'Thread.private' => 0,
-    'Board.status:!=' => 0,
-));
-$c->select($modx->getSelectColumns('disPost','disPost'));
-$c->select(array(
-    'Board.name AS board_name',
-    'Author.username AS username',
-    'Thread.replies AS replies',
-    'Thread.users AS users',
-    'Thread.private AS private',
-));
-$c->sortby('id','ASC');
-
-$posts = $modx->getIterator('disPost');
-foreach ($posts as $post) {
-    echo 'Indexing: '.$post->get('title')."\n"; flush();
-    $post->index();
-}
-
-//$c->prepare(); $sql = $c->toSql();
-
-$perPage = $modx->getOption('discuss.post_per_page',null, 10);
-$parser = $modx->getService('disParser','disBBCodeParser',$discuss->config['modelPath'].'discuss/parser/');
-
-/*
-$stmt = $modx->query($sql);
-if ($stmt) {
-    while ($postArray = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $postArray['url'] = $forumsResourceUrl.'thread/?thread='.$postArray['thread'];
-        $page = 1;
-        if ($postArray['replies'] > $perPage) {
-            $page = ceil($postArray['replies'] / $perPage);
+    /* fix num_topics */
+    $sql = 'SELECT
+      disBoard.id,
+      disBoard.name,
+      disBoard.num_topics,
+      (SELECT COUNT(id) FROM '.$modx->getTableName('disThread').' AS `Threads`
+    WHERE `Threads`.`board` = `disBoard`.`id`) AS `real_count`
+    FROM '.$modx->getTableName('disBoard').' `disBoard`
+    ORDER BY `disBoard`.`map` ASC';
+    $stmt = $modx->query($sql);
+    if ($stmt) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if (!empty($row['real_count']) && $row['real_count'] < $row['num_topics']) {
+                $discuss->import->log('Setting "'.$row['name'].'" to '.$row['real_count'].' from '.$row['num_topics']);
+                $modx->exec('UPDATE '.$modx->getTableName('disBoard').'
+                    SET `num_topics` = '.$row['real_count'].'
+                    WHERE `id` = '.$row['id']);
+            }
         }
-        if ($page != 1) { $postArray['url'] .= '&page='.$page; }
-        $postArray['url'] .= '#dis-post-'.$postArray['id'];
-
-        $message = $parser->parse($postArray['message']);
-        $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
-        $replace = '';
-        $postArray['message'] = preg_replace($pattern, $replace, $message);
-        echo 'Indexing: '.$postArray['title']."\n"; flush();
-        $discuss->search->index($postArray);
+        $stmt->closeCursor();
     }
-    $stmt->closeCursor();
-}*/
 
+    /* fix num_replies */
+    /* fix total_posts */
+
+} else {
+    $modx->log(xPDO::LOG_LEVEL_ERROR,'Failed to load Import class.');
+}
 
 $mtime= microtime();
 $mtime= explode(" ", $mtime);
@@ -115,6 +86,5 @@ $totalTime= ($tend - $tstart);
 $totalTime= sprintf("%2.4f s", $totalTime);
 
 $modx->log(modX::LOG_LEVEL_INFO,"\nExecution time: {$totalTime}\n");
-
 @session_write_close();
 die();

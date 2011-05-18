@@ -68,4 +68,25 @@ abstract class disParser {
     public function br2nl($str) {
         return str_replace(array('<br>','<br />','<br/>'),"\n",$str);
     }
+
+    /**
+     * Strip all bad words out of the parser
+     *
+     * @param string $message
+     * @return mixed
+     */
+    public function stripBadWords($message) {
+        $replace = $this->modx->getOption('discuss.bad_words_replace',null,true);
+        $char = '';
+        if (!empty($replace)) {
+            $char = $this->modx->getOption('discuss.bad_words_replace_string',null,'****');
+        }
+        $badWords = $this->modx->getOption('discuss.bad_words',null,'');
+        $badWords = explode(',',$badWords);
+        if (!empty($badWords)) {
+            $message = str_replace($badWords,'',$message);
+            $message = preg_replace('/\b('.implode('|',$badWords).')\b/i',$char,$message);
+        }
+        return $message;
+    }
 }

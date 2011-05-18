@@ -29,10 +29,11 @@
  */
 $discuss->setPageTitle($modx->lexicon('discuss.logout'));
 
+$discuss->user->clearCache();
 $contexts = $modx->user->getSessionContexts();
 foreach ($contexts as $context => $level) {
     if ($context == 'mgr') continue;
     $modx->user->removeSessionContext($context);
     $modx->getUser($context,true);
 }
-$modx->sendRedirect($discuss->url.'home');
+$modx->sendRedirect($discuss->request->makeUrl('home'));

@@ -4,7 +4,7 @@
     <div class="right" style="width: 10%">[[+views]]</div>
     <div class="dis-thread-icons">[[+icons]]</div>
     <div class="dis-thread-body">
-        <a href="[[~[[*id]]]]thread/?thread=[[+id]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a>
+        <a href="[[+url]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a>
         [[+unread]]
     </div>
 </li>

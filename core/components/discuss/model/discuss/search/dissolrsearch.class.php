@@ -74,6 +74,7 @@ class disSolrSearch extends disSearch {
               ->addField('createdon')
               ->addField('board_name')
               ->addField('url')
+              ->addField('private')
               ->addField('score');
 
         foreach ($conditions as $k => $v) {
@@ -135,6 +136,7 @@ class disSolrSearch extends disSearch {
         if (!empty($fields['createdon'])) {
             $document->addField('createdon',''.strftime('%Y-%m-%dT%H:%M:%SZ',strtotime($fields['createdon'])));
         }
+        $document->addField('private',$fields['private']);
 
         $response = false;
         try {

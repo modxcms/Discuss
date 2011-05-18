@@ -202,6 +202,109 @@ class disThread extends xPDOSimpleObject {
         return $response;
     }
 
+
+    /**
+     * Fetch all new replies in threads that the active user is a participant in
+     *
+     * @static
+     * @param xPDO $modx A reference to the modX instance
+     * @param string $sortBy The column to sort by
+     * @param string $sortDir The direction to sort
+     * @param int $limit The # of threads to limit
+     * @param int $start The index to start by
+     * @param boolean $sinceLastLogin
+     * @return array An array in results/total format
+     */
+    public static function fetchNewReplies(xPDO &$modx,$sortBy = 'LastPost.createdon',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
+        $response = array();
+        $c = $modx->newQuery('disThread');
+        $c->innerJoin('disBoard','Board');
+        $c->innerJoin('disPost','FirstPost');
+        $c->innerJoin('disPost','LastPost');
+        $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
+        $c->innerJoin('disUser','LastAuthor');
+        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
+        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+        $groups = $modx->discuss->user->getUserGroups();
+        if (!$modx->discuss->user->isAdmin()) {
+            if (!empty($groups)) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:IS'] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            } else {
+                $c->where(array(
+                    'UserGroups.usergroup:IS' => null,
+                ));
+            }
+        }
+        $c->where(array(
+            'Reads.thread:IS' => null,
+            'Board.status:!=' => disBoard::STATUS_INACTIVE,
+            $modx->discuss->user->get('id').' IN(
+             (
+                SELECT GROUP_CONCAT(pAuthor.id)
+                FROM '.$modx->getTableName('disPost').' AS pPost
+                INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+                WHERE pPost.thread = disThread.id
+             )
+            )',
+        ));
+
+        /* ignore spam/recycle bin boards */
+        $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
+        if (!empty($spamBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $spamBoard,
+            ));
+        }
+        $trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
+        if (!empty($trashBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $trashBoard,
+            ));
+        }
+
+        /* usergroup protection */
+        if ($modx->discuss->isLoggedIn) {
+            if ($sinceLastLogin) {
+                $lastLogin = $modx->discuss->user->get('last_login');
+                if (!empty($lastLogin)) {
+                    $c->where(array(
+                        'LastPost.createdon:>=' => $lastLogin,
+                    ));
+                }
+            }
+            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
+            if (!empty($ignoreBoards)) {
+                $c->where(array(
+                    'Board.id:NOT IN' => explode(',',$ignoreBoards),
+                ));
+            }
+        }
+        $response['total'] = $modx->getCount('disThread',$c);
+        $c->select($modx->getSelectColumns('disThread','disThread'));
+        $c->select(array(
+            'Board.name AS board_name',
+            'FirstPost.title AS title',
+            'FirstPost.thread AS thread',
+            'LastAuthor.username AS author_username',
+
+            'LastPost.id AS post_id',
+            'LastPost.createdon AS createdon',
+            'LastPost.author AS author',
+            'LastPostThread.replies AS last_post_replies',
+        ));
+        $c->sortby($sortBy,$sortDir);
+        $c->limit($limit,$start);
+        $response['results'] = $modx->getCollection('disThread',$c);
+
+        return $response;
+    }
+
     /**
      * Mark all posts in this thread as read
      * @static
@@ -253,12 +356,11 @@ class disThread extends xPDOSimpleObject {
      * @return boolean
      */
     public function remove(array $ancestors = array(),$doBoardMoveChecks = false,$moveToSpam = false) {
-        $remove = false;
         $removed = false;
 
         if (!empty($doBoardMoveChecks)) {
             $board = $this->getOne('Board');
-            if (!empty($board)) {
+            if (!empty($board) && !$this->get('private')) {
                 $isModerator = $board->isModerator($this->xpdo->discuss->user->get('id'));
                 $isAdmin = $this->xpdo->discuss->user->isAdmin();
                 if ($isModerator || $isAdmin) { /* move to spambox/recyclebin */
@@ -273,26 +375,37 @@ class disThread extends xPDOSimpleObject {
                             if ($this->move($trashBoard)) {
                                 $removed = true;
                             }
-                        } else {
-                            $remove = true;
                         }
                     }
                 }
-            } else { /* is a PM */
-                $remove = true;
             }
-        } else { /* skipping, usually used for related objs */
-            $remove = true;
         }
 
-        if ($remove) {
+        if (!$removed) {
             $removed = parent::remove($ancestors);
         }
 
         if ($removed) {
             $this->clearCache();
+            /* clear recent posts cache */
+            $this->xpdo->cacheManager->delete('discuss/board/recent/');
         }
         return $removed;
+    }
+
+    /**
+     * Save the Thread
+     *
+     * @param null $cacheFlag
+     * @param bool $clearCache
+     * @return boolean
+     */
+    public function save($cacheFlag = null,$clearCache = true) {
+        $saved = parent::save($cacheFlag);
+        if ($saved && $clearCache) {
+            $this->clearCache();
+        }
+        return $saved;
     }
 
     /**
@@ -340,7 +453,9 @@ class disThread extends xPDOSimpleObject {
             $members = array();
             foreach ($sessions as $member) {
                 $r = explode(':',$member->get('reader'));
-                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user/?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>' : $r[1];
+                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array(
+                    'user' => str_replace('%20','',$r[0])
+                )).'">'.$r[1].'</a>' : $r[1];
             }
             $members = array_unique($members);
             $members = implode(',',$members);
@@ -518,7 +633,7 @@ class disThread extends xPDOSimpleObject {
      * @return bool True if they are a moderator
      */
     public function isModerator() {
-        if ($this->xpdo->discuss->user->isGlobalModerator()) return true;
+        if ($this->xpdo->discuss->user->isGlobalModerator() || $this->xpdo->discuss->user->isAdmin()) return true;
         
         $moderator = $this->xpdo->getCount('disModerator',array(
             'user' => $this->xpdo->discuss->user->get('id'),
@@ -559,7 +674,7 @@ class disThread extends xPDOSimpleObject {
         $c->sortby('Ancestors.depth','DESC');
         $ancestors = $this->xpdo->getCollection('disBoard',$c);
         $trail = empty($defaultTrail) ? array(array(
-            'url' => $this->xpdo->discuss->url,
+            'url' => $this->xpdo->discuss->request->makeUrl(),
             'text' => $this->xpdo->getOption('discuss.forum_title'),
         )) : $defaultTrail;
         $category = false;
@@ -568,13 +683,13 @@ class disThread extends xPDOSimpleObject {
                 $category = $ancestor->getOne('Category');
                 if ($category) {
                     $trail[] = array(
-                        'url' => $this->xpdo->discuss->url.'?category='.$category->get('id'),
+                        'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
                         'text' => $category->get('name'),
                     );
                 }
             }
             $trail[] = array(
-                'url' => $this->xpdo->discuss->url.'board/?board='.$ancestor->get('id'),
+                'url' => $this->xpdo->discuss->request->makeUrl('board',array('board' => $ancestor->get('id'))),
                 'text' => $ancestor->get('name'),
             );
         }
@@ -597,7 +712,7 @@ class disThread extends xPDOSimpleObject {
         $class = array($defaultClass);
         $threshold = $this->xpdo->getOption('discuss.hot_thread_threshold',null,10);
         $participants = explode(',',$this->get('participants'));
-        if (in_array($this->xpdo->discuss->user->get('id'),$participants) && $this->xpdo->discuss->isLoggedIn) {
+        if (in_array($this->xpdo->discuss->user->get('id'),$participants) && $this->xpdo->discuss->user->isLoggedIn) {
             $class[] = $this->get('replies') < $threshold ? 'dis-my-normal-thread' : 'dis-my-veryhot-thread';
         } else {
             $class[] = $this->get('replies') < $threshold ? '' : 'dis-veryhot-thread';
@@ -630,21 +745,32 @@ class disThread extends xPDOSimpleObject {
      * @return void
      */
     public function view() {
+        $lastViewed = false;
+
         /* prevent view pushing */
         $ip = $this->xpdo->discuss->getIp();
-        if ($this->get('last_view_ip') == $ip) return false;
+        if ($this->get('last_view_ip') == $ip) $lastViewed = true;
 
         /* up the view count for this thread */
-        $views = $this->get('views');
-        $this->set('views',($views+1));
-        $this->set('last_view_ip',$ip);
-        $this->save();
-        unset($views);
+        if (!$lastViewed) {
+            $views = $this->get('views');
+            $this->set('views',($views+1));
+            $this->set('last_view_ip',$ip);
+            $this->save(null,false);
+            unset($views);
+        }
 
         /* set last visited */
         if ($this->xpdo->discuss->user->get('user') != 0) {
             $this->xpdo->discuss->user->set('thread_last_visited',$this->get('id'));
             $this->xpdo->discuss->user->save();
+        }
+
+        if (!$lastViewed) {
+            $this->xpdo->getCacheManager();
+            $this->xpdo->cacheManager->delete('discuss/thread/'.$this->get('id'));
+            $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board'));
+            $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board').'/');
         }
         return true;
     }
@@ -804,6 +930,10 @@ class disThread extends xPDOSimpleObject {
         return !$this->isArchived() && $this->xpdo->hasPermission('discuss.thread_reply') && !$this->get('locked');
     }
 
+    /**
+     * Determines if the active user can post attachments to this thread
+     * @return bool
+     */
     public function canPostAttachments() {
         return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_attach');
     }
@@ -813,13 +943,16 @@ class disThread extends xPDOSimpleObject {
      * @return int
      */
     public function calcLastPostPage() {
-        $page = 1;
-        $replies = $this->get('last_post_replies');
-        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
-        if ($replies > $perPage) {
-            $page = ceil($replies / $perPage);
+        $page = $this->get('last_post_page');
+        if (empty($page)) {
+            $page = 1;
+            $replies = $this->get('last_post_replies');
+            $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
+            if ($replies > $perPage) {
+                $page = ceil($replies / $perPage);
+            }
+            $this->set('last_post_page',$page);
         }
-        $this->set('last_post_page',$page);
         return $page;
     }
 
@@ -827,21 +960,54 @@ class disThread extends xPDOSimpleObject {
      * Get the proper URL for the thread, optionally with the post anchor and page
      *
      * @param boolean $lastPost If true, will get URL for last Post of thread
+     * @param array $params Any extra params to append to the thread
+     * @param boolean $regenerate If true, will regenerate the url even if it has already been set
      * @return string
      */
-    public function getUrl($lastPost = true) {
-        $url = $this->xpdo->discuss->url.'thread/?thread='.$this->get('id');
-        $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
-        if ($lastPost) {
-            if ($this->get('last_post_page') != 1 && $sortDir == 'ASC') {
-                $url .= '&page='.$this->get('last_post_page');
+    public function getUrl($lastPost = true,array $params = array(),$regenerate = false) {
+        $url = $this->get('url');
+        if (empty($url) || $regenerate || !empty($params)) {
+            $view = 'thread/'.$this->get('id').'/'.$this->getUrlTitle();
+
+            if ($lastPost) {
+                $page = $this->calcLastPostPage();
+                $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
+                if ($page > 1 && $sortDir == 'ASC') {
+                    $params['page'] = $this->get('last_post_page');
+                }
             }
-            if ($this->get('post_id')) {
+
+            $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+            if ($this->get('post_id') && $lastPost) {
                 $url .= '#dis-post-'.$this->get('post_id');
             }
+            $this->set('url',$url);
         }
-        $this->set('url',$url);
         return $url;
+    }
+
+    /**
+     * Get the URL-friendly title of this thread
+     * @return string
+     */
+    public function getUrlTitle() {
+        $title = $this->get('title');
+        if (empty($title)) {
+            $post = $this->getOne('FirstPost');
+            if ($post) {
+                $title = $post->get('title');
+                $this->set('title',$title);
+                $this->save();
+            }
+        }
+
+        if (!empty($title)) {
+            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
+        } else {
+            $title = $this->get('id');
+        }
+        return $title;
+
     }
 
     public function canStick() {

@@ -6,7 +6,6 @@ function shPath() {
   return result;
 };
 $(function() {
-console.log(DIS.shJsUrl);
     SyntaxHighlighter.autoloader.apply(null, shPath(
       'applescript            @shBrushAppleScript.js',
       'actionscript3 as3      @shBrushAS3.js',

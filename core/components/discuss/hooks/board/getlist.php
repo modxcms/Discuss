@@ -45,7 +45,9 @@ if (empty($boards)) {
     $boards = array();
     foreach ($response['results'] as $board) {
         $board->calcLastPostPage();
-        $boards[] = $board->toArray();
+        $board->getLastPostTitle();
+        $board->getLastPostUrl();
+        $boards[] = $board->toArray('',true,true);
     }
     $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,3600));
 }
@@ -58,11 +60,32 @@ $boardList = array();
 
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
-$sortDir = $modx->getOption('discuss.post_sort_dir',null,'ASC');
-
+$groups = $discuss->user->getUserGroups();
+$isAdmin = $discuss->user->isAdmin();
 foreach ($boards as $board) {
-    $unreadThreads = array_diff(explode(',',$board['threads']),$discuss->user->readThreads);
-    $board['unread'] = count($unreadThreads) > 0;
+    /* check usergroup perms */
+    if (!$isAdmin) {
+        $bgroups = explode(',',$board['usergroups']);
+        if (!empty($groups) && !empty($board['usergroups'])) {
+            $in = false;
+            foreach ($bgroups as $bg) {
+                if (in_array((int)$bg,$groups)) {
+                    $in = true;
+                }
+            }
+            if (!$in) continue;
+        } else if (!empty($board['usergroups'])) {
+            continue;
+        }
+    }
+    /* check ignore boards */
+    if ($discuss->user->isLoggedIn) {
+        if (in_array($board['id'],explode(',',$discuss->user->get('ignore_boards')))) {
+            continue;
+        }
+    }
+    /* check for read status */
+    $board['unread'] = $discuss->user->isBoardRead($board['id']);
     $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
     if (!empty($board['last_post_createdon'])) {
         $phs = array(
@@ -71,8 +94,8 @@ foreach ($boards as $board) {
             'username' => $board['last_post_username'],
             'thread' => $board['last_post_thread'],
             'id' => $board['last_post_id'],
-            'url' => $discuss->url.'thread/?thread='.$board['last_post_thread'].($board['last_post_page'] != 1 && $sortDir == 'ASC' ? '&page='.$board['last_post_page'] : '').'#dis-post-'.$board['last_post_id'],
-            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$board['last_post_author'].'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
+            'url' => $board['last_post_url'],
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('user',array('user' => $board['last_post_author'])).'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
         );
         $lp = $discuss->getChunk('board/disLastPostBy',$phs);
         $board['lastPost'] = $lp;
@@ -113,7 +136,9 @@ foreach ($boards as $board) {
     if ($currentCategory != $lastCategory) {
         $ba['list'] = implode("\n",$boardList);
         unset($ba['rowClass']);
-        $list[] = $discuss->getChunk('category/disCategoryLi',$ba);
+        if (!empty($ba['list'])) {
+            $list[] = $discuss->getChunk('category/disCategoryLi',$ba);
+        }
 
         $ba = $board;
         $boardList = array(); /* reset current category board list */

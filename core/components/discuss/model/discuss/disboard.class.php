@@ -42,7 +42,10 @@ class disBoard extends xPDOSimpleObject {
      * Overrides xPDOObject::set to provide custom functionality and automation
      * for the closure tables that persist the board map.
      *
-     * {@inheritDoc}
+     * @param string $k
+     * @param mixed $v
+     * @param string $vType
+     * @return boolean
      */
     public function set($k, $v= null, $vType= '') {
         $oldParentId = $this->get('parent');
@@ -53,6 +56,11 @@ class disBoard extends xPDOSimpleObject {
         return $set;
     }
 
+    /**
+     * Override xPDOObject::remove to clear cache on remove
+     * @param array $ancestors
+     * @return boolean
+     */
     public function remove(array $ancestors = array()) {
         $removed = parent::remove($ancestors);
         $this->clearCache();
@@ -63,7 +71,8 @@ class disBoard extends xPDOSimpleObject {
      * Overrides the xPDOObject::save method to provide custom functionality and
      * automation for the closure tables that persist the board map.
      *
-     * {@inheritDoc}
+     * @param boolean $cacheFlag
+     * @return boolean
      */
     public function save($cacheFlag = null) {
         $new = $this->isNew();
@@ -175,6 +184,13 @@ class disBoard extends xPDOSimpleObject {
         return $saved;
     }
 
+    /**
+     * Get all the IDs of the parents of this board up the tree
+     *
+     * @param bool $id
+     * @param array $ids
+     * @return array
+     */
     public function getRecursiveParentIds($id = false,array $ids = array()) {
         if ($id === false) {
             $board =& $this;
@@ -190,6 +206,15 @@ class disBoard extends xPDOSimpleObject {
         return $ids;
     }
 
+    /**
+     * Fetch a board by ID
+     * 
+     * @static
+     * @param xPDO $modx
+     * @param int $id
+     * @param bool $integrated
+     * @return disBoard
+     */
     public static function fetch(xPDO &$modx,$id,$integrated = false) {
         $c = $modx->newQuery('disBoard');
         $c->leftJoin('disBoardUserGroup','UserGroups');
@@ -197,15 +222,23 @@ class disBoard extends xPDOSimpleObject {
             ($integrated ? 'integrated_id' : 'id') => trim($id,'.'),
         ));
         $groups = $modx->discuss->user->getUserGroups();
-        if (!empty($groups) && !$modx->discuss->user->isAdmin) {
-            /* restrict boards by user group if applicable */
-            $g = array(
-                'UserGroups.usergroup:IN' => $groups,
-            );
-            $g['OR:UserGroups.usergroup:='] = null;
-            $where[] = $g;
-            $c->andCondition($where,null,2);
+        /* restrict boards by user group if applicable */
+        if (!$modx->discuss->user->isAdmin()) {
+            if (!empty($groups)) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:IS'] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            } else {
+                $c->where(array(
+                    'UserGroups.usergroup:IS' => null,
+                ));
+            }
         }
+        $c->andCondition($where,null,2);
         return $modx->getObject('disBoard',$c);
     }
 
@@ -236,7 +269,7 @@ class disBoard extends xPDOSimpleObject {
             $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user?user='.$r[0].'">'.$r[1].'</a>' : $r[1];
+                $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array('user' => $r[0])).'">'.$r[1].'</a>' : $r[1];
             }
             $members = array_unique($members);
             $members = implode(',',$members);
@@ -289,7 +322,7 @@ class disBoard extends xPDOSimpleObject {
         $mods = array();
         if ($moderators) {
             foreach ($moderators as $moderator) {
-                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->url.'user?user='.$moderator->get('user').'">'.$moderator->get('username').'</a>' : $moderator->get('username');
+                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array('user' => $moderator->get('user'))).'">'.$moderator->get('username').'</a>' : $moderator->get('username');
             }
             $mods = array_unique($mods);
             $mods = implode(',',$mods);
@@ -329,7 +362,7 @@ class disBoard extends xPDOSimpleObject {
             $sbs = array();
             foreach ($subboards as $subboard) {
                 $sb = explode(':',$subboard);
-                $sbs[] = '<a href="'.$this->xpdo->discuss->url.'board/?board='.$sb[0].'">'.$sb[1].'</a>';
+                $sbs[] = '<a href="'.$this->xpdo->discuss->request->makeUrl('board/',array('board' => $sb[0])).'">'.$sb[1].'</a>';
             }
             $sbl = $this->xpdo->lexicon('discuss.subforums').': '.implode(',',$sbs);
         }
@@ -337,6 +370,13 @@ class disBoard extends xPDOSimpleObject {
         return $sbl;
     }
 
+    /**
+     * Build the breadcrumb navigation for this board
+     * 
+     * @param array $additional
+     * @param bool $linkToSelf
+     * @return array
+     */
     public function buildBreadcrumbs($additional = array(),$linkToSelf = false) {
         $cacheKey = 'discuss/board/'.$this->get('id').'/breadcrumbs';
         $trail = $this->xpdo->cacheManager->get($cacheKey);
@@ -354,20 +394,20 @@ class disBoard extends xPDOSimpleObject {
             /* breadcrumbs */
             $trail = array();
             $trail[] = array(
-                'url' => $this->xpdo->discuss->url,
+                'url' => $this->xpdo->discuss->request->makeUrl(),
                 'text' => $this->xpdo->getOption('discuss.forum_title'),
             );
             $category = $this->getOne('Category');
             if ($category) {
                 $trail[] = array(
-                    'url' => $this->xpdo->discuss->url.'?category='.$category->get('id'),
+                    'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
                     'text' => $category->get('name'),
                 );
             }
             if (!empty($ancestors)) {
                 foreach ($ancestors as $ancestor) {
                     $trail[] = array(
-                        'url' => $this->xpdo->discuss->url.'board?board='.$ancestor->get('id'),
+                        'url' => $this->xpdo->discuss->request->makeUrl('board',array('board' => $ancestor->get('id'))),
                         'text' => $ancestor->get('name'),
                     );
                 }
@@ -376,7 +416,7 @@ class disBoard extends xPDOSimpleObject {
                 'text' => $this->get('name').($this->get('locked') ? $this->xpdo->lexicon('discuss.board_is_locked') : ''),
             );
             if ($linkToSelf) {
-                $self['url'] = $this->xpdo->discuss->url.'board/?board='.$this->get('id');
+                $self['url'] = $this->xpdo->discuss->request->makeUrl('board/',array('board' => $this->get('id')));
             }
             if (empty($additional)) { $self['active'] = true; }
             $trail[] = $self;
@@ -461,6 +501,14 @@ class disBoard extends xPDOSimpleObject {
         return $canPost;
     }
 
+    /**
+     * Get a full list of all boards on the forum, for any user
+     * @static
+     * @param xPDO $modx
+     * @param int $board
+     * @param bool $category
+     * @return array
+     */
     public static function getList(xPDO &$modx,$board = 0,$category = false) {
         $response = array();
 
@@ -479,7 +527,9 @@ class disBoard extends xPDOSimpleObject {
         /* subboards sql */
         $sbCriteria = $modx->newQuery('disBoard');
         $sbCriteria->setClassAlias('subBoard');
-        $sbCriteria->select('GROUP_CONCAT(CONCAT_WS(":",subBoardClosureBoard.id,subBoardClosureBoard.name) SEPARATOR "||") AS name');
+        $sbCriteria->select(array(
+            'GROUP_CONCAT(CONCAT_WS(":",subBoardClosureBoard.id,subBoardClosureBoard.name) SEPARATOR "||") AS name'
+        ));
         $sbCriteria->innerJoin('disBoardClosure','subBoardClosure','subBoardClosure.ancestor = subBoard.id');
         $sbCriteria->innerJoin('disBoard','subBoardClosureBoard','subBoardClosureBoard.id = subBoardClosure.descendant');
         $sbCriteria->where(array(
@@ -500,7 +550,6 @@ class disBoard extends xPDOSimpleObject {
         $c->leftJoin('disPost','LastPost');
         $c->leftJoin('disUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
         $c->leftJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
-        $c->leftJoin('disBoardUserGroup','UserGroups');
         $c->where(array(
             'disBoard.status:!=' => disBoard::STATUS_INACTIVE,
         ));
@@ -514,31 +563,18 @@ class disBoard extends xPDOSimpleObject {
                 'disBoard.category' => $category,
             ));
         }
-        $groups = $modx->discuss->user->getUserGroups();
-        if (!$modx->discuss->user->isAdmin()) {
-            if (!empty($groups)) {
-                /* restrict boards by user group if applicable */
-                $g = array(
-                    'UserGroups.usergroup:IN' => $groups,
-                );
-                $g['OR:UserGroups.usergroup:IS'] = null;
-                $where[] = $g;
-                $c->andCondition($where,null,2);
-            } else {
-                $c->where(array(
-                    'UserGroups.usergroup:IS' => null,
-                ));
-            }
-        }
-        if ($modx->discuss->isLoggedIn) {
-            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
-            if (!empty($ignoreBoards)) {
-                $c->where(array(
-                    'id:NOT IN' => explode(',',$ignoreBoards),
-                ));
-            }
-        }
 
+        $ugc = $modx->newQuery('disBoardUserGroup');
+        $ugc->select(array(
+            'GROUP_CONCAT(usergroup)',
+        ));
+        $ugc->where(array(
+            'board = disBoard.id',
+        ));
+        $ugc->groupby('board');
+        $ugc->prepare();
+        $userGroupsSql = $ugc->toSql();
+        
         $response['total'] = $modx->getCount('disBoard',$c);
         $c->query['distinct'] = 'DISTINCT';
         $c->select($modx->getSelectColumns('disBoard','disBoard'));
@@ -546,12 +582,13 @@ class disBoard extends xPDOSimpleObject {
             'Category.name AS category_name',
             '('.$sbSql.') AS '.$modx->escape('subboards'),
             '('.$threadsSql.') AS '.$modx->escape('threads'),
+            '('.$userGroupsSql.') AS '.$modx->escape('usergroups'),
             'LastPost.id AS last_post_id',
             'LastPost.thread AS last_post_thread',
-            'LastPost.title AS last_post_title',
             'LastPost.author AS last_post_author',
             'LastPost.createdon AS last_post_createdon',
             'LastPostThread.replies AS last_post_replies',
+            'LastPostThread.title AS last_post_title',
             'LastPostAuthor.username AS last_post_username',
         ));
         $c->sortby('Category.rank','ASC');
@@ -561,6 +598,14 @@ class disBoard extends xPDOSimpleObject {
         return $response;
     }
 
+    /**
+     * Fetch a full list of boards for the forum with restrictions based on current user
+     * 
+     * @static
+     * @param xPDO $modx
+     * @param bool $ignoreBoards
+     * @return array
+     */
     public static function fetchList(xPDO &$modx,$ignoreBoards = true) {
         $c = array(
             'ignore_boards' => $ignoreBoards,
@@ -616,6 +661,10 @@ class disBoard extends xPDOSimpleObject {
 
     }
 
+    /**
+     * Get the 2nd to last Post
+     * @return disPost
+     */
     public function get2ndLatestPost() {
         $c = $this->xpdo->newQuery('disPost');
         $c->innerJoin('disBoard','Board');
@@ -630,6 +679,10 @@ class disBoard extends xPDOSimpleObject {
         return $this->xpdo->getObject('disPost',$c);
     }
 
+    /**
+     * Calc the page of the last post on this board (requires prior data filled)
+     * @return float|int
+     */
     public function calcLastPostPage() {
         $page = 1;
         $replies = $this->get('last_post_replies');
@@ -641,17 +694,64 @@ class disBoard extends xPDOSimpleObject {
         return $page;
     }
 
+    /**
+     * Can active user post a sticky thread on this board
+     * @return bool
+     */
     public function canPostStickyThread() {
         return $this->xpdo->hasPermission('discuss.thread_stick') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
 
+    /**
+     * Can active user post a locked thread on this board
+     * 
+     * @return bool
+     */
     public function canPostLockedThread() {
         return $this->xpdo->hasPermission('discuss.thread_lock') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
 
+    /**
+     * Can active user post attachments on this board
+     * 
+     * @return bool
+     */
     public function canPostAttachments() {
         return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_attach');
+    }
+
+    /**
+     * Get the title of the last post on this board (requires prior data filled)
+     * @param string $key
+     * @return string
+     */
+    public function getLastPostTitle($key = 'last_post_title') {
+        $title = $this->get($key);
+        if (!empty($title)) {
+            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-').'/';
+            $this->set($key,$title);
+        }
+        return $title;
+    }
+
+    /**
+     * Get the URL of the last post on this board (requires prior data filled)
+     * @return string
+     */
+    public function getLastPostUrl() {
+        $view = 'thread/'.$this->get('last_post_thread').'/'.$this->getLastPostTitle();
+
+        $params = array();
+        $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
+        if ($this->get('last_post_page') > 1 && $sortDir == 'ASC') {
+            $params['page'] = $this->get('last_post_page');
+        }
+        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+
+        $url = $url.'#dis-post-'.$this->get('last_post_id');
+        $this->set('last_post_url',$url);
+        return $url;
     }
 }

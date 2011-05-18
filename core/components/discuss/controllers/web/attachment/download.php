@@ -29,9 +29,9 @@
 $discuss->setSessionPlace('downloadattachment:'.$_REQUEST['file']);
 
 /* get attachment */
-if (empty($_REQUEST['file'])) $modx->sendErrorPage();
+if (empty($_REQUEST['file'])) $discuss->sendErrorPage();
 $attachment = $modx->getObject('disPostAttachment',$_REQUEST['file']);
-if ($attachment == null) $modx->sendErrorPage();
+if ($attachment == null) $discuss->sendErrorPage();
 
 $path = $attachment->getPath();
 if (file_exists($path)) {

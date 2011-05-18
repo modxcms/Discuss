@@ -526,7 +526,34 @@ class Discuss {
         }
     }
 
+    /**
+     * Send user to the appropriate error page
+     * @return void
+     */
+    public function sendErrorPage() {
+        $errorPage = $this->modx->getOption('discuss.error_page',null,0);
+        if (!empty($errorPage)) {
+            $url = $this->modx->makeUrl($errorPage,'','?discuss=1','full');
+            $this->modx->sendRedirect($url);
+        } else if ($this->modx->getOption('discuss.error_page_to_index',null,true)) {
+            $this->modx->sendRedirect($this->url);
+        } else {
+            $this->modx->sendErrorPage();
+        }
+    }
+
     public function convertMODXTags($message) {
         return str_replace(array('[',']'),array('&#91;','&#93;'),$message);
+    }
+
+    public function arrayDiffFast($data1, $data2) {
+        $data1 = array_flip($data1);
+        $data2 = array_flip($data2);
+
+        foreach($data2 as $hash => $key) {
+           if (isset($data1[$hash])) unset($data1[$hash]);
+        }
+
+        return array_flip($data1);
     }
 }

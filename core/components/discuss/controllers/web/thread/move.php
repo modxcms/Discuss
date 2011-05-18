@@ -28,13 +28,19 @@
  */
 /* get thread root */
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$scriptProperties['thread']));
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
+
+/* ensure user can move this thread */
+if (!$thread->canMove()) {
+    $modx->sendRedirect($thread->getUrl());
+}
 
 $discuss->setPageTitle($modx->lexicon('discuss.move_thread_header',array('title' => $thread->get('title'))));
 
 /* get breadcrumb trail */
 $thread->buildBreadcrumbs();
 $placeholders = $thread->toArray();
+$placeholders['url'] = $thread->getUrl();
 
 /* process form */
 if (!empty($scriptProperties['move-thread']) && !empty($scriptProperties['board'])) {

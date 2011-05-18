@@ -28,13 +28,19 @@
  */
 /* get thread root */
 $thread = $modx->call('disThread', 'fetch', array(&$modx,$scriptProperties['thread']));
-if (empty($thread)) $modx->sendErrorPage();
+if (empty($thread)) $discuss->sendErrorPage();
 
 $discuss->setPageTitle($modx->lexicon('discuss.spam_thread_header',array('title' => $thread->get('title'))));
+
+/* ensure user can mark as spam this thread */
+if (!$thread->isModerator()) {
+    $modx->sendRedirect($thread->getUrl());
+}
 
 /* get breadcrumb trail */
 $thread->buildBreadcrumbs();
 $placeholders = $thread->toArray();
+$placeholders['url'] = $thread->getUrl();
 
 /* process form */
 if (!empty($scriptProperties['spam-thread'])) {

@@ -192,7 +192,7 @@ $xpdo_meta_map['disPost']= array (
     'EditedBy' => 
     array (
       'class' => 'disUser',
-      'local' => 'author',
+      'local' => 'editedby',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
