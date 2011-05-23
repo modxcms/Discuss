@@ -122,7 +122,19 @@ class disBBCodeParser extends disParser {
             '@<noframes[^>]*?.*?</noframes>@siu',
             '@<noscript[^>]*?.*?</noscript>@siu',
             '@<noembed[^>]*?.*?</noembed>@siu',
+            '@<div[^>]*?.*?</div>@siu',
+            '@<span[^>]*?.*?</span>@siu',
+            '@<body[^>]*?.*?</body>@siu',
+            '@<html[^>]*?.*?</html>@siu',
         ),'',$message);
+
+        /* strip HTML comments */
+        $message = preg_replace("#\<!--(.*?)--\>#si",'',$message);
+        $message = str_replace('<!--','',$message);
+        $message = str_replace('-->','',$message);
+
+        /* convert all remaining HTML to entities */
+        $message = htmlentities($message);
 
         return $message;
     }
