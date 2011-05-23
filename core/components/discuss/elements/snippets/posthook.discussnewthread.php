@@ -107,8 +107,8 @@ foreach ($attachments as $file) {
 
 $discuss->user->checkForPostGroupAdvance();
 
+$thread = $post->getOne('Thread');
 if (!empty($fields['notify'])) {
-    $thread = $post->getOne('Thread');
     if ($thread) {
         $thread->addSubscription($discuss->user->get('id'));
     }
@@ -130,6 +130,9 @@ $modx->invokeEvent('OnDiscussPostSave',array(
     'board' => &$board,
     'mode' => 'new',
 ));
+
+/* log activity */
+$discuss->logActivity('thread_new',$thread->toArray(),$thread->getUrl());
 
 /* clear recent posts cache */
 $modx->cacheManager->delete('discuss/board/recent/');

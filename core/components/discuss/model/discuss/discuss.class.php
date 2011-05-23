@@ -114,6 +114,13 @@ class Discuss {
         }
     }
 
+    /**
+     * Load the hooks class
+     * 
+     * @param string $class
+     * @param string $path
+     * @return
+     */
     public function loadHooks($class = 'discuss.disHooks',$path = '') {
         if (empty($path)) $path = $this->config['modelPath'];
         if ($className = $this->modx->loadClass($class,$path,true,true)) {
@@ -124,6 +131,13 @@ class Discuss {
         return $this->hooks;
     }
 
+    /**
+     * Load the request class
+     * 
+     * @param string $class
+     * @param string $path
+     * @return DisRequest
+     */
     public function loadRequest($class = 'discuss.request.DisRequest',$path = '') {
         if (empty($path)) $path = $this->config['modelPath'];
         if ($className = $this->modx->loadClass($class,$path,true,true)) {
@@ -135,6 +149,10 @@ class Discuss {
         
     }
 
+    /**
+     * Load the selected search class
+     * @return disSearch
+     */
     public function loadSearch() {
         $searchClass = $this->modx->getOption('discuss.search_class',null,'disSearch');
         $searchClassPath = $this->modx->getOption('discuss.search_class_path',null,$this->config['modelPath'].'discuss/search/');
@@ -148,8 +166,13 @@ class Discuss {
         return $this->search;
     }
 
-
-
+    /**
+     * Return an import class
+     * 
+     * @param string $class
+     * @param string $path
+     * @return disImport
+     */
     public function loadImporter($class = 'DisSmfImport',$path = '') {
         if (empty($path)) $path = $this->config['modelPath'];
         if ($className = $this->modx->loadClass('discuss.import.'.$class,$path,true,true)) {
@@ -312,6 +335,13 @@ class Discuss {
         return $this->treeParser;
     }
 
+    /**
+     * Load a processor
+     * 
+     * @param string $name
+     * @param array $scriptProperties
+     * @return bool|mixed
+     */
     public function loadProcessor($name,array $scriptProperties = array()) {
         if (!isset($this->modx->error)) $this->modx->request->loadErrorHandler();
 
@@ -463,10 +493,20 @@ class Discuss {
         return $success;
     }
 
+    /**
+     * Return the current time.
+     * 
+     * @return string
+     */
     public function now() {
         return strftime(Discuss::DATETIME_FORMATTED);
     }
 
+    /**
+     * Get the IP of the current user
+     * 
+     * @return string
+     */
     public function getIp() {
         $ip = '';
         $ipAll = array(); // networks IP
@@ -508,14 +548,31 @@ class Discuss {
         return $ip;
     }
 
+    /**
+     * Set the current pagetitle for the controller
+     * 
+     * @param string $title
+     * @return void
+     */
     public function setPageTitle($title) {
         $this->modx->setPlaceholder('discuss.pagetitle',$title);
     }
 
+    /**
+     * Format a date according to the default datetime
+     *
+     * @param string $datetime
+     * @return string
+     */
     public function formatDate($datetime) {
-        return !empty($datetime) && $datetime != '0000-00-00 00:00:00' ? strftime($this->dateFormat,strtotime($datetime)) : '';
+        $datetime = is_int($datetime) ? $datetime : strtotime($datetime);
+        return !empty($datetime) && $datetime != '0000-00-00 00:00:00' ? strftime($this->dateFormat,$datetime) : '';
     }
 
+    /**
+     * Send user to specific unauthorized page
+     * @return void
+     */
     public function sendUnauthorizedPage() {
         $loginPage = $this->modx->getOption('discuss.login_resource_id',null,0);
         if (!empty($loginPage) && $this->ssoMode) {
@@ -542,11 +599,24 @@ class Discuss {
         }
     }
 
+    /**
+     * Convert all MODX tags to html entities to prevent injection
+     *
+     * @param string $message
+     * @return mixed
+     */
     public function convertMODXTags($message) {
         return str_replace(array('[',']'),array('&#91;','&#93;'),$message);
     }
 
-    public function arrayDiffFast($data1, $data2) {
+    /**
+     * A faster array_diff
+     * 
+     * @param array $data1
+     * @param array $data2
+     * @return array
+     */
+    public function arrayDiffFast(array $data1,array $data2) {
         $data1 = array_flip($data1);
         $data2 = array_flip($data2);
 
@@ -555,5 +625,27 @@ class Discuss {
         }
 
         return array_flip($data1);
+    }
+
+    /**
+     * Log forum activity (destructive/creative only, ie, delete_post, delete_thread, create_post, etc)
+     * @param string $action The action key that happened
+     * @param array $data An array of extra data to store with the activity
+     * @param string $url An optional URL to store
+     * @return boolean
+     */
+    public function logActivity($action,array $data = array(),$url = '') {
+        if (empty($url)) {
+            $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+        }
+
+        $activity = $this->modx->newObject('disLogActivity');
+        $activity->set('createdon',$this->now());
+        $activity->set('user',$this->user->get('id'));
+        $activity->set('ip',$this->getIp());
+        $activity->set('action',$action);
+        $activity->set('data',$this->modx->toJSON($data));
+        $activity->set('url',$url);
+        return $activity->save();
     }
 }

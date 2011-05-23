@@ -61,6 +61,12 @@ if (!empty($hook->errors)) {
 
 if (!$discuss->user->merge($user)) {
     $hook->addError('username','An error occurred while trying to merge the user.');
+} else {
+    /* log activity */
+    $ua = $user->toArray();
+    unset($ua['password'],$ua['salt']);
+    $discuss->logActivity('user_merge',$ua);
 }
+
 
 return true;

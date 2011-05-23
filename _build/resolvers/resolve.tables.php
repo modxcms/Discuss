@@ -43,6 +43,7 @@ if ($object->xpdo) {
             $manager->createObjectContainer('disBoardUserGroup');
             $manager->createObjectContainer('disCategory');
             $manager->createObjectContainer('disForumActivity');
+            $manager->createObjectContainer('disLogActivity');
             $manager->createObjectContainer('disModerator');
             $manager->createObjectContainer('disPost');
             $manager->createObjectContainer('disPostAttachment');

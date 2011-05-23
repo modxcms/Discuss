@@ -75,6 +75,8 @@ if (!empty($scriptProperties['report-thread'])) {
     }
     unset($emailProperties);
 
+    $discuss->logActivity('post_report',$post->toArray(),$post->getUrl());
+
     /* redirect to thread */
     $modx->sendRedirect($url);
 }

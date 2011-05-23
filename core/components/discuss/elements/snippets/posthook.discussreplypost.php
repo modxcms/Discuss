@@ -124,6 +124,9 @@ $modx->invokeEvent('OnDiscussPostSave',array(
     'mode' => 'reply',
 ));
 
+/* log activity */
+$discuss->logActivity('thread_reply',$thread->toArray(),$thread->getUrl());
+
 /* clear recent posts cache */
 $modx->cacheManager->delete('discuss/board/recent/');
 

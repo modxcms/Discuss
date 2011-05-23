@@ -43,6 +43,8 @@ if (!$canRemovePost) {
 
 if (!$post->remove(array(),true,true)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove post: '.print_r($post->toArray(),true));
+} else {
+    $discuss->logActivity('post_spam_remove',$post->toArray(),$post->getUrl());
 }
 
 if ($thread->get('post_first') == $post->get('id')) {
