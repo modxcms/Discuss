@@ -22,18 +22,19 @@
  * @package discuss
  */
 /**
- * Loads the home page.
+ * Remove a post
  *
  * @package discuss
- * @subpackage controllers
+ * @subpackage processors
  */
-$modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/widgets/security/modx.tree.user.group.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/usergroup/usergroups.panel.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/board/boards.panel.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/user/users.panel.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/log/activity.log.panel.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/home.panel.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'sections/home.js');
-$output = '<div id="dis-panel-home-div"></div>';
+/* get object */
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.activity_log_err_ns'));
+$logItem = $modx->getObject('disLogActivity',$scriptProperties['id']);
+if ($logItem == null) return $modx->error->failure($modx->lexicon('discuss.activity_log_err_nf'));
 
-return $output;
+/* remove */
+if ($logItem->remove() == false) {
+    return $modx->error->failure($modx->lexicon('discuss.activity_log_err_remove'));
+}
+
+return $modx->error->success('',$logItem);
