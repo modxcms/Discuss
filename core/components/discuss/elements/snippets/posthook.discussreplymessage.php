@@ -112,7 +112,10 @@ if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id')
     $c->where(array(
         'thread' => $thread->get('id'),
     ));
-    $modx->removeCollection('disThreadUser',$c);
+    $tus = $modx->getCollection('disThreadUser',$c);
+    foreach ($tus as $tu) {
+        $tu->remove();
+    }
     $c = $modx->newQuery('disUserNotification');
     $c->where(array(
         'thread' => $thread->get('id'),

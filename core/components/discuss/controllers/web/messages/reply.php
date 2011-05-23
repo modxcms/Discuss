@@ -66,10 +66,10 @@ $trail = array(array(
     'text' => $modx->getOption('discuss.forum_title'),
 ),array(
     'text' => $modx->lexicon('discuss.messages'),
-    'url' => $discuss->url.'messages',
+    'url' => $discuss->request->makeUrl('messages'),
 ),array(
     'text' => $post->get('title'),
-    'url' => $discuss->url.'messages/view?thread='.$thread->get('id'),
+    'url' => $discuss->request->makeUrl('messages/view',array('thread' => $thread->get('id'))),
 ),array(
     'text' => $modx->lexicon('discuss.reply'),
     'active' => true,

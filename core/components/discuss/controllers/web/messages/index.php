@@ -109,7 +109,7 @@ $placeholders['total'] = $total;
 /* get breadcrumb trail */
 $trail = array();
 $trail[] = array(
-    'url' => $discuss->url,
+    'url' => $discuss->request->makeUrl(),
     'text' => $modx->getOption('discuss.forum_title'),
 );
 $trail[] = array('text' => $modx->lexicon('discuss.messages').' ('.number_format($total).')','active' => true);
@@ -126,8 +126,8 @@ $actionButtons = array();
 /* action buttons */
 $actionButtons = array();
 if ($modx->hasPermission('discuss.pm_send') && $discuss->user->isLoggedIn) {
-    $actionButtons[] = array('url' => $discuss->url.'messages/new', 'text' => $modx->lexicon('discuss.message_new'));
-    $actionButtons[] = array('url' => $discuss->url.'messages?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
+    $actionButtons[] = array('url' => $discuss->request->makeUrl('messages/new'), 'text' => $modx->lexicon('discuss.message_new'));
+    $actionButtons[] = array('url' => $discuss->request->makeUrl('messages',array('read' => 1)), 'text' => $modx->lexicon('discuss.mark_all_as_read'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
