@@ -50,35 +50,17 @@ echo '<pre>';
 if ($discuss->loadImporter('disSmfImport')) {
 
     /* fix num_topics */
-    $sql = 'SELECT
-      disBoard.id,
-      disBoard.name,
-      disBoard.num_topics,
-      (
-        SELECT COUNT(`Threads`.`id`) FROM '.$modx->getTableName('disThread').' AS `Threads`
-        WHERE `Threads`.`board` = `disBoard`.`id`
-    ) AS `real_count`
-    FROM '.$modx->getTableName('disBoard').' `disBoard`
-    ORDER BY `disBoard`.`map` ASC';
-    $stmt = $modx->query($sql);
-    if ($stmt) {
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if (!empty($row['real_count']) && $row['real_count'] != $row['num_topics']) {
-                $discuss->import->log('Setting "'.$row['name'].'" to '.$row['real_count'].' from '.$row['num_topics']);
-                $modx->exec('UPDATE '.$modx->getTableName('disBoard').'
-                    SET `num_topics` = '.$row['real_count'].'
-                    WHERE `id` = '.$row['id']);
-            }
-            if ($row['id'] == 8) {
-                $discuss->import->log('Board "'.$row['name'].'" has '.$row['real_count'].' topics.');
-            }
-        }
-        $stmt->closeCursor();
+    $c = $modx->newQuery('disThreadRead');
+    $c->leftJoin('disThread','Thread');
+    $c->where(array(
+        'Thread.board != disThreadRead.board',
+    ));
+    $reads = $modx->getCollection('disThreadRead',$c);
+
+    foreach ($reads as $read) {
+        $discuss->import->log('Removing orphaned disThreadRead ID: '.$read->get('id'));
+        $read->remove();
     }
-
-    /* fix num_replies */
-    /* fix total_posts */
-
 } else {
     $modx->log(xPDO::LOG_LEVEL_ERROR,'Failed to load Import class.');
 }

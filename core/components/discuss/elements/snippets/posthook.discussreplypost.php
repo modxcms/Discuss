@@ -127,6 +127,10 @@ $modx->invokeEvent('OnDiscussPostSave',array(
 /* log activity */
 $discuss->logActivity('thread_reply',$thread->toArray(),$thread->getUrl());
 
+/* mark thread unread for all users, except poster */
+$thread->unreadForAll();
+$thread->read($discuss->user->get('id'));
+
 /* clear recent posts cache */
 $modx->cacheManager->delete('discuss/board/recent/');
 

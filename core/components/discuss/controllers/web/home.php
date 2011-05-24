@@ -27,7 +27,6 @@
 $discuss->setSessionPlace('home');
 $discuss->setPageTitle($modx->getOption('discuss.forum_title'));
 
-$_groups = $modx->user->getUserGroups();
 $placeholders = array();
 
 /* get boards */
