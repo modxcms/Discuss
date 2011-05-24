@@ -1,8 +1,13 @@
+[[+top]]
 [[+trail]]
+
+[[+aboveBoards]]
 
 <ol class="dis-board-list">
 [[+boards]]
 </ol>
+
+[[+belowBoards]]
 
 <br class="clear" />
 
@@ -10,6 +15,7 @@
 
 <br class="clear" />
 
+[[+aboveRecent]]
 
 <div class="dis-threads">
     <div class="dis-threads-header">
@@ -19,6 +25,8 @@
         [[+recent_posts]]
     </ol>
 </div>
+
+[[+belowRecent]]
 
 <br class="clear" />
 
@@ -38,3 +46,5 @@
         <span class="dis-today-stats">[[%discuss.stats_today? &hits=`[[+activity.hits]]` &topics=`[[+activity.topics]]` &replies=`[[+activity.replies]]` &visitors=`[[+activity.visitors]]`]]</span>
     </li>
 </ol>
+
+[[+bottom]]

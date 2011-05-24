@@ -494,6 +494,42 @@ class Discuss {
     }
 
     /**
+     * Process MODx event results as a list of objs
+     * @param array $rs
+     * @return string
+     */
+    public function getEventRenderResult($rs) {
+        $objs = array();
+        if (is_array($rs)) {
+            foreach ($rs as $key => $value) {
+                if (is_array($value)) {
+                    $objs = array_merge($objs,$value);
+                } elseif (!empty($value)) {
+                    $objs[$key] = $value;
+                }
+            }
+        } else {
+            $objs = $rs;
+        }
+        return $objs;
+    }
+
+    /**
+     * Invoke an event that is supposed to return an array of placeholders to merge with the current set
+     * 
+     * @param string $name
+     * @param array $placeholders
+     * @param array $otherProperties
+     * @return array
+     */
+    public function invokeRenderEvent($name,array $placeholders = array(),array $otherProperties = array()) {
+        $otherProperties['placeholders'] = $placeholders;
+        $rs = $this->modx->invokeEvent($name,$otherProperties);
+        $rs = $this->getEventRenderResult($rs);
+        return array_merge($placeholders,$rs);
+    }
+
+    /**
      * Return the current time.
      * 
      * @return string

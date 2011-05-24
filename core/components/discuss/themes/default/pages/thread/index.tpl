@@ -1,4 +1,8 @@
+[[+top]]
+
 [[+trail]]
+
+[[+aboveThread]]
 
 [[+actionbuttons]]
 
@@ -25,5 +29,9 @@
 
 [[+threadactionbuttons]]
 
+[[+belowThread]]
+
 <br class="clear" />
 [[+discuss.error_panel]]
+
+[[+bottom]]

@@ -137,7 +137,7 @@ if (!empty($scriptProperties['user'])) {
 /* get breadcrumb trail */
 $trail = array();
 $trail[] = array(
-    'url' => $discuss->url,
+    'url' => $discuss->request->makeUrl(),
     'text' => $modx->getOption('discuss.forum_title'),
 );
 $trail[] = array(

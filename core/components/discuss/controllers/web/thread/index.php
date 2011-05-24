@@ -183,5 +183,12 @@ if (empty($scriptProperties['print'])) {
     $thread->read($discuss->user->get('id'));
 }
 
+/* Render thread event */
+$placeholders['top'] = '';
+$placeholders['bottom'] = '';
+$placeholders['aboveThread'] = '';
+$placeholders['belowThread'] = '';
+$placeholders = $discuss->invokeRenderEvent('OnDiscussRenderThread',$placeholders);
+
 $discuss->setPageTitle($thread->get('title'));
 return $placeholders;

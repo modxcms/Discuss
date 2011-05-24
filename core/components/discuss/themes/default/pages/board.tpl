@@ -1,3 +1,4 @@
+[[+top]]
 <div class="right">
     <form action="[[~[[*id]]]]search" method="GET">
         <input type="hidden" name="board" value="[[+id]]" />
@@ -8,9 +9,13 @@
 </div>
 [[+trail]]
 
+[[+aboveBoards]]
 <ol class="dis-board-list" style="[[+boards_toggle]]">
 [[+boards]]
 </ol>
+
+[[+belowBoards]]
+
 <br class="clear" />
 
 [[+actionbuttons]]
@@ -40,6 +45,10 @@
 
 <div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
 
-<p class="dis-thread-viewing" style="clear: both;">[[+readers]]</p>
+[[+belowThreads]]
+
+<p class="dis-thread-viewing clear">[[+readers]]</p>
 <p class="dis-moderators">[[+moderators]]</p>
-<p class="dis-breadcrumbs" style="clear: both;">[[+trail]]</p>
+<p class="dis-breadcrumbs clear">[[+trail]]</p>
+
+[[+bottom]]
