@@ -31,6 +31,7 @@ $modx->regClientStartupScript($modx->getOption('manager_url').'assets/modext/wid
 $modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/usergroup/usergroups.panel.js');
 $modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/board/boards.panel.js');
 $modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/user/users.panel.js');
+$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/log/activity.log.panel.js');
 $modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/home.panel.js');
 $modx->regClientStartupScript($discuss->config['mgrJsUrl'].'sections/home.js');
 $output = '<div id="dis-panel-home-div"></div>';

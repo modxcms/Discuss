@@ -33,10 +33,10 @@ $placeholders = array();
 /* get breadcrumb trail */
 $trail = array();
 $trail[] = array(
-    'url' => $discuss->url,
+    'url' => $discuss->request->makeUrl(),
     'text' => $modx->getOption('discuss.forum_title'),
 );
-$trail[] = array('text' => $modx->lexicon('discuss.messages'),'url' => $discuss->url.'messages');
+$trail[] = array('text' => $modx->lexicon('discuss.messages'),'url' => $discuss->request->makeUrl().'messages');
 $trail[] = array('text' => $modx->lexicon('discuss.message_new'),'active' => true);
 
 $trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(

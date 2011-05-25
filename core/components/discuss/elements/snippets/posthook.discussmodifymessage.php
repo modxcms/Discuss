@@ -120,12 +120,18 @@ $c = $modx->newQuery('disThreadUser');
 $c->where(array(
     'thread' => $thread->get('id'),
 ));
-$modx->removeCollection('disThreadUser',$c);
+$tus = $modx->getCollection('disThreadUser',$c);
+foreach ($tus as $tu) {
+    $tu->remove();
+}
 $c = $modx->newQuery('disUserNotification');
 $c->where(array(
     'thread' => $thread->get('id'),
 ));
-$modx->removeCollection('disUserNotification',$c);
+$tus = $modx->getCollection('disUserNotification',$c);
+foreach ($tus as $tu) {
+    $tu->remove();
+}
 foreach ($participantsIds as $participant) {
     $threadUser = $modx->newObject('disThreadUser');
     $threadUser->set('thread',$thread->get('id'));

@@ -97,7 +97,7 @@ $placeholders['threads'] = implode("\n",$list);
 /* get board breadcrumb trail */
 $trail = array();
 $trail[] = array(
-    'url' => $discuss->url,
+    'url' => $discuss->request->makeUrl(),
     'text' => $modx->getOption('discuss.forum_title'),
 );
 $trail[] = array('text' => $modx->lexicon('discuss.new_replies_to_posts').' ('.number_format($threads['total']).')','active' => true);
@@ -109,8 +109,8 @@ $placeholders['trail'] = $trail;
 
 /* action buttons */
 $actionButtons = array();
-if ($discuss->isLoggedIn) {
-    $actionButtons[] = array('url' => $discuss->url.'thread/unread?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
+if ($discuss->user->isLoggedIn) {
+    $actionButtons[] = array('url' => $discuss->request->makeUrl('thread/new_replies_to_posts',array('read' => 1)), 'text' => $modx->lexicon('discuss.mark_all_as_read'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);

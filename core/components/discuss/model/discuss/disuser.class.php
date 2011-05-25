@@ -68,7 +68,6 @@ class disUser extends xPDOSimpleObject {
             FROM '.$this->xpdo->getTableName('disThreadRead').' `Read`
             WHERE `user` = '.$this->get('id').'
             GROUP BY `board`');
-
             if ($stmt) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $this->readBoards[$row['board']] = $row['threads'] - $row['read'] > 0;
@@ -100,6 +99,7 @@ class disUser extends xPDOSimpleObject {
                 LEFT JOIN '.$this->xpdo->getTableName('disThreadRead').' `Read`
                 ON `Read`.`thread` = `disThread`.`id`
             WHERE `Read`.`id` IS NULL
+            AND `disThread`.`board` = '.$boardId.'
             GROUP BY `disThread`.`board`
         ');
         if ($stmt) {

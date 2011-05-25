@@ -22,23 +22,19 @@
  * @package discuss
  */
 /**
- * User statistics page
+ * Remove a post
  *
  * @package discuss
+ * @subpackage processors
  */
-if (!$discuss->user->isLoggedIn) {
-    $discuss->sendUnauthorizedPage();
+/* get object */
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.activity_log_err_ns'));
+$logItem = $modx->getObject('disLogActivity',$scriptProperties['id']);
+if ($logItem == null) return $modx->error->failure($modx->lexicon('discuss.activity_log_err_nf'));
+
+/* remove */
+if ($logItem->remove() == false) {
+    return $modx->error->failure($modx->lexicon('discuss.activity_log_err_remove'));
 }
-$modx->lexicon->load('discuss:user');
-$discuss->setPageTitle($modx->lexicon('discuss.account_merge'));
 
-
-$placeholders = $discuss->user->toArray();
-$isSelf = strtolower($modx->user->get('username')) == strtolower($discuss->user->get('username'));
-$placeholders['canEdit'] = $isSelf;
-$placeholders['canAccount'] = $isSelf;
-$placeholders['canMerge'] = $isSelf;
-$placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
-$modx->setPlaceholder('discuss.user',$discuss->user->get('username'));
-
-return $placeholders;
+return $modx->error->success('',$logItem);

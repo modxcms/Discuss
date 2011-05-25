@@ -43,6 +43,8 @@ if (!$post->remove(array(),true)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove post: '.print_r($post->toArray(),true));
 }
 
+$discuss->logActivity('post_remove',$post->toArray(),$post->getUrl());
+
 if ($thread->get('post_first') == $post->get('id')) {
     $redirectTo = $discuss->request->makeUrl('board/',array('board' => $post->get('board')));
 } else {

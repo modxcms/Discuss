@@ -27,7 +27,6 @@
 $discuss->setSessionPlace('home');
 $discuss->setPageTitle($modx->getOption('discuss.forum_title'));
 
-$_groups = $modx->user->getUserGroups();
 $placeholders = array();
 
 /* get boards */
@@ -138,4 +137,14 @@ if (!empty($options['showBreadcrumbs'])) {
     unset($trail);
 }
 
+/* invoke render event for plugin injection of custom stuff */
+$placeholders['top'] = '';
+$placeholders['bottom'] = '';
+$placeholders['aboveBoards'] = '';
+$placeholders['belowBoards'] = '';
+$placeholders['aboveRecent'] = '';
+$placeholders['belowRecent'] = '';
+$placeholders = $discuss->invokeRenderEvent('OnDiscussRenderHome',$placeholders);
+
+/* return */
 return $placeholders;

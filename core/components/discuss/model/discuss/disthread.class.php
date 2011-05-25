@@ -627,6 +627,15 @@ class disThread extends xPDOSimpleObject {
         return $success;
     }
 
+
+    /**
+     * Mark this thread unread for all users
+     * @return bool True if successful
+     */
+    public function unreadForAll() {
+        return $this->xpdo->exec('DELETE FROM '.$this->xpdo->getTableName('disThreadRead').' WHERE '.$this->xpdo->escape('thread').' = '.$this->get('id'));
+    }
+
     /**
      * Check to see if active user is a Moderator for this thread's board
      *
@@ -882,6 +891,12 @@ class disThread extends xPDOSimpleObject {
                 $newBoard->addOne($thisThreadPost,'LastPost');
             }
             $newBoard->save();
+
+            /* Update ThreadRead board field */
+            $this->xpdo->exec('UPDATE '.$this->xpdo->getTableName('disThreadRead').'
+                SET '.$this->xpdo->escape('board').' = '.$newBoard->get('id').'
+                WHERE '.$this->xpdo->escape('thread').' = '.$this->get('id').'
+            ');
 
             /* clear caches */
             if (!defined('DISCUSS_IMPORT_MODE')) {

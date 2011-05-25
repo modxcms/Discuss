@@ -42,6 +42,8 @@ if (!in_array($discuss->user->get('id'),$users)) {
 }
 
 if ($post->remove()) {
+    $discuss->logActivity('message_post_remove',$post->toArray(),$post->getUrl());
+
     $posts = $thread->getMany('Posts');
     if (count($posts) <= 0) {
         $url = $discuss->request->makeUrl('messages');

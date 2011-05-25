@@ -122,7 +122,19 @@ class disBBCodeParser extends disParser {
             '@<noframes[^>]*?.*?</noframes>@siu',
             '@<noscript[^>]*?.*?</noscript>@siu',
             '@<noembed[^>]*?.*?</noembed>@siu',
+            '@<div[^>]*?.*?</div>@siu',
+            '@<span[^>]*?.*?</span>@siu',
+            '@<body[^>]*?.*?</body>@siu',
+            '@<html[^>]*?.*?</html>@siu',
         ),'',$message);
+
+        /* strip HTML comments */
+        $message = preg_replace("#\<!--(.*?)--\>#si",'',$message);
+        $message = str_replace('<!--','',$message);
+        $message = str_replace('-->','',$message);
+
+        /* convert all remaining HTML to entities */
+        $message = htmlentities($message);
 
         return $message;
     }
@@ -384,7 +396,7 @@ class disBBCodeParser extends disParser {
 
         $nbs = '\xA0';
         $charset = $this->modx->getOption('modx_charset',null,'UTF-8');
-        $keepAttributes = $this->modx->getOption('discuss.allowed_html_attributes',null,'href,target,src');
+        $keepAttributes = $this->modx->getOption('discuss.allowed_html_attributes',null,'href,target,src,author,date');
         $keepAttributes = explode(',',$keepAttributes);
         
         /* Only mess with stuff outside [code] tags. */

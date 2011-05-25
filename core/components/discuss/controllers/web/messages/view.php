@@ -47,7 +47,7 @@ if (!in_array($discuss->user->get('id'),$users)) {
 /* handle actions */
 if (isset($scriptProperties['unread'])) {
     if ($thread->unread($discuss->user->get('id'))) {
-        $modx->sendRedirect($discuss->url.'messages');
+        $modx->sendRedirect($discuss->request->makeUrl('messages'));
     }
 }
 
@@ -59,10 +59,10 @@ $thread->set('posts',$posts['results']);
 unset($postsOutput,$pa,$plist,$userUrl,$profileUrl);
 /* get board breadcrumb trail */
 $thread->buildBreadcrumbs(array(array(
-    'url' => $discuss->url,
+    'url' => $discuss->request->makeUrl(),
     'text' => $modx->getOption('discuss.forum_title'),
 ),array(
-    'url' => $discuss->url.'messages',
+    'url' => $discuss->request->makeUrl('messages'),
     'text' => $modx->lexicon('discuss.messages'),
 )));
 unset($trail,$url,$c,$ancestors);
@@ -84,11 +84,11 @@ $placeholders['readers'] = $thread->getViewing('message');
 $actionButtons = array();
 if ($discuss->isLoggedIn) {
     if ($modx->hasPermission('discuss.pm_send')) {
-        $actionButtons[] = array('url' => $discuss->url.'messages/reply?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.reply_to_message'));
+        $actionButtons[] = array('url' => $discuss->request->makeUrl('messages/reply',array('thread' => $thread->get('id'))), 'text' => $modx->lexicon('discuss.reply_to_message'));
     }
-    $actionButtons[] = array('url' => $discuss->url.'messages/view?thread='.$thread->get('id').'&unread=1', 'text' => $modx->lexicon('discuss.mark_unread'));
+    $actionButtons[] = array('url' => $discuss->request->makeUrl('messages/view',array('thread' => $thread->get('id'),'unread' => 1)), 'text' => $modx->lexicon('discuss.mark_unread'));
     if ($modx->hasPermission('discuss.pm_remove')) {
-        $actionButtons[] = array('url' => $discuss->url.'messages/remove?thread='.$thread->get('id'), 'text' => $modx->lexicon('discuss.message_remove'));
+        $actionButtons[] = array('url' => $discuss->request->makeUrl('messages/remove',array('thread' => $thread->get('id'))), 'text' => $modx->lexicon('discuss.message_remove'));
     }
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');

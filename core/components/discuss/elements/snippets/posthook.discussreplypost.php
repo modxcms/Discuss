@@ -124,9 +124,16 @@ $modx->invokeEvent('OnDiscussPostSave',array(
     'mode' => 'reply',
 ));
 
+/* log activity */
+$discuss->logActivity('thread_reply',$thread->toArray(),$thread->getUrl());
+
+/* mark thread unread for all users, except poster */
+$thread->unreadForAll();
+$thread->read($discuss->user->get('id'));
+
 /* clear recent posts cache */
 $modx->cacheManager->delete('discuss/board/recent/');
 
-$url = $newPost->getUrl(null,true);
+$url = $newPost->getUrl('thread/',true);
 $modx->sendRedirect($url);
 return true;

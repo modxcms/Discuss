@@ -109,6 +109,14 @@ if ($discuss->user->isLoggedIn) {
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
 
+/* Render board event */
+$placeholders['top'] = '';
+$placeholders['bottom'] = '';
+$placeholders['aboveThreads'] = '';
+$placeholders['belowBoards'] = '';
+$placeholders['belowThreads'] = '';
+$placeholders = $discuss->invokeRenderEvent('OnDiscussRenderBoard',$placeholders);
+
 /* output */
 $modx->setPlaceholder('discuss.board',$board->get('name'));
 

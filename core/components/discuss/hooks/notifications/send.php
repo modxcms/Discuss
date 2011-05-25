@@ -43,8 +43,9 @@ $c->where(array(
 ));
 if (!empty($scriptProperties['board'])) {
     $c->orCondition(array(
-        'board' => $scriptProperties['board'],
-    ));
+        'board:=' => $scriptProperties['board'],
+        'AND:thread:=' => 0,
+    ),null,2);
 }
 $notifications = $modx->getCollection('disUserNotification',$c);
 

@@ -57,6 +57,9 @@ $placeholders = $thread->toArray();
 /* process form */
 if (!empty($scriptProperties['remove-message'])) {
     if ($thread->remove()) {
+        /* log activity */
+        $discuss->logActivity('message_thread_remove',$thread->toArray(),$thread->getUrl());
+
         $url = $discuss->request->makeUrl('messages');
         $modx->sendRedirect($url);
     }

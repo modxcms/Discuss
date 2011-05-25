@@ -43,11 +43,13 @@ if (!$canRemovePost) {
 
 if (!$post->remove(array(),true,true)) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove post: '.print_r($post->toArray(),true));
+} else {
+    $discuss->logActivity('post_spam_remove',$post->toArray(),$post->getUrl());
 }
 
 if ($thread->get('post_first') == $post->get('id')) {
-    $redirectTo = $discuss->url.'board/?board='.$post->get('board');
+    $redirectTo = $discuss->request->makeUrl('board',array('board' => $post->get('board')));
 } else {
-    $redirectTo = $discuss->url.'thread/?thread='.$post->get('thread');
+    $redirectTo = $discuss->request->makeUrl('thread',array('thread' => $post->get('thread')));
 }
 $modx->sendRedirect($redirectTo);

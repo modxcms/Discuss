@@ -95,5 +95,25 @@ $events['OnDiscussBanUser']->fromArray(array (
   'groupname' => 'Discuss',
 ), '', true, true);
 
+/* Page Render Events */
+$events['OnDiscussRenderHome']= $modx->newObject('modEvent');
+$events['OnDiscussRenderHome']->fromArray(array (
+  'name' => 'OnDiscussRenderHome',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+$events['OnDiscussRenderBoard']= $modx->newObject('modEvent');
+$events['OnDiscussRenderBoard']->fromArray(array (
+  'name' => 'OnDiscussRenderBoard',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+$events['OnDiscussRenderThread']= $modx->newObject('modEvent');
+$events['OnDiscussRenderThread']->fromArray(array (
+  'name' => 'OnDiscussRenderThread',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+
 
 return $events;
