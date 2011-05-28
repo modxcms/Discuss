@@ -125,6 +125,7 @@ class disPost extends xPDOSimpleObject {
                         'author_first' => $this->get('author'),
                         'replies' => 0,
                         'views' => 0,
+                        'class_key' => $this->get('class_key'),
                     ));
                 }
 

@@ -173,7 +173,7 @@ foreach ($posts['results'] as $post) {
             }
         }
     }
-    if ($thread->get('class_key') == 'disThreadQuestion' && $canMarkAsAnswer) {
+    if ($thread->get('class_key') == 'disThreadQuestion' && $canMarkAsAnswer && $postArray['id'] != $thread->get('post_first')) {
         if ($thread->get('post_answer') == $postArray['id']) {
             $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('unanswer' => $postArray['id'])).'">'.$modx->lexicon('discuss.unmark_as_answer').'</a>';
         } else {
