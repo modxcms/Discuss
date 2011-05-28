@@ -7,6 +7,7 @@ $xpdo_meta_map['disThread']= array (
   'table' => 'discuss_threads',
   'fields' => 
   array (
+    'class_key' => 'disThreadDiscussion',
     'board' => 0,
     'title' => '',
     'post_first' => 0,
@@ -24,6 +25,15 @@ $xpdo_meta_map['disThread']= array (
   ),
   'fieldMeta' => 
   array (
+    'class_key' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '120',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'disThreadDiscussion',
+      'index' => 'index',
+    ),
     'board' => 
     array (
       'dbtype' => 'int',

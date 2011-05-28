@@ -99,6 +99,7 @@
     </object>
 
     <object class="disThread" table="discuss_threads" extends="xPDOSimpleObject">
+        <field key="class_key" dbtype="varchar" precision="120" phptype="string" null="false" default="disThreadDiscussion" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="title" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="post_first" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
@@ -125,6 +126,15 @@
         <composite alias="Posts" class="disPost" local="id" foreign="thread" cardinality="many" owner="local" />
         <composite alias="Notifications" class="disUserNotification" local="id" foreign="thread" cardinality="many" owner="local" />
         <composite alias="Users" class="disThreadUser" local="id" foreign="thread" cardinality="many" owner="local" />
+    </object>
+
+    <object class="disThreadDiscussion" extends="disThread">
+
+    </object>
+    <object class="disThreadQuestion" extends="disThread">
+        <field key="post_answer" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
+
+        <aggregate alias="AnswerPost" class="disPost" local="post_answer" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="disThreadRead" table="discuss_threads_read" extends="xPDOSimpleObject">
