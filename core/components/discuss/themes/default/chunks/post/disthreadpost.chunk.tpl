@@ -39,6 +39,6 @@
             </div>
         </div>
         <br class="clear" />
-        [[+children:notempty=`<ol class="dis-board-thread [[+class]]">[[+children]]</ol>`]]
+        [[+children:notempty=`<ol class="dis-board-thread [[+children_class]]">[[+children]]</ol>`]]
     </div>
 </li>

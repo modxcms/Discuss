@@ -526,7 +526,12 @@ class Discuss {
         $otherProperties['placeholders'] = $placeholders;
         $rs = $this->modx->invokeEvent($name,$otherProperties);
         $rs = $this->getEventRenderResult($rs);
-        return array_merge($placeholders,$rs);
+        if (!empty($rs) && is_array($rs)) {
+            $rs = array_merge($placeholders,$rs);
+        } else {
+            $rs = $placeholders;
+        }
+        return $rs;
     }
 
     /**
