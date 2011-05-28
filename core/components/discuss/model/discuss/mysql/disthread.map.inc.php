@@ -7,10 +7,12 @@ $xpdo_meta_map['disThread']= array (
   'table' => 'discuss_threads',
   'fields' => 
   array (
+    'class_key' => 'disThreadDiscussion',
     'board' => 0,
     'title' => '',
     'post_first' => 0,
     'post_last' => 0,
+    'post_answer' => 0,
     'author_first' => 0,
     'author_last' => 0,
     'replies' => 0,
@@ -24,6 +26,15 @@ $xpdo_meta_map['disThread']= array (
   ),
   'fieldMeta' => 
   array (
+    'class_key' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '120',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => 'disThreadDiscussion',
+      'index' => 'index',
+    ),
     'board' => 
     array (
       'dbtype' => 'int',
@@ -54,6 +65,16 @@ $xpdo_meta_map['disThread']= array (
       'index' => 'index',
     ),
     'post_last' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
+      'default' => 0,
+      'null' => false,
+      'index' => 'index',
+    ),
+    'post_answer' => 
     array (
       'dbtype' => 'int',
       'precision' => '10',
@@ -186,6 +207,14 @@ $xpdo_meta_map['disThread']= array (
     array (
       'class' => 'disPost',
       'local' => 'post_last',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'AnswerPost' => 
+    array (
+      'class' => 'disPost',
+      'local' => 'post_answer',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

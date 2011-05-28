@@ -1,12 +1,9 @@
-<li class="dis-post" id="dis-post-[[+id]]">
+<li class="[[+class]]" id="dis-post-[[+id]]">
     <div class="dis-post-header">
         <h3 class="dis-post-title" post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h3>
         <div class="dis-post-author" id="dis-post-author-[[+id]]">
             <div class="dis-post-actions">
-                [[+action_remove]]
-                [[+action_modify]]
-                [[+action_quote]]
-                [[+action_reply]]
+                [[+actions]]
             </div>
             <div class="dis-author">
                 <a href="[[~[[*id]]]]user/?user=[[+author.id]]">[[+author.avatar]]</a>

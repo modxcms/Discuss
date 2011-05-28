@@ -20,6 +20,12 @@
     </label>
     <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
 
+    <label for="dis-new-thread-type">[[%discuss.thread_type]]</label>
+    <select name="class_key" id="dis-new-thread-type">
+        <option value="disThreadDiscussion">[[%discuss.discussion]]</option>
+        <option value="disThreadQuestion">[[%discuss.question_and_answer]]</option>
+    </select>
+
     <div style="margin-left: 150px;">
         <br class="clear" />
         [[+buttons]]

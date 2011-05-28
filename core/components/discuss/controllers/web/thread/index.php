@@ -35,6 +35,11 @@ if (empty($thread)) $discuss->sendErrorPage();
 
 $discuss->setSessionPlace('thread:'.$thread->get('id'));
 
+/* get moderator status */
+$isModerator = $thread->isModerator($discuss->user->get('id'));
+$isAdmin = $discuss->user->isAdmin();
+
+
 /* mark unread if user clicks mark unread */
 if (isset($scriptProperties['unread'])) {
     if ($thread->unread($discuss->user->get('id'))) {
@@ -71,6 +76,16 @@ if (!empty($scriptProperties['unsubscribe'])) {
         $modx->sendRedirect($thread->getUrl());
     }
 }
+if (!empty($scriptProperties['answer']) && $thread->get('class_key') == 'disThreadQuestion' && $thread->canMarkAsAnswer()) {
+    if ($thread->markAsAnswer($scriptProperties['answer'])) {
+        $modx->sendRedirect($thread->getUrl());
+    }
+}
+if (!empty($scriptProperties['unanswer']) && $thread->get('class_key') == 'disThreadQuestion' && $thread->canMarkAsAnswer()) {
+    if ($thread->unmarkAsAnswer($scriptProperties['answer'])) {
+        $modx->sendRedirect($thread->getUrl());
+    }
+}
 
 
 /* get posts */
@@ -103,10 +118,6 @@ $thread->buildCssClass();
 if (!empty($options['showViewing']) && empty($scriptProperties['print'])) {
     $placeholders['readers'] = empty($scriptProperties['print']) ? $thread->getViewing() : '';
 }
-
-/* get moderator status */
-$isModerator = $thread->isModerator($discuss->user->get('id'));
-$isAdmin = $discuss->user->isAdmin();
 
 /* action buttons */
 $actionButtons = array();

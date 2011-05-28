@@ -70,6 +70,7 @@ $canTrackIp = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.track_
 $canViewEmails = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.view_emails');
 $canViewProfiles = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.view_profiles');
 $canReportPost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_report');
+$canMarkAsAnswer = $thread->get('class_key') == 'disThreadQuestion' && $thread->canMarkAsAnswer();
 
 /* iterate */
 $plist = array();
@@ -124,14 +125,19 @@ foreach ($posts['results'] as $post) {
         }
     }
 
-    $postArray['class'] = array('dis-board-post');
+    $postArray['children_class'] = array('dis-board-post');
+    $postArray['class'] = array('dis-post');
     if (!$flat) {
         /* set depth and check max post depth */
-        $postArray['class'][] = 'dis-depth-'.$postArray['depth'];
+        $postArray['children_class'][] = 'dis-depth-'.$postArray['depth'];
         if ($postArray['depth'] > $modx->getOption('discuss.max_post_depth',null,3)) {
             /* Don't hide post if it exceed max depth, set its depth placeholder to max depth value instead */
             $postArray['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
         }
+    }
+    if ($postArray['id'] == $thread->get('post_answer')) {
+        $postArray['class'][] = 'dis-post-answer';
+        $postArray['title'] .= ' ('.$modx->lexicon('discuss.best_answer').')';
     }
 
     /* format bbcode */
@@ -143,27 +149,35 @@ foreach ($posts['results'] as $post) {
     }
 
     /* load actions */
+    $postArray['actions'] = array();
     $postArray['action_reply'] = '';
     $postArray['action_quote'] = '';
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
     if (($isAdmin || $isModerator || !$thread->get('locked')) && $discuss->user->isLoggedIn) {
         if ($post->canReply()) {
-            $postArray['action_reply'] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
-            $postArray['action_quote'] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
+            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
         }
 
         $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
         if ($canModifyPost) {
-            $postArray['action_modify'] = '<a href="'.$discuss->request->makeUrl('thread/modify',array('post' => $post->get('id'))).'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/modify',array('post' => $post->get('id'))).'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
         }
 
         $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
         if ($canRemovePost) {
-            $postArray['action_remove'] = '<a href="'.$discuss->request->makeUrl('post/remove',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.remove').'</a>';
+            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('post/remove',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.remove').'</a>';
             if ($isModerator || $isAdmin) {
-                $postArray['action_remove'] .= '<a href="'.$discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.post_spam').'</a>';
+                $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.post_spam').'</a>';
             }
+        }
+    }
+    if ($thread->get('class_key') == 'disThreadQuestion' && $canMarkAsAnswer) {
+        if ($thread->get('post_answer') == $postArray['id']) {
+            $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('unanswer' => $postArray['id'])).'">'.$modx->lexicon('discuss.unmark_as_answer').'</a>';
+        } else {
+            $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('answer' => $postArray['id'])).'">'.$modx->lexicon('discuss.mark_as_answer').'</a>';
         }
     }
 
@@ -185,6 +199,7 @@ foreach ($posts['results'] as $post) {
 
     $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
     $postArray['class'] = implode(' ',$postArray['class']);
+    $postArray['children_class'] = implode(' ',$postArray['children_class']);
     if ($canReportPost) {
         $postArray['report_link'] = '<a class="dis-report-link" href="'.$discuss->request->makeUrl('post/report',array(
             'thread' => $postArray['thread'],
@@ -198,6 +213,8 @@ foreach ($posts['results'] as $post) {
         $postArray['ip'] = '';
     }
     $postArray['idx'] = $idx+1;
+
+    $postArray['actions'] = implode("\n",$postArray['actions']);
 
     /* fire OnDiscussPostBeforeRender */
     $modx->invokeEvent('OnDiscussPostBeforeRender',array(

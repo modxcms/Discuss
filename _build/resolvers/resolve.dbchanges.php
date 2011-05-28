@@ -55,6 +55,12 @@ if ($object->xpdo) {
 
             $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD COLUMN `title` VARCHAR(255) NOT NULL DEFAULT '' AFTER `board`");
             $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD INDEX `title` (`title`)");
+
+            $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD COLUMN `class_key` VARCHAR(120) NOT NULL DEFAULT 'disThreadDiscussion' AFTER `id`");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD INDEX `class_key` (`class_key`)");
+
+            $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD COLUMN `post_answer` INT(10) NOT NULL DEFAULT '0' AFTER `post_last`");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD INDEX `post_answer` (`post_answer`)");
             break;
     }
 }

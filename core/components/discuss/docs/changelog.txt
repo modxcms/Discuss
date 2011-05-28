@@ -2,6 +2,7 @@ Changelog for Discuss.
 
 Discuss 1.0.0
 ====================================
+- Add Thread types
 - Lots of feature adds, flat-board capable only at this time
 - Not backwards-compatible with Discuss 0.1
 
