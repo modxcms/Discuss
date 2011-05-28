@@ -99,6 +99,8 @@ $c->select(array(
     'disThread.sticky',
     'disThread.locked',
     'disThread.board',
+    'disThread.post_answer',
+    'disThread.class_key',
     'FirstPost.title',
     'Board.name AS board_name',
     'LastPost.id AS post_id',
