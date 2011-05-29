@@ -145,10 +145,12 @@ foreach ($posts['results'] as $post) {
     }
 
     /* load actions */
+    $postArray['action_reply'] = '';
     $postArray['actions'] = array();
     if (($isAdmin || $isModerator || !$thread->get('locked')) && $discuss->user->isLoggedIn) {
         if ($post->canReply()) {
-            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['action_reply'] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['actions'][] = $postArray['action_reply'];
             $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
         }
 
