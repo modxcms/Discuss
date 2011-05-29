@@ -99,7 +99,7 @@ $c->select(array(
     'disThread.sticky',
     'disThread.locked',
     'disThread.board',
-    'disThread.post_answer',
+    'disThread.answered',
     'disThread.class_key',
     'FirstPost.title',
     'Board.name AS board_name',

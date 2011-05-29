@@ -110,6 +110,7 @@
         <field key="replies" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="views" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="locked" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
+        <field key="answered" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
         <field key="sticky" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="private" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
         <field key="users" dbtype="mediumtext" phptype="string" null="true" default="" />
@@ -132,9 +133,6 @@
 
     </object>
     <object class="disThreadQuestion" extends="disThread">
-        <field key="post_answer" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
-
-        <aggregate alias="AnswerPost" class="disPost" local="post_answer" foreign="id" cardinality="one" owner="foreign" />
     </object>
 
     <object class="disThreadRead" table="discuss_threads_read" extends="xPDOSimpleObject">
@@ -173,6 +171,7 @@
         <field key="ip" dbtype="varchar" precision="255" phptype="string" null="false" default="0.0.0.0" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="depth" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="answer" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" index="index" />
         
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />

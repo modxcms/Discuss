@@ -135,7 +135,7 @@ foreach ($posts['results'] as $post) {
             $postArray['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
         }
     }
-    if ($postArray['id'] == $thread->get('post_answer')) {
+    if (!empty($postArray['answer'])) {
         $postArray['class'][] = 'dis-post-answer';
         $postArray['title'] .= ' ('.$modx->lexicon('discuss.best_answer').')';
     }
@@ -174,7 +174,7 @@ foreach ($posts['results'] as $post) {
         }
     }
     if ($thread->get('class_key') == 'disThreadQuestion' && $canMarkAsAnswer && $postArray['id'] != $thread->get('post_first')) {
-        if ($thread->get('post_answer') == $postArray['id']) {
+        if (!empty($postArray['answer'])) {
             $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('unanswer' => $postArray['id'])).'">'.$modx->lexicon('discuss.unmark_as_answer').'</a>';
         } else {
             $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('answer' => $postArray['id'])).'">'.$modx->lexicon('discuss.mark_as_answer').'</a>';

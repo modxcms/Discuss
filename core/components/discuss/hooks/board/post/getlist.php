@@ -67,7 +67,7 @@ if (empty($threadCollection)) {
         'disThread.sticky',
         'disThread.locked',
         'disThread.post_last',
-        'disThread.post_answer',
+        'disThread.answered',
         'disThread.class_key',
         '(SELECT GROUP_CONCAT(pAuthor.id)
             FROM '.$modx->getTableName('disPost').' AS pPost

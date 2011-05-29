@@ -23,7 +23,6 @@ class disThreadQuestion extends disThread {
         $c->select($this->xpdo->getSelectColumns('disPost','disPost'));
         $c->select(array(
             'IF(Thread.post_first = disPost.id,1,0) AS thread_first',
-            'IF(Thread.post_answer = disPost.id,1,0) AS thread_answer',
         ));
 
         $flat = $this->xpdo->getOption('flat',$options,true);
@@ -33,14 +32,14 @@ class disThreadQuestion extends disThread {
             $sortBy = $this->xpdo->getOption('sortBy',$options,'createdon');
             $sortDir = $this->xpdo->getOption('sortDir',$options,'ASC');
             $c->sortby($this->xpdo->escape('thread_first'),'DESC');
-            $c->sortby($this->xpdo->escape('thread_answer'),'DESC');
+            $c->sortby($this->xpdo->escape('answer'),'DESC');
             $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array($sortBy)),$sortDir);
             if (empty($_REQUEST['print'])) {
                 $c->limit($limit, $start);
             }
         } else {
             $c->sortby($this->xpdo->escape('thread_first'),'DESC');
-            $c->sortby($this->xpdo->escape('thread_answer'),'DESC');
+            $c->sortby($this->xpdo->escape('answer'),'DESC');
             $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
         }
 
@@ -78,18 +77,42 @@ class disThreadQuestion extends disThread {
      * @return bool
      */
     public function markAsAnswer($postId) {
-        $this->set('post_answer',$postId);
-        return $this->save();
+        $marked = false;
+        $post = $this->xpdo->getObject('disPost',$postId);
+        if ($post) {
+            $post->set('answer',true);
+            if ($post->save()) {
+                $this->set('answered',true);
+                $marked = $this->save();
+            }
+        }
+        return $marked;
     }
 
     /**
      * Mark this thread as unsolved
      *
+     * @param int $postId
      * @return bool
      */
-    public function unmarkAsAnswer() {
-        $this->set('post_answer',0);
-        return $this->save();
+    public function unmarkAsAnswer($postId) {
+        $marked = false;
+        $post = $this->xpdo->getObject('disPost',$postId);
+        if ($post) {
+            $post->set('answer',false);
+            if ($post->save()) {
+                $marked = true;
+                $answersLeft = $this->xpdo->getCount('disPost',array(
+                    'thread' => $this->get('id'),
+                    'answer' => true,
+                ));
+                if ($answersLeft <= 0) {
+                    $this->set('answered',false);
+                    $this->save();
+                }
+            }
+        }
+        return $marked;
     }
 
     /**
@@ -104,8 +127,8 @@ class disThreadQuestion extends disThread {
         $v = parent::get($k,$format,$formatTemplate);
 
         if ($k == 'title' && $this->xpdo->lexicon) {
-            $postAnswer = $this->get('post_answer');
-            if (!empty($postAnswer)) {
+            $answered = $this->get('answered');
+            if (!empty($answered)) {
                 $v .= ' ['.$this->xpdo->lexicon('discuss.solved').']';
             }
         }

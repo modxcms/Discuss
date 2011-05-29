@@ -82,7 +82,7 @@ if (!empty($scriptProperties['answer']) && $thread->get('class_key') == 'disThre
     }
 }
 if (!empty($scriptProperties['unanswer']) && $thread->get('class_key') == 'disThreadQuestion' && $thread->canMarkAsAnswer()) {
-    if ($thread->unmarkAsAnswer($scriptProperties['answer'])) {
+    if ($thread->unmarkAsAnswer($scriptProperties['unanswer'])) {
         $modx->sendRedirect($thread->getUrl());
     }
 }
