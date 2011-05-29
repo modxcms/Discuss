@@ -171,7 +171,7 @@
         <field key="ip" dbtype="varchar" precision="255" phptype="string" null="false" default="0.0.0.0" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="depth" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
-        <field key="answer" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" index="index" />
+        <field key="answer" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
         
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />
