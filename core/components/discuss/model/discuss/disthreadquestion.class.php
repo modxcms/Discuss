@@ -3,6 +3,7 @@
  * @package discuss
  */
 class disThreadQuestion extends disThread {
+    public $canMarkAsAnswer;
 
     /**
      * Fetch all posts for this question, sorting the correct answer at the top
@@ -65,9 +66,12 @@ class disThreadQuestion extends disThread {
      * @return bool
      */
     public function canMarkAsAnswer() {
-        $isModerator = $this->isModerator($this->xpdo->discuss->user->get('id'));
-        $isAdmin = $this->xpdo->discuss->user->isAdmin();
-        return $this->xpdo->discuss->user->isLoggedIn && ($isModerator || $isAdmin || $this->get('author_first') == $this->xpdo->discuss->user->get('id'));
+        if (!isset($this->canMarkAsAnswer)) {
+            $isModerator = $this->isModerator($this->xpdo->discuss->user->get('id'));
+            $isAdmin = $this->xpdo->discuss->user->isAdmin();
+            $this->canMarkAsAnswer = $this->xpdo->discuss->user->isLoggedIn && ($isModerator || $isAdmin || $this->get('author_first') == $this->xpdo->discuss->user->get('id'));
+        }
+        return $this->canMarkAsAnswer;
     }
 
     /**
@@ -133,5 +137,50 @@ class disThreadQuestion extends disThread {
             }
         }
         return $v;
+    }
+
+    /**
+     * Prepares the thread view, useful for extra processing when using derivative thread types
+     * 
+     * @param array $postArray
+     * @return array
+     */
+    public function prepareThreadView(array $postArray) {
+        if ($this->canMarkAsAnswer() && $postArray['id'] != $this->get('post_first')) {
+            if (!empty($postArray['answer'])) {
+                $postArray['actions'][] = '<a href="'.$this->getUrl(false,array('unanswer' => $postArray['id'])).'">'.$this->xpdo->lexicon('discuss.unmark_as_answer').'</a>';
+            } else {
+                $postArray['actions'][] = '<a href="'.$this->getUrl(false,array('answer' => $postArray['id'])).'">'.$this->xpdo->lexicon('discuss.mark_as_answer').'</a>';
+            }
+        }
+
+        if (!empty($postArray['answer'])) {
+            $postArray['class'][] = 'dis-post-answer';
+            $postArray['title'] .= ' ('.$this->xpdo->lexicon('discuss.best_answer').')';
+        }
+        return $postArray;
+    }
+
+    /**
+     * Handle actions on thread view
+     * 
+     * @param array $scriptProperties
+     * @return boolean
+     */
+    public function handleThreadViewActions(array $scriptProperties) {
+        $success = parent::handleThreadViewActions($scriptProperties);
+        
+        if (!empty($scriptProperties['answer']) && $this->canMarkAsAnswer()) {
+            if ($this->markAsAnswer($scriptProperties['answer'])) {
+                $this->xpdo->sendRedirect($this->getUrl());
+            }
+        }
+        if (!empty($scriptProperties['unanswer']) && $this->canMarkAsAnswer()) {
+            if ($this->unmarkAsAnswer($scriptProperties['unanswer'])) {
+                $this->xpdo->sendRedirect($this->getUrl());
+            }
+        }
+
+        return $success;
     }
 }

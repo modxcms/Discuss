@@ -135,10 +135,6 @@ foreach ($posts['results'] as $post) {
             $postArray['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
         }
     }
-    if (!empty($postArray['answer'])) {
-        $postArray['class'][] = 'dis-post-answer';
-        $postArray['title'] .= ' ('.$modx->lexicon('discuss.best_answer').')';
-    }
 
     /* format bbcode */
     $postArray['content'] = $post->getContent();
@@ -150,10 +146,6 @@ foreach ($posts['results'] as $post) {
 
     /* load actions */
     $postArray['actions'] = array();
-    $postArray['action_reply'] = '';
-    $postArray['action_quote'] = '';
-    $postArray['action_modify'] = '';
-    $postArray['action_remove'] = '';
     if (($isAdmin || $isModerator || !$thread->get('locked')) && $discuss->user->isLoggedIn) {
         if ($post->canReply()) {
             $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
@@ -173,13 +165,6 @@ foreach ($posts['results'] as $post) {
             }
         }
     }
-    if ($thread->get('class_key') == 'disThreadQuestion' && $canMarkAsAnswer && $postArray['id'] != $thread->get('post_first')) {
-        if (!empty($postArray['answer'])) {
-            $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('unanswer' => $postArray['id'])).'">'.$modx->lexicon('discuss.unmark_as_answer').'</a>';
-        } else {
-            $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('answer' => $postArray['id'])).'">'.$modx->lexicon('discuss.mark_as_answer').'</a>';
-        }
-    }
 
     /* get attachments */
     $postArray['attachments'] = '';
@@ -197,9 +182,6 @@ foreach ($posts['results'] as $post) {
         }
     }
 
-    $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
-    $postArray['class'] = implode(' ',$postArray['class']);
-    $postArray['children_class'] = implode(' ',$postArray['children_class']);
     if ($canReportPost) {
         $postArray['report_link'] = '<a class="dis-report-link" href="'.$discuss->request->makeUrl('post/report',array(
             'thread' => $postArray['thread'],
@@ -214,8 +196,15 @@ foreach ($posts['results'] as $post) {
     }
     $postArray['idx'] = $idx+1;
 
-    $postArray['actions'] = implode("\n",$postArray['actions']);
+    /* prepare thread view for derivative thread types */
+    $postArray = $thread->prepareThreadView($postArray);
 
+    /* prepare specific properties for rendering */
+    $postArray['actions'] = implode("\n",$postArray['actions']);
+    $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
+    $postArray['class'] = implode(' ',$postArray['class']);
+    $postArray['children_class'] = implode(' ',$postArray['children_class']);
+    
     /* fire OnDiscussPostBeforeRender */
     $modx->invokeEvent('OnDiscussPostBeforeRender',array(
         'post' => &$post,

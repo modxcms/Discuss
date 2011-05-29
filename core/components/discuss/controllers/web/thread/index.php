@@ -39,54 +39,7 @@ $discuss->setSessionPlace('thread:'.$thread->get('id'));
 $isModerator = $thread->isModerator($discuss->user->get('id'));
 $isAdmin = $discuss->user->isAdmin();
 
-
-/* mark unread if user clicks mark unread */
-if (isset($scriptProperties['unread'])) {
-    if ($thread->unread($discuss->user->get('id'))) {
-        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
-    }
-}
-if (!empty($scriptProperties['sticky'])) {
-    if ($thread->stick()) {
-        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
-    }
-}
-if (isset($scriptProperties['sticky']) && $scriptProperties['sticky'] == 0) {
-    if ($thread->unstick()) {
-        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
-    }
-}
-if (!empty($scriptProperties['lock'])) {
-    if ($thread->lock()) {
-        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
-    }
-}
-if (isset($scriptProperties['lock']) && $scriptProperties['lock'] == 0) {
-    if ($thread->unlock()) {
-        $modx->sendRedirect($discuss->request->makeUrl('board',array('board' => $thread->get('board'))));
-    }
-}
-if (!empty($scriptProperties['subscribe'])) {
-    if ($thread->addSubscription($discuss->user->get('id'))) {
-        $modx->sendRedirect($thread->getUrl());
-    }
-}
-if (!empty($scriptProperties['unsubscribe'])) {
-    if ($thread->removeSubscription($discuss->user->get('id'))) {
-        $modx->sendRedirect($thread->getUrl());
-    }
-}
-if (!empty($scriptProperties['answer']) && $thread->get('class_key') == 'disThreadQuestion' && $thread->canMarkAsAnswer()) {
-    if ($thread->markAsAnswer($scriptProperties['answer'])) {
-        $modx->sendRedirect($thread->getUrl());
-    }
-}
-if (!empty($scriptProperties['unanswer']) && $thread->get('class_key') == 'disThreadQuestion' && $thread->canMarkAsAnswer()) {
-    if ($thread->unmarkAsAnswer($scriptProperties['unanswer'])) {
-        $modx->sendRedirect($thread->getUrl());
-    }
-}
-
+$thread->handleThreadViewActions($scriptProperties);
 
 /* get posts */
 if (!empty($options['showPosts'])) {

@@ -1025,6 +1025,11 @@ class disThread extends xPDOSimpleObject {
 
     }
 
+    /** can* methods */
+
+    /**
+     * @return bool
+     */
     public function canStick() {
         return !$this->get('sticky') && $this->xpdo->hasPermission('discuss.thread_stick') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
@@ -1057,5 +1062,65 @@ class disThread extends xPDOSimpleObject {
     }
     public function canUnsubscribe() {
         return $this->hasSubscription() && $this->xpdo->hasPermission('discuss.thread_subscribe');
+    }
+
+    /** process views for derivative thread types */
+
+    /**
+     * Prepares the thread view, useful for extra processing when using derivative thread types
+     * 
+     * @param array $postArray
+     * @return array
+     */
+    public function prepareThreadView(array $postArray) { return $postArray; }
+
+
+    /**
+     * Handle actions on thread view
+     *
+     * @param array $scriptProperties
+     * @return boolean
+     */
+    public function handleThreadViewActions(array $scriptProperties) {
+        if (!$this->xpdo->discuss->user->isLoggedIn) return false;
+
+        /* mark unread if user clicks mark unread */
+        if (isset($scriptProperties['unread'])) {
+            if ($this->unread($this->xpdo->discuss->user->get('id'))) {
+                $this->xpdo->sendRedirect($this->xpdo->discuss->request->makeUrl('board',array('board' => $this->get('board'))));
+            }
+        }
+        if (!empty($scriptProperties['sticky']) && $this->canStick()) {
+            if ($this->stick()) {
+                $this->xpdo->sendRedirect($this->xpdo->discuss->request->makeUrl('board',array('board' => $this->get('board'))));
+            }
+        }
+        if (isset($scriptProperties['sticky']) && $scriptProperties['sticky'] == 0 && $this->canUnstick()) {
+            if ($this->unstick()) {
+                $this->xpdo->sendRedirect($this->xpdo->discuss->request->makeUrl('board',array('board' => $this->get('board'))));
+            }
+        }
+        if (!empty($scriptProperties['lock']) && $this->canLock()) {
+            if ($this->lock()) {
+                $this->xpdo->sendRedirect($this->xpdo->discuss->request->makeUrl('board',array('board' => $this->get('board'))));
+            }
+        }
+        if (isset($scriptProperties['lock']) && $scriptProperties['lock'] == 0 && $this->canUnlock()) {
+            if ($this->unlock()) {
+                $this->xpdo->sendRedirect($this->xpdo->discuss->request->makeUrl('board',array('board' => $this->get('board'))));
+            }
+        }
+        if (!empty($scriptProperties['subscribe']) && $this->canSubscribe()) {
+            if ($this->addSubscription($this->xpdo->discuss->user->get('id'))) {
+                $this->xpdo->sendRedirect($this->getUrl());
+            }
+        }
+        if (!empty($scriptProperties['unsubscribe']) && $this->canUnsubscribe()) {
+            if ($this->removeSubscription($this->xpdo->discuss->user->get('id'))) {
+                $this->xpdo->sendRedirect($this->getUrl());
+            }
+        }
+
+        return true;
     }
 }
