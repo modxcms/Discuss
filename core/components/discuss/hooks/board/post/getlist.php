@@ -58,8 +58,10 @@ if (empty($threadCollection)) {
         'LastPost.id AS last_post_id',
         'LastPost.id AS post_id',
         'LastPostThread.replies AS last_post_replies',
+        'LastAuthor.username AS last_post_username',
+        'LastAuthor.use_display_name AS last_post_udn',
+        'LastAuthor.display_name AS last_post_display_name',
         'FirstPost.title',
-        'LastAuthor.username',
         'LastAuthor.user AS user',
         'disThread.id',
         'disThread.replies',
@@ -67,7 +69,7 @@ if (empty($threadCollection)) {
         'disThread.sticky',
         'disThread.locked',
         'disThread.post_last',
-        'disThread.post_answer',
+        'disThread.answered',
         'disThread.class_key',
         '(SELECT GROUP_CONCAT(pAuthor.id)
             FROM '.$modx->getTableName('disPost').' AS pPost
@@ -135,11 +137,16 @@ $response['results'] = array();
 foreach ($threadCollection as $threadArray) {
     if ($mode != 'rss') {
         /* last post */
+
+        $username = $threadArray['last_post_username'];
+        if (!empty($threadArray['last_post_udn']) && !empty($threadArray['last_post_display_name'])) {
+            $username = $threadArray['last_post_display_name'];
+        }
         $phs = array(
             'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($threadArray['createdon'])),
             'user' => $threadArray['author'],
-            'username' => $threadArray['username'],
-            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('user/',array('user' => $threadArray['user'])).'">'.$threadArray['username'].'</a>' : $threadArray['username'],
+            'username' => $threadArray['last_post_username'],
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('u/'.$threadArray['last_post_username']).'">'.$username.'</a>' : $username,
         );
         $latestText = $discuss->getChunk('board/disLastPostBy',$phs);
         $threadArray['latest'] = $latestText;

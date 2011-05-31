@@ -3,6 +3,7 @@
  * @package discuss
  */
 class disThreadQuestion extends disThread {
+    public $canMarkAsAnswer;
 
     /**
      * Fetch all posts for this question, sorting the correct answer at the top
@@ -23,7 +24,6 @@ class disThreadQuestion extends disThread {
         $c->select($this->xpdo->getSelectColumns('disPost','disPost'));
         $c->select(array(
             'IF(Thread.post_first = disPost.id,1,0) AS thread_first',
-            'IF(Thread.post_answer = disPost.id,1,0) AS thread_answer',
         ));
 
         $flat = $this->xpdo->getOption('flat',$options,true);
@@ -33,14 +33,14 @@ class disThreadQuestion extends disThread {
             $sortBy = $this->xpdo->getOption('sortBy',$options,'createdon');
             $sortDir = $this->xpdo->getOption('sortDir',$options,'ASC');
             $c->sortby($this->xpdo->escape('thread_first'),'DESC');
-            $c->sortby($this->xpdo->escape('thread_answer'),'DESC');
+            $c->sortby($this->xpdo->escape('answer'),'DESC');
             $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array($sortBy)),$sortDir);
             if (empty($_REQUEST['print'])) {
                 $c->limit($limit, $start);
             }
         } else {
             $c->sortby($this->xpdo->escape('thread_first'),'DESC');
-            $c->sortby($this->xpdo->escape('thread_answer'),'DESC');
+            $c->sortby($this->xpdo->escape('answer'),'DESC');
             $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
         }
 
@@ -66,9 +66,12 @@ class disThreadQuestion extends disThread {
      * @return bool
      */
     public function canMarkAsAnswer() {
-        $isModerator = $this->isModerator($this->xpdo->discuss->user->get('id'));
-        $isAdmin = $this->xpdo->discuss->user->isAdmin();
-        return $this->xpdo->discuss->user->isLoggedIn && ($isModerator || $isAdmin || $this->get('author_first') == $this->xpdo->discuss->user->get('id'));
+        if (!isset($this->canMarkAsAnswer)) {
+            $isModerator = $this->isModerator($this->xpdo->discuss->user->get('id'));
+            $isAdmin = $this->xpdo->discuss->user->isAdmin();
+            $this->canMarkAsAnswer = $this->xpdo->discuss->user->isLoggedIn && ($isModerator || $isAdmin || $this->get('author_first') == $this->xpdo->discuss->user->get('id'));
+        }
+        return $this->canMarkAsAnswer;
     }
 
     /**
@@ -78,18 +81,77 @@ class disThreadQuestion extends disThread {
      * @return bool
      */
     public function markAsAnswer($postId) {
-        $this->set('post_answer',$postId);
-        return $this->save();
+        $marked = false;
+        $post = $this->xpdo->getObject('disPost',$postId);
+        if ($post) {
+            $post->set('answer',true);
+
+            /* fire before mark as answer event */
+            $rs = $this->xpdo->invokeEvent('OnDiscussBeforeMarkAsAnswer',array(
+                'post' => &$post,
+                'thread' => &$this,
+            ));
+            $canSave = $this->xpdo->discuss->getEventResult($rs);
+            if (!empty($canSave)) {
+                return $this->xpdo->error->failure($canSave);
+            }
+
+            if ($post->save()) {
+                $this->set('answered',true);
+                $marked = $this->save();
+                if ($marked) {
+                    $rs = $this->xpdo->invokeEvent('OnDiscussMarkAsAnswer',array(
+                        'post' => &$post,
+                        'thread' => &$this,
+                    ));
+                }
+            }
+        }
+        return $marked;
     }
 
     /**
      * Mark this thread as unsolved
      *
+     * @param int $postId
      * @return bool
      */
-    public function unmarkAsAnswer() {
-        $this->set('post_answer',0);
-        return $this->save();
+    public function unmarkAsAnswer($postId) {
+        $marked = false;
+        $post = $this->xpdo->getObject('disPost',$postId);
+        if ($post) {
+            $post->set('answer',false);
+
+            /* fire before mark as answer event */
+            $rs = $this->xpdo->invokeEvent('OnDiscussBeforeUnmarkAsAnswer',array(
+                'post' => &$post,
+                'thread' => &$this,
+            ));
+            $canSave = $this->xpdo->discuss->getEventResult($rs);
+            if (!empty($canSave)) {
+                return $this->xpdo->error->failure($canSave);
+            }
+
+            if ($post->save()) {
+                $marked = true;
+                $answersLeft = $this->xpdo->getCount('disPost',array(
+                    'thread' => $this->get('id'),
+                    'answer' => true,
+                ));
+                if ($answersLeft <= 0) {
+                    $this->set('answered',false);
+                    $this->save();
+                }
+
+                if ($marked) {
+                    $rs = $this->xpdo->invokeEvent('OnDiscussUnmarkAsAnswer',array(
+                        'post' => &$post,
+                        'thread' => &$this,
+                    ));
+                }
+            }
+        }
+        return $marked;
     }
 
     /**
@@ -104,11 +166,56 @@ class disThreadQuestion extends disThread {
         $v = parent::get($k,$format,$formatTemplate);
 
         if ($k == 'title' && $this->xpdo->lexicon) {
-            $postAnswer = $this->get('post_answer');
-            if (!empty($postAnswer)) {
+            $answered = $this->get('answered');
+            if (!empty($answered)) {
                 $v .= ' ['.$this->xpdo->lexicon('discuss.solved').']';
             }
         }
         return $v;
+    }
+
+    /**
+     * Prepares the thread view, useful for extra processing when using derivative thread types
+     * 
+     * @param array $postArray
+     * @return array
+     */
+    public function prepareThreadView(array $postArray) {
+        if ($this->canMarkAsAnswer() && $postArray['id'] != $this->get('post_first')) {
+            if (!empty($postArray['answer'])) {
+                $postArray['actions'][] = '<a href="'.$this->getUrl(false,array('unanswer' => $postArray['id'])).'">'.$this->xpdo->lexicon('discuss.unmark_as_answer').'</a>';
+            } else {
+                $postArray['actions'][] = '<a href="'.$this->getUrl(false,array('answer' => $postArray['id'])).'">'.$this->xpdo->lexicon('discuss.mark_as_answer').'</a>';
+            }
+        }
+
+        if (!empty($postArray['answer'])) {
+            $postArray['class'][] = 'dis-post-answer';
+            $postArray['title'] .= ' ('.$this->xpdo->lexicon('discuss.best_answer').')';
+        }
+        return $postArray;
+    }
+
+    /**
+     * Handle actions on thread view
+     * 
+     * @param array $scriptProperties
+     * @return boolean
+     */
+    public function handleThreadViewActions(array $scriptProperties) {
+        $success = parent::handleThreadViewActions($scriptProperties);
+        
+        if (!empty($scriptProperties['answer']) && $this->canMarkAsAnswer()) {
+            if ($this->markAsAnswer($scriptProperties['answer'])) {
+                $this->xpdo->sendRedirect($this->getUrl());
+            }
+        }
+        if (!empty($scriptProperties['unanswer']) && $this->canMarkAsAnswer()) {
+            if ($this->unmarkAsAnswer($scriptProperties['unanswer'])) {
+                $this->xpdo->sendRedirect($this->getUrl());
+            }
+        }
+
+        return $success;
     }
 }

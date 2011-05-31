@@ -22,6 +22,7 @@ $xpdo_meta_map['disPost']= array (
     'ip' => '0.0.0.0',
     'integrated_id' => 0,
     'depth' => 0,
+    'answer' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -150,6 +151,15 @@ $xpdo_meta_map['disPost']= array (
       'precision' => '10',
       'phptype' => 'integer',
       'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+      'index' => 'index',
+    ),
+    'answer' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
       'index' => 'index',

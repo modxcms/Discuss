@@ -94,8 +94,7 @@ class DisRequest {
 
             $placeholders = require $controller['file'];
         } else {
-            @session_write_close();
-            die('Could not find: '.$controller['file']);
+            $this->discuss->sendErrorPage();
         }
         return is_array($placeholders) ? $placeholders : array();
     }

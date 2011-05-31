@@ -42,26 +42,15 @@ if (!empty($profileResourceId) && $discuss->ssoMode) {
 
 /* get user */
 if (empty($scriptProperties['user'])) { $discuss->sendErrorPage(); }
+$user = trim($scriptProperties['user'],' /');
+$key = intval($user) <= 0 ? 'username' : 'id';
 $c = array();
-$c[!empty($scriptProperties['i']) ? 'integrated_id' : 'id'] = $scriptProperties['user'];
+$c[!empty($scriptProperties['i']) ? 'integrated_id' : $key] = $user;
 $user = $modx->getObject('disUser',$c);
 if ($user == null) { $discuss->sendErrorPage(); }
 $discuss->setPageTitle($user->get('username'));
-$isSelf = $modx->user->get('id') == $user->get('user');
 
 $placeholders = $user->toArray();
-$placeholders['avatarUrl'] = $user->getAvatarUrl();
-/* format age */
-$age = strtotime($user->get('birthdate'));
-$age = round((time() - $age) / 60 / 60 / 24 / 365);
-$placeholders['age'] = $age;
-
-/* format gender */
-switch ($user->get('gender')) {
-    case 'm': $placeholders['gender'] = $modx->lexicon('discuss.male'); break;
-    case 'f': $placeholders['gender'] = $modx->lexicon('discuss.female'); break;
-    default: $placeholders['gender'] = ''; break;
-}
 
 /* get last visited thread */
 $placeholders['last_reading'] = '';
@@ -71,6 +60,7 @@ if ($lastThread) {
     $placeholders = array_merge($placeholders,$lastThread->toArray('lastThread.'));
     if ($firstPost) {
         $placeholders = array_merge($placeholders,$firstPost->toArray('lastThread.'));
+        $placeholders['last_post_url'] = $firstPost->getUrl();
     }
 }
 
@@ -83,27 +73,9 @@ if (!empty($options['showRecentPosts'])) {
     unset($recent);
 }
 
-if (!$user->get('show_email') && !$discuss->user->isAdmin()) {
-    $placeholders['email'] = '';
-}
-if (!$user->get('show_online') && !$discuss->user->isAdmin()) {
-    $placeholders['last_active'] = '';
-} elseif (!empty($placeholders['last_active']) && $placeholders['last_active'] != '-001-11-30 00:00:00') {
-    $placeholders['last_active'] = strftime($discuss->dateFormat,strtotime($placeholders['last_active']));
-} else {
-    $placeholders['last_active'] = '';
-}
-if ($modx->hasPermission('discuss.track_ip')) {
-    $placeholders['ip'] = '';
-}
-
-$user->getOne('User');
-$placeholders['groups'] = implode(', ',$user->User->getUserGroupNames());
+$placeholders['groups'] = implode(', ',$user->getUserGroupNames());
 
 /* do output */
-$placeholders['canEdit'] = $isSelf;
-$placeholders['canAccount'] = $isSelf;
-$placeholders['canMerge'] = $isSelf;
 $placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 return $placeholders;

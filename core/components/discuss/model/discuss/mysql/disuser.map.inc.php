@@ -39,6 +39,8 @@ $xpdo_meta_map['disUser']= array (
     'syncedat' => NULL,
     'salt' => '',
     'integrated_id' => 0,
+    'display_name' => '',
+    'use_display_name' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -290,6 +292,22 @@ $xpdo_meta_map['disUser']= array (
       'precision' => '10',
       'phptype' => 'integer',
       'attributes' => 'unsigned',
+      'null' => false,
+      'default' => 0,
+    ),
+    'display_name' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '255',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'use_display_name' => 
+    array (
+      'dbtype' => 'tinyint',
+      'precision' => '1',
+      'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
     ),

@@ -88,7 +88,7 @@ foreach ($threads['results'] as $thread) {
 
     /* unread class */
     $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
-    $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$threadArray['author'].'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+    $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
     $list[] = $discuss->getChunk('post/disPostLi',$threadArray);
 }

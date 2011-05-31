@@ -95,9 +95,9 @@ foreach ($posts['results'] as $post) {
 
     if ($post->Author) {
         if ($canViewProfiles) {
-            $postArray['author.username_link'] = '<a href="'.$discuss->request->makeUrl('user',array('user' => $post->get('author'))).'">'.$post->Author->get('username').'</a>';
+            $postArray['author.username_link'] = '<a href="'.$post->Author->getUrl().'">'.$post->Author->get('name').'</a>';
         } else {
-            $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('username').'</span>';
+            $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('name').'</span>';
         }
         if ($post->Author->get('status') == disUser::BANNED) {
             $postArray['author.username_link'] .= '<span class="dis-banned">'.$modx->lexicon('discuss.banned').'</span>';
@@ -135,10 +135,6 @@ foreach ($posts['results'] as $post) {
             $postArray['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
         }
     }
-    if ($postArray['id'] == $thread->get('post_answer')) {
-        $postArray['class'][] = 'dis-post-answer';
-        $postArray['title'] .= ' ('.$modx->lexicon('discuss.best_answer').')';
-    }
 
     /* format bbcode */
     $postArray['content'] = $post->getContent();
@@ -149,14 +145,12 @@ foreach ($posts['results'] as $post) {
     }
 
     /* load actions */
-    $postArray['actions'] = array();
     $postArray['action_reply'] = '';
-    $postArray['action_quote'] = '';
-    $postArray['action_modify'] = '';
-    $postArray['action_remove'] = '';
+    $postArray['actions'] = array();
     if (($isAdmin || $isModerator || !$thread->get('locked')) && $discuss->user->isLoggedIn) {
         if ($post->canReply()) {
-            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['action_reply'] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['actions'][] = $postArray['action_reply'];
             $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
         }
 
@@ -171,13 +165,6 @@ foreach ($posts['results'] as $post) {
             if ($isModerator || $isAdmin) {
                 $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.post_spam').'</a>';
             }
-        }
-    }
-    if ($thread->get('class_key') == 'disThreadQuestion' && $canMarkAsAnswer) {
-        if ($thread->get('post_answer') == $postArray['id']) {
-            $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('unanswer' => $postArray['id'])).'">'.$modx->lexicon('discuss.unmark_as_answer').'</a>';
-        } else {
-            $postArray['actions'][] = '<a href="'.$thread->getUrl(false,array('answer' => $postArray['id'])).'">'.$modx->lexicon('discuss.mark_as_answer').'</a>';
         }
     }
 
@@ -197,9 +184,6 @@ foreach ($posts['results'] as $post) {
         }
     }
 
-    $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
-    $postArray['class'] = implode(' ',$postArray['class']);
-    $postArray['children_class'] = implode(' ',$postArray['children_class']);
     if ($canReportPost) {
         $postArray['report_link'] = '<a class="dis-report-link" href="'.$discuss->request->makeUrl('post/report',array(
             'thread' => $postArray['thread'],
@@ -214,8 +198,15 @@ foreach ($posts['results'] as $post) {
     }
     $postArray['idx'] = $idx+1;
 
-    $postArray['actions'] = implode("\n",$postArray['actions']);
+    /* prepare thread view for derivative thread types */
+    $postArray = $thread->prepareThreadView($postArray);
 
+    /* prepare specific properties for rendering */
+    $postArray['actions'] = implode("\n",$postArray['actions']);
+    $postArray['createdon'] = strftime($dateFormat,strtotime($postArray['createdon']));
+    $postArray['class'] = implode(' ',$postArray['class']);
+    $postArray['children_class'] = implode(' ',$postArray['children_class']);
+    
     /* fire OnDiscussPostBeforeRender */
     $modx->invokeEvent('OnDiscussPostBeforeRender',array(
         'post' => &$post,
