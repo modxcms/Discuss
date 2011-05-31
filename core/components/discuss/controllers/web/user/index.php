@@ -42,8 +42,10 @@ if (!empty($profileResourceId) && $discuss->ssoMode) {
 
 /* get user */
 if (empty($scriptProperties['user'])) { $discuss->sendErrorPage(); }
+$user = trim($scriptProperties['user'],' /');
+$key = intval($user) <= 0 ? 'username' : 'id';
 $c = array();
-$c[!empty($scriptProperties['i']) ? 'integrated_id' : 'id'] = $scriptProperties['user'];
+$c[!empty($scriptProperties['i']) ? 'integrated_id' : $key] = $user;
 $user = $modx->getObject('disUser',$c);
 if ($user == null) { $discuss->sendErrorPage(); }
 $discuss->setPageTitle($user->get('username'));
@@ -71,6 +73,7 @@ if ($lastThread) {
     $placeholders = array_merge($placeholders,$lastThread->toArray('lastThread.'));
     if ($firstPost) {
         $placeholders = array_merge($placeholders,$firstPost->toArray('lastThread.'));
+        $placeholders['last_post_url'] = $firstPost->getUrl();
     }
 }
 

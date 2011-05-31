@@ -37,7 +37,7 @@
 </tr>
 <tr>
     <th>[[%discuss.last_reading]]:</th>
-    <td><a href="[[~[[*id]]]]thread/?thread=[[+lastThread.thread]]#dis-post-[[+lastThread.id]]">[[+lastThread.title]]</a></td>
+    <td><a href="[[+last_post_url]]">[[+lastThread.title]]</a></td>
 </tr>`]]
 <tr>
     <td colspan="2"><hr /></td>

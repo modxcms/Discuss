@@ -28,6 +28,10 @@
  */
 
 $board = isset($scriptProperties['board']) ? (is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board']) : 0;
+$lastPostTpl = $modx->getOption('lastPostTpl',$options,'board/disLastPostBy');
+$subBoardTpl = $modx->getOption('subBoardTpl',$options,'board/disSubForumLink');
+$categoryRowTpl = $modx->getOption('categoryRowTpl',$options,'category/disCategoryLi');
+$boardRowTpl = $modx->getOption('boardRowTpl',$options,'board/disBoardLi');
 
 /* check cache first */
 $category = $modx->getOption('category',$scriptProperties,false);
@@ -95,9 +99,9 @@ foreach ($boards as $board) {
             'thread' => $board['last_post_thread'],
             'id' => $board['last_post_id'],
             'url' => $board['last_post_url'],
-            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('user',array('user' => $board['last_post_author'])).'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('u/'.$board['last_post_username']).'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
         );
-        $lp = $discuss->getChunk('board/disLastPostBy',$phs);
+        $lp = $discuss->getChunk($lastPostTpl,$phs);
         $board['lastPost'] = $lp;
     } else {
         $board['lastPost'] = '';
@@ -113,7 +117,7 @@ foreach ($boards as $board) {
             $ph['id'] = $sb[0];
             $ph['title'] = $sb[1];
 
-            $sbl[] = $discuss->getChunk('board/disSubForumLink',$ph);
+            $sbl[] = $discuss->getChunk($subBoardTpl,$ph);
         }
         $board['subforums'] = implode(",\n",$sbl);
     }
@@ -137,20 +141,20 @@ foreach ($boards as $board) {
         $ba['list'] = implode("\n",$boardList);
         unset($ba['rowClass']);
         if (!empty($ba['list'])) {
-            $list[] = $discuss->getChunk('category/disCategoryLi',$ba);
+            $list[] = $discuss->getChunk($categoryRowTpl,$ba);
         }
 
         $ba = $board;
         $boardList = array(); /* reset current category board list */
         $ba['rowClass'] = $rowClass;
         $lastCategory = $board['category'];
-        $boardList[] = $discuss->getChunk('board/disBoardLi',$ba);
+        $boardList[] = $discuss->getChunk($boardRowTpl,$ba);
 
     } else { /* otherwise add to temp board list */
         $ba = $board;
         $ba['rowClass'] = $rowClass;
         $lastCategory = $board['category'];
-        $boardList[] = $discuss->getChunk('board/disBoardLi',$ba);
+        $boardList[] = $discuss->getChunk($boardRowTpl,$ba);
         $rowClass = ($rowClass == 'alt') ? 'even' : 'alt';
     }
 }
@@ -158,7 +162,7 @@ if (count($boards) > 0) {
     /* Last category */
     $ba['list'] = implode("\n",$boardList);
     $ba['rowClass'] = $rowClass;
-    $list[] = $discuss->getChunk('category/disCategoryLi',$ba);
+    $list[] = $discuss->getChunk($categoryRowTpl,$ba);
     $list = implode("\n",$list);
     unset($currentCategory,$ba,$boards,$board,$lp);
 }

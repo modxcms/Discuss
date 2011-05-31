@@ -39,6 +39,7 @@ $start = ($page-1) * $limit;
 
 $sortBy = $modx->getOption('sortBy',$scriptProperties,'LastPost.createdon');
 $sortDir = $modx->getOption('sortDir',$scriptProperties,'DESC');
+$postTpl = $modx->getOption('postTpl',$options,'post/disPostLi');
 
 /* handle marking all as read */
 if (!empty($scriptProperties['read']) && $discuss->user->isLoggedIn) {
@@ -91,16 +92,16 @@ foreach ($threads['results'] as $thread) {
     /* unread class */
     $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
 
-    $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->url.'user/?user='.$threadArray['author'].'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+    $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
-    $list[] = $discuss->getChunk('post/disPostLi',$threadArray);
+    $list[] = $discuss->getChunk($postTpl,$threadArray);
 }
 $placeholders['threads'] = implode("\n",$list);
 
 /* get board breadcrumb trail */
 $trail = array();
 $trail[] = array(
-    'url' => $discuss->url,
+    'url' => $discuss->request->makeUrl(),
     'text' => $modx->getOption('discuss.forum_title'),
 );
 $trail[] = array('text' => $modx->lexicon('discuss.unread_posts_last_visit').' ('.number_format($threads['total']).')','active' => true);
@@ -112,9 +113,9 @@ $placeholders['trail'] = $trail;
 
 /* action buttons */
 $actionButtons = array();
-$actionButtons[] = array('url' => $discuss->url.'thread/unread', 'text' => $modx->lexicon('discuss.unread_posts_all'));
-if ($discuss->isLoggedIn) {
-    $actionButtons[] = array('url' => $discuss->url.'thread/unread_last_visit?read=1', 'text' => $modx->lexicon('discuss.mark_all_as_read'));
+$actionButtons[] = array('url' => $discuss->request->makeUrl('thread/unread'), 'text' => $modx->lexicon('discuss.unread_posts_all'));
+if ($discuss->user->isLoggedIn) {
+    $actionButtons[] = array('url' => $discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1)), 'text' => $modx->lexicon('discuss.mark_all_as_read'));
 }
 $placeholders['actionbuttons'] = $discuss->buildActionButtons($actionButtons,'dis-action-btns right');
 unset($actionButtons);
