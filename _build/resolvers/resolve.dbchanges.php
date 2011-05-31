@@ -63,6 +63,11 @@ if ($object->xpdo) {
             $modx->query("ALTER TABLE ".$modx->getTableName('disThread')." ADD INDEX `answered` (`answered`)");
             $modx->query("ALTER TABLE ".$modx->getTableName('disPost')." ADD COLUMN `answer` TINYINT(1) NOT NULL DEFAULT '0' AFTER `allow_replies`");
             $modx->query("ALTER TABLE ".$modx->getTableName('disPost')." ADD INDEX `answer` (`answer`)");
+
+            $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD COLUMN `display_name` VARCHAR(255) NOT NULL DEFAULT '' AFTER `integrated_id`");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD INDEX `display_name` (`display_name`)");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD COLUMN `use_display_name` TINYINT(1) NOT NULL DEFAULT '0' AFTER `display_name`");
+            $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD INDEX `use_display_name` (`use_display_name`)");
         break;
     }
 }

@@ -9,7 +9,7 @@
 
 <form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form" style="border: 0;">
 
-    <h2>[[%discuss.account_merge? &namespace=`discuss` &topic=`user`]]: [[+username]]</h2>
+    <h2>[[%discuss.account_merge? &namespace=`discuss` &topic=`user`]]: [[+name]]</h2>
 
     <p>[[%discuss.account_merge_msg]]</p>
 

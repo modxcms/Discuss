@@ -156,6 +156,14 @@ class disUser extends xPDOSimpleObject {
                         $v = '';
                     }
                     break;
+                case 'name':
+                    if ($this->get('use_display_name')) {
+                        $v = $this->get('display_name');
+                    }
+                    if (empty($v)) {
+                        $v = $this->get('username');
+                    }
+                    break;
             }
         }
         return $v;
@@ -178,6 +186,7 @@ class disUser extends xPDOSimpleObject {
         $values['canEdit'] = $values['isSelf'];
         $values['canAccount'] = $values['isSelf'];
         $values['canMerge'] = $values['isSelf'];
+        $values['name'] = $this->get('name');
         return $values;
     }
 

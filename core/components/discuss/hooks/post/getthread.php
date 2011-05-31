@@ -95,9 +95,9 @@ foreach ($posts['results'] as $post) {
 
     if ($post->Author) {
         if ($canViewProfiles) {
-            $postArray['author.username_link'] = '<a href="'.$post->Author->getUrl().'">'.$post->Author->get('username').'</a>';
+            $postArray['author.username_link'] = '<a href="'.$post->Author->getUrl().'">'.$post->Author->get('name').'</a>';
         } else {
-            $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('username').'</span>';
+            $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('name').'</span>';
         }
         if ($post->Author->get('status') == disUser::BANNED) {
             $postArray['author.username_link'] .= '<span class="dis-banned">'.$modx->lexicon('discuss.banned').'</span>';

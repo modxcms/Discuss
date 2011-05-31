@@ -314,6 +314,8 @@ class disBoard extends xPDOSimpleObject {
         $c->select($this->xpdo->getSelectColumns('disModerator','disModerator','',array('id','user')));
         $c->select(array(
             'User.username',
+            'User.use_display_name',
+            'User.display_name',
         ));
         $c->where(array(
             'disModerator.board' => $this->get('id'),
@@ -322,7 +324,14 @@ class disBoard extends xPDOSimpleObject {
         $mods = array();
         if ($moderators) {
             foreach ($moderators as $moderator) {
-                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array('user' => $moderator->get('user'))).'">'.$moderator->get('username').'</a>' : $moderator->get('username');
+                $username = $moderator->get('username');
+                if ($moderator->get('use_display_name')) {
+                    $username = $moderator->get('display_name');
+                }
+                if (empty($username)) {
+                    $username = $moderator->get('username');
+                }
+                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('u/'.$moderator->get('username')).'">'.$username.'</a>' : $username;
             }
             $mods = array_unique($mods);
             $mods = implode(',',$mods);
@@ -590,6 +599,8 @@ class disBoard extends xPDOSimpleObject {
             'LastPostThread.replies AS last_post_replies',
             'LastPostThread.title AS last_post_title',
             'LastPostAuthor.username AS last_post_username',
+            'LastPostAuthor.use_display_name AS last_post_udn',
+            'LastPostAuthor.display_name AS last_post_display_name',
         ));
         $c->sortby('Category.rank','ASC');
         $c->sortby('disBoard.rank','ASC');

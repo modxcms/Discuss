@@ -1,6 +1,6 @@
 [[+usermenu]]
 <div class="dis-profile dis-form left" style="width: 80%; border: 0;">
-    <h2>[[%discuss.general_stats? &user=`[[+username]]`]]</h2>
+    <h2>[[%discuss.general_stats? &user=`[[+name]]`]]</h2>
     
     <dl class="dis-datalist">
         <dh>[[%discuss.joined]]:</dh>

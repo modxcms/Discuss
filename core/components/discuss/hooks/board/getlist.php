@@ -92,14 +92,18 @@ foreach ($boards as $board) {
     $board['unread'] = $discuss->user->isBoardRead($board['id']);
     $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
     if (!empty($board['last_post_createdon'])) {
+        $username = $board['last_post_username'];
+        if (!empty($board['last_post_udn']) && !empty($board['last_post_display_name'])) {
+            $username = $board['last_post_display_name'];
+        }
         $phs = array(
             'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($board['last_post_createdon'])),
             'user' => $board['last_post_author'],
-            'username' => $board['last_post_username'],
+            'username' => $username,
             'thread' => $board['last_post_thread'],
             'id' => $board['last_post_id'],
             'url' => $board['last_post_url'],
-            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('u/'.$board['last_post_username']).'">'.$board['last_post_username'].'</a>' : $board['last_post_username'],
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('u/'.$board['last_post_username']).'">'.$username.'</a>' : $username,
         );
         $lp = $discuss->getChunk($lastPostTpl,$phs);
         $board['lastPost'] = $lp;

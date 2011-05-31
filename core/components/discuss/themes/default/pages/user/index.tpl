@@ -3,7 +3,7 @@
 
 <form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
-<h2>[[+username]]</h2>
+<h2>[[+name]]</h2>
 
 <div class="right">
     <img src="[[+avatarUrl]]" alt="[[+username]]" />

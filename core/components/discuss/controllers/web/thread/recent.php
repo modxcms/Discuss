@@ -47,7 +47,7 @@ $placeholders['recent_posts'] = $recent['results'];
 /* get board breadcrumb trail */
 $trail = array();
 $trail[] = array(
-    'url' => $discuss->url,
+    'url' => $discuss->request->makeUrl(),
     'text' => $modx->getOption('discuss.forum_title'),
 );
 $trail[] = array('text' => $modx->lexicon('discuss.recent_posts').' ('.number_format($recent['total']).')','active' => true);

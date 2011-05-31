@@ -441,7 +441,7 @@ class disThread extends xPDOSimpleObject {
         $c->innerJoin('disUser','User');
         $c->select($this->xpdo->getSelectColumns('disSession','disSession','',array('id')));
         $c->select(array(
-            'CONCAT_WS(":",User.id,User.username) AS reader',
+            'CONCAT_WS(":",User.id,IF(User.use_display_name,User.display_name,User.username)) AS reader',
         ));
         $c->where(array(
             'disSession.place' => $placePrefix.':'.$this->get('id'),

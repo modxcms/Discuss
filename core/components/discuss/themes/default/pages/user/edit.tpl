@@ -3,7 +3,7 @@
 
 <form action="[[~[[*id]]]]user/edit?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
-    <h2>[[%discuss.edit_profile_for? &user=`[[+username]]` &namespace=`discuss` &topic=`user`]]</h2>
+    <h2>[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h2>
     
     <input type="hidden" name="user" value="[[+id]]" />
     

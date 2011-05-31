@@ -27,6 +27,7 @@ $start = $modx->getOption('start',$scriptProperties,0);
 
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
+$postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disPostLi');
 
 /* recent posts */
 $c = $modx->newQuery('disThread');
@@ -109,6 +110,8 @@ $c->select(array(
     'LastPost.createdon',
     'LastPostThread.replies AS last_post_replies',
     'LastAuthor.username AS author_username',
+    'LastAuthor.use_display_name AS author_udn',
+    'LastAuthor.display_name AS author_display_name',
 ));
 if (!empty($scriptProperties['showIfParticipating'])) {
     $c->select(array(
@@ -134,13 +137,17 @@ foreach ($recentPosts as $thread) {
     $threadArray = $thread->toArray();
     $threadArray['idx'] = $idx;
     $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
-    $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+    $username = $threadArray['author_username'];
+    if (!empty($threadArray['author_udn']) && !empty($threadArray['author_display_name'])) {
+        $username = $threadArray['author_display_name'];
+    }
+    $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$username.'</a>' : $username;
     $threadArray['views'] = '';
     $threadArray['replies'] = number_format($threadArray['replies']);
     $threadArray['unread'] = '';
 
     /* unread class */
-    $list[] = $discuss->getChunk('post/disPostLi',$threadArray);
+    $list[] = $discuss->getChunk($postTpl,$threadArray);
     $idx++;
 }
 $list = implode("\n",$list);
