@@ -765,4 +765,44 @@ class disBoard extends xPDOSimpleObject {
         $this->set('last_post_url',$url);
         return $url;
     }
+
+    /**
+     * Override toArray to provide more values
+     *
+     * @param string $keyPrefix
+     * @param bool $rawValues
+     * @param bool $excludeLazy
+     * @return void
+     */
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
+        $values = parent :: toArray($keyPrefix,$rawValues,$excludeLazy);
+        if ($this->xpdo->context->key != 'mgr' && $this->xpdo->discuss) {
+            $values['url'] = $this->getUrl();
+        }
+        return $values;
+    }
+
+    /**
+     * Get the friendly URL for this board
+     *
+     * @return string
+     */
+    public function getUrl() {
+        return $this->xpdo->discuss->request->makeUrl('board/'.$this->get('id').'/'.$this->getSlug());
+    }
+
+    /**
+     * Get the URL-friendly name of this board
+     * @return string
+     */
+    public function getSlug() {
+        $title = $this->get('name');
+        if (!empty($title)) {
+            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
+        } else {
+            $title = $this->get('id');
+        }
+        return $title;
+
+    }
 }
