@@ -82,10 +82,13 @@ abstract class disParser {
             $char = $this->modx->getOption('discuss.bad_words_replace_string',null,'****');
         }
         $badWords = $this->modx->getOption('discuss.bad_words',null,'');
-        $badWords = explode(',',$badWords);
+        $badWords = trim($badWords);
         if (!empty($badWords)) {
-            $message = str_replace($badWords,'',$message);
-            $message = preg_replace('/\b('.implode('|',$badWords).')\b/i',$char,$message);
+            $badWords = explode(',',$badWords);
+            if (!empty($badWords)) {
+                $message = str_replace($badWords,'',$message);
+                $message = preg_replace('/\b('.implode('|',$badWords).')\b/i',$char,$message);
+            }
         }
         return $message;
     }
