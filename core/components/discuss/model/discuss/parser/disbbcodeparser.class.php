@@ -107,6 +107,7 @@ class disBBCodeParser extends disParser {
     }
 
     public function stripHtml($message) {
+    	$message = $this->br2nl($message);
         $message = preg_replace(array(
             "@<iframe[^>]*?>.*?</iframe>@siu",
             "@<frameset[^>]*?>.*?</frameset>@siu",
@@ -493,29 +494,6 @@ class disBBCodeParser extends disParser {
                     $imgTag = preg_replace('~action(=|%3d)(?!dlattach)~i', 'action-', $imgTag);
                 }
 
-                // Check if the image is larger than allowed.
-                /*
-                if (!empty($modSettings['max_image_width']) && !empty($modSettings['max_image_height'])) {
-                    list ($width, $height) = url_image_size($imgtag);
-
-                    if (!empty($modSettings['max_image_width']) && $width > $modSettings['max_image_width'])
-                    {
-                        $height = (int) (($modSettings['max_image_width'] * $height) / $width);
-                        $width = $modSettings['max_image_width'];
-                    }
-
-                    if (!empty($modSettings['max_image_height']) && $height > $modSettings['max_image_height'])
-                    {
-                        $width = (int) (($modSettings['max_image_height'] * $width) / $height);
-                        $height = $modSettings['max_image_height'];
-                    }
-
-                    // Set the new image tag.
-                    $replaces[$matches[0][$match]] = '[img width=' . $width . ' height=' . $height . $alt . ']' . $imgtag . '[/img]';
-                }
-                else
-                    $replaces[$matches[0][$match]] = '[img' . $alt . ']' . $imgtag . '[/img]';
-                */
                 $replaces[$matches[0][$match]] = '[img' . $alt . ']' . $imgTag . '[/img]';
             }
 
