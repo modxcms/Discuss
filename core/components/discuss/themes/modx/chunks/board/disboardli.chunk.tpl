@@ -4,7 +4,7 @@
     <div class="right dis-board-li-stats">[[+post_stats]]</div>
     [[+is_locked]]
 
-    <h3><a href="[[~[[*id]]]]board/?board=[[+id]]">[[+name]]</a></h3>
+    <h3><a href="[[+url]]">[[+name]]</a></h3>
     <p>[[+description]]</p>
     <span class="dis-board-subs">[[+subforums]]</span>
 </li>

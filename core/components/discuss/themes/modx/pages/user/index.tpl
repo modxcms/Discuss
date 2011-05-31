@@ -3,7 +3,7 @@
 
 <form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
-<h2>[[+username]]</h2>
+<h2>[[+name]]</h2>
 
 <div class="right">
     <img src="[[+avatarUrl]]" alt="[[+username]]" />
@@ -37,7 +37,7 @@
 </tr>
 <tr>
     <th>[[%discuss.last_reading]]:</th>
-    <td><a href="[[~[[*id]]]]thread/?thread=[[+lastThread.thread]]#dis-post-[[+lastThread.id]]">[[+lastThread.title]]</a></td>
+    <td><a href="[[+last_post_url]]">[[+lastThread.title]]</a></td>
 </tr>`]]
 <tr>
     <td colspan="2"><hr /></td>
