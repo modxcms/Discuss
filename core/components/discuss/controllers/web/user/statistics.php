@@ -39,7 +39,6 @@ if ($user == null) { $discuss->sendErrorPage(); }
 $discuss->setPageTitle($modx->lexicon('discuss.user_statistics_header',array('user' => $user->get('username'))));
 
 /* get default properties */
-$isSelf = $modx->user->get('id') == $user->get('user');
 $menuTpl = $modx->getOption('menuTpl',$scriptProperties,'disUserMenu');
 
 $placeholders = $user->toArray();
@@ -61,9 +60,6 @@ $placeholders['replies'] = number_format($placeholders['replies']);
 $placeholders['posts'] = number_format($placeholders['posts']);
 
 /* do output */
-$placeholders['canEdit'] = $isSelf;
-$placeholders['canAccount'] = $isSelf;
-$placeholders['canMerge'] = $isSelf;
 $placeholders['usermenu'] = $discuss->getChunk($menuTpl,$placeholders);
 $modx->setPlaceholder('discuss.user',$user->get('username'));
 

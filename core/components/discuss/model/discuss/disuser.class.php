@@ -112,6 +112,86 @@ class disUser extends xPDOSimpleObject {
         return $threads;
     }
 
+
+    /**
+     * Overrides xPDOObject::get to provide formatting for certain fields
+     *
+     * @param string $k
+     * @param string $format
+     * @param string $formatTemplate
+     * @return mixed|string
+     */
+    public function get($k,$format = '',$formatTemplate = '') {
+        $v = parent::get($k,$format,$formatTemplate);
+        if ($this->xpdo->context->key != 'mgr') {
+            switch ($k) {
+                case 'gender_formatted':
+                    switch ($this->get('gender')) {
+                        case 'm': $v = $this->xpdo->lexicon('discuss.male'); break;
+                        case 'f': $v = $this->xpdo->lexicon('discuss.female'); break;
+                        default: $v = ''; break;
+                    }
+                    break;
+                case 'age':
+                    $v = strtotime($this->get('birthdate'));
+                    $v = round((time() - $v) / 60 / 60 / 24 / 365);
+                    $v = !empty($v) ? $v : '';
+                    break;
+                case 'ip':
+                    if (!$this->xpdo->hasPermission('discuss.track_ip')) {
+                        $v = '';
+                    }
+                    break;
+                case 'last_active':
+                    if (!$this->get('show_online') && !$this->xpdo->discuss->user->isAdmin()) {
+                        $v = '';
+                    } elseif (!empty($v) && $v != '-001-11-30 00:00:00') {
+                        $v = strftime($this->xpdo->discuss->dateFormat,strtotime($v));
+                    } else {
+                        $v = '';
+                    }
+                    break;
+                case 'email':
+                    if (!$this->get('show_email') && !$this->xpdo->discuss->user->isAdmin()) {
+                        $v = '';
+                    }
+                    break;
+            }
+        }
+        return $v;
+    }
+
+    /**
+     * Override toArray to provide more values
+     * 
+     * @param string $keyPrefix
+     * @param bool $rawValues
+     * @param bool $excludeLazy
+     * @return void
+     */
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
+        $values = parent :: toArray($keyPrefix,$rawValues,$excludeLazy);
+        $values['age'] = $this->get('age');
+        $values['gender_formatted'] = $this->get('gender_formatted');
+        $values['avatarUrl'] = $this->getAvatarUrl();
+        $values['isSelf'] = $this->xpdo->user->get('id') == $this->get('user');
+        $values['canEdit'] = $values['isSelf'];
+        $values['canAccount'] = $values['isSelf'];
+        $values['canMerge'] = $values['isSelf'];
+        return $values;
+    }
+
+
+
+    /**
+     * Return an array of names of User Groups this user is in
+     * @return array
+     */
+    public function getUserGroupNames() {
+        $this->getOne('User');
+        return $this->User->getUserGroupNames();
+    }
+
     /**
      * Gets the avatar URL for this user, depending on the avatar service.
      * @return string

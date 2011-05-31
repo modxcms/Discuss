@@ -40,7 +40,7 @@ if (!empty($_POST) && !empty($_POST['remove'])) {
         if ($notification == null) continue;
         $notification->remove();
     }
-    $url = $discuss->url.'user/subscriptions';
+    $url = $discuss->request->makeUrl('user/subscriptions');
     $modx->sendRedirect($url);
 }
 
@@ -76,9 +76,6 @@ foreach ($subscriptions as $subscription) {
 $placeholders['subscriptions'] = implode("\n",$placeholders['subscriptions']);
 
 /* output */
-$placeholders['canEdit'] = true;
-$placeholders['canAccount'] = true;
-$placeholders['canMerge'] = true;
 $placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
 $modx->setPlaceholder('discuss.user',$discuss->user->get('username'));
 return $placeholders;
