@@ -115,5 +115,32 @@ $events['OnDiscussRenderThread']->fromArray(array (
   'groupname' => 'Discuss',
 ), '', true, true);
 
+/* Q&A Events */
+$events['OnDiscussBeforeMarkAsAnswer']= $modx->newObject('modEvent');
+$events['OnDiscussBeforeMarkAsAnswer']->fromArray(array (
+  'name' => 'OnDiscussBeforeMarkAsAnswer',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+$events['OnDiscussBeforeUnmarkAsAnswer']= $modx->newObject('modEvent');
+$events['OnDiscussBeforeUnmarkAsAnswer']->fromArray(array (
+  'name' => 'OnDiscussBeforeUnmarkAsAnswer',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+$events['OnDiscussMarkAsAnswer']= $modx->newObject('modEvent');
+$events['OnDiscussMarkAsAnswer']->fromArray(array (
+  'name' => 'OnDiscussMarkAsAnswer',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+$events['OnDiscussUnmarkAsAnswer']= $modx->newObject('modEvent');
+$events['OnDiscussUnmarkAsAnswer']->fromArray(array (
+  'name' => 'OnDiscussUnmarkAsAnswer',
+  'service' => 1,
+  'groupname' => 'Discuss',
+), '', true, true);
+
+
 
 return $events;

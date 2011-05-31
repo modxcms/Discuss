@@ -85,9 +85,26 @@ class disThreadQuestion extends disThread {
         $post = $this->xpdo->getObject('disPost',$postId);
         if ($post) {
             $post->set('answer',true);
+
+            /* fire before mark as answer event */
+            $rs = $this->xpdo->invokeEvent('OnDiscussBeforeMarkAsAnswer',array(
+                'post' => &$post,
+                'thread' => &$this,
+            ));
+            $canSave = $this->xpdo->discuss->getEventResult($rs);
+            if (!empty($canSave)) {
+                return $this->xpdo->error->failure($canSave);
+            }
+
             if ($post->save()) {
                 $this->set('answered',true);
                 $marked = $this->save();
+                if ($marked) {
+                    $rs = $this->xpdo->invokeEvent('OnDiscussMarkAsAnswer',array(
+                        'post' => &$post,
+                        'thread' => &$this,
+                    ));
+                }
             }
         }
         return $marked;
@@ -104,6 +121,17 @@ class disThreadQuestion extends disThread {
         $post = $this->xpdo->getObject('disPost',$postId);
         if ($post) {
             $post->set('answer',false);
+
+            /* fire before mark as answer event */
+            $rs = $this->xpdo->invokeEvent('OnDiscussBeforeUnmarkAsAnswer',array(
+                'post' => &$post,
+                'thread' => &$this,
+            ));
+            $canSave = $this->xpdo->discuss->getEventResult($rs);
+            if (!empty($canSave)) {
+                return $this->xpdo->error->failure($canSave);
+            }
+
             if ($post->save()) {
                 $marked = true;
                 $answersLeft = $this->xpdo->getCount('disPost',array(
@@ -113,6 +141,13 @@ class disThreadQuestion extends disThread {
                 if ($answersLeft <= 0) {
                     $this->set('answered',false);
                     $this->save();
+                }
+
+                if ($marked) {
+                    $rs = $this->xpdo->invokeEvent('OnDiscussUnmarkAsAnswer',array(
+                        'post' => &$post,
+                        'thread' => &$this,
+                    ));
                 }
             }
         }
