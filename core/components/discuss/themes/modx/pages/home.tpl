@@ -3,9 +3,9 @@
 
 [[+aboveBoards]]
 
-<ol class="dis-board-list">
-[[+boards]]
-</ol>
+<ul class="DataList CategoryList CategoryListWithHeadings">
+	[[+boards]]
+</ul>
 
 [[+belowBoards]]
 

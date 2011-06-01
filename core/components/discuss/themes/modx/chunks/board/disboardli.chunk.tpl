@@ -1,10 +1,17 @@
-<li class="dis-board-li dis-category-[[+category]] [[+unread-cls]]">
-    <div class="right dis-board-li-last-post">[[+lastPost]]</div>
-    <a class="right dis-board-rss-icon" href="[[~[[*id]]]]board.xml?board=[[+id]]"></a>
-    <div class="right dis-board-li-stats">[[+post_stats]]</div>
-    [[+is_locked]]
-
-    <h3><a href="[[+url]]">[[+name]]</a></h3>
-    <p>[[+description]]</p>
-    <span class="dis-board-subs">[[+subforums]]</span>
+<li class="Item Depth2  dis-category-[[+category]] [[+unread-cls]]">
+    <div class="ItemContent Category Read">
+    	<a href="[[+url]]" class="Title">[[+name]]</a>
+    	
+    	<div class="CategoryDescription">[[+description]]
+		</div>
+		
+		<div class="dis-board-subs">[[+subforums]]</div>
+		
+			<div class="Meta">
+                     <span class="RSS"><a href="[[~[[*id]]]]board.xml?board=[[+id]]"><img src="/applications/dashboard/design/images/rss.gif"></a></span>
+                     <span class="DiscussionCount">[[+post_stats]]</span>
+                     [[<span class="CommentCount">xxx</span>]]
+                         [[+is_locked]]
+        	</div>
+        </div>
 </li>

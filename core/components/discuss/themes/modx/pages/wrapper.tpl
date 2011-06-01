@@ -6,8 +6,7 @@
     <title>[[*pagetitle]] | MODx CMS / CMF</title>
     [[*cssjs]]
 </head>
-<body>
-<!-- start header -->
+<body><!-- start header -->
 <div id="header">
     <div class="">
         <div id="metaheader">
@@ -45,8 +44,15 @@
 <!-- end header -->
 
 <div>
-    <div class="discuss" style="width: 95%; margin: 0 auto;">
-        [[+content]]
+	<div id="Frame">
+		<div id="Body">
+			<div id="Content">
+				<div class="Tabs Headings CategoryHeadings">
+				   <div class="ItemHeading">All Categories</div>
+				</div>
+				[[+content]]
+			</div>
+		</div>
     </div>
     <div class="clear">&nbsp;</div>
 </div>
