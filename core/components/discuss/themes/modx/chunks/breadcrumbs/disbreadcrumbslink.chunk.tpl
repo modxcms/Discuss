@@ -1,1 +1,1 @@
-<li><a href="[[+url]]">[[+text]]</a> &nbsp; / &nbsp;</li>
+				   <div class="ItemHeading"><a href="[[+url]]">[[+text]]</a> > </div>

@@ -11,26 +11,28 @@
 
 <br class="clear" />
 
-[[+actionbuttons]]
 
-<br class="clear" />
 
 [[+aboveRecent]]
 
 <div class="dis-threads">
-    <div class="dis-threads-header">
-    <h2 style="margin: 0; padding: 0">[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</h2>
-    </div>
-    <ol class="dis-board-list">
+<ul class="DataList CategoryList CategoryListWithHeadings">
+
+	<li class="Item CategoryHeading Depth1 Category-[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]">
+    <div class="ItemContent Category Read">[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</div>
+    </li>
+
         [[+recent_posts]]
-    </ol>
+
+</ul>
 </div>
+
 
 [[+belowRecent]]
 
 <br class="clear" />
 
-<ol class="dis-board-list dis-stats">
+<ul class="BoardInfo">
     <li class="dis-category-li"><h2>[[%discuss.stats]]</h2></li>
     <li class="dis-board-li">
         [[%discuss.stats_totals? &posts=`[[+totalPosts]]` &threads=`[[+totalTopics]]` &members=`[[+totalMembers]]`]]
@@ -45,6 +47,44 @@
     <li class="dis-board-li">
         <span class="dis-today-stats">[[%discuss.stats_today? &hits=`[[+activity.hits]]` &topics=`[[+activity.topics]]` &replies=`[[+activity.replies]]` &visitors=`[[+activity.visitors]]`]]</span>
     </li>
-</ol>
+</ul>
+
+	
 
 [[+bottom]]
+
+				</div><!-- Close Content From Wrapper -->
+
+
+				<div id="Panel">
+					<div class="PanelBox">
+					
+						<div class="Box GuestBox">
+						   <h4>Welcome back [[+modx.user.username]]</h4>
+							<p>Some information.</p>
+						      [[+actionbuttons]]
+						</div>
+						
+						<div class="Box BoxCategories">
+							<h4><a href="/categories/all">Categories</a></h4>
+							<ul class="PanelInfo PanelCategories">
+								<li><span><strong><a href="/discussions">All Discussions</a></strong><span class="Count">[[+totalPosts]]</span></span></li>
+								<li class="Heading">Partners</li>
+								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
+								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
+								<li class="Heading">General</li>
+								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
+								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
+								<li class="Heading">Evolution</li>
+								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
+								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
+								<li class="Heading">Revolution</li>
+								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
+								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
+								<li class="Heading">International</li>
+								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
+								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>

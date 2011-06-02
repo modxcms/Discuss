@@ -1,1 +1,1 @@
-<li>[[+text]]</li>
+			<div class="ItemHeading">[[+text]]</div>

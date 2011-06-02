@@ -1,3 +1,3 @@
-<ul class="dis-breadcrumbs">
-[[+items]]
-</ul>
+				<div class="Tabs Headings CategoryHeadings">
+				   <div class="ItemHeading">[[+items]]</div>
+				</div>
