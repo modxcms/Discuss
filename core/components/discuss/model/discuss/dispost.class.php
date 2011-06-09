@@ -251,6 +251,23 @@ class disPost extends xPDOSimpleObject {
             $this->addOne($newThread,'Thread');
             $this->addOne($newBoard,'Board');
             $this->save();
+
+            $thread->set('replies',$thread->get('replies')-1);
+            $thread->save();
+
+            $newBoard = $this->xpdo->getObject('disBoard',$newBoard->get('id'));
+            if ($newBoard) {
+                $newBoard->set('num_replies',$newBoard->get('num_replies')+1);
+                $newBoard->set('total_posts',$newBoard->get('total_posts')+1);
+                $newBoard->save();
+            }
+            $oldBoard = $this->xpdo->getObject('disBoard',$oldBoard->get('id'));
+            if ($oldBoard) {
+                $oldBoard->set('num_replies',$oldBoard->get('num_replies')-1);
+                $oldBoard->set('total_posts',$oldBoard->get('total_posts')-1);
+                $oldBoard->save();
+            }
+
         }
         return true;
     }
