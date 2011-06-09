@@ -98,7 +98,7 @@ class disBBCodeParser extends disParser {
 
         $message = preg_replace("#\[font=[\"']?(.*?)[\"']?\]#i",'<span style="font-family:\\1;">',$message);
         $message = preg_replace("#\[color=[\"']?(.*?)[\"']?\]#i",'<span style="color:\\1;">',$message);
-        $message = preg_replace("#\[size=[\"']?(.*?)[\"']?\]#si",'<span style="font-size:\\1;">',$message);
+        $message = preg_replace_callback("#\[size=[\"']?(.*?)[\"']?\]#si",array('disBBCodeParser','parseSizeCallback'),$message);
         $message = str_ireplace(array("[/size]", "[/font]", "[/color]"), "</span>", $message);
 
         $message = preg_replace('#\[/?left\]#si', '', $message);
@@ -150,6 +150,13 @@ class disBBCodeParser extends disParser {
     public static function parseUrlCallback($matches) {
         $url = str_replace(array('javascript:','ftp:'),'',strip_tags($matches[1]));
         return '<a href="'.$url.'">'.$matches[2].'</a>';
+    }
+
+    public static function parseSizeCallback($matches) {
+        $size = intval(str_replace(array('pt','px','em'),'',$matches[1]));
+        if ($size > 24) $size = 24;
+        if ($size < 6) $size = 6;
+        return '<span style="font-size:'.$size.'px;">';
     }
     
     public static function parseCodeCallback($matches) {
