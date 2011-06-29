@@ -89,6 +89,7 @@ $xpdo_meta_map['disPost']= array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
       'null' => false,
+      'index' => 'index',
     ),
     'editedby' => 
     array (
@@ -165,16 +166,161 @@ $xpdo_meta_map['disPost']= array (
       'index' => 'index',
     ),
   ),
+  'indexes' => 
+  array (
+    'board' => 
+    array (
+      'alias' => 'board',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'board' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'thread' => 
+    array (
+      'alias' => 'thread',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'thread' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'parent' => 
+    array (
+      'alias' => 'parent',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'parent' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'author' => 
+    array (
+      'alias' => 'author',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'author' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'createdon' => 
+    array (
+      'alias' => 'createdon',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'createdon' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'allow_replies' => 
+    array (
+      'alias' => 'allow_replies',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'allow_replies' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'depth' => 
+    array (
+      'alias' => 'depth',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'depth' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'answer' => 
+    array (
+      'alias' => 'answer',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'answer' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'search' => 
+    array (
+      'alias' => 'search',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'FULLTEXT',
+      'columns' => 
+      array (
+        'title' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'message' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => true,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
-    'Board' => 
-    array (
-      'class' => 'disBoard',
-      'local' => 'board',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
     'Thread' => 
     array (
       'class' => 'disThread',

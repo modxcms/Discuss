@@ -169,6 +169,25 @@ $xpdo_meta_map['disBoard']= array (
       'default' => 0,
     ),
   ),
+  'indexes' => 
+  array (
+    'status' => 
+    array (
+      'alias' => 'status',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'status' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'Category' => 

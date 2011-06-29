@@ -283,6 +283,16 @@ class DisRequest {
         $this->debugTimer = $tstart;
         return $this->debugTimer;
     }
+
+    public function getDebugTime() {
+        $mtime= microtime();
+        $mtime= explode(" ", $mtime);
+        $mtime= $mtime[1] + $mtime[0];
+        $tend= $mtime;
+        $totalTime= ($tend - $this->debugTimer);
+        $totalTime= sprintf("%2.4f s", $totalTime);
+        return $totalTime;
+    }
     /**
      * Ends the debug timer and returns the total number of seconds Discuss took
      * to run.
@@ -291,12 +301,7 @@ class DisRequest {
      * @return int The end total time to execute the script.
      */
     protected function endDebugTimer() {
-        $mtime= microtime();
-        $mtime= explode(" ", $mtime);
-        $mtime= $mtime[1] + $mtime[0];
-        $tend= $mtime;
-        $totalTime= ($tend - $this->debugTimer);
-        $totalTime= sprintf("%2.4f s", $totalTime);
+        $totalTime = $this->getDebugTime();
         $this->debugTimer = false;
         return $totalTime;
     }
