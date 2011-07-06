@@ -143,7 +143,7 @@ class disUser extends xPDOSimpleObject {
                     }
                     break;
                 case 'last_active':
-                    if (!$this->get('show_online') && !$this->xpdo->discuss->user->isAdmin()) {
+                    if (!$this->get('show_online') && !$this->isAdmin()) {
                         $v = '';
                     } elseif (!empty($v) && $v != '-001-11-30 00:00:00') {
                         $v = strftime($this->xpdo->discuss->dateFormat,strtotime($v));
@@ -152,7 +152,7 @@ class disUser extends xPDOSimpleObject {
                     }
                     break;
                 case 'email':
-                    if (!$this->get('show_email') && !$this->xpdo->discuss->user->isAdmin()) {
+                    if (!$this->get('show_email') && !$this->isAdmin()) {
                         $v = '';
                     }
                     break;

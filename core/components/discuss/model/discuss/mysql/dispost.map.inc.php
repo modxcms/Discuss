@@ -321,6 +321,14 @@ $xpdo_meta_map['disPost']= array (
   ),
   'aggregates' => 
   array (
+    'Board' => 
+    array (
+      'class' => 'disBoard',
+      'local' => 'board',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
     'Thread' => 
     array (
       'class' => 'disThread',

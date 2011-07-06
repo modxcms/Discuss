@@ -150,7 +150,7 @@ class disThread extends xPDOSimpleObject {
             'Reads.thread:IS' => null,
             'Board.status:!=' => disBoard::STATUS_INACTIVE,
         ));
-                
+
         /* ignore spam/recycle bin boards */
         $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
         if (!empty($spamBoard)) {
