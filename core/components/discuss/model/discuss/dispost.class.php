@@ -188,6 +188,7 @@ class disPost extends xPDOSimpleObject {
         if ($this->xpdo->discuss->loadSearch()) {
             $postArray = $this->toArray();
             $postArray['url'] = $this->getUrl();
+            var_dump($postArray['url']); die();
             if (empty($postArray['username'])) {
                 $this->getOne('Author');
                 if ($this->Author) {
@@ -647,7 +648,9 @@ class disPost extends xPDOSimpleObject {
         if ($replies > $perPage) {
             if (!$last) {
                 $idx = $this->get('idx');
-                if (empty($idx)) $idx = 1;
+                if (empty($idx)) { /* if we're not in a list thread page, so no idx is calculated */
+                    $idx = $this->calculateIdx();
+                }
             } else {
                 $idx = $replies - 1;
             }
@@ -661,6 +664,33 @@ class disPost extends xPDOSimpleObject {
         }
         $this->set('page',$page);
         return $page;
+    }
+
+    /**
+     * Calculate the position of this post in the thread when it is not known
+     *
+     * @return int The index position of the post in its thread
+     */
+    public function calculateIdx() {
+        $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
+        $c = $this->xpdo->newQuery('disPost');
+        $c->select($this->xpdo->getSelectColumns('disPost','disPost','',array('id')));
+        $c->where(array(
+            'thread' => $this->get('thread'),
+        ));
+        $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('createdon')),$sortDir);
+        $c->prepare();
+        $sql = $c->toSql();
+        $stmt = $this->xpdo->query($sql);
+        $i = 0;
+        if ($stmt && $stmt instanceof PDOStatement) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $i++;
+                if ($row['id'] == $this->get('id')) break;
+            }
+            $stmt->closeCursor();
+        }
+        return $i;
     }
 
     /**

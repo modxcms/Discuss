@@ -135,7 +135,7 @@ class disBBCodeParser extends disParser {
         $message = str_replace('-->','',$message);
 
         /* convert all remaining HTML to entities */
-        $message = htmlentities($message);
+        $message = htmlentities($message,null,'UTF-8');
 
         return $message;
     }
