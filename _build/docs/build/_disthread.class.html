@@ -127,12 +127,17 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="constant">
 <code> <span class="highlight">TYPE_POST</span> = 'post'
-      </code><div class="api-section">
+      </code><p class="short-description">The type-key for a Post-type thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h4 class="info">
 <img src="images/arrow_right.gif"> Details</h4>
 <dl class="constant-info">
 <dt>value</dt>
 <dd>post</dd>
+<dt>const</dt>
+<dd>TYPE_POST</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -141,12 +146,17 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="constant">
 <code> <span class="highlight">TYPE_MESSAGE</span> = 'message'
-      </code><div class="api-section">
+      </code><p class="short-description">The type key for a Message-type thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h4 class="info">
 <img src="images/arrow_right.gif"> Details</h4>
 <dl class="constant-info">
 <dt>value</dt>
 <dd>message</dd>
+<dt>const</dt>
+<dd>TYPE_MESSAGE</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -157,10 +167,16 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <a id="\disThread::$hasSubscription"></a><h4 class="property public">$hasSubscription<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
 </h4>
 <div class="property">
-<code> <span class="highlight">$hasSubscription</span> = ''</code><div class="api-section">
+<code>boolean <span class="highlight">$hasSubscription</span> = ''</code><p class="short-description">Whether or not the active user has a subscription to this thread.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h4 class="info">
 <img src="images/arrow_right.gif"> Details</h4>
 <dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em></em>
+</dd>
 <dt>visibility</dt>
 <dd>public</dd>
 <dt>default</dt>
@@ -169,6 +185,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+<dt>see</dt>
+<dd>disThread::hasSubscription</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -391,7 +409,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Determines whether or not the current active user can lock the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -413,7 +442,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Determines whether or not the current active user can move the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -510,7 +550,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Determines whether or not the current active user can print the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -532,7 +583,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Determines whether or not the current active user can remove the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -587,7 +649,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        bool</code><p class="short-description"></p>
+        bool</code><p class="short-description">Determines whether or not the current active user can stick the thread</p>
 <div class="long-description">
 </div>
 <div class="api-section">
@@ -620,7 +682,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Determines whether or not the current active user can subscribe to the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -642,7 +715,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Determines whether or not the current active user can unlock the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -664,7 +748,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Determines whether or not the current active user can unstick the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -686,7 +781,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Determines whether or not the current active user can unsubscribe the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">

@@ -2037,7 +2037,7 @@ thread root, returns itself.</description>
       </method>
     </class>
   </file>
-  <file path="dispostattachment.class.php" hash="d09535ee0e46d9483c2ccc7795041113">
+  <file path="dispostattachment.class.php" hash="116a7b6db29830d3a1e5573e27bb1e72">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -2069,108 +2069,120 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" line="33">
+      <method final="false" abstract="false" static="false" visibility="public" line="34">
         <name>save</name>
         <docblock>
           <description>Overrides xPDOObject::save to handle createdon date</description>
-          <long-description>&lt;p&gt;{@inheritDoc}&lt;/p&gt;
+          <long-description>
 </long-description>
+          <tag name="param" description="" type="boolean" variable="$cacheFlag" line="28">
+            <type by_reference="false">boolean</type>
+          </tag>
+          <tag name="return" description="" type="boolean" line="28">
+            <type by_reference="false">boolean</type>
+          </tag>
         </docblock>
-        <argument line="33">
+        <argument line="34">
           <name>$cacheFlag</name>
           <default>null</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="46">
+      <method final="false" abstract="false" static="false" visibility="public" line="50">
         <name>remove</name>
         <docblock>
           <description>Overrides the xPDOObject::remove method to remove the physical file for
 the attachment</description>
           <long-description>
 </long-description>
+          <tag name="param" description="" type="array" variable="$ancestors" line="43">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="return" description="" type="boolean" line="43">
+            <type by_reference="false">boolean</type>
+          </tag>
         </docblock>
-        <argument line="46">
+        <argument line="50">
           <name>$ancestors</name>
           <default>array</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="65">
+      <method final="false" abstract="false" static="false" visibility="public" line="69">
         <name>getPath</name>
         <docblock>
           <description>Gets the path of the attachment (and optionally just the directory)</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="57"/>
-          <tag name="param" description="If true, will append the filename to the attachment path. Defaults to true" type="boolean" variable="$appendFile" line="57">
+          <tag name="access" description="public" line="61"/>
+          <tag name="param" description="If true, will append the filename to the attachment path. Defaults to true" type="boolean" variable="$appendFile" line="61">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="The path to the file or directory of the file." type="string" line="57">
+          <tag name="return" description="The path to the file or directory of the file." type="string" line="61">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="65">
+        <argument line="69">
           <name>$appendFile</name>
           <default>true</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="91">
+      <method final="false" abstract="false" static="false" visibility="public" line="95">
         <name>getUrl</name>
         <docblock>
           <description>Gets the url of the attachment (and optionally just the directory)</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="83"/>
-          <tag name="param" description="If true, will append the filename to the attachment url. Defaults to true" type="boolean" variable="$appendFile" line="83">
+          <tag name="access" description="public" line="87"/>
+          <tag name="param" description="If true, will append the filename to the attachment url. Defaults to true" type="boolean" variable="$appendFile" line="87">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="The url to the file or directory of the file." type="string" line="83">
+          <tag name="return" description="The url to the file or directory of the file." type="string" line="87">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="91">
+        <argument line="95">
           <name>$appendFile</name>
           <default>true</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="114">
+      <method final="false" abstract="false" static="false" visibility="public" line="118">
         <name>upload</name>
         <docblock>
           <description>Handles uploads for the attachment</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="107"/>
-          <tag name="param" description="The POST file to upload." type="array" variable="$file" line="107">
+          <tag name="access" description="public" line="111"/>
+          <tag name="param" description="The POST file to upload." type="array" variable="$file" line="111">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="True if successful." type="boolean" line="107">
+          <tag name="return" description="True if successful." type="boolean" line="111">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="114">
+        <argument line="118">
           <name>$file</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="156">
+      <method final="false" abstract="false" static="false" visibility="public" line="160">
         <name>convert</name>
         <docblock>
           <description>Converts filesize to human-readable format</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="149"/>
-          <tag name="param" description="The number of decimal points to round to." type="int" variable="$precision" line="149">
+          <tag name="access" description="public" line="153"/>
+          <tag name="param" description="The number of decimal points to round to." type="int" variable="$precision" line="153">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="The formatted string." type="string" line="149">
+          <tag name="return" description="The formatted string." type="string" line="153">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="156">
+        <argument line="160">
           <name>$precision</name>
           <default>2</default>
           <type/>
@@ -2280,7 +2292,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </docblock>
     </class>
   </file>
-  <file path="disthread.class.php" hash="c4b4c4f601ed16cfd1ac948622b60ac5">
+  <file path="disthread.class.php" hash="86fcef877088662889d4eb83a8426c08">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -2312,770 +2324,855 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
-      <constant namespace="default" line="28">
+      <constant namespace="default" line="32">
         <name>TYPE_POST</name>
         <value>post</value>
+        <docblock>
+          <description>The type-key for a Post-type thread</description>
+          <long-description>
+</long-description>
+          <tag name="const" description="TYPE_POST" line="28"/>
+        </docblock>
       </constant>
-      <constant namespace="default" line="29">
+      <constant namespace="default" line="37">
         <name>TYPE_MESSAGE</name>
         <value>message</value>
+        <docblock>
+          <description>The type key for a Message-type thread</description>
+          <long-description>
+</long-description>
+          <tag name="const" description="TYPE_MESSAGE" line="33"/>
+        </docblock>
       </constant>
-      <property final="false" static="false" visibility="public" line="31">
+      <property final="false" static="false" visibility="public" line="44">
         <name>$hasSubscription</name>
         <default/>
+        <docblock>
+          <description>Whether or not the active user has a subscription to this thread.</description>
+          <long-description>
+</long-description>
+          <tag name="see" description="disThread::hasSubscription" line="39"/>
+          <tag name="var" description="" type="boolean" line="39">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
       </property>
-      <method final="false" abstract="false" static="true" visibility="public" line="43">
+      <method final="false" abstract="false" static="true" visibility="public" line="56">
         <name>fetch</name>
         <docblock>
           <description>Fetch a thread, but check permissions first</description>
           <long-description>
 </long-description>
-          <tag name="static" description="" line="33"/>
-          <tag name="param" description="A reference to the modX instance" type="\xPDO" variable="$modx" line="33">
+          <tag name="static" description="" line="46"/>
+          <tag name="param" description="A reference to the modX instance" type="\xPDO" variable="$modx" line="46">
             <type by_reference="false">\xPDO</type>
           </tag>
-          <tag name="param" description="The ID of the thread" type="\$id" variable="$id" line="33">
+          <tag name="param" description="The ID of the thread" type="\$id" variable="$id" line="46">
             <type by_reference="false">\$id</type>
           </tag>
-          <tag name="param" description="The type of thread: post/message" type="string" variable="$type" line="33">
+          <tag name="param" description="The type of thread: post/message" type="string" variable="$type" line="46">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="Grab by the integrated_id instead of the id" type="boolean" variable="$integrated" line="33">
+          <tag name="param" description="Grab by the integrated_id instead of the id" type="boolean" variable="$integrated" line="46">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="The returned, grabbed thread; or false/null if not found/accessible" type="\disThread/null" line="33">
+          <tag name="return" description="The returned, grabbed thread; or false/null if not found/accessible" type="\disThread/null" line="46">
             <type by_reference="false">\disThread/null</type>
           </tag>
         </docblock>
-        <argument line="43">
+        <argument line="56">
           <name>$modx</name>
           <default/>
           <type>xPDO</type>
         </argument>
-        <argument line="43">
+        <argument line="56">
           <name>$id</name>
           <default/>
           <type/>
         </argument>
-        <argument line="43">
+        <argument line="56">
           <name>$type</name>
           <default>disThread</default>
           <type/>
         </argument>
-        <argument line="43">
+        <argument line="56">
           <name>$integrated</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="123">
+      <method final="false" abstract="false" static="true" visibility="public" line="136">
         <name>fetchUnread</name>
         <docblock>
           <description>Fetch all unread, accessible threads</description>
           <long-description>
 </long-description>
-          <tag name="static" description="" line="111"/>
-          <tag name="param" description="A reference to the modX instance" type="\xPDO" variable="$modx" line="111">
+          <tag name="static" description="" line="124"/>
+          <tag name="param" description="A reference to the modX instance" type="\xPDO" variable="$modx" line="124">
             <type by_reference="false">\xPDO</type>
           </tag>
-          <tag name="param" description="The column to sort by" type="string" variable="$sortBy" line="111">
+          <tag name="param" description="The column to sort by" type="string" variable="$sortBy" line="124">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The direction to sort" type="string" variable="$sortDir" line="111">
+          <tag name="param" description="The direction to sort" type="string" variable="$sortDir" line="124">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The # of threads to limit" type="int" variable="$limit" line="111">
+          <tag name="param" description="The # of threads to limit" type="int" variable="$limit" line="124">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="param" description="The index to start by" type="int" variable="$start" line="111">
+          <tag name="param" description="The index to start by" type="int" variable="$start" line="124">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="param" description="" type="boolean" variable="$sinceLastLogin" line="111">
+          <tag name="param" description="" type="boolean" variable="$sinceLastLogin" line="124">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="An array in results/total format" type="array" line="111">
+          <tag name="return" description="An array in results/total format" type="array" line="124">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="123">
+        <argument line="136">
           <name>$modx</name>
           <default/>
           <type>xPDO</type>
         </argument>
-        <argument line="123">
+        <argument line="136">
           <name>$sortBy</name>
           <default>LastPost.createdon</default>
           <type/>
         </argument>
-        <argument line="123">
+        <argument line="136">
           <name>$sortDir</name>
           <default>DESC</default>
           <type/>
         </argument>
-        <argument line="123">
+        <argument line="136">
           <name>$limit</name>
           <default>20</default>
           <type/>
         </argument>
-        <argument line="123">
+        <argument line="136">
           <name>$start</name>
           <default>0</default>
           <type/>
         </argument>
-        <argument line="123">
+        <argument line="136">
           <name>$sinceLastLogin</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="218">
+      <method final="false" abstract="false" static="true" visibility="public" line="231">
         <name>fetchNewReplies</name>
         <docblock>
           <description>Fetch all new replies in threads that the active user is a participant in</description>
           <long-description>
 </long-description>
-          <tag name="static" description="" line="206"/>
-          <tag name="param" description="A reference to the modX instance" type="\xPDO" variable="$modx" line="206">
+          <tag name="static" description="" line="219"/>
+          <tag name="param" description="A reference to the modX instance" type="\xPDO" variable="$modx" line="219">
             <type by_reference="false">\xPDO</type>
           </tag>
-          <tag name="param" description="The column to sort by" type="string" variable="$sortBy" line="206">
+          <tag name="param" description="The column to sort by" type="string" variable="$sortBy" line="219">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The direction to sort" type="string" variable="$sortDir" line="206">
+          <tag name="param" description="The direction to sort" type="string" variable="$sortDir" line="219">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The # of threads to limit" type="int" variable="$limit" line="206">
+          <tag name="param" description="The # of threads to limit" type="int" variable="$limit" line="219">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="param" description="The index to start by" type="int" variable="$start" line="206">
+          <tag name="param" description="The index to start by" type="int" variable="$start" line="219">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="param" description="" type="boolean" variable="$sinceLastLogin" line="206">
+          <tag name="param" description="" type="boolean" variable="$sinceLastLogin" line="219">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="An array in results/total format" type="array" line="206">
+          <tag name="return" description="An array in results/total format" type="array" line="219">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="218">
+        <argument line="231">
           <name>$modx</name>
           <default/>
           <type>xPDO</type>
         </argument>
-        <argument line="218">
+        <argument line="231">
           <name>$sortBy</name>
           <default>LastPost.createdon</default>
           <type/>
         </argument>
-        <argument line="218">
+        <argument line="231">
           <name>$sortDir</name>
           <default>DESC</default>
           <type/>
         </argument>
-        <argument line="218">
+        <argument line="231">
           <name>$limit</name>
           <default>20</default>
           <type/>
         </argument>
-        <argument line="218">
+        <argument line="231">
           <name>$start</name>
           <default>0</default>
           <type/>
         </argument>
-        <argument line="218">
+        <argument line="231">
           <name>$sinceLastLogin</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="315">
+      <method final="false" abstract="false" static="true" visibility="public" line="328">
         <name>readAll</name>
         <docblock>
           <description>Mark all posts in this thread as read</description>
           <long-description>
 </long-description>
-          <tag name="static" description="" line="308"/>
-          <tag name="param" description="" type="\xPDO" variable="$modx" line="308">
+          <tag name="static" description="" line="321"/>
+          <tag name="param" description="" type="\xPDO" variable="$modx" line="321">
             <type by_reference="false">\xPDO</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$type" line="308">
+          <tag name="param" description="" type="string" variable="$type" line="321">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="bool" line="308">
+          <tag name="return" description="" type="bool" line="321">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="315">
+        <argument line="328">
           <name>$modx</name>
           <default/>
           <type>xPDO</type>
         </argument>
-        <argument line="315">
+        <argument line="328">
           <name>$type</name>
           <default>message</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="358">
+      <method final="false" abstract="false" static="false" visibility="public" line="371">
         <name>remove</name>
         <docblock>
           <description>Override remove() to clear thread cache</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="array" variable="$ancestors" line="350">
+          <tag name="param" description="" type="array" variable="$ancestors" line="363">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="param" description="" type="boolean" variable="$doBoardMoveChecks" line="350">
+          <tag name="param" description="" type="boolean" variable="$doBoardMoveChecks" line="363">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="param" description="" type="boolean" variable="$moveToSpam" line="350">
+          <tag name="param" description="" type="boolean" variable="$moveToSpam" line="363">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="" type="boolean" line="350">
+          <tag name="return" description="" type="boolean" line="363">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="358">
+        <argument line="371">
           <name>$ancestors</name>
           <default>array</default>
           <type>array</type>
         </argument>
-        <argument line="358">
+        <argument line="371">
           <name>$doBoardMoveChecks</name>
           <default>false</default>
           <type/>
         </argument>
-        <argument line="358">
+        <argument line="371">
           <name>$moveToSpam</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="403">
+      <method final="false" abstract="false" static="false" visibility="public" line="416">
         <name>save</name>
         <docblock>
           <description>Save the Thread</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="null" variable="$cacheFlag" line="396">
+          <tag name="param" description="" type="null" variable="$cacheFlag" line="409">
             <type by_reference="false">null</type>
           </tag>
-          <tag name="param" description="" type="bool" variable="$clearCache" line="396">
+          <tag name="param" description="" type="bool" variable="$clearCache" line="409">
             <type by_reference="false">bool</type>
           </tag>
-          <tag name="return" description="" type="boolean" line="396">
+          <tag name="return" description="" type="boolean" line="409">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="403">
+        <argument line="416">
           <name>$cacheFlag</name>
           <default>null</default>
           <type/>
         </argument>
-        <argument line="403">
+        <argument line="416">
           <name>$clearCache</name>
           <default>true</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="416">
+      <method final="false" abstract="false" static="false" visibility="public" line="429">
         <name>clearCache</name>
         <docblock>
           <description>Clear cache for this thread</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="void" line="411">
+          <tag name="return" description="" type="void" line="424">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="435">
+      <method final="false" abstract="false" static="false" visibility="public" line="448">
         <name>getViewing</name>
         <docblock>
           <description>Gets the viewing message for the bottom of the thread</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="428"/>
-          <tag name="param" description="" type="string" variable="$placePrefix" line="428">
+          <tag name="access" description="public" line="441"/>
+          <tag name="param" description="" type="string" variable="$placePrefix" line="441">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="The who is viewing message" type="string" line="428">
+          <tag name="return" description="The who is viewing message" type="string" line="441">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="435">
+        <argument line="448">
           <name>$placePrefix</name>
           <default>thread</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="484">
+      <method final="false" abstract="false" static="false" visibility="public" line="497">
         <name>read</name>
         <docblock>
           <description>Marks a post read by the currently logged in user.</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="477"/>
-          <tag name="param" description="" type="int" variable="$user" line="477">
+          <tag name="access" description="public" line="490"/>
+          <tag name="param" description="" type="int" variable="$user" line="490">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="True if successful." type="boolean" line="477">
+          <tag name="return" description="True if successful." type="boolean" line="490">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="484">
+        <argument line="497">
           <name>$user</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="510">
+      <method final="false" abstract="false" static="false" visibility="public" line="523">
         <name>unread</name>
         <docblock>
           <description>Marks a post unread by the currently logged in user.</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="503"/>
-          <tag name="param" description="" type="int" variable="$user" line="503">
+          <tag name="access" description="public" line="516"/>
+          <tag name="param" description="" type="int" variable="$user" line="516">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="True if successful." type="boolean" line="503">
+          <tag name="return" description="True if successful." type="boolean" line="516">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="510">
+        <argument line="523">
           <name>$user</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="529">
+      <method final="false" abstract="false" static="false" visibility="public" line="542">
         <name>stick</name>
         <docblock>
           <description>Make thread sticky</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="524">
+          <tag name="return" description="" type="boolean" line="537">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="539">
+      <method final="false" abstract="false" static="false" visibility="public" line="552">
         <name>unstick</name>
         <docblock>
           <description>Make thread unsticky</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="534">
+          <tag name="return" description="" type="boolean" line="547">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="549">
+      <method final="false" abstract="false" static="false" visibility="public" line="562">
         <name>lock</name>
         <docblock>
           <description>Lock thread</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="544">
+          <tag name="return" description="" type="boolean" line="557">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="559">
+      <method final="false" abstract="false" static="false" visibility="public" line="572">
         <name>unlock</name>
         <docblock>
           <description>Unlock thread</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="554">
+          <tag name="return" description="" type="boolean" line="567">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="570">
+      <method final="false" abstract="false" static="false" visibility="public" line="583">
         <name>hasSubscription</name>
         <docblock>
           <description>Check if a user (by id) has a subscription to this thread</description>
           <long-description>
 </long-description>
-          <tag name="param" description="ID of disUser" type="int" variable="$userId" line="564">
+          <tag name="param" description="ID of disUser" type="int" variable="$userId" line="577">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="True if has a subscription" type="bool" line="564">
+          <tag name="return" description="True if has a subscription" type="bool" line="577">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="570">
+        <argument line="583">
           <name>$userId</name>
           <default>0</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="588">
+      <method final="false" abstract="false" static="false" visibility="public" line="601">
         <name>addSubscription</name>
         <docblock>
           <description>Add a subscription to this thread for the User</description>
           <long-description>
 </long-description>
-          <tag name="param" description="ID of disUser" type="int" variable="$userId" line="582">
+          <tag name="param" description="ID of disUser" type="int" variable="$userId" line="595">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="True if successful" type="bool" line="582">
+          <tag name="return" description="True if successful" type="bool" line="595">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="588">
+        <argument line="601">
           <name>$userId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="614">
+      <method final="false" abstract="false" static="false" visibility="public" line="627">
         <name>removeSubscription</name>
         <docblock>
           <description>Remove a subscription to this thread for the User</description>
           <long-description>
 </long-description>
-          <tag name="param" description="ID of disUser" type="int" variable="$userId" line="608">
+          <tag name="param" description="ID of disUser" type="int" variable="$userId" line="621">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="True if successful" type="bool" line="608">
+          <tag name="return" description="True if successful" type="bool" line="621">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="614">
+        <argument line="627">
           <name>$userId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="635">
+      <method final="false" abstract="false" static="false" visibility="public" line="648">
         <name>unreadForAll</name>
         <docblock>
           <description>Mark this thread unread for all users</description>
           <long-description>
 </long-description>
-          <tag name="return" description="True if successful" type="bool" line="631">
+          <tag name="return" description="True if successful" type="bool" line="644">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="644">
+      <method final="false" abstract="false" static="false" visibility="public" line="657">
         <name>isModerator</name>
         <docblock>
           <description>Check to see if active user is a Moderator for this thread's board</description>
           <long-description>
 </long-description>
-          <tag name="return" description="True if they are a moderator" type="bool" line="639">
+          <tag name="return" description="True if they are a moderator" type="bool" line="652">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="658">
+      <method final="false" abstract="false" static="false" visibility="public" line="671">
         <name>getModerators</name>
         <docblock>
           <description>Get an array of disUser objects who are Moderators of this thread's board</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="array" line="654">
+          <tag name="return" description="" type="array" line="667">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="677">
+      <method final="false" abstract="false" static="false" visibility="public" line="690">
         <name>buildBreadcrumbs</name>
         <docblock>
           <description>Build the breadcrumb trail for this thread</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="array" variable="$defaultTrail" line="671">
+          <tag name="param" description="" type="array" variable="$defaultTrail" line="684">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="array" line="671">
+          <tag name="return" description="" type="array" line="684">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="677">
+        <argument line="690">
           <name>$defaultTrail</name>
           <default>array</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="720">
+      <method final="false" abstract="false" static="false" visibility="public" line="733">
         <name>buildCssClass</name>
         <docblock>
           <description>Build the CSS class for this thread</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$defaultClass" line="714">
+          <tag name="param" description="" type="string" variable="$defaultClass" line="727">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="array|string" line="714">
+          <tag name="return" description="" type="array|string" line="727">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="720">
+        <argument line="733">
           <name>$defaultClass</name>
           <default>dis-normal-thread</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="740">
+      <method final="false" abstract="false" static="false" visibility="public" line="753">
         <name>buildIcons</name>
         <docblock>
           <description>Build the icon list for this thread</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="array" variable="$icons" line="734">
+          <tag name="param" description="" type="array" variable="$icons" line="747">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="array|string" line="734">
+          <tag name="return" description="" type="array|string" line="747">
             <type by_reference="false">array</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="740">
+        <argument line="753">
           <name>$icons</name>
           <default>array</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="756">
+      <method final="false" abstract="false" static="false" visibility="public" line="769">
         <name>view</name>
         <docblock>
           <description>Up the view count and set last visited for the Thread.</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="void" line="752">
+          <tag name="return" description="" type="void" line="765">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="794">
+      <method final="false" abstract="false" static="false" visibility="public" line="807">
         <name>fetchPosts</name>
         <docblock>
           <description>Fetch all posts for this thread</description>
           <long-description>
 </long-description>
-          <tag name="param" description="A reference to a disPost or ID of disPost to start the posts from" type="mixed" variable="$post" line="787">
+          <tag name="param" description="A reference to a disPost or ID of disPost to start the posts from" type="mixed" variable="$post" line="800">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag name="param" description="An array of options for sorting, limiting and display" type="array" variable="$options" line="787">
+          <tag name="param" description="An array of options for sorting, limiting and display" type="array" variable="$options" line="800">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="array" line="787">
+          <tag name="return" description="" type="array" line="800">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="794">
+        <argument line="807">
           <name>$post</name>
           <default>false</default>
           <type/>
         </argument>
-        <argument line="794">
+        <argument line="807">
           <name>$options</name>
           <default>array</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="842">
+      <method final="false" abstract="false" static="false" visibility="public" line="855">
         <name>move</name>
         <docblock>
           <description>Move a thread to a new board</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="int" variable="$boardId" line="836">
+          <tag name="param" description="" type="int" variable="$boardId" line="849">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="True if successful" type="boolean" line="836">
+          <tag name="return" description="True if successful" type="boolean" line="849">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="842">
+        <argument line="855">
           <name>$boardId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="916">
+      <method final="false" abstract="false" static="false" visibility="public" line="929">
         <name>isArchived</name>
         <docblock>
           <description>Determines if a thread has been auto-archived or not.</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="bool" line="912">
+          <tag name="return" description="" type="bool" line="925">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="934">
+      <method final="false" abstract="false" static="true" visibility="public" line="947">
         <name>canPostNew</name>
         <docblock>
           <description>Determines if the active user can post or not</description>
           <long-description>
 </long-description>
-          <tag name="param" description="A reference to the modX object" type="\xPDO" variable="$modx" line="928">
+          <tag name="param" description="A reference to the modX object" type="\xPDO" variable="$modx" line="941">
             <type by_reference="false">\xPDO</type>
           </tag>
-          <tag name="return" description="" type="bool" line="928">
+          <tag name="return" description="" type="bool" line="941">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="934">
+        <argument line="947">
           <name>$modx</name>
           <default/>
           <type>xPDO</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="943">
+      <method final="false" abstract="false" static="false" visibility="public" line="956">
         <name>canReply</name>
         <docblock>
           <description>Determines if the active user can post a reply or not</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="bool" line="939">
+          <tag name="return" description="" type="bool" line="952">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="952">
+      <method final="false" abstract="false" static="false" visibility="public" line="965">
         <name>canPostAttachments</name>
         <docblock>
           <description>Determines if the active user can post attachments to this thread</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="bool" line="948">
+          <tag name="return" description="" type="bool" line="961">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="960">
+      <method final="false" abstract="false" static="false" visibility="public" line="973">
         <name>calcLastPostPage</name>
         <docblock>
           <description>Calculate the last post pagination page for a thread</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="int" line="956">
+          <tag name="return" description="" type="int" line="969">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="982">
+      <method final="false" abstract="false" static="false" visibility="public" line="995">
         <name>getUrl</name>
         <docblock>
           <description>Get the proper URL for the thread, optionally with the post anchor and page</description>
           <long-description>
 </long-description>
-          <tag name="param" description="If true, will get URL for last Post of thread" type="boolean" variable="$lastPost" line="974">
+          <tag name="param" description="If true, will get URL for last Post of thread" type="boolean" variable="$lastPost" line="987">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="param" description="Any extra params to append to the thread" type="array" variable="$params" line="974">
+          <tag name="param" description="Any extra params to append to the thread" type="array" variable="$params" line="987">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="param" description="If true, will regenerate the url even if it has already been set" type="boolean" variable="$regenerate" line="974">
+          <tag name="param" description="If true, will regenerate the url even if it has already been set" type="boolean" variable="$regenerate" line="987">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="" type="string" line="974">
+          <tag name="return" description="" type="string" line="987">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="982">
+        <argument line="995">
           <name>$lastPost</name>
           <default>true</default>
           <type/>
         </argument>
-        <argument line="982">
+        <argument line="995">
           <name>$params</name>
           <default>array</default>
           <type>array</type>
         </argument>
-        <argument line="982">
+        <argument line="995">
           <name>$regenerate</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1008">
+      <method final="false" abstract="false" static="false" visibility="public" line="1021">
         <name>getUrlTitle</name>
         <docblock>
           <description>Get the URL-friendly title of this thread</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="1004">
+          <tag name="return" description="" type="string" line="1017">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1033">
+      <method final="false" abstract="false" static="false" visibility="public" line="1047">
         <name>canStick</name>
         <docblock>
-          <description/>
+          <description>Determines whether or not the current active user can stick the thread</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="bool" line="1030">
+          <tag name="return" description="" type="bool" line="1043">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1037">
+      <method final="false" abstract="false" static="false" visibility="public" line="1055">
         <name>canUnstick</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1041">
-        <name>canLock</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1045">
-        <name>canUnlock</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1049">
-        <name>canMove</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1053">
-        <name>canRemove</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1057">
-        <name>canPrint</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1060">
-        <name>canSubscribe</name>
+        <docblock>
+          <description>Determines whether or not the current active user can unstick the thread</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="1051">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" line="1063">
-        <name>canUnsubscribe</name>
+        <name>canLock</name>
+        <docblock>
+          <description>Determines whether or not the current active user can lock the thread</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="1059">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1075">
+      <method final="false" abstract="false" static="false" visibility="public" line="1071">
+        <name>canUnlock</name>
+        <docblock>
+          <description>Determines whether or not the current active user can unlock the thread</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="1067">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="1079">
+        <name>canMove</name>
+        <docblock>
+          <description>Determines whether or not the current active user can move the thread</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="1075">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="1087">
+        <name>canRemove</name>
+        <docblock>
+          <description>Determines whether or not the current active user can remove the thread</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="1083">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="1095">
+        <name>canPrint</name>
+        <docblock>
+          <description>Determines whether or not the current active user can print the thread</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="1091">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="1102">
+        <name>canSubscribe</name>
+        <docblock>
+          <description>Determines whether or not the current active user can subscribe to the thread</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="1098">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="1109">
+        <name>canUnsubscribe</name>
+        <docblock>
+          <description>Determines whether or not the current active user can unsubscribe the thread</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="1105">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="1121">
         <name>prepareThreadView</name>
         <docblock>
           <description>Prepares the thread view, useful for extra processing when using derivative thread types</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="array" variable="$postArray" line="1069">
+          <tag name="param" description="" type="array" variable="$postArray" line="1115">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="array" line="1069">
+          <tag name="return" description="" type="array" line="1115">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="1075">
+        <argument line="1121">
           <name>$postArray</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="1084">
+      <method final="false" abstract="false" static="false" visibility="public" line="1130">
         <name>handleThreadViewActions</name>
         <docblock>
           <description>Handle actions on thread view</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="array" variable="$scriptProperties" line="1078">
+          <tag name="param" description="" type="array" variable="$scriptProperties" line="1124">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="boolean" line="1078">
+          <tag name="return" description="" type="boolean" line="1124">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="1084">
+        <argument line="1130">
           <name>$scriptProperties</name>
           <default/>
           <type>array</type>
@@ -3102,7 +3199,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </docblock>
     </class>
   </file>
-  <file path="disthreadquestion.class.php" hash="a71dd04c04e50c26e43347133a4b2990">
+  <file path="disthreadquestion.class.php" hash="083c91a4c5fd7c865ad220c6ac14e18f">
     <docblock>
       <description/>
       <long-description>
@@ -3119,155 +3216,163 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
         <tag name="package" description="discuss" line="2"/>
       </docblock>
-      <property final="false" static="false" visibility="public" line="6">
+      <property final="false" static="false" visibility="public" line="10">
         <name>$canMarkAsAnswer</name>
         <default/>
+        <docblock>
+          <description>Whether or not the active user can mark this thread as an answer</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="boolean" line="6">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" line="15">
+      <method final="false" abstract="false" static="false" visibility="public" line="19">
         <name>fetchPosts</name>
         <docblock>
           <description>Fetch all posts for this question, sorting the correct answer at the top</description>
           <long-description>
 </long-description>
-          <tag name="param" description="A reference to a disPost or ID of disPost to start the posts from" type="mixed" variable="$post" line="8">
+          <tag name="param" description="A reference to a disPost or ID of disPost to start the posts from" type="mixed" variable="$post" line="12">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag name="param" description="An array of options for sorting, limiting and display" type="array" variable="$options" line="8">
+          <tag name="param" description="An array of options for sorting, limiting and display" type="array" variable="$options" line="12">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="array" line="8">
+          <tag name="return" description="" type="array" line="12">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="15">
+        <argument line="19">
           <name>$post</name>
           <default>false</default>
           <type/>
         </argument>
-        <argument line="15">
+        <argument line="19">
           <name>$options</name>
           <default>array</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="68">
+      <method final="false" abstract="false" static="false" visibility="public" line="72">
         <name>canMarkAsAnswer</name>
         <docblock>
           <description>Check to see if active user can mark a post as the answer for this thread</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="bool" line="63">
+          <tag name="return" description="" type="bool" line="67">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="83">
+      <method final="false" abstract="false" static="false" visibility="public" line="87">
         <name>markAsAnswer</name>
         <docblock>
           <description>Mark a Post as an answer for this thread</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="int" variable="$postId" line="77">
+          <tag name="param" description="" type="int" variable="$postId" line="81">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="" type="bool" line="77">
+          <tag name="return" description="" type="bool" line="81">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="83">
+        <argument line="87">
           <name>$postId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="119">
+      <method final="false" abstract="false" static="false" visibility="public" line="123">
         <name>unmarkAsAnswer</name>
         <docblock>
           <description>Mark this thread as unsolved</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="int" variable="$postId" line="113">
+          <tag name="param" description="" type="int" variable="$postId" line="117">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="" type="bool" line="113">
+          <tag name="return" description="" type="bool" line="117">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="119">
+        <argument line="123">
           <name>$postId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="165">
+      <method final="false" abstract="false" static="false" visibility="public" line="169">
         <name>get</name>
         <docblock>
           <description>Overrides xPDOObject::get to provide Solved tag on title if thread is solved</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$k" line="157">
+          <tag name="param" description="" type="string" variable="$k" line="161">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$format" line="157">
+          <tag name="param" description="" type="string" variable="$format" line="161">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$formatTemplate" line="157">
+          <tag name="param" description="" type="string" variable="$formatTemplate" line="161">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="mixed|string" line="157">
+          <tag name="return" description="" type="mixed|string" line="161">
             <type by_reference="false">mixed</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="165">
+        <argument line="169">
           <name>$k</name>
           <default/>
           <type/>
         </argument>
-        <argument line="165">
+        <argument line="169">
           <name>$format</name>
           <default/>
           <type/>
         </argument>
-        <argument line="165">
+        <argument line="169">
           <name>$formatTemplate</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="183">
+      <method final="false" abstract="false" static="false" visibility="public" line="187">
         <name>prepareThreadView</name>
         <docblock>
           <description>Prepares the thread view, useful for extra processing when using derivative thread types</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="array" variable="$postArray" line="177">
+          <tag name="param" description="" type="array" variable="$postArray" line="181">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="array" line="177">
+          <tag name="return" description="" type="array" line="181">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="183">
+        <argument line="187">
           <name>$postArray</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="205">
+      <method final="false" abstract="false" static="false" visibility="public" line="209">
         <name>handleThreadViewActions</name>
         <docblock>
           <description>Handle actions on thread view</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="array" variable="$scriptProperties" line="199">
+          <tag name="param" description="" type="array" variable="$scriptProperties" line="203">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="boolean" line="199">
+          <tag name="return" description="" type="boolean" line="203">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="205">
+        <argument line="209">
           <name>$scriptProperties</name>
           <default/>
           <type>array</type>
@@ -3343,7 +3448,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </docblock>
     </class>
   </file>
-  <file path="distreeparser.class.php" hash="9a1583eb234ae505e3c83a8aca4b788e">
+  <file path="distreeparser.class.php" hash="48d7f55f593c5165c0d415840bf62ba6">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -3373,84 +3478,197 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
         <description>Handles row-parsing of naive tree data.</description>
         <long-description>
 </long-description>
-        <tag name="TODO" description="" line="24"/>
+        <tag name="todo" description="lots of code cleanup." line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
-      <property final="false" static="false" visibility="protected" line="32">
+      <property final="false" static="false" visibility="protected" line="36">
         <name>$last</name>
         <default/>
+        <docblock>
+          <description>The last node</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="32">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="33">
+      <property final="false" static="false" visibility="protected" line="41">
         <name>$openThread</name>
         <default>array</default>
+        <docblock>
+          <description>The current open tree node</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="array" line="37">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="34">
+      <property final="false" static="false" visibility="protected" line="46">
         <name>$output</name>
         <default/>
+        <docblock>
+          <description>The current output buffer</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="42">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" line="36">
+      <property final="false" static="false" visibility="protected" line="51">
+        <name>$tpl</name>
+        <default/>
+        <docblock>
+          <description>The tpl to use for each node</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="string" line="47">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="57">
         <name>__construct</name>
-        <argument line="36">
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="param" description="A reference to the Discuss instance" type="\Discuss" variable="$discuss" line="53">
+            <type by_reference="false">\Discuss</type>
+          </tag>
+          <tag name="param" description="An array of configuration options" type="array" variable="$config" line="53">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="57">
           <name>$discuss</name>
           <default/>
           <type>Discuss</type>
         </argument>
-        <argument line="36">
+        <argument line="57">
           <name>$config</name>
           <default>array</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="41">
+      <method final="false" abstract="false" static="false" visibility="public" line="67">
         <name>parse</name>
-        <argument line="41">
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag name="param" description="The current data array" type="array" variable="$array" line="62">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="param" description="The template for the node" type="string" variable="$tpl" line="62">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="array|string" line="62">
+            <type by_reference="false">array</type>
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="67">
           <name>$array</name>
           <default/>
           <type>array</type>
         </argument>
-        <argument line="41">
+        <argument line="67">
           <name>$tpl</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" line="60">
+      <method final="false" abstract="false" static="false" visibility="private" line="93">
         <name>_iterate</name>
-        <argument line="60">
+        <docblock>
+          <description>Iterate across the node</description>
+          <long-description>
+</long-description>
+          <tag name="access" description="private" line="86"/>
+          <tag name="param" description="The current array iteration" type="array" variable="$current" line="86">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="return" description="" type="string" line="86">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="93">
           <name>$current</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" line="109">
+      <method final="false" abstract="false" static="false" visibility="protected" line="149">
         <name>setOpenThread</name>
-        <argument line="109">
+        <docblock>
+          <description>Set the current open thread</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="string" variable="$string" line="142">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="param" description="" type="int" variable="$depth" line="142">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag name="return" description="" type="void" line="142">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="149">
           <name>$string</name>
           <default/>
           <type/>
         </argument>
-        <argument line="109">
+        <argument line="149">
           <name>$depth</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" line="117">
+      <method final="false" abstract="false" static="false" visibility="protected" line="163">
         <name>setOpenThreadChildren</name>
-        <argument line="117">
+        <docblock>
+          <description>Set the current open thread's children</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="int" variable="$depth" line="157">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag name="param" description="" type="string" variable="$string" line="157">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag name="return" description="" type="void" line="157">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="163">
           <name>$depth</name>
           <default/>
           <type/>
         </argument>
-        <argument line="117">
+        <argument line="163">
           <name>$string</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" line="121">
+      <method final="false" abstract="false" static="false" visibility="protected" line="172">
         <name>getOpenThread</name>
-        <argument line="121">
+        <docblock>
+          <description>Get the current open thread node in the tree</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="int" variable="$depth" line="167">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag name="return" description="" type="string" line="167">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="172">
           <name>$depth</name>
           <default/>
           <type/>
@@ -3458,7 +3676,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </method>
     </class>
   </file>
-  <file path="disuser.class.php" hash="0c1cd375fc52b02039b85da4b6533824">
+  <file path="disuser.class.php" hash="7169f014c6fa6de023e6dfda97e10a93">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -3490,485 +3708,574 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
-      <constant namespace="default" line="28">
+      <constant namespace="default" line="32">
         <name>INACTIVE</name>
         <value>0</value>
+        <docblock>
+          <description>If the user is inactive</description>
+          <long-description>
+</long-description>
+          <tag name="const" description="INACTIVE" line="28"/>
+        </docblock>
       </constant>
-      <constant namespace="default" line="29">
+      <constant namespace="default" line="37">
         <name>ACTIVE</name>
         <value>1</value>
+        <docblock>
+          <description>If the user is active</description>
+          <long-description>
+</long-description>
+          <tag name="const" description="ACTIVE" line="33"/>
+        </docblock>
       </constant>
-      <constant namespace="default" line="30">
+      <constant namespace="default" line="42">
         <name>UNCONFIRMED</name>
         <value>2</value>
+        <docblock>
+          <description>If the user is unconfirmed</description>
+          <long-description>
+</long-description>
+          <tag name="const" description="UNCONFIRMED" line="38"/>
+        </docblock>
       </constant>
-      <constant namespace="default" line="31">
+      <constant namespace="default" line="47">
         <name>BANNED</name>
         <value>3</value>
+        <docblock>
+          <description>If the user is banned</description>
+          <long-description>
+</long-description>
+          <tag name="const" description="BANNED" line="43"/>
+        </docblock>
       </constant>
-      <constant namespace="default" line="32">
+      <constant namespace="default" line="52">
         <name>AWAITING_MODERATION</name>
         <value>4</value>
+        <docblock>
+          <description>If the user is awaiting moderation</description>
+          <long-description>
+</long-description>
+          <tag name="const" description="AWAITING_MODERATION" line="48"/>
+        </docblock>
       </constant>
-      <property final="false" static="false" visibility="public" line="34">
+      <property final="false" static="false" visibility="public" line="58">
         <name>$isAdmin</name>
         <default/>
+        <docblock>
+          <description>If the user is in an Administrator group</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="boolean" line="54">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="35">
+      <property final="false" static="false" visibility="public" line="63">
         <name>$isGlobalModerator</name>
         <default/>
+        <docblock>
+          <description>If the user is in a global Moderator group</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="boolean" line="59">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="36">
+      <property final="false" static="false" visibility="public" line="68">
         <name>$isLoggedIn</name>
         <default>false</default>
+        <docblock>
+          <description>If the user is logged in</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="boolean" line="64">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="37">
+      <property final="false" static="false" visibility="public" line="73">
         <name>$readBoards</name>
         <default>array</default>
+        <docblock>
+          <description>An array of read boards for the user</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="array" line="69">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="38">
+      <property final="false" static="false" visibility="public" line="78">
         <name>$readBoardsPrepared</name>
         <default>false</default>
+        <docblock>
+          <description>An array of prepared, cached read boards for the user</description>
+          <long-description>
+</long-description>
+          <tag name="var" description="" type="boolean" line="74">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" line="40">
+      <method final="false" abstract="false" static="false" visibility="public" line="84">
         <name>init</name>
+        <docblock>
+          <description>Initialize the user, setup basic metadata for them, and log their activity time.</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="bool" line="80">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="58">
+      <method final="false" abstract="false" static="false" visibility="public" line="102">
         <name>prepareReadBoards</name>
         <docblock>
           <description>Prepare a cache of all read boards for this user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="array" line="53">
+          <tag name="return" description="" type="array" line="97">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="88">
+      <method final="false" abstract="false" static="false" visibility="public" line="132">
         <name>isBoardRead</name>
         <docblock>
           <description>See if a board is read by this user</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="int" variable="$boardId" line="82">
+          <tag name="param" description="" type="int" variable="$boardId" line="126">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="" type="bool" line="82">
+          <tag name="return" description="" type="bool" line="126">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="88">
+        <argument line="132">
           <name>$boardId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="93">
+      <method final="false" abstract="false" static="false" visibility="public" line="142">
         <name>getUnreadThreadsForBoard</name>
-        <argument line="93">
+        <docblock>
+          <description>Get all unread threads by this user for a specific board</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The ID of the board to look for" type="int" variable="$boardId" line="137">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag name="return" description="An array of thread data" type="array" line="137">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="142">
           <name>$boardId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="124">
+      <method final="false" abstract="false" static="false" visibility="public" line="173">
         <name>get</name>
         <docblock>
           <description>Overrides xPDOObject::get to provide formatting for certain fields</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$k" line="116">
+          <tag name="param" description="" type="string" variable="$k" line="165">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$format" line="116">
+          <tag name="param" description="" type="string" variable="$format" line="165">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$formatTemplate" line="116">
+          <tag name="param" description="" type="string" variable="$formatTemplate" line="165">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="mixed|string" line="116">
+          <tag name="return" description="" type="mixed|string" line="165">
             <type by_reference="false">mixed</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="124">
+        <argument line="173">
           <name>$k</name>
           <default/>
           <type/>
         </argument>
-        <argument line="124">
+        <argument line="173">
           <name>$format</name>
           <default/>
           <type/>
         </argument>
-        <argument line="124">
+        <argument line="173">
           <name>$formatTemplate</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="180">
+      <method final="false" abstract="false" static="false" visibility="public" line="229">
         <name>toArray</name>
         <docblock>
           <description>Override toArray to provide more values</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$keyPrefix" line="172">
+          <tag name="param" description="" type="string" variable="$keyPrefix" line="221">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="bool" variable="$rawValues" line="172">
+          <tag name="param" description="" type="bool" variable="$rawValues" line="221">
             <type by_reference="false">bool</type>
           </tag>
-          <tag name="param" description="" type="bool" variable="$excludeLazy" line="172">
+          <tag name="param" description="" type="bool" variable="$excludeLazy" line="221">
             <type by_reference="false">bool</type>
           </tag>
-          <tag name="return" description="" type="void" line="172">
+          <tag name="return" description="" type="void" line="221">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="180">
+        <argument line="229">
           <name>$keyPrefix</name>
           <default/>
           <type/>
         </argument>
-        <argument line="180">
+        <argument line="229">
           <name>$rawValues</name>
           <default>false</default>
           <type/>
         </argument>
-        <argument line="180">
+        <argument line="229">
           <name>$excludeLazy</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="199">
+      <method final="false" abstract="false" static="false" visibility="public" line="248">
         <name>getUserGroupNames</name>
         <docblock>
           <description>Return an array of names of User Groups this user is in</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="array" line="195">
+          <tag name="return" description="" type="array" line="244">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="208">
+      <method final="false" abstract="false" static="false" visibility="public" line="257">
         <name>getAvatarUrl</name>
         <docblock>
           <description>Gets the avatar URL for this user, depending on the avatar service.</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="204">
+          <tag name="return" description="" type="string" line="253">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="231">
+      <method final="false" abstract="false" static="false" visibility="public" line="280">
         <name>parseSignature</name>
         <docblock>
           <description>Parse and return the signature for this user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="227">
+          <tag name="return" description="" type="string" line="276">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" line="281">
+      <method final="false" abstract="false" static="false" visibility="private" line="330">
         <name>_nl2br2</name>
         <docblock>
           <description>Convert all linebreaks to br tags</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$str" line="276">
+          <tag name="param" description="" type="string" variable="$str" line="325">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="mixed" line="276">
-            <type by_reference="false">mixed</type>
-          </tag>
-        </docblock>
-        <argument line="281">
-          <name>$str</name>
-          <default/>
-          <type/>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="293">
-        <name>parseBBCode</name>
-        <docblock>
-          <description>Parse BBCode in post and return proper HTML. Supports SMF/Vanilla formats.</description>
-          <long-description>
-</long-description>
-          <tag name="param" description="The string to parse" type="\$message" variable="$message" line="287">
-            <type by_reference="false">\$message</type>
-          </tag>
-          <tag name="return" description="The parsed string with HTML instead of BBCode, and all code stripped" type="string" line="287">
-            <type by_reference="false">string</type>
-          </tag>
-        </docblock>
-        <argument line="293">
-          <name>$message</name>
-          <default/>
-          <type/>
-        </argument>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="331">
-        <name>stripBBCode</name>
-        <docblock>
-          <description>Strip BBCode from a string</description>
-          <long-description>
-</long-description>
-          <tag name="param" description="" type="" variable="$str" line="325"/>
           <tag name="return" description="" type="mixed" line="325">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="331">
+        <argument line="330">
           <name>$str</name>
           <default/>
           <type/>
         </argument>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" line="342">
-        <name>countUnreadMessages</name>
+        <name>parseBBCode</name>
         <docblock>
-          <description>Get a count of # of unread messages for the user</description>
+          <description>Parse BBCode in post and return proper HTML. Supports SMF/Vanilla formats.</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="int" line="337">
-            <type by_reference="false">int</type>
-          </tag>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="359">
-        <name>clearCache</name>
-        <docblock>
-          <description>Clear the cache for this User</description>
-          <long-description>
-</long-description>
-          <tag name="return" description="" type="void" line="354">
-            <type by_reference="false">void</type>
-          </tag>
-        </docblock>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="373">
-        <name>parseQuote</name>
-        <docblock>
-          <description>Parse a bbcode quote tag and return result</description>
-          <long-description>
-</long-description>
-          <tag name="param" description="The string to parse" type="\$message" variable="$message" line="367">
+          <tag name="param" description="The string to parse" type="\$message" variable="$message" line="336">
             <type by_reference="false">\$message</type>
           </tag>
-          <tag name="return" description="The quoted message" type="string" line="367">
+          <tag name="return" description="The parsed string with HTML instead of BBCode, and all code stripped" type="string" line="336">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="373">
+        <argument line="342">
           <name>$message</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="420">
+      <method final="false" abstract="false" static="false" visibility="public" line="380">
+        <name>stripBBCode</name>
+        <docblock>
+          <description>Strip BBCode from a string</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="" type="" variable="$str" line="374"/>
+          <tag name="return" description="" type="mixed" line="374">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="380">
+          <name>$str</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="391">
+        <name>countUnreadMessages</name>
+        <docblock>
+          <description>Get a count of # of unread messages for the user</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="int" line="386">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="408">
+        <name>clearCache</name>
+        <docblock>
+          <description>Clear the cache for this User</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="void" line="403">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="422">
+        <name>parseQuote</name>
+        <docblock>
+          <description>Parse a bbcode quote tag and return result</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="The string to parse" type="\$message" variable="$message" line="416">
+            <type by_reference="false">\$message</type>
+          </tag>
+          <tag name="return" description="The quoted message" type="string" line="416">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="422">
+          <name>$message</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="469">
         <name>getUserGroups</name>
         <docblock>
           <description>Get user groups for the active user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="An array of user groups" type="array" line="415">
+          <tag name="return" description="An array of user groups" type="array" line="464">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="434">
+      <method final="false" abstract="false" static="false" visibility="public" line="483">
         <name>isAdmin</name>
         <docblock>
           <description>Return whether or not the user is an Administrator</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="430">
+          <tag name="return" description="" type="boolean" line="479">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="455">
+      <method final="false" abstract="false" static="false" visibility="public" line="504">
         <name>isGlobalModerator</name>
         <docblock>
           <description>Return whether or not the user is a global Moderator</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="451">
+          <tag name="return" description="" type="boolean" line="500">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="480">
+      <method final="false" abstract="false" static="true" visibility="public" line="529">
         <name>fetchActive</name>
         <docblock>
           <description>Fetch a list of active users in the forum</description>
           <long-description>
 </long-description>
-          <tag name="static" description="" line="470"/>
-          <tag name="param" description="A reference to the modX object" type="\xPDO" variable="$modx" line="470">
+          <tag name="static" description="" line="519"/>
+          <tag name="param" description="A reference to the modX object" type="\xPDO" variable="$modx" line="519">
             <type by_reference="false">\xPDO</type>
           </tag>
-          <tag name="param" description="If set, will grab within X seconds" type="int" variable="$timeAgo" line="470">
+          <tag name="param" description="If set, will grab within X seconds" type="int" variable="$timeAgo" line="519">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="param" description="Limit results to this number" type="int" variable="$limit" line="470">
+          <tag name="param" description="Limit results to this number" type="int" variable="$limit" line="519">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="param" description="Start at this index" type="int" variable="$start" line="470">
+          <tag name="param" description="Start at this index" type="int" variable="$start" line="519">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="A response array of active users" type="array" line="470">
+          <tag name="return" description="A response array of active users" type="array" line="519">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="480">
+        <argument line="529">
           <name>$modx</name>
           <default/>
           <type>xPDO</type>
         </argument>
-        <argument line="480">
+        <argument line="529">
           <name>$timeAgo</name>
           <default>0</default>
           <type/>
         </argument>
-        <argument line="480">
+        <argument line="529">
           <name>$limit</name>
           <default>0</default>
           <type/>
         </argument>
-        <argument line="480">
+        <argument line="529">
           <name>$start</name>
           <default>0</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="511">
+      <method final="false" abstract="false" static="false" visibility="public" line="560">
         <name>getLastVisitedThread</name>
         <docblock>
           <description>Return the last visited thread by the User</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="\disThread" line="507">
+          <tag name="return" description="" type="\disThread" line="556">
             <type by_reference="false">\disThread</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="538">
+      <method final="false" abstract="false" static="false" visibility="public" line="587">
         <name>checkForPostGroupAdvance</name>
         <docblock>
           <description>Check to see if the user qualifies for any post-based groups
 and if so, grant it to them</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="bool" line="532">
+          <tag name="return" description="" type="bool" line="581">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="563">
+      <method final="false" abstract="false" static="false" visibility="public" line="612">
         <name>merge</name>
         <docblock>
           <description>Merge another user into this account</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="\disUser" variable="$oldUser" line="557">
+          <tag name="param" description="" type="\disUser" variable="$oldUser" line="606">
             <type by_reference="false">\disUser</type>
           </tag>
-          <tag name="return" description="" type="boolean" line="557">
+          <tag name="return" description="" type="boolean" line="606">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="563">
+        <argument line="612">
           <name>$oldUser</name>
           <default/>
           <type>disUser</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="722">
+      <method final="false" abstract="false" static="false" visibility="public" line="771">
         <name>getGroupBadge</name>
         <docblock>
           <description>Gets the badge for the Primary Group for this user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="717">
+          <tag name="return" description="" type="string" line="766">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="737">
+      <method final="false" abstract="false" static="false" visibility="public" line="786">
         <name>getUrl</name>
         <docblock>
           <description>Makes a link to the profile page for this user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="void" line="733">
+          <tag name="return" description="" type="void" line="782">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="749">
+      <method final="false" abstract="false" static="false" visibility="public" line="798">
         <name>getSetting</name>
         <docblock>
           <description>Gets a User Setting (bypasses cache)</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$key" line="743">
+          <tag name="param" description="" type="string" variable="$key" line="792">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$default" line="743">
+          <tag name="param" description="" type="string" variable="$default" line="792">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="string" line="743">
+          <tag name="return" description="" type="string" line="792">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="749">
+        <argument line="798">
           <name>$key</name>
           <default/>
           <type/>
         </argument>
-        <argument line="749">
+        <argument line="798">
           <name>$default</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="768">
+      <method final="false" abstract="false" static="false" visibility="public" line="817">
         <name>setSetting</name>
         <docblock>
           <description>Set a custom User Setting for this user</description>
           <long-description>
 </long-description>
-          <tag name="param" description="The key of the Setting" type="string" variable="$key" line="760">
+          <tag name="param" description="The key of the Setting" type="string" variable="$key" line="809">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The value to set" type="string" variable="$value" line="760">
+          <tag name="param" description="The value to set" type="string" variable="$value" line="809">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The default value of the setting" type="string" variable="$default" line="760">
+          <tag name="param" description="The default value of the setting" type="string" variable="$default" line="809">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="True if successfully updated" type="bool" line="760">
+          <tag name="return" description="True if successfully updated" type="bool" line="809">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="768">
+        <argument line="817">
           <name>$key</name>
           <default/>
           <type/>
         </argument>
-        <argument line="768">
+        <argument line="817">
           <name>$value</name>
           <default/>
           <type/>
         </argument>
-        <argument line="768">
+        <argument line="817">
           <name>$default</name>
           <default>null</default>
           <type/>
@@ -4010,7 +4317,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </docblock>
     </class>
   </file>
-  <file path="disusergroupprofile.class.php" hash="a5051eb0ba1447755e7db4009b0a5ce1">
+  <file path="disusergroupprofile.class.php" hash="9d773dca259b916f2de6f5b80439f1da">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -4042,23 +4349,61 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" line="29">
+      <method final="false" abstract="false" static="false" visibility="public" line="33">
         <name>getBadge</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="37">
-        <name>getBadgePath</name>
-      </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="41">
-        <name>getBadgeUrl</name>
+        <docblock>
+          <description>Return the URL for this user's badge, if they have one</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="The URL to the badge" type="string" line="29">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" line="45">
+        <name>getBadgePath</name>
+        <docblock>
+          <description>Get the absolute path to the badges directory</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="The absolute path to the badges directory" type="string" line="41">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="53">
+        <name>getBadgeUrl</name>
+        <docblock>
+          <description>Get the full URL to the badges directory</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="The full URL to the badges URL" type="string" line="49">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="64">
         <name>uploadBadge</name>
-        <argument line="45">
+        <docblock>
+          <description>Upload a badge and associate with this user group</description>
+          <long-description>
+</long-description>
+          <tag name="param" description="A php FILE array for the badge" type="array" variable="$file" line="57">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag name="param" description="If true, will remove the old badge if one was set" type="bool" variable="$removeOld" line="57">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag name="return" description="" type="bool" line="57">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="64">
           <name>$file</name>
           <default/>
           <type/>
         </argument>
-        <argument line="45">
+        <argument line="64">
           <name>$removeOld</name>
           <default>false</default>
           <type/>

@@ -25,18 +25,62 @@
  * @package discuss
  */
 class disUser extends xPDOSimpleObject {
+    /**
+     * If the user is inactive
+     * @const INACTIVE
+     */
     const INACTIVE = 0;
+    /**
+     * If the user is active
+     * @const ACTIVE
+     */
     const ACTIVE = 1;
+    /**
+     * If the user is unconfirmed
+     * @const UNCONFIRMED
+     */
     const UNCONFIRMED = 2;
+    /**
+     * If the user is banned
+     * @const BANNED
+     */
     const BANNED = 3;
+    /**
+     * If the user is awaiting moderation
+     * @const AWAITING_MODERATION
+     */
     const AWAITING_MODERATION = 4;
 
+    /**
+     * If the user is in an Administrator group
+     * @var boolean
+     */
     public $isAdmin;
+    /**
+     * If the user is in a global Moderator group
+     * @var boolean
+     */
     public $isGlobalModerator;
+    /**
+     * If the user is logged in
+     * @var boolean
+     */
     public $isLoggedIn = false;
+    /**
+     * An array of read boards for the user
+     * @var array
+     */
     public $readBoards = array();
+    /**
+     * An array of prepared, cached read boards for the user
+     * @var boolean
+     */
     public $readBoardsPrepared = false;
 
+    /**
+     * Initialize the user, setup basic metadata for them, and log their activity time.
+     * @return bool
+     */
     public function init() {
         $this->isLoggedIn = true;
 
@@ -90,6 +134,11 @@ class disUser extends xPDOSimpleObject {
         return !empty($this->readBoards[$boardId]);
     }
 
+    /**
+     * Get all unread threads by this user for a specific board
+     * @param int $boardId The ID of the board to look for
+     * @return array An array of thread data
+     */
     public function getUnreadThreadsForBoard($boardId) {
         $threads = array();
         $stmt = $this->xpdo->query('

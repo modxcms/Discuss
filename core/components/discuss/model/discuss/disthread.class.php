@@ -25,9 +25,22 @@
  * @package discuss
  */
 class disThread extends xPDOSimpleObject {
+    /**
+     * The type-key for a Post-type thread
+     * @const TYPE_POST
+     */
     const TYPE_POST = 'post';
+    /**
+     * The type key for a Message-type thread
+     * @const TYPE_MESSAGE
+     */
     const TYPE_MESSAGE = 'message';
 
+    /**
+     * Whether or not the active user has a subscription to this thread.
+     * @see disThread::hasSubscription
+     * @var boolean $hasSubscription
+     */
     public $hasSubscription;
     
     /**
@@ -1028,38 +1041,71 @@ class disThread extends xPDOSimpleObject {
     /** can* methods */
 
     /**
+     * Determines whether or not the current active user can stick the thread
      * @return bool
      */
     public function canStick() {
         return !$this->get('sticky') && $this->xpdo->hasPermission('discuss.thread_stick') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
+    /**
+     * Determines whether or not the current active user can unstick the thread
+     * @return bool
+     */
     public function canUnstick() {
         return $this->get('sticky') && $this->xpdo->hasPermission('discuss.thread_unstick') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
+    /**
+     * Determines whether or not the current active user can lock the thread
+     * @return bool
+     */
     public function canLock() {
         return !$this->get('locked') && $this->xpdo->hasPermission('discuss.thread_lock') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
+    /**
+     * Determines whether or not the current active user can unlock the thread
+     * @return bool
+     */
     public function canUnlock() {
         return $this->get('locked') && $this->xpdo->hasPermission('discuss.thread_unlock') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
+    /**
+     * Determines whether or not the current active user can move the thread
+     * @return bool
+     */
     public function canMove() {
         return $this->xpdo->hasPermission('discuss.thread_move') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
+    /**
+     * Determines whether or not the current active user can remove the thread
+     * @return bool
+     */
     public function canRemove() {
         return $this->xpdo->hasPermission('discuss.thread_remove') &&
             ($this->isModerator() || $this->xpdo->discuss->user->isAdmin());
     }
+    /**
+     * Determines whether or not the current active user can print the thread
+     * @return bool
+     */
     public function canPrint() {
         return $this->xpdo->hasPermission('discuss.thread_print');
     }
+    /**
+     * Determines whether or not the current active user can subscribe to the thread
+     * @return bool
+     */
     public function canSubscribe() {
         return !$this->hasSubscription() && $this->xpdo->hasPermission('discuss.thread_subscribe');
     }
+    /**
+     * Determines whether or not the current active user can unsubscribe the thread
+     * @return bool
+     */
     public function canUnsubscribe() {
         return $this->hasSubscription() && $this->xpdo->hasPermission('discuss.thread_subscribe');
     }

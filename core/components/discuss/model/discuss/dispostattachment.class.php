@@ -28,7 +28,8 @@ class disPostAttachment extends xPDOSimpleObject {
     /**
      * Overrides xPDOObject::save to handle createdon date
      *
-     * {@inheritDoc}
+     * @param boolean $cacheFlag
+     * @return boolean
      */
     public function save($cacheFlag = null) {
         if ($this->isNew()) {
@@ -42,6 +43,9 @@ class disPostAttachment extends xPDOSimpleObject {
     /**
      * Overrides the xPDOObject::remove method to remove the physical file for
      * the attachment
+     *
+     * @param array $ancestors
+     * @return boolean
      */
     public function remove(array $ancestors = array()) {
         $filename = $this->get('filename');

@@ -222,13 +222,13 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="method">
 <code><span class="highlight">remove</span><span class="nb-faded-text">(
-           $ancestors
+          array $ancestors
               =
               array
           )
         </span>
         :
-        </code><p class="short-description">Overrides the xPDOObject::remove method to remove the physical file for
+        boolean</code><p class="short-description">Overrides the xPDOObject::remove method to remove the physical file for
 the attachment</p>
 <div class="long-description">
 </div>
@@ -236,6 +236,15 @@ the attachment</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$ancestors</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -258,19 +267,28 @@ the attachment</p>
 </h4>
 <div class="method">
 <code><span class="highlight">save</span><span class="nb-faded-text">(
-           $cacheFlag
+          boolean $cacheFlag
               =
               null
           )
         </span>
         :
-        </code><p class="short-description">Overrides xPDOObject::save to handle createdon date</p>
-<div class="long-description"><p>{@inheritDoc}</p>
+        boolean</code><p class="short-description">Overrides xPDOObject::save to handle createdon date</p>
+<div class="long-description">
 </div>
 <div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$cacheFlag</dt>
+<dd>boolean<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>

@@ -86,7 +86,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        string</code><p class="short-description">Return the URL for this user's badge, if they have one</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The URL to the badge</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -108,7 +119,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        string</code><p class="short-description">Get the absolute path to the badges directory</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The absolute path to the badges directory</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -130,7 +152,18 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        </code><div class="api-section">
+        string</code><p class="short-description">Get the full URL to the badges directory</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The full URL to the badges URL</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
@@ -148,18 +181,31 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="method">
 <code><span class="highlight">uploadBadge</span><span class="nb-faded-text">(
-           $file,  $removeOld
+          array $file, bool $removeOld
               =
               false
           )
         </span>
         :
-        </code><div class="api-section">
+        bool</code><p class="short-description">Upload a badge and associate with this user group</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$file</dt>
-<dd><em></em></dd>
+<dd>array<br><em>A php FILE array for the badge</em>
+</dd>
 <dt>$removeOld</dt>
+<dd>bool<br><em>If true, will remove the old badge if one was set</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>

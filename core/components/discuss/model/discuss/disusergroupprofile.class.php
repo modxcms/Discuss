@@ -26,6 +26,10 @@
  * @package discuss
  */
 class disUserGroupProfile extends xPDOSimpleObject {
+    /**
+     * Return the URL for this user's badge, if they have one
+     * @return string The URL to the badge
+     */
     public function getBadge() {
         $badge = $this->get('image');
         if (!empty($badge)) {
@@ -34,14 +38,29 @@ class disUserGroupProfile extends xPDOSimpleObject {
         return $badge;
     }
 
+    /**
+     * Get the absolute path to the badges directory
+     * @return string The absolute path to the badges directory
+     */
     public function getBadgePath() {
         return $this->xpdo->getOption('discuss.attachments_path').'badges/'.$this->get('id').'/';
     }
 
+    /**
+     * Get the full URL to the badges directory
+     * @return string The full URL to the badges URL
+     */
     public function getBadgeUrl() {
         return $this->xpdo->getOption('discuss.attachments_url').'badges/'.$this->get('id').'/';
     }
 
+    /**
+     * Upload a badge and associate with this user group
+     * 
+     * @param array $file A php FILE array for the badge
+     * @param bool $removeOld If true, will remove the old badge if one was set
+     * @return bool
+     */
     public function uploadBadge($file,$removeOld = false) {
         $uploaded = false;
         $oldBadge = $this->get('image');

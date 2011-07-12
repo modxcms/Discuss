@@ -62,14 +62,15 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h2>
 <div class="class">
 <dl class="class-info">
-<dt>TODO</dt>
-<dd></dd>
 <dt>package</dt>
 <dd>discuss</dd>
+<dt>todo</dt>
+<dd>lots of code cleanup.</dd>
 <dt>Properties</dt>
 <dd><a class="property protected" href="#%5CdisTreeParser::%24last">$last</a></dd>
 <dd><a class="property protected" href="#%5CdisTreeParser::%24openThread">$openThread</a></dd>
 <dd><a class="property protected" href="#%5CdisTreeParser::%24output">$output</a></dd>
+<dd><a class="property protected" href="#%5CdisTreeParser::%24tpl">$tpl</a></dd>
 <dt>Methods</dt>
 <dd><a class="method public" href="#%5CdisTreeParser::__construct()">__construct</a></dd>
 <dd><a class="method private" href="#%5CdisTreeParser::_iterate()">_iterate</a></dd>
@@ -87,10 +88,16 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <a id="\disTreeParser::$last"></a><h4 class="property protected">$last<div class="to-top"><a href="#%5CdisTreeParser">jump to class</a></div>
 </h4>
 <div class="property">
-<code> <span class="highlight">$last</span> = ''</code><div class="api-section">
+<code>string <span class="highlight">$last</span> = ''</code><p class="short-description">The last node</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h4 class="info">
 <img src="images/arrow_right.gif"> Details</h4>
 <dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
 <dt>visibility</dt>
 <dd>protected</dd>
 <dt>default</dt>
@@ -106,10 +113,16 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <a id="\disTreeParser::$openThread"></a><h4 class="property protected">$openThread<div class="to-top"><a href="#%5CdisTreeParser">jump to class</a></div>
 </h4>
 <div class="property">
-<code> <span class="highlight">$openThread</span> = 'array'</code><div class="api-section">
+<code>array <span class="highlight">$openThread</span> = 'array'</code><p class="short-description">The current open tree node</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h4 class="info">
 <img src="images/arrow_right.gif"> Details</h4>
 <dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
 <dt>visibility</dt>
 <dd>protected</dd>
 <dt>default</dt>
@@ -125,10 +138,41 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <a id="\disTreeParser::$output"></a><h4 class="property protected">$output<div class="to-top"><a href="#%5CdisTreeParser">jump to class</a></div>
 </h4>
 <div class="property">
-<code> <span class="highlight">$output</span> = ''</code><div class="api-section">
+<code>string <span class="highlight">$output</span> = ''</code><p class="short-description">The current output buffer</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h4 class="info">
 <img src="images/arrow_right.gif"> Details</h4>
 <dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::$tpl"></a><h4 class="property protected">$tpl<div class="to-top"><a href="#%5CdisTreeParser">jump to class</a></div>
+</h4>
+<div class="property">
+<code>string <span class="highlight">$tpl</span> = ''</code><p class="short-description">The tpl to use for each node</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
 <dt>visibility</dt>
 <dd>protected</dd>
 <dt>default</dt>
@@ -148,19 +192,24 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="method">
 <code><span class="highlight">__construct</span><span class="nb-faded-text">(
-           $discuss,  $config
+          <a href="_discuss.class.html#%5CDiscuss">\Discuss</a> $discuss, array $config
               =
               array
           )
         </span>
         :
-        </code><div class="api-section">
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$discuss</dt>
-<dd><em></em></dd>
+<dd>\Discuss<br><em>A reference to the Discuss instance</em>
+</dd>
 <dt>$config</dt>
-<dd><em></em></dd>
+<dd>array<br><em>An array of configuration options</em>
+</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -182,14 +231,26 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="method">
 <code><span class="highlight">_iterate</span><span class="nb-faded-text">(
-           $current
+          array $current
           )
         </span>
         :
-        </code><div class="api-section">
+        string</code><p class="short-description">Iterate across the node</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$current</dt>
+<dd>array<br><em>The current array iteration</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -204,6 +265,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+<dt>access</dt>
+<dd>private</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -212,14 +275,26 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="method">
 <code><span class="highlight">getOpenThread</span><span class="nb-faded-text">(
-           $depth
+          int $depth
           )
         </span>
         :
-        </code><div class="api-section">
+        string</code><p class="short-description">Get the current open thread node in the tree</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$depth</dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -242,16 +317,29 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="method">
 <code><span class="highlight">parse</span><span class="nb-faded-text">(
-           $array,  $tpl
+          array $array, string $tpl
           )
         </span>
         :
-        </code><div class="api-section">
+        array|string</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$array</dt>
-<dd><em></em></dd>
+<dd>array<br><em>The current data array</em>
+</dd>
 <dt>$tpl</dt>
+<dd>string<br><em>The template for the node</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array|string</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -274,17 +362,22 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="method">
 <code><span class="highlight">setOpenThread</span><span class="nb-faded-text">(
-           $string,  $depth
+          string $string, int $depth
           )
         </span>
         :
-        </code><div class="api-section">
+        void</code><p class="short-description">Set the current open thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$string</dt>
-<dd><em></em></dd>
+<dd>string<br><em></em>
+</dd>
 <dt>$depth</dt>
-<dd><em></em></dd>
+<dd>int<br><em></em>
+</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -306,17 +399,22 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </h4>
 <div class="method">
 <code><span class="highlight">setOpenThreadChildren</span><span class="nb-faded-text">(
-           $depth,  $string
+          int $depth, string $string
           )
         </span>
         :
-        </code><div class="api-section">
+        void</code><p class="short-description">Set the current open thread's children</p>
+<div class="long-description">
+</div>
+<div class="api-section">
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$depth</dt>
-<dd><em></em></dd>
+<dd>int<br><em></em>
+</dd>
 <dt>$string</dt>
-<dd><em></em></dd>
+<dd>string<br><em></em>
+</dd>
 </dl>
 <div class="clear"></div>
 </div>
