@@ -24,6 +24,7 @@
 require_once MODX_CORE_PATH . 'model/modx/modconnectorresponse.class.php';
 /**
  * @package discuss
+ * @subpackage request
  */
 class disConnectorRequest extends modConnectorResponse {
 

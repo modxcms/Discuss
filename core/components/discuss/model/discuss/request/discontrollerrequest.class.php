@@ -28,6 +28,7 @@ require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
  * {@inheritdoc}
  *
  * @package discuss
+ * @subpackage request
  * @extends modRequest
  */
 class DisControllerRequest extends modRequest {

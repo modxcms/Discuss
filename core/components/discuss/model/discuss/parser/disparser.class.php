@@ -26,6 +26,8 @@
  * instantiate directly.
  *
  * @abstract
+ * @package discuss
+ * @subpackage parser
  */
 abstract class disParser {
     /** @var modX\xPDO A reference to the modX object. */

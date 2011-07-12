@@ -22,7 +22,7 @@
  * @package discuss
  */
 /**
- * @package Discuss
+ * @package discuss
  * @subpackage spam
  */
 class disStopForumSpam {

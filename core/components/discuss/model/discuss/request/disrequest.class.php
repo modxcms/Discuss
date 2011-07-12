@@ -27,7 +27,7 @@
  * {@inheritdoc}
  *
  * @package discuss
- * @extends modRequest
+ * @subpackage request
  */
 class DisRequest {
     public $controller = 'home';
