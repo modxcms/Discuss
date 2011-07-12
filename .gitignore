@@ -3,3 +3,4 @@ config.core.php
 .idea
 nbproject
 core/components/discuss/includes/systems.inc.php
+_build/docs/build/

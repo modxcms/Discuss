@@ -25,11 +25,38 @@
  * A representation of a forum Board. Uses closure tables to maintain depth and
  * proper ordering while getting O(1) query performance.
  *
+ * @property int category The ID of the Category this board is in
+ * @property int parent The ID of the parent Board. If none, will be 0.
+ * @property string name The name of the board.
+ * @property int last_post The ID of the most recent Post on this Board.
+ * @property int num_topics The number of Threads on this Board.
+ * @property int num_replies The number of replies to Threads on this Board.
+ * @property int total_posts The total number of Posts (in all threads) on this Board.
+ * @property boolean ignoreable Whether or not this Board can be ignored.
+ * @property int rank The rank, or order, of this board in its category.
+ * @property string map An internally-used map that stores the order of the board in the board tree.
+ * @property int minimum_post_level The minimum post authority of the user that is required to post on this board (either Admin = 0,Moderator = 1,anything else = 9998)
+ * @property int status The status of this board. See the STATUS_* constants.
+ * @property boolean locked Whether or not this board is locked from more posts.
+ * @property int integrated_id If this board was imported, the PK of the old system's board.
+ *
  * @package discuss
  */
 class disBoard extends xPDOSimpleObject {
+    /**
+     * The status constant for inactive Boards.
+     * @const STATUS_INACTIVE
+     */
     const STATUS_INACTIVE = 0;
+    /**
+     * The status constant for active Boards.
+     * @const STATUS_ACTIVE
+     */
     const STATUS_ACTIVE = 1;
+    /**
+     * The status constant for archived Boards.
+     * @const STATUS_ARCHIVED
+     */
     const STATUS_ARCHIVED = 2;
     
     /**

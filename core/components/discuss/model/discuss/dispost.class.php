@@ -31,7 +31,7 @@ class disPost extends xPDOSimpleObject {
     /**
      * Overrides xPDOObject::save to handle closure table edits.
      *
-     * TODO: add code for moving posts to different parents.
+     * @todo add code for moving posts to different parents.
      *
      * @param boolean $cacheFlag
      * @return boolean
@@ -188,7 +188,6 @@ class disPost extends xPDOSimpleObject {
         if ($this->xpdo->discuss->loadSearch()) {
             $postArray = $this->toArray();
             $postArray['url'] = $this->getUrl();
-            var_dump($postArray['url']); die();
             if (empty($postArray['username'])) {
                 $this->getOne('Author');
                 if ($this->Author) {
@@ -217,6 +216,11 @@ class disPost extends xPDOSimpleObject {
         return $indexed;
     }
 
+    /**
+     * Remove a Post from the index
+     * 
+     * @return bool True if removed
+     */
     public function removeFromIndex() {
         $removed = false;
         if ($this->xpdo->discuss->loadSearch()) {
@@ -225,6 +229,12 @@ class disPost extends xPDOSimpleObject {
         return $removed;
     }
 
+    /**
+     * Move a post to a different board
+     *
+     * @param int|disBoard $boardId The ID of the board or disBoard obj to move to
+     * @return bool
+     */
     public function move($boardId) {
         /* check to see if only post in thread, if so, just move thread */
         $thread = $this->xpdo->getObject('disThread',array('id' => $this->get('thread')));
@@ -408,6 +418,10 @@ class disPost extends xPDOSimpleObject {
         return $removed;
     }
 
+    /**
+     * Load the Parsing class for the post
+     * @return disParser
+     */
     public function loadParser() {
         if (empty($this->parser)) {
             $parserClass = $this->xpdo->getOption('discuss.parser_class',null,'disBBCodeParser');
@@ -420,6 +434,10 @@ class disPost extends xPDOSimpleObject {
         return $this->parser;
     }
 
+    /**
+     * Get the parsed content of this post
+     * @return string The parsed content of the post
+     */
     public function getContent() {
         $message = $this->get('message');
         
@@ -462,6 +480,11 @@ class disPost extends xPDOSimpleObject {
         return $message;
     }
 
+    /**
+     * Strip any BBCode from the post
+     * @param string $str The string to strip
+     * @return mixed The cleansed content
+     */
     public function stripBBCode($str) {
          $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
          $replace = '';
@@ -592,11 +615,23 @@ class disPost extends xPDOSimpleObject {
         }
     }
 
+    /**
+     * Clear all post caches
+     *
+     * @static
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     * @return bool True if cleared
+     */
     public static function clearAllCache(xPDO $xpdo) {
         $xpdo->getCacheManager();
         return $xpdo->cacheManager->delete('discuss/post/');
     }
 
+    /**
+     * Convert all BR tags to newlines
+     * @param string $str The string to parse
+     * @return string The converted content
+     */
     public function br2nl($str) {
         return str_replace(array('<br>','<br />','<br/>'),"\n",$str);
     }
@@ -627,6 +662,11 @@ class disPost extends xPDOSimpleObject {
         return $thread->canReply();
     }
 
+    /**
+     * Whether or not the user can report this post as spam
+     *
+     * @return bool True if the active user can report this post as spam
+     */
     public function canReport() {
         return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_report');
     }
