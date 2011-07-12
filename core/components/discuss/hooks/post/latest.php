@@ -34,7 +34,7 @@ $c->select(array(
     'Author.username',
     'Thread.id AS thread',
 ));
-if ($discuss->isLoggedIn) {
+if ($discuss->user->isLoggedIn) {
     $ignoreBoards = $discuss->user->get('ignore_boards');
     if (!empty($ignoreBoards)) {
         $c->where(array(

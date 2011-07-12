@@ -32,10 +32,25 @@ require_once MODX_CORE_PATH . 'model/modx/modrequest.class.php';
  * @extends modRequest
  */
 class DisControllerRequest extends modRequest {
+    /**
+     * A reference to the Discuss instance
+     * @var Discuss $discuss
+     */
     public $discuss = null;
+    /**
+     * The action variable key for the mgr controller
+     * @var string $actionVar
+     */
     public $actionVar = 'action';
+    /**
+     * The default controller to load when one is not specified
+     * @var string $defaultAction
+     */
     public $defaultAction = 'home';
 
+    /**
+     * @param Discuss $discuss A reference to the Discuss instance
+     */
     function __construct(Discuss &$discuss) {
         parent :: __construct($discuss->modx);
         $this->discuss =& $discuss;
@@ -44,8 +59,7 @@ class DisControllerRequest extends modRequest {
     /**
      * Extends modRequest::handleRequest and loads the proper error handler and
      * actionVar value.
-     *
-     * {@inheritdoc}
+     * @return string The processed output
      */
     public function handleRequest() {
         $this->loadErrorHandler();

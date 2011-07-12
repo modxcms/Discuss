@@ -25,11 +25,25 @@ require dirname(__FILE__).'/dissearch.class.php';
 /**
  * @package discuss
  * @subpackage search
+ * @extends disSearch
  */
 class disSolrSearch extends disSearch {
+    /**
+     * An array of connection configuration options for the Solr client
+     * 
+     * @var array $_connectionOptions
+     */
     private $_connectionOptions = array();
+    /**
+     * The client API for the Solr instance
+     * @var SolrClient $client
+     */
     public $client;
 
+    /**
+     * Initialize the Solr search engine
+     * @return void
+     */
     public function initialize() {
         $this->_connectionOptions = array(
             'hostname' => $this->modx->getOption('discuss.solr.hostname',null,'127.0.0.1'),
@@ -57,7 +71,20 @@ class disSolrSearch extends disSearch {
         }
     }
 
+    /**
+     * Run the search based on the specified search string.
+     *
+     * @param string $string The string to run the search on.
+     * @param int $limit The number of results to limit to.
+     * @param int $start The starting result index to search from.
+     * @param array $conditions An array of conditions to add to the search filter.
+     * @return array An array of search results.
+     */
     public function run($string,$limit = 10,$start = 0,array $conditions = array()) {
+        /* sanitize string */
+        $string = str_replace(array('!'),'',$string);
+
+        /* build query */
         $query = new SolrQuery();
         $query->setQuery($string);
         $query->setStart($start);
@@ -116,6 +143,12 @@ class disSolrSearch extends disSearch {
         return $response;
     }
 
+    /**
+     * Index the current search result.
+     *
+     * @param array $fields
+     * @return bool
+     */
     public function index($fields = array()) {
         $document = new SolrInputDocument();
         $document->addField('id',$fields['id']);
@@ -147,11 +180,20 @@ class disSolrSearch extends disSearch {
         return $response;
     }
 
+    /**
+     * Remove search result from the index.
+     * @param $id
+     * @return bool
+     */
     public function removeIndex($id) {
         $this->client->deleteById($id);
         $this->commit();
     }
 
+    /**
+     * Commit the search and close the connection.
+     * @return void
+     */
     public function commit() {
         try {
             $this->client->commit();

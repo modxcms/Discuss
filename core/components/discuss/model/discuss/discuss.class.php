@@ -27,15 +27,47 @@
  * @package discuss
  */
 class Discuss {
+    /**
+     * The MySQL datetime format
+     * @const DATETIME_FORMATTED
+     */
     const DATETIME_FORMATTED = '%Y-%m-%d %H:%M:%S';
-    /** @var int/boolean $debugTimer The starting value of the execution time. */
+    /**
+     * The starting value of the execution time.
+     * @var int/boolean $debugTimer
+     */
     public $debugTimer = false;
+    /**
+     * The URL of the current Discuss home page
+     * @var string $url
+     */
     public $url = '';
+    /**
+     * The current active disUser in Discuss
+     * @var disUser $user
+     */
     public $user;
+    /**
+     * Whether or not the active user is logged in
+     * @var bool $isLoggedIn
+     * @deprecated Use user->isLoggedIn
+     */
     public $isLoggedIn = false;
+    /**
+     * The Search class
+     * @var disSearch $search
+     */
     public $search;
+    /**
+     * The hooks class for loading application-specific hooks
+     * @var disHooks $hooks
+     */
     public $hooks;
 
+    /**
+     * @param modX $modx A reference to the modX instance
+     * @param array $config An array of configuration properties
+     */
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
@@ -117,9 +149,9 @@ class Discuss {
     /**
      * Load the hooks class
      * 
-     * @param string $class
-     * @param string $path
-     * @return
+     * @param string $class The Hooks class to load
+     * @param string $path The path of the class to load
+     * @return disHooks|null
      */
     public function loadHooks($class = 'discuss.disHooks',$path = '') {
         if (empty($path)) $path = $this->config['modelPath'];
@@ -134,8 +166,8 @@ class Discuss {
     /**
      * Load the request class
      * 
-     * @param string $class
-     * @param string $path
+     * @param string $class The Request class to load
+     * @param string $path The path of the request class.
      * @return DisRequest
      */
     public function loadRequest($class = 'discuss.request.DisRequest',$path = '') {
@@ -192,8 +224,8 @@ class Discuss {
      */
     private function _initUser() {
         /* if no user, set id to 0 */
-        $this->isLoggedIn = $this->modx->user->hasSessionContext($this->modx->context->get('key'));
-        if (!$this->isLoggedIn) {
+        $isLoggedIn = $this->modx->user->hasSessionContext($this->modx->context->get('key'));
+        if (!$isLoggedIn) {
             $this->user =& $this->modx->newObject('disUser');
             $this->user->set('id',0);
             $this->user->set('user',0);
@@ -234,7 +266,7 @@ class Discuss {
         }
 
         /* topbar profile links. @TODO: Move this somewhere else. */
-        if ($this->isLoggedIn) {
+        if ($this->user->isLoggedIn) {
             $authphs = array(
                 'authLink' => '<a href="'.$this->url.'logout">Logout</a>',
             );
@@ -260,7 +292,7 @@ class Discuss {
     private function _initSession() {
         if (defined('DIS_CONNECTOR') && DIS_CONNECTOR) return false;
         $sessionId = session_id();
-        if ($this->isLoggedIn) {
+        if ($this->user->isLoggedIn) {
             $session = $this->modx->getObject('disSession',array('user' => $this->user->get('id')));
             if (!empty($session)) {
                 $this->modx->removeCollection('disSession',array(
@@ -408,8 +440,6 @@ class Discuss {
 
     /**
      * Builds action button HTML.
-     *
-     * TODO: chunk/tpl-ize this
      *
      * @access public
      * @param array $btns

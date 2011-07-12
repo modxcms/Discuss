@@ -67,7 +67,7 @@ foreach ($threads['results'] as $thread) {
     $class = array('board-post');
     if ($enableHot) {
         $threshold = $hotThreadThreshold;
-        if ($discuss->user->get('id') == $threadArray['author'] && $discuss->isLoggedIn) {
+        if ($discuss->user->get('id') == $threadArray['author'] && $discuss->user->isLoggedIn) {
             $class[] = $threadArray['replies'] < $threshold ? 'dis-my-normal-thread' : 'dis-my-veryhot-thread';
         } else {
             $class[] = $threadArray['replies'] < $threshold ? '' : 'dis-veryhot-thread';

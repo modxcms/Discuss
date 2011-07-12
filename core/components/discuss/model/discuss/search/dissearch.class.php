@@ -22,10 +22,17 @@
  * @package discuss
  */
 /**
+ * Default Search class for searching records in Discuss
+ * 
  * @package discuss
  * @subpackage search
  */
 class disSearch {
+
+    /**
+     * @param Discuss $discuss A reference to the Discuss instance
+     * @param array $config An array of configuration properties
+     */
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
         $this->modx =& $discuss->modx;
@@ -35,16 +42,42 @@ class disSearch {
         $this->initialize();
     }
 
+    /**
+     * Initialize the search request.
+     * @return bool
+     */
     public function initialize() {
         return true;
     }
+
+    /**
+     * Index the current search result.
+     *
+     * @param array $fields
+     * @return bool
+     */
     public function index(array $fields = array()) {
         return true;
     }
+    
+    /**
+     * Remove search result from the index.
+     * @param $id
+     * @return bool
+     */
     public function removeIndex($id) {
         return true;
     }
 
+    /**
+     * Run the search based on the specified search string.
+     *
+     * @param string $string The string to run the search on.
+     * @param int $limit The number of results to limit to.
+     * @param int $start The starting result index to search from.
+     * @param array $conditions An array of conditions to add to the search filter.
+     * @return array An array of search results.
+     */
     public function run($string,$limit = 10,$start = 0,array $conditions = array()) {
         $response = array(
             'results' => array(),
@@ -72,8 +105,8 @@ class disSearch {
         $response['total'] = $this->modx->getCount('disPost',$c);
         $c->select($this->modx->getSelectColumns('disPost','disPost'));
         $c->select(array(
-            'Author.username AS username',
-            'Board.name AS board_name',
+            'username' => 'Author.username',
+            'board_name' => 'Board.name',
             'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE) AS score',
         ));
         $c->groupby('disPost.thread');
@@ -91,4 +124,10 @@ class disSearch {
         }
         return $response;
     }
+
+    /**
+     * Commit the search and close the connection.
+     * @return void
+     */
+    public function commit() {}
 }

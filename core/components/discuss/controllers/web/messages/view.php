@@ -25,7 +25,7 @@
  * Display a thread of posts
  * @package discuss
  */
-if (!$discuss->isLoggedIn) $modx->sendUnauthorizedPage();
+if (!$discuss->user->isLoggedIn) $modx->sendUnauthorizedPage();
 
 /* get default properties */
 $userId = $modx->user->get('id');
@@ -82,7 +82,7 @@ $placeholders['readers'] = $thread->getViewing('message');
 
 /* action buttons */
 $actionButtons = array();
-if ($discuss->isLoggedIn) {
+if ($discuss->user->isLoggedIn) {
     if ($modx->hasPermission('discuss.pm_send')) {
         $actionButtons[] = array('url' => $discuss->request->makeUrl('messages/reply',array('thread' => $thread->get('id'))), 'text' => $modx->lexicon('discuss.reply_to_message'));
     }
