@@ -1,0 +1,1056 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Discuss API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">parser/disbbcodeparser.class.php</h1>
+<div class="file_menu">
+<a href="#includes">Includes</a> <a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>subpackage</dt>
+<dd>parser</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CdisBBCodeParser">disBBCodeParser</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Discuss</p>
+<div class="long-description"><p>Copyright 2010-11 by Shaun McCormick <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;">&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;</a></p>
+
+<p>This file is part of Discuss, a native forum for MODx Revolution.</p>
+
+<p>Discuss is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.</p>
+
+<p>Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with
+Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+Suite 330, Boston, MA 02111-1307 USA</p>
+</div>
+<a name="classes"></a><a id="\disBBCodeParser"></a><h2 class="class">\disBBCodeParser<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_parser_disparser.class.html#%5CdisParser">\disParser</a></dd>
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>subpackage</dt>
+<dd>parser</dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CdisBBCodeParser::cleanupImg()">cleanupImg</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::convertLinks()">convertLinks</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::encodeEmail()">encodeEmail</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::obfuscate()">obfuscate</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parse()">parse</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseBasic()">parseBasic</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseCodeCallback()">parseCodeCallback</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseCodeSpecificCallback()">parseCodeSpecificCallback</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseEmailCallback()">parseEmailCallback</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseLinksCallback()">parseLinksCallback</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseList()">parseList</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseListCallback()">parseListCallback</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseQuote()">parseQuote</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseQuoteCallback()">parseQuoteCallback</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseSandboxed()">parseSandboxed</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseSizeCallback()">parseSizeCallback</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseSmileys()">parseSmileys</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::parseUrlCallback()">parseUrlCallback</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::preClean()">preClean</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::stripBBCode()">stripBBCode</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::stripBRTags()">stripBRTags</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::stripHtml()">stripHtml</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Abstract parser class that must be extended for creating custom parsing engines for Discuss Posts. Never
+instantiate directly.</p>
+<div class="long-description">
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\disBBCodeParser::cleanupImg()"></a><h4 class="method public">cleanupImg<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">cleanupImg</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Cleanup and sanitize [img] tags to prevent injections</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::convertLinks()"></a><h4 class="method public">convertLinks<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">convertLinks</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Auto-convert links to &lt;a&gt; tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::encodeEmail()"></a><h4 class="method public">encodeEmail<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">encodeEmail</span><span class="nb-faded-text">(
+          string $email, string $emailText
+          )
+        </span>
+        :
+        string</code><p class="short-description">Encode an email address and return the a tag</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$email</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>$emailText</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::obfuscate()"></a><h4 class="method public">obfuscate<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">obfuscate</span><span class="nb-faded-text">(
+          string $text
+          )
+        </span>
+        :
+        string</code><p class="short-description">Obfuscate a string to protect against spammers</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$text</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parse()"></a><h4 class="method public">parse<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parse</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse BBCode in post and return proper HTML. Supports SMF/Vanilla formats.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em>The string to parse</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The parsed string with HTML instead of BBCode, and all code stripped</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseBasic()"></a><h4 class="method public">parseBasic<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseBasic</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse BBCode from vanilla/smf boards BBCode formats</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseCodeCallback()"></a><h4 class="method public">parseCodeCallback<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseCodeCallback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse [code] tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$matches</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseCodeSpecificCallback()"></a><h4 class="method public">parseCodeSpecificCallback<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseCodeSpecificCallback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse [code=language] tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$matches</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseEmailCallback()"></a><h4 class="method public">parseEmailCallback<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseEmailCallback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse [email] tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$matches</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseLinksCallback()"></a><h4 class="method public">parseLinksCallback<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseLinksCallback</span><span class="nb-faded-text">(
+           $matches
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse [url] tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$matches</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseList()"></a><h4 class="method public">parseList<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseList</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Convert [list]/[li] tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseListCallback()"></a><h4 class="method public">parseListCallback<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseListCallback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+        mixed|string</code><p class="short-description">Parse [list] tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$matches</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed|string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseQuote()"></a><h4 class="method public">parseQuote<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseQuote</span><span class="nb-faded-text">(
+          \$message $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse a bbcode quote tag and return result</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>\$message<br><em>The string to parse</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The quoted message</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseQuoteCallback()"></a><h4 class="method public">parseQuoteCallback<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseQuoteCallback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse [quote] tags and append information about them</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$matches</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseSandboxed()"></a><h4 class="method public">parseSandboxed<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseSandboxed</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Parse code blocks where we dont wan't linebreaks, strip them out</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseSizeCallback()"></a><h4 class="method public">parseSizeCallback<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseSizeCallback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse [size] tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$matches</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseSmileys()"></a><h4 class="method public">parseSmileys<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseSmileys</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Parse Smileys</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::parseUrlCallback()"></a><h4 class="method public">parseUrlCallback<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parseUrlCallback</span><span class="nb-faded-text">(
+          array $matches
+          )
+        </span>
+        :
+        string</code><p class="short-description">Prevent javascript:/ftp: injections via URLs</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$matches</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::preClean()"></a><h4 class="method public">preClean<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">preClean</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Do some SMF-style BBCode cleaning</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::stripBBCode()"></a><h4 class="method public">stripBBCode<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">stripBBCode</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+        string</code><p class="short-description">Strip all BBCode from a string</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$str</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::stripBRTags()"></a><h4 class="method public">stripBRTags<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">stripBRTags</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+        string</code><p class="short-description">Strip all BR tags from a string</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$str</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::stripHtml()"></a><h4 class="method public">stripHtml<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">stripHtml</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Strip all invalid HTML and convert to HTML entities all remaining HTML</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em>The content to parse</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The stripped and cleaned content</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.2</a>.
+    </small></body></html>

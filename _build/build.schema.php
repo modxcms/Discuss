@@ -56,23 +56,28 @@ $generator->classTemplate= <<<EOD
 <?php
 /**
  * [+phpdoc-package+]
+ * [+phpdoc-subpackage+]
  */
 class [+class+] extends [+extends+] {}
-?>
 EOD;
 $generator->platformTemplate= <<<EOD
 <?php
 /**
  * [+phpdoc-package+]
+ * [+phpdoc-subpackage+]
  */
 require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\\\', '/') . '/[+class-lowercase+].class.php');
+/**
+ * [+phpdoc-package+]
+ * [+phpdoc-subpackage+]
+ */
 class [+class+]_[+platform+] extends [+class+] {}
-?>
 EOD;
 $generator->mapHeader= <<<EOD
 <?php
 /**
  * [+phpdoc-package+]
+ * [+phpdoc-subpackage+]
  */
 EOD;
 

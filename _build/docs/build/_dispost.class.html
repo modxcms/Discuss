@@ -1,0 +1,872 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Discuss API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">dispost.class.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CdisPost">disPost</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Discuss</p>
+<div class="long-description"><p>Copyright 2010-11 by Shaun McCormick <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;">&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;</a></p>
+
+<p>This file is part of Discuss, a native forum for MODx Revolution.</p>
+
+<p>Discuss is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.</p>
+
+<p>Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with
+Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+Suite 330, Boston, MA 02111-1307 USA</p>
+</div>
+<a name="classes"></a><a id="\disPost"></a><h2 class="class">\disPost<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd>\xPDOSimpleObject</dd>
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CdisPost::br2nl()">br2nl</a></dd>
+<dd><a class="method public" href="#%5CdisPost::calculateIdx()">calculateIdx</a></dd>
+<dd><a class="method public" href="#%5CdisPost::canReply()">canReply</a></dd>
+<dd><a class="method public" href="#%5CdisPost::canReport()">canReport</a></dd>
+<dd><a class="method public" href="#%5CdisPost::clearAllCache()">clearAllCache</a></dd>
+<dd><a class="method public" href="#%5CdisPost::clearCache()">clearCache</a></dd>
+<dd><a class="method public" href="#%5CdisPost::getBoardAncestors()">getBoardAncestors</a></dd>
+<dd><a class="method public" href="#%5CdisPost::getContent()">getContent</a></dd>
+<dd><a class="method public" href="#%5CdisPost::getDescendants()">getDescendants</a></dd>
+<dd><a class="method public" href="#%5CdisPost::getThreadPage()">getThreadPage</a></dd>
+<dd><a class="method public" href="#%5CdisPost::getThreadRoot()">getThreadRoot</a></dd>
+<dd><a class="method public" href="#%5CdisPost::getUrl()">getUrl</a></dd>
+<dd><a class="method public" href="#%5CdisPost::getViewing()">getViewing</a></dd>
+<dd><a class="method public" href="#%5CdisPost::index()">index</a></dd>
+<dd><a class="method public" href="#%5CdisPost::loadParser()">loadParser</a></dd>
+<dd><a class="method public" href="#%5CdisPost::move()">move</a></dd>
+<dd><a class="method public" href="#%5CdisPost::remove()">remove</a></dd>
+<dd><a class="method public" href="#%5CdisPost::removeFromIndex()">removeFromIndex</a></dd>
+<dd><a class="method public" href="#%5CdisPost::save()">save</a></dd>
+<dd><a class="method public" href="#%5CdisPost::stripBBCode()">stripBBCode</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Represents any post made on the forum, including Threads, which are Posts
+with a parent of 0.</p>
+<div class="long-description">
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\disPost::br2nl()"></a><h4 class="method public">br2nl<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">br2nl</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+        string</code><p class="short-description">Convert all BR tags to newlines</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$str</dt>
+<dd>string<br><em>The string to parse</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The converted content</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::calculateIdx()"></a><h4 class="method public">calculateIdx<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">calculateIdx</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        int</code><p class="short-description">Calculate the position of this post in the thread when it is not known</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>int</dt>
+<dd><em>The index position of the post in its thread</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::canReply()"></a><h4 class="method public">canReply<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canReply</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Return if the active user can reply to this post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::canReport()"></a><h4 class="method public">canReport<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canReport</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Whether or not the user can report this post as spam</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em>True if the active user can report this post as spam</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::clearAllCache()"></a><h4 class="method public">clearAllCache<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">clearAllCache</span><span class="nb-faded-text">(
+          \xPDO $xpdo
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Clear all post caches</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$xpdo</dt>
+<dd>\xPDO<br><em>A reference to the xPDO|modX instance</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em>True if cleared</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::clearCache()"></a><h4 class="method public">clearCache<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">clearCache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Clears the cache on post save/remove</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::getBoardAncestors()"></a><h4 class="method public">getBoardAncestors<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getBoardAncestors</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        array</code><p class="short-description">Get an array of all the ancestors of this Post's board</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::getContent()"></a><h4 class="method public">getContent<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getContent</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Get the parsed content of this post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The parsed content of the post</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::getDescendants()"></a><h4 class="method public">getDescendants<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getDescendants</span><span class="nb-faded-text">(
+          int $depth
+              =
+              0
+          )
+        </span>
+        :
+        array</code><p class="short-description">Grabs all descendants of this post.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$depth</dt>
+<dd>int<br><em>If set, will limit to specified depth</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em>A collection of disPost objects.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::getThreadPage()"></a><h4 class="method public">getThreadPage<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getThreadPage</span><span class="nb-faded-text">(
+          boolean $last
+              =
+              false
+          )
+        </span>
+        :
+        int</code><p class="short-description">Get the thread page that this post would be on</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$last</dt>
+<dd>boolean<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>int</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::getThreadRoot()"></a><h4 class="method public">getThreadRoot<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getThreadRoot</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <a href="_dispost.class.html#%5CdisPost">\disPost</a></code><p class="short-description">Gets the Thread root post of this current Post; if this Post is the
+thread root, returns itself.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_dispost.class.html#%5CdisPost">\disPost</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::getUrl()"></a><h4 class="method public">getUrl<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getUrl</span><span class="nb-faded-text">(
+          string $view
+              =
+              thread/, boolean $last
+              =
+              false
+          )
+        </span>
+        :
+        string</code><p class="short-description">Get the URL of this post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$view</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>$last</dt>
+<dd>boolean<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::getViewing()"></a><h4 class="method public">getViewing<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getViewing</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Gets the viewing message for the bottom of the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The who is viewing message</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::index()"></a><h4 class="method public">index<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">index</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Index the post into the search system</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::loadParser()"></a><h4 class="method public">loadParser<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadParser</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <a href="_parser_disparser.class.html#%5CdisParser">\disParser</a></code><p class="short-description">Load the Parsing class for the post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_parser_disparser.class.html#%5CdisParser">\disParser</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::move()"></a><h4 class="method public">move<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">move</span><span class="nb-faded-text">(
+          int|<a href="_disboard.class.html#%5CdisBoard">\disBoard</a> $boardId
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Move a post to a different board</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$boardId</dt>
+<dd>int\disBoard<br><em>The ID of the board or disBoard obj to move to</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::remove()"></a><h4 class="method public">remove<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">remove</span><span class="nb-faded-text">(
+          array $ancestors
+              =
+              array, boolean $doBoardMoveChecks
+              =
+              false, boolean $moveToSpam
+              =
+              false
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Overrides xPDOObject::remove to handle closure tables, post counts, fix
+the forum activity and user profile counts.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$ancestors</dt>
+<dd>array<br><em></em>
+</dd>
+<dt>$doBoardMoveChecks</dt>
+<dd>boolean<br><em></em>
+</dd>
+<dt>$moveToSpam</dt>
+<dd>boolean<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::removeFromIndex()"></a><h4 class="method public">removeFromIndex<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">removeFromIndex</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Remove a Post from the index</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em>True if removed</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::save()"></a><h4 class="method public">save<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">save</span><span class="nb-faded-text">(
+          boolean $cacheFlag
+              =
+              null
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Overrides xPDOObject::save to handle closure table edits.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$cacheFlag</dt>
+<dd>boolean<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>todo</dt>
+<dd>add code for moving posts to different parents.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::stripBBCode()"></a><h4 class="method public">stripBBCode<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">stripBBCode</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Strip any BBCode from the post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$str</dt>
+<dd>string<br><em>The string to strip</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em>The cleansed content</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.2</a>.
+    </small></body></html>

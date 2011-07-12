@@ -20,9 +20,11 @@
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package discuss
- */
-/**
- * @package discuss
+ * @subpackage mysql
  */
 require_once (strtr(realpath(dirname(dirname(__FILE__))), '\\', '/') . '/disbangroup.class.php');
+/**
+ * @package discuss
+ * @subpackage mysql
+ */
 class disBanGroup_mysql extends disBanGroup {}
