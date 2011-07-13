@@ -1,5 +1,5 @@
 <li class="dis-board-post [[+class]]">
-    <div class="right dis-latest" style="width: 25%"><a class="dis-last" href="[[+url]]"></a>
+    <div class="right dis-latest"><a class="dis-last" href="[[+url]]"></a>
         [[%discuss.last_post]] [[+createdon]]
         <br />[[%discuss.by? &author=`[[+author_link]]`]]
     </div>
