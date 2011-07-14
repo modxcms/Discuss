@@ -1,0 +1,439 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Discuss API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">distreeparser.class.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CdisTreeParser">disTreeParser</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Discuss</p>
+<div class="long-description"><p>Copyright 2010-11 by Shaun McCormick <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;">&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;</a></p>
+
+<p>This file is part of Discuss, a native forum for MODx Revolution.</p>
+
+<p>Discuss is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.</p>
+
+<p>Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with
+Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+Suite 330, Boston, MA 02111-1307 USA</p>
+</div>
+<a name="classes"></a><a id="\disTreeParser"></a><h2 class="class">\disTreeParser<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>todo</dt>
+<dd>lots of code cleanup.</dd>
+<dt>Properties</dt>
+<dd><a class="property protected" href="#%5CdisTreeParser::%24last">$last</a></dd>
+<dd><a class="property protected" href="#%5CdisTreeParser::%24openThread">$openThread</a></dd>
+<dd><a class="property protected" href="#%5CdisTreeParser::%24output">$output</a></dd>
+<dd><a class="property protected" href="#%5CdisTreeParser::%24tpl">$tpl</a></dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CdisTreeParser::__construct()">__construct</a></dd>
+<dd><a class="method private" href="#%5CdisTreeParser::_iterate()">_iterate</a></dd>
+<dd><a class="method protected" href="#%5CdisTreeParser::getOpenThread()">getOpenThread</a></dd>
+<dd><a class="method public" href="#%5CdisTreeParser::parse()">parse</a></dd>
+<dd><a class="method protected" href="#%5CdisTreeParser::setOpenThread()">setOpenThread</a></dd>
+<dd><a class="method protected" href="#%5CdisTreeParser::setOpenThreadChildren()">setOpenThreadChildren</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Handles row-parsing of naive tree data.</p>
+<div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\disTreeParser::$last"></a><h4 class="property protected">$last<div class="to-top"><a href="#%5CdisTreeParser">jump to class</a></div>
+</h4>
+<div class="property">
+<code>string <span class="highlight">$last</span> = ''</code><p class="short-description">The last node</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::$openThread"></a><h4 class="property protected">$openThread<div class="to-top"><a href="#%5CdisTreeParser">jump to class</a></div>
+</h4>
+<div class="property">
+<code>array <span class="highlight">$openThread</span> = 'array'</code><p class="short-description">The current open tree node</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd>array</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::$output"></a><h4 class="property protected">$output<div class="to-top"><a href="#%5CdisTreeParser">jump to class</a></div>
+</h4>
+<div class="property">
+<code>string <span class="highlight">$output</span> = ''</code><p class="short-description">The current output buffer</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::$tpl"></a><h4 class="property protected">$tpl<div class="to-top"><a href="#%5CdisTreeParser">jump to class</a></div>
+</h4>
+<div class="property">
+<code>string <span class="highlight">$tpl</span> = ''</code><p class="short-description">The tpl to use for each node</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\disTreeParser::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#disTreeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          <a href="_discuss.class.html#%5CDiscuss">\Discuss</a> $discuss, array $config
+              =
+              array
+          )
+        </span>
+        :
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$discuss</dt>
+<dd>\Discuss<br><em>A reference to the Discuss instance</em>
+</dd>
+<dt>$config</dt>
+<dd>array<br><em>An array of configuration options</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::_iterate()"></a><h4 class="method private">_iterate<div class="to-top"><a href="#disTreeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_iterate</span><span class="nb-faded-text">(
+          array $current
+          )
+        </span>
+        :
+        string</code><p class="short-description">Iterate across the node</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$current</dt>
+<dd>array<br><em>The current array iteration</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>private</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>private</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::getOpenThread()"></a><h4 class="method protected">getOpenThread<div class="to-top"><a href="#disTreeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getOpenThread</span><span class="nb-faded-text">(
+          int $depth
+          )
+        </span>
+        :
+        string</code><p class="short-description">Get the current open thread node in the tree</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$depth</dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::parse()"></a><h4 class="method public">parse<div class="to-top"><a href="#disTreeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">parse</span><span class="nb-faded-text">(
+          array $array, string $tpl
+          )
+        </span>
+        :
+        array|string</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$array</dt>
+<dd>array<br><em>The current data array</em>
+</dd>
+<dt>$tpl</dt>
+<dd>string<br><em>The template for the node</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array|string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::setOpenThread()"></a><h4 class="method protected">setOpenThread<div class="to-top"><a href="#disTreeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setOpenThread</span><span class="nb-faded-text">(
+          string $string, int $depth
+          )
+        </span>
+        :
+        void</code><p class="short-description">Set the current open thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$string</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>$depth</dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disTreeParser::setOpenThreadChildren()"></a><h4 class="method protected">setOpenThreadChildren<div class="to-top"><a href="#disTreeParser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setOpenThreadChildren</span><span class="nb-faded-text">(
+          int $depth, string $string
+          )
+        </span>
+        :
+        void</code><p class="short-description">Set the current open thread's children</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$depth</dt>
+<dd>int<br><em></em>
+</dd>
+<dt>$string</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.2</a>.
+    </small></body></html>

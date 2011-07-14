@@ -22,17 +22,27 @@
  * @package discuss
  */
 /**
- * Encapsulates the interaction of MODx manager with an HTTP request.
- *
- * {@inheritdoc}
+ * Handles all basic Discuss request handling within the forums.
  *
  * @package discuss
- * @extends modRequest
+ * @subpackage request
  */
 class DisRequest {
+    /**
+     * The default controller for the request
+     * @var string $controller
+     */
     public $controller = 'home';
+    /**
+     * Any page-specific options for the loaded controller
+     * @var array $pageOptions
+     */
     public $pageOptions = array();
 
+    /**
+     * @param Discuss $discuss A reference to the Discuss instance
+     * @param array $config An array of configuration properties
+     */
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
         $this->modx =& $discuss->modx;
@@ -120,6 +130,11 @@ class DisRequest {
         return $o;
     }
 
+    /**
+     * Return the file path to the specified controller
+     * @param string $controller
+     * @return array An array of file location, template location, and controller name information
+     */
     public function getControllerFile($controller = 'home') {
         $controllerFile = $this->discuss->config['controllersPath'].'web/'.$controller;
         if (!file_exists($controllerFile.'.php') && file_exists($controllerFile.'/index.php')) {
@@ -283,6 +298,20 @@ class DisRequest {
         $this->debugTimer = $tstart;
         return $this->debugTimer;
     }
+
+    /**
+     * Return the current debug time.
+     * @return string
+     */
+    public function getDebugTime() {
+        $mtime= microtime();
+        $mtime= explode(" ", $mtime);
+        $mtime= $mtime[1] + $mtime[0];
+        $tend= $mtime;
+        $totalTime= ($tend - $this->debugTimer);
+        $totalTime= sprintf("%2.4f s", $totalTime);
+        return $totalTime;
+    }
     /**
      * Ends the debug timer and returns the total number of seconds Discuss took
      * to run.
@@ -291,12 +320,7 @@ class DisRequest {
      * @return int The end total time to execute the script.
      */
     protected function endDebugTimer() {
-        $mtime= microtime();
-        $mtime= explode(" ", $mtime);
-        $mtime= $mtime[1] + $mtime[0];
-        $tend= $mtime;
-        $totalTime= ($tend - $this->debugTimer);
-        $totalTime= sprintf("%2.4f s", $totalTime);
+        $totalTime = $this->getDebugTime();
         $this->debugTimer = false;
         return $totalTime;
     }

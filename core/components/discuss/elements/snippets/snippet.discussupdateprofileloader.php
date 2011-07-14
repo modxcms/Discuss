@@ -33,16 +33,23 @@ if (empty($profile)) return '';
 
 $fields = $profile->toArray();
 
+$useExtended = $modx->getOption('useExtended',$scriptProperties,true);
+if ($useExtended) {
+    $extended = $fields['extended'];
+    if (!empty($extended)) {
+        $fields = array_merge($extended,$fields);
+    }
+}
 $disUser = $modx->getObject('disUser',array(
-    'user' => $modx->user->get('id'),
+   'user' => $modx->user->get('id'),
 ));
+
 if ($disUser) {
-    $fields = array_merge($fields,$disUser->toArray());
+    $fields = array_merge($disUser->toArray(),$fields);
     $fields['show_email'] = !empty($fields['show_email']) ? 1 : 0;
     $fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
     $fields['post_sort_dir'] = $disUser->getSetting('discuss.post_sort_dir','ASC');
 }
-
 
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);
 if (!empty($_REQUEST['discuss']) && !empty($forumsResourceId)) {

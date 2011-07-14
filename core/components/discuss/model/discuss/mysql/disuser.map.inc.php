@@ -1,6 +1,7 @@
 <?php
 /**
  * @package discuss
+ * @subpackage mysql
  */
 $xpdo_meta_map['disUser']= array (
   'package' => 'discuss',

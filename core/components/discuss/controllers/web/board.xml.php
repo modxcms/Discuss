@@ -37,7 +37,7 @@ if ($board == null) $discuss->sendErrorPage();
 $discuss->setPageTitle($board->get('name'));
 
 /* add user to board readers */
-if (!empty($scriptProperties['read']) && $discuss->isLoggedIn) {
+if (!empty($scriptProperties['read']) && $discuss->user->isLoggedIn) {
     $board->read($discuss->user->get('id'));
 }
 

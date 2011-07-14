@@ -1,0 +1,401 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Discuss API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">disthreadquestion.class.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CdisThreadQuestion">disThreadQuestion</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description"></p>
+<div class="long-description">
+</div>
+<a name="classes"></a><a id="\disThreadQuestion"></a><h2 class="class">\disThreadQuestion<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread">\disThread</a></dd>
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>Properties</dt>
+<dd><a class="property public" href="#%5CdisThreadQuestion::%24canMarkAsAnswer">$canMarkAsAnswer</a></dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canMarkAsAnswer()">canMarkAsAnswer</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::fetchPosts()">fetchPosts</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::get()">get</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::handleThreadViewActions()">handleThreadViewActions</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::markAsAnswer()">markAsAnswer</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::prepareThreadView()">prepareThreadView</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::unmarkAsAnswer()">unmarkAsAnswer</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description"></p>
+<div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\disThreadQuestion::$canMarkAsAnswer"></a><h4 class="property public">$canMarkAsAnswer<div class="to-top"><a href="#%5CdisThreadQuestion">jump to class</a></div>
+</h4>
+<div class="property">
+<code>boolean <span class="highlight">$canMarkAsAnswer</span> = ''</code><p class="short-description">Whether or not the active user can mark this thread as an answer</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\disThreadQuestion::canMarkAsAnswer()"></a><h4 class="method public">canMarkAsAnswer<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canMarkAsAnswer</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Check to see if active user can mark a post as the answer for this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::fetchPosts()"></a><h4 class="method public">fetchPosts<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">fetchPosts</span><span class="nb-faded-text">(
+          mixed $post
+              =
+              false, array $options
+              =
+              array
+          )
+        </span>
+        :
+        array</code><p class="short-description">Fetch all posts for this question, sorting the correct answer at the top</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$post</dt>
+<dd>mixed<br><em>A reference to a disPost or ID of disPost to start the posts from</em>
+</dd>
+<dt>$options</dt>
+<dd>array<br><em>An array of options for sorting, limiting and display</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::get()"></a><h4 class="method public">get<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">get</span><span class="nb-faded-text">(
+          string $k, string $format, string $formatTemplate
+          )
+        </span>
+        :
+        mixed|string</code><p class="short-description">Overrides xPDOObject::get to provide Solved tag on title if thread is solved</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$k</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>$format</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>$formatTemplate</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed|string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::handleThreadViewActions()"></a><h4 class="method public">handleThreadViewActions<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">handleThreadViewActions</span><span class="nb-faded-text">(
+          array $scriptProperties
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Handle actions on thread view</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$scriptProperties</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::markAsAnswer()"></a><h4 class="method public">markAsAnswer<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">markAsAnswer</span><span class="nb-faded-text">(
+          int $postId
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Mark a Post as an answer for this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$postId</dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::prepareThreadView()"></a><h4 class="method public">prepareThreadView<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">prepareThreadView</span><span class="nb-faded-text">(
+          array $postArray
+          )
+        </span>
+        :
+        array</code><p class="short-description">Prepares the thread view, useful for extra processing when using derivative thread types</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$postArray</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::unmarkAsAnswer()"></a><h4 class="method public">unmarkAsAnswer<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">unmarkAsAnswer</span><span class="nb-faded-text">(
+          int $postId
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Mark this thread as unsolved</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$postId</dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.2</a>.
+    </small></body></html>

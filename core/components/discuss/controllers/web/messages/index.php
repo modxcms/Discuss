@@ -92,7 +92,7 @@ foreach ($messages as $message) {
     $threadArray['idx'] = $idx+1;
 
     $threadArray['unread'] = '';
-    if (!$threadArray['viewed'] && $discuss->isLoggedIn) {
+    if (!$threadArray['viewed'] && $discuss->user->isLoggedIn) {
         $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
     }
 

@@ -155,7 +155,7 @@ foreach ($posts as $post) {
     $postArray['action_quote'] = '';
     $postArray['action_modify'] = '';
     $postArray['action_remove'] = '';
-    if (!$thread->get('locked') && $discuss->isLoggedIn) {
+    if (!$thread->get('locked') && $discuss->user->isLoggedIn) {
         if ($globalCanReplyPost) {
             $postArray['action_reply'] = '<a href="'.$discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
             $postArray['action_quote'] = '<a href="'.$discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';

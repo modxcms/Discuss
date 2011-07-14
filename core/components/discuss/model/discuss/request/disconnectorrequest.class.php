@@ -24,14 +24,35 @@
 require_once MODX_CORE_PATH . 'model/modx/modconnectorresponse.class.php';
 /**
  * @package discuss
+ * @subpackage request
+ * @extends modConnectorResponse
  */
 class disConnectorRequest extends modConnectorResponse {
+    /**
+     * A reference to the Discuss instance
+     * @var Discuss $discuss
+     */
+    public $discuss = null;
+    /**
+     * An array of configuration options
+     * @var array $config
+     */
+    public $config = array();
 
+    /**
+     * @param Discuss $discuss A reference to the Discuss instance
+     * @param array $config An array of configuration options
+     */
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
         parent::__construct($discuss->modx,$config);
     }
 
+    /**
+     * Load a processor from a connector
+     * @param string $action The processor action to load
+     * @return string The output of the processor
+     */
     public function handle($action = '') {
         if (empty($action) && !empty($_REQUEST['action'])) $action = $_REQUEST['action'];
         if (!isset($this->modx->error)) $this->loadErrorHandler();

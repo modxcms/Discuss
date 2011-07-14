@@ -20,6 +20,7 @@
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package discuss
+ * @subpackage parser
  */
 require_once dirname(__FILE__).'/disparser.class.php';
 
@@ -98,7 +99,7 @@ class disBBCodeParser extends disParser {
 
         $message = preg_replace("#\[font=[\"']?(.*?)[\"']?\]#i",'<span style="font-family:\\1;">',$message);
         $message = preg_replace("#\[color=[\"']?(.*?)[\"']?\]#i",'<span style="color:\\1;">',$message);
-        $message = preg_replace("#\[size=[\"']?(.*?)[\"']?\]#si",'<span style="font-size:\\1;">',$message);
+        $message = preg_replace_callback("#\[size=[\"']?(.*?)[\"']?\]#si",array('disBBCodeParser','parseSizeCallback'),$message);
         $message = str_ireplace(array("[/size]", "[/font]", "[/color]"), "</span>", $message);
 
         $message = preg_replace('#\[/?left\]#si', '', $message);
@@ -106,6 +107,12 @@ class disBBCodeParser extends disParser {
         return $message;
     }
 
+    /**
+     * Strip all invalid HTML and convert to HTML entities all remaining HTML
+     * 
+     * @param string $message The content to parse
+     * @return string The stripped and cleaned content
+     */
     public function stripHtml($message) {
     	$message = $this->br2nl($message);
         $message = preg_replace(array(
@@ -135,14 +142,13 @@ class disBBCodeParser extends disParser {
         $message = str_replace('-->','',$message);
 
         /* convert all remaining HTML to entities */
-        $message = htmlentities($message);
+        $message = htmlentities($message,null,'UTF-8');
 
         return $message;
     }
 
     /**
      * Prevent javascript:/ftp: injections via URLs
-     * 
      * @static
      * @param array $matches
      * @return string
@@ -151,11 +157,36 @@ class disBBCodeParser extends disParser {
         $url = str_replace(array('javascript:','ftp:'),'',strip_tags($matches[1]));
         return '<a href="'.$url.'">'.$matches[2].'</a>';
     }
-    
+
+    /**
+     * Parse [size] tags
+     * @static
+     * @param array $matches
+     * @return string
+     */
+    public static function parseSizeCallback($matches) {
+        $size = intval(str_replace(array('pt','px','em'),'',$matches[1]));
+        if ($size > 24) $size = 24;
+        if ($size < 6) $size = 6;
+        return '<span style="font-size:'.$size.'px;">';
+    }
+
+    /**
+     * Parse [code] tags
+     * @static
+     * @param array $matches
+     * @return string
+     */
     public static function parseCodeCallback($matches) {
         $code = disBBCodeParser::stripBRTags($matches[1]);
         return '<div class="dis-code"><pre class="brush: php; toolbar: false">'.$code.'</pre></div>';
     }
+    /**
+     * Parse [code=language] tags
+     * @static
+     * @param array $matches
+     * @return string
+     */
     public static function parseCodeSpecificCallback($matches) {
         $type = !empty($matches[1]) ? $matches[1] : 'php';
         $availableTypes = array('applescript','actionscript3','as3','bash','shell','coldfusion','cf','cpp','c','c#','c-sharp','csharp','css','delphi','pascal','diff','patch','pas','erl','erlang','groovy','java','jfx','javafx','js','jscript','javascript','perl','pl','php','text','plain','py','python','ruby','rails','ror','rb','sass','scss','scala','sql','vb','vbnet','xml','xhtml','xslt','html');
@@ -163,6 +194,12 @@ class disBBCodeParser extends disParser {
         $code = disBBCodeParser::stripBRTags($matches[2]);
         return '<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">'.$code.'</pre></div>';
     }
+    /**
+     * Parse [email] tags
+     * @static
+     * @param array $matches
+     * @return string
+     */
     public static function parseEmailCallback($matches) {
         if (empty($matches[1])) return '';
         $message = str_replace(array('<br>','<br />','<br/>'),'',$matches[1]);
@@ -192,6 +229,12 @@ class disBBCodeParser extends disParser {
         $message = preg_replace("#\[li\](.*?)\[/li\]#si",'<li>\\1</li>',$message);
         return preg_replace_callback("#\[list\](.*?)\[/list\]#si",array('disBBCodeParser','parseListCallback'),$message);
     }
+    /**
+     * Parse [list] tags
+     * @static
+     * @param array $matches
+     * @return mixed|string
+     */
     public static function parseListCallback($matches) {
         if (empty($matches[1])) return '';
         $message = str_replace(array('<br>','<br />','<br/>'),'',disBBCodeParser::stripBRTags($matches[1]));
@@ -208,6 +251,12 @@ class disBBCodeParser extends disParser {
     public function convertLinks($message) {
         return preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftp):\/\/)([\@a-z0-9\x21\x23-\x27\x2a-\x2e\x3a\x3b\/;\x3f-\x7a\x7e\x3d]+)/msxi",array('disBBCodeParser', 'parseLinksCallback'),$message);
     }
+    /**
+     * Parse [url] tags
+     * @static
+     * @param $matches
+     * @return string
+     */
     public static function parseLinksCallback($matches) {
         $url = $matches[1].$matches[2];
         $noFollow = ' rel="nofollow"';
@@ -294,6 +343,12 @@ class disBBCodeParser extends disParser {
         $message = preg_replace_callback('/\[quote(.*?)\]/msi',array('disBBCodeParser','parseQuoteCallback'), $new_string);
         return $message;
     }
+    /**
+     * Parse [quote] tags and append information about them
+     * @static
+     * @param array $matches
+     * @return string
+     */
     public static function parseQuoteCallback($matches) {
         $attributes = array();
         $attrs = explode(' ',$matches[1]);
@@ -482,6 +537,11 @@ class disBBCodeParser extends disParser {
         return $message;
     }
 
+    /**
+     * Cleanup and sanitize [img] tags to prevent injections
+     * @param string $message
+     * @return string
+     */
     public function cleanupImg($message) {
         preg_match_all('~&lt;img\s+src=((?:&quot;)?)((?:https?://|ftps?://)\S+?)\\1(?:\s+alt=(&quot;.*?&quot;|\S*?))?(?:\s?/)?&gt;~i', $message, $matches, PREG_PATTERN_ORDER);
         if (!empty($matches[0])) {

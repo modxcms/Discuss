@@ -26,13 +26,18 @@
  * instantiate directly.
  *
  * @abstract
+ * @package discuss
+ * @subpackage parser
  */
 abstract class disParser {
     /** @var modX\xPDO A reference to the modX object. */
     public $modx;
     /** @var Discuss $discuss A reference to the Discuss object. */
     public $discuss;
-    
+
+    /**
+     * @param xPDO $modx A reference to the modX instance
+     */
     function __construct(xPDO &$modx) {
         $this->modx =& $modx;
         $this->discuss =& $modx->discuss;

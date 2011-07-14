@@ -24,20 +24,46 @@
 /**
  * Handles row-parsing of naive tree data.
  *
- * @TODO: lots of code cleanup.
+ * @todo lots of code cleanup.
  *
  * @package discuss
  */
 class disTreeParser {
+    /**
+     * The last node
+     * @var string
+     */
     protected $last = '';
+    /**
+     * The current open tree node
+     * @var array
+     */
     protected $openThread = array();
+    /**
+     * The current output buffer
+     * @var string
+     */
     protected $output = '';
+    /**
+     * The tpl to use for each node
+     * @var string
+     */
+    protected $tpl = '';
 
+    /**
+     * @param Discuss $discuss A reference to the Discuss instance
+     * @param array $config An array of configuration options
+     */
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
         $this->config = $config;
     }
 
+    /**
+     * @param array $array The current data array
+     * @param string $tpl The template for the node
+     * @return array|string
+     */
     public function parse(array $array,$tpl = '') {
         /* set a value not possible in a LEVEL column to allow the
          * first row to know it's "firstness" */
@@ -57,6 +83,13 @@ class disTreeParser {
         return $output;
     }
 
+    /**
+     * Iterate across the node
+     * 
+     * @access private
+     * @param array $current The current array iteration
+     * @return string
+     */
     private function _iterate($current){
         $depth = $current['depth'];
         $parent = $current['parent'];
@@ -106,6 +139,13 @@ class disTreeParser {
         return $item;
     }
 
+    /**
+     * Set the current open thread
+     *
+     * @param string $string
+     * @param int $depth
+     * @return void
+     */
     protected function setOpenThread($string, $depth) {
         if (!empty($this->openThread[$depth]) && $depth > 0) {
             $this->openThread[$depth - 1]['children'] .= $this->discuss->getChunk($this->tpl, $this->openThread[$depth]);
@@ -114,10 +154,21 @@ class disTreeParser {
         $this->openThread[$depth] = $string;
     }
 
+    /**
+     * Set the current open thread's children
+     * @param int $depth
+     * @param string $string
+     * @return void
+     */
     protected function setOpenThreadChildren($depth, $string) {
         $this->openThread[$depth]['children'] .= $string;
     }
 
+    /**
+     * Get the current open thread node in the tree
+     * @param int $depth
+     * @return string
+     */
     protected function getOpenThread($depth) {
         $thread = $this->discuss->getChunk($this->tpl, $this->openThread[$depth]);
         unset($this->openThread[$depth]);

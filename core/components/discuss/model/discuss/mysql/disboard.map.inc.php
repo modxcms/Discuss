@@ -1,6 +1,7 @@
 <?php
 /**
  * @package discuss
+ * @subpackage mysql
  */
 $xpdo_meta_map['disBoard']= array (
   'package' => 'discuss',
@@ -167,6 +168,25 @@ $xpdo_meta_map['disBoard']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
+    ),
+  ),
+  'indexes' => 
+  array (
+    'status' => 
+    array (
+      'alias' => 'status',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'status' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
   'aggregates' => 

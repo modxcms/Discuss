@@ -1,6 +1,7 @@
 <?php
 /**
  * @package discuss
+ * @subpackage mysql
  */
 $xpdo_meta_map['disBanGroup']= array (
   'package' => 'discuss',

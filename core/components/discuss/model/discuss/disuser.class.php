@@ -25,18 +25,62 @@
  * @package discuss
  */
 class disUser extends xPDOSimpleObject {
+    /**
+     * If the user is inactive
+     * @const INACTIVE
+     */
     const INACTIVE = 0;
+    /**
+     * If the user is active
+     * @const ACTIVE
+     */
     const ACTIVE = 1;
+    /**
+     * If the user is unconfirmed
+     * @const UNCONFIRMED
+     */
     const UNCONFIRMED = 2;
+    /**
+     * If the user is banned
+     * @const BANNED
+     */
     const BANNED = 3;
+    /**
+     * If the user is awaiting moderation
+     * @const AWAITING_MODERATION
+     */
     const AWAITING_MODERATION = 4;
 
+    /**
+     * If the user is in an Administrator group
+     * @var boolean
+     */
     public $isAdmin;
+    /**
+     * If the user is in a global Moderator group
+     * @var boolean
+     */
     public $isGlobalModerator;
+    /**
+     * If the user is logged in
+     * @var boolean
+     */
     public $isLoggedIn = false;
+    /**
+     * An array of read boards for the user
+     * @var array
+     */
     public $readBoards = array();
+    /**
+     * An array of prepared, cached read boards for the user
+     * @var boolean
+     */
     public $readBoardsPrepared = false;
 
+    /**
+     * Initialize the user, setup basic metadata for them, and log their activity time.
+     * @return bool
+     */
     public function init() {
         $this->isLoggedIn = true;
 
@@ -90,6 +134,11 @@ class disUser extends xPDOSimpleObject {
         return !empty($this->readBoards[$boardId]);
     }
 
+    /**
+     * Get all unread threads by this user for a specific board
+     * @param int $boardId The ID of the board to look for
+     * @return array An array of thread data
+     */
     public function getUnreadThreadsForBoard($boardId) {
         $threads = array();
         $stmt = $this->xpdo->query('
@@ -143,7 +192,7 @@ class disUser extends xPDOSimpleObject {
                     }
                     break;
                 case 'last_active':
-                    if (!$this->get('show_online') && !$this->xpdo->discuss->user->isAdmin()) {
+                    if (!$this->get('show_online') && !$this->isAdmin()) {
                         $v = '';
                     } elseif (!empty($v) && $v != '-001-11-30 00:00:00') {
                         $v = strftime($this->xpdo->discuss->dateFormat,strtotime($v));
@@ -152,7 +201,7 @@ class disUser extends xPDOSimpleObject {
                     }
                     break;
                 case 'email':
-                    if (!$this->get('show_email') && !$this->xpdo->discuss->user->isAdmin()) {
+                    if (!$this->get('show_email') && !$this->isAdmin()) {
                         $v = '';
                     }
                     break;
@@ -213,12 +262,12 @@ class disUser extends xPDOSimpleObject {
         if (!empty($avatar) || !empty($avatarService)) {
             if (!empty($avatarService)) {
                 if ($avatarService == 'gravatar') {
-                    $avatarUrl = $this->xpdo->getOption('discuss.gravatar_url',null,'http://www.gravatar.com/avatar/').md5($this->get('email'));
+                    $avatarUrl = $this->xpdo->getOption('discuss.gravatar_url',null,'http://www.gravatar.com/avatar/').md5(strtolower(trim($this->_fields['email'])));
                     $avatarUrl .= '?d='.$this->xpdo->getOption('discuss.gravatar_default',null,'mm');
                     $avatarUrl .= '&r='.$this->xpdo->getOption('discuss.gravatar_rating',null,'g');
                 }
             } else {
-                $avatarUrl = $this->xpdo->getOption('discuss.files_url').'/profile/'.$this->get('user').'/'.$this->get('avatar');
+                $avatarUrl = $this->xpdo->getOption('discuss.files_url').'/profile/'.$this->get('user').'/'.$avatar;
             }
         }
         return $avatarUrl;

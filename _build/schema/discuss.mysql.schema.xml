@@ -46,7 +46,11 @@
         <field key="status" dbtype="integer" precision="4" phptype="integer" attributes="unsigned" null="false" default="1" index="index" />
         <field key="locked" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" index="index" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-        
+
+        <index alias="status" name="status" primary="false" unique="false" type="BTREE">
+            <column key="status" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="Category" class="disCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Parent" class="disBoard" local="parent" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Children" class="disBoard" local="id" foreign="parent" cardinality="many" owner="local" />
@@ -162,7 +166,7 @@
         <field key="title" dbtype="varchar" precision="255" phptype="string" default="" null="false" index="fulltext" indexgrp="search" />
         <field key="message" dbtype="text" phptype="string" null="false" index="fulltext" indexgrp="search" />
         <field key="author" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
-        <field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="false" index="index" />
         <field key="editedby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" />
         <field key="editedon" dbtype="datetime" phptype="datetime" null="false" />
         <field key="icon" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
@@ -172,6 +176,35 @@
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="depth" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="answer" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
+
+        <index alias="board" name="board" primary="false" unique="false" type="BTREE">
+            <column key="board" length="" collation="A" null="false" />
+        </index>
+        <index alias="thread" name="thread" primary="false" unique="false" type="BTREE">
+            <column key="thread" length="" collation="A" null="false" />
+        </index>
+        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="author" name="author" primary="false" unique="false" type="BTREE">
+            <column key="author" length="" collation="A" null="false" />
+        </index>
+        <index alias="createdon" name="createdon" primary="false" unique="false" type="BTREE">
+            <column key="createdon" length="" collation="A" null="false" />
+        </index>
+        <index alias="allow_replies" name="allow_replies" primary="false" unique="false" type="BTREE">
+            <column key="allow_replies" length="" collation="A" null="false" />
+        </index>
+        <index alias="depth" name="depth" primary="false" unique="false" type="BTREE">
+            <column key="depth" length="" collation="A" null="false" />
+        </index>
+        <index alias="answer" name="answer" primary="false" unique="false" type="BTREE">
+            <column key="answer" length="" collation="A" null="false" />
+        </index>
+        <index alias="search" name="search" primary="false" unique="false" type="FULLTEXT">
+            <column key="title" length="" collation="A" null="false" />
+            <column key="message" length="" collation="A" null="true" />
+        </index>
         
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />

@@ -58,6 +58,11 @@ if (!empty($fields['post_sort_dir'])) {
     $disUser->setSetting('discuss.post_sort_dir',$fields['post_sort_dir'],'ASC');
 }
 
+/* clear cache */
+$modx->getCacheManager();
+$modx->cacheManager->delete('discuss/board/user/');
+$modx->cacheManager->delete('discuss/board/index/');
+
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);
 
 if (!empty($_REQUEST['discuss']) && !empty($forumsResourceId)) {

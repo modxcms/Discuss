@@ -22,11 +22,15 @@
  * @package discuss
  */
 /**
- * @package Discuss
+ * @package discuss
  * @subpackage spam
  */
 class disStopForumSpam {
 
+    /**
+     * @param Discuss $discuss A reference to the Discuss instance
+     * @param array $config An array of configuration properties
+     */
     function __construct(Discuss &$discuss, array $config = array()) {
         $this->discuss =& $discuss;
         $this->modx =& $discuss->modx;

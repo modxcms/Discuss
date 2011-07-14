@@ -108,6 +108,6 @@ if (!$post->save()) {
 /* log activity */
 $discuss->logActivity('post_modify',$post->toArray(),$post->getUrl());
 
-$url = $post->getUrl('thread/',true);
+$url = $post->getUrl('thread/');
 $modx->sendRedirect($url);
 return true;

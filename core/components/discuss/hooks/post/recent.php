@@ -29,20 +29,16 @@ $start = $modx->getOption('start',$scriptProperties,0);
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disPostLi');
 
-/* recent posts */
-$c = $modx->newQuery('disThread');
-$c->query['distinct'] = 'DISTINCT';
-$c->innerJoin('disBoard','Board');
-$c->innerJoin('disPost','FirstPost');
-$c->innerJoin('disPost','LastPost');
-$c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
-$c->innerJoin('disUser','LastAuthor');
+/* get latest 10 posts */
+$c = $modx->newQuery('disPost');
+$c->innerJoin('disThread','Thread');
+$c->innerJoin('disBoard','Board','Board.id = Thread.board');
 $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
 $c->where(array(
-    'Board.status:!=' => disBoard::STATUS_INACTIVE,
+    'Board.status != 0',
 ));
-
 /* ignore spam/recycle bin boards */
+
 $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
 if (!empty($spamBoard)) {
     $c->where(array(
@@ -55,10 +51,9 @@ if (!empty($trashBoard)) {
         'Board.id:!=' => $trashBoard,
     ));
 }
-
 /* usergroup protection */
 $groups = $discuss->user->getUserGroups();
-if (!$discuss->user->isAdmin()) {
+if (!$discuss->user->isAdmin() && false) {
     if (!empty($groups)) {
         // restrict boards by user group if applicable
         $g = array(
@@ -73,26 +68,50 @@ if (!$discuss->user->isAdmin()) {
         ));
     }
 }
-/* if showing only recent posts for a user */
-if (!empty($scriptProperties['user'])) {
-    $c->innerJoin('disPost','Posts');
-    $c->where(array(
-        'Posts.author' => $scriptProperties['user'],
-    ));
-}
 /* ignore boards */
-if ($discuss->user->isLoggedIn) {
+if ($discuss->user->isLoggedIn && false) {
     $ignoreBoards = $discuss->user->get('ignore_boards');
-    if (!empty($ignoreBoards)) {
+    if (!empty($ignoreBoards) && false) {
         $c->where(array(
             'Board.id:NOT IN' => explode(',',$ignoreBoards),
         ));
     }
 }
+/* if showing only recent posts for a user */
+if (!empty($scriptProperties['user']) && false) {
+    $c->innerJoin('disPost','Posts');
+    $c->where(array(
+        'Posts.author' => $scriptProperties['user'],
+    ));
+}
+$c->groupby('disPost.thread');
 /* if requesting total */
 if (!empty($scriptProperties['getTotal'])) {
-    $total = $modx->getCount('disThread',$c);
+    $total = $modx->getCount('disPost',$c);
 }
+$c->select(array(
+    'id' => 'disPost.thread',
+));
+$c->sortby('disPost.createdon','DESC');
+$c->limit($limit,$start);
+$c->prepare();
+$sql = $c->toSql();
+$stmt = $modx->query($sql);
+$ids = array();
+if ($stmt) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $ids[] = $row['id'];
+    }
+    $stmt->closeCursor();
+}
+
+/* recent posts */
+$c = $modx->newQuery('disThread');
+$c->innerJoin('disBoard','Board');
+$c->innerJoin('disPost','FirstPost');
+$c->innerJoin('disPost','LastPost');
+$c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
+$c->innerJoin('disUser','LastAuthor');
 $c->select(array(
     'disThread.id',
     'disThread.replies',
@@ -103,17 +122,17 @@ $c->select(array(
     'disThread.answered',
     'disThread.class_key',
     'FirstPost.title',
-    'Board.name AS board_name',
-    'LastPost.id AS post_id',
+    'board_name' => 'Board.name',
+    'post_id' => 'LastPost.id',
     'LastPost.thread',
     'LastPost.author',
     'LastPost.createdon',
-    'LastPostThread.replies AS last_post_replies',
-    'LastAuthor.username AS author_username',
-    'LastAuthor.use_display_name AS author_udn',
-    'LastAuthor.display_name AS author_display_name',
+    'last_post_replies' => 'LastPostThread.replies',
+    'author_username' => 'LastAuthor.username',
+    'author_udn' => 'LastAuthor.use_display_name',
+    'author_display_name' => 'LastAuthor.display_name',
 ));
-if (!empty($scriptProperties['showIfParticipating'])) {
+if (!empty($scriptProperties['showIfParticipating']) && false) {
     $c->select(array(
         '(SELECT GROUP_CONCAT(pAuthor.id)
             FROM '.$modx->getTableName('disPost').' AS pPost
@@ -122,14 +141,16 @@ if (!empty($scriptProperties['showIfParticipating'])) {
          ) AS participants',
     ));
 }
-$c->sortby('LastPost.createdon','DESC');
-$c->limit($limit,$start);
-$recentPosts = $modx->getCollection('disThread',$c);
+$c->where(array(
+    'disThread.id:IN' => $ids,
+));
+$c->sortby('FIELD(disThread.id,'.implode(',',$ids).')','');
+$recentThreads = $modx->getCollection('disThread',$c);
 
 /* iterate */
 $list = array();
 $idx = 0;
-foreach ($recentPosts as $thread) {
+foreach ($recentThreads as $thread) {
     $thread->buildIcons();
     $thread->buildCssClass('board-post');
     $thread->calcLastPostPage();

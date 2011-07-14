@@ -1,0 +1,1450 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Discuss API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">discuss.class.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CDiscuss">Discuss</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Discuss</p>
+<div class="long-description"><p>Copyright 2010-11 by Shaun McCormick <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;">&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;</a></p>
+
+<p>This file is part of Discuss, a native forum for MODx Revolution.</p>
+
+<p>Discuss is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.</p>
+
+<p>Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with
+Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+Suite 330, Boston, MA 02111-1307 USA</p>
+</div>
+<a name="classes"></a><a id="\Discuss"></a><h2 class="class">\Discuss<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>Constants</dt>
+<dd><a class="constant" href="#%5CDiscuss::DATETIME_FORMATTED">DATETIME_FORMATTED</a></dd>
+<dt>Properties</dt>
+<dd><a class="property public" href="#%5CDiscuss::%24debugTimer">$debugTimer</a></dd>
+<dd><a class="property public" href="#%5CDiscuss::%24hooks">$hooks</a></dd>
+<dd><a class="property public" href="#%5CDiscuss::%24isLoggedIn">$isLoggedIn</a></dd>
+<dd><a class="property public" href="#%5CDiscuss::%24search">$search</a></dd>
+<dd><a class="property public" href="#%5CDiscuss::%24url">$url</a></dd>
+<dd><a class="property public" href="#%5CDiscuss::%24user">$user</a></dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CDiscuss::__construct()">__construct</a></dd>
+<dd><a class="method private" href="#%5CDiscuss::_getTplChunk()">_getTplChunk</a></dd>
+<dd><a class="method private" href="#%5CDiscuss::_initSession()">_initSession</a></dd>
+<dd><a class="method private" href="#%5CDiscuss::_initUser()">_initUser</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::arrayDiffFast()">arrayDiffFast</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::buildActionButtons()">buildActionButtons</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::convertMODXTags()">convertMODXTags</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::formatDate()">formatDate</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::getChunk()">getChunk</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::getEventRenderResult()">getEventRenderResult</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::getEventResult()">getEventResult</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::getIp()">getIp</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::initialize()">initialize</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::invokeRenderEvent()">invokeRenderEvent</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::loadHooks()">loadHooks</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::loadImporter()">loadImporter</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::loadProcessor()">loadProcessor</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::loadRequest()">loadRequest</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::loadSearch()">loadSearch</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::loadTreeParser()">loadTreeParser</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::logActivity()">logActivity</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::now()">now</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::processResult()">processResult</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::sendEmail()">sendEmail</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::sendErrorPage()">sendErrorPage</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::sendUnauthorizedPage()">sendUnauthorizedPage</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::setPageTitle()">setPageTitle</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::setSessionPlace()">setSessionPlace</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">The base class for Discuss.</p>
+<div class="long-description">
+</div>
+<h3>Constants</h3>
+<div>
+<a id="\Discuss::DATETIME_FORMATTED"></a><h4 class="constant">DATETIME_FORMATTED<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="constant">
+<code> <span class="highlight">DATETIME_FORMATTED</span> = '%Y-%m-%d %H:%M:%S'
+      </code><p class="short-description">The MySQL datetime format</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="constant-info">
+<dt>value</dt>
+<dd>%Y-%m-%d %H:%M:%S</dd>
+<dt>const</dt>
+<dd>DATETIME_FORMATTED</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\Discuss::$debugTimer"></a><h4 class="property public">$debugTimer<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\int/boolean <span class="highlight">$debugTimer</span> = 'false'</code><p class="short-description">The starting value of the execution time.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\int/boolean<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>false</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::$hooks"></a><h4 class="property public">$hooks<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property">
+<code><a href="_dishooks.class.html#%5CdisHooks">\disHooks</a> <span class="highlight">$hooks</span> = ''</code><p class="short-description">The hooks class for loading application-specific hooks</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_dishooks.class.html#%5CdisHooks">\disHooks</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::$isLoggedIn"></a><h4 class="property public">$isLoggedIn<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property">
+<code>bool <span class="highlight">$isLoggedIn</span> = 'false'</code><p class="short-description">Whether or not the active user is logged in</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>bool<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>false</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>deprecated</dt>
+<dd>Use user-&gt;isLoggedIn</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::$search"></a><h4 class="property public">$search<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property">
+<code><a href="_search_dissearch.class.html#%5CdisSearch">\disSearch</a> <span class="highlight">$search</span> = ''</code><p class="short-description">The Search class</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_search_dissearch.class.html#%5CdisSearch">\disSearch</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::$url"></a><h4 class="property public">$url<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property">
+<code>string <span class="highlight">$url</span> = ''</code><p class="short-description">The URL of the current Discuss home page</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::$user"></a><h4 class="property public">$user<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property">
+<code><a href="_disuser.class.html#%5CdisUser">\disUser</a> <span class="highlight">$user</span> = ''</code><p class="short-description">The current active disUser in Discuss</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disuser.class.html#%5CdisUser">\disUser</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Discuss::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          \modX $modx, array $config
+              =
+              array
+          )
+        </span>
+        :
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$modx</dt>
+<dd>\modX<br><em>A reference to the modX instance</em>
+</dd>
+<dt>$config</dt>
+<dd>array<br><em>An array of configuration properties</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::_getTplChunk()"></a><h4 class="method private">_getTplChunk<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_getTplChunk</span><span class="nb-faded-text">(
+          string $name, string $postFix
+              =
+              .chunk.tpl
+          )
+        </span>
+        :
+        \modChunk/boolean</code><p class="short-description">Returns a modChunk object from a template file.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$name</dt>
+<dd>string<br><em>The name of the Chunk. Will parse to name.chunk.tpl</em>
+</dd>
+<dt>$postFix</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\modChunk/boolean</dt>
+<dd><em>Returns the modChunk object if found, otherwise false.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>private</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>private</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::_initSession()"></a><h4 class="method private">_initSession<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_initSession</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Initializes the user session and updates forum activity</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>private</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>private</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::_initUser()"></a><h4 class="method private">_initUser<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_initUser</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Initializes the user, tracks their ip and activity, and loads their
+profile. Also loads topbar information and links.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>private</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>private</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::arrayDiffFast()"></a><h4 class="method public">arrayDiffFast<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">arrayDiffFast</span><span class="nb-faded-text">(
+          array $data1, array $data2
+          )
+        </span>
+        :
+        array</code><p class="short-description">A faster array_diff</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$data1</dt>
+<dd>array<br><em></em>
+</dd>
+<dt>$data2</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::buildActionButtons()"></a><h4 class="method public">buildActionButtons<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">buildActionButtons</span><span class="nb-faded-text">(
+          array $btns, string $cls
+          )
+        </span>
+        :
+        string</code><p class="short-description">Builds action button HTML.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$btns</dt>
+<dd>array<br><em></em>
+</dd>
+<dt>$cls</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The HTML for the action buttons</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::convertMODXTags()"></a><h4 class="method public">convertMODXTags<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">convertMODXTags</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Convert all MODX tags to html entities to prevent injection</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::formatDate()"></a><h4 class="method public">formatDate<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">formatDate</span><span class="nb-faded-text">(
+          string $datetime
+          )
+        </span>
+        :
+        string</code><p class="short-description">Format a date according to the default datetime</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$datetime</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::getChunk()"></a><h4 class="method public">getChunk<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getChunk</span><span class="nb-faded-text">(
+          string $name, array $properties
+              =
+              array
+          )
+        </span>
+        :
+        string</code><p class="short-description">Gets a Chunk and caches it; also falls back to file-based templates
+for easier debugging.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$name</dt>
+<dd>string<br><em>The name of the Chunk</em>
+</dd>
+<dt>$properties</dt>
+<dd>array<br><em>The properties for the Chunk</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The processed content of the Chunk</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::getEventRenderResult()"></a><h4 class="method public">getEventRenderResult<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getEventRenderResult</span><span class="nb-faded-text">(
+          array $rs
+          )
+        </span>
+        :
+        string</code><p class="short-description">Process MODx event results as a list of objs</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$rs</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::getEventResult()"></a><h4 class="method public">getEventResult<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getEventResult</span><span class="nb-faded-text">(
+          array $rs
+          )
+        </span>
+        :
+        string</code><p class="short-description">Process MODx event results</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$rs</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::getIp()"></a><h4 class="method public">getIp<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">getIp</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Get the IP of the current user</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::initialize()"></a><h4 class="method public">initialize<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">initialize</span><span class="nb-faded-text">(
+          string $ctx
+              =
+              web
+          )
+        </span>
+        :
+        void</code><p class="short-description">Initializes Discuss into different contexts.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$ctx</dt>
+<dd>string<br><em>The context to load. Defaults to web.</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>TODO</dt>
+<dd></dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::invokeRenderEvent()"></a><h4 class="method public">invokeRenderEvent<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">invokeRenderEvent</span><span class="nb-faded-text">(
+          string $name, array $placeholders
+              =
+              array, array $otherProperties
+              =
+              array
+          )
+        </span>
+        :
+        array</code><p class="short-description">Invoke an event that is supposed to return an array of placeholders to merge with the current set</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$name</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>$placeholders</dt>
+<dd>array<br><em></em>
+</dd>
+<dt>$otherProperties</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::loadHooks()"></a><h4 class="method public">loadHooks<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadHooks</span><span class="nb-faded-text">(
+          string $class
+              =
+              discuss.disHooks, string $path
+          )
+        </span>
+        :
+        <a href="_dishooks.class.html#%5CdisHooks">\disHooks</a>|null</code><p class="short-description">Load the hooks class</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$class</dt>
+<dd>string<br><em>The Hooks class to load</em>
+</dd>
+<dt>$path</dt>
+<dd>string<br><em>The path of the class to load</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>
+<a href="_dishooks.class.html#%5CdisHooks">\disHooks</a>|null</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::loadImporter()"></a><h4 class="method public">loadImporter<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadImporter</span><span class="nb-faded-text">(
+          string $class
+              =
+              DisSmfImport, string $path
+          )
+        </span>
+        :
+        \disImport</code><p class="short-description">Return an import class</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$class</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>$path</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\disImport</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::loadProcessor()"></a><h4 class="method public">loadProcessor<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadProcessor</span><span class="nb-faded-text">(
+          string $name, array $scriptProperties
+              =
+              array
+          )
+        </span>
+        :
+        bool|mixed</code><p class="short-description">Load a processor</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$name</dt>
+<dd>string<br><em></em>
+</dd>
+<dt>$scriptProperties</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool|mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::loadRequest()"></a><h4 class="method public">loadRequest<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadRequest</span><span class="nb-faded-text">(
+          string $class
+              =
+              discuss.request.DisRequest, string $path
+          )
+        </span>
+        :
+        <a href="_request_disrequest.class.html#%5CDisRequest">\DisRequest</a></code><p class="short-description">Load the request class</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$class</dt>
+<dd>string<br><em>The Request class to load</em>
+</dd>
+<dt>$path</dt>
+<dd>string<br><em>The path of the request class.</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_request_disrequest.class.html#%5CDisRequest">\DisRequest</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::loadSearch()"></a><h4 class="method public">loadSearch<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadSearch</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <a href="_search_dissearch.class.html#%5CdisSearch">\disSearch</a></code><p class="short-description">Load the selected search class</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_search_dissearch.class.html#%5CdisSearch">\disSearch</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::loadTreeParser()"></a><h4 class="method public">loadTreeParser<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">loadTreeParser</span><span class="nb-faded-text">(
+          string $class
+              =
+              discuss.disTreeParser, string $path
+          )
+        </span>
+        :
+        <a href="_distreeparser.class.html#%5CdisTreeParser">\disTreeParser</a></code><p class="short-description">Loads the Tree Parser to handle naive tree parsing into row-based HTML</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$class</dt>
+<dd>string<br><em>The name of the class to load.</em>
+</dd>
+<dt>$path</dt>
+<dd>string<br><em>The path by which to load the class.</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_distreeparser.class.html#%5CdisTreeParser">\disTreeParser</a></dt>
+<dd><em>The instantiated disTreeParser object.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::logActivity()"></a><h4 class="method public">logActivity<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">logActivity</span><span class="nb-faded-text">(
+          string $action, array $data
+              =
+              array, string $url
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Log forum activity (destructive/creative only, ie, delete_post, delete_thread, create_post, etc)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$action</dt>
+<dd>string<br><em>The action key that happened</em>
+</dd>
+<dt>$data</dt>
+<dd>array<br><em>An array of extra data to store with the activity</em>
+</dd>
+<dt>$url</dt>
+<dd>string<br><em>An optional URL to store</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::now()"></a><h4 class="method public">now<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">now</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Return the current time.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::processResult()"></a><h4 class="method public">processResult<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">processResult</span><span class="nb-faded-text">(
+          array $result
+              =
+              array
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Processes results from the error handler</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$result</dt>
+<dd>array<br><em>The result from the processor</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em>The success of the processor</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::sendEmail()"></a><h4 class="method public">sendEmail<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">sendEmail</span><span class="nb-faded-text">(
+          string $email, string $name, string $subject, array $properties
+              =
+              array
+          )
+        </span>
+        :
+        array</code><p class="short-description">Sends an email based on the specified information and templates.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$email</dt>
+<dd>string<br><em>The email to send to.</em>
+</dd>
+<dt>$name</dt>
+<dd>string<br><em>The name of the user to send to.</em>
+</dd>
+<dt>$subject</dt>
+<dd>string<br><em>The subject of the email.</em>
+</dd>
+<dt>$properties</dt>
+<dd>array<br><em>A collection of properties.</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::sendErrorPage()"></a><h4 class="method public">sendErrorPage<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">sendErrorPage</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Send user to the appropriate error page</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::sendUnauthorizedPage()"></a><h4 class="method public">sendUnauthorizedPage<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">sendUnauthorizedPage</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Send user to specific unauthorized page</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::setPageTitle()"></a><h4 class="method public">setPageTitle<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setPageTitle</span><span class="nb-faded-text">(
+          string $title
+          )
+        </span>
+        :
+        void</code><p class="short-description">Set the current pagetitle for the controller</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$title</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::setSessionPlace()"></a><h4 class="method public">setSessionPlace<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setSessionPlace</span><span class="nb-faded-text">(
+          string $place
+          )
+        </span>
+        :
+        </code><p class="short-description">Sets the current "place" the user is browsing. Used for user tracking
+purposes.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$place</dt>
+<dd>string<br><em>The place the user is currently at.</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.2</a>.
+    </small></body></html>

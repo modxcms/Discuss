@@ -20,6 +20,7 @@
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package discuss
+ * @subpackage import
  */
 /**
  * Handles importing data from SMF
@@ -28,25 +29,72 @@
  * @subpackage import
  */
 class DisSmfImport {
+    /**
+     * The default mysql datetime format.
+     * @const DATETIME_FORMATTED
+     */
     const DATETIME_FORMATTED = '%Y-%m-%d %H:%M:%S';
+    /**
+     * A reference to the modX instance.
+     * @var modX $modx
+     */
     public $modx;
+    /**
+     * A reference to the Discuss instance.
+     * @var Discuss $discuss
+     */
     public $discuss;
+    /**
+     * A reference to the PDO instance that connects to the old SMF database.
+     * @var PDO $pdo
+     */
     public $pdo;
+    /**
+     * The prefix of the tables in the SMF database.
+     * @var string $tablePrefix
+     */
     public $tablePrefix = 'smf_';
-
+    /**
+     * A collection of cached members for cross-reference
+     * @var array $memberCache
+     */
     protected $memberCache = array();
+    /**
+     * A collection of cached member usernames for cross-reference
+     * @var array $memberNameCache
+     */
     protected $memberNameCache = array();
+    /**
+     * A collection of cached member groups for cross-reference
+     * @var array $memberGroupCache
+     */
     protected $memberGroupCache = array();
+    /**
+     * A collection of cached posts for cross-reference
+     * @var array $postCache
+     */
     protected $postCache = array();
 
+    /**
+     * Whether or not this import will actually save and commit the data.
+     * @var bool
+     */
     public $live = true;
 
+    /**
+     * The modes of the import to run.
+     * @var array $runImport
+     */
     public $runImport = array(
         'users' => false,
         'categories' => false,
         'private_messages' => false,
         'ignore_boards' => false,
     );
+    /**
+     * Options for the import.
+     * @var array $importOptions
+     */
     public $importOptions = array(
         'default_user_group' => 'Forum Full Member',
         'attachments_path' => false,
@@ -56,8 +104,9 @@ class DisSmfImport {
      * Left TODO:
      * - User Group management
      * - auto-assign all users to one group
+     *
+     * @param Discuss $discuss A reference to the Discuss instance
      */
-
     function __construct(Discuss &$discuss) {
         $this->discuss =& $discuss;
         $this->modx =& $discuss->modx;
@@ -69,10 +118,19 @@ class DisSmfImport {
         }
     }
 
+    /**
+     * Log a message to the browser/console
+     * @param string $msg
+     * @return void
+     */
     public function log($msg) {
         $this->modx->log(modX::LOG_LEVEL_INFO,$msg); flush();
     }
 
+    /**
+     * Get the connection to the SMF database and return a PDO instance
+     * @return PDO
+     */
     public function getConnection() {
         $systems = array();
         require $this->discuss->config['corePath'].'includes/systems.inc.php';
@@ -89,6 +147,11 @@ class DisSmfImport {
         return $this->pdo;
     }
 
+    /**
+     * Run the import.
+     * 
+     * @return void
+     */
     public function run() {
         if ($this->getConnection()) {
             if ($this->runImport['users']) {
@@ -111,6 +174,10 @@ class DisSmfImport {
         }
     }
 
+    /**
+     * Get the cache of Users and User Groups from the Discuss database
+     * @return void
+     */
     protected function collectUserCaches() {
         $this->log('Collecting User cache...');
         $userTable = $this->modx->getTableName('disUser');
@@ -134,10 +201,20 @@ class DisSmfImport {
         }
     }
 
+    /**
+     * Escape and prefix any table
+     * 
+     * @param string $table
+     * @return string
+     */
     public function getFullTableName($table) {
         return '`'.$this->tablePrefix.$table.'`';
     }
 
+    /**
+     * Import User Groups into the Discuss database
+     * @return string
+     */
     public function importUserGroups() {
         $stmt = $this->pdo->query('
             SELECT * FROM '.$this->getFullTableName('membergroups').'
@@ -175,6 +252,10 @@ class DisSmfImport {
         $stmt->closeCursor();
     }
 
+    /**
+     * Import Users into the Discuss database
+     * @return string
+     */
     public function importUsers() {
         $stmt = $this->pdo->query('
             SELECT * FROM '.$this->getFullTableName('members').'
@@ -280,6 +361,13 @@ class DisSmfImport {
         $stmt->closeCursor();
     }
 
+    /**
+     * Import the UserGroup memberships for the specified User
+     * 
+     * @param disUser $user
+     * @param array $row
+     * @return void
+     */
     public function importUserGroupMemberships(disUser $user,array $row) {
         $groups = array();
         /* if a default group */
@@ -310,6 +398,10 @@ class DisSmfImport {
         }
     }
 
+    /**
+     * Import Categories into Discuss
+     * @return void
+     */
     public function importCategories() {
         $stmt = $this->pdo->query('
             SELECT * FROM '.$this->getFullTableName('categories').'
@@ -344,7 +436,15 @@ class DisSmfImport {
         }
     }
 
-
+    /**
+     * Import all Boards for this category and/or Board parent
+     * 
+     * @param disCategory $category
+     * @param array $row
+     * @param null $parentBoard
+     * @param int $smfParent
+     * @return array
+     */
     public function importBoards(disCategory $category,array $row,$parentBoard = null,$smfParent = 0) {
         $bst = $this->pdo->query('
             SELECT * FROM '.$this->getFullTableName('boards').'
@@ -408,6 +508,13 @@ class DisSmfImport {
         $bst->closeCursor();
     }
 
+    /**
+     * Import all topics for this Board
+     * 
+     * @param disBoard $board
+     * @param array $brow
+     * @return array
+     */
     public function importTopics(disBoard $board,array $brow) {
         $sql = '
             SELECT
@@ -484,10 +591,22 @@ class DisSmfImport {
         $tst->closeCursor();
     }
 
+    /**
+     * Return the current time in MySQL datetime format
+     * @return string
+     */
     public function now() {
         return strftime(DisSmfImport::DATETIME_FORMATTED);
     }
 
+    /**
+     * Import all posts for the specified thread
+     * 
+     * @param disThread $thread
+     * @param disPost $threadPost
+     * @param array $trow
+     * @return array
+     */
     public function importPosts(disThread $thread,disPost $threadPost,array $trow = array()) {
         $sql = '
             SELECT
@@ -538,6 +657,12 @@ class DisSmfImport {
         );
     }
 
+    /**
+     * Import all attachments for this post
+     * @param disPost $post
+     * @param array $prow
+     * @return array
+     */
     public function importAttachments(disPost $post,array $prow = array()) {
         $ast = $this->pdo->query('
             SELECT
@@ -577,6 +702,11 @@ class DisSmfImport {
         $ast->closeCursor();
     }
 
+    /**
+     * Import all Private Messages into private Threads
+     * 
+     * @return array
+     */
     public function importPrivateMessages() {
         $sql = '
             SELECT
@@ -712,6 +842,11 @@ class DisSmfImport {
         $tst->closeCursor();
     }
 
+    /**
+     * Migrate ignore boards into Users
+     * 
+     * @return void
+     */
     public function migrateIgnoreBoards() {
         $this->log('Migrating Ignore Boards...');
         $this->log('Collecting User cache...');

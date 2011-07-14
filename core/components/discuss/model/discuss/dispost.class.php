@@ -31,7 +31,7 @@ class disPost extends xPDOSimpleObject {
     /**
      * Overrides xPDOObject::save to handle closure table edits.
      *
-     * TODO: add code for moving posts to different parents.
+     * @todo add code for moving posts to different parents.
      *
      * @param boolean $cacheFlag
      * @return boolean
@@ -216,6 +216,11 @@ class disPost extends xPDOSimpleObject {
         return $indexed;
     }
 
+    /**
+     * Remove a Post from the index
+     * 
+     * @return bool True if removed
+     */
     public function removeFromIndex() {
         $removed = false;
         if ($this->xpdo->discuss->loadSearch()) {
@@ -224,6 +229,12 @@ class disPost extends xPDOSimpleObject {
         return $removed;
     }
 
+    /**
+     * Move a post to a different board
+     *
+     * @param int|disBoard $boardId The ID of the board or disBoard obj to move to
+     * @return bool
+     */
     public function move($boardId) {
         /* check to see if only post in thread, if so, just move thread */
         $thread = $this->xpdo->getObject('disThread',array('id' => $this->get('thread')));
@@ -251,6 +262,23 @@ class disPost extends xPDOSimpleObject {
             $this->addOne($newThread,'Thread');
             $this->addOne($newBoard,'Board');
             $this->save();
+
+            $thread->set('replies',$thread->get('replies')-1);
+            $thread->save();
+
+            $newBoard = $this->xpdo->getObject('disBoard',$newBoard->get('id'));
+            if ($newBoard) {
+                $newBoard->set('num_replies',$newBoard->get('num_replies')+1);
+                $newBoard->set('total_posts',$newBoard->get('total_posts')+1);
+                $newBoard->save();
+            }
+            $oldBoard = $this->xpdo->getObject('disBoard',$oldBoard->get('id'));
+            if ($oldBoard) {
+                $oldBoard->set('num_replies',$oldBoard->get('num_replies')-1);
+                $oldBoard->set('total_posts',$oldBoard->get('total_posts')-1);
+                $oldBoard->save();
+            }
+
         }
         return true;
     }
@@ -390,6 +418,10 @@ class disPost extends xPDOSimpleObject {
         return $removed;
     }
 
+    /**
+     * Load the Parsing class for the post
+     * @return disParser
+     */
     public function loadParser() {
         if (empty($this->parser)) {
             $parserClass = $this->xpdo->getOption('discuss.parser_class',null,'disBBCodeParser');
@@ -402,6 +434,10 @@ class disPost extends xPDOSimpleObject {
         return $this->parser;
     }
 
+    /**
+     * Get the parsed content of this post
+     * @return string The parsed content of the post
+     */
     public function getContent() {
         $message = $this->get('message');
         
@@ -444,6 +480,11 @@ class disPost extends xPDOSimpleObject {
         return $message;
     }
 
+    /**
+     * Strip any BBCode from the post
+     * @param string $str The string to strip
+     * @return mixed The cleansed content
+     */
     public function stripBBCode($str) {
          $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
          $replace = '';
@@ -574,11 +615,23 @@ class disPost extends xPDOSimpleObject {
         }
     }
 
+    /**
+     * Clear all post caches
+     *
+     * @static
+     * @param xPDO $xpdo A reference to the xPDO|modX instance
+     * @return bool True if cleared
+     */
     public static function clearAllCache(xPDO $xpdo) {
         $xpdo->getCacheManager();
         return $xpdo->cacheManager->delete('discuss/post/');
     }
 
+    /**
+     * Convert all BR tags to newlines
+     * @param string $str The string to parse
+     * @return string The converted content
+     */
     public function br2nl($str) {
         return str_replace(array('<br>','<br />','<br/>'),"\n",$str);
     }
@@ -609,6 +662,11 @@ class disPost extends xPDOSimpleObject {
         return $thread->canReply();
     }
 
+    /**
+     * Whether or not the user can report this post as spam
+     *
+     * @return bool True if the active user can report this post as spam
+     */
     public function canReport() {
         return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_report');
     }
@@ -630,7 +688,9 @@ class disPost extends xPDOSimpleObject {
         if ($replies > $perPage) {
             if (!$last) {
                 $idx = $this->get('idx');
-                if (empty($idx)) $idx = 1;
+                if (empty($idx)) { /* if we're not in a list thread page, so no idx is calculated */
+                    $idx = $this->calculateIdx();
+                }
             } else {
                 $idx = $replies - 1;
             }
@@ -644,6 +704,33 @@ class disPost extends xPDOSimpleObject {
         }
         $this->set('page',$page);
         return $page;
+    }
+
+    /**
+     * Calculate the position of this post in the thread when it is not known
+     *
+     * @return int The index position of the post in its thread
+     */
+    public function calculateIdx() {
+        $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
+        $c = $this->xpdo->newQuery('disPost');
+        $c->select($this->xpdo->getSelectColumns('disPost','disPost','',array('id')));
+        $c->where(array(
+            'thread' => $this->get('thread'),
+        ));
+        $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('createdon')),$sortDir);
+        $c->prepare();
+        $sql = $c->toSql();
+        $stmt = $this->xpdo->query($sql);
+        $i = 0;
+        if ($stmt && $stmt instanceof PDOStatement) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $i++;
+                if ($row['id'] == $this->get('id')) break;
+            }
+            $stmt->closeCursor();
+        }
+        return $i;
     }
 
     /**

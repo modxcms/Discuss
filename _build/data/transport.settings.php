@@ -77,7 +77,7 @@ $settings['discuss.archive_threads_after']->fromArray(array(
 $settings['discuss.attachments_allowed_filetypes']= $modx->newObject('modSystemSetting');
 $settings['discuss.attachments_allowed_filetypes']->fromArray(array(
     'key' => 'discuss.attachments_allowed_filetypes',
-    'value' => 'doc,gif,jpg,pdf,png,txt,zip,gz,bz2,xls,psd,css,tgz,odt,sql,tpl,rtf,xml',
+    'value' => 'doc,gif,jpg,pdf,png,txt,zip,gz,bz2,xls,psd,css,tgz,odt,sql,tpl,rtf,xml,docx',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Attachments',

@@ -53,7 +53,7 @@ if (empty($boards)) {
         $board->getLastPostUrl();
         $boards[] = $board->toArray('',true,true);
     }
-    $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,3600));
+    $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,0));
 }
 
 /* now loop through boards */
