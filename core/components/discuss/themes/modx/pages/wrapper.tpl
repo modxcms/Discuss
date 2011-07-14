@@ -4,11 +4,21 @@
     <meta charset="utf-8">
     <!--[if IE]><![endif]-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <base href="[[++site_url]]">
+    <base href="http://localhost:8888/revolution/">
     <title>Test Stuff</title>
     <meta name="title" content="Test Page">    
     <meta name="author" content="MODX Systems, LLC">
-    <link rel="stylesheet" href="http://localhost:8888/revolution/assets/css/site.css">
+
+<link rel="stylesheet" href="/revolution/assets/components/discuss/themes/modx/css/index.css" type="text/css" />
+<script type="text/javascript" src="/revolution/assets/components/discuss/themes/modx/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/revolution/assets/components/discuss/themes/modx/js/discuss.js"></script>
+<script type="text/javascript" src="/revolution/assets/components/discuss/themes/modx/js/sh/shCore.js"></script>
+<script type="text/javascript" src="/revolution/assets/components/discuss/themes/modx/js/sh/shAutoloader.js"></script>
+<script type="text/javascript" src="/revolution/assets/components/discuss/themes/modx/js/sh/shDiscuss.js"></script>
+<script type="text/javascript">// <![CDATA[
+DIS.url = "forums/";DIS.shJsUrl = "/revolution/assets/components/discuss/themes/modx/js/sh/";
+// ]]></script>
+<script type="text/javascript" src="/revolution/assets/components/discuss/themes/modx/js/dis.board.js"></script>
 
 </head>
 <body>
