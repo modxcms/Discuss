@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <!--[if IE]><![endif]-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <base href="http://localhost:8888/revolution/">
+	<base href="[[!++site_url]]">
     <title>Test Stuff</title>
     <meta name="title" content="Test Page">    
     <meta name="author" content="MODX Systems, LLC">
