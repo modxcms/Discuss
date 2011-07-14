@@ -23,9 +23,7 @@
         	<h1 post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h1>
         	<div>[[+content]]</div>
             <div class="dis-actions">[[+actions]]</div>
-
-            <div>[[+report_link]]</div>
-                
+            
 		    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
 		
 		        <div class="dis-post-footer">
@@ -40,6 +38,11 @@
 		         	<br class="clearfix" />
 		        [[+children:notempty=`<ol class="dis-board-thread [[+children_class]]">[[+children]]</ol>`]]
 		    </div>
+		    
+		    
+            <div class="dis-report">[[+report_link]]</div>
+                
+
         </div>
 
 
