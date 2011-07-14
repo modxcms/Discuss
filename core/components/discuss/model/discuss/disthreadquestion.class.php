@@ -187,9 +187,23 @@ class disThreadQuestion extends disThread {
     public function prepareThreadView(array $postArray) {
         if ($this->canMarkAsAnswer() && $postArray['id'] != $this->get('post_first')) {
             if (!empty($postArray['answer'])) {
-                $postArray['actions'][] = '<a href="'.$this->getUrl(false,array('unanswer' => $postArray['id'])).'">'.$this->xpdo->lexicon('discuss.unmark_as_answer').'</a>';
+                $postArray['action_mark_as_answer'] = $this->xpdo->discuss->getChunk('disActionLink',array(
+                    'url' => $this->getUrl(false,array('unanswer' => $postArray['id'])),
+                    'text' => $this->xpdo->lexicon('discuss.unmark_as_answer'),
+                    'class' => 'dis-report-link',
+                    'id' => '',
+                    'attributes' => '',
+                ));
+                $postArray['actions'][] = $postArray['action_mark_as_answer'];
             } else {
-                $postArray['actions'][] = '<a href="'.$this->getUrl(false,array('answer' => $postArray['id'])).'">'.$this->xpdo->lexicon('discuss.mark_as_answer').'</a>';
+                $postArray['action_mark_as_answer'] = $this->xpdo->discuss->getChunk('disActionLink',array(
+                    'url' => $this->getUrl(false,array('answer' => $postArray['id'])),
+                    'text' => $this->xpdo->lexicon('discuss.mark_as_answer'),
+                    'class' => 'dis-report-link',
+                    'id' => '',
+                    'attributes' => '',
+                ));
+                $postArray['actions'][] = $postArray['action_mark_as_answer'];
             }
         }
 
