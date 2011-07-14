@@ -149,21 +149,55 @@ foreach ($posts['results'] as $post) {
     $postArray['actions'] = array();
     if (($isAdmin || $isModerator || !$thread->get('locked')) && $discuss->user->isLoggedIn) {
         if ($post->canReply()) {
-            $postArray['action_reply'] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
+            $postArray['action_reply'] = $discuss->getChunk('disActionLink',array(
+                'url' => $discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))),
+                'text' => $modx->lexicon('discuss.reply'),
+                'class' => 'dis-post-reply',
+                'id' => '',
+                'attributes' => '',
+            ));
             $postArray['actions'][] = $postArray['action_reply'];
-            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
+            $postArray['action_quote'] = $discuss->getChunk('disActionLink',array(
+                'url' => $discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)),
+                'text' => $modx->lexicon('discuss.quote'),
+                'class' => 'dis-post-quote',
+                'id' => '',
+                'attributes' => '',
+            ));
+            $postArray['actions'][] = $postArray['action_quote'];
         }
 
         $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
         if ($canModifyPost) {
-            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('thread/modify',array('post' => $post->get('id'))).'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+            $postArray['action_modify'] = $discuss->getChunk('disActionLink',array(
+                'url' => $discuss->request->makeUrl('thread/modify',array('post' => $post->get('id'))),
+                'text' => $modx->lexicon('discuss.modify'),
+                'class' => 'dis-post-modify',
+                'id' => '',
+                'attributes' => '',
+            ));
+            $postArray['actions'][] = $postArray['action_modify'];
         }
 
         $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
         if ($canRemovePost) {
-            $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('post/remove',array('post' => $post->get('id'))).'" class="dis-post-remove">'.$modx->lexicon('discuss.remove').'</a>';
+            $postArray['action_remove'] = $discuss->getChunk('disActionLink',array(
+                'url' => $discuss->request->makeUrl('post/remove',array('post' => $post->get('id'))),
+                'text' => $modx->lexicon('discuss.remove'),
+                'class' => 'dis-post-remove',
+                'id' => '',
+                'attributes' => '',
+            ));
+            $postArray['actions'][] = $postArray['action_remove'];
             if ($isModerator || $isAdmin) {
-                $postArray['actions'][] = '<a href="'.$discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))).'" class="dis-post-spam">'.$modx->lexicon('discuss.post_spam').'</a>';
+                $postArray['action_spam'] = $discuss->getChunk('disActionLink',array(
+                    'url' => $discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))),
+                    'text' => $modx->lexicon('discuss.post_spam'),
+                    'class' => 'dis-post-spam',
+                    'id' => '',
+                    'attributes' => '',
+                ));
+                $postArray['actions'][] = $postArray['action_spam'];
             }
         }
     }
@@ -185,10 +219,13 @@ foreach ($posts['results'] as $post) {
     }
 
     if ($canReportPost) {
-        $postArray['report_link'] = '<a class="dis-report-link" href="'.$discuss->request->makeUrl('post/report',array(
-            'thread' => $postArray['thread'],
-            'post' => $postArray['id']
-        )).'">'.$modx->lexicon('discuss.report_to_mod').'</a>';
+        $postArray['report_link'] = $discuss->getChunk('disActionLink',array(
+            'url' => $discuss->request->makeUrl('post/report',array('post' => $postArray['id'],'thread' => $postArray['thread'])),
+            'text' => $modx->lexicon('discuss.report_to_mod'),
+            'class' => 'dis-report-link',
+            'id' => '',
+            'attributes' => '',
+        ));
     } else {
         $postArray['report_link'] = '';
     }
