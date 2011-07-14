@@ -9,21 +9,25 @@
 
 [[+pagination:notempty=`<div class="dis-pagination">[[<span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> ]]<ul>[[+pagination]]</ul></div>`]]
 ]]
+
+		<div class="dis-viewing">[[+readers]]</div>
+
+
 <div>
 	<ol class="dis-board-thread">
 		[[+posts]]
+		<li>[[+pagination:notempty=`<div class="dis-pagination">[[<span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> ]]<ul>[[+pagination]]</ul></div>`]]</li>
 	</ol>
+
 </div>
+		<div class="dis-thread-actions">[[+threadactionbuttons]]</div>
 
 
-<div class="dis-thread-viewing">
-[[+readers]]
-</div>
 <br class="clearfix" />
 
-[[+pagination:notempty=`<div class="dis-pagination">[[<span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> ]]<ul>[[+pagination]]</ul></div>`]]
 
-[[+threadactionbuttons]]
+
+
 
 [[+belowThread]]
 

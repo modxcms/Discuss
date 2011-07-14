@@ -41,11 +41,9 @@
 		    
 		    
             <div class="dis-report">[[+report_link]]</div>
-                
-
         </div>
 
-
+<br class="clearfix" />
 
     </div>
 

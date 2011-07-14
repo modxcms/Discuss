@@ -1,4 +1,17 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <base href="[[++site_url]]">
+    <title>Test Stuff</title>
+    <meta name="title" content="Test Page">    
+    <meta name="author" content="MODX Systems, LLC">
+    <link rel="stylesheet" href="http://localhost:8888/revolution/assets/css/site.css">
 
+</head>
+<body>
 <div id="header">
 		<a class="hidden" href="#main">Skip to content</a>
 		<header class="container">
@@ -41,30 +54,25 @@
 					[[+discuss.user.id:notempty=`<li class="last level1"><a href="[[~[[*id]]]]thread/unread_last_visit" class="last level1"><span class="Title">View New</span>Posts Since Last Visit</a></li>`]]
 					[[+discuss.user.id:notempty=`<li class="last level1"><a href="[[~[[*id]]]]thread/new_replies_to_posts" class="last level1"><span class="Title">[[%discuss.new_replies_to_posts]]</span>[[%discuss.new_replies_to_posts]]</a></li>`]]
 					[[+discuss.user.id:notempty=`<li class="last level1"><a href="[[~[[*id]]]]thread/recent" class="last level1"><span class="Title">View Recent Posts</span>My Latest Posts</a></li>`]]
-
-
-
 				</ul>   
 			</nav>
 		</header>
 	</div>
 	
 		<div id="Frame">
+		
 			<div id="Body">
+			
 				<div id="Content">
 					[[+content]]
 					
 				<!-- Close Content Inside home.tpl -->
-
-	
-	
-	
-
-			
 			
 			
 			</div>
+			
 	    </div>
+	    
     <div class="clear">&nbsp;</div>
 </div> 
 </body>
