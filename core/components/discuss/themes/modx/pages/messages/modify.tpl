@@ -26,11 +26,9 @@
     </label>
     <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" />
 
-    <div style="margin-left: 150px;">
-        <br class="clear" />
-        [[+buttons]]
-        <br class="clear" />
-    </div>
+
+    <div class="wysi-buttons">[[+buttons]]</div>
+    
 
     <label for="dis-thread-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>

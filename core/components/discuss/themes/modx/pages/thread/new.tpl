@@ -26,11 +26,8 @@
         <option value="disThreadQuestion">[[%discuss.question_and_answer]]</option>
     </select>
 
-    <div style="margin-left: 150px;">
-        <br class="clear" />
-        [[+buttons]]
-        <br class="clear" />
-    </div>
+    <div class="wysi-buttons">[[+buttons]]</div>
+
 
     <label for="dis-thread-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>
@@ -48,9 +45,9 @@
     <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]</label><br class="clear" />
 
     <div class="dis-form-buttons">
-        <input type="submit" class="dis-action-btn" name="dis-post-new" value="[[%discuss.thread_post_new]]" />
-        <input type="button" class="dis-action-btn dis-new-thread-preview" id="dis-new-thread-preview-btn" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
+        <input type="submit" class="Button" name="dis-post-new" value="[[%discuss.thread_post_new]]" />
+        <input type="button" class="Button dis-new-thread-preview" id="dis-new-thread-preview-btn" value="[[%discuss.preview]]" />
+        <input type="button" class="Button" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
     </div>
 </form>
 [[+discuss.error_panel]]

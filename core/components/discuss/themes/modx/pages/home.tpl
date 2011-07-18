@@ -53,10 +53,9 @@
     </li>
 </ul>
 
-	
 
 [[+bottom]]
-
+[[+actionbuttons]]
 				</div><!-- Close Content From Wrapper -->
 
 
@@ -65,8 +64,7 @@
 					
 						<div class="Box GuestBox">
 						   <h4>Welcome back [[+modx.user.username]]</h4>
-							<p>Some information.</p>
-						      [[+actionbuttons]]
+							<p>Some information. Test.</p>
 						</div>
 						
 						<div class="Box BoxCategories">

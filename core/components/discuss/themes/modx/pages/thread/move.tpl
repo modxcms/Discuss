@@ -20,7 +20,7 @@
     <br class="clear" />
     
     <div class="dis-form-buttons">
-    <input type="submit" name="move-thread" class="dis-action-btn" value="[[%discuss.thread_move]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+    <input type="submit" name="move-thread" class="Button" value="[[%discuss.thread_move]]" />
+    <input type="button" class="Button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>

@@ -3,26 +3,29 @@
         <div class="dis-post-author" id="dis-post-author-[[+id]]">
 
             <div class="dis-author">
-                <a href="[[~[[*id]]]]user/?user=[[+author.id]]">[[+author.avatar]]</a>
-                	<br />
-                	[[+author.username_link]]
-                    <br />[[+author.email]]
-                    [[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
-                    [[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
-                    <br />
-                    [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
+            	<a href="[[~[[*id]]]]user/?user=[[+author.id]]" class="auth-avatar">[[+author.avatar]]</a>
+            	<div class="auth-count">[[%discuss.posts]]: [[+author.posts]]</div>
+                <span>
+						[[+author.email]]
+						[[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
+						[[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
+					
+						
 		            <div class="dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
 		                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
 		            </div>
+                </span>
             </div>
+            
         </div>
-    
+
     
     	<div class="dis-post-content">
-        	<h4 class="created">[[+createdon]]</h4>
-        	<h1 post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h1>
+        	<h4 class="created">[[+author.username_link]] [[+createdon]]</h4>
+        	<a href="" class="dis-fav">Favorite</a>
+        	<a href="" class="dis-solved">Solved</a>
+            <div class="dis-actions"><span><ul>[[+actions]]<li>[[+report_link]]</li></ul></span></div>
         	<div>[[+content]]</div>
-            <div class="dis-actions">[[+actions]]</div>
             
 		    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
 		
@@ -40,7 +43,6 @@
 		    </div>
 		    
 		    
-            <div class="dis-report">[[+report_link]]</div>
         </div>
 
 <br class="clearfix" />

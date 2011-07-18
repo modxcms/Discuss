@@ -8,7 +8,6 @@
 ]]
 
 <div id="dis-reply-post-preview"></div>
-<br />
 <form action="[[~[[*id]]]]messages/reply?thread=[[!+fi.thread]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
@@ -30,11 +29,11 @@
     <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" />
 `]]
 
-    <div style="margin-left: 150px;">
-        <br class="clear" />
-        [[+buttons]]
-        <br class="clear" />
-    </div>
+
+
+    <div class="wysi-buttons">[[+buttons]]</div>
+    
+    
     
     <label for="dis-thread-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>

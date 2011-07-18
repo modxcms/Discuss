@@ -49,6 +49,5 @@
 
 <p class="dis-thread-viewing clear">[[+readers]]</p>
 <p class="dis-moderators">[[+moderators]]</p>
-<p class="dis-breadcrumbs clear">[[+trail]]</p>
 
 [[+bottom]]

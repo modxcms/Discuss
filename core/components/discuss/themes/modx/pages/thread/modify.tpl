@@ -21,11 +21,8 @@
     </label>
     <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
 
-    <div style="margin-left: 150px;">
-        <br class="clear" />
-        [[+buttons]]
-        <br class="clear" />
-    </div>
+    <div class="wysi-buttons">[[+buttons]]</div>
+
     
     <label for="dis-thread-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>
@@ -41,9 +38,9 @@
 
     <br class="clear" />
     <div class="dis-form-buttons">
-        <input type="submit" class="dis-action-btn" name="dis-post-modify" value="[[%discuss.save_changes]]" />
-        <input type="button" class="dis-action-btn dis-modify-post-preview-btn" id="dis-modify-post-preview-btn" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+        <input type="submit" class="Button" name="dis-post-modify" value="[[%discuss.save_changes]]" />
+        <input type="button" class="Button dis-modify-post-preview-btn" id="dis-modify-post-preview-btn" value="[[%discuss.preview]]" />
+        <input type="button" class="Button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
 

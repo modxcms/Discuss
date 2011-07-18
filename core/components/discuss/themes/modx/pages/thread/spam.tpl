@@ -14,7 +14,7 @@
     <br class="clear" />
 
     <div class="dis-form-buttons">
-    <input type="submit" name="spam-thread" class="dis-action-btn" value="[[%discuss.thread_spam]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+    <input type="submit" name="spam-thread" class="Button dis-action-btn" value="[[%discuss.thread_spam]]" />
+    <input type="button" class="Button dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>

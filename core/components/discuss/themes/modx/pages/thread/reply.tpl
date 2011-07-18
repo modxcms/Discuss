@@ -21,31 +21,29 @@
     </label>
     <input type="text" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" />
 
-    <div style="margin-left: 150px;">
-        <br class="clear" />
-        [[+buttons]]
-        <br class="clear" />
-    </div>
+
+    <div class="wysi-buttons">[[+buttons]]</div>
+
     
     <label for="dis-thread-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>
     </label>
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
-    <br class="clear" />
+    <br class="clearfix" />
 
     [[+attachment_fields]]
-    <br class="clear" />
+    <br class="clearfix" />
 
     [[+locked_cb]]
     [[+sticky_cb]]
     <label class="dis-cb"><input type="checkbox" name="notify" value="1" />[[%discuss.notify_of_replies]]</label>
     
-    <br class="clear" />
+    <br class="clearfix" />
     
     <div class="dis-form-buttons">
-        <input type="submit" class="dis-action-btn" name="dis-post-reply" value="[[%discuss.post_reply]]" />
-        <input type="button" class="dis-action-btn dis-reply-post-preview" name="dis-post-preview" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+        <input type="submit" class="Button" name="dis-post-reply" value="[[%discuss.post_reply]]" />
+        <input type="button" class="Button" name="dis-post-preview" value="[[%discuss.preview]]" />
+        <input type="button" class="Button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
 
