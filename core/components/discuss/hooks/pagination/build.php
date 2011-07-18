@@ -32,6 +32,7 @@ function addParam() {
 $current = (!empty($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
 $current = $current <= 0 ? 1 : $current;
 $limit = $modx->getOption('limit',$scriptProperties,20);
+$limit = $limit == 0 ? 1 : $limit;
 $count = $modx->getOption('count',$scriptProperties,0);
 $total = ceil($count / $limit);
 
