@@ -23,6 +23,11 @@
  */
 /**
  * Auto-redirect to profile page. Handles SMF-style redirects.
+ *
+ * @package discuss
+ *
+ * @var modX $modx
+ * @var array $params
  */
 $params['action'] = 'user';
 if (!empty($_REQUEST['u'])) {

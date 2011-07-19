@@ -23,6 +23,11 @@
  */
 /**
  * Handle the home page
+ *
+ * @package discuss
+ *
+ * @var Discuss $discuss
+ * @var modX $modx
  */
 $discuss->setSessionPlace('home');
 $discuss->setPageTitle($modx->getOption('discuss.forum_title'));

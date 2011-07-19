@@ -71,6 +71,10 @@ class Discuss {
      * @var disRequest $request
      */
     public $request;
+    /**
+     * @var DiscussController $controller
+     */
+    public $controller;
 
     /**
      * @param modX $modx A reference to the modX instance
