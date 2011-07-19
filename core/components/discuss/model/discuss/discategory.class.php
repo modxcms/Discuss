@@ -23,6 +23,17 @@
  */
 /**
  * Top-level aggregator for disBoard objects
+ *
+ * @property string $name A name for the Category
+ * @property string $description A user-provided description
+ * @property boolean $collapsible Not yet in use.
+ * @property int $rank The order of the category in sorting
+ * @property string $default_moderators A comma-separated list of Users to automatically make Moderators for all new boards in this Category
+ * @property string $default_usergroups A comma-separated list of UserGroups to automatically assign to all new boards in this Category
+ * @property int $integrated_id If imported from another system, the PK of the category in that system
+ *
+ * @property array $Boards A collection of Boards in this category
+ *
  * @package discuss
  */
 class disCategory extends xPDOSimpleObject {

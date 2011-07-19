@@ -22,8 +22,61 @@
  * @package discuss
  */
 /**
+ * The related object to modUser that stores Discuss-specific data for the User
  *
- * @property modUserGroup PrimaryGroup
+ * @property int $user
+ * @property string $username
+ * @property string $password
+ * @property string $email
+ * @property string $ip
+ *
+ * @property datetime $createdon
+ * @property string $name_first
+ * @property string $name_last
+ * @property string $gender
+ * @property date $birthdate
+ * @property string $website
+ * @property string $location
+ *
+ * @property int $status
+ * @property boolean $confirmed
+ * @property boolean $confirmedon
+ * @property datetime $last_login
+ * @property datetime $last_active
+ * @property string $ignore_boards
+ *
+ * @property string $signature
+ * @property string $title
+ * @property string $avatar
+ * @property string $avatar_service
+ *
+ * @property int $thread_last_visited
+ * @property int $posts
+ * @property boolean $show_email
+ * @property boolean $show_online
+ * @property int $primary_group
+ *
+ * @property boolean $synced
+ * @property string $source
+ * @property datetime $syncedat
+ * @property string $salt
+ * @property int $integrated_id
+ *
+ * @property string $display_name
+ * @property boolean $use_display_name
+ *
+ *
+ * @property modUser $User
+ * @property modUserGroup $PrimaryGroup
+ * @property disUserGroupProfile $PrimaryDiscussGroup
+ * @property disThread $ThreadLastVisited
+ *
+ * @property disUserModerated $UserModerated
+ * @property array $Posts
+ * @property array $PostReads
+ * @property disSession $Session
+ * @property array $Friends
+ * 
  * @package discuss
  */
 class disUser extends xPDOSimpleObject {

@@ -23,6 +23,13 @@
  */
 /**
  * The ancestor/descendant map of a disPost, with depth count.
+ *
+ * @property int $ancestor
+ * @property int $descendant
+ * @property int $depth
+ *
+ * @property disPost $Ancestor
+ * @property disPost $Descendant
  * @package discuss
  */
 class disPostClosure extends xPDOObject {}

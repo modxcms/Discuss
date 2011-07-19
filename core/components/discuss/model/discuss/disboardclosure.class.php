@@ -23,6 +23,13 @@
  */
 /**
  * The ancestor/descendant map of a disBoard, with depth count.
+ *
+ * @property int $ancestor
+ * @property int $descendant
+ * @property int $depth
+ *
+ * @property disBoard $Ancestor
+ * @property disBoard $Descendant
  * @package discuss
  */
 class disBoardClosure extends xPDOObject {}

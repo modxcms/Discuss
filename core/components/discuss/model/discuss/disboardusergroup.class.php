@@ -23,6 +23,14 @@
  */
 /**
  * Restricts access of a board to User Group(s)
+ *
+ * @property int $usergroup
+ * @property int $board
+ *
+ * @property disBoard $Board
+ * @property modUserGroup $UserGroup
+ * @property disUserGroupProfile $UserGroupProfile
+ * 
  * @package discuss
  */
 class disBoardUserGroup extends xPDOSimpleObject {}
