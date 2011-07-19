@@ -118,7 +118,6 @@
         <field key="sticky" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="private" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
         <field key="users" dbtype="mediumtext" phptype="string" null="true" default="" />
-        <field key="locked" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
         <field key="last_view_ip" dbtype="varchar" precision="120" phptype="string" null="false" default="" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 

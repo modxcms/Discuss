@@ -22,7 +22,19 @@
  * @package discuss
  */
 /**
- * Metadata class for modUserGroups
+ * Related object to the modUserGroup class, used for storing custom data specific to Discuss.
+ *
+ * @property int $usergroup The ID of the modUserGroup tied to this group.
+ * @property boolean $post_based Whether or not a certain number of posts is required to be a part of this group.
+ * @property int $min_posts If post-based, the minimum number of posts required to be in this group.
+ * @property string $color Optional. If set, users with this group as their primary will show this color when in lists.
+ * @property string $image Optional. An image badge for the user group/
+ * @property int $integrated_id If imported, the PK of the group from the imported system
+ *
+ * @property modUserGroup $UserGroup The related modUserGroup object
+ * @property array $Boards A collection of related Boards this UserGroup can access
+ *
+ * @see modUserGroup
  * @package discuss
  */
 class disUserGroupProfile extends xPDOSimpleObject {

@@ -22,6 +22,18 @@
  * @package discuss
  */
 /**
+ * A map of Threads to Users that marks when a User has read a Thread.
+ *
+ * @property int $user
+ * @property int $board
+ * @property int $thread
+ *
+ * @property disUser $User
+ * @property disBoard $Board
+ * @property disThread $Thread
+ *
+ * @see disThread
+ * @see disUser
  * @package discuss
  */
 class disThreadRead extends xPDOSimpleObject {}

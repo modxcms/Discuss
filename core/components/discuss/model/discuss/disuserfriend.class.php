@@ -22,6 +22,7 @@
  * @package discuss
  */
 /**
+ * @deprecated Not yet in use
  * @package discuss
  */
 class disUserFriend extends xPDOSimpleObject {}

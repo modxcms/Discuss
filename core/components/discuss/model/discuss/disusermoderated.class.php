@@ -23,6 +23,8 @@
  */
 /**
  * If a user is moderated, they will have a row in this table
+ *
+ * @deprecated Using Rampart instead
  * @package discuss
  */
 class disUserModerated extends xPDOSimpleObject {}

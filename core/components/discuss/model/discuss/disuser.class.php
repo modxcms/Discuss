@@ -226,7 +226,7 @@ class disUser extends xPDOSimpleObject {
      * @param string $keyPrefix
      * @param bool $rawValues
      * @param bool $excludeLazy
-     * @return void
+     * @return array
      */
     public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
         $values = parent :: toArray($keyPrefix,$rawValues,$excludeLazy);
@@ -783,7 +783,7 @@ class disUser extends xPDOSimpleObject {
 
     /**
      * Makes a link to the profile page for this user
-     * @return void
+     * @return string
      */
     public function getUrl() {
         $url = $this->xpdo->discuss->request->makeUrl('u/'.$this->get('username'));
@@ -860,6 +860,9 @@ class disUser extends xPDOSimpleObject {
         return $this->isLoggedIn && $this->xpdo->hasPermission('discuss.view_profiles');
     }
 
+    /**
+     * @return boolean
+     */
     public function canViewEmails() {
         return $this->isLoggedIn && $this->xpdo->hasPermission('discuss.view_emails');
     }
