@@ -187,29 +187,36 @@ class disThreadQuestion extends disThread {
     public function prepareThreadView(array $postArray) {
         if ($this->canMarkAsAnswer() && $postArray['id'] != $this->get('post_first')) {
             if (!empty($postArray['answer'])) {
+                $postArray['url_mark_as_answer'] = $this->getUrl(false,array('unanswer' => $postArray['id']));
                 $postArray['action_mark_as_answer'] = $this->xpdo->discuss->getChunk('disActionLink',array(
-                    'url' => $this->getUrl(false,array('unanswer' => $postArray['id'])),
+                    'url' => $postArray['url_mark_as_answer'],
                     'text' => $this->xpdo->lexicon('discuss.unmark_as_answer'),
-                    'class' => 'dis-report-link',
+                    'class' => 'dis-mark-as-answer-link',
                     'id' => '',
                     'attributes' => '',
                 ));
                 $postArray['actions'][] = $postArray['action_mark_as_answer'];
             } else {
+                $postArray['url_mark_as_answer'] = $this->getUrl(false,array('answer' => $postArray['id']));
                 $postArray['action_mark_as_answer'] = $this->xpdo->discuss->getChunk('disActionLink',array(
-                    'url' => $this->getUrl(false,array('answer' => $postArray['id'])),
+                    'url' => $postArray['url_mark_as_answer'],
                     'text' => $this->xpdo->lexicon('discuss.mark_as_answer'),
-                    'class' => 'dis-report-link',
+                    'class' => 'dis-mark-as-answer-link',
                     'id' => '',
                     'attributes' => '',
                 ));
                 $postArray['actions'][] = $postArray['action_mark_as_answer'];
             }
+        } else {
+            $postArray['url_mark_as_answer'] = '';
+            $postArray['action_mark_as_answer'] = '';
         }
 
         if (!empty($postArray['answer'])) {
             $postArray['class'][] = 'dis-post-answer';
             $postArray['title'] .= ' ('.$this->xpdo->lexicon('discuss.best_answer').')';
+        } else {
+
         }
         return $postArray;
     }
