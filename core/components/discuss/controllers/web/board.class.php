@@ -25,6 +25,7 @@
  * Displays the Board
  *
  * @package discuss
+ * @subpackage controllers
  */
 class DiscussBoardController extends DiscussController {
     /** @var disBoard $board */

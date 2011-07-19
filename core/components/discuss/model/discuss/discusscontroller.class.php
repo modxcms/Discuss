@@ -198,7 +198,7 @@ abstract class DiscussController {
      * @return void
      */
     protected function _renderBreadcrumbs() {
-        if (!empty($this->options['showBreadcrumbs'])) {
+        if (!isset($this->options['showBreadcrumbs']) || !empty($this->options['showBreadcrumbs'])) {
             $trail = $this->getBreadcrumbs();
             if (!empty($trail)) {
                 if (is_array($trail)) {

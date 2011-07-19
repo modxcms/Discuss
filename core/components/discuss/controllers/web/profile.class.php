@@ -25,20 +25,25 @@
  * Auto-redirect to profile page. Handles SMF-style redirects.
  *
  * @package discuss
- *
- * @var modX $modx
- * @var array $params
+ * @subpackage controllers
  */
-$params['action'] = 'user';
-if (!empty($_REQUEST['u'])) {
-    $params['user'] = $_REQUEST['u'];
+class DiscussProfileController extends DiscussController {
+    public function initialize() {
+        $params['action'] = 'user';
+        if (!empty($_REQUEST['u'])) {
+            $params['user'] = $_REQUEST['u'];
+        }
+        /* handle SMF profiles */
+        $qs = $_SERVER['QUERY_STRING'];
+        $u = strpos($qs,';u=');
+        if ($u !== false) {
+            $params['user'] = substr($qs,$u+3);
+            $params['i'] = true;
+        }
+        $url = $this->modx->makeUrl($this->modx->resource->get('id'),'',$params);
+        $this->modx->sendRedirect($url);
+    }
+    public function getPageTitle() { return ''; }
+    public function getSessionPlace() { return ''; }
+    public function process() {}
 }
-/* handle SMF profiles */
-$qs = $_SERVER['QUERY_STRING'];
-$u = strpos($qs,';u=');
-if ($u !== false) {
-    $params['user'] = substr($qs,$u+3);
-    $params['i'] = true;
-}
-$url = $modx->makeUrl($modx->resource->get('id'),'',$params);
-$modx->sendRedirect($url);

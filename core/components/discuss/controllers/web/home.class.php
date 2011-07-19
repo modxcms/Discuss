@@ -25,6 +25,7 @@
  * Handle the home page
  *
  * @package discuss
+ * @subpackage controllers
  */
 class DiscussHomeController extends DiscussController {
 
