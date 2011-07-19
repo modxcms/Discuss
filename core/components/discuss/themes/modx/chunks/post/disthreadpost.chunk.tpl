@@ -23,7 +23,7 @@
     	<div class="dis-post-content">
         	<h4 class="created">[[+author.username_link]] [[+createdon]]</h4>
         	<a href="" class="dis-fav">Favorite</a>
-        	<a href="" class="dis-solved">Solved</a>
+        	[[+link_mark_as_answer]]
             <div class="dis-actions"><span><ul>[[+actions]]<li>[[+report_link]]</li></ul></span></div>
         	<div>[[+content]]</div>
             
