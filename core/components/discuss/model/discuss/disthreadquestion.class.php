@@ -191,14 +191,14 @@ class disThreadQuestion extends disThread {
                 $postArray['action_mark_as_answer'] = $this->xpdo->discuss->getChunk('disActionLink',array(
                     'url' => $postArray['url_mark_as_answer'],
                     'text' => $this->xpdo->lexicon('discuss.unmark_as_answer'),
-                    'class' => 'dis-mark-as-answer-action',
+                    'class' => 'dis-mark-as-answer-action dis-solved',
                     'id' => '',
                     'attributes' => '',
                 ));
                 $postArray['link_mark_as_answer'] = $this->xpdo->discuss->getChunk('disLink',array(
                     'url' => $postArray['url_mark_as_answer'],
                     'text' => $this->xpdo->lexicon('discuss.solved'),
-                    'class' => 'dis-mark-as-answer-link',
+                    'class' => 'dis-mark-as-answer-link dis-solved',
                     'id' => '',
                     'attributes' => '',
                 ));
@@ -208,14 +208,14 @@ class disThreadQuestion extends disThread {
                 $postArray['action_mark_as_answer'] = $this->xpdo->discuss->getChunk('disActionLink',array(
                     'url' => $postArray['url_mark_as_answer'],
                     'text' => $this->xpdo->lexicon('discuss.mark_as_answer'),
-                    'class' => 'dis-mark-as-answer-action',
+                    'class' => 'dis-mark-as-answer-action dis-unsolved',
                     'id' => '',
                     'attributes' => '',
                 ));
                 $postArray['link_mark_as_answer'] = $this->xpdo->discuss->getChunk('disLink',array(
                     'url' => $postArray['url_mark_as_answer'],
                     'text' => $this->xpdo->lexicon('discuss.unsolved'),
-                    'class' => 'dis-mark-as-answer-link',
+                    'class' => 'dis-mark-as-answer-link dis-unsolved',
                     'id' => '',
                     'attributes' => '',
                 ));
