@@ -195,7 +195,7 @@ class disThreadQuestion extends disThread {
                     'id' => '',
                     'attributes' => '',
                 ));
-                $postArray['link_mark_as_answer'] = $this->xpdo->discuss->getChunk('disActionLink',array(
+                $postArray['link_mark_as_answer'] = $this->xpdo->discuss->getChunk('disLink',array(
                     'url' => $postArray['url_mark_as_answer'],
                     'text' => $this->xpdo->lexicon('discuss.solved'),
                     'class' => 'dis-mark-as-answer-link',
@@ -212,7 +212,7 @@ class disThreadQuestion extends disThread {
                     'id' => '',
                     'attributes' => '',
                 ));
-                $postArray['link_mark_as_answer'] = $this->xpdo->discuss->getChunk('disActionLink',array(
+                $postArray['link_mark_as_answer'] = $this->xpdo->discuss->getChunk('disLink',array(
                     'url' => $postArray['url_mark_as_answer'],
                     'text' => $this->xpdo->lexicon('discuss.unsolved'),
                     'class' => 'dis-mark-as-answer-link',
