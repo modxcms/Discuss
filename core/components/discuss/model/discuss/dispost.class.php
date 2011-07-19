@@ -25,9 +25,33 @@
  * Represents any post made on the forum, including Threads, which are Posts
  * with a parent of 0.
  *
- * 
+ * @property int $board
+ * @property int $thread
+ * @property int $parent
+ * @property string $title
+ * @property string $message
+ * @property int $author
+ * @property datetime $createdon
+ * @property int $editedby
+ * @property datetime $editedon
+ * @property string $icon
+ * @property boolean $allow_replies
+ * @property string $rank
+ * @property string $ip
+ * @property int $integrated_id
+ * @property int $depth
+ * @property boolean $answer
+ *
+ * @property disBoard $Board
+ * @property disThread $Thread
  * @property disUser $Author
+ * @property disUser $CreatedBy
  * @property disUser $EditedBy
+ * @property disPost $Parent
+ * @property array $Children
+ * @property array $Ancestors
+ * @property array $Descendants
+ * @property array $Attachments
  * @package discuss
  */
 class disPost extends xPDOSimpleObject {
@@ -65,6 +89,7 @@ class disPost extends xPDOSimpleObject {
             $parent = $this->get('parent');
 
             /* create self closure */
+            /** @var disPostClosure $cl */
             $cl = $this->xpdo->newObject('disPostClosure');
             $cl->set('ancestor',$id);
             $cl->set('descendant',$id);
@@ -77,6 +102,7 @@ class disPost extends xPDOSimpleObject {
                 'ancestor:!=' => 0,
             ));
             $c->sortby('depth','DESC');
+            /** @var array $gparents */
             $gparents = $this->xpdo->getCollection('disPostClosure',$c);
             $cgps = count($gparents);
             $gps = array();
@@ -93,6 +119,7 @@ class disPost extends xPDOSimpleObject {
             $gps[] = str_pad($id,10,'0',STR_PAD_LEFT); /* add self closure too */
 
             /* add root closure */
+            /** @var disPostClosure $cl */
             $cl = $this->xpdo->newObject('disPostClosure');
             $cl->set('ancestor',0);
             $cl->set('descendant',$id);
@@ -120,6 +147,7 @@ class disPost extends xPDOSimpleObject {
                 $board->save();
             }
 
+            /** @var disThread $thread */
             $thread = $this->getOne('Thread');
             $privatePost = $this->get('private');
 
@@ -153,6 +181,7 @@ class disPost extends xPDOSimpleObject {
             /* adjust forum activity */
             if (!defined('DISCUSS_IMPORT_MODE') && $thread && !$thread->get('private') && empty($privatePost)) {
                 $now = date('Y-m-d');
+                /** @var disForumActivity $activity */
                 $activity = $this->xpdo->getObject('disForumActivity',array(
                     'day' => $now,
                 ));
