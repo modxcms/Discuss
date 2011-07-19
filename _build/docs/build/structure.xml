@@ -5320,30 +5320,6 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </method>
     </class>
   </file>
-  <file path="mysql/disbanitem.class.php" hash="73a40d6f8f3c650d31720551f7333e18">
-    <docblock>
-      <description/>
-      <long-description>
-</long-description>
-      <tag name="package" description="discuss"/>
-      <tag name="subpackage" description="mysql"/>
-    </docblock>
-    <include type="Require Once" line="6">
-      <name>Unknown</name>
-    </include>
-    <class final="false" abstract="false" line="11" namespace="default">
-      <name>disBanItem_mysql</name>
-      <extends>\disBanItem</extends>
-      <full_name>\disBanItem_mysql</full_name>
-      <docblock>
-        <description/>
-        <long-description>
-</long-description>
-        <tag name="package" description="discuss" line="7"/>
-        <tag name="subpackage" description="mysql" line="7"/>
-      </docblock>
-    </class>
-  </file>
   <file path="mysql/disboard.class.php" hash="6bc34ca90f8d3eb0f13681b1c9cc2775">
     <docblock>
       <description/>
@@ -6710,7 +6686,7 @@ actionVar value.</description>
       </method>
     </class>
   </file>
-  <file path="request/disrequest.class.php" hash="2d2652b8e4c2c1e073586673450927c2">
+  <file path="request/disrequest.class.php" hash="4fef74e1da81ee58866dc8fbba53489d">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
