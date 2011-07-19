@@ -37,14 +37,14 @@
 
 				<div id="Panel">
 					<div class="PanelBox">
-						<div class="thread-actions">
-					    	[[+actionbuttons]]
-					    </div>
-
-						[[<div class="Box GuestBox">
-						  <h4>Welcome back [[+modx.user.username]]</h4>
+						
+						<div class="Box GuestBox">
+						  [[<h4>Welcome back [[+modx.user.username]]</h4>]]
 						  	<h4>Thread Actions</h4>
-						</div>]]
+						  	<p>[[+actionbuttons]]</p>
+
+						  	<p><a href="[[~[[*id]]]]thread/recent.xml" class="rss_feed">RSS Feed</a></p>
+						</div>
 						
 						[[<div class="Box BoxCategories">
 							<h4>Header</h4>

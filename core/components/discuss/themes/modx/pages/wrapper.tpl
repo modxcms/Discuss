@@ -16,6 +16,13 @@
 <div id="header">
 	<a class="hidden" href="#main">Skip to content</a>
 	<header class="container">
+		<nav id="global2">
+			<a href="">Revolution</a>
+			<a href="">Evolution</a>
+			<a href="">Partners</a>
+			<a href="">International</a>
+		</nav>
+
 	
 		<nav id="global">
 			<a href="http://modx.com/">MODX.com</a>
@@ -25,21 +32,29 @@
             [[+discuss.user.id:is=``:then=`<a href="[[~[[*id]]]]register">Register</a>`]]
 		</nav>
 		
-		
+
+          
+          	
 		<nav id="user">
 			<a title="Open Source PHP Content Management System, Framework, Platform and More" id="logo" class="ir" href="/revolution/forums/">MODX Open Source Content Management System, Framework, Platform and More.</a>
 		</nav>
 
-
-		<div id="search">
-			<form accept-charset="utf-8" method="get" action="http://modx.com/search-results/">
-				<label class="hidden" for="search_form_input">Search</label>
-	
-				<input title="Start typing and hit ENTER" value="" name="search" placeholder="Search keyphrase..." id="search_form_input" class="hasPlaceholder" type="text">
-				<input value="Go" type="submit">
-			</form>
-			<a href="[[~[[*id]]]]search">Advanced Search</a>
-		</div>
+			<nav id="logo_search">
+				<div id="search">
+		            <div class="links">
+		                <a href="partners/solution/">Find a Partner</a>  <span class="ir">|</span>
+		                <a href="partners/hosting-saas/">Hosts + SaaS</a> <span class="ir">|</span> 
+		                <a href="services/jobs/">Jobs</a> <span class="ir">|</span> 
+		                <a href="community/wall-of-fame/support-modx/">Donate</a>
+		            </div>
+		
+		                <form action="search-results/" method="get" accept-charset="utf-8">
+							<label for="search_form_input" class="hidden">Search</label>
+							<input id="search_form_input" placeholder="Search keyphrase..." name="search" value="" title="Start typing and hit ENTER" type="text">
+							<input value="Go" type="submit">
+						</form>   
+		        </div><!-- #search -->
+			</nav>
 	</header>
 </div>
 

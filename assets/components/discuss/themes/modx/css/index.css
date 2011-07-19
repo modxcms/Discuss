@@ -130,9 +130,9 @@ li.dis-board-li .dis-board-locked {
  	background: transparent url(../images/icons/quick_lock.gif) top left no-repeat;
 }
 
-
-li.dis-board-post {
+.dis-board-post {
  	list-style: none;
+ 	clear: both;
 }
  	
 li.dis-category-li {
@@ -140,6 +140,7 @@ li.dis-category-li {
  	height: 33px;
  	margin-left: 0;
 }
+
 li.dis-category-li h2,
 .dis-threads-header h2 {
  	background-color: #E3F4FF;
@@ -227,9 +228,16 @@ a.dis-mark-as-answer-link:hover {
 a.dis-solved {
 
 }
+
 a.dis-unsolved {
 
 }
+
+a.rss_feed {
+	display: block;
+	padding-left: 24px;
+	background: transparent url(../images/icon_rss.png) no-repeat 0 0;
+	}
 
 a.dis-fav {
 	background: transparent url(../images/discuss_fav_16.png) no-repeat 0 0;
@@ -379,22 +387,38 @@ div.dis-thread-sticky {
  	background: transparent url(../images/icons/show_sticky.gif) top left no-repeat;
 }
 div.dis-thread-locked { width: 21px; height: 22px; float: right; background: transparent url(../images/icons/quick_lock.gif) top left no-repeat; }
-div.dis-latest {
- 	vertical-align: middle;
- 	margin-top: -5px;
-}
 
-div.dis-latest {
-	width: 35%;
+div.dis-board-head {
+	display: block;
+	height: 30px;
+	clear: both;
+	}
+	
+div.dis-board-head div.dis-thread-body{
+	padding: 0 30px 0 10px;
 	}
 
-div.dis-latest a.dis-last {
- 	float: right;
- 	height: 16px;
- 	width: 14px;
- 	cursor: pointer;
- 	background: transparent url(../images/icons/last_post.gif) top right no-repeat;
+div.dis-thread-body,
+div.dis-views,
+div.dis-replies,
+div.dis-latest {
+ 	vertical-align: middle;
+ 	margin-right: 20px;
+	float: left;
 }
+
+div.dis-latest {
+	width: 260px;
+	}
+
+div.dis-views,
+div.dis-replies {
+	width: 55px;
+	}
+
+div.dis-thread-body {
+	width: 300px;
+	}
 
 div.dis-threads li, .dis-normal-thread { background-image: url(../images/icons/normal_post.gif); }
 .dis-my-normal-thread { background-image: url(../images/icons/my_normal_post.gif) !important; }
@@ -2049,13 +2073,15 @@ ul.CategoryList li.Item {
 	margin: 0;
 	border: 0 !important;
 }
-ul.CategoryList .ItemContent {
+
+.ItemContent {
 	position: relative;
 	margin-top: -1px;
 	border: 1px solid #BEC8CC;
 	border-width: 1px 0;
 	padding: 4px 9px;
 }
+
 div.Meta span.ChildCategories {
 	border-top: 1px dotted #ddd;
 	display: block;
@@ -4125,10 +4151,21 @@ header {
  	padding:2px 0 0;
  	height:112px;
 }
+
+#global2 {
+	position: absolute;
+	top: 0;
+	left: -80px;
+ 	margin:0 0 0 4px;
+ 	height:30px;
+	}
+
 #global {
  	margin:0 0 0 4px;
  	height:30px;
-}
+	}
+
+#global2 a,
 #global a {
  	line-height:30px;
  	padding:0 15px;
@@ -4137,26 +4174,35 @@ header {
  	display:block;
  	float:right;
  	text-decoration:none;
-}
+	}
+
+#global2 a {
+	float: left;
+	}
+
+#global2 a.active,
 #global a.active {
  	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#f7f8f9));
  	background:-moz-linear-gradient(top, #fff, #f7f8f9);
  	-pie-background:linear-gradient(top, #fff, #f7f8f9);
  	background:linear-gradient(top, #fff, #f7f8f9);
  	border-bottom:1px solid #f7f8f9;
-}
+	}
+
 #user{
  	position:absolute;
  	top:0;
  	left:0;
  	color:#4b4b4b;
-}
+	}
+
 #user a {
 	margin: 0 0;
 	padding: 0;
 	font-size: 10px;
  	text-decoration:none;
-}
+	}
+
 .green { color: green; }
 .red { color: red; }
 .gray { color: gray; }
@@ -4166,7 +4212,7 @@ header {
  	color: #999; 
  	text-indent: -10px;
  	padding-left: 20px;
-}
+	}
 
 /* ------------------------- [ Logo Search section ] ---*/
 
@@ -4174,6 +4220,18 @@ header {
  	height:70px;
  	position:relative;
  	line-height:30px;
+}
+
+#logo_search #search {
+    position: absolute;
+    right: 0;
+    top: 27px;
+}
+
+#logo_search div.links {
+    display: block;
+    float: left;
+    line-height: 30px;
 }
 
 #logo {
@@ -4187,47 +4245,35 @@ header {
  	background-position: left -63px;
 }
 
-#search {
-	position: absolute;
-	top: 60px;
-	right: 30px;
- 	width:350px;
- 	height:63px;
- 	display:block;
-	text-align: right;
-}
-
-#search a {
-	font-size: 10px;
-	}
-
-
-#logo_search div.links {
- 	display:block;
- 	float:left;
- 	line-height:30px;
-}
-#logo_search div.links a {
- 	float:left;
- 	display:block;
- 	clear:none;
- 	padding:0 12px 0 10px;
- 	line-height:30px;
- 	color:#3b3b3b;
- 	text-decoration:none;
-}
-#logo_search div.links a:hover {
- 	text-decoration:underline;
- 	color:#000;
-}
 #logo_search div.links span {
- 	background:transparent url(http://www.modx.com/assets/i/bg-sprite.png) 0 -649px no-repeat;
- 	width:1px;
- 	height:39px;
- 	display:block;
- 	float:left;
- 	margin:-5px 0 0;
+    background: url("../images/bg-sprite.png") no-repeat scroll 0 -649px transparent;
+    display: block;
+    float: left;
+    height: 39px;
+    margin: -5px 0 0;
+    width: 1px;
 }
+
+#logo_search div.links a {
+    clear: none;
+    color: #3B3B3B;
+    display: block;
+    float: left;
+    line-height: 30px;
+    padding: 0 12px 0 10px;
+    text-decoration: none;
+}
+
+.ir {
+    background-repeat: no-repeat;
+    direction: ltr;
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -999em;
+}
+
+
 #logo_search form,
 #results_search form {
  	float:left;
