@@ -89,6 +89,11 @@ $manifest = array(
             'showPosts' => true,
             'showBreadcrumbs' => true,
             'showViewing' => true,
+            'showSubscribeOption' => true,
+            'showPrintOption' => true,
+            'showStickOption' => true,
+            'showLockOption' => true,
+            'showMarkAsSpamOption' => true,
         ),
     ),
     'thread/new' => array(
