@@ -33,6 +33,10 @@ abstract class DiscussController {
      * @var boolean
      */
     public $useWrapper = true;
+    /**
+     * @var int
+     */
+    public $debugTimer = 0;
 
     /**
      * @param Discuss $discuss
@@ -92,11 +96,33 @@ abstract class DiscussController {
         }
         
         $this->_renderBreadcrumbs();
+        $this->postProcess();
         $output = $this->_renderTemplate($this->config['tpl'],$this->placeholders);
+
+        $output = $this->afterRender($output);
 
         return $this->_output($output);
     }
 
+    /**
+     * Used for custom post-processing after normal process, meta loading, and breadcrumb generation
+     * @return void
+     */
+    public function postProcess() {}
+    
+    /**
+     * Used to alter the output in a controller after rendering the template
+     * @param string $output
+     * @return string
+     */
+    public function afterRender($output) { return $output; }
+
+    /**
+     * Render a template file using the given properties
+     * @param string $tpl
+     * @param array $properties
+     * @return string
+     */
     protected function _renderTemplate($tpl,array $properties = array()) {
         $o = '';
         if (file_exists($tpl)) {
@@ -109,6 +135,11 @@ abstract class DiscussController {
         return $o;
     }
 
+    /**
+     * Render the output by wrapping, if desired, in the wrapper.tpl
+     * @param string $output
+     * @return string
+     */
     protected function _output($output = '') {
         if (!empty($_REQUEST['print'])) {
             $output = $this->_renderTemplate($this->discuss->config['pagesPath'].'print-wrapper.tpl',array(

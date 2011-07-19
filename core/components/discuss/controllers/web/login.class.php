@@ -22,18 +22,24 @@
  * @package discuss
  */
 /**
+ * Display the Login page
+ *
+ * @todo Only supports SSO login now. Eventually make a real login page.
+ *
  * @package discuss
+ * @subpackage controllers
  */
-$placeholders = array();
-$discuss->setPageTitle($modx->lexicon('discuss.register'));
+class DiscussLoginController extends DiscussController {
+    public function getPageTitle() {
+        return $this->modx->lexicon('discuss.login');
+    }
+    public function getSessionPlace() { return ''; }
 
-
-$registerResourceId = $modx->getOption('discuss.register_resource_id',null,0);
-if (!empty($registerResourceId) && $discuss->ssoMode) {
-    $url = $modx->makeUrl($registerResourceId,'',array('discuss' => 1));
-    $modx->sendRedirect($url);
+    public function process() {
+        $loginResourceId = $this->modx->getOption('discuss.login_resource_id',null,0);
+        if (!empty($loginResourceId) && $this->discuss->ssoMode) {
+            $url = $this->modx->makeUrl($loginResourceId,'',array('discuss' => 1));
+            $this->modx->sendRedirect($url);
+        }
+    }
 }
-
-
-/* output */
-return $placeholders;

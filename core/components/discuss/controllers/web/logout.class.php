@@ -22,16 +22,25 @@
  * @package discuss
  */
 /**
+ * Logout the user
+ * 
  * @package discuss
+ * @subpackage controllers
  */
-$placeholders = array();
-$discuss->setPageTitle($modx->lexicon('discuss.login'));
+class DiscussLogoutController extends DiscussController {
+    public function getPageTitle() {
+        return $this->modx->lexicon('discuss.logout');
+    }
+    public function getSessionPlace() { return ''; }
 
-$loginResourceId = $modx->getOption('discuss.login_resource_id',null,0);
-if (!empty($loginResourceId) && $discuss->ssoMode) {
-    $url = $modx->makeUrl($loginResourceId,'',array('discuss' => 1));
-    $modx->sendRedirect($url);
+    public function process() {
+        $this->discuss->user->clearCache();
+        $contexts = $this->modx->user->getSessionContexts();
+        foreach ($contexts as $context => $level) {
+            if ($context == 'mgr') continue;
+            $this->modx->user->removeSessionContext($context);
+            $this->modx->getUser($context,true);
+        }
+        $this->modx->sendRedirect($this->discuss->request->makeUrl('home'));
+    }
 }
-
-/* output */
-return $placeholders;

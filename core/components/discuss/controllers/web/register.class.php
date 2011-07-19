@@ -22,25 +22,24 @@
  * @package discuss
  */
 /**
- * Displays the Board
+ * Display the Register page
+ *
+ * @todo Only supports SSO now. Eventually make a real register page.
  *
  * @package discuss
+ * @subpackage controllers
  */
-$discuss->setSessionPlace('downloadattachment:'.$_REQUEST['file']);
+class DiscussRegisterController extends DiscussController {
+    public function getPageTitle() {
+        return $this->modx->lexicon('discuss.register');
+    }
+    public function getSessionPlace() { return ''; }
 
-/* get attachment */
-if (empty($_REQUEST['file'])) $discuss->sendErrorPage();
-$attachment = $modx->getObject('disPostAttachment',$_REQUEST['file']);
-if ($attachment == null) $discuss->sendErrorPage();
-
-$path = $attachment->getPath();
-if (file_exists($path)) {
-    $downloads = $attachment->get('downloads');
-    $downloads++;
-    $attachment->set('downloads',$downloads);
-    $attachment->save();
-
-    $modx->sendRedirect($attachment->getUrl());
-} else {
-    $modx->sendErrorPage();
+    public function process() {
+        $registerResourceId = $this->modx->getOption('discuss.register_resource_id',null,0);
+        if (!empty($registerResourceId) && $this->discuss->ssoMode) {
+            $url = $this->modx->makeUrl($registerResourceId,'',array('discuss' => 1));
+            $this->modx->sendRedirect($url);
+        }
+    }
 }
