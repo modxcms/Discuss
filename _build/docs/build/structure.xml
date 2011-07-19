@@ -1,73 +1,5 @@
 <?xml version="1.0"?>
 <project version="0.13-DEV" title="Discuss API Documentation">
-  <file path="disbangroup.class.php" hash="76175f6094708143c6a870a9e1e69762">
-    <docblock>
-      <description>Discuss</description>
-      <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This file is part of Discuss, a native forum for MODx Revolution.&lt;/p&gt;
-
-&lt;p&gt;Discuss is free software; you can redistribute it and/or modify it under the
-terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later
-version.&lt;/p&gt;
-
-&lt;p&gt;Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-A PARTICULAR PURPOSE. See the GNU General Public License for more details.&lt;/p&gt;
-
-&lt;p&gt;You should have received a copy of the GNU General Public License along with
-Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
-Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
-</long-description>
-      <tag name="package" description="discuss"/>
-    </docblock>
-    <class final="false" abstract="false" line="27" namespace="default">
-      <name>disBanGroup</name>
-      <extends>\xPDOSimpleObject</extends>
-      <full_name>\disBanGroup</full_name>
-      <docblock>
-        <description/>
-        <long-description>
-</long-description>
-        <tag name="package" description="discuss" line="24"/>
-      </docblock>
-    </class>
-  </file>
-  <file path="disbanitem.class.php" hash="4730720f590f51fa1e891ccadf10c556">
-    <docblock>
-      <description>Discuss</description>
-      <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This file is part of Discuss, a native forum for MODx Revolution.&lt;/p&gt;
-
-&lt;p&gt;Discuss is free software; you can redistribute it and/or modify it under the
-terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later
-version.&lt;/p&gt;
-
-&lt;p&gt;Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-A PARTICULAR PURPOSE. See the GNU General Public License for more details.&lt;/p&gt;
-
-&lt;p&gt;You should have received a copy of the GNU General Public License along with
-Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
-Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
-</long-description>
-      <tag name="package" description="discuss"/>
-    </docblock>
-    <class final="false" abstract="false" line="27" namespace="default">
-      <name>disBanItem</name>
-      <extends>\xPDOSimpleObject</extends>
-      <full_name>\disBanItem</full_name>
-      <docblock>
-        <description/>
-        <long-description>
-</long-description>
-        <tag name="package" description="discuss" line="24"/>
-      </docblock>
-    </class>
-  </file>
   <file path="disboard.class.php" hash="09c5adf81542b4f12e3f596cf7b7094e">
     <docblock>
       <description>Discuss</description>
@@ -629,7 +561,7 @@ automation for the closure tables that persist the board map.</description>
       </method>
     </class>
   </file>
-  <file path="disboardclosure.class.php" hash="b4e0c8e7879582bbf471b246dee7a592">
+  <file path="disboardclosure.class.php" hash="4b73f258c27b1cbf1bb7b5e04391a31b">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -651,7 +583,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
       <tag name="package" description="discuss"/>
     </docblock>
-    <class final="false" abstract="false" line="28" namespace="default">
+    <class final="false" abstract="false" line="35" namespace="default">
       <name>disBoardClosure</name>
       <extends>\xPDOObject</extends>
       <full_name>\disBoardClosure</full_name>
@@ -659,11 +591,16 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
         <description>The ancestor/descendant map of a disBoard, with depth count.</description>
         <long-description>
 </long-description>
+        <tag name="property" description="int $ancestor" line="24"/>
+        <tag name="property" description="int $descendant" line="24"/>
+        <tag name="property" description="int $depth" line="24"/>
+        <tag name="property" description="disBoard $Ancestor" line="24"/>
+        <tag name="property" description="disBoard $Descendant" line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
     </class>
   </file>
-  <file path="disboardusergroup.class.php" hash="db44798a9884edd357733c2dd5069193">
+  <file path="disboardusergroup.class.php" hash="e98787d09c1d5bcf4067778c73f45fbd">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -685,7 +622,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
       <tag name="package" description="discuss"/>
     </docblock>
-    <class final="false" abstract="false" line="28" namespace="default">
+    <class final="false" abstract="false" line="36" namespace="default">
       <name>disBoardUserGroup</name>
       <extends>\xPDOSimpleObject</extends>
       <full_name>\disBoardUserGroup</full_name>
@@ -693,11 +630,16 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
         <description>Restricts access of a board to User Group(s)</description>
         <long-description>
 </long-description>
+        <tag name="property" description="int $usergroup" line="24"/>
+        <tag name="property" description="int $board" line="24"/>
+        <tag name="property" description="disBoard $Board" line="24"/>
+        <tag name="property" description="modUserGroup $UserGroup" line="24"/>
+        <tag name="property" description="disUserGroupProfile $UserGroupProfile" line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
     </class>
   </file>
-  <file path="discategory.class.php" hash="5a8fdf5c285bb5f3f317c6cd4d7be090">
+  <file path="discategory.class.php" hash="791d34417e225ac880c9bc76b11b94a6">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -719,7 +661,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
       <tag name="package" description="discuss"/>
     </docblock>
-    <class final="false" abstract="false" line="28" namespace="default">
+    <class final="false" abstract="false" line="39" namespace="default">
       <name>disCategory</name>
       <extends>\xPDOSimpleObject</extends>
       <full_name>\disCategory</full_name>
@@ -727,15 +669,23 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
         <description>Top-level aggregator for disBoard objects</description>
         <long-description>
 </long-description>
+        <tag name="property" description="string $name A name for the Category" line="24"/>
+        <tag name="property" description="string $description A user-provided description" line="24"/>
+        <tag name="property" description="boolean $collapsible Not yet in use." line="24"/>
+        <tag name="property" description="int $rank The order of the category in sorting" line="24"/>
+        <tag name="property" description="string $default_moderators A comma-separated list of Users to automatically make Moderators for all new boards in this Category" line="24"/>
+        <tag name="property" description="string $default_usergroups A comma-separated list of UserGroups to automatically assign to all new boards in this Category" line="24"/>
+        <tag name="property" description="int $integrated_id If imported from another system, the PK of the category in that system" line="24"/>
+        <tag name="property" description="array $Boards A collection of Boards in this category" line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" line="34">
+      <method final="false" abstract="false" static="false" visibility="public" line="45">
         <name>getUrl</name>
         <docblock>
           <description>Gets the URL for the category</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="29">
+          <tag name="return" description="" type="string" line="40">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
@@ -1502,7 +1452,7 @@ for easier debugging.</description>
       </method>
     </class>
   </file>
-  <file path="disforumactivity.class.php" hash="dfd1ac67b3d67037cb187fbaa4a628bd">
+  <file path="disforumactivity.class.php" hash="1ba64a68d79bab56f43f1231d21b05fe">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -1524,14 +1474,20 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
       <tag name="package" description="discuss"/>
     </docblock>
-    <class final="false" abstract="false" line="27" namespace="default">
+    <class final="false" abstract="false" line="36" namespace="default">
       <name>disForumActivity</name>
       <extends>\xPDOSimpleObject</extends>
       <full_name>\disForumActivity</full_name>
       <docblock>
-        <description/>
+        <description>A general log of forum-wide activity</description>
         <long-description>
 </long-description>
+        <tag name="property" description="date $day" line="24"/>
+        <tag name="property" description="int $hits" line="24"/>
+        <tag name="property" description="int $topics" line="24"/>
+        <tag name="property" description="int $replies" line="24"/>
+        <tag name="property" description="int $registers" line="24"/>
+        <tag name="property" description="int $visitors" line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
     </class>
@@ -1649,26 +1605,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </method>
     </class>
   </file>
-  <file path="dislogactivity.class.php" hash="df27f70d205ef632436af88625c26233">
-    <docblock>
-      <description/>
-      <long-description>
-</long-description>
-      <tag name="package" description="discuss"/>
-    </docblock>
-    <class final="false" abstract="false" line="5" namespace="default">
-      <name>disLogActivity</name>
-      <extends>\xPDOSimpleObject</extends>
-      <full_name>\disLogActivity</full_name>
-      <docblock>
-        <description/>
-        <long-description>
-</long-description>
-        <tag name="package" description="discuss" line="2"/>
-      </docblock>
-    </class>
-  </file>
-  <file path="dismoderator.class.php" hash="cf0a1f6aed231734ab660e840fd9fa5f">
+  <file path="dislogactivity.class.php" hash="48d8179018357b280560eaf944f0d55b">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -1690,14 +1627,61 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
       <tag name="package" description="discuss"/>
     </docblock>
-    <class final="false" abstract="false" line="27" namespace="default">
+    <class final="false" abstract="false" line="37" namespace="default">
+      <name>disLogActivity</name>
+      <extends>\xPDOSimpleObject</extends>
+      <full_name>\disLogActivity</full_name>
+      <docblock>
+        <description>A log of activity across the Discuss system</description>
+        <long-description>
+</long-description>
+        <tag name="property" description="datetime $createdon" line="24"/>
+        <tag name="property" description="int $user" line="24"/>
+        <tag name="property" description="string $ip" line="24"/>
+        <tag name="property" description="string $action" line="24"/>
+        <tag name="property" description="string $data" line="24"/>
+        <tag name="property" description="string $url" line="24"/>
+        <tag name="property" description="disUser $User" line="24"/>
+        <tag name="package" description="discuss" line="24"/>
+      </docblock>
+    </class>
+  </file>
+  <file path="dismoderator.class.php" hash="56f8e8c75954ec251590a39422a18203">
+    <docblock>
+      <description>Discuss</description>
+      <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This file is part of Discuss, a native forum for MODx Revolution.&lt;/p&gt;
+
+&lt;p&gt;Discuss is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.&lt;/p&gt;
+
+&lt;p&gt;Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License for more details.&lt;/p&gt;
+
+&lt;p&gt;You should have received a copy of the GNU General Public License along with
+Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
+</long-description>
+      <tag name="package" description="discuss"/>
+    </docblock>
+    <class final="false" abstract="false" line="37" namespace="default">
       <name>disModerator</name>
       <extends>\xPDOSimpleObject</extends>
       <full_name>\disModerator</full_name>
       <docblock>
-        <description/>
+        <description>A map of Users who are moderators for a given Board</description>
         <long-description>
 </long-description>
+        <tag name="property" description="int $user" line="24"/>
+        <tag name="property" description="int $board" line="24"/>
+        <tag name="property" description="disUser $User" line="24"/>
+        <tag name="property" description="disBoard $Board" line="24"/>
+        <tag name="see" description="disUser" line="24"/>
+        <tag name="see" description="disBoard" line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
     </class>
@@ -2149,7 +2133,7 @@ thread root, returns itself.</description>
       </method>
     </class>
   </file>
-  <file path="dispostattachment.class.php" hash="116a7b6db29830d3a1e5573e27bb1e72">
+  <file path="dispostattachment.class.php" hash="77c1b84fda38eb878046a0552647a087">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -2171,130 +2155,140 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
       <tag name="package" description="discuss"/>
     </docblock>
-    <class final="false" abstract="false" line="27" namespace="default">
+    <class final="false" abstract="false" line="41" namespace="default">
       <name>disPostAttachment</name>
       <extends>\xPDOSimpleObject</extends>
       <full_name>\disPostAttachment</full_name>
       <docblock>
-        <description/>
+        <description>An attached file to a Post</description>
         <long-description>
 </long-description>
+        <tag name="property" description="int $post" line="24"/>
+        <tag name="property" description="int $board" line="24"/>
+        <tag name="property" description="string $filename" line="24"/>
+        <tag name="property" description="datetime $createdon" line="24"/>
+        <tag name="property" description="int $filesize" line="24"/>
+        <tag name="property" description="int $downloads" line="24"/>
+        <tag name="property" description="int $integrated_id" line="24"/>
+        <tag name="property" description="string $integrated_data" line="24"/>
+        <tag name="property" description="disPost $Post" line="24"/>
+        <tag name="property" description="disBoard $Board" line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" line="34">
+      <method final="false" abstract="false" static="false" visibility="public" line="48">
         <name>save</name>
         <docblock>
           <description>Overrides xPDOObject::save to handle createdon date</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="boolean" variable="$cacheFlag" line="28">
+          <tag name="param" description="" type="boolean" variable="$cacheFlag" line="42">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="" type="boolean" line="28">
+          <tag name="return" description="" type="boolean" line="42">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="34">
+        <argument line="48">
           <name>$cacheFlag</name>
           <default>null</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="50">
+      <method final="false" abstract="false" static="false" visibility="public" line="64">
         <name>remove</name>
         <docblock>
           <description>Overrides the xPDOObject::remove method to remove the physical file for
 the attachment</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="array" variable="$ancestors" line="43">
+          <tag name="param" description="" type="array" variable="$ancestors" line="57">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="boolean" line="43">
+          <tag name="return" description="" type="boolean" line="57">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="50">
+        <argument line="64">
           <name>$ancestors</name>
           <default>array</default>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="69">
+      <method final="false" abstract="false" static="false" visibility="public" line="83">
         <name>getPath</name>
         <docblock>
           <description>Gets the path of the attachment (and optionally just the directory)</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="61"/>
-          <tag name="param" description="If true, will append the filename to the attachment path. Defaults to true" type="boolean" variable="$appendFile" line="61">
+          <tag name="access" description="public" line="75"/>
+          <tag name="param" description="If true, will append the filename to the attachment path. Defaults to true" type="boolean" variable="$appendFile" line="75">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="The path to the file or directory of the file." type="string" line="61">
+          <tag name="return" description="The path to the file or directory of the file." type="string" line="75">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="69">
+        <argument line="83">
           <name>$appendFile</name>
           <default>true</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="95">
+      <method final="false" abstract="false" static="false" visibility="public" line="109">
         <name>getUrl</name>
         <docblock>
           <description>Gets the url of the attachment (and optionally just the directory)</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="87"/>
-          <tag name="param" description="If true, will append the filename to the attachment url. Defaults to true" type="boolean" variable="$appendFile" line="87">
+          <tag name="access" description="public" line="101"/>
+          <tag name="param" description="If true, will append the filename to the attachment url. Defaults to true" type="boolean" variable="$appendFile" line="101">
             <type by_reference="false">boolean</type>
           </tag>
-          <tag name="return" description="The url to the file or directory of the file." type="string" line="87">
+          <tag name="return" description="The url to the file or directory of the file." type="string" line="101">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="95">
+        <argument line="109">
           <name>$appendFile</name>
           <default>true</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="118">
+      <method final="false" abstract="false" static="false" visibility="public" line="132">
         <name>upload</name>
         <docblock>
           <description>Handles uploads for the attachment</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="111"/>
-          <tag name="param" description="The POST file to upload." type="array" variable="$file" line="111">
+          <tag name="access" description="public" line="125"/>
+          <tag name="param" description="The POST file to upload." type="array" variable="$file" line="125">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="True if successful." type="boolean" line="111">
+          <tag name="return" description="True if successful." type="boolean" line="125">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="118">
+        <argument line="132">
           <name>$file</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="160">
+      <method final="false" abstract="false" static="false" visibility="public" line="174">
         <name>convert</name>
         <docblock>
           <description>Converts filesize to human-readable format</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="153"/>
-          <tag name="param" description="The number of decimal points to round to." type="int" variable="$precision" line="153">
+          <tag name="access" description="public" line="167"/>
+          <tag name="param" description="The number of decimal points to round to." type="int" variable="$precision" line="167">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="The formatted string." type="string" line="153">
+          <tag name="return" description="The formatted string." type="string" line="167">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="160">
+        <argument line="174">
           <name>$precision</name>
           <default>2</default>
           <type/>
@@ -2302,7 +2296,7 @@ the attachment</description>
       </method>
     </class>
   </file>
-  <file path="dispostclosure.class.php" hash="11103252f89912ff749b36a5d9a37916">
+  <file path="dispostclosure.class.php" hash="e61b12689d6b90ada3c75bf4cef7184d">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -2324,7 +2318,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
       <tag name="package" description="discuss"/>
     </docblock>
-    <class final="false" abstract="false" line="28" namespace="default">
+    <class final="false" abstract="false" line="35" namespace="default">
       <name>disPostClosure</name>
       <extends>\xPDOObject</extends>
       <full_name>\disPostClosure</full_name>
@@ -2332,6 +2326,11 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
         <description>The ancestor/descendant map of a disPost, with depth count.</description>
         <long-description>
 </long-description>
+        <tag name="property" description="int $ancestor" line="24"/>
+        <tag name="property" description="int $descendant" line="24"/>
+        <tag name="property" description="int $depth" line="24"/>
+        <tag name="property" description="disPost $Ancestor" line="24"/>
+        <tag name="property" description="disPost $Descendant" line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
     </class>
@@ -3942,7 +3941,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </method>
     </class>
   </file>
-  <file path="disuser.class.php" hash="287ad7a1d33c23925dac9e7132d4de21">
+  <file path="disuser.class.php" hash="1051dfff0838c5efe6bcb208e3aebd4b">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -3964,608 +3963,650 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
 </long-description>
       <tag name="package" description="discuss"/>
     </docblock>
-    <class final="false" abstract="false" line="29" namespace="default">
+    <class final="false" abstract="false" line="82" namespace="default">
       <name>disUser</name>
       <extends>\xPDOSimpleObject</extends>
       <full_name>\disUser</full_name>
       <docblock>
-        <description/>
+        <description>The related object to modUser that stores Discuss-specific data for the User</description>
         <long-description>
 </long-description>
-        <tag name="property" description="modUserGroup PrimaryGroup" line="24"/>
+        <tag name="property" description="int $user" line="24"/>
+        <tag name="property" description="string $username" line="24"/>
+        <tag name="property" description="string $password" line="24"/>
+        <tag name="property" description="string $email" line="24"/>
+        <tag name="property" description="string $ip" line="24"/>
+        <tag name="property" description="datetime $createdon" line="24"/>
+        <tag name="property" description="string $name_first" line="24"/>
+        <tag name="property" description="string $name_last" line="24"/>
+        <tag name="property" description="string $gender" line="24"/>
+        <tag name="property" description="date $birthdate" line="24"/>
+        <tag name="property" description="string $website" line="24"/>
+        <tag name="property" description="string $location" line="24"/>
+        <tag name="property" description="int $status" line="24"/>
+        <tag name="property" description="boolean $confirmed" line="24"/>
+        <tag name="property" description="boolean $confirmedon" line="24"/>
+        <tag name="property" description="datetime $last_login" line="24"/>
+        <tag name="property" description="datetime $last_active" line="24"/>
+        <tag name="property" description="string $ignore_boards" line="24"/>
+        <tag name="property" description="string $signature" line="24"/>
+        <tag name="property" description="string $title" line="24"/>
+        <tag name="property" description="string $avatar" line="24"/>
+        <tag name="property" description="string $avatar_service" line="24"/>
+        <tag name="property" description="int $thread_last_visited" line="24"/>
+        <tag name="property" description="int $posts" line="24"/>
+        <tag name="property" description="boolean $show_email" line="24"/>
+        <tag name="property" description="boolean $show_online" line="24"/>
+        <tag name="property" description="int $primary_group" line="24"/>
+        <tag name="property" description="boolean $synced" line="24"/>
+        <tag name="property" description="string $source" line="24"/>
+        <tag name="property" description="datetime $syncedat" line="24"/>
+        <tag name="property" description="string $salt" line="24"/>
+        <tag name="property" description="int $integrated_id" line="24"/>
+        <tag name="property" description="string $display_name" line="24"/>
+        <tag name="property" description="boolean $use_display_name" line="24"/>
+        <tag name="property" description="modUser $User" line="24"/>
+        <tag name="property" description="modUserGroup $PrimaryGroup" line="24"/>
+        <tag name="property" description="disUserGroupProfile $PrimaryDiscussGroup" line="24"/>
+        <tag name="property" description="disThread $ThreadLastVisited" line="24"/>
+        <tag name="property" description="disUserModerated $UserModerated" line="24"/>
+        <tag name="property" description="array $Posts" line="24"/>
+        <tag name="property" description="array $PostReads" line="24"/>
+        <tag name="property" description="disSession $Session" line="24"/>
+        <tag name="property" description="array $Friends" line="24"/>
         <tag name="package" description="discuss" line="24"/>
       </docblock>
-      <constant namespace="default" line="34">
+      <constant namespace="default" line="87">
         <name>INACTIVE</name>
         <value>0</value>
         <docblock>
           <description>If the user is inactive</description>
           <long-description>
 </long-description>
-          <tag name="const" description="INACTIVE" line="30"/>
+          <tag name="const" description="INACTIVE" line="83"/>
         </docblock>
       </constant>
-      <constant namespace="default" line="39">
+      <constant namespace="default" line="92">
         <name>ACTIVE</name>
         <value>1</value>
         <docblock>
           <description>If the user is active</description>
           <long-description>
 </long-description>
-          <tag name="const" description="ACTIVE" line="35"/>
+          <tag name="const" description="ACTIVE" line="88"/>
         </docblock>
       </constant>
-      <constant namespace="default" line="44">
+      <constant namespace="default" line="97">
         <name>UNCONFIRMED</name>
         <value>2</value>
         <docblock>
           <description>If the user is unconfirmed</description>
           <long-description>
 </long-description>
-          <tag name="const" description="UNCONFIRMED" line="40"/>
+          <tag name="const" description="UNCONFIRMED" line="93"/>
         </docblock>
       </constant>
-      <constant namespace="default" line="49">
+      <constant namespace="default" line="102">
         <name>BANNED</name>
         <value>3</value>
         <docblock>
           <description>If the user is banned</description>
           <long-description>
 </long-description>
-          <tag name="const" description="BANNED" line="45"/>
+          <tag name="const" description="BANNED" line="98"/>
         </docblock>
       </constant>
-      <constant namespace="default" line="54">
+      <constant namespace="default" line="107">
         <name>AWAITING_MODERATION</name>
         <value>4</value>
         <docblock>
           <description>If the user is awaiting moderation</description>
           <long-description>
 </long-description>
-          <tag name="const" description="AWAITING_MODERATION" line="50"/>
+          <tag name="const" description="AWAITING_MODERATION" line="103"/>
         </docblock>
       </constant>
-      <property final="false" static="false" visibility="public" line="60">
+      <property final="false" static="false" visibility="public" line="113">
         <name>$isAdmin</name>
         <default/>
         <docblock>
           <description>If the user is in an Administrator group</description>
           <long-description>
 </long-description>
-          <tag name="var" description="" type="boolean" line="56">
+          <tag name="var" description="" type="boolean" line="109">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="65">
+      <property final="false" static="false" visibility="public" line="118">
         <name>$isGlobalModerator</name>
         <default/>
         <docblock>
           <description>If the user is in a global Moderator group</description>
           <long-description>
 </long-description>
-          <tag name="var" description="" type="boolean" line="61">
+          <tag name="var" description="" type="boolean" line="114">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="70">
+      <property final="false" static="false" visibility="public" line="123">
         <name>$isLoggedIn</name>
         <default>false</default>
         <docblock>
           <description>If the user is logged in</description>
           <long-description>
 </long-description>
-          <tag name="var" description="" type="boolean" line="66">
+          <tag name="var" description="" type="boolean" line="119">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="75">
+      <property final="false" static="false" visibility="public" line="128">
         <name>$readBoards</name>
         <default>array</default>
         <docblock>
           <description>An array of read boards for the user</description>
           <long-description>
 </long-description>
-          <tag name="var" description="" type="array" line="71">
+          <tag name="var" description="" type="array" line="124">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="80">
+      <property final="false" static="false" visibility="public" line="133">
         <name>$readBoardsPrepared</name>
         <default>false</default>
         <docblock>
           <description>An array of prepared, cached read boards for the user</description>
           <long-description>
 </long-description>
-          <tag name="var" description="" type="boolean" line="76">
+          <tag name="var" description="" type="boolean" line="129">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" line="86">
+      <method final="false" abstract="false" static="false" visibility="public" line="139">
         <name>init</name>
         <docblock>
           <description>Initialize the user, setup basic metadata for them, and log their activity time.</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="bool" line="82">
+          <tag name="return" description="" type="bool" line="135">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="104">
+      <method final="false" abstract="false" static="false" visibility="public" line="157">
         <name>prepareReadBoards</name>
         <docblock>
           <description>Prepare a cache of all read boards for this user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="array" line="99">
+          <tag name="return" description="" type="array" line="152">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="134">
+      <method final="false" abstract="false" static="false" visibility="public" line="187">
         <name>isBoardRead</name>
         <docblock>
           <description>See if a board is read by this user</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="int" variable="$boardId" line="128">
+          <tag name="param" description="" type="int" variable="$boardId" line="181">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="" type="bool" line="128">
+          <tag name="return" description="" type="bool" line="181">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="134">
+        <argument line="187">
           <name>$boardId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="144">
+      <method final="false" abstract="false" static="false" visibility="public" line="197">
         <name>getUnreadThreadsForBoard</name>
         <docblock>
           <description>Get all unread threads by this user for a specific board</description>
           <long-description>
 </long-description>
-          <tag name="param" description="The ID of the board to look for" type="int" variable="$boardId" line="139">
+          <tag name="param" description="The ID of the board to look for" type="int" variable="$boardId" line="192">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="An array of thread data" type="array" line="139">
+          <tag name="return" description="An array of thread data" type="array" line="192">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="144">
+        <argument line="197">
           <name>$boardId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="175">
+      <method final="false" abstract="false" static="false" visibility="public" line="228">
         <name>get</name>
         <docblock>
           <description>Overrides xPDOObject::get to provide formatting for certain fields</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$k" line="167">
+          <tag name="param" description="" type="string" variable="$k" line="220">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$format" line="167">
+          <tag name="param" description="" type="string" variable="$format" line="220">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$formatTemplate" line="167">
+          <tag name="param" description="" type="string" variable="$formatTemplate" line="220">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="mixed|string" line="167">
+          <tag name="return" description="" type="mixed|string" line="220">
             <type by_reference="false">mixed</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="175">
+        <argument line="228">
           <name>$k</name>
           <default/>
           <type/>
         </argument>
-        <argument line="175">
+        <argument line="228">
           <name>$format</name>
           <default/>
           <type/>
         </argument>
-        <argument line="175">
+        <argument line="228">
           <name>$formatTemplate</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="231">
+      <method final="false" abstract="false" static="false" visibility="public" line="284">
         <name>toArray</name>
         <docblock>
           <description>Override toArray to provide more values</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$keyPrefix" line="223">
+          <tag name="param" description="" type="string" variable="$keyPrefix" line="276">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="bool" variable="$rawValues" line="223">
+          <tag name="param" description="" type="bool" variable="$rawValues" line="276">
             <type by_reference="false">bool</type>
           </tag>
-          <tag name="param" description="" type="bool" variable="$excludeLazy" line="223">
+          <tag name="param" description="" type="bool" variable="$excludeLazy" line="276">
             <type by_reference="false">bool</type>
           </tag>
-          <tag name="return" description="" type="array" line="223">
+          <tag name="return" description="" type="array" line="276">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="231">
+        <argument line="284">
           <name>$keyPrefix</name>
           <default/>
           <type/>
         </argument>
-        <argument line="231">
+        <argument line="284">
           <name>$rawValues</name>
           <default>false</default>
           <type/>
         </argument>
-        <argument line="231">
+        <argument line="284">
           <name>$excludeLazy</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="250">
+      <method final="false" abstract="false" static="false" visibility="public" line="303">
         <name>getUserGroupNames</name>
         <docblock>
           <description>Return an array of names of User Groups this user is in</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="array" line="246">
+          <tag name="return" description="" type="array" line="299">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="259">
+      <method final="false" abstract="false" static="false" visibility="public" line="312">
         <name>getAvatarUrl</name>
         <docblock>
           <description>Gets the avatar URL for this user, depending on the avatar service.</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="255">
+          <tag name="return" description="" type="string" line="308">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="282">
+      <method final="false" abstract="false" static="false" visibility="public" line="335">
         <name>parseSignature</name>
         <docblock>
           <description>Parse and return the signature for this user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="278">
+          <tag name="return" description="" type="string" line="331">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" line="332">
+      <method final="false" abstract="false" static="false" visibility="private" line="385">
         <name>_nl2br2</name>
         <docblock>
           <description>Convert all linebreaks to br tags</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$str" line="327">
+          <tag name="param" description="" type="string" variable="$str" line="380">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="mixed" line="327">
+          <tag name="return" description="" type="mixed" line="380">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="332">
+        <argument line="385">
           <name>$str</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="344">
+      <method final="false" abstract="false" static="false" visibility="public" line="397">
         <name>parseBBCode</name>
         <docblock>
           <description>Parse BBCode in post and return proper HTML. Supports SMF/Vanilla formats.</description>
           <long-description>
 </long-description>
-          <tag name="param" description="The string to parse" type="\$message" variable="$message" line="338">
+          <tag name="param" description="The string to parse" type="\$message" variable="$message" line="391">
             <type by_reference="false">\$message</type>
           </tag>
-          <tag name="return" description="The parsed string with HTML instead of BBCode, and all code stripped" type="string" line="338">
+          <tag name="return" description="The parsed string with HTML instead of BBCode, and all code stripped" type="string" line="391">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="344">
+        <argument line="397">
           <name>$message</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="382">
+      <method final="false" abstract="false" static="false" visibility="public" line="435">
         <name>stripBBCode</name>
         <docblock>
           <description>Strip BBCode from a string</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="" variable="$str" line="376"/>
-          <tag name="return" description="" type="mixed" line="376">
+          <tag name="param" description="" type="" variable="$str" line="429"/>
+          <tag name="return" description="" type="mixed" line="429">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="382">
+        <argument line="435">
           <name>$str</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="393">
+      <method final="false" abstract="false" static="false" visibility="public" line="446">
         <name>countUnreadMessages</name>
         <docblock>
           <description>Get a count of # of unread messages for the user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="int" line="388">
+          <tag name="return" description="" type="int" line="441">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="410">
+      <method final="false" abstract="false" static="false" visibility="public" line="463">
         <name>clearCache</name>
         <docblock>
           <description>Clear the cache for this User</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="void" line="405">
+          <tag name="return" description="" type="void" line="458">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="424">
+      <method final="false" abstract="false" static="false" visibility="public" line="477">
         <name>parseQuote</name>
         <docblock>
           <description>Parse a bbcode quote tag and return result</description>
           <long-description>
 </long-description>
-          <tag name="param" description="The string to parse" type="\$message" variable="$message" line="418">
+          <tag name="param" description="The string to parse" type="\$message" variable="$message" line="471">
             <type by_reference="false">\$message</type>
           </tag>
-          <tag name="return" description="The quoted message" type="string" line="418">
+          <tag name="return" description="The quoted message" type="string" line="471">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="424">
+        <argument line="477">
           <name>$message</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="471">
+      <method final="false" abstract="false" static="false" visibility="public" line="524">
         <name>getUserGroups</name>
         <docblock>
           <description>Get user groups for the active user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="An array of user groups" type="array" line="466">
+          <tag name="return" description="An array of user groups" type="array" line="519">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="485">
+      <method final="false" abstract="false" static="false" visibility="public" line="538">
         <name>isAdmin</name>
         <docblock>
           <description>Return whether or not the user is an Administrator</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="481">
+          <tag name="return" description="" type="boolean" line="534">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="506">
+      <method final="false" abstract="false" static="false" visibility="public" line="559">
         <name>isGlobalModerator</name>
         <docblock>
           <description>Return whether or not the user is a global Moderator</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="502">
+          <tag name="return" description="" type="boolean" line="555">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="531">
+      <method final="false" abstract="false" static="true" visibility="public" line="584">
         <name>fetchActive</name>
         <docblock>
           <description>Fetch a list of active users in the forum</description>
           <long-description>
 </long-description>
-          <tag name="static" description="" line="521"/>
-          <tag name="param" description="A reference to the modX object" type="\xPDO" variable="$modx" line="521">
+          <tag name="static" description="" line="574"/>
+          <tag name="param" description="A reference to the modX object" type="\xPDO" variable="$modx" line="574">
             <type by_reference="false">\xPDO</type>
           </tag>
-          <tag name="param" description="If set, will grab within X seconds" type="int" variable="$timeAgo" line="521">
+          <tag name="param" description="If set, will grab within X seconds" type="int" variable="$timeAgo" line="574">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="param" description="Limit results to this number" type="int" variable="$limit" line="521">
+          <tag name="param" description="Limit results to this number" type="int" variable="$limit" line="574">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="param" description="Start at this index" type="int" variable="$start" line="521">
+          <tag name="param" description="Start at this index" type="int" variable="$start" line="574">
             <type by_reference="false">int</type>
           </tag>
-          <tag name="return" description="A response array of active users" type="array" line="521">
+          <tag name="return" description="A response array of active users" type="array" line="574">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="531">
+        <argument line="584">
           <name>$modx</name>
           <default/>
           <type>xPDO</type>
         </argument>
-        <argument line="531">
+        <argument line="584">
           <name>$timeAgo</name>
           <default>0</default>
           <type/>
         </argument>
-        <argument line="531">
+        <argument line="584">
           <name>$limit</name>
           <default>0</default>
           <type/>
         </argument>
-        <argument line="531">
+        <argument line="584">
           <name>$start</name>
           <default>0</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="562">
+      <method final="false" abstract="false" static="false" visibility="public" line="615">
         <name>getLastVisitedThread</name>
         <docblock>
           <description>Return the last visited thread by the User</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="\disThread" line="558">
+          <tag name="return" description="" type="\disThread" line="611">
             <type by_reference="false">\disThread</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="589">
+      <method final="false" abstract="false" static="false" visibility="public" line="642">
         <name>checkForPostGroupAdvance</name>
         <docblock>
           <description>Check to see if the user qualifies for any post-based groups
 and if so, grant it to them</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="bool" line="583">
+          <tag name="return" description="" type="bool" line="636">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="614">
+      <method final="false" abstract="false" static="false" visibility="public" line="667">
         <name>merge</name>
         <docblock>
           <description>Merge another user into this account</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="\disUser" variable="$oldUser" line="608">
+          <tag name="param" description="" type="\disUser" variable="$oldUser" line="661">
             <type by_reference="false">\disUser</type>
           </tag>
-          <tag name="return" description="" type="boolean" line="608">
+          <tag name="return" description="" type="boolean" line="661">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="614">
+        <argument line="667">
           <name>$oldUser</name>
           <default/>
           <type>disUser</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="773">
+      <method final="false" abstract="false" static="false" visibility="public" line="826">
         <name>getGroupBadge</name>
         <docblock>
           <description>Gets the badge for the Primary Group for this user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="768">
+          <tag name="return" description="" type="string" line="821">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="788">
+      <method final="false" abstract="false" static="false" visibility="public" line="841">
         <name>getUrl</name>
         <docblock>
           <description>Makes a link to the profile page for this user</description>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="string" line="784">
+          <tag name="return" description="" type="string" line="837">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="800">
+      <method final="false" abstract="false" static="false" visibility="public" line="853">
         <name>getSetting</name>
         <docblock>
           <description>Gets a User Setting (bypasses cache)</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$key" line="794">
+          <tag name="param" description="" type="string" variable="$key" line="847">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="string" variable="$default" line="794">
+          <tag name="param" description="" type="string" variable="$default" line="847">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="" type="string" line="794">
+          <tag name="return" description="" type="string" line="847">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="800">
+        <argument line="853">
           <name>$key</name>
           <default/>
           <type/>
         </argument>
-        <argument line="800">
+        <argument line="853">
           <name>$default</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="819">
+      <method final="false" abstract="false" static="false" visibility="public" line="872">
         <name>setSetting</name>
         <docblock>
           <description>Set a custom User Setting for this user</description>
           <long-description>
 </long-description>
-          <tag name="param" description="The key of the Setting" type="string" variable="$key" line="811">
+          <tag name="param" description="The key of the Setting" type="string" variable="$key" line="864">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The value to set" type="string" variable="$value" line="811">
+          <tag name="param" description="The value to set" type="string" variable="$value" line="864">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="The default value of the setting" type="string" variable="$default" line="811">
+          <tag name="param" description="The default value of the setting" type="string" variable="$default" line="864">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="True if successfully updated" type="bool" line="811">
+          <tag name="return" description="True if successfully updated" type="bool" line="864">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="819">
+        <argument line="872">
           <name>$key</name>
           <default/>
           <type/>
         </argument>
-        <argument line="819">
+        <argument line="872">
           <name>$value</name>
           <default/>
           <type/>
         </argument>
-        <argument line="819">
+        <argument line="872">
           <name>$default</name>
           <default>null</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="859">
+      <method final="false" abstract="false" static="false" visibility="public" line="912">
         <name>canViewProfiles</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="856">
+          <tag name="return" description="" type="boolean" line="909">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="866">
+      <method final="false" abstract="false" static="false" visibility="public" line="919">
         <name>canViewEmails</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag name="return" description="" type="boolean" line="863">
+          <tag name="return" description="" type="boolean" line="916">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
@@ -5277,45 +5318,6 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
           </tag>
         </docblock>
       </method>
-    </class>
-  </file>
-  <file path="mysql/disbangroup.class.php" hash="e76ff595e8cf95751b50e38658f9c391">
-    <docblock>
-      <description>Discuss</description>
-      <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This file is part of Discuss, a native forum for MODx Revolution.&lt;/p&gt;
-
-&lt;p&gt;Discuss is free software; you can redistribute it and/or modify it under the
-terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later
-version.&lt;/p&gt;
-
-&lt;p&gt;Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-A PARTICULAR PURPOSE. See the GNU General Public License for more details.&lt;/p&gt;
-
-&lt;p&gt;You should have received a copy of the GNU General Public License along with
-Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
-Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
-</long-description>
-      <tag name="package" description="discuss"/>
-      <tag name="subpackage" description="mysql"/>
-    </docblock>
-    <include type="Require Once" line="25">
-      <name>Unknown</name>
-    </include>
-    <class final="false" abstract="false" line="30" namespace="default">
-      <name>disBanGroup_mysql</name>
-      <extends>\disBanGroup</extends>
-      <full_name>\disBanGroup_mysql</full_name>
-      <docblock>
-        <description/>
-        <long-description>
-</long-description>
-        <tag name="package" description="discuss" line="26"/>
-        <tag name="subpackage" description="mysql" line="26"/>
-      </docblock>
     </class>
   </file>
   <file path="mysql/disbanitem.class.php" hash="73a40d6f8f3c650d31720551f7333e18">

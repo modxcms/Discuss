@@ -102,6 +102,14 @@ li.dis-category-li h2,
     color: white;
 }
 
+.dis-recent-rss {
+    background: transparent url(../images/icons/rss2.gif) top left no-repeat;
+    width: 14px;
+    height: 14px;
+    display: block;
+    float: right;
+}
+
 /* board view */
 .dis-threads-header {
     background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;

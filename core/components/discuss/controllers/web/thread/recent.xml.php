@@ -26,7 +26,6 @@
  * 
  * @package discuss
  */
-$discuss->setSessionPlace('home');
 $discuss->setPageTitle($modx->lexicon('discuss.recent_posts'));
 
 /* get default options */
@@ -41,37 +40,8 @@ $recent = $discuss->hooks->load('post/recent',array(
     'limit' => $limit,
     'start' => $start,
     'getTotal' => true,
+    'postTpl' => 'post/disBoardPostXml',
 ));
 $placeholders['recent_posts'] = $recent['results'];
-
-/* get board breadcrumb trail */
-$trail = array();
-$trail[] = array(
-    'url' => $discuss->request->makeUrl(),
-    'text' => $modx->getOption('discuss.forum_title'),
-);
-$trail[] = array('text' => $modx->lexicon('discuss.recent_posts').' ('.number_format($recent['total']).')'.$rssIcon,'active' => true);
-
-$trail = $discuss->hooks->load('breadcrumbs',array_merge($scriptProperties,array(
-    'items' => &$trail,
-)));
-$placeholders['trail'] = $trail;
-
-$rssIcon = $discuss->getChunk('disLink',array(
-    'url' => $discuss->request->makeUrl('thread/recent.xml'),
-    'text' => '',
-    'class' => 'dis-recent-rss',
-    'id' => '',
-    'attributes' => '',
-));
-$placeholders['rss_icon'] = $rssIcon;
-
-/* build pagination */
-$discuss->hooks->load('pagination/build',array(
-    'count' => $recent['total'],
-    'id' => 0,
-    'view' => 'thread/recent',
-    'limit' => $limit,
-));
 
 return $placeholders;

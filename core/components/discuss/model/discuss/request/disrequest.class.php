@@ -163,7 +163,7 @@ class DisRequest {
             $c = $this->getControllerFile('print-wrapper');
             return $this->getPage($c,array('content' => $output));
         }
-        $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview','board.xml'));
+        $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview','board.xml','thread/recent.xml'));
         if ($this->modx->getOption('discuss.debug',null,false)) {
             if (!$emptyTpl && $this->debugTimer !== false) {
                 $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";

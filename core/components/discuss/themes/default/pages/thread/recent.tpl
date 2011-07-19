@@ -1,7 +1,7 @@
 [[+trail]]
 
 <br class="clear" />
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
+<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul> [[+rss_icon]]</div>
 <br class="clear" />
 
 <div class="dis-threads">
@@ -21,5 +21,5 @@
 
 <br class="clear" />
 
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
+<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul> [[+rss_icon]]</div>
 [[+trail]]
