@@ -236,4 +236,24 @@ class disThreadQuestion extends disThread {
 
         return $success;
     }
+
+    /**
+     * @param int $postId
+     * @return bool
+     */
+    public function canModifyPost($postId) {
+        $canModify = parent::canModifyPost($postId);
+        if ($this->get('answered') && $this->get('post_first') == $postId) {
+            $canModify = false;
+        }
+        return $canModify;
+    }
+
+    /**
+     * @param array $postArray
+     * @return array
+     */
+    public function aggregateThreadActionButtons(array $postArray = array()) {
+        return parent::aggregateThreadActionButtons($postArray,'mark_as_answer,reply,quote,modify,remove,spam');
+    }
 }

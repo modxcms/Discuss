@@ -25,9 +25,18 @@
  * Represents any post made on the forum, including Threads, which are Posts
  * with a parent of 0.
  *
+ * 
+ * @property disUser $Author
+ * @property disUser $EditedBy
  * @package discuss
  */
 class disPost extends xPDOSimpleObject {
+    /**
+     * The parsing engine for this post
+     * @var disParser $parser
+     */
+    public $parser;
+    
     /**
      * Overrides xPDOObject::save to handle closure table edits.
      *
@@ -237,8 +246,11 @@ class disPost extends xPDOSimpleObject {
      */
     public function move($boardId) {
         /* check to see if only post in thread, if so, just move thread */
+        /** @var disThread $thread */
         $thread = $this->xpdo->getObject('disThread',array('id' => $this->get('thread')));
+        /** @var disBoard $newBoard */
         $newBoard = is_object($boardId) && $boardId instanceof disBoard ? $boardId : $this->xpdo->getObject('disBoard',$boardId);
+        /** @var disBoard $oldBoard */
         $oldBoard = $this->xpdo->getObject('disBoard',array('id' => $this->get('board')));
         if (!$thread || !$newBoard || !$oldBoard) return false;
 
@@ -248,6 +260,7 @@ class disPost extends xPDOSimpleObject {
         }
 
         /* is multiple posts in thread, so split post out and move new thread */
+        /** @var disThread $newThread */
         $newThread = $this->xpdo->newObject('disThread');
         $newThread->fromArray($thread->toArray());
         $newThread->set('board',$newBoard->get('id'));
@@ -304,8 +317,11 @@ class disPost extends xPDOSimpleObject {
             return false;
         }
 
+        /** @var disUser $author */
         $author = $this->getOne('Author');
+        /** @var disThread $thread */
         $thread = $this->xpdo->getObject('disThread',array('id' => $this->get('thread')));
+        /** @var disBoard $board */
         $board = $this->xpdo->getObject('disBoard',array('id' => $this->get('board')));
         $isPrivateMessage = !$thread || $thread->get('private');
 
@@ -656,6 +672,7 @@ class disPost extends xPDOSimpleObject {
      */
     public function canReply() {
         if ($this->xpdo->discuss->user->isAdmin()) return true;
+        /** @var disThread $thread */
         $thread = $this->getOne('Thread');
         if (!$thread) return false;
         
@@ -665,10 +682,46 @@ class disPost extends xPDOSimpleObject {
     /**
      * Whether or not the user can report this post as spam
      *
-     * @return bool True if the active user can report this post as spam
+     * @return boolean True if the active user can report this post as spam
      */
     public function canReport() {
         return $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_report');
+    }
+
+    /**
+     * See if the active user can modify this post
+     * @return boolean
+     */
+    public function canModify() {
+        $canModify = $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_modify');
+        $canModify = $this->xpdo->discuss->user->get('id') == $this->get('author') || ($this->isModerator() && $canModify);
+
+        /** @var disThread $thread */
+        $thread = $this->getOne('Thread');
+        return $canModify && $thread->canModifyPost($this->get('id'));
+    }
+
+    /**
+     * See if active user can remove this post
+     * @return boolean
+     */
+    public function canRemove() {
+        $canRemove = $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_remove');
+        $canRemove = $this->xpdo->discuss->user->get('id') == $this->get('author') || ($this->isModerator() && $canRemove);
+
+        /** @var disThread $thread */
+        $thread = $this->getOne('Thread');
+        return $canRemove && $thread->canRemovePost($this->get('id'));
+    }
+
+    /**
+     * Return true if the active user is a moderator of the Post's Thread
+     * @return boolean
+     */
+    public function isModerator() {
+        /** @var disThread $thread */
+        $thread = $this->getOne('Thread');
+        return $thread->isModerator();
     }
 
     /**
@@ -758,5 +811,53 @@ class disPost extends xPDOSimpleObject {
         $url .= '#dis-post-'.$this->get('id');
         $this->set('url',$url);
         return $url;
+    }
+
+    /**
+     * @param array $postArray
+     * @return
+     */
+    public function renderAuthorMeta(array &$postArray) {
+        if (empty($this->Author)) {
+            $this->getOne('Author');
+            if (empty($this->Author)) return;
+        }
+
+        /** @var array $authorArray */
+        $authorArray = $this->Author->toArray('author.');
+        $postArray = array_merge($postArray,$authorArray);
+        $postArray['author.signature'] = $this->Author->parseSignature();
+        $postArray['author.posts'] = number_format($postArray['author.posts']);
+        unset($postArray['author.password'],$postArray['author.cachepwd']);
+        
+        if ($this->xpdo->discuss->user->canViewProfiles()) {
+            $postArray['author.username_link'] = '<a href="'.$this->Author->getUrl().'">'.$this->Author->get('name').'</a>';
+        } else {
+            $postArray['author.username_link'] = '<span class="dis-username">'.$this->Author->get('name').'</span>';
+        }
+        if ($this->Author->get('status') == disUser::BANNED) {
+            $postArray['author.username_link'] .= '<span class="dis-banned">'.$this->xpdo->lexicon('discuss.banned').'</span>';
+        }
+
+        /* set author avatar */
+        $avatarUrl = $this->Author->getAvatarUrl();
+        if (!empty($avatarUrl)) {
+            $postArray['author.avatar'] = '<img class="dis-post-avatar" alt="'.$postArray['author'].'" src="'.$avatarUrl.'" />';
+        }
+
+        /* check if author wants to show email */
+        if ($this->Author->get('show_email') && $this->xpdo->discuss->user->canViewEmails()) {
+            $this->loadParser();
+            $postArray['author.email'] = disBBCodeParser::encodeEmail($this->Author->get('email'),$this->xpdo->lexicon('discuss.email_author'));
+        } else {
+            $postArray['author.email'] = '';
+        }
+
+        /* get primary group badge/name, if applicable */
+        $postArray['author.group_badge'] = $this->Author->getGroupBadge();
+        $postArray['author.group_name'] = '';
+        if (!empty($this->Author->PrimaryGroup)) {
+            $postArray['author.group_name'] = $this->Author->PrimaryGroup->get('name');
+        }
     }
 }

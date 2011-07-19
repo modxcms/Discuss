@@ -650,21 +650,6 @@ class disThread extends xPDOSimpleObject {
     }
 
     /**
-     * Check to see if active user is a Moderator for this thread's board
-     *
-     * @return bool True if they are a moderator
-     */
-    public function isModerator() {
-        if ($this->xpdo->discuss->user->isGlobalModerator() || $this->xpdo->discuss->user->isAdmin()) return true;
-        
-        $moderator = $this->xpdo->getCount('disModerator',array(
-            'user' => $this->xpdo->discuss->user->get('id'),
-            'board' => $this->get('board'),
-        ));
-        return $moderator > 0;
-    }
-
-    /**
      * Get an array of disUser objects who are Moderators of this thread's board
      * @return array
      */
@@ -1110,6 +1095,28 @@ class disThread extends xPDOSimpleObject {
         return $this->hasSubscription() && $this->xpdo->hasPermission('discuss.thread_subscribe');
     }
 
+    public function canModifyPost($postId) {
+        return $this->isModerator();
+    }
+    public function canRemovePost($postId) {
+        return $this->isModerator();
+    }
+    
+    /**
+     * Check to see if active user is a Moderator for this thread's board
+     *
+     * @return bool True if they are a moderator
+     */
+    public function isModerator() {
+        if ($this->xpdo->discuss->user->isGlobalModerator() || $this->xpdo->discuss->user->isAdmin()) return true;
+
+        $moderator = $this->xpdo->getCount('disModerator',array(
+            'user' => $this->xpdo->discuss->user->get('id'),
+            'board' => $this->get('board'),
+        ));
+        return $moderator > 0;
+    }
+
     /** process views for derivative thread types */
 
     /**
@@ -1168,5 +1175,18 @@ class disThread extends xPDOSimpleObject {
         }
 
         return true;
+    }
+
+    public function aggregateThreadActionButtons(array $postArray = array(),$defaultAvailableActions = 'mark_as_answer,reply,quote,modify,remove,spam') {
+        $actions = array();
+        $availableActions = $this->xpdo->getOption('discuss.thread_actionbutton_order',null,$defaultAvailableActions);
+        $availableActions = explode(',',$availableActions);
+        $availableActions = array_reverse($availableActions);
+        foreach ($availableActions as $availableAction) {
+            if (!empty($postArray['action_'.$availableAction])) {
+                $actions[] = $postArray['action_'.$availableAction];
+            }
+        }
+        return $actions;
     }
 }
