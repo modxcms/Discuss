@@ -41,15 +41,15 @@ proper ordering while getting O(1) query performance.</small></a></span></li>
 with a parent of 0.</small></a></span></li>
 <li><span class="class"><a href="_mysql_disreservedusername.class.html#%5CdisReservedUsername_mysql" target="content">disReservedUsername_mysql<br><small>A list of reserved usernames to prevent users from registering with.</small></a></span></li>
 <li><span class="class"><a href="_mysql_dissession.class.html#%5CdisSession_mysql" target="content">disSession_mysql<br><small>Custom Discuss sessions for detailed user activity and session handling.</small></a></span></li>
-<li><span class="class"><a href="_mysql_disthreaddiscussion.class.html#%5CdisThreadDiscussion_mysql" target="content">disThreadDiscussion_mysql<br><small></small></a></span></li>
-<li><span class="class"><a href="_mysql_disthreadquestion.class.html#%5CdisThreadQuestion_mysql" target="content">disThreadQuestion_mysql<br><small></small></a></span></li>
-<li><span class="class"><a href="_mysql_disthreadread.class.html#%5CdisThreadRead_mysql" target="content">disThreadRead_mysql<br><small></small></a></span></li>
-<li><span class="class"><a href="_mysql_disthreaduser.class.html#%5CdisThreadUser_mysql" target="content">disThreadUser_mysql<br><small></small></a></span></li>
-<li><span class="class"><a href="_mysql_disthread.class.html#%5CdisThread_mysql" target="content">disThread_mysql<br><small></small></a></span></li>
+<li><span class="class"><a href="_mysql_disthreaddiscussion.class.html#%5CdisThreadDiscussion_mysql" target="content">disThreadDiscussion_mysql<br><small>The default Thread type, which is a collection of posts in discussion format.</small></a></span></li>
+<li><span class="class"><a href="_mysql_disthreadquestion.class.html#%5CdisThreadQuestion_mysql" target="content">disThreadQuestion_mysql<br><small>The base class for Threads, which are compilations of Posts in a Board.</small></a></span></li>
+<li><span class="class"><a href="_mysql_disthreadread.class.html#%5CdisThreadRead_mysql" target="content">disThreadRead_mysql<br><small>A map of Threads to Users that marks when a User has read a Thread.</small></a></span></li>
+<li><span class="class"><a href="_mysql_disthreaduser.class.html#%5CdisThreadUser_mysql" target="content">disThreadUser_mysql<br><small>A map of Users involved in a private thread.</small></a></span></li>
+<li><span class="class"><a href="_mysql_disthread.class.html#%5CdisThread_mysql" target="content">disThread_mysql<br><small>The base class for Threads, which are compilations of Posts in a Board.</small></a></span></li>
 <li><span class="class"><a href="_mysql_disuserfriend.class.html#%5CdisUserFriend_mysql" target="content">disUserFriend_mysql<br><small></small></a></span></li>
-<li><span class="class"><a href="_mysql_disusergroupprofile.class.html#%5CdisUserGroupProfile_mysql" target="content">disUserGroupProfile_mysql<br><small>Metadata class for modUserGroups</small></a></span></li>
+<li><span class="class"><a href="_mysql_disusergroupprofile.class.html#%5CdisUserGroupProfile_mysql" target="content">disUserGroupProfile_mysql<br><small>Related object to the modUserGroup class, used for storing custom data specific to Discuss.</small></a></span></li>
 <li><span class="class"><a href="_mysql_disusermoderated.class.html#%5CdisUserModerated_mysql" target="content">disUserModerated_mysql<br><small>If a user is moderated, they will have a row in this table</small></a></span></li>
-<li><span class="class"><a href="_mysql_disusernotification.class.html#%5CdisUserNotification_mysql" target="content">disUserNotification_mysql<br><small></small></a></span></li>
+<li><span class="class"><a href="_mysql_disusernotification.class.html#%5CdisUserNotification_mysql" target="content">disUserNotification_mysql<br><small>A collection of notifications for users for a Thread</small></a></span></li>
 <li><span class="class"><a href="_mysql_disuser.class.html#%5CdisUser_mysql" target="content">disUser_mysql<br><small></small></a></span></li>
 </ul>
 </li>
@@ -94,17 +94,17 @@ with a parent of 0.</small></a></span></li>
 <li class="closed"><span class="class"><a href="_dispostclosure.class.html#%5CdisPostClosure" target="content">disPostClosure<br><small>The ancestor/descendant map of a disPost, with depth count.</small></a></span></li>
 <li class="closed"><span class="class"><a href="_disreservedusername.class.html#%5CdisReservedUsername" target="content">disReservedUsername<br><small>A list of reserved usernames to prevent users from registering with.</small></a></span></li>
 <li class="closed"><span class="class"><a href="_dissession.class.html#%5CdisSession" target="content">disSession<br><small>Custom Discuss sessions for detailed user activity and session handling.</small></a></span></li>
-<li class="closed"><span class="class"><a href="_disthread.class.html#%5CdisThread" target="content">disThread<br><small></small></a></span></li>
-<li class="closed"><span class="class"><a href="_disthreaddiscussion.class.html#%5CdisThreadDiscussion" target="content">disThreadDiscussion<br><small></small></a></span></li>
-<li class="closed"><span class="class"><a href="_disthreadquestion.class.html#%5CdisThreadQuestion" target="content">disThreadQuestion<br><small></small></a></span></li>
-<li class="closed"><span class="class"><a href="_disthreadread.class.html#%5CdisThreadRead" target="content">disThreadRead<br><small></small></a></span></li>
-<li class="closed"><span class="class"><a href="_disthreaduser.class.html#%5CdisThreadUser" target="content">disThreadUser<br><small></small></a></span></li>
+<li class="closed"><span class="class"><a href="_disthread.class.html#%5CdisThread" target="content">disThread<br><small>The base class for Threads, which are compilations of Posts in a Board.</small></a></span></li>
+<li class="closed"><span class="class"><a href="_disthreaddiscussion.class.html#%5CdisThreadDiscussion" target="content">disThreadDiscussion<br><small>The default Thread type, which is a collection of posts in discussion format.</small></a></span></li>
+<li class="closed"><span class="class"><a href="_disthreadquestion.class.html#%5CdisThreadQuestion" target="content">disThreadQuestion<br><small>The base class for Threads, which are compilations of Posts in a Board.</small></a></span></li>
+<li class="closed"><span class="class"><a href="_disthreadread.class.html#%5CdisThreadRead" target="content">disThreadRead<br><small>A map of Threads to Users that marks when a User has read a Thread.</small></a></span></li>
+<li class="closed"><span class="class"><a href="_disthreaduser.class.html#%5CdisThreadUser" target="content">disThreadUser<br><small>A map of Users involved in a private thread.</small></a></span></li>
 <li class="closed"><span class="class"><a href="_distreeparser.class.html#%5CdisTreeParser" target="content">disTreeParser<br><small>Handles row-parsing of naive tree data.</small></a></span></li>
 <li class="closed"><span class="class"><a href="_disuser.class.html#%5CdisUser" target="content">disUser<br><small></small></a></span></li>
 <li class="closed"><span class="class"><a href="_disuserfriend.class.html#%5CdisUserFriend" target="content">disUserFriend<br><small></small></a></span></li>
-<li class="closed"><span class="class"><a href="_disusergroupprofile.class.html#%5CdisUserGroupProfile" target="content">disUserGroupProfile<br><small>Metadata class for modUserGroups</small></a></span></li>
+<li class="closed"><span class="class"><a href="_disusergroupprofile.class.html#%5CdisUserGroupProfile" target="content">disUserGroupProfile<br><small>Related object to the modUserGroup class, used for storing custom data specific to Discuss.</small></a></span></li>
 <li class="closed"><span class="class"><a href="_disusermoderated.class.html#%5CdisUserModerated" target="content">disUserModerated<br><small>If a user is moderated, they will have a row in this table</small></a></span></li>
-<li class="closed"><span class="class"><a href="_disusernotification.class.html#%5CdisUserNotification" target="content">disUserNotification<br><small></small></a></span></li>
+<li class="closed"><span class="class"><a href="_disusernotification.class.html#%5CdisUserNotification" target="content">disUserNotification<br><small>A collection of notifications for users for a Thread</small></a></span></li>
 </ul>
 </li></ul></div>
 <h1><a href="#">Files</a></h1>
@@ -129,7 +129,7 @@ proper ordering while getting O(1) query performance.</small></a></span></li></u
 <span class="file"><a href="_discategory.class.html" target="content">discategory.class.php</a></span><ul id="files_5a8fdf5c285bb5f3f317c6cd4d7be090" class="filetree"><li><span class="class"><a href="_discategory.class.html#%5CdisCategory" target="content">disCategory<br><small>Top-level aggregator for disBoard objects</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_discuss.class.html" target="content">discuss.class.php</a></span><ul id="files_d9f767d731d604d3eefcf54732b5eee2" class="filetree"><li><span class="class"><a href="_discuss.class.html#%5CDiscuss" target="content">Discuss<br><small>The base class for Discuss.</small></a></span></li></ul>
+<span class="file"><a href="_discuss.class.html" target="content">discuss.class.php</a></span><ul id="files_a75613e6160b01886ef73a2115d700ba" class="filetree"><li><span class="class"><a href="_discuss.class.html#%5CDiscuss" target="content">Discuss<br><small>The base class for Discuss.</small></a></span></li></ul>
 </li>
 <li class="closed">
 <span class="file"><a href="_disforumactivity.class.html" target="content">disforumactivity.class.php</a></span><ul id="files_dfd1ac67b3d67037cb187fbaa4a628bd" class="filetree"><li><span class="class"><a href="_disforumactivity.class.html#%5CdisForumActivity" target="content">disForumActivity<br><small></small></a></span></li></ul>
@@ -144,7 +144,7 @@ proper ordering while getting O(1) query performance.</small></a></span></li></u
 <span class="file"><a href="_dismoderator.class.html" target="content">dismoderator.class.php</a></span><ul id="files_cf0a1f6aed231734ab660e840fd9fa5f" class="filetree"><li><span class="class"><a href="_dismoderator.class.html#%5CdisModerator" target="content">disModerator<br><small></small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_dispost.class.html" target="content">dispost.class.php</a></span><ul id="files_b0e905a514da96824eb699e79ef48d13" class="filetree"><li><span class="class"><a href="_dispost.class.html#%5CdisPost" target="content">disPost<br><small>Represents any post made on the forum, including Threads, which are Posts
+<span class="file"><a href="_dispost.class.html" target="content">dispost.class.php</a></span><ul id="files_2177f0ee44f01f192e4ec692c5584432" class="filetree"><li><span class="class"><a href="_dispost.class.html#%5CdisPost" target="content">disPost<br><small>Represents any post made on the forum, including Threads, which are Posts
 with a parent of 0.</small></a></span></li></ul>
 </li>
 <li class="closed">
@@ -154,43 +154,43 @@ with a parent of 0.</small></a></span></li></ul>
 <span class="file"><a href="_dispostclosure.class.html" target="content">dispostclosure.class.php</a></span><ul id="files_11103252f89912ff749b36a5d9a37916" class="filetree"><li><span class="class"><a href="_dispostclosure.class.html#%5CdisPostClosure" target="content">disPostClosure<br><small>The ancestor/descendant map of a disPost, with depth count.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disreservedusername.class.html" target="content">disreservedusername.class.php</a></span><ul id="files_dc99bb271a5fc6e5ed46e23b1f84ac29" class="filetree"><li><span class="class"><a href="_disreservedusername.class.html#%5CdisReservedUsername" target="content">disReservedUsername<br><small>A list of reserved usernames to prevent users from registering with.</small></a></span></li></ul>
+<span class="file"><a href="_disreservedusername.class.html" target="content">disreservedusername.class.php</a></span><ul id="files_56595ee7403afae8335c905616c80d1d" class="filetree"><li><span class="class"><a href="_disreservedusername.class.html#%5CdisReservedUsername" target="content">disReservedUsername<br><small>A list of reserved usernames to prevent users from registering with.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_dissession.class.html" target="content">dissession.class.php</a></span><ul id="files_e8c202116b3256a4c09e99a510916159" class="filetree"><li><span class="class"><a href="_dissession.class.html#%5CdisSession" target="content">disSession<br><small>Custom Discuss sessions for detailed user activity and session handling.</small></a></span></li></ul>
+<span class="file"><a href="_dissession.class.html" target="content">dissession.class.php</a></span><ul id="files_ec15b2d1c906faa6e4f12adbafe84042" class="filetree"><li><span class="class"><a href="_dissession.class.html#%5CdisSession" target="content">disSession<br><small>Custom Discuss sessions for detailed user activity and session handling.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disthread.class.html" target="content">disthread.class.php</a></span><ul id="files_86fcef877088662889d4eb83a8426c08" class="filetree"><li><span class="class"><a href="_disthread.class.html#%5CdisThread" target="content">disThread<br><small></small></a></span></li></ul>
+<span class="file"><a href="_disthread.class.html" target="content">disthread.class.php</a></span><ul id="files_589d0e820f3809d58eaf988a0611540b" class="filetree"><li><span class="class"><a href="_disthread.class.html#%5CdisThread" target="content">disThread<br><small>The base class for Threads, which are compilations of Posts in a Board.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disthreaddiscussion.class.html" target="content">disthreaddiscussion.class.php</a></span><ul id="files_9e71f29601fb847301976f98a3e81476" class="filetree"><li><span class="class"><a href="_disthreaddiscussion.class.html#%5CdisThreadDiscussion" target="content">disThreadDiscussion<br><small></small></a></span></li></ul>
+<span class="file"><a href="_disthreaddiscussion.class.html" target="content">disthreaddiscussion.class.php</a></span><ul id="files_1d14a85f6b08fdff36a662e63464134c" class="filetree"><li><span class="class"><a href="_disthreaddiscussion.class.html#%5CdisThreadDiscussion" target="content">disThreadDiscussion<br><small>The default Thread type, which is a collection of posts in discussion format.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disthreadquestion.class.html" target="content">disthreadquestion.class.php</a></span><ul id="files_083c91a4c5fd7c865ad220c6ac14e18f" class="filetree"><li><span class="class"><a href="_disthreadquestion.class.html#%5CdisThreadQuestion" target="content">disThreadQuestion<br><small></small></a></span></li></ul>
+<span class="file"><a href="_disthreadquestion.class.html" target="content">disthreadquestion.class.php</a></span><ul id="files_2160738489e5074acf3fafd01d2f8621" class="filetree"><li><span class="class"><a href="_disthreadquestion.class.html#%5CdisThreadQuestion" target="content">disThreadQuestion<br><small>The base class for Threads, which are compilations of Posts in a Board.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disthreadread.class.html" target="content">disthreadread.class.php</a></span><ul id="files_7b673dcc08802e48254ce9a0b7b67e87" class="filetree"><li><span class="class"><a href="_disthreadread.class.html#%5CdisThreadRead" target="content">disThreadRead<br><small></small></a></span></li></ul>
+<span class="file"><a href="_disthreadread.class.html" target="content">disthreadread.class.php</a></span><ul id="files_96bada4a143708ccb61e7a6b8eb74ba7" class="filetree"><li><span class="class"><a href="_disthreadread.class.html#%5CdisThreadRead" target="content">disThreadRead<br><small>A map of Threads to Users that marks when a User has read a Thread.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disthreaduser.class.html" target="content">disthreaduser.class.php</a></span><ul id="files_22bb3a9ec73578fd4873c90fc309f445" class="filetree"><li><span class="class"><a href="_disthreaduser.class.html#%5CdisThreadUser" target="content">disThreadUser<br><small></small></a></span></li></ul>
+<span class="file"><a href="_disthreaduser.class.html" target="content">disthreaduser.class.php</a></span><ul id="files_15466c7629810749dba9b83c30fa118b" class="filetree"><li><span class="class"><a href="_disthreaduser.class.html#%5CdisThreadUser" target="content">disThreadUser<br><small>A map of Users involved in a private thread.</small></a></span></li></ul>
 </li>
 <li class="closed">
 <span class="file"><a href="_distreeparser.class.html" target="content">distreeparser.class.php</a></span><ul id="files_48d7f55f593c5165c0d415840bf62ba6" class="filetree"><li><span class="class"><a href="_distreeparser.class.html#%5CdisTreeParser" target="content">disTreeParser<br><small>Handles row-parsing of naive tree data.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disuser.class.html" target="content">disuser.class.php</a></span><ul id="files_7169f014c6fa6de023e6dfda97e10a93" class="filetree"><li><span class="class"><a href="_disuser.class.html#%5CdisUser" target="content">disUser<br><small></small></a></span></li></ul>
+<span class="file"><a href="_disuser.class.html" target="content">disuser.class.php</a></span><ul id="files_287ad7a1d33c23925dac9e7132d4de21" class="filetree"><li><span class="class"><a href="_disuser.class.html#%5CdisUser" target="content">disUser<br><small></small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disuserfriend.class.html" target="content">disuserfriend.class.php</a></span><ul id="files_3cc80b473e3a68d8e8a4fc2ab4982889" class="filetree"><li><span class="class"><a href="_disuserfriend.class.html#%5CdisUserFriend" target="content">disUserFriend<br><small></small></a></span></li></ul>
+<span class="file"><a href="_disuserfriend.class.html" target="content">disuserfriend.class.php</a></span><ul id="files_ea5887cedfb74ec29f6a1c29751c8e24" class="filetree"><li><span class="class"><a href="_disuserfriend.class.html#%5CdisUserFriend" target="content">disUserFriend<br><small></small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disusergroupprofile.class.html" target="content">disusergroupprofile.class.php</a></span><ul id="files_9d773dca259b916f2de6f5b80439f1da" class="filetree"><li><span class="class"><a href="_disusergroupprofile.class.html#%5CdisUserGroupProfile" target="content">disUserGroupProfile<br><small>Metadata class for modUserGroups</small></a></span></li></ul>
+<span class="file"><a href="_disusergroupprofile.class.html" target="content">disusergroupprofile.class.php</a></span><ul id="files_79ff4eac939ab65845ad61f752fde6c4" class="filetree"><li><span class="class"><a href="_disusergroupprofile.class.html#%5CdisUserGroupProfile" target="content">disUserGroupProfile<br><small>Related object to the modUserGroup class, used for storing custom data specific to Discuss.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disusermoderated.class.html" target="content">disusermoderated.class.php</a></span><ul id="files_6527df9e1e76ae4b27ba1ca1800176e6" class="filetree"><li><span class="class"><a href="_disusermoderated.class.html#%5CdisUserModerated" target="content">disUserModerated<br><small>If a user is moderated, they will have a row in this table</small></a></span></li></ul>
+<span class="file"><a href="_disusermoderated.class.html" target="content">disusermoderated.class.php</a></span><ul id="files_164378a87665bad57f43f926f9ed2b6f" class="filetree"><li><span class="class"><a href="_disusermoderated.class.html#%5CdisUserModerated" target="content">disUserModerated<br><small>If a user is moderated, they will have a row in this table</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_disusernotification.class.html" target="content">disusernotification.class.php</a></span><ul id="files_85b3dc3de227f809d653c635cf9c82c2" class="filetree"><li><span class="class"><a href="_disusernotification.class.html#%5CdisUserNotification" target="content">disUserNotification<br><small></small></a></span></li></ul>
+<span class="file"><a href="_disusernotification.class.html" target="content">disusernotification.class.php</a></span><ul id="files_8d9340dcbb717e7125b5d59042fa5ef2" class="filetree"><li><span class="class"><a href="_disusernotification.class.html#%5CdisUserNotification" target="content">disUserNotification<br><small>A collection of notifications for users for a Thread</small></a></span></li></ul>
 </li>
 <li class="closed">
 <span class="file"><a href="_import_dissmfimport.class.html" target="content">import/dissmfimport.class.php</a></span><ul id="files_c12186aea77baaa97b40cb19cd03e953" class="filetree"><li><span class="class"><a href="_import_dissmfimport.class.html#%5CDisSmfImport" target="content">DisSmfImport<br><small>Handles importing data from SMF</small></a></span></li></ul>
@@ -240,19 +240,19 @@ with a parent of 0.</small></a></span></li></ul>
 <span class="file"><a href="_mysql_dissession.class.html" target="content">mysql/dissession.class.php</a></span><ul id="files_d73873dcb0e864017024e9c06384870b" class="filetree"><li><span class="class"><a href="_mysql_dissession.class.html#%5CdisSession_mysql" target="content">disSession_mysql<br><small>Custom Discuss sessions for detailed user activity and session handling.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_mysql_disthread.class.html" target="content">mysql/disthread.class.php</a></span><ul id="files_5eb7e442a4d50e5923f8e7c7b0d4a908" class="filetree"><li><span class="class"><a href="_mysql_disthread.class.html#%5CdisThread_mysql" target="content">disThread_mysql<br><small></small></a></span></li></ul>
+<span class="file"><a href="_mysql_disthread.class.html" target="content">mysql/disthread.class.php</a></span><ul id="files_5eb7e442a4d50e5923f8e7c7b0d4a908" class="filetree"><li><span class="class"><a href="_mysql_disthread.class.html#%5CdisThread_mysql" target="content">disThread_mysql<br><small>The base class for Threads, which are compilations of Posts in a Board.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_mysql_disthreaddiscussion.class.html" target="content">mysql/disthreaddiscussion.class.php</a></span><ul id="files_8a0a65f4fe79f9bb3fad7a83f609dca7" class="filetree"><li><span class="class"><a href="_mysql_disthreaddiscussion.class.html#%5CdisThreadDiscussion_mysql" target="content">disThreadDiscussion_mysql<br><small></small></a></span></li></ul>
+<span class="file"><a href="_mysql_disthreaddiscussion.class.html" target="content">mysql/disthreaddiscussion.class.php</a></span><ul id="files_8a0a65f4fe79f9bb3fad7a83f609dca7" class="filetree"><li><span class="class"><a href="_mysql_disthreaddiscussion.class.html#%5CdisThreadDiscussion_mysql" target="content">disThreadDiscussion_mysql<br><small>The default Thread type, which is a collection of posts in discussion format.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_mysql_disthreadquestion.class.html" target="content">mysql/disthreadquestion.class.php</a></span><ul id="files_9459a1a86389d4add68fa30856af945c" class="filetree"><li><span class="class"><a href="_mysql_disthreadquestion.class.html#%5CdisThreadQuestion_mysql" target="content">disThreadQuestion_mysql<br><small></small></a></span></li></ul>
+<span class="file"><a href="_mysql_disthreadquestion.class.html" target="content">mysql/disthreadquestion.class.php</a></span><ul id="files_9459a1a86389d4add68fa30856af945c" class="filetree"><li><span class="class"><a href="_mysql_disthreadquestion.class.html#%5CdisThreadQuestion_mysql" target="content">disThreadQuestion_mysql<br><small>The base class for Threads, which are compilations of Posts in a Board.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_mysql_disthreadread.class.html" target="content">mysql/disthreadread.class.php</a></span><ul id="files_4df7ce300b3f36dbc083ce86c37f4895" class="filetree"><li><span class="class"><a href="_mysql_disthreadread.class.html#%5CdisThreadRead_mysql" target="content">disThreadRead_mysql<br><small></small></a></span></li></ul>
+<span class="file"><a href="_mysql_disthreadread.class.html" target="content">mysql/disthreadread.class.php</a></span><ul id="files_4df7ce300b3f36dbc083ce86c37f4895" class="filetree"><li><span class="class"><a href="_mysql_disthreadread.class.html#%5CdisThreadRead_mysql" target="content">disThreadRead_mysql<br><small>A map of Threads to Users that marks when a User has read a Thread.</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_mysql_disthreaduser.class.html" target="content">mysql/disthreaduser.class.php</a></span><ul id="files_2b55bf7ea675488a769d60a35fd89c52" class="filetree"><li><span class="class"><a href="_mysql_disthreaduser.class.html#%5CdisThreadUser_mysql" target="content">disThreadUser_mysql<br><small></small></a></span></li></ul>
+<span class="file"><a href="_mysql_disthreaduser.class.html" target="content">mysql/disthreaduser.class.php</a></span><ul id="files_2b55bf7ea675488a769d60a35fd89c52" class="filetree"><li><span class="class"><a href="_mysql_disthreaduser.class.html#%5CdisThreadUser_mysql" target="content">disThreadUser_mysql<br><small>A map of Users involved in a private thread.</small></a></span></li></ul>
 </li>
 <li class="closed">
 <span class="file"><a href="_mysql_disuser.class.html" target="content">mysql/disuser.class.php</a></span><ul id="files_210f18a60a155cdb731b84993edf85e2" class="filetree"><li><span class="class"><a href="_mysql_disuser.class.html#%5CdisUser_mysql" target="content">disUser_mysql<br><small></small></a></span></li></ul>
@@ -261,13 +261,13 @@ with a parent of 0.</small></a></span></li></ul>
 <span class="file"><a href="_mysql_disuserfriend.class.html" target="content">mysql/disuserfriend.class.php</a></span><ul id="files_79034e9344c2ff9cf97d0b8a45f811e8" class="filetree"><li><span class="class"><a href="_mysql_disuserfriend.class.html#%5CdisUserFriend_mysql" target="content">disUserFriend_mysql<br><small></small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_mysql_disusergroupprofile.class.html" target="content">mysql/disusergroupprofile.class.php</a></span><ul id="files_38766f1af30ae0f6a268fb6f4bb87cda" class="filetree"><li><span class="class"><a href="_mysql_disusergroupprofile.class.html#%5CdisUserGroupProfile_mysql" target="content">disUserGroupProfile_mysql<br><small>Metadata class for modUserGroups</small></a></span></li></ul>
+<span class="file"><a href="_mysql_disusergroupprofile.class.html" target="content">mysql/disusergroupprofile.class.php</a></span><ul id="files_38766f1af30ae0f6a268fb6f4bb87cda" class="filetree"><li><span class="class"><a href="_mysql_disusergroupprofile.class.html#%5CdisUserGroupProfile_mysql" target="content">disUserGroupProfile_mysql<br><small>Related object to the modUserGroup class, used for storing custom data specific to Discuss.</small></a></span></li></ul>
 </li>
 <li class="closed">
 <span class="file"><a href="_mysql_disusermoderated.class.html" target="content">mysql/disusermoderated.class.php</a></span><ul id="files_b8410a41c95d84225118c1ef6f88dd13" class="filetree"><li><span class="class"><a href="_mysql_disusermoderated.class.html#%5CdisUserModerated_mysql" target="content">disUserModerated_mysql<br><small>If a user is moderated, they will have a row in this table</small></a></span></li></ul>
 </li>
 <li class="closed">
-<span class="file"><a href="_mysql_disusernotification.class.html" target="content">mysql/disusernotification.class.php</a></span><ul id="files_c2df0fd36949fd17be0a8f464070b53b" class="filetree"><li><span class="class"><a href="_mysql_disusernotification.class.html#%5CdisUserNotification_mysql" target="content">disUserNotification_mysql<br><small></small></a></span></li></ul>
+<span class="file"><a href="_mysql_disusernotification.class.html" target="content">mysql/disusernotification.class.php</a></span><ul id="files_c2df0fd36949fd17be0a8f464070b53b" class="filetree"><li><span class="class"><a href="_mysql_disusernotification.class.html#%5CdisUserNotification_mysql" target="content">disUserNotification_mysql<br><small>A collection of notifications for users for a Thread</small></a></span></li></ul>
 </li>
 <li class="closed">
 <span class="file"><a href="_parser_disbbcodeparser.class.html" target="content">parser/disbbcodeparser.class.php</a></span><ul id="files_cecf10c74f3a721d510c764e5809084d" class="filetree"><li><span class="class"><a href="_parser_disbbcodeparser.class.html#%5CdisBBCodeParser" target="content">disBBCodeParser<br><small>Abstract parser class that must be extended for creating custom parsing engines for Discuss Posts. Never
