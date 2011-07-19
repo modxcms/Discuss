@@ -66,9 +66,69 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>\xPDOSimpleObject</dd>
 <dt>package</dt>
 <dd>discuss</dd>
-<dt>Methods</dt>
+<dt>property</dt>
+<dd>int $board</dd>
+<dt>property</dt>
+<dd>int $thread</dd>
+<dt>property</dt>
+<dd>int $parent</dd>
+<dt>property</dt>
+<dd>string $title</dd>
+<dt>property</dt>
+<dd>string $message</dd>
+<dt>property</dt>
+<dd>int $author</dd>
+<dt>property</dt>
+<dd>datetime $createdon</dd>
+<dt>property</dt>
+<dd>int $editedby</dd>
+<dt>property</dt>
+<dd>datetime $editedon</dd>
+<dt>property</dt>
+<dd>string $icon</dd>
+<dt>property</dt>
+<dd>boolean $allow_replies</dd>
+<dt>property</dt>
+<dd>string $rank</dd>
+<dt>property</dt>
+<dd>string $ip</dd>
+<dt>property</dt>
+<dd>int $integrated_id</dd>
+<dt>property</dt>
+<dd>int $depth</dd>
+<dt>property</dt>
+<dd>boolean $answer</dd>
+<dt>property</dt>
+<dd>disBoard $Board</dd>
+<dt>property</dt>
+<dd>disThread $Thread</dd>
+<dt>property</dt>
+<dd>disUser $Author</dd>
+<dt>property</dt>
+<dd>disUser $CreatedBy</dd>
+<dt>property</dt>
+<dd>disUser $EditedBy</dd>
+<dt>property</dt>
+<dd>disPost $Parent</dd>
+<dt>property</dt>
+<dd>array $Children</dd>
+<dt>property</dt>
+<dd>array $Ancestors</dd>
+<dt>property</dt>
+<dd>array $Descendants</dd>
+<dt>property</dt>
+<dd>array $Attachments</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
+<dd><a class="property public" href="#%5CdisPost::%24parser">$parser</a></dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
 <dd><a class="method public" href="#%5CdisPost::br2nl()">br2nl</a></dd>
 <dd><a class="method public" href="#%5CdisPost::calculateIdx()">calculateIdx</a></dd>
+<dd><a class="method public" href="#%5CdisPost::canModify()">canModify</a></dd>
+<dd><a class="method public" href="#%5CdisPost::canRemove()">canRemove</a></dd>
 <dd><a class="method public" href="#%5CdisPost::canReply()">canReply</a></dd>
 <dd><a class="method public" href="#%5CdisPost::canReport()">canReport</a></dd>
 <dd><a class="method public" href="#%5CdisPost::clearAllCache()">clearAllCache</a></dd>
@@ -81,17 +141,49 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CdisPost::getUrl()">getUrl</a></dd>
 <dd><a class="method public" href="#%5CdisPost::getViewing()">getViewing</a></dd>
 <dd><a class="method public" href="#%5CdisPost::index()">index</a></dd>
+<dd><a class="method public" href="#%5CdisPost::isModerator()">isModerator</a></dd>
 <dd><a class="method public" href="#%5CdisPost::loadParser()">loadParser</a></dd>
 <dd><a class="method public" href="#%5CdisPost::move()">move</a></dd>
 <dd><a class="method public" href="#%5CdisPost::remove()">remove</a></dd>
 <dd><a class="method public" href="#%5CdisPost::removeFromIndex()">removeFromIndex</a></dd>
+<dd><a class="method public" href="#%5CdisPost::renderAuthorMeta()">renderAuthorMeta</a></dd>
 <dd><a class="method public" href="#%5CdisPost::save()">save</a></dd>
 <dd><a class="method public" href="#%5CdisPost::stripBBCode()">stripBBCode</a></dd>
 </dl>
+<dl></dl>
 <h3>Description</h3>
 <p class="short-description">Represents any post made on the forum, including Threads, which are Posts
 with a parent of 0.</p>
 <div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\disPost::$parser"></a><h4 class="property public">$parser<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property">
+<code><a href="_parser_disparser.class.html#%5CdisParser">\disParser</a> <span class="highlight">$parser</span> = ''</code><p class="short-description">The parsing engine for this post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_parser_disparser.class.html#%5CdisParser">\disParser</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 </div>
 <h3>Methods</h3>
 <div>
@@ -170,6 +262,72 @@ with a parent of 0.</p>
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disPost::canModify()"></a><h4 class="method public">canModify<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canModify</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">See if the active user can modify this post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::canRemove()"></a><h4 class="method public">canRemove<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canRemove</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">See if active user can remove this post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disPost::canReply()"></a><h4 class="method public">canReply<div class="to-top"><a href="#disPost">jump to class</a></div>
 </h4>
 <div class="method">
@@ -211,13 +369,13 @@ with a parent of 0.</p>
           )
         </span>
         :
-        bool</code><p class="short-description">Whether or not the user can report this post as spam</p>
+        boolean</code><p class="short-description">Whether or not the user can report this post as spam</p>
 <div class="long-description">
 </div>
 <div class="api-section">
 <h5 class="output">Output</h5>
 <dl class="return-info">
-<dt>bool</dt>
+<dt>boolean</dt>
 <dd><em>True if the active user can report this post as spam</em></dd>
 </dl>
 <div class="clear"></div>
@@ -614,6 +772,39 @@ thread root, returns itself.</p>
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disPost::isModerator()"></a><h4 class="method public">isModerator<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">isModerator</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Return true if the active user is a moderator of the Post's Thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disPost::loadParser()"></a><h4 class="method public">loadParser<div class="to-top"><a href="#disPost">jump to class</a></div>
 </h4>
 <div class="method">
@@ -777,6 +968,40 @@ the forum activity and user profile counts.</p>
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disPost::renderAuthorMeta()"></a><h4 class="method public">renderAuthorMeta<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">renderAuthorMeta</span><span class="nb-faded-text">(
+          array $postArray
+          )
+        </span>
+        :
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$postArray</dt>
+<dd>array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disPost::save()"></a><h4 class="method public">save<div class="to-top"><a href="#disPost">jump to class</a></div>
 </h4>
 <div class="method">
@@ -868,5 +1093,5 @@ the forum activity and user profile counts.</p>
 </div>
 </div>
 </div>
-<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.2</a>.
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.13-DEV</a>.
     </small></body></html>

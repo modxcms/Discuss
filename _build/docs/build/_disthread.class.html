@@ -66,23 +66,82 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>\xPDOSimpleObject</dd>
 <dt>package</dt>
 <dd>discuss</dd>
-<dt>Constants</dt>
+<dt>property</dt>
+<dd>string $class_key</dd>
+<dt>property</dt>
+<dd>int $board</dd>
+<dt>property</dt>
+<dd>string $title</dd>
+<dt>property</dt>
+<dd>int $post_first</dd>
+<dt>property</dt>
+<dd>int $post_last</dd>
+<dt>property</dt>
+<dd>int $author_first</dd>
+<dt>property</dt>
+<dd>int $author_last</dd>
+<dt>property</dt>
+<dd>int $replies</dd>
+<dt>property</dt>
+<dd>int $views</dd>
+<dt>property</dt>
+<dd>boolean $locked</dd>
+<dt>property</dt>
+<dd>boolean $answered</dd>
+<dt>property</dt>
+<dd>boolean $sticky</dd>
+<dt>property</dt>
+<dd>boolean $private</dd>
+<dt>property</dt>
+<dd>string $users</dd>
+<dt>property</dt>
+<dd>string $last_view_ip</dd>
+<dt>property</dt>
+<dd>int $integrated_id</dd>
+<dt>property</dt>
+<dd>disUser $FirstAuthor</dd>
+<dt>property</dt>
+<dd>disUser $LastAuthor</dd>
+<dt>property</dt>
+<dd>disPost $FirstPost</dd>
+<dt>property</dt>
+<dd>disPost $LastPost</dd>
+<dt>property</dt>
+<dd>disBoard $Board</dd>
+<dt>property</dt>
+<dd>array $Reads</dd>
+<dt>property</dt>
+<dd>array $Posts</dd>
+<dt>property</dt>
+<dd>array $Notifications</dd>
+<dt>property</dt>
+<dd>array $Users</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Constants
+              </a></dt>
 <dd><a class="constant" href="#%5CdisThread::TYPE_MESSAGE">TYPE_MESSAGE</a></dd>
 <dd><a class="constant" href="#%5CdisThread::TYPE_POST">TYPE_POST</a></dd>
-<dt>Properties</dt>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
 <dd><a class="property public" href="#%5CdisThread::%24hasSubscription">$hasSubscription</a></dd>
-<dt>Methods</dt>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
 <dd><a class="method public" href="#%5CdisThread::addSubscription()">addSubscription</a></dd>
+<dd><a class="method public" href="#%5CdisThread::aggregateThreadActionButtons()">aggregateThreadActionButtons</a></dd>
 <dd><a class="method public" href="#%5CdisThread::buildBreadcrumbs()">buildBreadcrumbs</a></dd>
 <dd><a class="method public" href="#%5CdisThread::buildCssClass()">buildCssClass</a></dd>
 <dd><a class="method public" href="#%5CdisThread::buildIcons()">buildIcons</a></dd>
 <dd><a class="method public" href="#%5CdisThread::calcLastPostPage()">calcLastPostPage</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canLock()">canLock</a></dd>
+<dd><a class="method public" href="#%5CdisThread::canModifyPost()">canModifyPost</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canMove()">canMove</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canPostAttachments()">canPostAttachments</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canPostNew()">canPostNew</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canPrint()">canPrint</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canRemove()">canRemove</a></dd>
+<dd><a class="method public" href="#%5CdisThread::canRemovePost()">canRemovePost</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canReply()">canReply</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canStick()">canStick</a></dd>
 <dd><a class="method public" href="#%5CdisThread::canSubscribe()">canSubscribe</a></dd>
@@ -117,9 +176,13 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CdisThread::unstick()">unstick</a></dd>
 <dd><a class="method public" href="#%5CdisThread::view()">view</a></dd>
 </dl>
+<dl>
+<dt>see</dt>
+<dd><a href="_dispost.class.html#%5CdisPost">disPost</a></dd>
+</dl>
 <h3>Description</h3>
-<p class="short-description"></p>
-<div class="long-description">
+<p class="short-description">The base class for Threads, which are compilations of Posts in a Board.</p>
+<div class="long-description"><p>This class may be extended to provide derivative functionality.</p>
 </div>
 <h3>Constants</h3>
 <div>
@@ -186,7 +249,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt>static</dt>
 <dd>false</dd>
 <dt>see</dt>
-<dd>disThread::hasSubscription</dd>
+<dd><a href="_disthread.class.html#%5CdisThread::hasSubscription">disThread::hasSubscription</a></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -219,6 +282,55 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dl class="return-info">
 <dt>bool</dt>
 <dd><em>True if successful</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::aggregateThreadActionButtons()"></a><h4 class="method public">aggregateThreadActionButtons<div class="to-top"><a href="#disThread">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">aggregateThreadActionButtons</span><span class="nb-faded-text">(
+          array $postArray
+              =
+              array, string $defaultAvailableActions
+              =
+              mark_as_answer,reply,quote,modify,remove,spam
+          )
+        </span>
+        :
+        array</code><p class="short-description">Prepare the aggregate composition of the action buttons for a post</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$postArray</dt>
+<dd>array<br><em></em>
+</dd>
+<dt>$defaultAvailableActions</dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -434,6 +546,48 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disThread::canModifyPost()"></a><h4 class="method public">canModifyPost<div class="to-top"><a href="#disThread">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canModifyPost</span><span class="nb-faded-text">(
+          int $postId
+          )
+        </span>
+        :
+        bool</code><p class="short-description">See if the active user can modify a post in this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$postId</dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disThread::canMove()"></a><h4 class="method public">canMove<div class="to-top"><a href="#disThread">jump to class</a></div>
 </h4>
 <div class="method">
@@ -585,6 +739,48 @@ Suite 330, Boston, MA 02111-1307 USA</p>
         :
         bool</code><p class="short-description">Determines whether or not the current active user can remove the thread</p>
 <div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::canRemovePost()"></a><h4 class="method public">canRemovePost<div class="to-top"><a href="#disThread">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canRemovePost</span><span class="nb-faded-text">(
+          int $postId
+          )
+        </span>
+        :
+        bool</code><p class="short-description">See if the active user can remove a post in this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$postId</dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
 </div>
 <div class="api-section">
 <h5 class="output">Output</h5>
@@ -1932,8 +2128,16 @@ Suite 330, Boston, MA 02111-1307 USA</p>
           )
         </span>
         :
-        void</code><p class="short-description">Up the view count and set last visited for the Thread.</p>
+        boolean</code><p class="short-description">Up the view count and set last visited for the Thread.</p>
 <div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
 </div>
 <div class="api-section">
 <h5 class="info">
@@ -1952,5 +2156,5 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 </div>
 </div>
-<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.2</a>.
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.13-DEV</a>.
     </small></body></html>

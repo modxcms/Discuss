@@ -66,20 +66,30 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>\xPDOSimpleObject</dd>
 <dt>package</dt>
 <dd>discuss</dd>
-<dt>Constants</dt>
+<dt>property</dt>
+<dd>modUserGroup PrimaryGroup</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Constants
+              </a></dt>
 <dd><a class="constant" href="#%5CdisUser::ACTIVE">ACTIVE</a></dd>
 <dd><a class="constant" href="#%5CdisUser::AWAITING_MODERATION">AWAITING_MODERATION</a></dd>
 <dd><a class="constant" href="#%5CdisUser::BANNED">BANNED</a></dd>
 <dd><a class="constant" href="#%5CdisUser::INACTIVE">INACTIVE</a></dd>
 <dd><a class="constant" href="#%5CdisUser::UNCONFIRMED">UNCONFIRMED</a></dd>
-<dt>Properties</dt>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
 <dd><a class="property public" href="#%5CdisUser::%24isAdmin">$isAdmin</a></dd>
 <dd><a class="property public" href="#%5CdisUser::%24isGlobalModerator">$isGlobalModerator</a></dd>
 <dd><a class="property public" href="#%5CdisUser::%24isLoggedIn">$isLoggedIn</a></dd>
 <dd><a class="property public" href="#%5CdisUser::%24readBoards">$readBoards</a></dd>
 <dd><a class="property public" href="#%5CdisUser::%24readBoardsPrepared">$readBoardsPrepared</a></dd>
-<dt>Methods</dt>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
 <dd><a class="method private" href="#%5CdisUser::_nl2br2()">_nl2br2</a></dd>
+<dd><a class="method public" href="#%5CdisUser::canViewEmails()">canViewEmails</a></dd>
+<dd><a class="method public" href="#%5CdisUser::canViewProfiles()">canViewProfiles</a></dd>
 <dd><a class="method public" href="#%5CdisUser::checkForPostGroupAdvance()">checkForPostGroupAdvance</a></dd>
 <dd><a class="method public" href="#%5CdisUser::clearCache()">clearCache</a></dd>
 <dd><a class="method public" href="#%5CdisUser::countUnreadMessages()">countUnreadMessages</a></dd>
@@ -106,6 +116,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CdisUser::stripBBCode()">stripBBCode</a></dd>
 <dd><a class="method public" href="#%5CdisUser::toArray()">toArray</a></dd>
 </dl>
+<dl></dl>
 <h3>Description</h3>
 <p class="short-description"></p>
 <div class="long-description">
@@ -372,6 +383,72 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dl class="function-info">
 <dt>visibility</dt>
 <dd>private</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUser::canViewEmails()"></a><h4 class="method public">canViewEmails<div class="to-top"><a href="#disUser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canViewEmails</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUser::canViewProfiles()"></a><h4 class="method public">canViewProfiles<div class="to-top"><a href="#disUser">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">canViewProfiles</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
 <dt>final</dt>
 <dd>false</dd>
 <dt>static</dt>
@@ -773,8 +850,16 @@ and if so, grant it to them</p>
           )
         </span>
         :
-        void</code><p class="short-description">Makes a link to the profile page for this user</p>
+        string</code><p class="short-description">Makes a link to the profile page for this user</p>
 <div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
 </div>
 <div class="api-section">
 <h5 class="info">
@@ -1292,7 +1377,7 @@ and if so, grant it to them</p>
           )
         </span>
         :
-        void</code><p class="short-description">Override toArray to provide more values</p>
+        array</code><p class="short-description">Override toArray to provide more values</p>
 <div class="long-description">
 </div>
 <div class="api-section">
@@ -1307,6 +1392,14 @@ and if so, grant it to them</p>
 <dt>$excludeLazy</dt>
 <dd>bool<br><em></em>
 </dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -1327,5 +1420,5 @@ and if so, grant it to them</p>
 </div>
 </div>
 </div>
-<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.2</a>.
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.13-DEV</a>.
     </small></body></html>

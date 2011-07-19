@@ -22,6 +22,18 @@
  * @package discuss
  */
 /**
+ * A collection of notifications for users for a Thread
+ *
+ * @property int $user
+ * @property int $board
+ * @property int $thread
+ *
+ * @property disUser $User
+ * @property disBoard $Board
+ * @property disThread $Thread
+ * 
+ * @see disThread
+ * @see disUser
  * @package discuss
  */
 class disUserNotification extends xPDOSimpleObject {}

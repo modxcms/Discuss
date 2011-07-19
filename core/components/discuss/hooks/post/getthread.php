@@ -26,8 +26,12 @@
  *
  * @package discuss
  * @subpackage hooks
+ *
+ * @var modX $modx
+ * @var array $scriptProperties
  */
 /* get thread or root of post */
+/** @var disThread $thread */
 $thread = $modx->getOption('thread',$scriptProperties,'');
 if (empty($thread)) return false;
 if (!is_object($thread)) {
@@ -49,7 +53,7 @@ $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
 $isAdmin = $discuss->user->isAdmin();
-$isModerator = $discuss->user->isGlobalModerator() || $thread->isModerator($discuss->user->get('id')) || $discuss->user->isAdmin();
+$isModerator = $thread->isModerator();
 $sortDir = $modx->getOption('discuss.post_sort_dir',$scriptProperties,'ASC');
 
 /* get posts */

@@ -22,6 +22,17 @@
  * @package discuss
  */
 /**
+ * A map of Users involved in a private thread.
+ *
+ * @property int $thread The ID of the Thread
+ * @property int $user The ID of the User in the Thread
+ * @property boolean $author Whether or not the mapped user is the Author of the Thread
+ *
+ * @property disUser $User
+ * @property disThread $Thread
+ *
+ * @see disUser
+ * @see disThread
  * @package discuss
  */
 class disThreadUser extends xPDOObject {}

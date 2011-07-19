@@ -2,6 +2,9 @@
 /**
  * @package discuss
  */
+/**
+ * @package discuss
+ */
 class disThreadQuestion extends disThread {
     /**
      * Whether or not the active user can mark this thread as an answer

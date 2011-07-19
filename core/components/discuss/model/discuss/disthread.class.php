@@ -22,6 +22,38 @@
  * @package discuss
  */
 /**
+ * The base class for Threads, which are compilations of Posts in a Board.
+ *
+ * This class may be extended to provide derivative functionality.
+ *
+ * @property string $class_key
+ * @property int $board
+ * @property string $title
+ * @property int $post_first
+ * @property int $post_last
+ * @property int $author_first
+ * @property int $author_last
+ * @property int $replies
+ * @property int $views
+ * @property boolean $locked
+ * @property boolean $answered
+ * @property boolean $sticky
+ * @property boolean $private
+ * @property string $users
+ * @property string $last_view_ip
+ * @property int $integrated_id
+ *
+ * @property disUser $FirstAuthor
+ * @property disUser $LastAuthor
+ * @property disPost $FirstPost
+ * @property disPost $LastPost
+ * @property disBoard $Board
+ * @property array $Reads
+ * @property array $Posts
+ * @property array $Notifications
+ * @property array $Users
+ *
+ * @see disPost
  * @package discuss
  */
 class disThread extends xPDOSimpleObject {
@@ -749,7 +781,7 @@ class disThread extends xPDOSimpleObject {
 
     /**
      * Up the view count and set last visited for the Thread.
-     * @return void
+     * @return boolean
      */
     public function view() {
         $lastViewed = false;
@@ -1095,9 +1127,20 @@ class disThread extends xPDOSimpleObject {
         return $this->hasSubscription() && $this->xpdo->hasPermission('discuss.thread_subscribe');
     }
 
+    /**
+     * See if the active user can modify a post in this thread
+     * @param int $postId
+     * @return bool
+     */
     public function canModifyPost($postId) {
         return $this->isModerator();
     }
+
+    /**
+     * See if the active user can remove a post in this thread
+     * @param int $postId
+     * @return bool
+     */
     public function canRemovePost($postId) {
         return $this->isModerator();
     }
@@ -1177,6 +1220,12 @@ class disThread extends xPDOSimpleObject {
         return true;
     }
 
+    /**
+     * Prepare the aggregate composition of the action buttons for a post
+     * @param array $postArray
+     * @param string $defaultAvailableActions
+     * @return array
+     */
     public function aggregateThreadActionButtons(array $postArray = array(),$defaultAvailableActions = 'mark_as_answer,reply,quote,modify,remove,spam') {
         $actions = array();
         $availableActions = $this->xpdo->getOption('discuss.thread_actionbutton_order',null,$defaultAvailableActions);

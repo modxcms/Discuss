@@ -24,6 +24,7 @@
 /**
  * A list of reserved usernames to prevent users from registering with.
  *
+ * @deprecated Use rampart/Login instead
  * @package discuss
  */
 class disReservedUsername extends xPDOObject {}
