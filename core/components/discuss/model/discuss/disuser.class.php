@@ -22,6 +22,8 @@
  * @package discuss
  */
 /**
+ *
+ * @property modUserGroup PrimaryGroup
  * @package discuss
  */
 class disUser extends xPDOSimpleObject {
@@ -849,5 +851,16 @@ class disUser extends xPDOSimpleObject {
             $this->xpdo->reloadConfig();
         }
         return $saved;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function canViewProfiles() {
+        return $this->isLoggedIn && $this->xpdo->hasPermission('discuss.view_profiles');
+    }
+
+    public function canViewEmails() {
+        return $this->isLoggedIn && $this->xpdo->hasPermission('discuss.view_emails');
     }
 }

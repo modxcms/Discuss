@@ -63,6 +63,14 @@ class Discuss {
      * @var disHooks $hooks
      */
     public $hooks;
+    /**
+     * @var disTreeParser $treeParser
+     */
+    public $treeParser;
+    /**
+     * @var disRequest $request
+     */
+    public $request;
 
     /**
      * @param modX $modx A reference to the modX instance

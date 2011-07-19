@@ -31,6 +31,7 @@
 $thread = $modx->getOption('thread',$scriptProperties,'');
 if (empty($thread)) return false;
 if (!is_object($thread)) {
+    /** @var disThread $thread */
     $thread = $modx->call('disThread', 'fetch', array(&$modx,$thread));
     if (empty($thread)) return false;
 }
@@ -63,8 +64,6 @@ $posts = $thread->fetchPosts($post,array(
 /* setup basic settings/permissions */
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
 $allowCustomTitles = $modx->getOption('discuss.allow_custom_titles',null,true);
-$canModifyPost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_modify');
-$canRemovePost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_remove');
 $canViewAttachments = $modx->hasPermission('discuss.view_attachments');
 $canTrackIp = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.track_ip');
 $canViewEmails = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.view_emails');
@@ -76,54 +75,19 @@ $canMarkAsAnswer = $thread->get('class_key') == 'disThreadQuestion' && $thread->
 $plist = array();
 $output = array();
 $idx = $sortDir == 'ASC' ? $start : $posts['total'] - $start - 1;
+/** @var disPost $post */
 foreach ($posts['results'] as $post) {
     $post->set('idx',$idx);
     $postArray = $post->toArray();
     $postArray['url'] = $post->getUrl();
     $postArray['children'] = '';
 
-    if ($post->Author) {
-        $postArray = array_merge($postArray,$post->Author->toArray('author.'));
-        $postArray['author.signature'] = $post->Author->parseSignature();
-        $postArray['author.posts'] = number_format($postArray['author.posts']);
-    }
-    unset($postArray['author.password'],$postArray['author.cachepwd']);
     if (!empty($post->EditedBy)) {
         $postArray = array_merge($postArray,$post->EditedBy->toArray('editedby.'));
         unset($postArray['editedby.password'],$postArray['editedby.cachepwd']);
     }
 
-    if ($post->Author) {
-        if ($canViewProfiles) {
-            $postArray['author.username_link'] = '<a href="'.$post->Author->getUrl().'">'.$post->Author->get('name').'</a>';
-        } else {
-            $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('name').'</span>';
-        }
-        if ($post->Author->get('status') == disUser::BANNED) {
-            $postArray['author.username_link'] .= '<span class="dis-banned">'.$modx->lexicon('discuss.banned').'</span>';
-        }
-
-        /* set author avatar */
-        $avatarUrl = $post->Author->getAvatarUrl();
-        if (!empty($avatarUrl)) {
-            $postArray['author.avatar'] = '<img class="dis-post-avatar" alt="'.$postArray['author'].'" src="'.$avatarUrl.'" />';
-        }
-
-        /* check if author wants to show email */
-        if ($post->Author->get('show_email') && $discuss->user->isLoggedIn && $canViewEmails) {
-            $post->loadParser();
-            $postArray['author.email'] = disBBCodeParser::encodeEmail($post->Author->get('email'),$modx->lexicon('discuss.email_author'));
-        } else {
-            $postArray['author.email'] = '';
-        }
-
-        /* get primary group badge/name, if applicable */
-        $postArray['author.group_badge'] = $post->Author->getGroupBadge();
-        $postArray['author.group_name'] = '';
-        if (!empty($post->Author->PrimaryGroup)) {
-            $postArray['author.group_name'] = $post->Author->PrimaryGroup->get('name');
-        }
-    }
+    $post->renderAuthorMeta($postArray);
 
     $postArray['children_class'] = array('dis-board-post');
     $postArray['class'] = array('dis-post');
@@ -156,7 +120,6 @@ foreach ($posts['results'] as $post) {
                 'id' => '',
                 'attributes' => '',
             ));
-            $postArray['actions'][] = $postArray['action_reply'];
             $postArray['action_quote'] = $discuss->getChunk('disActionLink',array(
                 'url' => $discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)),
                 'text' => $modx->lexicon('discuss.quote'),
@@ -164,11 +127,9 @@ foreach ($posts['results'] as $post) {
                 'id' => '',
                 'attributes' => '',
             ));
-            $postArray['actions'][] = $postArray['action_quote'];
         }
 
-        $canModifyPost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canModifyPost);
-        if ($canModifyPost) {
+        if ($post->canModify()) {
             $postArray['action_modify'] = $discuss->getChunk('disActionLink',array(
                 'url' => $discuss->request->makeUrl('thread/modify',array('post' => $post->get('id'))),
                 'text' => $modx->lexicon('discuss.modify'),
@@ -176,11 +137,9 @@ foreach ($posts['results'] as $post) {
                 'id' => '',
                 'attributes' => '',
             ));
-            $postArray['actions'][] = $postArray['action_modify'];
         }
 
-        $canRemovePost = $discuss->user->get('id') == $post->get('author') || ($isModerator && $canRemovePost);
-        if ($canRemovePost) {
+        if ($post->canRemove()) {
             $postArray['action_remove'] = $discuss->getChunk('disActionLink',array(
                 'url' => $discuss->request->makeUrl('post/remove',array('post' => $post->get('id'))),
                 'text' => $modx->lexicon('discuss.remove'),
@@ -188,7 +147,6 @@ foreach ($posts['results'] as $post) {
                 'id' => '',
                 'attributes' => '',
             ));
-            $postArray['actions'][] = $postArray['action_remove'];
             if ($isModerator || $isAdmin) {
                 $postArray['action_spam'] = $discuss->getChunk('disActionLink',array(
                     'url' => $discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))),
@@ -197,7 +155,6 @@ foreach ($posts['results'] as $post) {
                     'id' => '',
                     'attributes' => '',
                 ));
-                $postArray['actions'][] = $postArray['action_spam'];
             }
         }
     }
@@ -208,6 +165,7 @@ foreach ($posts['results'] as $post) {
         $attachments = $post->getMany('Attachments');
         if (!empty($attachments)) {
             $postArray['attachments'] = array();
+            /** @var disPostAttachment $attachment */
             foreach ($attachments as $attachment) {
                 $attachmentArray = $attachment->toArray();
                 $attachmentArray['filesize'] = $attachment->convert();
@@ -237,6 +195,9 @@ foreach ($posts['results'] as $post) {
 
     /* prepare thread view for derivative thread types */
     $postArray = $thread->prepareThreadView($postArray);
+
+    /* order action buttons */
+    $postArray['actions'] = $thread->aggregateThreadActionButtons($postArray);
 
     /* prepare specific properties for rendering */
     $postArray['actions'] = implode("\n",$postArray['actions']);
