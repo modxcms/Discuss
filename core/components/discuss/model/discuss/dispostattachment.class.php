@@ -22,6 +22,20 @@
  * @package discuss
  */
 /**
+ * An attached file to a Post
+ *
+ * @property int $post
+ * @property int $board
+ * @property string $filename
+ * @property datetime $createdon
+ * @property int $filesize
+ * @property int $downloads
+ * @property int $integrated_id
+ * @property string $integrated_data
+ *
+ * @property disPost $Post
+ * @property disBoard $Board
+ * 
  * @package discuss
  */
 class disPostAttachment extends xPDOSimpleObject {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="discuss" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">    
-    
+    <!--
     <object class="disBanGroup" table="discuss_ban_groups" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="ip" dbtype="varchar" precision="20" phptype="string" null="false" default="" index="index" />
@@ -29,6 +29,7 @@
         <aggregate alias="BanGroup" class="disBanGroup" local="grp" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
     </object>
+    -->
     
     <object class="disBoard" table="discuss_boards" extends="xPDOSimpleObject">
         <field key="category" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
@@ -285,7 +286,7 @@
         <field key="user" dbtype="int" precision="11" phptype="integer" null="false" default="0" index="index" />
         <field key="username" dbtype="varchar" precision="120" phptype="string" null="false" default="" index="index" />
         <field key="password" dbtype="varchar" precision="120" phptype="string" null="false" default="" />
-        <field key="email" dbtype="varchar" precision="120" phptype="string" null="false" default="" index="index" />
+        <field key="email" dbtype="varchar" precision="200" phptype="string" null="false" default="" index="index" />
         <field key="ip"  dbtype="varchar" precision="120" phptype="string" null="false" default="0.0.0.0" />
 
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
@@ -297,7 +298,6 @@
         <field key="website" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="location" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
 
-        <field key="ip" dbtype="varchar" precision="20" phptype="string" null="false" default="0.0.0.0" />
         <field key="status" dbtype="tinyint" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="confirmed" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
         <field key="confirmedon" dbtype="datetime" phptype="datetime" null="false" />

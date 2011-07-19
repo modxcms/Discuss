@@ -22,6 +22,16 @@
  * @package discuss
  */
 /**
+ * A map of Users who are moderators for a given Board
+ *
+ * @property int $user
+ * @property int $board
+ *
+ * @property disUser $User
+ * @property disBoard $Board
+ *
+ * @see disUser
+ * @see disBoard
  * @package discuss
  */
 class disModerator extends xPDOSimpleObject {}

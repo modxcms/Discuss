@@ -22,6 +22,15 @@
  * @package discuss
  */
 /**
+ * A general log of forum-wide activity
+ *
+ * @property date $day
+ * @property int $hits
+ * @property int $topics
+ * @property int $replies
+ * @property int $registers
+ * @property int $visitors
+ *
  * @package discuss
  */
 class disForumActivity extends xPDOSimpleObject {}
