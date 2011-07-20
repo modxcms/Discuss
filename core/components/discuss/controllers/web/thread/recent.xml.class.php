@@ -21,27 +21,17 @@
  *
  * @package discuss
  */
+require_once dirname(__FILE__).'/recent.class.php';
 /**
  * Show Recent Posts
  * 
  * @package discuss
  */
-$discuss->setPageTitle($modx->lexicon('discuss.recent_posts'));
-
-/* get default options */
-$limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.num_recent_posts',null,10));
-$start = $modx->getOption('start',$scriptProperties,0);
-$page = !empty($scriptProperties['page']) ? $scriptProperties['page'] : 1;
-$page = $page <= 0 ? $page = 1 : $page;
-$start = ($page-1) * $limit;
-
-/* recent posts */
-$recent = $discuss->hooks->load('post/recent',array(
-    'limit' => $limit,
-    'start' => $start,
-    'getTotal' => true,
-    'postTpl' => 'post/disBoardPostXml',
-));
-$placeholders['recent_posts'] = $recent['results'];
-
-return $placeholders;
+class DiscussThreadRecentXmlController extends DiscussThreadRecentController {
+    public $useWrapper = false;
+    public function getSessionPlace() { return ''; }
+    public function initialize() {
+        $this->options['postTpl'] = 'post/disBoardPostXml';
+    }
+    
+}

@@ -118,6 +118,14 @@ class DisRequest {
         $className = explode('/',$className);
         $o = array();
         foreach ($className as $k) {
+            if (strpos($k,'_')) {
+                $substr = '';
+                $e = explode('_',$k);
+                foreach ($e as $ex) {
+                    $substr[] = ucfirst($ex);
+                }
+                $k = implode('',$substr);
+            }
             $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
         }
         return implode('',$o);

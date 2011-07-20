@@ -10,37 +10,44 @@
  */
 abstract class DiscussController {
     /**
-     * @var modX
+     * A reference to the modX instance
+     * @var modX $modx
      */
     public $modx;
     /**
-     * @var Discuss
+     * A reference to the Discuss instance
+     * @var Discuss $discuss
      */
     public $discuss;
     /**
-     * @var array
+     * An array of theme-specific options for this controller
+     * @var array $options
      */
     public $options = array();
     /**
-     * @var array
+     * An array of set placeholders for this controller to load into the template
+     * @var array $placeholders
      */
     public $placeholders = array();
     /**
-     * @var array
+     * An array of REQUEST or CLI properties to pass into the controller
+     * @var array $scriptProperties
      */
     public $scriptProperties = array();
     /**
-     * @var boolean
+     * Whether or not to load the wrapper template after gathering this controller's output
+     * @var boolean $useWrapper
      */
     public $useWrapper = true;
     /**
-     * @var int
+     * Used for displaying the amount of time it took to render the page
+     * @var int $debugTime
      */
     public $debugTimer = 0;
 
     /**
-     * @param Discuss $discuss
-     * @param array $config
+     * @param Discuss $discuss A reference to the Discuss instance
+     * @param array $config An array of configuration properties about this controller
      */
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
@@ -82,6 +89,16 @@ abstract class DiscussController {
             $this->startDebugTimer();
         }
         $this->initialize();
+
+        $allowed = $this->checkPermissions();
+        if ($allowed !== true) {
+            if (is_string($allowed)) {
+                $this->modx->sendRedirect($allowed);
+            } else {
+                $this->discuss->sendUnauthorizedPage();
+            }
+        }
+
         $this->handleActions();
         $this->process();
 
@@ -147,8 +164,8 @@ abstract class DiscussController {
             ));
             return $output;
         }
-        $emptyTpl = in_array($this->config['controller'],array('thread/preview','messages/preview','board.xml','thread/recent.xml'));
-        if ($this->modx->getOption('discuss.debug',null,false)) {
+        $emptyTpl = in_array($this->config['controller'],array('messages/preview','board.xml'));
+        if ($this->modx->getOption('discuss.debug',null,false) && $this->useWrapper) {
             if (!$emptyTpl && $this->debugTimer !== false) {
                 $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";
             }
@@ -167,8 +184,17 @@ abstract class DiscussController {
      * @return void
      */
     public function handleActions() {}
+
+    /**
+     * Check to see if the user can do the page's action. Return true to pass, otherwise return either a URL to
+     * redirect to on an unsuccessful validation, or false to redirect to the unauthorized page.
+     * 
+     * @return boolean
+     */
+    public function checkPermissions() { return true; }
     
     /**
+     * Set a placeholder for the controller to render into the template
      * @param string $key
      * @param mixed $value
      * @return void
@@ -177,6 +203,7 @@ abstract class DiscussController {
         $this->placeholders[$key] = $value;
     }
     /**
+     * Set an array of placeholders
      * @param array $array
      * @return void
      */
@@ -185,6 +212,7 @@ abstract class DiscussController {
         $this->placeholders = array_merge($this->placeholders,$array);
     }
     /**
+     * Return an array of all the set placeholders
      * @return array
      */
     public function getPlaceholders() {
@@ -192,13 +220,29 @@ abstract class DiscussController {
     }
 
     /**
+     * Get a specific placeholder
+     * @param string $key
+     * @param null $default
+     * @return mixed|null
+     */
+    public function getPlaceholder($key,$default = null) {
+        return isset($this->placeholders[$key]) ? $this->placeholders[$key] : $default;
+    }
+
+    /**
      * Get a REQUEST property
      * @param string $key
      * @param mixed $default
+     * @param string $checkType
      * @return null
      */
-    public function getProperty($key,$default = null) {
-        return isset($this->scriptProperties[$key]) ? $this->scriptProperties[$key] : $default;
+    public function getProperty($key,$default = null,$checkType = 'isset') {
+        switch ($checkType) {
+            case 'empty': $pass = !empty($this->scriptProperties[$key]); break;
+            default:
+                $pass = isset($this->scriptProperties[$key]); break;
+        }
+        return $pass ? $this->scriptProperties[$key] : $default;
     }
 
     /**
@@ -220,7 +264,7 @@ abstract class DiscussController {
     /**
      * Override and return an array to automatically render breadcrumbs
      * 
-     * @return array
+     * @return array|string
      */
     public function getBreadcrumbs() { return array(); }
 
@@ -287,7 +331,9 @@ abstract class DiscussController {
 
 /**
  * Used for old-style deprecated controllers
+ * 
  * @package discuss
+ * @subpackage controllers
  */
 class DiscussDeprecatedController extends DiscussController {
     public function getPageTitle() { return ''; }
