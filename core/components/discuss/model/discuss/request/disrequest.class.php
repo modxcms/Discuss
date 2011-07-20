@@ -149,6 +149,7 @@ class DisRequest {
         } else if (file_exists($controllerFile.'/index.class.php')) {
             $controllerArray['isClass'] = true;
             $controllerArray['file'] = $controllerFile.'/index.class.php';
+            $controllerArray['tpl'] = $this->discuss->config['pagesPath'].strtolower($controller).'/index.tpl';
         } else if (!file_exists($controllerFile.'.php') && file_exists($controllerFile.'/index.php')) {
             $controllerArray['file'] = $controllerFile.'/index.php';
             $controllerArray['controller'] .= '/index';
