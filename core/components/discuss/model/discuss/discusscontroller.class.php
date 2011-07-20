@@ -164,7 +164,7 @@ abstract class DiscussController {
             ));
             return $output;
         }
-        $emptyTpl = in_array($this->config['controller'],array('messages/preview','board.xml'));
+        $emptyTpl = in_array($this->config['controller'],array('messages/preview'));
         if ($this->modx->getOption('discuss.debug',null,false) && $this->useWrapper) {
             if (!$emptyTpl && $this->debugTimer !== false) {
                 $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";

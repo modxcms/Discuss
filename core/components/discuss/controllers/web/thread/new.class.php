@@ -25,6 +25,7 @@
  * Display form to post a new thread
  *
  * @package discuss
+ * @subpackage controllers
  */
 class DiscussThreadNewController extends DiscussController {
     /** @var disBoard $board */

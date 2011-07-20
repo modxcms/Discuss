@@ -25,7 +25,7 @@
  * Remove Thread page
  * 
  * @package discuss
- * @subpackage controller
+ * @subpackage controllers
  */
 class DiscussThreadRemoveController extends DiscussController {
     /** @var disThread $thread */

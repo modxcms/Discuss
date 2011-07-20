@@ -30,15 +30,23 @@
 class DiscussBoardController extends DiscussController {
     /** @var disBoard $board */
     public $board;
+    /** @var array $list */
+    public $list = array();
 
     
     public function initialize() {
-        /* get board */
-        if (empty($this->scriptProperties['board'])) $this->discuss->sendErrorPage();
+        $board = $this->getProperty('board',false);
+        if (empty($board)) $this->discuss->sendErrorPage();
         $integrated = $this->getProperty('i',false);
         if (!empty($integrated)) $integrated = true;
-        $this->board = $this->modx->call('disBoard','fetch',array(&$this->modx,$this->scriptProperties['board'],$integrated));
+        $this->board = $this->modx->call('disBoard','fetch',array(&$this->modx,$board,$integrated));
         if ($this->board == null) $this->discuss->sendErrorPage();
+        $this->setOptions();
+    }
+    public function setOptions() {
+        $this->options['tpl'] = 'post/disBoardPost';
+        $this->options['mode'] = 'post';
+        $this->options['get_category_name'] = false;
     }
     public function getSessionPlace() {
         return 'board:'.$this->board->get('id');
@@ -54,7 +62,6 @@ class DiscussBoardController extends DiscussController {
         }
     }
 
-    
     public function process() {
         $this->setPlaceholders($this->board->toArray());
 
@@ -71,39 +78,59 @@ class DiscussBoardController extends DiscussController {
             $page = $page <= 0 ? 1 : $page;
             $start = ($page-1) * $limit;
         }
-
         if (!empty($this->options['showPosts'])) {
             $c = array(
                 'limit' => $limit,
                 'start' => $start,
                 'board' => &$this->board,
+                'tpl' => $this->options['tpl'],
+                'mode' => $this->options['mode'],
+                'get_category_name' => $this->options['get_category_name'],
             );
-            $posts = $this->discuss->hooks->load('board/post/getlist',$c);
-            $this->setPlaceholder('posts',implode("\n",$posts['results']));
-            $this->discuss->config['pa'] = $posts['total'];
+            $this->list = $this->discuss->hooks->load('board/post/getlist',$c);
+            $this->setPlaceholder('posts',implode("\n",$this->list['results']));
         }
 
+        $this->buildPagination();
 
-        /* get viewing users */
         if (!empty($this->options['showReaders'])) {
-            $this->setPlaceholder('readers',$this->board->getViewing());
+            $this->getViewing();
         }
+        if (!empty($this->options['showModerators'])) {
+            $this->getModerators();
+        }
+        $this->getActionButtons();
+        $this->onRenderBoard();
+        $this->setPlaceholder('discuss.board',$this->board->get('name'));
+    }
 
-        /* get pagination */
+    /**
+     * Get a list of moderators for this board
+     * @return void
+     */
+    public function getModerators() {
+        $this->setPlaceholder('moderators',$this->board->getModeratorsList());
+    }
+
+    public function getViewing() {
+        $this->setPlaceholder('readers',$this->board->getViewing());
+    }
+
+    /**
+     * Build the pagination for this grid
+     * @return void
+     */
+    public function buildPagination() {
         $this->discuss->hooks->load('pagination/build',array(
-            'count' => !empty($posts) ? $posts['total'] : 0,
+            'count' => !empty($this->list) ? $this->list['total'] : 0,
             'id' => $this->board->get('id'),
             'view' => 'board',
-            'limit' => $limit,
+            'limit' => $this->list['limit'],
             'param' => $this->modx->getOption('discuss.page_param',$this->scriptProperties,'page'),
         ));
+    }
 
-        /* get moderators */
-        if (!empty($this->options['showModerators'])) {
-            $this->setPlaceholder('moderators',$this->board->getModeratorsList());
-        }
-
-        /* action buttons */
+    public function getActionButtons() {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
             if ($this->modx->hasPermission('discuss.thread_create') && $this->board->canPost()) {
@@ -112,9 +139,9 @@ class DiscussBoardController extends DiscussController {
             $actionButtons[] = array('url' => $this->discuss->request->makeUrl('board',array('board' => $this->board->get('id'),'read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'));
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
-        unset($actionButtons);
+    }
 
-        /* Render board event */
+    public function onRenderBoard() {
         $this->setPlaceholders(array(
             'top' => '',
             'bottom' => '',
@@ -126,7 +153,6 @@ class DiscussBoardController extends DiscussController {
         if (!empty($eventOutput)) {
             $this->setPlaceholders($eventOutput);
         }
-        $this->setPlaceholder('discuss.board',$this->board->get('name'));
     }
 
     public function getBreadcrumbs() {

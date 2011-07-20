@@ -25,6 +25,7 @@
  * Show Recent Posts
  * 
  * @package discuss
+ * @subpackage controllers
  */
 class DiscussThreadRecentController extends DiscussController {
     /** @var array $list */

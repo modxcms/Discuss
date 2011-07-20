@@ -21,18 +21,20 @@
  *
  * @package discuss
  */
-require_once dirname(__FILE__).'/recent.class.php';
+require_once dirname(__FILE__).'/board.class.php';
 /**
- * Show Recent Posts
- * 
+ * Displays posts for a Board in RSS format
+ *
  * @package discuss
- * @subpackage controllers
  */
-class DiscussThreadRecentXmlController extends DiscussThreadRecentController {
+class DiscussBoardXmlController extends DiscussBoardController {
     public $useWrapper = false;
-    public function getSessionPlace() { return ''; }
-    public function initialize() {
-        $this->options['postTpl'] = 'post/disBoardPostXml';
+    public function setOptions() {
+        $this->options['tpl'] = 'post/disBoardPostXml';
+        $this->options['mode'] = 'rss';
+        $this->options['get_category_name'] = true;
     }
-    
+    public function postProcess() {
+        @header('Content-type: application/xhtml+xml');
+    }
 }
