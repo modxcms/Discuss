@@ -94,10 +94,8 @@ ol.dis-board-list {
 li.dis-board-li {
  	list-style: none;
  	border-top: 1px solid #eee;
- 	padding-left: 50px;
+ 	padding: 0 0 0 10px;
  	padding-bottom: 5px;
- 	background: transparent url(../images/icons/off.png) 0 -2px no-repeat;
- 	height: 32px;
 }
 
 ol.dis-board-list li.dis-unread {
@@ -171,7 +169,7 @@ div.dis-threads {
  	
 div.dis-threads li {
  	line-height: 1.1em;
- 	padding: 13px 40px 3px;
+ 	padding: 13px 0 3px 10px;
  	height: 25px;
  	vertical-align: middle;
  	border-bottom: 1px solid #f4f4f4;
@@ -226,7 +224,7 @@ a.dis-mark-as-answer-link:hover {
 	}
 
 a.dis-solved {
-
+	background: transparent url(../images/discuss_solved_16.png) no-repeat -16px 0;
 }
 
 a.dis-unsolved {
@@ -283,6 +281,7 @@ div.dis-actions span {
 	line-height: 100%;
 	padding: 10px;
 	display: none;
+	z-index: 200;
 	}
 
 div.dis-post-ct {
@@ -308,8 +307,14 @@ div.dis-actions span ul li a {
 	display: block;
 	padding: 2px;
 	width: 140px;
+	background: none
 	}
-	
+
+span.DiscussionCount {
+	font-size: 10px;
+	color: #555;
+	}
+
 div.dis-report {
 	margin: 10px 0;
 	text-align: right;
@@ -375,17 +380,20 @@ span.idx {
 .dis-new {
  	vertical-align: middle;
 }
+
 div.dis-thread-icons {
  	float: right;
  	margin-top: -5px;
  	padding-right: 10px;
  	}
+ 	
 div.dis-thread-sticky {
  	width: 21px;
  	height: 22px;
  	float: right;
  	background: transparent url(../images/icons/show_sticky.gif) top left no-repeat;
 }
+
 div.dis-thread-locked { width: 21px; height: 22px; float: right; background: transparent url(../images/icons/quick_lock.gif) top left no-repeat; }
 
 div.dis-board-head {
@@ -395,7 +403,7 @@ div.dis-board-head {
 	}
 	
 div.dis-board-head div.dis-thread-body{
-	padding: 0 30px 0 10px;
+	padding: 0 0 0 10px;
 	}
 
 div.dis-thread-body,
@@ -419,13 +427,6 @@ div.dis-replies {
 div.dis-thread-body {
 	width: 300px;
 	}
-
-div.dis-threads li, .dis-normal-thread { background-image: url(../images/icons/normal_post.gif); }
-.dis-my-normal-thread { background-image: url(../images/icons/my_normal_post.gif) !important; }
-.dis-veryhot-thread { background-image: url(../images/icons/veryhot_post.gif) !important; }
-.dis-my-veryhot-thread { background-image: url(../images/icons/my_veryhot_post.gif) !important; }
-
-
 
 dl.dis-datalist {	
  	}
@@ -4158,6 +4159,7 @@ header {
 	left: -80px;
  	margin:0 0 0 4px;
  	height:30px;
+ 	z-index: 100;
 	}
 
 #global {

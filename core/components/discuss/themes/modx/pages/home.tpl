@@ -55,7 +55,7 @@
 
 
 [[+bottom]]
-[[+actionbuttons]]
+<div class="dis-thread-actions">[[+actionbuttons]]</div>
 				</div><!-- Close Content From Wrapper -->
 
 
