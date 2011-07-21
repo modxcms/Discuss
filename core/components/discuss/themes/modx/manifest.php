@@ -78,7 +78,7 @@ $manifest = array(
             'showModerators' => true,
         ),
     ),
-    'thread/index' => array(
+    'thread' => array(
         'js' => array(
             'header' => array(
                 'dis.thread.js',
@@ -138,7 +138,7 @@ $manifest = array(
             ),
         )
     ),
-    'user/index' => array(
+    'user' => array(
         'options' => array(
             'showRecentPosts' => true,
         ),
