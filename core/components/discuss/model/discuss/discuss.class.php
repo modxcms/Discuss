@@ -693,6 +693,17 @@ class Discuss {
     }
 
     /**
+     * Strips all MODX tags and converts HTML tags
+     * @param string $message
+     * @return string
+     */
+    public function stripAllTags($message) {
+        $message = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$message);
+        $message = htmlentities($message,null,'UTF-8');
+        return $message;
+    }
+
+    /**
      * A faster array_diff
      * 
      * @param array $data1

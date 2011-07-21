@@ -241,5 +241,5 @@ if (empty($flat)) {
 } else {
     $output = implode("\n",$output);
 }
-$response['results'] = str_replace(array('[',']'),array('&#91;','&#93;'),$output);
+$response['results'] = $output;//str_replace(array('[',']'),array('&#91;','&#93;'),$output);
 return $response;

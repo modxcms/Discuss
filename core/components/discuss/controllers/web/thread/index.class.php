@@ -69,7 +69,7 @@ class DiscussThreadController extends DiscussController {
         $this->setPlaceholders($this->thread->toArray('',true,true));
         $this->setPlaceholder('views',number_format($this->getPlaceholder('views',1)));
         $this->setPlaceholder('replies',number_format($this->getPlaceholder('replies',0)));
-        
+
         /* set css class of thread */
         $this->thread->buildCssClass();
 
