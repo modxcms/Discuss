@@ -234,7 +234,7 @@ abstract class DiscussController {
      * @param string $key
      * @param mixed $default
      * @param string $checkType
-     * @return null
+     * @return mixed
      */
     public function getProperty($key,$default = null,$checkType = 'isset') {
         switch ($checkType) {

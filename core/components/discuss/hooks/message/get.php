@@ -24,10 +24,18 @@
 /**
  * Get a threaded view of a post.
  *
+ * @var Discuss $discuss
+ * @var modX $modx
+ * @var array $scriptProperties
+ *
  * @package discuss
  * @subpackage hooks
  */
-/* get thread or root of post */
+
+/**
+ * get thread or root of post
+ * @var disThread $thread
+ */
 $thread = $modx->getOption('thread',$scriptProperties,'');
 if (empty($thread)) return false;
 
@@ -88,6 +96,7 @@ $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 $plist = array();
 $output = array();
 $idx = 0;
+/** @var disPost $post */
 foreach ($posts as $post) {
     $postArray = $post->toArray();
     $postArray['url'] = $discuss->request->makeUrl('messages/view',array('thread' => $post->get('thread'))).'#dis-post-'.$post->get('id');
@@ -132,7 +141,7 @@ foreach ($posts as $post) {
     }
     $postArray['title'] = str_replace(array('[',']'),array('&#91;','&#93;'),$postArray['title']);
 
-    $postArray['class'] = array('dis-board-post');
+    $postArray['class'] = array('dis-post');
     if (!$flat) {
         /* set depth and check max post depth */
         $postArray['class'][] = 'dis-depth-'.$postArray['depth'];
@@ -150,34 +159,60 @@ foreach ($posts as $post) {
         $postArray['author.title'] = '';
     }
 
+
     /* load actions */
     $postArray['action_reply'] = '';
-    $postArray['action_quote'] = '';
-    $postArray['action_modify'] = '';
-    $postArray['action_remove'] = '';
+    $postArray['actions'] = array();
     if (!$thread->get('locked') && $discuss->user->isLoggedIn) {
-        if ($globalCanReplyPost) {
-            $postArray['action_reply'] = '<a href="'.$discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'))).'" class="dis-post-reply">'.$modx->lexicon('discuss.reply').'</a>';
-            $postArray['action_quote'] = '<a href="'.$discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'),'quote' => 1)).'" class="dis-post-quote">'.$modx->lexicon('discuss.quote').'</a>';
+        if ($post->canReply()) {
+            $postArray['action_reply'] = $discuss->getChunk('disActionLink',array(
+                'url' => $discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'))),
+                'text' => $modx->lexicon('discuss.reply'),
+                'class' => 'dis-post-reply',
+                'id' => '',
+                'attributes' => '',
+            ));
+            $postArray['action_quote'] = $discuss->getChunk('disActionLink',array(
+                'url' => $discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'),'quote' => 1)),
+                'text' => $modx->lexicon('discuss.quote'),
+                'class' => 'dis-post-quote',
+                'id' => '',
+                'attributes' => '',
+            ));
         }
 
-        $canModifyPost = $discuss->user->get('id') == $post->get('author') && $globalCanModifyPost;
-        if ($canModifyPost) {
-            $postArray['action_modify'] = '<a href="'.$discuss->request->makeUrl('messages/modify',array('post' => $post->get('id'))).'" class="dis-post-modify">'.$modx->lexicon('discuss.modify').'</a>';
+        if ($post->canModify()) {
+            $postArray['action_modify'] = $discuss->getChunk('disActionLink',array(
+                'url' => $discuss->request->makeUrl('messages/modify',array('post' => $post->get('id'))),
+                'text' => $modx->lexicon('discuss.modify'),
+                'class' => 'dis-post-modify',
+                'id' => '',
+                'attributes' => '',
+            ));
         }
 
-        $canRemovePost = $discuss->user->get('id') == $post->get('author') && $globalCanRemovePost;
-        if ($canRemovePost) {
-            $postArray['action_remove'] = '<a href="'.$discuss->request->makeUrl('messages/remove_post',array('post' => $post->get('id'))).'">'.$modx->lexicon('discuss.remove').'</a>';
+        if ($post->canRemove()) {
+            $postArray['action_remove'] = $discuss->getChunk('disActionLink',array(
+                'url' => $discuss->request->makeUrl('messages/remove_post',array('post' => $post->get('id'))),
+                'text' => $modx->lexicon('discuss.remove'),
+                'class' => 'dis-post-remove',
+                'id' => '',
+                'attributes' => '',
+            ));
         }
     }
 
+    /* order action buttons */
+    $postArray['actions'] = $thread->aggregateThreadActionButtons($postArray);
+    $postArray['actions'] = implode("\n",$postArray['actions']);
+    
     /* get attachments */
     $postArray['attachments'] = '';
     if ($canViewAttachments) {
         $attachments = $post->getMany('Attachments');
         if (!empty($attachments)) {
             $postArray['attachments'] = array();
+            /** @var disPostAttachment $attachment */
             foreach ($attachments as $attachment) {
                 $attachmentArray = $attachment->toArray();
                 $attachmentArray['filesize'] = $attachment->convert();
@@ -193,7 +228,7 @@ foreach ($posts as $post) {
     $postArray['report_link'] = '';
     $postArray['ip'] = '';
     $postArray['idx'] = $idx+1;
-    
+
     if ($flat) {
         $output[] = $discuss->getChunk('post/disThreadPost',$postArray);
     } else {

@@ -22,18 +22,32 @@
  * @package discuss
  */
 /**
- * User statistics page
+ * User merge account page
  *
  * @package discuss
+ * @subpackage controllers
  */
-if (!$discuss->user->isLoggedIn) {
-    $discuss->sendUnauthorizedPage();
+class DiscussUserMergeController extends DiscussController {
+
+    public function initialize() {
+        $this->modx->lexicon->load('discuss:user');
+    }
+    public function checkPermissions() {
+        return $this->discuss->user->isLoggedIn;
+    }
+    public function getPageTitle() {
+        return $this->modx->lexicon('discuss.account_merge');
+    }
+    public function getSessionPlace() {
+        return 'user-merge:'.$this->discuss->user->get('id');
+    }
+    public function process() {
+        $this->setPlaceholders($this->discuss->user->toArray());
+        $this->getMenu();
+
+    }
+    public function getMenu() {
+        $menuTpl = $this->getProperty('menuTpl','disUserMenu');
+        $this->setPlaceholder('usermenu',$this->discuss->getChunk($menuTpl,$this->getPlaceholders()));
+    }
 }
-$modx->lexicon->load('discuss:user');
-$discuss->setPageTitle($modx->lexicon('discuss.account_merge'));
-
-$placeholders = $discuss->user->toArray();
-$placeholders['usermenu'] = $discuss->getChunk('disUserMenu',$placeholders);
-$modx->setPlaceholder('discuss.user',$discuss->user->get('username'));
-
-return $placeholders;

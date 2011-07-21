@@ -4,9 +4,9 @@
     </div>
     <div class="right" style="padding: 4px;">[[+createdon]]</div>
 
-    <a href="[[~[[*id]]]]thread/?thread=[[+id]]#dis-post-[[+last_post_id]]">[[+title]]</a>
+    <a href="[[+url]]">[[+title]]</a>
     <p class="dis-post-li-desc">
-        [[%discuss.by? &author=`<a href="[[~[[*id]]]]user/?user=[[+author]]">[[+author_username]]</a>`]]
+        [[%discuss.by? &author=`<a href="[[~[[*id]]]]u/[[+author_username]]">[[+author_username]]</a>`]]
         (<a href="[[~[[*id]]]]board/?board=[[+board]]">[[+board_name]]</a>)
     </p>
 </li>
