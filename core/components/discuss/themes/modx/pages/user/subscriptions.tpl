@@ -4,7 +4,7 @@
 <p class="dis-breadcrumbs">
     <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
 </p>
-		<h2>[[%discuss.general_stats? &user=`[[+name]]`]]</h2>
+		<h2>[[%discuss.subscriptions? &user=`[[+name]]`]]</h2>
 		
 	<form class="dis-form" action="[[~[[*id]]]]user/subscriptions?user=[[+id]]" method="post">
 							<ul class="profile">

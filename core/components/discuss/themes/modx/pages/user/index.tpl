@@ -37,17 +37,7 @@
 
 
 
-	<div class="dis-threads">
-		<ul class="DataList CategoryList CategoryListWithHeadings">
-		
-			<li class="Item CategoryHeading Depth1 Category-[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]">
-		    <div class="ItemContent Category Read">[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</div>
-		    </li>
-		
-		        [[+recent_posts]]
-		
-		</ul>
-	</div>
+
 
 
 

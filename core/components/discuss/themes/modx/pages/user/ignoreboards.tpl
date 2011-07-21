@@ -12,11 +12,11 @@
    								
      					       [[+boards]]
 
-   								<li>Ignore All: <strong><input type="checkbox" class="dis-ignore-all" /></strong></li>
-
 							</ul>
 
+<br class="clearfix" />
     <div class="dis-form-buttons">
+    Ignore All: <input type="checkbox" class="dis-ignore-all" />
     <input type="submit" class="dis-action-btn" value="Update" />
     </div>
 
