@@ -85,6 +85,7 @@ class DiscussThreadController extends DiscussController {
         $this->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('Error'));
         $this->setPlaceholder('discuss.thread',$this->thread->get('title'));
 
+        $this->buildPagination();
         $this->getViewing();
         $this->fireOnRenderThread();
     }
