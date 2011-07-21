@@ -454,6 +454,41 @@ class disThread extends xPDOSimpleObject {
     }
 
     /**
+     * Always ensure that the title strips any HTML/MODX tags
+     * @param string $k
+     * @param string|null $format
+     * @param string|null $formatTemplate
+     * @return mixed
+     */
+    public function get($k, $format = null, $formatTemplate= null) {
+        $v = parent::get($k,$format,$formatTemplate);
+        switch ($k) {
+            case 'title':
+                $v = $this->xpdo->discuss->stripAllTags($v);
+                break;
+            default: break;
+        }
+        return $v;
+    }
+
+    /**
+     * @param string $keyPrefix
+     * @param bool $rawValues
+     * @param bool $excludeLazy
+     * @return array
+     */
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
+        $array = parent::toArray($keyPrefix,$rawValues,$excludeLazy);
+        foreach ($array as $k => &$v) {
+            if ($k == 'title') {
+                $v = $this->xpdo->discuss->stripAllTags($v);
+            }
+        }
+        reset($array);
+        return $array;
+    }
+
+    /**
      * Clear cache for this thread
      *
      * @return void
