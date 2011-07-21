@@ -1,5 +1,4 @@
 [[+trail]]
-<br />
 
 <form class="dis-form" action="[[~[[*id]]]]search/" method="get">
     <h2>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h2>

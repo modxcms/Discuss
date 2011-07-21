@@ -18,7 +18,7 @@
 
     <span class="error">[[+error]]</span>
 
-    <br class="clear" />
+    <br class="clearfix" />
 
     <div class="dis-form-buttons">
     <input type="submit" name="report-thread" class="dis-action-btn" value="[[%discuss.report_to_mod]]" />

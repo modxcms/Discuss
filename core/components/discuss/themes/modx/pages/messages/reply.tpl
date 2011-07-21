@@ -39,7 +39,7 @@
         <span class="error">[[!+fi.error.message]]</span>
     </label>
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
-    <br class="clear" />
+    <br class="clearfix" />
     
     <label for="dis-reply-post-attachment">[[%discuss.attachments]]:
         <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
@@ -49,7 +49,7 @@
     <input type="file" name="attachment1" id="dis-reply-post-attachment" />    
     
     <div id="dis-attachments"></div>
-    <br class="clear" />
+    <br class="clearfix" />
     
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-post-reply" value="[[%discuss.message_send]]" />

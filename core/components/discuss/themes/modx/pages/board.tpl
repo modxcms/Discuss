@@ -1,12 +1,12 @@
 [[+top]]
-<div class="right">
+[[<div class="right">
     <form action="[[~[[*id]]]]search" method="GET">
         <input type="hidden" name="board" value="[[+id]]" />
         <input type="text" name="s" value="" class="dis-form-field-solo" style="width: 200px; margin-right: 5px;" placeholder="[[%discuss.search_this_board]]" />
 
         <input type="submit" class="dis-action-btn-solo"  value="[[%discuss.search]]" />
     </form>
-</div>
+</div>]]
 [[+trail]]
 
 [[+aboveBoards]]
@@ -44,9 +44,11 @@
 <div class="dis-viewing">[[+readers]]</div>
 <div class="dis-viewing">[[+moderators]]</div>
 
-[[+bottom]]
 
 				</div><!-- Close Content From Wrapper -->
+
+[[+bottom]]
+
 
 
 				<div id="Panel">
@@ -79,4 +81,3 @@
 							</ul>
 						</div>
 					</div>
-				</div>

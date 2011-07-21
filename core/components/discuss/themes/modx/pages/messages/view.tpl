@@ -2,7 +2,7 @@
 
 [[+actionbuttons]]
 
-<br class="clear" />
+<br class="clearfix" />
 <h2 class="[[+class]] dis-thread-title">
     [[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[+views]] [[%discuss.views]])
 </h2>
@@ -10,7 +10,7 @@
 
 <div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
 
-<br class="clear" />
+<br class="clearfix" />
 <div class="dis-posts">
 	<ol class="dis-board-thread">
 		[[+posts]]
@@ -22,9 +22,9 @@
 <div class="dis-thread-viewing">
 [[+readers]]
 </div>
-<br class="clear" />
+<br class="clearfix" />
 
 <div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 
-<br class="clear" />
+<br class="clearfix" />
 [[+discuss.error_panel]]

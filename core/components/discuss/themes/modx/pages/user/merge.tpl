@@ -4,8 +4,13 @@
    &validate=`username:required,password:required`
    &successMessage=``
 ]]
-[[+usermenu]]
-<div class="dis-profile left" style="width: 80%;">
+
+<div class="dis-profile left">
+
+<p class="dis-breadcrumbs">
+    <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
+</p>
+
 
 <form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form" style="border: 0;">
 
@@ -25,7 +30,7 @@
     </label>
     <input type="password" name="password" id="dis-password" value="[[+fi.password]]" />
 
-    <br class="clear" />
+    <br class="clearfix" />
 
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" name="dis-account-merge" value="[[%discuss.account_merge]]" />
@@ -33,4 +38,31 @@
     </div>
 
 </form>
+
+
 </div>
+	
+
+</div><!-- Close Content From Wrapper -->
+	[[+bottom]]
+
+
+				<div id="Panel">
+					<div class="PanelBox">
+					
+						<div class="Box GuestBox">
+						   <h4>[[+name]]'s Profile</h4>
+							<ul class="PanelInfo PanelCategories">
+
+								<li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
+							<br /><span class="small">[[+title]]</span></li>
+							</ul>
+							
+						</div>
+						
+						<div class="Box BoxCategories">
+							[[+usermenu]]
+
+
+						</div>
+					</div>

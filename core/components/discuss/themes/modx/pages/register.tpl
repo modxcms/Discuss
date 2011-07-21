@@ -44,7 +44,7 @@
     [[+error.recaptcha]]
     </div>
 
-    <br class="clear" />
+    <br class="clearfix" />
     
     [[+discuss.login_error]]
     

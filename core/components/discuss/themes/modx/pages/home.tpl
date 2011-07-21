@@ -52,12 +52,15 @@
         <span class="dis-today-stats">[[%discuss.stats_today? &hits=`[[+activity.hits]]` &topics=`[[+activity.topics]]` &replies=`[[+activity.replies]]` &visitors=`[[+activity.visitors]]`]]</span>
     </li>
 </ul>
-
-
-[[+bottom]]
 <div class="dis-thread-actions">[[+actionbuttons]]</div>
-				</div><!-- Close Content From Wrapper -->
 
+
+
+
+
+
+				</div><!-- Close Content From Wrapper -->
+[[+bottom]]
 
 				<div id="Panel">
 					<div class="PanelBox">
@@ -89,4 +92,3 @@
 							</ul>
 						</div>
 					</div>
-				</div>

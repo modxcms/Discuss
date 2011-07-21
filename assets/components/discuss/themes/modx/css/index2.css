@@ -231,7 +231,7 @@ dl.dis-datalist dh {
 
 #Content {
 	float: left;
-	width: 69%;
+	width: 760px;
 	border-right: 1px solid #e3e3e3;
 	margin: 0;
 	}
@@ -827,10 +827,10 @@ span.InformSprite.Location {
 #global2 {
 	position: absolute;
 	top: 0;
-	left: -80px;
-	height: 30px;
-	z-index: 100;
-	margin: 0 0 0 4px;
+	left: 20px;
+ 	margin:0 0 0 4px;
+ 	height:30px;
+ 	z-index: 100;
 	}
 
 #global {
@@ -892,14 +892,14 @@ span.InformSprite.Location {
 
 #logo {
 	position: relative;
-	top: 30px;
-	left: 0;
-	width: 350px;
-	height: 63px;
-	display: block;
-	background: transparent url(http://www.modx.com/assets/i/modx-logo.png) top left no-repeat;
-	background-position: left -63px;
-	}
+	top: 42px;
+	left: 15px;
+ 	width:350px;
+ 	height:63px;
+ 	display:block;
+ 	background:transparent url(http://www.modx.com/assets/i/modx-logo.png) top left no-repeat;
+ 	background-position: left -63px;
+}
 
 #logo_search div.links span {
 	background: url("../images/bg-sprite.png") no-repeat scroll 0 -649px transparent;
@@ -1952,12 +1952,26 @@ div.InformMessages div.InformMessage:hover a.Close {
 	display: block;
 	}
 
+div.dis-thread-body,
+div.dis-views,
+div.dis-replies,
+div.dis-latest {
+ 	vertical-align: middle;
+ 	margin-right: 20px;
+	float: left;
+}
+
+div.dis-latest {
+	width: 240px;
+	}
+
 div.dis-views,
 div.dis-replies {
-	vertical-align: middle;
-	margin-right: 20px;
-	float: left;
 	width: 55px;
+	}
+
+div.dis-thread-body {
+	width: 280px;
 	}
 
 caption,

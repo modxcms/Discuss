@@ -30,9 +30,9 @@
 	<br class="clearfix" />
 	[[+discuss.error_panel]]
 	
-	[[+bottom]]
 
 </div><!-- Close Content From Wrapper -->
+	[[+bottom]]
 
 
 				<div id="Panel">
@@ -68,4 +68,3 @@
 							</ul>
 						</div>]]
 					</div>
-				</div>

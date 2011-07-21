@@ -1,80 +1,79 @@
-[[+usermenu]]
-<div class="dis-profile left" style="width: 80%;">
+
+[[+top]]
+
+<div class="dis-profile left">
 
 <form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
-
+<p class="dis-breadcrumbs">
+    <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
+</p>
 <h2>[[+name]]</h2>
 
-<div class="right">
-    <img src="[[+avatarUrl]]" alt="[[+username]]" />
-    <br /><span class="small">[[+title]]</span>
-</div>
-<table class="dis-table" style="width: 80%;">
-<tbody>
-<tr>
-    <th>[[%discuss.name? &namespace=`discuss` &topic=`user`]]:</th>
-    <td>[[+name_first]] [[+name_last]]</td>
-</tr>
-<tr>
-    <th>[[%discuss.posts]]</th>
-    <td>[[+posts]]</td>
-</tr>
-<tr>
-    <th>[[%discuss.groups]]:</th>
-    <td>[[+groups]]</td>
-</tr>
-[[+ip:notempty=`<tr>
-    <th>[[%discuss.ip? &namespace=`discuss` &topic=`web`]]:</th>
-    <td>[[+ip]]</td>
-</tr>`]]
-<tr>
-    <th>[[%discuss.date_registered]]:</th>
-    <td>[[+createdon:strtotime:date=`%b %d, %Y`]]</td>
-</tr>
-[[+last_active:notempty=`<tr>
-    <th>[[%discuss.last_online]]:</th>
-    <td>[[+last_active]]</td>
-</tr>
-<tr>
-    <th>[[%discuss.last_reading]]:</th>
-    <td><a href="[[+last_post_url]]">[[+lastThread.title]]</a></td>
-</tr>`]]
-<tr>
-    <td colspan="2"><hr /></td>
-</tr>
-[[+email:notempty=`<tr>
-    <th>[[%discuss.email]]:</th>
-    <td>[[+email]]</td>
-</tr>`]]
-<tr>
-    <th>[[%discuss.website]]:</th>
-    <td>[[+website]]</td>
-</tr>
-<tr>
-    <th>[[%discuss.gender]]:</th>
-    <td>[[+gender]]</td>
-</tr>
-<tr>
-    <th>[[%discuss.age]]:</th>
-    <td>[[+age]]</td>
-</tr>
-<tr>
-    <th>[[%discuss.location]]:</th>
-    <td>[[+location]]</td>
-</tr>
-</tbody>
-</table>
+							<ul class="profile">
+   								<li>[[%discuss.name? &namespace=`discuss` &topic=`user`]]: <strong>[[+name_first]] [[+name_last]]</strong></li>
+   								<li>[[%discuss.posts]]: <strong>[[+posts]]</strong></li>
+   								<li>[[%discuss.groups]]: <strong>[[+groups]]</strong></li>
+   								[[+ip:notempty=`<li>[[%discuss.ip? &namespace=`discuss` &topic=`web`]]: <strong>[[+ip]]</strong></li>`]]
+							
+   								<li>[[%discuss.date_registered]]: <strong>[[+createdon:strtotime:date=`%b %d, %Y`]]</strong></li>
+   								[[+last_active:notempty=`<li>[[%discuss.last_online]]: <strong>[[+last_active]]</strong></li>
+   								<li>[[%discuss.last_reading]]: <strong><a href="[[+last_post_url]]">[[+lastThread.title]]</a></strong></li>`]]
+   								[[+email:notempty=`<li>[[%discuss.email]]: <strong><a href="mailto:[[+email]]">[[+email]]</a></strong></li>`]]
+   								
+   								<li>[[%discuss.website]]: <strong>[[+website]]</strong></li>
+								
+								<li>[[%discuss.gender]]: <strong>[[+gender]]</strong></li>
+								
+								<li>[[%discuss.age]]: <strong>[[+age]]</strong></li>
+								
+								<li>[[%discuss.location]]: <strong>[[+location]]</strong></li>
+
+							</ul>
+
+
+
 </form>
 
-<br />
 
-<div class="dis-threads">
-    <div class="dis-threads-header">
-    <h2 style="margin: 0; padding: 0">[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</h2>
-    </div>
-    <ol class="dis-board-list">
-        [[+recent_posts]]
-    </ol>
-</div>
+
+
+	<div class="dis-threads">
+		<ul class="DataList CategoryList CategoryListWithHeadings">
+		
+			<li class="Item CategoryHeading Depth1 Category-[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]">
+		    <div class="ItemContent Category Read">[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]</div>
+		    </li>
+		
+		        [[+recent_posts]]
+		
+		</ul>
+	</div>
+
+
 
 </div>
+	
+
+</div><!-- Close Content From Wrapper -->
+	[[+bottom]]
+
+
+				<div id="Panel">
+					<div class="PanelBox">
+					
+						<div class="Box GuestBox">
+						   <h4>[[+name]]'s Profile</h4>
+							<ul class="PanelInfo PanelCategories">
+
+								<li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
+							<br /><span class="small">[[+title]]</span></li>
+							</ul>
+							
+						</div>
+						
+						<div class="Box BoxCategories">
+							[[+usermenu]]
+
+
+						</div>
+					</div>

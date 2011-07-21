@@ -109,6 +109,95 @@
 							
 
 </div>
-
+<footer>
+      <a href="[[!AnchorMan? &anchor=`header`]]" id="top" class="ir">Back to Top</a>
+       <nav id="destinations">
+          <div class="container">
+              <section class="company first">
+                  <h3><a href="[[~12]]">Company</a></h3>
+                  <ul>
+                      <li><a href="[[~113]]">Blog</a></li>
+                      <li><a href="[[~25]]">Contact</a></li>
+                      <li><a href="[[~18]]">Media Center</a></li>
+                      <li><a href="[[~27]]">Services</a></li>
+                      <li><a href="[[~11]]">Partners</a></li>
+                  </ul>
+              </section>
+              <section class="support">
+                  <h3><a href="[[~6]]">Support</a></h3>
+                  <ul>
+                      <li><a href="[[~10]]">Commercial Support</a></li>
+                      <li><a href="[[~100]]">Community Support</a></li>
+                      <li><a href="[[~16]]">Documentation</a></li>
+                      <li><a href="[[~102]]">Bugs &amp; Suggestions</a></li>
+                      [[<li><a href="[[~10]]">Purchase Support</a></li>]]
+                  </ul>
+              </section>
+              <section class="developer">
+                  <h3><a href="[[~5]]">Developer</a></h3>
+                  <ul>
+                    <li><a href="[[~133]]">Get the Source</a></li>
+                    <li><a href="[[~129]]">Contribute</a></li>
+                    <li><a href="[[~131]]">API Documentation</a></li>
+                    <li><a href="[[~17]]">Documentation</a></li>
+                    <li><a href="[[~29]]">Issue Tracker</a></li>
+                  </ul>
+              </section>
+              <section class="community">
+                  <h3><a href="[[~4]]">Community</a></h3>
+                  <ul>
+                      <li><a href="[[~13]]">Forums</a></li>
+                      <li><a href="[[~110]]">Wall of Fame</a></li>
+                      <li><a href="[[~109]]">Donate to MODX</a></li>
+                      <li><a href="[[~19]]">Spread MODX</a></li>
+                      [[<li><a href="[[~9]]">Awards &amp; Leaderboard</a></li>]]
+                      <li><a href="[[~129]]">Contribute</a></li>
+                  </ul>
+              </section>
+              <section class="learn last clearfix">
+                  <h3><a href="[[~7]]">Learn</a></h3>
+                  <ul>
+                      <li><a href="[[~17]]">Documentation</a></li>
+                      <li><a href="[[~32]]">Solutions</a></li>
+                      <li><a href="[[~108]]">Made in MODX</a></li>
+                      <li><a href="[[~31]]">Books</a></li>
+                      [[<li><a href="[[~68]]">MODX Quickstart</a></li>]]
+                  </ul>
+              </section>
+            </div> <!-- .container -->
+       </nav>
+       <section id="subscribe">
+           <div class="container clearfix">
+              <form id="newsletter" action="http://modxcms.list-manage.com/subscribe/post" method="post">
+                  <h3>Subscribe to Our Newsletter</h3>
+                  <input type="hidden" name="u" value="08b25a8de68a29fe03a483720" />
+                  <input type="hidden" name="id" value="848cf40420" />
+                  <input type="hidden" name="source" value="www_[[*id]]" id="source">
+                  <input type="hidden" name="MERGE7" value="[[~[[*id]]? &scheme=`full`]]" id="MERGE7">
+                  <div class="clearfix">
+                      <label for="MERGE0" class="hidden">Your email</label>
+                      <input type="text" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value="" class="textbox" />
+                      <input type="submit" name="Submit" value="Sign up" />
+                  </div>
+                  <p><a href="[[~458]]">Read the previous issues</a></p>
+              </form>
+              <div id="sponsors" class="clearfix">
+                  <h3>Sponsors</h3>
+                  <a href="[[~55]]" class="ir last" id="sponsor_modx">Sponsor MODX</a>
+                  <a href="http://www.microsoft.com/web/websitespark/" class="ir" id="mswss">Microsoft Websitespark</a>
+                  <a href="http://firehost.com/" class="ir" id="firehost" title="Firehost: Secure Cloud Hosting">Firehost: Secure Cloud Hosting</a>
+              </div>
+          </div>
+       </section>
+       <section id="copyright">
+            <div class="clearfix container">
+                <p><span><a href="[[~106]]">Privacy Policy</a> | <a href="[[~107]]">Terms of Service</a> | Pixels by <a href="http://weareakta.com">AKTA Web Studio</a></span>&copy; 2005-2011 MODX. All rights reserved. <a href="[[~104]]">Trademark Policy</a> </p>
+            </div>
+       </section>
+       <div id="post_body"></div>
+  </footer>
+<div class="overlay[[*id:ne=`320`:then=` round7`]]" id="overlay">
+<div class="contentWrap"></div>
+</div>
 </body>
 </html>

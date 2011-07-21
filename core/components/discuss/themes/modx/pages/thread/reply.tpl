@@ -41,9 +41,9 @@
     <br class="clearfix" />
     
     <div class="dis-form-buttons">
-        <input type="submit" class="Button" name="dis-post-reply" value="[[%discuss.post_reply]]" />
-        <input type="button" class="Button" name="dis-post-preview" value="[[%discuss.preview]]" />
-        <input type="button" class="Button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+        <input type="submit" name="dis-post-reply" value="[[%discuss.post_reply]]" />
+        <input type="button" name="dis-post-preview" value="[[%discuss.preview]]" />
+        <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
 

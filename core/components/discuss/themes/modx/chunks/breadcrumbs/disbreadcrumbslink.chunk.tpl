@@ -1,1 +1,1 @@
-				   <div class="ItemHeading"><a href="[[+url]]">[[+text]]</a> > </div>
+				   <a href="[[+url]]">[[+text]]</a> > 

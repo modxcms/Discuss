@@ -5,11 +5,12 @@
             <div class="dis-author">
             	<a href="[[~[[*id]]]]user/?user=[[+author.id]]" class="auth-avatar">[[+author.avatar]]</a>
             	<div class="auth-count">[[%discuss.posts]]: [[+author.posts]]</div>
-                <span>
+                <span class="avatarHover">
 						[[+author.email]]
 						[[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
 						[[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
 					
+					<a href="[[~[[*id]]]]post/track?ip=[[+ip]]">[[+ip]]</a>
 						
 		            <div class="dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
 		                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
@@ -35,7 +36,7 @@
 		            </div>
 		            <div class="dis-post-ip">
 		                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
-		                <a href="[[~[[*id]]]]post/track?ip=[[+ip]]">[[+ip]]</a>
+		                
 		            </div>
 		        </div>
 		         	<br class="clearfix" />

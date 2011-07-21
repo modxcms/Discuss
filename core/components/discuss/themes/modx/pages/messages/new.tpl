@@ -40,7 +40,7 @@
     <input type="file" name="attachment1" id="dis-message-attachment" />
 
     <div id="dis-attachments"></div>
-    <br class="clear" />
+    <br class="clearfix" />
 
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-message-new" value="[[%discuss.message_send]]" />
