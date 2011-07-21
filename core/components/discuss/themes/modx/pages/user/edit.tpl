@@ -1,9 +1,13 @@
-[[+usermenu]]
-<div class="dis-profile left" style="width: 80%;">
+[[+top]]
 
+<div class="dis-profile left">
+
+<p class="dis-breadcrumbs">
+    <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
+</p>
+    <h2>[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h2>
 <form action="[[~[[*id]]]]user/edit?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
-    <h2>[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h2>
     
     <input type="hidden" name="user" value="[[+id]]" />
     
@@ -72,7 +76,7 @@
     <input type="checkbox" name="show_online" id="dis-show-online" value="1" [[+show_online]] />
     
     
-    <br class="clear" />
+    <br class="clearfix" />
     
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.save_changes? &namespace=`discuss` &topic=`web`]]" />
@@ -80,4 +84,31 @@
     </div>
 </form>
 
+
+
 </div>
+	
+
+</div><!-- Close Content From Wrapper -->
+	[[+bottom]]
+
+
+				<div id="Panel">
+					<div class="PanelBox">
+					
+						<div class="Box GuestBox">
+						   <h4>[[+name]]'s Profile</h4>
+							<ul class="PanelInfo PanelCategories">
+
+								<li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
+							<br /><span class="small">[[+title]]</span></li>
+							</ul>
+							
+						</div>
+						
+						<div class="Box BoxCategories">
+							[[+usermenu]]
+
+
+						</div>
+					</div>
