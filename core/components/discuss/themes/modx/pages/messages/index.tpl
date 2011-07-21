@@ -4,18 +4,18 @@
 <br class="clear" />
 
 <div class="dis-threads">
-    <div class="dis-threads-header">
-        <div class="dis-threads-ct">
-            <div class="dis-last-post">[[%discuss.last_post]]</div>
+
+    <div class="dis-board-head">
+            <div class="dis-latest">[[%discuss.last_post]]</div>
             <div class="dis-replies">[[%discuss.replies]]</div>
             <div class="dis-views">[[%discuss.views]]</div>
             <div class="dis-threads-body right">[[%discuss.message]]</div>
         </div>
-        <br class="clear" />
     </div>
-    <ol class="dis-board-list">
-        [[+messages]]
-    </ol>
+
+	<ol class="dis-board-thread">
+		[[+messages]]
+	</ol>
 </div>
 
 <br class="clearfix" />

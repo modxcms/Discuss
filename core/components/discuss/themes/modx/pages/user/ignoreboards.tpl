@@ -6,7 +6,7 @@
 </p>
 		<h2>Ignore Boards</h2>
 		
-<form class="dis-form" action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post">
+<form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post">
 
 							<ul class="profile">
    								

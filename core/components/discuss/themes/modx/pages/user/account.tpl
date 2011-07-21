@@ -1,7 +1,7 @@
 [[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 
-<form action="[[~[[*id]]]]user/account?user=[[+id]]" method="post" class="dis-form" id="dis-user-account-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/account?user=[[+id]]" method="post" id="dis-user-account-form" style="border: 0;">
 
     <h2>[[%discuss.account_edit? &namespace=`discuss` &topic=`user`]]: [[+name]]</h2>
         

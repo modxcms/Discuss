@@ -6,7 +6,7 @@
 </p>
 		<h2>[[%discuss.subscriptions? &user=`[[+name]]`]]</h2>
 		
-	<form class="dis-form" action="[[~[[*id]]]]user/subscriptions?user=[[+id]]" method="post">
+	<form action="[[~[[*id]]]]user/subscriptions?user=[[+id]]" method="post">
 							<ul class="profile">
 							
    								<li>Remove All: <strong><input type="checkbox" /></strong></li>

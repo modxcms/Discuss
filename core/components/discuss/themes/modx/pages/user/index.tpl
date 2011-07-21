@@ -3,7 +3,7 @@
 
 <div class="dis-profile left">
 
-<form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" id="dis-user-edit-form" style="border: 0;">
 <p class="dis-breadcrumbs">
     <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
 </p>

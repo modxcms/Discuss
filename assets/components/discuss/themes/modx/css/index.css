@@ -401,11 +401,22 @@ div.dis-board-head {
 	height: 30px;
 	clear: both;
 	}
-	
-div.dis-board-head div.dis-thread-body{
-	padding: 0 0 0 10px;
+
+div.dis-board-head h3 {
+	font-size: 24px;
 	}
 
+
+	
+div.dis-board-head,
+div.dis-thread-body {
+	padding: 0 0 10px 10px;
+	}
+
+div.dis-thread-body {
+	border-bottom: 1px solid #ddd;
+	}
+	
 div.dis-thread-body,
 div.dis-views,
 div.dis-replies,
@@ -425,7 +436,8 @@ div.dis-replies {
 	}
 
 div.dis-thread-body {
-	width: 270px;
+	width: 675px;
+	color: #777;
 	}
 
 dl.dis-datalist {	
@@ -803,9 +815,9 @@ input.Button,
 a.Button,
 .Button {
 	cursor: pointer;
-	margin: 0 0 0 5px;
+	margin: 0;
 	font-size: 11px;
-	padding: 4px;
+	padding: 2px 4px;
 	background: #f8f8f8;
 	background:-webkit-gradient(linear, center bottom, center top, from(#cccccc), to(#ffffff));
 	background:-moz-linear-gradient(top, #ffffff, #cccccc);
@@ -5444,11 +5456,12 @@ div.Attachments {
  	font-weight:bold;
  	text-align:right;
  	width: 11em;
- 	float:left;
- 	clear: left;
  	line-height: 27px;
  	color: #5a5a5a;
+ 	float: left;
+ 	clear: left;
 }
+
 .dis-form .small {
  	color:#666666;
  	display:block;
@@ -5458,15 +5471,18 @@ div.Attachments {
  	line-height: 1em;
  	
 }
+
 .dis-form input, .dis-form select, .dis-form textarea, .dis-form-field-solo {
- 	float: left;
  	padding: .4em .2em; 
  	border: solid 1px lightgray;
  	margin: .2em 0 2em 1em;
+ 	float: left;
 }
+
 .dis-form input[type="text"], .dis-form input[type="password"] {
  	width: 400px;
 }
+
 .dis-form input:hover, .dis-form textarea:hover {
  	border: solid 1px grey;
 }

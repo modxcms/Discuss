@@ -1,11 +1,9 @@
 <li class="dis-board-post [[+class]]">
     <div class="dis-thread-body">
-        <a href="[[+url]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a>
+        <h3><a href="[[+url]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a></h3>
         [[+unread]]
+        
+        <p>[[+replies]] replies, <a href="[[+url]]"></a> [[+createdon]] [[%discuss.by? &author=`[[+author_link]]`]]</p>
     </div>
-    <div class="dis-thread-icons">[[+icons]]</div>
-    <div class="dis-views">[[+views]]</div>
-    <div class="dis-replies">[[+replies]]</div>
-    <div class="dis-latest"><a href="[[+url]]"></a>[[+latest]]</div>
-
+    
 </li>

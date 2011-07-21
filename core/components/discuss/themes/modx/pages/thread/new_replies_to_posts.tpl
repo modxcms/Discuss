@@ -4,18 +4,18 @@
 <div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 <br class="clear" />
 <div class="dis-threads">
-<div class="dis-threads-header">
-    <div class="dis-threads-ct">
-        <div class="dis-last-post">[[%discuss.last_post]]</div>
-        <div class="dis-replies">[[%discuss.replies]]</div>
-        <div class="dis-views">[[%discuss.views]]</div>
-        <div class="dis-threads-body">[[%discuss.thread]]</div>
+
+    <div class="dis-board-head">
+        <div class="dis-thread-body"><h3>[[%discuss.message]]</h3></div>
+        <div class="dis-views"><h3>[[%discuss.views]]</h3></div>
+        <div class="dis-replies"><h3>[[%discuss.replies]]</h3></div>
+        <div class="dis-latest"><h3>[[%discuss.last_post]]</h3></div>
     </div>
-    <br class="clear" />
-</div>
-<ol>
-[[+threads]]
-</ol>
+
+	<ol class="dis-board-thread">
+		[[+posts]]
+	</ol>
+	
 </div>
 <br class="clear" />
 <div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
