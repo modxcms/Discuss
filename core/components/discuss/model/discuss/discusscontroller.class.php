@@ -99,13 +99,13 @@ abstract class DiscussController {
             }
         }
 
-        $this->handleActions();
-        $this->process();
-
         $sessionPlace = $this->getSessionPlace();
         if (!empty($sessionPlace)) {
             $this->discuss->setSessionPlace($sessionPlace);
         }
+
+        $this->handleActions();
+        $this->process();
 
         $title = $this->getPageTitle();
         if (!empty($title)) {

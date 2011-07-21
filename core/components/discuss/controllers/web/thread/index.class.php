@@ -59,17 +59,12 @@ class DiscussThreadController extends DiscussController {
     }
 
     public function process() {
-        /* get posts */
-        $this->posts = array('total' => 0,'limit' => 0);
-        if (!empty($this->options['showPosts'])) {
-            $this->posts = $this->discuss->hooks->load('post/getThread',array(
-                'thread' => &$this->thread,
-            ));
-            $this->setPlaceholder('posts',$this->posts['results']);
-        }
-
-        /* up view count */
+        /* up view count and mark read */
         $this->view();
+        $this->markRead();
+        
+        /* get posts */
+        $this->getPosts();
 
         $this->setPlaceholders($this->thread->toArray('',true,true));
         $this->setPlaceholder('views',number_format($this->getPlaceholder('views',1)));
@@ -85,21 +80,32 @@ class DiscussThreadController extends DiscussController {
             $this->getModeratorActionButtons();
         }
 
-        $this->getViewing();
 
         /* output */
         $this->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('Error'));
         $this->setPlaceholder('discuss.thread',$this->thread->get('title'));
 
-        $this->markRead();
+        $this->getViewing();
+        $this->fireOnRenderThread();
+    }
 
+    public function getPosts() {
+        $this->posts = array('total' => 0,'limit' => 0);
+        if (!empty($this->options['showPosts'])) {
+            $this->posts = $this->discuss->hooks->load('post/getThread',array(
+                'thread' => &$this->thread,
+            ));
+            $this->setPlaceholder('posts',$this->posts['results']);
+        }
+    }
+
+    public function fireOnRenderThread() {
         /* Render thread event */
         $placeholders['top'] = '';
         $placeholders['bottom'] = '';
         $placeholders['aboveThread'] = '';
         $placeholders['belowThread'] = '';
         $placeholders = $this->discuss->invokeRenderEvent('OnDiscussRenderThread',$placeholders);
-
         $this->setPlaceholders($placeholders);
     }
 

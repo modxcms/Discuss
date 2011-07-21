@@ -126,8 +126,7 @@ class DiscussHomeController extends DiscussController {
                 $this->modx->setPlaceholder('discuss.loginForm',$this->discuss->getChunk('disLogin'));
             }
         }
-        $placeholders['actionbuttons'] = $this->discuss->buildActionButtons($actionButtons,'dis-action-btns right');
-        unset($authLink,$authMsg,$actionButtons);
+        $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
 
     /**
@@ -150,7 +149,10 @@ class DiscussHomeController extends DiscussController {
         $this->setPlaceholder('totalMembersActive',number_format((int)$this->modx->getCount('disSession',array('user:!=' => 0))));
         $this->setPlaceholder('totalVisitorsActive',number_format((int)$this->modx->getCount('disSession',array('user' => 0))));
 
-        /* forum activity */
+        /**
+         * forum activity
+         * @var disForumActivity $activity
+         */
         $activity = $this->modx->getObject('disForumActivity',array(
             'day' => date('Y-m-d'),
         ));
@@ -174,10 +176,16 @@ class DiscussHomeController extends DiscussController {
         unset($recent);
     }
 
+    /**
+     * Get the breadcrumbs for this page
+     * @return array
+     */
     public function getBreadcrumbs() {
         $trail = array();
-        if (!empty($scriptProperties['category'])) {
-            $category = $this->modx->getObject('disCategory',$scriptProperties['category']);
+        /** @var disCategory|null $category */
+        $category = null;
+        if (!empty($this->scriptProperties['category'])) {
+            $category = $this->modx->getObject('disCategory',$this->scriptProperties['category']);
         }
         if (!empty($category)) {
             $trail[] = array(
