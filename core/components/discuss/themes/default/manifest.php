@@ -79,7 +79,16 @@ $manifest = array(
             'showModerators' => true,
         ),
     ),
-    'thread/index' => array(
+    'board.xml' => array(
+        'options' => array(
+            'showSubBoards' => false,
+            'showPosts' => true,
+            'showBreadcrumbs' => false,
+            'showReaders' => false,
+            'showModerators' => false,
+        ),
+    ),
+    'thread' => array(
         'js' => array(
             'header' => array(
                 'dis.thread.js',
@@ -139,7 +148,7 @@ $manifest = array(
             ),
         )
     ),
-    'user/index' => array(
+    'user' => array(
         'options' => array(
             'showRecentPosts' => true,
         ),

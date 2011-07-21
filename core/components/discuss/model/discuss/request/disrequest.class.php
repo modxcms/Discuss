@@ -49,10 +49,6 @@ class DisRequest {
         $this->config = array_merge(array(
             'actionVar' => 'action',
         ),$config);
-        if ($this->modx->getOption('discuss.debug',$this->config,true)) {
-            $this->modx->setLogTarget('ECHO');
-            $this->startDebugTimer();
-        }
     }
 
     /**
@@ -81,55 +77,59 @@ class DisRequest {
     public function handle() {
         $this->getControllerValue();
         $this->loadThemeOptions();
-        $placeholders = $this->loadController();
-        $output = $this->getPage($this->controller,$placeholders);
-
-        return $this->output($output,$placeholders);
+        return $this->render();
     }
 
-    /**
-     * Load the appropriate controller file.
-     * 
-     * @param array $controller The controller to load
-     * @return array An array of placeholders
-     */
-    public function loadController($controller = array()) {
-        if (empty($controller)) $controller = $this->controller;
+    public function render() {
+        $controller = $this->controller;
 
+        if (!$this->modx->loadClass('DiscussController',$this->discuss->config['modelPath'].'discuss/',true,true)) {
+            return '';
+        }
+
+        if (empty($controller['isClass'])) {
+            $className = 'DiscussDeprecatedController';
+        } else {
+            $className = $this->getControllerClassName();
+        }
+
+        $output = '';
         if (file_exists($controller['file'])) {
-            $discuss =& $this->discuss;
-            $modx =& $this->modx;
-            $scriptProperties = array_merge($_REQUEST,$_GET,$_POST);
-            $options = $this->pageOptions;
+            if (!empty($controller['isClass'])) {
+                require_once $controller['file'];
+            }
+            $c = new $className($this->discuss,$this->controller);
+            
+            $this->discuss->controller = call_user_func_array(array($c,'getInstance'),array($this->discuss,$className,$this->controller));
 
-            $placeholders = require $controller['file'];
+            $this->discuss->controller->scriptProperties = array_merge($_REQUEST,$_GET,$_POST);
+            $this->discuss->controller->options = $this->pageOptions;
+            $output = $this->discuss->controller->render();
+            
         } else {
             $this->discuss->sendErrorPage();
         }
-        return is_array($placeholders) ? $placeholders : array();
+        return $output;
     }
 
-    /**
-     * Get the current template page
-     *
-     * @param array $controller
-     * @param array $properties
-     * @return string
-     */
-    public function getPage(array $controller = array(),array $properties = array()) {
-        if (empty($controller)) $controller = $this->controller;
-        
-        $f = $controller['tpl'];
-        $o = '';
-        if (file_exists($f)) {
-            $o = file_get_contents($f);
-            $chunk = $this->modx->newObject('modChunk');
-            $chunk->setContent($o);
-            $o = $chunk->process($properties);
+
+    public function getControllerClassName() {
+        $className = 'Discuss'.ucfirst(strtolower($this->controller['controller'])).'Controller';
+        $className = explode('/',$className);
+        $o = array();
+        foreach ($className as $k) {
+            if (strpos($k,'_')) {
+                $substr = '';
+                $e = explode('_',$k);
+                foreach ($e as $ex) {
+                    $substr[] = ucfirst($ex);
+                }
+                $k = implode('',$substr);
+            }
+            $o[] = ucfirst(str_replace(array('.','_','-'),'',$k));
         }
-        return $o;
+        return implode('',$o);
     }
-
     /**
      * Return the file path to the specified controller
      * @param string $controller
@@ -137,42 +137,27 @@ class DisRequest {
      */
     public function getControllerFile($controller = 'home') {
         $controllerFile = $this->discuss->config['controllersPath'].'web/'.$controller;
-        if (!file_exists($controllerFile.'.php') && file_exists($controllerFile.'/index.php')) {
-            $controllerFile .= '/index';
-            $controller .= '/index';
-        }
-        return array(
-            'file' => $controllerFile.'.php',
+        $controllerArray = array(
+            'isClass' => false,
             'tpl' => $this->discuss->config['pagesPath'].strtolower($controller).'.tpl',
             'controller' => $controller,
         );
-    }
 
-    /**
-     * Output the final forum output and wrap in the disWrapper chunk, if in
-     * debug mode. The wrapper code will need to be in the Template if not in
-     * debug mode.
-     *
-     * @access public
-     * @param string $output The output to process
-     * @param array $properties
-     * @return string The final wrapped output, or blank if not in debug.
-     */
-    public function output($output = '',array $properties = array()) {
-        if (!empty($_REQUEST['print'])) {
-            $c = $this->getControllerFile('print-wrapper');
-            return $this->getPage($c,array('content' => $output));
+        if (file_exists($controllerFile.'.class.php')) {
+            $controllerArray['isClass'] = true;
+            $controllerArray['file'] = $controllerFile.'.class.php';
+        } else if (file_exists($controllerFile.'/index.class.php')) {
+            $controllerArray['isClass'] = true;
+            $controllerArray['file'] = $controllerFile.'/index.class.php';
+            $controllerArray['tpl'] = $this->discuss->config['pagesPath'].strtolower($controller).'/index.tpl';
+        } else if (!file_exists($controllerFile.'.php') && file_exists($controllerFile.'/index.php')) {
+            $controllerArray['file'] = $controllerFile.'/index.php';
+            $controllerArray['controller'] .= '/index';
+            $controllerArray['tpl'] = $this->discuss->config['pagesPath'].strtolower($controller).'/index.tpl';
+        } else {
+            $controllerArray['file'] = $controllerFile.'.php';
         }
-        $emptyTpl = in_array($this->controller['controller'],array('thread/preview','messages/preview','board.xml','thread/recent.xml'));
-        if ($this->modx->getOption('discuss.debug',null,false)) {
-            if (!$emptyTpl && $this->debugTimer !== false) {
-                $output .= "<br />\nExecution time: ".$this->endDebugTimer()."\n";
-            }
-        }
-        $c = $this->getControllerFile('wrapper');
-        $placeholders = $this->loadController($c);
-        $placeholders['content'] = $output;
-        return $emptyTpl ? $output : $this->getPage($c,$placeholders);
+        return $controllerArray;
     }
 
 	/**
@@ -284,44 +269,4 @@ class DisRequest {
         return $url;
     }
     
-    /**
-     * Starts the debug timer.
-     *
-     * @access protected
-     * @return int The start time.
-     */
-    protected function startDebugTimer() {
-        $mtime = microtime();
-        $mtime = explode(' ', $mtime);
-        $mtime = $mtime[1] + $mtime[0];
-        $tstart = $mtime;
-        $this->debugTimer = $tstart;
-        return $this->debugTimer;
-    }
-
-    /**
-     * Return the current debug time.
-     * @return string
-     */
-    public function getDebugTime() {
-        $mtime= microtime();
-        $mtime= explode(" ", $mtime);
-        $mtime= $mtime[1] + $mtime[0];
-        $tend= $mtime;
-        $totalTime= ($tend - $this->debugTimer);
-        $totalTime= sprintf("%2.4f s", $totalTime);
-        return $totalTime;
-    }
-    /**
-     * Ends the debug timer and returns the total number of seconds Discuss took
-     * to run.
-     *
-     * @access protected
-     * @return int The end total time to execute the script.
-     */
-    protected function endDebugTimer() {
-        $totalTime = $this->getDebugTime();
-        $this->debugTimer = false;
-        return $totalTime;
-    }
 }
