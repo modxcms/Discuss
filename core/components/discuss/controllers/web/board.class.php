@@ -70,7 +70,24 @@ class DiscussBoardController extends DiscussController {
             $this->getSubBoards();
         }
 
-        /* get all threads in board */
+        $this->getThreads();
+        $this->buildPagination();
+
+        if (!empty($this->options['showReaders'])) {
+            $this->getViewing();
+        }
+        if (!empty($this->options['showModerators'])) {
+            $this->getModerators();
+        }
+        $this->getActionButtons();
+        $this->onRenderBoard();
+        $this->setPlaceholder('discuss.board',$this->board->get('name'));
+    }
+
+    /**
+     * Get all threads in board
+     */
+    public function getThreads() {
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.threads_per_page',null,20));
         $start = $this->getProperty('start',0);
         if (empty($start)) {
@@ -90,18 +107,6 @@ class DiscussBoardController extends DiscussController {
             $this->list = $this->discuss->hooks->load('board/post/getlist',$c);
             $this->setPlaceholder('posts',implode("\n",$this->list['results']));
         }
-
-        $this->buildPagination();
-
-        if (!empty($this->options['showReaders'])) {
-            $this->getViewing();
-        }
-        if (!empty($this->options['showModerators'])) {
-            $this->getModerators();
-        }
-        $this->getActionButtons();
-        $this->onRenderBoard();
-        $this->setPlaceholder('discuss.board',$this->board->get('name'));
     }
 
     /**

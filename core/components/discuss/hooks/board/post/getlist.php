@@ -24,7 +24,12 @@
 /**
  * Get a list of posts in a board
  *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
+ *
  * @package discuss
+ * @subpackage hooks
  */
 $response = array(
     'start' => $scriptProperties['start'],
@@ -53,16 +58,16 @@ if (empty($threadCollection)) {
         'disThread.board' => $board,
     ));
     $response['total'] = $modx->getCount('disThread',$c);
+    $c->select($modx->getSelectColumns('disPost','LastPost'));
     $c->select(array(
-        'LastPost.*',
-        'LastPost.id AS last_post_id',
-        'LastPost.id AS post_id',
-        'LastPostThread.replies AS last_post_replies',
-        'LastAuthor.username AS last_post_username',
-        'LastAuthor.use_display_name AS last_post_udn',
-        'LastAuthor.display_name AS last_post_display_name',
+        'last_post_id' => 'LastPost.id',
+        'post_id' => 'LastPost.id',
+        'last_post_replies' => 'LastPostThread.replies',
+        'last_post_username' => 'LastAuthor.username',
+        'last_post_udn' => 'LastAuthor.use_display_name',
+        'last_post_display_name' => 'LastAuthor.display_name',
         'FirstPost.title',
-        'LastAuthor.user AS user',
+        'user' => 'LastAuthor.user',
         'disThread.id',
         'disThread.replies',
         'disThread.views',
@@ -94,6 +99,7 @@ if (empty($threadCollection)) {
     $threads = $modx->getCollection('disThread',$c);
 
     $threadCollection = array();
+    /** @var disThread $thread */
     foreach ($threads as $thread) {
         $thread->getUrl();
         $thread->buildCssClass('board-post');
@@ -150,7 +156,7 @@ foreach ($threadCollection as $threadArray) {
         );
         $latestText = $discuss->getChunk('board/disLastPostBy',$phs);
         $threadArray['latest'] = $latestText;
-        
+
         /* unread class */
         $threadArray['unread'] = '';
         if ($discuss->user->isLoggedIn && in_array($threadArray['id'],$unread)) {

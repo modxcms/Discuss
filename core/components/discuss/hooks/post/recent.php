@@ -150,6 +150,7 @@ $recentThreads = $modx->getCollection('disThread',$c);
 /* iterate */
 $list = array();
 $idx = 0;
+/** @var disThread $thread */
 foreach ($recentThreads as $thread) {
     $thread->buildIcons();
     $thread->buildCssClass('board-post');

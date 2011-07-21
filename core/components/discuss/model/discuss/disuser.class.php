@@ -202,6 +202,7 @@ class disUser extends xPDOSimpleObject {
             FROM '.$this->xpdo->getTableName('disThread').' `disThread`
                 LEFT JOIN '.$this->xpdo->getTableName('disThreadRead').' `Read`
                 ON `Read`.`thread` = `disThread`.`id`
+                AND `Read`.`user` = '.$this->xpdo->discuss->user->get('id').'
             WHERE `Read`.`id` IS NULL
             AND `disThread`.`board` = '.$boardId.'
             GROUP BY `disThread`.`board`
