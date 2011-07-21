@@ -1,6 +1,6 @@
 [[+trail]]
 
-<br class="clear" />
+<br class="clearfix" />
 <div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 <br class="clear" />
 
@@ -19,7 +19,7 @@
     </ol>
 </div>
 
-<br class="clear" />
+<br class="clearfix" />
 
 <div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 [[+trail]]

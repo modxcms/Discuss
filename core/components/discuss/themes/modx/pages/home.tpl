@@ -54,7 +54,7 @@
 </ul>
 <div class="dis-thread-actions">[[+actionbuttons]]</div>
 
-</div>
+
 
 
 
@@ -92,3 +92,4 @@
 							</ul>
 						</div>
 					</div>
+

@@ -100,12 +100,12 @@
 					
 				<!-- Close Content Inside home.tpl -->
 			
-			
+				</div>
 			</div>
 			
 	    </div>
 	    
-    <div class="clear">&nbsp;</div>
+    <div class="clearfix">&nbsp;</div>
 							
 
 </div>
