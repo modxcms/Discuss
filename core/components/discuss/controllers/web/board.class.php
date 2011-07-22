@@ -47,6 +47,7 @@ class DiscussBoardController extends DiscussController {
         $this->options['tpl'] = 'post/disBoardPost';
         $this->options['mode'] = 'post';
         $this->options['get_category_name'] = false;
+        $this->options['lastPostTpl'] = 'board/disLastPostBy';
     }
     public function getSessionPlace() {
         return 'board:'.$this->board->get('id');
@@ -101,6 +102,7 @@ class DiscussBoardController extends DiscussController {
                 'start' => $start,
                 'board' => &$this->board,
                 'tpl' => $this->options['tpl'],
+                'lastPostTpl' => $this->options['lastPostTpl'],
                 'mode' => $this->options['mode'],
                 'get_category_name' => $this->options['get_category_name'],
             );

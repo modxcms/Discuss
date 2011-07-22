@@ -38,6 +38,7 @@ $response = array(
 
 /* setup default properties */
 $tpl = $modx->getOption('tpl',$scriptProperties,'post/disBoardPost');
+$lastPostTpl = $modx->getOption('lastPostTpl',$scriptProperties,'board/disLastPostBy');
 $mode = $modx->getOption('mode',$scriptProperties,'post');
 $board = (int)(is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board']);
 
@@ -111,8 +112,10 @@ if (empty($threadCollection)) {
             $threadArray['replies'] = number_format($threadArray['replies']);
             $threadArray['latest.id'] = $thread->get('last_post_id');
 
+            /** @var disPost $lastPost */
             $lastPost = $thread->getOne('LastPost');
             if ($lastPost) {
+                $threadArray = array_merge($threadArray,$thread->toArray('post.'));
                 $threadArray['excerpt'] = $lastPost->get('message');
                 $threadArray['excerpt'] = $lastPost->stripBBCode($threadArray['excerpt']);
                 $threadArray['excerpt'] = strip_tags($threadArray['excerpt']);
@@ -144,17 +147,19 @@ foreach ($threadCollection as $threadArray) {
     if ($mode != 'rss') {
         /* last post */
 
-        $username = $threadArray['last_post_username'];
+        $threadArray['post.username'] = $threadArray['last_post_username'];
         if (!empty($threadArray['last_post_udn']) && !empty($threadArray['last_post_display_name'])) {
-            $username = $threadArray['last_post_display_name'];
+            $threadArray['post.username'] = $threadArray['last_post_display_name'];
         }
         $phs = array(
             'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($threadArray['createdon'])),
             'user' => $threadArray['author'],
             'username' => $threadArray['last_post_username'],
-            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('u/'.$threadArray['last_post_username']).'">'.$username.'</a>' : $username,
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('u/'.$threadArray['last_post_username']).'">'.$threadArray['post.username'].'</a>' : $threadArray['post.username'],
         );
-        $latestText = $discuss->getChunk('board/disLastPostBy',$phs);
+        $latestText = $discuss->getChunk($lastPostTpl,$phs);
+        $threadArray['author_link'] = $phs['author_link'];
+        $threadArray['createdon'] = $phs['createdon'];
         $threadArray['latest'] = $latestText;
 
         /* unread class */
