@@ -43,12 +43,16 @@ class DiscussBoardController extends DiscussController {
         if ($this->board == null) $this->discuss->sendErrorPage();
         $this->setOptions();
     }
-    public function setOptions() {
-        $this->options['tpl'] = 'post/disBoardPost';
-        $this->options['mode'] = 'post';
-        $this->options['get_category_name'] = false;
-        $this->options['lastPostTpl'] = 'board/disLastPostBy';
+    
+    public function getDefaultOptions() {
+        return array(
+            'tpl' => 'post/disBoardPost',
+            'mode' => 'post',
+            'get_category_name' => false,
+            'lastPostTpl' => 'board/disLastPostBy',
+        );
     }
+    
     public function getSessionPlace() {
         return 'board:'.$this->board->get('id');
     }

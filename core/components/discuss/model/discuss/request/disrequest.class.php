@@ -103,7 +103,7 @@ class DisRequest {
             $this->discuss->controller = call_user_func_array(array($c,'getInstance'),array($this->discuss,$className,$this->controller));
 
             $this->discuss->controller->scriptProperties = array_merge($_REQUEST,$_GET,$_POST);
-            $this->discuss->controller->options = $this->pageOptions;
+            $this->discuss->controller->setOptions($this->pageOptions);
             $output = $this->discuss->controller->render();
             
         } else {

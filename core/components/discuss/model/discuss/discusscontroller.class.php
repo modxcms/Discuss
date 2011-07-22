@@ -75,7 +75,26 @@ abstract class DiscussController {
     public static function getInstance(Discuss &$discuss,$className,$config = array()) {
         /** @var DiscussController $controller */
         $controller = new $className($discuss,$config);
+        $controller->setOptions($controller->getDefaultOptions());
         return $controller;
+    }
+
+    /**
+     * Sets up default options for this controller.
+     * @return array
+     */
+    protected function getDefaultOptions() {
+        return array();
+    }
+
+    /**
+     * Sets an array of options
+     * 
+     * @param array $options
+     * @return void
+     */
+    public function setOptions(array $options = array()) {
+        $this->options = array_merge($this->options,$options);
     }
 
     /**
