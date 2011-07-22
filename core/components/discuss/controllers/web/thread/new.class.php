@@ -36,6 +36,13 @@ class DiscussThreadNewController extends DiscussController {
         if (empty($board)) { $this->modx->sendErrorPage(); }
         $this->board = $this->modx->getObject('disBoard',$this->scriptProperties['board']);
         if (empty($this->board)) $this->discuss->sendErrorPage();
+
+        $this->options = array_merge(array(
+            'tplAttachmentFields' => 'post/disAttachmentFields',
+            'textBreadcrumbsThreadNew' => $this->modx->lexicon('discuss.thread_new'),
+            'textCheckboxLocked' => $this->modx->lexicon('discuss.thread_lock'),
+            'textCheckboxSticky' => $this->modx->lexicon('discuss.thread_stick'),
+        ),$this->options);
         
         $this->modx->lexicon->load('discuss:post');
     }
@@ -55,17 +62,24 @@ class DiscussThreadNewController extends DiscussController {
     public function process() {
         /* setup defaults */
         $this->setPlaceholders($this->board->toArray());
-        $this->setPlaceholder('buttons',$this->discuss->getChunk('disPostButtons',array('buttons_url' => $this->discuss->config['imagesUrl'].'buttons/')));
+
+        $this->getButtons();
+        $this->checkThreadPermissions();
+        $this->handleAttachments();
 
         $this->modx->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('Error'));
         /* set placeholders for FormIt inputs */
         $this->modx->setPlaceholders($this->getPlaceholders(),'fi.');
     }
 
+    public function getButtons() {
+        $this->setPlaceholder('buttons',$this->discuss->getChunk('disPostButtons',array('buttons_url' => $this->discuss->config['imagesUrl'].'buttons/')));
+    }
+
     
     public function getBreadcrumbs() {
         return $this->board->buildBreadcrumbs(array(array(
-            'text' => $this->modx->lexicon('discuss.thread_new'),
+            'text' => $this->getOption('textBreadcrumbsThreadNew'),
             'active' => true,
         )),true);
     }
@@ -79,15 +93,25 @@ class DiscussThreadNewController extends DiscussController {
             $locked = !empty($_POST['locked']) ? ' checked="checked"' : '';
             $this->setPlaceholders(array(
                 'locked' => $locked,
-                'locked_cb' => '<label class="dis-cb"><input type="checkbox" name="locked" value="1" '.$locked.' />'.$this->modx->lexicon('discuss.thread_lock').'</label>',
+                'locked_cb' => $this->discuss->getChunk('form/disCheckbox',array(
+                    'name' => 'locked',
+                    'value' => 1,
+                    'text' => $this->getOption('textCheckboxLocked'),
+                    'attributes' => $locked,
+                )),
                 'can_lock' => true,
             ));
         }
         if ($this->board->canPostStickyThread()) {
-            $sticky = !empty($_POST['sticky']) ? ' checked="checked"' : '';
+            $sticky = !empty($this->scriptProperties['sticky']) ? ' checked="checked"' : '';
             $this->setPlaceholders(array(
                 'sticky' => $sticky,
-                'sticky_cb' => '<label class="dis-cb"><input type="checkbox" name="sticky" value="1" '.$sticky.' />'.$this->modx->lexicon('discuss.thread_stick').'</label>',
+                'sticky_cb' => $this->discuss->getChunk('form/disCheckbox',array(
+                    'name' => 'sticky',
+                    'value' => 1,
+                    'text' => $this->getOption('textCheckboxSticky'),
+                    'attributes' => $sticky,
+                )),
                 'can_stick' => true,
             ));
         }
@@ -107,7 +131,7 @@ class DiscussThreadNewController extends DiscussController {
                 'attachments' => '',
                 'attachmentCurIdx' => 1,
             ));
-            $this->setPlaceholder('attachment_fields',$this->discuss->getChunk('post/disAttachmentFields',$this->getPlaceholders()));
+            $this->setPlaceholder('attachment_fields',$this->discuss->getChunk($this->getOption('tplAttachmentFields'),$this->getPlaceholders()));
         } else {
             $this->setPlaceholders(array(
                 'attachment_fields' => '',

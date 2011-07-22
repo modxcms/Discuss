@@ -31,6 +31,12 @@ class DiscussThreadUnreadController extends DiscussController {
     /** @var array $threads */
     public $threads = array();
     public function initialize() {
+        $this->options = array_merge(array(
+            'postTpl' => 'post/disPostLi',
+            'dateFormat' => $this->discuss->dateFormat,
+            'btn_text_mark_all_read' => $this->modx->lexicon('discuss.mark_all_as_read'),
+            'bc_text_unread_posts' => $this->modx->lexicon('discuss.unread_posts'),
+        ),$this->options);
 
     }
     public function checkPermissions() {
@@ -44,14 +50,13 @@ class DiscussThreadUnreadController extends DiscussController {
     }
     public function process() {
         /* setup default properties */
-        $limit = !empty($this->scriptProperties['limit']) ? $this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
-        $page = !empty($this->scriptProperties['page']) ? $this->scriptProperties['page'] : 1;
+        $limit = $this->getProperty('limit',$this->modx->getOption('discuss.threads_per_page',null,20),'!empty');
+        $page = $this->getProperty('page',1,'!empty');
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 
-        $sortBy = $this->modx->getOption('sortBy',$this->scriptProperties,'LastPost.createdon');
-        $sortDir = $this->modx->getOption('sortDir',$this->scriptProperties,'DESC');
-        $postTpl = $this->modx->getOption('postTpl',$this->options,'post/disPostLi');
+        $sortBy = $this->getProperty('sortBy','LastPost.createdon');
+        $sortDir = $this->getProperty('sortDir','DESC');
 
         /* get unread threads */
         $this->threads = $this->modx->call('disThread','fetchUnread',array(&$this->modx,$sortBy,$sortDir,$limit,$start));
@@ -68,7 +73,7 @@ class DiscussThreadUnreadController extends DiscussController {
             $thread->calcLastPostPage();
             $thread->getUrl();
             $threadArray = $thread->toArray();
-            $threadArray['createdon'] = strftime($this->discuss->dateFormat,strtotime($threadArray['createdon']));
+            $threadArray['createdon'] = strftime($this->getOption('dateFormat'),strtotime($threadArray['createdon']));
             $threadArray['icons'] = '';
 
             /* set css class */
@@ -98,7 +103,7 @@ class DiscussThreadUnreadController extends DiscussController {
             $threadArray['unread'] = '<img src="'.$this->discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
             $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
-            $list[] = $this->discuss->getChunk($postTpl,$threadArray);
+            $list[] = $this->discuss->getChunk($this->getOption('postTpl'),$threadArray);
         }
         $this->setPlaceholder('threads',implode("\n",$list));
 
@@ -118,7 +123,7 @@ class DiscussThreadUnreadController extends DiscussController {
     public function getActionButtons() {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'));
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread',array('read' => 1)), 'text' => $this->getOption('btn_text_mark_all_read'));
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
@@ -129,7 +134,7 @@ class DiscussThreadUnreadController extends DiscussController {
             'url' => $this->discuss->request->makeUrl(),
             'text' => $this->modx->getOption('discuss.forum_title'),
         );
-        $trail[] = array('text' => $this->modx->lexicon('discuss.unread_posts').' ('.number_format($this->threads['total']).')','active' => true);
+        $trail[] = array('text' => $this->getOption('bc_text_unread_posts').' ('.number_format($this->threads['total']).')','active' => true);
         return $trail;
     }
 
