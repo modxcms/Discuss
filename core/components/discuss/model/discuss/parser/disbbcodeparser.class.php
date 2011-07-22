@@ -442,13 +442,13 @@ class disBBCodeParser extends disParser {
         $codeopen = preg_match_all('~(\[code(?:=[^\]]+)?\])~is', $message, $dummy);
         $codeclose = preg_match_all('~(\[/code\])~is', $message, $dummy);
 
-        // Close/open all code tags...
+        /* Close/open all code tags... */
         if ($codeopen > $codeclose)
             $message .= str_repeat('[/code]', $codeopen - $codeclose);
         elseif ($codeclose > $codeopen)
             $message = str_repeat('[code]', $codeclose - $codeopen) . $message;
 
-        // Now that we've fixed all the code tags, let's fix the img and url tags...
+        /* Fix tags outside of [code] tags */
         $parts = preg_split('~(\[/code\]|\[code(?:=[^\]]+)?\])~i', $message, -1, PREG_SPLIT_DELIM_CAPTURE);
 
         $nbs = '\xA0';
@@ -501,11 +501,11 @@ class disBBCodeParser extends disParser {
                     $parts[$i] = preg_replace(array_keys($mistakeFixes), $mistakeFixes, $parts[$i]);
                 }
 
-
+                /* get rid of malicious urls */
                 $parts[$i] = preg_replace('~&lt;a\s+href=((?:&quot;)?)((?:https?://|ftps?://|mailto:)\S+?)\\1&gt;~i', '[url=$2]', $parts[$i]);
                 $parts[$i] = preg_replace('~&lt;/a&gt;~i', '[/url]', $parts[$i]);
 
-                // strip all unwanted html attributes
+                /* strip all unwanted html attributes */
                 preg_match_all('/[a-z]+=".+"/iU', $parts[$i], $attributes);
                 foreach ($attributes[0] as $attribute) {
                     $attributeName = stristr($attribute, '=', true);
@@ -514,7 +514,7 @@ class disBBCodeParser extends disParser {
                     }
                 }
 
-                // now attributes without quotes
+                /* now strip attributes without quotes */
                 preg_match_all('/[a-z]+=.+/iU', $parts[$i], $attributes);
                 foreach ($attributes[0] as $attribute) {
                     $attributeName = stristr($attribute, '=', true);
@@ -523,7 +523,7 @@ class disBBCodeParser extends disParser {
                     }
                 }
 
-                // strip script tags properly
+                /* strip script tags properly */
                 $parts[$i] = preg_replace("@<script[^>]*>.+</script[^>]*>@i",'',$parts[$i]);
                 $parts[$i] = $this->stripHtml($parts[$i]);
 
@@ -550,7 +550,7 @@ class disBBCodeParser extends disParser {
             foreach ($matches[2] as $match => $imgTag) {
                 $alt = empty($matches[3][$match]) ? '' : ' alt=' . preg_replace('~^&quot;|&quot;$~', '', $matches[3][$match]);
 
-                // Remove action= from the URL - no funny business, now.
+                /* strip action from url to prevent redirection */
                 if (preg_match('~action(=|%3d)(?!dlattach)~i', $imgTag) != 0) {
                     $imgTag = preg_replace('~action(=|%3d)(?!dlattach)~i', 'action-', $imgTag);
                 }
