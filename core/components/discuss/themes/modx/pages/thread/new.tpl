@@ -20,7 +20,7 @@
     </label>
     <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
 
-    <label for="dis-new-thread-type">[[%discuss.thread_type]]</label>
+    <label for="dis-new-thread-type">[[%discuss.thread_type]]:</label>
     <select name="class_key" id="dis-new-thread-type">
         <option value="disThreadDiscussion">[[%discuss.discussion]]</option>
         <option value="disThreadQuestion">[[%discuss.question_and_answer]]</option>
@@ -29,7 +29,7 @@
     <div class="wysi-buttons">[[+buttons]]</div>
 
 
-    <label for="dis-thread-message">[[%discuss.message]]:
+    <label for="dis-thread-message">
         <span class="error">[[!+fi.error.message]]</span>
     </label>
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>

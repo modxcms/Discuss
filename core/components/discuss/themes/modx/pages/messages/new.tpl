@@ -27,7 +27,7 @@
     <div class="wysi-buttons">[[+buttons]]</div>
 
 
-    <label for="dis-thread-message">[[%discuss.message]]:
+    <label for="dis-thread-message">
         <span class="error">[[!+fi.error.message]]</span>
     </label>
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
