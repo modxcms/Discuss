@@ -32,6 +32,7 @@ class DiscussThreadRecentXmlController extends DiscussThreadRecentController {
     public $useWrapper = false;
     public function getSessionPlace() { return ''; }
     public function initialize() {
+        parent::initialize();
         $this->options['postTpl'] = 'post/disBoardPostXml';
     }
     

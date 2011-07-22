@@ -41,6 +41,12 @@ class DiscussThreadMoveController extends DiscussController {
         if (empty($this->thread)) $this->discuss->sendErrorPage();
     }
 
+    public function getDefaultOptions() {
+        return array(
+            'tplBoardOption' => 'board/disBoardOpt',
+        );
+    }
+
     /**
      * Ensure user can move this thread
      * 
@@ -62,8 +68,6 @@ class DiscussThreadMoveController extends DiscussController {
         $this->setPlaceholder('url',$this->thread->getUrl());
         $this->getBoardList();
 
-        unset($boards,$board,$list,$c);
-
         /* output */
         $this->modx->setPlaceholder('discuss.thread',$this->thread->get('title'));
     }
@@ -78,7 +82,7 @@ class DiscussThreadMoveController extends DiscussController {
         foreach ($boards as $board) {
             $board['selected'] = !empty($this->scriptProperties['board']) && $this->scriptProperties['board'] == $board['id'] ? ' selected="selected"' : '';
             $board['name'] = str_repeat('--',$board['depth']-1).$board['name'];
-            $boardOutput[] = $this->discuss->getChunk('board/disBoardOpt',$board);
+            $boardOutput[] = $this->discuss->getChunk($this->getOption('tplBoardOption'),$board);
         }
         $this->setPlaceholder('boards',implode("\n",$boardOutput));
     }
@@ -96,7 +100,7 @@ class DiscussThreadMoveController extends DiscussController {
      */
     public function handleActions() {
         if (!empty($this->scriptProperties['move-thread']) && !empty($this->scriptProperties['board'])) {
-            if ($this->thread->move($this->scriptProperties['board'])) {
+            if ($this->thread->move($this->getProperty('board'))) {
                 $this->discuss->logActivity('thread_move',$this->thread->toArray());
 
                 $url = $this->discuss->request->makeUrl('board',array('board' => $this->thread->get('board')));

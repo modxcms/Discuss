@@ -27,6 +27,11 @@
  */
 class DiscussThreadPreviewController extends DiscussController {
     public $useWrapper = false;
+    public function getDefaultOptions() {
+        return array(
+            'tpl' => 'post/disPostPreview',
+        );
+    }
     public function getPageTitle() { return ''; }
     public function getSessionPlace() { return ''; }
     public function checkPermissions() {
@@ -44,6 +49,7 @@ class DiscussThreadPreviewController extends DiscussController {
             $postArray['author.'.$k] = $v;
         }
 
+        /** @var disPost $post */
         $post = $this->modx->newObject('disPost');
         $post->fromArray($postArray);
         $postArray = $post->toArray();
@@ -55,7 +61,7 @@ class DiscussThreadPreviewController extends DiscussController {
         $postArray['title'] = $post->parser->parse($postArray['title']);
         $postArray['createdon'] = strftime($this->discuss->dateFormat,time());
 
-        $output = $this->discuss->getChunk('post/disPostPreview',$postArray);
+        $output = $this->discuss->getChunk($this->getOption('tpl'),$postArray);
         $this->setPlaceholder('post',$output);
     }
 }

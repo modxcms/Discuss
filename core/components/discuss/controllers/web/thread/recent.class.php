@@ -30,8 +30,15 @@
 class DiscussThreadRecentController extends DiscussController {
     /** @var array $list */
     public $list = array();
-    public function initialize() {
-        $this->options['postTpl'] = 'post/disPostLi';
+    public function getDefaultOptions() {
+        return array(
+            'postTpl' => 'post/disPostLi',
+            'textBreadcrumbsRecentPosts' => $this->modx->lexicon('discuss.recent_posts'),
+            'rssIconLinkCls' => 'dis-recent-rss',
+            'rssIconLinkId' => '',
+            'rssIconLinkAttributes' => '',
+            'rssIconLinkText' => '',
+        );
     }
     public function checkPermissions() {
         return $this->discuss->user->isLoggedIn;
@@ -44,9 +51,8 @@ class DiscussThreadRecentController extends DiscussController {
     }
     public function process() {
         /* get default options */
-        $limit = $this->modx->getOption('limit',$this->scriptProperties,$this->modx->getOption('discuss.num_recent_posts',null,10));
-        $start = $this->modx->getOption('start',$this->scriptProperties,0);
-        $page = !empty($this->scriptProperties['page']) ? $this->scriptProperties['page'] : 1;
+        $limit = $this->getProperty('limit',$this->modx->getOption('discuss.num_recent_posts',null,10),'!empty');
+        $page = $this->getProperty('page',1);
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 
@@ -55,7 +61,7 @@ class DiscussThreadRecentController extends DiscussController {
             'limit' => $limit,
             'start' => $start,
             'getTotal' => true,
-            'postTpl' => $this->options['postTpl'],
+            'postTpl' => $this->getOption('postTpl'),
         ));
         $this->list['limit'] = $limit;
         $this->list['start'] = $start;
@@ -68,10 +74,10 @@ class DiscussThreadRecentController extends DiscussController {
     public function getActionButtons() {
         $rssIcon = $this->discuss->getChunk('disLink',array(
             'url' => $this->discuss->request->makeUrl('thread/recent.xml'),
-            'text' => '',
-            'class' => 'dis-recent-rss',
-            'id' => '',
-            'attributes' => '',
+            'text' => $this->getOption('rssIconLinkText',''),
+            'class' => $this->getOption('rssIconLinkCls','dis-recent-rss'),
+            'id' => $this->getOption('rssIconLinkId',''),
+            'attributes' => $this->getOption('rssIconLinkAttributes',''),
         ));
         $this->setPlaceholder('rss_icon',$rssIcon);
     }
@@ -82,7 +88,7 @@ class DiscussThreadRecentController extends DiscussController {
             'url' => $this->discuss->request->makeUrl(),
             'text' => $this->modx->getOption('discuss.forum_title'),
         );
-        $trail[] = array('text' => $this->modx->lexicon('discuss.recent_posts').' ('.number_format($this->list['total']).')','active' => true);
+        $trail[] = array('text' => $this->getOption('textBreadcrumbsRecentPosts').' ('.number_format($this->list['total']).')','active' => true);
         return $trail;
     }
 

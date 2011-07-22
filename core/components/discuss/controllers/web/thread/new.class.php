@@ -36,15 +36,16 @@ class DiscussThreadNewController extends DiscussController {
         if (empty($board)) { $this->modx->sendErrorPage(); }
         $this->board = $this->modx->getObject('disBoard',$this->scriptProperties['board']);
         if (empty($this->board)) $this->discuss->sendErrorPage();
+        $this->modx->lexicon->load('discuss:post');
+    }
 
-        $this->options = array_merge(array(
+    public function getDefaultOptions() {
+        return array(
             'tplAttachmentFields' => 'post/disAttachmentFields',
             'textBreadcrumbsThreadNew' => $this->modx->lexicon('discuss.thread_new'),
             'textCheckboxLocked' => $this->modx->lexicon('discuss.thread_lock'),
             'textCheckboxSticky' => $this->modx->lexicon('discuss.thread_stick'),
-        ),$this->options);
-        
-        $this->modx->lexicon->load('discuss:post');
+        );
     }
 
     public function getPageTitle() {
