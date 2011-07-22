@@ -238,11 +238,32 @@ abstract class DiscussController {
      */
     public function getProperty($key,$default = null,$checkType = 'isset') {
         switch ($checkType) {
-            case 'empty': $pass = !empty($this->scriptProperties[$key]); break;
+            case 'empty':
+            case '!empty':
+                $pass = !empty($this->scriptProperties[$key]); break;
             default:
                 $pass = isset($this->scriptProperties[$key]); break;
         }
         return $pass ? $this->scriptProperties[$key] : $default;
+    }
+
+    /**
+     * Get a specific page option
+     *
+     * @param string $key
+     * @param mixed $default
+     * @param string $checkType
+     * @return mixed
+     */
+    public function getOption($key,$default = null,$checkType = '!empty') {
+        switch ($checkType) {
+            case 'empty':
+            case '!empty':
+                $pass = !empty($this->options[$key]); break;
+            default:
+                $pass = isset($this->options[$key]); break;
+        }
+        return $pass ? $this->options[$key] : $default;
     }
 
     /**
