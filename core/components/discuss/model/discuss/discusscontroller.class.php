@@ -177,10 +177,11 @@ abstract class DiscussController {
      * @return string
      */
     protected function _output($output = '') {
+        $placeholders = $this->getPlaceholders();
+        $placeholders['content'] = $output;
+
         if (!empty($_REQUEST['print'])) {
-            $output = $this->_renderTemplate($this->discuss->config['pagesPath'].'print-wrapper.tpl',array(
-                'content' => $output,
-            ));
+            $output = $this->_renderTemplate($this->discuss->config['pagesPath'].'print-wrapper.tpl',$placeholders);
             return $output;
         }
         $emptyTpl = in_array($this->config['controller'],array('messages/preview'));
@@ -191,9 +192,7 @@ abstract class DiscussController {
         }
         $output = trim($output);
         if (!$emptyTpl && $this->useWrapper) {
-            $output = $this->_renderTemplate($this->discuss->config['pagesPath'].'wrapper.tpl',array(
-                'content' => $output,
-            ));
+            $output = $this->_renderTemplate($this->discuss->config['pagesPath'].'wrapper.tpl',$placeholders);
         }
         return $output;
     }
