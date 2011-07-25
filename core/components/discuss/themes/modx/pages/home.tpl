@@ -7,7 +7,7 @@
 
 [[+belowBoards]]
 
-<br class="clear" />
+<br class="clearfix" />
 
 
 
@@ -32,7 +32,7 @@
 
 [[+belowRecent]]
 
-<br class="clear" />
+<br class="clearfix" />
 
 <ul class="BoardInfo">
     <li class="dis-category-li"><h2>[[%discuss.stats]]</h2></li>
@@ -55,7 +55,7 @@
 
 
 				</div><!-- Close Content From Wrapper -->
-[[+bottom]]
+			[[+bottom]]
 
 				<div id="Panel">
 					<div class="PanelBox">

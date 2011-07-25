@@ -14,6 +14,6 @@
             [[+attachments:notempty=`<ul class="dis-attachments">[[+attachments]]</ul>`]]
             </div>
         </div>
-        <br class="clear" />
     </div>
+        <br class="clearfix" />
 </li>

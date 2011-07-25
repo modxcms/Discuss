@@ -4,7 +4,7 @@
 
             <div class="dis-author">
             	<a href="[[~[[*id]]]]user/?user=[[+author.id]]" class="auth-avatar">[[+author.avatar]]</a>
-            	<div class="auth-count">[[%discuss.posts]]: [[+author.posts]]</div>
+            	<div class="auth-count"><strong>[[+author.posts]]</strong> [[%discuss.posts]] | 3 badges</div>
                 <span class="avatarHover">
 						[[+author.email]]
 						[[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
@@ -43,11 +43,10 @@
 		        [[+children:notempty=`<ol class="dis-board-thread [[+children_class]]">[[+children]]</ol>`]]
 		    </div>
 		    
-		    
         </div>
 
-<br class="clearfix" />
 
     </div>
+<br class="clearfix" />
 
 </li>

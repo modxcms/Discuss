@@ -13,5 +13,4 @@
         </div>
         <div class="dis-post-reply" id="dis-post-reply-[[+id]]"></div>
     </div>
-    <br class="clear" />
 </div>

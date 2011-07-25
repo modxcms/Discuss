@@ -7,7 +7,7 @@
     <label>[[%discuss.password]]:</label>
     <input type="password" name="password" id="dis-login-password" value="[[+password]]" />
     
-    <br class="clear" />
+    <br class="clearfix" />
     
     [[+discuss.login_error]]
     
