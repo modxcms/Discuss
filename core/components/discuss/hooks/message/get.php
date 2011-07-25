@@ -31,7 +31,6 @@
  * @package discuss
  * @subpackage hooks
  */
-
 /**
  * get thread or root of post
  * @var disThread $thread
@@ -46,7 +45,7 @@ $start = intval(isset($_GET['page']) ? ($_GET['page'] - 1) * $limit : 0);
 $flat = $modx->getOption('flat',$scriptProperties,false);
 $flat = true;
 /* get default properties */
-$postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
+$tpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
 /* get posts */
@@ -101,44 +100,14 @@ foreach ($posts as $post) {
     $postArray = $post->toArray();
     $postArray['url'] = $discuss->request->makeUrl('messages/view',array('thread' => $post->get('thread'))).'#dis-post-'.$post->get('id');
     $postArray['children'] = '';
-    if ($post->Author) {
-        $postArray = array_merge($postArray,$post->Author->toArray('author.'));
-        $postArray['author.signature'] = $post->Author->parseSignature();
-        $postArray['author.posts'] = number_format($postArray['author.posts']);
-    }
-    unset($postArray['author.password'],$postArray['author.cachepwd']);
+
     if (!empty($post->EditedBy)) {
         $postArray = array_merge($postArray,$post->EditedBy->toArray('editedby.'));
         unset($postArray['editedby.password'],$postArray['editedby.cachepwd']);
     }
 
-    if ($post->Author) {
-        if ($canViewProfiles) {
-            $postArray['author.username_link'] = '<a href="'.$discuss->request->makeUrl('user',array('user' => $post->get('author'))).'">'.$post->Author->get('username').'</a>';
-        } else {
-            $postArray['author.username_link'] = '<span class="dis-username">'.$post->Author->get('username').'</span>';
-        }
+    $post->renderAuthorMeta($postArray);
 
-        /* set author avatar */
-        $avatarUrl = $post->Author->getAvatarUrl();
-        if (!empty($avatarUrl)) {
-            $postArray['author.avatar'] = '<img class="dis-post-avatar" alt="'.$postArray['author'].'" src="'.$avatarUrl.'" />';
-        }
-
-        /* check if author wants to show email */
-        if ($post->Author->get('show_email') && $discuss->user->isLoggedIn && $canViewEmails) {
-            $postArray['author.email'] = '<a href="mailto:'.$post->Author->get('email').'">'.$modx->lexicon('discuss.email_author').'</a>';
-        } else {
-            $postArray['author.email'] = '';
-        }
-        
-        /* get primary group badge/name, if applicable */
-        $postArray['author.group_badge'] = $post->Author->getGroupBadge();
-        $postArray['author.group_name'] = '';
-        if (!empty($post->Author->PrimaryGroup)) {
-            $postArray['author.group_name'] = $post->Author->PrimaryGroup->get('name');
-        }
-    }
     $postArray['title'] = str_replace(array('[',']'),array('&#91;','&#93;'),$postArray['title']);
 
     $postArray['class'] = array('dis-post');
@@ -229,8 +198,20 @@ foreach ($posts as $post) {
     $postArray['ip'] = '';
     $postArray['idx'] = $idx+1;
 
+    /* prepare thread view for derivative thread types */
+    $postArray = $thread->prepareThreadView($postArray);
+
+    /* fire OnDiscussPostBeforeRender */
+    $modx->invokeEvent('OnDiscussPostBeforeRender',array(
+        'post' => &$post,
+        'postArray' => &$postArray,
+        'idx' => $idx+1,
+        'tpl' => $tpl,
+        'flat' => $flat,
+    ));
+    
     if ($flat) {
-        $output[] = $discuss->getChunk('post/disThreadPost',$postArray);
+        $output[] = $discuss->getChunk($tpl,$postArray);
     } else {
         $plist[] = $postArray;
     }
@@ -250,7 +231,7 @@ if (empty($flat)) {
 } else {
     $output = implode("\n",$output);
 }
-$response['results'] = str_replace(array('[',']'),array('&#91;','&#93;'),$output);
+$response['results'] = $output;//str_replace(array('[',']'),array('&#91;','&#93;'),$output);
 
 /* mark as read */
 $thread->read($discuss->user->get('id'));

@@ -24,16 +24,23 @@
 /**
  * Get a list of boards
  *
+ * @var array $options
+ * @var array $scriptProperties
+ * @var modX $modx
+ * @var Discuss $discuss
+ *
  * @package discuss
+ * @subpackage hooks
  */
-
 $board = isset($scriptProperties['board']) ? (is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board']) : 0;
 $lastPostTpl = $modx->getOption('lastPostTpl',$options,'board/disLastPostBy');
 $subBoardTpl = $modx->getOption('subBoardTpl',$options,'board/disSubForumLink');
 $categoryRowTpl = $modx->getOption('categoryRowTpl',$options,'category/disCategoryLi');
 $boardRowTpl = $modx->getOption('boardRowTpl',$options,'board/disBoardLi');
+$checkUnread = $modx->getOption('checkUnread',$options,true);
 
 /* check cache first */
+/** @var int|disCategory $category */
 $category = $modx->getOption('category',$scriptProperties,false);
 $category = (int)(is_object($category) ? $category->get('id') : $category);
 $c = array(
@@ -47,6 +54,7 @@ if (empty($boards)) {
     $response = $modx->call('disBoard','getList',array(&$modx,$board,$category));
 
     $boards = array();
+    /** @var disBoard $board */
     foreach ($response['results'] as $board) {
         $board->calcLastPostPage();
         $board->getLastPostTitle();
@@ -89,8 +97,14 @@ foreach ($boards as $board) {
         }
     }
     /* check for read status */
-    $board['unread'] = $discuss->user->isBoardRead($board['id']);
-    $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
+    if ($checkUnread) {
+        $board['unread'] = $discuss->user->isBoardRead($board['id']);
+        $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
+    } else {
+        $board['unread'] = '';
+        $board['unread-cls'] = 'dis-read';
+    }
+
     if (!empty($board['last_post_createdon'])) {
         $username = $board['last_post_username'];
         if (!empty($board['last_post_udn']) && !empty($board['last_post_display_name'])) {

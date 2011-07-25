@@ -96,6 +96,7 @@ class DiscussHomeController extends DiscussController {
     public function getBoards() {
         $c = array(
             'board' => 0,
+            'checkUnread' => $this->getOption('checkUnread',true),
         );
         if (!empty($this->scriptProperties['category'])) $c['category'] = (int)$this->scriptProperties['category'];
         $boards = $this->discuss->hooks->load('board/getlist',$c);
@@ -112,17 +113,18 @@ class DiscussHomeController extends DiscussController {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) { /* if logged in */
             $actionButtons[] = array('url' => $this->discuss->request->makeUrl('',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'));
-
-            $authLink = $this->discuss->request->makeUrl('logout');
-            $authMsg = $this->modx->lexicon('discuss.logout');
-            $this->modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
-            $actionButtons[] = array('url' => $authLink, 'text' => $authMsg);
+            if ($this->getOption('showLogoutActionButton',false,'!empty')) {
+                $authLink = $this->discuss->request->makeUrl('logout');
+                $authMsg = $this->modx->lexicon('discuss.logout');
+                $this->modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
+                $actionButtons[] = array('url' => $authLink, 'text' => $authMsg);
+            }
         } else { /* if logged out */
             $authLink = $this->discuss->request->makeUrl('login');
             $authMsg = $this->modx->lexicon('discuss.login');
             $this->modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
 
-            if (!empty($options['showLoginForm'])) {
+            if ($this->getOption('showLoginForm',false,'!empty')) {
                 $this->modx->setPlaceholder('discuss.loginForm',$this->discuss->getChunk('disLogin'));
             }
         }

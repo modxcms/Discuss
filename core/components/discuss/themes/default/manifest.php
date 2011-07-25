@@ -63,6 +63,8 @@ $manifest = array(
             'showStatistics' => true,
             'showLoginForm' => false,
             'bypassUnreadCheck' => true,
+            'checkUnread' => true,
+            'showLogoutActionButton' => true,
         ),
     ),
     'board' => array(

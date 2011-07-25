@@ -29,6 +29,7 @@
  *
  * @var modX $modx
  * @var array $scriptProperties
+ * @var Discuss $discuss
  */
 /* get thread or root of post */
 /** @var disThread $thread */
@@ -163,6 +164,10 @@ foreach ($posts['results'] as $post) {
         }
     }
 
+    /* order action buttons */
+    $postArray['actions'] = $thread->aggregateThreadActionButtons($postArray);
+    $postArray['actions'] = implode("\n",$postArray['actions']);
+
     /* get attachments */
     $postArray['attachments'] = '';
     if ($canViewAttachments) {
@@ -199,9 +204,6 @@ foreach ($posts['results'] as $post) {
 
     /* prepare thread view for derivative thread types */
     $postArray = $thread->prepareThreadView($postArray);
-
-    /* order action buttons */
-    $postArray['actions'] = $thread->aggregateThreadActionButtons($postArray);
 
     /* prepare specific properties for rendering */
     $postArray['actions'] = implode("\n",$postArray['actions']);
