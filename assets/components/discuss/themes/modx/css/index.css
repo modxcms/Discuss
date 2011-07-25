@@ -410,6 +410,7 @@ div.dis-board-head {
 	}
 
 div.dis-board-head h3 {
+	margin: 10px 0 0 0;
 	font-size: 24px;
 	}
 
@@ -521,6 +522,31 @@ span.avatarHover a	{
 .dis-stats li.dis-board-li { background: none; padding: 5px 50px; }
 
 /* breadcrumbs */
+#crumbs {
+    background: url("../images/destinations-home.jpg") repeat scroll 50% -64px #EFEFEF;
+    height: 36px;
+    margin-bottom: 14px;
+}
+
+#crumbs ul {
+    height: 26px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul {
+    list-style: none outside none;
+}
+
+#crumbs li {
+    background: url("../images/bg-sprite.png") no-repeat scroll 3px -114px transparent;
+    float: left;
+    font-size: 12px;
+    padding: 2px 0 0 24px;
+    z-index: 10;
+    height: 23px;
+}
+
 .dis-breadcrumbs {
  	background: none repeat scroll 0 0 #ccc;
  	border: 1px solid #FFFFFF;
@@ -657,7 +683,7 @@ span.avatarHover a	{
 /* ============================================== Main Containers */
 
 #Frame {
- 	margin: 15px auto 0;
+ 	margin: 0 auto;
  	text-align: left;
  	width: 960px;
 }
@@ -4191,7 +4217,7 @@ header {
 #header {
  	background:#f5f5f5 url(http://www.modx.com/assets/i/bg-sprite.png) repeat-x;
  	padding:2px 0 0;
- 	height:112px;
+ 	height:110px;
 }
 
 #global2 {
@@ -4393,7 +4419,7 @@ header {
 
 /* ------------------------- [ Mega Menu ] ---*/
 
-#section_wrap { background:#00181f url(http://www.modx.com/assets/i/headers.jpg) top center no-repeat; }
+#section_wrap { background:#00181f url(http://www.modx.com/assets/i/headers.jpg) top center no-repeat; height: 63px; }
 #community #section_wrap { background:#031e16 url(http://www.modx.com/assets/i/headers.jpg) center -561px no-repeat; }
 #developer #section_wrap { background:#0b1d1a url(http://www.modx.com/assets/i/headers.jpg) center -314px no-repeat; }
 #support #section_wrap { background:#200d1a url(http://www.modx.com/assets/i/headers.jpg) center -810px no-repeat; }

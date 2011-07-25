@@ -1,4 +1,3 @@
-[[+trail]]
 
 [[!FormIt?
   &submitVar=`dis-message-new`

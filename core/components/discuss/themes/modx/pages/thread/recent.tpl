@@ -1,4 +1,3 @@
-[[+trail]]
 
 
 <div class="dis-threads">

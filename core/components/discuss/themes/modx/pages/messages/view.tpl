@@ -1,5 +1,3 @@
-[[+trail]]
-
 
 
 [[<h4 class="right">[[%discuss.participants]]: [[+participants_usernames]]</h4>]]

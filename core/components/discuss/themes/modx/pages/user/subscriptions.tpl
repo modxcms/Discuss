@@ -1,9 +1,6 @@
 
 <div class="dis-profile left">
 
-<p class="dis-breadcrumbs">
-    <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
-</p>
 		<h2>[[%discuss.subscriptions? &user=`[[+name]]`]]</h2>
 		
 	<form action="[[~[[*id]]]]user/subscriptions?user=[[+id]]" method="post">

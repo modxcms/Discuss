@@ -1,6 +1,5 @@
-[[+trail]]
 
-<br />
+
 <form action="[[~[[*id]]]]messages/remove?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-message-form">
 
     <h2>[[%discuss.message_remove? &namespace=`discuss` &topic=`post`]]</h2>

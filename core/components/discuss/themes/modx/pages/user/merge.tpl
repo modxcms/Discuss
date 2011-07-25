@@ -7,9 +7,6 @@
 
 <div class="dis-profile left">
 
-<p class="dis-breadcrumbs">
-    <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
-</p>
 
 
 <form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form" style="border: 0;">

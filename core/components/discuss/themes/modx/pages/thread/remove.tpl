@@ -1,4 +1,3 @@
-[[+trail]]
 
 <br />
 <form action="[[~[[*id]]]]thread/remove?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">

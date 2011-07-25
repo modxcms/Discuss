@@ -1,4 +1,4 @@
-[[+trail]]
+
 
 [[!FormIt?
   &submitVar=`dis-post-new`
@@ -8,7 +8,6 @@
 
 
 <div id="dis-new-thread-preview"></div>
-<br />
 <form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h2>

@@ -6,7 +6,7 @@
     &usergroups=`Forum New Member`
 ]]
 
-[[+trail]]
+
 
 <form class="dis-form dis-register" action="[[~[[*id]]]]register" method="post">
     <h2>[[%discuss.register? &namespace=`discuss` &topic=`web`]]</h2>

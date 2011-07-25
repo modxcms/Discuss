@@ -1,6 +1,4 @@
-[[+trail]]
 
-<br />
 <form action="[[~[[*id]]]]thread/move?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">
 
     <h2>[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h2>

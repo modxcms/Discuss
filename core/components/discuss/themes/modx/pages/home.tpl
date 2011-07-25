@@ -1,5 +1,4 @@
 [[+top]]
-[[+trail]]
 [[+aboveBoards]]
 <ul class="DataList CategoryList CategoryListWithHeadings">
 	[[+boards]]

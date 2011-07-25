@@ -1,5 +1,4 @@
 [[+top]]
-[[+trail]]
 
 [[+aboveThread]]
 

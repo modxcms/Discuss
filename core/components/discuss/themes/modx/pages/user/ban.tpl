@@ -7,9 +7,7 @@
 
 <div class="dis-profile left">
 
-<p class="dis-breadcrumbs">
-    <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
-</p>
+
 
 
 <form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form" style="border: 0;">

@@ -1,4 +1,4 @@
-[[+trail]]
+
 
 [[!FormIt?
   &submitVar=`dis-post-reply`

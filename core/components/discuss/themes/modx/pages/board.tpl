@@ -1,5 +1,5 @@
 [[+top]]
-[[+trail]]
+
 [[<div class="right">
     <form action="[[~[[*id]]]]search" method="GET">
         <input type="hidden" name="board" value="[[+id]]" />

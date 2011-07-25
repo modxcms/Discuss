@@ -2,9 +2,7 @@
 
 <div class="dis-profile left">
 
-<p class="dis-breadcrumbs">
-    <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
-</p>
+
     <h2>[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h2>
 <form action="[[~[[*id]]]]user/edit?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
