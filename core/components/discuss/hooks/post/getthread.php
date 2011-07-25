@@ -166,7 +166,6 @@ foreach ($posts['results'] as $post) {
 
     /* order action buttons */
     $postArray['actions'] = $thread->aggregateThreadActionButtons($postArray);
-    $postArray['actions'] = implode("\n",$postArray['actions']);
 
     /* get attachments */
     $postArray['attachments'] = '';
