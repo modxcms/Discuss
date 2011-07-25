@@ -83,7 +83,6 @@ class DiscussHomeController extends DiscussController {
         if (isset($this->scriptProperties['read']) && !empty($this->scriptProperties['read'])) {
             $c = array(
                 'board' => 0,
-                'checkUnread' => $this->getOption('checkUnread',true,'!empty'),
             );
             if (!empty($this->scriptProperties['category'])) $c['category'] = (int)$this->scriptProperties['category'];
             $this->discuss->hooks->load('thread/read_all',$c);
@@ -97,6 +96,7 @@ class DiscussHomeController extends DiscussController {
     public function getBoards() {
         $c = array(
             'board' => 0,
+            'checkUnread' => $this->getOption('checkUnread',true),
         );
         if (!empty($this->scriptProperties['category'])) $c['category'] = (int)$this->scriptProperties['category'];
         $boards = $this->discuss->hooks->load('board/getlist',$c);
