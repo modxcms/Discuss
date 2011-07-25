@@ -358,7 +358,7 @@ div.dis-post-footer {
 	}
 
 h4.created {
-	margin: 10px 0 0 0;
+	margin: 10px 0 10px 0;
 	font-size: 12px;
 	color: #777;
 	}
@@ -5441,7 +5441,7 @@ input.DateBox, input.InputBox, input.SmallInput, textarea {
 }
 .CategoryDescription {
 	color: #666;
-	padding: 5px 0;
+	padding: 0 0 5px 0;
 }
 /* category headers */
 .Depth1 .Category {
