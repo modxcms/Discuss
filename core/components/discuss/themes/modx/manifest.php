@@ -40,7 +40,7 @@ $manifest = array(
                 'sh/shAutoloader.js',
                 'sh/shDiscuss.js',
             ),
-            'inline' => 'DIS.url = "'.$this->discuss->url.'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";',
+            'inline' => 'DIS.url = "'.$this->discuss->request->makeUrl().'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";',
         ),
     ),
     'print' => array(
@@ -62,6 +62,9 @@ $manifest = array(
             'showRecentPosts' => true,
             'showStatistics' => true,
             'showLoginForm' => false,
+            'bypassUnreadCheck' => true,
+            'checkUnread' => false,
+            'showLogoutActionButton' => false,
         ),
     ),
     'board' => array(
