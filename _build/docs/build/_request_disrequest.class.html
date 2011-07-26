@@ -75,17 +75,13 @@ Suite 330, Boston, MA 02111-1307 USA</p>
                 Methods
               </a></dt>
 <dd><a class="method public" href="#%5CDisRequest::__construct()">__construct</a></dd>
-<dd><a class="method protected" href="#%5CDisRequest::endDebugTimer()">endDebugTimer</a></dd>
+<dd><a class="method public" href="#%5CDisRequest::getControllerClassName()">getControllerClassName</a></dd>
 <dd><a class="method public" href="#%5CDisRequest::getControllerFile()">getControllerFile</a></dd>
 <dd><a class="method public" href="#%5CDisRequest::getControllerValue()">getControllerValue</a></dd>
-<dd><a class="method public" href="#%5CDisRequest::getDebugTime()">getDebugTime</a></dd>
-<dd><a class="method public" href="#%5CDisRequest::getPage()">getPage</a></dd>
 <dd><a class="method public" href="#%5CDisRequest::handle()">handle</a></dd>
-<dd><a class="method public" href="#%5CDisRequest::loadController()">loadController</a></dd>
 <dd><a class="method public" href="#%5CDisRequest::loadThemeOptions()">loadThemeOptions</a></dd>
 <dd><a class="method public" href="#%5CDisRequest::makeUrl()">makeUrl</a></dd>
-<dd><a class="method public" href="#%5CDisRequest::output()">output</a></dd>
-<dd><a class="method protected" href="#%5CDisRequest::startDebugTimer()">startDebugTimer</a></dd>
+<dd><a class="method public" href="#%5CDisRequest::render()">render</a></dd>
 </dl>
 <dl></dl>
 <h3>Description</h3>
@@ -96,7 +92,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <div>
 <a id="\DisRequest::$controller"></a><h4 class="property public">$controller<div class="to-top"><a href="#%5CDisRequest">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code>string <span class="highlight">$controller</span> = 'home'</code><p class="short-description">The default controller for the request</p>
 <div class="long-description">
 </div>
@@ -121,7 +117,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <a id="\DisRequest::$pageOptions"></a><h4 class="property public">$pageOptions<div class="to-top"><a href="#%5CDisRequest">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code>array <span class="highlight">$pageOptions</span> = 'array'</code><p class="short-description">Any page-specific options for the loaded controller</p>
 <div class="long-description">
 </div>
@@ -164,10 +160,12 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$discuss</dt>
-<dd>\Discuss<br><em>A reference to the Discuss instance</em>
+<dd>\Discuss<br><em><p>A reference to the Discuss instance</p>
+</em>
 </dd>
 <dt>$config</dt>
-<dd>array<br><em>An array of configuration properties</em>
+<dd>array<br><em><p>An array of configuration properties</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -186,38 +184,24 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <div class="clear"></div>
 </div>
 </div>
-<a id="\DisRequest::endDebugTimer()"></a><h4 class="method protected">endDebugTimer<div class="to-top"><a href="#DisRequest">jump to class</a></div>
+<a id="\DisRequest::getControllerClassName()"></a><h4 class="method public">getControllerClassName<div class="to-top"><a href="#DisRequest">jump to class</a></div>
 </h4>
 <div class="method">
-<code><span class="highlight">endDebugTimer</span><span class="nb-faded-text">(
+<code><span class="highlight">getControllerClassName</span><span class="nb-faded-text">(
           
           )
         </span>
         :
-        int</code><p class="short-description">Ends the debug timer and returns the total number of seconds Discuss took
-to run.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>int</dt>
-<dd><em>The end total time to execute the script.</em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
+        </code><div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
 <dt>visibility</dt>
-<dd>protected</dd>
+<dd>public</dd>
 <dt>final</dt>
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
-<dt>access</dt>
-<dd>protected</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -239,7 +223,8 @@ to run.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$controller</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -299,88 +284,6 @@ to run.</p>
 <div class="clear"></div>
 </div>
 </div>
-<a id="\DisRequest::getDebugTime()"></a><h4 class="method public">getDebugTime<div class="to-top"><a href="#DisRequest">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">getDebugTime</span><span class="nb-faded-text">(
-          
-          )
-        </span>
-        :
-        string</code><p class="short-description">Return the current debug time.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>string</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="\DisRequest::getPage()"></a><h4 class="method public">getPage<div class="to-top"><a href="#DisRequest">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">getPage</span><span class="nb-faded-text">(
-          array $controller
-              =
-              array, array $properties
-              =
-              array
-          )
-        </span>
-        :
-        string</code><p class="short-description">Get the current template page</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$controller</dt>
-<dd>array<br><em></em>
-</dd>
-<dt>$properties</dt>
-<dd>array<br><em></em>
-</dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>string</dt>
-<dd><em></em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
 <a id="\DisRequest::handle()"></a><h4 class="method public">handle<div class="to-top"><a href="#DisRequest">jump to class</a></div>
 </h4>
 <div class="method">
@@ -397,50 +300,6 @@ to run.</p>
 <dl class="return-info">
 <dt>string</dt>
 <dd><em>The output HTML</em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="\DisRequest::loadController()"></a><h4 class="method public">loadController<div class="to-top"><a href="#DisRequest">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">loadController</span><span class="nb-faded-text">(
-          array $controller
-              =
-              array
-          )
-        </span>
-        :
-        array</code><p class="short-description">Load the appropriate controller file.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$controller</dt>
-<dd>array<br><em>The controller to load</em>
-</dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>array</dt>
-<dd><em>An array of placeholders</em></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -502,10 +361,12 @@ to run.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$action</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 <dt>$params</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -532,88 +393,24 @@ to run.</p>
 <div class="clear"></div>
 </div>
 </div>
-<a id="\DisRequest::output()"></a><h4 class="method public">output<div class="to-top"><a href="#DisRequest">jump to class</a></div>
+<a id="\DisRequest::render()"></a><h4 class="method public">render<div class="to-top"><a href="#DisRequest">jump to class</a></div>
 </h4>
 <div class="method">
-<code><span class="highlight">output</span><span class="nb-faded-text">(
-          string $output, array $properties
-              =
-              array
-          )
-        </span>
-        :
-        string</code><p class="short-description">Output the final forum output and wrap in the disWrapper chunk, if in
-debug mode. The wrapper code will need to be in the Template if not in
-debug mode.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="arguments">Arguments</h5>
-<dl class="argument-info">
-<dt>$output</dt>
-<dd>string<br><em>The output to process</em>
-</dd>
-<dt>$properties</dt>
-<dd>array<br><em></em>
-</dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>string</dt>
-<dd><em>The final wrapped output, or blank if not in debug.</em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
-<h5 class="info">
-<img src="images/arrow_right.gif"> Details</h5>
-<dl class="function-info">
-<dt>visibility</dt>
-<dd>public</dd>
-<dt>final</dt>
-<dd>false</dd>
-<dt>static</dt>
-<dd>false</dd>
-<dt>access</dt>
-<dd>public</dd>
-</dl>
-<div class="clear"></div>
-</div>
-</div>
-<a id="\DisRequest::startDebugTimer()"></a><h4 class="method protected">startDebugTimer<div class="to-top"><a href="#DisRequest">jump to class</a></div>
-</h4>
-<div class="method">
-<code><span class="highlight">startDebugTimer</span><span class="nb-faded-text">(
+<code><span class="highlight">render</span><span class="nb-faded-text">(
           
           )
         </span>
         :
-        int</code><p class="short-description">Starts the debug timer.</p>
-<div class="long-description">
-</div>
-<div class="api-section">
-<h5 class="output">Output</h5>
-<dl class="return-info">
-<dt>int</dt>
-<dd><em>The start time.</em></dd>
-</dl>
-<div class="clear"></div>
-</div>
-<div class="api-section">
+        </code><div class="api-section">
 <h5 class="info">
 <img src="images/arrow_right.gif"> Details</h5>
 <dl class="function-info">
 <dt>visibility</dt>
-<dd>protected</dd>
+<dd>public</dd>
 <dt>final</dt>
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
-<dt>access</dt>
-<dd>protected</dd>
 </dl>
 <div class="clear"></div>
 </div>

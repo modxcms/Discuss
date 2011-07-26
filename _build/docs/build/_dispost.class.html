@@ -66,62 +66,36 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>\xPDOSimpleObject</dd>
 <dt>package</dt>
 <dd>discuss</dd>
-<dt>property</dt>
-<dd>int $board</dd>
-<dt>property</dt>
-<dd>int $thread</dd>
-<dt>property</dt>
-<dd>int $parent</dd>
-<dt>property</dt>
-<dd>string $title</dd>
-<dt>property</dt>
-<dd>string $message</dd>
-<dt>property</dt>
-<dd>int $author</dd>
-<dt>property</dt>
-<dd>datetime $createdon</dd>
-<dt>property</dt>
-<dd>int $editedby</dd>
-<dt>property</dt>
-<dd>datetime $editedon</dd>
-<dt>property</dt>
-<dd>string $icon</dd>
-<dt>property</dt>
-<dd>boolean $allow_replies</dd>
-<dt>property</dt>
-<dd>string $rank</dd>
-<dt>property</dt>
-<dd>string $ip</dd>
-<dt>property</dt>
-<dd>int $integrated_id</dd>
-<dt>property</dt>
-<dd>int $depth</dd>
-<dt>property</dt>
-<dd>boolean $answer</dd>
-<dt>property</dt>
-<dd>disBoard $Board</dd>
-<dt>property</dt>
-<dd>disThread $Thread</dd>
-<dt>property</dt>
-<dd>disUser $Author</dd>
-<dt>property</dt>
-<dd>disUser $CreatedBy</dd>
-<dt>property</dt>
-<dd>disUser $EditedBy</dd>
-<dt>property</dt>
-<dd>disPost $Parent</dd>
-<dt>property</dt>
-<dd>array $Children</dd>
-<dt>property</dt>
-<dd>array $Ancestors</dd>
-<dt>property</dt>
-<dd>array $Descendants</dd>
-<dt>property</dt>
-<dd>array $Attachments</dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Properties
               </a></dt>
+<dd><a class="property public" href="#%5CdisPost::%24Ancestors">$Ancestors</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24Attachments">$Attachments</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24Author">$Author</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24Board">$Board</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24Children">$Children</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24CreatedBy">$CreatedBy</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24Descendants">$Descendants</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24EditedBy">$EditedBy</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24Parent">$Parent</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24Thread">$Thread</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24allow_replies">$allow_replies</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24answer">$answer</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24author">$author</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24board">$board</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24createdon">$createdon</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24depth">$depth</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24editedby">$editedby</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24editedon">$editedon</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24icon">$icon</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24integrated_id">$integrated_id</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24ip">$ip</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24message">$message</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24parent">$parent</a></dd>
 <dd><a class="property public" href="#%5CdisPost::%24parser">$parser</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24rank">$rank</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24thread">$thread</a></dd>
+<dd><a class="property public" href="#%5CdisPost::%24title">$title</a></dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
               </a></dt>
@@ -133,6 +107,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CdisPost::canReport()">canReport</a></dd>
 <dd><a class="method public" href="#%5CdisPost::clearAllCache()">clearAllCache</a></dd>
 <dd><a class="method public" href="#%5CdisPost::clearCache()">clearCache</a></dd>
+<dd><a class="method public" href="#%5CdisPost::get()">get</a></dd>
 <dd><a class="method public" href="#%5CdisPost::getBoardAncestors()">getBoardAncestors</a></dd>
 <dd><a class="method public" href="#%5CdisPost::getContent()">getContent</a></dd>
 <dd><a class="method public" href="#%5CdisPost::getDescendants()">getDescendants</a></dd>
@@ -149,6 +124,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CdisPost::renderAuthorMeta()">renderAuthorMeta</a></dd>
 <dd><a class="method public" href="#%5CdisPost::save()">save</a></dd>
 <dd><a class="method public" href="#%5CdisPost::stripBBCode()">stripBBCode</a></dd>
+<dd><a class="method public" href="#%5CdisPost::toArray()">toArray</a></dd>
 </dl>
 <dl></dl>
 <h3>Description</h3>
@@ -158,9 +134,659 @@ with a parent of 0.</p>
 </div>
 <h3>Properties</h3>
 <div>
+<a id="\disPost::$Ancestors"></a><h4 class="property public">$Ancestors<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Ancestors</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$Attachments"></a><h4 class="property public">$Attachments<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Attachments</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$Author"></a><h4 class="property public">$Author<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_disuser.class.html#%5CdisUser">\disUser</a> <span class="highlight">$Author</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disuser.class.html#%5CdisUser">\disUser</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_disuser.class.html#%5CdisUser"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$Board"></a><h4 class="property public">$Board<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_disboard.class.html#%5CdisBoard">\disBoard</a> <span class="highlight">$Board</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disboard.class.html#%5CdisBoard">\disBoard</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_disboard.class.html#%5CdisBoard"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$Children"></a><h4 class="property public">$Children<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Children</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$CreatedBy"></a><h4 class="property public">$CreatedBy<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_disuser.class.html#%5CdisUser">\disUser</a> <span class="highlight">$CreatedBy</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disuser.class.html#%5CdisUser">\disUser</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_disuser.class.html#%5CdisUser"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$Descendants"></a><h4 class="property public">$Descendants<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Descendants</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$EditedBy"></a><h4 class="property public">$EditedBy<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_disuser.class.html#%5CdisUser">\disUser</a> <span class="highlight">$EditedBy</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disuser.class.html#%5CdisUser">\disUser</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_disuser.class.html#%5CdisUser"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$Parent"></a><h4 class="property public">$Parent<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_dispost.class.html#%5CdisPost">\disPost</a> <span class="highlight">$Parent</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_dispost.class.html#%5CdisPost">\disPost</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_dispost.class.html#%5CdisPost"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$Thread"></a><h4 class="property public">$Thread<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_disthread.class.html#%5CdisThread">\disThread</a> <span class="highlight">$Thread</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disthread.class.html#%5CdisThread">\disThread</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_disthread.class.html#%5CdisThread"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$allow_replies"></a><h4 class="property public">$allow_replies<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>boolean <span class="highlight">$allow_replies</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$answer"></a><h4 class="property public">$answer<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>boolean <span class="highlight">$answer</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$author"></a><h4 class="property public">$author<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$author</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$board"></a><h4 class="property public">$board<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$board</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$createdon"></a><h4 class="property public">$createdon<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>\datetime <span class="highlight">$createdon</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\datetime<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$depth"></a><h4 class="property public">$depth<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$depth</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$editedby"></a><h4 class="property public">$editedby<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$editedby</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$editedon"></a><h4 class="property public">$editedon<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>\datetime <span class="highlight">$editedon</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\datetime<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$icon"></a><h4 class="property public">$icon<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$icon</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$integrated_id"></a><h4 class="property public">$integrated_id<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$integrated_id</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$ip"></a><h4 class="property public">$ip<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$ip</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$message"></a><h4 class="property public">$message<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$message</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$parent"></a><h4 class="property public">$parent<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$parent</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disPost::$parser"></a><h4 class="property public">$parser<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code><a href="_parser_disparser.class.html#%5CdisParser">\disParser</a> <span class="highlight">$parser</span> = ''</code><p class="short-description">The parsing engine for this post</p>
 <div class="long-description">
 </div>
@@ -184,6 +810,90 @@ with a parent of 0.</p>
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disPost::$rank"></a><h4 class="property public">$rank<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$rank</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$thread"></a><h4 class="property public">$thread<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$thread</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::$title"></a><h4 class="property public">$title<div class="to-top"><a href="#%5CdisPost">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$title</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 </div>
 <h3>Methods</h3>
 <div>
@@ -202,7 +912,8 @@ with a parent of 0.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$str</dt>
-<dd>string<br><em>The string to parse</em>
+<dd>string<br><em><p>The string to parse</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -409,7 +1120,8 @@ with a parent of 0.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$xpdo</dt>
-<dd>\xPDO<br><em>A reference to the xPDO|modX instance</em>
+<dd>\xPDO<br><em><p>A reference to the xPDO|modX instance</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -448,6 +1160,61 @@ with a parent of 0.</p>
         :
         void</code><p class="short-description">Clears the cache on post save/remove</p>
 <div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::get()"></a><h4 class="method public">get<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">get</span><span class="nb-faded-text">(
+          string $k, string|null $format
+              =
+              null, string|null $formatTemplate
+              =
+              null
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Always ensure that the title strips any HTML/MODX tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$k</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$format</dt>
+<dd>stringnull<br><em>
+</em>
+</dd>
+<dt>$formatTemplate</dt>
+<dd>stringnull<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
 </div>
 <div class="api-section">
 <h5 class="info">
@@ -546,7 +1313,8 @@ with a parent of 0.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$depth</dt>
-<dd>int<br><em>If set, will limit to specified depth</em>
+<dd>int<br><em><p>If set, will limit to specified depth</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -592,7 +1360,8 @@ with a parent of 0.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$last</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -674,10 +1443,12 @@ thread root, returns itself.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$view</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 <dt>$last</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -853,7 +1624,8 @@ thread root, returns itself.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$boardId</dt>
-<dd>int\disBoard<br><em>The ID of the board or disBoard obj to move to</em>
+<dd>int\disBoard<br><em><p>The ID of the board or disBoard obj to move to</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -902,13 +1674,16 @@ the forum activity and user profile counts.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$ancestors</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 <dt>$doBoardMoveChecks</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 <dt>$moveToSpam</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -983,7 +1758,8 @@ the forum activity and user profile counts.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$postArray</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1019,7 +1795,8 @@ the forum activity and user profile counts.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$cacheFlag</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1063,7 +1840,8 @@ the forum activity and user profile counts.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$str</dt>
-<dd>string<br><em>The string to strip</em>
+<dd>string<br><em><p>The string to strip</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1073,6 +1851,61 @@ the forum activity and user profile counts.</p>
 <dl class="return-info">
 <dt>mixed</dt>
 <dd><em>The cleansed content</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPost::toArray()"></a><h4 class="method public">toArray<div class="to-top"><a href="#disPost">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">toArray</span><span class="nb-faded-text">(
+          string $keyPrefix, bool $rawValues
+              =
+              false, bool $excludeLazy
+              =
+              false
+          )
+        </span>
+        :
+        array</code><p class="short-description">Always ensure that the title strips any HTML/MODX tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$keyPrefix</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$rawValues</dt>
+<dd>bool<br><em>
+</em>
+</dd>
+<dt>$excludeLazy</dt>
+<dd>bool<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
 </dl>
 <div class="clear"></div>
 </div>

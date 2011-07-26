@@ -66,22 +66,17 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>\xPDOSimpleObject</dd>
 <dt>package</dt>
 <dd>discuss</dd>
-<dt>property</dt>
-<dd>int $usergroup The ID of the modUserGroup tied to this group.</dd>
-<dt>property</dt>
-<dd>boolean $post_based Whether or not a certain number of posts is required to be a part of this group.</dd>
-<dt>property</dt>
-<dd>int $min_posts If post-based, the minimum number of posts required to be in this group.</dd>
-<dt>property</dt>
-<dd>string $color Optional. If set, users with this group as their primary will show this color when in lists.</dd>
-<dt>property</dt>
-<dd>string $image Optional. An image badge for the user group/</dd>
-<dt>property</dt>
-<dd>int $integrated_id If imported, the PK of the group from the imported system</dd>
-<dt>property</dt>
-<dd>modUserGroup $UserGroup The related modUserGroup object</dd>
-<dt>property</dt>
-<dd>array $Boards A collection of related Boards this UserGroup can access</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
+<dd><a class="property public" href="#%5CdisUserGroupProfile::%24Boards">$Boards</a></dd>
+<dd><a class="property public" href="#%5CdisUserGroupProfile::%24UserGroup">$UserGroup</a></dd>
+<dd><a class="property public" href="#%5CdisUserGroupProfile::%24color">$color</a></dd>
+<dd><a class="property public" href="#%5CdisUserGroupProfile::%24image">$image</a></dd>
+<dd><a class="property public" href="#%5CdisUserGroupProfile::%24integrated_id">$integrated_id</a></dd>
+<dd><a class="property public" href="#%5CdisUserGroupProfile::%24min_posts">$min_posts</a></dd>
+<dd><a class="property public" href="#%5CdisUserGroupProfile::%24post_based">$post_based</a></dd>
+<dd><a class="property public" href="#%5CdisUserGroupProfile::%24usergroup">$usergroup</a></dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
               </a></dt>
@@ -92,11 +87,238 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </dl>
 <dl>
 <dt>see</dt>
-<dd>modUserGroup</dd>
+<dd>\modUserGroup</dd>
 </dl>
 <h3>Description</h3>
 <p class="short-description">Related object to the modUserGroup class, used for storing custom data specific to Discuss.</p>
 <div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\disUserGroupProfile::$Boards"></a><h4 class="property public">$Boards<div class="to-top"><a href="#%5CdisUserGroupProfile">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Boards</span> = ''</code><p class="short-description">A collection of related Boards this UserGroup can access</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em>A collection of related Boards this UserGroup can access</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>A collection of related Boards this UserGroup can access</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile::$UserGroup"></a><h4 class="property public">$UserGroup<div class="to-top"><a href="#%5CdisUserGroupProfile">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>\modUserGroup <span class="highlight">$UserGroup</span> = ''</code><p class="short-description">The related modUserGroup object</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\modUserGroup<br><em>The related modUserGroup object</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>The related modUserGroup object</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile::$color"></a><h4 class="property public">$color<div class="to-top"><a href="#%5CdisUserGroupProfile">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$color</span> = ''</code><p class="short-description">Optional. If set, users with this group as their primary will show this color when in lists.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em>Optional. If set, users with this group as their primary will show this color when in lists.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>Optional. If set, users with this group as their primary will show this color when in lists.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile::$image"></a><h4 class="property public">$image<div class="to-top"><a href="#%5CdisUserGroupProfile">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$image</span> = ''</code><p class="short-description">Optional. An image badge for the user group/</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em>Optional. An image badge for the user group/</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>Optional. An image badge for the user group/</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile::$integrated_id"></a><h4 class="property public">$integrated_id<div class="to-top"><a href="#%5CdisUserGroupProfile">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$integrated_id</span> = ''</code><p class="short-description">If imported, the PK of the group from the imported system</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>If imported, the PK of the group from the imported system</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>If imported, the PK of the group from the imported system</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile::$min_posts"></a><h4 class="property public">$min_posts<div class="to-top"><a href="#%5CdisUserGroupProfile">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$min_posts</span> = ''</code><p class="short-description">If post-based, the minimum number of posts required to be in this group.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>If post-based, the minimum number of posts required to be in this group.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>If post-based, the minimum number of posts required to be in this group.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile::$post_based"></a><h4 class="property public">$post_based<div class="to-top"><a href="#%5CdisUserGroupProfile">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>boolean <span class="highlight">$post_based</span> = ''</code><p class="short-description">Whether or not a certain number of posts is required to be a part of this group.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em>Whether or not a certain number of posts is required to be a part of this group.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>Whether or not a certain number of posts is required to be a part of this group.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile::$usergroup"></a><h4 class="property public">$usergroup<div class="to-top"><a href="#%5CdisUserGroupProfile">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$usergroup</span> = ''</code><p class="short-description">The ID of the modUserGroup tied to this group.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>The ID of the modUserGroup tied to this group.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>The ID of the modUserGroup tied to this group.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 </div>
 <h3>Methods</h3>
 <div>
@@ -216,10 +438,12 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$file</dt>
-<dd>array<br><em>A php FILE array for the badge</em>
+<dd>array<br><em><p>A php FILE array for the badge</p>
+</em>
 </dd>
 <dt>$removeOld</dt>
-<dd>bool<br><em>If true, will remove the old badge if one was set</em>
+<dd>bool<br><em><p>If true, will remove the old badge if one was set</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>

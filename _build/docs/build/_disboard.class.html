@@ -66,34 +66,6 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>\xPDOSimpleObject</dd>
 <dt>package</dt>
 <dd>discuss</dd>
-<dt>property</dt>
-<dd>int category The ID of the Category this board is in</dd>
-<dt>property</dt>
-<dd>int parent The ID of the parent Board. If none, will be 0.</dd>
-<dt>property</dt>
-<dd>string name The name of the board.</dd>
-<dt>property</dt>
-<dd>int last_post The ID of the most recent Post on this Board.</dd>
-<dt>property</dt>
-<dd>int num_topics The number of Threads on this Board.</dd>
-<dt>property</dt>
-<dd>int num_replies The number of replies to Threads on this Board.</dd>
-<dt>property</dt>
-<dd>int total_posts The total number of Posts (in all threads) on this Board.</dd>
-<dt>property</dt>
-<dd>boolean ignoreable Whether or not this Board can be ignored.</dd>
-<dt>property</dt>
-<dd>int rank The rank, or order, of this board in its category.</dd>
-<dt>property</dt>
-<dd>string map An internally-used map that stores the order of the board in the board tree.</dd>
-<dt>property</dt>
-<dd>int minimum_post_level The minimum post authority of the user that is required to post on this board (either Admin = 0,Moderator = 1,anything else = 9998)</dd>
-<dt>property</dt>
-<dd>int status The status of this board. See the STATUS_* constants.</dd>
-<dt>property</dt>
-<dd>boolean locked Whether or not this board is locked from more posts.</dd>
-<dt>property</dt>
-<dd>int integrated_id If this board was imported, the PK of the old system&#039;s board.</dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Constants
               </a></dt>
@@ -103,6 +75,20 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Properties
               </a></dt>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
+<dd><a class="property public" href="#%5CdisBoard::"></a></dd>
 <dd><a class="property protected" href="#%5CdisBoard::%24parentChanged">$parentChanged</a></dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
@@ -202,9 +188,387 @@ proper ordering while getting O(1) query performance.</p>
 </div>
 <h3>Properties</h3>
 <div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">category The ID of the Category this board is in</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>category The ID of the Category this board is in</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>category The ID of the Category this board is in</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">parent The ID of the parent Board. If none, will be 0.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>parent The ID of the parent Board. If none, will be 0.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>parent The ID of the parent Board. If none, will be 0.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>string <span class="highlight"></span> = ''</code><p class="short-description">name The name of the board.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em>name The name of the board.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>name The name of the board.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">last_post The ID of the most recent Post on this Board.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>last_post The ID of the most recent Post on this Board.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>last_post The ID of the most recent Post on this Board.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">num_topics The number of Threads on this Board.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>num_topics The number of Threads on this Board.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>num_topics The number of Threads on this Board.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">num_replies The number of replies to Threads on this Board.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>num_replies The number of replies to Threads on this Board.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>num_replies The number of replies to Threads on this Board.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">total_posts The total number of Posts (in all threads) on this Board.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>total_posts The total number of Posts (in all threads) on this Board.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>total_posts The total number of Posts (in all threads) on this Board.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>boolean <span class="highlight"></span> = ''</code><p class="short-description">ignoreable Whether or not this Board can be ignored.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em>ignoreable Whether or not this Board can be ignored.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>ignoreable Whether or not this Board can be ignored.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">rank The rank, or order, of this board in its category.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>rank The rank, or order, of this board in its category.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>rank The rank, or order, of this board in its category.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>string <span class="highlight"></span> = ''</code><p class="short-description">map An internally-used map that stores the order of the board in the board tree.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em>map An internally-used map that stores the order of the board in the board tree.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>map An internally-used map that stores the order of the board in the board tree.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">minimum_post_level The minimum post authority of the user that is required to post on this board (either Admin = 0,Moderator = 1,anything else = 9998)</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>minimum_post_level The minimum post authority of the user that is required to post on this board (either Admin = 0,Moderator = 1,anything else = 9998)</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>minimum_post_level The minimum post authority of the user that is required to post on this board (either Admin = 0,Moderator = 1,anything else = 9998)</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">status The status of this board. See the STATUS_* constants.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>status The status of this board. See the STATUS_* constants.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>status The status of this board. See the STATUS_* constants.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>boolean <span class="highlight"></span> = ''</code><p class="short-description">locked Whether or not this board is locked from more posts.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em>locked Whether or not this board is locked from more posts.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>locked Whether or not this board is locked from more posts.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBoard::"></a><h4 class="property public"><div class="to-top"><a href="#%5CdisBoard">jump to class</a></div></h4>
+<div class="property magic">
+<code>int <span class="highlight"></span> = ''</code><p class="short-description">integrated_id If this board was imported, the PK of the old system's board.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>integrated_id If this board was imported, the PK of the old system&amp;#039;s board.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>integrated_id If this board was imported, the PK of the old system&#039;s board.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disBoard::$parentChanged"></a><h4 class="property protected">$parentChanged<div class="to-top"><a href="#%5CdisBoard">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code>boolean <span class="highlight">$parentChanged</span> = 'false'</code><p class="short-description"></p>
 <div class="long-description">
 </div>
@@ -251,10 +615,12 @@ proper ordering while getting O(1) query performance.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$additional</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 <dt>$linkToSelf</dt>
-<dd>bool<br><em></em>
+<dd>bool<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -488,13 +854,16 @@ proper ordering while getting O(1) query performance.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\xPDO<br><em></em>
+<dd>\xPDO<br><em>
+</em>
 </dd>
 <dt>$id</dt>
-<dd>int<br><em></em>
+<dd>int<br><em>
+</em>
 </dd>
 <dt>$integrated</dt>
-<dd>bool<br><em></em>
+<dd>bool<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -540,10 +909,12 @@ proper ordering while getting O(1) query performance.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\xPDO<br><em></em>
+<dd>\xPDO<br><em>
+</em>
 </dd>
 <dt>$ignoreBoards</dt>
-<dd>bool<br><em></em>
+<dd>bool<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -622,7 +993,8 @@ proper ordering while getting O(1) query performance.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$key</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -701,13 +1073,16 @@ proper ordering while getting O(1) query performance.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\xPDO<br><em></em>
+<dd>\xPDO<br><em>
+</em>
 </dd>
 <dt>$board</dt>
-<dd>int<br><em></em>
+<dd>int<br><em>
+</em>
 </dd>
 <dt>$category</dt>
-<dd>bool<br><em></em>
+<dd>bool<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -823,10 +1198,12 @@ proper ordering while getting O(1) query performance.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$id</dt>
-<dd>bool<br><em></em>
+<dd>bool<br><em>
+</em>
 </dd>
 <dt>$ids</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1037,7 +1414,8 @@ proper ordering while getting O(1) query performance.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$userId</dt>
-<dd><em></em></dd>
+<dd><em>
+</em></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -1080,7 +1458,8 @@ proper ordering while getting O(1) query performance.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$ancestors</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1125,7 +1504,8 @@ automation for the closure tables that persist the board map.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$cacheFlag</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1170,13 +1550,16 @@ for the closure tables that persist the board map.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$k</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 <dt>$v</dt>
-<dd>mixed<br><em></em>
+<dd>mixed<br><em>
+</em>
 </dd>
 <dt>$vType</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1222,13 +1605,16 @@ for the closure tables that persist the board map.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$keyPrefix</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 <dt>$rawValues</dt>
-<dd>bool<br><em></em>
+<dd>bool<br><em>
+</em>
 </dd>
 <dt>$excludeLazy</dt>
-<dd>bool<br><em></em>
+<dd>bool<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>

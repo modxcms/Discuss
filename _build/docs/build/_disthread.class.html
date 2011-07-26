@@ -66,56 +66,6 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>\xPDOSimpleObject</dd>
 <dt>package</dt>
 <dd>discuss</dd>
-<dt>property</dt>
-<dd>string $class_key</dd>
-<dt>property</dt>
-<dd>int $board</dd>
-<dt>property</dt>
-<dd>string $title</dd>
-<dt>property</dt>
-<dd>int $post_first</dd>
-<dt>property</dt>
-<dd>int $post_last</dd>
-<dt>property</dt>
-<dd>int $author_first</dd>
-<dt>property</dt>
-<dd>int $author_last</dd>
-<dt>property</dt>
-<dd>int $replies</dd>
-<dt>property</dt>
-<dd>int $views</dd>
-<dt>property</dt>
-<dd>boolean $locked</dd>
-<dt>property</dt>
-<dd>boolean $answered</dd>
-<dt>property</dt>
-<dd>boolean $sticky</dd>
-<dt>property</dt>
-<dd>boolean $private</dd>
-<dt>property</dt>
-<dd>string $users</dd>
-<dt>property</dt>
-<dd>string $last_view_ip</dd>
-<dt>property</dt>
-<dd>int $integrated_id</dd>
-<dt>property</dt>
-<dd>disUser $FirstAuthor</dd>
-<dt>property</dt>
-<dd>disUser $LastAuthor</dd>
-<dt>property</dt>
-<dd>disPost $FirstPost</dd>
-<dt>property</dt>
-<dd>disPost $LastPost</dd>
-<dt>property</dt>
-<dd>disBoard $Board</dd>
-<dt>property</dt>
-<dd>array $Reads</dd>
-<dt>property</dt>
-<dd>array $Posts</dd>
-<dt>property</dt>
-<dd>array $Notifications</dd>
-<dt>property</dt>
-<dd>array $Users</dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Constants
               </a></dt>
@@ -124,7 +74,32 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Properties
               </a></dt>
+<dd><a class="property public" href="#%5CdisThread::%24Board">$Board</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24FirstAuthor">$FirstAuthor</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24FirstPost">$FirstPost</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24LastAuthor">$LastAuthor</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24LastPost">$LastPost</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24Notifications">$Notifications</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24Posts">$Posts</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24Reads">$Reads</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24Users">$Users</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24answered">$answered</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24author_first">$author_first</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24author_last">$author_last</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24board">$board</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24class_key">$class_key</a></dd>
 <dd><a class="property public" href="#%5CdisThread::%24hasSubscription">$hasSubscription</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24integrated_id">$integrated_id</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24last_view_ip">$last_view_ip</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24locked">$locked</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24post_first">$post_first</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24post_last">$post_last</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24private">$private</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24replies">$replies</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24sticky">$sticky</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24title">$title</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24users">$users</a></dd>
+<dd><a class="property public" href="#%5CdisThread::%24views">$views</a></dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
               </a></dt>
@@ -153,6 +128,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CdisThread::fetchNewReplies()">fetchNewReplies</a></dd>
 <dd><a class="method public" href="#%5CdisThread::fetchPosts()">fetchPosts</a></dd>
 <dd><a class="method public" href="#%5CdisThread::fetchUnread()">fetchUnread</a></dd>
+<dd><a class="method public" href="#%5CdisThread::get()">get</a></dd>
 <dd><a class="method public" href="#%5CdisThread::getModerators()">getModerators</a></dd>
 <dd><a class="method public" href="#%5CdisThread::getUrl()">getUrl</a></dd>
 <dd><a class="method public" href="#%5CdisThread::getUrlTitle()">getUrlTitle</a></dd>
@@ -170,6 +146,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CdisThread::removeSubscription()">removeSubscription</a></dd>
 <dd><a class="method public" href="#%5CdisThread::save()">save</a></dd>
 <dd><a class="method public" href="#%5CdisThread::stick()">stick</a></dd>
+<dd><a class="method public" href="#%5CdisThread::toArray()">toArray</a></dd>
 <dd><a class="method public" href="#%5CdisThread::unlock()">unlock</a></dd>
 <dd><a class="method public" href="#%5CdisThread::unread()">unread</a></dd>
 <dd><a class="method public" href="#%5CdisThread::unreadForAll()">unreadForAll</a></dd>
@@ -178,7 +155,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </dl>
 <dl>
 <dt>see</dt>
-<dd><a href="_dispost.class.html#%5CdisPost">disPost</a></dd>
+<dd><a href="_dispost.class.html#%5CdisPost">\disPost</a></dd>
 </dl>
 <h3>Description</h3>
 <p class="short-description">The base class for Threads, which are compilations of Posts in a Board.</p>
@@ -227,9 +204,406 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <h3>Properties</h3>
 <div>
+<a id="\disThread::$Board"></a><h4 class="property public">$Board<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_disboard.class.html#%5CdisBoard">\disBoard</a> <span class="highlight">$Board</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disboard.class.html#%5CdisBoard">\disBoard</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_disboard.class.html#%5CdisBoard"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$FirstAuthor"></a><h4 class="property public">$FirstAuthor<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_disuser.class.html#%5CdisUser">\disUser</a> <span class="highlight">$FirstAuthor</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disuser.class.html#%5CdisUser">\disUser</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_disuser.class.html#%5CdisUser"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$FirstPost"></a><h4 class="property public">$FirstPost<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_dispost.class.html#%5CdisPost">\disPost</a> <span class="highlight">$FirstPost</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_dispost.class.html#%5CdisPost">\disPost</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_dispost.class.html#%5CdisPost"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$LastAuthor"></a><h4 class="property public">$LastAuthor<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_disuser.class.html#%5CdisUser">\disUser</a> <span class="highlight">$LastAuthor</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_disuser.class.html#%5CdisUser">\disUser</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_disuser.class.html#%5CdisUser"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$LastPost"></a><h4 class="property public">$LastPost<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code><a href="_dispost.class.html#%5CdisPost">\disPost</a> <span class="highlight">$LastPost</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_dispost.class.html#%5CdisPost">\disPost</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd><a href="_dispost.class.html#%5CdisPost"></a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$Notifications"></a><h4 class="property public">$Notifications<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Notifications</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$Posts"></a><h4 class="property public">$Posts<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Posts</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$Reads"></a><h4 class="property public">$Reads<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Reads</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$Users"></a><h4 class="property public">$Users<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Users</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$answered"></a><h4 class="property public">$answered<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>boolean <span class="highlight">$answered</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$author_first"></a><h4 class="property public">$author_first<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$author_first</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$author_last"></a><h4 class="property public">$author_last<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$author_last</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$board"></a><h4 class="property public">$board<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$board</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$class_key"></a><h4 class="property public">$class_key<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$class_key</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disThread::$hasSubscription"></a><h4 class="property public">$hasSubscription<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code>boolean <span class="highlight">$hasSubscription</span> = ''</code><p class="short-description">Whether or not the active user has a subscription to this thread.</p>
 <div class="long-description">
 </div>
@@ -249,7 +623,315 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt>static</dt>
 <dd>false</dd>
 <dt>see</dt>
-<dd><a href="_disthread.class.html#%5CdisThread::hasSubscription">disThread::hasSubscription</a></dd>
+<dd><a href="_disthread.class.html#%5CdisThread::hasSubscription">\disThread::hasSubscription</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$integrated_id"></a><h4 class="property public">$integrated_id<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$integrated_id</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$last_view_ip"></a><h4 class="property public">$last_view_ip<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$last_view_ip</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$locked"></a><h4 class="property public">$locked<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>boolean <span class="highlight">$locked</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$post_first"></a><h4 class="property public">$post_first<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$post_first</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$post_last"></a><h4 class="property public">$post_last<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$post_last</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$private"></a><h4 class="property public">$private<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>boolean <span class="highlight">$private</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$replies"></a><h4 class="property public">$replies<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$replies</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$sticky"></a><h4 class="property public">$sticky<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>boolean <span class="highlight">$sticky</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$title"></a><h4 class="property public">$title<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$title</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$users"></a><h4 class="property public">$users<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$users</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::$views"></a><h4 class="property public">$views<div class="to-top"><a href="#%5CdisThread">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$views</span> = ''</code><p class="short-description"></p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -272,7 +954,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$userId</dt>
-<dd>int<br><em>ID of disUser</em>
+<dd>int<br><em><p>ID of disUser</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -318,10 +1001,12 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$postArray</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 <dt>$defaultAvailableActions</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -365,7 +1050,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$defaultTrail</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -409,7 +1095,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$defaultClass</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -453,7 +1140,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$icons</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -561,7 +1249,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$postId</dt>
-<dd>int<br><em></em>
+<dd>int<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -669,7 +1358,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\xPDO<br><em>A reference to the modX object</em>
+<dd>\xPDO<br><em><p>A reference to the modX object</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -777,7 +1467,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$postId</dt>
-<dd>int<br><em></em>
+<dd>int<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1046,16 +1737,20 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\xPDO<br><em>A reference to the modX instance</em>
+<dd>\xPDO<br><em><p>A reference to the modX instance</p>
+</em>
 </dd>
 <dt>$id</dt>
-<dd>\$id<br><em>The ID of the thread</em>
+<dd>\$id<br><em><p>The ID of the thread</p>
+</em>
 </dd>
 <dt>$type</dt>
-<dd>string<br><em>The type of thread: post/message</em>
+<dd>string<br><em><p>The type of thread: post/message</p>
+</em>
 </dd>
 <dt>$integrated</dt>
-<dd>boolean<br><em>Grab by the integrated_id instead of the id</em>
+<dd>boolean<br><em><p>Grab by the integrated_id instead of the id</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1109,22 +1804,28 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\xPDO<br><em>A reference to the modX instance</em>
+<dd>\xPDO<br><em><p>A reference to the modX instance</p>
+</em>
 </dd>
 <dt>$sortBy</dt>
-<dd>string<br><em>The column to sort by</em>
+<dd>string<br><em><p>The column to sort by</p>
+</em>
 </dd>
 <dt>$sortDir</dt>
-<dd>string<br><em>The direction to sort</em>
+<dd>string<br><em><p>The direction to sort</p>
+</em>
 </dd>
 <dt>$limit</dt>
-<dd>int<br><em>The # of threads to limit</em>
+<dd>int<br><em><p>The # of threads to limit</p>
+</em>
 </dd>
 <dt>$start</dt>
-<dd>int<br><em>The index to start by</em>
+<dd>int<br><em><p>The index to start by</p>
+</em>
 </dd>
 <dt>$sinceLastLogin</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1172,10 +1873,12 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$post</dt>
-<dd>mixed<br><em>A reference to a disPost or ID of disPost to start the posts from</em>
+<dd>mixed<br><em><p>A reference to a disPost or ID of disPost to start the posts from</p>
+</em>
 </dd>
 <dt>$options</dt>
-<dd>array<br><em>An array of options for sorting, limiting and display</em>
+<dd>array<br><em><p>An array of options for sorting, limiting and display</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1227,22 +1930,28 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\xPDO<br><em>A reference to the modX instance</em>
+<dd>\xPDO<br><em><p>A reference to the modX instance</p>
+</em>
 </dd>
 <dt>$sortBy</dt>
-<dd>string<br><em>The column to sort by</em>
+<dd>string<br><em><p>The column to sort by</p>
+</em>
 </dd>
 <dt>$sortDir</dt>
-<dd>string<br><em>The direction to sort</em>
+<dd>string<br><em><p>The direction to sort</p>
+</em>
 </dd>
 <dt>$limit</dt>
-<dd>int<br><em>The # of threads to limit</em>
+<dd>int<br><em><p>The # of threads to limit</p>
+</em>
 </dd>
 <dt>$start</dt>
-<dd>int<br><em>The index to start by</em>
+<dd>int<br><em><p>The index to start by</p>
+</em>
 </dd>
 <dt>$sinceLastLogin</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1267,6 +1976,61 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>true</dd>
 <dt>static</dt>
 <dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::get()"></a><h4 class="method public">get<div class="to-top"><a href="#disThread">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">get</span><span class="nb-faded-text">(
+          string $k, string|null $format
+              =
+              null, string|null $formatTemplate
+              =
+              null
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Always ensure that the title strips any HTML/MODX tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$k</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$format</dt>
+<dd>stringnull<br><em>
+</em>
+</dd>
+<dt>$formatTemplate</dt>
+<dd>stringnull<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -1325,13 +2089,16 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$lastPost</dt>
-<dd>boolean<br><em>If true, will get URL for last Post of thread</em>
+<dd>boolean<br><em><p>If true, will get URL for last Post of thread</p>
+</em>
 </dd>
 <dt>$params</dt>
-<dd>array<br><em>Any extra params to append to the thread</em>
+<dd>array<br><em><p>Any extra params to append to the thread</p>
+</em>
 </dd>
 <dt>$regenerate</dt>
-<dd>boolean<br><em>If true, will regenerate the url even if it has already been set</em>
+<dd>boolean<br><em><p>If true, will regenerate the url even if it has already been set</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1408,7 +2175,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$placePrefix</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1452,7 +2220,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$scriptProperties</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1496,7 +2265,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$userId</dt>
-<dd>int<br><em>ID of disUser</em>
+<dd>int<br><em><p>ID of disUser</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1637,7 +2407,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$boardId</dt>
-<dd>int<br><em></em>
+<dd>int<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1679,7 +2450,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$postArray</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1721,7 +2493,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$user</dt>
-<dd>int<br><em></em>
+<dd>int<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1767,10 +2540,12 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\xPDO<br><em></em>
+<dd>\xPDO<br><em>
+</em>
 </dd>
 <dt>$type</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1820,13 +2595,16 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$ancestors</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 <dt>$doBoardMoveChecks</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 <dt>$moveToSpam</dt>
-<dd>boolean<br><em></em>
+<dd>boolean<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1868,7 +2646,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$userId</dt>
-<dd>int<br><em>ID of disUser</em>
+<dd>int<br><em><p>ID of disUser</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1914,10 +2693,12 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$cacheFlag</dt>
-<dd>null<br><em></em>
+<dd>null<br><em>
+</em>
 </dd>
 <dt>$clearCache</dt>
-<dd>bool<br><em></em>
+<dd>bool<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1959,6 +2740,61 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="output">Output</h5>
 <dl class="return-info">
 <dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThread::toArray()"></a><h4 class="method public">toArray<div class="to-top"><a href="#disThread">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">toArray</span><span class="nb-faded-text">(
+          string $keyPrefix, bool $rawValues
+              =
+              false, bool $excludeLazy
+              =
+              false
+          )
+        </span>
+        :
+        array</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$keyPrefix</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$rawValues</dt>
+<dd>bool<br><em>
+</em>
+</dd>
+<dt>$excludeLazy</dt>
+<dd>bool<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
 <dd><em></em></dd>
 </dl>
 <div class="clear"></div>
@@ -2025,7 +2861,8 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$user</dt>
-<dd>int<br><em></em>
+<dd>int<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>

@@ -71,6 +71,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Properties
               </a></dt>
+<dd><a class="property public" href="#%5CDiscuss::%24controller">$controller</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24debugTimer">$debugTimer</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24hooks">$hooks</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24isLoggedIn">$isLoggedIn</a></dd>
@@ -110,6 +111,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CDiscuss::sendUnauthorizedPage()">sendUnauthorizedPage</a></dd>
 <dd><a class="method public" href="#%5CDiscuss::setPageTitle()">setPageTitle</a></dd>
 <dd><a class="method public" href="#%5CDiscuss::setSessionPlace()">setSessionPlace</a></dd>
+<dd><a class="method public" href="#%5CDiscuss::stripAllTags()">stripAllTags</a></dd>
 </dl>
 <dl></dl>
 <h3>Description</h3>
@@ -140,9 +142,35 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <h3>Properties</h3>
 <div>
+<a id="\Discuss::$controller"></a><h4 class="property public">$controller<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property ">
+<code><a href="_discusscontroller.class.html#%5CDiscussController">\DiscussController</a> <span class="highlight">$controller</span> = ''</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_discusscontroller.class.html#%5CDiscussController">\DiscussController</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\Discuss::$debugTimer"></a><h4 class="property public">$debugTimer<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code>\int/boolean <span class="highlight">$debugTimer</span> = 'false'</code><p class="short-description">The starting value of the execution time.</p>
 <div class="long-description">
 </div>
@@ -167,7 +195,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <a id="\Discuss::$hooks"></a><h4 class="property public">$hooks<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code><a href="_dishooks.class.html#%5CdisHooks">\disHooks</a> <span class="highlight">$hooks</span> = ''</code><p class="short-description">The hooks class for loading application-specific hooks</p>
 <div class="long-description">
 </div>
@@ -193,7 +221,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <a id="\Discuss::$isLoggedIn"></a><h4 class="property public">$isLoggedIn<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code>bool <span class="highlight">$isLoggedIn</span> = 'false'</code><p class="short-description">Whether or not the active user is logged in</p>
 <div class="long-description">
 </div>
@@ -220,7 +248,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <a id="\Discuss::$request"></a><h4 class="property public">$request<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code>\disRequest <span class="highlight">$request</span> = ''</code><p class="short-description"></p>
 <div class="long-description">
 </div>
@@ -245,7 +273,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <a id="\Discuss::$search"></a><h4 class="property public">$search<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code><a href="_search_dissearch.class.html#%5CdisSearch">\disSearch</a> <span class="highlight">$search</span> = ''</code><p class="short-description">The Search class</p>
 <div class="long-description">
 </div>
@@ -271,7 +299,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <a id="\Discuss::$treeParser"></a><h4 class="property public">$treeParser<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code><a href="_distreeparser.class.html#%5CdisTreeParser">\disTreeParser</a> <span class="highlight">$treeParser</span> = ''</code><p class="short-description"></p>
 <div class="long-description">
 </div>
@@ -297,7 +325,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <a id="\Discuss::$url"></a><h4 class="property public">$url<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code>string <span class="highlight">$url</span> = ''</code><p class="short-description">The URL of the current Discuss home page</p>
 <div class="long-description">
 </div>
@@ -322,7 +350,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <a id="\Discuss::$user"></a><h4 class="property public">$user<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
-<div class="property">
+<div class="property ">
 <code><a href="_disuser.class.html#%5CdisUser">\disUser</a> <span class="highlight">$user</span> = ''</code><p class="short-description">The current active disUser in Discuss</p>
 <div class="long-description">
 </div>
@@ -366,10 +394,12 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$modx</dt>
-<dd>\modX<br><em>A reference to the modX instance</em>
+<dd>\modX<br><em><p>A reference to the modX instance</p>
+</em>
 </dd>
 <dt>$config</dt>
-<dd>array<br><em>An array of configuration properties</em>
+<dd>array<br><em><p>An array of configuration properties</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -405,10 +435,12 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$name</dt>
-<dd>string<br><em>The name of the Chunk. Will parse to name.chunk.tpl</em>
+<dd>string<br><em><p>The name of the Chunk. Will parse to name.chunk.tpl</p>
+</em>
 </dd>
 <dt>$postFix</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -507,10 +539,12 @@ profile. Also loads topbar information and links.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$data1</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 <dt>$data2</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -552,10 +586,12 @@ profile. Also loads topbar information and links.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$btns</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 <dt>$cls</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -599,7 +635,8 @@ profile. Also loads topbar information and links.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$message</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -641,7 +678,8 @@ profile. Also loads topbar information and links.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$datetime</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -686,10 +724,12 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$name</dt>
-<dd>string<br><em>The name of the Chunk</em>
+<dd>string<br><em><p>The name of the Chunk</p>
+</em>
 </dd>
 <dt>$properties</dt>
-<dd>array<br><em>The properties for the Chunk</em>
+<dd>array<br><em><p>The properties for the Chunk</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -733,7 +773,8 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$rs</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -775,7 +816,8 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$rs</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -852,7 +894,8 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$ctx</dt>
-<dd>string<br><em>The context to load. Defaults to web.</em>
+<dd>string<br><em><p>The context to load. Defaults to web.</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -894,13 +937,16 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$name</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 <dt>$placeholders</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 <dt>$otherProperties</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -944,10 +990,12 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$class</dt>
-<dd>string<br><em>The Hooks class to load</em>
+<dd>string<br><em><p>The Hooks class to load</p>
+</em>
 </dd>
 <dt>$path</dt>
-<dd>string<br><em>The path of the class to load</em>
+<dd>string<br><em><p>The path of the class to load</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -992,10 +1040,12 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$class</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 <dt>$path</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1039,10 +1089,12 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$name</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 <dt>$scriptProperties</dt>
-<dd>array<br><em></em>
+<dd>array<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1086,10 +1138,12 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$class</dt>
-<dd>string<br><em>The Request class to load</em>
+<dd>string<br><em><p>The Request class to load</p>
+</em>
 </dd>
 <dt>$path</dt>
-<dd>string<br><em>The path of the request class.</em>
+<dd>string<br><em><p>The path of the request class.</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1166,10 +1220,12 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$class</dt>
-<dd>string<br><em>The name of the class to load.</em>
+<dd>string<br><em><p>The name of the class to load.</p>
+</em>
 </dd>
 <dt>$path</dt>
-<dd>string<br><em>The path by which to load the class.</em>
+<dd>string<br><em><p>The path by which to load the class.</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1215,13 +1271,16 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$action</dt>
-<dd>string<br><em>The action key that happened</em>
+<dd>string<br><em><p>The action key that happened</p>
+</em>
 </dd>
 <dt>$data</dt>
-<dd>array<br><em>An array of extra data to store with the activity</em>
+<dd>array<br><em><p>An array of extra data to store with the activity</p>
+</em>
 </dd>
 <dt>$url</dt>
-<dd>string<br><em>An optional URL to store</em>
+<dd>string<br><em><p>An optional URL to store</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1298,7 +1357,8 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$result</dt>
-<dd>array<br><em>The result from the processor</em>
+<dd>array<br><em><p>The result from the processor</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1344,16 +1404,20 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$email</dt>
-<dd>string<br><em>The email to send to.</em>
+<dd>string<br><em><p>The email to send to.</p>
+</em>
 </dd>
 <dt>$name</dt>
-<dd>string<br><em>The name of the user to send to.</em>
+<dd>string<br><em><p>The name of the user to send to.</p>
+</em>
 </dd>
 <dt>$subject</dt>
-<dd>string<br><em>The subject of the email.</em>
+<dd>string<br><em><p>The subject of the email.</p>
+</em>
 </dd>
 <dt>$properties</dt>
-<dd>array<br><em>A collection of properties.</em>
+<dd>array<br><em><p>A collection of properties.</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1447,7 +1511,8 @@ for easier debugging.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$title</dt>
-<dd>string<br><em></em>
+<dd>string<br><em>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1482,7 +1547,8 @@ purposes.</p>
 <h5 class="arguments">Arguments</h5>
 <dl class="argument-info">
 <dt>$place</dt>
-<dd>string<br><em>The place the user is currently at.</em>
+<dd>string<br><em><p>The place the user is currently at.</p>
+</em>
 </dd>
 </dl>
 <div class="clear"></div>
@@ -1499,6 +1565,49 @@ purposes.</p>
 <dd>false</dd>
 <dt>access</dt>
 <dd>public</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::stripAllTags()"></a><h4 class="method public">stripAllTags<div class="to-top"><a href="#Discuss">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">stripAllTags</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        string</code><p class="short-description">Strips all MODX tags and converts HTML tags</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
 </dl>
 <div class="clear"></div>
 </div>
