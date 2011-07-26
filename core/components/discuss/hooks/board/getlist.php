@@ -149,7 +149,7 @@ foreach ($boards as $board) {
     $board['post_stats'] = $modx->lexicon('discuss.board_post_stats',array(
         'posts' => number_format($board['total_posts']),
         'topics' => number_format($board['num_topics']),
-        'unread' => number_format($board['unread']),
+        'unread' => !empty($board['unread']) ? number_format((int)$board['unread']) : 0,
     ));
 
     $board['is_locked'] = !empty($board['locked']) ? '<div class="dis-board-locked"></div>' : '';

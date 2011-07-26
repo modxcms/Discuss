@@ -69,6 +69,7 @@ class disHooks {
         if (file_exists($hookFile)) {
             $discuss =& $this->discuss;
             $modx =& $this->modx;
+            $options =& $this->discuss->controller->options;
 
             $success = include $hookFile;
         } else {
