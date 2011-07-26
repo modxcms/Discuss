@@ -66,22 +66,17 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd>\xPDOSimpleObject</dd>
 <dt>package</dt>
 <dd>discuss</dd>
-<dt>property</dt>
-<dd>string $name A name for the Category</dd>
-<dt>property</dt>
-<dd>string $description A user-provided description</dd>
-<dt>property</dt>
-<dd>boolean $collapsible Not yet in use.</dd>
-<dt>property</dt>
-<dd>int $rank The order of the category in sorting</dd>
-<dt>property</dt>
-<dd>string $default_moderators A comma-separated list of Users to automatically make Moderators for all new boards in this Category</dd>
-<dt>property</dt>
-<dd>string $default_usergroups A comma-separated list of UserGroups to automatically assign to all new boards in this Category</dd>
-<dt>property</dt>
-<dd>int $integrated_id If imported from another system, the PK of the category in that system</dd>
-<dt>property</dt>
-<dd>array $Boards A collection of Boards in this category</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Properties
+              </a></dt>
+<dd><a class="property public" href="#%5CdisCategory::%24Boards">$Boards</a></dd>
+<dd><a class="property public" href="#%5CdisCategory::%24collapsible">$collapsible</a></dd>
+<dd><a class="property public" href="#%5CdisCategory::%24default_moderators">$default_moderators</a></dd>
+<dd><a class="property public" href="#%5CdisCategory::%24default_usergroups">$default_usergroups</a></dd>
+<dd><a class="property public" href="#%5CdisCategory::%24description">$description</a></dd>
+<dd><a class="property public" href="#%5CdisCategory::%24integrated_id">$integrated_id</a></dd>
+<dd><a class="property public" href="#%5CdisCategory::%24name">$name</a></dd>
+<dd><a class="property public" href="#%5CdisCategory::%24rank">$rank</a></dd>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
               </a></dt>
@@ -91,6 +86,233 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <h3>Description</h3>
 <p class="short-description">Top-level aggregator for disBoard objects</p>
 <div class="long-description">
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\disCategory::$Boards"></a><h4 class="property public">$Boards<div class="to-top"><a href="#%5CdisCategory">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>array <span class="highlight">$Boards</span> = ''</code><p class="short-description">A collection of Boards in this category</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em>A collection of Boards in this category</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>A collection of Boards in this category</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disCategory::$collapsible"></a><h4 class="property public">$collapsible<div class="to-top"><a href="#%5CdisCategory">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>boolean <span class="highlight">$collapsible</span> = ''</code><p class="short-description">Not yet in use.</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>boolean<br><em>Not yet in use.</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>Not yet in use.</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disCategory::$default_moderators"></a><h4 class="property public">$default_moderators<div class="to-top"><a href="#%5CdisCategory">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$default_moderators</span> = ''</code><p class="short-description">A comma-separated list of Users to automatically make Moderators for all new boards in this Category</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em>A comma-separated list of Users to automatically make Moderators for all new boards in this Category</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>A comma-separated list of Users to automatically make Moderators for all new boards in this Category</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disCategory::$default_usergroups"></a><h4 class="property public">$default_usergroups<div class="to-top"><a href="#%5CdisCategory">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$default_usergroups</span> = ''</code><p class="short-description">A comma-separated list of UserGroups to automatically assign to all new boards in this Category</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em>A comma-separated list of UserGroups to automatically assign to all new boards in this Category</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>A comma-separated list of UserGroups to automatically assign to all new boards in this Category</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disCategory::$description"></a><h4 class="property public">$description<div class="to-top"><a href="#%5CdisCategory">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$description</span> = ''</code><p class="short-description">A user-provided description</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em>A user-provided description</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>A user-provided description</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disCategory::$integrated_id"></a><h4 class="property public">$integrated_id<div class="to-top"><a href="#%5CdisCategory">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$integrated_id</span> = ''</code><p class="short-description">If imported from another system, the PK of the category in that system</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>If imported from another system, the PK of the category in that system</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>If imported from another system, the PK of the category in that system</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disCategory::$name"></a><h4 class="property public">$name<div class="to-top"><a href="#%5CdisCategory">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>string <span class="highlight">$name</span> = ''</code><p class="short-description">A name for the Category</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>string<br><em>A name for the Category</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>A name for the Category</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disCategory::$rank"></a><h4 class="property public">$rank<div class="to-top"><a href="#%5CdisCategory">jump to class</a></div>
+</h4>
+<div class="property magic">
+<code>int <span class="highlight">$rank</span> = ''</code><p class="short-description">The order of the category in sorting</p>
+<div class="long-description"></div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>int<br><em>The order of the category in sorting</em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>The order of the category in sorting</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 </div>
 <h3>Methods</h3>
 <div>
