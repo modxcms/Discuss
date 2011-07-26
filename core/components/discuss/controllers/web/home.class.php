@@ -96,7 +96,7 @@ class DiscussHomeController extends DiscussController {
     public function getBoards() {
         $c = array(
             'board' => 0,
-            'checkUnread' => $this->getOption('checkUnread',true),
+            'checkUnread' => $this->getOption('checkUnread',true,'isset'),
         );
         if (!empty($this->scriptProperties['category'])) $c['category'] = (int)$this->scriptProperties['category'];
         $boards = $this->discuss->hooks->load('board/getlist',$c);
