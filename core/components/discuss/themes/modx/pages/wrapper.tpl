@@ -25,11 +25,11 @@
 
 	
 		<nav id="global">
-			<a href="http://modx.com/">MODX.com</a>
-            [[+discuss.user.id:notempty=`<a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">My Account</a>`]]
+			<a href="http://modx.com/">MODX.com</a> | 
+            [[+discuss.user.id:notempty=`<a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">My Account</a> | `]]
             [[+discuss.authLink]]
 
-            [[+discuss.user.id:is=``:then=`<a href="[[~[[*id]]]]register">Register</a>`]]
+            [[+discuss.user.id:is=``:then=` | <a href="[[~[[*id]]]]register">Register</a>`]]
 		</nav>
 		
 
