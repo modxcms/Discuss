@@ -1,5 +1,5 @@
 [[+usermenu]]
-<div class="dis-profile left" style="width: 80%;">
+<div class="dis-profile left">
 
 <form action="[[~[[*id]]]]user/account?user=[[+id]]" method="post" id="dis-user-account-form" style="border: 0;">
 

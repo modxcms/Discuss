@@ -3,7 +3,7 @@
 [[+aboveThread]]
 
 
-[[<h2 class="[[+class]] dis-thread-title">[[%discuss.thread? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[+views]] [[%discuss.views]])</h2>
+<h2 class="[[+class]] dis-thread-title">[[+title]]</h2>[[
 
 [[+pagination:notempty=`<div class="dis-pagination">[[<span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> ]]<ul>[[+pagination]]</ul></div>`]]
 ]]
@@ -21,7 +21,6 @@
 	<div class="dis-thread-actions">[[+threadactionbuttons]]</div>
 	<div class="dis-viewing">[[+readers]]</div>
 
-	<br class="clearfix" />
 	
 	[[+belowThread]]
 	
@@ -37,9 +36,11 @@
 					<div class="PanelBox">
 						
 						<div class="Box GuestBox">
-						  [[<h4>Welcome back [[+modx.user.username]]</h4>]]
-						  	<h4>Thread Actions</h4>
+							[[<h4>Welcome back [[+modx.user.username]]</h4>]]
+						  	<h4>Info and Actions</h4>
+						  	<p>[[+views]] - [[%discuss.views]]</p>
 						  	<p>[[+actionbuttons]]</p>
+
 
 						  	<p><a href="[[~[[*id]]]]thread/recent.xml" class="rss_feed">RSS Feed</a></p>
 						</div>

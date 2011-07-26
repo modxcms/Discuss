@@ -5,8 +5,6 @@
   &validate=`title:required,message:required:allowTags,participants_usernames:required`
 ]]
 
-<div id="dis-message-preview"></div>
-<br />
 <form action="[[~[[*id]]]]messages/new" method="post" class="dis-form" id="dis-message-new-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h2>
@@ -47,7 +45,7 @@
         <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages';" />
     </div>
 </form>
-
+<div id="dis-message-preview"></div>
 
 			</div><!-- Close Content From Wrapper -->
 [[+bottom]]
@@ -56,18 +54,8 @@
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">
-						   <h4>[[+name]]'s Profile</h4>
-							<ul class="PanelInfo PanelCategories">
-
-								<li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
-							<br /><span class="small">[[+title]]</span></li>
-							</ul>
-							
+						   <h4>Rules of Engagement</h4>
+							<p>Sample copy.</p>
 						</div>
-						
-						<div class="Box BoxCategories">
-							[[+usermenu]]
 
-
-						</div>
 					</div>

@@ -25,11 +25,9 @@
 
 	
 		<nav id="global">
-			<a href="http://modx.com/">MODX.com</a> | 
-            [[+discuss.user.id:notempty=`<a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">My Account</a> | `]]
-            [[+discuss.authLink]]
-
-            [[+discuss.user.id:is=``:then=` | <a href="[[~[[*id]]]]register">Register</a>`]]
+			[[+discuss.user.id:is=``:then=`<a href="[[~[[*id]]]]login">Login</a> | <a href="[[~[[*id]]]]register">Register</a>`]]
+			[[+discuss.user.id:notempty=`Welcome, <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a> | <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">My Account</a> | <a href="[[~[[*id]]]]logout">Logout</a>`]]
+			
 		</nav>
 		
 
@@ -71,7 +69,7 @@
 					[[+discuss.user.id:is=``:then=`<li class="first level1">
 						<a href="[[~[[*id]]]]register" class="first level1"><span class="Title">Register</span>Sign Up with the MODX Community</a></li>
 				
-            		<li class="level1"><a href="[[~[[*id]]]]login" class="first level1"><span class="Title">Login</span>Click Here to Login</a></li>`]]
+            		<li class="level1"><a href="[[~[[*id]]]]login" class="first level1"><span class="Title">Login</span>Use Your MODX.com Account</a></li>`]]
 				
 				
 					[[+discuss.user.id:notempty=`<li class="first level1 parent">

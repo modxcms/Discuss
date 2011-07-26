@@ -1,22 +1,19 @@
 [[+top]]
 [[+aboveBoards]]
+
+<div class="dis-threads">
+
 <ul class="DataList CategoryList CategoryListWithHeadings">
 	[[+boards]]
 </ul>
 
 [[+belowBoards]]
 
-<br class="clearfix" />
-
-
 
 [[+aboveRecent]]
 
 
 
-
-
-<div class="dis-threads">
 	<ul class="DataList CategoryList CategoryListWithHeadings">
 	
 		<li class="Item CategoryHeading Depth1 Category-[[%discuss.recent_posts? &namespace=`discuss` &topic=`web`]]">
@@ -31,27 +28,29 @@
 
 [[+belowRecent]]
 
-<br class="clearfix" />
 
-<ul class="BoardInfo">
-    <li class="dis-category-li"><h2>[[%discuss.stats]]</h2></li>
-    <li class="dis-board-li">
+<ul class="CategoryList CategoryListWithHeadings">
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category Read">[[%discuss.stats]]</div>
+	    </li>
+    <li class="Item Depth2  dis-category-1">
         [[%discuss.stats_totals? &posts=`[[+totalPosts]]` &threads=`[[+totalTopics]]` &members=`[[+totalMembers]]`]]
     </li>
-    <li class="dis-board-li">
+    <li class="Item Depth2  dis-category-1">
         [[%discuss.stats_online? &visitors=`[[+totalVisitorsActive]]` &members=`[[+totalMembersActive]]`]]
         <br />
         <span class="dis-active-users dis-small">
         [[+activeUsers]]
         </span>
     </li>
-    <li class="dis-board-li">
+    <li class="Item Depth2  dis-category-1">
         <span class="dis-today-stats">[[%discuss.stats_today? &hits=`[[+activity.hits]]` &topics=`[[+activity.topics]]` &replies=`[[+activity.replies]]` &visitors=`[[+activity.visitors]]`]]</span>
     </li>
 </ul>
 
 							<div class="dis-pagination"><ul>[[+pagination]]</ul></div>
 
+[[+threadactionbuttons]]
 
 				</div><!-- Close Content From Wrapper -->
 			[[+bottom]]
@@ -59,8 +58,9 @@
 				<div id="Panel">
 					<div class="PanelBox">
 					
-						<div class="Box GuestBox">
-						   <h4>Welcome back [[+modx.user.username]]</h4>
+												<div class="Box GuestBox">
+						   <h4>Actions &amp; Info</h4>
+
 							<p>[[+actionbuttons]]</p>
 
 							[[+belowThreads]]
@@ -68,28 +68,15 @@
 							<p>[[+readers]]</p>
 							<p>[[+moderators]]</p>
 						</div>
+					
+						<div class="Box GuestBox">
+						   <h4>Other Support Options</h4>
+							<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>.</p>
+						</div>
 						
-						
-						[[<div class="Box BoxCategories">
-							<h4><a href="/categories/all">Categories</a></h4>
-							<ul class="PanelInfo PanelCategories">
-								<li><span><strong><a href="/discussions">All Discussions</a></strong><span class="Count">[[+totalPosts]]</span></span></li>
-								<li class="Heading">Partners</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">General</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">Evolution</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">Revolution</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">International</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-							</ul>
-						</div>]]
+						<div class="Box GuestBox">
+						   <h4>Want to Support MODX?</h4>
+							<p>If you build sites for a living with MODX, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
+						</div>
 					</div>
 
