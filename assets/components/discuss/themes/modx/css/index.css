@@ -29,7 +29,7 @@ span.dis-small {
 
 /* board listing */
 #dis-category-1 {
-	margin: 10px 0 0;
+	margin: 0 0;
 	}
 	
 ol.dis-board-list {
@@ -275,8 +275,9 @@ div.dis-actions span ul li a {
 	}
 
 span.DiscussionCount {
-	font-size: 10px;
-	color: #555;
+	color: #aaa;
+    font-size: 14px;
+    text-transform: uppercase;
 	}
 
 div.dis-report {
@@ -357,7 +358,7 @@ div.dis-board-head {
 	}
 
 div.dis-board-head h3 {
-	margin: 10px 0 0 0;
+	margin: 18px 0 0 0;
 	font-size: 24px;
 	}
 
@@ -587,13 +588,15 @@ body {
 	text-align: center;
 	font-size: small;
 	}
-
+	
+.Depth1 .Category,
 h1, h2, h3, h4, h5, h6 {
 	color: #555;
 	font-family: "Helvetica Neue",Helvetica,arial,sans-serif;
 	font-weight: normal;
 	margin: 0;
 	}
+	
 p {
 	margin: 0.5em 0 0 0;
 	line-height: 1.6em;
@@ -604,7 +607,8 @@ h1, h2 {
 	font-weight:bold;
 	margin-bottom:10px;
 	}
-
+	
+ul.DataList a.Title,
 h3 {
 	font-size:18px;
 	}
@@ -955,12 +959,6 @@ ul.DataList li.Item {
 	padding: 0 0;
 	}
 
-ul.DataList a.Title {
-	display: block;
-	margin: 0;
-	font-size: 18px;
-	}
-
 ul.DataList div.Meta {
 	font-size: 11px;
 	color: #70727c;
@@ -970,7 +968,6 @@ ul.DataList div.Meta strong {
 	border-radius: 2px;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
-	
 	background: #FF0;
 	color:#000;
 	font-size:9px;
@@ -2211,8 +2208,6 @@ body.Profile ul.Activities {
 	}
 
 #Content ul.DataList {
-	background: #fff;
-	border-top: 1px solid #e5e5e5;
 	}
 
 ul.DataList.Conversations li.Item {
@@ -2417,15 +2412,17 @@ input.DateBox, input.InputBox, input.SmallInput, textarea {
 
 .CategoryDescription {
 	color: #666;
-	padding: 0 0 5px 0;
+	padding: 5px 0;
 	}
 
 .Depth1 .Category {
-    background-color: #E3F4FF;
-    font-size: 26px;
-    font-weight: bold;
-    height: 31px;
-    padding: 12px 0 0 19px;
+    color: #555555;
+    font-family: "Helvetica Neue",Helvetica,arial,sans-serif;
+    font-weight: normal;
+    font-size: 24px;
+    height: 26px;
+    padding: 18px 0 0 19px;
+    border-bottom: 1px solid #ccc;
     }
 
 pre {

@@ -58,15 +58,9 @@
 				<div id="Panel">
 					<div class="PanelBox">
 					
-												<div class="Box GuestBox">
-						   <h4>Actions &amp; Info</h4>
-
-							<p>[[+actionbuttons]]</p>
-
-							[[+belowThreads]]
-
-							<p>[[+readers]]</p>
-							<p>[[+moderators]]</p>
+						<div class="Box GuestBox">
+						  	<h4>Subscribe to Feed</h4>
+						  	<p><a href="[[~[[*id]]]]thread/recent.xml" class="rss_feed">RSS Feed</a></p>
 						</div>
 					
 						<div class="Box GuestBox">
