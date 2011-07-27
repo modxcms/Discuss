@@ -7,7 +7,6 @@
   &validationErrorMessage=`<p class="error">A form validation error occurred. Please check the values you have entered: [[+errors]]</p>`
 ]]
 
-<div id="dis-reply-post-preview"></div>
 <form action="[[~[[*id]]]]messages/reply?thread=[[!+fi.thread]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
@@ -57,9 +56,9 @@
         <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages/view?thread=[[+thread]]';" />
     </div>
 </form>
+<div id="dis-reply-post-preview"></div>
 
-<br />
-<hr />
+
 <div class="dis-thread-posts">
     <h2>[[%discuss.thread_summary]]</h2>
 [[+thread_posts]]
@@ -74,31 +73,25 @@
 
 				<div id="Panel">
 					<div class="PanelBox">
-					
+						
 						<div class="Box GuestBox">
-						   <h4>Welcome back [[+modx.user.username]]</h4>
-							<p>Some information. Test.</p>
+						   <h4>Don't Be That Guy</h4>
+							<p>Be nice, respectful and patient. Inflamatory or inappropriate posts will get your post nuked and flood your life with bans and bad karma.</p>
 						</div>
 						
-						<div class="Box BoxCategories">
-							<h4><a href="/categories/all">Categories</a></h4>
-							<ul class="PanelInfo PanelCategories">
-								<li><span><strong><a href="/discussions">All Discussions</a></strong><span class="Count">[[+totalPosts]]</span></span></li>
-								<li class="Heading">Partners</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">General</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">Evolution</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">Revolution</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">International</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-							</ul>
+						<div class="Box GuestBox">
+						   <h4>Help Us Help You</h4>
+							<p>Use a title that gives insight into your post and limit your posts to 1. Remember, this is an open source project and folks aren't paid to help you here. If you're experiencing problems, please supply adequate technical details.</p>
 						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Other Support Options</h4>
+							<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>.</p>
+						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Want to Support MODX?</h4>
+							<p>If you build sites for a living with MODX, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
+						</div>
+						
 					</div>

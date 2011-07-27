@@ -125,7 +125,7 @@ div.dis-threads {
  	
 div.dis-threads li {
  	line-height: 1.1em;
- 	padding: 13px 0 3px 10px;
+ 	padding: 5px 0 0;
  	vertical-align: middle;
 	}
 
@@ -139,7 +139,6 @@ ol.dis-board-thread {
 li.dis-post {
 	display: block;
 	margin: 0 auto;
-	width: 100%;
 	border-bottom: 1px solid #ccc;
 	position: relative;
 	}
@@ -383,7 +382,7 @@ div.dis-views,
 div.dis-replies,
 div.dis-latest {
  	vertical-align: middle;
- 	margin-right: 20px;
+ 	margin: 0 18px;
 	float: left;
 	}
 
@@ -405,8 +404,10 @@ div.dis-replies {
 	}
 
 div.dis-thread-body {
-	width: 675px;
+	width: 670px;
 	color: #777;
+	margin: 0 20px 0 18px;
+	padding: 0 0;
 	}
 
 dl.dis-datalist {	
@@ -443,23 +444,27 @@ div.dis-author span {
 	}
 
 div.post_icon {
-	font-size: 12px;
+	display: block;
+	height: 18px;
+	width: 24px;
+	font-size: 10px;
 	color: #aaa;
-	width: 18px;
-	padding-right: 19px;
+	padding-left: 14px;
 	float: left;
-	text-align: right;
-    background: transparent url("../images/post.png") no-repeat 20px 4px;
+	text-align: left;
+    background: transparent url("../images/post.png") no-repeat left center;
 	}
 
 div.badge_icon {
-	font-size: 12px;
+	display: block;
+	height: 18px;
+	width: 24px;
+	font-size: 10px;
 	color: #aaa;
-	width: 23px;
-	padding-right: 12px;
+	padding-left: 10px;
 	float: left;
-	text-align: right;
-    background: transparent url("../images/badge.png") no-repeat 25px 4px;
+	text-align: left;
+    background: transparent url("../images/badge.png") no-repeat left center;
 	}
 
 div.dis-author:hover span {
@@ -1577,7 +1582,9 @@ header {
  	width:360px;
 	}
 
-#section_wrap { background:#00181f url(http://www.modx.com/assets/i/headers.jpg) top center no-repeat; height: 63px; }
+#section_wrap {
+	background:#00181f url(http://www.modx.com/assets/i/headers.jpg) no-repeat 0 1px;
+	height: 64px; }
 
 #section{ margin-left:-20px; text-align: left; }
 
@@ -1785,12 +1792,12 @@ header {
 	}
 #section li:hover ul li a:hover:before,
 #section li:hover ul li a.current:before {
- 	content:": ";
+ 	content:">";
  	margin:0;
- 	font-size:24px;
+ 	font-size:14px;
  	position:absolute;
  	left:9px;
- 	top:0;
+ 	top:5px;
 	}
 
 #section li:hover ul li a.level2:hover:before{
@@ -1882,7 +1889,7 @@ footer {
 	}
 #destinations a:hover:before  {
  	content:"> ";
- 	font-size:18px;
+ 	font-size:14px;
  	position:absolute;
  	left:-14px;
  	top:-2px;
@@ -2427,7 +2434,8 @@ input.DateBox, input.InputBox, input.SmallInput, textarea {
     font-weight: normal;
     font-size: 24px;
     height: 26px;
-    padding: 18px 0 0 19px;
+    padding: 18px 0 0 0;
+    margin: 0 18px;
     border-bottom: 1px solid #ccc;
     }
 
@@ -2552,7 +2560,7 @@ pre {
 .dis-post-preview {
 	display: block;
 	width: 90%;
-	margin: 0 auto;
+	margin: 20px auto;
 	}
 	
 .dis-post-preview h2 {
