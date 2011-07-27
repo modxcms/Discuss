@@ -364,13 +364,8 @@ div.dis-board-head h3 {
 	}
 
 	
-div.dis-board-head,
-div.dis-thread-body {
+div.dis-board-head {
 	padding: 0 0 10px 10px;
-	}
-
-div.dis-thread-body {
-	border-bottom: 1px solid #ddd;
 	}
 	
 div.dis-thread-body p {
@@ -382,8 +377,11 @@ div.dis-views,
 div.dis-replies,
 div.dis-latest {
  	vertical-align: middle;
- 	margin: 0 18px;
-	float: left;
+	width: 670px;
+	color: #777;
+	margin: 0 20px 0 19px;
+	padding: 0 0;
+	border-bottom: 1px solid #ddd;
 	}
 
 div.dis-thread-body h3 a {
@@ -401,13 +399,6 @@ div.dis-latest {
 div.dis-views,
 div.dis-replies {
 	width: 55px;
-	}
-
-div.dis-thread-body {
-	width: 670px;
-	color: #777;
-	margin: 0 20px 0 18px;
-	padding: 0 0;
 	}
 
 dl.dis-datalist {	
