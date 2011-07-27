@@ -49,6 +49,7 @@ class DiscussMessagesReplyController extends DiscussController {
         }
         
         $this->author = $this->post->getOne('Author');
+        $this->modx->lexicon->load('discuss:post');
     }
     public function checkPermissions() {
         $users = explode(',',$this->thread->get('users'));

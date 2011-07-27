@@ -41,6 +41,7 @@ class DiscussMessagesController extends DiscussController {
         return 'messages';
     }
     public function process() {
+        $this->modx->lexicon->load('discuss:post');
         $this->getMessages();
         $this->buildPagination();
         $this->getActionButtons();

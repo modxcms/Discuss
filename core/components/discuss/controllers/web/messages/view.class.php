@@ -36,6 +36,7 @@ class DiscussMessagesViewController extends DiscussController {
         if (empty($thread)) $this->discuss->sendErrorPage();
         $this->thread = $this->modx->call('disThread', 'fetch', array(&$this->modx,$thread,disThread::TYPE_MESSAGE));
         if (empty($this->thread)) $this->modx->sendErrorPage();
+        $this->modx->lexicon->load('discuss:post');
     }
 
     public function checkPermissions() {

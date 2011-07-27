@@ -38,6 +38,7 @@ class DiscussMessagesNewController extends DiscussController {
         return 'message-new';
     }
     public function process() {
+        $this->modx->lexicon->load('discuss:post');
         /* setup defaults */
         if (empty($_POST)) {
             $participants = array($this->modx->user->get('username'));
