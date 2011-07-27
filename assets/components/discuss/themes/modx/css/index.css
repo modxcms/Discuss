@@ -214,7 +214,7 @@ a.dis-fav:hover {
 div.dis-actions {
 	background: transparent url(../images/discuss_settings.png) no-repeat 0 0;
 	position: absolute;
-	top: 10px;
+	top: 15px;
 	right: 5px;
 	height: 24px;
 	width: 24px;
@@ -307,14 +307,16 @@ div.dis-post-footer {
 	}
 	
 h4.created {
+	text-transform: uppercase;
 	margin: 10px 0 10px 0;
 	font-size: 12px;
-	color: #777;
+	color: #aaa;
 	}
 	
 h4.created a {
+	text-transform: none;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 16px;
 	}
 
 span.idx {
@@ -441,19 +443,23 @@ div.dis-author span {
 	}
 
 div.post_icon {
-	width: 12px;
-	padding-right: 23px;
+	font-size: 12px;
+	color: #aaa;
+	width: 18px;
+	padding-right: 19px;
 	float: left;
 	text-align: right;
-    background: transparent url("../images/post.png") no-repeat top right;
+    background: transparent url("../images/post.png") no-repeat 20px 4px;
 	}
 
 div.badge_icon {
+	font-size: 12px;
+	color: #aaa;
 	width: 23px;
 	padding-right: 12px;
 	float: left;
 	text-align: right;
-    background: transparent url("../images/badge.png") no-repeat top right;
+    background: transparent url("../images/badge.png") no-repeat 25px 4px;
 	}
 
 div.dis-author:hover span {
