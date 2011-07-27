@@ -39,6 +39,7 @@ class DiscussMessagesRemovePostController extends DiscussController {
 
         $this->thread = $this->modx->call('disThread', 'fetch', array(&$this->modx,$this->post->get('thread'),disThread::TYPE_MESSAGE));
         if (empty($this->thread)) $this->discuss->sendErrorPage();
+        $this->modx->lexicon->load('discuss:post');
     }
 
     public function checkPermissions() {
