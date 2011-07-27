@@ -10,8 +10,12 @@
 
 
 <form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form" style="border: 0;">
-
-    <h2>[[%discuss.account_merge? &namespace=`discuss` &topic=`user`]]: [[+name]]</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.account_merge? &namespace=`discuss` &topic=`user`]]: [[+name]]</div>
+	    </li>
+	</ul>
 
     <p>[[%discuss.account_merge_msg]]</p>
 

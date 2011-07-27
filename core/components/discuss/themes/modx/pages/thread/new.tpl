@@ -7,10 +7,13 @@
 ]]
 
 
-<div id="dis-new-thread-preview"></div>
 <form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
-
-    <h2>[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</div>
+	    </li>
+	</ul>
     
     <input type="hidden" name="board" value="[[+id]]" />
     
@@ -49,6 +52,9 @@
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
     </div>
 </form>
+
+<div id="dis-new-thread-preview"></div>
+
 [[+discuss.error_panel]]
 
 				</div><!-- Close Content From Wrapper -->

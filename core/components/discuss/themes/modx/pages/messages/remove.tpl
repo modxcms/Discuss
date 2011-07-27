@@ -2,7 +2,12 @@
 
 <form action="[[~[[*id]]]]messages/remove?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-message-form">
 
-    <h2>[[%discuss.message_remove? &namespace=`discuss` &topic=`post`]]</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.message_remove? &namespace=`discuss` &topic=`post`]]</div>
+	    </li>
+	</ul>
 
     <input type="hidden" name="thread" value="[[+id]]" />
 

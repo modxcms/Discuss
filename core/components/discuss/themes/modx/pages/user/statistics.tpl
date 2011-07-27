@@ -1,7 +1,11 @@
 
 <div class="dis-profile left">
-
-		<h2>[[%discuss.general_stats? &user=`[[+name]]`]]</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.general_stats? &user=`[[+name]]`]]</div>
+	    </li>
+	</ul>
 
 							<ul class="profile">
 							

@@ -6,11 +6,14 @@
   &validate=`title:required,message:required:allowTags,participants_usernames:required`
 ]]
 
-<div id="dis-modify-message-preview">[[+preview]]</div>
-<br />
-<form action="[[~[[*id]]]]messages/modify?post=[[!+fi.id]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
 
-    <h2>[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</h2>
+<form action="[[~[[*id]]]]messages/modify?post=[[!+fi.id]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</div>
+	    </li>
+	</ul>
 
     <input type="hidden" name="post" value="[[!+fi.id]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
@@ -57,10 +60,15 @@
     </div>
 </form>
 
-<br />
-<hr />
+<div id="dis-modify-message-preview">[[+preview]]</div>
+
 <div class="dis-thread-posts">
-    <h2>[[%discuss.thread_summary]]</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.thread_summary]]</div>
+	    </li>
+	</ul>
 [[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
 </div>
 

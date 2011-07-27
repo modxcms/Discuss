@@ -6,11 +6,15 @@
   &validate=`title:required,message:required:allowTags`
 ]]
 
-<div id="dis-reply-post-preview"></div>
-<br />
 <form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
-    <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</div>
+	    </li>
+	</ul>
+	
     
     <input type="hidden" name="board" value="[[!+fi.board]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
@@ -46,12 +50,41 @@
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
+<div id="dis-reply-post-preview"></div>
 
-<br />
-<hr />
 <div class="dis-thread-posts">
     <h2>[[%discuss.thread_summary]]</h2>
 [[+thread_posts]]
 </div>
 
 [[+discuss.error_panel]]
+				</div><!-- Close Content From Wrapper -->
+
+[[+bottom]]
+
+
+
+				<div id="Panel">
+					<div class="PanelBox">
+						
+						<div class="Box GuestBox">
+						   <h4>Don't Be That Guy</h4>
+							<p>Be nice, respectful and patient. Inflamatory or inappropriate posts will get your post nuked and flood your life with bans and bad karma.</p>
+						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Help Us Help You</h4>
+							<p>Use a title that gives insight into your post and limit your posts to 1. Remember, this is an open source project and folks aren't paid to help you here. If you're experiencing problems, please supply adequate technical details.</p>
+						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Other Support Options</h4>
+							<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>.</p>
+						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Want to Support MODX?</h4>
+							<p>If you build sites for a living with MODX, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
+						</div>
+						
+					</div>

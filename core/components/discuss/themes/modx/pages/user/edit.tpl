@@ -1,9 +1,13 @@
 [[+top]]
 
 <div class="dis-profile left">
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</div>
+	    </li>
+	</ul>
 
-
-    <h2>[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h2>
 <form action="[[~[[*id]]]]user/edit?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
     

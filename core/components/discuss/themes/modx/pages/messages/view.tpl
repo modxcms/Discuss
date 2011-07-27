@@ -4,12 +4,13 @@
 
 <div class="dis-threads">
 
-    <div class="dis-board-head">
-        <div class="dis-thread-body"><h3>[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[+views]] [[%discuss.views]])</h3></div>
-       [[ <div class="dis-views"><h3>[[%discuss.views]]</h3></div>
-        <div class="dis-replies"><h3>[[%discuss.replies]]</h3></div>
-        <div class="dis-latest"><h3>[[%discuss.last_post]]</h3></div>]]
-    </div>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[+views]] [[%discuss.views]])</div>
+	    </li>
+	</ul>
+
 
 	<ol class="dis-board-thread">
 		[[+posts]]
@@ -34,6 +35,8 @@
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">
+							<h4>Actions & Info</h4>
 							<p>[[+actionbuttons]]</p>
 						</div>
 
+					</div>

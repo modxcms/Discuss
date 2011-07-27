@@ -1,12 +1,11 @@
 
 <div class="dis-threads">
-
-    <div class="dis-board-head">
-        <div class="dis-thread-body"><h3>[[%discuss.last_post]]</h3></div>
-       [[ <div class="dis-views"><h3>[[%discuss.replies]]</h3></div>
-        <div class="dis-replies"><h3>[[%discuss.views]]</h3></div>
-        <div class="dis-latest"><h3>[[%discuss.thread]]</h3></div>]]
-    </div>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.last_post]]</div>
+	    </li>
+	</ul>
 
 	<ol class="dis-board-thread">
 		[[+threads]]

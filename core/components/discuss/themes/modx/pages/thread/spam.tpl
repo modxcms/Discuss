@@ -1,7 +1,12 @@
 
 <form action="[[~[[*id]]]]thread/spam?thread=[[+id]]" method="post" class="dis-form" id="dis-spam-thread-form">
 
-    <h2>[[%discuss.thread_spam? &namespace=`discuss` &topic=`post`]]</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.thread_spam? &namespace=`discuss` &topic=`post`]]</div>
+	    </li>
+	</ul>
 
     <input type="hidden" name="thread" value="[[+id]]" />
 
@@ -9,7 +14,7 @@
 
     <span class="error">[[+error]]</span>
 
-    <br class="clear" />
+    <br class="clearfix" />
 
     <div class="dis-form-buttons">
     <input type="submit" name="spam-thread" class="Button dis-action-btn" value="[[%discuss.thread_spam]]" />

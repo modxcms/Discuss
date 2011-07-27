@@ -4,8 +4,13 @@
 <div class="dis-profile left">
 
 <form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" id="dis-user-edit-form" style="border: 0;">
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[+name]]</div>
+	    </li>
+	</ul>
 
-<h2>[[+name]]</h2>
 
 							<ul class="profile">
    								<li>[[%discuss.name? &namespace=`discuss` &topic=`user`]]: <strong>[[+name_first]] [[+name_last]]</strong></li>

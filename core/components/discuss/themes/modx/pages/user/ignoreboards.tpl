@@ -1,8 +1,12 @@
 
 <div class="dis-profile left">
 
-
-		<h2>Ignore Boards</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">Ignore Boards</div>
+	    </li>
+	</ul>
 		
 <form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post">
 

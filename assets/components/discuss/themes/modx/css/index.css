@@ -214,7 +214,7 @@ div.dis-actions {
 	background: transparent url(../images/discuss_settings.png) no-repeat 0 0;
 	position: absolute;
 	top: 15px;
-	right: 5px;
+	right: 10px;
 	height: 24px;
 	width: 24px;
 	display: block;
@@ -409,7 +409,7 @@ dl.dis-datalist dh { clear: left; width: 250px; font-weight: bold; }
 div.dis-author{
 	position: absolute;
 	top: 15px;
-	left: 15px;
+	left: 18px;
 	padding: 0;
 	display: block;
 	}

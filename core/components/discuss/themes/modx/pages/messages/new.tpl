@@ -7,7 +7,12 @@
 
 <form action="[[~[[*id]]]]messages/new" method="post" class="dis-form" id="dis-message-new-form" enctype="multipart/form-data">
 
-    <h2>[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h2>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</div>
+	    </li>
+	</ul>
 
     <label for="dis-message-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
