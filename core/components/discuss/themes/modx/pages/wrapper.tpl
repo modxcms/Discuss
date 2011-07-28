@@ -17,10 +17,10 @@
 	<a class="hidden" href="#main">Skip to content</a>
 	<header class="container">
 		<nav id="global2">
-			<a href="">Revolution</a>
-			<a href="">Evolution</a>
-			<a href="">Partners</a>
-			<a href="">International</a>
+			<a href="[[~[[*id]]]]">Revolution</a>
+			<a href="[[~[[*id]]]]">Evolution</a>
+			<a href="[[~[[*id]]]]">Partners</a>
+			<a href="[[~[[*id]]]]">International</a>
 		</nav>
 
 	
