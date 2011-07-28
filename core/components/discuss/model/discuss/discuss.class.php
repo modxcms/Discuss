@@ -75,6 +75,18 @@ class Discuss {
      * @var DiscussController $controller
      */
     public $controller;
+    /**
+     * @var array $chunks
+     */
+    public $chunks = array();
+    /**
+     * @var disSession $session
+     */
+    public $session;
+    /**
+     * @var disImport $import
+     */
+    public $import;
 
     /**
      * @param modX $modx A reference to the modX instance
@@ -127,7 +139,7 @@ class Discuss {
      *
      * @access public
      * @param string $ctx The context to load. Defaults to web.
-     * @return void
+     * @return void|string
      */
     public function initialize($ctx = 'web') {
         $this->loadHooks();
@@ -302,7 +314,7 @@ class Discuss {
      * @return void
      */
     private function _initSession() {
-        if (defined('DIS_CONNECTOR') && DIS_CONNECTOR) return false;
+        if (defined('DIS_CONNECTOR') && DIS_CONNECTOR) return;
         $sessionId = session_id();
         if ($this->user->isLoggedIn) {
             $session = $this->modx->getObject('disSession',array('user' => $this->user->get('id')));
@@ -319,6 +331,7 @@ class Discuss {
         /* only log activity if first visit */
         if ($session == null) {
             $now = date('Y-m-d');
+            /** @var disForumActivity $activity */
             $activity = $this->modx->getObject('disForumActivity',array(
                 'day' => $now,
             ));
@@ -326,7 +339,7 @@ class Discuss {
                 $activity = $this->modx->newObject('disForumActivity');
                 $activity->set('day',$now);
             }
-
+            /** @var disSession $session */
             $session = $this->modx->newObject('disSession');
             $session->set('id',$sessionId);
             $session->set('startedon',time());
@@ -443,6 +456,7 @@ class Discuss {
         $f = $this->config['chunksPath'].strtolower($name).$postFix;
         if (file_exists($f)) {
             $o = file_get_contents($f);
+            /** @var modChunk $chunk */
             $chunk = $this->modx->newObject('modChunk');
             $chunk->set('name',$name);
             $chunk->setContent($o);
@@ -732,7 +746,7 @@ class Discuss {
         if (empty($url)) {
             $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
         }
-
+        /** @var disLogActivity $activity */
         $activity = $this->modx->newObject('disLogActivity');
         $activity->set('createdon',$this->now());
         $activity->set('user',$this->user->get('id'));

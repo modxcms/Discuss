@@ -84,7 +84,7 @@ class disSolrSearch extends disSearch {
         /* sanitize string */
         $string = str_replace(array('!'),'',$string);
 
-        /* build query */
+        /* @var SolrQuery $query */
         $query = new SolrQuery();
         $query->setQuery($string);
         $query->setStart($start);
