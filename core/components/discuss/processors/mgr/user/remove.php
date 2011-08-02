@@ -21,5 +21,35 @@
  *
  * @package discuss
  */
-$o = include dirname(__FILE__).'/controllers/index.php';
-return $o;
+/**
+ * Remove a User
+ *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * @var modProcessor $this
+ * 
+ * @package discuss
+ * @subpackage processors
+ */
+/* get user */
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.user_err_ns'));
+$c = $modx->newQuery('disUser');
+$c->innerJoin('modUser','User');
+$c->where(array(
+    'id' => $scriptProperties['id'],
+));
+/** @var modUser $user */
+$user = $modx->getObject('disUser',$c);
+if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf',array('id' => $scriptProperties['id'])));
+
+/* save user */
+if (!$user->remove()) {
+    return $modx->error->failure($modx->lexicon('discuss.user_err_save'));
+}
+
+/* save username if changed */
+$modxUser = $user->getOne('User');
+if ($modxUser) {
+    $modxUser->remove();
+}
+return $modx->error->success('',$user);

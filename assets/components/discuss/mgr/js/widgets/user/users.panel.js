@@ -62,11 +62,7 @@ Dis.grid.Users = function(config) {
             ,sortable: true
             ,width: 300
         }]
-        ,tbar: [{
-            text: _('discuss.user_create')
-            ,handler: this.createUser
-            ,scope: this
-        },'->',{
+        ,tbar: ['->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'modx-user-search'
@@ -125,11 +121,11 @@ Ext.extend(Dis.grid.Users,MODx.grid.Grid,{
         });
     }
     ,createUser: function() {
-        location.href = '?a='+MODx.request.a+'&action=user/create';
+        location.href = '?a='+MODx.request.a+'&action=mgr/user/create';
     }
     ,updateUser: function() {
         var id = this.menu.record.id;
-        location.href = '?a='+MODx.request.a+'&user='+id+'&action=user/update';
+        location.href = '?a='+MODx.request.a+'&user='+id+'&action=mgr/user/update';
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;

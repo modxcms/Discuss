@@ -25,10 +25,23 @@
  * @package discuss
  * @subpackage controllers
  */
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/board/board.moderators.grid.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/board/board.usergroups.grid.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'widgets/board/board.panel.js');
-$modx->regClientStartupScript($discuss->config['mgrJsUrl'].'sections/board/update.js');
-$output = '<div id="dis-panel-board-div"></div>';
+class DiscussMgrBoardCreateManagerController extends DiscussManagerController {
+    public function initialize() {
+        parent::initialize();
+        return true;
+    }
 
-return $output;
+    public function process(array $scriptProperties = array()) {
+
+    }
+
+    public function getPageTitle() { return $this->modx->lexicon('discuss.board_new'); }
+    public function loadCustomCssJs() {
+
+        $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/board/board.moderators.grid.js');
+        $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/board/board.usergroups.grid.js');
+        $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/board/board.panel.js');
+        $this->addLastJavascript($this->discuss->config['mgrJsUrl'].'sections/board/create.js');
+    }
+    public function getTemplateFile() { return $this->discuss->config['templatesPath'].'board/create.tpl'; }
+}

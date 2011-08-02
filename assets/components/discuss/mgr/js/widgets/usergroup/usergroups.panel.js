@@ -95,7 +95,7 @@ Ext.extend(Dis.tree.UserGroups,MODx.tree.UserGroup,{
         var n = this.cm.activeNode;
         var id = n.id.substr(2).split('_');id = id[1];
         
-        location.href = '?a=' + Dis.request.a + '&action=usergroup/update&id=' + id;
+        location.href = '?a=' + Dis.request.a + '&action=mgr/usergroup/update&id=' + id;
     }
     
     ,removeUserGroup: function(btn,e) {

@@ -107,8 +107,8 @@ class Discuss {
             'theme' => $theme,
             'cssUrl' => $themesUrl.$theme.'/css/',
             'jsUrl' => $themesUrl.$theme.'/js/',
-            'mgrCssUrl' => $assetsUrl.'/mgr/css/',
-            'mgrJsUrl' => $assetsUrl.'/mgr/js/',
+            'mgrCssUrl' => $assetsUrl.'mgr/css/',
+            'mgrJsUrl' => $assetsUrl.'mgr/js/',
             'imagesUrl' => $themesUrl.$theme.'/images/',
 
             'connectorUrl' => $assetsUrl.'connector.php',
@@ -121,6 +121,7 @@ class Discuss {
             'controllersPath' => $corePath.'controllers/',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
+            'templatesPath' => $corePath.'templates/',
             'hooksPath' => $corePath.'hooks/',
             'useCss' => true,
             'loadJQuery' => true,
@@ -146,11 +147,6 @@ class Discuss {
 
         switch ($ctx) {
             case 'mgr':
-                if (!$this->modx->loadClass('discuss.request.DisControllerRequest',$this->config['modelPath'],true,true)) {
-                    return 'Could not load controller request handler.';
-                }
-                $this->request = new DisControllerRequest($this);
-                return $this->request->handleRequest();
             break;
             case 'connector':
                 if (!$this->modx->loadClass('discuss.request.DisConnectorRequest',$this->config['modelPath'],true,true)) {

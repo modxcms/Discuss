@@ -39,6 +39,7 @@ $_lang['discuss.activity_log_remove'] = 'Remove Log Entry';
 $_lang['discuss.activity_log_remove_confirm'] = 'Are you sure you want to permanently remove this log entry?';
 $_lang['discuss.admin'] = 'Administrator';
 $_lang['discuss.archived'] = 'Archived';
+$_lang['discuss.board'] = 'Board';
 $_lang['discuss.board_create'] = 'Create Board';
 $_lang['discuss.board_create_here'] = 'Create Board Here';
 $_lang['discuss.board_edit'] = 'Edit Board';
