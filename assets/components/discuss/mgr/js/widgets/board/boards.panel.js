@@ -64,7 +64,7 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
     
     ,updateBoard: function(btn,e) {
         var id = this.cm.activeNode ? this.cm.activeNode.attributes.pk : 0;
-        location.href = '?a='+MODx.request.a+'&board='+id+'&action=board/update';
+        location.href = '?a='+MODx.request.a+'&board='+id+'&action=mgr/board/update';
     }
     
     ,createBoard: function(btn,e) {

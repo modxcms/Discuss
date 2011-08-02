@@ -23,17 +23,24 @@
  */
 /**
  * Modify a post in a Thread
+ *
+ * @var modX $modx
+ * @var fiHooks $hook
+ * @var string $submitVar
  * @package discuss
  */
+/** @var Discuss $discuss */
 $discuss =& $modx->discuss;
 $modx->lexicon->load('discuss:post');
 $fields = $hook->getValues();
 unset($fields[$submitVar]);
 
 if (empty($fields['post'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
+/** @var disPost $post */
 $post = $modx->getObject('disPost',$fields['post']);
 if ($post == null) return false;
 
+/** @var disThread $thread */
 $thread = $post->getOne('Thread');
 if ($thread == null) return false;
 
@@ -71,6 +78,7 @@ $oldAttachments = $post->getMany('Attachments');
 
 /* get rid of removed attachments */
 $idx = 1;
+/** @var disPostAttachment $oldAttachment */
 foreach ($oldAttachments as $oldAttachment) {
     if (!isset($_POST['attachment'.$idx])) {
         $oldAttachment->remove();
@@ -80,6 +88,7 @@ foreach ($oldAttachments as $oldAttachment) {
 
 /* upload new attachments */
 foreach ($attachments as $file) {
+    /** @var disPostAttachment $attachment */
     $attachment = $modx->newObject('disPostAttachment');
     $attachment->set('post',$post->get('id'));
     $attachment->set('board',$post->get('board'));
@@ -103,6 +112,11 @@ if (!empty($fields['notify'])) {
 if (!$post->save()) {
     $hook->addError('title',$modx->lexicon('discuss.post_err_modify'));
     return false;
+}
+
+if (!empty($fields['class_key'])) {
+    $thread->set('class_key',$fields['class_key']);
+    $thread->save();
 }
 
 /* log activity */
