@@ -69,6 +69,8 @@ class DiscussThreadModifyController extends DiscussController {
         $placeholders['thread'] = $this->thread->get('id');
         $placeholders['locked'] = $this->thread->get('locked');
         $placeholders['sticky'] = $this->thread->get('sticky');
+        $placeholders['class_key'] = $this->thread->get('class_key');
+        $placeholders['is_root'] = $this->thread->get('post_first') == $this->post->get('id') ? 1 : 0;
 
         /* ensure user can modify this post */
         $isModerator = $this->discuss->user->isGlobalModerator() || $this->thread->isModerator($this->discuss->user->get('id')) || $this->discuss->user->isAdmin();
@@ -83,6 +85,7 @@ class DiscussThreadModifyController extends DiscussController {
         $idx = 1;
         $atts = array();
         $postAttachmentRowTpl = $this->modx->getOption('postAttachmentRowTpl',$this->scriptProperties,'post/disPostEditAttachment');
+        /** @var disPostAttachment $attachment */
         foreach ($attachments as $attachment) {
             $attachmentArray = $attachment->toArray();
             $attachmentArray['filesize'] = $attachment->convert();

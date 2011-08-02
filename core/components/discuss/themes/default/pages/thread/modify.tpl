@@ -21,6 +21,12 @@
     </label>
     <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
 
+    [[+fi.is_root:is=`1`:then=`<label for="dis-new-thread-type">[[%discuss.thread_type]]</label>
+    <select name="class_key" id="dis-new-thread-type">
+        <option value="disThreadDiscussion" [[+fi.class_key:FormItIsSelected=`disThreadDiscussion`]]>[[%discuss.discussion]]</option>
+        <option value="disThreadQuestion" [[+fi.class_key:FormItIsSelected=`disThreadQuestion`]]>[[%discuss.question_and_answer]]</option>
+    </select>`]]
+    
     <div style="margin-left: 150px;">
         <br class="clear" />
         [[+buttons]]
