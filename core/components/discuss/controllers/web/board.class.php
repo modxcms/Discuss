@@ -132,13 +132,14 @@ class DiscussBoardController extends DiscussController {
      * @return void
      */
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $pagination = $this->discuss->hooks->load('pagination/build',array(
             'count' => !empty($this->list) ? $this->list['total'] : 0,
             'id' => $this->board->get('id'),
             'view' => 'board',
             'limit' => $this->list['limit'],
             'param' => $this->modx->getOption('discuss.page_param',$this->scriptProperties,'page'),
         ));
+        $this->setPlaceholder('pagination',$pagination);
     }
 
     public function getActionButtons() {
