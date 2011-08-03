@@ -487,6 +487,58 @@ span.avatarHover a	{
 	text-align: left;
 	}
 
+.dis-code {
+	display: block;
+	background-color: #fff;
+	color: #333;
+	padding: 10px;
+	overflow: auto;
+	}
+
+.gutter,
+code.php {
+	background-color: #fff;
+	border: none;
+	margin: 0;
+	padding: 0;
+	font-family: monospace;
+	}
+
+.gutter {
+	text-align: right;
+	}
+
+.line {
+	line-height: 20px;
+	height: 20px;
+	}
+
+.variable {
+	color: #9d6f2e;
+	}
+	
+.string {
+	color: #e58500;
+	}
+	
+.keyword {
+	color: #a62d74;
+	}
+	
+.comments {
+	color: #3c8b46;
+	}
+
+.plain {
+	color: #3a4c99
+	}
+
+.syntaxhighlighter {}
+
+.loginLegend {
+	display: none;
+	}
+	
 /* stats footer */
 .dis-stats li.dis-board-li { background: none; padding: 5px 50px; }
 
