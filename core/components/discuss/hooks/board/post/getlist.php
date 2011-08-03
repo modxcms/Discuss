@@ -31,10 +31,10 @@
  * @package discuss
  * @subpackage hooks
  */
-$response = array(
-    'start' => $scriptProperties['start'],
-    'limit' => $scriptProperties['limit'],
-);
+$response = array();
+$response['limit'] = !empty($scriptProperties['limit']) ? intval($scriptProperties['limit']) : 0;
+$response['start'] = !empty($scriptProperties['start']) ? intval($scriptProperties['start']) : 0;
+
 
 /* setup default properties */
 $tpl = $modx->getOption('tpl',$scriptProperties,'post/disBoardPost');
@@ -43,12 +43,13 @@ $mode = $modx->getOption('mode',$scriptProperties,'post');
 $board = (int)(is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board']);
 
 $c = array();
-$c['limit'] = !empty($scriptProperties['limit']) ? $scriptProperties['limit'] : 0;
-$c['start'] = !empty($scriptProperties['start']) ? $scriptProperties['start'] : 0;
+$c['limit'] = $response['limit'];
+$c['start'] = $response['start'];
 $cacheKey = 'discuss/board/'.$board.'/posts/'.$mode.'-'.md5(serialize($c));
-$threadCollection = $modx->cacheManager->get($cacheKey);
+$cache = $modx->cacheManager->get($cacheKey);
 
-if (empty($threadCollection)) {
+if (empty($cache)) {
+    $cache = array();
     /* build query */
     $c = $modx->newQuery('disThread');
     $c->innerJoin('disPost','FirstPost');
@@ -58,7 +59,7 @@ if (empty($threadCollection)) {
     $c->where(array(
         'disThread.board' => $board,
     ));
-    $response['total'] = $modx->getCount('disThread',$c);
+    $cache['total'] = $modx->getCount('disThread',$c);
     $c->select($modx->getSelectColumns('disPost','LastPost'));
     $c->select(array(
         'last_post_id' => 'LastPost.id',
@@ -99,7 +100,7 @@ if (empty($threadCollection)) {
     }
     $threads = $modx->getCollection('disThread',$c);
 
-    $threadCollection = array();
+    $cache['results'] = array();
     /** @var disThread $thread */
     foreach ($threads as $thread) {
         $thread->getUrl();
@@ -128,12 +129,14 @@ if (empty($threadCollection)) {
             $threadArray['createdon'] = strftime('%a, %d %b %Y %I:%M:%S %z',strtotime($threadArray['createdon']));
             $threadArray['url'] = $modx->getOption('site_url').$threadArray['url'];
         }
-        $threadCollection[] = $threadArray;
+        $cache['results'][] = $threadArray;
     }
 
     /* set to cache */
-    $modx->cacheManager->set($cacheKey,$threadCollection,$modx->getOption('discuss.cache_time',null,3600));
+    $modx->cacheManager->set($cacheKey,$cache,$modx->getOption('discuss.cache_time',null,3600));
 }
+
+$response['total'] = $cache['total'];
 
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
@@ -141,9 +144,9 @@ $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 $unread = $discuss->user->getUnreadThreadsForBoard($board);
 
 /* iterate through threads */
-reset($threadCollection);
+reset($cache['results']);
 $response['results'] = array();
-foreach ($threadCollection as $threadArray) {
+foreach ($cache['results'] as $threadArray) {
     if ($mode != 'rss') {
         /* last post */
 
