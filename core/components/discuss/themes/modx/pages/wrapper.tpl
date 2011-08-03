@@ -34,7 +34,7 @@
           
           	
 		<nav id="user">
-			<a title="Open Source PHP Content Management System, Framework, Platform and More" id="logo" class="ir" href="/revolution/forums/">MODX Open Source Content Management System, Framework, Platform and More.</a>
+			<a title="Open Source PHP Content Management System, Framework, Platform and More" id="logo" class="ir" href="[[~[[*id]]]]">MODX Open Source Content Management System, Framework, Platform and More.</a>
 		</nav>
 
 			<nav id="logo_search">
@@ -46,9 +46,9 @@
 		                <a href="community/wall-of-fame/support-modx/">Donate</a>
 		            </div>
 		
-		                <form action="search-results/" method="get" accept-charset="utf-8">
+		                <form action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
 							<label for="search_form_input" class="hidden">Search</label>
-							<input id="search_form_input" placeholder="Search keyphrase..." name="search" value="" title="Start typing and hit ENTER" type="text">
+							<input id="search_form_input" placeholder="Search keyphrase..." name="s" value="" title="Start typing and hit ENTER" type="text">
 							<input value="Go" type="submit">
 						</form>   
 		        </div><!-- #search -->
