@@ -476,7 +476,7 @@ div.auth-count {
 	}
 	
 div.dis-profile ul.profile {
-	margin: 0 0 30px 10px;
+	margin: 0 0 30px 18px;
 	}
 
 span.avatarHover a	{
@@ -1068,8 +1068,7 @@ div.User {
 #Status a:hover {
 	text-decoration: underline;
 	}
-#Form_Invitation table tbody th,
-UNUSED#Form_Invitation table tbody td {
+#Form_Invitation table tbody th {
 	border-bottom: 1px solid #C0E7F5;
 	line-height: 150%;
 	}
@@ -1087,6 +1086,10 @@ div.MessageForm {
 	background: #cfecff;
 	}
 
+form ul.CategoryList {
+	margin-bottom: 15px;
+	}
+	
 div.MorePager a:hover,
 a.TabLink:hover,
 div.Tabs li a:hover,
