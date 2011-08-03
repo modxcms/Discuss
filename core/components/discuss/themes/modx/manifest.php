@@ -81,6 +81,15 @@ $manifest = array(
             'showModerators' => true,
         ),
     ),
+    'board.xml' => array(
+        'options' => array(
+            'showSubBoards' => false,
+            'showPosts' => true,
+            'showBreadcrumbs' => false,
+            'showReaders' => false,
+            'showModerators' => false,
+        ),
+    ),
     'thread' => array(
         'js' => array(
             'header' => array(
