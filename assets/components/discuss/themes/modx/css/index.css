@@ -143,6 +143,12 @@ li.dis-post {
 	position: relative;
 	}
 
+div.dis-threads ol.search-results {
+	display: block;
+	margin: 0 0 0 20px;
+	padding: 0 0;
+	}
+
 .dis-thread-actions,
 .dis-pagination,
 .dis-viewing {
@@ -628,7 +634,8 @@ h1, h2 {
 	font-weight:bold;
 	margin-bottom:10px;
 	}
-	
+
+div.dis-threads ol.search-results a.Title,
 ul.DataList a.Title,
 h3 {
 	font-size:18px;
@@ -2476,11 +2483,11 @@ pre {
  	display:block;
  	font-weight:bold;
  	width: 11em;
- 	line-height: 27px;
+ 	line-height: 12px;
  	color: #5a5a5a;
  	float: left;
  	clear: left;
- 	margin-left: 20px;
+ 	margin: 0 0 0 20px;
 	cursor: pointer;
 	}
 

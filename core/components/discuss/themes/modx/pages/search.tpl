@@ -1,43 +1,66 @@
 
 
 <form class="dis-form" action="[[~[[*id]]]]search/" method="get">
-    <h2>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h2>
-    
-    <label for="dis-search">[[%discuss.search]]:</label>
-    <input type="text" id="dis-search" name="s" value="[[+search]]" />
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.search? &namespace=`discuss` &topic=`web`]]</div>
+	    </li>
+	</ul>
+	
+    <label for="dis-search">[[%discuss.search]]:</label><br class="clearfix" />
+    <input type="text" id="dis-search" name="s" value="[[+search]]" /><br class="clearfix" />
 
     <label for="dis-search-board">[[%discuss.board]]:
         <span class="error">[[+error.board]]</span>
-    </label>
-    <select name="board" id="dis-search-board">[[+boards]]</select>
+    </label><br class="clearfix" />
+    <select name="board" id="dis-search-board">[[+boards]]</select><br class="clearfix" />
 
-    <label for="dis-author">[[%discuss.author]]:</label>
+    <label for="dis-author">[[%discuss.author]]:</label><br class="clearfix" />
     <input type="text" id="dis-author" name="user" value="[[+user]]" />
 
-    <br class="clear" />
+    <br class="clearfix" />
     
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.search]]" />
-    </div>
+    </div><br class="clearfix" />
 </form>
 
 <hr />
 
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
 
-[[+results:notempty=`<h2>Displaying [[+start]]-[[+end]] of [[+total]] Results</h2>`]]
-<table class="dis-search-results dis-table">
-<thead>
-<tr>
-    <th style="width: 18%;">[[%discuss.post]]</th>
-    <th style="width: 32%;">[[%discuss.excerpt]]</th>
-    <th style="width: 10%;">[[%discuss.author]]</th>
-    <th style="width: 10%;">[[%discuss.posted_on]]</th>
-</tr>
-</thead>
-<tbody>
+<div class="dis-threads">
+	[[+results:notempty=`<ul class="DataList CategoryList CategoryListWithHeadings">
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">Displaying [[+start]]-[[+end]] of [[+total]] Results</div>
+	    </li>
+	</ul>`]]
+
+<ol class="dis-board-thread search-results">
 [[+results]]
-</tbody>
-</table>
+</ol>
+</div>
 
-<div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
+<div class="dis-pagination"><ul>[[+pagination]]</ul></div>
+
+	
+</div><!-- Close Content From Wrapper -->
+
+[[+bottom]]
+
+
+
+<div id="Panel">
+    <div class="PanelBox">
+
+
+        <div class="Box GuestBox">
+           <h4>Other Support Options</h4>
+            <p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>.</p>
+        </div>
+
+        <div class="Box GuestBox">
+           <h4>Want to Support MODX?</h4>
+            <p>If you build sites for a living with MODX, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
+        </div>
+
+    </div>
