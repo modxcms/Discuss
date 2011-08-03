@@ -487,15 +487,22 @@ span.avatarHover a	{
 	text-align: left;
 	}
 
+.dis-attachments li a {
+	padding-left: 15px;
+	background: transparent url(../images/attachment.png) no-repeat 0 2px;
+	}
+
 .dis-code {
 	display: block;
+	width: 550px;
 	background-color: #fff;
 	color: #333;
 	padding: 10px;
-	overflow: auto;
+	overflow-x: scroll;
 	}
 
 .gutter,
+code.js,
 code.php {
 	background-color: #fff;
 	border: none;
@@ -1428,7 +1435,6 @@ input:invalid {
 br.clearfix  {display:block; height:0; clear:both; visibility:hidden; }
 
  
-
 
 
 body {
