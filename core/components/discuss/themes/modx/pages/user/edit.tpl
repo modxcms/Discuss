@@ -7,6 +7,13 @@
 	    <div class="ItemContent Category">[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</div>
 	    </li>
 	</ul>
+	
+[[!include? &file=`[[++discuss.core_path]]elements/snippets/snippet.discussupdateprofileloader.php`]]
+[[!UpdateProfile?
+	&placeholderPrefix=`up`
+	&submitVar=`login-updprof-btn`
+	&postHooks=`postHook.DiscussUpdateProfile`
+]]
 
 <form action="[[~[[*id]]]]user/edit?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 

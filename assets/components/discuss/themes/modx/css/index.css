@@ -418,6 +418,7 @@ div.dis-author span {
 	position: absolute;
 	top: 0;
 	left: 75px;
+	z-index: 500;
 	background-color: #fff;
 	border: 1px solid #bbb;
 	-moz-border-radius: 4px;
@@ -537,7 +538,7 @@ nav ul {
 .syntaxhighlighter { overflow: hidden !important; }
 
 #Frame {
- 	margin: 0 auto;
+ 	margin: 20px auto;
  	text-align: left;
  	width: 960px;
 	}
@@ -2457,12 +2458,13 @@ pre {
 .dis-form label {
  	display:block;
  	font-weight:bold;
- 	text-align:right;
  	width: 11em;
  	line-height: 27px;
  	color: #5a5a5a;
  	float: left;
  	clear: left;
+ 	margin-left: 20px;
+	cursor: pointer;
 	}
 
 .dis-form .small {
@@ -2477,7 +2479,7 @@ pre {
 .dis-form input, .dis-form select, .dis-form textarea, .dis-form-field-solo {
  	padding: .4em .2em; 
  	border: solid 1px lightgray;
- 	margin: .2em 0 2em 1em;
+ 	margin: 5px 0 20px 20px;
  	float: left;
 	}
 
@@ -2497,8 +2499,10 @@ pre {
  	line-height: 10px;
 	}
 
-.dis-form label { cursor: pointer; }
-
+.loginLegend {
+	display: none;
+	}
+	
 .dis-form .dis-cb {
  	display: block;
  	font-weight: normal;
@@ -2512,7 +2516,6 @@ pre {
  	}
  	
 .dis-form .dis-cb input { margin: 5px; }
-.dis-form fieldset { border: 1px solid lightgray; }
 
 .wysi-buttons {
 	width: 100%;
@@ -2527,7 +2530,6 @@ pre {
 	}
 
 .dis-form-buttons input { float: none; }
-
 .dis-form p {
  	color: #666666;
  	padding: 5px 20px;
