@@ -29,10 +29,11 @@ require_once dirname(__FILE__).'/board.class.php';
  */
 class DiscussBoardXmlController extends DiscussBoardController {
     public $useWrapper = false;
-    public function setOptions() {
+    public function initialize() {
         $this->options['tpl'] = 'post/disBoardPostXml';
         $this->options['mode'] = 'rss';
         $this->options['get_category_name'] = true;
+        parent::initialize();
     }
     public function postProcess() {
         @header('Content-type: application/xhtml+xml');
