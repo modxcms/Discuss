@@ -4,7 +4,7 @@
 
             <div class="dis-author">
             	<a href="[[~[[*id]]]]user/?user=[[+author.id]]" class="auth-avatar">[[+author.avatar]]</a>
-            	<div class="auth-count"><div class="post_icon">[[+author.posts]]</div><div class="badge_icon">3</div></div>
+            	<div class="auth-count"><div class="post_icon">[[+author.posts]]</div><!--<div class="badge_icon">3</div>--></div>
                 <span class="avatarHover">
 						[[+author.email]]
 						[[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
