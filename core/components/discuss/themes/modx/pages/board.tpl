@@ -22,12 +22,6 @@
     <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
 </div>
 
-<div style="padding:10px;">
-    <p class="dis-thread-viewing clear">[[+readers]]</p>
-    <p class="dis-moderators">[[+moderators]]</p>
-</div>
-
-
 
 </div><!-- Close Content From Wrapper -->
 
@@ -40,17 +34,23 @@
 
         <div class="Box GuestBox">
         <h4>Search Board</h4>
-        <form action="[[~[[*id]]]]search" method="GET">
-            <input type="hidden" name="board" value="[[+id]]" />
-            <label><input type="text" name="s" value="" placeholder="[[%discuss.search_this_board]]" /></label>
-
-            <input type="submit" class="dis-action-btn-solo"  value="[[%discuss.search]]" />
-        </form>
+        <p>
+	        <form action="[[~[[*id]]]]search" method="GET">
+	            <input type="hidden" name="board" value="[[+id]]" />
+	            <label>
+	            	<input type="text" name="s" value="" placeholder="[[%discuss.search_this_board]]" />
+	            </label>
+				<input type="submit" class="Button dis-action-btn-solo"  value="[[%discuss.search]]" />
+	        </form>
+        </p>
         </div>
 
         [[+discuss.user.id:notempty=`<div class="Box GuestBox">
            <h4>Actions &amp; Info</h4>
             <p>[[+actionbuttons]]</p>
+            [[+belowThreads]]
+            <p>[[+readers]]</p>
+			<p>[[+moderators]]</p>
         </div>`]]
 
 

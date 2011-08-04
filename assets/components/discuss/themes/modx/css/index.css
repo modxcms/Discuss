@@ -1809,6 +1809,7 @@ header {
  	display:block;
  	background:transparent url(http://www.modx.com/assets/i/modx-logo.png) top left no-repeat;
  	background-position: left -63px;
+ 	z-index: 1000;
 	}
 
 #logo_search div.links span {
@@ -2802,6 +2803,13 @@ pre {
  	line-height: 1em;
 	}
 
+.GuestBox form input[type="text"] {
+	width: 130px;
+ 	padding: .4em .2em; 
+ 	border: solid 1px lightgray;
+ 	margin: 5px 5px 10px 10px;
+ 	}
+ 	
 .dis-form input, .dis-form select, .dis-form textarea, .dis-form-field-solo {
  	padding: .4em .2em; 
  	border: solid 1px lightgray;
