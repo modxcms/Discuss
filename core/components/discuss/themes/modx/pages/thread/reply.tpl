@@ -22,16 +22,16 @@
     
     <label for="dis-reply-post-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
-    </label>
-    <input type="text" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" /><br class="clearfix" />
 
 
-    <div class="wysi-buttons">[[+buttons]]</div>
+    <div class="wysi-buttons">[[+buttons]]</div><br class="clearfix" />
 
     
     <label for="dis-thread-message">
         <span class="error">[[!+fi.error.message]]</span>
-    </label>
+    </label><br class="clearfix" />
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
     <br class="clearfix" />
 
@@ -52,8 +52,14 @@
 </form>
 <div id="dis-reply-post-preview"></div>
 
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+		<li class="Item CategoryHeading Depth1">
+	    <div class="ItemContent Category">[[%discuss.thread_summary]]</div>
+	    </li>
+	</ul>
+
 <div class="dis-thread-posts">
-    <h2>[[%discuss.thread_summary]]</h2>
 [[+thread_posts]]
 </div>
 

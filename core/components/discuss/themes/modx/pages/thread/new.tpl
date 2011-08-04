@@ -19,22 +19,22 @@
     
     <label for="dis-new-thread-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
-    </label>
-    <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" /><br class="clearfix" />
 
-    <label for="dis-new-thread-type">[[%discuss.thread_type]]:</label>
+    <label for="dis-new-thread-type">[[%discuss.thread_type]]:</label><br class="clearfix" />
     <select name="class_key" id="dis-new-thread-type">
         <option value="disThreadDiscussion">[[%discuss.discussion]]</option>
         <option value="disThreadQuestion">[[%discuss.question_and_answer]]</option>
-    </select>
+    </select><br class="clearfix" />
 
-    <div class="wysi-buttons">[[+buttons]]</div>
+    <div class="wysi-buttons">[[+buttons]]</div><br class="clearfix" />
 
 
     <label for="dis-thread-message">
         <span class="error">[[!+fi.error.message]]</span>
-    </label>
-    <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
+    </label><br class="clearfix" />
+    <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea><br class="clearfix" />
 
     [[+attachment_fields]]
 
@@ -43,16 +43,16 @@
 
     [[+locked_cb]]
     [[+sticky_cb]]
-
+<br class="clearfix" />
     <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]</label><br class="clear" />
-
+<br class="clearfix" />
     <div class="dis-form-buttons">
         <input type="submit" name="dis-post-new" value="[[%discuss.thread_post_new]]" />
         <input type="button" class="dis-new-thread-preview" id="dis-new-thread-preview-btn" value="[[%discuss.preview]]" />
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
     </div>
 </form>
-
+<br class="clearfix" />
 <div id="dis-new-thread-preview"></div>
 
 [[+discuss.error_panel]]
