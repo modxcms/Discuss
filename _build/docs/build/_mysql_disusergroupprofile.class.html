@@ -55,11 +55,181 @@
 <dd>discuss</dd>
 <dt>subpackage</dt>
 <dd>mysql</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
+<dd><a class="method public" href="#%5CdisUserGroupProfile_mysql::getBadge()">getBadge</a></dd>
+<dd><a class="method public" href="#%5CdisUserGroupProfile_mysql::getBadgePath()">getBadgePath</a></dd>
+<dd><a class="method public" href="#%5CdisUserGroupProfile_mysql::getBadgeUrl()">getBadgeUrl</a></dd>
+<dd><a class="method public" href="#%5CdisUserGroupProfile_mysql::uploadBadge()">uploadBadge</a></dd>
 </dl>
 <dl></dl>
 <h3>Description</h3>
 <p class="short-description">Related object to the modUserGroup class, used for storing custom data specific to Discuss.</p>
 <div class="long-description">
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\disUserGroupProfile_mysql::getBadge()"></a><h4 class="method public">getBadge<div class="to-top"><a href="#disUserGroupProfile_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getBadge</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Return the URL for this user's badge, if they have one</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The URL to the badge</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disusergroupprofile.class.html#%5CdisUserGroupProfile::getBadge()">\disUserGroupProfile::getBadge()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile_mysql::getBadgePath()"></a><h4 class="method public">getBadgePath<div class="to-top"><a href="#disUserGroupProfile_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getBadgePath</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Get the absolute path to the badges directory</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The absolute path to the badges directory</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disusergroupprofile.class.html#%5CdisUserGroupProfile::getBadgePath()">\disUserGroupProfile::getBadgePath()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile_mysql::getBadgeUrl()"></a><h4 class="method public">getBadgeUrl<div class="to-top"><a href="#disUserGroupProfile_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getBadgeUrl</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Get the full URL to the badges directory</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The full URL to the badges URL</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disusergroupprofile.class.html#%5CdisUserGroupProfile::getBadgeUrl()">\disUserGroupProfile::getBadgeUrl()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disUserGroupProfile_mysql::uploadBadge()"></a><h4 class="method public">uploadBadge<div class="to-top"><a href="#disUserGroupProfile_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">uploadBadge</span><span class="nb-faded-text">(
+          array $file, bool $removeOld
+              =
+              false
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Upload a badge and associate with this user group</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$file</dt>
+<dd>array<br><em><p>A php FILE array for the badge</p>
+</em>
+</dd>
+<dt>$removeOld</dt>
+<dd>bool<br><em><p>If true, will remove the old badge if one was set</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disusergroupprofile.class.html#%5CdisUserGroupProfile::uploadBadge()">\disUserGroupProfile::uploadBadge()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 </div>
 </div>
 </div>

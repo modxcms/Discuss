@@ -55,11 +55,318 @@
 <dd>discuss</dd>
 <dt>subpackage</dt>
 <dd>mysql</dd>
+<dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
+                Methods
+              </a></dt>
+<dd><a class="method public" href="#%5CdisPostAttachment_mysql::convert()">convert</a></dd>
+<dd><a class="method public" href="#%5CdisPostAttachment_mysql::getPath()">getPath</a></dd>
+<dd><a class="method public" href="#%5CdisPostAttachment_mysql::getUrl()">getUrl</a></dd>
+<dd><a class="method public" href="#%5CdisPostAttachment_mysql::remove()">remove</a></dd>
+<dd><a class="method public" href="#%5CdisPostAttachment_mysql::save()">save</a></dd>
+<dd><a class="method public" href="#%5CdisPostAttachment_mysql::upload()">upload</a></dd>
 </dl>
 <dl></dl>
 <h3>Description</h3>
 <p class="short-description">An attached file to a Post</p>
 <div class="long-description">
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\disPostAttachment_mysql::convert()"></a><h4 class="method public">convert<div class="to-top"><a href="#disPostAttachment_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">convert</span><span class="nb-faded-text">(
+          int $precision
+              =
+              2
+          )
+        </span>
+        :
+        string</code><p class="short-description">Converts filesize to human-readable format</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$precision</dt>
+<dd>int<br><em><p>The number of decimal points to round to.</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The formatted string.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+<dt>inherited_from</dt>
+<dd><a href="_dispostattachment.class.html#%5CdisPostAttachment::convert()">\disPostAttachment::convert()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPostAttachment_mysql::getPath()"></a><h4 class="method public">getPath<div class="to-top"><a href="#disPostAttachment_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getPath</span><span class="nb-faded-text">(
+          boolean $appendFile
+              =
+              true
+          )
+        </span>
+        :
+        string</code><p class="short-description">Gets the path of the attachment (and optionally just the directory)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$appendFile</dt>
+<dd>boolean<br><em><p>If true, will append the filename to the attachment path. Defaults to true</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The path to the file or directory of the file.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+<dt>inherited_from</dt>
+<dd><a href="_dispostattachment.class.html#%5CdisPostAttachment::getPath()">\disPostAttachment::getPath()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPostAttachment_mysql::getUrl()"></a><h4 class="method public">getUrl<div class="to-top"><a href="#disPostAttachment_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getUrl</span><span class="nb-faded-text">(
+          boolean $appendFile
+              =
+              true
+          )
+        </span>
+        :
+        string</code><p class="short-description">Gets the url of the attachment (and optionally just the directory)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$appendFile</dt>
+<dd>boolean<br><em><p>If true, will append the filename to the attachment url. Defaults to true</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The url to the file or directory of the file.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+<dt>inherited_from</dt>
+<dd><a href="_dispostattachment.class.html#%5CdisPostAttachment::getUrl()">\disPostAttachment::getUrl()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPostAttachment_mysql::remove()"></a><h4 class="method public">remove<div class="to-top"><a href="#disPostAttachment_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">remove</span><span class="nb-faded-text">(
+          array $ancestors
+              =
+              array
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Overrides the xPDOObject::remove method to remove the physical file for
+the attachment</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$ancestors</dt>
+<dd>array<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_dispostattachment.class.html#%5CdisPostAttachment::remove()">\disPostAttachment::remove()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPostAttachment_mysql::save()"></a><h4 class="method public">save<div class="to-top"><a href="#disPostAttachment_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">save</span><span class="nb-faded-text">(
+          boolean $cacheFlag
+              =
+              null
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Overrides xPDOObject::save to handle createdon date</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$cacheFlag</dt>
+<dd>boolean<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_dispostattachment.class.html#%5CdisPostAttachment::save()">\disPostAttachment::save()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disPostAttachment_mysql::upload()"></a><h4 class="method public">upload<div class="to-top"><a href="#disPostAttachment_mysql">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">upload</span><span class="nb-faded-text">(
+          array $file
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Handles uploads for the attachment</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$file</dt>
+<dd>array<br><em><p>The POST file to upload.</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em>True if successful.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+<dt>inherited_from</dt>
+<dd><a href="_dispostattachment.class.html#%5CdisPostAttachment::upload()">\disPostAttachment::upload()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 </div>
 </div>
 </div>
