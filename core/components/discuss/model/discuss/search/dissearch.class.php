@@ -107,6 +107,7 @@ class disSearch {
         $c->select(array(
             'username' => 'Author.username',
             'board_name' => 'Board.name',
+            'replies' => 'Thread.replies',
             'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE) AS score',
         ));
         $c->groupby('disPost.thread');
@@ -116,6 +117,7 @@ class disSearch {
         $postObjects = $this->modx->getCollection('disPost',$c);
 
         if (!empty($postObjects)) {
+            /** @var disPost $post */
             foreach ($postObjects as $post) {
                 $postArray = $post->toArray();
                 $postArray['message'] = $post->getContent();

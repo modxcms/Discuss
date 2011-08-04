@@ -40,6 +40,8 @@
  * @property boolean locked Whether or not this board is locked from more posts.
  * @property int integrated_id If this board was imported, the PK of the old system's board.
  *
+ * @property disCategory $Category
+ *
  * @package discuss
  */
 class disBoard extends xPDOSimpleObject {

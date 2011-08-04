@@ -74,6 +74,7 @@ $c->select(array(
 $c->sortby('id','ASC');
 
 $posts = $modx->getIterator('disPost');
+/** @var disPost $post */
 foreach ($posts as $post) {
     echo 'Indexing: '.$post->get('title')."\n"; flush();
     $post->index();
