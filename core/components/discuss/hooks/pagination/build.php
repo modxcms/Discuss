@@ -76,7 +76,7 @@ switch ($current) {
 	break;
 }
 /* If total pages under limit, don't truncate */
-if ($total < $count) {
+if ($total < $limit) {
 	for ($i = 1; $i <= $total; $i++) {
 		$list[] = ($i == $current)
 			? $discuss->getChunk('pagination/PaginationActive', array('class' => 'active', 'text' => $i))
