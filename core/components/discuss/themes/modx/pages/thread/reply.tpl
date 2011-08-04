@@ -46,7 +46,7 @@
     
     <div class="dis-form-buttons">
         <input type="submit" name="dis-post-reply" value="[[%discuss.post_reply]]" />
-        <input type="button" name="dis-post-preview" value="[[%discuss.preview]]" />
+        <input type="button" name="dis-post-preview" class="dis-preview" value="[[%discuss.preview]]" />
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
