@@ -45,7 +45,11 @@ unset($params['start']);
 $currentResourceUrl = $discuss->request->makeUrl($view,$params);
 
 if ($total <= 1) {
-	$pagination = '<div class="inactive">'.$modx->lexicon('discuss.page_one_of_one').'</div>';
+	$pagination = $discuss->getChunk('pagination/paginationActive',array(
+	    'text' => $modx->lexicon('discuss.page_one_of_one'),
+	    'class' => 'dis-no-pages',
+	));
+	$pagination = $discuss->getChunk('pagination/PaginationWrapper',array('content' => $pagination));
 	$modx->toPlaceholders(array('pagination' => $pagination));
 	return;
 }
