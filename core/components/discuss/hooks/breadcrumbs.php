@@ -23,6 +23,10 @@
  */
 /**
  * Build breadcrumbs from data
+ *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
  * 
  * @package discuss
  * @subpackage hooks
@@ -30,10 +34,21 @@
 $tpl = $modx->getOption('breadcrumbLinkTpl',$scriptProperties,'breadcrumbs/disBreadcrumbsLink');
 $activeTpl = $modx->getOption('breadcrumbActiveTpl',$scriptProperties,'breadcrumbs/disBreadcrumbsActive');
 $containerTpl = $modx->getOption('breadcrumbsTpl',$scriptProperties,'breadcrumbs/disBreadcrumbs');
+$firstCls = $modx->getOption('firstCls',$scriptProperties,'dis-bc-first');
+$lastCls = $modx->getOption('firstCls',$scriptProperties,'dis-bc-last');
+$altCls = $modx->getOption('altCls',$scriptProperties,'dis-bc-alt');
 
 $output = array();
+$idx = 0;
+$total = count($scriptProperties['items']);
+$alt = false;
 foreach ($scriptProperties['items'] as $item) {
+    $cls = $idx == 0 ? $firstCls : ($idx == ($total-1) ? $lastCls : '');
+    if ($alt) { $cls .= ' '.$altCls; }
+    $item['cls'] = $cls;
     $output[] = $discuss->getChunk(!empty($item['active']) ? $activeTpl : $tpl,$item);
+    $idx++;
+    $alt = !$alt;
 }
 $output = implode("\n",$output);
 return $discuss->getChunk($containerTpl,array('items' => $output));
