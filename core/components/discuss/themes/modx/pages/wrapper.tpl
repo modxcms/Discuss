@@ -5,7 +5,7 @@
     <!--[if IE]><![endif]-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<base href="[[!++site_url]]">
-    <title>Discuss Test</title>
+    <title>MODX :: [[!+discuss.pagetitle]]</title>
     <meta name="title" content="Test Page">    
     <meta name="author" content="MODX Systems, LLC">
 
