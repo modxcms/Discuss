@@ -1,5 +1,3 @@
-[[+trail]]
-
 [[!FormIt?
   &submitVar=`dis-message-modify`
   &hooks=`postHook.DiscussModifyMessage`
@@ -20,39 +18,44 @@
 
     <label for="dis-message-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
-    </label>
-    <input type="text" name="title" id="dis-message-title" value="[[!+fi.title]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="title" id="dis-message-title" value="[[!+fi.title]]" /><br class="clearfix" />
 
     <label for="dis-reply-participants">[[%discuss.participants]]:
         <span class="error">[[!+fi.error.participants_usernames]]</span>
         <span class="small">[[%discuss.participants_desc]]</span>
-    </label>
-    <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" /><br class="clearfix" />
 
 
-    <div class="wysi-buttons">[[+buttons]]</div>
+    <div class="wysi-buttons">[[+buttons]]</div><br class="clearfix" />
     
 
     <label for="dis-thread-message">
         <span class="error">[[!+fi.error.message]]</span>
-    </label>
+    </label><br class="clearfix" />
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
     <br class="clearfix" />
+
 
     <label for="dis-attachment">[[%discuss.attachments]]:
         <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
         <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
     </label>
+        <br class="clearfix" />
+
     <input type="file" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
+    
 
     <div id="dis-attachments"></div>
+
     [[+attachments:notempty=`<div class="dis-existing-attachments">
         <ul>[[+attachments]]</ul>
     </div>`]]
-    <br class="clearfix" />
-
-    <br class="clearfix" />
+    
+    
+<br class="clearfix" />
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-message-modify" value="[[%discuss.save_changes]]" />
         <input type="button" class="dis-action-btn dis-modify-message-preview-btn" id="dis-modify-message-preview-btn" value="[[%discuss.preview]]" />
@@ -69,7 +72,10 @@
 	    <div class="ItemContent Category">[[%discuss.thread_summary]]</div>
 	    </li>
 	</ul>
+	<div class="dis-thread-posts">
+
 [[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
+	</div>
 </div>
 
 

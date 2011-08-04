@@ -2833,6 +2833,10 @@ pre {
  	
 .dis-form .dis-cb input { margin: 5px; }
 
+.dis-thread-posts p {
+	margin: 5px 0 20px 20px;
+	}
+
 .wysi-buttons {
 	width: 100%;
 	clear: both;
