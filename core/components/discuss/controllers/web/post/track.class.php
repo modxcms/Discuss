@@ -43,7 +43,8 @@ class DiscussPostTrackController extends DiscussController {
     }
 
     public function process() {
-        /* get default options */
+        $ip = $this->getProperty('ip','');
+        
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.post_per_page',null,10));
         //$start = $this->getProperty('start',0);
         $page = $this->getProperty('page',1);
@@ -52,12 +53,14 @@ class DiscussPostTrackController extends DiscussController {
 
         /* posts by ip */
         $this->posts = $this->discuss->hooks->load('post/byip',array(
-            'ip' => $this->getProperty('ip',''),
+            'ip' => $ip,
             'limit' => $limit,
             'start' => $start,
             'getTotal' => true,
         ));
         $this->setPlaceholder('posts',$this->posts['results']);
+        $this->setPlaceholder('total',$this->posts['total']);
+        $this->setPlaceholder('ip',$ip);
 
         /* build pagination */
         $this->discuss->hooks->load('pagination/build',array(
