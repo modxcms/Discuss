@@ -32,18 +32,7 @@
 <div id="Panel">
     <div class="PanelBox">
 
-        <div class="Box GuestBox">
-        <h4>Search Board</h4>
-        <p>
-	        <form action="[[~[[*id]]]]search" method="GET">
-	            <input type="hidden" name="board" value="[[+id]]" />
-	            <label>
-	            	<input type="text" name="s" value="" placeholder="[[%discuss.search_this_board]]" />
-	            </label>
-				<input type="submit" class="Button dis-action-btn-solo"  value="[[%discuss.search]]" />
-	        </form>
-        </p>
-        </div>
+
 
         [[+discuss.user.id:notempty=`<div class="Box GuestBox">
            <h4>Actions &amp; Info</h4>

@@ -87,7 +87,9 @@
 				</ul>   
 			</nav>
 		</header>
+		
 [[+trail]]
+
 	</div>
 	
 		<div id="Frame">

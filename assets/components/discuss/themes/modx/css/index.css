@@ -85,7 +85,6 @@ li.dis-board-li .dis-board-locked {
 
 .dis-board-post {
  	list-style: none;
- 	height: 50px;
  	clear: both;
 	}
  	
@@ -292,7 +291,7 @@ div.dis-actions span ul li a {
 
 span.DiscussionCount {
 	color: #aaa;
-    font-size: 14px;
+    font-size: 13px;
 	}
 
 div.dis-report {
@@ -398,7 +397,7 @@ div.dis-latest {
 	width: 670px;
 	color: #777;
 	margin: 0 20px 0 19px;
-	padding: 0 0;
+	padding: 10px 0;
 	border-bottom: 1px solid #ddd;
 	}
 
@@ -845,13 +844,18 @@ nav ul {
     list-style: none outside none;
 	}
 
+#crumbs li.first {
+    background: none repeat scroll 0 0 transparent;
+    padding: 0;
+}
+
 #crumbs li {
     background: url("../images/bg-sprite.png") no-repeat scroll 3px -114px transparent;
     float: left;
     font-size: 12px;
-    padding: 2px 0 0 24px;
+    padding: 3px 0 0 24px;
     z-index: 10;
-    height: 23px;
+    height: 24px;
 	}
 
 .dis-breadcrumbs {
@@ -893,16 +897,25 @@ nav ul {
 #Panel {
 	width: 250px;
 	float: right;
+	background:-webkit-gradient(linear, center bottom, center top, from(#ffffff), to(#f3f3f3));
+	background:-moz-linear-gradient(top, #f3f3f3, #ffffff);
+	-pie-background:linear-gradient(top, #f3f3f3, #ffffff);
+	background:linear-gradient(top, #f3f3f3, #ffffff);
+	border-top-right-radius: 6px;
+	-moz-border-top-right-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
 	}
 
 :focus {
 	outline: 0;
 	}
+	
 body {
 	line-height: 1;
 	color: black;
 	background: white;
 	}
+	
 ol, ul {
 	list-style: none;
 	}
@@ -2404,10 +2417,6 @@ footer {
 	width: 100%;
 	float: left;
 	background: #ffffff;
-	background:-webkit-gradient(linear, center bottom, center top, from(#ffffff), to(#f3f3f3));
-	background:-moz-linear-gradient(top, #f3f3f3, #ffffff);
-	-pie-background:linear-gradient(top, #f3f3f3, #ffffff);
-	background:linear-gradient(top, #f3f3f3, #ffffff);
 	border: 1px solid #e3e3e3;
 	border-radius: 6px;
 	-moz-border-radius: 6px;
