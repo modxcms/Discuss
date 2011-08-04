@@ -23,6 +23,10 @@
  */
 /**
  * Get all posts by an IP address
+ *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
  */
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
@@ -49,11 +53,12 @@ if ($discuss->user->isLoggedIn) {
 $total = $modx->getCount('disPost',$c);
 $c->select($modx->getSelectColumns('disPost','disPost'));
 $c->select(array(
-    'Author.username AS author_username',
-    'Board.name AS board_name',
+    'author_username' => 'Author.username',
+    'board_name' => 'Board.name',
     'Thread.sticky',
     'Thread.locked',
     'Thread.private',
+    'Thread.replies',
 ));
 $c->groupby('disPost.thread');
 $c->sortby('disPost.createdon','ASC');
@@ -64,6 +69,7 @@ $postObjects = $modx->getCollection('disPost',$c);
 /* iterate */
 $list = array();
 $idx = 0;
+/** @var disPost $post */
 foreach ($postObjects as $post) {
     $post->getUrl();
     $postArray = $post->toArray();

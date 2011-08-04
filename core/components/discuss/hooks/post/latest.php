@@ -23,17 +23,13 @@
  */
 /**
  * Get latest post
+ *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
  */
 
 $c = $modx->newQuery('disPost');
-$c->select(array(
-    'disPost.id',
-    'disPost.title',
-    'disPost.createdon',
-    'disPost.author',
-    'Author.username',
-    'Thread.id AS thread',
-));
 if ($discuss->user->isLoggedIn) {
     $ignoreBoards = $discuss->user->get('ignore_boards');
     if (!empty($ignoreBoards)) {
@@ -80,7 +76,18 @@ if (!$discuss->user->isAdmin()) {
         ));
     }
 }
-$c->select($modx->getSelectColumns('disBoard','Board','',array('name')).' AS `board`');
+$c->select(array(
+    'disPost.id',
+    'disPost.title',
+    'disPost.createdon',
+    'disPost.author',
+    'Author.username',
+    'Thread.sticky',
+    'Thread.locked',
+    'Thread.private',
+    'Thread.replies',
+));
+$c->select($modx->getSelectColumns('disBoard','Board','',array('name')).' AS board');
 $c->sortby($modx->getSelectColumns('disPost','disPost','',array('createdon')),'DESC');
 $latestPost = $modx->getObject('disPost',$c);
 
