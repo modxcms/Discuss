@@ -80,6 +80,10 @@ class DisRequest {
         return $this->render();
     }
 
+    /**
+     * Render the request using the loaded controller
+     * @return string
+     */
     public function render() {
         $controller = $this->controller;
 
@@ -112,7 +116,10 @@ class DisRequest {
         return $output;
     }
 
-
+    /**
+     * Get the processed name of the controller to load
+     * @return string
+     */
     public function getControllerClassName() {
         $className = 'Discuss'.ucfirst(strtolower($this->controller['controller'])).'Controller';
         $className = explode('/',$className);

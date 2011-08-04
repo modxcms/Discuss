@@ -1587,7 +1587,7 @@ for easier debugging.</description>
       </method>
     </class>
   </file>
-  <file path="discusscontroller.class.php" hash="ebb3434218d2563c57136c4ddf6bfb5c">
+  <file path="discusscontroller.class.php" hash="e54c584fa08b7c91aa11d7e1a89e703a">
     <docblock>
       <description/>
       <long-description>
@@ -2163,14 +2163,29 @@ to run.</description>
         <tag name="package" description="discuss" line="371"/>
         <tag name="subpackage" description="controllers" line="371"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" line="378">
+      <method final="false" abstract="false" static="false" visibility="public" line="381">
         <name>getPageTitle</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="379">
+      <method final="false" abstract="false" static="false" visibility="public" line="385">
         <name>getSessionPlace</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="380">
+      <method final="false" abstract="false" static="false" visibility="public" line="389">
         <name>process</name>
+        <docblock>
+          <description>{@inheritDoc}</description>
+          <long-description>
+</long-description>
+        </docblock>
       </method>
     </class>
   </file>
@@ -3339,7 +3354,7 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
       </docblock>
     </class>
   </file>
-  <file path="disthread.class.php" hash="37497b847f32c7cb01e42084d3e6cfd8">
+  <file path="disthread.class.php" hash="a36175c5aa65d8db3e89e46928b65ea0">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -7870,7 +7885,7 @@ actionVar value.</description>
       </method>
     </class>
   </file>
-  <file path="request/disrequest.class.php" hash="0383d98f6a9205314927940bbff1adb1">
+  <file path="request/disrequest.class.php" hash="953acd3bcd45ff388a73503330d6005b">
     <docblock>
       <description>Discuss</description>
       <long-description>&lt;p&gt;Copyright 2010-11 by Shaun McCormick &lt;a href="&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;"&gt;&amp;#115;&amp;#104;&amp;#x61;&amp;#x75;&amp;#x6e;&amp;#x40;&amp;#x6d;&amp;#111;&amp;#100;&amp;#120;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&lt;/a&gt;&lt;/p&gt;
@@ -7973,65 +7988,81 @@ Suite 330, Boston, MA 02111-1307 USA&lt;/p&gt;
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="83">
+      <method final="false" abstract="false" static="false" visibility="public" line="87">
         <name>render</name>
+        <docblock>
+          <description>Render the request using the loaded controller</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="string" line="83">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="116">
+      <method final="false" abstract="false" static="false" visibility="public" line="123">
         <name>getControllerClassName</name>
+        <docblock>
+          <description>Get the processed name of the controller to load</description>
+          <long-description>
+</long-description>
+          <tag name="return" description="" type="string" line="119">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="138">
+      <method final="false" abstract="false" static="false" visibility="public" line="145">
         <name>getControllerFile</name>
         <docblock>
           <description>Return the file path to the specified controller</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$controller" line="133">
+          <tag name="param" description="" type="string" variable="$controller" line="140">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="return" description="An array of file location, template location, and controller name information" type="array" line="133">
+          <tag name="return" description="An array of file location, template location, and controller name information" type="array" line="140">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="138">
+        <argument line="145">
           <name>$controller</name>
           <default>home</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="169">
+      <method final="false" abstract="false" static="false" visibility="public" line="176">
         <name>loadThemeOptions</name>
         <docblock>
           <description>Load current theme options for Front end</description>
           <long-description>
 </long-description>
-          <tag name="access" description="public" line="163"/>
-          <tag name="return" description="" type="void" line="163">
+          <tag name="access" description="public" line="170"/>
+          <tag name="return" description="" type="void" line="170">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="260">
+      <method final="false" abstract="false" static="false" visibility="public" line="267">
         <name>makeUrl</name>
         <docblock>
           <description>Makes a proper URL for the Discuss system</description>
           <long-description>
 </long-description>
-          <tag name="param" description="" type="string" variable="$action" line="253">
+          <tag name="param" description="" type="string" variable="$action" line="260">
             <type by_reference="false">string</type>
           </tag>
-          <tag name="param" description="" type="array" variable="$params" line="253">
+          <tag name="param" description="" type="array" variable="$params" line="260">
             <type by_reference="false">array</type>
           </tag>
-          <tag name="return" description="" type="string" line="253">
+          <tag name="return" description="" type="string" line="260">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="260">
+        <argument line="267">
           <name>$action</name>
           <default/>
           <type/>
         </argument>
-        <argument line="260">
+        <argument line="267">
           <name>$params</name>
           <default>array</default>
           <type>array</type>
