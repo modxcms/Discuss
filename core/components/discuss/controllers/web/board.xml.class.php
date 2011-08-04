@@ -20,12 +20,14 @@
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package discuss
+ * @subpackage controllers
  */
 require_once dirname(__FILE__).'/board.class.php';
 /**
  * Displays posts for a Board in RSS format
  *
  * @package discuss
+ * @subpackage controllers
  */
 class DiscussBoardXmlController extends DiscussBoardController {
     public $useWrapper = false;

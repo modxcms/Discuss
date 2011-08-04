@@ -375,8 +375,17 @@ abstract class DiscussController {
  * @subpackage controllers
  */
 class DiscussDeprecatedController extends DiscussController {
+    /**
+     * {@inheritDoc}
+     */
     public function getPageTitle() { return ''; }
+    /**
+     * {@inheritDoc}
+     */
     public function getSessionPlace() { return ''; }
+    /**
+     * {@inheritDoc}
+     */
     public function process() {
         $discuss =& $this->discuss;
         $modx =& $this->modx;
