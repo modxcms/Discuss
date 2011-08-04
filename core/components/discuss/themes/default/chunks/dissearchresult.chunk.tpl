@@ -5,5 +5,7 @@
     </td>
     <td>[[+message]]</td>
     <td>[[+username]]</td>
-    <td>[[+createdon]]</td>
+    <td>[[+createdon]]
+    <br /><em>[[+replies]] [[%discuss.replies]]</em>
+    </td>
 </tr>

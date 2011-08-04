@@ -115,6 +115,7 @@ class DiscussSearchController extends DiscussController {
                     if (empty($postArray['url'])) {
                         $postArray['url'] = $this->discuss->request->makeUrl('thread',array('thread' => $postArray['thread'])).'#dis-post-'.$postArray['id'];
                     }
+                    $postArray['replies'] = number_format($postArray['replies'],0);
 
                     $results[] = $this->discuss->getChunk($resultRowTpl,$postArray);
                 }

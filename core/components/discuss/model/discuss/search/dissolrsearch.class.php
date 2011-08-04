@@ -98,6 +98,7 @@ class disSolrSearch extends disSearch {
               ->addField('category_name')
               ->addField('author')
               ->addField('username')
+              ->addField('replies')
               ->addField('createdon')
               ->addField('board_name')
               ->addField('url')
@@ -156,6 +157,9 @@ class disSolrSearch extends disSearch {
         $document->addField('title',$fields['title'],2);
         $document->addField('message',$fields['message'],2);
         $document->addField('board',$fields['board']);
+        if (!empty($fields['replies'])) {
+            $document->addField('replies',$fields['replies']);
+        }
         if (!empty($fields['url'])) {
             $document->addField('url',$fields['url']);
         }

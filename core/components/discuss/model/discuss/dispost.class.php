@@ -247,6 +247,7 @@ class disPost extends xPDOSimpleObject {
             if ($this->Thread) {
                 $postArray['private'] = $this->Thread->get('private');
                 $postArray['users'] = $this->Thread->get('users');
+                $postArray['replies'] = $this->Thread->get('replies');
             }
             $postArray['message'] = $this->getContent();
             $indexed = $this->xpdo->discuss->search->index($postArray);
