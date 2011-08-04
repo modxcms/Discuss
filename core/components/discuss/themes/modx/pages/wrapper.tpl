@@ -17,17 +17,17 @@
 	<a class="hidden" href="#main">Skip to content</a>
 	<header class="container">
 		<nav id="global2">
-			<a href="[[~[[*id]]]]">Revolution</a>
-			<a href="[[~[[*id]]]]">Evolution</a>
-			<a href="[[~[[*id]]]]">Partners</a>
-			<a href="[[~[[*id]]]]">International</a>
+			<!--<a href="">Revolution</a>-->
+			<a href="http://modx.com/revolution/">Revolution</a>
+			<a href="http://modx.com/evolution/">Evolution</a>
+			<a href="http://modx.com/partners/">Partners</a>
+			<a href="http://modx.com/community/">Community</a>
 		</nav>
 
 	
 		<nav id="global">
 			[[+discuss.user.id:is=``:then=`<a href="[[~[[*id]]]]login">Login</a> | <a href="[[~[[*id]]]]register">Register</a>`]]
 			[[+discuss.user.id:notempty=`Welcome, <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a> | <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">My Account</a> | <a href="[[~[[*id]]]]logout">Logout</a>`]]
-			
 		</nav>
 		
 
@@ -40,10 +40,10 @@
 			<nav id="logo_search">
 				<div id="search">
 		            <div class="links">
-		                <a href="partners/solution/">Find a Partner</a>  <span class="ir">|</span>
-		                <a href="partners/hosting-saas/">Hosts + SaaS</a> <span class="ir">|</span> 
-		                <a href="services/jobs/">Jobs</a> <span class="ir">|</span> 
-		                <a href="community/wall-of-fame/support-modx/">Donate</a>
+		                <a href="http://modx.com/partners/solution/">Find a Partner</a>  <span class="ir">|</span>
+		                <a href="http://modx.com/partners/hosting-saas/">Hosts + SaaS</a> <span class="ir">|</span>
+		                <a href="http://modx.com/services/jobs/">Jobs</a> <span class="ir">|</span>
+		                <a href="http://modx.com/community/wall-of-fame/support-modx/">Donate</a>
 		            </div>
 		
 		                <form action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
@@ -129,7 +129,6 @@
                       <li><a href="[[~100]]">Community Support</a></li>
                       <li><a href="[[~16]]">Documentation</a></li>
                       <li><a href="[[~102]]">Bugs &amp; Suggestions</a></li>
-                      [[<li><a href="[[~10]]">Purchase Support</a></li>]]
                   </ul>
               </section>
               <section class="developer">
@@ -149,7 +148,6 @@
                       <li><a href="[[~110]]">Wall of Fame</a></li>
                       <li><a href="[[~109]]">Donate to MODX</a></li>
                       <li><a href="[[~19]]">Spread MODX</a></li>
-                      [[<li><a href="[[~9]]">Awards &amp; Leaderboard</a></li>]]
                       <li><a href="[[~129]]">Contribute</a></li>
                   </ul>
               </section>
@@ -160,7 +158,6 @@
                       <li><a href="[[~32]]">Solutions</a></li>
                       <li><a href="[[~108]]">Made in MODX</a></li>
                       <li><a href="[[~31]]">Books</a></li>
-                      [[<li><a href="[[~68]]">MODX Quickstart</a></li>]]
                   </ul>
               </section>
             </div> <!-- .container -->
@@ -195,7 +192,7 @@
        </section>
        <div id="post_body"></div>
   </footer>
-<div class="overlay[[*id:ne=`320`:then=` round7`]]" id="overlay">
+<div class="overlay round7" id="overlay">
 <div class="contentWrap"></div>
 </div>
 </body>
