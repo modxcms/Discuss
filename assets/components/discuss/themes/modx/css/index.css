@@ -418,7 +418,7 @@ div.dis-author{
 	display: block;
 	}
 
-div.dis-author span {
+.avatarHover {
 	position: absolute;
 	top: 0;
 	left: 75px;
@@ -431,13 +431,34 @@ div.dis-author span {
 	box-shadow: 1px 1px 2px #999999;
 	-moz-box-shadow: 1px 1px 2px #999999;
 	-webkit-box-shadow: 1px 1px 2px #999999;
-	white-space: nowrap;
+	
 	color: #555;
 	cursor: pointer;
-	line-height: 100%;
 	padding: 10px;
 	display: none;
+	width: 500px;
+	text-align: left;
 	}
+
+div.dis-author:hover .avatarHover {
+	display: block;
+	}
+
+.dis-post-track {
+    float: right;
+}
+
+.avatarHover .auth-avatar	{
+	display: block;
+	margin: 0 0;
+	padding: 5px 5px;
+	text-align: left;
+	}
+.dis-signature {
+    border-top:  1px solid #ccc;
+    margin-top: 4px;
+    padding-top: 4px;
+}
 
 div.post_icon {
 	display: block;
@@ -463,10 +484,6 @@ div.badge_icon {
     background: transparent url("../images/badge.png") no-repeat left center;
 	}
 
-div.dis-author:hover span {
-	display: block;
-	}
-
 div.auth-count {
 	display: block;
 	width: 80px;
@@ -482,13 +499,6 @@ div.auth-count {
 	
 div.dis-profile ul.profile {
 	margin: 0 0 30px 18px;
-	}
-
-span.avatarHover a	{
-	display: block;
-	margin: 0 0;
-	padding: 5px 5px;
-	text-align: left;
 	}
 	
 ul.dis-attachments {

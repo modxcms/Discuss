@@ -4,13 +4,13 @@
 
             <div class="dis-author">
             	<a href="[[~[[*id]]]]user/?user=[[+author.id]]" class="auth-avatar">[[+author.avatar]]</a>
-            	<div class="auth-count"><div class="post_icon">[[+author.posts]]</div><!--<div class="badge_icon">3</div>--></div>
+            	<div class="auth-count"><div class="post_icon" title="[[+author.posts]] Posts">[[+author.posts]]</div><!--<div class="badge_icon" title="[[+author.modxp]] XP">3</div>--></div>
                 <span class="avatarHover">
 						[[+author.email]]
 						[[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
 						[[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
 					
-					<a href="[[~[[*id]]]]post/track?ip=[[+ip]]">[[+ip]]</a>
+					<a href="[[~[[*id]]]]post/track?ip=[[+ip]]" class="dis-post-track">[[+ip]]</a>
 						
 		            <div class="dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
 		                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
