@@ -1,1 +1,1 @@
-<li>[[+text]]</li>
+<li class="[[+cls]]">[[+text]]</li>
