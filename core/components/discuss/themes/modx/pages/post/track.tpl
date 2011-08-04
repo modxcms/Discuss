@@ -13,4 +13,4 @@
 
 <br class="clearfix" />
 
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
+<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> [[+pagination]]</div>

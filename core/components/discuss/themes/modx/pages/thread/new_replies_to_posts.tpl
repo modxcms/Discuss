@@ -16,7 +16,7 @@
 	
 </div>
 
-						   <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
+[[+pagination]]
 
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]

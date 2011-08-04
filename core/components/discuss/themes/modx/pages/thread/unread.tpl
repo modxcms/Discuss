@@ -12,9 +12,9 @@
 	<ol>
 	[[+threads]]
 	</ol>
+    [[+pagination]]
 </div>
 
-						   <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
 
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]

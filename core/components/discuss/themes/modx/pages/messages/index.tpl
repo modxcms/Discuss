@@ -10,6 +10,7 @@
 	
 	<ol class="dis-board-thread">
 		[[+messages]]
+        <li>[[+pagination:notempty=`<div class="dis-pagination">[[+pagination]]</div>`]]</li>
 	</ol>
 </div>
 

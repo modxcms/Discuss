@@ -13,10 +13,8 @@
     <ol class="dis-board-thread">
         [[+recent_posts]]
     </ol>
+    [[+pagination]]
 </div>
-
-
-						   <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
 
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]

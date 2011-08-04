@@ -12,7 +12,7 @@
 	<div>
 		<ol class="dis-board-thread">
 			[[+posts]]
-			<li>[[+pagination:notempty=`<div class="dis-pagination">[[<span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> ]]<ul>[[+pagination]]</ul></div>`]]</li>
+			<li>[[+pagination]]</li>
 		</ol>
 	</div>
 

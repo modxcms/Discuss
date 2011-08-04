@@ -1,3 +1,3 @@
-<ul class="pagination left">		
+<ul class="dis-pagination">
 	[[+content]]
 </ul>

@@ -159,6 +159,17 @@ div.dis-threads ol.search-results {
 	float: right;
 	}
 
+.dis-pagination {
+    float: right;
+    padding-top: 10px;
+    height: 30px;
+    }
+.dis-pagination li {
+    display: block;
+    float: left;
+    margin: 0 5px 5px 0;
+}
+
 div.dis-post-content {
 	display: block;
 	float: left;
