@@ -73,6 +73,9 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
               </a></dt>
+<dd><a class="method public" href="#%5CdisBBCodeParser::__construct()">__construct</a></dd>
+<dd><a class="method protected" href="#%5CdisBBCodeParser::_nl2br2()">_nl2br2</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::br2nl()">br2nl</a></dd>
 <dd><a class="method public" href="#%5CdisBBCodeParser::cleanupImg()">cleanupImg</a></dd>
 <dd><a class="method public" href="#%5CdisBBCodeParser::convertLinks()">convertLinks</a></dd>
 <dd><a class="method public" href="#%5CdisBBCodeParser::encodeEmail()">encodeEmail</a></dd>
@@ -94,6 +97,7 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dd><a class="method public" href="#%5CdisBBCodeParser::preClean()">preClean</a></dd>
 <dd><a class="method public" href="#%5CdisBBCodeParser::stripBBCode()">stripBBCode</a></dd>
 <dd><a class="method public" href="#%5CdisBBCodeParser::stripBRTags()">stripBRTags</a></dd>
+<dd><a class="method public" href="#%5CdisBBCodeParser::stripBadWords()">stripBadWords</a></dd>
 <dd><a class="method public" href="#%5CdisBBCodeParser::stripHtml()">stripHtml</a></dd>
 </dl>
 <dl></dl>
@@ -104,6 +108,136 @@ instantiate directly.</p>
 </div>
 <h3>Methods</h3>
 <div>
+<a id="\disBBCodeParser::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          \xPDO $modx
+          )
+        </span>
+        :
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$modx</dt>
+<dd>\xPDO<br><em><p>A reference to the modX instance</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_parser_disparser.class.html#%5CdisParser::__construct()">\disParser::__construct()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::_nl2br2()"></a><h4 class="method protected">_nl2br2<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">_nl2br2</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+        string</code><p class="short-description">A better working nl2br</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$str</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_parser_disparser.class.html#%5CdisParser::_nl2br2()">\disParser::_nl2br2()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::br2nl()"></a><h4 class="method public">br2nl<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">br2nl</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+        string</code><p class="short-description">Convert BR tags to newlines</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$str</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_parser_disparser.class.html#%5CdisParser::br2nl()">\disParser::br2nl()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disBBCodeParser::cleanupImg()"></a><h4 class="method public">cleanupImg<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
 </h4>
 <div class="method">
@@ -1028,6 +1162,52 @@ instantiate directly.</p>
 <dd>true</dd>
 <dt>static</dt>
 <dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disBBCodeParser::stripBadWords()"></a><h4 class="method public">stripBadWords<div class="to-top"><a href="#disBBCodeParser">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">stripBadWords</span><span class="nb-faded-text">(
+          string $message
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Strip all bad words out of the parser</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_parser_disparser.class.html#%5CdisParser::stripBadWords()">\disParser::stripBadWords()</a></dd>
 </dl>
 <div class="clear"></div>
 </div>

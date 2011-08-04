@@ -71,12 +71,15 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Properties
               </a></dt>
+<dd><a class="property public" href="#%5CDiscuss::%24chunks">$chunks</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24controller">$controller</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24debugTimer">$debugTimer</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24hooks">$hooks</a></dd>
+<dd><a class="property public" href="#%5CDiscuss::%24import">$import</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24isLoggedIn">$isLoggedIn</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24request">$request</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24search">$search</a></dd>
+<dd><a class="property public" href="#%5CDiscuss::%24session">$session</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24treeParser">$treeParser</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24url">$url</a></dd>
 <dd><a class="property public" href="#%5CDiscuss::%24user">$user</a></dd>
@@ -142,6 +145,31 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 </div>
 <h3>Properties</h3>
 <div>
+<a id="\Discuss::$chunks"></a><h4 class="property public">$chunks<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property ">
+<code>array <span class="highlight">$chunks</span> = 'array'</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>array<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd>array</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\Discuss::$controller"></a><h4 class="property public">$controller<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
 </h4>
 <div class="property ">
@@ -206,6 +234,31 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt></dt>
 <dd>
 <a href="_dishooks.class.html#%5CdisHooks">\disHooks</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::$import"></a><h4 class="property public">$import<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property ">
+<code>\disImport <span class="highlight">$import</span> = ''</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\disImport<br><em></em>
 </dd>
 <dt>visibility</dt>
 <dd>public</dd>
@@ -284,6 +337,32 @@ Suite 330, Boston, MA 02111-1307 USA</p>
 <dt></dt>
 <dd>
 <a href="_search_dissearch.class.html#%5CdisSearch">\disSearch</a><br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Discuss::$session"></a><h4 class="property public">$session<div class="to-top"><a href="#%5CDiscuss">jump to class</a></div>
+</h4>
+<div class="property ">
+<code><a href="_dissession.class.html#%5CdisSession">\disSession</a> <span class="highlight">$session</span> = ''</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>
+<a href="_dissession.class.html#%5CdisSession">\disSession</a><br><em></em>
 </dd>
 <dt>visibility</dt>
 <dd>public</dd>
@@ -887,7 +966,7 @@ for easier debugging.</p>
           )
         </span>
         :
-        void</code><p class="short-description">Initializes Discuss into different contexts.</p>
+        void|string</code><p class="short-description">Initializes Discuss into different contexts.</p>
 <div class="long-description">
 </div>
 <div class="api-section">
@@ -897,6 +976,14 @@ for easier debugging.</p>
 <dd>string<br><em><p>The context to load. Defaults to web.</p>
 </em>
 </dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>void|string</dt>
+<dd><em></em></dd>
 </dl>
 <div class="clear"></div>
 </div>

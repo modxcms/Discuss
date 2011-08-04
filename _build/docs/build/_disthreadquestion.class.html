@@ -58,15 +58,58 @@
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
               </a></dt>
+<dd><a class="method public" href="#%5CdisThreadQuestion::addSubscription()">addSubscription</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::aggregateThreadActionButtons()">aggregateThreadActionButtons</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::buildBreadcrumbs()">buildBreadcrumbs</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::buildCssClass()">buildCssClass</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::buildIcons()">buildIcons</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::calcLastPostPage()">calcLastPostPage</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canLock()">canLock</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::canMarkAsAnswer()">canMarkAsAnswer</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::canModifyPost()">canModifyPost</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canMove()">canMove</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canPostAttachments()">canPostAttachments</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canPostNew()">canPostNew</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canPrint()">canPrint</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canRemove()">canRemove</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canRemovePost()">canRemovePost</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canReply()">canReply</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canStick()">canStick</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canSubscribe()">canSubscribe</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canUnlock()">canUnlock</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canUnstick()">canUnstick</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::canUnsubscribe()">canUnsubscribe</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::clearCache()">clearCache</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::fetch()">fetch</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::fetchNewReplies()">fetchNewReplies</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::fetchPosts()">fetchPosts</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::fetchUnread()">fetchUnread</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::get()">get</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::getModerators()">getModerators</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::getUrl()">getUrl</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::getUrlTitle()">getUrlTitle</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::getViewing()">getViewing</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::handleThreadViewActions()">handleThreadViewActions</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::hasSubscription()">hasSubscription</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::isArchived()">isArchived</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::isModerator()">isModerator</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::lock()">lock</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::markAsAnswer()">markAsAnswer</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::move()">move</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::prepareThreadView()">prepareThreadView</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::read()">read</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::readAll()">readAll</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::remove()">remove</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::removeSubscription()">removeSubscription</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::save()">save</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::stick()">stick</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::toArray()">toArray</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::unlock()">unlock</a></dd>
 <dd><a class="method public" href="#%5CdisThreadQuestion::unmarkAsAnswer()">unmarkAsAnswer</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::unread()">unread</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::unreadForAll()">unreadForAll</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::unstick()">unstick</a></dd>
+<dd><a class="method public" href="#%5CdisThreadQuestion::view()">view</a></dd>
 </dl>
 <dl></dl>
 <h3>Description</h3>
@@ -103,6 +146,52 @@
 </div>
 <h3>Methods</h3>
 <div>
+<a id="\disThreadQuestion::addSubscription()"></a><h4 class="method public">addSubscription<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">addSubscription</span><span class="nb-faded-text">(
+          int $userId
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Add a subscription to this thread for the User</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$userId</dt>
+<dd>int<br><em><p>ID of disUser</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em>True if successful</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::addSubscription()">\disThread::addSubscription()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disThreadQuestion::aggregateThreadActionButtons()"></a><h4 class="method public">aggregateThreadActionButtons<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
 </h4>
 <div class="method">
@@ -144,6 +233,222 @@
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::buildBreadcrumbs()"></a><h4 class="method public">buildBreadcrumbs<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">buildBreadcrumbs</span><span class="nb-faded-text">(
+          array $defaultTrail
+              =
+              array
+          )
+        </span>
+        :
+        array</code><p class="short-description">Build the breadcrumb trail for this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$defaultTrail</dt>
+<dd>array<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::buildBreadcrumbs()">\disThread::buildBreadcrumbs()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::buildCssClass()"></a><h4 class="method public">buildCssClass<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">buildCssClass</span><span class="nb-faded-text">(
+          string $defaultClass
+              =
+              dis-normal-thread
+          )
+        </span>
+        :
+        array|string</code><p class="short-description">Build the CSS class for this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$defaultClass</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array|string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::buildCssClass()">\disThread::buildCssClass()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::buildIcons()"></a><h4 class="method public">buildIcons<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">buildIcons</span><span class="nb-faded-text">(
+          array $icons
+              =
+              array
+          )
+        </span>
+        :
+        array|string</code><p class="short-description">Build the icon list for this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$icons</dt>
+<dd>array<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array|string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::buildIcons()">\disThread::buildIcons()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::calcLastPostPage()"></a><h4 class="method public">calcLastPostPage<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">calcLastPostPage</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        int</code><p class="short-description">Calculate the last post pagination page for a thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>int</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::calcLastPostPage()">\disThread::calcLastPostPage()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canLock()"></a><h4 class="method public">canLock<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canLock</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can lock the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canLock()">\disThread::canLock()</a></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -224,6 +529,628 @@
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disThreadQuestion::canMove()"></a><h4 class="method public">canMove<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canMove</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can move the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canMove()">\disThread::canMove()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canPostAttachments()"></a><h4 class="method public">canPostAttachments<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canPostAttachments</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines if the active user can post attachments to this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canPostAttachments()">\disThread::canPostAttachments()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canPostNew()"></a><h4 class="method public">canPostNew<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canPostNew</span><span class="nb-faded-text">(
+          \xPDO $modx
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines if the active user can post or not</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$modx</dt>
+<dd>\xPDO<br><em><p>A reference to the modX object</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canPostNew()">\disThread::canPostNew()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canPrint()"></a><h4 class="method public">canPrint<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canPrint</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can print the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canPrint()">\disThread::canPrint()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canRemove()"></a><h4 class="method public">canRemove<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canRemove</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can remove the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canRemove()">\disThread::canRemove()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canRemovePost()"></a><h4 class="method public">canRemovePost<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canRemovePost</span><span class="nb-faded-text">(
+          int $postId
+          )
+        </span>
+        :
+        bool</code><p class="short-description">See if the active user can remove a post in this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$postId</dt>
+<dd>int<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canRemovePost()">\disThread::canRemovePost()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canReply()"></a><h4 class="method public">canReply<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canReply</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines if the active user can post a reply or not</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canReply()">\disThread::canReply()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canStick()"></a><h4 class="method public">canStick<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canStick</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can stick the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canStick()">\disThread::canStick()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canSubscribe()"></a><h4 class="method public">canSubscribe<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canSubscribe</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can subscribe to the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canSubscribe()">\disThread::canSubscribe()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canUnlock()"></a><h4 class="method public">canUnlock<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canUnlock</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can unlock the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canUnlock()">\disThread::canUnlock()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canUnstick()"></a><h4 class="method public">canUnstick<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canUnstick</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can unstick the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canUnstick()">\disThread::canUnstick()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::canUnsubscribe()"></a><h4 class="method public">canUnsubscribe<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">canUnsubscribe</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines whether or not the current active user can unsubscribe the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::canUnsubscribe()">\disThread::canUnsubscribe()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::clearCache()"></a><h4 class="method public">clearCache<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">clearCache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Clear cache for this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::clearCache()">\disThread::clearCache()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::fetch()"></a><h4 class="method public">fetch<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">fetch</span><span class="nb-faded-text">(
+          \xPDO $modx, \$id $id, string $type
+              =
+              disThread, boolean $integrated
+              =
+              false
+          )
+        </span>
+        :
+        \disThread/null</code><p class="short-description">Fetch a thread, but check permissions first</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$modx</dt>
+<dd>\xPDO<br><em><p>A reference to the modX instance</p>
+</em>
+</dd>
+<dt>$id</dt>
+<dd>\$id<br><em><p>The ID of the thread</p>
+</em>
+</dd>
+<dt>$type</dt>
+<dd>string<br><em><p>The type of thread: post/message</p>
+</em>
+</dd>
+<dt>$integrated</dt>
+<dd>boolean<br><em><p>Grab by the integrated_id instead of the id</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\disThread/null</dt>
+<dd><em>The returned, grabbed thread; or false/null if not found/accessible</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::fetch()">\disThread::fetch()</a></dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::fetchNewReplies()"></a><h4 class="method public">fetchNewReplies<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">fetchNewReplies</span><span class="nb-faded-text">(
+          \xPDO $modx, string $sortBy
+              =
+              LastPost.createdon, string $sortDir
+              =
+              DESC, int $limit
+              =
+              20, int $start
+              =
+              0, boolean $sinceLastLogin
+              =
+              false
+          )
+        </span>
+        :
+        array</code><p class="short-description">Fetch all new replies in threads that the active user is a participant in</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$modx</dt>
+<dd>\xPDO<br><em><p>A reference to the modX instance</p>
+</em>
+</dd>
+<dt>$sortBy</dt>
+<dd>string<br><em><p>The column to sort by</p>
+</em>
+</dd>
+<dt>$sortDir</dt>
+<dd>string<br><em><p>The direction to sort</p>
+</em>
+</dd>
+<dt>$limit</dt>
+<dd>int<br><em><p>The # of threads to limit</p>
+</em>
+</dd>
+<dt>$start</dt>
+<dd>int<br><em><p>The index to start by</p>
+</em>
+</dd>
+<dt>$sinceLastLogin</dt>
+<dd>boolean<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em>An array in results/total format</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::fetchNewReplies()">\disThread::fetchNewReplies()</a></dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disThreadQuestion::fetchPosts()"></a><h4 class="method public">fetchPosts<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
 </h4>
 <div class="method">
@@ -271,6 +1198,84 @@
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::fetchUnread()"></a><h4 class="method public">fetchUnread<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">fetchUnread</span><span class="nb-faded-text">(
+          \xPDO $modx, string $sortBy
+              =
+              LastPost.createdon, string $sortDir
+              =
+              DESC, int $limit
+              =
+              20, int $start
+              =
+              0, boolean $sinceLastLogin
+              =
+              false
+          )
+        </span>
+        :
+        array</code><p class="short-description">Fetch all unread, accessible threads</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$modx</dt>
+<dd>\xPDO<br><em><p>A reference to the modX instance</p>
+</em>
+</dd>
+<dt>$sortBy</dt>
+<dd>string<br><em><p>The column to sort by</p>
+</em>
+</dd>
+<dt>$sortDir</dt>
+<dd>string<br><em><p>The direction to sort</p>
+</em>
+</dd>
+<dt>$limit</dt>
+<dd>int<br><em><p>The # of threads to limit</p>
+</em>
+</dd>
+<dt>$start</dt>
+<dd>int<br><em><p>The index to start by</p>
+</em>
+</dd>
+<dt>$sinceLastLogin</dt>
+<dd>boolean<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em>An array in results/total format</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::fetchUnread()">\disThread::fetchUnread()</a></dd>
+<dt>static</dt>
+<dd></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -326,6 +1331,188 @@
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disThreadQuestion::getModerators()"></a><h4 class="method public">getModerators<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getModerators</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        array</code><p class="short-description">Get an array of disUser objects who are Moderators of this thread's board</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::getModerators()">\disThread::getModerators()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::getUrl()"></a><h4 class="method public">getUrl<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getUrl</span><span class="nb-faded-text">(
+          boolean $lastPost
+              =
+              true, array $params
+              =
+              array, boolean $regenerate
+              =
+              false
+          )
+        </span>
+        :
+        string</code><p class="short-description">Get the proper URL for the thread, optionally with the post anchor and page</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$lastPost</dt>
+<dd>boolean<br><em><p>If true, will get URL for last Post of thread</p>
+</em>
+</dd>
+<dt>$params</dt>
+<dd>array<br><em><p>Any extra params to append to the thread</p>
+</em>
+</dd>
+<dt>$regenerate</dt>
+<dd>boolean<br><em><p>If true, will regenerate the url even if it has already been set</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::getUrl()">\disThread::getUrl()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::getUrlTitle()"></a><h4 class="method public">getUrlTitle<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getUrlTitle</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Get the URL-friendly title of this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::getUrlTitle()">\disThread::getUrlTitle()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::getViewing()"></a><h4 class="method public">getViewing<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getViewing</span><span class="nb-faded-text">(
+          string $placePrefix
+              =
+              thread
+          )
+        </span>
+        :
+        string</code><p class="short-description">Gets the viewing message for the bottom of the thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$placePrefix</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em>The who is viewing message</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::getViewing()">\disThread::getViewing()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disThreadQuestion::handleThreadViewActions()"></a><h4 class="method public">handleThreadViewActions<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
 </h4>
 <div class="method">
@@ -365,6 +1552,162 @@
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::hasSubscription()"></a><h4 class="method public">hasSubscription<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">hasSubscription</span><span class="nb-faded-text">(
+          int $userId
+              =
+              0
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Check if a user (by id) has a subscription to this thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$userId</dt>
+<dd>int<br><em><p>ID of disUser</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em>True if has a subscription</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::hasSubscription()">\disThread::hasSubscription()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::isArchived()"></a><h4 class="method public">isArchived<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">isArchived</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Determines if a thread has been auto-archived or not.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::isArchived()">\disThread::isArchived()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::isModerator()"></a><h4 class="method public">isModerator<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">isModerator</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Check to see if active user is a Moderator for this thread's board</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em>True if they are a moderator</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::isModerator()">\disThread::isModerator()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::lock()"></a><h4 class="method public">lock<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">lock</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Lock thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::lock()">\disThread::lock()</a></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -412,6 +1755,52 @@
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disThreadQuestion::move()"></a><h4 class="method public">move<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">move</span><span class="nb-faded-text">(
+          int $boardId
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Move a thread to a new board</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$boardId</dt>
+<dd>int<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em>True if successful</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::move()">\disThread::move()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disThreadQuestion::prepareThreadView()"></a><h4 class="method public">prepareThreadView<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
 </h4>
 <div class="method">
@@ -455,6 +1844,398 @@
 <div class="clear"></div>
 </div>
 </div>
+<a id="\disThreadQuestion::read()"></a><h4 class="method public">read<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">read</span><span class="nb-faded-text">(
+          int $user
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Marks a post read by the currently logged in user.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$user</dt>
+<dd>int<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em>True if successful.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::read()">\disThread::read()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::readAll()"></a><h4 class="method public">readAll<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">readAll</span><span class="nb-faded-text">(
+          \xPDO $modx, string $type
+              =
+              message
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Mark all posts in this thread as read</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$modx</dt>
+<dd>\xPDO<br><em>
+</em>
+</dd>
+<dt>$type</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::readAll()">\disThread::readAll()</a></dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::remove()"></a><h4 class="method public">remove<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">remove</span><span class="nb-faded-text">(
+          array $ancestors
+              =
+              array, boolean $doBoardMoveChecks
+              =
+              false, boolean $moveToSpam
+              =
+              false
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Override remove() to clear thread cache</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$ancestors</dt>
+<dd>array<br><em>
+</em>
+</dd>
+<dt>$doBoardMoveChecks</dt>
+<dd>boolean<br><em>
+</em>
+</dd>
+<dt>$moveToSpam</dt>
+<dd>boolean<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::remove()">\disThread::remove()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::removeSubscription()"></a><h4 class="method public">removeSubscription<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">removeSubscription</span><span class="nb-faded-text">(
+          int $userId
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Remove a subscription to this thread for the User</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$userId</dt>
+<dd>int<br><em><p>ID of disUser</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em>True if successful</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::removeSubscription()">\disThread::removeSubscription()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::save()"></a><h4 class="method public">save<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">save</span><span class="nb-faded-text">(
+          null $cacheFlag
+              =
+              null, bool $clearCache
+              =
+              true
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Save the Thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$cacheFlag</dt>
+<dd>null<br><em>
+</em>
+</dd>
+<dt>$clearCache</dt>
+<dd>bool<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::save()">\disThread::save()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::stick()"></a><h4 class="method public">stick<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">stick</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Make thread sticky</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::stick()">\disThread::stick()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::toArray()"></a><h4 class="method public">toArray<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">toArray</span><span class="nb-faded-text">(
+          string $keyPrefix, bool $rawValues
+              =
+              false, bool $excludeLazy
+              =
+              false
+          )
+        </span>
+        :
+        array</code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$keyPrefix</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$rawValues</dt>
+<dd>bool<br><em>
+</em>
+</dd>
+<dt>$excludeLazy</dt>
+<dd>bool<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::toArray()">\disThread::toArray()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::unlock()"></a><h4 class="method public">unlock<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">unlock</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Unlock thread</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::unlock()">\disThread::unlock()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\disThreadQuestion::unmarkAsAnswer()"></a><h4 class="method public">unmarkAsAnswer<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
 </h4>
 <div class="method">
@@ -494,6 +2275,162 @@
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::unread()"></a><h4 class="method public">unread<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">unread</span><span class="nb-faded-text">(
+          int $user
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Marks a post unread by the currently logged in user.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$user</dt>
+<dd>int<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em>True if successful.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>public</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::unread()">\disThread::unread()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::unreadForAll()"></a><h4 class="method public">unreadForAll<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">unreadForAll</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        bool</code><p class="short-description">Mark this thread unread for all users</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>bool</dt>
+<dd><em>True if successful</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::unreadForAll()">\disThread::unreadForAll()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::unstick()"></a><h4 class="method public">unstick<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">unstick</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Make thread unsticky</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::unstick()">\disThread::unstick()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\disThreadQuestion::view()"></a><h4 class="method public">view<div class="to-top"><a href="#disThreadQuestion">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">view</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Up the view count and set last visited for the Thread.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_disthread.class.html#%5CdisThread::view()">\disThread::view()</a></dd>
 </dl>
 <div class="clear"></div>
 </div>

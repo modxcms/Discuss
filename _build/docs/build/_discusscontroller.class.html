@@ -1262,9 +1262,32 @@ class; for example, when handling derivative classes with class_key settings.</p
 <dt><a href="#" onclick="$(this).children('img').toggle().parents('dt').nextUntil('dt').slideToggle(); return false;"><img src="images/arrow_down.gif"><img src="images/arrow_right.gif" style="display: none">
                 Methods
               </a></dt>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::__construct()">__construct</a></dd>
+<dd><a class="method protected" href="#%5CDiscussDeprecatedController::_output()">_output</a></dd>
+<dd><a class="method protected" href="#%5CDiscussDeprecatedController::_renderBreadcrumbs()">_renderBreadcrumbs</a></dd>
+<dd><a class="method protected" href="#%5CDiscussDeprecatedController::_renderTemplate()">_renderTemplate</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::afterRender()">afterRender</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::checkPermissions()">checkPermissions</a></dd>
+<dd><a class="method protected" href="#%5CDiscussDeprecatedController::endDebugTimer()">endDebugTimer</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::getBreadcrumbs()">getBreadcrumbs</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::getDebugTime()">getDebugTime</a></dd>
+<dd><a class="method protected" href="#%5CDiscussDeprecatedController::getDefaultOptions()">getDefaultOptions</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::getInstance()">getInstance</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::getOption()">getOption</a></dd>
 <dd><a class="method public" href="#%5CDiscussDeprecatedController::getPageTitle()">getPageTitle</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::getPlaceholder()">getPlaceholder</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::getPlaceholders()">getPlaceholders</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::getProperty()">getProperty</a></dd>
 <dd><a class="method public" href="#%5CDiscussDeprecatedController::getSessionPlace()">getSessionPlace</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::handleActions()">handleActions</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::initialize()">initialize</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::postProcess()">postProcess</a></dd>
 <dd><a class="method public" href="#%5CDiscussDeprecatedController::process()">process</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::render()">render</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::setOptions()">setOptions</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::setPlaceholder()">setPlaceholder</a></dd>
+<dd><a class="method public" href="#%5CDiscussDeprecatedController::setPlaceholders()">setPlaceholders</a></dd>
+<dd><a class="method protected" href="#%5CDiscussDeprecatedController::startDebugTimer()">startDebugTimer</a></dd>
 </dl>
 <dl></dl>
 <h3>Description</h3>
@@ -1273,6 +1296,523 @@ class; for example, when handling derivative classes with class_key settings.</p
 </div>
 <h3>Methods</h3>
 <div>
+<a id="\DiscussDeprecatedController::__construct()"></a><h4 class="method public">__construct<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">__construct</span><span class="nb-faded-text">(
+          <a href="_discuss.class.html#%5CDiscuss">\Discuss</a> $discuss, array $config
+              =
+              array
+          )
+        </span>
+        :
+        </code><p class="short-description"></p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$discuss</dt>
+<dd>\Discuss<br><em><p>A reference to the Discuss instance</p>
+</em>
+</dd>
+<dt>$config</dt>
+<dd>array<br><em><p>An array of configuration properties about this controller</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::__construct()">\DiscussController::__construct()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::_output()"></a><h4 class="method protected">_output<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">_output</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+        string</code><p class="short-description">Render the output by wrapping, if desired, in the wrapper.tpl</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$output</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::_output()">\DiscussController::_output()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::_renderBreadcrumbs()"></a><h4 class="method protected">_renderBreadcrumbs<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">_renderBreadcrumbs</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Render any breadcrumbs for the page</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::_renderBreadcrumbs()">\DiscussController::_renderBreadcrumbs()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::_renderTemplate()"></a><h4 class="method protected">_renderTemplate<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">_renderTemplate</span><span class="nb-faded-text">(
+          string $tpl, array $properties
+              =
+              array
+          )
+        </span>
+        :
+        string</code><p class="short-description">Render a template file using the given properties</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$tpl</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$properties</dt>
+<dd>array<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::_renderTemplate()">\DiscussController::_renderTemplate()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::afterRender()"></a><h4 class="method public">afterRender<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">afterRender</span><span class="nb-faded-text">(
+          string $output
+          )
+        </span>
+        :
+        string</code><p class="short-description">Used to alter the output in a controller after rendering the template</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$output</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::afterRender()">\DiscussController::afterRender()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::checkPermissions()"></a><h4 class="method public">checkPermissions<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">checkPermissions</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        boolean</code><p class="short-description">Check to see if the user can do the page's action. Return true to pass, otherwise return either a URL to
+redirect to on an unsuccessful validation, or false to redirect to the unauthorized page.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>boolean</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::checkPermissions()">\DiscussController::checkPermissions()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::endDebugTimer()"></a><h4 class="method protected">endDebugTimer<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">endDebugTimer</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        int</code><p class="short-description">Ends the debug timer and returns the total number of seconds Discuss took
+to run.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>int</dt>
+<dd><em>The end total time to execute the script.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>protected</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::endDebugTimer()">\DiscussController::endDebugTimer()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::getBreadcrumbs()"></a><h4 class="method public">getBreadcrumbs<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getBreadcrumbs</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        array|string</code><p class="short-description">Override and return an array to automatically render breadcrumbs</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array|string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::getBreadcrumbs()">\DiscussController::getBreadcrumbs()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::getDebugTime()"></a><h4 class="method public">getDebugTime<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getDebugTime</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Return the current debug time.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::getDebugTime()">\DiscussController::getDebugTime()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::getDefaultOptions()"></a><h4 class="method protected">getDefaultOptions<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getDefaultOptions</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        array</code><p class="short-description">Sets up default options for this controller.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::getDefaultOptions()">\DiscussController::getDefaultOptions()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::getInstance()"></a><h4 class="method public">getInstance<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getInstance</span><span class="nb-faded-text">(
+          <a href="_discuss.class.html#%5CDiscuss">\Discuss</a> $discuss, string $className, array $config
+              =
+              array
+          )
+        </span>
+        :
+        \The</code><p class="short-description">Return the proper instance of the derived class. This can be used to override how the manager loads a controller
+class; for example, when handling derivative classes with class_key settings.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$discuss</dt>
+<dd>\Discuss<br><em><p>A reference to the Discuss object.</p>
+</em>
+</dd>
+<dt>$className</dt>
+<dd>string<br><em><p>The name of the class that is being requested.</p>
+</em>
+</dd>
+<dt>$config</dt>
+<dd>array<br><em><p>A configuration array of options related to this controller's action object.</p>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\The</dt>
+<dd><em>class specified by $className</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>true</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::getInstance()">\DiscussController::getInstance()</a></dd>
+<dt>static</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::getOption()"></a><h4 class="method public">getOption<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getOption</span><span class="nb-faded-text">(
+          string $key, mixed $default
+              =
+              null, string $checkType
+              =
+              !empty
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Get a specific page option</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$default</dt>
+<dd>mixed<br><em>
+</em>
+</dd>
+<dt>$checkType</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::getOption()">\DiscussController::getOption()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\DiscussDeprecatedController::getPageTitle()"></a><h4 class="method public">getPageTitle<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
 </h4>
 <div class="method">
@@ -1302,6 +1842,152 @@ class; for example, when handling derivative classes with class_key settings.</p
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::getPlaceholder()"></a><h4 class="method public">getPlaceholder<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getPlaceholder</span><span class="nb-faded-text">(
+          string $key, null $default
+              =
+              null
+          )
+        </span>
+        :
+        mixed|null</code><p class="short-description">Get a specific placeholder</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$default</dt>
+<dd>null<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed|null</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::getPlaceholder()">\DiscussController::getPlaceholder()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::getPlaceholders()"></a><h4 class="method public">getPlaceholders<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getPlaceholders</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        array</code><p class="short-description">Return an array of all the set placeholders</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::getPlaceholders()">\DiscussController::getPlaceholders()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::getProperty()"></a><h4 class="method public">getProperty<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">getProperty</span><span class="nb-faded-text">(
+          string $key, mixed $default
+              =
+              null, string $checkType
+              =
+              isset
+          )
+        </span>
+        :
+        mixed</code><p class="short-description">Get a REQUEST property</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$default</dt>
+<dd>mixed<br><em>
+</em>
+</dd>
+<dt>$checkType</dt>
+<dd>string<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>mixed</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::getProperty()">\DiscussController::getProperty()</a></dd>
 </dl>
 <div class="clear"></div>
 </div>
@@ -1339,6 +2025,90 @@ class; for example, when handling derivative classes with class_key settings.</p
 <div class="clear"></div>
 </div>
 </div>
+<a id="\DiscussDeprecatedController::handleActions()"></a><h4 class="method public">handleActions<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">handleActions</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Used for handling POST actions prior to rendering</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::handleActions()">\DiscussController::handleActions()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::initialize()"></a><h4 class="method public">initialize<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">initialize</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Can be used to provide custom methods prior to processing</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::initialize()">\DiscussController::initialize()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::postProcess()"></a><h4 class="method public">postProcess<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">postProcess</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        void</code><p class="short-description">Used for custom post-processing after normal process, meta loading, and breadcrumb generation</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::postProcess()">\DiscussController::postProcess()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
 <a id="\DiscussDeprecatedController::process()"></a><h4 class="method public">process<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
 </h4>
 <div class="method">
@@ -1360,6 +2130,200 @@ class; for example, when handling derivative classes with class_key settings.</p
 <dd>false</dd>
 <dt>static</dt>
 <dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::render()"></a><h4 class="method public">render<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">render</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        string</code><p class="short-description">Render the controller.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>string</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::render()">\DiscussController::render()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::setOptions()"></a><h4 class="method public">setOptions<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">setOptions</span><span class="nb-faded-text">(
+          array $options
+              =
+              array
+          )
+        </span>
+        :
+        void</code><p class="short-description">Sets an array of options</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$options</dt>
+<dd>array<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::setOptions()">\DiscussController::setOptions()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::setPlaceholder()"></a><h4 class="method public">setPlaceholder<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">setPlaceholder</span><span class="nb-faded-text">(
+          string $key, mixed $value
+          )
+        </span>
+        :
+        void</code><p class="short-description">Set a placeholder for the controller to render into the template</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$key</dt>
+<dd>string<br><em>
+</em>
+</dd>
+<dt>$value</dt>
+<dd>mixed<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::setPlaceholder()">\DiscussController::setPlaceholder()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::setPlaceholders()"></a><h4 class="method public">setPlaceholders<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">setPlaceholders</span><span class="nb-faded-text">(
+          array $array
+          )
+        </span>
+        :
+        void</code><p class="short-description">Set an array of placeholders</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$array</dt>
+<dd>array<br><em>
+</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::setPlaceholders()">\DiscussController::setPlaceholders()</a></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\DiscussDeprecatedController::startDebugTimer()"></a><h4 class="method protected">startDebugTimer<div class="to-top"><a href="#DiscussDeprecatedController">jump to class</a></div>
+</h4>
+<div class="method inherited_from
+            ">
+<code><span class="highlight">startDebugTimer</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        int</code><p class="short-description">Starts the debug timer.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>int</dt>
+<dd><em>The start time.</em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>access</dt>
+<dd>protected</dd>
+<dt>inherited_from</dt>
+<dd><a href="_discusscontroller.class.html#%5CDiscussController::startDebugTimer()">\DiscussController::startDebugTimer()</a></dd>
 </dl>
 <div class="clear"></div>
 </div>
