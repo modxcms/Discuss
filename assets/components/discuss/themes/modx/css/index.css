@@ -540,6 +540,18 @@ ul.dis-attachments {
 	overflow-x: auto;
 	}
 
+#dis-new-thread-preview {
+	display: none;
+    background-color: #CCCCCC;
+    left: 12px;
+    position: absolute;
+    top: 22px;
+    width: 696px;
+	}
+
+
+
+
 /* syntax-highlighter shCore.css */
 .syntaxhighlighter a,
 .syntaxhighlighter div,
@@ -873,7 +885,7 @@ nav ul {
     float:left;
     text-decoration:none;
     color:#127293;
-    padding: 3px 0 0 0;
+    padding: 3px 4px 0 0;
     height: 24px;
     background: transparent url("../images/bg-sprite.png") repeat-x 3px -171px;    
 }
@@ -930,6 +942,7 @@ nav ul {
 	}
 
 #Content {
+	position: relative;
 	float: left;
 	width: 708px;
 	margin: 0 0 40px;
@@ -2886,7 +2899,7 @@ pre {
 	}
 
 .dis-form input:hover, .dis-form textarea:hover {
- 	border: solid 1px #ff0084;
+ 	border: solid 1px #02475A;
 	}
 
 .dis-form span.error {

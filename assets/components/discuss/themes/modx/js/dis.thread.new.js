@@ -7,6 +7,7 @@ DIS.NewThread = function() {
     return {
         init: function() {
             $('.dis-new-thread-preview').click(this.preview);
+            $('.dis-cancel-preview').click(this.cancel);
             $('.dis-add-attachment').click(this.addAttachment);
             
         }
@@ -21,8 +22,12 @@ DIS.NewThread = function() {
                 ,data: p
             });
             var a = $.ajax(a);
-            $('#dis-new-thread-preview').hide().html(a.responseText).fadeIn();
+            $('#dis-new-thread-preview').hide().html(a.responseText).slideDown('slow');
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
+        }
+
+        ,cancel: function() {
+            $('#dis-new-thread-preview').slideUp('slow');
         }
         
         ,addAttachment: function() {
