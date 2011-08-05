@@ -51,7 +51,7 @@ $xpdo_meta_map['disPostAttachment']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'filesize' => 
     array (

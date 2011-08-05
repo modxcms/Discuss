@@ -89,7 +89,7 @@ $xpdo_meta_map['disPost']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
       'index' => 'index',
     ),
     'editedby' => 
@@ -105,7 +105,7 @@ $xpdo_meta_map['disPost']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'icon' => 
     array (
@@ -128,7 +128,7 @@ $xpdo_meta_map['disPost']= array (
     array (
       'dbtype' => 'tinytext',
       'phptype' => 'string',
-      'null' => false,
+      'null' => true,
     ),
     'ip' => 
     array (

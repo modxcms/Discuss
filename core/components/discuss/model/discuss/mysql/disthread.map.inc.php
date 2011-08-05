@@ -117,11 +117,12 @@ $xpdo_meta_map['disThread']= array (
     ),
     'locked' => 
     array (
-      'dbtype' => 'tinyint',
-      'precision' => '1',
-      'phptype' => 'boolean',
-      'null' => false,
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'attributes' => 'unsigned',
       'default' => 0,
+      'null' => false,
       'index' => 'index',
     ),
     'answered' => 
