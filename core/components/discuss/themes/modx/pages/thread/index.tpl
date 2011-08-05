@@ -14,6 +14,33 @@
 			[[+posts]]
 			<li>[[+pagination]]</li>
 		</ol>
+
+        <form action="[[~[[*id]]]]thread/reply" method="post" class="dis-form" id="dis-quick-reply-form" enctype="multipart/form-data">
+
+            <input type="hidden" id="dis-quick-reply-board" name="board" value="[[+board]]" />
+            <input type="hidden" id="dis-quick-reply-thread" name="thread" value="[[+id]]" />
+            <input type="hidden" id="dis-quick-reply-post" name="post" value="[[+lastPost.id]]" />
+
+            <input type="hidden" name="title" id="dis-quick-reply-title" value="Re: [[+title]]" />
+
+            <textarea name="message" id="dis-quick-reply-message" style="width: 90%" rows="7">[[+message]]</textarea>
+
+            [[+attachment_fields]]
+            <br class="clearfix" />
+
+            [[+locked_cb]]
+            [[+sticky_cb]]
+            <label class="dis-cb"><input type="checkbox" name="notify" value="1" />Notify of Replies</label>
+
+            <br class="clearfix" />
+
+            <div class="dis-form-buttons">
+                <input type="submit" name="dis-post-reply" value="Quick Reply" />
+                <input type="button" name="dis-post-reply-preview-btn" class="dis-preview" value="Preview Reply" />
+            </div>
+        </form>
+        <div id="dis-quick-reply-preview"></div>
+
 	</div>
 
 

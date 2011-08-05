@@ -126,37 +126,8 @@ DIS.Thread = function() {
         ,removePost: function() {
             var p = $.q($(this).attr('href'));
             p.id = $(this).closest('.dis-post').attr('id');
-            p.id = p.id.replace(/dis-post-/,'');      
-                    
-            var s = confirm('Are you sure you want to remove this post?');
-            if (s) {
-                var a = $.extend({},DIS.baseAjax,{
-                    url: DIS.config.connector
-                    ,data: {
-                        action: 'web/post/remove'
-                        ,post: p.id
-                    }
-                    ,success: function(r) {
-                        if (r.success == false) { DIS._showError(r.message); return false; }
-                        
-                        var ol = $('#dis-board-post-'+p.id).parent('ol');
-                        var lis = ol.children('li');
-                        if (lis.length == 1) {
-                            ol.fadeOut().remove();
-                        } else {
-                            $('#dis-board-post-'+p.id).fadeOut().remove();
-                        }
-                        var ct = parseInt($('.dis-author-post-count').html());
-                        $('.dis-author-post-count').html((ct-1));
-                        if (p['parent'] == 0) {
-                            location.href = p.url;
-                        }
-                        return true;
-                    }
-                });
-                $.ajax(a);
-            }
-            return false;
+            p.id = p.id.replace(/dis-post-/,'');
+            return confirm('Are you sure you want to remove this post?');
         }
     };
 }();
