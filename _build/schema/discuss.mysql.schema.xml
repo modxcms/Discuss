@@ -166,12 +166,12 @@
         <field key="title" dbtype="varchar" precision="255" phptype="string" default="" null="false" index="fulltext" indexgrp="search" />
         <field key="message" dbtype="text" phptype="string" null="false" index="fulltext" indexgrp="search" />
         <field key="author" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
-        <field key="createdon" dbtype="datetime" phptype="datetime" null="false" index="index" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" index="index" />
         <field key="editedby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" />
-        <field key="editedon" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="editedon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="icon" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="allow_replies" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" index="index" />
-        <field key="rank" dbtype="tinytext" phptype="string" null="false" />
+        <field key="rank" dbtype="tinytext" phptype="string" null="true" />
         <field key="ip" dbtype="varchar" precision="255" phptype="string" null="false" default="0.0.0.0" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="depth" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
@@ -222,7 +222,7 @@
         <field key="post" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="filename" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+        <field key="createdon" dbtype="datetime" phptype="datetime" null="true" />
         <field key="filesize" dbtype="int" precision="10" phptype="int" null="false" default="0" />
         <field key="downloads" dbtype="int" precision="10" phptype="int" null="false" default="0" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
@@ -300,9 +300,9 @@
 
         <field key="status" dbtype="tinyint" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="confirmed" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" />
-        <field key="confirmedon" dbtype="datetime" phptype="datetime" null="false" />
-        <field key="last_login" dbtype="datetime" phptype="datetime" null="false" />
-        <field key="last_active" dbtype="datetime" phptype="datetime" null="false" index="index" />
+        <field key="confirmedon" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="last_login" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="last_active" dbtype="datetime" phptype="datetime" null="true" index="index" />
         <field key="ignore_boards" dbtype="text" phptype="string" null="false" default="" />
 
         <field key="signature" dbtype="text" phptype="string" null="false" default="" />

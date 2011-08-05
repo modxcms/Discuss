@@ -38,6 +38,8 @@ class DiscussThreadController extends DiscussController {
     public $isModerator = false;
     /** @var boolean $isAdmin */
     public $isAdmin = false;
+    /** @var disPost $lastPost */
+    public $lastPost;
 
     public function initialize() {
         $integrated = $this->modx->getOption('i',$this->scriptProperties,false);
@@ -65,6 +67,7 @@ class DiscussThreadController extends DiscussController {
         
         /* get posts */
         $this->getPosts();
+        $this->getLastPost();
 
         $this->setPlaceholders($this->thread->toArray('',true,true));
         $this->setPlaceholder('views',number_format($this->getPlaceholder('views',1)));
@@ -88,6 +91,16 @@ class DiscussThreadController extends DiscussController {
         $this->buildPagination();
         $this->getViewing();
         $this->fireOnRenderThread();
+    }
+
+    /**
+     * Get the last post of the thread and set it as a placeholder
+     * @return void
+     */
+    public function getLastPost() {
+        $this->lastPost = $this->thread->getOne('LastPost');
+        $lastPostArray = $this->lastPost->toArray('lastPost.');
+        $this->setPlaceholders($lastPostArray);
     }
 
     public function getPosts() {

@@ -82,7 +82,7 @@ $xpdo_meta_map['disUser']= array (
     'ip' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '20',
+      'precision' => '120',
       'phptype' => 'string',
       'null' => false,
       'default' => '0.0.0.0',
@@ -161,19 +161,19 @@ $xpdo_meta_map['disUser']= array (
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'last_login' => 
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
     ),
     'last_active' => 
     array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
-      'null' => false,
+      'null' => true,
       'index' => 'index',
     ),
     'ignore_boards' => 

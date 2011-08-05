@@ -24,6 +24,11 @@
 /**
  * Post a reply to a post
  *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var fiHooks $hook
+ * @var string $submitVar
+ * 
  * @package discuss
  */
 $discuss =& $modx->discuss;
@@ -32,9 +37,11 @@ $fields = $hook->getValues();
 unset($fields[$submitVar]);
 
 if (empty($fields['post'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
+/** @var disPost $post */
 $post = $modx->getObject('disPost',$fields['post']);
 if ($post == null) return false;
 
+/** @var disThread $thread */
 $thread = $post->getOne('Thread');
 if ($thread == null) return false;
 
@@ -62,6 +69,7 @@ if ($maxSize > 0) {
 }
 
 /* create post object and set fields */
+/** @var disPost $newPost */
 $newPost = $modx->newObject('disPost');
 $newPost->fromArray($fields);
 $newPost->set('author',$discuss->user->get('id'));
@@ -82,11 +90,13 @@ if (!empty($canSave)) {
 }
 /* save post */
 if ($newPost->save() == false) {
-    return $modx->error->failure($modx->lexicon('discuss.post_err_reply'));
+    $hook->addError('title','An error occurred while saving the post.');
+    return false;
 }
 
 /* upload attachments */
 foreach ($attachments as $file) {
+    /** @var disPostAttachment $attachment */
     $attachment = $modx->newObject('disPostAttachment');
     $attachment->set('post',$newPost->get('id'));
     $attachment->set('board',$newPost->get('board'));

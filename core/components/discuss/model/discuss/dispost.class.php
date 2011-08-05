@@ -107,8 +107,10 @@ class disPost extends xPDOSimpleObject {
             $cgps = count($gparents);
             $gps = array();
             $i = $cgps;
+            /** @var disPostClosure $gparent */
             foreach ($gparents as $gparent) {
                 $gps[] = str_pad($gparent->get('ancestor'),10,'0',STR_PAD_LEFT);
+                /** @var disPostClosure $obj */
                 $obj = $this->xpdo->newObject('disPostClosure');
                 $obj->set('ancestor',$gparent->get('ancestor'));
                 $obj->set('descendant',$id);
