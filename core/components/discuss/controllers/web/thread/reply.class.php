@@ -58,7 +58,6 @@ class DiscussThreadReplyController extends DiscussController {
         $this->author = $this->post->getOne('Author');
         $this->board = $this->thread->getOne('Board');
         $this->modx->lexicon->load('discuss:post');
-        var_dump($_POST);
     }
     
     public function getPageTitle() {
