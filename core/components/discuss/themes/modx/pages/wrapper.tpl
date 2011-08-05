@@ -10,7 +10,9 @@
     <meta name="author" content="MODX Systems, LLC">
 
 	[[*cssjs]]
-
+    <!-- TypeKit -->
+    <script src="http://use.typekit.com/zub5doo.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
 <div id="header">
@@ -27,7 +29,7 @@
 	
 		<nav id="global">
 			[[+discuss.user.id:is=``:then=`<a href="[[~[[*id]]]]login">Login</a> | <a href="[[~[[*id]]]]register">Register</a>`]]
-			[[+discuss.user.id:notempty=`Welcome, <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a> | <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">My Account</a> | <a href="[[~[[*id]]]]logout">Logout</a>`]]
+			[[+discuss.user.id:notempty=`Welcome, <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a> | <a href="[[~[[*id]]]]logout">Logout</a>`]]
 		</nav>
 		
 

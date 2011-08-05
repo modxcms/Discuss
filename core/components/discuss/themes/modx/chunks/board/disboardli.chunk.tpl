@@ -1,4 +1,4 @@
-<li class="Item Depth2  dis-category-[[+category]] [[+unread-cls]]">
+<li class="Depth2  dis-category-[[+category]] [[+unread-cls]]">
     <div class="ItemContent Category Read">
     	<a href="[[+url]]" class="Title">
     	    [[+name]] <span class="DiscussionCount">[[+post_stats]]</span>

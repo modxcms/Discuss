@@ -36,10 +36,12 @@
 
             <div class="dis-form-buttons">
                 <input type="submit" name="dis-post-reply" value="Quick Reply" />
-                <input type="button" name="dis-post-reply-preview-btn" class="dis-preview" value="Preview Reply" />
+                <input type="button" name="dis-post-reply-preview" class="dis-preview" value="Preview Reply" />
             </div>
+            
         </form>
-        <div id="dis-quick-reply-preview"></div>
+        
+        <div id="dis-reply-post-preview"></div>
 
 	</div>
 

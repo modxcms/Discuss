@@ -1,5 +1,3 @@
-
-
 [[!FormIt?
   &submitVar=`dis-post-reply`
   &hooks=`postHook.DiscussReplyPost`
@@ -11,7 +9,7 @@
 	<ul class="DataList CategoryList CategoryListWithHeadings">
 	
 		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</div>
+	    <div class="ItemContent Category">[[!+fi.title]]</div>
 	    </li>
 	</ul>
 	
@@ -19,13 +17,8 @@
     <input type="hidden" name="board" value="[[!+fi.board]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     <input type="hidden" name="post" value="[[!+fi.post]]" />
-    
-    <label for="dis-reply-post-title">[[%discuss.title]]:
-        <span class="error">[[!+fi.error.title]]</span>
-    </label><br class="clearfix" />
-    <input type="text" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" /><br class="clearfix" />
-
-
+    <input type="hidden" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" /><br class="clearfix" />
+	
     <div class="wysi-buttons">[[+buttons]]</div><br class="clearfix" />
 
     
@@ -36,6 +29,7 @@
     <br class="clearfix" />
 
     [[+attachment_fields]]
+    
     <br class="clearfix" />
 
     [[+locked_cb]]
@@ -50,13 +44,15 @@
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
+
 <div id="dis-reply-post-preview"></div>
 
 	<ul class="DataList CategoryList CategoryListWithHeadings">
 	
 		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.thread_summary]]</div>
+			<div class="ItemContent Category">[[%discuss.thread_summary]]</div>
 	    </li>
+	    
 	</ul>
 
 <div class="dis-thread-posts">
