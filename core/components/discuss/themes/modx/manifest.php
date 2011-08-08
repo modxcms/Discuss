@@ -58,7 +58,7 @@ $manifest = array(
         ),
         'options' => array(
             'showBoards' => true,
-            'showBreadcrumbs' => true,
+            'showBreadcrumbs' => false,
             'showRecentPosts' => true,
             'showStatistics' => true,
             'showLoginForm' => false,
