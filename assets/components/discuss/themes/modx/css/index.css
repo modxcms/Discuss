@@ -183,7 +183,6 @@ div.dis-threads ol.search-results {
 .dis-pagination,
 .dis-viewing {
 	display: block;
-	width: 90%;
 	padding: 0 20px 30px 0;
 	text-align: right;
 	float: right;
@@ -194,12 +193,50 @@ div.dis-threads ol.search-results {
     padding-top: 10px;
     height: 30px;
     }
+    
 .dis-pagination li {
     display: block;
     float: left;
-    margin: 0 5px 5px 0;
+    margin: 0 0;
+    text-align: center;
+    height: 20px;
+    width: 20px;
 }
 
+.dis-pagination li.active {
+	font-weight: bold;
+	font-size: 18px;
+	}
+
+.dis-pagination li a {
+	padding: 3px 6px;
+	}
+
+.dis-pagination li a:hover {
+	font-size: 18px;
+	color: #fe1492;
+	/* Firefox */
+	-moz-transition-property: all;
+	-moz-transition-duration: .2s;
+	-moz-transition-delay: 0s;
+	/* WebKit */
+	-webkit-transition-property: all;
+	-webkit-transition-duration: .2s;
+	-webkit-transition-delay: 0s;
+	/* Opera */
+	-o-transition-property: all;
+	-o-transition-duration: .2s;
+	-o-transition-delay: 0s;
+	/* Standard */
+	transition-property: all;
+	transition-duration: .2s;
+	transition-delay: 0s;
+	}
+
+.dis-pagination li.dis-no-pages {
+	width: 100px;
+	}
+	
 div.dis-post-content {
 	display: block;
 	float: left;
@@ -1335,6 +1372,13 @@ div.Box h4 {
 div.Box p {
 	font-size: 100%;
 	padding: 0 0 4px;
+	color: #555;
+	}
+
+div.Box p.stats {
+	font-size: 10px;
+	padding: 2px 4px;
+	border-bottom: 1px solid #efefef;
 	color: #555;
 	}
 

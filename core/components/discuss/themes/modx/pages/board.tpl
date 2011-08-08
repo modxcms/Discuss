@@ -19,6 +19,8 @@
 		[[+posts]]
 	</ol>
 
+
+
     [[+pagination]]
 </div>
 
