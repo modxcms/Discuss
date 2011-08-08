@@ -89,7 +89,7 @@ li.dis-board-li .dis-board-locked {
 	}
  
 .translucent,
-.dis-board-post .dis-thread-body {
+.dis-post-read .dis-thread-body {
 	opacity:.40;
 	filter: alpha(opacity=40);
 	filter: Òalpha(opacity=40)Ó;

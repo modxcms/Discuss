@@ -1,4 +1,4 @@
-<li class="dis-board-post [[+class]][[+unread:notempty=` unread`]]">
+<li class="dis-board-post [[+class]] [[+unreadCls]]">
     <div class="dis-thread-body">
         <h3><a href="[[+url]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a></h3>
         
