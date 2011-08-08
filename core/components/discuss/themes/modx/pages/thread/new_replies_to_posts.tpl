@@ -2,12 +2,7 @@
 
 <div class="dis-threads">
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.message]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.message]]</h1>
 
 
 	<ol class="dis-board-thread">
@@ -22,6 +17,7 @@
 [[+bottom]]
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">

@@ -4,6 +4,8 @@
         
         
         <p>[[+replies]] replies, <a href="[[+url]]"></a> [[+createdon]] [[%discuss.by? &author=`[[+author_link]]`]]</p>
+        
+        
     </div>
     
 </li>

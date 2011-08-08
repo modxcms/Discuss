@@ -11,12 +11,8 @@
 
 
 <form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form" style="border: 0;">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</div>
-	    </li>
-	</ul>
+
+	<h1 class="Category">[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</h1>
 
 <p style="color: green;">[[+fi.successMessage]]</p>
 
@@ -91,6 +87,7 @@
 
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">

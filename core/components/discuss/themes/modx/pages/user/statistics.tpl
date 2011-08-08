@@ -1,11 +1,7 @@
 
 <div class="dis-profile left">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.general_stats? &user=`[[+name]]`]]</div>
-	    </li>
-	</ul>
+
+	<h1 class="Category">[[%discuss.general_stats? &user=`[[+name]]`]]</h1>
 
 							<ul class="profile">
 							
@@ -35,6 +31,7 @@
 
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">

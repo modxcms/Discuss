@@ -2,12 +2,7 @@
 
 [[+aboveThread]]
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[+title]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[+title]]</h1>
 
 	<div>
 		<ol class="dis-board-thread">
@@ -63,6 +58,7 @@
 
 
 <div id="Panel">
+				<hr class="line" />
     <div class="PanelBox">
 
         <div class="Box GuestBox">

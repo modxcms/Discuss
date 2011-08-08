@@ -1,10 +1,6 @@
 <div class="dis-threads">
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">Track IP: [[+ip]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">Track IP: [[+ip]]</h1>
 
     <ol class="dis-board-thread">
         [[+posts]]

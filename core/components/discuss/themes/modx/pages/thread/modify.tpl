@@ -6,14 +6,8 @@
 ]]
 
 <div id="dis-modify-post-preview">[[+preview]]</div>
-<br />
 <form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</div>
-	    </li>
-	</ul>
+		<h1 class="Category">[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
     
     <input type="hidden" name="board" value="[[!+fi.board]]" />
     <input type="hidden" name="post" value="[[!+fi.post]]" />
@@ -56,12 +50,7 @@
 <br />
 <hr />
 <div class="dis-thread-posts">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.thread_summary]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.thread_summary]]</h1>
 [[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
 </div>
 [[+discuss.error_panel]]

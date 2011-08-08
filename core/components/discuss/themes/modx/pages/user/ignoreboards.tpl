@@ -1,12 +1,7 @@
 
 <div class="dis-profile left">
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">Ignore Boards</div>
-	    </li>
-	</ul>
+	<h1 class="Category">Ignore Boards</h1>
 		
 <form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post">
 
@@ -32,6 +27,7 @@
 
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">

@@ -4,10 +4,7 @@
 
 	<ul class="DataList CategoryList CategoryListWithHeadings">
 	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.message_remove? &namespace=`discuss` &topic=`post`]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.message_remove? &namespace=`discuss` &topic=`post`]]</h1>
 
     <input type="hidden" name="thread" value="[[+id]]" />
 
@@ -28,6 +25,7 @@
 [[+bottom]]
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">

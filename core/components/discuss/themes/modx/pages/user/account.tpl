@@ -2,12 +2,8 @@
 <div class="dis-profile left">
 
 <form action="[[~[[*id]]]]user/account?user=[[+id]]" method="post" id="dis-user-account-form" style="border: 0;">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.account_edit? &namespace=`discuss` &topic=`user`]]: [[+name]]</div>
-	    </li>
-	</ul>
+
+	<h1 class="Category">[[%discuss.account_edit? &namespace=`discuss` &topic=`user`]]: [[+name]]</h1>
 
         
     <input type="hidden" name="user" value="[[+id]]" />

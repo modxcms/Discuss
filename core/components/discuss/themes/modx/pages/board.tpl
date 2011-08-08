@@ -9,11 +9,7 @@
 
 <div class="dis-threads">
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[+name]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[+name]]</h1>
 
 	<ol class="dis-board-thread">
 		[[+posts]]
@@ -32,6 +28,7 @@
 
 
 <div id="Panel">
+				<hr class="line" />
     <div class="PanelBox">
 
 

@@ -437,6 +437,8 @@ div.dis-thread-sticky {
 
 div.dis-thread-locked { width: 21px; height: 22px; float: right; background: transparent url(../images/icons/quick_lock.gif) top left no-repeat; }
 
+
+
 div.dis-board-head {
 	display: block;
 	height: 30px;
@@ -461,12 +463,18 @@ div.dis-thread-body,
 div.dis-views,
 div.dis-replies,
 div.dis-latest {
- 	vertical-align: middle;
-	width: 670px;
 	color: #777;
-	margin: 0 20px 0 19px;
-	padding: 10px 0;
-	border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #EFEFEF;
+    margin: 0 18px;
+    padding: 7px 7px 0;
+    width: 662px;
+	}
+
+.dis-thread-body h3.locked {
+	display: block;
+	margin-left: -14px;
+	padding-left: 14px;
+	background: transparent url(../images/locked.png) no-repeat 0 2px;
 	}
 
 div.dis-thread-body h3 a {
@@ -1073,7 +1081,6 @@ body {
 	font-size: small;
 	}
 	
-.Depth1 .Category,
 h1, h2, h3, h4, h5, h6 {
 	color: #555;
 	font-family: "Helvetica Neue",Helvetica,arial,sans-serif;
@@ -2918,15 +2925,15 @@ input.DateBox, input.InputBox, input.SmallInput, textarea {
 	padding: 5px 0;
 	}
 
+h1.Category,
 .Depth1 .Category {
     font-size: 24px;
     border-bottom: 1px solid #E3E3E3;
     color: #494949;
     font-family: "museo-slab-1","museo-slab-2",Georgia,serif;
     font-weight: normal;
-    height: 26px;
-    padding: 18px 0 0 7px;
-    margin: 0 18px;
+    padding: 18px 0 5px 7px;
+    margin: 0 18px 10px;
     }
 
 pre {

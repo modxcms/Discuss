@@ -1,11 +1,7 @@
 
 
 <form class="dis-form" action="[[~[[*id]]]]search/" method="get">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.search? &namespace=`discuss` &topic=`web`]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h1>
 	
     <label for="dis-search">[[%discuss.search]]:</label><br class="clearfix" />
     <input type="text" id="dis-search" name="s" value="[[+search]]" /><br class="clearfix" />
@@ -29,11 +25,7 @@
 
 
 <div class="dis-threads">
-	[[+results:notempty=`<ul class="DataList CategoryList CategoryListWithHeadings">
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">Displaying [[+start]]-[[+end]] of [[+total]] Results</div>
-	    </li>
-	</ul>`]]
+	[[+results:notempty=`<h1 class="Category">Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]
 
 <ol class="dis-board-thread search-results">
 [[+results]]
@@ -50,6 +42,7 @@
 
 
 <div id="Panel">
+				<hr class="line" />
     <div class="PanelBox">
 
 

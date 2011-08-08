@@ -6,12 +6,8 @@
 
 
 <form action="[[~[[*id]]]]messages/modify?post=[[!+fi.id]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</div>
-	    </li>
-	</ul>
+
+	<h1 class="Category">[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</h1>
 
     <input type="hidden" name="post" value="[[!+fi.id]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
@@ -66,12 +62,7 @@
 <div id="dis-modify-message-preview">[[+preview]]</div>
 
 <div class="dis-thread-posts">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.thread_summary]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.thread_summary]]</h1>
 	<div class="dis-thread-posts">
 
 [[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
@@ -85,6 +76,7 @@
 [[+bottom]]
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">

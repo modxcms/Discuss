@@ -3,10 +3,7 @@
 <div class="dis-profile left">
 	<ul class="DataList CategoryList CategoryListWithHeadings">
 	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h1>
 	
 [[!include? &file=`[[++discuss.core_path]]elements/snippets/snippet.discussupdateprofileloader.php`]]
 [[!UpdateProfile?
@@ -103,6 +100,7 @@
 
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">

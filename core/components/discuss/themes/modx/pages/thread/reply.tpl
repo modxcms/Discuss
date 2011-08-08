@@ -6,12 +6,7 @@
 
 <form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[!+fi.title]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[!+fi.title]]</h1>
 	
     
     <input type="hidden" name="board" value="[[!+fi.board]]" />
@@ -47,13 +42,7 @@
 
 <div id="dis-reply-post-preview"></div>
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-			<div class="ItemContent Category">[[%discuss.thread_summary]]</div>
-	    </li>
-	    
-	</ul>
+	<h1 class="Category">[[%discuss.thread_summary]]</h1>
 
 <div class="dis-thread-posts">
 [[+thread_posts]]
@@ -67,6 +56,7 @@
 
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 						
 						<div class="Box GuestBox">

@@ -8,12 +8,7 @@
 
 
 <form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
     
     <input type="hidden" name="board" value="[[+id]]" />
     
@@ -64,6 +59,7 @@
 
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 						
 						<div class="Box GuestBox">

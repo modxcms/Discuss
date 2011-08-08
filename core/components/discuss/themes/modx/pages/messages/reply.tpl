@@ -9,12 +9,7 @@
 
 <form action="[[~[[*id]]]]messages/reply?thread=[[!+fi.thread]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h1>
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     <input type="hidden" name="post" value="[[!+fi.post]]" />
 
@@ -65,13 +60,10 @@
 
 
 <div class="dis-thread-posts">
-		<ul class="DataList CategoryList CategoryListWithHeadings">
+	<h1 class="Category">[[%discuss.thread_summary]]</h1>
 	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.thread_summary]]</div>
-	    </li>
-	</ul>
 [[+thread_posts]]
+
 </div>
 
 [[+discuss.error_panel]]
@@ -82,6 +74,7 @@
 [[+bottom]]
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 						
 						<div class="Box GuestBox">

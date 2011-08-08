@@ -2,12 +2,7 @@
 <div class="dis-threads">
 
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[%discuss.last_post]]</div>
-	    </li>
-	</ul>
+	<h1 class="Category">[[%discuss.last_post]]</h1>
 	
 	<ol>
 	[[+threads]]
@@ -20,6 +15,7 @@
 [[+bottom]]
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">

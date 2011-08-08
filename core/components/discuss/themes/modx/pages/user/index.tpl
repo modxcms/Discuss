@@ -4,12 +4,8 @@
 <div class="dis-profile left">
 
 <form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" id="dis-user-edit-form" style="border: 0;">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
-	
-		<li class="Item CategoryHeading Depth1">
-	    <div class="ItemContent Category">[[+name]]</div>
-	    </li>
-	</ul>
+
+	<h1 class="Category">[[+name]]</h1>
 
 
 							<ul class="profile">
@@ -52,6 +48,7 @@
 
 
 				<div id="Panel">
+				<hr class="line" />
 					<div class="PanelBox">
 					
 						<div class="Box GuestBox">
