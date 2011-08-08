@@ -167,10 +167,14 @@ foreach ($cache['results'] as $threadArray) {
 
         /* unread class */
         $threadArray['unread'] = '';
-        $threadArray['unreadCls'] = 'dis-post-read';
-        if ($discuss->user->isLoggedIn && in_array($threadArray['id'],$unread)) {
-            $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
-            $threadArray['unreadCls'] = 'dis-post-unread';
+        $threadArray['unreadCls'] = '';
+        if ($discuss->user->isLoggedIn) {
+            if (in_array($threadArray['id'],$unread)) {
+                $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
+                $threadArray['unreadCls'] = 'dis-post-unread';
+            } else {
+                $threadArray['unreadCls'] = 'dis-post-read';
+            }
         }
     }
     $response['results'][] = $discuss->getChunk($tpl,$threadArray);
