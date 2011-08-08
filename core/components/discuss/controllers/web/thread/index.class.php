@@ -75,6 +75,7 @@ class DiscussThreadController extends DiscussController {
 
         /* set css class of thread */
         $this->thread->buildCssClass();
+        $this->getQuickReplyButtons();
 
         if ($this->discuss->user->isLoggedIn && empty($this->scriptProperties['print'])) {
             $this->getActionButtons();
@@ -91,6 +92,16 @@ class DiscussThreadController extends DiscussController {
         $this->buildPagination();
         $this->getViewing();
         $this->fireOnRenderThread();
+    }
+
+    /**
+     * Loads the quick reply wysiwyg buttons for the form
+     * @return void
+     */
+    public function getQuickReplyButtons() {
+        $buttonsTpl = $this->getOption('buttonsTpl','disPostButtons');
+        $buttons = $this->discuss->getChunk($buttonsTpl,array('buttons_url' => $this->discuss->config['imagesUrl'].'buttons/'));
+        $this->setPlaceholder('reply_buttons',$buttons);
     }
 
     /**
