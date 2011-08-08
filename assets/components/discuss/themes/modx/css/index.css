@@ -88,13 +88,35 @@ li.dis-board-li .dis-board-locked {
  	clear: both;
 	}
  
+.translucent,
 .dis-board-post .dis-thread-body {
-	opacity: .4;
+	opacity:.40;
+	filter: alpha(opacity=40);
+	filter: Òalpha(opacity=40)Ó;
+	/* Firefox */
+	-moz-transition-property: opacity;
+	-moz-transition-duration: .3s;
+	-moz-transition-delay: 0s;
+	/* WebKit */
+	-webkit-transition-property: opacity;
+	-webkit-transition-duration: .3s;
+	-webkit-transition-delay: 0s;
+	/* Opera */
+	-o-transition-property: opacity;
+	-o-transition-duration: .3s;
+	-o-transition-delay: 0s;
+	/* Standard */
+	transition-property: opacity;
+	transition-duration: .3s;
+	transition-delay: 0s;
 	}
-	
+
+.opaque,
 .dis-board-post:hover .dis-thread-body,
 .unread .dis-thread-body {
 	opacity: 1;
+	filter: alpha(opacity=100);
+	filter: Òalpha(opacity=100)Ó;
 	}
 		
 li.dis-category-li {
