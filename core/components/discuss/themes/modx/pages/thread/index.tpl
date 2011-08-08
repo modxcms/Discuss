@@ -23,6 +23,8 @@
 
             <input type="hidden" name="title" id="dis-quick-reply-title" value="Re: [[+title]]" />
 
+            <div class="wysi-buttons">[[+reply_buttons]]</div>
+
             <textarea name="message" id="dis-quick-reply-message" style="width: 90%" rows="7">[[+message]]</textarea>
 
             [[+attachment_fields]]
