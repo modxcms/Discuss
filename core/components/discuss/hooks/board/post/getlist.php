@@ -167,8 +167,10 @@ foreach ($cache['results'] as $threadArray) {
 
         /* unread class */
         $threadArray['unread'] = '';
+        $threadArray['unreadCls'] = 'dis-post-read';
         if ($discuss->user->isLoggedIn && in_array($threadArray['id'],$unread)) {
             $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
+            $threadArray['unreadCls'] = 'dis-post-unread';
         }
     }
     $response['results'][] = $discuss->getChunk($tpl,$threadArray);
