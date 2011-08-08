@@ -2,7 +2,7 @@
 
 [[+aboveThread]]
 
-	<h1 class="Category">[[+title]]</h1>
+	<h1 class="Category[[+locked:notempty=` locked`]]">[[+title]]</h1>
 
 	<div>
 		<ol class="dis-board-thread">
