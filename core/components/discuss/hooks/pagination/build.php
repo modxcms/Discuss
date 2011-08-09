@@ -81,10 +81,10 @@ $list = array();
 /* Previous button */
 switch ($current) {
 	case ($current >= 2):
-		$list[] = $discuss->getChunk($tplLink,array('url' => $currentResourceUrl.'&page='.$prev, 'text' => '◄'));
+		$list[] = $discuss->getChunk($tplLink,array('url' => $currentResourceUrl.'&page='.$prev, 'text' => $previousText));
 	break;
 	default:
-		$list[] = $discuss->getChunk($tplActive,array('class' => 'inactive', 'text' => '◄'));
+		$list[] = $discuss->getChunk($tplActive,array('class' => 'inactive', 'text' => $previousText));
 	break;
 }
 /* If total pages under limit, don't truncate */
@@ -151,9 +151,9 @@ if ($total < $limit) {
 
 /* Next button */
 if ($current == $total) {
-	$list[] = $discuss->getChunk($tplActive,array('class' => 'inactive', 'text' => '►'));
+	$list[] = $discuss->getChunk($tplActive,array('class' => 'inactive', 'text' => $nextText));
 } else {
-	$list[] = $discuss->getChunk($tplLink,array('url' => $currentResourceUrl.'&page='.($current+1), 'text' => '►'));
+	$list[] = $discuss->getChunk($tplLink,array('url' => $currentResourceUrl.'&page='.($current+1), 'text' => $nextText));
 }
 
 $list = implode("\n",$list);
