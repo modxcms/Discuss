@@ -3,7 +3,24 @@
         <h3 class="dis-post-title" post="0">[[+title]]</h3>
         <div class="dis-post-author" id="dis-post-author-0">
             <div class="dis-post-actions"></div>
-            <div class="dis-author">- [[%discuss.post_author_short? &user=`[[+author.username]]` &date=`[[+createdon]]`]]</div>
+            <div class="dis-author">
+                <a href="[[~[[*id]]]]user/?user=[[+author.id]]">[[+author.avatar]]</a>
+                <span class="right">
+                    [[+createdon]]
+                    <br />[[+author.email]]
+                </span>
+                <span>
+                    [[+author.username_link]]
+                    [[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
+                    [[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
+                    <br />
+                    [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
+                </span>
+                <br class="clear" />
+            </div>
+            <div class="dis-author dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
+                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]<div class="clear"></div></div><div class="clear"></div>`]]
+            </div>
         </div>
     </div>
     <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">

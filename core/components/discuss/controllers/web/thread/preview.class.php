@@ -52,6 +52,7 @@ class DiscussThreadPreviewController extends DiscussController {
         /** @var disPost $post */
         $post = $this->modx->newObject('disPost');
         $post->fromArray($postArray);
+        $post->Author = $this->discuss->user;
         $postArray = $post->toArray();
         /* handle MODX tags */
         $post->set('message',str_replace(array('[[',']]'),array('&#91;&#91;','&#93;&#93;'),$postArray['message']));
@@ -60,6 +61,8 @@ class DiscussThreadPreviewController extends DiscussController {
         $postArray['message'] = $post->getContent();
         $postArray['title'] = $post->parser->parse($postArray['title']);
         $postArray['createdon'] = strftime($this->discuss->dateFormat,time());
+        $postArray['url'] = $post->getUrl();
+        $post->renderAuthorMeta($postArray);
 
         $output = $this->discuss->getChunk($this->getOption('tpl'),$postArray);
         $this->setPlaceholder('post',$output);
