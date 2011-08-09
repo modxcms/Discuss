@@ -15,9 +15,23 @@ class DiscussClassTest extends DiscussTestCase {
      * @return void
      */
     public function testLoadHooks() {
-        $hooks = $this->discuss->loadHooks('unit');
+        $hooks = $this->discuss->loadHooks();
         $this->assertInstanceOf('disHooks',$hooks);
-        $this->assertInstanceOf('disHooks',$this->discuss->unitHooks);
-        $this->discuss->unitHooks = null;
+        $this->assertInstanceOf('disHooks',$this->discuss->hooks);
+        $this->discuss->hooks = null;
     }
+
+
+    /**
+     * Test loading of tree parser
+     * @return void
+     */
+    public function testLoadTreeParser() {
+        $treeParser = $this->discuss->loadTreeParser();
+        $this->assertInstanceOf('disTreeParser',$treeParser);
+        $this->assertInstanceOf('disTreeParser',$this->discuss->treeParser);
+        $this->discuss->treeParser = null;
+    }
+
+
 }

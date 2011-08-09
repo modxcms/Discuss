@@ -801,7 +801,7 @@ class disBoard extends xPDOSimpleObject {
      * @param string $keyPrefix
      * @param bool $rawValues
      * @param bool $excludeLazy
-     * @return void
+     * @return array
      */
     public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
         $values = parent :: toArray($keyPrefix,$rawValues,$excludeLazy);
