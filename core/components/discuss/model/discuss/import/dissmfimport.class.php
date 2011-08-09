@@ -225,6 +225,7 @@ class DisSmfImport {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (!$row) continue;
 
+            /** @var modUserGroup $usergroup */
             $usergroup = $this->modx->newObject('modUserGroup');
             $usergroup->fromArray(array(
                 'name' => 'Forum '.$row['groupName'],
@@ -233,6 +234,7 @@ class DisSmfImport {
                 $usergroup->save();
             }
 
+            /** @var disUserGroupProfile $dug */
             $dug = $this->modx->newObject('disUserGroupProfile');
             $dug->fromArray(array(
                 'usergroup' => $usergroup->get('id'),
@@ -287,6 +289,7 @@ class DisSmfImport {
             } elseif (!$modxUser) {
                 /**
                  * No modUser exists with that username and email, so we'll create one.
+                 * @var modUser $modxUser
                  */
                 $modxUser = $this->modx->newObject('modUser');
                 $modxUser->fromArray(array(
@@ -299,6 +302,7 @@ class DisSmfImport {
                 if ($this->live) {
                     $modxUser->save();
                 }
+                /** @var modUserProfile $modxUserProfile */
                 $modxUserProfile = $this->modx->newObject('modUserProfile');
                 $modxUserProfile->fromArray(array(
                     'email' => $row['emailAddress'],
@@ -317,6 +321,7 @@ class DisSmfImport {
 
             /* now create disUser object */
             $name = explode(' ' ,$row['realName']);
+            /** @var disUser $user */
             $user = $this->modx->newObject('disUser');
             $user->fromArray(array(
                 'username' => $row['memberName'],
@@ -379,6 +384,7 @@ class DisSmfImport {
 
         /* default user group import option */
         if (!empty($this->importOptions['default_user_group'])) {
+            /** @var modUserGroup $dug */
             $dug = $this->modx->getObject('modUserGroup',array('name' => $this->importOptions['default_user_group']));
             if ($dug) {
                 $groups[] = $dug->get('id');
@@ -388,6 +394,7 @@ class DisSmfImport {
         $groups = array_unique($groups);
         foreach ($groups as $group) {
             if (!empty($this->memberGroupCache[$group])) {
+                /** @var modUserGroupMember $member */
                 $member = $this->modx->newObject('modUserGroupMember');
                 $member->set('user_group',$this->memberGroupCache[$group]);
                 $member->set('member',$user->get('user'));
@@ -411,6 +418,7 @@ class DisSmfImport {
             $idx = 0;
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 if (!$row) continue;
+                /** @var disCategory $category */
                 $category = $this->modx->getObject('disCategory',array(
                     'name' => $row['name'],
                 ));
@@ -464,6 +472,7 @@ class DisSmfImport {
                 'disBoard.name' => $brow['name'],
                 'Category.name' => $category->get('name'),
             ));
+            /** @var disBoard $board */
             $board = $this->modx->getObject('disBoard',$c);
 
             if (!$board) {
@@ -538,6 +547,7 @@ class DisSmfImport {
         while ($trow = $tst->fetch(PDO::FETCH_ASSOC)) {
             $this->log('Importing Topic in '.$board->get('name').': '.$trow['subject']);
 
+            /** @var disThread $thread */
             $thread = $this->modx->newObject('disThread');
             $thread->fromArray(array(
                 'board' => $board->get('id'),
@@ -550,7 +560,8 @@ class DisSmfImport {
             if ($this->live) {
                 $thread->save();
             }
-            
+
+            /** @var disPost $threadPost */
             $threadPost = $this->modx->newObject('disPost');
             $threadPost->fromArray(array(
                 'board' => $thread->get('board'),
@@ -623,6 +634,7 @@ class DisSmfImport {
         $pIdx = 0;
         while ($prow = $pst->fetch(PDO::FETCH_ASSOC)) {
             $this->log('Importing response: '.$prow['subject']);
+            /** @var disPost $post */
             $post = $this->modx->newObject('disPost');
             $post->set('thread',$thread->get('id'));
             $post->fromArray(array(
@@ -675,6 +687,7 @@ class DisSmfImport {
         $aIdx = 0;
         while ($arow = $ast->fetch(PDO::FETCH_ASSOC)) {
             $this->log('Adding attachment: '.$arow['filename']);
+            /** @var disPostAttachment $attachment */
             $attachment = $this->modx->newObject('disPostAttachment');
             $attachment->fromArray(array(
                 'post' => $post->get('id'),
@@ -739,6 +752,7 @@ class DisSmfImport {
                     $participants = array_unique($participants);
                     $thread->set('users',implode(',',$participants));
                     foreach ($participants as $participant) {
+                        /** @var disThreadUser $pmUser */
                         $pmUser = $this->modx->newObject('disThreadUser');
                         $pmUser->set('thread',$thread->get('id'));
                         $pmUser->set('user',$participant);
@@ -749,6 +763,7 @@ class DisSmfImport {
                         }
 
                         /* add read status so we can assume all messages are read */
+                        /** @var disThreadRead $pmRead */
                         $pmRead = $this->modx->newObject('disThreadRead');
                         $pmRead->set('user',$participant);
                         $pmRead->set('thread',$thread->get('id'));
@@ -758,6 +773,7 @@ class DisSmfImport {
                         }
 
                         /* add email notification automatically to PM threads */
+                        /** @var disUserNotification $pmNotify */
                         $pmNotify = $this->modx->newObject('disUserNotification');
                         $pmNotify->set('user',$participant);
                         $pmNotify->set('thread',$thread->get('id'));
@@ -780,6 +796,7 @@ class DisSmfImport {
                 $participants = array();
                 $rIdx = 0;
                 $firstAuthorId = isset($this->memberCache[$trow['ID_MEMBER_FROM']]) ? $this->memberCache[$trow['ID_MEMBER_FROM']] : 0;
+                /** @var disThread $thread */
                 $thread = $this->modx->newObject('disThread');
                 $thread->fromArray(array(
                     'replies' => 0,
@@ -802,6 +819,7 @@ class DisSmfImport {
 
             $this->log('- Importing Message: '.$trow['fromName']);
             $postAuthor = isset($this->memberCache[$trow['ID_MEMBER_FROM']]) ? $this->memberCache[$trow['ID_MEMBER_FROM']] : 0;
+            /** @var disPost $post */
             $post = $this->modx->newObject('disPost');
             $post->fromArray(array(
                 'board' => 0,
@@ -856,12 +874,14 @@ class DisSmfImport {
             'ignore_boards:!=' => '',
         ));
         $users = $this->modx->getCollection('disUser',$c);
+        /** @var disUser $user */
         foreach ($users as $user) {
             $boards = explode(',',$user->get('ignore_boards'));
             if (!empty($boards)) {
                 $this->log('Migrating '.count($boards).' boards for '.$user->get('username'));
                 $newBoards = array();
                 foreach ($boards as $board) {
+                    /** @var disBoard $b */
                     $b = $this->modx->getObject('disBoard',array(
                         'integrated_id' => $board,
                     ));
