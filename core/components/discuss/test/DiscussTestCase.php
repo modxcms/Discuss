@@ -25,6 +25,7 @@ class DiscussTestCase extends PHPUnit_Framework_TestCase {
         $disCorePath = $this->modx->getOption('discuss.core_path',null,$this->modx->getOption('core_path',null,MODX_CORE_PATH).'components/discuss/');
         require_once $disCorePath.'model/discuss/discuss.class.php';
         $this->discuss = new Discuss($this->modx);
+        $this->modx->discuss =& $this->discuss;
         /* set this here to prevent emails/headers from being sent */
         $this->discuss->inTestMode = true;
         /* make sure to reset MODX placeholders so as not to keep placeholder data across tests */
