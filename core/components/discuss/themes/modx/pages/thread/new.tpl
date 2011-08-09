@@ -7,8 +7,24 @@
 ]]
 
 
+    <div class="preview_toggle">
+		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
+        <a href="#" class="dis-new-thread-preview" id="dis-new-thread-preview-btn">preview</a>
+    	<div id="dis-new-thread-preview"></div>
+    </div>
+    
 <form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
 	<h1 class="Category">[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
+	
+
+    
+  
+    
+    
+    
+    
+    
+    
     
     <input type="hidden" name="board" value="[[+id]]" />
     
@@ -43,12 +59,11 @@
 <br class="clearfix" />
     <div class="dis-form-buttons">
         <input type="submit" name="dis-post-new" value="[[%discuss.thread_post_new]]" />
-        <input type="button" class="dis-new-thread-preview" id="dis-new-thread-preview-btn" value="[[%discuss.preview]]" />
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
     </div>
 </form>
 <br class="clearfix" />
-<div id="dis-new-thread-preview"></div>
+
 
 [[+discuss.error_panel]]
 

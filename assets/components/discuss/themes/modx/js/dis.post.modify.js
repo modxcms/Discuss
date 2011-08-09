@@ -5,6 +5,7 @@ DIS.DISModifyPost = function() {
             $('.dis-add-attachment').click(this.addAttachment);
             $('.dis-remove-attachment').click(this.removeAttachment);
             $('.dis-modify-post-preview-btn').click(this.preview);
+            $('.dis-message-write').click(this.message);
             attachments = o.attachments || 1;
         }
     
@@ -20,6 +21,17 @@ DIS.DISModifyPost = function() {
             var a = $.ajax(a);
             $('#dis-modify-post-preview').hide().html(a.responseText).fadeIn();
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
+
+            $('.dis-message-write').removeClass('selected');
+            $('.dis-modify-post-preview-btn').addClass('selected');
+            return false;
+        }
+
+        ,message: function() {
+            $('.dis-modify-post-preview-btn').removeClass('selected');
+            $('.dis-message-write').addClass('selected');
+            $('#dis-modify-post-preview').fadeOut();
+            return false;        
         }
 
         ,addAttachment: function() {

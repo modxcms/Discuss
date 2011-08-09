@@ -10,8 +10,14 @@
 			<li>[[+pagination]]</li>
 		</ol>
 
-		<form action="[[~[[*id]]]]thread/reply" method="post" class="dis-form[[+locked:notempty=` locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
+            <div class="preview_toggle">
+                <a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
+                <a href="#" class="dis-preview" name="dis-post-reply-preview">preview</a>
+            	<div id="dis-reply-post-preview"></div>
+            </div>
 
+		<form action="[[~[[*id]]]]thread/reply" method="post" class="dis-form [[+locked:notempty=`locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
+            
             <input type="hidden" id="dis-quick-reply-board" name="board" value="[[+board]]" />
             <input type="hidden" id="dis-quick-reply-thread" name="thread" value="[[+id]]" />
             <input type="hidden" id="dis-quick-reply-post" name="post" value="[[+lastPost.id]]" />
@@ -20,7 +26,7 @@
 
             <div class="wysi-buttons">[[+reply_buttons]]</div>
 
-            <textarea name="message" id="dis-quick-reply-message" rows="7">[[+message]]</textarea>
+            <textarea name="message" id="dis-quick-reply-message" rows="7" cols="80">[[+message]]</textarea>
 
             [[+attachment_fields]]
             <br class="clearfix" />
@@ -30,20 +36,20 @@
             <label class="dis-cb"><input type="checkbox" name="notify" value="1" />Notify of Replies</label>
 
             <br class="clearfix" />
-
             <div class="dis-form-buttons">
                 <input type="submit" name="dis-post-reply" value="Quick Reply" />
-                <input type="button" name="dis-post-reply-preview" class="dis-preview" value="Preview Reply" />
             </div>
-            
+
         </form>
         
-        <div id="dis-reply-post-preview"></div>
+
+	<div class="dis-thread-actions">[[+threadactionbuttons]]</div>
+
+	<br class="clearfix" />
 
 	</div>
 
 
-	<div class="dis-thread-actions">[[+threadactionbuttons]]</div>
 
 	
 	[[+belowThread]]
@@ -65,10 +71,8 @@
             <h4>Info and Actions</h4>
             <p>[[+actionbuttons]]</p>
 
-            <p>[[+subscribed:is=`1`:then=`<a href="[[+unsubscribeUrl]]">Unsubscribe</a>`:else=`<a href="[[+subscribeUrl]]">Subscribe</a>`]]</p>
-            <p>[[+views]] total views.</p>
-            <p>[[+readers]]</p>
-            <p><a href="[[~[[*id]]]]thread/recent.xml" class="rss_feed">RSS Feed</a></p>
+            <p>[[+readers]] [[+views]] total views.</p>
+            <p>Subscribe: <a href="[[~[[*id]]]]thread/recent.xml">RSS</a> or [[+subscribed:is=`1`:then=`<a href="[[+unsubscribeUrl]]">stop emails</a>`:else=`<a href="[[+subscribeUrl]]">email</a>`]]</p>
         </div>
 
         <div class="Box GuestBox">

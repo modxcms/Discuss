@@ -9,10 +9,38 @@ DIS.Thread = function() {
     
     return {
         init: function() {
+            $('.dis-preview').click(this.preview);
+            $('.dis-message-write').click(this.message);
             $('.dis-post-title').click(this.togglePost);
             $('.dis-post-author').click(this.toggleAuthor);
             $('.dis-post-remove').click(this.removePost);
         }
+        ,preview: function() {
+            var f = $('#dis-quick-reply-form');
+            var p = f.serialize()+'&action=thread/preview';
+
+            var a = $.extend({},DIS.baseAjax,{
+                url: DIS.url
+                ,async: false
+                ,data: p
+                ,type: 'POST'
+            });
+            var a = $.ajax(a);
+            $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();
+            if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
+            
+            $('.dis-message-write').removeClass('selected');
+            $('.dis-preview').addClass('selected');
+            return false;
+        }
+        
+        ,message: function() {
+            $('.dis-preview').removeClass('selected');
+            $('.dis-message-write').addClass('selected');
+            $('#dis-reply-post-preview').fadeOut();
+            return false;        
+        }
+
         ,pollPosts: function() {
              var a = $.extend({},DIS.baseAjax,{
                 url: DIS.config.connector
@@ -35,7 +63,7 @@ DIS.Thread = function() {
             });
             $.ajax(a);
         }
-        
+
         ,displayRefreshMessage: function(d) {
             /* TODO: move html to a chunk */
             $('.dis-poll-refresh').html('There have been '+d+' new posts since you last reloaded. Please ' +

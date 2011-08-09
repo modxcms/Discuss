@@ -2928,9 +2928,7 @@ h1.locked {
 	}
 
 .dis-board-subs {
-	display: block;
-	margin: 5px;
-	padding: 5px;
+	padding: 0 0 0 10px;
 	}
 
 .dis-board-subs h4 {
@@ -2947,31 +2945,20 @@ pre {
 	background-color: #eee;
 	}
 
-hr.line {
-    -moz-border-bottom-colors: none;
-    -moz-border-image: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background: none repeat scroll 0 0 #E3E3E3;
-    border-color: #B9B9B9 -moz-use-text-color -moz-use-text-color;
-    border-right: 0 none;
-    border-style: solid none none;
-    border-width: 0 0 0;
-    display: block;
-    height: 2px;
-    margin: 1em 0;
-    padding: 0;
-}
-
 #Panel hr.line {
-    background: -moz-linear-gradient(center top , #EAEAEA 0%, #FFFFFF 100%) repeat scroll 0 0 transparent;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: -15px;
-    width: 1px;
-	}
+   position:absolute;
+   top:-15px;
+   left:0;
+   width:1px;
+   height:100%;
+   background:#EAEAEA;
+   background:-moz-linear-gradient(top, #EAEAEA 0%, #FFFFFF 100%);
+   background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#EAEAEA), color-stop(100%,#FFFFFF));
+   -pie-background:linear-gradient(top, #EAEAEA, #FFFFFF);
+   background:linear-gradient(top, #EAEAEA 0%, #FFFFFF 100%);
+   border-width: 0 0 0;
+   }
+
 
 /* form */
 .dis-form {
@@ -3073,10 +3060,10 @@ form.locked {
 	}
 
 .dis-form-buttons {
- 	text-align: center; 
- 	width: 97%; 
+	position: relative;
  	padding: 7px 0;
- 	margin: 20px 0 30px;
+ 	margin: 10px 0 30px 20px;
+ 	text-align: right;
 	}
 
 .dis-form-buttons input { float: none; }
@@ -3103,13 +3090,48 @@ form.locked {
 	text-align: left;
 	}
 
-.dis-post-preview {
+.preview_toggle {
+	position: relative;
+	overflow: visible;
+	height: 16px;
+	width: 83px;
+    border-radius: 8px;
+    background-color: #444;
+    z-index: 550;
+    margin: 10px 0 20px 20px;
+	}
+
+.preview_toggle a {
+	float: left;
 	display: block;
-	width: 90%;
-	margin: 20px auto;
+    border-radius: 7px;
+    margin: 2px;
+    padding: 0 6px;
+    text-decoration: none;
+    font-family: helvetica;
+    font-size: 9px;
+    line-height: 12px;
+    color: #eee;	
+	}
+
+.preview_toggle a.selected {
+    background-color: #ddd;
+    color: #444;
+	}
+
+.preview_toggle #dis-reply-post-preview {
+    background-color: #FFFFFF;
+    display: none;
+    left: -20px;
+    margin: 0;
+    min-height: 400px;
+    position: absolute;
+    top: 23px;
+    width: 710px;
+    z-index: 1000;
 	}
 	
-.dis-post-preview h2 {
+.preview_toggle .dis-post-preview h2 {
 	margin: 0 0;
 	padding: 0 0;
 	}

@@ -7,6 +7,7 @@ DIS.ReplyPost = function() {
     return {
         init: function() {
             $('.dis-preview').click(this.preview);
+            $('.dis-message-write').click(this.message);
             $('.dis-post-title').click(this.togglePost);
             $('.dis-post-author').click(this.toggleAuthor);
             $('.dis-add-attachment').click(this.addAttachment);
@@ -25,6 +26,17 @@ DIS.ReplyPost = function() {
             var a = $.ajax(a);
             $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
+
+            $('.dis-message-write').removeClass('selected');
+            $('.dis-preview').addClass('selected');
+            return false;
+        }
+
+        ,message: function() {
+            $('.dis-preview').removeClass('selected');
+            $('.dis-message-write').addClass('selected');
+            $('#dis-reply-post-preview').fadeOut();
+            return false;        
         }
         
         ,togglePost: function() {

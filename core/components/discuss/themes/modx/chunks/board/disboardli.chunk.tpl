@@ -6,12 +6,8 @@
     	</a></h3>
     	
 	    	<p class="CategoryDescription">[[+description]]</p>
-			[[+subforums:notempty=`<div class="dis-board-subs">
-			<h4>Subtopics</h4>
-			
-				<p>[[+subforums]]</p>
-			
-			</div>`]]
+	    	
+			[[+subforums:notempty=`<p class="dis-board-subs"><b>Subtopics:</b> [[+subforums]]</p>`]]
 		
-        </div>
+	</div>
 </li>

@@ -4,10 +4,18 @@
   &validate=`title:required,message:required:allowTags`
 ]]
 
+
+	    <div class="preview_toggle">
+			<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
+        	<a href="#" class="dis-preview" id="dis-post-preview">preview</a>
+			<div id="dis-new-thread-preview"></div>
+	    </div>
+	    
 <form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
 	<h1 class="Category">[[!+fi.title]]</h1>
-	
+
+
     
     <input type="hidden" name="board" value="[[!+fi.board]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
@@ -35,7 +43,6 @@
     
     <div class="dis-form-buttons">
         <input type="submit" name="dis-post-reply" value="[[%discuss.post_reply]]" />
-        <input type="button" name="dis-post-preview" class="dis-preview" value="[[%discuss.preview]]" />
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
