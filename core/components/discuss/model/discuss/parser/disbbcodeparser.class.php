@@ -431,6 +431,10 @@ class disBBCodeParser extends disParser {
         /* leave only \n linebreaks */
 	    $message = strtr($message, array("\r" => ''));
 
+	    /* convert from smf imported tags, entities */
+	    $message = html_entity_decode($message,ENT_COMPAT,'UTF-8');
+	    $message = str_replace('&#039;',"'",$message);
+
         /* nuke any extra [/quote] tags */
         while (substr($message, -7) == '[quote]') {
             $message = substr($message, 0, -7);
