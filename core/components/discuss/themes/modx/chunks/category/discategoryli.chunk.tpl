@@ -1,4 +1,2 @@
-<li class="Item CategoryHeading Depth1 Category-[[+category_name]]" id="dis-category-[[+category]]">
-    <div class="ItemContent Category Read">[[+category_name]]</div>
-</li>
+<li><h1 class="Category">[[+category_name]]</h1></li>
 [[+list]]

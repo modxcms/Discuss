@@ -1432,8 +1432,8 @@ ul.CategoryList li.Depth11 { padding-left: 250px !important; }
 ul.CategoryList li.Depth12 { padding-left: 275px !important; }
 ul.CategoryListWithHeadings li.Depth2 { 
     border-bottom: 1px solid #efefef;
-    margin: 0 18px;
-    padding: 7px 4px 0;
+    margin: 0 18px 10px;
+    padding: 0 4px 0;
     width: 662px;
     }
 
@@ -2897,7 +2897,7 @@ body { color: #444; }
 
 .ItemContent {
 	color: #444;
-	padding: 4px;
+	padding: 0 4px 4px 4px;
 	}
 
 input.DateBox, input.InputBox, input.SmallInput, textarea {
@@ -2906,7 +2906,8 @@ input.DateBox, input.InputBox, input.SmallInput, textarea {
 
 .CategoryDescription {
 	color: #666;
-	padding: 5px 0;
+	padding: 0 0;
+	margin: 0 0;
 	}
 
 h1.Category,
