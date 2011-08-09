@@ -64,6 +64,8 @@
         <div class="Box GuestBox">
             <h4>Info and Actions</h4>
             <p>[[+actionbuttons]]</p>
+
+            <p>[[+subscribed:is=`1`:then=`<a href="[[+unsubscribeUrl]]">Unsubscribe</a>`:else=`<a href="[[+subscribeUrl]]">Subscribe</a>`]]</p>
             <p>[[+views]] total views.</p>
             <p>[[+readers]]</p>
             <p><a href="[[~[[*id]]]]thread/recent.xml" class="rss_feed">RSS Feed</a></p>
