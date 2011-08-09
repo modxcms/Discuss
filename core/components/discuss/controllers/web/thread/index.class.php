@@ -72,6 +72,7 @@ class DiscussThreadController extends DiscussController {
         $this->setPlaceholders($this->thread->toArray('',true,true));
         $this->setPlaceholder('views',number_format($this->getPlaceholder('views',1)));
         $this->setPlaceholder('replies',number_format($this->getPlaceholder('replies',0)));
+        $this->setPlaceholder('url',$this->thread->getUrl());
 
         /* set css class of thread */
         $this->thread->buildCssClass();
@@ -200,11 +201,13 @@ class DiscussThreadController extends DiscussController {
                 $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unsubscribe' => 1)), 'text' => $this->modx->lexicon('discuss.unsubscribe'));
             }
             $this->setPlaceholder('subscribed',true);
+            $this->setPlaceholder('unsubscribeUrl',$this->thread->getUrl(false,array('unsubscribe' => 1)));
         } elseif ($this->thread->canSubscribe()) {
             if (!empty($this->options['showSubscribeOption'])) {
                 $actionButtons[] = array('url' => $this->thread->getUrl(false,array('subscribe' => 1)), 'text' => $this->modx->lexicon('discuss.subscribe'));
             }
             $this->setPlaceholder('subscribed',false);
+            $this->setPlaceholder('subscribeUrl',$this->thread->getUrl(false,array('subscribe' => 1)));
         }
         /* TODO: Send thread by email - 1.1
          * if ($this->modx->hasPermission('discuss.thread_send') {
