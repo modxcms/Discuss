@@ -3,7 +3,7 @@
 
 <div class="dis-profile left">
 
-<form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" id="dis-user-edit-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" id="dis-user-edit-form">
 
 	<h1 class="Category">[[+name]]</h1>
 

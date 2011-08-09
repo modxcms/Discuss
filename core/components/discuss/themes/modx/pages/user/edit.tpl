@@ -12,7 +12,7 @@
 	&postHooks=`postHook.DiscussUpdateProfile`
 ]]
 
-<form action="[[~[[*id]]]]user/edit?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/edit?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form">
 
     
     <input type="hidden" name="user" value="[[+id]]" />

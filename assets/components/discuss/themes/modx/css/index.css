@@ -183,7 +183,7 @@ div.dis-threads ol.search-results {
 .dis-pagination,
 .dis-viewing {
 	display: block;
-	padding: 0 20px 30px 0;
+	padding: 10px 20px 0 0;
 	text-align: right;
 	float: right;
 	}
@@ -195,43 +195,27 @@ div.dis-threads ol.search-results {
     }
     
 .dis-pagination li {
-    display: block;
-    float: left;
-    margin: 0 0;
-    text-align: center;
-    height: 20px;
-    width: 20px;
+    display: inline-block;
 }
 
-.dis-pagination li.active {
-	font-weight: bold;
-	font-size: 18px;
-	}
-
 .dis-pagination li a {
-	padding: 3px 6px;
-	}
+    background-color: #DDDDDD;
+    border-radius: 3px 3px 3px 3px;
+    color: #333333;
+    display: block;
+    font-size: 11px;
+    height: 24px;
+    line-height: 24px;
+    margin: 0 0 0 5px;
+    padding: 0 8px;
+    position: relative;
+    text-decoration: none;
+}
 
-.dis-pagination li a:hover {
-	font-size: 18px;
-	color: #fe1492;
-	/* Firefox */
-	-moz-transition-property: all;
-	-moz-transition-duration: .2s;
-	-moz-transition-delay: 0s;
-	/* WebKit */
-	-webkit-transition-property: all;
-	-webkit-transition-duration: .2s;
-	-webkit-transition-delay: 0s;
-	/* Opera */
-	-o-transition-property: all;
-	-o-transition-duration: .2s;
-	-o-transition-delay: 0s;
-	/* Standard */
-	transition-property: all;
-	transition-duration: .2s;
-	transition-delay: 0s;
-	}
+.dis-pagination li a.active, .dis-pagination li a:hover {
+    background: -moz-linear-gradient(center top , #99D0E2, #4AA8BF) repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    }
 
 .dis-pagination li.dis-no-pages {
 	width: 100px;
@@ -2956,7 +2940,7 @@ hr.line {
     border-color: #B9B9B9 -moz-use-text-color -moz-use-text-color;
     border-right: 0 none;
     border-style: solid none none;
-    border-width: 1px 0 0;
+    border-width: 0 0 0;
     display: block;
     height: 2px;
     margin: 1em 0;
@@ -2976,6 +2960,10 @@ hr.line {
 .dis-form {
  	margin: 0;
  	padding: 0;
+	}
+
+form.locked {
+	display: none;
 	}
 	
 .discuss .dis-form h2 {

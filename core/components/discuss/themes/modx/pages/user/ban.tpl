@@ -10,11 +10,11 @@
 
 
 
-<form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form">
 
 	<h1 class="Category">[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</h1>
 
-<p style="color: green;">[[+fi.successMessage]]</p>
+<p>[[+fi.successMessage]]</p>
 
     <input type="hidden" name="id" value="[[+fi.id]]" />
     <input type="hidden" name="user" value="[[+fi.user]]" />
@@ -23,7 +23,7 @@
         <span class="small">[[%discuss.ban_reason_desc]]</span>
         <span class="error">[[+fi.error.reason]]</span>
     </label>
-    <textarea name="reason" id="dis-ban-reason" style="width: 300px; height: 80px;">[[+fi.reason]]</textarea>
+    <textarea name="reason" id="dis-ban-reason">[[+fi.reason]]</textarea>
 
 
     <label for="dis-ban-cb-iprange">[[%discuss.ban_iprange]]:
@@ -56,7 +56,7 @@
 
     <span class="label-inline">
         <span class="label-inline-th">[[%discuss.ban_expireson]]</span>
-        <input type="text" name="expireson" id="dis-ban-expireson" value="[[+fi.expireson]]" class="label-inline-text" style="width: 40px;" />
+        <input type="text" name="expireson" id="dis-ban-expireson" value="[[+fi.expireson]]" class="label-inline-text" />
         <span class="label-inline-td">[[%discuss.days]]</span>
         <br class="clear" />
         <span class="small">[[%discuss.ban_expireson_desc]]</span>
@@ -67,7 +67,7 @@
         <span class="small">[[%discuss.ban_notes_desc]]</span>
         <span class="error">[[+fi.error.notes]]</span>
     </label>
-    <textarea name="notes" id="dis-ban-notes" style="width: 300px; height: 80px;">[[+fi.notes]]</textarea>
+    <textarea name="notes" id="dis-ban-notes">[[+fi.notes]]</textarea>
 
     [[+other_fields]]
 

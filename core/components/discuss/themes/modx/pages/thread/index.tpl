@@ -2,7 +2,7 @@
 
 [[+aboveThread]]
 
-	<h1 class="Category[[+locked:notempty=` locked`]]">[[+title]]</h1>
+	<h1 class="Category[[+locked:is=`1`:then=` locked`]]">[[+title]]</h1>
 
 	<div>
 		<ol class="dis-board-thread">
@@ -10,7 +10,7 @@
 			<li>[[+pagination]]</li>
 		</ol>
 
-        <form action="[[~[[*id]]]]thread/reply" method="post" class="dis-form" id="dis-quick-reply-form" enctype="multipart/form-data">
+		<form action="[[~[[*id]]]]thread/reply" method="post" class="dis-form[[+locked:notempty=` locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
 
             <input type="hidden" id="dis-quick-reply-board" name="board" value="[[+board]]" />
             <input type="hidden" id="dis-quick-reply-thread" name="thread" value="[[+id]]" />
@@ -20,7 +20,7 @@
 
             <div class="wysi-buttons">[[+reply_buttons]]</div>
 
-            <textarea name="message" id="dis-quick-reply-message" style="width: 90%" rows="7">[[+message]]</textarea>
+            <textarea name="message" id="dis-quick-reply-message" rows="7">[[+message]]</textarea>
 
             [[+attachment_fields]]
             <br class="clearfix" />

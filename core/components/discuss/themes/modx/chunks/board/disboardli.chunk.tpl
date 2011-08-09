@@ -2,7 +2,7 @@
     <div class="ItemContent Category">
     	<a href="[[+url]]" class="Title">
     	    [[+name]] <span class="DiscussionCount">[[+post_stats]]</span>
-    	    <span class="RSS"><a href="[[~[[*id]]]]board.xml?board=[[+id]]"><img src="[[++discuss.assets_url]]themes/modx/images/icons/rss2.gif"></a></span>
+    	    <span class="RSS"><a href="[[~[[*id]]]]board.xml?board=[[+id]]"><img src="[[++discuss.assets_url]]themes/modx/images/rss.png"></a></span>
     	</a>
     	
     	<div class="CategoryDescription">[[+description]]</div>

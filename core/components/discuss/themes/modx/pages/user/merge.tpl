@@ -9,7 +9,7 @@
 
 
 
-<form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form">
 
 	<h1 class="Category">[[%discuss.account_merge? &namespace=`discuss` &topic=`user`]]: [[+name]]</h1>
 
