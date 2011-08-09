@@ -2,7 +2,7 @@
 
 [[+aboveThread]]
 
-	<h1 class="Category[[+locked:is=`1`:then=` locked`]]">[[+title]]</h1>
+	<h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]">[[+title]]</h1>
 
 	<div>
 		<ol class="dis-board-thread">
