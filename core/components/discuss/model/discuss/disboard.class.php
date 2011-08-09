@@ -132,10 +132,12 @@ class disBoard extends xPDOSimpleObject {
             $cgps = count($gparents);
             $i = $cgps - 1;
             $gps = array();
+            /** @var disBoardClosure $gparent */
             foreach ($gparents as $gparent) {
                 $depth = 0;
                 $ancestor = $gparent->get('ancestor');
                 if ($ancestor != 0) $depth = $i;
+                /** @var disBoardClosure $obj */
                 $obj = $this->xpdo->newObject('disBoardClosure');
                 $obj->set('ancestor',$ancestor);
                 $obj->set('descendant',$id);
@@ -151,6 +153,7 @@ class disBoard extends xPDOSimpleObject {
                 'descendant' => $id,
             ));
             if (!$rootcl) {
+                /** @var disBoardClosure $rootcl */
                 $rootcl = $this->xpdo->newObject('disBoardClosure');
                 $rootcl->set('ancestor',0);
                 $rootcl->set('descendant',$id);
@@ -179,6 +182,7 @@ class disBoard extends xPDOSimpleObject {
                 'AND:ancestor:!=' => $this->get('id'),
             ));
             $rs = $this->xpdo->getCollection('disBoardClosure',$c);
+            /** @var disBoardClosure $r */
             foreach ($rs as $r) {
                 $r->remove();
             }
@@ -189,6 +193,7 @@ class disBoard extends xPDOSimpleObject {
             $idx = 0;
             $map = array();
             foreach ($parents as $parent) {
+                /** @var disBoardClosure $cl */
                 $cl = $this->xpdo->newObject('disBoardClosure');
                 $cl->set('ancestor',$parent);
                 $cl->set('descendant',$this->get('id'));
@@ -251,6 +256,7 @@ class disBoard extends xPDOSimpleObject {
             ($integrated ? 'integrated_id' : 'id') => trim($id,'.'),
         ));
         $groups = $modx->discuss->user->getUserGroups();
+        $where = array();
         /* restrict boards by user group if applicable */
         if (!$modx->discuss->user->isAdmin()) {
             if (!empty($groups)) {
