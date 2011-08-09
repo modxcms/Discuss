@@ -2926,6 +2926,22 @@ h1.locked {
 	background: transparent url(../images/locked.png) no-repeat 5px 5px;
 	}
 
+.dis-board-subs {
+	display: block;
+	margin: 5px;
+	padding: 5px;
+	}
+
+.dis-board-subs h4 {
+    border-bottom: 1px solid #E3E3E3;
+    color: #494949;
+    font-family: "museo-slab-1","museo-slab-2",Georgia,serif;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0 0 5px;
+    padding: 0 0 5px;
+	}
+
 pre {
 	background-color: #eee;
 	}
