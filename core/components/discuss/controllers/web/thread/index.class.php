@@ -195,11 +195,15 @@ class DiscussThreadController extends DiscussController {
             $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'));
         }
         $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'));
-        if ($this->thread->canUnsubscribe() && !empty($this->options['showSubscribeOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unsubscribe' => 1)), 'text' => $this->modx->lexicon('discuss.unsubscribe'));
+        if ($this->thread->canUnsubscribe()) {
+            if (!empty($this->options['showSubscribeOption'])) {
+                $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unsubscribe' => 1)), 'text' => $this->modx->lexicon('discuss.unsubscribe'));
+            }
             $this->setPlaceholder('subscribed',true);
-        } elseif ($this->thread->canSubscribe() && !empty($this->options['showSubscribeOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('subscribe' => 1)), 'text' => $this->modx->lexicon('discuss.subscribe'));
+        } elseif ($this->thread->canSubscribe()) {
+            if (!empty($this->options['showSubscribeOption'])) {
+                $actionButtons[] = array('url' => $this->thread->getUrl(false,array('subscribe' => 1)), 'text' => $this->modx->lexicon('discuss.subscribe'));
+            }
             $this->setPlaceholder('subscribed',false);
         }
         /* TODO: Send thread by email - 1.1
