@@ -100,6 +100,9 @@ class Discuss {
         $assetsUrl = $this->modx->getOption('discuss.assets_url',$config,$this->modx->getOption('assets_url').'components/discuss/');
 		$themesUrl = $this->modx->getOption('discuss.themes_url',$config,$assetsUrl.'themes/');
         $theme = $this->modx->getOption('discuss.theme',$config,'default');
+        if (!is_dir($corePath.'themes/'.$theme)) {
+            $theme = 'default';
+        }
 
         $this->config = array_merge(array(
             'assetsUrl' => $assetsUrl,
