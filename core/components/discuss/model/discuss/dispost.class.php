@@ -889,7 +889,9 @@ class disPost extends xPDOSimpleObject {
     public function renderAuthorMeta(array &$postArray) {
         if (empty($this->Author)) {
             $this->getOne('Author');
-            if (empty($this->Author)) return;
+            if (empty($this->Author)) {
+                return;
+            }
         }
 
         /** @var array $authorArray */

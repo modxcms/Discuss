@@ -24,9 +24,15 @@
 /**
  * Show a preview of the post before it is made
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * @var Discuss $discuss
+ * 
  * @package discuss
  * @subpackage processors
  */
+
+/** @var disPost $post */
 $post = $modx->newObject('disPost');
 $post->fromArray($_POST);
 $post->set('author',$modx->user->get('id'));
@@ -39,7 +45,8 @@ $post->set('username',$modx->user->get('username'));
 
 $postArray = $post->toArray();
 $postArray['content'] = $post->getContent();
-
+$postArray['url'] = $post->getUrl();
+$post->renderAuthorMeta($postArray);
 $o = $discuss->getChunk('disPost',$postArray);
 
 return $modx->error->success($o,$post);
