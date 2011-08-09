@@ -24,17 +24,12 @@ Then add these system settings:
 - discuss.assets_path - point to path/of/yourdiscussrepo/assets/components/discuss/
 - discuss.assets_url - point to the web path to /url/of/yourdiscussrepo/assets/components/discuss/
 
-If you're wanting to modify the Snippets, simply replace the Discuss Snippet calls in the
-Resources with [[!include]] calls, such as this for the DiscussThread snippet:
+Put the Discuss snippet in an empty template Resource:
 
-[[!include? &file=\`[[++discuss.core_path]]elements/snippets/snippet.discussthread.php\`]]
+`[[!Discuss]]`
 
-Where the include snippet is just:
+Then make sure you've installed the FormIt and Login Extras.
 
-`<?php $o = include $file; return $o; ?>`
-
-If you further want to work on the content within a Resource, simply replace the
-entire Resource with that snippet call, and set the System Setting 'discuss.debug'
-to 1.
-
-And that's it!
+Finally, create pages for registration, login, and updating profile, and turn discuss.sso_mode on. Map
+the System Settings for each resource. Set the appropriate preHooks and postHooks for each snippet,
+and you're ready to roll!
