@@ -167,6 +167,7 @@ class Discuss {
                 $this->loadRequest();
             break;
         }
+        return '';
     }
 
     /**
@@ -468,10 +469,9 @@ class Discuss {
      *
      * @access public
      * @param array $btns
-     * @param string $cls
      * @return string The HTML for the action buttons
      */
-    public function buildActionButtons($btns,$cls) {
+    public function buildActionButtons($btns) {
         $abs = array();
         foreach ($btns as $ar) {
             $abs[] = $this->getChunk('disActionButton',$ar);

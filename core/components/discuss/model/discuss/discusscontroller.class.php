@@ -20,6 +20,10 @@ abstract class DiscussController {
      */
     public $discuss;
     /**
+     * @var array
+     */
+    public $config = array();
+    /**
      * An array of theme-specific options for this controller
      * @var array $options
      */
@@ -52,7 +56,7 @@ abstract class DiscussController {
     function __construct(Discuss &$discuss,array $config = array()) {
         $this->discuss =& $discuss;
         $this->modx =& $discuss->modx;
-        $this->config = array_merge(array(),$config);
+        $this->config = array_merge($this->config,$config);
     }
 
     /**
