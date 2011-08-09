@@ -197,8 +197,10 @@ class DiscussThreadController extends DiscussController {
         $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'));
         if ($this->thread->canUnsubscribe() && !empty($this->options['showSubscribeOption'])) {
             $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unsubscribe' => 1)), 'text' => $this->modx->lexicon('discuss.unsubscribe'));
+            $this->setPlaceholder('subscribed',true);
         } elseif ($this->thread->canSubscribe() && !empty($this->options['showSubscribeOption'])) {
             $actionButtons[] = array('url' => $this->thread->getUrl(false,array('subscribe' => 1)), 'text' => $this->modx->lexicon('discuss.subscribe'));
+            $this->setPlaceholder('subscribed',false);
         }
         /* TODO: Send thread by email - 1.1
          * if ($this->modx->hasPermission('discuss.thread_send') {
