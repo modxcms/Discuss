@@ -5,11 +5,12 @@
   &validate=`title:required,message:required:allowTags`
 ]]
 
-<div class="preview_toggle">
-    <a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
-    <a href="#" class="dis-modify-post-preview-btn" id="dis-modify-post-preview-btn">preview</a>
-    <div id="dis-modify-post-preview">[[+preview]]</div>
-</div>
+    <div class="preview_toggle">
+		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
+        <a href="#" class="dis-modify-post-preview-btn" id="dis-modify-post-preview-btn">preview</a>
+		<div id="dis-modify-post-preview"></div>
+    </div>
+
 <form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
 		<h1 class="Category">[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
     
@@ -19,26 +20,39 @@
     
     <label for="dis-new-thread-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
-    </label>
-    <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" /><br class="clearfix" />
 
-    [[+fi.is_root:is=`1`:then=`<label for="dis-new-thread-type">[[%discuss.thread_type]]</label>
+    [[+fi.is_root:is=`1`:then=`<label for="dis-new-thread-type">[[%discuss.thread_type]]</label><br class="clearfix" />
     <select name="class_key" id="dis-new-thread-type">
         <option value="disThreadDiscussion" [[+fi.class_key:FormItIsSelected=`disThreadDiscussion`]]>[[%discuss.discussion]]</option>
         <option value="disThreadQuestion" [[+fi.class_key:FormItIsSelected=`disThreadQuestion`]]>[[%discuss.question_and_answer]]</option>
-    </select>`]]
+    </select>`]]<br class="clearfix" />
 
     <div class="wysi-buttons">[[+buttons]]</div>
 
     
     <label for="dis-thread-message">
         <span class="error">[[!+fi.error.message]]</span>
-    </label>
+    </label><br class="clearfix" />
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
-    <br class="clear" />
+    <br class="clearfix" />
+    
+    <label for="dis-attachment">[[%discuss.attachments]]:
+        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
+        <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
+        <span class="error">[[+error.attachments]]</span>
+    </label>
+        <br class="clearfix" />
 
-    [[+attachment_fields]]
-    <br class="clear" />
+    <input type="file" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
+        <br class="clearfix" />
+
+    <div id="dis-attachments"></div>
+
+    [[+attachments:notempty=`<div class="dis-existing-attachments">
+        <ul class="dis-attachments">[[+attachments]]</ul>
+    </div>`]]
 
     [[+locked_cb]]
     [[+sticky_cb]]
@@ -50,10 +64,42 @@
     </div>
 </form>
 
-    <br class="clearfix" />
+
+<br class="clearfix" />
+<hr />
+
 
 <div class="dis-thread-posts">
 	<h1 class="Category">[[%discuss.thread_summary]]</h1>
 [[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
 </div>
 [[+discuss.error_panel]]
+
+			</div><!-- Close Content From Wrapper -->
+[[+bottom]]
+
+				<div id="Panel">
+				<hr class="line" />
+					<div class="PanelBox">
+						
+						<div class="Box GuestBox">
+						   <h4>Don't Be That Guy</h4>
+							<p>Be nice, respectful and patient. Inflamatory or inappropriate posts will get your post nuked and flood your life with bans and bad karma.</p>
+						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Help Us Help You</h4>
+							<p>Use a title that gives insight into your post and limit your posts to 1. Remember, this is an open source project and folks aren't paid to help you here. If you're experiencing problems, please supply adequate technical details.</p>
+						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Other Support Options</h4>
+							<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>.</p>
+						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Want to Support MODX?</h4>
+							<p>If you build sites for a living with MODX, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
+						</div>
+						
+					</div>

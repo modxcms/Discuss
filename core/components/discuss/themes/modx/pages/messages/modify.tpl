@@ -5,6 +5,13 @@
 ]]
 
 
+    <div class="preview_toggle">
+		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
+        <a href="#" class="dis-modify-message-preview" id="dis-modify-message-preview-btn">preview</a>
+		<div id="dis-modify-message-preview"></div>
+    </div>
+    
+
 <form action="[[~[[*id]]]]messages/modify?post=[[!+fi.id]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
 
 	<h1 class="Category">[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</h1>
@@ -54,12 +61,11 @@
 <br class="clearfix" />
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-message-modify" value="[[%discuss.save_changes]]" />
-        <input type="button" class="dis-action-btn dis-modify-message-preview-btn" id="dis-modify-message-preview-btn" value="[[%discuss.preview]]" />
         <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages/view?message=[[+thread]]#dis-post-[[+id]]';" />
     </div>
 </form>
 
-<div id="dis-modify-message-preview">[[+preview]]</div>
+
 
 <div class="dis-thread-posts">
 	<h1 class="Category">[[%discuss.thread_summary]]</h1>
@@ -78,31 +84,25 @@
 				<div id="Panel">
 				<hr class="line" />
 					<div class="PanelBox">
-					
+						
 						<div class="Box GuestBox">
-						   <h4>Welcome back [[+modx.user.username]]</h4>
-							<p>Some information. Test.</p>
+						   <h4>Don't Be That Guy</h4>
+							<p>Be nice, respectful and patient. Inflamatory or inappropriate posts will get your post nuked and flood your life with bans and bad karma.</p>
 						</div>
 						
-						<div class="Box BoxCategories">
-							<h4><a href="/categories/all">Categories</a></h4>
-							<ul class="PanelInfo PanelCategories">
-								<li><span><strong><a href="/discussions">All Discussions</a></strong><span class="Count">[[+totalPosts]]</span></span></li>
-								<li class="Heading">Partners</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">General</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">Evolution</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">Revolution</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-								<li class="Heading">International</li>
-								<li class="Depth2 active"><strong><a href="/categories/-important-news">Sample 1 Active</a></strong><span class="Count">0</span></li>
-								<li class="Depth2"><strong><a href="/categories/security-notices">Sample 2</a></strong><span class="Count">0</span></li>
-							</ul>
+						<div class="Box GuestBox">
+						   <h4>Help Us Help You</h4>
+							<p>Use a title that gives insight into your post and limit your posts to 1. Remember, this is an open source project and folks aren't paid to help you here. If you're experiencing problems, please supply adequate technical details.</p>
 						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Other Support Options</h4>
+							<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>.</p>
+						</div>
+						
+						<div class="Box GuestBox">
+						   <h4>Want to Support MODX?</h4>
+							<p>If you build sites for a living with MODX, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
+						</div>
+						
 					</div>

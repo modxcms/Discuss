@@ -5,9 +5,18 @@
   &validate=`title:required,message:required:allowTags,participants_usernames:required`
 ]]
 
+
+    <div class="preview_toggle">
+		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
+        <a href="#" class="dis-message-preview" id="dis-message-preview-btn">preview</a>
+    	<div id="dis-message-preview"></div>
+    </div>
+
 <form action="[[~[[*id]]]]messages/new" method="post" class="dis-form" id="dis-message-new-form" enctype="multipart/form-data">
 
 	<h1 class="Category">[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h1>
+
+
 
     <label for="dis-message-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
@@ -41,11 +50,10 @@
 
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-message-new" value="[[%discuss.message_send]]" />
-        <input type="button" class="dis-action-btn dis-message-preview" id="dis-message-preview-btn" value="[[%discuss.preview]]" />
         <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages';" />
     </div>
 </form>
-<div id="dis-message-preview"></div>
+
 
 			</div><!-- Close Content From Wrapper -->
 [[+bottom]]

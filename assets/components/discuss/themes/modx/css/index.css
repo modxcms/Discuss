@@ -3082,7 +3082,11 @@ form.locked {
 .dis-post-body {
 	text-align: left;
 	}
-
+	
+.dis-existing-attachments {
+	margin: 10px 20px;
+	}
+	
 .preview_toggle {
 	position: relative;
 	top: 30px;
@@ -3113,7 +3117,10 @@ form.locked {
     background-color: #ddd;
     color: #444;
 	}
-
+	
+#dis-modify-message-preview,
+.previewtoggle #dis-reply-post-preview,
+.preview_toggle #dis-message-preview,
 .preview_toggle #dis-new-thread-preview,
 .preview_toggle #dis-quick-reply-preview,
 .preview_toggle #dis-reply-post-preview,

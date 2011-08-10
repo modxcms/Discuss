@@ -7,6 +7,8 @@ DIS.NewMessage = function() {
     return {
         init: function() {
             $('.dis-message-preview').click(this.preview);
+            $('.dis-message-write').click(this.message);
+            $('.dis-cancel-preview').click(this.cancel);
             $('.dis-add-attachment').click(this.addAttachment);
             
         }
@@ -23,6 +25,21 @@ DIS.NewMessage = function() {
             var a = $.ajax(a);
             $('#dis-message-preview').hide().html(a.responseText).fadeIn();
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
+
+            $('.dis-message-write').removeClass('selected');
+            $('.dis-message-preview').addClass('selected');
+            return false;
+        }
+
+        ,message: function() {
+            $('.dis-message-preview').removeClass('selected');
+            $('.dis-message-write').addClass('selected');
+            $('#dis-message-preview').fadeOut();
+            return false;        
+        }
+
+        ,cancel: function() {
+            $('#dis-message-preview').slideUp('slow');
         }
         
         ,addAttachment: function() {
