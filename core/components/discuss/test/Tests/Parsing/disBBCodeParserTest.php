@@ -317,6 +317,4 @@ class disBBCodeParserTest extends DiscussTestCase {
             array('[code=js]alert("test");[/code]','<div class="dis-code"><pre class="brush: js; toolbar: false">alert("test");</pre></div>'),
         );
     }
-        
-    //<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">
 }
