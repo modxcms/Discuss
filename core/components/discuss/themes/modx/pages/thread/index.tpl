@@ -35,11 +35,10 @@
             [[+sticky_cb]]
             
 
-            <br class="clearfix" />
-            <div class="dis-form-buttons">
+            <div class="dis-form-buttons" style="">
                <input type="submit" name="dis-post-reply" value="Reply" /> <label class="dis-cb"><input type="checkbox" name="notify" value="1" />Subscribe to replies via email</label>
             </div>
-
+            <br class="clearfix" />
         </form>
         
 
