@@ -84,10 +84,10 @@ class disBBCodeParser extends disParser {
 
         $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
         $message = preg_replace("#\[hide\](.*?)\[/hide\]#si",'\\1',$message);
-        $message = preg_replace_callback("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",array('disBBCodeParser','parseUrlCallback'),$message);
         $message = preg_replace_callback("#\[email\]([^/]*?)\[/email\]#si",array('disBBCodeParser','parseEmailCallback'),$message);
         $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
-        $message = preg_replace("#\[url\](.*?)\[/url\]#si",'\\1',$message);
+        $message = preg_replace_callback("#\[url\](.*?)\[/url\]#si",array('disBBCodeParser','parseSimpleUrlCallback'),$message);
+        $message = preg_replace_callback("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",array('disBBCodeParser','parseUrlCallback'),$message);
         $message = preg_replace("#\[magic\](.*?)\[/magic\]#si",'<marquee>\\1</marquee>',$message);
         $message = preg_replace("#\[php\](.*?)\[/php\]#si",'<pre class="brush:php">\\1</pre>',$message);
         $message = preg_replace("#\[mysql\](.*?)\[/mysql\]#si",'<pre class="brush:sql">\\1</pre>',$message);
@@ -149,14 +149,25 @@ class disBBCodeParser extends disParser {
     }
 
     /**
+     * Parse [url]url here[/url] calls
+     * @static
+     * @param $matches
+     * @return string
+     */
+    public static function parseSimpleUrlCallback($matches) {
+        $url = str_replace(array('javascript:','ftp:'),'http:',strip_tags($matches[1]));
+        return '<a href="'.$url.'" target="_blank" rel="nofollow">'.$url.'</a>';
+    }
+
+    /**
      * Prevent javascript:/ftp: injections via URLs
      * @static
      * @param array $matches
      * @return string
      */
     public static function parseUrlCallback($matches) {
-        $url = str_replace(array('javascript:','ftp:'),'',strip_tags($matches[1]));
-        return '<a href="'.$url.'">'.$matches[2].'</a>';
+        $url = str_replace(array('javascript:','ftp:'),'http:',strip_tags($matches[1]));
+        return '<a href="'.$url.'" target="_blank" rel="nofollow">'.$matches[2].'</a>';
     }
 
     /**
