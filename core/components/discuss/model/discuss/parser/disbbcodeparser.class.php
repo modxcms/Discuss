@@ -264,7 +264,7 @@ class disBBCodeParser extends disParser {
     public static function parseListCallback($matches) {
         if (empty($matches[1])) return '';
         $message = str_replace(array('<br>','<br />','<br/>'),'',disBBCodeParser::stripBRTags($matches[1]));
-        $message = '<ul style="margin-top:0;margin-bottom:0;">'.$message.'</ul>';
+        $message = '<ul class="dis-ul">'.$message.'</ul>';
         return $message;
     }
 

@@ -270,4 +270,27 @@ class disBBCodeParserTest extends DiscussTestCase {
             array('[email]hello@modx.com[/email]','<a href="mailto:hello@modx.com" rel="nofollow">hello<em>@</em>modx.com</a>'),
         );
     }
+
+
+    /**
+     * Test [list] and [li] tags
+     *
+     * @param string $string
+     * @param string $expected
+     * @dataProvider providerList
+     */
+    public function testList($string,$expected) {
+        $result = $this->parser->parse($string);
+        $this->assertEquals($expected,$result,'Result of [list] and [li] test did not pass.');
+    }
+    /**
+     * @return array
+     */
+    public function providerList() {
+        return array(
+            array('[list][li]Test[/li][/list]','<ul class="dis-ul"><li>Test</li></ul>'),
+            array('[list][li]Test[/li][li]Another[/li][/list]','<ul class="dis-ul"><li>Test</li><li>Another</li></ul>'),
+            array('[list][li]Test[li]Another[/li][/list]','<ul class="dis-ul"><li>Test</li><li>Another</li></ul>'),
+        );
+    }
 }
