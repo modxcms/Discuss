@@ -70,7 +70,7 @@ function bbc_highlight(something, mode) {
         src="[[+buttons_url]]face.gif" align="bottom" width="23" height="22"
         alt="Font Face" title="Font Face"
         style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<br/>
+
 <a href="javascript:void(0);"
    onclick="surroundText('[img]', '[/img]'); return false;"><img
         onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
@@ -83,26 +83,7 @@ function bbc_highlight(something, mode) {
         src="[[+buttons_url]]url.gif" align="bottom" width="23" height="22"
         alt="Insert Hyperlink" title="Insert Hyperlink"
         style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<a href="javascript:void(0);"
-   onclick="surroundText('[email]', '[/email]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]email.gif" align="bottom" width="23" height="22"
-        alt="Insert Email" title="Insert Email"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
 
-<img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/><a
-        href="javascript:void(0);"
-        onclick="surroundText('[sup]', '[/sup]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]sup.gif" align="bottom" width="23" height="22"
-        alt="Superscript" title="Superscript"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
-<a href="javascript:void(0);"
-   onclick="surroundText('[sub]', '[/sub]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]sub.gif" align="bottom" width="23" height="22"
-        alt="Subscript" title="Subscript"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
 <a href="javascript:void(0);" onclick="surroundText('[tt]', '[/tt]'); return false;"><img
         onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
         src="[[+buttons_url]]tele.gif" align="bottom" width="23" height="22"

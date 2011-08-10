@@ -1107,6 +1107,10 @@ textarea {
 	line-height: 128%;
 	}
 
+.dis-form-buttons {
+	margin: 0 20px 0 0;
+	}
+
 .dis-form-buttons input[type="submit"],
 .dis-form-buttons input[type="button"],
 .dis-action-btn,
