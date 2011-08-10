@@ -5,7 +5,11 @@
   &validate=`title:required,message:required:allowTags`
 ]]
 
-<div id="dis-modify-post-preview">[[+preview]]</div>
+<div class="preview_toggle">
+    <a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
+    <a href="#" class="dis-modify-post-preview-btn" id="dis-modify-post-preview-btn">preview</a>
+    <div id="dis-modify-post-preview">[[+preview]]</div>
+</div>
 <form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
 		<h1 class="Category">[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
     
@@ -39,16 +43,15 @@
     [[+locked_cb]]
     [[+sticky_cb]]
 
-    <br class="clear" />
+    <br class="clearfix" />
     <div class="dis-form-buttons">
         <input type="submit" class="Button" name="dis-post-modify" value="[[%discuss.save_changes]]" />
-        <input type="button" class="Button dis-modify-post-preview-btn" id="dis-modify-post-preview-btn" value="[[%discuss.preview]]" />
         <input type="button" class="Button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
 
-<br />
-<hr />
+    <br class="clearfix" />
+
 <div class="dis-thread-posts">
 	<h1 class="Category">[[%discuss.thread_summary]]</h1>
 [[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]

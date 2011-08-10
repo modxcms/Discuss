@@ -3116,7 +3116,8 @@ form.locked {
 
 .preview_toggle #dis-new-thread-preview,
 .preview_toggle #dis-quick-reply-preview,
-.preview_toggle #dis-reply-post-preview {
+.preview_toggle #dis-reply-post-preview,
+.preview_toggle #dis-modify-post-preview {
     background-color: #FFFFFF;
     display: none;
     left: -20px;
