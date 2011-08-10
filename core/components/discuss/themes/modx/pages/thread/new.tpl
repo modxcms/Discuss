@@ -52,12 +52,11 @@
     <br class="clearfix" />
 
 
+
+    <div class="dis-form-buttons">
     [[+locked_cb]]
     [[+sticky_cb]]
-<br class="clearfix" />
-    <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]</label><br class="clear" />
-<br class="clearfix" />
-    <div class="dis-form-buttons">
+    <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]</label>
         <input type="submit" name="dis-post-new" value="[[%discuss.thread_post_new]]" />
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
     </div>

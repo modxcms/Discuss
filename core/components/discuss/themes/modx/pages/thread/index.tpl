@@ -12,7 +12,7 @@
 
             <div class="preview_toggle">
                 <a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
-                <a href="#" class="dis-preview" name="dis-post-reply-preview">preview</a>
+                <a href="#" class="dis-preview" id="dis-post-reply-preview">preview</a>
             	<div id="dis-reply-post-preview"></div>
             </div>
 
@@ -33,11 +33,11 @@
 
             [[+locked_cb]]
             [[+sticky_cb]]
-            <label class="dis-cb"><input type="checkbox" name="notify" value="1" />Notify of Replies</label>
+            
 
             <br class="clearfix" />
             <div class="dis-form-buttons">
-                <input type="submit" name="dis-post-reply" value="Quick Reply" />
+               <input type="submit" name="dis-post-reply" value="Reply" /> <label class="dis-cb"><input type="checkbox" name="notify" value="1" />Subscribe to replies via email</label>
             </div>
 
         </form>

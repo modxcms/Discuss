@@ -600,23 +600,7 @@ ul.dis-attachments {
 	overflow-x: auto;
 	}
 
-#dis-new-thread-preview {
-	display: none;
-    background-color: #CCCCCC;
-    left: 12px;
-    position: absolute;
-    top: 22px;
-    width: 696px;
-	}
 
-#dis-quick-reply-preview {
-	display: none;
-    background-color: #CCCCCC;
-    left: 12px;
-    position: absolute;
-    top: 22px;
-    width: 696px;
-	}
 	
 	
 	
@@ -1155,6 +1139,12 @@ input.Button:hover,
 .Button:hover {
 	color: #ff0084;
 	border: 1px solid #ff0084;
+	}
+
+.dis-form-buttons input[type="submit"],
+.dis-form-buttons input[type="button"] {
+	margin: 0 0 0 10px;
+	float: right;
 	}
 
 input.Button:focus,
@@ -2962,7 +2952,7 @@ pre {
 
 /* form */
 .dis-form {
- 	margin: 0;
+ 	margin: 40px 0 0 0;
  	padding: 0;
 	}
 
@@ -3038,13 +3028,12 @@ form.locked {
 .dis-form .dis-cb {
  	display: block;
  	font-weight: normal;
- 	text-align: left;
- 	float: left;
+ 	float: right;
  	clear: none;
  	line-height: 27px;
  	color: #5a5a5a;
  	width: auto;
- 	margin-left: 20px;
+ 	margin-right: 20px;
  	}
  	
 .dis-form .dis-cb input { margin: 5px; }
@@ -3059,14 +3048,6 @@ form.locked {
 	margin: 0 0 0 20px;
 	}
 
-.dis-form-buttons {
-	position: relative;
- 	padding: 7px 0;
- 	margin: 10px 0 30px 20px;
- 	text-align: right;
-	}
-
-.dis-form-buttons input { float: none; }
 .dis-form p {
  	color: #666666;
  	padding: 5px 20px;
@@ -3092,8 +3073,10 @@ form.locked {
 
 .preview_toggle {
 	position: relative;
+	top: 30px;
+	left: 0;
 	overflow: visible;
-	height: 16px;
+	height: 17px;
 	width: 83px;
     border-radius: 8px;
     background-color: #444;
@@ -3106,7 +3089,7 @@ form.locked {
 	display: block;
     border-radius: 7px;
     margin: 2px;
-    padding: 0 6px;
+    padding: 1px 6px 0;
     text-decoration: none;
     font-family: helvetica;
     font-size: 9px;
@@ -3119,18 +3102,20 @@ form.locked {
     color: #444;
 	}
 
+#dis-new-thread-preview,
+#dis-quick-reply-preview,
 .preview_toggle #dis-reply-post-preview {
     background-color: #FFFFFF;
     display: none;
     left: -20px;
     margin: 0;
-    min-height: 400px;
+    min-height: 200px;
     position: absolute;
     top: 23px;
     width: 710px;
     z-index: 1000;
 	}
-	
+
 .preview_toggle .dis-post-preview h2 {
 	margin: 0 0;
 	padding: 0 0;
