@@ -94,6 +94,7 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'dis.thread.js',
+                'dis.post.buttons.js',
             )
         ),
         'options' => array(

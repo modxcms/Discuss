@@ -26,7 +26,7 @@
 
             <div class="wysi-buttons">[[+reply_buttons]]</div>
 
-            <textarea name="message" id="dis-quick-reply-message" rows="7" cols="80">[[+message]]</textarea>
+            <textarea name="message" id="dis-thread-message" rows="7" cols="80">[[+message]]</textarea>
 
             [[+attachment_fields]]
             <br class="clearfix" />
