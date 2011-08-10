@@ -46,7 +46,7 @@
     <div class="PanelBox">
 
 
-		[[$discuss-sidebar]]
+		[[$actions-sidebar]]
 
 
     </div>
