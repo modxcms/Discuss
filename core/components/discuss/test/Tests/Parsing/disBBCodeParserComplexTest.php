@@ -80,7 +80,7 @@ class disBBCodeParserComplexTest extends DiscussTestCase {
      * @param string $expected
      * @dataProvider providerStripScriptTags
      */
-    public function testStripScriptTags($string,$expected) {
+    public function testStripScriptTags($string,$expected = '') {
         $result = $this->parser->parse($string);
         $result = html_entity_decode($result,ENT_COMPAT,'UTF-8');
         $this->assertEquals($expected,$result);
@@ -90,16 +90,46 @@ class disBBCodeParserComplexTest extends DiscussTestCase {
      */
     public function providerStripScriptTags() {
         return array(
-            array('<script type="text/javascript">alert("test");</script>',''),
+            array('<script type="text/javascript">alert("test");</script>'),
             array('<script type="text/javascript">alert("test");</script>Test','Test'),
-            array('<script type=text/javascript>alert("test");</script>',''),
-            array('<script type=javascript>alert("test");</script>',''),
-            array('<script>alert("test");</script>',''),
-            array('<script >alert("test");</script>',''),
-            array('<script zz>alert("test");</script>',''),
-            array('<script zz=>alert("test");</script>',''),
-            array('<script >alert("test");</script >',''),
-            array('<script>alert("test");</script zz="test">',''),
+            array('<script type=text/javascript>alert("test");</script>'),
+            array('<script type=javascript>alert("test");</script>'),
+            array('<script>alert("test");</script>'),
+            array('<script >alert("test");</script>'),
+            array('<script zz>alert("test");</script>'),
+            array('<script zz=>alert("test");</script>'),
+            array('<script >alert("test");</script >'),
+            array('<script>alert("test");</script zz="test">'),
+        );
+    }
+
+    /**
+     * Prevent malicious html
+     *
+     * @param string $string
+     * @param string $expected
+     * @dataProvider providerStripMaliciousHtml
+     */
+    public function testStripMaliciousHtml($string,$expected = '') {
+        $result = $this->parser->parse($string);
+        $result = html_entity_decode($result,ENT_COMPAT,'UTF-8');
+        $this->assertEquals($expected,$result);
+    }
+    /**
+     * @return array
+     */
+    public function providerStripMaliciousHtml() {
+        return array(
+            array('<iframe src="badpage.html"></iframe>'),
+            array('<style>div { display: none; }</style>'),
+            array('<style type="text/css">div { display: none; }</style>'),
+            array('<form action="h4x.php" method="post"><input type="submit" /></form>'),
+            array('<input type="button" name="clickToCrash" onclick="crash();" />'),
+            array('<frame src="bad.html"></frame>'),
+            array('<frame src="bad.htm" />'),
+            array('<object data="boom.swf"></object>'),
+            array('<embed src="h4x.c"></embed>'),
+            array('<html>test hax</html>'),
         );
     }
 }
