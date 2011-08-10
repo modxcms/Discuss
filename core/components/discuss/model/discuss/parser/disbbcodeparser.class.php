@@ -432,6 +432,7 @@ class disBBCodeParser extends disParser {
 	    $message = strtr($message, array("\r" => ''));
 
 	    /* convert from smf imported tags, entities */
+        $message = str_replace('&nbsp;',' ',$message);
 	    $message = html_entity_decode($message,ENT_COMPAT,'UTF-8');
 	    $message = str_replace('&#039;',"'",$message);
 	    $message = str_replace('[*]','*',$message);
