@@ -19,7 +19,7 @@ DIS.DISModifyPost = function() {
                 ,data: p
             });
             var a = $.ajax(a);
-            $('#dis-modify-post-preview').hide().html(a.responseText).fadeIn();
+            $('#dis-modify-post-preview').hide().html(a.responseText).fadeIn(80);
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
 
             $('.dis-message-write').removeClass('selected');
@@ -30,7 +30,7 @@ DIS.DISModifyPost = function() {
         ,message: function() {
             $('.dis-modify-post-preview-btn').removeClass('selected');
             $('.dis-message-write').addClass('selected');
-            $('#dis-modify-post-preview').fadeOut();
+            $('#dis-modify-post-preview').fadeOut(80);
             return false;        
         }
 

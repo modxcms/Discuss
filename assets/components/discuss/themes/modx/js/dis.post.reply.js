@@ -24,7 +24,7 @@ DIS.ReplyPost = function() {
                 ,type: 'POST'
             });
             var a = $.ajax(a);
-            $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();
+            $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn(80);
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
 
             $('.dis-message-write').removeClass('selected');
@@ -35,7 +35,7 @@ DIS.ReplyPost = function() {
         ,message: function() {
             $('.dis-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
-            $('#dis-reply-post-preview').fadeOut();
+            $('#dis-reply-post-preview').fadeOut(80);
             return false;        
         }
         
