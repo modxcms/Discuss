@@ -1118,8 +1118,8 @@ a.Button,
 .Button {
 	cursor: pointer;
 	margin: 0;
-	font-size: 13px;
-	padding: 3px 5px;
+	font-size: 11px;
+	padding: 2px 4px;
 	background: #f8f8f8;
 	background:-webkit-gradient(linear, center bottom, center top, from(#cccccc), to(#ffffff));
 	background:-moz-linear-gradient(top, #ffffff, #cccccc);
@@ -1147,16 +1147,9 @@ input.Button:hover,
 
 .dis-form-buttons input[type="submit"],
 .dis-form-buttons input[type="button"] {
-	margin: 0 0 0 20px;
-}
-p .Button {
-    float: left;
-    margin: 5px;
-    clear: left;
-}
-.Box p {
-    clear: left;
-}
+	margin: 0 0 0 10px;
+	float: right;
+	}
 
 input.Button:focus,
 .Button:focus {
@@ -2606,7 +2599,6 @@ div.Box dl {
 
 h1, h2 {
 	margin: 10px;
-	clear: left;
 	}
 
 a.BigButton {
@@ -3092,8 +3084,8 @@ form.locked {
 	top: 30px;
 	left: 0;
 	overflow: visible;
-	height: 25px;
-	width: 101px;
+	height: 17px;
+	width: 83px;
     border-radius: 8px;
     background-color: #444;
     z-index: 550;
@@ -3108,8 +3100,8 @@ form.locked {
     padding: 1px 6px 0;
     text-decoration: none;
     font-family: helvetica;
-    font-size: 12px;
-    line-height: 20px;
+    font-size: 9px;
+    line-height: 12px;
     color: #eee;	
 	}
 
@@ -3123,15 +3115,14 @@ form.locked {
 .preview_toggle #dis-message-preview,
 .preview_toggle #dis-new-thread-preview,
 .preview_toggle #dis-quick-reply-preview,
-.preview_toggle #dis-reply-post-preview,
-.preview_toggle #dis-modify-post-preview {
+.preview_toggle #dis-reply-post-preview {
     background-color: #FFFFFF;
     display: none;
     left: -20px;
     margin: 0;
     min-height: 200px;
     position: absolute;
-    top: 26px;
+    top: 23px;
     width: 710px;
     z-index: 1000;
 	}
