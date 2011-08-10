@@ -1118,8 +1118,8 @@ a.Button,
 .Button {
 	cursor: pointer;
 	margin: 0;
-	font-size: 11px;
-	padding: 2px 4px;
+	font-size: 13px;
+	padding: 3px 5px;
 	background: #f8f8f8;
 	background:-webkit-gradient(linear, center bottom, center top, from(#cccccc), to(#ffffff));
 	background:-moz-linear-gradient(top, #ffffff, #cccccc);
@@ -1147,9 +1147,16 @@ input.Button:hover,
 
 .dis-form-buttons input[type="submit"],
 .dis-form-buttons input[type="button"] {
-	margin: 0 0 0 10px;
-	float: right;
-	}
+	margin: 0 0 0 20px;
+}
+p .Button {
+    float: left;
+    margin: 5px;
+    clear: left;
+}
+.Box p {
+    clear: left;
+}
 
 input.Button:focus,
 .Button:focus {
@@ -2599,6 +2606,7 @@ div.Box dl {
 
 h1, h2 {
 	margin: 10px;
+	clear: left;
 	}
 
 a.BigButton {
