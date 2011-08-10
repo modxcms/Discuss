@@ -84,6 +84,7 @@ class disBBCodeParser extends disParser {
 
         $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
         $message = preg_replace("#\[hide\](.*?)\[/hide\]#si",'\\1',$message);
+        $message = preg_replace_callback("#\[email=[\"']?(.*?)[\"']?\](.*?)\[/email\]#si",array('disBBCodeParser','parseComplexEmailCallback'),$message);
         $message = preg_replace_callback("#\[email\]([^/]*?)\[/email\]#si",array('disBBCodeParser','parseEmailCallback'),$message);
         $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
         $message = preg_replace_callback("#\[url\](.*?)\[/url\]#si",array('disBBCodeParser','parseSimpleUrlCallback'),$message);
@@ -100,6 +101,7 @@ class disBBCodeParser extends disParser {
         $message = preg_replace("#\[font=[\"']?(.*?)[\"']?\]#i",'<span style="font-family:\\1;">',$message);
         $message = preg_replace("#\[color=[\"']?(.*?)[\"']?\]#i",'<span style="color:\\1;">',$message);
         $message = preg_replace_callback("#\[size=[\"']?(.*?)[\"']?\]#si",array('disBBCodeParser','parseSizeCallback'),$message);
+        $message = str_replace(array('[color]','[size]','[font]'),'<span>',$message);/* cleanup improper span/color/font tags */
         $message = str_ireplace(array("[/size]", "[/font]", "[/color]"), "</span>", $message);
 
         $message = preg_replace('#\[/?left\]#si', '', $message);
@@ -217,6 +219,18 @@ class disBBCodeParser extends disParser {
         $message = str_replace(array('<br>','<br />','<br/>'),'',$matches[1]);
         return disBBCodeParser::encodeEmail($message);
     }
+    /**
+     * Parse [email=] tags
+     * @static
+     * @param array $matches
+     * @return string
+     */
+    public static function parseComplexEmailCallback($matches) {
+        if (empty($matches[1])) return '';
+        $message = str_replace(array('<br>','<br />','<br/>'),'',$matches[1]);
+        if (empty($matches[2])) $matches[2] = $matches[1];
+        return disBBCodeParser::encodeEmail($message,$matches[2]);
+    }
 
     /**
      * Parse code blocks where we dont wan't linebreaks, strip them out
@@ -309,8 +323,9 @@ class disBBCodeParser extends disParser {
     public static function encodeEmail($email,$emailText = '') {
         $email = disBBCodeParser::obfuscate($email);
         if (empty($emailText)) {
-            $emailText = str_replace(array('&#64;','@'),'<em>&#64;</em>',$email);
+            $emailText = $email;
         }
+        $emailText = str_replace(array('&#64;','&#x40;','@'),'<em>&#64;</em>',$emailText);
         return '<a href="mailto:'.$email.'" rel="nofollow">'.$emailText.'</a>';
     }
 
