@@ -2,7 +2,9 @@
 
 [[+aboveThread]]
 
-	<h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]">[[+title]]</h1>
+
+<h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]" post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h1>
+
 
 	<div>
 		<ol class="dis-board-thread">
@@ -26,7 +28,7 @@
 
             <div class="wysi-buttons">[[+reply_buttons]]</div>
 
-            <textarea name="message" id="dis-thread-message" rows="7" cols="80">[[+message]]</textarea>
+            <textarea name="message" id="dis-thread-message">[[+message]]</textarea>
 
             [[+attachment_fields]]
             <br class="clearfix" />
@@ -66,22 +68,8 @@
 				<hr class="line" />
     <div class="PanelBox">
 
-        <div class="Box GuestBox">
-            <h4>Info and Actions</h4>
-            <p>[[+actionbuttons]]</p>
 
-            <p>[[+readers]] [[+views]] total views.</p>
-            <p>Subscribe: <a href="[[~[[*id]]]]thread/recent.xml">RSS</a> or [[+subscribed:is=`1`:then=`<a href="[[+unsubscribeUrl]]">stop emails</a>`:else=`<a href="[[+subscribeUrl]]">email</a>`]]</p>
-        </div>
+		[[$discuss-sidebar]]
 
-        <div class="Box GuestBox">
-           <h4>Other Support Options</h4>
-            <p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>.</p>
-        </div>
-
-        <div class="Box GuestBox">
-           <h4>Want to Support MODX?</h4>
-            <p>If you build sites for a living with MODX, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
-        </div>
 
     </div>

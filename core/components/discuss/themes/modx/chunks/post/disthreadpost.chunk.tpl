@@ -1,7 +1,6 @@
 <li class="[[+class]]" id="dis-post-[[+id]]">
     <div class="dis-post">
         <div class="dis-post-author" id="dis-post-author-[[+id]]">
-
             <div class="dis-author">
             	<a href="[[~[[*id]]]]user/?user=[[+author.id]]" class="auth-avatar">[[+author.avatar]]</a>
             	<div class="auth-count"><div class="post_icon" title="[[+author.posts]] Posts">[[+author.posts]]</div><!--<div class="badge_icon" title="[[+author.modxp]] XP">3</div>--></div>
@@ -22,10 +21,11 @@
 
     
     	<div class="dis-post-content">
-        	<h4 class="created">[[+author.username_link]] [[+createdon]]</h4>
+        	<h4 class="created">[[+author.username_link]] <a class="normal-type" href="[[+url]]">[[+createdon]]<span class="idx">#[[+idx]]</span></a></h4>
         	<!--<a href="" class="dis-fav">Favorite</a>-->
         	[[+link_mark_as_answer]]
-            <div class="dis-actions"><span><ul>[[+actions]]<li>[[+report_link]]</li></ul></span></div>
+            <div class="dis-actions"><span><ul>[[+actions]]<li><a href="[[+url]]">Link to this post<span class="idx">#[[+idx]]</span></a>
+</li><li>[[+report_link]]</li></ul></span></div>
         	<div>[[+content]]</div>
             
 		    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">

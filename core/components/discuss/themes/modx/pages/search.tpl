@@ -46,14 +46,7 @@
     <div class="PanelBox">
 
 
-        <div class="Box GuestBox">
-           <h4>Other Support Options</h4>
-            <p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>.</p>
-        </div>
+		[[$discuss-sidebar]]
 
-        <div class="Box GuestBox">
-           <h4>Want to Support MODX?</h4>
-            <p>If you build sites for a living with MODX, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
-        </div>
 
     </div>

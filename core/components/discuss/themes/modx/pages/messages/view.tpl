@@ -26,14 +26,12 @@
 			</div><!-- Close Content From Wrapper -->
 [[+bottom]]
 
-				<div id="Panel">
+<div id="Panel">
 				<hr class="line" />
-					<div class="PanelBox">
-					
-						<div class="Box GuestBox">
-							<h4>Actions & Info</h4>
-							<p>[[+actionbuttons]]</p>
-							<p>[[+views]] total views.</p>
-						</div>
+    <div class="PanelBox">
 
-					</div>
+
+		[[$discuss-sidebar]]
+
+
+    </div>

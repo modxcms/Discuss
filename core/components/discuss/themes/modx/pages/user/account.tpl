@@ -51,3 +51,19 @@
     
 </form>
 </div>
+
+	
+
+</div><!-- Close Content From Wrapper -->
+	[[+bottom]]
+
+
+<div id="Panel">
+				<hr class="line" />
+    <div class="PanelBox">
+
+
+		[[$user-sidebar]]
+
+
+    </div>

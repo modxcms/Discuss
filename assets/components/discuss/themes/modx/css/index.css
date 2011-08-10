@@ -383,6 +383,7 @@ h4.created a {
 	font-size: 16px;
 	}
 
+div.dis-actions:hover span.idx,
 span.idx {
 	font-size: 12px;
 	color: #333;
@@ -3083,6 +3084,17 @@ form.locked {
 	margin: 10px 20px;
 	}
 	
+#dis-thread-message {
+	display: block;
+	width: 662px;
+	height: 150px;
+	}
+
+h4 a.normal-type {
+	font-weight: normal;
+	font-size: 12px;
+	}
+
 .preview_toggle {
 	position: relative;
 	top: 30px;
