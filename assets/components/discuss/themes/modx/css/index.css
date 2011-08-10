@@ -3106,8 +3106,8 @@ form.locked {
     color: #444;
 	}
 
-#dis-new-thread-preview,
-#dis-quick-reply-preview,
+.preview_toggle #dis-new-thread-preview,
+.preview_toggle #dis-quick-reply-preview,
 .preview_toggle #dis-reply-post-preview {
     background-color: #FFFFFF;
     display: none;

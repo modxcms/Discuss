@@ -8,7 +8,7 @@
 	    <div class="preview_toggle">
 			<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
         	<a href="#" class="dis-preview" id="dis-post-preview">preview</a>
-			<div id="dis-new-thread-preview"></div>
+			<div id="dis-reply-post-preview"></div>
 	    </div>
 	    
 <form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
     </div>
 </form>
 
-<div id="dis-reply-post-preview"></div>
+
 
 	<h1 class="Category">[[%discuss.thread_summary]]</h1>
 
