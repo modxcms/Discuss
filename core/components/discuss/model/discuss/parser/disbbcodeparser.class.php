@@ -42,7 +42,6 @@ class disBBCodeParser extends disParser {
         /* handle quotes better, to allow for citing */
         $message = $this->parseQuote($message);
         $message = $this->parseBasic($message);
-        $message = $this->parseSmileys($message);
         $message = $this->parseList($message);
         $message = $this->convertLinks($message);
         $message = $this->stripBadWords($message);
@@ -560,6 +559,7 @@ class disBBCodeParser extends disParser {
                 $parts[$i] = $this->stripHtml($parts[$i]);
 
                 $parts[$i] = $this->cleanupImg($parts[$i]);
+                $parts[$i] = $this->parseSmileys($parts[$i]);
             }
 
             $z++;
