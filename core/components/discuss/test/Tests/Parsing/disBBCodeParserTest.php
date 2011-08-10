@@ -226,4 +226,71 @@ class disBBCodeParserTest extends DiscussTestCase {
         );
     }
 
+    /**
+     * Test [color] tags
+     *
+     * @param string $string
+     * @param string $expected
+     * @dataProvider providerColor
+     */
+    public function testColor($string,$expected) {
+        $result = $this->parser->parse($string);
+        $this->assertEquals($expected,$result,'Result of [color] tests did not pass.');
+    }
+    /**
+     * @return array
+     */
+    public function providerColor() {
+        return array(
+            array('[color=red]Test[/color]','<span style="color:red;">Test</span>'),
+            array('[color=#abcdef]Test[/color]','<span style="color:#abcdef;">Test</span>'),
+            array('[color]Test[/color]','<span>Test</span>'),
+        );
+    }
+
+
+    /**
+     * Test [email] tags
+     *
+     * @param string $string
+     * @param string $expected
+     * @dataProvider providerEmail
+     */
+    public function testEmail($string,$expected) {
+        $result = $this->parser->parse($string);
+        $result = html_entity_decode($result,ENT_COMPAT,'UTF-8');
+        $this->assertEquals($expected,$result,'Result of [email] test did not pass.');
+    }
+    /**
+     * @return array
+     */
+    public function providerEmail() {
+        return array(
+            array('[email=hello@modx.com]MODX[/email]','<a href="mailto:hello@modx.com" rel="nofollow">MODX</a>'),
+            array('[email]hello@modx.com[/email]','<a href="mailto:hello@modx.com" rel="nofollow">hello<em>@</em>modx.com</a>'),
+        );
+    }
+
+
+    /**
+     * Test [list] and [li] tags
+     *
+     * @param string $string
+     * @param string $expected
+     * @dataProvider providerList
+     */
+    public function testList($string,$expected) {
+        $result = $this->parser->parse($string);
+        $this->assertEquals($expected,$result,'Result of [list] and [li] test did not pass.');
+    }
+    /**
+     * @return array
+     */
+    public function providerList() {
+        return array(
+            array('[list][li]Test[/li][/list]','<ul class="dis-ul"><li>Test</li></ul>'),
+            array('[list][li]Test[/li][li]Another[/li][/list]','<ul class="dis-ul"><li>Test</li><li>Another</li></ul>'),
+            array('[list][li]Test[li]Another[/li][/list]','<ul class="dis-ul"><li>Test</li><li>Another</li></ul>'),
+        );
+    }
 }
