@@ -293,4 +293,30 @@ class disBBCodeParserTest extends DiscussTestCase {
             array('[list][li]Test[li]Another[/li][/list]','<ul class="dis-ul"><li>Test</li><li>Another</li></ul>'),
         );
     }
+
+    /**
+     * Test [code] tag
+     *
+     * @param string $string
+     * @param string $expected
+     * @dataProvider providerCode
+     */
+    public function testCode($string,$expected) {
+        $result = $this->parser->parse($string);
+        $result = html_entity_decode($result,ENT_COMPAT,'UTF-8');
+        $this->assertEquals($expected,$result,'Result of [code] test did not pass.');
+    }
+    /**
+     * @return array
+     */
+    public function providerCode() {
+        return array(
+            array('[code]<?php echo "test";[/code]','<div class="dis-code"><pre class="brush: php; toolbar: false"><?php echo "test";</pre></div>'),
+            array('[code=php]<?php echo "test";[/code]','<div class="dis-code"><pre class="brush: php; toolbar: false"><?php echo "test";</pre></div>'),
+            array('[code=sql]TRUNCATE my_table;[/code]','<div class="dis-code"><pre class="brush: sql; toolbar: false">TRUNCATE my_table;</pre></div>'),
+            array('[code=js]alert("test");[/code]','<div class="dis-code"><pre class="brush: js; toolbar: false">alert("test");</pre></div>'),
+        );
+    }
+        
+    //<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">
 }
