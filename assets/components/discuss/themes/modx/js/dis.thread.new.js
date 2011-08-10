@@ -34,7 +34,7 @@ DIS.NewThread = function() {
         ,message: function() {
             $('.dis-new-thread-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
-            $('#dis-new-thread-preview').hide();
+            $('#dis-new-thread-preview').fadeOut();
             return false;        
         }
 

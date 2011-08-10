@@ -37,7 +37,7 @@ DIS.Thread = function() {
         ,message: function() {
             $('.dis-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
-            $('#dis-reply-post-preview').hide();
+            $('#dis-reply-post-preview').fadeOut();
             return false;        
         }
 
