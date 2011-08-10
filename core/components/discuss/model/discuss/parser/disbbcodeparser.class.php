@@ -84,10 +84,7 @@ class disBBCodeParser extends disParser {
 
         $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
         $message = preg_replace("#\[hide\](.*?)\[/hide\]#si",'\\1',$message);
-<<<<<<< HEAD
-=======
         $message = preg_replace_callback("#\[email=[\"']?(.*?)[\"']?\](.*?)\[/email\]#si",array('disBBCodeParser','parseComplexEmailCallback'),$message);
->>>>>>> develop
         $message = preg_replace_callback("#\[email\]([^/]*?)\[/email\]#si",array('disBBCodeParser','parseEmailCallback'),$message);
         $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
         $message = preg_replace_callback("#\[url\](.*?)\[/url\]#si",array('disBBCodeParser','parseSimpleUrlCallback'),$message);

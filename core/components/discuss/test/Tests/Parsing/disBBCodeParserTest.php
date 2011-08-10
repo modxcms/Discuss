@@ -248,7 +248,6 @@ class disBBCodeParserTest extends DiscussTestCase {
         );
     }
 
-
     /**
      * Test [email] tags
      *
@@ -270,7 +269,6 @@ class disBBCodeParserTest extends DiscussTestCase {
             array('[email]hello@modx.com[/email]','<a href="mailto:hello@modx.com" rel="nofollow">hello<em>@</em>modx.com</a>'),
         );
     }
-
 
     /**
      * Test [list] and [li] tags
