@@ -737,9 +737,10 @@ class disThread extends xPDOSimpleObject {
      * Build the breadcrumb trail for this thread
      *
      * @param array $defaultTrail
+     * @param boolean $showTitle
      * @return array
      */
-    public function buildBreadcrumbs($defaultTrail = array()) {
+    public function buildBreadcrumbs($defaultTrail = array(),$showTitle = false) {
         $c = $this->xpdo->newQuery('disBoard');
         $c->innerJoin('disBoardClosure','Ancestors');
         $c->where(array(
@@ -752,6 +753,7 @@ class disThread extends xPDOSimpleObject {
             'text' => $this->xpdo->getOption('discuss.forum_title'),
         )) : $defaultTrail;
         $category = false;
+        /** @var disBoardClosure $ancestor */
         foreach ($ancestors as $ancestor) {
             if (empty($category)) {
                 $category = $ancestor->getOne('Category');
@@ -765,10 +767,13 @@ class disThread extends xPDOSimpleObject {
             $trail[] = array(
                 'url' => $this->xpdo->discuss->request->makeUrl('board',array('board' => $ancestor->get('id'))),
                 'text' => $ancestor->get('name'),
+                'last' => !$showTitle,
             );
         }
-        $title = str_replace(array('[',']'),array('&#91;','&#93;'),$this->get('title'));
-        $trail[] = array('text' => $title, 'active' => true);
+        if ($showTitle) {
+            $title = str_replace(array('[',']'),array('&#91;','&#93;'),$this->get('title'));
+            $trail[] = array('text' => $title, 'active' => true,'last' => true);
+        }
         $trail = $this->xpdo->discuss->hooks->load('breadcrumbs',array(
             'items' => &$trail,
         ));

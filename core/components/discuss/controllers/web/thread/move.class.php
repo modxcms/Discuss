@@ -91,7 +91,7 @@ class DiscussThreadMoveController extends DiscussController {
      * @return array|string
      */
     public function getBreadcrumbs() {
-        return $this->thread->buildBreadcrumbs();
+        return $this->thread->buildBreadcrumbs(array(),$this->options['showTitleInBreadcrumbs']);
     }
 
     /**
