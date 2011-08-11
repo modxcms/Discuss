@@ -34,6 +34,9 @@
 
 <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
 
+<br class="clearfix" />
+<br class="clearfix" />
+
 	
 </div><!-- Close Content From Wrapper -->
 

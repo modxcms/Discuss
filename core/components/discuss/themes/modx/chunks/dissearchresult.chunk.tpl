@@ -4,6 +4,6 @@
     	</a>
     	<div class="CategoryDescription">
     		<p>[[+message]]</p>
-    		
     	</div>
+    </div>
 </li>
