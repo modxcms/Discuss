@@ -679,7 +679,7 @@ class disBoard extends xPDOSimpleObject {
                     ));
                 }
             }
-            if ($modx->discuss->isLoggedIn && $ignoreBoards) {
+            if ($modx->discuss->user->isLoggedIn && $ignoreBoards) {
                 $ignoreBoards = $modx->discuss->user->get('ignore_boards');
                 if (!empty($ignoreBoards)) {
                     $c->where(array(
@@ -696,6 +696,7 @@ class disBoard extends xPDOSimpleObject {
             $c->sortby('disBoard.map','ASC');
             $c->groupby('disBoard.id');
             $boardObjects = $modx->getCollection('disBoard',$c);
+            /** @var disBoard $board */
             foreach ($boardObjects as $board) {
                 $boards[] = $board->toArray();
             }
