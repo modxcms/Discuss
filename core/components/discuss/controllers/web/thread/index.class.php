@@ -76,7 +76,7 @@ class DiscussThreadController extends DiscussController {
 
         /* set css class of thread */
         $this->thread->buildCssClass();
-        $this->getQuickReplyButtons();
+        $this->getQuickReplyForm();
 
         if ($this->discuss->user->isLoggedIn && empty($this->scriptProperties['print'])) {
             $this->getActionButtons();
@@ -96,13 +96,38 @@ class DiscussThreadController extends DiscussController {
     }
 
     /**
+     * Get the Quick Reply form
+     * @return string
+     */
+    public function getQuickReplyForm() {
+        $form = '';
+        if ($this->canQuickReply()) {
+            $this->getQuickReplyButtons();
+            $form = $this->discuss->getChunk('post/disQuickReply',$this->getPlaceholders());
+        }
+        $this->setPlaceholder('quick_reply_form',$form);
+        return $form;
+    }
+
+    /**
+     * Check to see if user has access to quick reply
+     * @return boolean
+     */
+    public function canQuickReply() {
+        $canReply = $this->thread->canReply() && $this->discuss->user->isLoggedIn;
+        $this->setPlaceholder('can_reply',$canReply);
+        return $canReply;
+    }
+
+    /**
      * Loads the quick reply wysiwyg buttons for the form
-     * @return void
+     * @return string
      */
     public function getQuickReplyButtons() {
         $buttonsTpl = $this->getOption('buttonsTpl','disPostButtons');
         $buttons = $this->discuss->getChunk($buttonsTpl,array('buttons_url' => $this->discuss->config['imagesUrl'].'buttons/'));
         $this->setPlaceholder('reply_buttons',$buttons);
+        return $buttons;
     }
 
     /**
