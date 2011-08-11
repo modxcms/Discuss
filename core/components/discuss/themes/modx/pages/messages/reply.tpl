@@ -87,8 +87,6 @@
 <div id="Panel">
 				<hr class="line" />
     <div class="PanelBox">
-
-
 		[[$actions-sidebar]]
 
 

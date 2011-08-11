@@ -30,7 +30,16 @@
 <div id="Panel">
 				<hr class="line" />
     <div class="PanelBox">
-
+        [[!+discuss.user.id:notempty=`<div class="Box GuestBox">
+            <h4>Actions &amp; Info</h4>
+			<p>[[+actionbuttons]]</p>
+			[[+belowThreads]]
+			<p>[[+moderators]]</p>
+	    </div>`]]
+        [[!+discuss.user.id:is=``:then=`<div class="Box GuestBox">
+		    <h4>Actions &amp; Info</h4>
+			<p><a href="[[~[[*id]]]]login" class="Button">Login to Post</a></p>
+		</div>`]]
 
 		[[$actions-sidebar]]
 
