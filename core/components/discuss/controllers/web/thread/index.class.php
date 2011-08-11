@@ -70,6 +70,7 @@ class DiscussThreadController extends DiscussController {
         $this->getLastPost();
 
         $this->setPlaceholders($this->thread->toArray('',true,true));
+        $this->setPlaceholder('title',$this->thread->get('title'));
         $this->setPlaceholder('views',number_format($this->getPlaceholder('views',1)));
         $this->setPlaceholder('replies',number_format($this->getPlaceholder('replies',0)));
         $this->setPlaceholder('url',$this->thread->getUrl());
