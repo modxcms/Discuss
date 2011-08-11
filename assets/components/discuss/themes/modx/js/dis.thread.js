@@ -14,6 +14,7 @@ DIS.Thread = function() {
             $('.dis-post-title').click(this.togglePost);
             $('.dis-post-author').click(this.toggleAuthor);
             $('.dis-post-remove').click(this.removePost);
+            $('.quick-reply').click(this.quickReply);
         }
         ,preview: function() {
             var f = $('#dis-quick-reply-form');
@@ -40,6 +41,11 @@ DIS.Thread = function() {
             $('#dis-reply-post-preview').fadeOut(80);
             return false;        
         }
+
+		,quickReply: function() {
+			$.scrollTo($('.preview_toggle'),500);
+			return false;
+		}
 
         ,pollPosts: function() {
              var a = $.extend({},DIS.baseAjax,{

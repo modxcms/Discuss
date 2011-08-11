@@ -308,6 +308,19 @@ a.quick-reply:hover {
 	background: transparent url(../images/reply_arrow.png) no-repeat 0 0;
 	}
 
+a.quick-reply:hover span {
+    display: block;
+    font-size: 10px;
+    height: 16px;
+    left: -60px;
+    line-height: 10px;
+    position: absolute;
+    text-indent: 0;
+    top: 0;
+    width: 100px;
+    z-index: 1000;
+}
+
 div.dis-actions span {
 	position: absolute;
 	top: 0;
