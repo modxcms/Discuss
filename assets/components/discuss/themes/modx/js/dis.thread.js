@@ -44,6 +44,7 @@ DIS.Thread = function() {
 
 		,quickReply: function() {
 			$.scrollTo($('.preview_toggle'),500);
+			$('#dis-thread-message').focus();
 			return false;
 		}
 
