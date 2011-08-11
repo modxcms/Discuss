@@ -339,9 +339,10 @@ a.dis-unsolved {
 	}
 
 
-
-
-
+.format-buttons {
+	background-image: url([[+buttons_url]]bbc_bg.gif);
+	margin: 1px 2px 1px 1px;
+	}
 
 
 

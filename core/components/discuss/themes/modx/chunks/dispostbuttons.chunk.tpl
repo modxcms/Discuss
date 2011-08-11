@@ -7,7 +7,7 @@ function bbc_highlight(something, mode) {
     <img onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
          src="[[+buttons_url]]bold.gif" align="bottom" width="23" height="22"
          alt="Bold" title="Bold"
-         style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/>
+         class="format_buttons" />
 </a>
 <a href="javascript:void(0);" onclick="surroundText('[i]', '[/i]'); return false;">
     <img onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
@@ -84,11 +84,6 @@ function bbc_highlight(something, mode) {
         alt="Insert Hyperlink" title="Insert Hyperlink"
         style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
 
-<a href="javascript:void(0);" onclick="surroundText('[tt]', '[/tt]'); return false;"><img
-        onmouseover="bbc_highlight(this, true);" onmouseout="if (window.bbc_highlight) bbc_highlight(this, false);"
-        src="[[+buttons_url]]tele.gif" align="bottom" width="23" height="22"
-        alt="Teletype" title="Teletype"
-        style="background-image: url([[+buttons_url]]bbc_bg.gif); margin: 1px 2px 1px 1px;"/></a>
 <img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/><a
         href="javascript:void(0);"
         onclick="surroundText('[code]', '[/code]'); return false;"><img
