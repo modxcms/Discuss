@@ -238,30 +238,6 @@ div.dis-post-content h1 {
 	margin: 0 0 10px 0;
 	}
 
-a.dis-mark-as-answer-link {
-	background: transparent url(../images/discuss_solved_16.png) no-repeat 0 0;
-	position: absolute;
-	top: 10px;
-	right: 55px;
-	height: 16px;
-	width: 16px;
-	display: block;
-	text-indent: 16px;
-	overflow: hidden;
-	}
-
-a.dis-mark-as-answer-link:hover {
-	background: transparent url(../images/discuss_solved_16.png) no-repeat -16px 0;
-	}
-
-a.dis-solved {
-	background: transparent url(../images/discuss_solved_16.png) no-repeat -16px 0;
-	}
-
-a.dis-unsolved {
-
-}
-
 a.rss_feed {
 	display: block;
 	padding-left: 24px;
@@ -312,15 +288,62 @@ a.quick-reply:hover span {
     display: block;
     font-size: 10px;
     height: 16px;
-    left: -85px;
+    left: -75px;
     line-height: 10px;
     position: absolute;
     text-indent: 0;
-    top: 0;
+    top: -12px;
     width: 80px;
     z-index: 1000;
     text-align: right;
 }
+
+a.dis-mark-as-answer-link {
+	background: transparent url(../images/discuss_solved_16.png) no-repeat 0 0;
+	position: absolute;
+	top: 15px;
+	right: 70px;
+	height: 16px;
+	width: 16px;
+	display: block;
+	text-indent: 16px;
+	}
+
+a.dis-mark-as-answer-link:hover {
+	background: transparent url(../images/discuss_solved_16.png) no-repeat 0 -16px;
+	}
+
+a.dis-mark-as-answer-link:hover span {
+    display: block;
+    font-size: 10px;
+    height: 16px;
+    left: -75px;
+    line-height: 10px;
+    position: absolute;
+    text-indent: 0;
+    top: -12px;
+    width: 80px;
+    z-index: 1000;
+    text-align: right;
+}
+
+
+
+
+a.dis-solved {
+	background: transparent url(../images/discuss_solved_16.png) no-repeat 0 -16px;
+	}
+
+a.dis-unsolved {
+
+	}
+
+
+
+
+
+
+
 
 div.dis-actions span {
 	position: absolute;
