@@ -21,9 +21,10 @@
 
     
     	<div class="dis-post-content">
-        	<h4 class="created">[[+author.username_link]] <a class="normal-type" href="[[+url]]">[[+createdon]]<span class="idx">#[[+idx]]</span></a></h4>
+        	<h4 class="created">[[+author.username_link]] <a class="normal-type" href="[[+url]]">Reply #[[+idx]], [[+createdon:ago]]</a></h4>
         	<!--<a href="" class="dis-fav">Favorite</a>-->
         	[[+link_mark_as_answer]]
+        	<a href="" class="quick-reply hide">Quick Reply</a>
             <div class="dis-actions"><span><ul>[[+actions]]<li><a href="[[+url]]">Link to this post<span class="idx">#[[+idx]]</span></a>
 </li><li>[[+report_link]]</li></ul></span></div>
         	<div>[[+content]]</div>
