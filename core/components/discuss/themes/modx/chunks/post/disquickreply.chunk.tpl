@@ -10,7 +10,7 @@
     <input type="hidden" id="dis-quick-reply-thread" name="thread" value="[[+id]]" />
     <input type="hidden" id="dis-quick-reply-post" name="post" value="[[+lastPost.id]]" />
 
-    <input type="hidden" name="title" id="dis-quick-reply-title" value="Re: [[+title]]" />
+    <input type="hidden" name="title" id="dis-quick-reply-title" value="Re: [[+title_value]]" />
 
     <div class="wysi-buttons">[[+reply_buttons]]</div>
 

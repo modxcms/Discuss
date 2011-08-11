@@ -1,6 +1,6 @@
-<form action="dispostreplyform.chunk.tpl#" method="post" class="dis-reply-form" id="dis-reply-form-[[+id]]" onsubmit="DISThread.postReply([[+id]]); return false;">
+<form action="#" method="post" class="dis-reply-form" id="dis-reply-form-[[+id]]" onsubmit="DISThread.postReply([[+id]]); return false;">
     <input type="hidden" name="post" value="[[+id]]" />
-    
+
     <label class="dis-reply-title">[[%discuss.title]]:
     <input type="text" name="title" value="Re: [[+title]]" />
     </label>
