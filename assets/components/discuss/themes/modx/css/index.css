@@ -880,7 +880,7 @@ ul.dis-attachments {
 
 .syntaxhighlighter .script {
 	background-color:none;
-	color:#069;
+	color: #026598;
 	font-weight:700;
 	}
 
@@ -971,7 +971,7 @@ nav ul {
     padding: 0 0 0 24px;
     height: 27px;
 	}
-	
+#crumbs li.dis-bc-last span,	
 #crumbs li.dis-bc-last a {
     display:block;
     float:left;
@@ -1160,23 +1160,17 @@ textarea {
 a.Button,
 .Button {
 	cursor: pointer;
-	margin: 0;
-	font-size: 11px;
-	padding: 1px 5px;
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 30px;
+	padding: 6px;
 	background: #f8f8f8;
-	background:-webkit-gradient(linear, center bottom, center top, from(#cccccc), to(#ffffff));
-	background:-moz-linear-gradient(top, #ffffff, #cccccc);
-	-pie-background:linear-gradient(top, #ffffff, #cccccc);
-	background:linear-gradient(top, #ffffff, #cccccc);
-	color: #02475A;
-	text-shadow: 0 1px 0 #fff;
-	border: 1px solid #999;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	box-shadow: 0px 0px 2px #999;
-	-moz-box-shadow: 0px 0px 2px #999;
-	-webkit-box-shadow: 0px 0px 2px #999;
+	color: #555;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
 	white-space: nowrap;
 	}
 
@@ -1184,8 +1178,9 @@ a.Button,
 .dis-form-buttons input[type="button"]:hover,
 input.Button:hover,
 .Button:hover {
-	color: #ff0084;
-	border: 1px solid #ff0084;
+	background: #026598;
+	color: #fff;
+	border: 1px solid #026598;
 	}
 
 .dis-form-buttons input[type="submit"],
