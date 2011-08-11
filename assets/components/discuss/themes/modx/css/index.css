@@ -317,12 +317,12 @@ a.dis-mark-as-answer-link:hover span {
     display: block;
     font-size: 10px;
     height: 16px;
-    left: -75px;
+    left: -120px;
     line-height: 10px;
     position: absolute;
     text-indent: 0;
     top: -12px;
-    width: 80px;
+    width: 120px;
     z-index: 1000;
     text-align: right;
 }
@@ -339,11 +339,16 @@ a.dis-unsolved {
 	}
 
 
-.format-buttons {
-	background-image: url([[+buttons_url]]bbc_bg.gif);
+a.format_buttons img {
+	background: transparent url(../images/buttons/bbc_bg.png) no-repeat 0 0;
 	margin: 1px 2px 1px 1px;
+	width: 23px;
+	height: 22px;
 	}
 
+a.format_buttons:hover img {
+	background: transparent url(../images/buttons/bbc_bg.png) no-repeat 0 -22px;
+	}
 
 
 div.dis-actions span {
