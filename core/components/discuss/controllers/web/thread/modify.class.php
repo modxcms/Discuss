@@ -149,12 +149,17 @@ class DiscussThreadModifyController extends DiscussController {
             $this->board = $this->thread->getOne('Board');
         }
         if ($this->board) {
-            $this->board->buildBreadcrumbs(array(array(
-                'text' => $this->modx->lexicon('discuss.modify_post_header',array(
-                    'post' => $this->post->get('title'),
-                )),
-                'active' => true,
-            )),true);
+            $default = array();
+            if (!empty($this->options['showTitleInBreadcrumbs'])) {
+                $default[] = array(
+                    'text' => $this->modx->lexicon('discuss.modify_post_header',array(
+                        'post' => $this->post->get('title'),
+                    )),
+                    'active' => true,
+                );
+            }
+
+            $this->board->buildBreadcrumbs($default,true);
             $trail = $this->board->get('trail');
         }
         return $trail;

@@ -132,12 +132,16 @@ class DiscussThreadReplyController extends DiscussController {
     }
 
     public function getBreadcrumbs() {
-        return $this->board->buildBreadcrumbs(array(array(
-            'text' => $this->modx->lexicon('discuss.reply_to_post',array(
-                'post' => '<a class="active" href="'.$this->discuss->url.'thread?thread='.$this->thread->get('id').'">'.$this->post->get('title').'</a>',
-            )),
-            'active' => true,
-        )),true);
+        $defaults = array();
+        if (!empty($this->options['showTitleInBreadcrumbs'])) {
+            $defaults[] = array(
+                'text' => $this->modx->lexicon('discuss.reply_to_post',array(
+                    'post' => '<a class="active" href="'.$this->discuss->url.'thread?thread='.$this->thread->get('id').'">'.$this->post->get('title').'</a>',
+                )),
+                'active' => true,
+            );
+        }
+        return $this->board->buildBreadcrumbs($defaults,true);
     }
 
     /**

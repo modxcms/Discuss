@@ -171,7 +171,7 @@ class DiscussThreadController extends DiscussController {
 
     public function getBreadcrumbs() {
         if (!empty($this->options['showBreadcrumbs']) && empty($this->scriptProperties['print'])) {
-            return $this->thread->buildBreadcrumbs();
+            return $this->thread->buildBreadcrumbs(array(),$this->options['showTitleInBreadcrumbs']);
         }
         return '';
     }

@@ -105,6 +105,7 @@ $manifest = array(
             'showStickOption' => true,
             'showLockOption' => true,
             'showMarkAsSpamOption' => true,
+            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'thread/new' => array(
@@ -122,6 +123,9 @@ $manifest = array(
                 'dis.post.buttons.js',
             ),
         ),
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+        ),
     ),
     'thread/modify' => array(
         'js' => array(
@@ -130,12 +134,58 @@ $manifest = array(
                 'dis.post.buttons.js',
             ),
         ),
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+        ),
+    ),
+    'thread/move' => array(
+        'js' => array(
+            'header' => array(
+                'dis.thread.js',
+            )
+        ),
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+        ),
+    ),
+    'thread/spam' => array(
+        'js' => array(
+            'header' => array(
+                'dis.thread.js',
+            )
+        ),
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+        ),
     ),
     'thread/remove' => array(
         'js' => array(
             'header' => array(
                 'dis.thread.js',
             )
+        ),
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+        ),
+    ),
+    'post/report' => array(
+        'js' => array(
+            'header' => array(
+                'dis.thread.js',
+            )
+        ),
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+        ),
+    ),
+    'post/spam' => array(
+        'js' => array(
+            'header' => array(
+                'dis.thread.js',
+            )
+        ),
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'search' => array(
