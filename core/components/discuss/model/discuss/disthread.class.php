@@ -481,7 +481,8 @@ class disThread extends xPDOSimpleObject {
         $array = parent::toArray($keyPrefix,$rawValues,$excludeLazy);
         foreach ($array as $k => &$v) {
             if ($k == 'title') {
-                $v = $this->xpdo->discuss->stripAllTags($v);
+                $v = strip_tags($v,'<span>');
+                $v = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$v);
             }
         }
         reset($array);
