@@ -211,7 +211,7 @@ class disThread extends xPDOSimpleObject {
         }
 
         /* usergroup protection */
-        if ($modx->discuss->isLoggedIn) {
+        if ($modx->discuss->user->isLoggedIn) {
             if ($sinceLastLogin) {
                 $lastLogin = $modx->discuss->user->get('last_login');
                 if (!empty($lastLogin)) {
@@ -314,7 +314,7 @@ class disThread extends xPDOSimpleObject {
         }
 
         /* usergroup protection */
-        if ($modx->discuss->isLoggedIn) {
+        if ($modx->discuss->user->isLoggedIn) {
             if ($sinceLastLogin) {
                 $lastLogin = $modx->discuss->user->get('last_login');
                 if (!empty($lastLogin)) {

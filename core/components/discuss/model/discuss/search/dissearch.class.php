@@ -92,7 +92,7 @@ class disSearch {
             'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE)',
             'Thread.private' => 0,
         ));
-        if ($this->discuss->isLoggedIn) {
+        if ($this->discuss->user->isLoggedIn) {
             $ignoreBoards = $this->discuss->user->get('ignore_boards');
             if (!empty($ignoreBoards)) {
                 $c->where(array(
