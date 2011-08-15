@@ -36,9 +36,6 @@ $modx->lexicon->load('discuss:post');
 $fields = $hook->getValues();
 unset($fields[$submitVar]);
 
-$thread = $modx->call('disThread', 'fetch', array(&$modx,$fields['thread'],disThread::TYPE_MESSAGE));
-if (empty($thread)) return false;
-
 if (empty($fields['post'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
 /** @var disPost $post */
 $post = $modx->getObject('disPost',$fields['post']);
@@ -74,7 +71,7 @@ if ($maxSize > 0) {
 
 /* get participants */
 $participantsIds = array();
-if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
+if (isset($fields['participants_usernames']) && !empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
     $participants = explode(',',$fields['participants_usernames']);
     foreach ($participants as $participant) {
         /** @var disUser $user */
@@ -114,7 +111,7 @@ if ($newPost->save() == false) {
 }
 
 /* set participants, add notifications */
-if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
+if (isset($fields['participants_usernames']) && !empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
     $thread->set('users',implode(',',$participantsIds));
     $thread->save();
     $c = $modx->newQuery('disThreadUser');
