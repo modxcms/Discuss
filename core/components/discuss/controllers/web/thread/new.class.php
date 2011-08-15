@@ -37,6 +37,10 @@ class DiscussThreadNewController extends DiscussController {
         $this->board = $this->modx->getObject('disBoard',$this->scriptProperties['board']);
         if (empty($this->board)) $this->discuss->sendErrorPage();
         $this->modx->lexicon->load('discuss:post');
+
+        if ($this->board) {
+            $this->discuss->user->isModerator($this->board->get('id'));
+        }
     }
 
     public function getDefaultOptions() {

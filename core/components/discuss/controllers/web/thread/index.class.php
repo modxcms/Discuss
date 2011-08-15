@@ -53,6 +53,9 @@ class DiscussThreadController extends DiscussController {
         $this->isAdmin = $this->discuss->user->isAdmin();
         
         $this->board = $this->thread->getOne('Board');
+        if ($this->board) {
+            $this->discuss->user->isModerator($this->board->get('id'));
+        }
     }
 
     public function getPageTitle() {

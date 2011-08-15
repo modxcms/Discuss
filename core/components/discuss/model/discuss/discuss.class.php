@@ -297,6 +297,8 @@ class Discuss {
             $authphs = array_merge($this->user->toArray('user.'),$authphs);
             $authphs['user.avatar_url'] = $this->user->getAvatarUrl();
             $authphs['user.unread_messages'] = $this->user->countUnreadMessages();
+            $this->user->isGlobalModerator();
+            $this->user->isAdmin();
         } else {
             $authphs = array(
                 'authLink' => '<a href="'.$this->url.'login">Login</a>',

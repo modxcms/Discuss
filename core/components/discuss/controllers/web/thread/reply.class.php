@@ -58,6 +58,9 @@ class DiscussThreadReplyController extends DiscussController {
         $this->author = $this->post->getOne('Author');
         $this->board = $this->thread->getOne('Board');
         $this->modx->lexicon->load('discuss:post');
+        if ($this->board) {
+            $this->discuss->user->isModerator($this->board->get('id'));
+        }
     }
     
     public function getPageTitle() {
