@@ -55,6 +55,11 @@ Dis.panel.Board = function(config) {
                     ,width: 300
                     ,allowBlank: false
                 },{
+                    xtype: 'dis-combo-rtl'
+                    ,fieldLabel: _('discuss.lang_direction')
+                    ,description: _('discuss.lang_direction_desc')
+                    ,name: 'rtl'
+                },{
                     xtype: 'textarea'
                     ,fieldLabel: _('description')
                     ,name: 'description'

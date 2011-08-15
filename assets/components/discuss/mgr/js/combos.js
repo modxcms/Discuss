@@ -70,6 +70,31 @@ Dis.combo.MinimumPostLevel = function(config) {
 Ext.extend(Dis.combo.MinimumPostLevel,MODx.combo.ComboBox);
 Ext.reg('dis-combo-minimum-post-level',Dis.combo.MinimumPostLevel);
 
+Dis.combo.RTL = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        store: new Ext.data.SimpleStore({
+            fields: ['d','v']
+            ,data: [[_('discuss.ltr'),0],[_('discuss.rtl'),1]]
+        })
+        ,name: 'rtl'
+        ,hiddenName: 'rtl'
+        ,width: 200
+        ,displayField: 'd'
+        ,valueField: 'v'
+        ,mode: 'local'
+        ,triggerAction: 'all'
+        ,editable: false
+        ,pageSize: 20
+        ,selectOnFocus: false
+        ,preventRender: true
+    });
+    Dis.combo.RTL.superclass.constructor.call(this,config);
+};
+Ext.extend(Dis.combo.RTL,MODx.combo.ComboBox);
+Ext.reg('dis-combo-rtl',Dis.combo.RTL);
+
+
 
 Dis.combo.BoardStatus = function(config) {
     config = config || {};
