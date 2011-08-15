@@ -110,7 +110,9 @@ class DiscussThreadController extends DiscussController {
         $form = '';
         if ($this->canQuickReply()) {
             $this->getQuickReplyButtons();
-            $form = $this->discuss->getChunk('post/disQuickReply',$this->getPlaceholders());
+            $phs = $this->getPlaceholders();
+            $phs['view'] = 'thread/reply';
+            $form = $this->discuss->getChunk('post/disQuickReply',$phs);
         }
         $this->setPlaceholder('quick_reply_form',$form);
         return $form;
