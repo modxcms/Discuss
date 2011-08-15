@@ -47,9 +47,46 @@
         <field key="status" dbtype="integer" precision="4" phptype="integer" attributes="unsigned" null="false" default="1" index="index" />
         <field key="locked" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" index="index" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <field key="rtl" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" index="index" />
 
+        <index alias="category" name="category" primary="false" unique="false" type="BTREE">
+            <column key="category" length="" collation="A" null="false" />
+        </index>
+        <index alias="parent" name="parent" primary="false" unique="false" type="BTREE">
+            <column key="parent" length="" collation="A" null="false" />
+        </index>
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
+        <index alias="last_post" name="last_post" primary="false" unique="false" type="BTREE">
+            <column key="last_post" length="" collation="A" null="false" />
+        </index>
+        <index alias="num_topics" name="num_topics" primary="false" unique="false" type="BTREE">
+            <column key="num_topics" length="" collation="A" null="false" />
+        </index>
+        <index alias="num_replies" name="num_replies" primary="false" unique="false" type="BTREE">
+            <column key="num_replies" length="" collation="A" null="false" />
+        </index>
+        <index alias="total_posts" name="total_posts" primary="false" unique="false" type="BTREE">
+            <column key="total_posts" length="" collation="A" null="false" />
+        </index>
+        <index alias="ignoreable" name="ignoreable" primary="false" unique="false" type="BTREE">
+            <column key="ignoreable" length="" collation="A" null="false" />
+        </index>
+        <index alias="rank" name="rank" primary="false" unique="false" type="BTREE">
+            <column key="rank" length="" collation="A" null="false" />
+        </index>
+        <index alias="minimum_post_level" name="minimum_post_level" primary="false" unique="false" type="BTREE">
+            <column key="minimum_post_level" length="" collation="A" null="false" />
+        </index>
         <index alias="status" name="status" primary="false" unique="false" type="BTREE">
             <column key="status" length="" collation="A" null="false" />
+        </index>
+        <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
+            <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="rtl" name="rtl" primary="false" unique="false" type="BTREE">
+            <column key="rtl" length="" collation="A" null="false" />
         </index>
 
         <aggregate alias="Category" class="disCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
@@ -68,7 +105,7 @@
     <object class="disBoardClosure" table="discuss_boards_closure" extends="xPDOObject">
         <field key="ancestor" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="descendant" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
-        <field key="depth" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" /> 
+        <field key="depth" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         
         <aggregate alias="Ancestor" class="disBoard" local="ancestor" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Descendant" class="disBoard" local="descendant" foreign="id" cardinality="one" owner="foreign" />
@@ -77,6 +114,13 @@
     <object class="disBoardUserGroup" table="discuss_board_usergroups" extends="xPDOSimpleObject">
         <field key="usergroup" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+
+        <index alias="usergroup" name="usergroup" primary="false" unique="false" type="BTREE">
+            <column key="usergroup" length="" collation="A" null="false" />
+        </index>
+        <index alias="board" name="board" primary="false" unique="false" type="BTREE">
+            <column key="board" length="" collation="A" null="false" />
+        </index>
                 
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="UserGroup" class="modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign" />
@@ -91,6 +135,10 @@
         <field key="default_moderators" dbtype="text" phptype="string" />
         <field key="default_usergroups" dbtype="text" phptype="string" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <index alias="name" name="name" primary="false" unique="false" type="BTREE">
+            <column key="name" length="" collation="A" null="false" />
+        </index>
         
         <composite alias="Boards" class="disBoard" local="id" foreign="category" cardinality="many" owner="local" />
     </object>
@@ -98,6 +146,13 @@
     <object class="disModerator" table="discuss_moderators" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
+        <index alias="board" name="board" primary="false" unique="false" type="BTREE">
+            <column key="board" length="" collation="A" null="false" />
+        </index>
         
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
@@ -122,6 +177,46 @@
         <field key="last_view_ip" dbtype="varchar" precision="120" phptype="string" null="false" default="" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 
+        <index alias="class_key" name="class_key" primary="false" unique="false" type="BTREE">
+            <column key="class_key" length="" collation="A" null="false" />
+        </index>
+        <index alias="board" name="board" primary="false" unique="false" type="BTREE">
+            <column key="board" length="" collation="A" null="false" />
+        </index>
+        <index alias="title" name="title" primary="false" unique="false" type="BTREE">
+            <column key="title" length="" collation="A" null="false" />
+        </index>
+        <index alias="post_first" name="post_first" primary="false" unique="false" type="BTREE">
+            <column key="post_first" length="" collation="A" null="false" />
+        </index>
+        <index alias="post_last" name="post_last" primary="false" unique="false" type="BTREE">
+            <column key="post_last" length="" collation="A" null="false" />
+        </index>
+        <index alias="author_first" name="author_first" primary="false" unique="false" type="BTREE">
+            <column key="author_first" length="" collation="A" null="false" />
+        </index>
+        <index alias="author_last" name="author_last" primary="false" unique="false" type="BTREE">
+            <column key="author_last" length="" collation="A" null="false" />
+        </index>
+        <index alias="replies" name="replies" primary="false" unique="false" type="BTREE">
+            <column key="replies" length="" collation="A" null="false" />
+        </index>
+        <index alias="views" name="views" primary="false" unique="false" type="BTREE">
+            <column key="views" length="" collation="A" null="false" />
+        </index>
+        <index alias="locked" name="locked" primary="false" unique="false" type="BTREE">
+            <column key="locked" length="" collation="A" null="false" />
+        </index>
+        <index alias="answered" name="answered" primary="false" unique="false" type="BTREE">
+            <column key="answered" length="" collation="A" null="false" />
+        </index>
+        <index alias="sticky" name="sticky" primary="false" unique="false" type="BTREE">
+            <column key="sticky" length="" collation="A" null="false" />
+        </index>
+        <index alias="private" name="private" primary="false" unique="false" type="BTREE">
+            <column key="private" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="FirstAuthor" class="disUser" local="author_first" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="LastAuthor" class="disUser" local="author_last" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="FirstPost" class="disPost" local="post_first" foreign="id" cardinality="one" owner="foreign" />
@@ -144,6 +239,16 @@
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="thread" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
 
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
+        <index alias="board" name="board" primary="false" unique="false" type="BTREE">
+            <column key="board" length="" collation="A" null="false" />
+        </index>
+        <index alias="thread" name="thread" primary="false" unique="false" type="BTREE">
+            <column key="thread" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />
@@ -154,6 +259,10 @@
         <field key="thread" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="pk" />
         <field key="author" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" index="index" />
+
+        <index alias="author" name="author" primary="false" unique="false" type="BTREE">
+            <column key="author" length="" collation="A" null="false" />
+        </index>
         
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />
@@ -227,6 +336,13 @@
         <field key="downloads" dbtype="int" precision="10" phptype="int" null="false" default="0" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="integrated_data" dbtype="text" phptype="string" null="true" />
+
+        <index alias="post" name="post" primary="false" unique="false" type="BTREE">
+            <column key="post" length="" collation="A" null="false" />
+        </index>
+        <index alias="board" name="board" primary="false" unique="false" type="BTREE">
+            <column key="board" length="" collation="A" null="false" />
+        </index>
         
         <aggregate alias="Post" class="disPost" local="post" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
@@ -257,14 +373,25 @@
         <field key="ttl" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="3600" />
         <field key="place" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="data" dbtype="text" phptype="text" null="false" default="" />
+
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
         
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
     </object>
     
     <!-- delayed until 1.1 -->
     <object class="disUserFriend" table="discuss_user_friends" extends="xPDOSimpleObject">
-        <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-        <field key="friend" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+        <field key="friend" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
+
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
+        <index alias="friend" name="friend" primary="false" unique="false" type="BTREE">
+            <column key="friend" length="" collation="A" null="false" />
+        </index>
         
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Friend" class="disUser" local="friend" foreign="id" cardinality="one" owner="foreign" />
@@ -277,6 +404,10 @@
         <field key="color" dbtype="varchar" precision="20" phptype="string" null="false" default="" />
         <field key="image" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <index alias="usergroup" name="usergroup" primary="false" unique="false" type="BTREE">
+            <column key="usergroup" length="" collation="A" null="false" />
+        </index>
         
         <aggregate alias="UserGroup" class="modUserGroup" local="usergroup" foreign="id" cardinality="one" owner="foreign" />
         <composite alias="Boards" class="disBoardUserGroup" local="usergroup" foreign="usergroup" cardinality="many" owner="local" />
@@ -326,6 +457,22 @@
         <field key="display_name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="use_display_name" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
 
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
+        <index alias="username" name="username" primary="false" unique="false" type="BTREE">
+            <column key="username" length="" collation="A" null="false" />
+        </index>
+        <index alias="email" name="email" primary="false" unique="false" type="BTREE">
+            <column key="email" length="" collation="A" null="false" />
+        </index>
+        <index alias="last_active" name="last_active" primary="false" unique="false" type="BTREE">
+            <column key="last_active" length="" collation="A" null="false" />
+        </index>
+        <index alias="synced" name="synced" primary="false" unique="false" type="BTREE">
+            <column key="synced" length="" collation="A" null="false" />
+        </index>
+
         <aggregate alias="User" class="modUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="PrimaryGroup" class="modUserGroup" local="primary_group" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="PrimaryDiscussGroup" class="disUserGroupProfile" local="primary_group" foreign="usergroup" cardinality="one" owner="foreign" />
@@ -342,6 +489,10 @@
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="reason" dbtype="mediumint" precision="5" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="register_ip" dbtype="varchar" precision="20" phptype="string" null="false" default="0.0.0.0" />
+
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
         
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
     </object>
@@ -350,6 +501,16 @@
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="thread" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
+
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
+        <index alias="board" name="board" primary="false" unique="false" type="BTREE">
+            <column key="board" length="" collation="A" null="false" />
+        </index>
+        <index alias="thread" name="threadr" primary="false" unique="false" type="BTREE">
+            <column key="thread" length="" collation="A" null="false" />
+        </index>
         
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
@@ -365,6 +526,10 @@
         <field key="replies" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="registers" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="visitors" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+
+        <index alias="day" name="day" primary="false" unique="false" type="BTREE">
+            <column key="day" length="" collation="A" null="false" />
+        </index>
     </object>
 
     <object class="disLogActivity" table="discuss_log_activity" extends="xPDOSimpleObject">
@@ -374,6 +539,10 @@
         <field key="action" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="data" dbtype="mediumtext" phptype="string" null="true" />
         <field key="url" dbtype="text" phptype="string" null="true" />
+
+        <index alias="user" name="user" primary="false" unique="false" type="BTREE">
+            <column key="user" length="" collation="A" null="false" />
+        </index>
 
         <aggregate alias="User" class="disUser" local="user" foreign="id" cardinality="one" owner="foreign" />
     </object>

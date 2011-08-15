@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
+    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]" [[+rtl:notempty=`dir="rtl"`]]>
         <div class="dis-post-body">[[+content]]</div>
         <div class="dis-post-footer">
             <div class="dis-post-reply" id="dis-post-reply-[[+id]]">[[+action_reply]]</div>

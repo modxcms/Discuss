@@ -61,6 +61,25 @@ $xpdo_meta_map['disLogActivity']= array (
       'null' => true,
     ),
   ),
+  'indexes' => 
+  array (
+    'user' => 
+    array (
+      'alias' => 'user',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'user' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'User' => 

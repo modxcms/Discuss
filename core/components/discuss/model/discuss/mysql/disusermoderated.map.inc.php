@@ -42,6 +42,25 @@ $xpdo_meta_map['disUserModerated']= array (
       'default' => '0.0.0.0',
     ),
   ),
+  'indexes' => 
+  array (
+    'user' => 
+    array (
+      'alias' => 'user',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'user' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'User' => 

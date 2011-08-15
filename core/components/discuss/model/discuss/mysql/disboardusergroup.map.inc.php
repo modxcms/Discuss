@@ -34,6 +34,41 @@ $xpdo_meta_map['disBoardUserGroup']= array (
       'index' => 'index',
     ),
   ),
+  'indexes' => 
+  array (
+    'usergroup' => 
+    array (
+      'alias' => 'usergroup',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'usergroup' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'board' => 
+    array (
+      'alias' => 'board',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'board' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'Board' => 

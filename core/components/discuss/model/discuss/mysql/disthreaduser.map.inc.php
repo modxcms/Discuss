@@ -45,6 +45,25 @@ $xpdo_meta_map['disThreadUser']= array (
       'index' => 'index',
     ),
   ),
+  'indexes' => 
+  array (
+    'author' => 
+    array (
+      'alias' => 'author',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'author' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'User' => 

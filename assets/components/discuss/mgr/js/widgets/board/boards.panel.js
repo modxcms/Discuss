@@ -243,6 +243,11 @@ Dis.window.CreateBoard = function(config) {
             ,name: 'category'
             ,id: 'dis-'+this.ident+'-category'
         },{
+            xtype: 'dis-combo-rtl'
+            ,fieldLabel: _('discuss.lang_direction')
+            ,description: _('discuss.lang_direction_desc')
+            ,name: 'rtl'
+        },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'

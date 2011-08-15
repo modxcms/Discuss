@@ -88,9 +88,11 @@ class disThread extends xPDOSimpleObject {
     public static function fetch(xPDO &$modx, $id, $type = disThread::TYPE_POST, $integrated = false) {
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disPost','FirstPost');
+        $c->leftJoin('disBoard','Board');
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
             'FirstPost.title',
+            'Board.rtl',
             '(SELECT GROUP_CONCAT(pAuthor.id)
                 FROM '.$modx->getTableName('disPost').' AS pPost
                 INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
@@ -107,7 +109,6 @@ class disThread extends xPDOSimpleObject {
             ));
         }
         if ($type == disThread::TYPE_POST) {
-            $c->innerJoin('disBoard','Board');
             $c->where(array(
                 'Board.status:!=' => disBoard::STATUS_INACTIVE,
             ));
@@ -144,6 +145,7 @@ class disThread extends xPDOSimpleObject {
                  ) AS participants_usernames',
             ));
         }
+        /** @var disThread $thread */
         $thread = $modx->getObject('disThread',$c);
         if ($thread && $type == disThread::TYPE_MESSAGE) {
             $pu = array_unique(explode(',',$thread->get('participants_usernames')));
