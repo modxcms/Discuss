@@ -88,13 +88,14 @@ class DiscussUserSubscriptionsController extends DiscussController {
         $c->leftJoin('disBoard','Board');
         $c->where(array(
             'Notifications.user' => $this->discuss->user->get('id'),
+            'disThread.private' => false,
         ));
         $c->sortby('FirstPost.title','ASC');
         $subscriptions = $this->modx->getCollection('disThread',$c);
         $subs = array();
         /** @var disThread $subscription */
         foreach ($subscriptions as $subscription) {
-            $subscriptionArray = $subscription->toArray();
+            $subscriptionArray = $subscription->toArray('',true);
             $subscriptionArray['url'] = $subscription->getUrl();
             $subscriptionArray['class'] = 'dis-board-li';
             $subscriptionArray['createdon'] = strftime($this->discuss->dateFormat,strtotime($subscriptionArray['createdon']));
