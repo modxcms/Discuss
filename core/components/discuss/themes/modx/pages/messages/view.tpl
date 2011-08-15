@@ -6,13 +6,13 @@
 
 	<h1 class="Category">[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]]</h1>
 
-
 	<ol class="dis-board-thread">
 		[[+posts]]
 	</ol>
 
-						   <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
+    <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
 
+    [[+quick_reply_form]]
 </div>
 
 

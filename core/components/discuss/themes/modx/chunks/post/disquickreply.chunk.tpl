@@ -4,7 +4,7 @@
     <div id="dis-reply-post-preview"></div>
 </div>
 
-<form action="[[~[[*id]]]]thread/reply" method="post" class="dis-form [[+locked:notempty=`locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]]][[+view]]" method="post" class="dis-form [[+locked:notempty=`locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
 
     <input type="hidden" id="dis-quick-reply-board" name="board" value="[[+board]]" />
     <input type="hidden" id="dis-quick-reply-thread" name="thread" value="[[+id]]" />
