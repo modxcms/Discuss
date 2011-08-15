@@ -1,15 +1,10 @@
-<form action="[[~[[*id]]]]thread/reply" method="post" class="dis-form [[+locked:notempty=`locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
 <div class="preview_toggle">
     <a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
     <a href="#" class="dis-preview" id="dis-post-reply-preview">preview</a>
     <div id="dis-reply-post-preview"></div>
 </div>
 
-<<<<<<< Updated upstream
 <form action="[[~[[*id]]]][[+view]]" method="post" class="dis-form [[+locked:notempty=`locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
-
-=======
->>>>>>> Stashed changes
     <input type="hidden" id="dis-quick-reply-board" name="board" value="[[+board]]" />
     <input type="hidden" id="dis-quick-reply-thread" name="thread" value="[[+id]]" />
     <input type="hidden" id="dis-quick-reply-post" name="post" value="[[+lastPost.id]]" />
