@@ -30,13 +30,14 @@
  * @var modX $modx
  * @var array $scriptProperties
  * @var Discuss $discuss
+ * @var DiscussController $controller
  */
 /* get thread or root of post */
-/** @var disThread $thread */
+
+/** @var disThread|disThreadQuestion $thread */
 $thread = $modx->getOption('thread',$scriptProperties,'');
 if (empty($thread)) return false;
 if (!is_object($thread)) {
-    /** @var disThread $thread */
     $thread = $modx->call('disThread', 'fetch', array(&$modx,$thread));
     if (empty($thread)) return false;
 }
@@ -69,12 +70,18 @@ $posts = $thread->fetchPosts($post,array(
 /* setup basic settings/permissions */
 $dateFormat = $modx->getOption('discuss.date_format',null,'%b %d, %Y, %H:%M %p');
 $allowCustomTitles = $modx->getOption('discuss.allow_custom_titles',null,true);
+$maxPostDepth = $modx->getOption('discuss.max_post_depth',null,3);
+
 $canViewAttachments = $modx->hasPermission('discuss.view_attachments');
 $canTrackIp = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.track_ip');
 $canViewEmails = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.view_emails');
 $canViewProfiles = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.view_profiles');
 $canReportPost = $discuss->user->isLoggedIn && $modx->hasPermission('discuss.thread_report');
 $canMarkAsAnswer = $thread->get('class_key') == 'disThreadQuestion' && $thread->canMarkAsAnswer();
+
+$rowCls = $controller->getOption('rowCls','dis-post');
+$childrenCls = $controller->getOption('childrenCls','dis-board-post');
+$actionLinkTpl = $controller->getOption('actionLinkTpl','disActionLink');
 
 /* iterate */
 $plist = array();
@@ -94,14 +101,14 @@ foreach ($posts['results'] as $post) {
 
     $post->renderAuthorMeta($postArray);
 
-    $postArray['children_class'] = array('dis-board-post');
-    $postArray['class'] = array('dis-post');
+    $postArray['children_class'] = array($childrenCls);
+    $postArray['class'] = array($rowCls);
     if (!$flat) {
         /* set depth and check max post depth */
         $postArray['children_class'][] = 'dis-depth-'.$postArray['depth'];
-        if ($postArray['depth'] > $modx->getOption('discuss.max_post_depth',null,3)) {
+        if ($postArray['depth'] > $maxPostDepth) {
             /* Don't hide post if it exceed max depth, set its depth placeholder to max depth value instead */
-            $postArray['depth'] = $modx->getOption('discuss.max_post_depth',null,3);
+            $postArray['depth'] = $maxPostDepth;
         }
     }
 
@@ -118,14 +125,14 @@ foreach ($posts['results'] as $post) {
     $postArray['actions'] = array();
     if (($isAdmin || $isModerator || !$thread->get('locked')) && $discuss->user->isLoggedIn) {
         if ($post->canReply()) {
-            $postArray['action_reply'] = $discuss->getChunk('disActionLink',array(
+            $postArray['action_reply'] = $discuss->getChunk($actionLinkTpl,array(
                 'url' => $discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'))),
                 'text' => $modx->lexicon('discuss.reply'),
                 'class' => 'dis-post-reply',
                 'id' => '',
                 'attributes' => '',
             ));
-            $postArray['action_quote'] = $discuss->getChunk('disActionLink',array(
+            $postArray['action_quote'] = $discuss->getChunk($actionLinkTpl,array(
                 'url' => $discuss->request->makeUrl('thread/reply',array('post' => $post->get('id'),'quote' => 1)),
                 'text' => $modx->lexicon('discuss.quote'),
                 'class' => 'dis-post-quote',
@@ -135,7 +142,7 @@ foreach ($posts['results'] as $post) {
         }
 
         if ($post->canModify()) {
-            $postArray['action_modify'] = $discuss->getChunk('disActionLink',array(
+            $postArray['action_modify'] = $discuss->getChunk($actionLinkTpl,array(
                 'url' => $discuss->request->makeUrl('thread/modify',array('post' => $post->get('id'))),
                 'text' => $modx->lexicon('discuss.modify'),
                 'class' => 'dis-post-modify',
@@ -145,7 +152,7 @@ foreach ($posts['results'] as $post) {
         }
 
         if ($post->canRemove()) {
-            $postArray['action_remove'] = $discuss->getChunk('disActionLink',array(
+            $postArray['action_remove'] = $discuss->getChunk($actionLinkTpl,array(
                 'url' => $discuss->request->makeUrl('post/remove',array('post' => $post->get('id'))),
                 'text' => $modx->lexicon('discuss.remove'),
                 'class' => 'dis-post-remove',
@@ -153,7 +160,7 @@ foreach ($posts['results'] as $post) {
                 'attributes' => '',
             ));
             if ($isModerator || $isAdmin) {
-                $postArray['action_spam'] = $discuss->getChunk('disActionLink',array(
+                $postArray['action_spam'] = $discuss->getChunk($actionLinkTpl,array(
                     'url' => $discuss->request->makeUrl('post/spam',array('post' => $post->get('id'))),
                     'text' => $modx->lexicon('discuss.post_spam'),
                     'class' => 'dis-post-spam',
@@ -240,7 +247,7 @@ if (empty($flat)) {
         $output = $discuss->treeParser->parse($plist,$tpl);
     }
 } else {
-    $output = implode("\n",$output);
+    $output = implode($controller->getOption('rowSeparator',"\n"),$output);
 }
-$response['results'] = $output;//str_replace(array('[',']'),array('&#91;','&#93;'),$output);
+$response['results'] = $output;
 return $response;

@@ -70,6 +70,9 @@ class disHooks {
             $discuss =& $this->discuss;
             $modx =& $this->modx;
             $options =& $this->discuss->controller->options;
+            if (isset($scriptProperties['controller'])) {
+                $controller =& $scriptProperties['controller'];
+            }
 
             $success = include $hookFile;
         } else {

@@ -111,6 +111,11 @@ abstract class DiscussController {
             $this->modx->setLogTarget('ECHO');
             $this->startDebugTimer();
         }
+
+        foreach ($this->config as $k => $v) {
+            $this->setPlaceholder('controller.'.$k,$v);
+        }
+        
         $this->initialize();
 
         $allowed = $this->checkPermissions();

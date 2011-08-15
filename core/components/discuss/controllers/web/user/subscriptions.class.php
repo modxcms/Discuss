@@ -68,7 +68,10 @@ class DiscussUserSubscriptionsController extends DiscussController {
      * @return void
      */
     public function getSubscriptions() {
-        $tpl = $this->modx->getOption('subscriptionTpl',$this->options,'user/disUserSubscriptionRow');
+        $tpl = $this->getOption('subscriptionTpl','user/disUserSubscriptionRow');
+        $rowCls = $this->getOption('rowCls','dis-board-li');
+        $dateFormat = $this->getOption('dateFormat',$this->discuss->dateFormat);
+        $rowSeparator = $this->getOption('rowSeparator',"\n");
 
         $c = $this->modx->newQuery('disThread');
         $c->select($this->modx->getSelectColumns('disThread','disThread'));
@@ -97,11 +100,11 @@ class DiscussUserSubscriptionsController extends DiscussController {
         foreach ($subscriptions as $subscription) {
             $subscriptionArray = $subscription->toArray('',true);
             $subscriptionArray['url'] = $subscription->getUrl();
-            $subscriptionArray['class'] = 'dis-board-li';
-            $subscriptionArray['createdon'] = strftime($this->discuss->dateFormat,strtotime($subscriptionArray['createdon']));
+            $subscriptionArray['class'] = $rowCls;
+            $subscriptionArray['createdon'] = strftime($dateFormat,strtotime($subscriptionArray['createdon']));
             $subs[] = $this->discuss->getChunk($tpl,$subscriptionArray);
         }
-        $this->setPlaceholder('subscriptions',implode("\n",$subs));
+        $this->setPlaceholder('subscriptions',implode($rowSeparator,$subs));
     }
 
     /**

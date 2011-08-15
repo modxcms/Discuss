@@ -159,9 +159,11 @@ class DiscussThreadController extends DiscussController {
     public function getPosts() {
         $this->posts = array('total' => 0,'limit' => 0);
         if (!empty($this->options['showPosts'])) {
-            $this->posts = $this->discuss->hooks->load('post/getThread',array(
+            $options = array_merge($this->options,array(
                 'thread' => &$this->thread,
+                'controller' => &$this,
             ));
+            $this->posts = $this->discuss->hooks->load('post/getThread',$options);
             $this->setPlaceholder('posts',$this->posts['results']);
         }
     }
