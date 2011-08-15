@@ -110,12 +110,12 @@ class disUser extends xPDOSimpleObject {
      * If the user is in an Administrator group
      * @var boolean
      */
-    public $isAdmin;
+    public $isAdmin = null;
     /**
      * If the user is in a global Moderator group
      * @var boolean
      */
-    public $isGlobalModerator;
+    public $isGlobalModerator = null;
     /**
      * If the user is logged in
      * @var boolean
@@ -131,6 +131,17 @@ class disUser extends xPDOSimpleObject {
      * @var boolean
      */
     public $readBoardsPrepared = false;
+
+    /**
+     * Whether or not a user is a moderator for a given board
+     * @var array
+     */
+    public $moderatorships = array();
+
+    /**
+     * @var modX $xpdo
+     */
+    public $xpdo;
 
     /**
      * Initialize the user, setup basic metadata for them, and log their activity time.
@@ -540,7 +551,7 @@ class disUser extends xPDOSimpleObject {
         if (!$this->isLoggedIn) {
             $this->isAdmin = false;
         }
-        if (!isset($this->isAdmin)) {
+        if ($this->isAdmin == null) {
             $this->isAdmin = false;
             $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'');
             $adminGroups = explode(',',$adminGroups);
@@ -550,6 +561,10 @@ class disUser extends xPDOSimpleObject {
             }
         }
         $this->xpdo->setPlaceholder('discuss.user.isAdmin',$this->isAdmin);
+        if (!array_key_exists('discuss.user.isModerator',$this->xpdo->placeholders) && $this->isAdmin) {
+            $this->xpdo->setPlaceholder('discuss.user.isModerator',true);
+        }
+        $this->xpdo->setPlaceholder('discuss.user.isModerator',$this->isAdmin);
         return $this->isAdmin;
     }
 
@@ -561,15 +576,38 @@ class disUser extends xPDOSimpleObject {
         if (!$this->isLoggedIn) {
             $this->isGlobalModerator = false;
         }
-        if (!isset($this->isGlobalModerator)) {
+        if ($this->isGlobalModerator == null) {
             $this->isGlobalModerator = false;
             $moderators = $this->xpdo->getOption('discuss.global_moderators',null,'');
             $moderators = explode(',',$moderators);
             if (in_array($this->xpdo->user->get('username'),$moderators)) {
                 $this->isGlobalModerator = true;
             }
+            $this->xpdo->setPlaceholder('discuss.user.isModerator',$this->isGlobalModerator);
         }
         return $this->isGlobalModerator;
+    }
+
+    /**
+     * See if a user is a moderator of a board
+     * @param int $boardId
+     * @return bool
+     */
+    public function isModerator($boardId) {
+        if (!array_key_exists($boardId,$this->moderatorships)) {
+            if ($this->xpdo->discuss->user->isGlobalModerator() || $this->xpdo->discuss->user->isAdmin()) {
+                $isModerator = true;
+            } else {
+                $moderator = $this->xpdo->getCount('disModerator',array(
+                    'user' => $this->get('id'),
+                    'board' => $boardId,
+                ));
+                $isModerator = $moderator > 0;
+            }
+            $this->moderatorships[$boardId] = $isModerator;
+            $this->xpdo->setPlaceholder('discuss.user.isModerator',$isModerator);
+        }
+        return $this->moderatorships[$boardId];
     }
 
     /**
