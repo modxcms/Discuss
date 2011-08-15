@@ -27,6 +27,8 @@
  * @var modX $modx
  * @var fiHooks $hook
  * @var Discuss $discuss
+ * @var string $submitVar
+ * 
  * @package discuss
  */
 $discuss =& $modx->discuss;
@@ -71,10 +73,11 @@ if ($maxSize > 0) {
 }
 
 /* get participants */
+$participantsIds = array();
 if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
-    $participantsIds = array();
     $participants = explode(',',$fields['participants_usernames']);
     foreach ($participants as $participant) {
+        /** @var disUser $user */
         $user = $modx->getObject('disUser',array('username' => $participant));
         if ($user) {
             $participantsIds[] = $user->get('id');
@@ -119,6 +122,7 @@ if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id')
         'thread' => $thread->get('id'),
     ));
     $tus = $modx->getCollection('disThreadUser',$c);
+    /** @var disThreadUser $tu */
     foreach ($tus as $tu) {
         $tu->remove();
     }
@@ -126,8 +130,13 @@ if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id')
     $c->where(array(
         'thread' => $thread->get('id'),
     ));
-    $modx->removeCollection('disUserNotification',$c);
+    $notifications = $modx->getCollection('disUserNotification',$c);
+    /** @var disUserNotification $notify */
+    foreach ($notifications as $notify) {
+        $notify->remove();
+    }
     foreach ($participantsIds as $participant) {
+        /** @var disThreadUser $threadUser */
         $threadUser = $modx->newObject('disThreadUser');
         $threadUser->set('thread',$thread->get('id'));
         $threadUser->set('user',$participant);
@@ -135,6 +144,7 @@ if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id')
         $threadUser->save();
 
         /* add new notification */
+        /** @var disUserNotification $notify */
         $notify = $modx->newObject('disUserNotification');
         $notify->set('thread',$thread->get('id'));
         $notify->set('user',$participant);
@@ -143,6 +153,7 @@ if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id')
 
         /* remove read status for all-non-replier participants */
         if ($participant != $discuss->user->get('id')) {
+            /** @var disThreadRead $read */
             $read = $modx->getObject('disThreadRead',array(
                 'thread' => $thread->get('id'),
                 'user' => $participant,
@@ -156,6 +167,7 @@ if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id')
 
 /* upload attachments */
 foreach ($attachments as $file) {
+    /** @var disPostAttachment $attachment */
     $attachment = $modx->newObject('disPostAttachment');
     $attachment->set('post',$newPost->get('id'));
     $attachment->set('board',$newPost->get('board'));
