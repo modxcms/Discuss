@@ -24,6 +24,9 @@
 /**
  * Post a reply to a post
  *
+ * @var modX $modx
+ * @var fiHooks $hook
+ * @var Discuss $discuss
  * @package discuss
  */
 $discuss =& $modx->discuss;
@@ -35,9 +38,11 @@ $thread = $modx->call('disThread', 'fetch', array(&$modx,$fields['thread'],disTh
 if (empty($thread)) return false;
 
 if (empty($fields['post'])) return $modx->error->failure($modx->lexicon('discuss.post_err_ns'));
+/** @var disPost $post */
 $post = $modx->getObject('disPost',$fields['post']);
 if ($post == null) return false;
 
+/** @var disThread $thread */
 $thread = $post->getOne('Thread');
 if ($thread == null) return false;
 
@@ -79,6 +84,7 @@ if (!empty($fields['participants_usernames']) && $modx->discuss->user->get('id')
 }
 
 /* create post object and set fields */
+/** @var disPost $newPost */
 $newPost = $modx->newObject('disPost');
 $newPost->fromArray($fields);
 $newPost->set('author',$discuss->user->get('id'));
