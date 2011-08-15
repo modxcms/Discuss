@@ -101,16 +101,12 @@ class DiscussBoardController extends DiscussController {
             $page = $page <= 0 ? 1 : $page;
             $start = ($page-1) * $limit;
         }
-        if (!empty($this->options['showPosts'])) {
-            $c = array(
+        if ($this->getOption('showPosts',true)) {
+            $c = array_merge($this->options,array(
                 'limit' => $limit,
                 'start' => $start,
                 'board' => &$this->board,
-                'tpl' => $this->options['tpl'],
-                'lastPostTpl' => $this->options['lastPostTpl'],
-                'mode' => $this->options['mode'],
-                'get_category_name' => $this->options['get_category_name'],
-            );
+            ));
             $this->list = $this->discuss->hooks->load('board/post/getlist',$c);
             $this->setPlaceholder('posts',implode("\n",$this->list['results']));
         }
