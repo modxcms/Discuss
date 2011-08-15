@@ -29,6 +29,8 @@
  * @subpackage controllers
  */
 class DiscussUserIgnoreboardsController extends DiscussController {
+    public $boards = array();
+
     public function initialize() {
         $this->modx->lexicon->load('discuss:user');
     }
@@ -46,6 +48,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
         $this->setPlaceholders($this->discuss->user->toArray());
 
         $this->getBoards();
+        $this->prepareBoards();
         $this->getMenu();
     }
 
@@ -70,11 +73,23 @@ class DiscussUserIgnoreboardsController extends DiscussController {
 
     /**
      * Get the list of boards to be able to ignore
-     * @return void
+     * @return array 
      */
     public function getBoards() {
         /* build query */
-        $boards = $this->modx->call('disBoard','fetchList',array(&$this->modx,false));
+        $this->boards = $this->modx->call('disBoard','fetchList',array(&$this->modx,false));
+        return $this->boards;
+    }
+
+    /**
+     * Iterate through and list boards
+     * @return void
+     */
+    public function prepareBoards() {
+        $rowSeparator = $this->getOption('rowSeparator',"\n");
+        $categoryTpl = $this->getOption('categoryTpl','board/disBoardCategoryIb');
+        $boardTpl = $this->getOption('boardTpl','board/disBoardCheckbox');
+        $subBoardPaddingString = $this->getOption('subBoardPaddingString','---');
 
         /* now loop through boards */
         $list = array();
@@ -85,7 +100,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
         $ignores = $this->discuss->user->get('ignore_boards');
         $ignores = explode(',',$ignores);
         $idx = 0;
-        foreach ($boards as $board) {
+        foreach ($this->boards as $board) {
             $boardArray = $board;
             /* get current category */
             $currentCategory = $board['category'];
@@ -106,35 +121,37 @@ class DiscussUserIgnoreboardsController extends DiscussController {
                 unset($ba['rowClass']);
                 $ba['checked'] = (count($categoryIgnoreList['all'])-1 == count($categoryIgnoreList['checked'])) ? ' checked="checked"' : '';
                 if (empty($ba['category_name'])) $ba['category_name'] = $lastCategoryName;
-                $list[] = $this->discuss->getChunk('board/disBoardCategoryIb',$ba);
+                $list[] = $this->discuss->getChunk($categoryTpl,$ba);
                 $categoryIgnoreList = array('checked' => array(),'all' => array());
 
                 $ba = $boardArray;
                 $boardList = array(); /* reset current category board list */
                 $ba['cls'] = 'dis-board-cb '.$rowClass;
                 $lastCategory = $board['category'];
-                $boardList[] = $this->discuss->getChunk('board/disBoardCheckbox',$ba);
+                $boardList[] = $this->discuss->getChunk($boardTpl,$ba);
 
             } else { /* otherwise add to temp board list */
                 if ($boardArray['depth'] - 1 > 0) {
-                    $boardArray['name'] = str_repeat('---',$boardArray['depth'] - 1).$boardArray['name'];
+                    $boardArray['name'] = str_repeat($subBoardPaddingString,$boardArray['depth'] - 1).$boardArray['name'];
                 }
-                $boardList[] = $this->discuss->getChunk('board/disBoardCheckbox',$boardArray);
+                $boardList[] = $this->discuss->getChunk($boardTpl,$boardArray);
                 $rowClass = ($rowClass == 'alt') ? 'even' : 'alt';
             }
             $idx++;
         }
         
-        if (count($boards) > 0) {
+        if (count($this->boards) > 0) {
             if (in_array($boardArray['id'],$ignores)) {
                 $boardArray['checked'] = 'checked="checked"';
             }
             /* Last category */
             $boardArray['list'] = implode("\n",$boardList);
             $boardArray['rowClass'] = 'dis-board-cb '.$rowClass;
-            $list[] = $this->discuss->getChunk('board/disBoardCategoryIb',$boardArray);
+            $list[] = $this->discuss->getChunk($categoryTpl,$boardArray);
         }
-        $this->setPlaceholder('boards',implode("\n",$list));
+
+
+        $this->setPlaceholder('boards',implode($rowSeparator,$list));
     }
 
     /**
