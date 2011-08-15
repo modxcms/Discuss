@@ -76,29 +76,10 @@ class DisSmfImport {
     protected $postCache = array();
 
     /**
-     * Whether or not this import will actually save and commit the data.
-     * @var bool
+     * An array of configuration properties
+     * @var array $config
      */
-    public $live = true;
-
-    /**
-     * The modes of the import to run.
-     * @var array $runImport
-     */
-    public $runImport = array(
-        'users' => false,
-        'categories' => false,
-        'private_messages' => false,
-        'ignore_boards' => false,
-    );
-    /**
-     * Options for the import.
-     * @var array $importOptions
-     */
-    public $importOptions = array(
-        'default_user_group' => 'Forum Full Member',
-        'attachments_path' => false,
-    );
+    public $config = array();
 
     /**
      * Left TODO:
@@ -113,8 +94,35 @@ class DisSmfImport {
         if (!defined('DISCUSS_IMPORT_MODE')) {
             define('DISCUSS_IMPORT_MODE',true);
         }
-        if (empty($this->importOptions['attachments_path'])) {
-            $this->importOptions['attachments_path'] = $this->modx->getOption('assets_path').'attachments/';
+        $this->_loadConfig();
+        if (empty($this->config['attachments_path'])) {
+            $this->config['attachments_path'] = $this->modx->getOption('assets_path').'attachments/';
+        }
+    }
+
+    /**
+     * Load the custom configuration file
+     * @return void
+     */
+    public function _loadConfig() {
+        $config = array();
+        require $this->discuss->config['corePath'].'includes/config.inc.php';
+        if (empty($config)) {
+            $this->log('No config.');
+            die();
+        } else {
+            $this->config = array_merge($this->config,array(
+                'live' => false,
+
+                'import_users' => false,
+                'import_categories' => false,
+                'import_private_messages' => false,
+                'import_ignore_boards' => false,
+
+                'default_user_group' => 'Forum Full Member',
+                'usergroup_prefix' => 'Forum ',
+                'attachments_path' => false,
+            ),$config);
         }
     }
 
@@ -132,17 +140,11 @@ class DisSmfImport {
      * @return PDO
      */
     public function getConnection() {
-        $systems = array();
-        require $this->discuss->config['corePath'].'includes/systems.inc.php';
-        if (empty($systems)) {
-            $this->log('No config file.');
-        } else {
-            try {
-                $this->pdo = new PDO($systems['smf']['dsn'], $systems['smf']['username'], $systems['smf']['password']);
-                $this->tablePrefix = $systems['smf']['tablePrefix'];
-            } catch (PDOException $e) {
-                $this->log('Connection failed: ' . $e->getMessage());
-            }
+        try {
+            $this->pdo = new PDO($this->config['smf']['dsn'], $this->config['smf']['username'], $this->config['smf']['password']);
+            $this->tablePrefix = $this->config['smf']['tablePrefix'];
+        } catch (PDOException $e) {
+            $this->log('Connection failed: ' . $e->getMessage());
         }
         return $this->pdo;
     }
@@ -150,33 +152,34 @@ class DisSmfImport {
     /**
      * Run the import.
      * 
-     * @return void
+     * @return boolean
      */
     public function run() {
         if ($this->getConnection()) {
-            if ($this->runImport['users']) {
+            if ($this->config['import_users']) {
                 $this->importUserGroups();
                 $this->importUsers();
             } else {
                 $this->collectUserCaches();
             }
-            if ($this->runImport['categories']) {
+            if ($this->config['import_categories']) {
                 $this->importCategories();
             }
-            if ($this->runImport['private_messages']) {
+            if ($this->config['import_private_messages']) {
                 $this->importPrivateMessages();
             }
-            if ($this->runImport['ignore_boards']) {
+            if ($this->config['import_ignore_boards']) {
                 $this->migrateIgnoreBoards();
             }
         } else {
             $this->log('Could not start import because could not get connection to SMF database.');
         }
+        return true;
     }
 
     /**
      * Get the cache of Users and User Groups from the Discuss database
-     * @return void
+     * @return boolean
      */
     protected function collectUserCaches() {
         $this->log('Collecting User cache...');
@@ -199,6 +202,7 @@ class DisSmfImport {
             }
             $stmt->closeCursor();
         }
+        return true;
     }
 
     /**
@@ -213,57 +217,65 @@ class DisSmfImport {
 
     /**
      * Import User Groups into the Discuss database
-     * @return string
+     * @return boolean|string
      */
     public function importUserGroups() {
         $stmt = $this->pdo->query('
             SELECT * FROM '.$this->getFullTableName('membergroups').'
             ORDER BY `groupName` ASC
-        '.(!$this->live ? 'LIMIT 10' : ''));
+        '.(!$this->config['live'] ? 'LIMIT 10' : ''));
         if (!$stmt) { return 'Failed grabbing members.'; }
         
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (!$row) continue;
 
-            /** @var modUserGroup $usergroup */
-            $usergroup = $this->modx->newObject('modUserGroup');
-            $usergroup->fromArray(array(
-                'name' => 'Forum '.$row['groupName'],
-            ));
-            if ($this->live) {
-                $usergroup->save();
+            /** @var modUserGroup $userGroup */
+            $userGroup = $this->modx->getObject('modUserGroup',array('name' => $this->config['usergroup_prefix'].$row['groupName']));
+            if (!$userGroup) {
+                $userGroup = $this->modx->newObject('modUserGroup');
+                $userGroup->fromArray(array(
+                    'name' => $this->config['usergroup_prefix'].$row['groupName'],
+                ));
+                if ($this->config['live']) {
+                    $userGroup->save();
+                }
+                $this->log('Created User Group: '.$row['groupName']);
+            } else {
+                $this->log('Found User Group, using: '.$row['groupName']);
             }
 
             /** @var disUserGroupProfile $dug */
-            $dug = $this->modx->newObject('disUserGroupProfile');
-            $dug->fromArray(array(
-                'usergroup' => $usergroup->get('id'),
-                'post_based' => !empty($row['minPosts']) ? true : false,
-                'min_posts' => $row['minPosts'],
-                'color' => $row['onlineColor'],
-                'integrated_id' => $row['ID_GROUP'],
-            ));
-            if ($this->live) {
-                $dug->save();
+            $dug = $this->modx->getObject('disUserGroupProfile',array('usergroup' => $userGroup->get('id')));
+            if (!$dug) {
+                $dug = $this->modx->newObject('disUserGroupProfile');
+                $dug->fromArray(array(
+                    'usergroup' => $userGroup->get('id'),
+                    'post_based' => !empty($row['minPosts']) ? true : false,
+                    'min_posts' => $row['minPosts'],
+                    'color' => $row['onlineColor'],
+                    'integrated_id' => $row['ID_GROUP'],
+                ));
+                if ($this->config['live']) {
+                    $dug->save();
+                }
             }
 
-            $this->log('Creating User Group: '.$row['groupName']);
-
-            $this->memberGroupCache[$row['ID_GROUP']] = $usergroup->get('id');
+            $this->memberGroupCache[$row['ID_GROUP']] = $userGroup->get('id');
         }
         $stmt->closeCursor();
+        return true;
     }
 
     /**
      * Import Users into the Discuss database
-     * @return string
+     * @return boolean
      */
     public function importUsers() {
         $stmt = $this->pdo->query('
             SELECT * FROM '.$this->getFullTableName('members').'
             ORDER BY `memberName` ASC
-        '.(!$this->live ? 'LIMIT 10' : ''));
-        if (!$stmt) { return 'Failed grabbing members.'; }
+        '.(!$this->config['live'] ? 'LIMIT 10' : ''));
+        if (!$stmt) { return false; }
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (!$row) continue;
 
@@ -299,7 +311,7 @@ class DisSmfImport {
                     'class_key' => 'modUser',
                     'active' => (boolean)$row['is_activated'],
                 ));
-                if ($this->live) {
+                if ($this->config['live']) {
                     $modxUser->save();
                 }
                 /** @var modUserProfile $modxUserProfile */
@@ -313,7 +325,7 @@ class DisSmfImport {
                     'address' => $row['location'],
                     'lastlogin' => $row['lastLogin'],
                 ));
-                if ($this->live) {
+                if ($this->config['live']) {
                     $modxUserProfile->set('internalKey',$modxUser->get('id'));
                     $modxUserProfile->save();
                 }
@@ -352,7 +364,7 @@ class DisSmfImport {
             $this->log('Creating User '.$row['memberName']);
             $this->memberCache[$row['ID_MEMBER']] = $user->get('id');
             $this->memberNameCache[$row['memberName']] = $user->get('id');
-            if ($this->live) {
+            if ($this->config['live']) {
                 if ($modxUser) {
                     $user->set('user',$modxUser->get('id'));
                 }
@@ -364,6 +376,7 @@ class DisSmfImport {
 
         } /* end while */
         $stmt->closeCursor();
+        return true;
     }
 
     /**
@@ -371,7 +384,7 @@ class DisSmfImport {
      * 
      * @param disUser $user
      * @param array $row
-     * @return void
+     * @return boolean
      */
     public function importUserGroupMemberships(disUser $user,array $row) {
         $groups = array();
@@ -383,9 +396,9 @@ class DisSmfImport {
         }
 
         /* default user group import option */
-        if (!empty($this->importOptions['default_user_group'])) {
+        if (!empty($this->config['default_user_group'])) {
             /** @var modUserGroup $dug */
-            $dug = $this->modx->getObject('modUserGroup',array('name' => $this->importOptions['default_user_group']));
+            $dug = $this->modx->getObject('modUserGroup',array('name' => $this->config['default_user_group']));
             if ($dug) {
                 $groups[] = $dug->get('id');
             }
@@ -398,16 +411,17 @@ class DisSmfImport {
                 $member = $this->modx->newObject('modUserGroupMember');
                 $member->set('user_group',$this->memberGroupCache[$group]);
                 $member->set('member',$user->get('user'));
-                if ($this->live) {
+                if ($this->config['live']) {
                     $member->save();
                 }
             }
         }
+        return true;
     }
 
     /**
      * Import Categories into Discuss
-     * @return void
+     * @return boolean
      */
     public function importCategories() {
         $stmt = $this->pdo->query('
@@ -431,7 +445,7 @@ class DisSmfImport {
                         'integrated_id' => $row['ID_CAT'],
                     ));
                     $this->log('Importing category '.$row['name']);
-                    if ($this->live) {
+                    if ($this->config['live']) {
                         $category->save();
                     }
                 }
@@ -442,6 +456,7 @@ class DisSmfImport {
             }
             $stmt->closeCursor();
         }
+        return $stmt ? true : false;
     }
 
     /**
@@ -460,7 +475,7 @@ class DisSmfImport {
                 `ID_CAT` = '.$row['ID_CAT'].'
             AND `ID_PARENT` = '.$smfParent.'
             ORDER BY boardOrder ASC
-        '.(!$this->live ? 'LIMIT 3' : ''));
+        '.(!$this->config['live'] ? 'LIMIT 3' : ''));
         if (!$bst) return array();
         $bIdx = 0;
         while ($brow = $bst->fetch(PDO::FETCH_ASSOC)) {
@@ -492,7 +507,7 @@ class DisSmfImport {
                     $board->set('parent',$parentBoard->get('id'));
                 }
                 $this->log('Importing board '.$brow['name']);
-                if ($this->live) {
+                if ($this->config['live']) {
                     $board->set('category',$category->get('id'));
                     $board->save();
                 }
@@ -540,7 +555,7 @@ class DisSmfImport {
             WHERE
                 `Topic`.`ID_BOARD` = '.$brow['ID_BOARD'].'
             ORDER BY `FirstPost`.`posterTime` ASC
-        '.(!$this->live ? 'LIMIT 10' : '');
+        '.(!$this->config['live'] ? 'LIMIT 10' : '');
         $tst = $this->pdo->query($sql);
         if (!$tst) return array();
         $tIdx = 0;
@@ -557,7 +572,7 @@ class DisSmfImport {
                 'private' => false,
                 'integrated_id' => $trow['ID_TOPIC'],
             ));
-            if ($this->live) {
+            if ($this->config['live']) {
                 $thread->save();
             }
 
@@ -579,7 +594,7 @@ class DisSmfImport {
                 'integrated_id' => $trow['ID_MSG'],
                 'depth' => 0,
             ));
-            if ($this->live) {
+            if ($this->config['live']) {
                 $threadPost->save();
             }
             $tIdx++;
@@ -595,7 +610,7 @@ class DisSmfImport {
                 $thread->set('post_last',$threadPost->get('id'));
                 $thread->set('author_last',$threadPost->get('author'));
             }
-            if ($this->live) {
+            if ($this->config['live']) {
                 $thread->save();
             }
         }
@@ -628,7 +643,7 @@ class DisSmfImport {
             AND `ID_MSG` != '.$trow['ID_MSG'].'
             AND `ID_BOARD` = '.$trow['ID_BOARD'].'
             ORDER BY posterTime ASC
-        '.(!$this->live ? 'LIMIT 10' : '');
+        '.(!$this->config['live'] ? 'LIMIT 10' : '');
         $pst = $this->pdo->query($sql);
         if (!$pst) return array('total' => 0);
         $pIdx = 0;
@@ -655,7 +670,7 @@ class DisSmfImport {
                 'depth' => 1,
             ));
 
-            if ($this->live) {
+            if ($this->config['live']) {
                 $post->save();
             }
 
@@ -707,7 +722,7 @@ class DisSmfImport {
                     'ID_THUMB' => $arow['ID_THUMB'],
                 )),
             ));
-            if ($this->live) {
+            if ($this->config['live']) {
                 $attachment->save();
             }
             $aIdx++;
@@ -758,7 +773,7 @@ class DisSmfImport {
                         $pmUser->set('user',$participant);
                         $pmUser->set('author',$participant == $thread->get('author_first') ? 1 : 0);
                         $this->log('--- Adding Participant '.$participant.' to Thread');
-                        if ($this->live) {
+                        if ($this->config['live']) {
                             $pmUser->save();
                         }
 
@@ -768,7 +783,7 @@ class DisSmfImport {
                         $pmRead->set('user',$participant);
                         $pmRead->set('thread',$thread->get('id'));
                         $pmRead->set('board',0);
-                        if ($this->live) {
+                        if ($this->config['live']) {
                             $pmRead->save();
                         }
 
@@ -778,7 +793,7 @@ class DisSmfImport {
                         $pmNotify->set('user',$participant);
                         $pmNotify->set('thread',$thread->get('id'));
                         $pmNotify->set('board',0);
-                        if ($this->live) {
+                        if ($this->config['live']) {
                             $pmNotify->save();
                         }
                     }
@@ -787,7 +802,7 @@ class DisSmfImport {
                         $thread->set('post_last',$post->get('id'));
                         $thread->set('author_last',$post->get('author'));
                     }
-                    if ($this->live) {
+                    if ($this->config['live']) {
                         $thread->save();
                     }
                 }
@@ -807,7 +822,7 @@ class DisSmfImport {
                     'author_first' => $firstAuthorId,
                     'integrated_id' => $trow['ID_PM'],
                 ));
-                if ($this->live) {
+                if ($this->config['live']) {
                     $thread->save();
                 }
                 $isFirstPostOfThread = true;
@@ -833,11 +848,11 @@ class DisSmfImport {
                 'integrated_id' => $trow['ID_PM'],
             ));
             $participants[] = $postAuthor;
-            if ($this->live) {
+            if ($this->config['live']) {
                 $post->save();
             }
             if ($isFirstPostOfThread) {
-                if ($this->live) {
+                if ($this->config['live']) {
                     $thread->set('post_first',$post->get('id'));
                     $thread->save();
                 }
@@ -853,7 +868,7 @@ class DisSmfImport {
                 $thread->set('post_last',$post->get('id'));
                 $thread->set('author_last',$post->get('author'));
             }
-            if ($this->live) {
+            if ($this->config['live']) {
                 $thread->save();
             }
         }
@@ -892,7 +907,7 @@ class DisSmfImport {
 
                 if (!empty($newBoards)) {
                     $user->set('ignore_boards',implode(',',$newBoards));
-                    if ($this->live) {
+                    if ($this->config['live']) {
                         $user->save();
                     }
                 }

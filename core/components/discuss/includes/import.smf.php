@@ -21,6 +21,10 @@
  *
  * @package discuss
  */
+/**
+ * @var modX $modx
+ * @var Discuss $discuss
+ */
 $mtime = microtime();
 $mtime = explode(' ', $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -49,7 +53,6 @@ echo '<pre>';
 /* load and run importer */
 if ($discuss->loadImporter('disSmfImport')) {
     $discuss->import->live = true;
-    $discuss->import->postsOnly = true;
     $discuss->import->run();
 } else {
     $modx->log(xPDO::LOG_LEVEL_ERROR,'Failed to load Import class.');
