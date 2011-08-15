@@ -245,5 +245,24 @@ $manifest = array(
             ),
         ),
     ),
+    'messages/view' => array(
+        'js' => array(
+            'header' => array(
+                'dis.thread.js',
+                'dis.post.buttons.js',
+            )
+        ),
+        'options' => array(
+            'showPosts' => true,
+            'showBreadcrumbs' => true,
+            'showViewing' => true,
+            'showSubscribeOption' => false,
+            'showPrintOption' => false,
+            'showStickOption' => true,
+            'showLockOption' => true,
+            'showMarkAsSpamOption' => true,
+            'showTitleInBreadcrumbs' => false,
+        ),
+    ),
 );
 return $manifest;
