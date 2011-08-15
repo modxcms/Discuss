@@ -76,11 +76,9 @@ class DisSmfImport {
     protected $postCache = array();
 
     /**
-     * Whether or not this import will actually save and commit the data.
-     * @var bool
+     * An array of configuration properties
+     * @var array $config
      */
-    public $live = true;
-
     public $config = array();
 
     /**
@@ -102,22 +100,30 @@ class DisSmfImport {
         }
     }
 
+    /**
+     * Load the custom configuration file
+     * @return void
+     */
     public function _loadConfig() {
-        $systems = array();
-        require $this->discuss->config['corePath'].'includes/systems.inc.php';
-        $this->config = array_merge($this->config,array(
-            'live' => false,
-            
-            'import_users' => false,
-            'import_categories' => false,
-            'import_private_messages' => false,
-            'import_ignore_boards' => false,
-            
-            'default_user_group' => 'Forum Full Member',
-            'usergroup_prefix' => 'Forum ',
-            'attachments_path' => false,
-        ),$systems);
+        $config = array();
+        require $this->discuss->config['corePath'].'includes/config.inc.php';
+        if (empty($config)) {
+            $this->log('No config.');
+            die();
+        } else {
+            $this->config = array_merge($this->config,array(
+                'live' => false,
 
+                'import_users' => false,
+                'import_categories' => false,
+                'import_private_messages' => false,
+                'import_ignore_boards' => false,
+
+                'default_user_group' => 'Forum Full Member',
+                'usergroup_prefix' => 'Forum ',
+                'attachments_path' => false,
+            ),$config);
+        }
     }
 
     /**
@@ -134,17 +140,11 @@ class DisSmfImport {
      * @return PDO
      */
     public function getConnection() {
-        $systems = array();
-        require $this->discuss->config['corePath'].'includes/systems.inc.php';
-        if (empty($systems)) {
-            $this->log('No config file.');
-        } else {
-            try {
-                $this->pdo = new PDO($systems['smf']['dsn'], $systems['smf']['username'], $systems['smf']['password']);
-                $this->tablePrefix = $systems['smf']['tablePrefix'];
-            } catch (PDOException $e) {
-                $this->log('Connection failed: ' . $e->getMessage());
-            }
+        try {
+            $this->pdo = new PDO($this->config['smf']['dsn'], $this->config['smf']['username'], $this->config['smf']['password']);
+            $this->tablePrefix = $this->config['smf']['tablePrefix'];
+        } catch (PDOException $e) {
+            $this->log('Connection failed: ' . $e->getMessage());
         }
         return $this->pdo;
     }

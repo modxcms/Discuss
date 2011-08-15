@@ -23,10 +23,22 @@
  */
 /**
  * Sample Import config
+ *
+ * @var array $config
  */
-$systems = array();
-$systems['smf']['dsn'] = 'mysql:dbname=smf;host=127.0.0.1';
-$systems['smf']['username'] = 'username';
-$systems['smf']['password'] = 'password';
-$systems['smf']['tablePrefix'] = 'smf_';
+$config['smf']['dsn'] = 'mysql:dbname=smf;host=127.0.0.1';
+$config['smf']['username'] = 'username';
+$config['smf']['password'] = 'password';
+$config['smf']['tablePrefix'] = 'smf_';
+
+$config['live'] = false;
+$config['import_users'] = false;
+$config['import_categories'] = false;
+$config['import_private_messages'] = false;
+$config['import_ignore_boards'] = false;
+
+$config['default_user_group'] = 'Forum Full Member';
+$config['usergroup_prefix'] = 'Forum ';
+$config['attachments_path'] = false;
+
 
