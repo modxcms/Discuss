@@ -84,7 +84,7 @@ class Discuss {
      */
     public $session;
     /**
-     * @var disImport $import
+     * @var disImport|disSmfImport $import
      */
     public $import;
 
