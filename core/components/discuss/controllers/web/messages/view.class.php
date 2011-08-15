@@ -30,6 +30,8 @@ class DiscussMessagesViewController extends DiscussController {
     public $thread;
     /** @var array $list */
     public $list = array();
+    /** @var disPost $lastPost */
+    public $lastPost;
 
     public function initialize() {
         $thread = $this->getProperty('thread',false);
@@ -64,6 +66,7 @@ class DiscussMessagesViewController extends DiscussController {
         $this->setPlaceholders($threadArray);
 
         $this->getThreadPosts();
+        $this->getLastPost();
         $this->getViewing();
 
         $this->getActionButtons();
@@ -107,6 +110,16 @@ class DiscussMessagesViewController extends DiscussController {
         $buttons = $this->discuss->getChunk($buttonsTpl,array('buttons_url' => $this->discuss->config['imagesUrl'].'buttons/'));
         $this->setPlaceholder('reply_buttons',$buttons);
         return $buttons;
+    }
+
+    /**
+     * Get the last post of the thread and set it as a placeholder
+     * @return void
+     */
+    public function getLastPost() {
+        $this->lastPost = $this->thread->getOne('LastPost');
+        $lastPostArray = $this->lastPost->toArray('lastPost.');
+        $this->setPlaceholders($lastPostArray);
     }
     
     /**
