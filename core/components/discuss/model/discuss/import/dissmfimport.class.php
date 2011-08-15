@@ -152,7 +152,7 @@ class DisSmfImport {
     /**
      * Run the import.
      * 
-     * @return void
+     * @return boolean
      */
     public function run() {
         if ($this->getConnection()) {
@@ -174,11 +174,12 @@ class DisSmfImport {
         } else {
             $this->log('Could not start import because could not get connection to SMF database.');
         }
+        return true;
     }
 
     /**
      * Get the cache of Users and User Groups from the Discuss database
-     * @return void
+     * @return boolean
      */
     protected function collectUserCaches() {
         $this->log('Collecting User cache...');
@@ -201,6 +202,7 @@ class DisSmfImport {
             }
             $stmt->closeCursor();
         }
+        return true;
     }
 
     /**
@@ -215,7 +217,7 @@ class DisSmfImport {
 
     /**
      * Import User Groups into the Discuss database
-     * @return string
+     * @return boolean|string
      */
     public function importUserGroups() {
         $stmt = $this->pdo->query('
@@ -227,45 +229,53 @@ class DisSmfImport {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (!$row) continue;
 
-            /** @var modUserGroup $usergroup */
-            $usergroup = $this->modx->newObject('modUserGroup');
-            $usergroup->fromArray(array(
-                'name' => $this->config['usergroup_prefix'].$row['groupName'],
-            ));
-            if ($this->config['live']) {
-                $usergroup->save();
+            /** @var modUserGroup $userGroup */
+            $userGroup = $this->modx->getObject('modUserGroup',array('name' => $this->config['usergroup_prefix'].$row['groupName']));
+            if (!$userGroup) {
+                $userGroup = $this->modx->newObject('modUserGroup');
+                $userGroup->fromArray(array(
+                    'name' => $this->config['usergroup_prefix'].$row['groupName'],
+                ));
+                if ($this->config['live']) {
+                    $userGroup->save();
+                }
+                $this->log('Created User Group: '.$row['groupName']);
+            } else {
+                $this->log('Found User Group, using: '.$row['groupName']);
             }
 
             /** @var disUserGroupProfile $dug */
-            $dug = $this->modx->newObject('disUserGroupProfile');
-            $dug->fromArray(array(
-                'usergroup' => $usergroup->get('id'),
-                'post_based' => !empty($row['minPosts']) ? true : false,
-                'min_posts' => $row['minPosts'],
-                'color' => $row['onlineColor'],
-                'integrated_id' => $row['ID_GROUP'],
-            ));
-            if ($this->config['live']) {
-                $dug->save();
+            $dug = $this->modx->getObject('disUserGroupProfile',array('usergroup' => $userGroup->get('id')));
+            if (!$dug) {
+                $dug = $this->modx->newObject('disUserGroupProfile');
+                $dug->fromArray(array(
+                    'usergroup' => $userGroup->get('id'),
+                    'post_based' => !empty($row['minPosts']) ? true : false,
+                    'min_posts' => $row['minPosts'],
+                    'color' => $row['onlineColor'],
+                    'integrated_id' => $row['ID_GROUP'],
+                ));
+                if ($this->config['live']) {
+                    $dug->save();
+                }
             }
 
-            $this->log('Creating User Group: '.$row['groupName']);
-
-            $this->memberGroupCache[$row['ID_GROUP']] = $usergroup->get('id');
+            $this->memberGroupCache[$row['ID_GROUP']] = $userGroup->get('id');
         }
         $stmt->closeCursor();
+        return true;
     }
 
     /**
      * Import Users into the Discuss database
-     * @return string
+     * @return boolean
      */
     public function importUsers() {
         $stmt = $this->pdo->query('
             SELECT * FROM '.$this->getFullTableName('members').'
             ORDER BY `memberName` ASC
         '.(!$this->config['live'] ? 'LIMIT 10' : ''));
-        if (!$stmt) { return 'Failed grabbing members.'; }
+        if (!$stmt) { return false; }
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (!$row) continue;
 
@@ -366,6 +376,7 @@ class DisSmfImport {
 
         } /* end while */
         $stmt->closeCursor();
+        return true;
     }
 
     /**
@@ -373,7 +384,7 @@ class DisSmfImport {
      * 
      * @param disUser $user
      * @param array $row
-     * @return void
+     * @return boolean
      */
     public function importUserGroupMemberships(disUser $user,array $row) {
         $groups = array();
@@ -405,11 +416,12 @@ class DisSmfImport {
                 }
             }
         }
+        return true;
     }
 
     /**
      * Import Categories into Discuss
-     * @return void
+     * @return boolean
      */
     public function importCategories() {
         $stmt = $this->pdo->query('
@@ -444,6 +456,7 @@ class DisSmfImport {
             }
             $stmt->closeCursor();
         }
+        return $stmt ? true : false;
     }
 
     /**
