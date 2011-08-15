@@ -1,0 +1,1248 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Discuss API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.file-nav').show();
+      });
+    </script><h1 class="file">disboard.class.php</h1>
+<div class="file-nav"><ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CdisBoard">\disBoard</a></li></ul>
+</li>
+</ul></div>
+<a name="top"></a><div id="file-description">
+<p class="short-description">Discuss</p>
+<div class="long-description"><p>Copyright 2010-11 by Shaun McCormick <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;">&#115;&#104;&#x61;&#x75;&#x6e;&#x40;&#x6d;&#111;&#100;&#120;&#46;&#99;&#x6f;&#x6d;</a></p>
+
+<p>This file is part of Discuss, a native forum for MODx Revolution.</p>
+
+<p>Discuss is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.</p>
+
+<p>Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with
+Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+Suite 330, Boston, MA 02111-1307 USA</p>
+</div>
+</div>
+<dl class="file-info">
+<dt>package</dt>
+<dd>discuss</dd>
+</dl>
+<a name="classes"></a><a id="\disBoard"></a><h2 class="class">\disBoard<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<p class="short-description">A representation of a forum Board. Uses closure tables to maintain depth and
+proper ordering while getting O(1) query performance.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd>\xPDOSimpleObject</dd>
+<dt>package</dt>
+<dd>discuss</dd>
+</dl>
+<h3>Constants</h3>
+<div>
+<a id="\disBoard::STATUS_INACTIVE"></a><div class="constant">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">STATUS_INACTIVE</span>
+                = '0'
+            </code><div class="description"><p class="short-description">The status constant for inactive Boards.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<dl class="constant-info">
+<dt>const</dt>
+<dd>STATUS_INACTIVE</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::STATUS_ACTIVE"></a><div class="constant">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">STATUS_ACTIVE</span>
+                = '1'
+            </code><div class="description"><p class="short-description">The status constant for active Boards.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<dl class="constant-info">
+<dt>const</dt>
+<dd>STATUS_ACTIVE</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::STATUS_ARCHIVED"></a><div class="constant">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">STATUS_ARCHIVED</span>
+                = '2'
+            </code><div class="description"><p class="short-description">The status constant for archived Boards.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<dl class="constant-info">
+<dt>const</dt>
+<dd>STATUS_ARCHIVED</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">category The ID of the Category this board is in</p>category The ID of the Category this board is in</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>category The ID of the Category this board is in</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">parent The ID of the parent Board. If none, will be 0.</p>parent The ID of the parent Board. If none, will be 0.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>parent The ID of the parent Board. If none, will be 0.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">name The name of the board.</p>name The name of the board.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>name The name of the board.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">last_post The ID of the most recent Post on this Board.</p>last_post The ID of the most recent Post on this Board.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>last_post The ID of the most recent Post on this Board.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">num_topics The number of Threads on this Board.</p>num_topics The number of Threads on this Board.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>num_topics The number of Threads on this Board.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">num_replies The number of replies to Threads on this Board.</p>num_replies The number of replies to Threads on this Board.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>num_replies The number of replies to Threads on this Board.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">total_posts The total number of Posts (in all threads) on this Board.</p>total_posts The total number of Posts (in all threads) on this Board.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>total_posts The total number of Posts (in all threads) on this Board.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">boolean
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">ignoreable Whether or not this Board can be ignored.</p>ignoreable Whether or not this Board can be ignored.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>boolean</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>ignoreable Whether or not this Board can be ignored.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">rank The rank, or order, of this board in its category.</p>rank The rank, or order, of this board in its category.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>rank The rank, or order, of this board in its category.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">string
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">map An internally-used map that stores the order of the board in the board tree.</p>map An internally-used map that stores the order of the board in the board tree.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>map An internally-used map that stores the order of the board in the board tree.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">minimum_post_level The minimum post authority of the user that is required to post on this board (either Admin = 0,Moderator = 1,anything else = 9998)</p>minimum_post_level The minimum post authority of the user that is required to post on this board (either Admin = 0,Moderator = 1,anything else = 9998)</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>minimum_post_level The minimum post authority of the user that is required to post on this board (either Admin = 0,Moderator = 1,anything else = 9998)</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">status The status of this board. See the STATUS_* constants.</p>status The status of this board. See the STATUS_* constants.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>status The status of this board. See the STATUS_* constants.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">boolean
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">locked Whether or not this board is locked from more posts.</p>locked Whether or not this board is locked from more posts.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>boolean</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>locked Whether or not this board is locked from more posts.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">int
+                 <span class="highlight"></span>= ''
+                </code><div class="description">
+<p class="short-description">integrated_id If this board was imported, the PK of the old system's board.</p>integrated_id If this board was imported, the PK of the old system's board.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd>integrated_id If this board was imported, the PK of the old system's board.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::$Category"></a><div class="propertymagic">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">\disCategory
+                 <span class="highlight">$Category</span>= ''
+                </code><div class="description">
+<p class="short-description"></p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_discategory.class.html#%5CdisCategory">\disCategory</a></dd>
+<dt>magic</dt>
+<dd></dd>
+<dt>property</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::$parentChanged"></a><div class="property">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">boolean
+                 <span class="highlight">$parentChanged</span>= 'false'
+                </code><div class="description">
+<p class="short-description"></p>Monitors whether parent has been changed.</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>boolean</dd>
+<dt>access</dt>
+<dd>protected</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\disBoard::buildBreadcrumbs()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">buildBreadcrumbs</span><span class="nb-faded-text">(
+          array $additional
+              =
+              array, bool $linkToSelf
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description">Build the breadcrumb navigation for this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$additional</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$linkToSelf</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::calcLastPostPage()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">calcLastPostPage</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          float|int</code><div class="description">Calc the page of the last post on this board (requires prior data filled)</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>floatint</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::canPost()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canPost</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">See if the active user can post on this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::canPostAttachments()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canPostAttachments</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Can active user post attachments on this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::canPostLockedThread()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canPostLockedThread</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Can active user post a locked thread on this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::canPostStickyThread()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canPostStickyThread</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Can active user post a sticky thread on this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::clearCache()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">clearCache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">Clear the cache for this board</div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::fetch()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">fetch</span><span class="nb-faded-text">(
+          \xPDO $modx, int $id, bool $integrated
+              =
+              false
+          )
+        </span>
+        :
+          <a href="db_disboard.class.html#%5CdisBoard">\disBoard</a></code><div class="description">
+<span class="attribute">static</span>Fetch a board by ID</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$modx</th>
+<td>\xPDO</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$integrated</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_disboard.class.html#%5CdisBoard">\disBoard</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>static</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::fetchList()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">fetchList</span><span class="nb-faded-text">(
+          \xPDO $modx, bool $ignoreBoards
+              =
+              true
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">static</span>Fetch a full list of boards for the forum with restrictions based on current user</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$modx</th>
+<td>\xPDO</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ignoreBoards</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>static</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::get2ndLatestPost()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get2ndLatestPost</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_dispost.class.html#%5CdisPost">\disPost</a></code><div class="description">Get the 2nd to last Post</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_dispost.class.html#%5CdisPost">\disPost</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getLastPostTitle()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLastPostTitle</span><span class="nb-faded-text">(
+          string $key
+              =
+              last_post_title
+          )
+        </span>
+        :
+          string</code><div class="description">Get the title of the last post on this board (requires prior data filled)</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getLastPostUrl()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLastPostUrl</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Get the URL of the last post on this board (requires prior data filled)</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getList()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getList</span><span class="nb-faded-text">(
+          \xPDO $modx, int $board
+              =
+              0, bool $category
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">static</span>Get a full list of all boards on the forum, for any user</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$modx</th>
+<td>\xPDO</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$board</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$category</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>static</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getModerators()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getModerators</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description">Get an array of disUser objects who are Moderators of this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getModeratorsList()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getModeratorsList</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Grab the moderators text for the board.</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The text returned for the viewing users.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getRecursiveParentIds()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getRecursiveParentIds</span><span class="nb-faded-text">(
+          bool $id
+              =
+              false, array $ids
+              =
+              array
+          )
+        </span>
+        :
+          array</code><div class="description">Get all the IDs of the parents of this board up the tree</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ids</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getSlug()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getSlug</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Get the URL-friendly name of this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getSubBoardList()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getSubBoardList</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Grabs a comma-separated list of direct subboards for this board.</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>A CSV list of subboards</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getUrl()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getUrl</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Get the friendly URL for this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::getViewing()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getViewing</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Grab the viewing text for the board.</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The text returned for the viewing users.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::isModerator()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isModerator</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Determine if a user is a moderator of this board</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::read()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">read</span><span class="nb-faded-text">(
+           $userId
+          )
+        </span>
+        :
+          bool</code><div class="description">Mark all threads in this board as read for a user.</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$userId</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::remove()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">remove</span><span class="nb-faded-text">(
+          array $ancestors
+              =
+              array
+          )
+        </span>
+        :
+          boolean</code><div class="description">Override xPDOObject::remove to clear cache on remove</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ancestors</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::save()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">save</span><span class="nb-faded-text">(
+          boolean $cacheFlag
+              =
+              null
+          )
+        </span>
+        :
+          boolean</code><div class="description">Overrides the xPDOObject::save method to provide custom functionality and
+automation for the closure tables that persist the board map.</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cacheFlag</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::set()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">set</span><span class="nb-faded-text">(
+          string $k, mixed $v
+              =
+              null, string $vType
+          )
+        </span>
+        :
+          boolean</code><div class="description">Overrides xPDOObject::set to provide custom functionality and automation
+for the closure tables that persist the board map.</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$k</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$v</th>
+<td>mixed</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$vType</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard::toArray()"></a><div class="method">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toArray</span><span class="nb-faded-text">(
+          string $keyPrefix, bool $rawValues
+              =
+              false, bool $excludeLazy
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description">Override toArray to provide more values</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$keyPrefix</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$rawValues</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$excludeLazy</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.13.2</a>.
+    </small></body></html>

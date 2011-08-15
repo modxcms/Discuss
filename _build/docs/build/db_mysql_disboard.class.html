@@ -1,0 +1,951 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Discuss API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.file-nav').show();
+      });
+    </script><h1 class="file">mysql/disboard.class.php</h1>
+<div class="file-nav"><ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CdisBoard_mysql">\disBoard_mysql</a></li></ul>
+</li>
+</ul></div>
+<a name="top"></a><div id="file-description">
+<p class="short-description"></p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>subpackage</dt>
+<dd>mysql</dd>
+</dl>
+<a name="classes"></a><a id="\disBoard_mysql"></a><h2 class="class">\disBoard_mysql<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<p class="short-description">A representation of a forum Board. Uses closure tables to maintain depth and
+proper ordering while getting O(1) query performance.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="db_disboard.class.html#%5CdisBoard">\disBoard</a></dd>
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>subpackage</dt>
+<dd>mysql</dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\disBoard_mysql::buildBreadcrumbs()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">buildBreadcrumbs</span><span class="nb-faded-text">(
+          array $additional
+              =
+              array, bool $linkToSelf
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description">Build the breadcrumb navigation for this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::buildBreadcrumbs()">\disBoard::buildBreadcrumbs()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$additional</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$linkToSelf</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::calcLastPostPage()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">calcLastPostPage</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          float|int</code><div class="description">Calc the page of the last post on this board (requires prior data filled)<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::calcLastPostPage()">\disBoard::calcLastPostPage()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>floatint</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::canPost()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canPost</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">See if the active user can post on this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::canPost()">\disBoard::canPost()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::canPostAttachments()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canPostAttachments</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Can active user post attachments on this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::canPostAttachments()">\disBoard::canPostAttachments()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::canPostLockedThread()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canPostLockedThread</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Can active user post a locked thread on this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::canPostLockedThread()">\disBoard::canPostLockedThread()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::canPostStickyThread()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canPostStickyThread</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Can active user post a sticky thread on this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::canPostStickyThread()">\disBoard::canPostStickyThread()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::clearCache()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">clearCache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">Clear the cache for this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::clearCache()">\disBoard::clearCache()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::fetch()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">fetch</span><span class="nb-faded-text">(
+          \xPDO $modx, int $id, bool $integrated
+              =
+              false
+          )
+        </span>
+        :
+          <a href="db_disboard.class.html#%5CdisBoard">\disBoard</a></code><div class="description">
+<span class="attribute">static</span>Fetch a board by ID<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::fetch()">\disBoard::fetch()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$modx</th>
+<td>\xPDO</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$id</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$integrated</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_disboard.class.html#%5CdisBoard">\disBoard</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>static</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::fetchList()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">fetchList</span><span class="nb-faded-text">(
+          \xPDO $modx, bool $ignoreBoards
+              =
+              true
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">static</span>Fetch a full list of boards for the forum with restrictions based on current user<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::fetchList()">\disBoard::fetchList()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$modx</th>
+<td>\xPDO</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ignoreBoards</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>static</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::get2ndLatestPost()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get2ndLatestPost</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_dispost.class.html#%5CdisPost">\disPost</a></code><div class="description">Get the 2nd to last Post<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::get2ndLatestPost()">\disBoard::get2ndLatestPost()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_dispost.class.html#%5CdisPost">\disPost</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getLastPostTitle()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLastPostTitle</span><span class="nb-faded-text">(
+          string $key
+              =
+              last_post_title
+          )
+        </span>
+        :
+          string</code><div class="description">Get the title of the last post on this board (requires prior data filled)<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getLastPostTitle()">\disBoard::getLastPostTitle()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getLastPostUrl()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLastPostUrl</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Get the URL of the last post on this board (requires prior data filled)<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getLastPostUrl()">\disBoard::getLastPostUrl()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getList()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getList</span><span class="nb-faded-text">(
+          \xPDO $modx, int $board
+              =
+              0, bool $category
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">static</span>Get a full list of all boards on the forum, for any user<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getList()">\disBoard::getList()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$modx</th>
+<td>\xPDO</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$board</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$category</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>static</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getModerators()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getModerators</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description">Get an array of disUser objects who are Moderators of this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getModerators()">\disBoard::getModerators()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getModeratorsList()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getModeratorsList</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Grab the moderators text for the board.<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getModeratorsList()">\disBoard::getModeratorsList()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The text returned for the viewing users.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getRecursiveParentIds()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getRecursiveParentIds</span><span class="nb-faded-text">(
+          bool $id
+              =
+              false, array $ids
+              =
+              array
+          )
+        </span>
+        :
+          array</code><div class="description">Get all the IDs of the parents of this board up the tree<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getRecursiveParentIds()">\disBoard::getRecursiveParentIds()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$id</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$ids</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getSlug()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getSlug</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Get the URL-friendly name of this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getSlug()">\disBoard::getSlug()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getSubBoardList()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getSubBoardList</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Grabs a comma-separated list of direct subboards for this board.<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getSubBoardList()">\disBoard::getSubBoardList()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>A CSV list of subboards</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getUrl()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getUrl</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Get the friendly URL for this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getUrl()">\disBoard::getUrl()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::getViewing()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getViewing</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Grab the viewing text for the board.<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::getViewing()">\disBoard::getViewing()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The text returned for the viewing users.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::isModerator()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isModerator</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Determine if a user is a moderator of this board<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::isModerator()">\disBoard::isModerator()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::read()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">read</span><span class="nb-faded-text">(
+           $userId
+          )
+        </span>
+        :
+          bool</code><div class="description">Mark all threads in this board as read for a user.<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::read()">\disBoard::read()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$userId</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::remove()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">remove</span><span class="nb-faded-text">(
+          array $ancestors
+              =
+              array
+          )
+        </span>
+        :
+          boolean</code><div class="description">Override xPDOObject::remove to clear cache on remove<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::remove()">\disBoard::remove()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ancestors</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::save()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">save</span><span class="nb-faded-text">(
+          boolean $cacheFlag
+              =
+              null
+          )
+        </span>
+        :
+          boolean</code><div class="description">Overrides the xPDOObject::save method to provide custom functionality and
+automation for the closure tables that persist the board map.<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::save()">\disBoard::save()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cacheFlag</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::set()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">set</span><span class="nb-faded-text">(
+          string $k, mixed $v
+              =
+              null, string $vType
+          )
+        </span>
+        :
+          boolean</code><div class="description">Overrides xPDOObject::set to provide custom functionality and automation
+for the closure tables that persist the board map.<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::set()">\disBoard::set()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$k</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$v</th>
+<td>mixed</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$vType</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disBoard_mysql::toArray()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toArray</span><span class="nb-faded-text">(
+          string $keyPrefix, bool $rawValues
+              =
+              false, bool $excludeLazy
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description">Override toArray to provide more values<small>Inherited from:
+                    <a href="db_disboard.class.html#%5CdisBoard::toArray()">\disBoard::toArray()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$keyPrefix</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$rawValues</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$excludeLazy</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.13.2</a>.
+    </small></body></html>

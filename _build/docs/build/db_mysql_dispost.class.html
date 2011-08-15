@@ -1,0 +1,923 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Discuss API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script type="text/javascript" src="js/menu.js"></script><script>
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.file-nav').show();
+      });
+    </script><h1 class="file">mysql/dispost.class.php</h1>
+<div class="file-nav"><ul id="file-nav">
+<li><a href="#top">Global</a></li>
+<li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                      Classes
+                  </a><ul><li><a href="#%5CdisPost_mysql">\disPost_mysql</a></li></ul>
+</li>
+</ul></div>
+<a name="top"></a><div id="file-description">
+<p class="short-description"></p>
+<div class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>subpackage</dt>
+<dd>mysql</dd>
+</dl>
+<a name="classes"></a><a id="\disPost_mysql"></a><h2 class="class">\disPost_mysql<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<p class="short-description">Represents any post made on the forum, including Threads, which are Posts
+with a parent of 0.</p>
+<div class="long-description">
+</div>
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="db_dispost.class.html#%5CdisPost">\disPost</a></dd>
+<dt>package</dt>
+<dd>discuss</dd>
+<dt>subpackage</dt>
+<dd>mysql</dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\disPost_mysql::br2nl()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">br2nl</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+          string</code><div class="description">Convert all BR tags to newlines<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::br2nl()">\disPost::br2nl()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td>string</td>
+<td><em>The string to parse</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The converted content</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::calculateIdx()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">calculateIdx</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description">Calculate the position of this post in the thread when it is not known<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::calculateIdx()">\disPost::calculateIdx()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The index position of the post in its thread</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::canModify()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canModify</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">See if the active user can modify this post<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::canModify()">\disPost::canModify()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::canRemove()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canRemove</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">See if active user can remove this post<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::canRemove()">\disPost::canRemove()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::canReply()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canReply</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Return if the active user can reply to this post<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::canReply()">\disPost::canReply()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::canReport()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canReport</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">Whether or not the user can report this post as spam<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::canReport()">\disPost::canReport()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>True if the active user can report this post as spam</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::clearAllCache()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">clearAllCache</span><span class="nb-faded-text">(
+          \xPDO $xpdo
+          )
+        </span>
+        :
+          bool</code><div class="description">
+<span class="attribute">static</span>Clear all post caches<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::clearAllCache()">\disPost::clearAllCache()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$xpdo</th>
+<td>\xPDO</td>
+<td><em>A reference to the xPDO|modX instance</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if cleared</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>static</dt>
+<dd></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::clearCache()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">clearCache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">Clears the cache on post save/remove<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::clearCache()">\disPost::clearCache()</a></small>
+</div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::get()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get</span><span class="nb-faded-text">(
+          string $k, string|null $format
+              =
+              null, string|null $formatTemplate
+              =
+              null
+          )
+        </span>
+        :
+          mixed</code><div class="description">Always ensure that the title strips any HTML/MODX tags<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::get()">\disPost::get()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$k</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$format</th>
+<td>string|null</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$formatTemplate</th>
+<td>string|null</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::getBoardAncestors()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getBoardAncestors</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description">Get an array of all the ancestors of this Post's board<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::getBoardAncestors()">\disPost::getBoardAncestors()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::getContent()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getContent</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Get the parsed content of this post<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::getContent()">\disPost::getContent()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The parsed content of the post</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::getDescendants()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDescendants</span><span class="nb-faded-text">(
+          int $depth
+              =
+              0
+          )
+        </span>
+        :
+          array</code><div class="description">Grabs all descendants of this post.<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::getDescendants()">\disPost::getDescendants()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$depth</th>
+<td>int</td>
+<td><em>If set, will limit to specified depth</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>A collection of disPost objects.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::getThreadPage()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getThreadPage</span><span class="nb-faded-text">(
+          boolean $last
+              =
+              false
+          )
+        </span>
+        :
+          int</code><div class="description">Get the thread page that this post would be on<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::getThreadPage()">\disPost::getThreadPage()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$last</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::getThreadRoot()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getThreadRoot</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_dispost.class.html#%5CdisPost">\disPost</a></code><div class="description">Gets the Thread root post of this current Post; if this Post is the
+thread root, returns itself.<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::getThreadRoot()">\disPost::getThreadRoot()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_dispost.class.html#%5CdisPost">\disPost</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::getUrl()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getUrl</span><span class="nb-faded-text">(
+          string $view
+              =
+              thread/, boolean $last
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description">Get the URL of this post<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::getUrl()">\disPost::getUrl()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$view</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$last</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::getViewing()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getViewing</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">Gets the viewing message for the bottom of the thread<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::getViewing()">\disPost::getViewing()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The who is viewing message</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>access</dt>
+<dd>public</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::index()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">index</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Index the post into the search system<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::index()">\disPost::index()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::isModerator()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isModerator</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">Return true if the active user is a moderator of the Post's Thread<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::isModerator()">\disPost::isModerator()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::loadParser()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">loadParser</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_parser_disparser.class.html#%5CdisParser">\disParser</a></code><div class="description">Load the Parsing class for the post<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::loadParser()">\disPost::loadParser()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_parser_disparser.class.html#%5CdisParser">\disParser</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::move()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">move</span><span class="nb-faded-text">(
+          int|<a href="db_disboard.class.html#%5CdisBoard">\disBoard</a> $boardId
+          )
+        </span>
+        :
+          bool</code><div class="description">Move a post to a different board<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::move()">\disPost::move()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$boardId</th>
+<td>int|<a href="db_disboard.class.html#%5CdisBoard">\disBoard</a>
+</td>
+<td><em>The ID of the board or disBoard obj to move to</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::remove()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">remove</span><span class="nb-faded-text">(
+          array $ancestors
+              =
+              array, boolean $doBoardMoveChecks
+              =
+              false, boolean $moveToSpam
+              =
+              false
+          )
+        </span>
+        :
+          boolean</code><div class="description">Overrides xPDOObject::remove to handle closure tables, post counts, fix
+the forum activity and user profile counts.<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::remove()">\disPost::remove()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ancestors</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$doBoardMoveChecks</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$moveToSpam</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::removeFromIndex()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">removeFromIndex</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          bool</code><div class="description">Remove a Post from the index<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::removeFromIndex()">\disPost::removeFromIndex()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>True if removed</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::renderAuthorMeta()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">renderAuthorMeta</span><span class="nb-faded-text">(
+          array $postArray
+          )
+        </span>
+        :
+          </code><div class="description"><small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::renderAuthorMeta()">\disPost::renderAuthorMeta()</a></small></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$postArray</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::save()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">save</span><span class="nb-faded-text">(
+          boolean $cacheFlag
+              =
+              null
+          )
+        </span>
+        :
+          boolean</code><div class="description">Overrides xPDOObject::save to handle closure table edits.<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::save()">\disPost::save()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cacheFlag</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>todo</dt>
+<dd>add code for moving posts to different parents.</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::stripBBCode()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">stripBBCode</span><span class="nb-faded-text">(
+          string $str
+          )
+        </span>
+        :
+          mixed</code><div class="description">Strip any BBCode from the post<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::stripBBCode()">\disPost::stripBBCode()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td>string</td>
+<td><em>The string to strip</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>The cleansed content</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\disPost_mysql::toArray()"></a><div class="method inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toArray</span><span class="nb-faded-text">(
+          string $keyPrefix, bool $rawValues
+              =
+              false, bool $excludeLazy
+              =
+              false
+          )
+        </span>
+        :
+          array</code><div class="description">Always ensure that the title strips any HTML/MODX tags<small>Inherited from:
+                    <a href="db_dispost.class.html#%5CdisPost::toArray()">\disPost::toArray()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$keyPrefix</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$rawValues</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$excludeLazy</th>
+<td>bool</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.13.2</a>.
+    </small></body></html>
