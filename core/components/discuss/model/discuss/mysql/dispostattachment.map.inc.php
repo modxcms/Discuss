@@ -85,6 +85,41 @@ $xpdo_meta_map['disPostAttachment']= array (
       'null' => true,
     ),
   ),
+  'indexes' => 
+  array (
+    'post' => 
+    array (
+      'alias' => 'post',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'post' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'board' => 
+    array (
+      'alias' => 'board',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'board' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'Post' => 

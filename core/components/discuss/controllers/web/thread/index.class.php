@@ -51,6 +51,8 @@ class DiscussThreadController extends DiscussController {
 
         $this->isModerator = $this->thread->isModerator();
         $this->isAdmin = $this->discuss->user->isAdmin();
+        
+        $this->board = $this->thread->getOne('Board');
     }
 
     public function getPageTitle() {
@@ -68,6 +70,8 @@ class DiscussThreadController extends DiscussController {
         /* get posts */
         $this->getPosts();
         $this->getLastPost();
+
+        $this->setPlaceholder('rtl',$this->board->get('rtl'));
 
         $threadArray = $this->thread->toArray('',true,true);
         $this->setPlaceholders($threadArray);
@@ -143,6 +147,10 @@ class DiscussThreadController extends DiscussController {
         $this->setPlaceholders($lastPostArray);
     }
 
+    /**
+     * Get all posts for the thread
+     * @return void
+     */
     public function getPosts() {
         $this->posts = array('total' => 0,'limit' => 0);
         if (!empty($this->options['showPosts'])) {
@@ -218,9 +226,7 @@ class DiscussThreadController extends DiscussController {
     public function getActionButtons() {
         /* @var array $actionButtons Thread action buttons */
         $actionButtons = array();
-        /** @var disBoard $board */
-        $board = $this->thread->getOne('Board');
-        if ($board->canPost() && $this->thread->canReply()) {
+        if ($this->board->canPost() && $this->thread->canReply()) {
             $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'));
         }
         $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'));

@@ -71,6 +71,25 @@ $xpdo_meta_map['disUserGroupProfile']= array (
       'default' => 0,
     ),
   ),
+  'indexes' => 
+  array (
+    'usergroup' => 
+    array (
+      'alias' => 'usergroup',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'usergroup' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'UserGroup' => 

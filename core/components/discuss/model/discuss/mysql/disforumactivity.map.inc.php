@@ -70,4 +70,23 @@ $xpdo_meta_map['disForumActivity']= array (
       'default' => 0,
     ),
   ),
+  'indexes' => 
+  array (
+    'day' => 
+    array (
+      'alias' => 'day',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'day' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
 );

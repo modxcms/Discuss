@@ -24,6 +24,7 @@
 /**
  * Resolve creating db tables
  *
+ * @var xPDOObject $object
  * @package discuss
  * @subpackage build
  */
@@ -35,6 +36,7 @@ if ($object->xpdo) {
             $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
             $modx->addPackage('discuss',$modelPath);
 
+            /** @var xPDOManager $manager */
             $manager = $modx->getManager();
             
             //$modx->query("ALTER TABLE ".$modx->getTableName('disUserProfile')." ADD COLUMN `use_gravatar` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER `avatar`");
@@ -68,6 +70,13 @@ if ($object->xpdo) {
             $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD INDEX `display_name` (`display_name`)");
             $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD COLUMN `use_display_name` TINYINT(1) NOT NULL DEFAULT '0' AFTER `display_name`");
             $modx->query("ALTER TABLE ".$modx->getTableName('disUser')." ADD INDEX `use_display_name` (`use_display_name`)");
+
+            $manager->addIndex('disUserFriend','user');
+            $manager->addIndex('disUserFriend','friend');
+
+            $manager->addField('disBoard','ltr');
+            $manager->addIndex('disBoard','ltr');
+
         break;
     }
 }
