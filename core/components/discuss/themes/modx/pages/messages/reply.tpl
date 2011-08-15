@@ -9,17 +9,17 @@
 
 
 
-    <div class="preview_toggle">
-		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
-        <a href="#" class="dis-reply-post-preview" id="dis-message-preview-btn">preview</a>
-    	<div id="dis-reply-post-preview"></div>
-    </div>
 
     
     
     
 
 <form action="[[~[[*id]]]]messages/reply?thread=[[!+fi.thread]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
+    <div class="preview_toggle">
+		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
+        <a href="#" class="dis-reply-post-preview" id="dis-message-preview-btn">preview</a>
+    	<div id="dis-reply-post-preview"></div>
+    </div>
 
 	<h1 class="Category">[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h1>
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />

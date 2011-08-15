@@ -7,24 +7,17 @@
 ]]
 
 
+
+    
+<form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
+
     <div class="preview_toggle">
 		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">write</a>
         <a href="#" class="dis-new-thread-preview" id="dis-new-thread-preview-btn">preview</a>
     	<div id="dis-new-thread-preview"></div>
     </div>
-    
-<form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
-	<h1 class="Category">[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
-	
 
-    
-  
-    
-    
-    
-    
-    
-    
+	<h1 class="Category">[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
     
     <input type="hidden" name="board" value="[[+id]]" />
     
