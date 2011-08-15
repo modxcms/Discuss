@@ -136,6 +136,7 @@ class DiscussThreadModifyController extends DiscussController {
     public function getThreadSummary() {
         $threadData = $this->discuss->hooks->load('post/getthread',array(
             'post' => &$this->post,
+            'controller' => &$this,
             'thread' => $this->post->get('thread'),
             'limit' => 5,
         ));
