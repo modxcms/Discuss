@@ -21,7 +21,20 @@
     <div class="PanelBox">
 
 
-		[[$actions-sidebar]]
+[[!+discuss.user.id:notempty=`<div class="Box GuestBox">
+				           <h4>Actions &amp; Info</h4>
+				            <p>[[+actionbuttons]]</p>
+				            [[+belowThreads]]
+				            <p>[[+readers]]</p>
+							<p>[[+moderators]]</p>
+				        </div>`]]
+				        [[!+discuss.user.id:is=``:then=`<div class="Box GuestBox">
+				           <h4>Actions &amp; Info</h4>
+				            <p><a href="[[~[[*id]]]]login" class="Button">Login to Post</a></p>
+				        </div>`]]
+
+						
+						
 
 
     </div>

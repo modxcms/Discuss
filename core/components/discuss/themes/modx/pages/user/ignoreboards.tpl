@@ -13,8 +13,8 @@
 
 <br class="clearfix" />
     <div class="dis-form-buttons">
-    Ignore All: <input type="checkbox" class="dis-ignore-all" />
     <input type="submit" class="dis-action-btn" value="Update" />
+    <label class="dis-cb"><input type="checkbox" class="dis-ignore-all" />Ignore All</label>
     </div>
 
 </form>

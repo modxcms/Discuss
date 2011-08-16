@@ -87,7 +87,9 @@
 <div id="Panel">
 				<hr class="line" />
     <div class="PanelBox">
-		[[$actions-sidebar]]
+
+
+		[[!$post-sidebar?disection=`new-message`]]
 
 
     </div>

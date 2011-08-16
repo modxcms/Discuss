@@ -85,8 +85,7 @@
 				<hr class="line" />
     <div class="PanelBox">
 
-
-		[[$actions-sidebar]]
+		[[!$post-sidebar]]
 
 
     </div>

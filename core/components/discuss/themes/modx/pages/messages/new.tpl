@@ -63,7 +63,7 @@
     <div class="PanelBox">
 
 
-		[[$actions-sidebar]]
+		[[!$post-sidebar?disection=`new-message`]]
 
 
     </div>
