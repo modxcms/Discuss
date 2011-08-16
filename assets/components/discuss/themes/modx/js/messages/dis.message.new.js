@@ -28,6 +28,7 @@ DIS.NewMessage = function() {
 
             $('.dis-message-write').removeClass('selected');
             $('.dis-message-preview').addClass('selected');
+            $('#overlay-20').fadeIn();
             return false;
         }
 
@@ -35,6 +36,7 @@ DIS.NewMessage = function() {
             $('.dis-message-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
             $('#dis-message-preview').fadeOut();
+            $('#overlay-20').fadeOut();
             return false;        
         }
 

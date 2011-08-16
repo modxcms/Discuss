@@ -40,6 +40,7 @@ $manifest = array(
                 'sh/shCore.js',
                 'sh/shAutoloader.js',
                 'sh/shDiscuss.js',
+                'dis.sticky.js'
             ),
             'inline' => 'DIS.url = "'.$this->discuss->request->makeUrl().'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";DIS.config.connector = "'.$this->discuss->config['connectorUrl'].'"',
         ),

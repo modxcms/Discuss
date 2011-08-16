@@ -28,6 +28,7 @@ DIS.NewThread = function() {
 
             $('.dis-message-write').removeClass('selected');
             $('.dis-new-thread-preview').addClass('selected');
+            $('#overlay-20').fadeIn();
             return false;
         }
 
@@ -35,6 +36,7 @@ DIS.NewThread = function() {
             $('.dis-new-thread-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
             $('#dis-new-thread-preview').fadeOut(80);
+            $('#overlay-20').fadeOut();
             return false;        
         }
 

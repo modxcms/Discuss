@@ -12,8 +12,6 @@
 
     [[+quick_reply_form]]
 
-    <div class="dis-thread-actions">[[+threadactionbuttons]]</div>
-
     <br class="clearfix" />
 </div>
 

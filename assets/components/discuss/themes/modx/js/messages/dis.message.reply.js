@@ -30,6 +30,7 @@ DIS.NewMessage = function() {
 
             $('.dis-message-write').removeClass('selected');
             $('.dis-reply-post-preview').addClass('selected');
+            $('#overlay-20').fadeIn();
             return false;
         }
 
@@ -37,6 +38,7 @@ DIS.NewMessage = function() {
             $('.dis-reply-post-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
             $('#dis-reply-post-preview').fadeOut();
+            $('#overlay-20').fadeOut();
             return false;        
         }
 

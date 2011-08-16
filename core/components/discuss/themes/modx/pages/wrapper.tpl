@@ -14,7 +14,11 @@
     <script src="http://use.typekit.com/zub5doo.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
-<body>
+<body id="body-[[+controller.controller]]">
+	<div id="overlay-20"> </div>
+	
+    [[+discuss.user.isAdmin:is=`1`:then=`<div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div>`]]
+
 <div id="header">
 	<a class="hidden" href="#main">Skip to content</a>
 	<header class="container">

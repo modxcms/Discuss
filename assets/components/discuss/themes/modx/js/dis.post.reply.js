@@ -29,6 +29,7 @@ DIS.ReplyPost = function() {
 
             $('.dis-message-write').removeClass('selected');
             $('.dis-preview').addClass('selected');
+            $('#overlay-20').fadeIn();
             return false;
         }
 
@@ -36,6 +37,7 @@ DIS.ReplyPost = function() {
             $('.dis-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
             $('#dis-reply-post-preview').fadeOut(80);
+            $('#overlay-20').fadeOut();
             return false;        
         }
         

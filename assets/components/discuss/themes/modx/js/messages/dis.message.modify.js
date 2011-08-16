@@ -25,6 +25,7 @@ DIS.DISModifyMessage = function() {
 
             $('.dis-message-write').removeClass('selected');
             $('.dis-modify-message-preview').addClass('selected');
+            $('#overlay-20').fadeIn();
             return false;
         }
 
@@ -32,6 +33,7 @@ DIS.DISModifyMessage = function() {
             $('.dis-modify-message-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
             $('#dis-modify-message-preview').fadeOut();
+            $('#overlay-20').fadeOut();
             return false;        
         }
 

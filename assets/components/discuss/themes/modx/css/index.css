@@ -143,6 +143,89 @@ li.dis-category-li h2,
 	}
 
 /* board view */
+.dis-sticky-actions {
+	z-index: 2000;
+	height: 24px;
+	position: relative;
+	padding: 0;
+	margin: 0;
+	background:-webkit-gradient(linear, center bottom, center top, from(#ffffff), to(#f3f3f3));
+	background:-moz-linear-gradient(top, #f3f3f3, #ffffff);
+	-pie-background:linear-gradient(top, #f3f3f3, #ffffff);
+	background:linear-gradient(top, #f3f3f3, #ffffff);
+	box-shadow: 1px 1px 2px #999999;
+	-moz-box-shadow: 1px 1px 2px #999999;
+	-webkit-box-shadow: 1px 1px 2px #999999;
+	}
+	
+.dis-sticky-actions a.Button {
+		float: left;
+		line-height: 12px;
+		font-weight: normal;
+		height: 14px;
+		padding: 2px 4px;
+		margin: 2px 0 0 -1px;
+		background-color: #fefefe;
+		border-color: #aaa;
+		color: #aaa;
+		border-radius: 0;
+		-moz-border-radius: 0;
+		-webkit-border-radius: 0;
+		}
+
+.dis-sticky-actions a.Button:hover {
+ 	-moz-box-shadow:inset 2px 2px 7px #d8d8d8;
+ 	-webkit-box-shadow:inset 2px 2px 7px #d8d8d8;
+ 	box-shadow:inset 2px 2px 7px #d8d8d8;
+	border-color: #555;
+	color: #555;
+	-moz-transition-duration: .3s;
+	-moz-transition-delay: 0s;
+	/* WebKit */
+	-webkit-transition-duration: .3s;
+	-webkit-transition-delay: 0s;
+	/* Opera */
+	-o-transition-duration: .3s;
+	-o-transition-delay: 0s;
+	/* Standard */
+	transition-duration: .3s;
+	transition-delay: 0s;
+	}
+
+.dis-sticky-actions a.Button:first-child {
+	border-radius: 3px 0 0 3px;
+	-moz-border-radius: 3px 0 0 3px;
+	-webkit-border-radius: 3px 0 0 3px;
+	}
+
+.dis-sticky-actions a.Button:last-child {
+	border-radius: 0 3px 3px 0;
+	-moz-border-radius: 0 3px 3px 0;
+	-webkit-border-radius: 0 3px 3px 0;
+	}
+
+
+.full-width {
+	width: 960px;
+	margin: 0 auto;
+	padding: 0 0;
+	}
+	
+.floatingHeader {
+	position: fixed;
+	top: 0;
+	visibility: hidden;
+	}	
+	
+.dis-sticky-actions {
+	display: none;
+	}
+
+body#body-thread .dis-sticky-actions {
+	display: block;
+	}
+	
+	
 .dis-threads-header {
  	background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;
  	color: white;
@@ -185,19 +268,12 @@ div.dis-threads ol.search-results {
 	padding: 0 0;
 	}
 
-.dis-thread-actions,
 .dis-pagination,
 .dis-viewing {
 	display: block;
 	padding: 10px 20px 0 0;
 	text-align: right;
 	float: right;
-	}
-
-div.dis-thread-actions {
-	position: absolute;
-	top: 0;
-	left: 0;
 	}
 
 .dis-pagination {
@@ -1952,8 +2028,8 @@ header {
 	}
 
 #header {
- 	background:#f5f5f5 url(http://www.modx.com/assets/i/bg-sprite.png) repeat-x;
- 	padding:2px 0 0;
+ 	background:#f5f5f5 url(http://www.modx.com/assets/i/bg-sprite.png) repeat-x 0 -2px;
+ 	padding: 0 0;
  	height:110px;
 	}
 
@@ -3172,7 +3248,7 @@ h4 a.normal-type {
 	width: 101px;
     border-radius: 8px;
     background-color: #444;
-    z-index: 550;
+    z-index: 600;
     margin: 10px 0 20px 20px;
 	}
 
@@ -3215,9 +3291,26 @@ h4 a.normal-type {
     top: 26px;
     width: 710px;
     z-index: 1000;
+   	box-shadow: 0 1px 5px #ddd;
+	-moz-box-shadow: 0 1px 5px #ddd;
+	-webkit-box-shadow: 0 1px 5px #ddd;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
 	}
 
 .preview_toggle .dis-post-preview h2 {
 	margin: 0 0;
 	padding: 0 0;
+	}
+
+div#overlay-20 {
+	position: fixed;
+	top: 0;
+	left: 0;
+ 	background: transparent url(../images/20-percent.png) repeat 0 0;
+	width: 100%;
+	height: 100%;
+	z-index: 540;
+	display: none;
 	}
