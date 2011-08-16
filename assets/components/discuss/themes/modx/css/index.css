@@ -1702,13 +1702,13 @@ ul.CategoryList li.Item {
 	padding: 4px 9px;
 	}
 
-.ItemContent a {
+.ItemContent a.dis-cat-links {
 	padding: 5px;
 	margin: 0 0 5px 0;
 	display: block;
 	}
 
-.ItemContent a:hover {
+.ItemContent a.dis-cat-links:hover {
 	background-color: #efefef;
 	}
 
