@@ -3105,6 +3105,12 @@ h1.locked {
     padding: 0 0 5px;
 	}
 
+.dis-board-subs a {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	}
+
 pre {
 	background-color: #eee;
 	}
