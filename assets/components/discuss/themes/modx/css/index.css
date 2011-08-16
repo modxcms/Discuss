@@ -321,6 +321,8 @@ div.dis-post-content h1 {
 	}
 
 a.rss_feed {
+	position: relative;
+	z-index: 1700;
 	display: block;
 	padding-left: 24px;
 	background: transparent url(../images/icon_rss.png) no-repeat 0 0;
@@ -1222,6 +1224,14 @@ h1, h2 {
 	margin-bottom:10px;
 	}
 
+a span.Title {
+	color: #1e79a7;
+	}
+
+a:hover span.Title {
+	color: #ff0084;
+	}
+
 div.dis-threads ol.search-results a.Title,
 ul.DataList a.Title,
 h3 {
@@ -1690,6 +1700,11 @@ ul.CategoryList li.Item {
 .ItemContent {
 	position: relative;
 	padding: 4px 9px;
+	}
+
+.ItemContent a {
+	position: relative;
+	z-index:1500;
 	}
 
 ul.SideMenu li ul li a:hover {
