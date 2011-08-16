@@ -596,8 +596,8 @@ div.dis-replies,
 div.dis-latest {
 	color: #777;
     border-bottom: 1px solid #EFEFEF;
-    margin: 0 18px;
-    padding: 7px 7px 0;
+    margin: 0 18px 10px 26px;
+    padding: 0;
     width: 662px;
 	}
 
@@ -1030,7 +1030,7 @@ ul.dis-attachments {
 	}
 
 .syntaxhighlighter.printing .functions,.syntaxhighlighter.printing .color2,.syntaxhighlighter.printing .color2 a,.syntaxhighlighter .functions,.syntaxhighlighter .color2,.syntaxhighlighter .color2 a {
-	color:#ff1493;
+	color:#d9742a;
 	}
 
 .syntaxhighlighter.printing .color3,.syntaxhighlighter.printing .color3 a,.syntaxhighlighter.collapsed .toolbar a:hover,.syntaxhighlighter .color3,.syntaxhighlighter .color3 a {
@@ -1096,7 +1096,7 @@ nav ul {
 }
 
 #crumbs li.dis-bc-last a:hover {
-	color: #ff0084;
+	color: #d9742a;
 	}
 
 #crumbs li.last { background-position:4px -142px; }
@@ -1229,7 +1229,7 @@ a span.Title {
 	}
 
 a:hover span.Title {
-	color: #ff0084;
+	color: #d9742a;
 	}
 
 div.dis-threads ol.search-results a.Title,
@@ -1254,7 +1254,7 @@ a {
 	}
 a:hover {
 	text-decoration: none;
-	color: #ff0084;
+	color: #d9742a;
 	}
 
 input.SmallInput,
@@ -1321,7 +1321,7 @@ span.Alert a:hover {
 	}
 
 div.DismissMessage a.Dismiss:hover {
-	color: #ff0084;
+	color: #d9742a;
 	}
 
 .NumberedPager span,
@@ -1649,7 +1649,7 @@ ul.DataList a.Delete:hover {
 
 ul.Activities div.Excerpt a:hover,
 ul.Activities div.Meta a:hover {
-	color: #ff0084;
+	color: #d9742a;
 	}
 
 ul.Activities a.CommentLink:hover {
@@ -1703,8 +1703,13 @@ ul.CategoryList li.Item {
 	}
 
 .ItemContent a {
-	position: relative;
-	z-index:1500;
+	padding: 5px;
+	margin: 0 0 5px 0;
+	display: block;
+	}
+
+.ItemContent a:hover {
+	background-color: #efefef;
 	}
 
 ul.SideMenu li ul li a:hover {
@@ -3056,7 +3061,7 @@ body { color: #444; }
 
 .ItemContent {
 	color: #444;
-	padding: 0 4px 4px 4px;
+	padding: 0 0;
 	}
 
 input.DateBox, input.InputBox, input.SmallInput, textarea {
