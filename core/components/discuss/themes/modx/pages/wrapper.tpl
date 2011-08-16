@@ -17,7 +17,7 @@
 <body id="body-[[+controller.controller]]">
 	<div id="overlay-20"> </div>
 	
-    [[+discuss.user.isAdmin:is=`1`:then=`<div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div>`]]
+    [[+discuss.user.isModerator:is=`1`:then=`<div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div>`]]
 
 <div id="header">
 	<a class="hidden" href="#main">Skip to content</a>
