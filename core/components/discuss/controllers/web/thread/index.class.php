@@ -54,7 +54,8 @@ class DiscussThreadController extends DiscussController {
         
         $this->board = $this->thread->getOne('Board');
         if ($this->board) {
-            $this->discuss->user->isModerator($this->board->get('id'));
+            $isModerator = $this->discuss->user->isModerator($this->board->get('id'));
+            $this->setPlaceholder('discuss.user.isModerator',$isModerator);
         }
     }
 
