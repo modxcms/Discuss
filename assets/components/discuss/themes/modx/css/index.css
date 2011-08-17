@@ -3080,8 +3080,8 @@ input.DateBox, input.InputBox, input.SmallInput, textarea {
 	}
 
 .CategoryDescription {
-	color: #666;
-	padding: 0 0;
+	color: #888;
+	padding: 4px 0 0;
 	margin: 0 0;
 	}
 
@@ -3092,8 +3092,8 @@ h1.Category,
     color: #494949;
     font-family: "museo-slab-1","museo-slab-2",Georgia,serif;
     font-weight: normal;
-    padding: 18px 0 5px 7px;
-    margin: 0 18px 10px;
+    padding: 18px 0 10px 7px;
+    margin: 5px 18px 10px;
     }
 
 h1.locked {
@@ -3104,6 +3104,7 @@ h1.locked {
 
 .dis-board-subs {
 	padding: 0 0 0 10px;
+	font-size: 11px;
 	}
 
 .dis-board-subs h4 {
@@ -3115,7 +3116,10 @@ h1.locked {
     margin: 0 0 5px;
     padding: 0 0 5px;
 	}
-
+.dis-board-subs strong {
+    text-transform: uppercase;
+    color: #666;
+}
 .dis-board-subs a {
 	display: inline;
 	margin: 0;
