@@ -23,7 +23,7 @@
 			<p>[[+actionbuttons]]</p>
 			[[+belowThreads]]
 	    </div>`]]
-		[[$actions-sidebar]]
+		[[!$post-sidebar?disection=`dis-support-opt`]]
 
 
     </div>

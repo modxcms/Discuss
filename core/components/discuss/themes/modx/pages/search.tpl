@@ -49,7 +49,7 @@
     <div class="PanelBox">
 
 
-		[[$actions-sidebar]]
+		[[!$post-sidebar?disection=`dis-support-opt`]]
 
 
     </div>

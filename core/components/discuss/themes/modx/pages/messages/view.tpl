@@ -37,7 +37,7 @@
 			<p>[[+moderators]]</p>
 	    </div>`]]
 
-		[[$actions-sidebar]]
+		[[!$post-sidebar?disection=`dis-support-opt`]]
 
 
     </div>

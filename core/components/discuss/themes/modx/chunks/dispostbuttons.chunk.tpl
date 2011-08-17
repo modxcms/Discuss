@@ -23,7 +23,7 @@ function bbc_highlight(something, mode) {
 </a>
 
         
-<img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/>
+<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
 
 <a href="javascript:void(0);" onclick="surroundText('[pre]', '[/pre]'); return false;" class="format_buttons">
 	<img src="[[+buttons_url]]pre.gif" alt="Preformatted Text" title="Preformatted Text" />
@@ -43,13 +43,13 @@ function bbc_highlight(something, mode) {
 	<img src="[[+buttons_url]]right.gif" alt="Right Align" title="Right Align" />
 </a>
 
-<img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/>
+<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
 
 <a href="javascript:void(0);" onclick="replaceText('[hr]'); return false;" class="format_buttons">
 	<img src="[[+buttons_url]]hr.gif" alt="Horizontal Rule" title="Horizontal Rule" />
 </a>
 
-<img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/>
+<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
 
 <a href="javascript:void(0);" onclick="surroundText('[size=10pt]', '[/size]'); return false;" class="format_buttons">
 	<img src="[[+buttons_url]]size.gif" alt="Font Size" title="Font Size" />
@@ -69,7 +69,7 @@ function bbc_highlight(something, mode) {
 </a>
 
 
-<img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/>
+<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
 
 <a href="javascript:void(0);" onclick="surroundText('[code]', '[/code]'); return false;" class="format_buttons">
 	<img src="[[+buttons_url]]code.gif" alt="Insert Code" title="Insert Code" />
@@ -79,7 +79,7 @@ function bbc_highlight(something, mode) {
 	<img src="[[+buttons_url]]quote.gif" alt="Insert Quote" title="Insert Quote" />
 </a>
 
-<img src="[[+buttons_url]]divider.gif" alt="|" style="margin: 0 3px 0 3px;"/>
+<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
 
 <a href="javascript:void(0);" onclick="surroundText('[list]\n[li]', '[/li]\n[li][/li]\n[/list]'); return false;" class="format_buttons">
     <img src="[[+buttons_url]]list.gif" alt="Insert List" title="Insert List" />

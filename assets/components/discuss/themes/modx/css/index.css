@@ -434,6 +434,9 @@ a.format_buttons:hover img {
 	background: transparent url(../images/buttons/bbc_bg.png) no-repeat 0 -22px;
 	}
 
+img.button-divider {
+	margin: 0 3px 2px;
+	}
 
 div.dis-actions span {
 	position: absolute;
@@ -608,12 +611,13 @@ div.dis-latest {
 	background: transparent url(../images/locked.png) no-repeat 0 2px;
 	}
 
+div.dis-thread-body a h3,
 div.dis-thread-body h3 a {
 	color: #555;
 	}
-
+div.dis-thread-body a:hover h3,
 div.dis-thread-body h3 a:hover {
-	color: #fe1492;
+	color: #d9742a;
 	}
 
 div.dis-latest {
@@ -1526,6 +1530,13 @@ div.Box p.stats {
 	border-bottom: 1px solid #efefef;
 	color: #555;
 	}
+
+
+
+
+
+
+
 
 ul.PanelInfo li {
 	background: #e3f4ff;
@@ -3217,10 +3228,10 @@ form.locked {
  	font-weight: normal;
  	float: right;
  	clear: none;
- 	line-height: 27px;
+    line-height: 22px;
+    margin: 4px 10px 0 0;
  	color: #5a5a5a;
  	width: auto;
- 	margin-right: 20px;
  	}
  	
 .dis-form .dis-cb input { margin: 5px; }
@@ -3280,7 +3291,7 @@ h4 a.normal-type {
 	left: 0;
 	overflow: visible;
 	height: 18px;
-	width: 101px;
+	width: 93px;
     border-radius: 8px;
     background-color: #444;
     z-index: 600;
