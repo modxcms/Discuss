@@ -571,8 +571,6 @@ div.dis-thread-sticky {
 
 div.dis-thread-locked { width: 21px; height: 22px; float: right; background: transparent url(../images/icons/quick_lock.gif) top left no-repeat; }
 
-
-
 div.dis-board-head {
 	display: block;
 	height: 30px;
@@ -583,7 +581,6 @@ div.dis-board-head h3 {
 	margin: 18px 0 0 0;
 	font-size: 24px;
 	}
-
 	
 div.dis-board-head {
 	padding: 0 0 10px 10px;
@@ -615,6 +612,7 @@ div.dis-thread-body a h3,
 div.dis-thread-body h3 a {
 	color: #555;
 	}
+	
 div.dis-thread-body a:hover h3,
 div.dis-thread-body h3 a:hover {
 	color: #d9742a;
@@ -629,9 +627,8 @@ div.dis-replies {
 	width: 55px;
 	}
 
-dl.dis-datalist {	
- 	}
 dl.dis-datalist dh, dl.dis-datalist dt { display: block; float: left; padding: 5px 0; }
+
 dl.dis-datalist dh { clear: left; width: 250px; font-weight: bold; }
 
 div.dis-author {
@@ -655,7 +652,6 @@ div.dis-author {
 	box-shadow: 1px 1px 2px #999999;
 	-moz-box-shadow: 1px 1px 2px #999999;
 	-webkit-box-shadow: 1px 1px 2px #999999;
-	
 	color: #555;
 	cursor: pointer;
 	padding: 10px;
