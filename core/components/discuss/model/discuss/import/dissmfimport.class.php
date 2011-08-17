@@ -106,7 +106,7 @@ class DisSmfImport {
      */
     public function _loadConfig() {
         $config = array();
-        require $this->discuss->config['corePath'].'includes/config.inc.php';
+        require $this->discuss->config['corePath'].'includes/import.config.inc.php';
         if (empty($config)) {
             $this->log('No config.');
             die();
