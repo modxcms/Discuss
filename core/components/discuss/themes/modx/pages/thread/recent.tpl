@@ -2,7 +2,7 @@
 
 <div class="dis-threads">
 
-	<h1 class="Category">[[%discuss.last_post]]</h1>
+	<h1 class="Category">Recent Posts</h1>
 
 
     <ol class="dis-board-thread">

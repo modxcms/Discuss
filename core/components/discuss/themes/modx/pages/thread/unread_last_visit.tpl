@@ -1,7 +1,7 @@
 
 <div class="dis-threads">
 
-	<h1 class="Category">[[%discuss.last_post]]</h1>
+	<h1 class="Category">Unread Posts Since Last Visit</h1>
 
 	<ol class="dis-board-thread">
 		[[+threads]]
