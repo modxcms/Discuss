@@ -42,6 +42,6 @@ class DiscussLogoutController extends DiscussController {
             $this->modx->user->removeSessionContext($context);
             $this->modx->getUser($context,true);
         }
-        $this->modx->sendRedirect($this->discuss->request->makeUrl('home'));
+        $this->modx->sendRedirect($this->discuss->request->makeUrl());
     }
 }
