@@ -51,7 +51,7 @@ foreach ($activeUsers['results'] as $activeUser) {
 
 /* parse into lexicon */
 $list = $modx->lexicon('discuss.users_active_in_last',array(
-    'users' => implode(',',$as),
+    'users' => implode(', ',$as),
     'total' => $activeUsers['total'],
     'threshold' => $threshold,
 ));
