@@ -466,7 +466,7 @@ class disThread extends xPDOSimpleObject {
         $v = parent::get($k,$format,$formatTemplate);
         switch ($k) {
             case 'title':
-                $v = $this->xpdo->discuss->stripAllTags($v);
+                $v = html_entity_decode($this->xpdo->discuss->stripAllTags($v));
                 break;
             default: break;
         }
