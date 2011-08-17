@@ -36,7 +36,7 @@ class DiscussUserController extends DiscussController {
         /* allow external profile page */
         $profileResourceId = $this->modx->getOption('discuss.profile_resource_id',null,0);
         if (!empty($profileResourceId) && $this->discuss->ssoMode) {
-            $url = $this->modx->makeUrl($profileResourceId,'',array('discuss' => 1,'user' => $this->scriptProperties['user']));
+            $url = $this->modx->makeUrl($profileResourceId,'',array('discuss' => 1,'user' => $this->scriptProperties['user']),'full');
             $this->modx->sendRedirect($url);
         }
 

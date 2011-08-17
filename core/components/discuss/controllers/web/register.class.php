@@ -39,7 +39,7 @@ class DiscussRegisterController extends DiscussController {
     public function process() {
         $registerResourceId = $this->modx->getOption('discuss.register_resource_id',null,0);
         if (!empty($registerResourceId) && $this->discuss->ssoMode) {
-            $url = $this->modx->makeUrl($registerResourceId,'',array('discuss' => 1));
+            $url = $this->modx->makeUrl($registerResourceId,'',array('discuss' => 1),'full');
             $this->modx->sendRedirect($url);
         }
     }
