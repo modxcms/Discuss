@@ -39,7 +39,7 @@ class DiscussLoginController extends DiscussController {
     public function process() {
         $loginResourceId = $this->modx->getOption('discuss.login_resource_id',null,0);
         if (!empty($loginResourceId) && $this->discuss->ssoMode) {
-            $url = $this->modx->makeUrl($loginResourceId,'',array('discuss' => 1));
+            $url = $this->modx->makeUrl($loginResourceId,'',array('discuss' => 1),'full');
             $this->modx->sendRedirect($url);
         }
     }

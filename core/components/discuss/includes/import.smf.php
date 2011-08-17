@@ -33,7 +33,7 @@ set_time_limit(0);
 
 /* override with your own defines here (see build.config.sample.php) */
 require_once dirname(dirname(dirname(dirname(__FILE__)))).'/config.core.php';
-require_once MODX_BASE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
+require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 $modx= new modX();
 $modx->initialize('mgr');
@@ -49,6 +49,12 @@ ini_set('memory_limit','1024M');
 set_time_limit(0);
 @ob_end_clean();
 echo '<pre>';
+$modx->resource = $modx->getObject('modResource',402);
+$modx->resource->set('alias','');
+
+$modx->user = $modx->getObject('modUser',1);
+
+$discuss->initialize('web');
 
 /* load and run importer */
 if ($discuss->loadImporter('disSmfImport')) {

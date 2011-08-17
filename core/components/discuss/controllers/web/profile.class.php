@@ -41,7 +41,7 @@ class DiscussProfileController extends DiscussController {
             $params['user'] = substr($qs,$u+3);
             $params['i'] = true;
         }
-        $url = $this->modx->makeUrl($this->modx->resource->get('id'),'',$params);
+        $url = $this->modx->makeUrl($this->modx->resource->get('id'),'',$params,'full');
         $this->modx->sendRedirect($url);
     }
     public function getPageTitle() { return ''; }

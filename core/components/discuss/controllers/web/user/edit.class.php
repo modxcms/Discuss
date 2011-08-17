@@ -36,7 +36,7 @@ class DiscussUserEditController extends DiscussController {
         /* allow external update profile page */
         $upResourceId = $this->modx->getOption('discuss.update_profile_resource_id',null,0);
         if (!empty($upResourceId) && $this->discuss->ssoMode) {
-            $url = $this->modx->makeUrl($upResourceId,'',array('discuss' => 1));
+            $url = $this->modx->makeUrl($upResourceId,'',array('discuss' => 1),'full');
             $this->modx->sendRedirect($url);
         }
 
