@@ -131,7 +131,7 @@ $c->select(array(
     'author_udn' => 'LastAuthor.use_display_name',
     'author_display_name' => 'LastAuthor.display_name',
 ));
-if (!empty($scriptProperties['showIfParticipating']) && false) {
+if (!empty($scriptProperties['showIfParticipating'])) {
     $c->select(array(
         '(SELECT GROUP_CONCAT(pAuthor.id)
             FROM '.$modx->getTableName('disPost').' AS pPost
