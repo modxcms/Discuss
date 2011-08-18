@@ -1,3 +1,3 @@
-<ol class="dis-board-list">
+<ul class="CategoryListWithHeadings">
 [[+boards]]
-</ol>
+</ul>

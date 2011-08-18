@@ -1,9 +1,11 @@
 [[+top]]
 
 [[+aboveBoards]]
-<ol class="dis-board-list" style="[[+boards_toggle]]">
+
+
+<ul class="CategoryListWithHeadings" style="[[+boards_toggle]]">
 [[+boards]]
-</ol>
+</ul>
 
 [[+belowBoards]]
 
@@ -11,9 +13,9 @@
 
 	<h1 class="Category">[[+name]]</h1>
 
-	<ol class="dis-board-thread">
+	<ul class="CategoryListWithHeadings">
 		[[+posts]]
-	</ol>
+	</ul>
 
 
 

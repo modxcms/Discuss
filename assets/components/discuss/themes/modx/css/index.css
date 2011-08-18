@@ -37,8 +37,6 @@ ol.dis-board-list {
  	list-style: none;
  	margin: 0;
  	padding: 0;
- 	border: 5px solid #eee;
- 	clear: left;
 	}
 
 li.dis-board-li {
@@ -1715,14 +1713,15 @@ ul.CategoryList li.Item {
 
 .ItemContent {
 	position: relative;
-	padding: 4px 9px;
+	padding: 0;
+	margin: 0 0 5px 0;
 	}
 
 .ItemContent a.dis-cat-links {
-	padding: 5px;
-	margin: 0 0 5px 0;
-	display: block;
-	}
+    display: block;
+    margin: 0 0;
+    padding: 5px;
+}
 
 .ItemContent a.dis-cat-links:hover {
 	background-color: #efefef;
@@ -3073,11 +3072,6 @@ body { color: #444; }
 
 .Meta {
 	background-color: #f8f8f8;
-	}
-
-.ItemContent {
-	color: #444;
-	padding: 0 0;
 	}
 
 input.DateBox, input.InputBox, input.SmallInput, textarea {
