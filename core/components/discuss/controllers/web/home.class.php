@@ -143,9 +143,9 @@ class DiscussHomeController extends DiscussController {
 
         /* active in last 40 */
         if ($this->modx->getOption('discuss.show_whos_online',null,true) && $this->modx->hasPermission('discuss.view_online')) {
-            $this->setPlaceholder('activeUsers',$this->discuss->hooks->load('user/active_in_last'));
+            $this->setPlaceholder('activeUsers', $this->discuss->hooks->load('user/active_in_last'));
         } else {
-            $this->setPlaceholder('activeUsers','');
+            $this->setPlaceholder('activeUsers', '');
         }
 
         /* total active */
