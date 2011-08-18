@@ -121,6 +121,22 @@ class DiscussMessagesViewController extends DiscussController {
         $lastPostArray = $this->lastPost->toArray('lastPost.');
         $this->setPlaceholders($lastPostArray);
     }
+
+    /**
+     * Handle the rendering and options of attachments being sent to the form
+     * @return void
+     */
+    public function handleAttachments() {
+        $this->setPlaceholder('max_attachments',$this->modx->getOption('discuss.attachments_max_per_post',null,5));
+        if ($this->thread->canPostAttachments()) {
+            $this->setPlaceholder('attachment_fields',$this->discuss->getChunk('post/disAttachmentFields',$this->getPlaceholders()));
+        } else {
+            $this->setPlaceholder('attachment_fields','');
+        }
+        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $(function() { DIS.config.attachments_max_per_post = '.$this->getPlaceholder('max_attachments').'; });
+        </script>');
+    }
     
     /**
      * Get all the readers of this thread
