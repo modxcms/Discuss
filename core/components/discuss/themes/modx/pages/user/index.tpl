@@ -28,6 +28,14 @@
     </ul>
 </form>
 
+
+<div class="dis-threads">
+    <h1 class="Category">[[%discuss.recent_posts]]</h1>
+    <ol class="dis-board-list">
+        [[+recent_posts]]
+    </ol>
+</div>
+
 </div>
 
 </div><!-- Close Content From Wrapper -->
