@@ -57,6 +57,7 @@ class DiscussThreadController extends DiscussController {
             $isModerator = $this->discuss->user->isModerator($this->board->get('id'));
             $this->setPlaceholder('discuss.user.isModerator',$isModerator);
         }
+        $this->modx->lexicon->load('discuss:post');
     }
 
     public function getPageTitle() {
@@ -113,6 +114,7 @@ class DiscussThreadController extends DiscussController {
     public function getQuickReplyForm() {
         $form = '';
         if ($this->canQuickReply()) {
+            $this->handleAttachments();
             $this->getQuickReplyButtons();
             $phs = $this->getPlaceholders();
             $phs['view'] = 'thread/reply';
@@ -151,6 +153,22 @@ class DiscussThreadController extends DiscussController {
         $this->lastPost = $this->thread->getOne('LastPost');
         $lastPostArray = $this->lastPost->toArray('lastPost.');
         $this->setPlaceholders($lastPostArray);
+    }
+    
+    /**
+     * Handle the rendering and options of attachments being sent to the form
+     * @return void
+     */
+    public function handleAttachments() {
+        $this->setPlaceholder('max_attachments',$this->modx->getOption('discuss.attachments_max_per_post',null,5));
+        if ($this->thread->canPostAttachments()) {
+            $this->setPlaceholder('attachment_fields',$this->discuss->getChunk('post/disAttachmentFields',$this->getPlaceholders()));
+        } else {
+            $this->setPlaceholder('attachment_fields','');
+        }
+        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
+        $(function() { DIS.config.attachments_max_per_post = '.$this->getPlaceholder('max_attachments').'; });
+        </script>');
     }
 
     /**
