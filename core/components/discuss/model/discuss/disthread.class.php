@@ -1037,7 +1037,7 @@ class disThread extends xPDOSimpleObject {
             $replies = $this->get('last_post_replies');
             $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
             if ($replies > $perPage) {
-                $page = ceil($replies / $perPage);
+                $page = ceil(($replies+1) / $perPage);
             }
             $this->set('last_post_page',$page);
         }
