@@ -35,7 +35,7 @@ $c->innerJoin('disThread','Thread');
 $c->innerJoin('disBoard','Board','Board.id = Thread.board');
 $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
 $c->where(array(
-    'Board.status != 0',
+    'Board.status:!=' => 0,
 ));
 /* ignore spam/recycle bin boards */
 
@@ -53,7 +53,7 @@ if (!empty($trashBoard)) {
 }
 /* usergroup protection */
 $groups = $discuss->user->getUserGroups();
-if (!$discuss->user->isAdmin() && false) {
+if (!$discuss->user->isAdmin()) {
     if (!empty($groups)) {
         // restrict boards by user group if applicable
         $g = array(
@@ -69,19 +69,18 @@ if (!$discuss->user->isAdmin() && false) {
     }
 }
 /* ignore boards */
-if ($discuss->user->isLoggedIn && false) {
+if ($discuss->user->isLoggedIn) {
     $ignoreBoards = $discuss->user->get('ignore_boards');
-    if (!empty($ignoreBoards) && false) {
+    if (!empty($ignoreBoards)) {
         $c->where(array(
             'Board.id:NOT IN' => explode(',',$ignoreBoards),
         ));
     }
 }
 /* if showing only recent posts for a user */
-if (!empty($scriptProperties['user']) && false) {
-    $c->innerJoin('disPost','Posts');
+if (!empty($scriptProperties['user'])) {
     $c->where(array(
-        'Posts.author' => $scriptProperties['user'],
+        'disPost.author' => $scriptProperties['user'],
     ));
 }
 $c->groupby('disPost.thread');
@@ -132,7 +131,7 @@ $c->select(array(
     'author_udn' => 'LastAuthor.use_display_name',
     'author_display_name' => 'LastAuthor.display_name',
 ));
-if (!empty($scriptProperties['showIfParticipating']) && false) {
+if (!empty($scriptProperties['showIfParticipating'])) {
     $c->select(array(
         '(SELECT GROUP_CONCAT(pAuthor.id)
             FROM '.$modx->getTableName('disPost').' AS pPost
