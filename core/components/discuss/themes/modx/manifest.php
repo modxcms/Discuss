@@ -60,13 +60,14 @@ $manifest = array(
         ),
         'options' => array(
             'showBoards' => true,
-            'showBreadcrumbs' => false,
+            'showBreadcrumbs' => true,
             'showRecentPosts' => false,
             'showStatistics' => true,
             'showLoginForm' => false,
             'bypassUnreadCheck' => true,
             'checkUnread' => false,
             'showLogoutActionButton' => false,
+            'hideIndexBreadcrumbs' => true,
         ),
     ),
     'board' => array(
