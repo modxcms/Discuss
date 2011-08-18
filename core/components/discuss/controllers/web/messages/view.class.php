@@ -82,6 +82,7 @@ class DiscussMessagesViewController extends DiscussController {
     public function getQuickReplyForm() {
         $form = '';
         if ($this->canQuickReply()) {
+            $this->handleAttachments();
             $this->getQuickReplyButtons();
             $phs = $this->getPlaceholders();
             $phs['view'] = 'messages/reply';
