@@ -30,6 +30,14 @@
  * ---- If auth is fail, return fail
  * --- If source == internal, ignore this and move on
  * - If no disUser, return true and we'll add post-login
+ *
+ * @var modX $modx
+ * @var array $scriptProperties
+ * @var array $fields
+ * @var Discuss $discuss
+ * @var fiHooks $hook
+ * 
+ * @package discuss
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
 if (!($discuss instanceof Discuss)) return true;
@@ -43,11 +51,13 @@ if ($scriptProperties['mode'] != 'login') {
 /* get discuss User */
 $c = $modx->newQuery('disUser');
 $c->where(array(
-    'username' => $fields['username'],
+   'username' => $fields['username'],
 ));
+/** @var disUser $disUser */
 $disUser = $modx->getObject('disUser',$c);
 
 if ($disUser) {
+    /** @var modUser $disUser */
     $user = $disUser->getOne('User');
     if (!$user) {
         /* no related disUser, add it post-login, is import err */
@@ -117,7 +127,7 @@ switch ($status) {
         break;
 }
 if (!$ok) {
-    $hook->addError($errorOutput);
+    $hook->addError('username',$errorOutput);
     return false;
 }
 return true;

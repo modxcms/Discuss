@@ -122,6 +122,9 @@ class DisSmfImport {
                 'default_user_group' => 'Forum Full Member',
                 'usergroup_prefix' => 'Forum ',
                 'attachments_path' => false,
+
+                'from_encoding' => 'UTF-8',
+                'to_encoding' => 'UTF-8',
             ),$config);
         }
     }
@@ -156,6 +159,10 @@ class DisSmfImport {
      */
     public function run() {
         if ($this->getConnection()) {
+
+            $this->log('Starting import...');
+            $this->log('Encoding conversion set to: '.$this->config['from_encoding'].' => '.$this->config['to_encoding']);
+
             if ($this->config['import_users']) {
                 $this->importUserGroups();
                 $this->importUsers();
@@ -439,7 +446,7 @@ class DisSmfImport {
                 if (!$category) {
                     $category = $this->modx->newObject('disCategory');
                     $category->fromArray(array(
-                        'name' => $row['name'],
+                        'name' => mb_convert_encoding($row['name'],$this->config['to_encoding'],$this->config['from_encoding']),
                         'collapsible' => $row['canCollapse'] ? true : false,
                         'rank' => $idx,
                         'integrated_id' => $row['ID_CAT'],
@@ -494,8 +501,8 @@ class DisSmfImport {
                 $board = $this->modx->newObject('disBoard');
                 $board->fromArray(array(
                     'parent' => 0,
-                    'name' => $brow['name'],
-                    'description' => $brow['description'],
+                    'name' => mb_convert_encoding($brow['name'],$this->config['to_encoding'],$this->config['from_encoding']),
+                    'description' => mb_convert_encoding($brow['description'],$this->config['to_encoding'],$this->config['from_encoding']),
                     'num_topics' => $brow['numTopics'],
                     'num_replies' => $brow['numPosts']-$brow['numTopics'],
                     'total_posts' => $brow['numPosts'],
@@ -582,8 +589,8 @@ class DisSmfImport {
                 'board' => $thread->get('board'),
                 'thread' => $thread->get('id'),
                 'parent' => 0,
-                'title' => $trow['subject'],
-                'message' => $trow['body'],
+                'title' => mb_convert_encoding($trow['subject'],$this->config['to_encoding'],$this->config['from_encoding']),
+                'message' => mb_convert_encoding($trow['body'],$this->config['to_encoding'],$this->config['from_encoding']),
                 'author' => isset($this->memberCache[$trow['ID_MEMBER']]) ? $this->memberCache[$trow['ID_MEMBER']] : 0,
                 'createdon' => strftime(DisSmfImport::DATETIME_FORMATTED,$trow['posterTime']),
                 'editedby' => !empty($trow['modifiedName']) && isset($this->memberNameCache[$trow['modifiedName']]) ? $this->memberNameCache[$trow['modifiedName']] : 0,
@@ -656,8 +663,8 @@ class DisSmfImport {
                 'board' => $thread->get('board'),
                 'thread' => $thread->get('id'),
                 'parent' => $threadPost->get('id'),
-                'title' => $prow['subject'],
-                'message' => $prow['body'],
+                'title' => mb_convert_encoding($prow['subject'],$this->config['to_encoding'],$this->config['from_encoding']),
+                'message' => mb_convert_encoding($prow['body'],$this->config['to_encoding'],$this->config['from_encoding']),
                 'author' => isset($this->memberCache[$prow['ID_MEMBER']]) ? $this->memberCache[$prow['ID_MEMBER']] : 0,
                 'createdon' => strftime(DisSmfImport::DATETIME_FORMATTED,$prow['posterTime']),
                 'editedby' => !empty($prow['modifiedName']) && isset($this->memberNameCache[$prow['modifiedName']]) ? $this->memberNameCache[$prow['modifiedName']] : 0,
@@ -840,8 +847,8 @@ class DisSmfImport {
                 'board' => 0,
                 'thread' => $thread->get('id'),
                 'parent' => 0,
-                'title' => $trow['subject'],
-                'message' => $trow['body'],
+                'title' => mb_convert_encoding($trow['subject'],$this->config['to_encoding'],$this->config['from_encoding']),
+                'message' => mb_convert_encoding($trow['body'],$this->config['to_encoding'],$this->config['from_encoding']),
                 'author' => $postAuthor,
                 'createdon' => strftime(DisSmfImport::DATETIME_FORMATTED,$trow['msgtime']),
                 'allow_replies' => 1,
