@@ -6,6 +6,7 @@ $(function() {
 
 DIS.Thread = function() {
     var postCount = DIS.config.postCount;
+    var attachments = 1;
     
     return {
         init: function() {
@@ -15,6 +16,7 @@ DIS.Thread = function() {
             $('.dis-post-author').click(this.toggleAuthor);
             $('.dis-post-remove').click(this.removePost);
             $('.quick-reply').click(this.quickReply);
+            $('.dis-add-attachment').click(this.addAttachment);
         }
         ,preview: function() {
             var f = $('#dis-quick-reply-form');
@@ -165,6 +167,17 @@ DIS.Thread = function() {
             p.id = $(this).closest('.dis-post').attr('id');
             p.id = p.id.replace(/dis-post-/,'');
             return confirm('Are you sure you want to remove this post?');
+        }
+
+        ,addAttachment: function() {
+            var d = $('#dis-attachments');
+            var i = attachments+1;
+            if (i > DIS.config.attachments_max_per_post) return false;
+            var tpl = '<label><span>&nbsp;</span></label><input type="file" name="attachment'+i+'" /><br class="clear" />';
+
+            d.append(tpl);
+            attachments = attachments+1;
+            return false;
         }
     };
 }();
