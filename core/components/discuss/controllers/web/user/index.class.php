@@ -68,7 +68,11 @@ class DiscussUserController extends DiscussController {
      * @return void
      */
     public function process() {
-        $this->setPlaceholders($this->user->toArray());
+        $userArray = $this->user->toArray();
+        if (!$this->user->isAdmin() && !$this->user->get('show_email')) {
+            unset($userArray['email']);
+        }
+        $this->setPlaceholders($userArray);
         $this->getLastVisitedThread();
 
         /* recent posts */
