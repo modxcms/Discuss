@@ -161,9 +161,11 @@ class Discuss {
             default:
                 $this->modx->lexicon->load('discuss:web');
 
-                $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
-                $this->_initUser();
-                $this->_initSession();
+                if (!defined('DISCUSS_IMPORT_MODE')) {
+                    $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
+                    $this->_initUser();
+                    $this->_initSession();
+                }
                 $this->loadRequest();
             break;
         }

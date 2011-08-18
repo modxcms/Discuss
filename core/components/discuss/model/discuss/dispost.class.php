@@ -224,6 +224,7 @@ class disPost extends xPDOSimpleObject {
      * @return bool
      */
     public function index() {
+        if (defined('DISCUSS_IMPORT_MODE') && DISCUSS_IMPORT_MODE) return true;
         $indexed = false;
         if ($this->xpdo->discuss->loadSearch()) {
             $postArray = $this->toArray();
