@@ -36,7 +36,6 @@ class disBBCodeParser extends disParser {
      * @return string The parsed string with HTML instead of BBCode, and all code stripped
      */
     public function parse($message) {
-
         $message = $this->preClean($message);
         
         /* handle quotes better, to allow for citing */
@@ -467,6 +466,7 @@ class disBBCodeParser extends disParser {
      * @return string
      */
     public function preClean($message) {
+
         /* leave only \n linebreaks */
 	    $message = strtr($message, array("\r" => ''));
 
@@ -563,6 +563,7 @@ class disBBCodeParser extends disParser {
                 preg_match_all('/[a-z]+=.+/iU', $parts[$i], $attributes);
                 foreach ($attributes[0] as $attribute) {
                     $attributeName = stristr($attribute, '=', true);
+                    if ($attributeName == 'link' && $attribute == 'link=t') continue; /* smf bug workaround */
                     if (!in_array($attributeName, $keepAttributes)) {
                         $parts[$i] = str_replace(' ' . $attribute, '', $parts[$i]);
                     }

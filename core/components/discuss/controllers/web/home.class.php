@@ -55,6 +55,8 @@ class DiscussHomeController extends DiscussController {
             $this->getRecentPosts();
         }
 
+        $this->getBreadcrumbs();
+
         /* invoke render event for plugin injection of custom stuff */
         $this->setPlaceholders(array(
             'top' => '',
@@ -189,6 +191,8 @@ class DiscussHomeController extends DiscussController {
         $category = null;
         if (!empty($this->scriptProperties['category'])) {
             $category = $this->modx->getObject('disCategory',$this->scriptProperties['category']);
+        } else if ($this->getOption('hideIndexBreadcrumbs',true)) {
+            return '';
         }
         if (!empty($category)) {
             $trail[] = array(
