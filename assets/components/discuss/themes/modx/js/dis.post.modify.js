@@ -6,8 +6,15 @@ DIS.DISModifyPost = function() {
             $('.dis-remove-attachment').click(this.removeAttachment);
             $('.dis-modify-post-preview-btn').click(this.preview);
             $('.dis-message-write').click(this.message);
+            $('.quick-reply').click(this.quickReply);
             attachments = o.attachments || 1;
         }
+
+		,quickReply: function() {
+			$.scrollTo($('.preview_toggle'),500);
+			$('#dis-thread-message').focus();
+			return false;
+		}
     
         ,preview: function() {
             var f = $('#dis-modify-post-form');

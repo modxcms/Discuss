@@ -10,8 +10,15 @@ DIS.ReplyPost = function() {
             $('.dis-message-write').click(this.message);
             $('.dis-post-title').click(this.togglePost);
             $('.dis-post-author').click(this.toggleAuthor);
+            $('.quick-reply').click(this.quickReply);
             $('.dis-add-attachment').click(this.addAttachment);
         }
+
+		,quickReply: function() {
+			$.scrollTo($('.preview_toggle'),500);
+			$('#dis-thread-message').focus();
+			return false;
+		}
         
         ,preview: function() {
             var f = $('#dis-reply-post-form');
