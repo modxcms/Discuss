@@ -18,7 +18,7 @@ DIS.DISModifyPost = function() {
                 ,data: p
             });
             var a = $.ajax(a);
-            $('#dis-modify-post-preview').hide().html(a.responseText).fadeIn();
+            $('#dis-message-preview').hide().html(a.responseText).fadeIn();
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
         }
 

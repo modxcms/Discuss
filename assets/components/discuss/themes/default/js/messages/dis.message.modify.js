@@ -19,7 +19,7 @@ DIS.DISModifyMessage = function() {
                 ,type: 'POST'
             });
             var a = $.ajax(a);
-            $('#dis-modify-message-preview').hide().html(a.responseText).fadeIn();
+            $('#dis-message-preview').hide().html(a.responseText).fadeIn();
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
         }
 

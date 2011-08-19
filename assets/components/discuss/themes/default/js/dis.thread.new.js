@@ -6,7 +6,7 @@ DIS.NewThread = function() {
     
     return {
         init: function() {
-            $('.dis-new-thread-preview').click(this.preview);
+            $('.dis-message-preview').click(this.preview);
             $('.dis-add-attachment').click(this.addAttachment);
             
         }
@@ -21,7 +21,7 @@ DIS.NewThread = function() {
                 ,data: p
             });
             var a = $.ajax(a);
-            $('#dis-new-thread-preview').hide().html(a.responseText).fadeIn();
+            $('#dis-message-preview').hide().html(a.responseText).fadeIn();
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
         }
         

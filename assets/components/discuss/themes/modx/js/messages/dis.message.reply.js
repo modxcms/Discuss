@@ -6,12 +6,12 @@ DIS.NewMessage = function() {
     
     return {
         init: function() {
-            $('.dis-reply-post-preview').click(this.preview);
+            $('.dis-preview').click(this.preview);
             $('.dis-message-write').click(this.message);
+            $("#dis-message-preview").delegate(".dis-message-cancel", "click", this.message);
             $('.dis-post-title').click(this.togglePost);
             $('.dis-post-author').click(this.toggleAuthor);
             $('.dis-add-attachment').click(this.addAttachment);
-            
         }
 
 
@@ -25,11 +25,11 @@ DIS.NewMessage = function() {
                 ,data: p
             });
             var a = $.ajax(a);
-            $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn();
+            $('#dis-message-preview').hide().html(a.responseText).fadeIn();
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
 
             $('.dis-message-write').removeClass('selected');
-            $('.dis-reply-post-preview').addClass('selected');
+            $('.dis-preview').addClass('selected');
             $('#overlay-20').fadeIn();
             return false;
         }
@@ -37,13 +37,13 @@ DIS.NewMessage = function() {
         ,message: function() {
             $('.dis-reply-post-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
-            $('#dis-reply-post-preview').fadeOut();
+            $('#dis-message-preview').fadeOut();
             $('#overlay-20').fadeOut();
             return false;        
         }
 
         ,cancel: function() {
-            $('#dis-reply-post-preview').fadeOut('slow');
+            $('#dis-message-preview').fadeOut('slow');
         }
         
         ,addAttachment: function() {

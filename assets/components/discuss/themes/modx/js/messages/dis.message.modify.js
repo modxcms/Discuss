@@ -5,7 +5,8 @@ DIS.DISModifyMessage = function() {
             $('.dis-message-write').click(this.message);
             $('.dis-add-attachment').click(this.addAttachment);
             $('.dis-remove-attachment').click(this.removeAttachment);
-            $('.dis-modify-message-preview').click(this.preview);
+            $('.dis-preview').click(this.preview);
+            $("#dis-message-preview").delegate(".dis-message-cancel", "click", this.message);
             attachments = o.attachments || 1;
         }
     
@@ -20,19 +21,19 @@ DIS.DISModifyMessage = function() {
                 ,type: 'POST'
             });
             var a = $.ajax(a);
-            $('#dis-modify-message-preview').hide().html(a.responseText).fadeIn();
+            $('#dis-message-preview').hide().html(a.responseText).fadeIn();
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
 
             $('.dis-message-write').removeClass('selected');
-            $('.dis-modify-message-preview').addClass('selected');
+            $('.dis-preview').addClass('selected');
             $('#overlay-20').fadeIn();
             return false;
         }
 
         ,message: function() {
-            $('.dis-modify-message-preview').removeClass('selected');
+            $('.dis-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
-            $('#dis-modify-message-preview').fadeOut();
+            $('#dis-message-preview').fadeOut();
             $('#overlay-20').fadeOut();
             return false;        
         }

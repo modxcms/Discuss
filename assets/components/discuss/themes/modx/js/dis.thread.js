@@ -12,12 +12,14 @@ DIS.Thread = function() {
         init: function() {
             $('.dis-preview').click(this.preview);
             $('.dis-message-write').click(this.message);
+            $("#dis-message-preview").delegate(".dis-message-cancel", "click", this.message);
             $('.dis-post-title').click(this.togglePost);
             $('.dis-post-author').click(this.toggleAuthor);
             $('.dis-post-remove').click(this.removePost);
             $('.quick-reply').click(this.quickReply);
             $('.dis-add-attachment').click(this.addAttachment);
         }
+        
         ,preview: function() {
             var f = $('#dis-quick-reply-form');
             var p = f.serialize()+'&action=thread/preview';
@@ -29,7 +31,7 @@ DIS.Thread = function() {
                 ,type: 'POST'
             });
             var a = $.ajax(a);
-            $('#dis-reply-post-preview').hide().html(a.responseText).fadeIn(80);
+            $('#dis-message-preview').hide().html(a.responseText).fadeIn(80);
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
             
             $('.dis-message-write').removeClass('selected');
@@ -41,7 +43,7 @@ DIS.Thread = function() {
         ,message: function() {
             $('.dis-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
-            $('#dis-reply-post-preview').fadeOut(80);
+            $('#dis-message-preview').fadeOut(80);
             $('#overlay-20').fadeOut();
             return false;        
         }

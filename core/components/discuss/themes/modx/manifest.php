@@ -34,7 +34,7 @@ $manifest = array(
         ),
         'js' => array(
             'header' => array(
-                'jquery-1.3.2.min.js',
+                'jquery-1.6.1.min.js',
                 'jquery.scrollTo-min.js',
                 'discuss.js',
                 'sh/shCore.js',

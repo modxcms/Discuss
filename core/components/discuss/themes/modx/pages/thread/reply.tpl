@@ -8,15 +8,18 @@
 
 	    
 <form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
-	    <div class="preview_toggle">
-			<a href="#" class="dis-message-write selected" id="dis-message-write-btn">edit</a>
-        	<a href="#" class="dis-preview" id="dis-post-preview">preview</a>
-			<div id="dis-reply-post-preview"></div>
-	    </div>
+
+
+    <div class="preview_toggle">
+		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
+        <a href="#" class="dis-preview" id="dis-preview-btn">preview</a>
+		<div id="dis-message-preview"></div>
+    </div>
+	    
+	    
 	<h1 class="Category">[[!+fi.title]]</h1>
 
 
-    
     <input type="hidden" name="board" value="[[!+fi.board]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     <input type="hidden" name="post" value="[[!+fi.post]]" />

@@ -5,6 +5,8 @@
     </ul>
     <br class="clearfix" />
     <div class="dis-form-buttons">
-       <input type="submit" name="dis-post-reply" value="Submit" />
+		<input type="button" name="Cancel" value="Cancel" class="dis-message-cancel" />
+		<input type="submit" name="dis-post-reply" value="Submit" />
     </div>
+    <br class="clearfix" />
 </div>

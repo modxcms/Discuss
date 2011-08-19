@@ -9,11 +9,17 @@
     
 
 <form action="[[~[[*id]]]]messages/modify?post=[[!+fi.id]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
+
+
     <div class="preview_toggle">
-		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">edit</a>
-        <a href="#" class="dis-modify-message-preview" id="dis-modify-message-preview-btn">preview</a>
-		<div id="dis-modify-message-preview"></div>
+		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
+        <a href="#" class="dis-preview" id="dis-preview-btn">preview</a>
+		<div id="dis-message-preview"></div>
     </div>
+    
+    
+    
+    
 	<h1 class="Category">[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</h1>
 
     <input type="hidden" name="post" value="[[!+fi.id]]" />

@@ -609,6 +609,7 @@ div.dis-latest {
 
 div.dis-thread-body h3 {
     margin: 2px 0;
+    line-height: 18px;
 }
 div.dis-thread-body a h3,
 div.dis-thread-body h3 a {
@@ -628,7 +629,7 @@ div.dis-views,
 div.dis-replies {
 	width: 55px;
 	}
-
+	
 dl.dis-datalist dh, dl.dis-datalist dt { display: block; float: left; padding: 5px 0; }
 
 dl.dis-datalist dh { clear: left; width: 250px; font-weight: bold; }
@@ -1278,10 +1279,11 @@ textarea {
 	margin: 0 20px 0 0;
 	}
 
+
 .dis-form-buttons input[type="submit"],
 .dis-form-buttons input[type="button"],
 .dis-action-btn,
-a.Button,
+.dis-form-buttons a.Button,
 .Button {
 	display:-moz-inline-stack;
 	display:inline-block;
@@ -1299,21 +1301,27 @@ a.Button,
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	white-space: nowrap;
+	line-height: 12px;
 	}
 
 .dis-form-buttons input[type="submit"]:hover,
 .dis-form-buttons input[type="button"]:hover,
 input.Button:hover,
-.Button:hover {
+.dis-form-buttons a.Button:hover {
 	background: #026598;
 	color: #fff;
 	border: 1px solid #026598;
 	}
 
+.dis-form-buttons a.Button,
 .dis-form-buttons input[type="submit"],
 .dis-form-buttons input[type="button"] {
 	margin: 0 0 0 10px;
 	float: right;
+	}
+
+.dis-form-buttons a.Button {
+	line-height: 17px;
 	}
 
 input.Button:focus,
@@ -3300,7 +3308,11 @@ h4 a.normal-type {
 	}
 
 .preview_toggle a {
-    border-radius: 7px 7px 7px 7px;
+
+}
+
+a.dis-message-write {
+	border-radius: 7px 7px 7px 7px;
     color: #EEEEEE;
     display: block;
     float: left;
@@ -3311,10 +3323,22 @@ h4 a.normal-type {
     margin: 2px;
     padding: 1px 6px 0;
     text-decoration: none;
-}
-
-a.dis-preview {
+    }
+    
+a.dis-new-thread-preview,
+a.dis-preview,
+a.dis-message-preview {
 	float: right;
+    border-radius: 7px 7px 7px 7px;
+    color: #EEEEEE;
+    display: block;
+    font-family: helvetica;
+    font-size: 12px;
+    height: 13px;
+    line-height: 12px;
+    margin: 2px;
+    padding: 1px 6px 0;
+    text-decoration: none;
 	}
 
 .dis-post-preview {
@@ -3326,13 +3350,7 @@ a.dis-preview {
     color: #444;
 	}
 	
-#dis-modify-message-preview,
-.previewtoggle #dis-reply-post-preview,
-.preview_toggle #dis-message-preview,
-.preview_toggle #dis-new-thread-preview,
-.preview_toggle #dis-quick-reply-preview,
-.preview_toggle #dis-modify-post-preview,
-.preview_toggle #dis-reply-post-preview {
+.preview_toggle #dis-message-preview {
     background-color: #FFFFFF;
     display: none;
     left: -20px;

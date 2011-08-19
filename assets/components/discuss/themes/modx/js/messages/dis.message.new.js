@@ -6,8 +6,9 @@ DIS.NewMessage = function() {
     
     return {
         init: function() {
-            $('.dis-message-preview').click(this.preview);
+            $('.dis-preview').click(this.preview);
             $('.dis-message-write').click(this.message);
+            $("#dis-message-preview").delegate(".dis-message-cancel", "click", this.message);
             $('.dis-cancel-preview').click(this.cancel);
             $('.dis-add-attachment').click(this.addAttachment);
             
@@ -27,13 +28,13 @@ DIS.NewMessage = function() {
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
 
             $('.dis-message-write').removeClass('selected');
-            $('.dis-message-preview').addClass('selected');
+            $('.dis-preview').addClass('selected');
             $('#overlay-20').fadeIn();
             return false;
         }
 
         ,message: function() {
-            $('.dis-message-preview').removeClass('selected');
+            $('.dis-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
             $('#dis-message-preview').fadeOut();
             $('#overlay-20').fadeOut();

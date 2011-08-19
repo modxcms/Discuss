@@ -4,9 +4,10 @@ DIS.DISModifyPost = function() {
         init: function(o) {
             $('.dis-add-attachment').click(this.addAttachment);
             $('.dis-remove-attachment').click(this.removeAttachment);
-            $('.dis-modify-post-preview-btn').click(this.preview);
+            $('.dis-preview').click(this.preview);
             $('.dis-message-write').click(this.message);
             $('.quick-reply').click(this.quickReply);
+            $("#dis-message-preview").delegate(".dis-message-cancel", "click", this.message);
             attachments = o.attachments || 1;
         }
 
@@ -26,19 +27,19 @@ DIS.DISModifyPost = function() {
                 ,data: p
             });
             var a = $.ajax(a);
-            $('#dis-modify-post-preview').hide().html(a.responseText).fadeIn(80);
+            $('#dis-message-preview').hide().html(a.responseText).fadeIn(80);
             if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
 
             $('.dis-message-write').removeClass('selected');
-            $('.dis-modify-post-preview-btn').addClass('selected');
+            $('.dis-preview').addClass('selected');
             $('#overlay-20').fadeIn();
             return false;
         }
 
         ,message: function() {
-            $('.dis-modify-post-preview-btn').removeClass('selected');
+            $('.dis-preview').removeClass('selected');
             $('.dis-message-write').addClass('selected');
-            $('#dis-modify-post-preview').fadeOut(80);
+            $('#dis-message-preview').fadeOut(80);
             $('#overlay-20').fadeOut();
             return false;        
         }

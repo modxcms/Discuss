@@ -9,11 +9,15 @@
 
 
 <form action="[[~[[*id]]]]messages/new" method="post" class="dis-form" id="dis-message-new-form" enctype="multipart/form-data">
+    
     <div class="preview_toggle">
-		<a href="#" class="dis-message-write selected" id="dis-message-write-btn">edit</a>
-        <a href="#" class="dis-message-preview" id="dis-message-preview-btn">preview</a>
-    	<div id="dis-message-preview"></div>
+		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
+        <a href="#" class="dis-preview" id="dis-preview-btn">preview</a>
+		<div id="dis-message-preview"></div>
     </div>
+    
+    
+    
 	<h1 class="Category">[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h1>
 
 
