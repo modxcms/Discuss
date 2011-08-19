@@ -44,6 +44,14 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         return 'new_replies_to_posts';
     }
 
+    public function getDefaultOptions() {
+        return array(
+            'tpl' => 'post/disPostLi',
+            'dateFormat' => $this->discuss->dateFormat,
+            'rowSeparator' => "\n",
+        );
+    }
+
     public function process() {
         /* setup default properties */
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.threads_per_page',null,20),'empty');
@@ -71,7 +79,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
             $thread->getUrl();
             $threadArray = $thread->toArray();
             $threadArray['class'] = 'dis-board-li';
-            $threadArray['createdon'] = strftime($this->discuss->dateFormat,strtotime($threadArray['createdon']));
+            $threadArray['createdon'] = strftime($this->getOption('dateFormat',$this->discuss->dateFormat),strtotime($threadArray['createdon']));
             $threadArray['icons'] = '';
 
             /* set css class */
@@ -101,9 +109,9 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
             $threadArray['unread'] = '<img src="'.$this->discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
             $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
-            $list[] = $this->discuss->getChunk('post/disPostLi',$threadArray);
+            $list[] = $this->discuss->getChunk($this->getOption('tpl','post/disPostLi'),$threadArray);
         }
-        $placeholders['threads'] = implode("\n",$list);
+        $this->setPlaceholder('threads',implode($this->getOption('rowSeparator',"\n"),$list));
 
         $this->getActionButtons();
         $this->buildPagination();
