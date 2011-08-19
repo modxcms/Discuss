@@ -87,8 +87,11 @@ li.dis-board-li .dis-board-locked {
 	}
 
 .dis-post-board-name {
-    color: #aaa;
-}
+    color: #AAAAAA;
+    display: block;
+    margin: 0 0 5px;
+    }
+    
 .translucent,
 .dis-post-read .dis-thread-body {
 	opacity:.40;
