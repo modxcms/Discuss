@@ -38,7 +38,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         return $this->discuss->user->isLoggedIn;
     }
     public function getPageTitle() {
-        return $this->modx->lexicon('discuss.unread_posts');
+        return $this->modx->lexicon('discuss.new_replies_to_posts');
     }
     public function getSessionPlace() {
         return 'new_replies_to_posts';
@@ -125,7 +125,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         $this->discuss->hooks->load('pagination/build',array(
             'count' => $this->threads['total'],
             'id' => 0,
-            'view' => 'thread/unread',
+            'view' => 'thread/new_replies_to_posts',
             'limit' => $this->threads['limit'],
         ));
     }
