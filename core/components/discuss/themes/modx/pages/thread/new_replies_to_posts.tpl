@@ -6,7 +6,7 @@
 
 
 	<ol class="dis-board-thread">
-		[[+posts]]
+		[[+threads]]
 	</ol>
 	
 </div>
