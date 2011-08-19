@@ -113,47 +113,52 @@ if ($stmt) {
 }
 
 /* recent posts */
-$c = $modx->newQuery('disThread');
-$c->innerJoin('disBoard','Board');
-$c->innerJoin('disPost','FirstPost');
-$c->innerJoin('disPost','LastPost');
-$c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
-$c->innerJoin('disUser','LastAuthor');
-$c->select(array(
-    'disThread.id',
-    'disThread.replies',
-    'disThread.views',
-    'disThread.sticky',
-    'disThread.locked',
-    'disThread.board',
-    'disThread.answered',
-    'disThread.class_key',
-    'FirstPost.title',
-    'board_name' => 'Board.name',
-    'post_id' => 'LastPost.id',
-    'LastPost.thread',
-    'LastPost.author',
-    'LastPost.createdon',
-    'last_post_replies' => 'LastPostThread.replies',
-    'author_username' => 'LastAuthor.username',
-    'author_udn' => 'LastAuthor.use_display_name',
-    'author_display_name' => 'LastAuthor.display_name',
-));
-if (!empty($scriptProperties['showIfParticipating'])) {
+if (!empty($ids)) {
+    $c = $modx->newQuery('disThread');
+    $c->innerJoin('disBoard','Board');
+    $c->innerJoin('disPost','FirstPost');
+    $c->innerJoin('disPost','LastPost');
+    $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
+    $c->innerJoin('disUser','LastAuthor');
     $c->select(array(
-        '(SELECT GROUP_CONCAT(pAuthor.id)
-            FROM '.$modx->getTableName('disPost').' AS pPost
-            INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
-            WHERE pPost.thread = disThread.id
-         ) AS participants',
+        'disThread.id',
+        'disThread.replies',
+        'disThread.views',
+        'disThread.sticky',
+        'disThread.locked',
+        'disThread.board',
+        'disThread.answered',
+        'disThread.class_key',
+        'FirstPost.title',
+        'board_name' => 'Board.name',
+        'post_id' => 'LastPost.id',
+        'LastPost.thread',
+        'LastPost.author',
+        'LastPost.createdon',
+        'last_post_replies' => 'LastPostThread.replies',
+        'author_username' => 'LastAuthor.username',
+        'author_udn' => 'LastAuthor.use_display_name',
+        'author_display_name' => 'LastAuthor.display_name',
     ));
+    if (!empty($scriptProperties['showIfParticipating'])) {
+        $c->select(array(
+            '(SELECT GROUP_CONCAT(pAuthor.id)
+                FROM '.$modx->getTableName('disPost').' AS pPost
+                INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
+                WHERE pPost.thread = disThread.id
+             ) AS participants',
+        ));
+    }
+    $c->where(array(
+        'disThread.id:IN' => $ids,
+    ));
+    //$c->sortby('FIELD(disThread.id,'.implode(',',$ids).')','');
+    $c->sortby('LastPost.createdon','DESC');
+    $recentThreads = $modx->getCollection('disThread',$c);
+} else {
+    $recentThreads = array();
+    $total = 0;
 }
-$c->where(array(
-    'disThread.id:IN' => $ids,
-));
-//$c->sortby('FIELD(disThread.id,'.implode(',',$ids).')','');
-$c->sortby('LastPost.createdon','DESC');
-$recentThreads = $modx->getCollection('disThread',$c);
 
 /* iterate */
 $list = array();
