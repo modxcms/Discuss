@@ -151,7 +151,8 @@ if (!empty($scriptProperties['showIfParticipating'])) {
 $c->where(array(
     'disThread.id:IN' => $ids,
 ));
-$c->sortby('FIELD(disThread.id,'.implode(',',$ids).')','');
+//$c->sortby('FIELD(disThread.id,'.implode(',',$ids).')','');
+$c->sortby('LastPost.createdon','DESC');
 $recentThreads = $modx->getCollection('disThread',$c);
 
 /* iterate */
