@@ -169,6 +169,7 @@ class disPost extends xPDOSimpleObject {
                 }
 
                 $thread->set('post_last',$this->get('id'));
+                $thread->set('post_last_on',time());
                 $thread->set('author_last',$this->get('author'));
                 $thread->set('replies',$thread->get('replies')+1);
                 if ($thread->get('post_last') == $thread->get('post_first')) {
@@ -435,6 +436,7 @@ class disPost extends xPDOSimpleObject {
                 ));
                 $c->sortby('createdon','DESC');
                 $c->limit(1);
+                /** @var disPost $latestPost */
                 $latestPost = $this->xpdo->getObject('disPost',$c);
                 if ($latestPost) {
                     $board->set('last_post',$latestPost->get('id'));
@@ -462,9 +464,11 @@ class disPost extends xPDOSimpleObject {
                 ));
                 $c->sortby('createdon','DESC');
                 $c->limit(1);
+                /** @var disPost $priorPost */
                 $priorPost = $this->xpdo->getObject('disPost',$c);
                 if ($priorPost) { /* set last post anew */
                     $thread->set('post_last',$priorPost->get('id'));
+                    $thread->set('post_last_on',strtotime($priorPost->get('createdon')));
                     $thread->set('author_last',$priorPost->get('author'));
                     $saved = $thread->save();
                 } else { /* if no more posts, remove thread */
@@ -475,6 +479,7 @@ class disPost extends xPDOSimpleObject {
             /* adjust forum activity */
             if (!defined('DISCUSS_IMPORT_MODE') && !$isPrivateMessage) {
                 $now = date('Y-m-d');
+                /** @var disForumActivity $activity */
                 $activity = $this->xpdo->getObject('disForumActivity',array(
                     'day' => $now,
                 ));

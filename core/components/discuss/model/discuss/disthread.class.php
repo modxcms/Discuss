@@ -167,7 +167,7 @@ class disThread extends xPDOSimpleObject {
      * @param boolean $sinceLastLogin
      * @return array An array in results/total format
      */
-    public static function fetchUnread(xPDO &$modx,$sortBy = 'LastPost.createdon',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
+    public static function fetchUnread(xPDO &$modx,$sortBy = 'post_last_on',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
         $response = array();
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
@@ -218,7 +218,7 @@ class disThread extends xPDOSimpleObject {
                 $lastLogin = $modx->discuss->user->get('last_login');
                 if (!empty($lastLogin)) {
                     $c->where(array(
-                        'LastPost.createdon:>=' => $lastLogin,
+                        'disThread.post_last_on:>=' => is_int($lastLogin) ? $lastLogin : strtotime($lastLogin),
                     ));
                 }
             }
@@ -232,15 +232,15 @@ class disThread extends xPDOSimpleObject {
         $response['total'] = $modx->getCount('disThread',$c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
-            'Board.name AS board_name',
-            'FirstPost.title AS title',
-            'FirstPost.thread AS thread',
-            'LastAuthor.username AS author_username',
+            'board_name' => 'Board.name',
+            'title' => 'FirstPost.title',
+            'thread' => 'FirstPost.thread',
+            'author_username' => 'LastAuthor.username',
 
-            'LastPost.id AS post_id',
-            'LastPost.createdon AS createdon',
-            'LastPost.author AS author',
-            'LastPostThread.replies AS last_post_replies',
+            'post_id' => 'LastPost.id',
+            'createdon' => 'LastPost.createdon',
+            'author' => 'LastPost.author',
+            'last_post_replies' => 'LastPostThread.replies',
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);
@@ -262,7 +262,7 @@ class disThread extends xPDOSimpleObject {
      * @param boolean $sinceLastLogin
      * @return array An array in results/total format
      */
-    public static function fetchNewReplies(xPDO &$modx,$sortBy = 'LastPost.createdon',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
+    public static function fetchNewReplies(xPDO &$modx,$sortBy = 'post_last_on',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
         $response = array();
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
@@ -321,7 +321,7 @@ class disThread extends xPDOSimpleObject {
                 $lastLogin = $modx->discuss->user->get('last_login');
                 if (!empty($lastLogin)) {
                     $c->where(array(
-                        'LastPost.createdon:>=' => $lastLogin,
+                        'disThread.post_last_on:>=' => is_int($lastLogin) ? $lastLogin : strtotime($lastLogin),
                     ));
                 }
             }
@@ -436,6 +436,7 @@ class disThread extends xPDOSimpleObject {
             $this->clearCache();
             /* clear recent posts cache */
             $this->xpdo->cacheManager->delete('discuss/board/recent/');
+            $this->xpdo->cacheManager->delete('discuss/recent/');
         }
         return $removed;
     }
