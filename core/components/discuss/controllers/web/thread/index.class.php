@@ -113,7 +113,7 @@ class DiscussThreadController extends DiscussController {
      */
     public function getQuickReplyForm() {
         $form = '';
-        if ($this->canQuickReply()) {
+        if ($this->canQuickReply() && empty($this->scriptProperties['print'])) {
             $this->handleAttachments();
             $this->getQuickReplyButtons();
             $phs = $this->getPlaceholders();
