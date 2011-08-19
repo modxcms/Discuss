@@ -436,6 +436,7 @@ class disThread extends xPDOSimpleObject {
             $this->clearCache();
             /* clear recent posts cache */
             $this->xpdo->cacheManager->delete('discuss/board/recent/');
+            $this->xpdo->cacheManager->delete('discuss/recent/');
         }
         return $removed;
     }
