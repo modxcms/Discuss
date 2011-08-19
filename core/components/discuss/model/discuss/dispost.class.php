@@ -694,6 +694,7 @@ class disPost extends xPDOSimpleObject {
             $this->xpdo->cacheManager->delete('discuss/board/user/');
             $this->xpdo->cacheManager->delete('discuss/board/index/');
             $this->xpdo->cacheManager->delete('discuss/board/recent/');
+            $this->xpdo->cacheManager->delete('discuss/recent/');
             $thread = $this->getOne('Thread');
             if ($thread) {
                 $this->xpdo->cacheManager->delete('discuss/thread/'.$thread->get('id'));

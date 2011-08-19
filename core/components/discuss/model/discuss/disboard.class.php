@@ -518,6 +518,7 @@ class disBoard extends xPDOSimpleObject {
             $this->xpdo->cacheManager->delete('discuss/board/user/');
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('id'));
             $this->xpdo->cacheManager->delete('discuss/board/index/');
+            $this->xpdo->cacheManager->delete('discuss/recent/');
         }
     }
 
