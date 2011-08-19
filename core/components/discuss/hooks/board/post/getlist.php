@@ -94,7 +94,7 @@ if (empty($cache)) {
     if ($modx->getOption('discuss.enable_sticky',null,true)) {
         $c->sortby('disThread.sticky','DESC');
     }
-    $c->sortby('LastPost.createdon','DESC');
+    $c->sortby('disThread.last_post_on','DESC');
     if (!empty($scriptProperties['limit'])) {
         $c->limit($scriptProperties['limit'],$scriptProperties['start']);
     }
