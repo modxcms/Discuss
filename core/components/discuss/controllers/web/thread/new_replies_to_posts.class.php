@@ -60,7 +60,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 
-        $sortBy = $this->getProperty('sortBy','LastPost.createdon');
+        $sortBy = $this->getProperty('sortBy','post_last_on');
         $sortDir = $this->getProperty('sortDir','DESC');
 
         /* get new replies threads */

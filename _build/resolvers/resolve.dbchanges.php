@@ -77,6 +77,9 @@ if ($object->xpdo) {
             $manager->addField('disBoard','ltr');
             $manager->addIndex('disBoard','ltr');
 
+            $manager->addField('disThread','post_last_on');
+            $manager->addIndex('disThread','post_last_on');
+
         break;
     }
 }

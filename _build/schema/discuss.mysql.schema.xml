@@ -164,6 +164,7 @@
         <field key="title" dbtype="varchar" precision="255" phptype="string" null="false" default="" index="index" />
         <field key="post_first" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="post_last" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
+        <field key="post_last_on" dbtype="int" precision="11" phptype="timestamp" null="false" default="0" index="index" />
         <field key="author_first" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="author_last" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
 
@@ -191,6 +192,9 @@
         </index>
         <index alias="post_last" name="post_last" primary="false" unique="false" type="BTREE">
             <column key="post_last" length="" collation="A" null="false" />
+        </index>
+        <index alias="post_last_on" name="post_last_on" primary="false" unique="false" type="BTREE">
+            <column key="post_last_on" length="" collation="A" null="false" />
         </index>
         <index alias="author_first" name="author_first" primary="false" unique="false" type="BTREE">
             <column key="author_first" length="" collation="A" null="false" />

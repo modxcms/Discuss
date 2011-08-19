@@ -13,6 +13,7 @@ $xpdo_meta_map['disThread']= array (
     'title' => '',
     'post_first' => 0,
     'post_last' => 0,
+    'post_last_on' => 0,
     'author_first' => 0,
     'author_last' => 0,
     'replies' => 0,
@@ -73,6 +74,15 @@ $xpdo_meta_map['disThread']= array (
       'attributes' => 'unsigned',
       'default' => 0,
       'null' => false,
+      'index' => 'index',
+    ),
+    'post_last_on' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '11',
+      'phptype' => 'timestamp',
+      'null' => false,
+      'default' => 0,
       'index' => 'index',
     ),
     'author_first' => 
@@ -253,6 +263,22 @@ $xpdo_meta_map['disThread']= array (
       'columns' => 
       array (
         'post_last' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'post_last_on' => 
+    array (
+      'alias' => 'post_last_on',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'post_last_on' => 
         array (
           'length' => '',
           'collation' => 'A',

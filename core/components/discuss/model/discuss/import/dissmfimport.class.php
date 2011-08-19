@@ -613,9 +613,11 @@ class DisSmfImport {
             if ($postsData['lastPost']) {
                 $thread->set('post_last',$postsData['lastPost']->get('id'));
                 $thread->set('author_last',$postsData['lastPost']->get('author'));
+                $thread->set('post_last_on',strtotime($postsData['lastPost']->get('createdon')));
             } else {
                 $thread->set('post_last',$threadPost->get('id'));
                 $thread->set('author_last',$threadPost->get('author'));
+                $thread->set('post_last_on',strtotime($threadPost->get('createdon')));
             }
             if ($this->config['live']) {
                 $thread->save();

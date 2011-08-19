@@ -169,6 +169,7 @@ class disPost extends xPDOSimpleObject {
                 }
 
                 $thread->set('post_last',$this->get('id'));
+                $thread->set('post_last_on',time());
                 $thread->set('author_last',$this->get('author'));
                 $thread->set('replies',$thread->get('replies')+1);
                 if ($thread->get('post_last') == $thread->get('post_first')) {
