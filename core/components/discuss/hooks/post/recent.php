@@ -19,6 +19,10 @@
  * Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
  *
+ * @var Discuss $discuss
+ * @var modX $modx
+ * @var array $scriptProperties
+ * 
  * @package discuss
  */
 /* get default options */
@@ -28,6 +32,10 @@ $start = $modx->getOption('start',$scriptProperties,0);
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
 $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disPostLi');
+
+$cacheKey = 'discuss/recent/'.$discuss->user->get('id').'.'.md5(serialize($scriptProperties));
+$cache = $modx->cacheManager->get($cacheKey);
+if (!empty($cache)) return $cache;
 
 /* get latest 10 posts */
 $c = $modx->newQuery('disPost');
@@ -173,9 +181,13 @@ foreach ($recentThreads as $thread) {
 }
 $list = implode("\n",$list);
 
-return array(
+$output = array(
     'results' => $list,
     'total' => isset($total) ? $total : null,
     'start' => $start,
     'limit' => $limit,
 );
+
+$modx->cacheManager->set($cacheKey,$output);
+
+return $output;

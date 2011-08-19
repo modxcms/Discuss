@@ -504,6 +504,7 @@ class disThread extends xPDOSimpleObject {
             $this->xpdo->cacheManager->delete('discuss/board/'.$this->get('board').'/');
             $this->xpdo->cacheManager->delete('discuss/board/user/');
             $this->xpdo->cacheManager->delete('discuss/board/index/');
+            $this->xpdo->cacheManager->delete('discuss/recent/');
         }
     }
 
