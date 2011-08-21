@@ -48,6 +48,18 @@
 				<hr class="line" />
     <div class="PanelBox">
 
+        <div class="Box GuestBox">
+           <h4>[[+username]]'s Profile</h4>
+            <ul class="PanelInfo PanelCategories">
+
+                <li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
+            <br /><span class="small">[[+title]]</span></li>
+            </ul>
+
+        </div>
+        <div class="Box BoxCategories">
+            [[+usermenu]]
+        </div>
 
 		[[$user-sidebar]]
 

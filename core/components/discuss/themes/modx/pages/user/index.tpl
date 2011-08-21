@@ -9,7 +9,6 @@
     <ul class="profile">
         <li>[[%discuss.name? &namespace=`discuss` &topic=`user`]]: <strong>[[+name_first]] [[+name_last]]</strong></li>
         <li>[[%discuss.posts]]: <strong>[[+posts]]</strong></li>
-        <li>[[%discuss.groups]]: <strong>[[+groups]]</strong></li>
         [[+ip:notempty=`<li>[[%discuss.ip? &namespace=`discuss` &topic=`web`]]: <strong>[[+ip]]</strong></li>`]]
 
         <li>[[%discuss.date_registered]]: <strong>[[+createdon:strtotime:date=`%b %d, %Y`]]</strong></li>
@@ -44,5 +43,19 @@
 <div id="Panel">
     <hr class="line" />
     <div class="PanelBox">
+
+        <div class="Box GuestBox">
+           <h4>[[+username]]'s Profile</h4>
+            <ul class="PanelInfo PanelCategories">
+
+                <li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
+            <br /><span class="small">[[+title]]</span></li>
+            </ul>
+
+        </div>
+
+        <div class="Box BoxCategories">
+            [[+usermenu]]
+        </div>
     	[[$user-sidebar]]
     </div>
