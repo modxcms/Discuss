@@ -774,7 +774,7 @@ class disPost extends xPDOSimpleObject {
 
         /** @var disThread $thread */
         $thread = $this->getOne('Thread');
-        return $canModify && $thread->canModifyPost($this->get('id'));
+        return $canModify || $thread->canModifyPost($this->get('id'));
     }
 
     /**
@@ -787,7 +787,7 @@ class disPost extends xPDOSimpleObject {
 
         /** @var disThread $thread */
         $thread = $this->getOne('Thread');
-        return $canRemove && $thread->canRemovePost($this->get('id'));
+        return $canRemove || $thread->canRemovePost($this->get('id'));
     }
 
     /**
