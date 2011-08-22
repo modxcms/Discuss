@@ -128,7 +128,19 @@ if (empty($cache)) {
         } else {
             $threadArray['title'] = strip_tags($threadArray['title']);
             $threadArray['createdon'] = strftime('%a, %d %b %Y %I:%M:%S %z',strtotime($threadArray['createdon']));
-            $threadArray['url'] = $modx->getOption('site_url').$threadArray['url'];
+            $threadArray['url'] = str_replace('//','/',$modx->getOption('site_url').$threadArray['url']);
+
+            /** @var disPost $lastPost */
+            $lastPost = $thread->getOne('LastPost');
+            if ($lastPost) {
+                $threadArray = array_merge($threadArray,$thread->toArray('post.'));
+                $threadArray['excerpt'] = $lastPost->get('message');
+                $threadArray['excerpt'] = $lastPost->stripBBCode($threadArray['excerpt']);
+                $threadArray['excerpt'] = strip_tags($threadArray['excerpt']);
+                if (strlen($threadArray['excerpt']) > 500) {
+                    $threadArray['excerpt'] = substr($threadArray['excerpt'],0,500).'...';
+                }
+            }
         }
         $cache['results'][] = $threadArray;
     }
