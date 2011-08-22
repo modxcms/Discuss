@@ -93,7 +93,7 @@ if (empty($cache)) {
             'Category.name AS category_name',
         ));
     }
-    if ($modx->getOption('discuss.enable_sticky',null,true)) {
+    if ($modx->getOption('discuss.enable_sticky',null,true) && $mode != 'rss') {
         $c->sortby('disThread.sticky','DESC');
     }
     $c->sortby('disThread.post_last_on','DESC');
