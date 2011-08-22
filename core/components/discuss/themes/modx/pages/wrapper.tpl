@@ -24,10 +24,12 @@
 	<header class="container">
 		<nav id="global2">
 			<!--<a href="">Revolution</a>-->
-			<a href="http://modx.com/revolution/">Revolution</a>
-			<a href="http://modx.com/evolution/">Evolution</a>
-			<a href="http://modx.com/partners/">Partners</a>
-			<a href="http://modx.com/community/">Community</a>
+			<a href="/?category=2" class="global1[[+category]]">General</a>
+			<a href="/?category=3" class="global2[[+category]]">Revolution</a>
+			<a href="/?category=4" class="global3[[+category]]">Evolution</a>
+			<a href="/?category=5" class="global4[[+category]]">Add-ons</a>
+			<a href="/?category=6" class="global5[[+category]]">International</a>
+			[[+category]]
 		</nav>
 
 	
@@ -203,5 +205,21 @@
 <div class="overlay round7" id="overlay">
 <div class="contentWrap"></div>
 </div>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-71684-1']);
+_gaq.push(['_setDomainName', '.modx.com']);
+_gaq.push(['_setAllowLinker', true]);
+_gaq.push(['_setAllowHash', false]);
+_gaq.push(['_trackPageview']);
+(function() { 
+	var ga = document.createElement('script');
+	ga.type = 'text/javascript';
+	ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
+	var s = document.getElementsByTagName('script')[0]; 
+	s.parentNode.insertBefore(ga, s);
+})(); 
+</script>
 </body>
 </html>

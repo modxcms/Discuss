@@ -2195,6 +2195,15 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
 	float: left;
 	}
 
+#global2 a.global12, 
+#global2 a.global23, 
+#global2 a.global34, 
+#global2 a.global45, 
+#global2 a.global56 {
+	background-color: #fff;
+	height: 35px;
+	}
+
 #user{
  	position:absolute;
  	top:0;
