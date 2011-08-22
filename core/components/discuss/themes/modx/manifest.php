@@ -91,6 +91,7 @@ $manifest = array(
             'showBreadcrumbs' => false,
             'showReaders' => false,
             'showModerators' => false,
+            'useLastPost' => false,
         ),
     ),
     'thread' => array(
