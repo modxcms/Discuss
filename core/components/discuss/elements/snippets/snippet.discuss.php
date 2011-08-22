@@ -24,6 +24,10 @@
 /**
  * Main front page snippet
  *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
+ *
  * @package discuss
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/',$scriptProperties);
