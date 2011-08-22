@@ -118,6 +118,7 @@ class DiscussThreadController extends DiscussController {
             $this->getQuickReplyButtons();
             $phs = $this->getPlaceholders();
             $phs['view'] = 'thread/reply';
+            $phs['subscribed'] = $this->thread->hasSubscription() ? ' checked="checked"' : '';
             $form = $this->discuss->getChunk('post/disQuickReply',$phs);
         }
         $this->setPlaceholder('quick_reply_form',$form);
