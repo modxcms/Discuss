@@ -40,12 +40,13 @@ $response['start'] = !empty($scriptProperties['start']) ? intval($scriptProperti
 $tpl = $modx->getOption('tpl',$scriptProperties,'post/disBoardPost');
 $lastPostTpl = $modx->getOption('lastPostTpl',$scriptProperties,'board/disLastPostBy');
 $mode = $modx->getOption('mode',$scriptProperties,'post');
+$useLastPost = $modx->getOption('useLastPost',$scriptProperties,true);
 $board = (int)(is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board']);
 
 $c = array();
 $c['limit'] = $response['limit'];
 $c['start'] = $response['start'];
-$cacheKey = 'discuss/board/'.$board.'/posts/'.$mode.'-'.md5(serialize($c));
+$cacheKey = 'discuss/board/'.$board.'/posts/'.$mode.$useLastPost.'-'.md5(serialize($c));
 $cache = $modx->cacheManager->get($cacheKey);
 
 if (empty($cache)) {
@@ -131,7 +132,8 @@ if (empty($cache)) {
             $threadArray['url'] = str_replace('//','/',$modx->getOption('site_url').$threadArray['url']);
 
             /** @var disPost $lastPost */
-            $lastPost = $thread->getOne('LastPost');
+            $alias = $useLastPost ? 'LastPost' : 'FirstPost';
+            $lastPost = $thread->getOne($alias);
             if ($lastPost) {
                 $threadArray = array_merge($threadArray,$thread->toArray('post.'));
                 $threadArray['excerpt'] = $lastPost->get('message');
