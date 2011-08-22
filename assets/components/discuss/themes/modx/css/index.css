@@ -93,7 +93,7 @@ li.dis-board-li .dis-board-locked {
 .dis-post-read .dis-thread-body {
 	opacity:.40;
 	filter: alpha(opacity=40);
-	filter: Òalpha(opacity=40)Ó;
+	filter: ï¿½alpha(opacity=40)ï¿½;
 	/* Firefox */
 	-moz-transition-property: opacity;
 	-moz-transition-duration: .3s;
@@ -117,7 +117,7 @@ li.dis-board-li .dis-board-locked {
 .unread .dis-thread-body {
 	opacity: 1;
 	filter: alpha(opacity=100);
-	filter: Òalpha(opacity=100)Ó;
+	filter: ï¿½alpha(opacity=100)ï¿½;
 	}
 
 .hide {
@@ -2059,8 +2059,9 @@ body {
  	position:relative;
 	}
 
-header {
- 	position:relative;
+article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, section {
+ 	display:block;
+    position:relative;
 	}
 
 #header {
