@@ -141,7 +141,7 @@ abstract class DiscussController {
         }
         
         $this->_renderBreadcrumbs();
-        $this->postProcess();
+        //$this->postProcess();
         $output = $this->_renderTemplate($this->config['tpl'],$this->placeholders);
 
         $output = $this->afterRender($output);
@@ -203,7 +203,7 @@ abstract class DiscussController {
         if (!$emptyTpl && $this->useWrapper) {
             $output = $this->_renderTemplate($this->discuss->config['pagesPath'].'wrapper.tpl',$placeholders);
         }
-        return $output;
+        return trim(trim($output),"\n");
     }
 
     /**
