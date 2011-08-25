@@ -38,10 +38,12 @@ $tpl = $modx->getOption('tpl',$scriptProperties,$modx->getOption('discuss.notifi
 
 /* get notification subscriptions */
 $c = $modx->newQuery('disUserNotification');
-$c->where(array(
-    'thread' => $scriptProperties['thread'],
-));
-if (!empty($scriptProperties['board'])) {
+if (!empty($scriptProperties['thread'])) {
+    $c->where(array(
+        'thread' => $scriptProperties['thread'],
+    ));
+}
+if (!empty($scriptProperties['board']) && empty($scriptProperties['thread'])) {
     $c->orCondition(array(
         'board:=' => $scriptProperties['board'],
         'AND:thread:=' => 0,
@@ -55,7 +57,6 @@ $url = $modx->makeUrl($modx->resource->get('id'),'','','full').$url.'?thread='.$
 if (!empty($scriptProperties['post'])) {
     $url .= '#dis-post-'.$scriptProperties['post'];
 }
-
 /* send out notifications */
 foreach ($notifications as $notification) {
     $user = $notification->getOne('User');
