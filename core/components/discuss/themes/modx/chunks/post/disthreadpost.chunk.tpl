@@ -4,7 +4,7 @@
             <div class="dis-author">
             	<a href="[[~[[*id]]]]user/?user=[[+author.id]]" class="auth-avatar">[[+author.avatar]]</a>
             	<div class="auth-count"><div class="post_icon" title="[[+author.posts]] Posts">[[+author.posts]]</div><!--<div class="badge_icon" title="[[+author.modxp]] XP">3</div>--></div>
-                <span class="avatarHover">
+                <div class="avatarHover">
 						[[+author.email]]
 						[[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
 						[[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
@@ -14,7 +14,7 @@
 		            <div class="dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
 		                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
 		            </div>
-                </span>
+                </div>
             </div>
             
         </div>
@@ -25,8 +25,8 @@
         	<!--<a href="" class="dis-fav">Favorite</a>-->
         	[[+link_mark_as_answer]]
         	<a href="#" class="quick-reply hide"><span>Reply</span></a>
-            <div class="dis-actions"><span><ul>[[+actions]]<li><a href="[[+url]]">Link to this post<span class="idx">#[[+idx]]</span></a>
-</li><li>[[+report_link]]</li></ul></span></div>
+            <div class="dis-actions"><div><ul>[[+actions]]<li><a href="[[+url]]">Link to this post<span class="idx">#[[+idx]]</span></a>
+</li><li>[[+report_link]]</li></ul></div></div>
         	<div>[[+content]]</div>
             
 		    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
