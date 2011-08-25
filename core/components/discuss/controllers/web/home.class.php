@@ -101,7 +101,12 @@ class DiscussHomeController extends DiscussController {
             'board' => 0,
             'checkUnread' => $this->getOption('checkUnread',true,'isset'),
         );
-        if (!empty($this->scriptProperties['category'])) $c['category'] = (int)$this->scriptProperties['category'];
+        if (!empty($this->scriptProperties['category'])) {
+            $c['category'] = (int)$this->scriptProperties['category'];
+            $this->setPlaceholder('category',$c['category']);
+        } else {
+            $this->setPlaceholder('category',0);
+        }
         $boards = $this->discuss->hooks->load('board/getlist',$c);
         if (!empty($boards)) {
             $this->setPlaceholder('boards',$boards);
