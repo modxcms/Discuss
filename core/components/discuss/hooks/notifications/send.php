@@ -23,6 +23,11 @@
  */
 /**
  * Send out all notifications for a post
+ *
+ * @var Discuss $discuss
+ * @var modX $modx
+ * @var array $scriptProperties
+ * 
  * @package discuss
  * @subpackage hooks
  */
@@ -58,6 +63,7 @@ if (!empty($scriptProperties['post'])) {
     $url .= '#dis-post-'.$scriptProperties['post'];
 }
 /* send out notifications */
+/** @var disUserNotification $notification */
 foreach ($notifications as $notification) {
     $user = $notification->getOne('User');
     if ($user == null) { $notification->remove(); continue; }
