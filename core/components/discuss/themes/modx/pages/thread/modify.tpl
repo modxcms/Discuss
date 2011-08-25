@@ -1,6 +1,6 @@
 
 [[!FormIt?
-  &submitVar=`dis-post-modify`
+  &submitVar=`dis-post-reply`
   &hooks=`postHook.DiscussModifyPost`
   &validate=`title:required,message:required:allowTags`
 ]]
@@ -65,7 +65,7 @@
 
     <br class="clearfix" />
     <div class="dis-form-buttons">
-        <input type="submit" class="Button" name="dis-post-modify" value="[[%discuss.save_changes]]" />
+        <input type="submit" class="Button" name="dis-post-reply" value="[[%discuss.save_changes]]" />
         <input type="button" class="Button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>

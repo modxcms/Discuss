@@ -1,7 +1,7 @@
 
 
 [[!FormIt?
-  &submitVar=`dis-post-new`
+  &submitVar=`dis-post-reply`
   &hooks=`postHook.DiscussNewThread`
   &validate=`title:required,message:required:allowTags`
 ]]
@@ -50,7 +50,7 @@
     [[+locked_cb]]
     [[+sticky_cb]]
     <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]</label><br class="clearfix" />
-        <input type="submit" name="dis-post-new" value="[[%discuss.thread_post_new]]" />
+        <input type="submit" name="dis-post-reply" value="[[%discuss.thread_post_new]]" />
         <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
     </div>
 </form>
