@@ -29,7 +29,6 @@
 			<a href="/?category=4" class="global3[[+category]]">Evolution</a>
 			<a href="/?category=5" class="global4[[+category]]">Add-ons</a>
 			<a href="/?category=6" class="global5[[+category]]">International</a>
-			[[+category]]
 		</nav>
 
 	
