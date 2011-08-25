@@ -36,6 +36,7 @@ class disBBCodeParser extends disParser {
      * @return string The parsed string with HTML instead of BBCode, and all code stripped
      */
     public function parse($message) {
+        $message = $this->checkImageSizes($message);
         $message = $this->preClean($message);
         
         /* handle quotes better, to allow for citing */
@@ -73,7 +74,6 @@ class disBBCodeParser extends disParser {
         $message = preg_replace("#\[tt\](.*?)\[/tt\]#si",'<tt>\\1</tt>',$message);
         $message = preg_replace("#\[rtl\](.*?)\[/rtl\]#si",'<div dir="rtl">\\1</div>',$message);
 
-
         /* align tags */
         $message = preg_replace("#\[center\](.*?)\[/center\]#si",'<div style="text-align: center;">\\1</div>',$message);
         $message = preg_replace("#\[right\](.*?)\[/right\]#si",'<div style="text-align: right;">\\1</div>',$message);
@@ -92,6 +92,8 @@ class disBBCodeParser extends disParser {
         $message = preg_replace("#\[mysql\](.*?)\[/mysql\]#si",'<pre class="brush:sql">\\1</pre>',$message);
         $message = preg_replace("#\[css\](.*?)\[/css\]#si",'<pre class="brush:css">\\1</pre>',$message);
         $message = preg_replace("#\[pre\](.*?)\[/pre\]#si",'<pre>\\1</pre>',$message);
+
+        $message = preg_replace_callback("#\[img\s[\"']?(.*?)[\"']?\](.*?)\[/img\]#si",array('disBBCodeParser','parseImageCallback'),$message);
         $message = preg_replace("#\[img=[\"']?(.*?)[\"']?\](.*?)\[/img\]#si",'<img src="\\1" alt="\\2" />',$message);
         $message = preg_replace("#\[img\](.*?)\[/img\]#si",'<img src="\\1" border="0" />',$message);
         $message = str_ireplace(array('[indent]', '[/indent]'), array('<div class="Indent">', '</div>'), $message);
@@ -105,6 +107,64 @@ class disBBCodeParser extends disParser {
         $message = preg_replace('#\[/?left\]#si', '', $message);
 
         return $message;
+    }
+
+    public static function parseImageCallback($matches) {
+        $width = '';
+        $height = '';
+        if (!empty($matches[1])) {
+            $p = explode(' ',$matches[1]);
+            foreach ($p as $part) {
+                $dim = explode('=',$part);
+                if (!empty($dim[1])) {
+                    $$dim[0] = $dim[0].'="'.$dim[1].'"';
+                }
+            }
+        }
+        return '<img src="'.$matches[2].'" alt="" '.$width.' '.$height.' />';
+    }
+
+    /**
+     * Handle smf-style img heights, preventing too large images
+     *
+     * @static
+     * @param string $message
+     * @return string
+     */
+    public function checkImageSizes($message) {
+        $maxWidth = $this->modx->getOption('discuss.max_image_width',null,500);
+        $maxHeight = $this->modx->getOption('discuss.max_image_height',null,500);
+		preg_match_all('~\[img(\s+width=\d+)?(\s+height=\d+)?(\s+width=\d+)?\](.+?)\[/img\]~is', $message, $matches, PREG_PATTERN_ORDER);
+		$replaces = array();
+		foreach ($matches[0] as $k => $v) {
+		    /* handle preg foo */
+			$matches[1][$k] = !empty($matches[3][$k]) ? $matches[3][$k] : $matches[1][$k];
+			$adjustedWidth = !empty($matches[1][$k]) ? (int) substr(trim($matches[1][$k]), 6) : 0;
+			$adjustedHeight = !empty($matches[2][$k]) ? (int) substr(trim($matches[2][$k]), 7) : 0;
+
+			/* skip if ok */
+			if ($adjustedWidth <= $maxWidth && $adjustedHeight <= $maxHeight)
+				continue;
+
+			/* if too wide */
+			if ($adjustedWidth > $maxWidth && !empty($maxWidth)) {
+				$adjustedHeight = (int) ($maxWidth * $adjustedHeight) / $adjustedWidth;
+				$adjustedWidth = $maxWidth;
+			}
+			/* if too high */
+			if ($adjustedHeight > $maxHeight && !empty($maxHeight)) {
+				$adjustedWidth = (int) (($maxHeight * $adjustedWidth) / $adjustedHeight);
+				$adjustedHeight = $maxHeight;
+			}
+
+			$replaces[$matches[0][$k]] = '[img' . (!empty($adjustedWidth) ? ' width=' . $adjustedWidth : '') . (!empty($adjustedHeight) ? ' height=' . $adjustedHeight : '') . ']' . $matches[4][$k] . '[/img]';
+		}
+
+		/* if we replaced tags */
+		if (!empty($replaces)) {
+			$message = strtr($message, $replaces);
+        }
+	    return $message;
     }
 
     /**
@@ -498,7 +558,7 @@ class disBBCodeParser extends disParser {
 
         $nbs = '\xA0';
         $charset = $this->modx->getOption('modx_charset',null,'UTF-8');
-        $keepAttributes = $this->modx->getOption('discuss.allowed_html_attributes',null,'href,target,src,author,date');
+        $keepAttributes = $this->modx->getOption('discuss.allowed_html_attributes',null,'href,target,src,author,date,width,height');
         $keepAttributes = explode(',',$keepAttributes);
         
         /* Only mess with stuff outside [code] tags. */
