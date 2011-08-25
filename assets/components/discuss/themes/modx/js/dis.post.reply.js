@@ -16,7 +16,7 @@ DIS.ReplyPost = function() {
         }
 
 		,quickReply: function() {
-			$.scrollTo($('.preview_toggle'),500);
+			$.scrollTo($('.dis-form'),500);
 			$('#dis-thread-message').focus();
 			return false;
 		}
