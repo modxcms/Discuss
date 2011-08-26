@@ -295,6 +295,7 @@ li.dis-board-li .dis-board-locked {
     }
     
 .translucent,
+.dis-read,
 .dis-post-read .dis-thread-body {
 	opacity:.40;
 	filter: alpha(opacity=40);
@@ -317,6 +318,7 @@ li.dis-board-li .dis-board-locked {
 	}
 
 .opaque,
+.dis-read:hover,
 .dis-board-post:hover .dis-thread-body,
 .unread .dis-thread-body {
 	opacity: 1;
