@@ -1486,7 +1486,7 @@ textarea {
 	margin: 0 20px 0 0;
 	}
 
-
+.Button:visited,
 .dis-form-buttons input[type="submit"],
 .dis-form-buttons input[type="button"],
 .dis-action-btn,
@@ -1511,6 +1511,7 @@ textarea {
 	line-height: 12px;
 	}
 
+.Button:hover,
 .dis-form-buttons input[type="submit"]:hover,
 .dis-form-buttons input[type="button"]:hover,
 input.Button:hover,
