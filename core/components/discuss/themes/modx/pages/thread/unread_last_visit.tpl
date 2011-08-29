@@ -3,9 +3,10 @@
 
 	<h1 class="Category">Unread Posts Since Last Visit</h1>
 
-	<ol class="dis-board-thread">
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+
 		[[+threads]]
-	</ol>
+	</ul>
 
 [[+pagination]]
 </div>
@@ -26,9 +27,6 @@
 				           <h4>Actions &amp; Info</h4>
 				            <p><a href="[[~[[*id]]]]login" class="Button">Login to Post</a></p>
 				        </div>`]]
-
-						
-						
 
 
     </div>
