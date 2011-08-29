@@ -5,9 +5,10 @@
 	<h1 class="Category">New Replies to Posts</h1>
 
 
-	<ol class="dis-board-thread">
+	<ul class="DataList CategoryList CategoryListWithHeadings">
+
 		[[+threads]]
-	</ol>
+	</ul>
 	
 </div>
 
