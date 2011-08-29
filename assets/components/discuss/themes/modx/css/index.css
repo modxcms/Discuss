@@ -1814,7 +1814,7 @@ ul.CategoryList li.Depth11 { padding-left: 250px !important; }
 ul.CategoryList li.Depth12 { padding-left: 275px !important; }
 ul.CategoryListWithHeadings li.Depth2 { 
     border-bottom: 1px solid #eee;
-    margin: 0 25px 10px 0;
+    margin: 0 25px 0 0;
     padding: 0 0;
     width: 662px;
     }
@@ -1928,14 +1928,14 @@ ul.CategoryList li.Item {
 .ItemContent {
 	position: relative;
 	padding: 0;
-	margin: 0 0 5px;
+	margin: 0;
 	}
 
 .ItemContent a.dis-cat-links {
     display: block;
-    margin: 0 0 0 -5px;
-    padding: 5px;
-    width: 658px;
+    margin: 0 0;
+    padding: 10px 0 10px 5px;
+    width: 657px;
 	}
 
 .ItemContent a.dis-cat-links:hover {
