@@ -4,9 +4,9 @@
 
 	<h1 class="Category">Unread Posts</h1>
 	
-	<ol>
+	<ul class="DataList CategoryList CategoryListWithHeadings">
 	[[+threads]]
-	</ol>
+	</ul>
     [[+pagination]]
 </div>
 

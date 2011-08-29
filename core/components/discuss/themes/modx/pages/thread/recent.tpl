@@ -5,9 +5,9 @@
 	<h1 class="Category">Recent Posts</h1>
 
 
-    <ol class="dis-board-thread">
+	<ul class="DataList CategoryList CategoryListWithHeadings">
         [[+recent_posts]]
-    </ol>
+    </ul>
     [[+pagination]]
 </div>
 
