@@ -35,7 +35,7 @@ set_time_limit(0);
 
 define('PKG_NAME','Discuss');
 define('PKG_NAME_LOWER','discuss');
-define('PKG_VERSION','1.0.5');
+define('PKG_VERSION','1.0.6');
 define('PKG_RELEASE','pl');
 
 /* override with your own defines here (see build.config.sample.php) */
