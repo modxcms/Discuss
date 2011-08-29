@@ -93,12 +93,6 @@ select, input, textarea, button { font:99% sans-serif; }
 pre, code, kbd, samp { font-family:monospace, sans-serif; }
 
 
-
-/*
- * minimal base styles
- */
-
-
 /* #444 looks better than black:twitter.com/H_FJ/statuses/11800719859 */
 body, select, input, textarea { color:#5f5f5f; }
 
@@ -212,10 +206,68 @@ links 137899
 
 */
 /* styles*//* == end boilerplate ======================================================= */
+/*
+ * print styles
+ * inlined to avoid required HTTP connection www.phpied.com/delay-loading-your-print-css/
+ */
+@media print {
+  * { background:transparent !important; color:#444 !important; text-shadow:none !important; }
+
+  a, a:visited { color:#444 !important; text-decoration:underline; }
+
+  a:after { content:" (" attr(href) ")"; }
+
+  abbr:after { content:" (" attr(title) ")"; }
+
+  .ir a:after { content:""; } /* Don't show links for images */
+
+  pre, blockquote { border:1px solid #999; page-break-inside:avoid; }
+
+  img { page-break-inside:avoid; }
+
+  @page { margin:0.5cm; }
+
+  p, h2, h3 { orphans:3; widows:3; }
+
+  h2, h3{ page-break-after:avoid; }
+  
+  #header,header,#crumbs,aside,footer{visibilty:hidden;display:none;}
+  #content{border:0;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;}
+  #main .two-col article {width:940px;}
+  #sidestage{width:900px;}
+  .two_col .col{width:426px;}
+  #content article{padding:0;}
+}
 
 
+/*
+ * Typekit Rules -- Put Them All in here
+ */
+.wf-inactive .pp thead th,.wf-loading h1,.wf-loading h2,.wf-loading h4,.wf-loading h6,.wf-loading .pp tbody .highlight th,.wf-loading .pp thead th, .wf-loading a.level1,.wf-loading .job_types label,.wf-loading .job_wheres label,.wf-loading .bigbtns label, .wf-loading .listing h3 {opacity:0;}
+ 
+//.wf-inactive .pp thead th,.wf-active h1,.wf-active h2,.wf-active h4,.wf-active h6,.wf-active .pp tbody .highlight th,.wf-active .pp thead th, .wf-active a.level1,.wf-active .job_types label,.wf-active .job_wheres label,.wf-active .bigbtns label, .wf-active .listing h3 {opacity:1;-moz-transition:0.2s opacity ease-in; -webkit-transition:0.2s opacity ease-in; transition:0.2s opacity ease-in;}
 
+/*
+ * Media queries for responsive design
+ */
 
+@media all and (orientation:portrait) {
+  /* Style adjustments for portrait mode goes here */
+
+}
+
+@media all and (orientation:landscape) {
+  /* Style adjustments for landscape mode goes here */
+
+}
+
+/* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)
+   Consider this:www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+@media screen and (max-device-width:480px) {
+  /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you
+     j.mp/textsizeadjust
+  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
+}
 
 
 
@@ -315,6 +367,7 @@ li.dis-board-li .dis-board-locked {
 	transition-property: opacity;
 	transition-duration: .3s;
 	transition-delay: 0s;
+ 	behavior:url(pie.htc);
 	}
 
 .opaque,
@@ -323,6 +376,7 @@ li.dis-board-li .dis-board-locked {
 .unread .dis-thread-body {
 	opacity: 1;
 	filter: alpha(opacity=100);
+ 	behavior:url(pie.htc);
 	}
 
 .hide {
@@ -362,6 +416,7 @@ li.dis-category-li h2,
 	box-shadow: 1px 1px 2px #999999;
 	-moz-box-shadow: 1px 1px 2px #999999;
 	-webkit-box-shadow: 1px 1px 2px #999999;
+ 	behavior:url(pie.htc);
 	}
 	
 .dis-sticky-actions a.Button {
@@ -377,6 +432,7 @@ li.dis-category-li h2,
 		border-radius: 0;
 		-moz-border-radius: 0;
 		-webkit-border-radius: 0;
+	 	behavior:url(pie.htc);
 		}
 
 .dis-sticky-actions a.Button:hover {
@@ -396,18 +452,21 @@ li.dis-category-li h2,
 	/* Standard */
 	transition-duration: .3s;
 	transition-delay: 0s;
+ 	behavior:url(pie.htc);
 	}
 
 .dis-sticky-actions a.Button:first-child {
 	border-radius: 3px 0 0 3px;
 	-moz-border-radius: 3px 0 0 3px;
 	-webkit-border-radius: 3px 0 0 3px;
+ 	behavior:url(pie.htc);
 	}
 
 .dis-sticky-actions a.Button:last-child {
 	border-radius: 0 3px 3px 0;
 	-moz-border-radius: 0 3px 3px 0;
 	-webkit-border-radius: 0 3px 3px 0;
+ 	behavior:url(pie.htc);
 	}
 
 
@@ -663,6 +722,7 @@ div.dis-actions div {
 	padding: 10px;
 	display: none;
 	z-index: 200;
+ 	behavior:url(pie.htc);
 	}
 
 div.dis-post-ct {
@@ -868,6 +928,7 @@ div.dis-author {
 	display: none;
 	width: 500px;
 	text-align: left;
+ 	behavior:url(pie.htc);
 	}
 
 div.dis-author:hover .avatarHover {
@@ -1004,6 +1065,7 @@ ul.dis-attachments {
 	font-size:1em;
 	min-height:inherit;
 	min-height:auto;
+ 	behavior:url(pie.htc);
 	}
 	
 .syntaxhighlighter {
@@ -1321,15 +1383,6 @@ nav ul {
 }
 
 
-
-
-
-
-
-
-
-
-
 .dis-breadcrumbs {
  	background: none repeat scroll 0 0 #ccc;
  	border: 1px solid #FFFFFF;
@@ -1379,6 +1432,7 @@ nav ul {
 	border-top-right-radius: 6px;
 	-moz-border-top-right-radius: 6px;
 	-webkit-border-top-right-radius: 6px;
+ 	behavior:url(pie.htc);
 	}
 
 :focus {
@@ -1509,6 +1563,7 @@ textarea {
 	-webkit-border-radius: 2px;
 	white-space: nowrap;
 	line-height: 12px;
+ 	behavior:url(pie.htc);
 	}
 
 .Button:hover,
@@ -1583,6 +1638,7 @@ a.Small:hover {
 	font-size: 9px;
 	line-height: 12px;
 	font-weight: normal;
+ 	behavior:url(pie.htc);
 	}
 
 ul.Options {
@@ -1612,6 +1668,7 @@ ul.Options li.Active strong:hover,
 	-webkit-border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
+ 	behavior:url(pie.htc);
 	}
 
 ul.Options li.Active {
@@ -1627,6 +1684,7 @@ ul.Options li.Active ul {
 	border-bottom-right-radius: 2px;
 	background: #444;
 	border: 1px solid #282828;
+ 	behavior:url(pie.htc);
 	}
 
 ul.Options li.Active ul li a {
@@ -1647,8 +1705,9 @@ ul.Options li.Active strong,
 ul.Options li.Active ul {
   	box-shadow: 0px 0px 2px #999;
 	-moz-box-shadow: 0 0 2px #999;
-	-webkit-box-shadow: 0px 0px 2px #999;  	
-}
+	-webkit-box-shadow: 0px 0px 2px #999;
+	 behavior:url(pie.htc);	
+	}
 
 ul.Options li.Active strong,
 ul.Options li.Active strong:hover,
@@ -1667,13 +1726,16 @@ ul.Options li.Parent strong:hover {
 	box-shadow:1px 1px 2px #999999;
 	-moz-box-shadow:1px 1px 2px #999999;
 	-webkit-box-shadow:1px 1px 2px #999999;
+ 	behavior:url(pie.htc);
 	}
+	
 ul.Options li.Active strong:hover,
 ul.Options li.Active strong,
 ul.Options li.Active ul {
 	box-shadow:2px 2px 2px #999999;
 	-moz-box-shadow:2px 2px 2px #999999;
 	-webkit-box-shadow:2px 2px 2px #999999;
+ 	behavior:url(pie.htc);
 	}
 
 .OptionsMenu {
@@ -1725,8 +1787,10 @@ div.Box {
 	margin: 0 0 10px;
 	box-shadow: 0px 0px 2px #999;
 	-moz-box-shadow: 0px 0px 2px #999;
-	-webkit-box-shadow: 0px 0px 2px #999;  
-}
+	-webkit-box-shadow: 0px 0px 2px #999;
+ 	behavior:url(pie.htc);
+	}
+
 div.Box h4 {
 	font-size: 110%;
 	color: #1e79a7;
@@ -1747,13 +1811,6 @@ div.Box p.stats {
 	border-bottom: 1px solid #efefef;
 	color: #555;
 	}
-
-
-
-
-
-
-
 
 ul.PanelInfo li {
 	background: #e3f4ff;
@@ -1780,13 +1837,13 @@ ul.PanelInfo div.Meta strong {
 	border-radius: 2px;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
-	
 	background: #FF0;
 	color:#000;
 	font-size:9px;
 	font-weight:bold;
 	padding: 3px;
 	line-height: 1;
+ 	behavior:url(pie.htc);
 	}
 
 /* Category Depths */
@@ -1850,6 +1907,7 @@ ul.DataList div.Meta strong {
 	font-weight:bold;
 	padding: 3px;
 	line-height: 1;
+ 	behavior:url(pie.htc);
 	}
 
 ul.DataList a.Delete:hover {
@@ -1866,6 +1924,7 @@ ul.DataList a.Delete:hover {
 	font-size:16px;
 	font-weight:bold;
 	line-height: 1;
+ 	behavior:url(pie.htc);
 	}
 
 ul.DataList a.Delete:hover {
@@ -1897,22 +1956,6 @@ div.Preview div.Message,
 ul.MessageList div.Message {
 	margin: 8px 0;
 	}
-/*
-code, pre {
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	background: #ff9;
-	padding: 4px 8px;
-	white-space: pre;
-	font-family: monospace;
-	overflow: auto;
-	border: 1px solid #eec;
-	}
-
-pre {
-	display: block;
-	}*/
 
 div.Message h1 { font-size: 22px; }
 div.Message h2 { font-size: 20px; }
@@ -1994,6 +2037,7 @@ div.Tabs li a:visited {
 	padding: 5px 10px;
 	line-height: 2.6;
 	white-space: nowrap;
+ 	behavior:url(pie.htc);
 	}
 
 div.MorePager li a:hover,
@@ -2036,6 +2080,7 @@ div.Headings {
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+ 	behavior:url(pie.htc);
 	}
 
 form.Thumbnail table {
@@ -2114,6 +2159,7 @@ ul.Tabs li a:hover {
 	position: relative;
 	top: 1px;
 	padding: 2px 8px 1px;
+ 	behavior:url(pie.htc);
 	}
 
 ul.Tabs li a:hover {
@@ -2226,7 +2272,6 @@ html {
 .modxcss ol { list-style-type:decimal; }
 .modxcss pre {
   padding:15px;
-  
   white-space:pre; 
   white-space:pre-wrap; 
   white-space:pre-line; 
@@ -2245,6 +2290,7 @@ input:invalid {
 			-moz-box-shadow:0px 0px 5px red;
 			-webkit-box-shadow:0px 0px 5px red;
 			box-shadow:0px 0px 5px red;
+			behavior:url(pie.htc);
 			}
 
 .modxcss ::-moz-selection{ background:#84d5e8; color:#fff; text-shadow:none; }
@@ -2261,8 +2307,6 @@ input:invalid {
 br.clearfix  {display:block; height:0; clear:both; visibility:hidden; }
 
  
-
-
 body {
 	background:#efefef url(http://www.modx.com/assets/i/bg-pattern.png) repeat;
 	}
@@ -2438,7 +2482,7 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	-webkit-box-shadow:inset 2px 2px 7px #d8d8d8;
  	box-shadow:inset 2px 2px 7px #d8d8d8;
  	position:relative;
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
 
 #logo_search input[type=submit],
@@ -2461,7 +2505,7 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	-webkit-box-shadow:none;
  	box-shadow:none;
  	position:relative;
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
 
 #main #results_search input[type=submit]{
@@ -2483,6 +2527,7 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	position:relative;
  	z-index:999;
 	}
+	
 #section li {
  	display:inline-block;
  	color:#fff;
@@ -2491,6 +2536,7 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	position:relative;
  	z-index:1000;
 	}
+	
 #section li.first { background:none; }
 
 #section span.Title {
@@ -2506,6 +2552,7 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	width:auto;
  	padding:10px 20px;
 	}
+	
 #section a span{
  	color:#fff;
 	}
@@ -2533,12 +2580,13 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	border:0;
  	-moz-border-radius:0;
  	border-radius:0;
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
 
 #section .level2{
  	float:left;
 	}
+	
 #section .level2 a {
  	font-family:"Helvetica Neue", helvetica, arial, sans-serif;
  	font-size:13px;
@@ -2555,15 +2603,18 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	-moz-border-radius:5px 5px 0 0;
  	border-radius:5px 5px 0 0;
  	position:relative;
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
+	
 #home #section li:hover a {
  	background-color:#1a6d84;
  	background:-webkit-gradient(linear, left top, left bottom, from(#0f5a75), to(#1a6d84));
  	background:-moz-linear-gradient(top, #0f5a75, #1a6d84);
+ 	behavior:url(pie.htc);
 	}
-.ie#home #section .level1:hover a{-pie-background:linear-gradient(top, #0f5a75, #1a6d84);}
-.ie#home #section .level1:hover .level2 a{-pie-background:transparent;}
+	
+.ie#home #section .level1:hover a {-pie-background:linear-gradient(top, #0f5a75, #1a6d84); behavior:url(pie.htc); }
+.ie#home #section .level1:hover .level2 a {-pie-background:transparent;	behavior:url(pie.htc); }
 
 #section li ul { display:none; }
 #section li:hover li a { background:transparent !important; }
@@ -2587,23 +2638,26 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	box-shadow:1px 4px 5px rgba(0,0,0,.22);
  	z-index:1001;
  	padding-top:20px;
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
+	
 .ie #section li:hover ul{
  	border-radius:0 0 5px 5px;
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
+	
 #section li:hover ul ul{
  	background:transparent;
  	padding:0;
 	}
+	
 #home #section li:hover ul {
  	background-color:#1a6d84;
  	background:-webkit-gradient(linear, left top, left bottom, from(#1a6d84), to(#024761));
  	background:-moz-linear-gradient(top, #1a6d84, #024761);
  	-pie-background:linear-gradient(top, #1a6d84, #024761);
  	background:linear-gradient(top, #1a6d84, #024761); 	
-}
+	}
 
 #section li:hover li ul {
  	background:none !important;
@@ -2613,6 +2667,7 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	box-shadow:none;
  	padding-top:0;
 	}
+	
 #section li:hover ul ul{
  	position:relative;
  	-moz-box-shadow:0;
@@ -2621,15 +2676,18 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	background:transparent;
  	padding-top:0;
 	}
+	
 #section .level1.last:hover ul{
  	position:absolute;
  	top:auto;
  	left:auto;
  	right:0;
 	}
+	
 #section .level1.last:hover ul ul{
  	position:relative;
 	}
+	
 #section li:hover ul li {
  	position:relative;
  	display:block;
@@ -2640,6 +2698,7 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	padding:0;
  	width:auto;
 	}
+	
 #section li:hover .inner a {
  	position:relative;
  	display:block;
@@ -2652,11 +2711,13 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	-moz-box-shadow:none;
  	-webkit-box-shadow:none;
  	box-shadow:none;
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
+	
 #section li:hover .inner{
  	width:470px;
 	}
+	
 #section .level1 li.level2{
  	float:left;
  	display:block;
@@ -2664,22 +2725,28 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
  	padding-top:0;
  	padding-bottom:10px;
 	}
+	
 #section li.level2:nth-child(even){
  	border-left:1px solid #555;
  	margin-left:-1px;
 	}
+	
 #section li.level2:nth-child(odd){
  	border-right:1px solid #555;
 	}
+	
 #home #section li.level2:nth-child(even){
  	border-left-color:#0F7096;
 	}
+	
 #home #section li.level2:nth-child(odd){
  	border-right-color:#0F7096;
 	}
+	
 #section li:hover .inner ul{
  	width:auto;
 	}
+	
 #section li:hover ul li a:hover:before,
 #section li:hover ul li a.current:before {
  	content:">";
@@ -2699,10 +2766,12 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
   font-weight:normal;
   color:#137899;
 	}
+	
 .modxcss h3, .modxcss h5, UNUSED.modxcss h3 a {
  	font-weight:bold;
  	color:#494949;
 	}
+	
 .modxcss h4 {
  	color:#494949;
  	border-bottom:1px solid #e3e3e3;
@@ -2720,10 +2789,10 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
 .modxcss h2, .modxcss h6{letter-spacing:1px;}
 
 .modxcss p { margin:10px 0 20px; }
+
 .modxcss em {
   font-style:italic;
-
-}
+	}
 
 #top {
 	margin: 0 auto;
@@ -2732,18 +2801,20 @@ article, aside, details, header, figcaption, figure, footer, hgroup, menu, nav, 
 	}
 
 footer {
- 	background-color:#f5f5f5;
-	 text-align: left;
-	 clear: both;
+	background-color:#f5f5f5;
+	text-align: left;
+	clear: both;
 	}
 
 #destinations h3 a {
  	font-size:16px;
  	font-weight:normal;
 	}
+	
 #destinations h3 {
  	margin:2em 0 .75em;
 	}
+	
 #destinations {
  	height:183px;
  	background:#00181f url(http://www.modx.com/assets/i/headers.jpg) center -132px no-repeat;
@@ -2761,6 +2832,7 @@ footer {
  	height:183px;
  	background:transparent url(http://www.modx.com/assets/i/bg-sprite.png) 150px -466px no-repeat;
 	}
+	
 #destinations section.last { background:none; }
 
 #destinations a {
@@ -2777,6 +2849,7 @@ footer {
  	color:#ddd;
  	position:relative;
 	}
+	
 #destinations a:hover:before  {
  	content:"> ";
  	font-size:14px;
@@ -2794,8 +2867,7 @@ footer {
  	background:linear-gradient(top, #5FA5AF 0%, #1E4F6A 19%, #02314B 100%);
  	height:134px;
  	padding:33px 0 0;
- 	
-}
+	}
 
 #subscribe form {
  	float:left;
@@ -2822,7 +2894,7 @@ footer {
  	-webkit-box-shadow:inset 2px 2px 7px #d8d8d8;
  	box-shadow:inset 2px 2px 7px #d8d8d8;
  	position:relative;
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
 	
 #subscribe input[type=submit]{
@@ -2844,7 +2916,7 @@ footer {
  	background:-moz-linear-gradient(top, #9ccad8, #56a9c2);
  	-pie-background:linear-gradient(top, #9ccad8, #56a9c2);
  	background:linear-gradient(top, #9ccad8, #56a9c2);
- 	behavior:url(http://www.modx.com/assets/css/pie.htc);
+ 	behavior:url(pie.htc);
 	}
 	
 #subscribe p {
@@ -2918,6 +2990,7 @@ footer {
  	background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#202427), color-stop(30%,#3C4746));
  	filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#202427', endColorstr='#3C4746',GradientType=0 );
  	border-bottom:1px solid #fff;
+ 	behavior:url(pie.htc);
 	}
 
 #copyright p {
@@ -2949,7 +3022,8 @@ footer {
  	background:-moz-linear-gradient(top, #BCCACD 0%, #F2F2F2 69%);
  	background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#BCCACD), color-stop(69%,#F2F2F2));
  	filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#BCCACD', endColorstr='#F2F2F2',GradientType=0 )
-}
+ 	behavior:url(pie.htc);
+	}
 
 .last { margin-right:0; }
 
@@ -2964,6 +3038,7 @@ footer {
 	box-shadow: 0 0 2px #ddd;
 	-moz-box-shadow: 0 1px 2px #ddd;
 	-webkit-box-shadow: 0 0 2px #ddd;
+ 	behavior:url(pie.htc);
 	}
 
 #Status {
@@ -3023,6 +3098,7 @@ a.BigButton {
 	-webkit-box-shadow: 0 0 2px #aaa;
 	color: #fff;
 	text-shadow: 0 1px 0 #408496;
+ 	behavior:url(pie.htc);
 	}
 	
 a.BigButton:hover {
@@ -3032,6 +3108,7 @@ a.BigButton:hover {
 	-webkit-box-shadow: 0 0 2px #aaa;
 	color: #fff;
 	text-shadow: 0 1px 0 #2E616F;
+ 	behavior:url(pie.htc);
 	}
 
 a.BigButton:active {
@@ -3048,6 +3125,7 @@ div.Box {
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	padding: 0;
+ 	behavior:url(pie.htc);
 	}
 
 div.Box h4 {
@@ -3062,6 +3140,7 @@ div.Box h4 {
 	border-radius: 6px 6px 0 0;
 	-moz-border-radius: 6px 6px 0 0;
 	-webkit-border-radius: 6px 6px 0 0;
+ 	behavior:url(pie.htc);
 	}
 	
 div.Popup #ConversationForm h2,
@@ -3078,6 +3157,7 @@ div.Connect h2 {
 	background:linear-gradient(top, #ffffff, #eef5f7);
 	border-bottom: 1px solid #e5e5e5;
 	margin: 0;
+ 	behavior:url(pie.htc);
 	}
 	
 a.Close, a.Close:hover {
@@ -3146,6 +3226,7 @@ div.Tabs li a:visited {
 	background:linear-gradient(top, #fcfeff, #e9f3f6);
 	font-weight: normal;
 	color: #000;
+ 	behavior:url(pie.htc);
 	}
 
 div.MorePager a:hover,
@@ -3157,6 +3238,7 @@ div.Tabs li a:hover {
 	background:-moz-linear-gradient(top, #f0f9fc, #e2f1f6);
 	-pie-background:linear-gradient(top, #f0f9fc, #e2f1f6);
 	background:linear-gradient(top, #f0f9fc, #e2f1f6);
+ 	behavior:url(pie.htc);
 	}
 
 a.Active,
@@ -3196,15 +3278,19 @@ form.Activity {
 	border-top: 1px solid #E3E3E3;
 	padding: 10px;
 	}
+	
 ul.DataList.Activities li.Item {
 	min-height: 54px;
 	}
+	
 ul.Activities ul.DataList {
 	margin-left: 62px;
 	}
+	
 div.Box.GuestBox {
 	padding-bottom: 6px;
 	}
+	
 div.Box.GuestBox p {
 	letter-spacing: -.01em;
 	padding: 0 10px 4px;
@@ -3229,6 +3315,7 @@ ul.Discussion {
 	border-radius: 0 0 0 6px;
 	-moz-border-radius: 0 0 0 6px;
 	-webkit-border-radius: 0 0 0 6px;
+ 	behavior:url(pie.htc);
 	}
 	
 div.MessageForm div.Tabs {
@@ -3250,6 +3337,7 @@ div.DismissMessage {
 	-moz-box-shadow: 0 1px 2px #ddd;
 	-webkit-box-shadow: 0 0 2px #ddd;
 	padding: 4px 8px;
+ 	behavior:url(pie.htc);
 	}
 
 div.DismissMessage.Warning {
@@ -3344,15 +3432,18 @@ h1.locked {
     margin: 0 0 5px;
     padding: 0 0 5px;
 	}
+	
 .dis-board-subs strong {
     text-transform: uppercase;
     color: #666;
-}
+	}
+	
 .dis-board-subs a {
 	display: inline;
 	margin: 0;
 	padding: 0;
 	}
+	
 pre {
 	background-color: #eee;
 	}
@@ -3369,6 +3460,7 @@ pre {
    -pie-background:linear-gradient(top, #EAEAEA, #FFFFFF);
    background:linear-gradient(top, #EAEAEA 0%, #FFFFFF 100%);
    border-width: 0 0 0;
+   behavior:url(pie.htc);
    }
 
 
@@ -3527,10 +3619,10 @@ h4 a.normal-type {
     background-color: #444;
     z-index: 600;
     margin: 10px 0 20px 20px;
+ 	behavior:url(pie.htc);
 	}
 
 .preview_toggle a {
-
 }
 
 a.dis-message-write {
@@ -3545,6 +3637,7 @@ a.dis-message-write {
     margin: 2px;
     padding: 1px 6px 0;
     text-decoration: none;
+ 	behavior:url(pie.htc);
     }
     
 a.dis-new-thread-preview,
@@ -3561,6 +3654,7 @@ a.dis-message-preview {
     margin: 2px;
     padding: 1px 6px 0;
     text-decoration: none;
+ 	behavior:url(pie.htc);
 	}
 
 .dis-post-preview {
@@ -3588,6 +3682,7 @@ a.dis-message-preview {
 	border-radius: 6px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
+ 	behavior:url(pie.htc);
 	}
 
 .preview_toggle .dis-post-preview h2 {
