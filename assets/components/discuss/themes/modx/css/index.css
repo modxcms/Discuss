@@ -420,20 +420,20 @@ li.dis-category-li h2,
 	}
 	
 .dis-sticky-actions a.Button {
-		float: left;
-		line-height: 12px;
-		font-weight: normal;
-		height: 14px;
-		padding: 2px 4px;
-		margin: 2px 0 0 -1px;
-		background-color: #fefefe;
-		border-color: #aaa;
-		color: #aaa;
-		border-radius: 0;
-		-moz-border-radius: 0;
-		-webkit-border-radius: 0;
-	 	behavior:url(pie.htc);
-		}
+	float: left;
+	line-height: 12px;
+	font-weight: normal;
+	height: 14px;
+	padding: 2px 4px;
+	margin: 2px 0 0 -1px;
+	background-color: #fefefe;
+	border-color: #aaa;
+	color: #aaa;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+ 	behavior:url(pie.htc);
+	}
 
 .dis-sticky-actions a.Button:hover {
  	-moz-box-shadow:inset 2px 2px 7px #d8d8d8;
@@ -563,11 +563,13 @@ div.dis-threads ol.search-results {
     padding: 0 8px;
     position: relative;
     text-decoration: none;
-}
+    behavior:url(pie.htc);
+	}
 
 .dis-pagination li a.active, .dis-pagination li a:hover {
     background: -moz-linear-gradient(center top , #99D0E2, #4AA8BF) repeat scroll 0 0 transparent;
     color: #FFFFFF;
+    behavior:url(pie.htc);
     }
 
 .dis-pagination li.dis-no-pages {
