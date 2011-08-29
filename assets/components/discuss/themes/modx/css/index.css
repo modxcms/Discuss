@@ -918,9 +918,7 @@ div.dis-author {
 	z-index: 500;
 	background-color: #fff;
 	border: 1px solid #bbb;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
+
 	box-shadow: 1px 1px 2px #999999;
 	-moz-box-shadow: 1px 1px 2px #999999;
 	-webkit-box-shadow: 1px 1px 2px #999999;
@@ -930,6 +928,9 @@ div.dis-author {
 	display: none;
 	width: 500px;
 	text-align: left;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
  	behavior:url(pie.htc);
 	}
 
@@ -1041,8 +1042,6 @@ ul.dis-attachments {
 .syntaxhighlighter table thead,
 .syntaxhighlighter table caption,
 .syntaxhighlighter textarea {
-	-moz-border-radius:0 0 0 0;
-	-webkit-border-radius:0 0 0 0;
 	background:none;
 	border:0;
 	bottom:auto;
@@ -1067,6 +1066,9 @@ ul.dis-attachments {
 	font-size:1em;
 	min-height:inherit;
 	min-height:auto;
+	border-radius:0 0 0 0;
+	-moz-border-radius:0 0 0 0;
+	-webkit-border-radius:0 0 0 0;
  	behavior:url(pie.htc);
 	}
 	
@@ -1388,7 +1390,6 @@ nav ul {
 .dis-breadcrumbs {
  	background: none repeat scroll 0 0 #ccc;
  	border: 1px solid #FFFFFF;
- 	border-radius: 6px 0 0 0;
  	list-style: none;
  	clear: left;
 	display: block;
@@ -1397,6 +1398,10 @@ nav ul {
 	margin: 0;
 	background: #dedede;
 	height: 20px;
+	border-radius: 6px 0 0 0;
+	-moz-border-radius: 6px 0 0 0;
+	-webkit-border-radius: 6px 0 0 0;
+ 	behavior:url(pie.htc);
 	}
 	
 .dis-breadcrumbs li {
@@ -1560,11 +1565,11 @@ textarea {
 	background: #f8f8f8;
 	color: #555;
 	border: 1px solid #ccc;
+	white-space: nowrap;
+	line-height: 12px;
 	border-radius: 2px;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
-	white-space: nowrap;
-	line-height: 12px;
  	behavior:url(pie.htc);
 	}
 
@@ -1633,13 +1638,13 @@ a.Small:hover {
 	}
 
 #Menu li.Highlight a:hover span {
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
 	padding: 0 2px;
 	font-size: 9px;
 	line-height: 12px;
 	font-weight: normal;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
  	behavior:url(pie.htc);
 	}
 
@@ -1678,14 +1683,14 @@ ul.Options li.Active {
 	}
 
 ul.Options li.Active ul {
+	background: #444;
+	border: 1px solid #282828;
 	-moz-border-radius-bottomleft: 2px;
 	-moz-border-radius-bottomright: 2px;
 	-webkit-border-bottom-left-radius: 2px;
 	-webkit-border-bottom-right-radius: 2px;
 	border-bottom-left-radius: 2px;
 	border-bottom-right-radius: 2px;
-	background: #444;
-	border: 1px solid #282828;
  	behavior:url(pie.htc);
 	}
 

@@ -3,10 +3,10 @@
 
 	<h1 class="Category">[[%discuss.last_post]]</h1>
 	
-	<ol class="dis-board-thread">
+	<ul class="DataList CategoryList CategoryListWithHeadings">
 		[[+messages]]
         <li>[[+pagination:notempty=`<div class="dis-pagination">[[+pagination]]</div>`]]</li>
-	</ol>
+	</ul>
 </div>
 
 
