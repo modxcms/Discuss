@@ -110,7 +110,7 @@ if (empty($cache)) {
         $thread->buildIcons();
         $threadArray = $thread->toArray();
         if ($mode != 'rss') {
-            $threadArray['title'] = html_entity_decode($threadArray['title']);
+            $threadArray['title'] = $threadArray['title'];
             $threadArray['excerpt'] = '';
             $threadArray['views'] = number_format($threadArray['views']);
             $threadArray['replies'] = number_format($threadArray['replies']);
