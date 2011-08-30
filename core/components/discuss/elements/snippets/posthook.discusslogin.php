@@ -23,6 +23,13 @@
  */
 /**
  * Handle post-login data manipulation
+ *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
+ * @var fiHooks $hook
+ * 
+ * @package discuss
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
 if (!($discuss instanceof Discuss)) return true;
@@ -33,7 +40,7 @@ if (empty($fields['username'])) {
     return false;
 }
 
-/* get modUser object */
+/* @var modUser $user get modUser object */
 $user = $modx->getObject('modUser',array(
     'username' => $fields['username'],
 ));
@@ -47,9 +54,11 @@ $c = $modx->newQuery('disUser');
 $c->where(array(
     'user' => $user->get('id'),
 ));
+/** @var disUser $disUser */
 $disUser = $modx->getObject('disUser',$c);
 if (empty($disUser)) {
     /* ok, we need to create a parallel disUser obj since none exists */
+    /** @var modUserProfile $profile */
     $profile = $user->getOne('Profile');
 
     $disUser = $modx->newObject('disUser');
@@ -80,6 +89,7 @@ if (empty($disUser)) {
 
 /* remove old session to prevent duplicates */
 $oldSessionId = session_id();
+/** @var disSession $session */
 $session = $modx->getObject('disSession',array('id' => $oldSessionId));
 if ($session) {
     $session->remove();
