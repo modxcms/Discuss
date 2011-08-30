@@ -276,6 +276,7 @@ class Discuss {
                     'confirmedon' => date('Y-m-d H:I:S'),
                     'source' => 'internal',
                     'ip' => $this->getIp(),
+                    'status' => disUser::ACTIVE,
                 ));
                 if ($profile) {
                     $this->user->fromArray($profile->toArray());
