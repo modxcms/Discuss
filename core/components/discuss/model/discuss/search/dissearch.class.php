@@ -100,7 +100,7 @@ class disSearch {
                 ));
             }
         }
-        if (!empty($conditions['board'])) $c->where(array('disBoard.id' => $conditions['board']));
+        if (!empty($conditions['board'])) $c->where(array('Board.id' => $conditions['board']));
         if (!empty($conditions['user'])) $c->where(array('disPost.author' => $conditions['user']));
         $response['total'] = $this->modx->getCount('disPost',$c);
         $c->select($this->modx->getSelectColumns('disPost','disPost'));

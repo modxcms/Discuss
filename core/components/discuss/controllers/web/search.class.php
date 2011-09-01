@@ -59,7 +59,9 @@ class DiscussSearchController extends DiscussController {
         $boardOutput[] = $this->discuss->getChunk('board/disBoardOpt',array('id' => '','name' => $this->modx->lexicon('discuss.board_all'),'selected' => ''));
         foreach ($boards as $board) {
             $board['selected'] = !empty($this->scriptProperties['board']) && $this->scriptProperties['board'] == $board['id'] ? ' selected="selected"' : '';
-            $board['name'] = str_repeat('--',$board['depth']-1).$board['name'];
+            $pad = $board['depth']-1;
+            if ($pad < 0) $pad = 0;
+            $board['name'] = str_repeat('--',$pad).$board['name'];
             $boardOutput[] = $this->discuss->getChunk('board/disBoardOpt',$board);
         }
         $this->setPlaceholder('boards',implode("\n",$boardOutput));
