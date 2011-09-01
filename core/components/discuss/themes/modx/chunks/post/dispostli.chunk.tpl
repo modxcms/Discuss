@@ -1,17 +1,10 @@
-<li class="dis-board-post [[+class]][[+unread:notempty=` unread`]]">
-
-    <a href="[[+url]]">
-    	<div class="dis-thread-body">
-        <h3[[+locked:is=`1`:then=` class="locked"`]]>
-            <span class="dis-post-board-name">&#91;[[+board_name]]&#93;</span>
-            [[+sticky:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]
-        </h3>
-        
-        
-        <p>[[+replies]] replies, [[+createdon]] [[%discuss.by? &author=`[[+author_link]]`]]</p>
-        
-        
-    	</div>
-    </a>
-    
+<li class="Depth2 [[+class]]">
+    <div class="ItemContent">
+    	<a href="[[+url]]" class="dis-cat-links[[+unread:notempty=` unread`:else=` read`]]">
+    		<h3 class="[[+locked:is=`1`:then=`locked`:else=`unlocked`]]">
+    		<span class="Title">[[+sticky:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</span><br />
+    		<span class="DiscussionCount">[[+createdon:ago]], [[+replies]] replies</span>
+    		</h3>
+	    </a>
+	</div>
 </li>

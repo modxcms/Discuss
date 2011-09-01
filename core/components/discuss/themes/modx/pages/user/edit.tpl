@@ -1,7 +1,6 @@
 [[+top]]
 
-<div class="dis-profile left">
-	<ul class="DataList CategoryList CategoryListWithHeadings">
+<div class="dis-profile">
 	
 	<h1 class="Category">[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h1>
 	
@@ -19,67 +18,67 @@
     
     <label for="dis-name-first">[[%discuss.name_first]]:
         <span class="error">[[+error.name_first]]</span>
-    </label>
-    <input type="text" name="name_first" id="dis-name-first" value="[[+name_first]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="name_first" id="dis-name-first" value="[[+name_first]]" /><br class="clearfix" />
     
     <label for="dis-name-last">[[%discuss.name_last]]:
         <span class="error">[[+error.name_last]]</span>
-    </label>
-    <input type="text" name="name_last" id="dis-name-last" value="[[+name_last]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="name_last" id="dis-name-last" value="[[+name_last]]" /><br class="clearfix" />
     
     <label for="dis-email">[[%discuss.email]]:
         <span class="error">[[+error.email]]</span>
-    </label>
-    <input type="text" name="email" id="dis-email" value="[[+email]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="email" id="dis-email" value="[[+email]]" /><br class="clearfix" />
     
     <label for="dis-website">[[%discuss.website]]:
         <span class="error">[[+error.website]]</span>
-    </label>
-    <input type="text" name="website" id="dis-website" value="[[+website]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="website" id="dis-website" value="[[+website]]" /><br class="clearfix" />
     
     <label for="dis-gender">[[%discuss.gender]]:
         <span class="error">[[+error.gender]]</span>
-    </label>
+    </label><br class="clearfix" />
     <select name="gender" id="dis-gender">
         [[+genders]]
-    </select>
+    </select><br class="clearfix" />
     
     <label for="dis-birthdate">[[%discuss.birthdate]]:
         <span class="error">[[+error.birthdate]]</span>
-    </label>
+    </label><br class="clearfix" />
     <input type="text" name="birthdate" id="dis-birthdate" value="[[+birthdate]]" />
-    
+    <br class="clearfix" />
     <label for="dis-location">[[%discuss.location]]:
         <span class="error">[[+error.location]]</span>
-    </label>
+    </label><br class="clearfix" />
     <input type="text" name="location" id="dis-location" value="[[+location]]" />
-        
+        <br class="clearfix" />
     <label for="dis-title">[[%discuss.custom_title]]:
         <span class="error">[[+error.title]]</span>
-    </label>
+    </label><br class="clearfix" />
     <input type="text" name="title" id="dis-title" value="[[+title]]" />
-
+<br class="clearfix" />
     <label for="dis-title">[[%discuss.avatar_service]]:
         <span class="error">[[+error.title]]</span>
-    </label>
+    </label><br class="clearfix" />
     <select name="avatar_service" id="dis-avatar-service" value="[[+avatar_service]]">
         <option value="gravatar">Gravatar</option>
-    </select>
+    </select><br class="clearfix" />
 
     <label for="dis-signature">[[%discuss.signature]]:
         <span class="error">[[+error.signature]]</span>
-    </label>
+    </label><br class="clearfix" />
     <textarea type="text" name="signature" id="dis-signature" rows="7" cols="54">[[+signature]]</textarea>
-
-    <label for="dis-show-email">[[%discuss.show_email_public]]
+<br class="clearfix" />
+    <label for="dis-show-email"><input type="checkbox" name="show_email" id="dis-show-email" value="1" [[+show_email]] />[[%discuss.show_email_public]]
         <span class="error">[[+error.show_email]]</span>
-    </label>
-    <input type="checkbox" name="show_email" id="dis-show-email" value="1" [[+show_email]] />
+    </label><br class="clearfix" />
+    
 
-    <label for="dis-show-online">[[%discuss.show_online_status]]
+    <label for="dis-show-online"><input type="checkbox" name="show_online" id="dis-show-online" value="1" [[+show_online]] />[[%discuss.show_online_status]]
         <span class="error">[[+error.show_online]]</span>
     </label>
-    <input type="checkbox" name="show_online" id="dis-show-online" value="1" [[+show_online]] />
+    
     
     
     <br class="clearfix" />
@@ -103,16 +102,16 @@
 				<hr class="line" />
     <div class="PanelBox">
 
-        <div class="Box GuestBox">
+        <div class="Box">
            <h4>[[+username]]'s Profile</h4>
-            <ul class="PanelInfo PanelCategories">
+            <ul class="panel_info">
 
                 <li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
-            <br /><span class="small">[[+title]]</span></li>
+            <span class="small">[[+title]]</span></li>
             </ul>
 
         </div>
-        <div class="Box BoxCategories">
+        <div class="Box">
             [[+usermenu]]
         </div>
 

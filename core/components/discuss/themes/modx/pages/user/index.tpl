@@ -1,6 +1,6 @@
 [[+top]]
 
-<div class="dis-profile left">
+<div class="dis-profile">
 
 <form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" id="dis-user-edit-form">
 
@@ -29,10 +29,11 @@
 
 
 <div class="dis-threads">
-    <h1 class="Category">[[%discuss.recent_posts]]</h1>
-    <ol class="dis-board-list">
+
+    <ul class="dis-list">
+    	<li><h1 class="Category">[[%discuss.recent_posts]]</h1></li>
         [[+recent_posts]]
-    </ol>
+    </ul>
 </div>
 
 </div>
@@ -44,9 +45,9 @@
     <hr class="line" />
     <div class="PanelBox">
 
-        <div class="Box GuestBox">
+        <div class="Box">
            <h4>[[+username]]'s Profile</h4>
-            <ul class="PanelInfo PanelCategories">
+            <ul class="panel_info">
 
                 <li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
             <br /><span class="small">[[+title]]</span></li>
@@ -54,8 +55,7 @@
 
         </div>
 
-        <div class="Box BoxCategories">
+        <div class="Box">
             [[+usermenu]]
         </div>
-    	[[$user-sidebar]]
     </div>

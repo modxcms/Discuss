@@ -30,15 +30,15 @@
 
     <label for="dis-reply-post-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
-    </label>
-    <input type="text" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" />
+    </label><br />
+    <input type="text" name="title" id="dis-reply-post-title" value="[[!+fi.title]]" /><br />
 
 [[+is_author:notempty=`
     <label for="dis-reply-participants">[[%discuss.participants]]:
         <span class="error">[[!+fi.error.participants_usernames]]</span>
         <span class="small">[[%discuss.participants_desc]]</span>
-    </label>
-    <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" />
+    </label><br />
+    <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" /><br />
 `]]
 
 
@@ -47,17 +47,16 @@
     
     
     
-    <label for="dis-thread-message">
+    <label for="dis-thread-message">Reply:
         <span class="error">[[!+fi.error.message]]</span>
-    </label>
+    </label><br />
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
     <br class="clearfix" />
     
-    <label for="dis-reply-post-attachment">[[%discuss.attachments]]:
-        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
-        <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
+    <label for="dis-reply-post-attachment">
+        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a> ([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
-    </label>
+    </label><br />
     <input type="file" name="attachment1" id="dis-reply-post-attachment" />    
     
     <div id="dis-attachments"></div>
@@ -72,10 +71,10 @@
 
 
 <div class="dis-thread-posts">
-	<h1 class="Category">[[%discuss.thread_summary]]</h1>
-	
-[[+thread_posts]]
-
+		<ul class="dis-list">
+			<li><h1 class="Category">[[%discuss.thread_summary]]</h1></li>
+			[[+thread_posts]]
+		</ul>
 </div>
 
 [[+discuss.error_panel]]

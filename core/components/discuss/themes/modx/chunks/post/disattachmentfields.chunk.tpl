@@ -1,7 +1,5 @@
-<label for="dis-thread-attachment1">[[%discuss.attachments]]:
-    <span class="small dis-add-attachment">
-    	<a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
-    	<br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
+<label for="dis-thread-attachment1">
+    	<a href="javascript:void(0);">[[%discuss.attachment_add]]</a> ([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])
     <span class="error">[[!+fi.error.attachments]]</span>
 </label>
 	

@@ -2,7 +2,7 @@
 
 <form action="[[~[[*id]]]]messages/remove?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-message-form">
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
+	<ul class="dis-list">
 	
 	<h1 class="Category">[[%discuss.message_remove? &namespace=`discuss` &topic=`post`]]</h1>
 

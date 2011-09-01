@@ -5,7 +5,7 @@
    &successMessage=``
 ]]
 
-<div class="dis-profile left">
+<div class="dis-profile">
 
 
 
@@ -19,12 +19,12 @@
 
     <label for="dis-username">[[%discuss.username]]:
         <span class="error">[[+fi.error.username]]</span>
-    </label>
+    </label><br class="clearfix" />
     <input type="text" name="username" id="dis-username" value="[[+fi.username]]" />
-
+<br class="clearfix" />
     <label for="dis-password">[[%discuss.password]]:
         <span class="error">[[+fi.error.password]]</span>
-    </label>
+    </label><br class="clearfix" />
     <input type="password" name="password" id="dis-password" value="[[+fi.password]]" />
 
     <br class="clearfix" />
@@ -48,16 +48,16 @@
 				<hr class="line" />
     <div class="PanelBox">
 
-        <div class="Box GuestBox">
+        <div class="Box">
            <h4>[[+username]]'s Profile</h4>
-            <ul class="PanelInfo PanelCategories">
+            <ul class="panel_info">
 
                 <li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
             <br /><span class="small">[[+title]]</span></li>
             </ul>
 
         </div>
-        <div class="Box BoxCategories">
+        <div class="Box">
             [[+usermenu]]
         </div>
 

@@ -1,21 +1,23 @@
 
-<div class="dis-profile left">
+<div class="dis-profile">
 
 	<h1 class="Category">Ignore Boards</h1>
 		
-<form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post">
+<form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post" class="dis-form">
 
-							<ul class="profile">
+							<ul>
    								
      					       [[+boards]]
 
 							</ul>
-
+<label class="dis-cb"><input type="checkbox" class="dis-ignore-all" /><strong>Ignore All</strong></label>
 <br class="clearfix" />
+
+    
     <div class="dis-form-buttons">
-    <input type="submit" class="dis-action-btn" value="Update" />
-    <label class="dis-cb"><input type="checkbox" class="dis-ignore-all" />Ignore All</label>
+    <input type="submit" value="Update" />
     </div>
+
 
 </form>
 
@@ -31,20 +33,19 @@
 				<hr class="line" />
     <div class="PanelBox">
 
-        <div class="Box GuestBox">
+        <div class="Box">
            <h4>[[+username]]'s Profile</h4>
-            <ul class="PanelInfo PanelCategories">
+            <ul class="panel_info">
 
                 <li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
             <br /><span class="small">[[+title]]</span></li>
             </ul>
 
         </div>
-        <div class="Box BoxCategories">
+        <div class="Box">
             [[+usermenu]]
         </div>
 
-		[[$user-sidebar]]
 
 
     </div>

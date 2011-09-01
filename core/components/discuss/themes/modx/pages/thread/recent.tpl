@@ -2,10 +2,8 @@
 
 <div class="dis-threads">
 
-	<h1 class="Category">Recent Posts</h1>
-
-
-	<ul class="DataList CategoryList CategoryListWithHeadings">
+	<ul class="dis-list">
+		<li><h1 class="Category">Recent Posts</h1></li>
         [[+recent_posts]]
     </ul>
     [[+pagination]]

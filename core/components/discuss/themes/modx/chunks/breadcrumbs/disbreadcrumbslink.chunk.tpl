@@ -1,1 +1,1 @@
-<li class="[[+cls]]"><a href="[[+url]]">[[+text]]</a></li>
+<li><a href="[[+url]]">[[+text]]</a></li>

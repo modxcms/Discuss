@@ -1,3 +1,3 @@
-<ul class="CategoryListWithHeadings">
+<ul class="dis-list">
 [[+boards]]
 </ul>

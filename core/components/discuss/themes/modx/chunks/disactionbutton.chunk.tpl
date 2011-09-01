@@ -1,1 +1,1 @@
-<a href="[[+url]]" rel="nofollow" class="Button">[[+text]]</a>
+<a href="[[+url]]" rel="nofollow" class="action-buttons">[[+text]]</a>

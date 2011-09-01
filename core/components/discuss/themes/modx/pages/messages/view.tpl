@@ -4,11 +4,12 @@
 
 <div class="dis-threads">
 
-	<h1 class="Category">[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]]</h1>
 
-	<ol class="dis-board-thread">
+
+	<ul class="dis-list">
+		<li><h1 class="Category">[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]]</h1></li>
 		[[+posts]]
-	</ol>
+	</ul>
 
     <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
 
@@ -29,7 +30,7 @@
 <div id="Panel">
 				<hr class="line" />
     <div class="PanelBox">
-        [[!+discuss.user.id:notempty=`<div class="Box GuestBox">
+        [[!+discuss.user.id:notempty=`<div class="Box">
             <h4>Actions &amp; Info</h4>
 			<p>[[+actionbuttons]]</p>
 			[[+belowThreads]]

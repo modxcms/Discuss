@@ -1,1 +1,1 @@
-<li class="[[+cls]]"><span>[[+text]]</span></li>
+<li class="last clearfix"><span>[[+text]]</span></li>

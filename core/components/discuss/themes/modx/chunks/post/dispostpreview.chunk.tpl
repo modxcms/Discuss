@@ -9,7 +9,7 @@
 
     
     	<div class="dis-post-content">
-        	<h4 class="created">[[+author.username]] [[+createdon]]</h4>
+        	<h4 class="created">[[+author.username]] [[+createdon:ago]]</h4>
         	<div>[[+message]]</div>
             
 		    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">

@@ -1,9 +1,10 @@
 
 <div class="dis-threads">
 
-	<h1 class="Category">[[%discuss.last_post]]</h1>
 	
-	<ul class="DataList CategoryList CategoryListWithHeadings">
+	
+	<ul class="dis-list">
+		<li><h1 class="Category">[[%discuss.last_post]]</h1></li>
 		[[+messages]]
         <li>[[+pagination:notempty=`<div class="dis-pagination">[[+pagination]]</div>`]]</li>
 	</ul>
@@ -18,7 +19,7 @@
 				<hr class="line" />
     <div class="PanelBox">
 
-        [[!+discuss.user.id:notempty=`<div class="Box GuestBox">
+        [[!+discuss.user.id:notempty=`<div class="Box">
             <h4>Actions &amp; Info</h4>
 			<p>[[+actionbuttons]]</p>
 			[[+belowThreads]]

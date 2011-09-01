@@ -25,16 +25,16 @@
 
 
 <div class="dis-threads">
-	[[+results:notempty=`<h1 class="Category">Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]
+	
 
-<ol class="dis-board-thread search-results">
+<ul class="dis-list search-results">
+<li>[[+results:notempty=`<h1 class="Category">Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]</li>
 [[+results]]
-</ol>
+</ul>
 </div>
 
 <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
 
-<br class="clearfix" />
 <br class="clearfix" />
 
 	

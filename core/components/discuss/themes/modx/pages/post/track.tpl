@@ -2,9 +2,9 @@
 
 	<h1 class="Category">Track IP: [[+ip]]</h1>
 
-    <ol class="dis-board-thread">
+    <ul class="dis-list">
         [[+posts]]
-    </ol>
+    </ul>
 </div>
 
 <br class="clearfix" />

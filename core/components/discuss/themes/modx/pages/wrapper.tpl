@@ -8,7 +8,7 @@
     <title>MODX :: [[!+discuss.pagetitle]]</title>
     <meta name="title" content="Test Page">    
     <meta name="author" content="MODX Systems, LLC">
-
+	<link rel="stylesheet" type="text/css" href="http://www.modx.com/assets/css/style.css" />
 	[[*cssjs]]
     <!-- TypeKit -->
     <script src="http://use.typekit.com/zub5doo.js"></script>
@@ -19,54 +19,46 @@
 	
     [[+discuss.user.isModerator:is=`1`:then=`<div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div>`]]
 
-<div id="header">
-	<a class="hidden" href="#main">Skip to content</a>
-	<header class="container">
-		<nav id="global2">
+    <div id="header">
+        <a href="#main" class="hidden">Skip to content</a>
+        <header class="container">
+<nav id="global">
 			<!--<a href="">Revolution</a>-->
 			<a href="/?category=2" class="global1[[+category]]">General</a>
 			<a href="/?category=3" class="global2[[+category]]">Revolution</a>
 			<a href="/?category=4" class="global3[[+category]]">Evolution</a>
 			<a href="/?category=5" class="global4[[+category]]">Add-ons</a>
 			<a href="/?category=6" class="global5[[+category]]">International</a>
-		</nav>
-
-	
-		<nav id="global">
+</nav>
+		<nav id="global2">
 			[[+discuss.user.id:is=``:then=`<a href="[[~[[*id]]]]login">Login</a> | <a href="[[~[[*id]]]]register">Register</a>`]]
 			[[+discuss.user.id:notempty=`Welcome, <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a> | <a href="[[~[[*id]]]]logout">Logout</a>`]]
 		</nav>
-		
 
-          
-          	
-		<nav id="user">
-			<a title="Open Source PHP Content Management System, Framework, Platform and More" id="logo" class="ir" href="[[~[[*id]]]]">MODX Open Source Content Management System, Framework, Platform and More.</a>
-		</nav>
 
-			<nav id="logo_search">
-				<div id="search">
-		            <div class="links">
-		                <a href="http://modx.com/partners/solution/">Find a Partner</a>  <span class="ir">|</span>
-		                <a href="http://modx.com/partners/hosting-saas/">Hosts + SaaS</a> <span class="ir">|</span>
-		                <a href="http://modx.com/services/jobs/">Jobs</a> <span class="ir">|</span>
-		                <a href="http://modx.com/community/wall-of-fame/support-modx/">Donate</a>
-		            </div>
-		
+          <nav id="logo_search">
+            <a href="[[~[[*id]]]]" class="ir" id="logo" title="Open Source PHP Content Management System, Framework, Platform and More">MODX Open Source Content Management System, Framework, Platform and More.</a>
+            <div id="search">
+            <div class="links">
+                <a href="partners/solution/">Find a Partner</a>  <span class="ir">|</span>
+                <a href="partners/hosting-saas/">Hosts + SaaS</a> <span class="ir">|</span> 
+                <a href="services/jobs/">Jobs</a> <span class="ir">|</span> 
+                 
+                <a href="community/wall-of-fame/support-modx/">Donate</a></div>
+
 		                <form action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
 							<label for="search_form_input" class="hidden">Search</label>
 							<input id="search_form_input" placeholder="Search keyphrase..." name="s" value="" title="Start typing and hit ENTER" type="text">
 							<input value="Go" type="submit">
 						</form>   
-		        </div><!-- #search -->
-			</nav>
-	</header>
-</div>
+                    
+            </div><!-- #search -->
+          </nav>
 
+        </header>
+    </div>
 
-
-	
-<!-- end header -->
+    <!-- #header -->
 
 <div>
 	<div id="section_wrap">
@@ -99,9 +91,9 @@
 
 	</div>
 	
-		<div id="Frame">
+		<div id="frame">
 		
-			<div id="Body">
+			<div id="body">
 			
 				<div id="Content">
 					[[+content]]

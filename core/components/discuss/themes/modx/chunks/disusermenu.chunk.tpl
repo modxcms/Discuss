@@ -1,5 +1,5 @@
 <h4>User Menu</h4>
-<ul class="PanelInfo PanelCategories">
+<ul class="panel_info">
 
     <li class="Heading">[[%discuss.forum_profile]]</li>
 

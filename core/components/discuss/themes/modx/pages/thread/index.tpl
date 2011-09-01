@@ -2,13 +2,14 @@
 
 [[+aboveThread]]
 
-<h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]" post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h1>
+
 
 <div>
-    <ol class="dis-board-thread">
+	<ul class="dis-list">
+		<li><h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]" post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h1></li>
         [[+posts]]
         <li>[[+pagination]]</li>
-    </ol>
+    </ul>
 
     [[+quick_reply_form]]
 
@@ -28,14 +29,14 @@
 <div id="Panel">
     <hr class="line" />
     <div class="PanelBox">
-        [[!+discuss.user.id:notempty=`<div class="Box GuestBox">
+        [[!+discuss.user.id:notempty=`<div class="Box">
             <h4>Actions &amp; Info</h4>
 			<p>[[+actionbuttons]]</p>
 			[[+belowThreads]]
 			<p>[[+readers]]</p>
 			<p>[[+moderators]]</p>
 	    </div>`]]
-        [[!+discuss.user.id:is=``:then=`<div class="Box GuestBox">
+        [[!+discuss.user.id:is=``:then=`<div class="Box">
 		    <h4>Actions &amp; Info</h4>
 			<p><a href="[[~[[*id]]]]login" class="Button">Login to Post</a></p>
 		</div>`]]

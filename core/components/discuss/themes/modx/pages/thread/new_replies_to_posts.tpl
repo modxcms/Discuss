@@ -5,7 +5,7 @@
 	<h1 class="Category">New Replies to Posts</h1>
 
 
-	<ul class="DataList CategoryList CategoryListWithHeadings">
+	<ul class="dis-list">
 
 		[[+threads]]
 	</ul>
