@@ -1,6 +1,6 @@
 <li class="Depth2  dis-category-[[+category]]">
     <div class="ItemContent">
-    	<a href="[[+url]]" class="dis-cat-links">
+    	<a href="[[+url]]" class="dis-cat-links [[+unread-cls]]">
     		<h3>
     			<span class="Title">[[+name]] <span class="DiscussionCount">[[+post_stats]]</span></span>
     		</h3>

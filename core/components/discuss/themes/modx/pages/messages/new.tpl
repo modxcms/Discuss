@@ -24,14 +24,14 @@
 
     <label for="dis-message-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
-    </label>
-    <input type="text" name="title" id="dis-message-title" value="[[!+fi.title]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="title" id="dis-message-title" value="[[!+fi.title]]" /><br class="clearfix" />
 
     <label for="dis-message-participants">[[%discuss.participants]]:
         <span class="error">[[!+fi.error.participants_usernames]]</span>
         <span class="small">[[%discuss.participants_desc]]</span>
-    </label>
-    <input type="text" name="participants_usernames" id="dis-message-participants" value="[[!+fi.participants_usernames]]" />
+    </label><br class="clearfix" />
+    <input type="text" name="participants_usernames" id="dis-message-participants" value="[[!+fi.participants_usernames]]" /><br class="clearfix" />
 
 
     <div class="wysi-buttons">[[+buttons]]</div>
@@ -39,16 +39,15 @@
 
     <label for="dis-thread-message">
         <span class="error">[[!+fi.error.message]]</span>
-    </label>
-    <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
+    </label><br class="clearfix" />
+    <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea><br class="clearfix" />
 
-    <label for="dis-message-attachment">[[%discuss.attachments]]:
-        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
-        <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
+    <label for="dis-message-attachment">
+        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
-    </label>
+    </label><br class="clearfix" />
     <input type="file" name="attachment1" id="dis-message-attachment" />
-
+<br class="clearfix" />
     <div id="dis-attachments"></div>
     <br class="clearfix" />
 

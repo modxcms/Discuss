@@ -76,8 +76,10 @@
 
 
 <div class="dis-thread-posts">
-	<h1 class="Category">[[%discuss.thread_summary]]</h1>
-[[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
+		<ul class="dis-list">
+			<li><h1 class="Category">[[%discuss.thread_summary]]</h1></li>
+			[[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
+		</ul>
 </div>
 [[+discuss.error_panel]]
 

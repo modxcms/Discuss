@@ -339,23 +339,20 @@ ul.dis-list li h3 {
 
 .dis-profile h1.Category,
 .dis-threads h1.Category,
-.dis-form h1.Category {
+.dis-form h1.Category,
+.dis-list li h1.Category,
+h1.Category,
+.dis-list h1.Category {
     border-bottom: 1px solid #999999;
-    padding: 0 0 5px;
+    padding: 0 0 5px 5px;
     margin: 25px;
 	}
 	
 .dis-list li h1.Category,
-h1.Category, {
-    border-bottom: 1px solid #999999;
-    padding: 0 0 5px;
+h1.Category {
     margin: 25px 0 0 0;
     }
 
-.dis-list h1.Category {
-	margin: 25px 0 0 0;
-	padding: 0 0 5px 0;
-	}
     
 .ItemContent {
 	position: relative;
@@ -397,7 +394,7 @@ span.DiscussionCount {
 	color: #aaa;
     font-size: 13px;
 	}
-
+	
 .read {
 	opacity:.40;
 	filter: alpha(opacity=40);
