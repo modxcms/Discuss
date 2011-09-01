@@ -194,6 +194,6 @@ $output = array(
     'limit' => $limit,
 );
 
-$modx->cacheManager->set($cacheKey,$output);
+$modx->cacheManager->set($cacheKey,$output,$modx->getOption('discuss.cache_time',null,3600));
 
 return $output;
