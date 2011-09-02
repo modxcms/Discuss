@@ -57,6 +57,7 @@ if (empty($cache)) {
     $c->innerJoin('disPost','LastPost');
     $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
     $c->innerJoin('disUser','LastAuthor');
+    $c->innerJoin('disUser','FirstAuthor');
     $c->where(array(
         'disThread.board' => $board,
     ));
@@ -69,6 +70,9 @@ if (empty($cache)) {
         'last_post_username' => 'LastAuthor.username',
         'last_post_udn' => 'LastAuthor.use_display_name',
         'last_post_display_name' => 'LastAuthor.display_name',
+        'first_post_username' => 'FirstAuthor.username',
+        'first_post_udn' => 'FirstAuthor.use_display_name',
+        'first_post_display_name' => 'FirstAuthor.display_name',
         'FirstPost.title',
         'user' => 'LastAuthor.user',
         'disThread.id',
@@ -110,7 +114,6 @@ if (empty($cache)) {
         $thread->buildIcons();
         $threadArray = $thread->toArray();
         if ($mode != 'rss') {
-            $threadArray['title'] = $threadArray['title'];
             $threadArray['excerpt'] = '';
             $threadArray['views'] = number_format($threadArray['views']);
             $threadArray['replies'] = number_format($threadArray['replies']);
