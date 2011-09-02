@@ -70,6 +70,7 @@ Dis.panel.UserGroup = function(config) {
                 title: _('discuss.members')
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
+                ,forceLayout: true
                 ,items: [{
                     html: '<p>'+_('discuss.user_members.intro_msg')+'</p>'
                     ,border: false
@@ -83,6 +84,7 @@ Dis.panel.UserGroup = function(config) {
                 title: _('discuss.boards')
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
+                ,forceLayout: true
                 ,items: [{
                     html: '<p>'+_('discuss.user_boards.intro_msg')+'</p>'
                     ,border: false

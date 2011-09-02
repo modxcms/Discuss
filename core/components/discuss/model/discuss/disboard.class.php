@@ -537,9 +537,11 @@ class disBoard extends xPDOSimpleObject {
             }
             /* only allow posts if meeting minimum level
              * AND if board is not archived (and user is not an admin, who can post to archived boards)
-             * AND if board not locked
+             * AND if board not locked (and user is not an admin, who can always post)
             */
-            if ($level <= ((int)$this->get('minimum_post_level')) && ($this->get('status') != disBoard::STATUS_ARCHIVED || $level == 0) && !$this->get('locked')) {
+            if ($level <= ((int)$this->get('minimum_post_level'))
+            && ($this->get('status') != disBoard::STATUS_ARCHIVED || $level == 0)
+            && (!$this->get('locked') || $level == 0)) {
                 $canPost = true;
             }
         }
