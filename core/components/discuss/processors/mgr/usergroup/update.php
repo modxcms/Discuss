@@ -22,14 +22,20 @@
  * @package discuss
  */
 /**
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
+ *
  * @package discuss
  * @subpackage processors
  */
 /* get usergroup */
+/** @var disUserGroupProfile $profile */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_ns'));
 $profile = $modx->getObject('disUserGroupProfile',array('usergroup' => $scriptProperties['id']));
 if ($profile == null) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_nf'));
 
+/** @var modUserGroup $usergroup */
 $usergroup = $profile->getOne('UserGroup');
 if (!$usergroup) return $modx->error->failure($modx->lexicon('discuss.usergroup_err_nf',array('id' => $scriptProperties['id'])));
 
@@ -60,8 +66,9 @@ if (!empty($_FILES['image'])) {
 /* set members */
 if (isset($scriptProperties['members'])) {
 
+    /** @var modUserGroupMember $membership */
     $members = $modx->getCollection('modUserGroupMember',array('user_group' => $usergroup->get('id')));
-    foreach ($members as $member) { $member->remove(); }
+    foreach ($members as $membership) { $membership->remove(); }
     unset($members,$member);
 
     $members = $modx->fromJSON($scriptProperties['members']);
@@ -79,6 +86,7 @@ if (isset($scriptProperties['members'])) {
 
 /* set board access */
 if (isset($scriptProperties['boards'])) {
+    /** @var disBoardUserGroup $bug */
     $bugs = $modx->getCollection('disBoardUserGroup',array('usergroup' => $usergroup->get('id')));
     foreach ($bugs as $bug) { $bug->remove(); }
     unset($bugs,$bug);
