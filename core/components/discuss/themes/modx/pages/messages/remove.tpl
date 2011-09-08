@@ -24,7 +24,7 @@
 			</div><!-- Close Content From Wrapper -->
 [[+bottom]]
 
-<div id="Panel">
+<aside>
 				<hr class="line" />
     <div class="PanelBox">
 
@@ -32,4 +32,4 @@
 		[[!$post-sidebar?disection=`dis-support-opt`]]
 
 
-    </div>
+</aside>

@@ -154,7 +154,7 @@ body#body-thread .dis-sticky-actions {
 
 
 /*  Side Panel  */
-#Panel {
+aside {
 	position: relative;
 	width: 250px;
 	float: right;
@@ -170,7 +170,7 @@ body#body-thread .dis-sticky-actions {
  	padding: 0 0;
 	}
 
-#Panel hr.line {
+aside hr.line {
    position:absolute;
    top:-15px;
    left:0;
@@ -184,7 +184,10 @@ body#body-thread .dis-sticky-actions {
    border-width: 0 0 0;
    behavior:url(pie.htc);
    }	
-	
+
+aside div.Box a {
+	text-decoration: none;
+	}
 
 div.PanelBox div.Photo img {
 	max-width: 237px;

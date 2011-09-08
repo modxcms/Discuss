@@ -101,7 +101,7 @@
 	[[+bottom]]
 
 
-<div id="Panel">
+<aside>
 				<hr class="line" />
     <div class="PanelBox">
 
@@ -118,5 +118,4 @@
             [[+usermenu]]
         </div>
 
-
-    </div>
+</aside>

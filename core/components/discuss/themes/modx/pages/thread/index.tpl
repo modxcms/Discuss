@@ -24,7 +24,7 @@
 [[+bottom]]
 
 
-<div id="Panel">
+<aside>
     <hr class="line" />
     <div class="PanelBox">
         [[!+discuss.user.id:notempty=`<div class="Box">
@@ -42,4 +42,4 @@
 		[[!$post-sidebar?disection=`dis-support-opt`]]
 		
 
-    </div>
+</aside>

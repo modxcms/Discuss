@@ -29,7 +29,7 @@
 
 
 
-<div id="Panel">
+<aside>
 				<hr class="line" />
     <div class="PanelBox">
 
@@ -48,4 +48,4 @@
 
 
 
-    </div>
+    </aside>

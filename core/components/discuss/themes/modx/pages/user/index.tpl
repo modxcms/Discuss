@@ -41,7 +41,7 @@
 </div><!-- Close Content From Wrapper -->
 [[+bottom]]
 
-<div id="Panel">
+<aside>
     <hr class="line" />
     <div class="PanelBox">
 
@@ -58,4 +58,4 @@
         <div class="Box">
             [[+usermenu]]
         </div>
-    </div>
+</aside>

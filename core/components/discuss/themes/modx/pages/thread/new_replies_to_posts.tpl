@@ -17,7 +17,7 @@
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]
 
-<div id="Panel">
+<aside>
 				<hr class="line" />
     <div class="PanelBox">
 
@@ -27,4 +27,4 @@
 						
 
 
-    </div>
+</aside>

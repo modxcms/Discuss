@@ -61,7 +61,7 @@
 			</div><!-- Close Content From Wrapper -->
 [[+bottom]]
 
-<div id="Panel">
+<aside>
 				<hr class="line" />
     <div class="PanelBox">
 
@@ -69,4 +69,4 @@
 		[[!$post-sidebar?disection=`new-message`]]
 
 
-    </div>
+</aside>

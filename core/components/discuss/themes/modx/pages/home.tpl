@@ -27,7 +27,7 @@
 				</div><!-- Close Content From Wrapper -->
 			[[+bottom]]
 
-				<div id="Panel">
+				<aside>
 				<hr class="line" />
 					<div class="PanelBox">
 
@@ -51,4 +51,4 @@
 							<p class="stats">[[%discuss.stats_today? &hits=`[[+activity.hits]]` &topics=`[[+activity.topics]]` &replies=`[[+activity.replies]]` &visitors=`[[+activity.visitors]]`]]</p>
 						</div>
 						
-					</div>
+					</aside>

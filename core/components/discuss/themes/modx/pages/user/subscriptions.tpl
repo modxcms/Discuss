@@ -23,7 +23,7 @@
 	[[+bottom]]
 
 
-<div id="Panel">
+<aside>
 				<hr class="line" />
     <div class="PanelBox">
 
@@ -42,5 +42,4 @@
 
 		[[$user-sidebar]]
 
-
-    </div>
+</aside>

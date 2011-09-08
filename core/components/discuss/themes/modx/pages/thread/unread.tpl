@@ -15,7 +15,7 @@
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]
 
-<div id="Panel">
+<aside>
 				<hr class="line" />
     <div class="PanelBox">
 
@@ -31,7 +31,4 @@
 				            <p><a href="[[~[[*id]]]]login" class="Button">Login to Post</a></p>
 				        </div>`]]
 
-						
-						
-
-    </div>
+</aside>
