@@ -6,6 +6,6 @@
     		</h3>
 	    	<p class="CategoryDescription">[[+description]]</p>
 	    </a>
-			[[+subforums:notempty=`<p class="dis-board-subs"><strong>Subtopics:</strong> [[+subforums]]</p>`]]
+			[[+subforums:notempty=`<p class="dis-board-subs [[+unread-cls]]"><strong>Subtopics:</strong> [[+subforums]]</p>`]]
 	</div>
 </li>
