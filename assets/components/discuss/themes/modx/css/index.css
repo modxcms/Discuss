@@ -825,6 +825,10 @@ blockquote:after {
 	content:none;
 	}
 
+.dis-form {
+	position: relative;
+	}
+
 .dis-form input, .dis-form select, .dis-form textarea, .dis-form-field-solo {
  	margin: 5px 0 20px 26px;
  	float: left;
@@ -948,7 +952,7 @@ h4 a.normal-type {
 	width: 96px;
     border-radius: 8px;
     background-color: #444;
-    z-index: 600;
+    z-index: 900;
     margin: 10px 0 5px 20px;
  	behavior:url(pie.htc);
 	}
@@ -974,7 +978,6 @@ a.dis-message-preview {
 	float: right;
     border-radius: 7px 7px 7px 7px;
     color: #EEEEEE;
-    display: block;
     font-family: helvetica;
     font-size: 12px;
     height: 13px;
@@ -997,16 +1000,17 @@ a.dis-message-preview {
     color: #444;
 	}
 	
-.preview_toggle #dis-message-preview {
+#dis-message-preview {
     background-color: #FFFFFF;
     display: none;
-    left: -20px;
+    top: 9px;
+    left: 0px;
     margin: 0;
+    padding: 30px 0 0 0;
     min-height: 300px;
     position: absolute;
-    top: 18px;
     width: 710px;
-    z-index: 1000;
+    z-index: 700;
    	box-shadow: 0 1px 2px #000;
 	-moz-box-shadow: 0 1px 2px #000;
 	-webkit-box-shadow: 0 1px 2px #000;

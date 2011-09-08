@@ -14,8 +14,8 @@
     <div class="preview_toggle">
 		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
         <a href="#" class="dis-preview" id="dis-preview-btn">preview</a>
-		<div id="dis-message-preview"></div>
     </div>
+	<div id="dis-message-preview"></div>
 
 	<h1>[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
     

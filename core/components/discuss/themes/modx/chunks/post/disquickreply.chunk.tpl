@@ -2,8 +2,8 @@
     <div class="preview_toggle">
 		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
         <a href="#" class="dis-preview" id="dis-preview-btn">preview</a>
-		<div id="dis-message-preview"></div>
     </div>
+	<div id="dis-message-preview"></div>
 
     <input type="hidden" id="dis-quick-reply-board" name="board" value="[[+board]]" />
     <input type="hidden" id="dis-quick-reply-thread" name="thread" value="[[+id]]" />
