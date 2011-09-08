@@ -82,7 +82,8 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
             $threadArray['replies'] = number_format($threadArray['replies']);
 
             /* unread class */
-            $threadArray['unread'] = '<img src="'.$this->discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
+            $threadArray['unread'] = true;
+            $threadArray['unread-cls'] = 'dis-unread';
             $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
             $list[] = $this->discuss->getChunk($postTpl,$threadArray);
