@@ -418,6 +418,7 @@ span.DiscussionCount {
  	behavior:url(pie.htc);
 	}
 
+p.dis-board-subs,
 a.dis-read:hover {
 	opacity: 1;
 	filter: alpha(opacity=100);
@@ -517,7 +518,8 @@ a.dis-solved {
 	content:"]";
 	margin: 0 0 0 2px;
 	}	
-	
+
+
 /* Breadcrumbs  */
 #crumbs li.first {
     background: none repeat scroll 0 0 transparent;
