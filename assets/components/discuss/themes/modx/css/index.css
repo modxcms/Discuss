@@ -393,7 +393,7 @@ span.DiscussionCount {
     font-size: 13px;
 	}
 	
-.read {
+.dis-read {
 	opacity:.40;
 	filter: alpha(opacity=40);
 	/* Firefox */
@@ -415,7 +415,7 @@ span.DiscussionCount {
  	behavior:url(pie.htc);
 	}
 
-a.read:hover {
+a.dis-read:hover {
 	opacity: 1;
 	filter: alpha(opacity=100);
  	behavior:url(pie.htc);
