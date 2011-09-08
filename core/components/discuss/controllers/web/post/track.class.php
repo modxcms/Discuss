@@ -68,6 +68,7 @@ class DiscussPostTrackController extends DiscussController {
             'id' => 0,
             'view' => 'post/track',
             'limit' => $limit,
+            'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
         ));
     }
     

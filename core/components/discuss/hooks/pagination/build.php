@@ -36,6 +36,7 @@ $tplWrapper = $modx->getOption('tplWrapper',$scriptProperties,'pagination/pagina
 $tplLink = $modx->getOption('tplLink',$scriptProperties,'pagination/paginationLink');
 $previousTextTpl = $modx->getOption('tplPreviousText',$scriptProperties,'pagination/paginationPrevious');
 $nextTextTpl = $modx->getOption('tplNextText',$scriptProperties,'pagination/paginationNext');
+$showPaginationIfOnePage = $modx->getOption('showPaginationIfOnePage',$scriptProperties,true);
 
 $current = (!empty($_GET['page']) && is_numeric($_GET['page'])) ? intval($_GET['page']) : 1;
 $current = $current <= 0 ? 1 : $current;
@@ -57,12 +58,14 @@ $previousText = $discuss->getChunk($previousTextTpl,array('url' => $currentResou
 $nextText = $discuss->getChunk($nextTextTpl,array('url' => $currentResourceUrl));
 
 if ($total <= 1) {
-	$pagination = $discuss->getChunk($tplActive,array(
-	    'text' => $modx->lexicon('discuss.page_one_of_one'),
-	    'class' => 'dis-no-pages',
-	));
-	$pagination = $discuss->getChunk($tplWrapper,array('content' => $pagination));
-	$modx->toPlaceholders(array('pagination' => $pagination));
+    if ($showPaginationIfOnePage) {
+        $pagination = $discuss->getChunk($tplActive,array(
+            'text' => $modx->lexicon('discuss.page_one_of_one'),
+            'class' => 'dis-no-pages',
+        ));
+        $pagination = $discuss->getChunk($tplWrapper,array('content' => $pagination));
+        $modx->toPlaceholders(array('pagination' => $pagination));
+    }
 	return;
 }
 

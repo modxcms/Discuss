@@ -129,6 +129,7 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
             'id' => 0,
             'view' => 'thread/unread_last_visit',
             'limit' => $this->threads['limit'],
+            'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
         ));
     }
 }

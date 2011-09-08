@@ -178,6 +178,7 @@ class DiscussMessagesViewController extends DiscussController {
             'id' => $this->thread->get('id'),
             'view' => 'messages/view',
             'limit' => $this->list['limit'],
+            'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
         ));
     }
 

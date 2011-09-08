@@ -117,6 +117,7 @@ class DiscussThreadUnreadController extends DiscussController {
             'id' => 0,
             'view' => 'thread/unread',
             'limit' => $this->threads['limit'],
+            'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
         ));
     }
 
