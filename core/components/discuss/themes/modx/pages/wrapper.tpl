@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<base href="[[!++site_url]]">
     <title>MODX :: [[!+discuss.pagetitle]]</title>
-    <meta name="title" content="Test Page">    
+    <meta name="title" content="MODX Forums">
     <meta name="author" content="MODX Systems, LLC">
-	<link rel="stylesheet" type="text/css" href="http://www.modx.com/assets/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="http://modx.com/assets/css/style.css" />
 	[[*cssjs]]
     <!-- TypeKit -->
     <script src="http://use.typekit.com/zub5doo.js"></script>
