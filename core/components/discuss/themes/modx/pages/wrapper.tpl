@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<base href="[[!++site_url]]">
     <title>MODX :: [[!+discuss.pagetitle]]</title>
-    <meta name="title" content="MODX Forums">
+    <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
 	<link rel="stylesheet" type="text/css" href="http://modx.com/assets/css/style.css" />
 	[[*cssjs]]
