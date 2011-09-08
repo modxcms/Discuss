@@ -501,7 +501,23 @@ a.dis-solved {
 	color: #
 	}
 
+.dis-post-board-name {
+    color: #AAAAAA;
+    font-weight: normal;
+    display: block;
+    margin: 0 0 5px;
+    }
 
+.dis-post-board-name:before {
+	content:"[";
+	margin: 0 2px 0 0;
+	}
+	
+.dis-post-board-name:after {
+	content:"]";
+	margin: 0 0 0 2px;
+	}	
+	
 /* Breadcrumbs  */
 #crumbs li.first {
     background: none repeat scroll 0 0 transparent;
