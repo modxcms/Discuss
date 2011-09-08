@@ -470,7 +470,7 @@ class disBBCodeParser extends disParser {
             }
         }
 
-        return $citation.'<blockquote class="dis-quote">';
+        return $citation.'<blockquote>';
     }
     
     /**

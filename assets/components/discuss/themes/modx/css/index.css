@@ -494,6 +494,10 @@ a.dis-solved {
 	background: transparent url(../images/discuss_solved_16.png) no-repeat 0 -16px;
 	}
 
+.dis-solved-title {
+	color: #
+	}
+
 
 /* Breadcrumbs  */
 #crumbs li.first {
@@ -785,18 +789,19 @@ div.dis-post-footer {
 	clear: both;
 	}
 
-.dis-quote {
+blockquote {
 	display: block;
-	margin: 0 0 10px;
+	margin: 5px 10px;
 	padding: 10px;
-	width: 95%;
-	background-color: #eee;
-	border: 1px solid #ddd;
+	width: 90%;
+	background-color: #EEE;
+	border: 1px solid #DDD;
 	clear: both;
 	}
-
-.dis-quote blockquote.dis-quote {
-	background-color: #fffeed;
+	
+blockquote:before,
+blockquote:after {
+	content:none;
 	}
 
 .dis-form input, .dis-form select, .dis-form textarea, .dis-form-field-solo {
