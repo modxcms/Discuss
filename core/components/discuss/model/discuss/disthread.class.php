@@ -270,7 +270,7 @@ class disThread extends xPDOSimpleObject {
         $c->innerJoin('disPost','LastPost');
         $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
         $c->innerJoin('disUser','LastAuthor');
-        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
+        //$c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
         $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
         $groups = $modx->discuss->user->getUserGroups();
         if (!$modx->discuss->user->isAdmin()) {
@@ -289,7 +289,7 @@ class disThread extends xPDOSimpleObject {
             }
         }
         $c->where(array(
-            'Reads.thread:IS' => null,
+            //'Reads.thread:IS' => null,
             'Board.status:!=' => disBoard::STATUS_INACTIVE,
             $modx->discuss->user->get('id').' IN(
              (
@@ -299,6 +299,7 @@ class disThread extends xPDOSimpleObject {
                 WHERE pPost.thread = disThread.id
              )
             )',
+            'LastPost.author:!=' => $modx->discuss->user->get('id'),
         ));
 
         /* ignore spam/recycle bin boards */
