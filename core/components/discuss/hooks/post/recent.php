@@ -179,7 +179,8 @@ foreach ($recentThreads as $thread) {
     $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$username.'</a>' : $username;
     $threadArray['views'] = '';
     $threadArray['replies'] = number_format($threadArray['replies']);
-    $threadArray['unread'] = '';
+    $threadArray['unread'] = false;
+    $threadArray['unread-cls'] = '';
 
     /* unread class */
     $list[] = $discuss->getChunk($postTpl,$threadArray);
