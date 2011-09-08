@@ -82,6 +82,7 @@ $manifest = array(
             'showBreadcrumbs' => true,
             'showReaders' => true,
             'showModerators' => true,
+            'showPaginationIfOnePage' => false,
         ),
     ),
     'board.xml' => array(
@@ -111,6 +112,7 @@ $manifest = array(
             'showLockOption' => true,
             'showMarkAsSpamOption' => true,
             'showTitleInBreadcrumbs' => false,
+            'showPaginationIfOnePage' => false,
         ),
     ),
     'thread/new' => array(
@@ -224,6 +226,16 @@ $manifest = array(
             )
         ),
     ),
+    'messages/index' => array(
+        'options' => array(
+            'showSubBoards' => true,
+            'showPosts' => true,
+            'showBreadcrumbs' => true,
+            'showReaders' => true,
+            'showModerators' => true,
+            'showPaginationIfOnePage' => false,
+        ),
+    ),
     'messages/new' => array(
         'js' => array(
             'header' => array(
@@ -265,6 +277,25 @@ $manifest = array(
             'showLockOption' => true,
             'showMarkAsSpamOption' => true,
             'showTitleInBreadcrumbs' => false,
+            'showPaginationIfOnePage' => false,
+        ),
+    ),
+    'thread/recent' => array(
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+            'showPaginationIfOnePage' => false,
+        ),
+    ),
+    'thread/unread' => array(
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+            'showPaginationIfOnePage' => false,
+        ),
+    ),
+    'thread/unread_last_visit' => array(
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+            'showPaginationIfOnePage' => false,
         ),
     ),
 );
