@@ -79,6 +79,7 @@ $manifest = array(
             'showBreadcrumbs' => true,
             'showReaders' => true,
             'showModerators' => true,
+            'showPaginationIfOnePage' => false,
         ),
     ),
     'board.xml' => array(
@@ -106,6 +107,7 @@ $manifest = array(
             'showLockOption' => true,
             'showMarkAsSpamOption' => true,
             'showTitleInBreadcrumbs' => true,
+            'showPaginationIfOnePage' => true,
         ),
     ),
     'thread/new' => array(
@@ -219,6 +221,40 @@ $manifest = array(
             )
         ),
     ),
+    'messages/index' => array(
+        'js' => array(
+            'header' => array(
+                'dis.board.js',
+            ),
+        ),
+        'options' => array(
+            'showSubBoards' => true,
+            'showPosts' => true,
+            'showBreadcrumbs' => true,
+            'showReaders' => true,
+            'showModerators' => true,
+            'showPaginationIfOnePage' => true,
+        ),
+    ),
+    'messages/view' => array(
+        'js' => array(
+            'header' => array(
+                'dis.thread.js',
+            )
+        ),
+        'options' => array(
+            'showPosts' => true,
+            'showBreadcrumbs' => true,
+            'showViewing' => true,
+            'showSubscribeOption' => true,
+            'showPrintOption' => true,
+            'showStickOption' => true,
+            'showLockOption' => true,
+            'showMarkAsSpamOption' => true,
+            'showTitleInBreadcrumbs' => true,
+            'showPaginationIfOnePage' => true,
+        ),
+    ),
     'messages/new' => array(
         'js' => array(
             'header' => array(
@@ -241,6 +277,24 @@ $manifest = array(
                 'messages/dis.message.modify.js',
                 'dis.post.buttons.js',
             ),
+        ),
+    ),
+    'thread/recent' => array(
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+            'showPaginationIfOnePage' => true,
+        ),
+    ),
+    'thread/unread' => array(
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+            'showPaginationIfOnePage' => true,
+        ),
+    ),
+    'thread/unread_last_visit' => array(
+        'options' => array(
+            'showTitleInBreadcrumbs' => true,
+            'showPaginationIfOnePage' => true,
         ),
     ),
 );

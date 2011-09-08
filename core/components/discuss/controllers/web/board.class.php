@@ -135,6 +135,7 @@ class DiscussBoardController extends DiscussController {
             'view' => 'board',
             'limit' => $this->list['limit'],
             'param' => $this->modx->getOption('discuss.page_param',$this->scriptProperties,'page'),
+            'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
         ));
         $this->setPlaceholder('pagination',$pagination);
     }

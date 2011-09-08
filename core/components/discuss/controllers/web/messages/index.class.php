@@ -131,6 +131,7 @@ class DiscussMessagesController extends DiscussController {
             'id' => 0,
             'view' => 'messages',
             'limit' => $this->list['limit'],
+            'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
         ));
     }
 

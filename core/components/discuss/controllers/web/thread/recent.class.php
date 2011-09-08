@@ -98,6 +98,7 @@ class DiscussThreadRecentController extends DiscussController {
             'id' => 0,
             'view' => 'thread/recent',
             'limit' => $this->list['limit'],
+            'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
         ));
     }
 }

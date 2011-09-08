@@ -246,6 +246,7 @@ class DiscussThreadController extends DiscussController {
                 'id' => $this->thread->get('id'),
                 'view' => 'thread/',
                 'limit' => $this->posts['limit'],
+                'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
             ));
         }
     }
