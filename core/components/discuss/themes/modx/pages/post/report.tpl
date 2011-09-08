@@ -1,6 +1,6 @@
 <form action="[[~[[*id]]]]post/report?post=[[+id]]" method="post" class="dis-form" id="dis-report-thread-form">
 
-    <h1 class="Category">[[%discuss.report_to_mod? &namespace=`discuss` &topic=`post`]]</h1>
+    <h1>[[%discuss.report_to_mod? &namespace=`discuss` &topic=`post`]]</h1>
 
     <input type="hidden" name="thread" value="[[+id]]" />
 

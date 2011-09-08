@@ -12,7 +12,7 @@
 <div class="dis-threads">
 
 	<ul class="dis-list">
-		<li><h1 class="Category">[[+name]]</h1></li>
+		<li><h1>[[+name]]</h1></li>
 		[[+posts]]
 	</ul>
 

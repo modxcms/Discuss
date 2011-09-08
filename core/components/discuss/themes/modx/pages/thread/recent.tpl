@@ -3,7 +3,7 @@
 <div class="dis-threads">
 
 	<ul class="dis-list">
-		<li><h1 class="Category">Recent Posts</h1></li>
+		<li><h1>Recent Posts</h1></li>
         [[+recent_posts]]
     </ul>
     [[+pagination]]

@@ -1,7 +1,7 @@
 
 <div class="dis-profile">
 
-	<h1 class="Category">[[%discuss.subscriptions? &user=`[[+name]]`]]</h1>
+	<h1>[[%discuss.subscriptions? &user=`[[+name]]`]]</h1>
 		
 	<form action="[[~[[*id]]]]user/subscriptions?user=[[+id]]" method="post" class="dis-form">
 							<ul class="profile">

@@ -17,7 +17,7 @@
 		<div id="dis-message-preview"></div>
     </div>
 
-	<h1 class="Category">[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
+	<h1>[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
     
     <input type="hidden" name="board" value="[[+id]]" />
     

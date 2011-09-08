@@ -1,2 +1,2 @@
-<li><h1 class="Category">[[+category_name]]</h1></li>
+<li><h1>[[+category_name]]</h1></li>
 [[+list]]

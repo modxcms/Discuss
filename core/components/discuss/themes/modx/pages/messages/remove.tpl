@@ -4,7 +4,7 @@
 
 	<ul class="dis-list">
 	
-	<h1 class="Category">[[%discuss.message_remove? &namespace=`discuss` &topic=`post`]]</h1>
+	<h1>[[%discuss.message_remove? &namespace=`discuss` &topic=`post`]]</h1>
 
     <input type="hidden" name="thread" value="[[+id]]" />
 

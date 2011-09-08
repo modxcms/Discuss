@@ -1,7 +1,7 @@
 
 <div class="dis-profile">
 
-	<h1 class="Category">[[%discuss.general_stats? &user=`[[+name]]`]]</h1>
+	<h1>[[%discuss.general_stats? &user=`[[+name]]`]]</h1>
 
 							<ul class="profile">
 							

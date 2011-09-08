@@ -4,7 +4,7 @@
 	
 
 	<ul class="dis-list">
-		<li><h1 class="Category">Unread Posts Since Last Visit</h1></li>
+		<li><h1>Unread Posts Since Last Visit</h1></li>
 		[[+threads]]
 	</ul>
 

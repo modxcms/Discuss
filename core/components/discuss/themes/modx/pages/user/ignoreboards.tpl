@@ -1,7 +1,7 @@
 
 <div class="dis-profile">
 
-	<h1 class="Category">Ignore Boards</h1>
+	<h1>Ignore Boards</h1>
 		
 <form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post" class="dis-form">
 

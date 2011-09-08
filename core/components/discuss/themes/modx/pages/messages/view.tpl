@@ -7,7 +7,7 @@
 
 
 	<ul class="dis-list">
-		<li><h1 class="Category">[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]]</h1></li>
+		<li><h1>[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]]</h1></li>
 		[[+posts]]
 	</ul>
 

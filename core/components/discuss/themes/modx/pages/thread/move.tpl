@@ -1,7 +1,7 @@
 
 <form action="[[~[[*id]]]]thread/move?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">
 
-	<h1 class="Category">[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h1>
+	<h1>[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h1>
 
     
     <input type="hidden" name="thread" value="[[+id]]" />

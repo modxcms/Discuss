@@ -1,6 +1,6 @@
 <div class="dis-threads">
 
-	<h1 class="Category">Track IP: [[+ip]]</h1>
+	<h1>Track IP: [[+ip]]</h1>
 
     <ul class="dis-list">
         [[+posts]]

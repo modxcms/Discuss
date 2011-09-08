@@ -3,7 +3,7 @@
 
 <form action="[[~[[*id]]]]user/account?user=[[+id]]" class="dis-form" method="post" id="dis-user-account-form">
 
-	<h1 class="Category">[[%discuss.account_edit? &namespace=`discuss` &topic=`user`]]: [[+name]]</h1>
+	<h1>[[%discuss.account_edit? &namespace=`discuss` &topic=`user`]]: [[+name]]</h1>
 
         
     <input type="hidden" name="user" value="[[+id]]" />

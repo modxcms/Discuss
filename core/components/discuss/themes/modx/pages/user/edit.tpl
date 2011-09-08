@@ -2,7 +2,7 @@
 
 <div class="dis-profile">
 	
-	<h1 class="Category">[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h1>
+	<h1>[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h1>
 	
 [[!include? &file=`[[++discuss.core_path]]elements/snippets/snippet.discussupdateprofileloader.php`]]
 [[!UpdateProfile?

@@ -17,7 +17,7 @@
     </div>
 	    
 	    
-	<h1 class="Category">[[!+fi.title]]</h1>
+	<h1>[[!+fi.title]]</h1>
 
 
     <input type="hidden" name="board" value="[[!+fi.board]]" />
@@ -52,7 +52,7 @@
 
 
 
-	<h1 class="Category">[[%discuss.thread_summary]]</h1>
+	<h1>[[%discuss.thread_summary]]</h1>
 
 <div class="dis-thread-posts">
 [[+thread_posts]]

@@ -4,7 +4,7 @@
 
 <form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" id="dis-user-edit-form">
 
-	<h1 class="Category">[[+name]]</h1>
+	<h1>[[+name]]</h1>
 
     <ul class="profile">
         <li>[[%discuss.name? &namespace=`discuss` &topic=`user`]]: <strong>[[+name_first]] [[+name_last]]</strong></li>
@@ -31,7 +31,7 @@
 <div class="dis-threads">
 
     <ul class="dis-list">
-    	<li><h1 class="Category">[[%discuss.recent_posts]]</h1></li>
+    	<li><h1>[[%discuss.recent_posts]]</h1></li>
         [[+recent_posts]]
     </ul>
 </div>

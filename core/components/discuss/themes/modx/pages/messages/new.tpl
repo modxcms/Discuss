@@ -18,7 +18,7 @@
     
     
     
-	<h1 class="Category">[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h1>
+	<h1>[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h1>
 
 
 

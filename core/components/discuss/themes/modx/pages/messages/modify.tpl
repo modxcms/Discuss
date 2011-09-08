@@ -20,7 +20,7 @@
     
     
     
-	<h1 class="Category">[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</h1>
+	<h1>[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</h1>
 
     <input type="hidden" name="post" value="[[!+fi.id]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
@@ -75,7 +75,7 @@
 
 <div class="dis-thread-posts">
 		<ul class="dis-list">
-			<li><h1 class="Category">[[%discuss.thread_summary]]</h1></li>
+			<li><h1>[[%discuss.thread_summary]]</h1></li>
 			[[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
 </div>
 

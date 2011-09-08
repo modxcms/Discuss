@@ -1,7 +1,7 @@
 
 
 <form class="dis-form" action="[[~[[*id]]]]search/" method="get">
-	<h1 class="Category">[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h1>
+	<h1>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h1>
 	
     <label for="dis-search">[[%discuss.search]]:</label><br class="clearfix" />
     <input type="text" id="dis-search" name="s" value="[[+search]]" /><br class="clearfix" />
@@ -28,7 +28,7 @@
 	
 
 <ul class="dis-list search-results">
-<li>[[+results:notempty=`<h1 class="Category">Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]</li>
+<li>[[+results:notempty=`<h1>Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]</li>
 [[+results]]
 </ul>
 </div>

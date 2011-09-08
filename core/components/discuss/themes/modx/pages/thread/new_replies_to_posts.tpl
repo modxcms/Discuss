@@ -2,7 +2,7 @@
 
 <div class="dis-threads">
 
-	<h1 class="Category">New Replies to Posts</h1>
+	<h1>New Replies to Posts</h1>
 
 
 	<ul class="dis-list">

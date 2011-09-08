@@ -1,7 +1,7 @@
 
 <form action="[[~[[*id]]]]thread/spam?thread=[[+id]]" method="post" class="dis-form" id="dis-spam-thread-form">
 
-	<h1 class="Category">[[%discuss.thread_spam? &namespace=`discuss` &topic=`post`]]</h1>
+	<h1>[[%discuss.thread_spam? &namespace=`discuss` &topic=`post`]]</h1>
 
     <input type="hidden" name="thread" value="[[+id]]" />
 

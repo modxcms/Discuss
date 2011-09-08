@@ -1,6 +1,6 @@
 <li class="dis-post">
     <div class="dis-post-header">
-		<h1 class="Category">[[+title]]</h1>
+		<h1>[[+title]]</h1>
         <div class="dis-post-author">
             <div class="auth-avatar">[[+author.avatar]]</div>
 		</div>

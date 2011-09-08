@@ -5,7 +5,7 @@
 	
 	
 	<ul class="dis-list">
-		<li><h1 class="Category">Unread Posts</h1></li>
+		<li><h1>Unread Posts</h1></li>
 	[[+threads]]
 	</ul>
     [[+pagination]]

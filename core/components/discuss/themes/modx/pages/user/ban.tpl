@@ -12,7 +12,7 @@
 
 <form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form">
 
-	<h1 class="Category">[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</h1>
+	<h1>[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</h1>
 
 <p>[[+fi.successMessage]]</p>
 
