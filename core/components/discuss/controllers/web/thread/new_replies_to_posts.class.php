@@ -106,7 +106,8 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
             $threadArray['replies'] = number_format($threadArray['replies']);
 
             /* unread class */
-            $threadArray['unread'] = '<img src="'.$this->discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
+            $threadArray['unread'] = false;
+            $threadArray['unread-cls'] = '';
             $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
             $list[] = $this->discuss->getChunk($this->getOption('tpl','post/disPostLi'),$threadArray);
