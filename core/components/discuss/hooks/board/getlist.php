@@ -98,8 +98,8 @@ foreach ($boards as $board) {
     }
     /* check for read status */
     if ($checkUnread) {
-        $board['unread'] = $discuss->user->isBoardRead($board['id']);
-        $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
+        $board['unread'] = $discuss->user->isLoggedIn ? $discuss->user->isBoardRead($board['id']) : 1;
+        $board['unread-cls'] = $board['unread'] ? 'dis-unread' : 'dis-read';
     } else {
         $board['unread'] = $discuss->user->isLoggedIn ? 0 : 1;
         $board['unread-cls'] = $discuss->user->isLoggedIn ? 'dis-read' : 'dis-unread';
