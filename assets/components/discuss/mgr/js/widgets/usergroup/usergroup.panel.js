@@ -80,7 +80,7 @@ Dis.panel.UserGroup = function(config) {
                     ,usergroup: config.usergroup
                     ,preventRender: true
                 }]
-            },{
+            }/*,{
                 title: _('discuss.boards')
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
@@ -94,7 +94,7 @@ Dis.panel.UserGroup = function(config) {
                     ,usergroup: config.usergroup
                     ,preventRender: true
                 }]
-            }]
+            }*/]
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}

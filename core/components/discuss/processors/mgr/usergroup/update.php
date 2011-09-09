@@ -85,8 +85,9 @@ if (isset($scriptProperties['members'])) {
 }
 
 /* set board access */
+/**
 if (isset($scriptProperties['boards'])) {
-    /** @var disBoardUserGroup $bug */
+    /// @var disBoardUserGroup $bug /
     $bugs = $modx->getCollection('disBoardUserGroup',array('usergroup' => $usergroup->get('id')));
     foreach ($bugs as $bug) { $bug->remove(); }
     unset($bugs,$bug);
@@ -101,5 +102,6 @@ if (isset($scriptProperties['boards'])) {
         $bug->save();
     }
 }
+*/
 
 return $modx->error->success();
