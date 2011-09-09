@@ -21,7 +21,7 @@
     
     <input type="hidden" name="board" value="[[+id]]" />
     	
-    	<label><input type="radio" name="class_key" value="disThreadDiscussion" /> [[%discuss.discussion]]</label>
+    	<label><input type="radio" name="class_key" value="disThreadDiscussion" checked="checked" /> [[%discuss.discussion]]</label>
     	<label><input type="radio" name="class_key" value="disThreadQuestion" /> [[%discuss.question_and_answer]]</label>
 
 <br class="clearfix" />

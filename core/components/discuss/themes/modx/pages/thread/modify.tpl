@@ -24,7 +24,7 @@
     <input type="hidden" name="post" value="[[!+fi.post]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     
-    [[+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" /> [[%discuss.discussion]]</label>
+    [[+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" checked="checked" /> [[%discuss.discussion]]</label>
     	<label><input type="radio" name="class_key" value="disThreadQuestion" /> [[%discuss.question_and_answer]]</label>`]]
     <br class="clearfix" />
     <label for="dis-new-thread-title">[[%discuss.title]]:
