@@ -101,8 +101,8 @@ foreach ($boards as $board) {
         $board['unread'] = $discuss->user->isBoardRead($board['id']);
         $board['unread-cls'] = ($board['unread'] && $discuss->user->isLoggedIn) ? 'dis-unread' : 'dis-read';
     } else {
-        $board['unread'] = '';
-        $board['unread-cls'] = 'dis-read';
+        $board['unread'] = $discuss->user->isLoggedIn ? 0 : 1;
+        $board['unread-cls'] = $discuss->user->isLoggedIn ? 'dis-read' : 'dis-unread';
     }
 
     if (!empty($board['last_post_createdon'])) {
