@@ -303,6 +303,10 @@ input[type="submit"], .Button {
     transition:all .4s ease;
     }	
 	
+form input[type="radio"] {
+	margin: 0 0;
+	}
+	
 /* Main List Display  */
 .dis-threads-header h2 {
  	background-color: #E3F4FF;
@@ -348,6 +352,10 @@ ul.dis-list li h3 {
     border-bottom: 1px solid #999999;
     padding: 0 0 5px 5px;
     margin: 25px;
+	}
+
+.dis-form h1 {
+    margin: 25px 25px 0 25px;
 	}
 	
 .dis-list li h1 {
@@ -901,7 +909,7 @@ input[type="checkbox"] {
 .wysi-buttons {
 	width: 100%;
 	clear: both;
-	margin: 0 0 0 25px;
+	margin: 10px 0 0 25px;
 	}
 
 .dis-form p {
@@ -936,6 +944,7 @@ input[type="checkbox"] {
 	display: block;
 	height: 150px;
 	width: 600px;
+	margin: 0 0 0 26px;
 	}
 
 h4 a.normal-type {

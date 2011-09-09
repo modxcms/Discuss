@@ -20,24 +20,30 @@
 	<h1>[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
     
     <input type="hidden" name="board" value="[[+id]]" />
-    
+    	
+    	<label><input type="radio" name="class_key" value="disThreadDiscussion" /> [[%discuss.discussion]]</label>
+    	<label><input type="radio" name="class_key" value="disThreadQuestion" /> [[%discuss.question_and_answer]]</label>
+
+<br class="clearfix" />
+
     <label for="dis-new-thread-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
     </label><br class="clearfix" />
+
     <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" /><br class="clearfix" />
 
-    <label for="dis-new-thread-type">[[%discuss.thread_type]]:</label><br class="clearfix" />
-    <select name="class_key" id="dis-new-thread-type">
-        <option value="disThreadDiscussion">[[%discuss.discussion]]</option>
-        <option value="disThreadQuestion">[[%discuss.question_and_answer]]</option>
-    </select><br class="clearfix" />
+
+
+    
+    
+<br class="clearfix" />
 
     <div class="wysi-buttons">[[+buttons]]</div><br class="clearfix" />
 
 
-    <label for="dis-thread-message">
+
         <span class="error">[[!+fi.error.message]]</span>
-    </label><br class="clearfix" />
+<br class="clearfix" />
     <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea><br class="clearfix" />
 
     [[+attachment_fields]]
