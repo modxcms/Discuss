@@ -1,13 +1,11 @@
 
-
-[[<h4 class="right">[[%discuss.participants]]: [[+participants_usernames]]</h4>]]
-
 <div class="dis-threads">
 
 
 
 	<ul class="dis-list">
 		<li><h1>[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]]</h1></li>
+		<li><h4 class="participants">[[%discuss.participants]]: [[+participants_usernames]]</h4></li>
 		[[+posts]]
 	</ul>
 

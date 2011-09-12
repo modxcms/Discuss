@@ -3,8 +3,8 @@
     	<a href="[[+url]]" class="dis-cat-links [[+unread-cls]]">
     		<h3 class="[[+locked:is=`1`:then=`locked`:else=`unlocked`]]"><span class="dis-post-board-name">[[+board_name]]</span>
     		<span class="Title">[[+sticky:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</span><br />
-    		<span class="DiscussionCount">[[+createdon:ago]], [[+replies]] replies</span>
     		</h3>
+    		<p class="CategoryDescription">Started by [[+first_post_username]] [[+createdon:ago]], last post by [[+last_post_username]]</p>
 	    </a>
 	</div>
 </li>

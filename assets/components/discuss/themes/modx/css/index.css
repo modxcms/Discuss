@@ -422,6 +422,12 @@ a.dis-read:hover {
  	behavior:url(pie.htc);
 	}
 
+h3.locked {
+    background: url("../images/locked.png") no-repeat scroll 0 3px transparent;
+    padding-left: 19px !important;
+    margin: 0 0 0 -19px !important;
+	}
+	
 h1.locked {
     background: url("../images/locked.png") no-repeat scroll 0 3px transparent;
     margin: 25px 0 0 !important;
@@ -684,6 +690,12 @@ ul.dis-attachments {
     margin-bottom:0;
 }
 
+h4.participants {
+	border: none;
+	font-size: 11px;
+	margin: 5px 0 0 5px;
+	}
+	
 h4.created {
 	margin: 10px 0 10px 0;
 	font-size: 12px;
