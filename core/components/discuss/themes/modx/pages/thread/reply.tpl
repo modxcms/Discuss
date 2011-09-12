@@ -52,10 +52,13 @@
 
 
 
-	<h1>[[%discuss.thread_summary]]</h1>
+	
 
 <div class="dis-thread-posts">
+<ul class="dis-list">
+	<li><h1>[[%discuss.thread_summary]]</h1></li>
 [[+thread_posts]]
+</ul>
 </div>
 
 [[+discuss.error_panel]]

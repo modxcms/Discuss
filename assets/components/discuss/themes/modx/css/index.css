@@ -26,7 +26,32 @@
 	padding: 0 0 30px;
 	}
 
+input[type="submit"],
+input[type="button"] {
+	-moz-transition: all 0.4s ease 0s;
+    background: none;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    color: #555555 !important;
+    text-shadow: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+ 	behavior:url(pie.htc);
+	}
 
+input[type="submit"]:hover {
+	-moz-transition: all 0.4s ease 0s;
+    background: none;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    color: #fff;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+ 	behavior:url(pie.htc);
+	}
+	
 .hide {
 	text-indent: -2000px;
 	font-size: 0px;
@@ -232,6 +257,10 @@ div.Box h4 {
  	margin: 0 0 5px;
 	}
 
+.dis-reply-cancel,
+input[type="button"],
+input[type="submit"],
+.Button,
 div.Box .action-buttons {
     background: none repeat scroll 0 0 #F8F8F8;
     border: 1px solid #CCCCCC;
@@ -250,58 +279,18 @@ div.Box .action-buttons {
     transition:all .4s ease;
  	behavior:url(pie.htc);
 	}
-	
+
+.dis-reply-cancel:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.Button:hover,
 div.Box .action-buttons:hover {
-	background: #026598;
-	color: #fff;
-	border: 1px solid #026598;
+	background: #026598 !important;
+	color: #fff !important;
+	border: 1px solid #026598 !important;
  	behavior:url(pie.htc);
 	}
 
-input[type="button"]:hover,	
-input[type="submit"]:hover, .Button:hover {
-    -moz-box-shadow:0 0 0 1px #4aa8bf, 0 0 0 4px rgba(255,255,255,.25);
-    -webkit-box-shadow:0 0 0 1px #4aa8bf, 0 0 0 4px rgba(255,255,255,.25);
-    box-shadow:0 0 0 1px #4aa8bf, 0 0 0 4px rgba(255,255,255,.25);
-    background:-moz-linear-gradient(bottom, #99d0e2, #4aa8bf) !important;
-    background:-webkit-gradient(linear, left bottom, left top, from(#99d0e2), to(#4aa8bf))!important;
-    -pie-background:linear-gradient(bottom, #99d0e2, #4aa8bf) !important;
-    -moz-transition:all .5s ease;
-    -webkit-transition:all .5s ease;
- 	behavior:url(pie.htc);
-    }
-    
-input[type="button"],	
-input[type="submit"], .Button {
-    cursor:pointer;
-    margin:10px 0 10px;
-    border:1px solid #b1dbea;
-    -moz-border-radius:7px;
-    -webkit-border-radius:7px;
-    border-radius:7px;
-    text-align:center;
-    color:#fff !important;
-    width: auto;
-    display:inline-block;
-    font-size:18px;
-    padding:8px 10px 10px;
-    font-weight:bold;
-    text-decoration:none !important;
-    line-height:1;
-    -moz-box-shadow:0 0 0 1px #4aa8bf, 0 0 0 4px rgba(0,0,0,.1);
-    -webkit-box-shadow:0 0 0 1px #4aa8bf, 0 0 0 4px rgba(0,0,0,.1);
-    box-shadow:0 0 0 1px #4aa8bf, 0 0 0 4px rgba(0,0,0,.1);
-    background:-moz-linear-gradient(top, #99d0e2, #4aa8bf);
-    -pie-background:linear-gradient(top, #99d0e2, #4aa8bf);
-    background:-webkit-gradient(linear, left top, left bottom, from(#99d0e2), to(#4aa8bf));
-    background:linear-gradient(top, #99d0e2, #4aa8bf);
- 	behavior:url(pie.htc);
-    text-shadow:0 1px 2px #555;
-    position:relative;
-    -moz-transition:all .4s ease;
-    -webkit-transition:all .4s ease;
-    transition:all .4s ease;
-    }	
 	
 form input[type="radio"] {
 	margin: 0 0;
@@ -433,9 +422,9 @@ a.dis-read:hover {
 	}
 
 h1.locked {
-    padding: 18px 0 5px 21px;
-    margin: 0 0 10px 0;
-	background: transparent url(../images/locked.png) no-repeat 5px 5px;
+    background: url("../images/locked.png") no-repeat scroll 0 3px transparent;
+    margin: 25px 0 0 !important;
+    padding: 0 0 0 15px !important;
 	}
 
 .dis-board-subs {
