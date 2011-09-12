@@ -190,9 +190,9 @@ foreach ($cache['results'] as $threadArray) {
         if ($discuss->user->isLoggedIn) {
             if (in_array($threadArray['id'],$unread)) {
                 $threadArray['unread'] = '<img src="'.$discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
-                $threadArray['unreadCls'] = 'dis-post-unread';
+                $threadArray['unreadCls'] = 'dis-unread';
             } else {
-                $threadArray['unreadCls'] = 'dis-post-read';
+                $threadArray['unreadCls'] = 'dis-read';
             }
         }
     }
