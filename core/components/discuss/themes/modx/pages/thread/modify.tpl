@@ -24,7 +24,7 @@
     <input type="hidden" name="post" value="[[!+fi.post]]" />
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     
-    [[+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" checked="checked" /> [[%discuss.discussion]]</label>
+    [[+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" /> [[%discuss.discussion]]</label>
     	<label><input type="radio" name="class_key" value="disThreadQuestion" /> [[%discuss.question_and_answer]]</label>`]]
     <br class="clearfix" />
     <label for="dis-new-thread-title">[[%discuss.title]]:
@@ -46,7 +46,7 @@
     <br class="clearfix" />
     
     <label for="dis-attachment">[[%discuss.attachments]]:
-        <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
+        <span class="small"><a href="javascript:void(0);" class=" dis-add-attachment">[[%discuss.attachment_add]]</a>
         <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
     </label>
