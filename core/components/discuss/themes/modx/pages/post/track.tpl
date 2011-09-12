@@ -9,7 +9,7 @@
 
 <br class="clearfix" />
 
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> [[+pagination]]</div>
+    [[+pagination]]
 
 </div><!-- Close Content From Wrapper -->
 

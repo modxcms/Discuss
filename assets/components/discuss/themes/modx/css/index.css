@@ -330,6 +330,7 @@ ul.dis-list li.Item {
 ul.dis-list li h3 {
 	margin: 0 0;
 	padding: 0 0;
+	font-weight: normal;
 	}
 
 .dis-profile h1,

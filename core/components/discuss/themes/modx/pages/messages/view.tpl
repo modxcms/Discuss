@@ -11,7 +11,7 @@
 		[[+posts]]
 	</ul>
 
-    <div class="dis-pagination"><ul>[[+pagination]]</ul></div>
+    [[+pagination]]
 
     [[+quick_reply_form]]
 </div>

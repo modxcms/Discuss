@@ -33,7 +33,7 @@
 </ul>
 </div>
 
-<div class="dis-pagination"><ul>[[+pagination]]</ul></div>
+    [[+pagination]]
 
 <br class="clearfix" />
 

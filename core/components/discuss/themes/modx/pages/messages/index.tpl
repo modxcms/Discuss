@@ -4,9 +4,9 @@
 	
 	
 	<ul class="dis-list">
-		<li><h1>[[%discuss.last_post]]</h1></li>
+		<li><h1>Private Messages</h1></li>
 		[[+messages]]
-        <li>[[+pagination:notempty=`<div class="dis-pagination">[[+pagination]]</div>`]]</li>
+        <li>[[+pagination:notempty=`[[+pagination]]</div>`]]</li>
 	</ul>
 </div>
 
