@@ -957,17 +957,24 @@ h4 a.normal-type {
 	top: 0;
 	left: 0;
 	overflow: visible;
-	height: 18px;
+	height: 19px;
 	width: 96px;
-    border-radius: 8px;
+	background:-webkit-gradient(linear, center bottom, center top, from(#333), to(#555));
+	background:-moz-linear-gradient(top, #333, #555);
+	-pie-background:linear-gradient(top, #333, #555);
+	background:linear-gradient(top, #333, #555);
+	border-radius: 2px 2px 2px 2px;
     background-color: #444;
     z-index: 900;
     margin: 10px 0 5px 25px;
+   	box-shadow: 0 1px 1px #bbb;
+	-moz-box-shadow: 0 1px 1px #bbb;
+	-webkit-box-shadow: 0 1px 1px #bbb;
  	behavior:url(pie.htc);
 	}
 
 a.dis-message-write {
-	border-radius: 7px 7px 7px 7px;
+	border-radius: 1px 1px 1px 1px;
     color: #EEEEEE;
     display: block;
     float: left;
@@ -976,7 +983,7 @@ a.dis-message-write {
     height: 13px;
     line-height: 12px;
     margin: 2px;
-    padding: 1px 6px 0;
+    padding: 2px 6px 0;
     text-decoration: none;
  	behavior:url(pie.htc);
     }
@@ -985,14 +992,14 @@ a.dis-new-thread-preview,
 a.dis-preview,
 a.dis-message-preview {
 	float: right;
-    border-radius: 7px 7px 7px 7px;
+    border-radius: 1px 1px 1px 1px;
     color: #EEEEEE;
     font-family: helvetica;
     font-size: 12px;
     height: 13px;
     line-height: 12px;
     margin: 2px;
-    padding: 1px 6px 0;
+    padding: 2px 6px 0;
     text-decoration: none;
  	behavior:url(pie.htc);
 	}
@@ -1005,8 +1012,12 @@ a.dis-message-preview {
 	}
 	
 .preview_toggle a.selected {
-    background-color: #ddd;
+	background:-webkit-gradient(linear, center bottom, center top, from(#fff), to(#fafafa));
+	background:-moz-linear-gradient(top, #fff, #fafafa);
+	-pie-background:linear-gradient(top, #fff, #fafafa);
+	background:linear-gradient(top, #fff, #fafafa);
     color: #444;
+ 	behavior:url(pie.htc);
 	}
 	
 #dis-message-preview {
@@ -1015,8 +1026,7 @@ a.dis-message-preview {
     top: 10px;
     left: 0px;
     margin: 0;
-    padding: 12px 0 0;
-    min-height: 300px;
+    padding: 12px 0 20px;
     position: absolute;
     width: 710px;
     z-index: 700;
