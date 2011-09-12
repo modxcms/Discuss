@@ -326,6 +326,15 @@ $settings['discuss.maximum_post_size']->fromArray(array(
     'area' => 'Threads',
 ),'',true,true);
 
+$settings['discuss.new_replies_threshold']= $modx->newObject('modSystemSetting');
+$settings['discuss.new_replies_threshold']->fromArray(array(
+    'key' => 'discuss.new_replies_threshold',
+    'value' => 14,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Threads',
+),'',true,true);
+
 $settings['discuss.notification_new_post_subject']= $modx->newObject('modSystemSetting');
 $settings['discuss.notification_new_post_subject']->fromArray(array(
     'key' => 'discuss.notification_new_post_subject',

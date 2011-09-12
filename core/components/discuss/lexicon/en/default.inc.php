@@ -279,6 +279,9 @@ $_lang['setting_discuss.max_signature_length_desc'] = 'The maximum number of cha
 $_lang['setting_discuss.maximum_post_size'] = 'Maximum Post Size';
 $_lang['setting_discuss.maximum_post_size_desc'] = 'The maximum number of characters a post may be in a thread.';
 
+$_lang['setting_discuss.new_replies_threshold'] = 'New Replies Threshold';
+$_lang['setting_discuss.new_replies_threshold_desc'] = 'The number of days to show from when viewing new replies to posts.';
+
 $_lang['setting_discuss.notification_new_post_chunk'] = 'New Post Notification Email Chunk';
 $_lang['setting_discuss.notification_new_post_chunk_desc'] = 'The Chunk used for the email sent to subscribers of a thread when a new post is made.';
 

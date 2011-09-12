@@ -288,6 +288,8 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
+        $daysAgo = time() - ($modx->getOption('discuss.new_replies_threshold',null,14) * 24 * 60 * 60);
+        $modx->setLogTarget('ECHO');
         $c->where(array(
             //'Reads.thread:IS' => null,
             'Board.status:!=' => disBoard::STATUS_INACTIVE,
@@ -300,8 +302,8 @@ class disThread extends xPDOSimpleObject {
              )
             )',
             'LastPost.author:!=' => $modx->discuss->user->get('id'),
+            'disThread.post_last_on:>=' => $daysAgo,
         ));
-
         /* ignore spam/recycle bin boards */
         $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
         if (!empty($spamBoard)) {

@@ -103,9 +103,11 @@ class DiscussMessagesController extends DiscussController {
             $threadArray['title'] = str_replace(array('[',']'),array('&#91;','&#93;'),$threadArray['title']);
             $threadArray['idx'] = $idx+1;
 
-            $threadArray['unread'] = '';
+            $threadArray['unread'] = false;
+            $threadArray['unread-cls'] = 'dis-post-read';
             if (!$threadArray['viewed'] && $this->discuss->user->isLoggedIn) {
-                $threadArray['unread'] = '<img src="'.$this->discuss->config['imagesUrl'].'icons/new.png'.'" class="dis-new" alt="" />';
+                $threadArray['unread'] = true;
+                $threadArray['unread-cls'] = 'dis-post-read';
             }
 
             $this->list['results'][] = $this->discuss->getChunk('message/disMessageLi',$threadArray);
