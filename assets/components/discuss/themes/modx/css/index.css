@@ -434,9 +434,10 @@ h1.locked {
     padding: 0 0 0 15px !important;
 	}
 
-.dis-board-subs {
-	padding: 0 0 0 10px;
+p.dis-board-subs {
 	font-size: 11px;
+	padding: 0 0 0 5px;
+	margin: 0 0 5px;
 	}
 
 .dis-board-subs h4 {
