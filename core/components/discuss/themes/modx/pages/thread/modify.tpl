@@ -46,7 +46,7 @@
     <br class="clearfix" />
     
     <label for="dis-attachment">[[%discuss.attachments]]:
-        <span class="small"><a href="javascript:void(0);" class=" dis-add-attachment">[[%discuss.attachment_add]]</a>
+        <span class="small"><a href="javascript:void(0);" class="dis-add-attachment">[[%discuss.attachment_add]]</a>
         <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
         <span class="error">[[+error.attachments]]</span>
     </label>
