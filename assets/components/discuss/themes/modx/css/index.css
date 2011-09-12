@@ -331,7 +331,6 @@ ul.dis-list li {
     border-bottom: 1px solid #eee;
     margin: 0 25px 0 0;
     padding: 0 0;
-    width: 662px;
     }
     
 ul.dis-list li.Item {
@@ -468,8 +467,8 @@ h1.locked {
 a.dis-mark-as-answer-link {
 	background: transparent url(../images/discuss_solved_16.png) no-repeat 0 0;
 	position: absolute;
-	top: 15px;
-	right: 70px;
+	top: 10px;
+	right: 50px;
 	height: 16px;
 	width: 16px;
 	display: block;
@@ -488,7 +487,7 @@ a.dis-mark-as-answer-link:hover span {
     line-height: 10px;
     position: absolute;
     text-indent: 0;
-    top: -12px;
+    top: -10px;
     width: 120px;
     z-index: 1000;
     text-align: right;
@@ -500,7 +499,6 @@ span.idx {
 	color: #333;
 	display: none;
 	}
-
 
 a.dis-solved {
 	background: transparent url(../images/discuss_solved_16.png) no-repeat 0 -16px;
@@ -715,8 +713,8 @@ a.quick-reply {
 	height: 16px;
 	width: 16px;
 	position: absolute;
-	top: 15px;
-	right: 45px;
+	top: 10px;
+	right: 25px;
 	}
 
 a.quick-reply:hover {
@@ -731,7 +729,7 @@ a.quick-reply:hover span {
     line-height: 10px;
     position: absolute;
     text-indent: 0;
-    top: -12px;
+    top: -10px;
     width: 80px;
     z-index: 1000;
     text-align: right;
@@ -740,8 +738,8 @@ a.quick-reply:hover span {
 div.dis-actions {
 	background: transparent url(../images/discuss_settings.png) no-repeat 0 0;
 	position: absolute;
-	top: 15px;
-	right: 10px;
+	top: 10px;
+	right: -10px;
 	height: 24px;
 	width: 24px;
 	display: block;
@@ -1012,10 +1010,10 @@ a.dis-message-preview {
 #dis-message-preview {
     background-color: #FFFFFF;
     display: none;
-    top: 9px;
+    top: 10px;
     left: 0px;
     margin: 0;
-    padding: 30px 0 0 0;
+    padding: 12px 0 0;
     min-height: 300px;
     position: absolute;
     width: 710px;

@@ -33,6 +33,7 @@
 		<nav id="global2">
 			[[+discuss.user.id:is=``:then=`<a href="[[~[[*id]]]]login">Login</a> | <a href="[[~[[*id]]]]register">Register</a>`]]
 			[[+discuss.user.id:notempty=`Welcome, <a href="[[~[[*id]]]]user/?user=[[+discuss.user.id]]">[[+modx.user.username]]</a> | <a href="[[~[[*id]]]]logout">Logout</a>`]]
+			 | <a href="http://www.modx.com" title="Shimmy on over to MODX.com">MODX.com</a>
 		</nav>
 
 
