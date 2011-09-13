@@ -530,7 +530,7 @@ a.dis-solved {
 
 
 /* Breadcrumbs  */
-#crumbs li.first {
+#crumbs li:first-child {
     background: none repeat scroll 0 0 transparent;
     padding: 0;
 }

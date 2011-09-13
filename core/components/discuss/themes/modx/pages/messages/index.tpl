@@ -6,11 +6,10 @@
 	<ul class="dis-list">
 		<li><h1>Private Messages</h1></li>
 		[[+messages]]
-        <li>[[+pagination:notempty=`[[+pagination]]</div>`]]</li>
 	</ul>
 </div>
 
-
+[[+pagination:notempty=`[[+pagination]]`]]
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]
 
