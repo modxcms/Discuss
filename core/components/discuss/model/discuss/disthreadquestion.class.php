@@ -175,7 +175,7 @@ class disThreadQuestion extends disThread {
         if ($k == 'title' && $this->xpdo->lexicon) {
             $answered = $this->get('answered');
             if (!empty($answered)) {
-                $v .= ' <span class="dis-solved-title">['.$this->xpdo->lexicon('discuss.solved').']</span>';
+                $v .= ' ['.$this->xpdo->lexicon('discuss.solved').']';
             }
         }
         return $v;
