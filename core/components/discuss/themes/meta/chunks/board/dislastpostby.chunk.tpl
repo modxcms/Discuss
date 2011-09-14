@@ -1,1 +1,0 @@
-<a href="[[+url]]">[[%discuss.last_post]]</a> [[+createdon]] [[%discuss.by? &author=`[[+author_link]]`]]

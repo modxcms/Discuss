@@ -1,1 +1,0 @@
-<label class="dis-cb"><input type="checkbox" name="[[+name]]" value="[[+value]]" [[+attributes]] />[[+text]]</label>

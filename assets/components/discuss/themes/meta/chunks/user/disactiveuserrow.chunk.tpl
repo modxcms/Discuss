@@ -1,1 +1,0 @@
-<a href="[[+url]]"[[+style]]>[[+username]]</a>
