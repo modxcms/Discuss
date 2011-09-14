@@ -105,9 +105,6 @@ img.button-divider {
  	behavior:url(pie.htc);
 	}
 
-
-a.dis-preview,
-a.dis-message-write,	
 .dis-sticky-actions a.action-buttons {
 	float: left;
 	line-height: 12px;
@@ -124,9 +121,6 @@ a.dis-message-write,
  	behavior:url(pie.htc);
 	}
 
-.preview_toggle a.selected,
-a.dis-preview:hover,
-a.dis-message-write:hover,
 .dis-sticky-actions a.action-buttons:hover {
  	-moz-box-shadow:inset 2px 2px 7px #d8d8d8;
  	-webkit-box-shadow:inset 2px 2px 7px #d8d8d8;
@@ -962,7 +956,7 @@ h4 a.normal-type {
 .preview_toggle {
 	border-radius: 4px 4px 0px 0px;
 	position: relative;
-	top: -7px;
+	top: -8px;
 	left: 0;
 	overflow: visible;
 	height: 17px;
@@ -979,23 +973,11 @@ h4 a.normal-type {
 .dis-post-preview .dis-post-author {
 	margin: 0 0 0 25px;
 	}
-	
-.preview_toggle a.selected {
-	color: #333;
-	cursor: default;
-	}	
-	
-.preview_toggle a.selected,
-a.dis-preview:hover,
-a.dis-message-write:hover {
-	position: relative;
-	z-index: 1500;
-	}
 
 #dis-message-preview {
     background-color: #FFFFFF;
     display: none;
-    top: 10px;
+    top: 12px;
     left: 0px;
     margin: 0;
     padding: 12px 0 20px;
@@ -1010,6 +992,62 @@ a.dis-message-write:hover {
 	-webkit-border-radius: 6px;
  	behavior:url(pie.htc);
 	}
+
+.preview_toggle a.selected {
+	color: #333;
+	cursor: default;
+	}	
+	
+.preview_toggle a.selected,
+a.dis-preview:hover,
+a.dis-message-write:hover {
+	position: relative;
+	z-index: 1500;
+	color: #333;
+    border-color: #ababab #dedede #dedede #ababab;
+    background-color: #fff;
+	-moz-transition-duration: .3s;
+	-moz-transition-delay: 0s;
+	/* WebKit */
+	-webkit-transition-duration: .3s;
+	-webkit-transition-delay: 0s;
+	/* Opera */
+	-o-transition-duration: .3s;
+	-o-transition-delay: 0s;
+	/* Standard */
+	transition-duration: .3s;
+	transition-delay: 0s;
+ 	behavior:url(pie.htc);
+	}
+
+a.dis-message-write,
+a.dis-preview {
+	padding: 0 5px 0;
+	font-size: 11px;
+	-moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #efefef;
+    border-color: #ddd;
+    border-radius: 6px 6px 6px 6px;
+    border-style: solid;
+    border-width: 1px;
+    color: #777;
+	-moz-transition-duration: .3s;
+	-moz-transition-delay: 0s;
+	/* WebKit */
+	-webkit-transition-duration: .3s;
+	-webkit-transition-delay: 0s;
+	/* Opera */
+	-o-transition-duration: .3s;
+	-o-transition-delay: 0s;
+	/* Standard */
+	transition-duration: .3s;
+	transition-delay: 0s;
+ 	behavior:url(pie.htc);
+ 	}
 
 .preview_toggle .dis-post-preview h2 {
 	margin: 0 0;
