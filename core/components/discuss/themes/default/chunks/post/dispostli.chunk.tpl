@@ -7,7 +7,7 @@
     <div class="right" style="width: 10%">[[+views]]</div>
     <div class="dis-thread-icons">[[+icons]]</div>
     <div class="dis-thread-body">
-        [<a class="dis-board-gray" href="[[~[[*id]]]]board/?board=[[+board]]">[[+board_name]]</a>] <a href="[[+url]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a>
-        [[+unread]]
+        [<a class="dis-board-gray" href="[[~[[*id]]]]board/[[+board]]/">[[+board_name]]</a>] <a href="[[+url]]">[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</a>
+        [[+unread:notempty=`<img src="[[++discuss.assets_url]]themes/default/images/icons/new.png" class="dis-new" alt="" />`]]
     </div>
 </li>

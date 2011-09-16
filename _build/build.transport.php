@@ -191,6 +191,21 @@ foreach ($settings as $setting) {
 }
 unset($settings,$setting,$attributes);
 
+/* load user groups  */
+$userGroups = include $sources['data'].'transport.usergroups.php';
+if (empty($userGroups)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in User Groups.');
+$attributes = array (
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::UNIQUE_KEY => array ('name'),
+);
+foreach ($userGroups as $userGroup) {
+    $vehicle = $builder->createVehicle($userGroup,$attributes);
+    $builder->putVehicle($vehicle);
+}
+$modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($userGroups).' default User Groups.'); flush();
+unset ($userGroups,$userGroup,$attributes);
+
 /* load events */
 $events = include $sources['data'].'transport.events.php';
 if (empty($events)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in events.');
