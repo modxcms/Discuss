@@ -1,22 +1,18 @@
 [[!FormIt?
     &submitVar=`dis-add-ban`
     &hooks=`postHook.DiscussAddBan`
+    &validate=`email:required`
+    &successMessage=`Ban added.`
 ]]
 
-
-
 <div class="dis-profile">
-
-
-
-
-<form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form">
+<form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-formz">
 
 	<h1>[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</h1>
 
 <p>[[+fi.successMessage]]</p>
 
-    <input type="hidden" name="id" value="[[+fi.id]]" />
+    <input type="hidden" name="disUser" value="[[+fi.disUser]]" /> 
     <input type="hidden" name="user" value="[[+fi.user]]" />
     
     <label for="dis-ban-reason">[[%discuss.ban_reason]]:
