@@ -22,29 +22,26 @@
  * @package discuss
  */
 /**
- * Resolve creating demo data, Discuss resource, and ACLs
+ * Default Discuss User Groups
  *
  * @var modX $modx
- * @var array $options
- * @var xPDOTransport $object
- *
+ * 
  * @package discuss
  * @subpackage build
  */
-if ($object->xpdo) {
-    switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-        case xPDOTransport::ACTION_INSTALL:
-$modx =& $object->xpdo;
-$modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
-$modx->addPackage('discuss',$modelPath);
-if (!$modx->loadClass('disSetup',$modelPath.'discuss/setup/',true,true)) {
-    return false;
-}
-$setup = new disSetup($object->xpdo,$options);
-$setup->run();
-            break;
-        case xPDOTransport::ACTION_UPGRADE:
-            break;
-    }
-}
-return true;
+$groups = array();
+
+$groups[1]= $modx->newObject('modUserGroup');
+$groups[1]->fromArray(array(
+    'id' => 1,
+    'name' => 'Forum Members',
+    'description' => 'For basic members of the forum.',
+));
+$groups[2]= $modx->newObject('modUserGroup');
+$groups[2]->fromArray(array(
+    'id' => 2,
+    'name' => 'Forum Moderators',
+    'description' => 'For moderators of the forum.',
+));
+
+return $groups;

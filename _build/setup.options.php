@@ -24,21 +24,21 @@
 /**
  * Build the setup options form.
  *
+ * @var modX $modx
+ * @var array $options
+ * 
  * @package discuss
  * @subpackage build
  */
-/* set some default values */
 $demoDataChecked = '';
-/* get values based on mode */
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
+    case xPDOTransport::ACTION_UPGRADE:
         $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
         $modx->addPackage('discuss',$modelPath);
-        $cat = $modx->getObject('disCategory',array('name' => 'Welcome'));
-        $demoDataChecked = $cat ? '' : ' checked="checked"';
-
+        $cat = $modx->getCount('disUser');
+        $demoDataChecked = $cat > 0 ? '' : ' checked="checked"';
         break;
-    case xPDOTransport::ACTION_UPGRADE:
     case xPDOTransport::ACTION_UNINSTALL:
         break;
 }
@@ -49,11 +49,16 @@ $output = '
 <p>Thanks for installing Discuss! Please review the setup options below before proceeding.</p>
 <br />
 
-<h3>Demo Data</h3>
+<h3>Setup Options</h3>
 
 <label for="discuss-install_demodata">Install Demo Data:</label>
 <input type="checkbox" name="install_demodata" id="discuss-install_demodata" value="1"'.$demoDataChecked.' />
 <p>Checking this will install demo data. It is recommended to do this on your first install of Discuss.</p>
+<br /><br />
+
+<label for="discuss-install_resource">Install Discuss Resource:</label>
+<input type="checkbox" name="install_demodata" id="discuss-install_resource" value="1"'.$demoDataChecked.' />
+<p>Checking this field will create a Resource in your site root with the alias "forums" with Discuss setup inside it.</p>
 <br /><br />
 ';
 

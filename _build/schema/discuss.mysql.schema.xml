@@ -45,7 +45,7 @@
         <field key="map" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="minimum_post_level" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="9999" index="index" />
         <field key="status" dbtype="integer" precision="4" phptype="integer" attributes="unsigned" null="false" default="1" index="index" />
-        <field key="locked" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="1" index="index" />
+        <field key="locked" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" index="index" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="rtl" dbtype="tinyint" precision="1" phptype="boolean" attributes="unsigned" null="false" default="0" index="index" />
 

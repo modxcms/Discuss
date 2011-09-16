@@ -1,7 +1,3 @@
-Ext.onReady(function() {
-    MODx.load({ xtype: 'dis-page-usergroup-update'});
-});
-
 Dis.page.UpdateUserGroup = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -27,6 +23,7 @@ Dis.page.UpdateUserGroup = function(config) {
         ,components: [{
             xtype: 'dis-panel-usergroup'
             ,usergroup: Dis.request.id
+            ,record: config.record || {}
             ,renderTo: 'dis-panel-usergroup-div'
         }]
     });

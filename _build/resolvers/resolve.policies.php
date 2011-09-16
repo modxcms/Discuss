@@ -41,6 +41,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $policies = array(
             'Discuss Administrator Policy',
             'Discuss Moderator Policy',
+            'Discuss Member Policy',
         );
         $template = $modx->getObject('modAccessPolicyTemplate',array('name' => 'DiscussTemplate'));
         if ($template) {
@@ -59,6 +60,53 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $modx->log(xPDO::LOG_LEVEL_ERROR,'[Discuss] Could not find DiscussTemplate Access Policy Template!');
         }
 
+        /* assign policy to forum members group */
+        $policy = $modx->getObject('modAccessPolicy',array('name' => 'Discuss Member Policy'));
+        $adminGroup = $modx->getObject('modUserGroup',array('name' => 'Forum Members'));
+        if ($policy && $adminGroup) {
+            $access = $modx->getObject('modAccessContext',array(
+                'target' => 'web',
+                'principal_class' => 'modUserGroup',
+                'principal' => $adminGroup->get('id'),
+                'authority' => 9999,
+                'policy' => $policy->get('id'),
+            ));
+            if (!$access) {
+                $access = $modx->newObject('modAccessContext');
+                $access->fromArray(array(
+                    'target' => 'web',
+                    'principal_class' => 'modUserGroup',
+                    'principal' => $adminGroup->get('id'),
+                    'authority' => 9999,
+                    'policy' => $policy->get('id'),
+                ));
+                $access->save();
+            }
+        }
+
+        /* assign policy to forum moderators group */
+        $policy = $modx->getObject('modAccessPolicy',array('name' => 'Discuss Moderator Policy'));
+        $adminGroup = $modx->getObject('modUserGroup',array('name' => 'Forum Moderators'));
+        if ($policy && $adminGroup) {
+            $access = $modx->getObject('modAccessContext',array(
+                'target' => 'web',
+                'principal_class' => 'modUserGroup',
+                'principal' => $adminGroup->get('id'),
+                'authority' => 9999,
+                'policy' => $policy->get('id'),
+            ));
+            if (!$access) {
+                $access = $modx->newObject('modAccessContext');
+                $access->fromArray(array(
+                    'target' => 'web',
+                    'principal_class' => 'modUserGroup',
+                    'principal' => $adminGroup->get('id'),
+                    'authority' => 9999,
+                    'policy' => $policy->get('id'),
+                ));
+                $access->save();
+            }
+        }
 
         /* assign policy to admin group */
         $policy = $modx->getObject('modAccessPolicy',array('name' => 'Discuss Administrator Policy'));
