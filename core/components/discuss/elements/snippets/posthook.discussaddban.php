@@ -21,6 +21,17 @@
  *
  * @package discuss
  */
+/**
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
+ *
+ * @var fiHooks $hook
+ * @var array $fields
+ * @var string $submitVar
+ *
+ * @package discuss
+ */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
 if (!($discuss instanceof Discuss)) return true;
 $modx->lexicon->load('discuss:user');
@@ -34,14 +45,15 @@ if (!$modx->loadClass('rptBan',$rptCorePath.'model/rampart/')) {
 }
 $modx->lexicon->load('rampart:default');
 
-/* get discuss user obj */
-$user = $modx->getObject('disUser',$fields['id']);
+/* @var disUser $user get discuss user obj */
+$user = $modx->getObject('disUser',$fields['disUser']);
 if (empty($user)) {
-    $hook->addError('reason','No user found with ID: '.$fields['id']);
+    $hook->addError('reason','No user found with ID: '.$fields['disUser']);
+    return false;
 }
 $modxUser = $user->getOne('User');
 
-/* create ban obj */
+/* @var rptBan $ban create ban obj */
 $ban = $modx->newObject('rptBan');
 $ban->set('createdon',strftime('%Y-%m-%d %H:%M:%S'));
 $ban->set('createdby',$modx->user->get('id'));
@@ -78,6 +90,7 @@ $user->set('status',disUser::BANNED);
 $sessions = $modx->getCollection('disSession',array(
     'user' => $user->get('id'),
 ));
+/** @var disSession $s */
 foreach ($sessions as $s) {
     $s->remove();
 }
@@ -115,7 +128,7 @@ $discuss->logActivity('ban_add',$ban->toArray());
 
 /* redirect */
 $url = $discuss->request->makeUrl('user/ban',array(
-    'id' => $fields['id'],
+    'u' => $fields['disUser'],
     'success' => true,
 ));
 $modx->sendRedirect($url);
