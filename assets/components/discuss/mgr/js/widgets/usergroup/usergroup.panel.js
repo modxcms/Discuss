@@ -17,6 +17,7 @@ Dis.panel.UserGroup = function(config) {
                 autoHeight: true, bodyStyle: 'padding: 15px;'
             }
             ,forceLayout: true
+            ,labelWidth: 150
             ,items: [{
                 title: _('general_information')
                 ,layout: 'form'
@@ -29,13 +30,14 @@ Dis.panel.UserGroup = function(config) {
                     xtype: 'textfield'
                     ,fieldLabel: _('name')
                     ,name: 'name'
-                    ,width: 250
+                    ,anchor: '97%'
                     ,allowBlank: false
                 },{
                     xtype: 'checkbox'
                     ,fieldLabel: _('discuss.usergroup_post_based')
                     ,description: _('discuss.usergroup_post_based_desc')
                     ,name: 'post_based'
+                    ,anchor: '97%'
                     ,inputValue: true
                 },{
                     xtype: 'numberfield'
@@ -49,13 +51,13 @@ Dis.panel.UserGroup = function(config) {
                     ,fieldLabel:  _('discuss.usergroup_name_color')
                     ,description: _('discuss.usergroup_name_color_desc')
                     ,name: 'color'
-                    ,width: 200
+                    ,width: 300
                 },{
                     xtype: 'displayfield'
                     ,fieldLabel: _('discuss.usergroup_image')
                     ,description: _('discuss.usergroup_image_desc')
                     ,name: 'image'
-                    ,width: 200
+                    ,anchor: '97%'
                 },{
                     id: 'ug-image-preview'
                     ,html: ''
@@ -64,7 +66,7 @@ Dis.panel.UserGroup = function(config) {
                     xtype: 'textfield'
                     ,inputType: 'file'
                     ,name: 'image'
-                    ,width: 200
+                    ,anchor: '97%'
                 }]
             },{
                 title: _('discuss.members')
@@ -80,7 +82,7 @@ Dis.panel.UserGroup = function(config) {
                     ,usergroup: config.usergroup
                     ,preventRender: true
                 }]
-            }/*,{
+            },{
                 title: _('discuss.boards')
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
@@ -94,7 +96,7 @@ Dis.panel.UserGroup = function(config) {
                     ,usergroup: config.usergroup
                     ,preventRender: true
                 }]
-            }*/]
+            }]
         }]
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
@@ -105,46 +107,50 @@ Dis.panel.UserGroup = function(config) {
     Dis.panel.UserGroup.superclass.constructor.call(this,config);
 };
 Ext.extend(Dis.panel.UserGroup,MODx.FormPanel,{
-    setup: function() {
-        if (!this.config.usergroup) return;
-        MODx.Ajax.request({
-            url: this.config.url
-            ,params: {
-                action: 'mgr/usergroup/get'
-                ,id: this.config.usergroup
-            }
-            ,listeners: {
-                'success': {fn:function(r) {
-                    this.getForm().setValues(r.object);
-                    
-                    var d = Ext.decode(r.object.members);
-                    Ext.getCmp('dis-grid-usergroup-members').getStore().loadData(d);
-                    
-                    var b = Ext.decode(r.object.boards);
-                    Ext.getCmp('dis-grid-usergroup-boards').getStore().loadData(b);
-                    
-                    Ext.getCmp('dis-usergroup-header').getEl().update('<h2>'+'UserGroup'+': '+r.object.name+'</h2>');
+    initialized: false
+    ,setup: function() {
+        if (!this.config.record || this.initialized) return;
+        var r = this.config.record;
+        this.getForm().setValues(r);
 
-                    if (r.object.badge_full) {
-                        Ext.get('ug-image-preview').update('<img src="'+r.object.badge_full+'?pq='+Math.floor(Math.random()*11)+'" alt="" />');
-                    }
-                },scope:this}
-            }
-        });
+        if (r.members) {
+            var d = Ext.decode(r.members);
+            var ug = Ext.getCmp('dis-grid-usergroup-members');
+            if (ug) { ug.getStore().loadData(d); }
+        }
+
+        if (r.boards) {
+            var b = Ext.decode(r.boards);
+            var bg = Ext.getCmp('dis-grid-usergroup-boards');
+            if (bg) { bg.getStore().loadData(b); }
+        }
+
+        Ext.getCmp('dis-usergroup-header').getEl().update('<h2>'+'UserGroup'+': '+r.name+'</h2>');
+
+        if (r.badge) {
+            Ext.get('ug-image-preview').update('<img src="'+r.badge+'?pq='+Math.floor(Math.random()*11)+'" alt="" />');
+        }
+        this.initialized = true;
     }
     ,beforeSubmit: function(o) {
-        Ext.apply(o.form.baseParams,{
-            members: Ext.getCmp('dis-grid-usergroup-members').encode()
-            ,boards: Ext.getCmp('dis-grid-usergroup-boards').encode()
-        });
+        var d = {};
+        var ug = Ext.getCmp('dis-grid-usergroup-members');
+        if (ug) { d['members'] = ug.encode(); }
+
+        var bg = Ext.getCmp('dis-grid-usergroup-boards');
+        if (bg) { d['boards'] = bg.encode(); }
+        
+        Ext.apply(o.form.baseParams,d);
     }
     ,success: function(o) {
         if (!this.config['usergroup']) { 
             location.href = '?a='+Dis.request.a+'&action=usergroup/update&user='+o.result.object.id;
         } else {
             Ext.getCmp('dis-btn-save').setDisabled(false);
-            Ext.getCmp('dis-grid-usergroup-members').getStore().commitChanges();
-            Ext.getCmp('dis-grid-usergroup-boards').getStore().commitChanges();
+            var bg = Ext.getCmp('dis-grid-usergroup-members');
+            if (bg) { bg.getStore().commitChanges(); }
+            var ug = Ext.getCmp('dis-grid-usergroup-boards');
+            if (ug) { ug.getStore().commitChanges(); }
         }
     }
 });

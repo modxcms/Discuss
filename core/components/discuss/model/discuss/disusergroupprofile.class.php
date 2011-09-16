@@ -44,10 +44,30 @@ class disUserGroupProfile extends xPDOSimpleObject {
      */
     public function getBadge() {
         $badge = $this->get('image');
+        if ($badge == 'Array') {
+            $badge = null;
+            $this->set('badge','');
+            $this->save();
+        }
         if (!empty($badge)) {
             $badge = $this->getBadgeUrl().$badge;
         }
         return $badge;
+    }
+
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated= false) {
+        $array = parent::toArray($keyPrefix,$rawValues,$excludeLazy,$includeRelated);
+        $array['badge'] = $this->getBadge();
+        return $array;
+    }
+
+    public function get($k, $format = null, $formatTemplate= null) {
+        if ($k == 'badge') {
+            $v = $this->getBadge();
+        } else {
+            $v = parent::get($k,$format,$formatTemplate);
+        }
+        return $v;
     }
 
     /**

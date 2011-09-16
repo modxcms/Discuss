@@ -28,7 +28,7 @@ Dis.grid.UserGroupMembers = function(config) {
         }]
     });
     Dis.grid.UserGroupMembers.superclass.constructor.call(this,config);
-    this.propRecord = Ext.data.Record.create([{name: 'id'},{name:'username'},{name:'role'}]);
+    this.propRecord = Ext.data.Record.create(['id','username','role','role_name']);
 };
 Ext.extend(Dis.grid.UserGroupMembers,MODx.grid.LocalGrid,{
     getMenu: function() {
