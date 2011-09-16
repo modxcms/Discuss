@@ -87,6 +87,7 @@ class disSetup {
             'category' => $category->get('id'),
             'description' => 'Introduce yourself to the community here.',
             'ignoreable' => true,
+            'locked' => false,
         ));
         $board->save();
 
@@ -117,6 +118,6 @@ class disSetup {
             }
         }
 
-        return $true;
+        return true;
     }
 }

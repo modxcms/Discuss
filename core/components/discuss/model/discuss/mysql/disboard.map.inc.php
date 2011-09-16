@@ -21,7 +21,7 @@ $xpdo_meta_map['disBoard']= array (
     'map' => '',
     'minimum_post_level' => 9999,
     'status' => 1,
-    'locked' => 1,
+    'locked' => 0,
     'integrated_id' => 0,
     'rtl' => 0,
   ),
@@ -158,7 +158,7 @@ $xpdo_meta_map['disBoard']= array (
       'phptype' => 'boolean',
       'attributes' => 'unsigned',
       'null' => false,
-      'default' => 1,
+      'default' => 0,
       'index' => 'index',
     ),
     'integrated_id' => 

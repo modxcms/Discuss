@@ -42,8 +42,6 @@ if (!$modx->loadClass('disSetup',$modelPath.'discuss/setup/',true,true)) {
 }
 $setup = new disSetup($object->xpdo,$options);
 $setup->run();
-
-
             break;
         case xPDOTransport::ACTION_UPGRADE:
             break;
