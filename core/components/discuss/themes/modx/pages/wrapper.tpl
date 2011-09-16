@@ -41,11 +41,11 @@
             <a href="[[~[[*id]]]]" class="ir" id="logo" title="Open Source PHP Content Management System, Framework, Platform and More">MODX Open Source Content Management System, Framework, Platform and More.</a>
             <div id="search">
             <div class="links">
-                <a href="partners/solution/">Find a Partner</a>  <span class="ir">|</span>
-                <a href="partners/hosting-saas/">Hosts + SaaS</a> <span class="ir">|</span> 
-                <a href="services/jobs/">Jobs</a> <span class="ir">|</span> 
+                <a href="[[~54]]">Find a Partner</a>  <span class="ir">|</span>
+                <a href="[[~56]]">Hosts + SaaS</a> <span class="ir">|</span> 
+                <a href="[[~30]]">Jobs</a> <span class="ir">|</span> 
                  
-                <a href="community/wall-of-fame/support-modx/">Donate</a></div>
+                <a href="[[~109]]">Donate</a></div>
 
 		                <form action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
 							<label for="search_form_input" class="hidden">Search</label>
