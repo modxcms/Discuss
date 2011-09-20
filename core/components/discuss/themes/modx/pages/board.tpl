@@ -2,7 +2,7 @@
 
 [[+aboveBoards]]
 
-
+	    [[+pagination]]
 <ul class="dis-list" style="[[+boards_toggle]]">
 [[+boards]]
 </ul>

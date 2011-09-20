@@ -1,3 +1,5 @@
+	    [[+pagination]]
+
 <div class="dis-threads">
 
 	<h1>Track IP: [[+ip]]</h1>

@@ -1,3 +1,4 @@
+	    [[+pagination:notempty=`[[+pagination]]`]]
 
 <div class="dis-threads">
 
@@ -8,9 +9,7 @@
 		[[+messages]]
 	</ul>
 </div>
-	<div class="pagingbar round6 bordered">
 	    [[+pagination:notempty=`[[+pagination]]`]]
-	</div>
 
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]

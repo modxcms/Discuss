@@ -1,3 +1,4 @@
+	    [[+pagination]]
 
 
 <div class="dis-threads">

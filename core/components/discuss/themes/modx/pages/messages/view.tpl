@@ -1,6 +1,6 @@
 
 <div class="dis-threads">
-
+	    [[+pagination]]
 
 
 	<ul class="dis-list">

@@ -22,6 +22,7 @@
 </form>
 
 <hr />
+	    [[+pagination]]
 
 
 <div class="dis-threads">

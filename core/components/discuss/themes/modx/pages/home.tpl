@@ -1,6 +1,6 @@
 [[+top]]
 [[+aboveBoards]]
-
+	    [[+pagination]]
 <div class="dis-threads">
 
 <ul class="dis-list">

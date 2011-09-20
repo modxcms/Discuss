@@ -1,6 +1,7 @@
 [[+top]]
 
 [[+aboveThread]]
+	    [[+pagination]]
 
 <div>
 	<ul class="dis-list">
