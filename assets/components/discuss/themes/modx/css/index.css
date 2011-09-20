@@ -530,19 +530,13 @@ a.dis-solved {
 }
 
 /*  Pagination  */
+.pagingbar {
+    margin: 25px;
+	}
+
 li a.dis-no-pages {
 	width: 100px;
 	float: right;
-	}
-
-ul.paging {
-	text-align: right;
-	margin: 0 25px 0 0;
-	}
-
-ul.paging li {
-	border: none;
-	padding: 5px 0;
 	}
 	
 /*  Post Pages  */

@@ -6,7 +6,7 @@
 		<li><h1>Recent Posts</h1></li>
         [[+recent_posts]]
     </ul>
-    [[+pagination]]
+	    [[+pagination]]
 </div>
 
 				</div><!-- Close Content From Wrapper -->

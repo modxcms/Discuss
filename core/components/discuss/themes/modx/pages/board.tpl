@@ -17,8 +17,7 @@
 	</ul>
 
 
-
-    [[+pagination]]
+	    [[+pagination]]
 </div>
 
 

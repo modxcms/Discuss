@@ -8,7 +8,7 @@
 		<li><h1>Unread Posts</h1></li>
 	[[+threads]]
 	</ul>
-    [[+pagination]]
+	    [[+pagination]]
 </div>
 
 

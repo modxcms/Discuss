@@ -20,7 +20,8 @@
 
 
 
-    [[+pagination]]
+	    [[+pagination]]
+
 
 [[+threadactionbuttons]]
 

@@ -8,7 +8,7 @@
 		[[+threads]]
 	</ul>
 
-[[+pagination]]
+	    [[+pagination]]
 </div>
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]

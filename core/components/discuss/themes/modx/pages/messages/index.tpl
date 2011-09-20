@@ -8,8 +8,10 @@
 		[[+messages]]
 	</ul>
 </div>
+	<div class="pagingbar round6 bordered">
+	    [[+pagination:notempty=`[[+pagination]]`]]
+	</div>
 
-[[+pagination:notempty=`[[+pagination]]`]]
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]
 

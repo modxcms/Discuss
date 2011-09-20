@@ -12,7 +12,7 @@
 	
 </div>
 
-    [[+pagination]]
+	    [[+pagination]]
 
 				</div><!-- Close Content From Wrapper -->
 [[+bottom]]

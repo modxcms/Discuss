@@ -9,7 +9,7 @@
 
 <br class="clearfix" />
 
-    [[+pagination]]
+	    [[+pagination]]
 
 </div><!-- Close Content From Wrapper -->
 

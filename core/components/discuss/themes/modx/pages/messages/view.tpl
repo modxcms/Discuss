@@ -9,7 +9,7 @@
 		[[+posts]]
 	</ul>
 
-    [[+pagination]]
+	    [[+pagination]]
 
     [[+quick_reply_form]]
 </div>
