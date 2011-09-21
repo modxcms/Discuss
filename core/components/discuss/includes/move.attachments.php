@@ -21,6 +21,12 @@
  *
  * @package discuss
  */
+/**
+ * @var Discuss $discuss
+ *
+ * @package discuss
+ * @subpackage scripts
+ */
 $mtime = microtime();
 $mtime = explode(' ', $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -49,12 +55,13 @@ echo '<pre>';
 /* load and run importer */
 if ($discuss->loadImporter('disSmfImport')) {
     $modx->getCacheManager();
-    $sourceAttachmentsPath = $discuss->import->importOptions['attachments_path'];
+    $sourceAttachmentsPath = $discuss->import->config['attachments_path'];
 
     $discuss->import->getConnection();
     $c = $modx->newQuery('disPostAttachment');
     $c->sortby('post','DESC');
     $attachments = $modx->getIterator('disPostAttachment',$c);
+    /** @var disPostAttachment $attachment */
     foreach ($attachments as $attachment) {
         $found = false;
         $target = $attachment->getPath();

@@ -496,6 +496,7 @@ class disThread extends xPDOSimpleObject {
             if ($k == 'title') {
                 $v = strip_tags($v,'<span>');
                 $v = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$v);
+                $v = html_entity_decode($v,ENT_COMPAT,'UTF-8');
             }
         }
         reset($array);
@@ -910,10 +911,10 @@ class disThread extends xPDOSimpleObject {
             }
         }
 
-        $c->bindGraph('{"Author":{},"EditedBy":{}}');
+        $c->bindGraph('{"Author":{"PrimaryDiscussGroup":{},"PrimaryGroup":{}},"EditedBy":{}}');
         //$c->prepare();
         //$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
-        $response['results'] = $this->xpdo->getCollectionGraph('disPost','{"Author":{},"EditedBy":{}}',$c);
+        $response['results'] = $this->xpdo->getCollectionGraph('disPost','{"Author":{"PrimaryDiscussGroup":{},"PrimaryGroup":{}},"EditedBy":{}}',$c);
 
         return $response;
     }

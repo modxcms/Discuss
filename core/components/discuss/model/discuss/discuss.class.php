@@ -96,17 +96,13 @@ class Discuss {
         $this->modx =& $modx;
 
         $corePath = $this->modx->getOption('discuss.core_path',$config,$this->modx->getOption('core_path').'components/discuss/');
-        $this->modx->setPlaceholder('+discuss.core_path',$corePath);
         $assetsPath = $this->modx->getOption('discuss.assets_path',$config,$this->modx->getOption('assets_path').'components/discuss/');
-        $this->modx->setPlaceholder('+discuss.assets_path',$assetsPath);
         $assetsUrl = $this->modx->getOption('discuss.assets_url',$config,$this->modx->getOption('assets_url').'components/discuss/');
-        $this->modx->setPlaceholder('+discuss.assets_url',$assetsUrl);
 		$themesUrl = $this->modx->getOption('discuss.themes_url',$config,$assetsUrl.'themes/');
         $theme = $this->modx->getOption('discuss.theme',$config,'default');
         if (!is_dir($corePath.'themes/'.$theme)) {
             $theme = 'default';
         }
-        $this->modx->setPlaceholder('+discuss.theme',$theme);
 
         $this->config = array_merge(array(
             'assetsUrl' => $assetsUrl,
@@ -721,7 +717,8 @@ class Discuss {
      */
     public function stripAllTags($message) {
         $message = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$message);
-        $message = htmlentities($message,null,'UTF-8');
+        $message = strip_tags($message);
+//        $message = htmlentities($message,null,'UTF-8');
         return $message;
     }
 
