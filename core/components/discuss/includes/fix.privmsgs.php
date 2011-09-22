@@ -61,17 +61,39 @@ if ($discuss->loadImporter('disSmfImport')) {
     ));
     $c->sortby('id','ASC');
     $threads = $modx->getIterator('disThread',$c);
+    /** @var disThread $thread */
     foreach ($threads as $thread) {
         $users = $thread->get('users');
         $discuss->import->log('Setting users to: '.$users.' for Thread: '.$thread->get('title'));
         if (!empty($users)) {
             $users = explode(',',$users);
             foreach ($users as $user) {
-                $threadUser = $modx->newObject('disThreadUser');
-                $threadUser->set('user',$user);
-                $threadUser->set('thread',$thread->get('id'));
-                $threadUser->set('author',$thread->get('author_first') == $user ? true : false);
-                $threadUser->save();
+                /** @var disThreadUser $threadUser */
+                $threadUser = $modx->getObject('disThreadUser',array(
+                    'user' => $user,
+                    'thread' => $thread->get('id'),
+                ));
+                if (!$threadUser) {
+                    $threadUser = $modx->newObject('disThreadUser');
+                    $threadUser->set('user',$user);
+                    $threadUser->set('thread',$thread->get('id'));
+                    $threadUser->set('author',$thread->get('author_first') == $user ? true : false);
+                    $threadUser->save();
+                }
+
+                /** @var disUserNotification $subscription */
+                $subscription = $modx->getObject('disUserNotification',array(
+                    'thread' => $thread->get('id'),
+                    'user' => $user,
+                    'board' => 0,
+                ));
+                if (!$subscription) {
+                    $subscription = $modx->newObject('disUserNotification');
+                    $subscription->set('thread',$thread->get('id'));
+                    $subscription->set('user',$user);
+                    $subscription->set('board',0);
+                    $subscription->save();
+                }
             }
         }
     }
