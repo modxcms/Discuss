@@ -496,6 +496,7 @@ class disThread extends xPDOSimpleObject {
             if ($k == 'title') {
                 $v = strip_tags($v,'<span>');
                 $v = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$v);
+                $v = html_entity_decode($v,ENT_COMPAT,'UTF-8');
             }
         }
         reset($array);
