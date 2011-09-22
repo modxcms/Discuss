@@ -65,10 +65,12 @@ if (!empty($scriptProperties['post'])) {
 /* send out notifications */
 /** @var disUserNotification $notification */
 foreach ($notifications as $notification) {
-    $user = $notification->getOne('User');
-    if ($user == null) { $notification->remove(); continue; }
+    $user = $modx->getObject('disUser',$notification->get('user'));
+    if ($user == null) { continue; }
+    $thread = $modx->getObject('disThread',$notification->get('thread'));
+    if ($thread == null) { continue; }
     /* dont notify on own posts! */
-    if ($user->get('id') == $discuss->user->get('id')) { continue; }
+    if ($thread->get('author_last') == $notification->get('user')) { continue; }
 
     $emailProperties = array_merge($scriptProperties,$user->toArray());
     $emailProperties['tpl'] = $tpl;
@@ -78,5 +80,4 @@ foreach ($notifications as $notification) {
     $sent = $discuss->sendEmail($user->get('email'),$user->get('username'),$subject,$emailProperties);
     unset($emailProperties);
 }
-
 return true;
