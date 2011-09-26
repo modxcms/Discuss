@@ -136,15 +136,24 @@ class disThread extends xPDOSimpleObject {
             $c->where(array(
                 'Users.user' => $modx->discuss->user->get('id'),
             ));
+            $c->select(array(
+                '(SELECT GROUP_CONCAT(sqThreadUser.username)
+                    FROM '.$modx->getTableName('disThreadUser').' AS sqThreadUsers
+                        INNER JOIN '.$modx->getTableName('disUser').' AS sqThreadUser
+                        ON sqThreadUser.id = sqThreadUsers.user
+                    WHERE sqThreadUsers.thread = disThread.id
+                 ) AS participants_usernames',
+            ));
+        } else {
+            $c->select(array(
+                '(SELECT GROUP_CONCAT(sqPostAuthor.username)
+                    FROM '.$modx->getTableName('disPost').' AS sqPosts
+                        INNER JOIN '.$modx->getTableName('disUser').' AS sqPostAuthor
+                        ON sqPostAuthor.id = sqPosts.author
+                    WHERE sqPosts.thread = disThread.id
+                 ) AS participants_usernames',
+            ));
         }
-        $c->select(array(
-            '(SELECT GROUP_CONCAT(sqThreadUser.username)
-                FROM '.$modx->getTableName('disThreadUser').' AS sqThreadUsers
-                    INNER JOIN '.$modx->getTableName('disUser').' AS sqThreadUser
-                    ON sqThreadUser.id = sqThreadUsers.user
-                WHERE sqThreadUsers.thread = disThread.id
-             ) AS participants_usernames',
-        ));
         /** @var disThread $thread */
         $thread = $modx->getObject('disThread',$c);
         if ($thread) {
