@@ -136,21 +136,24 @@ class disThread extends xPDOSimpleObject {
             $c->where(array(
                 'Users.user' => $modx->discuss->user->get('id'),
             ));
-            $c->select(array(
-                '(SELECT GROUP_CONCAT(sqThreadUser.username)
-                    FROM '.$modx->getTableName('disThreadUser').' AS sqThreadUsers
-                        INNER JOIN '.$modx->getTableName('disUser').' AS sqThreadUser
-                        ON sqThreadUser.id = sqThreadUsers.user
-                    WHERE sqThreadUsers.thread = disThread.id
-                 ) AS participants_usernames',
-            ));
         }
+        $c->select(array(
+            '(SELECT GROUP_CONCAT(sqThreadUser.username)
+                FROM '.$modx->getTableName('disThreadUser').' AS sqThreadUsers
+                    INNER JOIN '.$modx->getTableName('disUser').' AS sqThreadUser
+                    ON sqThreadUser.id = sqThreadUsers.user
+                WHERE sqThreadUsers.thread = disThread.id
+             ) AS participants_usernames',
+        ));
         /** @var disThread $thread */
         $thread = $modx->getObject('disThread',$c);
-        if ($thread && $type == disThread::TYPE_MESSAGE) {
-            $pu = array_unique(explode(',',$thread->get('participants_usernames')));
-            asort($pu);
-            $thread->set('participants_usernames',implode(',',$pu));
+        if ($thread) {
+            $participants = $thread->get('participants_usernames');
+            if (!empty($participants)) {
+                $pu = array_unique(explode(',',$participants));
+                asort($pu);
+                $thread->set('participants_usernames',implode(',',$pu));
+            }
         }
         return $thread;
     }
