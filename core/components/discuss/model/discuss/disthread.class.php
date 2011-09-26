@@ -157,11 +157,16 @@ class disThread extends xPDOSimpleObject {
         /** @var disThread $thread */
         $thread = $modx->getObject('disThread',$c);
         if ($thread) {
+            $userUrl = $modx->discuss->request->makeUrl('u');
             $participants = $thread->get('participants_usernames');
             if (!empty($participants)) {
                 $pu = array_unique(explode(',',$participants));
                 asort($pu);
-                $thread->set('participants_usernames',implode(',',$pu));
+                foreach ($pu as &$username) {
+                    $username = '<a href="'.$userUrl.'/'.$username.'/">'.$username.'</a>';
+                }
+                $pu = implode(', ',$pu);
+                $thread->set('participants_usernames',trim($pu));
             }
         }
         return $thread;
