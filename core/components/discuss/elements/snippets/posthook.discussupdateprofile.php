@@ -23,11 +23,18 @@
  */
 /**
  * Handle updating of profile
+ *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $fields
+ *
+ * @package discuss
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
 if (!($discuss instanceof Discuss)) return true;
 $modx->lexicon->load('discuss:user');
 
+/** @var disUser $disUser */
 $disUser = $modx->getObject('disUser',array(
     'user' => $modx->user->get('id'),
 ));
@@ -38,6 +45,12 @@ unset($fields['user']);
 
 $fields['show_email'] = !empty($fields['show_email']) ? 1 : 0;
 $fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
+
+if (isset($fields['fullname']) && empty($fields['name_first'])) {
+    $name = explode(' ',$fields['fullname']);
+    $fields['name_first'] = $name[0];
+    $fields['name_last'] = !empty($name[1]) ? $name[1] : '';
+}
 
 $disUser->fromArray($fields);
 if (!empty($fields['signature'])) {
