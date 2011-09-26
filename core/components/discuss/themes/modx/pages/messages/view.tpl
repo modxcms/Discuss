@@ -29,14 +29,15 @@
 				<hr class="line" />
     <div class="PanelBox">
         [[!+discuss.user.id:notempty=`<div class="Box">
-            <h4>Actions &amp; Info</h4>
+            <h4>Actions</h4>
 			<p>[[+actionbuttons]]</p>
-			[[+belowThreads]]
-			<p>[[+readers]]</p>
 			<p>[[+moderators]]</p>
 	    </div>`]]
 
 		[[!$post-sidebar?disection=`dis-support-opt`]]
-
-
+		
+			<div class="Box">
+			<h4>Information</h4>
+			<p>[[+readers]]</p>
+			</div>
 </aside>

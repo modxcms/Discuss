@@ -16,5 +16,5 @@
 						
 						<div class="Box">
 						   <h4>Love MODX?</h4>
-							<p>If you build sites for a living with MODX or just love using it, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
+							<p>If you build sites with MODX or just love using it, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
 						</div>`]]

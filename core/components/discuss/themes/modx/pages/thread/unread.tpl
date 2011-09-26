@@ -21,15 +21,17 @@
     <div class="PanelBox">
 
 [[!+discuss.user.id:notempty=`<div class="Box">
-				           <h4>Actions &amp; Info</h4>
+				           <h4>Actions</h4>
 				            <p>[[+actionbuttons]]</p>
-				            [[+belowThreads]]
 				            <p>[[+readers]]</p>
 							<p>[[+moderators]]</p>
 				        </div>`]]
 				        [[!+discuss.user.id:is=``:then=`<div class="Box">
-				           <h4>Actions &amp; Info</h4>
+				           <h4>Actions</h4>
 				            <p><a href="[[~[[*id]]]]login" class="Button">Login to Post</a></p>
 				        </div>`]]
-
+			<div class="Box">
+			<h4>Information</h4>
+			<p>[[+readers]]</p>
+			</div>
 </aside>

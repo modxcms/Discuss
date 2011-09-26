@@ -20,7 +20,7 @@
     <div class="PanelBox">
 
         [[!+discuss.user.id:notempty=`<div class="Box">
-            <h4>Actions &amp; Info</h4>
+            <h4>Actions</h4>
 			<p>[[+actionbuttons]]</p>
 			[[+belowThreads]]
 	    </div>`]]
