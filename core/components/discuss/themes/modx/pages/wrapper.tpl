@@ -10,9 +10,9 @@
     <meta name="author" content="MODX Systems, LLC">
 	<link rel="stylesheet" type="text/css" href="http://modx.com/assets/css/style.css" />
 	[[*cssjs]]
-    <!-- TypeKit -->
+    [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
     <script src="http://use.typekit.com/zub5doo.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>`]]
 </head>
 <body id="body-[[+controller.controller]]">
 	<div id="overlay-20"> </div>
