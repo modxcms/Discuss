@@ -4,7 +4,7 @@
     		<h3 class="[[+locked:is=`1`:then=`locked`:else=`unlocked`]]"><span class="dis-post-board-name">[[+board_name]]</span>
     		<span class="Title">[[+sticky:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</span><br />
     		</h3>
-    		<p class="CategoryDescription">[[+first_post_username:notempty=`Started by [[+first_post_username]]`]] [[+createdon:ago]], last post by [[+author_username]]</p>
+    		<p class="CategoryDescription">[[+first_post_username:notempty=`Started by [[+first_post_username]]`]] [[+createdon:ago]], last post by [[+author_username]], [[+replies]] replies</p>
 	    </a>
 	</div>
 </li>
