@@ -23,11 +23,16 @@
  */
 /**
  * Handle updating of profile
+ *
+ * @var modX $modx
+ * @var Discuss $discuss
+ * @var array $scriptProperties
  */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
 if (!($discuss instanceof Discuss)) return true;
 $modx->lexicon->load('discuss:user');
 
+/** @var modUserProfile $profile */
 $profile = $modx->user->getOne('Profile');
 if (empty($profile)) return '';
 
@@ -40,6 +45,8 @@ if ($useExtended) {
         $fields = array_merge($extended,$fields);
     }
 }
+
+/** @var disUser $disUser */
 $disUser = $modx->getObject('disUser',array(
    'user' => $modx->user->get('id'),
 ));
@@ -49,6 +56,7 @@ if ($disUser) {
     $fields['show_email'] = !empty($fields['show_email']) ? 1 : 0;
     $fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
     $fields['post_sort_dir'] = $disUser->getSetting('discuss.post_sort_dir','ASC');
+    $fields['posts'] = number_format($fields['posts'],0);
 }
 
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);
