@@ -24,6 +24,13 @@
 /**
  * Post a reply to a post
  *
+ * @var modX $modx
+ * @var array $fields
+ * @var Discuss $discuss
+ *
+ * @var string $submitVar
+ * @var fiHooks $hook
+ *
  * @package discuss
  */
 $discuss =& $modx->discuss;
@@ -59,6 +66,7 @@ if ($maxSize > 0) {
 $participantsIds = array();
 $participants = explode(',',$fields['participants_usernames']);
 foreach ($participants as $participant) {
+    /** @var disUser $user */
     $user = $modx->getObject('disUser',array('username' => $participant));
     if ($user) {
         $participantsIds[] = $user->get('id');
@@ -67,6 +75,7 @@ foreach ($participants as $participant) {
 $participantsIds = array_unique($participantsIds);
 
 /* create post object and set fields */
+/** @var disPost $post */
 $post = $modx->newObject('disPost');
 $post->fromArray($fields);
 $post->set('author',$discuss->user->get('id'));
@@ -95,7 +104,7 @@ if (!$post->save()) {
     return false;
 }
 
-/* update thread */
+/* @var disThread $thread */
 $thread = $post->getOne('Thread');
 $thread->set('private',true);
 $thread->set('users',implode(',',$participantsIds));
@@ -103,21 +112,24 @@ $thread->save();
 
 /* set participants, add notifications */
 foreach ($participantsIds as $participant) {
+    /** @var disThreadUser $threadUser */
     $threadUser = $modx->newObject('disThreadUser');
     $threadUser->set('thread',$thread->get('id'));
     $threadUser->set('user',$participant);
     $threadUser->set('author',$thread->get('author_first') == $participant ? true : false);
     $threadUser->save();
 
-    $notify = $modx->newObject('disUserNotification');
-    $notify->set('thread',$thread->get('id'));
-    $notify->set('user',$participant);
-    $notify->set('board',0);
-    $notify->save();
+    /** @var disUserNotification $subscription */
+    $subscription = $modx->newObject('disUserNotification');
+    $subscription->set('thread',$thread->get('id'));
+    $subscription->set('user',$participant);
+    $subscription->set('board',0);
+    $subscription->save();
 }
 
 /* upload attachments */
 foreach ($attachments as $file) {
+    /** @var disPostAttachment $attachment */
     $attachment = $modx->newObject('disPostAttachment');
     $attachment->set('post',$post->get('id'));
     $attachment->set('board',$post->get('board'));

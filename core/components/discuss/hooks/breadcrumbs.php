@@ -34,9 +34,10 @@
 $tpl = $modx->getOption('breadcrumbLinkTpl',$scriptProperties,'breadcrumbs/disBreadcrumbsLink');
 $activeTpl = $modx->getOption('breadcrumbActiveTpl',$scriptProperties,'breadcrumbs/disBreadcrumbsActive');
 $containerTpl = $modx->getOption('breadcrumbsTpl',$scriptProperties,'breadcrumbs/disBreadcrumbs');
-$firstCls = $modx->getOption('firstCls',$scriptProperties,'dis-bc-first');
-$lastCls = $modx->getOption('firstCls',$scriptProperties,'dis-bc-last');
-$altCls = $modx->getOption('altCls',$scriptProperties,'dis-bc-alt');
+$firstCls = $modx->getOption('firstCls',$scriptProperties,'first');
+$lastCls = $modx->getOption('firstCls',$scriptProperties,'last clearfix');
+$altCls = $modx->getOption('altCls',$scriptProperties,'alt');
+$separator = $modx->getOption('separator',$scriptProperties,"\n");
 
 $output = array();
 $idx = 0;
@@ -50,5 +51,5 @@ foreach ($scriptProperties['items'] as $item) {
     $idx++;
     $alt = !$alt;
 }
-$output = implode("\n",$output);
+$output = implode($separator,$output);
 return $discuss->getChunk($containerTpl,array('items' => $output));

@@ -764,11 +764,16 @@ class disThread extends xPDOSimpleObject {
         ));
         $c->sortby('Ancestors.depth','DESC');
         $ancestors = $this->xpdo->getCollection('disBoard',$c);
+
+        $idx = 0;
+        $total = count($ancestors);
         $trail = empty($defaultTrail) ? array(array(
             'url' => $this->xpdo->discuss->request->makeUrl(),
             'text' => $this->xpdo->getOption('discuss.forum_title'),
+            'last' => $total == 0,
         )) : $defaultTrail;
         $category = false;
+        
         /** @var disBoardClosure $ancestor */
         foreach ($ancestors as $ancestor) {
             if (empty($category)) {
@@ -777,14 +782,16 @@ class disThread extends xPDOSimpleObject {
                     $trail[] = array(
                         'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
                         'text' => $category->get('name'),
+                        'last' => false,
                     );
                 }
             }
             $trail[] = array(
                 'url' => $this->xpdo->discuss->request->makeUrl('board',array('board' => $ancestor->get('id'))),
                 'text' => $ancestor->get('name'),
-                'last' => !$showTitle,
+                'last' => empty($showTitle) && $idx >= ($total-1) ? true : false,
             );
+            $idx++;
         }
         if ($showTitle) {
             $title = str_replace(array('[',']'),array('&#91;','&#93;'),$this->get('title'));
