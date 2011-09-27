@@ -31,7 +31,9 @@
         [[!+discuss.user.id:notempty=`<div class="Box">
             <h4>Actions</h4>
 			<p>[[+actionbuttons]]</p>
-
+			<p>Subscribe: 
+			[[+subscribeUrl:notempty=`<a href="[[+subscribeUrl]]">By email</a>`]]
+			[[+unsubscribeUrl:notempty=`<a href="[[+unsubscribeUrl]]">Stop emails</a>`]]</p>
 			<p>[[+moderators]]</p>
 	    </div>`]]
         [[!+discuss.user.id:is=``:then=`<div class="Box">

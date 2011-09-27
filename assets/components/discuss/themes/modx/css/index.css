@@ -67,14 +67,18 @@ ul, ol {
 	}
 
 a.format_buttons img {
-	background: transparent url(../images/buttons/bbc_bg.png) no-repeat 0 0;
 	margin: 1px 2px 1px 1px;
 	width: 23px;
 	height: 22px;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+ 	behavior:url(pie.htc);
 	}
 
 a.format_buttons:hover img {
-	background: transparent url(../images/buttons/bbc_bg.png) no-repeat 0 -22px;
+	border: 1px solid #026598;
 	}
 
 img.button-divider {

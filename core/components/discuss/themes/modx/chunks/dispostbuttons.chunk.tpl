@@ -25,32 +25,6 @@ function bbc_highlight(something, mode) {
         
 <img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
 
-<a href="javascript:void(0);" onclick="surroundText('[pre]', '[/pre]'); return false;" class="format_buttons">
-	<img src="[[+buttons_url]]pre.gif" alt="Preformatted Text" title="Preformatted Text" />
-</a>
-
-
-<a href="javascript:void(0);" onclick="surroundText('[left]', '[/left]'); return false;" class="format_buttons">
-	<img src="[[+buttons_url]]left.gif" alt="Left Align" title="Left Align" />
-</a>
-
-
-<a href="javascript:void(0);" onclick="surroundText('[center]', '[/center]'); return false;" class="format_buttons">
-	<img src="[[+buttons_url]]center.gif" alt="Centered" title="Centered" />
-</a>
-
-<a href="javascript:void(0);" onclick="surroundText('[right]', '[/right]'); return false;" class="format_buttons">
-	<img src="[[+buttons_url]]right.gif" alt="Right Align" title="Right Align" />
-</a>
-
-<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
-
-<a href="javascript:void(0);" onclick="replaceText('[hr]'); return false;" class="format_buttons">
-	<img src="[[+buttons_url]]hr.gif" alt="Horizontal Rule" title="Horizontal Rule" />
-</a>
-
-<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
-
 <a href="javascript:void(0);" onclick="surroundText('[size=10pt]', '[/size]'); return false;" class="format_buttons">
 	<img src="[[+buttons_url]]size.gif" alt="Font Size" title="Font Size" />
 </a>
@@ -84,3 +58,30 @@ function bbc_highlight(something, mode) {
 <a href="javascript:void(0);" onclick="surroundText('[list]\n[li]', '[/li]\n[li][/li]\n[/list]'); return false;" class="format_buttons">
     <img src="[[+buttons_url]]list.gif" alt="Insert List" title="Insert List" />
 </a>
+
+<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
+
+<a href="javascript:void(0);" onclick="surroundText('[pre]', '[/pre]'); return false;" class="format_buttons">
+	<img src="[[+buttons_url]]pre.gif" alt="Preformatted Text" title="Preformatted Text" />
+</a>
+
+
+<a href="javascript:void(0);" onclick="surroundText('[left]', '[/left]'); return false;" class="format_buttons">
+	<img src="[[+buttons_url]]left.gif" alt="Left Align" title="Left Align" />
+</a>
+
+
+<a href="javascript:void(0);" onclick="surroundText('[center]', '[/center]'); return false;" class="format_buttons">
+	<img src="[[+buttons_url]]center.gif" alt="Centered" title="Centered" />
+</a>
+
+<a href="javascript:void(0);" onclick="surroundText('[right]', '[/right]'); return false;" class="format_buttons">
+	<img src="[[+buttons_url]]right.gif" alt="Right Align" title="Right Align" />
+</a>
+
+<img src="[[+buttons_url]]divider.gif" alt="|" class="button-divider"/>
+
+<a href="javascript:void(0);" onclick="replaceText('[hr]'); return false;" class="format_buttons">
+	<img src="[[+buttons_url]]hr.gif" alt="Horizontal Rule" title="Horizontal Rule" />
+</a>
+

@@ -5,7 +5,6 @@
 
 	<ul class="dis-list">
 		<li><h1>[[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]]</h1></li>
-		<li><h4 class="participants">[[%discuss.participants]]: [[+participants_usernames]]</h4></li>
 		[[+posts]]
 	</ul>
 
@@ -38,6 +37,7 @@
 		
 			<div class="Box">
 			<h4>Information</h4>
+			<p>Posted in this thread:<br />[[+participants_usernames]]</p>
 			<p>[[+readers]]</p>
 			</div>
 </aside>
