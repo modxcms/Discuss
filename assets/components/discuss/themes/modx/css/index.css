@@ -465,6 +465,10 @@ p.dis-board-subs {
 	padding: 0;
 	}
 
+.dis-board-subs a:hover {
+	text-decoration: underline;
+	}
+	
 a.dis-mark-as-answer-link {
 	background: transparent url(../images/discuss_solved_16.png) no-repeat 0 0;
 	position: absolute;
