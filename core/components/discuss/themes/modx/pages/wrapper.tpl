@@ -189,7 +189,7 @@
        </section>
        <section id="copyright">
             <div class="clearfix container">
-                <p><span><a href="[[~106]]">Privacy Policy</a> | <a href="[[~107]]">Terms of Service</a> | Pixels by <a href="http://weareakta.com">AKTA Web Studio</a></span>&copy; 2005-2011 MODX. All rights reserved. <a href="[[~104]]">Trademark Policy</a> </p>
+                <p><span><a href="[[~106]]">Privacy Policy</a> | <a href="[[~107]]">Terms of Service</a> | Pixels by <a href="http://weareakta.com">AKTA Web Studio</a></span>&copy; 2005-2011 MODX. All rights reserved. <a href="[[~104]]">Trademark Policy</a> | Discuss [[+discuss_version]]</p>
             </div>
        </section>
        <div id="post_body"></div>
