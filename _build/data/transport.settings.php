@@ -338,7 +338,7 @@ $settings['discuss.new_replies_threshold']->fromArray(array(
 $settings['discuss.notification_new_post_subject']= $modx->newObject('modSystemSetting');
 $settings['discuss.notification_new_post_subject']->fromArray(array(
     'key' => 'discuss.notification_new_post_subject',
-    'value' => '[Discuss] [[%discuss.new_post_made]]',
+    'value' => '[Discuss] New Reply: [[+title]]',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Notifications',

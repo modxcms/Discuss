@@ -255,18 +255,18 @@ class DiscussThreadController extends DiscussController {
         /* @var array $actionButtons Thread action buttons */
         $actionButtons = array();
         if ($this->board->canPost() && $this->thread->canReply()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'));
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'),'cls' => 'dis-action-reply');
         }
         $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'));
         if ($this->thread->canUnsubscribe()) {
             if (!empty($this->options['showSubscribeOption'])) {
-                $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unsubscribe' => 1)), 'text' => $this->modx->lexicon('discuss.unsubscribe'));
+                $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unsubscribe' => 1)), 'text' => $this->modx->lexicon('discuss.unsubscribe'),'cls' => 'dis-action-unsubscribe');
             }
             $this->setPlaceholder('subscribed',true);
             $this->setPlaceholder('unsubscribeUrl',$this->thread->getUrl(false,array('unsubscribe' => 1)));
         } elseif ($this->thread->canSubscribe()) {
             if (!empty($this->options['showSubscribeOption'])) {
-                $actionButtons[] = array('url' => $this->thread->getUrl(false,array('subscribe' => 1)), 'text' => $this->modx->lexicon('discuss.subscribe'));
+                $actionButtons[] = array('url' => $this->thread->getUrl(false,array('subscribe' => 1)), 'text' => $this->modx->lexicon('discuss.subscribe'),'cls' => 'dis-action-subscribe');
             }
             $this->setPlaceholder('subscribed',false);
             $this->setPlaceholder('subscribeUrl',$this->thread->getUrl(false,array('subscribe' => 1)));
@@ -277,7 +277,7 @@ class DiscussThreadController extends DiscussController {
          * }
          */
         if ($this->thread->canPrint() && !empty($this->options['showPrintOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('print' => 1)), 'text' => $this->modx->lexicon('discuss.print'));
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('print' => 1)), 'text' => $this->modx->lexicon('discuss.print'),'cls' => 'dis-action-print');
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
@@ -285,24 +285,24 @@ class DiscussThreadController extends DiscussController {
     public function getModeratorActionButtons() {
         $actionButtons = array();
         if ($this->thread->canMove()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/move',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_move'));
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/move',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_move'),'cls' => 'dis-action-move');
         }
         if ($this->thread->canRemove()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_remove'));
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_remove'),'cls' => 'dis-action-remove-thread');
             if (!empty($this->options['showMarkAsSpamOption'])) {
-                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/spam',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_spam'));
+                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/spam',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_spam'),'cls' => 'dis-action-spam');
             }
         }
 
         if ($this->thread->canUnlock() && !empty($this->options['showLockOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('lock' => 0)), 'text' => $this->modx->lexicon('discuss.thread_unlock'));
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('lock' => 0)), 'text' => $this->modx->lexicon('discuss.thread_unlock'),'cls' => 'dis-action-unlock');
         } else if ($this->thread->canLock() && !empty($this->options['showLockOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('lock' => 1)), 'text' => $this->modx->lexicon('discuss.thread_lock'));
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('lock' => 1)), 'text' => $this->modx->lexicon('discuss.thread_lock'),'cls' => 'dis-action-lock');
         }
         if ($this->thread->canUnstick() && !empty($this->options['showStickOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('sticky' => 0)), 'text' => $this->modx->lexicon('discuss.thread_unstick'));
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('sticky' => 0)), 'text' => $this->modx->lexicon('discuss.thread_unstick'),'cls' => 'dis-action-unstick');
         } else if ($this->thread->canStick() && !empty($this->options['showStickOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('sticky' => 1)), 'text' => $this->modx->lexicon('discuss.thread_stick'));
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('sticky' => 1)), 'text' => $this->modx->lexicon('discuss.thread_stick'),'cls' => 'dis-action-stick');
         }
         /**
          * TODO: Merge thread - 1.1
