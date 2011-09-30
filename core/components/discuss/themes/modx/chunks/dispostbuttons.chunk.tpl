@@ -41,10 +41,13 @@ function bbc_highlight(something, mode) {
 	<img src="[[+buttons_url]]10x10/code.gif" alt="Insert Code" title="Insert Code" />
 </a>
 
+<a href="javascript:void(0);" onclick="surroundText('[pre]', '[/pre]'); return false;" class="format_buttons">
+	<img src="[[+buttons_url]]10x10/align-pre.gif" alt="Preformatted Text" title="Preformatted Text" />
+</a>
+
 <a href="javascript:void(0);" onclick="surroundText('[quote]', '[/quote]'); return false;" class="format_buttons">
 	<img src="[[+buttons_url]]10x10/comment.gif" alt="Insert Quote" title="Insert Quote" />
 </a>
-
 
 
 <a href="javascript:void(0);" onclick="surroundText('[list]\n[li]', '[/li]\n[li][/li]\n[/list]'); return false;" class="format_buttons last">
@@ -53,12 +56,8 @@ function bbc_highlight(something, mode) {
 
 
 
-<a href="javascript:void(0);" onclick="surroundText('[pre]', '[/pre]'); return false;" class="format_buttons first">
-	<img src="[[+buttons_url]]10x10/align-pre.gif" alt="Preformatted Text" title="Preformatted Text" />
-</a>
 
-
-<a href="javascript:void(0);" onclick="surroundText('[left]', '[/left]'); return false;" class="format_buttons">
+<a href="javascript:void(0);" onclick="surroundText('[left]', '[/left]'); return false;" class="format_buttons first">
 	<img src="[[+buttons_url]]10x10/align-left.gif" alt="Left Align" title="Left Align" />
 </a>
 
