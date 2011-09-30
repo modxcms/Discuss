@@ -39,6 +39,8 @@ if (!$modx->getOption('discuss.enable_notifications',null,true)) {
 /* setup default properties */
 $type = $modx->getOption('type',$scriptProperties,'thread');
 $subject = $modx->getOption('subject',$scriptProperties,$modx->getOption('discuss.notification_new_post_subject',null,'New Post'));
+$subject = str_replace('[[+title]]',$scriptProperties['title'],$subject);
+
 $tpl = $modx->getOption('tpl',$scriptProperties,$modx->getOption('discuss.notification_new_post_chunk',null,'emails/disNotificationEmail'));
 
 /* get notification subscriptions */
