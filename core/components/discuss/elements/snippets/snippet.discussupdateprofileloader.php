@@ -57,6 +57,7 @@ if ($disUser) {
     $fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
     $fields['post_sort_dir'] = $disUser->getSetting('discuss.post_sort_dir','ASC');
     $fields['posts'] = number_format($fields['posts'],0);
+    $fields['gender'] = $disUser->get('gender') == 'm' ? 'm' : 'f';
 }
 
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);
