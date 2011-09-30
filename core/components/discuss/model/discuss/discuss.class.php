@@ -105,6 +105,7 @@ class Discuss {
         }
 
         $this->config = array_merge(array(
+            'version' => '1.0.8-pl',
             'assetsUrl' => $assetsUrl,
 			'themesUrl' => $themesUrl,
             'theme' => $theme,
@@ -133,6 +134,7 @@ class Discuss {
         $this->modx->addPackage('discuss',$this->config['modelPath']);
         $this->ssoMode = $this->modx->getOption('discuss.sso_mode',$config,false);
         $this->dateFormat = $this->modx->getOption('discuss.date_format',$config,'%b %d, %Y, %I:%M %p');
+        $this->modx->setPlaceholder('discuss_version',$this->config['version']);
     }
 
     /**

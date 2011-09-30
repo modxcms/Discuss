@@ -50,5 +50,6 @@
     </div>
     <div class="clear">&nbsp;</div>
 </div>
+<!-- Discuss version [[+discuss_version]] -->
 </body>
 </html>
