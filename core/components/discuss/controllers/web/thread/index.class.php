@@ -288,7 +288,7 @@ class DiscussThreadController extends DiscussController {
             $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/move',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_move'),'cls' => 'dis-action-move');
         }
         if ($this->thread->canRemove()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_remove'),'cls' => 'dis-action-remove');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_remove'),'cls' => 'dis-action-remove-thread');
             if (!empty($this->options['showMarkAsSpamOption'])) {
                 $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/spam',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_spam'),'cls' => 'dis-action-spam');
             }
