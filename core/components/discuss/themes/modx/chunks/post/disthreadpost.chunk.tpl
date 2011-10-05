@@ -24,9 +24,15 @@
         	<h4 class="created">[[+author.username_link]] <a class="normal-type" href="[[+url]]">Reply #[[+idx]], [[+createdon:ago]]</a></h4>
         	<!--<a href="" class="dis-fav">Favorite</a>-->
         	[[+link_mark_as_answer]]
-        	<a href="#" class="quick-reply first hide"><span>Reply</span></a>
-            <div class="dis-actions"><div><ul>[[+actions]]<li><a href="[[+url]]">Link to this post<span class="idx">#[[+idx]]</span></a>
-</li><li>[[+report_link]]</li></ul></div></div>
+        	<a href="#" class="quick-reply first hide" title="Quick Reply">Reply</a>
+            <div class="dis-actions">
+            	<div>
+            		<ul>[[+actions]]<li><a href="[[+url]]">Link to this post<span class="idx">#[[+idx]]</span></a>
+</li><li>[[+report_link]]</li>
+					</ul>
+				</div>
+			</div>
+			
         	<div>[[+content]]</div>
             
 		    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
