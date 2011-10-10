@@ -294,6 +294,17 @@ abstract class DiscussController {
     }
 
     /**
+     * Set a specific page option
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    public function setOption($key,$value) {
+        $this->options[$key] = $value;
+    }
+
+    /**
      * @abstract
      * @return void
      */
