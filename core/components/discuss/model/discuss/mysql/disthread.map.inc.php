@@ -190,7 +190,7 @@ $xpdo_meta_map['disThread']= array (
     ),
     'participants' => 
     array (
-      'dbtype' => 'tinytext',
+      'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
