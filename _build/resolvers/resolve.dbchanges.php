@@ -80,6 +80,8 @@ if ($object->xpdo) {
             $manager->addField('disThread','post_last_on');
             $manager->addIndex('disThread','post_last_on');
 
+            $manager->addField('disThread','participants');
+
         break;
     }
 }
