@@ -129,6 +129,7 @@ if (!empty($ids)) {
         'disThread.board',
         'disThread.answered',
         'disThread.class_key',
+        'disThread.participants',
         'FirstPost.title',
         'board_name' => 'Board.name',
         'post_id' => 'LastPost.id',
@@ -140,15 +141,6 @@ if (!empty($ids)) {
         'author_udn' => 'LastAuthor.use_display_name',
         'author_display_name' => 'LastAuthor.display_name',
     ));
-    if (!empty($scriptProperties['showIfParticipating'])) {
-        $c->select(array(
-            '(SELECT GROUP_CONCAT(pAuthor.id)
-                FROM '.$modx->getTableName('disPost').' AS pPost
-                INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
-                WHERE pPost.thread = disThread.id
-             ) AS participants',
-        ));
-    }
     $c->where(array(
         'disThread.id:IN' => $ids,
     ));

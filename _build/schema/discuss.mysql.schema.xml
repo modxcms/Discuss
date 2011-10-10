@@ -177,7 +177,7 @@
         <field key="users" dbtype="mediumtext" phptype="string" null="true" default="" />
         <field key="last_view_ip" dbtype="varchar" precision="120" phptype="string" null="false" default="" />
         <field key="integrated_id" dbtype="integer" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
-        <field key="participants" dbtype="tinytext" phptype="string" null="false" default="" />
+        <field key="participants" dbtype="text" phptype="string" null="false" default="" />
 
         <index alias="class_key" name="class_key" primary="false" unique="false" type="BTREE">
             <column key="class_key" length="" collation="A" null="false" />
