@@ -209,8 +209,15 @@ class disPost extends xPDOSimpleObject {
                     $author->save();
                 }
             }
-        }
+        } /* end if $saved && $new */
+
         if ($saved) {
+            /* fix participants */
+            $thread = $this->getOne('Thread');
+            if ($thread) {
+                $thread->addParticipant($this->get('author'));
+            }
+
             $this->index();
 
             /* clear cache */
@@ -317,23 +324,23 @@ class disPost extends xPDOSimpleObject {
      */
     public function move($boardId) {
         /* check to see if only post in thread, if so, just move thread */
-        /** @var disThread $thread */
-        $thread = $this->xpdo->getObject('disThread',array('id' => $this->get('thread')));
+        /** @var disThread $oldThread */
+        $oldThread = $this->xpdo->getObject('disThread',array('id' => $this->get('thread')));
         /** @var disBoard $newBoard */
         $newBoard = is_object($boardId) && $boardId instanceof disBoard ? $boardId : $this->xpdo->getObject('disBoard',$boardId);
         /** @var disBoard $oldBoard */
         $oldBoard = $this->xpdo->getObject('disBoard',array('id' => $this->get('board')));
-        if (!$thread || !$newBoard || !$oldBoard) return false;
+        if (!$oldThread || !$newBoard || !$oldBoard) return false;
 
-        $postCount = $this->xpdo->getCount('disPost',array('thread' => $thread->get('id')));
+        $postCount = $this->xpdo->getCount('disPost',array('thread' => $oldThread->get('id')));
         if ($postCount == 1) {
-            return $thread->move($boardId);
+            return $oldThread->move($boardId);
         }
 
         /* is multiple posts in thread, so split post out and move new thread */
         /** @var disThread $newThread */
         $newThread = $this->xpdo->newObject('disThread');
-        $newThread->fromArray($thread->toArray());
+        $newThread->fromArray($oldThread->toArray());
         $newThread->set('board',$newBoard->get('id'));
         $newThread->set('post_first',$this->get('id'));
         $newThread->set('post_last',$this->get('id'));
@@ -347,8 +354,10 @@ class disPost extends xPDOSimpleObject {
             $this->addOne($newBoard,'Board');
             $this->save();
 
-            $thread->set('replies',$thread->get('replies')-1);
-            $thread->save();
+            $oldThread->removeParticipant($this->get('author'),$this->get('id'));
+            $oldThread->set('replies',$oldThread->get('replies')-1);
+            $oldThread->save();
+
 
             $newBoard = $this->xpdo->getObject('disBoard',$newBoard->get('id'));
             if ($newBoard) {
@@ -470,6 +479,10 @@ class disPost extends xPDOSimpleObject {
                     $thread->set('post_last',$priorPost->get('id'));
                     $thread->set('post_last_on',strtotime($priorPost->get('createdon')));
                     $thread->set('author_last',$priorPost->get('author'));
+
+                    /* fix thread participants */
+                    $thread->removeParticipant($this->get('author'),$this->get('id'));
+
                     $saved = $thread->save();
                 } else { /* if no more posts, remove thread */
                     $thread->remove();

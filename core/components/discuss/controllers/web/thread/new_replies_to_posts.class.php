@@ -78,12 +78,11 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
             $thread->calcLastPostPage();
             $thread->getUrl();
             $threadArray = $thread->toArray();
-            $threadArray['class'] = 'dis-board-li';
             $threadArray['createdon'] = strftime($this->getOption('dateFormat',$this->discuss->dateFormat),strtotime($threadArray['createdon']));
             $threadArray['icons'] = '';
 
             /* set css class */
-            $class = array('board-post');
+            $class = array('dis-board-li','board-post');
             if ($enableHot) {
                 $threshold = $hotThreadThreshold;
                 if ($this->discuss->user->get('id') == $threadArray['author'] && $this->discuss->user->isLoggedIn) {

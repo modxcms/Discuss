@@ -3,5 +3,6 @@ config.core.php
 .idea
 nbproject
 core/components/discuss/includes/import.config.inc.php
+core/components/discuss/includes/config.core.php
 core/components/discuss/test/config.inc.php
 core/components/discuss/test/properties.inc.php
