@@ -30,15 +30,28 @@
 class DiscussThreadUnreadController extends DiscussController {
     /** @var array $threads */
     public $threads = array();
-    public function initialize() {
-        $this->options = array_merge(array(
+    
+    public function getDefaultOptions() {
+        return array(
             'postTpl' => 'post/disPostLi',
             'dateFormat' => $this->discuss->dateFormat,
-            'btn_text_mark_all_read' => $this->modx->lexicon('discuss.mark_all_as_read'),
-            'bc_text_unread_posts' => $this->modx->lexicon('discuss.unread_posts'),
-        ),$this->options);
 
+            'textButtonMarkAllRead' => $this->modx->lexicon('discuss.mark_all_as_read'),
+            'textBreadcrumbsUnreadPosts' => $this->modx->lexicon('discuss.unread_posts'),
+
+            'clsRow' => 'board-post,dis-board-li',
+            'clsMyNormalThread' => 'dis-my-normal-thread',
+            'clsMyHotThread' => 'dis-my-veryhot-thread',
+            'clsNormalThread' => 'dis-normal-thread',
+            'clsHotThread' => 'dis-veryhot-thread',
+            'clsUnread' => 'dis-unread',
+
+            'iconLocked' => '<div class="dis-thread-locked"></div>',
+            'iconSticky' => '<div class="dis-thread-sticky"></div>',
+            'iconSeparator' => "\n",
+        );
     }
+    
     public function checkPermissions() {
         return $this->discuss->user->isLoggedIn;
     }
@@ -50,6 +63,25 @@ class DiscussThreadUnreadController extends DiscussController {
     }
     public function process() {
         /* setup default properties */
+        $this->getData();
+
+        $this->setOption('canViewProfiles',$this->modx->hasPermission('discuss.view_profiles'));
+        $this->setOption('hotThreadThreshold',$this->modx->getOption('discuss.hot_thread_threshold',null,10));
+        $this->setOption('enableSticky',$this->modx->getOption('discuss.enable_sticky',null,true));
+        $this->setOption('enableHot',$this->modx->getOption('discuss.enable_hot',null,true));
+        $list = array();
+        /** @var disThread $thread */
+        foreach ($this->threads['results'] as $thread) {
+            $threadArray = $this->prepareThread($thread);
+            $list[] = $this->discuss->getChunk($this->getOption('postTpl'),$threadArray);
+        }
+        $this->setPlaceholder('threads',implode("\n",$list));
+
+        $this->getActionButtons();
+        $this->buildPagination();
+    }
+
+    public function getData() {
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.threads_per_page',null,20),'!empty');
         $page = $this->getProperty('page',1,'!empty');
         $page = $page <= 0 ? 1 : $page;
@@ -62,54 +94,6 @@ class DiscussThreadUnreadController extends DiscussController {
         $this->threads = $this->modx->call('disThread','fetchUnread',array(&$this->modx,$sortBy,$sortDir,$limit,$start));
         $this->threads['limit'] = $limit;
         $this->threads['start'] = $start;
-
-        $canViewProfiles = $this->modx->hasPermission('discuss.view_profiles');
-        $hotThreadThreshold = $this->modx->getOption('discuss.hot_thread_threshold',null,10);
-        $enableSticky = $this->modx->getOption('discuss.enable_sticky',null,true);
-        $enableHot = $this->modx->getOption('discuss.enable_hot',null,true);
-        $list = array();
-        /** @var disThread $thread */
-        foreach ($this->threads['results'] as $thread) {
-            $thread->calcLastPostPage();
-            $thread->getUrl();
-            $threadArray = $thread->toArray();
-            $threadArray['createdon'] = strftime($this->getOption('dateFormat'),strtotime($threadArray['createdon']));
-            $threadArray['icons'] = '';
-
-            /* set css class */
-            $class = array('board-post','dis-board-li');
-            if ($enableHot) {
-                $threshold = $hotThreadThreshold;
-                if ($this->discuss->user->get('id') == $threadArray['author'] && $this->discuss->user->isLoggedIn) {
-                    $class[] = $threadArray['replies'] < $threshold ? 'dis-my-normal-thread' : 'dis-my-veryhot-thread';
-                } else {
-                    $class[] = $threadArray['replies'] < $threshold ? '' : 'dis-veryhot-thread';
-                }
-            }
-            $threadArray['class'] = implode(' ',$class);
-
-            /* if sticky/locked */
-            $icons = array();
-            if ($threadArray['locked']) { $icons[] = '<div class="dis-thread-locked"></div>'; }
-            if ($enableSticky && $threadArray['sticky']) {
-                $icons[] = '<div class="dis-thread-sticky"></div>';
-            }
-            $threadArray['icons'] = implode("\n",$icons);
-
-            $threadArray['views'] = number_format($threadArray['views']);
-            $threadArray['replies'] = number_format($threadArray['replies']);
-
-            /* unread class */
-            $threadArray['unread'] = true;
-            $threadArray['unread-cls'] = 'dis-unread';
-            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
-
-            $list[] = $this->discuss->getChunk($this->getOption('postTpl'),$threadArray);
-        }
-        $this->setPlaceholder('threads',implode("\n",$list));
-
-        $this->getActionButtons();
-        $this->buildPagination();
     }
 
     public function buildPagination() {
@@ -125,7 +109,7 @@ class DiscussThreadUnreadController extends DiscussController {
     public function getActionButtons() {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread',array('read' => 1)), 'text' => $this->getOption('btn_text_mark_all_read'));
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread',array('read' => 1)), 'text' => $this->getOption('textButtonMarkAllRead'));
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
@@ -136,7 +120,7 @@ class DiscussThreadUnreadController extends DiscussController {
             'url' => $this->discuss->request->makeUrl(),
             'text' => $this->modx->getOption('discuss.forum_title'),
         );
-        $trail[] = array('text' => $this->getOption('bc_text_unread_posts').' ('.number_format($this->threads['total']).')','active' => true);
+        $trail[] = array('text' => $this->getOption('textBreadcrumbsUnreadPosts').' ('.number_format($this->threads['total']).')','active' => true);
         return $trail;
     }
 
@@ -145,5 +129,49 @@ class DiscussThreadUnreadController extends DiscussController {
         if (!empty($this->scriptProperties['read']) && $this->discuss->user->isLoggedIn) {
             $this->discuss->hooks->load('thread/read_all');
         }
+    }
+
+    /**
+     * Prepare the thread for iteration
+     * @param disThread $thread
+     * @return array
+     */
+    protected function prepareThread(disThread $thread) {
+        $thread->calcLastPostPage();
+        $thread->getUrl();
+
+        $threadArray = $thread->toArray();
+        $threadArray['createdon'] = strftime($this->getOption('dateFormat'),strtotime($threadArray['createdon']));
+        $threadArray['icons'] = '';
+
+        /* set css class */
+        $class = $this->getOption('clsRow');
+        $class = explode(',',$class);
+        if ($this->getOption('enableHot')) {
+            $threshold = $this->getOption('hotThreadThreshold');
+            if ($this->discuss->user->get('id') == $threadArray['author'] && $this->discuss->user->isLoggedIn) {
+                $class[] = $threadArray['replies'] < $threshold ? $this->getOption('clsMyNormalThread') : $this->getOption('clsMyHotThread');
+            } else {
+                $class[] = $threadArray['replies'] < $threshold ? $this->getOption('clsNormalThread') : $this->getOption('clsHotThread');
+            }
+        }
+        $threadArray['class'] = implode(' ',$class);
+
+        /* if sticky/locked */
+        $icons = array();
+        if ($threadArray['locked']) { $icons[] = $this->getOption('iconLocked'); }
+        if ($this->getOption('enableSticky') && $threadArray['sticky']) {
+            $icons[] = $this->getOption('iconSticky');
+        }
+        $threadArray['icons'] = implode($this->getOption('iconSeparator'),$icons);
+
+        $threadArray['views'] = number_format($threadArray['views']);
+        $threadArray['replies'] = number_format($threadArray['replies']);
+
+        /* unread class */
+        $threadArray['unread'] = true;
+        $threadArray['unread-cls'] = $this->getOption('clsUnread');
+        $threadArray['author_link'] = $this->getOption('canViewProfiles') ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+        return $threadArray;
     }
 }
