@@ -321,7 +321,7 @@ div.dis-actions {
 	background: #ffffff url(../images/buttons/10x10/gear.gif) no-repeat 6px 6px;
 	position: absolute;
 	top: 10px;
-	right: 46px;
+	right: 23px;
 	display: block;
 	}
 
@@ -329,7 +329,7 @@ a.dis-mark-as-answer-link {
 	background: transparent url(../images/buttons/10x10/check.gif) no-repeat 6px 6px;
 	position: absolute;
 	top: 10px;
-	right: 23px;
+	right: 50px;
 	text-indent: -3000px;
 	}
 
@@ -381,7 +381,8 @@ div.dis-actions,
 	-webkit-border-radius: 0 2px 2px 0;
  	behavior:url(pie.htc);
 	}
-	
+
+a.dis-mark-as-answer-link,
 .quick-reply.first.last,
 .wysi-buttons a.format_buttons.first.last {
 	border-radius: 2px;
