@@ -26,6 +26,16 @@
 	padding: 0 0 30px;
 	}
 
+#crumbs li.last {
+	background: url("../images/bg-sprite.png") no-repeat scroll 4px -142px transparent;
+	}
+
+#crumbs li.last a {
+	background: url("../images/bg-sprite.png") repeat-x 3px -170px transparent;
+	margin: 0 0;
+	padding: 0 0;
+	}
+
 input[type="submit"],
 input[type="button"] {
 	-moz-transition: all 0.4s ease 0s;
