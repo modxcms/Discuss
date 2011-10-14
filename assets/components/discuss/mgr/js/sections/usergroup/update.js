@@ -16,7 +16,7 @@ Dis.page.UpdateUserGroup = function(config) {
             text: _('cancel')
             ,id: 'dis-btn-back'
             ,handler: function() {
-                location.href = '?a='+Dis.request.a+'&action=home';
+                location.href = '?a='+Dis.request.a;
             }
             ,scope: this
         }]

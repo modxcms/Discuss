@@ -66,6 +66,7 @@ Dis.window.CreateBoardAccess = function(config) {
             ,name: 'usergroup'
             ,hiddenName: 'usergroup'
             ,id: 'dis-'+this.ident+'-usergroup'
+            ,anchor: '100%'
             ,allowBlank: false
             ,pageSize: 20
         }]

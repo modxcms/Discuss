@@ -1,73 +1,51 @@
-
-Dis.panel.Users = function(config) {
+Dis.panel.Threads = function(config) {
     config = config || {};
     Ext.apply(config,{
-        title: _('discuss.users')
+        title: _('discuss.threads')
         ,autoHeight: true
         ,items: [{
-            html: '<p>'+_('discuss.users.intro_msg')+'</p>'
+            html: '<p>'+_('discuss.threads.intro_msg')+'</p>'
             ,border: false
             ,bodyCssClass: 'panel-desc'
         },{
-            xtype: 'dis-grid-users'
+            xtype: 'dis-grid-threads'
             ,autoHeight: true
             ,preventRender: true
             ,cls: 'main-wrapper'
         }]
     });
-    Dis.panel.Users.superclass.constructor.call(this,config);
+    Dis.panel.Threads.superclass.constructor.call(this,config);
 };
-Ext.extend(Dis.panel.Users,MODx.Panel);
-Ext.reg('dis-panel-users',Dis.panel.Users);
+Ext.extend(Dis.panel.Threads,MODx.Panel);
+Ext.reg('dis-panel-threads',Dis.panel.Threads);
 
 
-Dis.grid.Users = function(config) {
+Dis.grid.Threads = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        id: 'dis-grid-users'
-        ,url: Dis.config.connector_url
-        ,baseParams: { action: 'mgr/user/getList' }
-        ,save_action: 'mgr/user/updateFromGrid'
-        ,fields: ['id','user','username','email','ip','last_active','posts']
+        id: 'dis-grid-threads'
+        ,url: Dis.config.connectorUrl
+        ,baseParams: { action: 'mgr/thread/getList' }
+        ,save_action: 'mgr/thread/updateFromGrid'
+        ,fields: ['id','title','url']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
-        ,width: '95%'
         ,columns: [{
             header: _('id')
-            ,dataIndex: 'user'
-            ,sortable: true
-            ,width: 90
-        },{
-            header: _('discuss.username')
-            ,dataIndex: 'username'
-            ,sortable: true
-            ,width: 300
-        },{
-            header: _('email')
-            ,dataIndex: 'email'
-            ,sortable: true
-            ,width: 300
-        },{
-            header: _('discuss.ip')
-            ,dataIndex: 'ip'
+            ,dataIndex: 'id'
             ,sortable: true
             ,width: 120
         },{
-            header: _('discuss.posts')
-            ,dataIndex: 'posts'
+            header: _('discuss.title')
+            ,dataIndex: 'title'
             ,sortable: true
-            ,width: 90
-        },{
-            header: _('discuss.last_active')
-            ,dataIndex: 'last_active'
-            ,sortable: true
-            ,width: 300
+            ,width: 200
         }]
         ,tbar: ['->',{
             xtype: 'textfield'
             ,name: 'search'
-            ,id: 'modx-user-search'
+            ,id: 'dis-threads-search'
             ,emptyText: _('search_ellipsis')
             ,listeners: {
                 'change': {fn: this.search, scope: this}
@@ -91,43 +69,31 @@ Dis.grid.Users = function(config) {
             }
         }]
     });
-    Dis.grid.Users.superclass.constructor.call(this,config)
+    Dis.grid.Threads.superclass.constructor.call(this,config)
 };
-Ext.extend(Dis.grid.Users,MODx.grid.Grid,{
+Ext.extend(Dis.grid.Threads,MODx.grid.Grid,{
 
     getMenu: function() {
         var m = [];
         m.push({
-            text: _('discuss.user_update')
-            ,handler: this.updateUser
-        });
-        m.push('-');
-        m.push({
-            text: _('discuss.user_remove')
-            ,handler: this.removeUser
+            text: _('discuss.thread_remove')
+            ,handler: this.removeThread
         });
         this.addContextMenuItem(m);
     }
-    ,removeUser: function() {
+    ,removeThread: function() {
         MODx.msg.confirm({
             title: _('warning')
-            ,text: _('discuss.user_remove_confirm')
+            ,text: _('discuss.activity_log_remove_confirm')
             ,url: this.config.url
             ,params: {
-                action: 'mgr/user/remove'
+                action: 'mgr/thread/remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
                 'success': {fn:this.removeActiveRow,scope:this}
             }
         });
-    }
-    ,createUser: function() {
-        location.href = '?a='+MODx.request.a+'&action=mgr/user/create';
-    }
-    ,updateUser: function() {
-        var id = this.menu.record.id;
-        location.href = '?a='+MODx.request.a+'&user='+id+'&action=mgr/user/update';
     }
     ,search: function(tf,newValue,oldValue) {
         var nv = newValue || tf;
@@ -138,11 +104,11 @@ Ext.extend(Dis.grid.Users,MODx.grid.Grid,{
     }
     ,clearFilter: function() {
     	this.getStore().baseParams = {
-            action: 'mgr/user/getList'
+            action: 'mgr/thread/getList'
     	};
-        Ext.getCmp('modx-user-search').reset();
+        Ext.getCmp('dis-threads-search').reset();
     	this.getBottomToolbar().changePage(1);
         this.refresh();
     }
 });
-Ext.reg('dis-grid-users',Dis.grid.Users);
+Ext.reg('dis-grid-threads',Dis.grid.Threads);

@@ -5,6 +5,7 @@ Dis.panel.UserGroup = function(config) {
         ,url: Dis.config.connector_url
         ,baseParams: {}
         ,fileUpload: true
+        ,cls: 'container form-with-labels'
         ,items: [{
             html: '<h2>'+_('discuss.usergroup_new')+'</h2>'
             ,border: false
@@ -14,59 +15,101 @@ Dis.panel.UserGroup = function(config) {
             xtype: 'modx-tabs'
             ,border: true
             ,defaults: {
-                autoHeight: true, bodyStyle: 'padding: 15px;'
+                autoHeight: true
             }
             ,forceLayout: true
-            ,labelWidth: 150
             ,items: [{
                 title: _('general_information')
                 ,layout: 'form'
-                ,items: [{                    
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('id')
-                    ,name: 'id'
-                    ,submitValue: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('name')
-                    ,name: 'name'
-                    ,anchor: '97%'
-                    ,allowBlank: false
-                },{
-                    xtype: 'checkbox'
-                    ,fieldLabel: _('discuss.usergroup_post_based')
-                    ,description: _('discuss.usergroup_post_based_desc')
-                    ,name: 'post_based'
-                    ,anchor: '97%'
-                    ,inputValue: true
-                },{
-                    xtype: 'numberfield'
-                    ,fieldLabel: _('discuss.usergroup_min_posts')
-                    ,description: _('discuss.usergroup_min_posts_desc')
-                    ,name: 'min_posts'
-                    ,id: 'dis-usergroup-min-posts'
-                    ,width: 50
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel:  _('discuss.usergroup_name_color')
-                    ,description: _('discuss.usergroup_name_color_desc')
-                    ,name: 'color'
-                    ,width: 300
-                },{
-                    xtype: 'displayfield'
-                    ,fieldLabel: _('discuss.usergroup_image')
-                    ,description: _('discuss.usergroup_image_desc')
-                    ,name: 'image'
-                    ,anchor: '97%'
-                },{
-                    id: 'ug-image-preview'
-                    ,html: ''
+                ,items: [{
+                    layout: 'column'
+					,cls: 'main-wrapper'
                     ,border: false
-                },{
-                    xtype: 'textfield'
-                    ,inputType: 'file'
-                    ,name: 'image'
-                    ,anchor: '97%'
+                    ,anchor: '100%'
+                    ,defaults: {
+                        layout: 'form'
+                        ,labelAlign: 'top'
+                        ,anchor: '100%'
+                        ,border: false
+                    }
+                    ,items: [{
+                        columnWidth: .6
+                        ,items: [{
+                            xtype: 'statictextfield'
+                            ,fieldLabel: _('id')
+                            ,name: 'id'
+                            ,submitValue: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('name')
+                            ,name: 'name'
+                            ,id: 'dis-usergroup-name'
+                            ,anchor: '100%'
+                            ,allowBlank: false
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'dis-usergroup-name'
+                            ,html: _('discuss.usergroup_name_desc')
+                            ,cls: 'desc-under'
+
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel:  _('discuss.usergroup_name_color')
+                            ,description: MODx.expandHelp ? '' : _('discuss.usergroup_name_color_desc')
+                            ,name: 'color'
+                            ,anchor: '100%'
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'dis-usergroup-name-color'
+                            ,html: _('discuss.usergroup_name_color_desc')
+                            ,cls: 'desc-under'
+
+                        },{
+                            xtype: 'displayfield'
+                            ,fieldLabel: _('discuss.usergroup_image')
+                            ,description: _('discuss.usergroup_image_desc')
+                            ,name: 'image'
+                            ,anchor: '100%'
+                        },{
+                            id: 'ug-image-preview'
+                            ,html: ''
+                            ,border: false
+                        },{
+                            xtype: 'textfield'
+                            ,inputType: 'file'
+                            ,name: 'image'
+                            ,anchor: '100%'
+                        }]
+                    },{
+                        columnWidth: .4
+                        ,items: [{
+                            xtype: 'checkbox'
+                            ,boxLabel: _('discuss.usergroup_post_based')
+                            ,description: MODx.expandHelp ? '' : _('discuss.usergroup_post_based_desc')
+                            ,name: 'post_based'
+                            ,anchor: '100%'
+                            ,inputValue: true
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'dis-usergroup-post-based'
+                            ,html: _('discuss.usergroup_post_based_desc')
+                            ,cls: 'desc-under'
+
+                        },{
+                            xtype: 'numberfield'
+                            ,fieldLabel: _('discuss.usergroup_min_posts')
+                            ,description: MODx.expandHelp ? '' : _('discuss.usergroup_min_posts_desc')
+                            ,name: 'min_posts'
+                            ,id: 'dis-usergroup-min-posts'
+                            ,width: 100
+                        },{
+                            xtype: MODx.expandHelp ? 'label' : 'hidden'
+                            ,forId: 'dis-usergroup-min-posts'
+                            ,html: _('discuss.usergroup_min_posts_desc')
+                            ,cls: 'desc-under'
+
+                        }]
+                    }]
                 }]
             },{
                 title: _('discuss.members')
@@ -76,9 +119,11 @@ Dis.panel.UserGroup = function(config) {
                 ,items: [{
                     html: '<p>'+_('discuss.user_members.intro_msg')+'</p>'
                     ,border: false
+                    ,bodyCssClass: 'panel-desc'
                 },{
                     xtype: 'dis-grid-usergroup-members'
-                    ,width: '97%'
+                    ,anchor: '100%'
+                    ,cls: 'main-wrapper'
                     ,usergroup: config.usergroup
                     ,preventRender: true
                 }]
@@ -90,9 +135,11 @@ Dis.panel.UserGroup = function(config) {
                 ,items: [{
                     html: '<p>'+_('discuss.user_boards.intro_msg')+'</p>'
                     ,border: false
+                    ,bodyCssClass: 'panel-desc'
                 },{
                     xtype: 'dis-grid-usergroup-boards'
-                    ,width: '97%'
+                    ,anchor: '100%'
+                    ,cls: 'main-wrapper'
                     ,usergroup: config.usergroup
                     ,preventRender: true
                 }]

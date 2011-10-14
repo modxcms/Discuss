@@ -5,12 +5,14 @@ Dis.panel.ActivityLog = function(config) {
         title: _('discuss.activity_log')
         ,autoHeight: true
         ,items: [{
-            html: '<p>'+_('discuss.activity_log.intro_msg')+'</p><br />'
+            html: '<p>'+_('discuss.activity_log.intro_msg')+'</p>'
             ,border: false
+            ,bodyCssClass: 'panel-desc'
         },{
             xtype: 'dis-grid-activity-log'
             ,autoHeight: true
             ,preventRender: true
+            ,cls: 'main-wrapper'
         }]
     });
     Dis.panel.ActivityLog.superclass.constructor.call(this,config);

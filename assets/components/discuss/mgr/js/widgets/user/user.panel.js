@@ -3,6 +3,7 @@ Dis.panel.User = function(config) {
     Ext.applyIf(config,{
         id: 'dis-panel-user'
         ,url: Dis.config.connector_url
+        ,cls: 'container form-with-labels'
         ,baseParams: {}
         ,items: [{
             html: '<h2>'+_('discuss.user_new')+'</h2>'
@@ -13,159 +14,207 @@ Dis.panel.User = function(config) {
             xtype: 'modx-tabs'
             ,border: true
             ,defaults: {
-                autoHeight: true, bodyStyle: 'padding: 10px;'
+                autoHeight: true
             }
             ,items: [{
                 title: _('general_information')
                 ,layout: 'form'
-                ,items: [{                    
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('id')
-                    ,name: 'id'
-                    ,submitValue: true
-                },{
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('discuss.username')
-                    ,name: 'username'
-                    ,width: 250
-                    ,allowBlank: false
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('discuss.user_email')
-                    ,name: 'email'
-                    ,width: 250
-                    ,allowBlank: false
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('discuss.user_name_first')
-                    ,name: 'name_first'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('discuss.user_name_last')
-                    ,name: 'name_last'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'datefield'
-                    ,fieldLabel: _('discuss.user_birthdate')
-                    ,name: 'birthdate'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('discuss.user_website')
-                    ,name: 'website'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('discuss.user_location')
-                    ,name: 'location'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('discuss.custom_title')
-                    ,name: 'title'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'textarea'
-                    ,fieldLabel: _('discuss.user_signature')
-                    ,name: 'signature'
-                    ,width: 500
-                    ,grow: true
-                },{
-                    xtype: 'textfield'
-                    ,fieldLabel: _('discuss.posts')
-                    ,name: 'posts'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'modx-combo-usergroup'
-                    ,fieldLabel: _('discuss.primary_group')
-                    ,description: _('discuss.primary_group_desc')
-                    ,name: 'primary_group'
-                    ,hiddenName: 'primary_group'
-                    ,width: 250
-                    ,allowBlank: true
+                ,items: [{
+                    layout: 'column'
+					,cls: 'main-wrapper'
+                    ,border: false
+                    ,anchor: '100%'
+                    ,defaults: {
+                        layout: 'form'
+                        ,labelAlign: 'top'
+                        ,anchor: '100%'
+                        ,border: false
+                    }
+                    ,items: [{
+                        columnWidth: .6
+                        ,items: [{
+                            xtype: 'statictextfield'
+                            ,fieldLabel: _('id')
+                            ,name: 'id'
+                            ,anchor: '100%'
+                            ,submitValue: true
+                        },{
+                            xtype: 'statictextfield'
+                            ,fieldLabel: _('discuss.username')
+                            ,name: 'username'
+                            ,anchor: '100%'
+                            ,allowBlank: false
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.user_email')
+                            ,name: 'email'
+                            ,anchor: '100%'
+                            ,allowBlank: false
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.user_name_first')
+                            ,name: 'name_first'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.user_name_last')
+                            ,name: 'name_last'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.user_website')
+                            ,name: 'website'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.user_location')
+                            ,name: 'location'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.custom_title')
+                            ,name: 'title'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textarea'
+                            ,fieldLabel: _('discuss.user_signature')
+                            ,name: 'signature'
+                            ,anchor: '100%'
+                            ,grow: true
+                        }]
+                    },{
+                        columnWidth: .4
+                        ,items: [{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.posts')
+                            ,name: 'posts'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'modx-combo-usergroup'
+                            ,fieldLabel: _('discuss.primary_group')
+                            ,description: _('discuss.primary_group_desc')
+                            ,name: 'primary_group'
+                            ,hiddenName: 'primary_group'
+                            ,anchor: '100%'
+                            ,allowBlank: true
 
-                },{
-                    xtype: 'checkbox'
-                    ,fieldLabel: _('discuss.user_show_email')
-                    ,name: 'show_email'
-                    ,labelSeparator: ''
-                    ,inputValue: 1
-                },{
-                    xtype: 'checkbox'
-                    ,fieldLabel: _('discuss.user_show_online')
-                    ,name: 'show_online'
-                    ,labelSeparator: ''
-                    ,inputValue: 1
-                },{ html: "<hr />" ,border: false },{
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('discuss.registered_on')
-                    ,name: 'createdon'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'checkbox'
-                    ,fieldLabel: _('discuss.synced')
-                    ,name: 'synced'
-                    ,labelSeparator: ''
-                    ,inputValue: 1
-                    ,disabled: true
-                },{
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('discuss.synced_at')
-                    ,name: 'syncedat'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('discuss.source')
-                    ,name: 'source'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('discuss.last_login')
-                    ,name: 'last_login'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('discuss.last_active')
-                    ,name: 'last_active'
-                    ,width: 250
-                    ,allowBlank: true
-                },{
-                    xtype: 'statictextfield'
-                    ,fieldLabel: _('discuss.ip')
-                    ,name: 'ip'
-                    ,width: 250
-                    ,allowBlank: true
+                        },{
+                            xtype: 'datefield'
+                            ,fieldLabel: _('discuss.user_birthdate')
+                            ,name: 'birthdate'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'checkbox'
+                            ,boxLabel: _('discuss.user_show_email')
+                            ,hideLabel: true
+                            ,name: 'show_email'
+                            ,labelSeparator: ''
+                            ,inputValue: 1
+                        },{
+                            xtype: 'checkbox'
+                            ,boxLabel: _('discuss.user_show_online')
+                            ,hideLabel: true
+                            ,name: 'show_online'
+                            ,labelSeparator: ''
+                            ,inputValue: 1
+                        }]
+                    }]
                 }]
-            }/*,{
+            },{
                 title: 'Activity'
                 ,layout: 'form'
-                ,defaults: { autoHeight: true }
                 ,items: [{
-                    html: '<p>Activity info, including track IP and other usage, goes here.</p>'
+                    html: '<p>'+_('discuss.user_activity_msg')+'</p>'
                     ,border: false
+                    ,bodyCssClass: 'panel-desc'
+                },{
+                    layout: 'column'
+					,cls: 'main-wrapper'
+                    ,border: false
+                    ,anchor: '100%'
+                    ,defaults: {
+                        layout: 'form'
+                        ,labelAlign: 'top'
+                        ,anchor: '100%'
+                        ,border: false
+                    }
+                    ,items: [{
+                        columnWidth: .6
+                        ,items: [{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.registered_on')
+                            ,name: 'createdon'
+                            ,readOnly: true
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'checkbox'
+                            ,boxLabel: _('discuss.synced')
+                            ,hideLabel: true
+                            ,readOnly: true
+                            ,name: 'synced'
+                            ,labelSeparator: ''
+                            ,inputValue: 1
+                            ,disabled: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.synced_at')
+                            ,name: 'syncedat'
+                            ,readOnly: true
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.source')
+                            ,name: 'source'
+                            ,readOnly: true
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        }]
+                    },{
+                        columnWidth: .4
+                        ,items: [{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.last_login')
+                            ,name: 'last_login'
+                            ,readOnly: true
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.last_active')
+                            ,name: 'last_active'
+                            ,readOnly: true
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textfield'
+                            ,fieldLabel: _('discuss.ip')
+                            ,readOnly: true
+                            ,name: 'ip'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        }]
+                    }]
                 }]
-            }*/,{
+            },{
                 title: _('discuss.posts')
                 ,layout: 'form'
                 ,defaults: { autoHeight: true }
                 ,items: [{
                     html: '<p>'+_('discuss.user_posts.intro_msg')+'</p>'
                     ,border: false
+                    ,bodyCssClass: 'panel-desc'
                 },{
                     xtype: 'dis-grid-user-posts'
-                    ,width: '97%'
+                    ,cls: 'main-wrapper'
                     ,user: config.user
                     ,preventRender: true
                 }]

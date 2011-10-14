@@ -9,7 +9,6 @@ Dis.panel.Home = function(config) {
             ,cls: 'modx-page-header'
         },{
             xtype: 'modx-tabs'
-            ,bodyStyle: 'padding: 15px'
             ,defaults: { border: false ,autoHeight: true }
             ,border: true
             ,stateful: true
@@ -25,7 +24,9 @@ Dis.panel.Home = function(config) {
             },{
                 xtype: 'dis-panel-usergroups'
                 ,forceLayout: true
-            },{
+            }/*,{
+                xtype: 'dis-panel-threads'
+            }*/,{
                 xtype: 'dis-panel-activity-log'
             }]
         }]

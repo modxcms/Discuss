@@ -73,18 +73,20 @@ Dis.window.AddUserGroupMember = function(config) {
             ,fieldLabel: _('discuss.user')
             ,name: 'user'
             ,hiddenName: 'user'
-            ,id: 'dis-'+this.ident+'-user'
+            ,id: this.ident+'-user'
             ,allowBlank: false
             ,editable: true
             ,typeAhead: true
             ,pageSize: 20
+            ,anchor: '100%'
         },{
             xtype: 'modx-combo-role'
             ,fieldLabel: _('discuss.role')
             ,name: 'role'
             ,hiddenName: 'role'
-            ,id: 'dis-'+this.ident+'-role'
+            ,id: this.ident+'-role'
             ,allowBlank: false
+            ,anchor: '100%'
         }]
     });
     Dis.window.AddUserGroupMember.superclass.constructor.call(this,config);

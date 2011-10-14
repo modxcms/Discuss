@@ -6,12 +6,14 @@ Dis.panel.UserGroups = function(config) {
         ,autoHeight: true
         ,forceLayout: true
         ,items: [{
-            html: '<p>'+_('discuss.usergroups.intro_msg')+'</p><br />'
+            html: '<p>'+_('discuss.usergroups.intro_msg')+'</p>'
             ,border: false
+            ,bodyCssClass: 'panel-desc'
         },{
             title: ''
             ,xtype: 'dis-tree-usergroups'
             ,autoHeight: true
+            ,cls: 'main-wrapper'
         }]
     });
     Dis.panel.UserGroups.superclass.constructor.call(this,config);
@@ -143,7 +145,7 @@ Dis.window.CreateUserGroup = function(config) {
         title: _('discuss.usergroup_add')
         ,id: this.ident
         ,height: 150
-        ,width: 475
+        ,width: 625
         ,url: Dis.config.connector_url
         ,action: 'mgr/usergroup/create'
         ,fields: [{
@@ -151,46 +153,81 @@ Dis.window.CreateUserGroup = function(config) {
             ,name: 'parent'
             ,id: 'dis-'+this.ident+'-parent'
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('name')
-            ,name: 'name'
-            ,id: 'dis-'+this.ident+'-name'
-            ,width: 300
-        },{
-            xtype: 'checkbox'
-            ,fieldLabel: _('discuss.usergroup_post_based')
-            ,description: _('discuss.usergroup_post_based_desc')
-            ,name: 'post_based'
-            ,id: 'dis-'+this.ident+'-post-based'
-            ,inputValue: true
-            ,listeners: {
-                'check': {fn:function() {
-                    var tf = Ext.getCmp('dis-'+this.ident+'-min-posts');
-                    tf.setDisabled(!tf.disabled);
-                },scope:this}
+            layout: 'column'
+            ,border: false
+            ,anchor: '100%'
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,anchor: '100%'
+                ,border: false
             }
-        },{
-            xtype: 'numberfield'
-            ,fieldLabel: _('discuss.usergroup_min_posts')
-            ,description: _('discuss.usergroup_min_posts_desc')
-            ,name: 'min_posts'
-            ,id: 'dis-'+this.ident+'-min-posts'
-            ,width: 50
-            ,disabled: true
-        },{
-            xtype: 'textfield'
-            ,fieldLabel:  _('discuss.usergroup_name_color')
-            ,description: _('discuss.usergroup_name_color_desc')
-            ,name: 'color'
-            ,id: 'dis-'+this.ident+'-color'
-            ,width: 200
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('discuss.usergroup_image')
-            ,description: _('discuss.usergroup_image_desc')
-            ,name: 'image'
-            ,id: 'dis-'+this.ident+'-image'
-            ,width: 200
+            ,items: [{
+                columnWidth: .5
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('name')
+                    ,description: MODx.expandHelp ? '' : _('discuss.usergroup_name_desc')
+                    ,name: 'name'
+                    ,id: this.ident+'-name'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-name'
+                    ,html: _('discuss.usergroup_name_desc')
+                    ,cls: 'desc-under'
+
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel:  _('discuss.usergroup_name_color')
+                    ,description: MODx.expandHelp ? '' : _('discuss.usergroup_name_color_desc')
+                    ,name: 'color'
+                    ,id: this.ident+'-color'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-color'
+                    ,html: _('discuss.usergroup_name_color_desc')
+                    ,cls: 'desc-under'
+
+                }]
+            },{
+                columnWidth: .5
+                ,items: [{
+                    xtype: 'checkbox'
+                    ,boxLabel: _('discuss.usergroup_post_based')
+                    ,description: MODx.expandHelp ? '' : _('discuss.usergroup_post_based_desc')
+                    ,name: 'post_based'
+                    ,id: this.ident+'-post-based'
+                    ,inputValue: true
+                    ,listeners: {
+                        'check': {fn:function() {
+                            var tf = Ext.getCmp('dis-'+this.ident+'-min-posts');
+                            tf.setDisabled(!tf.disabled);
+                        },scope:this}
+                    }
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-post-based'
+                    ,html: _('discuss.usergroup_post_based_desc')
+                    ,cls: 'desc-under'
+
+                },{
+                    xtype: 'numberfield'
+                    ,fieldLabel: _('discuss.usergroup_min_posts')
+                    ,description: _('discuss.usergroup_min_posts_desc')
+                    ,name: 'min_posts'
+                    ,id: this.ident+'-min-posts'
+                    ,width: 100
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-min-posts'
+                    ,html: _('discuss.usergroup_min_posts_desc')
+                    ,cls: 'desc-under'
+
+
+                }]
+            }]
         }]
     });
     Dis.window.CreateUserGroup.superclass.constructor.call(this,config);
