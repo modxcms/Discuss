@@ -9,7 +9,6 @@ Dis.panel.Home = function(config) {
             ,cls: 'modx-page-header'
         },{
             xtype: 'modx-tabs'
-            ,bodyStyle: 'padding: 15px'
             ,defaults: { border: false ,autoHeight: true }
             ,border: true
             ,stateful: true

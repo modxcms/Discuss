@@ -5,12 +5,14 @@ Dis.panel.Users = function(config) {
         title: _('discuss.users')
         ,autoHeight: true
         ,items: [{
-            html: '<p>'+_('discuss.users.intro_msg')+'</p><br />'
+            html: '<p>'+_('discuss.users.intro_msg')+'</p>'
             ,border: false
+            ,bodyCssClass: 'panel-desc'
         },{
             xtype: 'dis-grid-users'
             ,autoHeight: true
             ,preventRender: true
+            ,cls: 'main-wrapper'
         }]
     });
     Dis.panel.Users.superclass.constructor.call(this,config);

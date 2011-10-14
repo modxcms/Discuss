@@ -71,6 +71,7 @@ Dis.window.CreateBoardModerator = function(config) {
             ,editable: true
             ,typeAhead: true
             ,pageSize: 20
+            ,anchor: '100%'
         }]
     });
     Dis.window.CreateBoardModerator.superclass.constructor.call(this,config);
