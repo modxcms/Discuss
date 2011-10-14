@@ -40,9 +40,6 @@ class DiscussThreadRecentController extends DiscussController {
             'rssIconLinkText' => '',
         );
     }
-    public function checkPermissions() {
-        return $this->discuss->user->isLoggedIn;
-    }
     public function getPageTitle() {
         return $this->modx->lexicon('discuss.recent_posts');
     }

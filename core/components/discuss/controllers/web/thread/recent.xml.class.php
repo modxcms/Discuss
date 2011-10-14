@@ -35,5 +35,4 @@ class DiscussThreadRecentXmlController extends DiscussThreadRecentController {
         parent::initialize();
         $this->options['postTpl'] = 'post/disBoardPostXml';
     }
-    
 }
