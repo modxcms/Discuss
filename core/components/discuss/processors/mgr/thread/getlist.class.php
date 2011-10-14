@@ -15,7 +15,6 @@ class disThreadGetListProcessor extends modProcessor {
         return true;
     }
     public function process() {
-
         $data = $this->getData();
         
         /* iterate */
