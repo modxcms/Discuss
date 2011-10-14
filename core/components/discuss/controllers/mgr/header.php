@@ -24,6 +24,9 @@
 /**
  * Loads the header for mgr pages.
  *
+ * @var modX $modx
+ * @var Discuss $discuss
+ *
  * @package discuss
  * @subpackage controllers
  */

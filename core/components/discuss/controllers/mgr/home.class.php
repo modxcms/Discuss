@@ -29,7 +29,7 @@
  */
 class DiscussMgrHomeManagerController extends DiscussManagerController {
     public function process(array $scriptProperties = array()) {
-        
+    
     }
     public function getPageTitle() { return $this->modx->lexicon('discuss'); }
     public function loadCustomCssJs() {
@@ -37,6 +37,7 @@ class DiscussMgrHomeManagerController extends DiscussManagerController {
         $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/usergroup/usergroups.panel.js');
         $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/board/boards.panel.js');
         $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/user/users.panel.js');
+        $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/thread/threads.panel.js');
         $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/log/activity.log.panel.js');
         $this->addJavascript($this->discuss->config['mgrJsUrl'].'widgets/home.panel.js');
         $this->addLastJavascript($this->discuss->config['mgrJsUrl'].'sections/home.js');

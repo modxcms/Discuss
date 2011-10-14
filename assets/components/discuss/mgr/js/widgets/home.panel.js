@@ -24,7 +24,9 @@ Dis.panel.Home = function(config) {
             },{
                 xtype: 'dis-panel-usergroups'
                 ,forceLayout: true
-            },{
+            }/*,{
+                xtype: 'dis-panel-threads'
+            }*/,{
                 xtype: 'dis-panel-activity-log'
             }]
         }]

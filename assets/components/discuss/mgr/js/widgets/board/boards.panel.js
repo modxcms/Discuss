@@ -473,46 +473,96 @@ Dis.window.UpdateCategory = function(config) {
         title: _('discuss.category_update')
         ,id: this.ident
         ,height: 150
-        ,width: 475
+        ,width: 625
         ,url: Dis.config.connector_url
         ,action: 'mgr/category/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
         },{
-            xtype: 'textfield'
-            ,fieldLabel: _('name')
-            ,name: 'name'
-            ,id: 'dis-'+this.ident+'-name'
-            ,width: 300
-        },{
-            xtype: 'textarea'
-            ,fieldLabel: _('description')
-            ,name: 'description'
-            ,id: 'dis-'+this.ident+'-description'
-            ,width: 300
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('discuss.category_default_moderators')
-            ,description: _('discuss.category_default_moderators_desc')
-            ,name: 'default_moderators'
-            ,id: 'dis-'+this.ident+'-default-board-moderators'
-            ,width: 300
-        },{
-            xtype: 'textfield'
-            ,fieldLabel: _('discuss.category_default_usergroups')
-            ,description: _('discuss.category_default_usergroups_desc')
-            ,name: 'default_usergroups'
-            ,id: 'dis-'+this.ident+'-default-board-usergroups'
-            ,width: 300
-        },{
-            xtype: 'checkbox'
-            ,fieldLabel: _('discuss.board_collapsible')
-            ,name: 'collapsible'
-            ,description: _('discuss.board_collapsible_desc')
-            ,id: 'dis-'+this.ident+'-collapsible'
-            ,checked: true
-            ,inputValue: 1
+            layout: 'column'
+            ,border: false
+            ,anchor: '100%'
+            ,defaults: {
+                layout: 'form'
+                ,labelAlign: 'top'
+                ,anchor: '100%'
+                ,border: false
+            }
+            ,items: [{
+                columnWidth: .5
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('name')
+                    ,description: MODx.expandHelp ? '' : _('discuss.category_name_desc')
+                    ,name: 'name'
+                    ,id: this.ident+'-name'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-name'
+                    ,html: _('discuss.category_name_desc')
+                    ,cls: 'desc-under'
+
+                },{
+                    xtype: 'textarea'
+                    ,fieldLabel: _('description')
+                    ,description: MODx.expandHelp ? '' : _('discuss.category_description_desc')
+                    ,name: 'description'
+                    ,id: this.ident+'-description'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-description'
+                    ,html: _('discuss.category_description_desc')
+                    ,cls: 'desc-under'
+
+                },{
+                    xtype: 'checkbox'
+                    ,boxLabel: _('discuss.board_collapsible')
+                    ,description: MODx.expandHelp ? '' : _('discuss.board_collapsible_desc')
+                    ,hideLabel: true
+                    ,name: 'collapsible'
+                    ,id: this.ident+'-collapsible'
+                    ,checked: true
+                    ,inputValue: 1
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-collapsible'
+                    ,html: _('discuss.board_collapsible_desc')
+                    ,cls: 'desc-under'
+
+                }]
+            },{
+                columnWidth: .5
+                ,items: [{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('discuss.category_default_moderators')
+                    ,description: MODx.expandHelp ? '' : _('discuss.category_default_moderators_desc')
+                    ,name: 'default_moderators'
+                    ,id: this.ident+'-default-board-moderators'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-default-board-moderators'
+                    ,html: _('discuss.category_default_moderators_desc')
+                    ,cls: 'desc-under'
+
+                },{
+                    xtype: 'textfield'
+                    ,fieldLabel: _('discuss.category_default_usergroups')
+                    ,description: MODx.expandHelp ? '' : _('discuss.category_default_usergroups_desc')
+                    ,name: 'default_usergroups'
+                    ,id: this.ident+'-default-board-usergroups'
+                    ,anchor: '100%'
+                },{
+                    xtype: MODx.expandHelp ? 'label' : 'hidden'
+                    ,forId: this.ident+'-default-board-usergroups'
+                    ,html: _('discuss.category_default_usergroups_desc')
+                    ,cls: 'desc-under'
+
+                }]
+            }]
         }]
     });
     Dis.window.UpdateCategory.superclass.constructor.call(this,config);
