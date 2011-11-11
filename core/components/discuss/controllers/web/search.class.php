@@ -45,6 +45,12 @@ class DiscussSearchController extends DiscussController {
         if (!empty($this->scriptProperties['user'])) {
             $placeholders['user'] = strip_tags($this->discuss->convertMODXTags($this->scriptProperties['user']));
         }
+
+
+        $this->modx->regClientHTMLBlock('<script type="text/javascript">$(function() {
+    $(".date-picker").datepicker();
+});</script>');
+
         $this->setPlaceholders($placeholders);
     }
 
@@ -144,6 +150,7 @@ class DiscussSearchController extends DiscussController {
                 'results' => 'Could not load search class.',
             ));
         }
+        $this->setPlaceholders($this->scriptProperties);
         $this->setPlaceholders($placeholders);
     }
 
@@ -165,6 +172,20 @@ class DiscussSearchController extends DiscussController {
             } else {
                 $conditions['author'] = $this->scriptProperties['user'];
             }
+        }
+        $dateFormat = '%Y-%m-%dT%H:%M:%S.999Z';
+        if (!empty($this->scriptProperties['date_start']) && !empty($this->scriptProperties['date_end'])) {
+            $start = strftime($dateFormat,strtotime($this->scriptProperties['date_start'].' 00:00:00'));
+            $end = strftime($dateFormat,strtotime($this->scriptProperties['date_end'].' 23:59:59'));
+            $conditions['createdon'] = '['.$start.' TO '.$end.']';
+
+        } else if (!empty($this->scriptProperties['date_start'])) {
+            $start = strftime($dateFormat,strtotime($this->scriptProperties['date_start'].' 00:00:00'));
+            $conditions['createdon'] = '['.$start.' TO *]';
+
+        } else if (!empty($this->scriptProperties['date_end'])) {
+            $end = strftime($dateFormat,strtotime($this->scriptProperties['date_end'].' 23:59:59'));
+            $conditions['createdon'] = '[* TO '.$end.']';
         }
         $conditions['private'] = 0;
         return $conditions;
