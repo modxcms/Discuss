@@ -45,12 +45,6 @@ class DiscussSearchController extends DiscussController {
         if (!empty($this->scriptProperties['user'])) {
             $placeholders['user'] = strip_tags($this->discuss->convertMODXTags($this->scriptProperties['user']));
         }
-
-
-        $this->modx->regClientHTMLBlock('<script type="text/javascript">$(function() {
-    $(".date-picker").datepicker();
-});</script>');
-
         $this->setPlaceholders($placeholders);
     }
 
