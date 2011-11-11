@@ -15,6 +15,12 @@
     <label for="dis-author">[[%discuss.author]]:</label>
     <input type="text" id="dis-author" name="user" value="[[+user]]" />
 
+    <label for="dis-date-start">[[%discuss.date_start]]:</label>
+    <input type="text" id="dis-date-start" name="date_start" class="date-picker" value="[[+date_start]]" />
+
+    <label for="dis-date-end">[[%discuss.date_end]]:</label>
+    <input type="text" id="dis-date-end" name="date_end" class="date-picker" value="[[+date_end]]" />
+
     <br class="clear" />
     
     <div class="dis-form-buttons">

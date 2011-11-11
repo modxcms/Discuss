@@ -11,26 +11,33 @@ class disThreadGetListProcessor extends modProcessor {
             'start' => 0,
             'limit' => 10,
             'query' => '',
+            'dateFormat' => '%b %d, %Y %I:%M %p',
         ));
         return true;
     }
     public function process() {
-
         $data = $this->getData();
         
         /* iterate */
         $list = array();
         /** @var disThread $thread */
         foreach ($data['results'] as $thread) {
-            $threadArray = $thread->toArray();
-            if (!empty($threadArray['createdon']) && $threadArray['createdon'] != '0000-00-00 00:00:00' && $threadArray['createdon'] != '-001-11-30 00:00:00') {
-                $threadArray['createdon'] = strftime('%b %d, %Y %I:%M %p',strtotime($threadArray['createdon']));
-            } else {
-                $threadArray['createdon'] = '';
+            $threadArray = $this->prepareThread($thread);
+            if (!empty($threadArray)) {
+                $list[] = $threadArray;
             }
-            $list[]= $threadArray;
         }
         return $this->outputArray($list,$data['total']);
+    }
+
+    public function prepareThread(disThread $thread) {
+        $threadArray = $thread->toArray();
+        if (!empty($threadArray['post_last_on'])) {
+            $threadArray['post_last_on'] = strftime($this->getProperty('dateFormat'),strtotime($threadArray['post_last_on']));
+        } else {
+            $threadArray['post_last_on'] = '';
+        }
+        return $threadArray;
     }
 
     public function getData() {

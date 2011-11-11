@@ -30,11 +30,13 @@ $manifest = array(
         'css' => array(
             'header' => array(
                 'index.css',
+                'jquery-ui-1.8.16.custom.css',
             ),
         ),
         'js' => array(
             'header' => array(
-                'jquery-1.3.2.min.js',
+                'jquery-1.6.2.min.js',
+                'jquery-ui-1.8.16.custom.min.js',
                 'discuss.js',
                 'sh/shCore.js',
                 'sh/shAutoloader.js',

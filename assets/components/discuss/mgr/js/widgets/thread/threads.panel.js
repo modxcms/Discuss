@@ -27,9 +27,9 @@ Dis.grid.Threads = function(config) {
         ,url: Dis.config.connectorUrl
         ,baseParams: { action: 'mgr/thread/getList' }
         ,save_action: 'mgr/thread/updateFromGrid'
-        ,fields: ['id','title','url']
+        ,fields: ['id','title','author_first','post_last_on','url']
         ,paging: true
-        ,autosave: true
+        ,autosave: false
         ,remoteSort: true
         ,columns: [{
             header: _('id')
@@ -41,6 +41,17 @@ Dis.grid.Threads = function(config) {
             ,dataIndex: 'title'
             ,sortable: true
             ,width: 200
+        },{
+            header: _('discuss.thread_author')
+            ,dataIndex: 'author_first'
+            ,width: 120
+            ,editor: {xtype: 'dis-combo-user' ,renderer: true }
+            ,editable: false
+        },{
+            header: _('discuss.last_post_on')
+            ,dataIndex: 'post_last_on'
+            ,sortable: true
+            ,width: 140
         }]
         ,tbar: ['->',{
             xtype: 'textfield'
