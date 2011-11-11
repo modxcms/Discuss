@@ -15,6 +15,15 @@
     <input type="text" id="dis-author" name="user" value="[[+user]]" />
 
     <br class="clearfix" />
+
+
+    <label for="dis-date-start">[[%discuss.date_start]]:</label>
+    <input type="text" id="dis-date-start" name="date_start" class="date-picker" value="[[+date_start]]" />
+    <br class="clearfix" />
+
+    <label for="dis-date-end">[[%discuss.date_end]]:</label>
+    <input type="text" id="dis-date-end" name="date_end" class="date-picker" value="[[+date_end]]" />
+    <br class="clearfix" />
     
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.search]]" />
