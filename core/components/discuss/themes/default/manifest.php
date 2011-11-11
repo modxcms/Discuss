@@ -197,6 +197,7 @@ $manifest = array(
             'header' => array(
                 'dis.search.js',
             ),
+            'inline' => '$(".date-picker").datepicker();',
         ),
         'css' => array(
             'header' => array(
