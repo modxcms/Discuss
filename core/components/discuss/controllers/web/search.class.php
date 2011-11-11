@@ -154,7 +154,18 @@ class DiscussSearchController extends DiscussController {
      */
     public function getConditions() {
         $conditions = array();
-        if (!empty($this->scriptProperties['board'])) { $conditions['board'] = $this->scriptProperties['board']; }
+        if (!empty($this->scriptProperties['board'])) {
+            $conditions['board'] = $this->scriptProperties['board'];
+        } else {
+            $boards = $this->modx->call('disBoard','fetchList',array(&$this->modx));
+            $c = array();
+            foreach ($boards as $board) {
+                $c[] = $board['id'];
+            }
+            $c = implode(' OR ',$c);
+            $conditions['board'] = '('.$c.')';
+        }
+
         if (!empty($this->scriptProperties['category'])) { $conditions['category'] = $this->scriptProperties['category']; }
         if (!empty($this->scriptProperties['user'])) {
             if (intval($this->scriptProperties['user']) <= 0) {
