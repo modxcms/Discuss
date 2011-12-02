@@ -32,7 +32,23 @@ class DiscussThreadRecentXmlController extends DiscussThreadRecentController {
     public $useWrapper = false;
     public function getSessionPlace() { return ''; }
     public function initialize() {
-        parent::initialize();
+        $initialized = parent::initialize();
         $this->options['postTpl'] = 'post/disBoardPostXml';
+        return $initialized;
+    }
+    
+    public function process() {
+    	$this->modx->setOption('discuss.absolute_urls',true);
+        $this->list = $this->discuss->hooks->load('post/recent',array(
+            'limit' => 20,
+            'start' => 0,
+            'getTotal' => false,
+            'postTpl' => 'post/disBoardPostXml',
+            'rss' => true,
+        ));
+        $this->setPlaceholder('recent_posts',$this->list['results']);
+    }
+    public function postProcess() {
+        @header('Content-type: application/xhtml+xml');
     }
 }

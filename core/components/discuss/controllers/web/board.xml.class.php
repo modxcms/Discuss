@@ -35,6 +35,7 @@ class DiscussBoardXmlController extends DiscussBoardController {
         $this->options['tpl'] = 'post/disBoardPostXml';
         $this->options['mode'] = 'rss';
         $this->options['get_category_name'] = true;
+    	$this->modx->setOption('discuss.absolute_urls',true);
         parent::initialize();
     }
     public function postProcess() {
