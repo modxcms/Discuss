@@ -133,7 +133,7 @@ if (empty($cache)) {
         } else {
             $threadArray['title'] = strip_tags($threadArray['title']);
             $threadArray['createdon'] = strftime('%a, %d %b %Y %I:%M:%S %z',strtotime($threadArray['createdon']));
-            $threadArray['url'] = str_replace('//','/',$modx->getOption('site_url').$threadArray['url']);
+            $threadArray['url'] = $modx->getOption('site_url').ltrim($threadArray['url'],'/');
 
             /** @var disPost $post */
             $alias = $useLastPost ? 'LastPost' : 'FirstPost';
