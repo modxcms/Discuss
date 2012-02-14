@@ -5,3 +5,4 @@ core/components/discuss/includes/import.config.inc.php
 core/components/discuss/includes/config.core.php
 core/components/discuss/test/config.inc.php
 core/components/discuss/test/properties.inc.php
+_build/build.config.php
