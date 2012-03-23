@@ -53,6 +53,7 @@ class disThreadGetListProcessor extends modProcessor {
             $c->where(array(
                 'FirstAuthor.username:LIKE' => '%'.$query.'%',
                 'OR:disThread.title:LIKE' => '%'.$query.'%',
+                'OR:disThread.id:=' => $query,
             ));
         }
         $data['total'] = $this->modx->getCount('disThread',$c);
