@@ -291,7 +291,10 @@ class disPost extends xPDOSimpleObject {
         $v = parent::get($k,$format,$formatTemplate);
         switch ($k) {
             case 'title':
-                $this->xpdo->discuss->stripAllTags($v);
+            	$v = html_entity_decode($v);
+                $v = $this->xpdo->discuss->stripAllTags($v);
+                $v = strip_tags($v,'<span>');
+                $v = preg_replace('@\[\[(.[^\[\[]*?)\]\]@si','',$v);
                 break;
             default: break;
         }
