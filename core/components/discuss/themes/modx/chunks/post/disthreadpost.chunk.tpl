@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			
-        	<div>[[+content]]</div>
+        	<div class="dis-post-body">[[+content]]</div>
             
 		    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
 		
