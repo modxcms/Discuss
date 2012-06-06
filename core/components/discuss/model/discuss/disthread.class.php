@@ -498,7 +498,7 @@ class disThread extends xPDOSimpleObject {
      * @param bool $excludeLazy
      * @return array
      */
-    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated = false) {
         $array = parent::toArray($keyPrefix,$rawValues,$excludeLazy);
         foreach ($array as $k => &$v) {
             if ($k == 'title') {

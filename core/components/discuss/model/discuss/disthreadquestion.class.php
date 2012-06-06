@@ -278,7 +278,7 @@ class disThreadQuestion extends disThread {
      * @param array $postArray
      * @return array
      */
-    public function aggregateThreadActionButtons(array $postArray = array()) {
+    public function aggregateThreadActionButtons(array $postArray = array(),$defaultAvailableActions = 'mark_as_answer,reply,quote,modify,remove,spam') {
         return parent::aggregateThreadActionButtons($postArray,'mark_as_answer,reply,quote,modify,remove,spam');
     }
 }
