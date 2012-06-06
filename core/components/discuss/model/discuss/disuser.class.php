@@ -291,9 +291,10 @@ class disUser extends xPDOSimpleObject {
      * @param string $keyPrefix
      * @param bool $rawValues
      * @param bool $excludeLazy
+     * @param bool $includeRelated
      * @return array
      */
-    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated = false) {
         $values = parent :: toArray($keyPrefix,$rawValues,$excludeLazy);
         $values['age'] = $this->get('age');
         $values['gender_formatted'] = $this->get('gender_formatted');
