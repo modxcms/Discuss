@@ -1,0 +1,151 @@
+/* form */
+.dis-form {
+    margin: 0;
+    padding: 0;
+    border: 5px solid #eee;
+}
+.discuss .dis-form h2 {
+    background: transparent url(../images/bgs/titlebg.jpg) top left repeat-x;
+    border-bottom: 1px solid #eee;
+    color: white;
+    background-color: #b1d095;
+    padding: 3px 15px;
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+
+.dis-form label {
+    display:block;
+    font-weight:bold;
+    text-align:right;
+    width: 11em;
+    float:left;
+    clear: left;
+    line-height: 27px;
+    color: #5a5a5a;
+}
+.dis-form .small {
+    color:#666666;
+    display:block;
+    font-size: .8em;
+    font-weight: normal;
+    text-align: right;
+    line-height: 1em;
+    
+}
+.dis-form input, .dis-form select, .dis-form textarea, .dis-form-field-solo {
+    float: left;
+    padding: .4em .2em; 
+    border: solid 1px lightgray;
+    margin: .2em 0 2em 1em;
+}
+.dis-form input[type="text"], .dis-form input[type="password"] {
+    width: 400px;
+}
+.dis-form input:hover, .dis-form textarea:hover {
+    border: solid 1px grey;
+}
+
+.dis-form span.error {
+    display: block;
+    color: red;
+    font-size: .8em;
+    padding-bottom: .5em;
+    line-height: 10px;
+}
+
+.dis-form label { cursor: pointer; }
+
+.dis-form .dis-cb {
+    display: block;
+    font-weight: normal;
+    text-align: left;
+    float: left;
+    clear: none;
+    line-height: 27px;
+    color: #5a5a5a;
+    width: auto;
+    margin-left: 10em;
+    }
+.dis-form .dis-cb input { margin: 5px; }
+.dis-form fieldset { border: 1px solid lightgray; }
+
+
+.dis-form input[type="submit"], .dis-form input[type="button"], .dis-action-btn-solo {
+    font: bold 12px/1 "Lucida Grande","Lucida Sans Unicode",Verdana,Arial,Helvetica,sans-serif;
+    color: #fff;
+    background: #81AD2A url(../images/bgs/button-gradient.png) repeat-x top left;
+    padding: 4px 6px;
+    height: auto;
+    white-space: nowrap;
+    vertical-align: top;
+    text-decoration: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-text-shadow: 0 1px 1px #555;
+    -moz-text-shadow: 0 1px 1px #555;
+    text-shadow: 0 1px 1px #555;
+    border:1px solid #8EBE2F;
+    outline: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -moz-box-sizing: border-box;    
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.dis-form input[type="submit"]:hover, .dis-form input[type="button"]:hover {
+    background-position: bottom left;
+    -webkit-box-shadow: 0 0 10px #8EBE2F;
+    -moz-box-shadow: 0 0 10px #8EBE2F;
+    box-shadow:  0 0 10px #8EBE2F;
+    -webkit-transition: -webkit-box-shadow 0.2s linear;
+    text-decoration: none;
+}
+
+.dis-form-buttons {
+    text-align: center; 
+    width: 97%; 
+    padding: 7px 0;
+}
+.dis-form-buttons input { float: none; }
+
+.dis-form p {
+    color: #666666;
+    padding: 5px 20px;
+    }
+.dis-form hr {
+    float: left;
+    margin: 20px 0 30px;
+}
+
+#dis-thread-message {
+    width: 80%;
+    height: 160px;
+}
+
+span.label-inline {
+    float: left;
+    display: block;
+    clear: left;
+    font-weight:bold;
+    line-height: 27px;
+    color: #5a5a5a;
+}
+.label-inline-th,.label-inline-td {
+    display: block;
+    float: left;
+}
+.label-inline-td {
+    margin-left: 5px;
+}
+.label-inline-th {
+    width: 150px;
+    text-align: right
+}
+.label-inline-text {
+    margin-right: 5px;
+    float: left;
+}
