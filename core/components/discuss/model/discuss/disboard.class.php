@@ -813,7 +813,7 @@ class disBoard extends xPDOSimpleObject {
      * @param bool $excludeLazy
      * @return array
      */
-    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false) {
+    public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated = false) {
         $values = parent :: toArray($keyPrefix,$rawValues,$excludeLazy);
         if ($this->xpdo->context->key != 'mgr' && $this->xpdo->discuss) {
             $values['url'] = $this->getUrl();

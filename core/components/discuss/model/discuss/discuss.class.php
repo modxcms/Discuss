@@ -162,7 +162,6 @@ class Discuss {
             break;
             default:
                 $this->modx->lexicon->load('discuss:web');
-
                 if (!defined('DISCUSS_IMPORT_MODE')) {
                     $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
                     $this->_initUser();
@@ -254,7 +253,7 @@ class Discuss {
         /* if no user, set id to 0 */
         $isLoggedIn = $this->modx->user->hasSessionContext($this->modx->context->get('key'));
         if (!$isLoggedIn) {
-            $this->user =& $this->modx->newObject('disUser');
+            $this->user = $this->modx->newObject('disUser');
             $this->user->set('id',0);
             $this->user->set('user',0);
             $this->user->set('username','(anonymous)');
