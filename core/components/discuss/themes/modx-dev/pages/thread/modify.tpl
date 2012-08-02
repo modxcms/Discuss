@@ -1,4 +1,4 @@
-
+<!-- modify.tpl -->
 [[!FormIt?
   &submitVar=`dis-post-reply`
   &hooks=`postHook.DiscussModifyPost`

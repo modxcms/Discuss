@@ -1,0 +1,8 @@
+$radius-sm: 3px;
+$radius-med: 5px;
+$raidus-lrg: 8px;
+
+
+.group {@include clearfix;}
+.cell { display: -moz-inline-box; -moz-box-orient: vertical; vertical-align: top; display: inline-block;white-space:normal;}
+.cell { *display: inline; }

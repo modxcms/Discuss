@@ -1,0 +1,373 @@
+// Width and margin variables for grid
+$m-forum-grid: 10px 0 30px 0    // margin on primary forum grid
+$p-forum-grid: 15px             // padding for forum grid
+
+body
+    color: $c-copy
+h3.forum
+    color: $c-primary-h
+    +rem('font-size',16px)
+    font-weight: bold
+    padding: 0 0 0 .8em
+
+// Replacing standard sans font on just forums for now
+.new-forums
+    #body
+        +box-shadow(none)
+        background-color: transparent
+        border: none
+    h1.Category
+        +rem('font-size',20px)
+        line-height: 1.1
+        border-bottom: none
+    .dis-list
+        color: darken($c-copy, 30%)
+        h1
+            margin: 0
+
+    // Categroy headings for grids
+    .dis-cat-header
+        +border-radius($radius-sm $radius-sm 0 0)
+        +background-clip(padding-box)
+        +rem('margin',0 -15px 15px -15px) // shifts margin equal to padding on forum grid
+        +rem('padding',$p-forum-grid/2 $p-forum-grid) // adds in padding to equal padding of grid
+        border-bottom: solid 1px $c-dark-cool-bg
+        color: #fff
+        line-height: 1
+        &:first-child
+            +rem('margin',-$p-forum-grid -15px 15px -15px) // shifts margin equal to padding on forum grid
+
+        h1
+            color: #fff
+            font-weight: 500 !important
+            border: 0 !important
+            float: left
+            padding-bottom: 0
+
+        // Green button used to either just to post or jump to login
+        .post-box a.Button
+            color: #fff
+            margin: 0 0 0 1em
+            border: none // Can remove in future, resetting default styles
+            +rem('padding', 5px)
+            +border-radius($radius-sm)
+            +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
+            +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+            &:hover
+                +rem('padding', 5px)
+                +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
+                +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+
+    .row+.dis-cat-header
+        margin-top: 1em
+
+    // Sub topics styling
+    .dis-board-subs
+        padding: 5px 5px 5px 17px
+        background: url(../../images/redo/icons/arrow.png) no-repeat left 9px
+        strong, a
+            +rem('font-size', 10px)
+        strong
+            color: #000
+        a
+            color: darken($c-base, 50%)
+            +background-image(linear-gradient(lighten($c-base, 1%), darken($c-base, 6%)))
+            display: inline-block
+            padding: 3px 6px
+            margin-top: 2px
+            line-height: 1
+            // border: solid 1px darken($c-base, 3%)
+            border-radius: 3px
+            &:hover
+                color: darken($c-base, 90%)
+                +background-image(linear-gradient(lighten($c-base, 3%), darken($c-base, 2%)))
+                text-decoration: none
+            &:active
+                +box-shadow(darken($c-base, 27%) 0 0 1px inset)
+
+// Faux table grid for 5 columns. This later will be able to be
+// converted to a responsive table
+.panel-stack
+    +box-shadow(darken($c-base, 5%) 0 0 3px)
+    +border-radius($radius-sm)
+    border: solid 1px darken($c-base, 5%)
+
+.forum-grid
+    +rem('font-size',11px)
+    line-height: 1.1
+    +rem('margin',$m-forum-grid)
+    +rem('padding',$p-forum-grid)
+    width: 100%
+    color: lighten($c-copy, 20%)
+    background-color: lighten($c-base, 20%)
+
+    p
+        color: darken($c-copy, 30%)
+        line-height: 1.1
+        margin: 0 0 .25em 0
+
+    a
+        text-decoration: none
+        color: darken($c-copy, 20%)
+    &.dis-threads // REMOVE FUTURE needed to override default styles in index.html
+        h1
+            +rem('font-size',19px)
+            font-weight: 700
+            margin: 0
+    .dis-board-description
+        margin: .25em 0
+    // Faux Grids
+    .first
+        width: 63%
+        padding: 0 2% 0 0
+    .second
+        width: 7%
+        text-align: center
+    .third
+        width: 7%
+        text-align: center
+    .fourth
+        width: 20%
+        p
+            display: inline
+    .fifth
+        width: 18%
+    .row
+        padding: .5em
+        border-bottom: 1px solid darken($c-base, 3%)
+        border-top:  1px solid lighten($c-base, 80%)
+        &.header-row
+            +rem('font-size', 12px)
+            font-weight: bold
+            color: #000
+            border-bottom: 2px solid darken($c-base, 15%)
+
+    .heading
+        color: darken($c-base, 65%)
+        background-color: darken($c-base, 35%)
+        margin: 0 0 .4em 0
+        +background(linear-gradient($g-low-contrast))
+        +border-radius($radius-sm)
+        .cell
+            padding-top: .2em
+            padding-bottom: .2em
+    strong
+        +rem('font-size',13px)
+        color: #000
+        font-weight: bold
+        line-height: 1.1
+    .posted-date, .posted-by
+        +rem('font-size',10px)
+        color: lighten($c-copy, 30%)
+
+    // Category view used as three column on the ladning page of the forums.
+    &.category
+        .first
+            width: 55%
+        .second
+            width: 11%
+            padding: 0 2%
+            text-align: center
+        .third
+            width: 24%
+            padding: 0 0 0 2%
+            text-align: right
+            margin: 0 -1% 0 0 // Ensure clearing issues on IE
+        &.boards
+            margin: 0
+.boards+.forum-grid
+    margin-top: 0
+.boards .row:last-child
+    border: none
+    padding-bottom: 0
+
+// Single post styling
+.dis-list
+    margin: 1em 0 0 0
+    line-height: 1.4
+    +box-shadow(darken($c-base, 15%) 0 0 3px)
+    +border-radius($radius-sm)
+    border: solid 1px darken($c-base, 20%)
+    background-color: lighten($c-base, 4%)
+
+    .dis-post
+        border-bottom: solid 1px darken($c-base, 5%)
+        border-top: solid 1px lighten($c-base, 55%)
+        margin: 0
+        width: 96% // not sure why this is needed but if not occasionaly post doesnt span the right width
+        padding: 1.75% 2% 3% 2%
+        float: right
+        &:first-child
+            border-top: none
+            padding-top: 3%
+        &:last-child
+            padding-bottom: 5%
+        .dis-content
+            overflow: hidden
+        li
+            border: none
+        .dis-post-footer
+            width: 88%
+            float: right
+            +rem('font-size', 10px)
+            .dis-post-editedon
+                padding: 1em 0 0 0
+                font-style: italic
+                color: darken($c-base, 50%)
+.dis-post-left
+    // font-size: 11px
+    float: left
+    width: 9%
+    img
+        width: 100%
+        +border-radius($radius-sm)
+    .auth-avatar
+        display: block
+        border: none
+    .dis-usr-post-count, .dis-usr-icon // REMOVE FUTURE prexsiting styling
+        margin: 0
+        +rem('font-size', 9px)
+    .dis-usr-post-count
+        margin-left: .35em
+
+.dis-post-right
+    float: right
+    width: 86%
+    padding: 0 2% 2% 0
+    +rem('font-size', 12px)
+    .title
+        +rem('font-size', 10px)
+        line-height: 1
+        color: darken($c-base, 50%)
+        margin: 0 0 1em 0
+        padding: 0 0 .5em 0
+        position: relative
+        border-bottom: dotted 1px darken($c-base, 12%)
+        strong
+            background-color: lighten($c-base, 4%) // should match background color of .dis-list for now
+            +rem('font-size', 12px)
+            margin-right: .25em
+        .dis-actions
+            top: 0 !important
+            right: 0 !important
+    blockquote
+        background-color: lighten($c-base, 1%)
+        border: none
+        border: 1px dotted darken($c-base, 6%)
+        border-left: 3px solid darken($c-base, 40%)
+        +rem('padding', 6px 14px)
+        margin: 1rem 0
+        font-size: .9em
+        color: #000
+        // line-height: 1.3
+    cite
+        +rem('padding-left', 15px)
+        margin-top: 1em
+        display: block
+        font-style: italics
+    cite+blockquote
+        margin-top: .6em
+
+.dis-signature
+    width: 86%
+    padding: 2% 2% 0 0 !important
+    float: right
+    border-top: 1px dotted darken($c-base, 10%) !important //override, remove eventually
+    +rem('font-size', 9px)
+    +opacity(.7)
+    a
+        text-decoration: underline
+    &:hover
+        +opacity(1.0)
+
+
+// Used group-fix rather than my typical group because it already being used
+.group-fix
+    &:before,
+    &:after
+        content: ""
+        display: table
+    &:after
+        clear: both
+    zoom: 1
+
+// pagination 2012
+.paginate
+    float: right
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 3%), $c-dark-cool-bg))
+    +border-radius($radius-sm+2)
+    +background-clip(padding-box)
+    +box-shadow(lighten($c-dark-cool-bg, 15%) 0 1px 0, darken($c-dark-cool-bg, 30%) 0 -1px 0)
+    +rem('padding',4px)
+    +rem('font-size', 10px)
+    line-height: 1
+    li
+        margin: 0
+        padding: 0
+    a
+        cursor: pointer
+        +border-radius($radius-sm)
+        +background-image(linear-gradient(lighten($c-dark-cool-bg, 7%), lighten($c-dark-cool-bg, 5%)))
+        +box-shadow(darken($c-dark-cool-bg, 10%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 12%) 0 1px 0 inset)
+        color: lighten($c-dark-cool-bg, 80%)
+        font-weight: 100
+        letter-spacing: 1px
+        +rem('padding', 4px 5px)
+        margin: 0 1px 0 0
+        &:hover, &.active
+            +opacity(1.0)
+            +background-image(linear-gradient(lighten($c-dark-cool-bg, 22%), lighten($c-dark-cool-bg, 14%)))
+            +box-shadow(darken($c-dark-cool-bg, 40%) 0 0 3px, darken($c-dark-cool-bg, 40%) 0 1px 0, lighten($c-dark-cool-bg, 32%) 0 1px 0 inset)
+    &.stand-alone
+        text-align: right
+        float: none
+        position: relative
+        z-index: 20
+        +box-shadow(lighten($c-dark-cool-bg, 95%) 0 1px 0, darken($c-dark-cool-bg, 60%) 0 -1px 0)
+        &.top
+            +border-radius($radius-sm+2 $radius-sm+2 0 0)
+            margin: 1.4em 0 -1.4em 0
+        &.bottom
+            +border-radius(0 0 $radius-sm+2 $radius-sm+2)
+// horizonatl list
+.horiz-list
+    li
+        display: inline-block
+    a
+        display: block
+
+// New sidebar
+.sidebar
+    width: 220px
+    .panel-box
+        +rem('font-size',11px)
+        line-height: 1.3
+        +rem('padding', 10px 15px)
+        background-color: lighten($c-base, 1%)
+        +border-radius($radius-sm)
+        +box-shadow(darken($c-base, 10%) 0 2px 5px)
+        border: 1px solid darken($c-base, 15%)
+        h4
+            +rem('font-size', 13px)
+            +rem('margin', 0 -15px 5px -15px )
+            +rem('padding', 0 15px 5px 15px )
+            background: none
+            font-weight: bold
+            font-size: 1rem
+            border-bottom: 1px solid darken($c-base, 5%)
+        p
+            padding: 0
+            color: #666
+        h4+p
+            border-top: solid 1px #fff
+            +rem('padding', 10px 15px 10px 15px)
+            +rem('margin', -5px -15px 10px -15px)
+            // padding-top: 15px
+            // margin-top: -6px
+    .primary-cta
+        color: #fff
+        &.login
+            display: block
+            margin-left: 0
+            text-align: center
+

@@ -1,3 +1,4 @@
+<!-- recent.tpl -->
 	    [[+pagination]]
 
 

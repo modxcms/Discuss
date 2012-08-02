@@ -1,0 +1,27 @@
+// MODX Colors 
+$c-base: #efefef
+$c-base-contrast: #194853
+$c-primary: #5fb7d3
+$c-btn-primary: #194853
+$c-type-link: #000
+$c-type-link-hover: #666
+$c-type-link-visited: lighten($c-type-link, 20%)
+$c-primary-h: #199fc9
+$c-copy: #444
+$c-dark-bg: #a3c94f                     // Green
+$c-dark-cool-bg: #013749                // Blue
+
+
+// Gradients
+$g-low-contrast: darken($c-base, 7%), darken($c-base, 13%)
+$g-med-contrast: darken($c-base, 25%), darken($c-base, 37%)
+$g-high-contrast: darken($c-base, 55%), darken($c-base, 70%)
+
+// Gradients Defined by Classes
+.dark-gradient
+    background-color: $c-dark-bg
+    +background-image(linear-gradient(left top, $c-dark-cool-bg, lighten($c-dark-cool-bg,10%)))
+    color: #fff
+
+.color
+    color: #efefef

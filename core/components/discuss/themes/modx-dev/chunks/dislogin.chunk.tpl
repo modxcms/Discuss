@@ -1,3 +1,4 @@
+<!-- REMOVE PRODUCTION dislogin.chunk.tpl -->
 <form class="dis-form dis-login" action="[[~[[*id]]]]login" method="post">
     <h2>[[%discuss.login]]</h2>
     

@@ -1,4 +1,4 @@
-
+<!-- spam -->
 <form action="[[~[[*id]]]]thread/spam?thread=[[+id]]" method="post" class="dis-form" id="dis-spam-thread-form">
 
 	<h1>[[%discuss.thread_spam? &namespace=`discuss` &topic=`post`]]</h1>

@@ -1,4 +1,4 @@
-
+<!-- new.tpl -->
 
 [[!FormIt?
   &submitVar=`dis-post-reply`

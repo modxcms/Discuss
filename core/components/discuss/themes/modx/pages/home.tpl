@@ -34,7 +34,7 @@
 
 						
 						<div class="Box">
-						   <h4>Other Support Options</h4>
+						   <h4>Other Support Optionss modx template</h4>
 							<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>, or you can also <a href="[[~10]]" title="MODX Direct Commercial Support">purchase commercial support</a>.</p>
 						</div>
 						

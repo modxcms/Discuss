@@ -1,3 +1,4 @@
+<!-- new_replies_to_posts.tpl -->
 
 	    [[+pagination]]
 

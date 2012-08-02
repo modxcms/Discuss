@@ -1,3 +1,4 @@
+<!-- preview.tpl -->
 <div>
     <br class="clearfix" />
     <ul class="dis-post-preview">

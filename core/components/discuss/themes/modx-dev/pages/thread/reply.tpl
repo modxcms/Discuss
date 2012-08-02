@@ -1,3 +1,4 @@
+<!-- reply -->
 [[!FormIt?
   &submitVar=`dis-post-reply`
   &hooks=`postHook.DiscussReplyPost`

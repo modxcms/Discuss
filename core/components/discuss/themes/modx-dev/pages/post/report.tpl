@@ -1,3 +1,4 @@
+<!-- post/report.tpl -->
 <form action="[[~[[*id]]]]post/report?post=[[+id]]" method="post" class="dis-form" id="dis-report-thread-form">
 
     <h1>[[%discuss.report_to_mod? &namespace=`discuss` &topic=`post`]]</h1>

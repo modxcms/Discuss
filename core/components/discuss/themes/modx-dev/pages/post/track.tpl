@@ -1,3 +1,4 @@
+<!-- post/track.tpl -->
 	    [[+pagination]]
 
 <div class="dis-threads">

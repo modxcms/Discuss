@@ -1,3 +1,4 @@
+<!-- unread.tpl -->
 	    [[+pagination]]
 
 <div class="dis-threads">

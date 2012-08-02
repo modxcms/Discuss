@@ -1,4 +1,4 @@
-
+<!-- move.tpl -->
 <form action="[[~[[*id]]]]thread/move?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">
 
 	<h1>[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h1>

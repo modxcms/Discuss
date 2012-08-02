@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- wrapper.tpl -->
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8">
@@ -8,16 +9,26 @@
     <title>MODX :: [[!+discuss.pagetitle]]</title>
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
-    <link rel="stylesheet" type="text/css" href="http://modx.com/assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.modx.localhost/assets/css/style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/forums-styles.css"/>
+    <link rel="stylesheet" type="text/css" href="http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/helper.css"/>
+    <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">
     [[*cssjs]]
+    
+    [[- Live Typekit call
     [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
     <script src="http://use.typekit.com/zub5doo.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>`]]
     <script src="[[++modx.assets.url]]js/LABjs/LAB.min.js"></script> 
+    ]]
+
+    [[- local typekit call]]
+    <script type="text/javascript" src="//use.typekit.net/zce4syh.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
-<body id="body-[[+controller.controller]]">
+<body id="body-[[+controller.controller]]" class="new-forums">[[-we can remove this class and the sass line if integrated into a new design at a later date]]
     <div id="overlay-20"> </div>
-    
     [[+discuss.user.isModerator:is=`1`:then=`<div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div>`]]
 
     <div id="header">
@@ -45,15 +56,13 @@
                 <a href="[[~54]]">Find a Partner</a>  <span class="ir">|</span>
                 <a href="[[~56]]">Hosts + SaaS</a> <span class="ir">|</span> 
                 <a href="[[~30]]">Jobs</a> <span class="ir">|</span> 
-                 
                 <a href="[[~109]]">Donate</a></div>
 
                         <form action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
                             <label for="search_form_input" class="hidden">Search</label>
                             <input id="search_form_input" placeholder="Search keyphrase..." name="s" value="" title="Start typing and hit ENTER" type="text">
                             <input value="Go" type="submit">
-                        </form>   
-                    
+                        </form>
             </div><!-- #search -->
           </nav>
 
@@ -69,10 +78,7 @@
                 <ul>
                     [[+discuss.user.id:is=``:then=`<li class="first level1">
                         <a href="[[~[[*id]]]]register" class="first level1"><span class="Title">Register</span>Sign Up with the MODX Community</a></li>
-                
                     <li class="level1"><a href="[[~[[*id]]]]login" class="first level1"><span class="Title">Login</span>Use Your MODX.com Account</a></li>`]]
-                
-                
                     [[+discuss.user.id:notempty=`<li class="first level1 parent">
                         <a href="[[~[[*id]]]]thread/unread" class="first level1 parent"><span class="Title">View Unread Posts</span> All Discussion Categories</a>
                         <ul class="inner">
@@ -81,34 +87,24 @@
                             <li class="first level2 parent"><a href="[[~[[*id]]]]thread/recent" class=""><span class="Title">Recent Posts</span>Latest Posts</a></li>
                         </ul>
                     </li>
-                    
                     <li class="level1">
                     <a href="[[~[[*id]]]]messages/" class="level1"><span class="Title">Private Discussions</span> All Private Messages</a>
                     </li>`]]
-                </ul>   
+                </ul>
             </nav>
         </header>
-        
 [[+trail]]
 
     </div>
-    
         <div id="frame">
-        
             <div id="body">
-            
-                <div id="Content">
+                
                     [[+content]]
-                    
                 <!-- Close Content Inside home.tpl -->
-            
-                </div>
+                
             </div>
-            
         </div>
-        
     <div class="clearfix">&nbsp;</div>
-                            
 
 </div>
 [[$tplOmega]]
