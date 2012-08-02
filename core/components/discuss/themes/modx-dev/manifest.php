@@ -30,6 +30,7 @@ $manifest = array(
         'css' => array(
             'header' => array(
                 'index.css',
+                'redo/forums-styles.css',
                 'jquery-ui-1.8.16.custom.css',
             ),
         ),
