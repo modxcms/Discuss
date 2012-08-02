@@ -10,7 +10,6 @@
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
     <link rel="stylesheet" type="text/css" href="http://www.modx.localhost/assets/css/style.css" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
     <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">
     [[*cssjs]]
     
