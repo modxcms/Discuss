@@ -37,7 +37,7 @@
 	[[+posts]]
 
 
-	   <nav class="paginate horiz-list"> [[+pagination]]</nav>
+	   <nav class="paginate stand-alone top horiz-list"> [[+pagination]]</nav>
 </div>
 
 
