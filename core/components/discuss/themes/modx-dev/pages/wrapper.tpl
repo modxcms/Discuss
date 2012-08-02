@@ -21,7 +21,7 @@
     ]]
 
     [[- local typekit call]]
-    <script type="text/javascript" src="//use.typekit.net/zce4syh.js"></script>
+    <script type="text/javascript" src="//use.typekit.net/ukf1ncb.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body id="body-[[+controller.controller]]" class="new-forums">[[-we can remove this class and the sass line if integrated into a new design at a later date]]
