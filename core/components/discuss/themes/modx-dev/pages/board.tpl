@@ -35,14 +35,9 @@
 	    <div class="fourth cell">Info</div>
 	</div>
 	[[+posts]]
-	<!--
-	<ul class="dis-list">
-		<li><h1>[[+name]]</h1>[[+pagination]]</li>
-		[[+posts]]
-	</ul> -->
 
 
-	    [[+pagination]]
+	   <nav class="paginate horiz-list"> [[+pagination]]</nav>
 </div>
 
 
