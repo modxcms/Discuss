@@ -9,7 +9,7 @@
     <title>MODX :: [[!+discuss.pagetitle]]</title>
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
-    <link rel="stylesheet" href="http://modx.com/assets/css/style.css?v=3">
+    <link rel="stylesheet" href="http://modx.com/assets/css/forums.css?v=101">
     <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">
     [[*cssjs]]
     
