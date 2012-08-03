@@ -9,7 +9,7 @@
     <title>MODX :: [[!+discuss.pagetitle]]</title>
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
-    <link rel="stylesheet" href="http://modx.com/assets/css/forums.css?v=101">
+    [[-<link rel="stylesheet" href="http://modx.com/assets/css/forums.css?v=101">]]
     <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">
     [[*cssjs]]
     
@@ -25,6 +25,12 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body id="body-[[+controller.controller]]" class="new-forums">[[-we can remove this class and the sass line if integrated into a new design at a later date]]
+
+
+
+
+    [[-
+    REMOVE THIS STUFF EVENTUALLY
     <div id="overlay-20"> </div>
     [[+discuss.user.isModerator:is=`1`:then=`<div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div>`]]
 
@@ -65,11 +71,23 @@
 
         </header>
     </div>
+    REMOVE THIS STUFF EVENTUALLY
+    ]]
+
+
+
+
+
+
 
     <!-- #header -->
 
 <div>
     <div id="section_wrap">
+        
+
+
+        [[- REMOVE THIS STUFF EVENTUALLY
         <header class="container">
             <nav id="section">
                 <ul>
@@ -90,18 +108,18 @@
                 </ul>
             </nav>
         </header>
+        REMOVE THIS STUFF EVENTUALLY
+        ]]
 [[+trail]]
 
     </div>
         <div id="frame">
             <div id="body">
-                
                     [[+content]]
                 <!-- Close Content Inside home.tpl -->
-                
             </div>
         </div>
     <div class="clearfix">&nbsp;</div>
 
 </div>
-[[$tplOmega]]
+[[$tplOmega-2012]]
