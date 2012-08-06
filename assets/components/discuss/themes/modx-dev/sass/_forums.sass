@@ -29,19 +29,20 @@ h3.forum
     .dis-cat-header
         +border-radius($radius-sm $radius-sm 0 0)
         +background-clip(padding-box)
-        +rem('margin',0 -15px 15px -15px) // shifts margin equal to padding on forum grid
-        +rem('padding',$p-forum-grid/2 $p-forum-grid) // adds in padding to equal padding of grid
+        // +rem('margin',0 -15px 15px -15px) // shifts margin equal to padding on forum grid
+        // +rem('padding',$p-forum-grid/2 $p-forum-grid) // adds in padding to equal padding of grid
         border-bottom: solid 1px $c-dark-cool-bg
         color: #fff
         line-height: 1
-        &:first-child
-            +rem('margin',-$p-forum-grid -15px 15px -15px) // shifts margin equal to padding on forum grid
+        // &:first-child
+        //     +rem('margin',-$p-forum-grid -15px 15px -15px) // shifts margin equal to padding on forum grid
 
         h1
             color: #fff
             font-weight: 500 !important
             border: 0 !important
             float: left
+            padding: 10px
             padding-bottom: 0
 
         // Green button used to either just to post or jump to login
@@ -88,18 +89,18 @@ h3.forum
 // Faux table grid for 5 columns. This later will be able to be
 // converted to a responsive table
 .panel-stack
-    +box-shadow(darken($c-base, 5%) 0 0 3px)
+    // +box-shadow(darken($c-base, 5%) 0 0 3px)
     +border-radius($radius-sm)
-    border: solid 1px darken($c-base, 5%)
+    // border: solid 1px darken($c-base, 5%)
 
 .forum-grid
     +rem('font-size',11px)
     line-height: 1.1
-    +rem('margin',$m-forum-grid)
-    +rem('padding',$p-forum-grid)
+    // +rem('margin',$m-forum-grid)
+    // +rem('padding',$p-forum-grid)
     width: 100%
     color: lighten($c-copy, 20%)
-    background-color: lighten($c-base, 20%)
+    // background-color: lighten($c-base, 20%)
 
     p
         color: darken($c-copy, 30%)
@@ -338,7 +339,7 @@ h3.forum
 
 // New sidebar
 .sidebar
-    width: 220px
+    // width: 220px
     .panel-box
         +rem('font-size',11px)
         line-height: 1.3

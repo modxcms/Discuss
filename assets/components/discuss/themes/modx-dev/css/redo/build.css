@@ -1,0 +1,25 @@
+
+body {font-family:"proxima-nova",sans-serif;
+    background-color: #f9f9f9;
+    font-size: 13px;
+    line-height: 1.4;
+} 
+.breadcrumbs {
+    padding-top: .5%;
+    padding-bottom: .5%;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+.masthead {
+    background-color: #173130;
+    color: #fff;
+    padding-top: 1.1%;
+    padding-bottom: 1.1%;
+    
+}
+.masthead a {
+    color: #fff;
+}
+
+.h-group{zoom:1}.h-group:before,.h-group:after{content:"";display:table}.h-group:after{clear:both}

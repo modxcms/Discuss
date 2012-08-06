@@ -1,12 +1,12 @@
 <!-- chunk/boards/disboardli.chunk.tpl -->
-<div class="Depth2 row dis-category-[[+category]] read-status-[[+unread-cls]]">
-    <div class="first cell">
+<div class="Depth2 row h-group dis-category-[[+category]] read-status-[[+unread-cls]]">
+    <div class="f1-f7">
         <a href="[[+url]]"><strong>[[+name]]</strong></a>
         <p class="dis-board-description">[[+description]]</p>
     </div>
-    <div class="second cell">Title of Last Post</div>
-    <div class="third cell">[[+post_stats]]</div>
-    [[+subforums:notempty=`<p class="dis-board-subs [[+unread-cls]] group-fix"><strong>Subtopics:</strong> [[+subforums]]</p>`]]
+    <div class="f8-f10">Title of Last Post</div>
+    <div class="f11-f12">[[+post_stats]]</div>
+    [[+subforums:notempty=`<p class="dis-board-subs [[+unread-cls]] h-group f-all"><strong>Subtopics:</strong> [[+subforums]]</p>`]]
 </div>
 [[-
 <!--<li class="Depth2  dis-category-[[+category]]">

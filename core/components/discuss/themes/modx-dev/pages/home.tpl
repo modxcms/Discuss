@@ -2,7 +2,7 @@
 [[+top]]
 [[+aboveBoards]]
 	    [[+pagination]]
-<div class="dis-threads">
+<div class="dis-threads f-all">
 
 	<div class="dis-threads forum-grid category panel-stack">
 	[[+boards]]
@@ -16,7 +16,7 @@
 				</div><!-- Close Content From Wrapper -->
 			[[+bottom]]
 				[[-
-				Removing sidebar on views need the maximum width possible
+				<!-- Removing sidebar on views need the maximum width possible
 				<aside>
 				<hr class="line" />
 					<div class="PanelBox">
@@ -35,5 +35,5 @@
 							<p class="stats">[[+activeUsers]]</p>
 							<p class="stats">[[%discuss.stats_today? &hits=`[[+activity.hits]]` &topics=`[[+activity.topics]]` &replies=`[[+activity.replies]]` &visitors=`[[+activity.visitors]]`]]</p>
 						</div>
-					</aside>
+					</aside> -->
 				]]
