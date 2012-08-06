@@ -28,11 +28,11 @@
 			<p><a href="[[~[[*id]]]]login" class="Button">Login to Post</a></p>
 		</div>`]]
 	</header>
-	<div class="row header-row">
-	    <div class="first cell">Title</div>
-	    <div class="second cell">Views</div>
-	    <div class="third cell">Replies</div>
-	    <div class="fourth cell">Info</div>
+	<div class="row h-group header-row">
+	    <div class="f1-f7 f-padinall">Title</div>
+	    <div class="f8 f-padinall">Views</div>
+	    <div class="f9 f-padinall">Replies</div>
+	    <div class="f10-f12 f-padinall">Info</div>
 	</div>
 	[[+posts]]
 
