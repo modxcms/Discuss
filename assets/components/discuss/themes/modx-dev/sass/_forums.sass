@@ -11,80 +11,80 @@ h3.forum
     padding: 0 0 0 .8em
 
 // Replacing standard sans font on just forums for now
-.new-forums
-    #body
-        +box-shadow(none)
-        background-color: transparent
-        border: none
-    h1.Category
-        +rem('font-size',20px)
-        line-height: 1.1
-        border-bottom: none
-    .dis-list
-        color: darken($c-copy, 30%)
-        h1
-            margin: 0
+// .new-forums
+    // #body
+    //     +box-shadow(none)
+    //     background-color: transparent
+    //     border: none
+h1.Category
+    +rem('font-size',20px)
+    line-height: 1.1
+    border-bottom: none
+.dis-list
+    color: darken($c-copy, 30%)
+    h1
+        margin: 0
 
-    // Categroy headings for grids
-    .dis-cat-header
-        +border-radius($radius-sm $radius-sm 0 0)
-        +background-clip(padding-box)
-        // +rem('margin',0 -15px 15px -15px) // shifts margin equal to padding on forum grid
-        // +rem('padding',$p-forum-grid/2 $p-forum-grid) // adds in padding to equal padding of grid
-        border-bottom: solid 1px $c-dark-cool-bg
+// Categroy headings for grids
+.dis-cat-header
+    +border-radius($radius-sm $radius-sm 0 0)
+    +background-clip(padding-box)
+    // +rem('margin',0 -15px 15px -15px) // shifts margin equal to padding on forum grid
+    // +rem('padding',$p-forum-grid/2 $p-forum-grid) // adds in padding to equal padding of grid
+    border-bottom: solid 1px $c-dark-cool-bg
+    color: #fff
+    line-height: 1
+    // &:first-child
+    //     +rem('margin',-$p-forum-grid -15px 15px -15px) // shifts margin equal to padding on forum grid
+
+    h1
         color: #fff
-        line-height: 1
-        // &:first-child
-        //     +rem('margin',-$p-forum-grid -15px 15px -15px) // shifts margin equal to padding on forum grid
+        font-weight: 500 !important
+        border: 0 !important
+        float: left
+        padding: 10px
+        padding-bottom: 0
 
-        h1
-            color: #fff
-            font-weight: 500 !important
-            border: 0 !important
-            float: left
-            padding: 10px
-            padding-bottom: 0
-
-        // Green button used to either just to post or jump to login
-        .post-box a.Button
-            color: #fff
-            margin: 0 0 0 1em
-            border: none // Can remove in future, resetting default styles
+    // Green button used to either just to post or jump to login
+    .post-box a.Button
+        color: #fff
+        margin: 0 0 0 1em
+        border: none // Can remove in future, resetting default styles
+        +rem('padding', 5px)
+        +border-radius($radius-sm)
+        +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
+        +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+        &:hover
             +rem('padding', 5px)
-            +border-radius($radius-sm)
-            +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
+            +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
             +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
-            &:hover
-                +rem('padding', 5px)
-                +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
-                +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
 
-    .row+.dis-cat-header
-        margin-top: 1em
+.row+.dis-cat-header
+    margin-top: 1em
 
-    // Sub topics styling
-    .dis-board-subs
-        padding: 5px 5px 5px 17px
-        background: url(../../images/redo/icons/arrow.png) no-repeat left 9px
-        strong, a
-            +rem('font-size', 10px)
-        strong
-            color: #000
-        a
-            color: darken($c-base, 50%)
-            +background-image(linear-gradient(lighten($c-base, 1%), darken($c-base, 6%)))
-            display: inline-block
-            padding: 3px 6px
-            margin-top: 2px
-            line-height: 1
-            // border: solid 1px darken($c-base, 3%)
-            border-radius: 3px
-            &:hover
-                color: darken($c-base, 90%)
-                +background-image(linear-gradient(lighten($c-base, 3%), darken($c-base, 2%)))
-                text-decoration: none
-            &:active
-                +box-shadow(darken($c-base, 27%) 0 0 1px inset)
+// Sub topics styling
+.dis-board-subs
+    padding: 5px 5px 5px 17px
+    background: url(../../images/redo/icons/arrow.png) no-repeat left 9px
+    strong, a
+        +rem('font-size', 10px)
+    strong
+        color: #000
+    a
+        color: darken($c-base, 50%)
+        +background-image(linear-gradient(lighten($c-base, 1%), darken($c-base, 6%)))
+        display: inline-block
+        padding: 3px 6px
+        margin-top: 2px
+        line-height: 1
+        // border: solid 1px darken($c-base, 3%)
+        border-radius: 3px
+        &:hover
+            color: darken($c-base, 90%)
+            +background-image(linear-gradient(lighten($c-base, 3%), darken($c-base, 2%)))
+            text-decoration: none
+        &:active
+            +box-shadow(darken($c-base, 27%) 0 0 1px inset)
 
 // Faux table grid for 5 columns. This later will be able to be
 // converted to a responsive table

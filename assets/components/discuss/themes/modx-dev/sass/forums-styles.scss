@@ -6,21 +6,24 @@
 @import "compass/css3/images";
 @import "compass/utilities/general/clearfix";
 
-@import "lib/_shared.scss";
-
-// typography
-@import "_typography.sass";
-
 // Forums grid is using _rem.sass for setting sizes to provide
 // scalable font sizes using rem sizing while providing a
 // backup for browsers that do not support rems (< IE8).
 // As support is added we can convert to using just rem based
 // sizing.
 @import "lib/_rem.sass";
+@import "_grid.scss";
+
+// typography
+@import "_typography.sass";
+
+@import "_brand-colors.sass";
+@import "lib/_shared.sass";
+@import "lib/_layout.sass";
+@import "lib/_masthead.sass";
+@import "lib/_helpers.sass";
 
 // shared css
-@import "_grid.scss";
-@import "_brand-colors.sass";
 @import "lib/_buttons.sass";
 // forums
 @import "_forums.sass";

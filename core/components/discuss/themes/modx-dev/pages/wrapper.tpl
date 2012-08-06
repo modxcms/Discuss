@@ -89,7 +89,7 @@
                     </nav>
                     <a class="h-ir" href="#">MODX Forums</a>
                 </div><!-- left side of masthead -->
-                <div class="f7-f12">
+                <div class="masthead-right f7-f12">
                     <div class="masthead-login m-login_box h-group">
                         <div class="masthead-title"><strong>Login to MODX</strong> Don't have a MODX.com account? <a href="#">Create one</a></div>
                             <form class="m-login_block">
@@ -102,7 +102,7 @@
                                     <label>password</label>
                                 </div>
                                 <div class="f11-f12">
-                                    <input type="submit">
+                                    <input class="alt-1-cta" type="submit">
                                 </div>
                             </form>
                     </div>
@@ -110,7 +110,7 @@
             </div>
         </div>
     </header>
-    <div class="breadcrumbs f-padinfull l-horizontal_nav h-group">
+    <div class="m-breadcrumbs f-padinfull l-horizontal_nav h-group">
        New Bread Crumbs go here
     </div>
 

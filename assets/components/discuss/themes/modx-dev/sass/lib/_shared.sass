@@ -1,0 +1,82 @@
+body
+    font-size: 66.7%
+    background-color: $c-base
+
+// Login module
+.m-login_block
+    input[type="text"]
+        display: block
+        width: 100%
+        +rem('padding', 5px 3px)
+        +border-radius($radius-sm)
+        border: none
+    input
+        vertical-align: top
+        display: inline-block
+        margin-top: 0
+
+// mini navigation
+.m-sm_nav_pod
+    a
+        +rem('padding', 5px 7px 5px 0)
+        +opacity(0.6)
+        line-height: 1
+    a:after
+        content: "|"
+        +rem('padding', 0 0 0 7px)
+    li:last-child a:after
+        content: ""
+        padding: 0
+
+// Footer 2012
+footer
+    background: url(../images/bg/section-border-medy-repeat.png) repeat-x left top
+    padding: 1.5em 0
+    margin: 5em 0 0 0
+    a
+        white-space: nowrap
+    .copy-info
+        display: inline-block
+        font-size: .9em
+        padding: .5em 0 0 1.3em
+        p, ul
+            margin: 0 0 .25em 0
+        p, a
+            opacity: .4
+        p
+            padding-top: .7em
+        a:hover
+            opacity: .8
+        li:first-child
+            padding-left: 0
+    .modx-logo
+        background: url(../images/elements/modx-logo-footer.png) no-repeat left top
+        height: 45px
+        width: 115px
+        display: inline-block
+        vertical-align: text-top
+        opacity: .4
+    .modx-logo:hover
+        opacity: .8
+    .horiz-list li a
+        padding: .25em .75em
+        text-decoration: none
+        color: #000
+    nav
+        ul.horiz-list
+            margin: 0
+            li
+                a
+                    &:after
+                        content: "|"
+                        padding: 0 .75em
+                        margin-right: -1.25em
+                &:last-child a:after
+                    content: ""
+            a, h3
+                font-size: 13px
+                font-weight: bold
+    .row .stay-connected
+        padding-left: 1.75em
+        border-left: 1px dotted #c0c0c0
+        margin-left: 0

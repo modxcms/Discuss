@@ -1,3 +1,5 @@
+/* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/build.css */
+
 
 body {font-family:"proxima-nova",sans-serif;
     background-color: #f9f9f9;
@@ -11,15 +13,15 @@ body {font-family:"proxima-nova",sans-serif;
     border-bottom: 1px solid #ccc;
 }
 
-.masthead {
-    background-color: #173130;
-    color: #fff;
-    padding-top: 1.1%;
-    padding-bottom: 1.1%;
-    
-}
 .masthead a {
     color: #fff;
 }
+.masthead .h-ir 
+    {
+        display: block;
+        background: url(../../images/redo/elements/forums-logo.png) no-repeat left top;
+        height: 42px;
+        text-align: left;
+    }
 
 .h-group{zoom:1}.h-group:before,.h-group:after{content:"";display:table}.h-group:after{clear:both}

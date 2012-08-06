@@ -7,14 +7,15 @@ sass_dir = "sass"
 images_dir = "images/redo"
 javascripts_dir = "js/redo"
 
-output_style = :compressed
+# output_style = :compressed
+output_style = :nested
 environment = :development
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
 relative_assets = true
 
 # To disable debugging comments that display the original location of your selectors. Uncomment:
-line_comments = false
+line_comments = true
 color_output = false
 
 
