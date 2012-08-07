@@ -14,6 +14,7 @@
 [[+belowBoards]]
 
 <div class="dis-threads forum-grid">
+	<div class="m-section_title">
 	<header class="dis-cat-header dark-gradient group-fix sticky-bar">
 		<h1>[[+name]]</h1>
 		<nav id="key-Paginate" class="paginate horiz-list">[[+pagination]]</nav>
@@ -34,6 +35,8 @@
 	    <div class="f9 f-padinall">Replies</div>
 	    <div class="f10-f12 f-padinall">Info</div>
 	</div>
+	</div>
+
 	[[+posts]]
 
 

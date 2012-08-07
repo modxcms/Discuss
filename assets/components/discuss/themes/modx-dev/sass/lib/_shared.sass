@@ -2,6 +2,13 @@ body
     font-size: 66.7%
     background-color: $c-base
 
+// basic formatting
+a
+    color: saturate(lighten($c-dark-cool-bg, 10%), 10%)
+    text-decoration: none
+    &:hover
+        color: #000
+        text-decoration: underline
 // Login module
 .m-login_block
     input[type="text"]
@@ -29,6 +36,11 @@ body
             color: #ccc
         &:last-child:after
             content: ""
+    a
+        color: darken($c-base, 40%)
+        text-decoration: none
+        &:hover
+            color: darken($c-base, 90%)
 
 // mini navigation
 .m-sm_nav_pod
