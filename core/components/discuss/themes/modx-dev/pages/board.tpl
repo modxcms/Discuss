@@ -17,7 +17,7 @@
 	<div class="m-section_title">
 	<header class="dis-cat-header dark-gradient group-fix sticky-bar">
 		<h1>[[+name]]</h1>
-		<nav id="key-Paginate" class="paginate horiz-list">[[+pagination]]</nav>
+		[[+pagination:notempty=`<nav id="key-Paginate" class="paginate horiz-list">[[+pagination]]</nav>`]]
 		[[- USER LOGGED IN ]]
         [[!+discuss.user.id:notempty=`<div class="post-box">
 			<p>[[+actionbuttons]]</p>
@@ -40,7 +40,7 @@
 	[[+posts]]
 
 
-	   <nav class="paginate stand-alone bottom horiz-list"> [[+pagination]]</nav>
+	   [[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list"> [[+pagination]]</nav>`]]
 </div>
 
 

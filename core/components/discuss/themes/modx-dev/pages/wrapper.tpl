@@ -12,7 +12,7 @@
     <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />
     [[-<link rel="stylesheet" href="http://modx.com/assets/css/forums.css?v=101">]]
     <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">
-    <script src="http://get.gridsetapp.com/2953/overlay/"></script>
+
     [[*cssjs]]
     
     [[- Live Typekit call
@@ -77,8 +77,8 @@
     <!-- NEW masthead 2012 start -->
     <header class="masthead">
         <div class="wrapper h-group">
-            <div class="f-padinfull f-all">
-                <div class="f1-f6">
+            <div class="f-padinfull f-all m-all">
+                <div class="f1-f6 m-all">
                     <nav class="l-col_16">
                         <ul class="m-sm_nav_pod">
                             <li><a href="#">Back to MODX.com</a></li>
@@ -89,7 +89,7 @@
                     </nav>
                     <a class="h-ir" href="#">MODX Forums</a>
                 </div><!-- left side of masthead -->
-                <div class="masthead-right f7-f12">
+                <div class="masthead-right f7-f12 m-all">
                     <div class="masthead-login m-login_box h-group">
                         <div class="masthead-title"><strong>Login to MODX</strong> Don't have a MODX.com account? <a href="#">Create one</a></div>
                             <form class="m-login_block">
@@ -98,7 +98,7 @@
                                     <label>modx.com username</label>
                                 </div>
                                 <div class="f9-f10">
-                                    <input type="text">
+                                    <input type="password">
                                     <label>password</label>
                                 </div>
                                 <div class="f11-f12">

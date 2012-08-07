@@ -84,6 +84,7 @@ h3.forum
         a
             color: darken($c-base, 50%)
             +background-image(linear-gradient(darken($c-base, 7%), darken($c-base, 10%)))
+            border: solid 1px darken($c-base, 10%)
             display: inline-block
             padding: 3px 6px
             margin-top: 2px
@@ -92,7 +93,8 @@ h3.forum
             border-radius: 3px
             &:hover
                 color: darken($c-base, 90%)
-                +background-image(linear-gradient(lighten($c-base, 3%), darken($c-base, 2%)))
+                +background-image(linear-gradient(darken($c-base, 3%), darken($c-base, 7%)))
+                border: solid 1px darken($c-base, 7%)
                 text-decoration: none
             &:active
                 +box-shadow(darken($c-base, 27%) 0 0 1px inset)
@@ -236,6 +238,8 @@ h3.forum
             padding-bottom: 5%
         .dis-content
             overflow: hidden
+            strong
+                font-weight: 700
         li
             border: none
         .dis-post-footer
@@ -261,6 +265,7 @@ h3.forum
     width: 9%
     img
         width: 100%
+        max-width: 80px
         +border-radius($radius-sm)
     .auth-avatar
         display: block
@@ -398,8 +403,8 @@ h3.forum
         +rem('padding', 10px 15px)
         background-color: lighten($c-base, 1%)
         +border-radius($radius-sm)
-        +box-shadow(darken($c-base, 10%) 0 2px 5px)
-        border: 1px solid darken($c-base, 15%)
+        +box-shadow(darken($c-base, 10%) 0 2px 3px)
+        border: 1px solid darken($c-base, 8%)
         h4
             +rem('font-size', 13px)
             +rem('margin', 0 -15px 5px -15px )
