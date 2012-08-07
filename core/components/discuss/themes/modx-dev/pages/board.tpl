@@ -29,7 +29,7 @@
 		</div>`]]
 	</header>
 	<div class="row h-group header-row">
-	    <div class="f1-f7 f-padinall">Title</div>
+	    <div class="f1-f7 f-padinall"><div class="wrap">Title</div></div>
 	    <div class="f8 f-padinall">Views</div>
 	    <div class="f9 f-padinall">Replies</div>
 	    <div class="f10-f12 f-padinall">Info</div>

@@ -1,5 +1,7 @@
 /* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/build.css */
 
+/* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/build.css */
+
 
 body {font-family:"proxima-nova",sans-serif;
     background-color: #f9f9f9;
@@ -13,9 +15,7 @@ body {font-family:"proxima-nova",sans-serif;
     border-bottom: 1px solid #ccc;
 }
 
-.masthead a {
-    color: #fff;
-}
+
 .masthead .h-ir 
     {
         display: block;
@@ -25,3 +25,30 @@ body {font-family:"proxima-nova",sans-serif;
     }
 
 .h-group{zoom:1}.h-group:before,.h-group:after{content:"";display:table}.h-group:after{clear:both}
+
+.m-section_title {
+    background-color: #ececec;
+    border-radius: 5px;
+}
+.m-section_title .dis-cat-header {
+    border: none !important;
+}
+.m-section_title h1 {
+    font-size: 15px !important;
+    padding: 10px;
+}
+
+
+header.dis-cat-header.dark-gradient.group-fix.multi {
+    -moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;-moz-background-clip: padding;-webkit-background-clip: padding-box;background-clip: padding-box;background-color: #194b47;-moz-box-shadow: inset 0 0 5px rgba(0,0,0,.75);-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.75);box-shadow: inset 0 0 5px rgba(0,0,0,.75);background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA5MmIyMyIgc3RvcC1vcGFjaXR5PSIxIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzE5NGI0NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNoYXQwKSIgLz4KPC9zdmc+);background-image: -moz-linear-gradient(90deg, #092b23 0%, #194b47 100%);background-image: -o-linear-gradient(90deg, #092b23 0%, #194b47 100%);background-image: -webkit-linear-gradient(90deg, #092b23 0%, #194b47 100%);background-image: linear-gradient(90deg, #092b23 0%, #194b47 100%);
+}
+
+.dis-threads .wrap {
+    padding-left: 20px;
+}
+.locked .wrap {
+    background: url(../../images/redo/icons/i-lock-read.png) no-repeat 0 0 !important;
+}
+.dis-unread .wrap {
+   background: url(../../images/redo/icons/i-unread.png) no-repeat 0 5px !important; 
+}

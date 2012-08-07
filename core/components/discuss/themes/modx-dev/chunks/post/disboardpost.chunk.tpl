@@ -9,8 +9,11 @@
 	    </a>
 	</div>
 </li>-->]]
-<div class="row h-group dis-category-[[+category]] [[+locked:is=`1`:then=`locked`:else=`unlocked`]]">
-    <div class="f1-f7"><a href="[[+url]]"><strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong></a>
+<div class="row h-group dis-category-[[+category]] [[+locked:is=`1`:then=`locked`:else=`unlocked`]] [[+unreadCls]]">
+    <div class="f1-f7">
+        <div class="wrap">
+            <a href="[[+url]]"><strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong></a>
+        </div>
     </div>
     <div class="f8">[[+views]]</div>
     <div class="f9">[[+replies]]</div>

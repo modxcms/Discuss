@@ -3,6 +3,8 @@
     background: url(../../images/redo/bg/masthead-highlight.png) no-repeat center, url(../../images/redo/bg/masthead-flourish.jpg) no-repeat center top
     background-color: $c-dark-cool-bg
     color: #fff
+    a
+        color: #fff
     & > div
         padding-bottom: 10px
         +rem('padding', 0 0 14px 0)
@@ -57,7 +59,7 @@
         border: solid 1px darken($c-dark-cool-bg, 25%)
         +box-shadow(lighten($c-dark-cool-bg, 6%) 0 1px 0, darken($c-dark-cool-bg, 66%) 0 -1px 0 )
         &:focus
-            color: lighten($c-dark-cool-bg, 80%)
+            color: darken($c-dark-cool-bg, 80%)
             background-color: lighten($c-dark-cool-bg, 90%)
             border: solid 1px lighten($c-dark-cool-bg, 24%)
             +box-shadow(lighten($c-dark-cool-bg, 39%) 0 0 7px)
