@@ -15,6 +15,21 @@ body
         display: inline-block
         margin-top: 0
 
+// bread crumbs
+.m-breadcrumbs
+    li
+        display:  inline-block
+        line-height: 1
+        vertical-align: bottom
+        padding: 3px 0
+        &:after
+            content: "\2192 "
+            padding-left: 3px
+            padding-right: 3px
+            color: #ccc
+        &:last-child:after
+            content: ""
+
 // mini navigation
 .m-sm_nav_pod
     a

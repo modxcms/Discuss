@@ -115,51 +115,67 @@ body {
   margin-top: 0; }
 
 /* line 20, ../../sass/lib/_shared.sass */
+.m-breadcrumbs li {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: bottom;
+  padding: 3px 0; }
+  /* line 25, ../../sass/lib/_shared.sass */
+  .m-breadcrumbs li:after {
+    content: "\2192 ";
+    padding-left: 3px;
+    padding-right: 3px;
+    color: #cccccc; }
+  /* line 30, ../../sass/lib/_shared.sass */
+  .m-breadcrumbs li:last-child:after {
+    content: ""; }
+
+/* line 35, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod a {
   padding: 5px 7px 5px 0;
   padding:  0.385rem 0.538rem 0.385rem 0;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
   line-height: 1; }
-/* line 24, ../../sass/lib/_shared.sass */
+/* line 39, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod a:after {
   content: "|";
   padding: 0 0 0 7px;
   padding:  0 0 0 0.538rem; }
-/* line 27, ../../sass/lib/_shared.sass */
+/* line 42, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod li:last-child a:after {
   content: "";
   padding: 0; }
 
-/* line 32, ../../sass/lib/_shared.sass */
+/* line 47, ../../sass/lib/_shared.sass */
 footer {
   background: url(../images/bg/section-border-medy-repeat.png) repeat-x left top;
   padding: 1.5em 0;
   margin: 5em 0 0 0; }
-  /* line 36, ../../sass/lib/_shared.sass */
+  /* line 51, ../../sass/lib/_shared.sass */
   footer a {
     white-space: nowrap; }
-  /* line 38, ../../sass/lib/_shared.sass */
+  /* line 53, ../../sass/lib/_shared.sass */
   footer .copy-info {
     display: inline-block;
     font-size: 0.9em;
     padding: 0.5em 0 0 1.3em; }
-    /* line 42, ../../sass/lib/_shared.sass */
+    /* line 57, ../../sass/lib/_shared.sass */
     footer .copy-info p, footer .copy-info ul {
       margin: 0 0 0.25em 0; }
-    /* line 44, ../../sass/lib/_shared.sass */
+    /* line 59, ../../sass/lib/_shared.sass */
     footer .copy-info p, footer .copy-info a {
       opacity: 0.4; }
-    /* line 46, ../../sass/lib/_shared.sass */
+    /* line 61, ../../sass/lib/_shared.sass */
     footer .copy-info p {
       padding-top: 0.7em; }
-    /* line 48, ../../sass/lib/_shared.sass */
+    /* line 63, ../../sass/lib/_shared.sass */
     footer .copy-info a:hover {
       opacity: 0.8; }
-    /* line 50, ../../sass/lib/_shared.sass */
+    /* line 65, ../../sass/lib/_shared.sass */
     footer .copy-info li:first-child {
       padding-left: 0; }
-  /* line 52, ../../sass/lib/_shared.sass */
+  /* line 67, ../../sass/lib/_shared.sass */
   footer .modx-logo {
     background: url(../images/elements/modx-logo-footer.png) no-repeat left top;
     height: 45px;
@@ -167,30 +183,30 @@ footer {
     display: inline-block;
     vertical-align: text-top;
     opacity: 0.4; }
-  /* line 59, ../../sass/lib/_shared.sass */
+  /* line 74, ../../sass/lib/_shared.sass */
   footer .modx-logo:hover {
     opacity: 0.8; }
-  /* line 61, ../../sass/lib/_shared.sass */
+  /* line 76, ../../sass/lib/_shared.sass */
   footer .horiz-list li a {
     padding: 0.25em 0.75em;
     text-decoration: none;
     color: black; }
-  /* line 66, ../../sass/lib/_shared.sass */
+  /* line 81, ../../sass/lib/_shared.sass */
   footer nav ul.horiz-list {
     margin: 0; }
-    /* line 70, ../../sass/lib/_shared.sass */
+    /* line 85, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list li a:after {
       content: "|";
       padding: 0 0.75em;
       margin-right: -1.25em; }
-    /* line 74, ../../sass/lib/_shared.sass */
+    /* line 89, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list li:last-child a:after {
       content: ""; }
-    /* line 76, ../../sass/lib/_shared.sass */
+    /* line 91, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list a, footer nav ul.horiz-list h3 {
       font-size: 13px;
       font-weight: bold; }
-  /* line 79, ../../sass/lib/_shared.sass */
+  /* line 94, ../../sass/lib/_shared.sass */
   footer .row .stay-connected {
     padding-left: 1.75em;
     border-left: 1px dotted silver;
