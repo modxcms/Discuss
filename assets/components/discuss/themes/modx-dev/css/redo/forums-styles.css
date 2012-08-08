@@ -105,7 +105,15 @@ a {
     color: black;
     text-decoration: underline; }
 
+/* line 12, ../../sass/lib/_shared.sass */
+.l-right {
+  float: right; }
+
 /* line 14, ../../sass/lib/_shared.sass */
+.l-left {
+  float: left; }
+
+/* line 18, ../../sass/lib/_shared.sass */
 .m-login_block input[type="text"], .m-login_block input[type="password"] {
   display: block;
   width: 100%;
@@ -117,81 +125,81 @@ a {
   -o-border-radius: 3px;
   border-radius: 3px;
   border: none; }
-/* line 20, ../../sass/lib/_shared.sass */
+/* line 24, ../../sass/lib/_shared.sass */
 .m-login_block input {
   vertical-align: top;
   display: inline-block;
   margin-top: 0; }
 
-/* line 27, ../../sass/lib/_shared.sass */
+/* line 31, ../../sass/lib/_shared.sass */
 .m-breadcrumbs li {
   display: inline-block;
   line-height: 1;
   vertical-align: bottom;
   padding: 3px 0; }
-  /* line 32, ../../sass/lib/_shared.sass */
+  /* line 36, ../../sass/lib/_shared.sass */
   .m-breadcrumbs li:after {
     content: "\2192 ";
     padding-left: 3px;
     padding-right: 3px;
     color: #cccccc; }
-  /* line 37, ../../sass/lib/_shared.sass */
+  /* line 41, ../../sass/lib/_shared.sass */
   .m-breadcrumbs li:last-child:after {
     content: ""; }
-/* line 39, ../../sass/lib/_shared.sass */
+/* line 43, ../../sass/lib/_shared.sass */
 .m-breadcrumbs a {
   color: #939393;
   text-decoration: none; }
-  /* line 42, ../../sass/lib/_shared.sass */
+  /* line 46, ../../sass/lib/_shared.sass */
   .m-breadcrumbs a:hover {
     color: #131313; }
 
-/* line 47, ../../sass/lib/_shared.sass */
+/* line 51, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod a {
   padding: 5px 7px 5px 0;
   padding:  0.385rem 0.538rem 0.385rem 0;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
   line-height: 1; }
-/* line 51, ../../sass/lib/_shared.sass */
+/* line 55, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod a:after {
   content: "|";
   padding: 0 0 0 7px;
   padding:  0 0 0 0.538rem; }
-/* line 54, ../../sass/lib/_shared.sass */
+/* line 58, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod li:last-child a:after {
   content: "";
   padding: 0; }
 
-/* line 59, ../../sass/lib/_shared.sass */
+/* line 63, ../../sass/lib/_shared.sass */
 footer {
   background: url(../images/bg/section-border-medy-repeat.png) repeat-x left top;
   padding: 1.5em 0;
   margin: 5em 0 0 0; }
-  /* line 63, ../../sass/lib/_shared.sass */
+  /* line 67, ../../sass/lib/_shared.sass */
   footer a {
     white-space: nowrap; }
-  /* line 65, ../../sass/lib/_shared.sass */
+  /* line 69, ../../sass/lib/_shared.sass */
   footer .copy-info {
     display: inline-block;
     font-size: 0.9em;
     padding: 0.5em 0 0 1.3em; }
-    /* line 69, ../../sass/lib/_shared.sass */
+    /* line 73, ../../sass/lib/_shared.sass */
     footer .copy-info p, footer .copy-info ul {
       margin: 0 0 0.25em 0; }
-    /* line 71, ../../sass/lib/_shared.sass */
+    /* line 75, ../../sass/lib/_shared.sass */
     footer .copy-info p, footer .copy-info a {
       opacity: 0.4; }
-    /* line 73, ../../sass/lib/_shared.sass */
+    /* line 77, ../../sass/lib/_shared.sass */
     footer .copy-info p {
       padding-top: 0.7em; }
-    /* line 75, ../../sass/lib/_shared.sass */
+    /* line 79, ../../sass/lib/_shared.sass */
     footer .copy-info a:hover {
       opacity: 0.8; }
-    /* line 77, ../../sass/lib/_shared.sass */
+    /* line 81, ../../sass/lib/_shared.sass */
     footer .copy-info li:first-child {
       padding-left: 0; }
-  /* line 79, ../../sass/lib/_shared.sass */
+  /* line 83, ../../sass/lib/_shared.sass */
   footer .modx-logo {
     background: url(../images/elements/modx-logo-footer.png) no-repeat left top;
     height: 45px;
@@ -199,30 +207,30 @@ footer {
     display: inline-block;
     vertical-align: text-top;
     opacity: 0.4; }
-  /* line 86, ../../sass/lib/_shared.sass */
+  /* line 90, ../../sass/lib/_shared.sass */
   footer .modx-logo:hover {
     opacity: 0.8; }
-  /* line 88, ../../sass/lib/_shared.sass */
+  /* line 92, ../../sass/lib/_shared.sass */
   footer .horiz-list li a {
     padding: 0.25em 0.75em;
     text-decoration: none;
     color: black; }
-  /* line 93, ../../sass/lib/_shared.sass */
+  /* line 97, ../../sass/lib/_shared.sass */
   footer nav ul.horiz-list {
     margin: 0; }
-    /* line 97, ../../sass/lib/_shared.sass */
+    /* line 101, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list li a:after {
       content: "|";
       padding: 0 0.75em;
       margin-right: -1.25em; }
-    /* line 101, ../../sass/lib/_shared.sass */
+    /* line 105, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list li:last-child a:after {
       content: ""; }
-    /* line 103, ../../sass/lib/_shared.sass */
+    /* line 107, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list a, footer nav ul.horiz-list h3 {
       font-size: 13px;
       font-weight: bold; }
-  /* line 106, ../../sass/lib/_shared.sass */
+  /* line 110, ../../sass/lib/_shared.sass */
   footer .row .stay-connected {
     padding-left: 1.75em;
     border-left: 1px dotted silver;
@@ -456,7 +464,80 @@ footer {
   .secondary-cta:visited {
     color: #797979; }
 
-/* line 50, ../../sass/lib/_buttons.sass */
+/* line 49, ../../sass/lib/_buttons.sass */
+.a-secondary-cta {
+  line-height: 1;
+  color: white;
+  padding: 10px 7px;
+  margin: 3px 2px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #d3d3d3;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cbcbcb), color-stop(100%, #9b9b9b));
+  background-image: -webkit-linear-gradient(#cbcbcb, #9b9b9b);
+  background-image: -moz-linear-gradient(#cbcbcb, #9b9b9b);
+  background-image: -o-linear-gradient(#cbcbcb, #9b9b9b);
+  background-image: -ms-linear-gradient(#cbcbcb, #9b9b9b);
+  background-image: linear-gradient(#cbcbcb, #9b9b9b);
+  -webkit-box-shadow: #f9f9f9 0 1px 2px, ligten(#f9f9f9, 10%) 0 0 3px inset;
+  -moz-box-shadow: #f9f9f9 0 1px 2px, ligten(#f9f9f9, 10%) 0 0 3px inset;
+  box-shadow: #f9f9f9 0 1px 2px, ligten(#f9f9f9, 10%) 0 0 3px inset;
+  border: 1px solid #c6c6c6;
+  display: block;
+  font-size: 13px;
+  font-size: 1rem;
+  text-align: center; }
+  /* line 62, ../../sass/lib/_buttons.sass */
+  .a-secondary-cta span {
+    font-size: 70%;
+    white-space: nowrap; }
+  /* line 65, ../../sass/lib/_buttons.sass */
+  .a-secondary-cta:hover {
+    color: white;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dadada), color-stop(100%, #acacac));
+    background-image: -webkit-linear-gradient(#dadada, #acacac);
+    background-image: -moz-linear-gradient(#dadada, #acacac);
+    background-image: -o-linear-gradient(#dadada, #acacac);
+    background-image: -ms-linear-gradient(#dadada, #acacac);
+    background-image: linear-gradient(#dadada, #acacac); }
+
+/* line 70, ../../sass/lib/_buttons.sass */
+.a-faux-btn.a-secondary-cta {
+  padding: 0; }
+  /* line 72, ../../sass/lib/_buttons.sass */
+  .a-faux-btn.a-secondary-cta a {
+    display: inline-block;
+    padding: 10px 15px;
+    color: white;
+    background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ececec), color-stop(100%, #cecece));
+    background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -webkit-linear-gradient(#ececec, #cecece);
+    background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -moz-linear-gradient(#ececec, #cecece);
+    background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -o-linear-gradient(#ececec, #cecece);
+    background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -ms-linear-gradient(#ececec, #cecece);
+    background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, linear-gradient(#ececec, #cecece); }
+    /* line 77, ../../sass/lib/_buttons.sass */
+    .a-faux-btn.a-secondary-cta a:hover {
+      color: white;
+      background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dadada), color-stop(100%, #acacac));
+      background-image: -webkit-linear-gradient(#dadada, #acacac);
+      background-image: -moz-linear-gradient(#dadada, #acacac);
+      background-image: -o-linear-gradient(#dadada, #acacac);
+      background-image: -ms-linear-gradient(#dadada, #acacac);
+      background-image: linear-gradient(#dadada, #acacac); }
+  /* line 80, ../../sass/lib/_buttons.sass */
+  .a-faux-btn.a-secondary-cta:hover {
+    color: white;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cbcbcb), color-stop(100%, #9b9b9b));
+    background-image: -webkit-linear-gradient(#cbcbcb, #9b9b9b);
+    background-image: -moz-linear-gradient(#cbcbcb, #9b9b9b);
+    background-image: -o-linear-gradient(#cbcbcb, #9b9b9b);
+    background-image: -ms-linear-gradient(#cbcbcb, #9b9b9b);
+    background-image: linear-gradient(#cbcbcb, #9b9b9b); }
+
+/* line 83, ../../sass/lib/_buttons.sass */
 .alt-1-cta {
   color: white;
   background-color: #89c8da !important; }

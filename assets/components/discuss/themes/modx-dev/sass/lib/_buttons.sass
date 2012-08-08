@@ -46,7 +46,40 @@
         border: 1px solid darken($c-base, 50%)
     &:visited
         color: darken($c-base, 50%)
+.a-secondary-cta
+    line-height: 1
+    color: lighten($c-base, 60%)
+    padding: 10px 7px
+    margin: 3px 2px
+    +border-radius($radius-sm)
+    background-color: darken($c-base, 15%)
+    +background-image(linear-gradient(darken($c-base, 18%), darken($c-base, 37%)))
+    +box-shadow(darken($c-base, 0%) 0 1px 2px, ligten($c-base, 10%) 0 0 3px inset)
+    border: 1px solid darken($c-base, 20%)
+    display: block
+    +rem('font-size', 13px)
+    text-align: center
+    span
+        font-size: 70%
+        white-space: nowrap
+    &:hover
+        color: lighten($c-base, 90%)
+        +background-image(linear-gradient(darken($c-base, 12%), darken($c-base, 30%)))
 
+// if wrapped in a faux button
+.a-faux-btn.a-secondary-cta
+    padding: 0
+    a
+        display: inline-block
+        padding: 10px 15px
+        color: lighten($c-base, 60%)
+        +background-image(url(../../images/redo/bg/btn-divide.png) no-repeat right center, linear-gradient(darken($c-base, 5%), darken($c-base, 17%)))
+        &:hover
+            color: lighten($c-base, 90%)
+            +background-image(linear-gradient(darken($c-base, 12%), darken($c-base, 30%)))
+    &:hover
+        color: lighten($c-base, 90%)
+        +background-image(linear-gradient(darken($c-base, 18%), darken($c-base, 37%)))
 .alt-1-cta
     color: #fff
     background-color: $c-alt-1 !important

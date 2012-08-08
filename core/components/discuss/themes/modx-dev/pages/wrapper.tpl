@@ -28,6 +28,8 @@
 </head>
 <body id="body-[[+controller.controller]]" class="new-forums">[[-we can remove this class and the sass line if integrated into a new design at a later date]]
 
+[[+discuss.user.isModerator:is=`1`:then=`<!-- moderator bar--><div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div><!-- / moderator bar-->`]]
+
     [[-
 <!--     REMOVE THIS STUFF EVENTUALLY
     <div id="overlay-20"> </div>
@@ -102,7 +104,7 @@
                                     <label>password</label>
                                 </div>
                                 <div class="f11-f12">
-                                    <input class="alt-1-cta" type="submit">
+                                    <input class="alt-1-cta" type="submit" value="Login">
                                 </div>
                             </form>
                     </div>
