@@ -124,6 +124,9 @@ h3.forum
     a
         text-decoration: none
         color: darken($c-copy, 20%)
+    a.h-group
+        display: block
+        cursor: pointer
     &.dis-threads // REMOVE FUTURE needed to override default styles in index.html
         h1
             +rem('font-size',19px)
@@ -149,14 +152,22 @@ h3.forum
     .fifth
         width: 18%
     .row
-        padding: .5em
+        // padding: .5em
         border-bottom: 1px solid darken($c-base, 3%)
         border-top:  1px solid lighten($c-base, 80%)
+        &:hover
+            border-bottom-color: darken($c-base, 13%)
+            border-top-color: lighten($c-base, 80%)
         &.header-row
             +rem('font-size', 12px)
             font-weight: bold
             color: #000
             border-bottom: 2px solid darken($c-base, 15%)
+        > a
+            padding: .5em
+            &:hover
+                background-color: #fff
+                text-decoration: underline
 
     .heading
         color: darken($c-base, 65%)

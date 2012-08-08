@@ -1,13 +1,15 @@
 <!-- chunk/boards/disboardli.chunk.tpl -->
 <div class="Depth2 row dis-category h-group dis-category-[[+category]] [[+unread-cls]]">
-    <div class="f1-f7">
-        <div class="wrap">
-            <a href="[[+url]]"><strong>[[+name]]</strong></a>
-            <p class="dis-board-description">[[+description]]</p>
+    <a href="[[+url]]" class="h-group">
+        <div class="f1-f7">
+            <div class="wrap">
+                <strong>[[+name]]</strong>
+                <p class="dis-board-description">[[+description]]</p>
+            </div>
         </div>
-    </div>
-    <div class="f8-f10">Title of Last Post</div>
-    <div class="f11-f12">[[+post_stats]]</div>
+        <div class="f8-f10">Title of Last Post</div>
+        <div class="f11-f12">[[+post_stats]]</div>
+    </a>
     [[+subforums:notempty=`<p class="dis-board-subs [[+unread-cls]] h-group f-all">[[-<strong>Subtopics:</strong>]] [[+subforums]]</p>`]]
 </div>
 [[-
