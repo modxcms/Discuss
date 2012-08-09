@@ -60,7 +60,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'dis.home.js',
-                'showBreadcrumbs' => true,
             ),
         ),
         'options' => array(
