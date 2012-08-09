@@ -10,7 +10,7 @@
         <div class="f8-f10">Title of Last Post</div>
         <div class="f11-f12">[[+post_stats]]</div>
     </a>
-    [[+subforums:notempty=`<p class="dis-board-subs [[+unread-cls]] h-group f-all">[[-<strong>Subtopics:</strong>]] [[+subforums]]</p>`]]
+    [[+subforums:notempty=`<div class="h-group f-all"><p class="dis-board-subs [[+unread-cls]]">[[-<strong>Subtopics:</strong>]] [[+subforums]]</p></div>`]]
 </div>
 [[-
 <!--<li class="Depth2  dis-category-[[+category]]">
