@@ -1254,3 +1254,15 @@ h3.forum {
       margin-left: 0;
       text-align: center;
       padding: 0.5em; }
+
+/* line 450, ../../sass/_forums.sass */
+.footer-stats {
+  font-size: 14px;
+  padding-top: 1.2em;
+  padding-bottom: 2em;
+  margin: 0 0 2em 0;
+  border-top: 2px solid #333333;
+  border-bottom: 1px solid #333333 !important; }
+  /* line 457, ../../sass/_forums.sass */
+  .footer-stats strong {
+    font-weight: 700; }

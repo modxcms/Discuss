@@ -13,9 +13,7 @@
     <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />
     [[-<link rel="stylesheet" href="http://modx.com/assets/css/forums.css?v=101">]]
     <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">
-
     [[*cssjs]]
-    
     [[- Live Typekit call
     [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
     <script src="http://use.typekit.com/zub5doo.js"></script>
@@ -84,49 +82,85 @@
 
 <!-- move all this to tplOmega-2012 eventually -->
     <footer class="h-group">
-    <div class="f-padinfull">
-        <div class="f1-f8">
-            <nav class="group">
-                <ul class="horiz-list">
-                    <li><a href="doc/">MODX Cloud User Guide</a></li>
-                    <li><a href="doc/api/">API Documentation</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="signup/">Sign-up now</a></li>
-                </ul>
-            </nav>
-            <div class="group">
-                <a class="modx-logo ir" href="http://modx.com">MODX Creative Freedom</a>
-                <div class="group copy-info">
-                    <p>&copy; MODX, LLC 2012. All Rights Reserved.</p>
-                    <ul class="horiz-list">
-                        <li><a href="trademark.html">Trademark Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
+        <!-- forum stats -->
+        <div class="f-padinfull">
+            <div class="footer-stats h-group">
+                <div class="f1-f2">
+                    <strong>[[%discuss.stats]]</strong>
+                </div>
+                <div class="f3-f4 m-stats">
+                    <strong>Total:</strong>
+                    [[%discuss.stats_totals?
+                        &posts=`[[+totalPosts]]`
+                        &threads=`[[+totalTopics]]`
+                        &members=`[[+totalMembers]]`
+                    ]]
+                </div>
+                <div class="f5-f6 m-stats">
+                    <strong>Online:</strong>
+                    [[%discuss.stats_online? 
+                        &visitors=`[[+totalVisitorsActive]]` 
+                        &members=`[[+totalMembersActive]]`
+                    ]]
+                </div>
+                <div class="f7-f8 m-stats">
+                [[%discuss.stats_today?
+                    &hits=`[[+activity.hits]]`
+                    &topics=`[[+activity.topics]]`
+                    &replies=`[[+activity.replies]]`
+                    &visitors=`[[+activity.visitors]]`
+                ]]
+                </div>
+                <div class="f9-f12">
+                    [[+activeUsers]]
                 </div>
             </div>
         </div>
-        <div class="f9-f12 stay-connected">
-            <h3>Stay Connected</h3>
-            <form id="newsletter" action="http://modxcms.list-manage.com/subscribe/post" method="post">
-                <input type="hidden" name="u" value="08b25a8de68a29fe03a483720" />
-                <input type="hidden" name="id" value="848cf40420" />
-                <input type="hidden" name="source" value="www_1" id="source">
-                <input type="hidden" name="MERGE7" value="http://modx.com/" id="MERGE7">
-                <div class="field clearfix">
-                    <label for="MERGE0" class="hidden">Your email</label>
-                    <input type="text" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value="" class="textbox" />
-                    <input  type="submit" name="Submit" value="Sign up" />
+        <!-- forum stats -->
+
+        <div class="f-padinfull">
+            <div class="f1-f8">
+                <nav class="group">
+                    <ul class="horiz-list">
+                        <li><a href="doc/">MODX Cloud User Guide</a></li>
+                        <li><a href="doc/api/">API Documentation</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="signup/">Sign-up now</a></li>
+                    </ul>
+                </nav>
+                <div class="group">
+                    <a class="modx-logo ir" href="http://modx.com">MODX Creative Freedom</a>
+                    <div class="group copy-info">
+                        <p>&copy; MODX, LLC 2012. All Rights Reserved.</p>
+                        <ul class="horiz-list">
+                            <li><a href="trademark.html">Trademark Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </form> 
-            <ul class="social-icons horiz-list">
-                <li><a href="http://twitter.com/#!/modxcms" title="MODX on Twitter" class="twitter">Twitter</a></li>
-                <li><a href="http://www.facebook.com/modxcms" title="MODX Facebook" class="facebook">Facebook</a></li>
-                <li><a href="http://modx.com/feeds/" title="Subscribe to our Feeds" class="rss">RSS Feeds</a></li>
-            </ul>
+            </div>
+            <div class="f9-f12 stay-connected">
+                <h3>Stay Connected</h3>
+                <form id="newsletter" action="http://modxcms.list-manage.com/subscribe/post" method="post">
+                    <input type="hidden" name="u" value="08b25a8de68a29fe03a483720" />
+                    <input type="hidden" name="id" value="848cf40420" />
+                    <input type="hidden" name="source" value="www_1" id="source">
+                    <input type="hidden" name="MERGE7" value="http://modx.com/" id="MERGE7">
+                    <div class="field clearfix">
+                        <label for="MERGE0" class="hidden">Your email</label>
+                        <input type="text" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value="" class="textbox" />
+                        <input  type="submit" name="Submit" value="Sign up" />
+                    </div>
+                </form> 
+                <ul class="social-icons horiz-list">
+                    <li><a href="http://twitter.com/#!/modxcms" title="MODX on Twitter" class="twitter">Twitter</a></li>
+                    <li><a href="http://www.facebook.com/modxcms" title="MODX Facebook" class="facebook">Facebook</a></li>
+                    <li><a href="http://modx.com/feeds/" title="Subscribe to our Feeds" class="rss">RSS Feeds</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-    </footer>
+    </footer><!-- footer -->
 
     <!-- not sure what this is used for? -->
     <div class="overlay[[*id:ne=`320`:then=` round7`]]" id="overlay">
