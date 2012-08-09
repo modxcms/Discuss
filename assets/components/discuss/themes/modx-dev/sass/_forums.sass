@@ -70,19 +70,24 @@ h3.forum
         border-bottom: px solid #fff
         border-radius: 0 0 3px 3px
         line-height: 1
-        padding: 7px 6px 7px 6px
+        padding: 7px 6px 7px 8px
+        margin-bottom: .35em
+    .dis-cat-header
+        margin-top: 2em
+
 
 // Sub topics styling
 .forum-grid
     .dis-board-subs
-        padding: 5px 5px 5px 50px
-        background: url(../../images/redo/icons/arrow.png) no-repeat 35px 9px
+        color: #fff
+        padding: 5px 5px 5px 57px
+        background: url(../../images/redo/icons/arrow.png) no-repeat 39px 11px
         strong, a
             +rem('font-size', 10px)
         strong
             color: #000
         a
-            color: darken($c-base, 50%)
+            color: darken($c-base, 70%)
             +background-image(linear-gradient(darken($c-base, 7%), darken($c-base, 10%)))
             border: solid 1px darken($c-base, 10%)
             display: inline-block
@@ -134,7 +139,7 @@ h3.forum
             margin: 0
     .dis-board-description
         margin: .25em 0
-        color: lighten($c-copy, 30%)
+        color: lighten($c-copy, 20%)
     // Faux Grids
     .first
         width: 63%
@@ -205,12 +210,12 @@ h3.forum
 
 // status on threads and categories
 .dis-category .wrap
-    background: url(../../images/redo/icons/i-category.png) no-repeat 5px 7px !important
-    padding-left: 35px !important
+    background: url(../../images/redo/icons/i-category.png) no-repeat 4px 7px !important
+    padding-left: 31px !important
 .dis-unread .wrap
     background: url(../../images/redo/icons/i-unread.png) no-repeat 0 5px !important
 .dis-category.dis-unread .wrap
-    background: url(../../images/redo/icons/i-category-unread.png) no-repeat 2px 1px !important
+    background: url(../../images/redo/icons/i-category-unread.png) no-repeat 2px 2px !important
 
 .boards+.forum-grid
     margin-top: 0
