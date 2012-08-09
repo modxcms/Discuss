@@ -8,3 +8,5 @@
 	</div>
 </div>
 [[+list]]
+
+<!-- / REMOVEPRODUCTION category/discategoryli.chunk.tpl -->
