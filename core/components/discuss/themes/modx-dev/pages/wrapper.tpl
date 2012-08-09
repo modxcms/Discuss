@@ -78,7 +78,7 @@
     </header>
     [[+trail]]
     <!-- / NEW mastehad 2012 -->
-    <div class="wrapper l-center f-padinfull">
+    <div class="wrapper l-center f-padinfull h-group">
         [[+content]]
     </div>
 
