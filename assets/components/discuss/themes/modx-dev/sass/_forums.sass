@@ -266,6 +266,15 @@ h3.forum
                 padding: 1em 0 0 0
                 font-style: italic
                 color: darken($c-base, 50%)
+footer
+    h3
+        +rem('font-size', 13px)
+        font-weight: 700
+        color: #000
+    nav, h3
+        +rem('margin', 0 0 10px 0 )
+    .m-modx_logo
+        +rem('margin', 3px 0 0 0)
 .dis-post .title
     a
         color: #000
@@ -452,7 +461,21 @@ h3.forum
     padding-top: 1.2em
     padding-bottom: 2em
     margin: 0 0 2em 0
-    border-top: 2px solid #333
-    border-bottom: 1px solid #333 !important
+    border-top: 2px solid darken($c-base, 20%)
+    border-bottom: 1px solid darken($c-base, 20%)
     strong
         font-weight: 700
+.m-modx_logo
+    background: url(../../images/redo/elements/modx-logo-fixed.png) no-repeat 0 0
+    display: block
+    height: 50px
+    width: 130px
+    +opacity(0.4)
+    &:hover
+        +opacity(0.6)
+.backgroundsize
+    .m-modx_logo
+        width: 100%
+        height: 7.5em
+        background: url(../../images/redo/elements/modx-logo-sizeable.png) no-repeat 0 0
+        background-size: 100% auto

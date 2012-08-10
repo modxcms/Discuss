@@ -105,10 +105,10 @@
                 </div>
                 <div class="f7-f8 m-stats">
                 [[%discuss.stats_today?
-                    &hits=`[[+activity.hits]]`
-                    &topics=`[[+activity.topics]]`
-                    &replies=`[[+activity.replies]]`
-                    &visitors=`[[+activity.visitors]]`
+                    &hits=`<span class="m-stats-single">[[+activity.hits]]</span>`
+                    &topics=`<span class="m-stats-single">[[+activity.topics]]</span>`
+                    &replies=`<span class="m-stats-single">[[+activity.replies]]</span>`
+                    &visitors=`<span class="m-stats-single">[[+activity.visitors]]</span>`
                 ]]
                 </div>
                 <div class="f9-f12">
@@ -129,8 +129,10 @@
                     </ul>
                 </nav>
                 <div class="group">
-                    <a class="modx-logo ir" href="http://modx.com">MODX Creative Freedom</a>
-                    <div class="group copy-info">
+                    <div class="f1-f2">
+                        <a class="m-modx_logo h-ir" href="http://modx.com">MODX Creative Freedom</a>
+                    </div>
+                    <div class="group copy-info f3-f7">
                         <p>&copy; MODX, LLC 2012. All Rights Reserved.</p>
                         <ul class="horiz-list">
                             <li><a href="trademark.html">Trademark Policy</a></li>
