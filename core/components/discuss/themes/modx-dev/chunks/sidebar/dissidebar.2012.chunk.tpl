@@ -11,12 +11,12 @@
 
 [[+disection:is=`dis-support-opt`:then=`
 <div class="Box GuestBox">
-	<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>, or you can also <a href="[[~10]]" title="MODX Direct Commercial Support">purchase commercial support</a>.</p>]]
-	<div class="a-faux-btn a-secondary-cta"><a href="http://tracker.modx.com">Found a bug?</a><a href="http://tracker.modx.com/projects/modx-proposals">Have a feature request?</a></div>
-	<a class="a-secondary-cta" href="[[~10]">Purchase Commercial Support <span>(from $50/month)</span></a>
+	<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>, or you can also <a href="[[~10]]" title="MODX Direct Commercial Support">purchase commercial support</a>.</p>`]]
+	<a class="a-secondary-cta l-inline-btn" href="http://tracker.modx.com">Found a bug?</a>
+	<a class="a-secondary-cta l-inline-btn" href="http://tracker.modx.com/projects/modx-proposals">Have a feature request?</a>
+	<a class="a-secondary-cta" href="[[~10]]">Purchase Commercial Support <span>(from $50/month)</span></a>
 </div>
 <div class="Box GuestBox">
 	<h4>Love MODX?</h4>
 	<p>If you build sites for a living with MODX or just love using it, why not <a href="http://modx.com/community/wall-of-fame/support-modx/">give back</a>?</p>
 </div>
-`]]
