@@ -86,18 +86,18 @@
         <div class="f-padinfull">
             <div class="footer-stats h-group">
                 <div class="f1-f2">
-                    <strong>[[%discuss.stats]]</strong>
+                    <strong class="m-stats-title">[[%discuss.stats]]</strong>
                 </div>
                 <div class="f3-f4 m-stats">
-                    <strong>Total:</strong>
+                    <strong class="m-stats-title">Total:</strong>
                     [[%discuss.stats_totals?
-                        &posts=`[[+totalPosts]]`
-                        &threads=`[[+totalTopics]]`
-                        &members=`[[+totalMembers]]`
+                        &posts=`<span class="m-stats-single">[[+totalPosts]]</span>`
+                        &threads=`<span class="m-stats-single">[[+totalTopics]]</span>`
+                        &members=`<span class="m-stats-single">[[+totalMembers]]</span>`
                     ]]
                 </div>
                 <div class="f5-f6 m-stats">
-                    <strong>Online:</strong>
+                    <strong class="m-stats-title">Online:</strong>
                     [[%discuss.stats_online? 
                         &visitors=`[[+totalVisitorsActive]]` 
                         &members=`[[+totalMembersActive]]`

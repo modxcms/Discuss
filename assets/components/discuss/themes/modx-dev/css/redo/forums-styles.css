@@ -1299,6 +1299,14 @@ footer .m-modx_logo {
     font-weight: 700; }
 
 /* line 468, ../../sass/_forums.sass */
+.m-stats-title {
+  display: block; }
+
+/* line 470, ../../sass/_forums.sass */
+.m-stats-single {
+  font-weight: 700; }
+
+/* line 472, ../../sass/_forums.sass */
 .m-modx_logo {
   background: url(../../images/redo/elements/modx-logo-fixed.png) no-repeat 0 0;
   display: block;
@@ -1306,12 +1314,12 @@ footer .m-modx_logo {
   width: 130px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
   opacity: 0.4; }
-  /* line 474, ../../sass/_forums.sass */
+  /* line 478, ../../sass/_forums.sass */
   .m-modx_logo:hover {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6; }
 
-/* line 477, ../../sass/_forums.sass */
+/* line 481, ../../sass/_forums.sass */
 .backgroundsize .m-modx_logo {
   width: 100%;
   height: 7.5em;
