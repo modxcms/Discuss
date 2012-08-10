@@ -1,28 +1,6 @@
 /* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/build.css */
 
 
-.m-user_box {
-    padding: 1em;
-}
-.m-user_box .l-left {
-    width: 12%;
-}
-
-.m-user_box .l-left img {
-    width: 100%;
-    border: 2px solid rgba(255,255,255,.3);
-    border-radius: 3px;
-/*    max-width: 100px;*/
-}
-.m-user_tools {
-    margin: 1em 0;
-}
-.m-user_tools ul, .m-user_tools a{
-    display: inline-block;
-}
-.m-user_tools a {
-    padding: 6px 10px;
-}
 
 /*body {font-family:"proxima-nova",sans-serif;
     background-color: #f9f9f9;
