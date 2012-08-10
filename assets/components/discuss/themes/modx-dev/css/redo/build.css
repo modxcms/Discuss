@@ -1,19 +1,34 @@
 /* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/build.css */
 
-/* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/build.css */
 
+.m-user_box {
+    padding: 1em;
+}
+.m-user_box .l-left {
+    width: 12%;
+}
 
-body {font-family:"proxima-nova",sans-serif;
+.m-user_box .l-left img {
+    width: 100%;
+    border: 2px solid rgba(255,255,255,.3);
+    border-radius: 3px;
+/*    max-width: 100px;*/
+}
+.m-user_tools {
+    margin: 1em 0;
+}
+.m-user_tools ul, .m-user_tools a{
+    display: inline-block;
+}
+.m-user_tools a {
+    padding: 6px 10px;
+}
+
+/*body {font-family:"proxima-nova",sans-serif;
     background-color: #f9f9f9;
     font-size: 13px;
     line-height: 1.4;
-} 
-.breadcrumbs {
-    padding-top: .5%;
-    padding-bottom: .5%;
-    background-color: #fff;
-    border-bottom: 1px solid #ccc;
-}
+} */
 
 
 .masthead .h-ir 
@@ -24,8 +39,7 @@ body {font-family:"proxima-nova",sans-serif;
         text-align: left;
     }
 
-.h-group{zoom:1}.h-group:before,.h-group:after{content:"";display:table}.h-group:after{clear:both}
-
+/*
 .m-section_title {
     background-color: #ececec;
     border-radius: 5px;
@@ -36,7 +50,7 @@ body {font-family:"proxima-nova",sans-serif;
 .m-section_title h1 {
     font-size: 15px !important;
     padding: 10px;
-}
+}*/
 
 
 header.dis-cat-header.dark-gradient.group-fix.multi {

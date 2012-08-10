@@ -14,41 +14,42 @@ h3.forum
 .dis-cat-header
     +border-radius($radius-sm $radius-sm 0 0)
     +background-clip(padding-box)
+    padding: 10px
+    line-height: 1
     background-color: #194b47
-    -moz-box-shadow: inset 0 0 5px rgba(0,0,0,.75)
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.75)
-    box-shadow: inset 0 0 5px rgba(0,0,0,.75)
-    +background-image(linear-gradient(lighten($c-dark-cool-bg, 8%), darken($c-dark-cool-bg, 0%)))
-
-    // background-image: -moz-linear-gradient(90deg, #092b23 0%, #194b47 100%)
-    // background-image: -o-linear-gradient(90deg, #092b23 0%, #194b47 100%)
-    // background-image: -webkit-linear-gradient(90deg, #092b23 0%, #194b47 100%)
-    // background-image: linear-gradient(90deg, #092b23 0%, #194b47 100%)
-    // +rem('margin',0 -15px 15px -15px) // shifts margin equal to padding on forum grid
-    // +rem('padding',$p-forum-grid/2 $p-forum-grid) // adds in padding to equal padding of grid
+    +box-shadow(darken($c-dark-cool-bg, 30%) 0 1px 3px inset !important)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 9%), lighten($c-dark-cool-bg, 1%)) !important)
+    +border-radius($radius-sm $radius-sm 0 0 !important)
     border-bottom: solid 1px $c-dark-cool-bg
     color: #fff
     line-height: 1
-    // &:first-child
-    //     +rem('margin',-$p-forum-grid -15px 15px -15px) // shifts margin equal to padding on forum grid
 
     h1
+        +rem('font-size', 17px)
+        line-height: 1
         color: #fff
-        font-weight: 500 !important
-        border: 0 !important
+        font-weight: 500
+        border: 0
         float: left
-        padding: 10px
-        padding-bottom: 0
+        padding: 6px 0 0 5px
+        margin: 0
+        display: inline-block
 
     // Green button used to either just to post or jump to login
+    .action-buttons
+        +rem('font-size', 13px)
+        display: inline-block
+        margin-top: .2em
+    .action-buttons+.action-buttons
+        margin-left: .25em
     .post-box a.Button
         color: #fff
         margin: 0 0 0 1em
         border: none // Can remove in future, resetting default styles
-        +rem('padding', 5px)
+        +rem('padding', 6px)
         +border-radius($radius-sm)
         +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
-        +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+        +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
         &:hover
             +rem('padding', 5px)
             +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
@@ -61,9 +62,9 @@ h3.forum
 .m-section_title
     background-color: #ececec
     border-radius: 5px
-    h1
-        font-size: 15px
-        padding: 10px
+    // h1
+    //     font-size: 15px
+    //     padding: 10px
     .row
         color: #000
         font-weight: 700
@@ -83,7 +84,7 @@ h3.forum
         padding: 5px 5px 5px 57px
         background: url(../../images/redo/icons/arrow.png) no-repeat 39px 11px
         strong, a
-            +rem('font-size', 10px)
+            +rem('font-size', 12px)
         strong
             color: #000
         a
@@ -112,50 +113,25 @@ h3.forum
     // border: solid 1px darken($c-base, 5%)
 
 .forum-grid
-    +rem('font-size',11px)
+    +rem('font-size',13px)
     line-height: 1.1
-    // +rem('margin',$m-forum-grid)
-    // +rem('padding',$p-forum-grid)
-    width: 100%
     color: lighten($c-copy, 20%)
-    margin-top: 2.3em
-    // background-color: lighten($c-base, 20%)
-
+    +rem('margin-top', 25px)
     p
         color: darken($c-copy, 30%)
         line-height: 1.1
         margin: 0 0 .25em 0
-
     a
         text-decoration: none
         color: darken($c-copy, 20%)
     a.h-group
         display: block
         cursor: pointer
-    &.dis-threads // REMOVE FUTURE needed to override default styles in index.html
-        h1
-            +rem('font-size',19px)
-            font-weight: 700
-            margin: 0
     .dis-board-description
         margin: .25em 0
         color: lighten($c-copy, 20%)
+
     // Faux Grids
-    .first
-        width: 63%
-        padding: 0 2% 0 0
-    .second
-        width: 7%
-        text-align: center
-    .third
-        width: 7%
-        text-align: center
-    .fourth
-        width: 20%
-        p
-            display: inline
-    .fifth
-        width: 18%
     .row
         // padding: .5em
         border-bottom: 1px solid darken($c-base, 3%)
@@ -164,7 +140,6 @@ h3.forum
             border-bottom-color: darken($c-base, 13%)
             border-top-color: lighten($c-base, 80%)
         &.header-row
-            +rem('font-size', 12px)
             font-weight: bold
             color: #000
             border-bottom: 2px solid darken($c-base, 15%)
@@ -184,29 +159,13 @@ h3.forum
             padding-top: .2em
             padding-bottom: .2em
     strong
-        +rem('font-size',13px)
+        +rem('font-size',16px)
         color: #000
         font-weight: bold
         line-height: 1.1
     .posted-date, .posted-by
-        +rem('font-size',10px)
         color: lighten($c-copy, 30%)
 
-    // Category view used as three column on the ladning page of the forums.
-    &.category
-        .first
-            width: 55%
-        .second
-            width: 11%
-            padding: 0 2%
-            text-align: center
-        .third
-            width: 24%
-            padding: 0 0 0 2%
-            text-align: right
-            margin: 0 -1% 0 0 // Ensure clearing issues on IE
-        &.boards
-            margin: 0
 
 // status on threads and categories
 .dis-category .wrap
@@ -230,7 +189,7 @@ h3.forum
     a
         color: $c-dark-cool-bg
         text-decoration: none
-        +rem('font-size', 25px)
+        +rem('font-size', 32px)
 
 .dis-list
     margin: 1em 0 0 0
@@ -261,7 +220,7 @@ h3.forum
         .dis-post-footer
             width: 88%
             float: right
-            +rem('font-size', 10px)
+            +rem('font-size', 12px)
             .dis-post-editedon
                 padding: 1em 0 0 0
                 font-style: italic
@@ -305,9 +264,9 @@ footer
     float: right
     width: 86%
     padding: 0 2% 2% 0
-    +rem('font-size', 12px)
+    +rem('font-size', 15px)
     .title
-        +rem('font-size', 10px)
+        +rem('font-size', 12px)
         line-height: 1
         color: darken($c-base, 50%)
         margin: 0 0 1em 0
@@ -316,7 +275,7 @@ footer
         border-bottom: dotted 1px darken($c-base, 12%)
         strong
             background-color: lighten($c-base, 4%) // should match background color of .dis-list for now
-            +rem('font-size', 12px)
+            +rem('font-size', 15px)
             margin-right: .25em
         .dis-actions
             top: 0 !important
@@ -344,7 +303,7 @@ footer
     padding: 2% 2% 0 0 !important
     float: right
     border-top: 1px dotted darken($c-base, 10%) !important //override, remove eventually
-    +rem('font-size', 9px)
+    +rem('font-size', 11px)
     +opacity(.7)
     a
         color: #000
@@ -479,7 +438,7 @@ footer
         +opacity(0.6)
 .backgroundsize
     .m-modx_logo
-        width: 100%
+        width: 90%
         height: 7.5em
         background: url(../../images/redo/elements/modx-logo-sizeable.png) no-repeat 0 0
         background-size: 100% auto

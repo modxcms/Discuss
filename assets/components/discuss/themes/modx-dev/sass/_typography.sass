@@ -1,10 +1,11 @@
 @import "blueprint/typography"
 @import "compass/typography/lists/horizontal-list"
 @import "compass/typography/links/link-colors"
+html
+    font-size: 62.5%
 
-
-// new forum typography. May eventually apply to primary site
-.new-forums
-    #body
-        font-family: "proxima-nova", sans-serif
-        font: 13px/1.4
+body
+    font-family: "proxima-nova",sans-serif
+    background-color: #f9f9f9
+    +rem('font-size', 13px)
+    line-height: 1.4

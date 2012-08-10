@@ -49,7 +49,22 @@
                 <div class="masthead-right f7-f12 m-all">
                     [[!+discuss.user.id:notempty=`
                     <div class="m-welcome_box">
-                        Welcome back 
+                        <div class="m-user_box h-group">
+                            <div class="l-left">
+                                <img src="https://dl.dropbox.com/u/491945/modx-forums/fpo/sample-user-profile.png">
+                            </div>
+                            <div class="l-right">
+                                <h3>Welcome Back Jason</h3>
+                                <p>Since your last visit, there have been <a href="#">129 new posts</a>, <a href="#">12 unread messages</a> and <a href="#">14 replies</a> in subscribed threads.</p>
+                                <div class="m-user_tools">
+                                    <ul class="m-user_tools_reg_links l-horiz_list">
+                                        <li><a href="#">update profile</a></li>
+                                        <li><a href="#">update email notificaitons</a></li>
+                                    </ul>
+                                    <a class="m-user_tools_logout" href="#">Logout</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     `]]
                     [[!+discuss.user.id:is=``:then=`

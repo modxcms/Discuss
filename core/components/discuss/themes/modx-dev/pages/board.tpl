@@ -13,17 +13,15 @@
 			<nav id="key-Paginate" class="paginate horiz-list">[[+pagination]]</nav>
 			`]]
 			[[- USER LOGGED IN ]]
-	        [[!+discuss.user.id:notempty=`<div class="post-box">
-				<p>[[+actionbuttons]]</p>
-				<p>[[+moderators]]</p>
+	        [[!+discuss.user.id:notempty=`<div class="post-box h-group">
+				[[+actionbuttons]]
+				[[+moderators]]
 		    </div>`]]
 
 		    [[- USER NOT LOGGED IN ]]
 		    [[!+discuss.user.id:is=``:then=`
 		    <div class="post-box">
-				<p>
-					<a href="[[~[[*id]]]]login" class="Button">Login to Post</a>
-				</p>
+				<a href="[[~[[*id]]]]login" class="Button">Login to Post</a>
 			</div>
 			`]]
 		</header>
