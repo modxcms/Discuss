@@ -26,7 +26,7 @@
 
 [[+bottom]]
 
-[[$thread-sidebar-2012]]
+[[!$thread-sidebar-2012]]
 	[[- Replaced by new sidebar
 	<!--
 	<aside>
