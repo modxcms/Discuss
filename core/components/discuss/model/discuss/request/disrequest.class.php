@@ -102,7 +102,6 @@ class DisRequest {
             if (!empty($controller['isClass'])) {
                 require_once $controller['file'];
             }
-            error_reporting(E_ALL); ini_set('display_errors',true);
             if (!class_exists($className)) {
             	$this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find class: '.$className);
             	$this->discuss->sendErrorPage();
