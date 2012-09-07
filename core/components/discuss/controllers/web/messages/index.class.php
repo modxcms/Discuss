@@ -38,7 +38,7 @@ class DiscussMessagesController extends DiscussController {
         return $this->modx->lexicon('discuss.messages');
     }
     public function getSessionPlace() {
-        return 'messages';
+        return 'messages::'.$this->getProperty('page',1);
     }
     public function process() {
         $this->modx->lexicon->load('discuss:post');

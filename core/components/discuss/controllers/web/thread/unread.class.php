@@ -59,7 +59,7 @@ class DiscussThreadUnreadController extends DiscussController {
         return $this->modx->lexicon('discuss.unread_posts');
     }
     public function getSessionPlace() {
-        return 'unread';
+        return 'unread::'.$this->getProperty('page',1);
     }
     public function process() {
         /* setup default properties */
