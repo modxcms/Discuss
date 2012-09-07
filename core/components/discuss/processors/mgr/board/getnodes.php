@@ -29,7 +29,7 @@
 $curNode = !empty($scriptProperties['id']) ? $scriptProperties['id'] : 'root_0';
 $curNode = explode('_',$curNode);
 $type = $curNode[0];
-$id = $curNode[1];
+$id = (isset($curNode[1])) ? $curNode[1] : 0;
 $nodes = array();
 $parentFK = 'parent';
 switch ($type) {
