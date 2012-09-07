@@ -64,7 +64,7 @@ class DiscussThreadController extends DiscussController {
         return $this->thread->get('title');
     }
     public function getSessionPlace() {
-        return 'thread:'.$this->thread->get('id');
+        return 'thread:'.$this->thread->get('id').':'.$this->getProperty('page',1);
     }
 
     public function process() {

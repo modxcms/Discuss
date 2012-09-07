@@ -163,7 +163,7 @@ class Discuss {
             default:
                 $this->modx->lexicon->load('discuss:web');
                 if (!defined('DISCUSS_IMPORT_MODE')) {
-                    $this->url = $this->modx->makeUrl($this->modx->resource->get('id'));
+                    $this->url = $this->modx->makeUrl($this->modx->getOption('discuss.forums_resource_id'));
                     $this->_initUser();
                     $this->_initSession();
                 }
@@ -377,6 +377,7 @@ class Discuss {
     public function setSessionPlace($place) {
         $this->session->set('place',$place);
         $this->session->save();
+        $this->modx->setPlaceholder('discuss.place', $place);
     }
 
     /**
@@ -678,7 +679,7 @@ class Discuss {
     public function sendUnauthorizedPage() {
         $loginPage = $this->modx->getOption('discuss.login_resource_id',null,0);
         if (!empty($loginPage) && $this->ssoMode) {
-            $url = $this->modx->makeUrl($loginPage,'','?discuss=1','full');
+            $url = $this->modx->makeUrl($loginPage,'',array('discuss' => 1, 'discussPlace' => $this->controller->getSessionPlace()) ,'full');
             $this->modx->sendRedirect($url);
         } else {
             $this->modx->sendUnauthorizedPage();

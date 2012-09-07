@@ -44,7 +44,7 @@ class DiscussThreadRecentController extends DiscussController {
         return $this->modx->lexicon('discuss.recent_posts');
     }
     public function getSessionPlace() {
-        return 'recent';
+        return 'recent::'.$this->getProperty('page',1);
     }
     public function process() {
         /* get default options */

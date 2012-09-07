@@ -102,4 +102,25 @@ $disUser->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
 $disUser->set('ip',$discuss->getIp());
 $disUser->save();
 
+/* Parse the discussPlace value (if set) to redirect user back to Discuss. */
+$discussPlace = $hook->getValue('discussPlace');
+if (!empty($discussPlace)) {
+    $discussPlace = explode(':', $discussPlace);
+    $params = array();
+    if (isset($discussPlace[1])) {
+        $params = array($discussPlace[0] => $discussPlace[1]);
+    }
+    if (isset($discussPlace[2]) && ($discussPlace[2] > 1)) {
+        $params['page'] = $discussPlace[2];
+    }
+
+    /* Load the request handler, set the URL (cause we're out of Discuss here) and redirect back. */
+    $discuss->loadRequest();
+    $discuss->url = $modx->makeUrl($modx->getOption('discuss.forums_resource_id'));
+    $url = $discuss->request->makeUrl($discussPlace[0],$params);
+    if (!empty($url)) {
+        $modx->sendRedirect($url);
+    }
+}
+
 return true;

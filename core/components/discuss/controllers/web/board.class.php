@@ -55,7 +55,7 @@ class DiscussBoardController extends DiscussController {
     }
     
     public function getSessionPlace() {
-        return 'board:'.$this->board->get('id');
+        return 'board:'.$this->board->get('id').':'.$this->getProperty('page',1);
     }
     public function getPageTitle() {
         return $this->board->get('name');
