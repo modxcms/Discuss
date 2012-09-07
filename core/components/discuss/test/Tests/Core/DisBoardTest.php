@@ -75,18 +75,18 @@ class disBoardTest extends DiscussTestCase {
     /**
      * @param string $name
      * @param string $expected
-     * @dataProvider providerGetLastPostTitle
+     * @dataProvider providerGetLastPostTitleUrl
      */
-    public function testGetLastPostTitle($name,$expected) {
+    public function testGetLastPostTitleUrl($name,$expected) {
         $this->board->set('unit_test_title',$name);
-        $slug = $this->board->getLastPostTitle('unit_test_title');
+        $slug = $this->board->getLastPostTitleSlug('unit_test_title');
         $this->assertEquals($expected,$slug);
         $this->assertEquals($this->board->get('unit_test_title'),$slug);
     }
     /**
      * @return array
      */
-    public function providerGetLastPostTitle() {
+    public function providerGetLastPostTitleUrl() {
         return array(
             array('Test Board','test-board/'),
             array('###A Really% Weird Board! Name^^^','a-really-weird-board-name/'),
