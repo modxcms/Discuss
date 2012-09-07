@@ -51,17 +51,18 @@
                     <div class="m-welcome_box">
                         <div class="m-user_box h-group">
                             <div class="l-left">
-                                <img src="https://dl.dropbox.com/u/491945/modx-forums/fpo/sample-user-profile.png">
+                                [[-<img src="https://dl.dropbox.com/u/491945/modx-forums/fpo/sample-user-profile.png">]]
+                                <img src="[[!+discuss.user.avatar_url]]">
                             </div>
                             <div class="l-right">
-                                <h3>Welcome Back Jason</h3>
-                                <p>Since your last visit, there have been <a href="#">129 new posts</a>, <a href="#">12 unread messages</a> and <a href="#">14 replies</a> in subscribed threads.</p>
+                                <h3>Welcome Back [[!+discuss.user.name_first]]</h3>
+                                <p>Since your last visit, there have been <a href="[[~[[*id]]]]thread/unread_last_visit">129 new posts</a>, <a href="[[~[[*id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]] unread messages</a> and <a href="[[~[[*id]]]]thread/new_replies_to_posts">14 replies</a> in subscribed threads.</p>
                                 <div class="m-user_tools">
                                     <ul class="m-user_tools_reg_links l-horiz_list">
-                                        <li><a href="#">update profile</a></li>
-                                        <li><a href="#">update email notificaitons</a></li>
+                                        <li><a href="[[~[[++discuss.update_profile_resource_id]]]]">update profile</a></li>
+                                        <li><a href="#">update email notifications</a></li>
                                     </ul>
-                                    <a class="m-user_tools_logout" href="#">Logout</a>
+                                    <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]">Logout</a>
                                 </div>
                             </div>
                         </div>
@@ -70,14 +71,16 @@
                     [[!+discuss.user.id:is=``:then=`
                     <div class="masthead-login m-login_box h-group">
                         <div class="masthead-title"><strong>Login to MODX</strong> Don't have a MODX.com account? <a href="#">Create one</a></div>
-                            <form class="m-login_block">
+                            <form class="m-login_block" method="post" action="[[~[[++discuss.login_resource_id]]]]">
+                                <input type="hidden" name="service" value="login" />
+                                <input type="hidden" name="discussPlace" value="[[!+discuss.place]]" />
                                 <div class="f7-f8">
-                                    <input type="text">
-                                    <label>modx.com username</label>
+                                    <input type="text" name="username" id="login-username">
+                                    <label for="login-username">modx.com username</label>
                                 </div>
                                 <div class="f9-f10">
-                                    <input type="password">
-                                    <label>password</label>
+                                    <input type="password" name="password" id="login-password">
+                                    <label for="login-password">password</label>
                                 </div>
                                 <div class="f11-f12">
                                     <input class="alt-1-cta" type="submit" value="Login">
