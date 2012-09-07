@@ -57,7 +57,6 @@ if (empty($boards)) {
     /** @var disBoard $board */
     foreach ($response['results'] as $board) {
         $board->calcLastPostPage();
-        $board->getLastPostTitle();
         $board->getLastPostUrl();
         $boards[] = $board->toArray('',true,true);
     }

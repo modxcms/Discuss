@@ -773,15 +773,22 @@ class disBoard extends xPDOSimpleObject {
     }
 
     /**
-     * Get the title of the last post on this board (requires prior data filled)
+     * Deprecated, use disBoard.getLastPostTitleSlug instead.
+     * @deprecated 2012-09-07
+     */
+    public function getLastPostTitle($key = 'last_post_title') {
+        return $this->getLastPostTitleSlug($key);
+    }
+
+    /**
+     * Get the title of the last post, properly escaped for building urls. (requires prior data filled)
      * @param string $key
      * @return string
      */
-    public function getLastPostTitle($key = 'last_post_title') {
+    public function getLastPostTitleSlug($key = 'last_post_title') {
         $title = $this->get($key);
         if (!empty($title)) {
             $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-').'/';
-            $this->set($key,$title);
         }
         return $title;
     }
@@ -791,7 +798,7 @@ class disBoard extends xPDOSimpleObject {
      * @return string
      */
     public function getLastPostUrl() {
-        $view = 'thread/'.$this->get('last_post_thread').'/'.$this->getLastPostTitle();
+        $view = 'thread/'.$this->get('last_post_thread').'/'.$this->getLastPostTitleSlug();
 
         $params = array();
         $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
@@ -811,6 +818,7 @@ class disBoard extends xPDOSimpleObject {
      * @param string $keyPrefix
      * @param bool $rawValues
      * @param bool $excludeLazy
+     * @param bool $includeRelated
      * @return array
      */
     public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated = false) {
