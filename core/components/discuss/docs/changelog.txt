@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- Fix bug in mgr processor board/getnodes causing issues in CMP.
 - Add ability to discussLogin post login hook to redirect back to prior location based on sessionPlace
 - Update sessionPlace to include page number on boards, threads.
 - Refactor disBoard.getLastPostTitle to disBoard.getLastPostTitleSlug
