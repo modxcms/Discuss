@@ -194,10 +194,14 @@ h3.forum
 .dis-list
     margin: 1em 0 0 0
     line-height: 1.4
-    +box-shadow(darken($c-base, 5%) 0 0 3px)
+    // +box-shadow(darken($c-base, 5%) 0 0 3px)
+    // +border-radius($radius-sm)
+    // border: solid 1px darken($c-base, 10%)
+    // background-color: lighten($c-base, 4%)
+    +box-shadow(darken($c-base, 0%) 0 0 0)
     +border-radius($radius-sm)
-    border: solid 1px darken($c-base, 10%)
-    background-color: lighten($c-base, 4%)
+    border: solid 1px darken($c-base, 0%)
+    background-color: lighten($c-base, 0%)
 
     .dis-post
         border-bottom: solid 1px darken($c-base, 13%)
@@ -246,6 +250,7 @@ footer
 .dis-post-left
     // font-size: 11px
     float: left
+    text-align: left
     width: 9%
     img
         width: 100%
@@ -256,12 +261,12 @@ footer
         border: none
     .dis-usr-post-count, .dis-usr-icon // REMOVE FUTURE prexsiting styling
         margin: 0
-        +rem('font-size', 9px)
+        +rem('font-size', 11px)
     .dis-usr-post-count
-        margin-left: .35em
+        margin: .3em .2em 0 .35em
 
 .dis-post-right
-    float: right
+    float: left
     width: 86%
     padding: 0 2% 2% 0
     +rem('font-size', 15px)
@@ -270,11 +275,10 @@ footer
         line-height: 1
         color: darken($c-base, 50%)
         margin: 0 0 1em 0
-        padding: 0 0 .5em 0
+        padding: 0 0 .8em 0
         position: relative
         border-bottom: dotted 1px darken($c-base, 12%)
         strong
-            background-color: lighten($c-base, 4%) // should match background color of .dis-list for now
             +rem('font-size', 15px)
             margin-right: .25em
         .dis-actions
@@ -385,13 +389,13 @@ footer
         +rem('font-size',14px)
         line-height: 1.3
         +rem('padding', 10px 15px)
-        background-color: lighten($c-base, 1%)
+        background-color: lighten($c-base, 11%)
         +border-radius($radius-sm)
         +box-shadow(darken($c-base, 10%) 0 2px 3px)
         border: 1px solid darken($c-base, 8%)
         h4
             +rem('font-size', 16px)
-            +rem('margin', 0 -18px 5px -18px )
+            +rem('margin', 0 -17px 5px -17px )
             +rem('padding', 0 18px 7px 18px )
             background: none
             font-weight: 700
