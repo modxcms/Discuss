@@ -143,8 +143,8 @@ if (empty($cache)) {
                 $threadArray['excerpt'] = $post->get('message');
                 $threadArray['excerpt'] = $post->stripBBCode($threadArray['excerpt']);
                 $threadArray['excerpt'] = strip_tags($threadArray['excerpt']);
-                if (strlen($threadArray['excerpt']) > 500) {
-                    $threadArray['excerpt'] = substr($threadArray['excerpt'],0,500).'...';
+                if (strlen($threadArray['excerpt']) > $modx->getOption('discuss.post_excerpt_length', null, 500)) {
+                    $threadArray['excerpt'] = substr($threadArray['excerpt'],0,$modx->getOption('discuss.post_excerpt_length', null, 500)).'...';
                 }
             }
         }
