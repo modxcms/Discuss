@@ -280,6 +280,11 @@ class disUser extends xPDOSimpleObject {
                         $v = $this->get('username');
                     }
                     break;
+                case 'posts_formatted': {
+                    $v = $this->get('posts');
+                    $v = number_format($v);
+                    break;
+                }
             }
         }
         return $v;
@@ -295,15 +300,16 @@ class disUser extends xPDOSimpleObject {
      * @return array
      */
     public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated = false) {
-        $values = parent :: toArray($keyPrefix,$rawValues,$excludeLazy);
-        $values['age'] = $this->get('age');
-        $values['gender_formatted'] = $this->get('gender_formatted');
-        $values['avatarUrl'] = $this->getAvatarUrl();
-        $values['isSelf'] = $this->xpdo->user->get('id') == $this->get('user');
-        $values['canEdit'] = $values['isSelf'];
-        $values['canAccount'] = $values['isSelf'];
-        $values['canMerge'] = $values['isSelf'];
-        $values['name'] = $this->get('name');
+        $values = parent :: toArray($keyPrefix,$rawValues,$excludeLazy, $includeRelated);
+        $values[$keyPrefix.'age'] = $this->get('age');
+        $values[$keyPrefix.'gender_formatted'] = $this->get('gender_formatted');
+        $values[$keyPrefix.'avatarUrl'] = $this->getAvatarUrl();
+        $values[$keyPrefix.'isSelf'] = $this->xpdo->user->get('id') == $this->get('user');
+        $values[$keyPrefix.'canEdit'] = $values[$keyPrefix.'isSelf'];
+        $values[$keyPrefix.'canAccount'] = $values[$keyPrefix.'isSelf'];
+        $values[$keyPrefix.'canMerge'] = $values[$keyPrefix.'isSelf'];
+        $values[$keyPrefix.'name'] = $this->get('name');
+        $values[$keyPrefix.'posts_formatted'] = $this->get('posts_formatted');
         return $values;
     }
 

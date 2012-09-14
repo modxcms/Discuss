@@ -125,7 +125,7 @@ class DiscussHomeController extends DiscussController {
                 $authLink = $this->discuss->request->makeUrl('logout');
                 $authMsg = $this->modx->lexicon('discuss.logout');
                 $this->modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
-                $actionButtons[] = array('url' => $authLink, 'text' => $authMsg);
+                $actionButtons[] = array('url' => $authLink, 'text' => $authMsg, 'cls' => 'dis-action-logout');
             }
         } else { /* if logged out */
             $authLink = $this->discuss->request->makeUrl('login');
