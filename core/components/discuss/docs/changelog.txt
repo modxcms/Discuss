@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- Fix overridden disUser.toArray and add posts_formatted placeholder.
 - Ensure action buttons have specific and consistent class names for styling (dis-action-name_of_action)
 - Make length of post excerpt configurable.
 - Fix bug in mgr processor board/getnodes causing issues in CMP.
