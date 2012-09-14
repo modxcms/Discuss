@@ -690,6 +690,14 @@ $settings['discuss.solr.proxy_password']->fromArray(array(
     'namespace' => 'discuss',
     'area' => 'Solr',
 ),'',true,true);
+$settings['discuss.post_excerpt_length']= $modx->newObject('modSystemSetting');
+$settings['discuss.post_excerpt_length']->fromArray(array(
+    'key' => 'discuss.post_excerpt_length',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Posts',
+),'',true,true);
 
 /*
 $settings['discuss.']= $modx->newObject('modSystemSetting');
