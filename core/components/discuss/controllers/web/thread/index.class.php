@@ -255,7 +255,7 @@ class DiscussThreadController extends DiscussController {
         /* @var array $actionButtons Thread action buttons */
         $actionButtons = array();
         if ($this->board->canPost() && $this->thread->canReply()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'),'cls' => 'dis-action-reply');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'),'cls' => 'dis-action-reply dis-action-reply_to-thread');
         }
         $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'));
         if ($this->thread->canUnsubscribe()) {
@@ -285,24 +285,24 @@ class DiscussThreadController extends DiscussController {
     public function getModeratorActionButtons() {
         $actionButtons = array();
         if ($this->thread->canMove()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/move',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_move'),'cls' => 'dis-action-move');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/move',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_move'),'cls' => 'dis-action-move dis-action-thread_move');
         }
         if ($this->thread->canRemove()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_remove'),'cls' => 'dis-action-remove-thread');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_remove'),'cls' => 'dis-action-remove-thread dis-action-thread_remove');
             if (!empty($this->options['showMarkAsSpamOption'])) {
-                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/spam',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_spam'),'cls' => 'dis-action-spam');
+                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/spam',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_spam'),'cls' => 'dis-action-spam dis-action-thread_spam');
             }
         }
 
         if ($this->thread->canUnlock() && !empty($this->options['showLockOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('lock' => 0)), 'text' => $this->modx->lexicon('discuss.thread_unlock'),'cls' => 'dis-action-unlock');
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('lock' => 0)), 'text' => $this->modx->lexicon('discuss.thread_unlock'),'cls' => 'dis-action-unlock dis-action-thread_unlock');
         } else if ($this->thread->canLock() && !empty($this->options['showLockOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('lock' => 1)), 'text' => $this->modx->lexicon('discuss.thread_lock'),'cls' => 'dis-action-lock');
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('lock' => 1)), 'text' => $this->modx->lexicon('discuss.thread_lock'),'cls' => 'dis-action-lock dis-action-thread_lock');
         }
         if ($this->thread->canUnstick() && !empty($this->options['showStickOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('sticky' => 0)), 'text' => $this->modx->lexicon('discuss.thread_unstick'),'cls' => 'dis-action-unstick');
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('sticky' => 0)), 'text' => $this->modx->lexicon('discuss.thread_unstick'),'cls' => 'dis-action-unstick dis-action-thread_unstick');
         } else if ($this->thread->canStick() && !empty($this->options['showStickOption'])) {
-            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('sticky' => 1)), 'text' => $this->modx->lexicon('discuss.thread_stick'),'cls' => 'dis-action-stick');
+            $actionButtons[] = array('url' => $this->thread->getUrl(false,array('sticky' => 1)), 'text' => $this->modx->lexicon('discuss.thread_stick'),'cls' => 'dis-action-stick dis-action-thread-stick');
         }
         /**
          * TODO: Merge thread - 1.1

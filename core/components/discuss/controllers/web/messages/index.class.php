@@ -121,8 +121,8 @@ class DiscussMessagesController extends DiscussController {
     public function getActionButtons() {
         $actionButtons = array();
         if ($this->modx->hasPermission('discuss.pm_send') && $this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages/new'), 'text' => $this->modx->lexicon('discuss.message_new'));
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'));
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages/new'), 'text' => $this->modx->lexicon('discuss.message_new'), 'cls' => 'dis-action-message_new');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
