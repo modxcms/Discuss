@@ -51,8 +51,9 @@
                     <div class="m-welcome_box">
                         <div class="m-user_box h-group">
                             <div class="l-left">
-                                [[-<img src="https://dl.dropbox.com/u/491945/modx-forums/fpo/sample-user-profile.png">]]
                                 <img src="[[!+discuss.user.avatar_url]]">
+                                <br />
+                                <span class="m-user_posts">[[!+discuss.user.posts_formatted]] [[%discuss.posts]]</span>
                             </div>
                             <div class="l-right">
                                 <h3>Welcome Back [[!+discuss.user.name_first]]</h3>
