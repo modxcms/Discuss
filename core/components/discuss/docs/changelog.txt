@@ -1,5 +1,6 @@
 Changelog for Discuss (MODX Theme).
 
+- Add ability to customize separator between subboards through theme's manifest.php
 - Fix overridden disUser.toArray and add posts_formatted placeholder.
 - Ensure action buttons have specific and consistent class names for styling (dis-action-name_of_action)
 - Make length of post excerpt configurable.

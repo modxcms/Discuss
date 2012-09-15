@@ -32,9 +32,11 @@
  * @package discuss
  * @subpackage hooks
  */
+//var_dump($options);
 $board = isset($scriptProperties['board']) ? (is_object($scriptProperties['board']) ? $scriptProperties['board']->get('id') : $scriptProperties['board']) : 0;
 $lastPostTpl = $modx->getOption('lastPostTpl',$options,'board/disLastPostBy');
 $subBoardTpl = $modx->getOption('subBoardTpl',$options,'board/disSubForumLink');
+$subBoardSeparator = $modx->getOption('subBoardSeparator',$options,",\n");
 $categoryRowTpl = $modx->getOption('categoryRowTpl',$options,'category/disCategoryLi');
 $boardRowTpl = $modx->getOption('boardRowTpl',$options,'board/disBoardLi');
 $checkUnread = $modx->getOption('checkUnread',$options,true);
@@ -136,7 +138,7 @@ foreach ($boards as $board) {
 
             $sbl[] = $discuss->getChunk($subBoardTpl,$ph);
         }
-        $board['subforums'] = implode(",\n",$sbl);
+        $board['subforums'] = implode($subBoardSeparator,$sbl);
     }
 
     /* get current category */
