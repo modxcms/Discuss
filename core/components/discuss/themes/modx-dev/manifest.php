@@ -73,6 +73,7 @@ $manifest = array(
             'checkUnread' => true,
             'showLogoutActionButton' => false,
             'hideIndexBreadcrumbs' => true,
+            'subBoardSeparator' => '',
         ),
     ),
     'board' => array(
