@@ -45,10 +45,6 @@ class DiscussHomeController extends DiscussController {
             $this->getBoards();
         }
 
-        if (!empty($this->options['showStatistics'])) {
-            $this->getStatistics();
-        }
-
         $this->renderActionButtons();
 
         if (!empty($this->options['showRecentPosts'])) {
@@ -138,42 +134,6 @@ class DiscussHomeController extends DiscussController {
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
-
-    /**
-     * Get the statistics for the bottom area of the home page
-     * @return void
-     */
-    public function getStatistics() {
-        $this->setPlaceholder('totalPosts',number_format((int)$this->modx->getCount('disPost')));
-        $this->setPlaceholder('totalTopics',number_format((int)$this->modx->getCount('disPost',array('parent' => 0))));
-        $this->setPlaceholder('totalMembers',number_format((int)$this->modx->getCount('disUser')));
-
-        /* active in last 40 */
-        if ($this->modx->getOption('discuss.show_whos_online',null,true) && $this->modx->hasPermission('discuss.view_online')) {
-            $this->setPlaceholder('activeUsers', $this->discuss->hooks->load('user/active_in_last'));
-        } else {
-            $this->setPlaceholder('activeUsers', '');
-        }
-
-        /* total active */
-        $this->setPlaceholder('totalMembersActive',number_format((int)$this->modx->getCount('disSession',array('user:!=' => 0))));
-        $this->setPlaceholder('totalVisitorsActive',number_format((int)$this->modx->getCount('disSession',array('user' => 0))));
-
-        /**
-         * forum activity
-         * @var disForumActivity $activity
-         */
-        $activity = $this->modx->getObject('disForumActivity',array(
-            'day' => date('Y-m-d'),
-        ));
-        if (!$activity) {
-            $activity = $this->modx->newObject('disForumActivity');
-            $activity->set('day',date('Y-m-d'));
-            $activity->save();
-        }
-        $this->setPlaceholders($activity->toArray('activity.'));
-    }
-
 
     public function getRecentPosts() {
         $cacheKey = 'discuss/board/recent/'.$this->discuss->user->get('id');
