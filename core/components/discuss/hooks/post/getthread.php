@@ -111,9 +111,6 @@ foreach ($posts['results'] as $post) {
             $postArray['depth'] = $maxPostDepth;
         }
     }
-    if ($postArray['answer']) {
-        $postArray['class'][] = 'dis-post-answer';
-    }
 
     /* format bbcode */
     $postArray['content'] = $post->getContent();
