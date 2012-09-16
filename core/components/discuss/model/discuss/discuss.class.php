@@ -129,6 +129,8 @@ class Discuss {
             'hooksPath' => $corePath.'hooks/',
             'useCss' => true,
             'loadJQuery' => true,
+
+            'debugTemplates' => $this->modx->getOption('discuss.debug_templates', null, false)
         ),$config);
 
         $this->modx->addPackage('discuss',$this->config['modelPath']);
@@ -480,6 +482,10 @@ class Discuss {
         $f = $this->config['chunksPath'].strtolower($name).$postFix;
         if (file_exists($f)) {
             $o = file_get_contents($f);
+            if ($this->config['debugTemplates']) {
+                $fv = str_replace($this->config['corePath'], '', $f);
+                $o = "\n<!-- Start: $name from file: $fv -->\n $o \n<!-- /End: $name -->\n";
+            }
             /** @var modChunk $chunk */
             $chunk = $this->modx->newObject('modChunk');
             $chunk->set('name',$name);

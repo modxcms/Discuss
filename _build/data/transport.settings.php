@@ -244,6 +244,14 @@ $settings['discuss.debug']->fromArray(array(
     'namespace' => 'discuss',
     'area' => '',
 ),'',true,true);
+$settings['discuss.debug_templates']= $modx->newObject('modSystemSetting');
+$settings['discuss.debug_templates']->fromArray(array(
+    'key' => 'discuss.debug_templates',
+    'value' => '0',
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => '',
+),'',true,true);
 
 $settings['discuss.enable_hot']= $modx->newObject('modSystemSetting');
 $settings['discuss.enable_hot']->fromArray(array(
