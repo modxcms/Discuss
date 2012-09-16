@@ -1,5 +1,6 @@
 Changelog for Discuss (MODX Theme).
 
+- #4768 Ask user to login if thread not found to allow links to private forums to work through login
 - Enable statistics globally (can be disabled in the manifest) so we can use it everywhere.
 - Fix url generation on notification emails.
 - Add new discuss.user.new_replies and discuss.user.unread_posts placeholders
