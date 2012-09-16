@@ -57,7 +57,7 @@
                             </div>
                             <div class="l-right">
                                 <h3>Welcome Back [[!+discuss.user.name_first]]</h3>
-                                <p>Since your last visit, there have been <a href="[[~[[*id]]]]thread/unread_last_visit">[[!+discuss.user.unread_posts]] new posts</a>, <a href="[[~[[*id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]] unread messages</a> and <a href="[[~[[*id]]]]thread/new_replies_to_posts">[[!+discuss.user.new_replies]] replies</a> in subscribed threads.</p>
+                                <p>Since your last visit, there have been <a href="[[~[[*id]]]]thread/unread_last_visit">[[!+discuss.user.unread_posts]]</a>, <a href="[[~[[*id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]]</a> and <a href="[[~[[*id]]]]thread/new_replies_to_posts">[[!+discuss.user.new_replies]]</a> in subscribed threads.</p>
                                 <div class="m-user_tools">
                                     <ul class="m-user_tools_reg_links l-horiz_list">
                                         <li><a href="[[~[[++discuss.update_profile_resource_id]]]]">update profile</a></li>
