@@ -190,6 +190,7 @@ class DiscussThreadController extends DiscussController {
 
     public function fireOnRenderThread() {
         /* Render thread event */
+        $placeholders = $this->getPlaceholders();
         $placeholders['top'] = '';
         $placeholders['bottom'] = '';
         $placeholders['aboveThread'] = '';
