@@ -301,6 +301,8 @@ class Discuss {
             $authphs = array_merge($this->user->toArray('user.'),$authphs);
             $authphs['user.avatar_url'] = $this->user->getAvatarUrl();
             $authphs['user.unread_messages'] = $this->user->countUnreadMessages();
+            $authphs['user.unread_posts'] = $this->user->countUnreadPosts();
+            $authphs['user.new_replies'] = $this->user->countNewReplies();
             $this->user->isGlobalModerator();
             $this->user->isAdmin();
         } else {

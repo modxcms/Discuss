@@ -171,17 +171,20 @@ class disThread extends xPDOSimpleObject {
 
     /**
      * Fetch all unread, accessible threads
-     * 
+     *
      * @static
+     *
      * @param xPDO $modx A reference to the modX instance
      * @param string $sortBy The column to sort by
      * @param string $sortDir The direction to sort
      * @param int $limit The # of threads to limit
      * @param int $start The index to start by
      * @param boolean $sinceLastLogin
+     * @param boolean $countOnly Set to true to only return the count, and not actually run the query.
+     *
      * @return array An array in results/total format
      */
-    public static function fetchUnread(xPDO &$modx,$sortBy = 'post_last_on',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
+    public static function fetchUnread(xPDO &$modx,$sortBy = 'post_last_on',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false, $countOnly = false) {
         $response = array();
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
@@ -263,8 +266,9 @@ class disThread extends xPDOSimpleObject {
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);
-        $response['results'] = $modx->getCollection('disThread',$c);
-
+        if (!$countOnly) {
+            $response['results'] = $modx->getCollection('disThread',$c);
+        }
         return $response;
     }
 
@@ -273,15 +277,18 @@ class disThread extends xPDOSimpleObject {
      * Fetch all new replies in threads that the active user is a participant in
      *
      * @static
+     *
      * @param xPDO $modx A reference to the modX instance
      * @param string $sortBy The column to sort by
      * @param string $sortDir The direction to sort
      * @param int $limit The # of threads to limit
      * @param int $start The index to start by
      * @param boolean $sinceLastLogin
+     * @param bool $countOnly Set to true to only return count, not run the actual query
+     *
      * @return array An array in results/total format
      */
-    public static function fetchNewReplies(xPDO &$modx,$sortBy = 'post_last_on',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false) {
+    public static function fetchNewReplies(xPDO &$modx,$sortBy = 'post_last_on',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false, $countOnly = false) {
         $response = array();
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
@@ -362,7 +369,9 @@ class disThread extends xPDOSimpleObject {
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);
-        $response['results'] = $modx->getCollection('disThread',$c);
+        if (!$countOnly) {
+            $response['results'] = $modx->getCollection('disThread',$c);
+        }
 
         return $response;
     }
