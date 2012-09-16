@@ -282,6 +282,7 @@ class disBoard extends xPDOSimpleObject {
      *
      * @access public
      * @return string The text returned for the viewing users.
+     * @todo Fix hardcoded markup and separator and add check for display name.
      */
     public function getViewing() {
         if (!$this->xpdo->getOption('discuss.show_whos_online',null,true)) return '';
@@ -340,6 +341,7 @@ class disBoard extends xPDOSimpleObject {
      *
      * @access public
      * @return string The text returned for the viewing users.
+     * @todo Get rid of hardcoded separator + markup
      */
     public function getModeratorsList() {
         $canViewProfiles = $this->xpdo->hasPermission('discuss.view_profiles');

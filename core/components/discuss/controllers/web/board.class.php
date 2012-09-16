@@ -155,6 +155,7 @@ class DiscussBoardController extends DiscussController {
         $this->setPlaceholders(array(
             'top' => '',
             'bottom' => '',
+            'aboveBoards' => '',
             'aboveThreads' => '',
             'belowBoards' => '',
             'belowThreads' => '',
