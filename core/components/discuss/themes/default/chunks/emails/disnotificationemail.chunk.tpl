@@ -1,6 +1,6 @@
 <p>Hello [[+username]],</p>
 
-<p>A post has been made in the [[+type]] "[[+name]]". You have selected to recieve notifications for new posts in this [[+type]].</p>
+<p>A post has been made in the [[+type]] "[[+name]]". You have selected to receive notifications for new posts in this [[+type]].</p>
 
 <p>You can view the post here:</p>
 
