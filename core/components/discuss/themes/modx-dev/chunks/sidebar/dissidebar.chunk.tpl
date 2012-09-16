@@ -1,4 +1,3 @@
-<!-- sidebar/dissidebar.chunk.tpl -->
 <aside>
     <div class="PanelBox">
             [[!+discuss.user.id:notempty=`

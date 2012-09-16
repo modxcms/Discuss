@@ -1,2 +1,1 @@
-<!-- REMOVEDPRODUCTION disbreadcrumbslink.chunk.tpl -->
-<li class="[[+cls]]"><a href="[[+url]]">[[+text]]</a></li>
+<li class="[[+cls]]"><a href="[[+url]]" title="[[+text]]">[[+text]]</a></li>

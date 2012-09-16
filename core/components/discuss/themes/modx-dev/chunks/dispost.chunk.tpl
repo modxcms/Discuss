@@ -1,4 +1,3 @@
-<!-- REMOVEPRODUCTION dispost.chunk.tpl -->
 <div>
     <div class="dis-post-header">
         <div class="dis-post-actions"></div>

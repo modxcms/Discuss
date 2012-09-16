@@ -1,4 +1,3 @@
-<!-- REMOVEPRODUCTION dispostbuttons.chunk.tpl -->
 <script type="text/javascript"><!-- // --><![CDATA[
 function bbc_highlight(something, mode) {
     something.style.backgroundImage = "url(" + '[[+buttons_url]]10x10/' + (mode ? "bbc_hoverbg.gif)" : "bbc_bg.gif)");

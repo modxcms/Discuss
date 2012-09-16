@@ -1,4 +1,3 @@
-<!-- REMOVEPRODUCTION category/discategoryli.chunk.tpl -->
 <div class="m-section_title">
 	<header class="dis-cat-header dark-gradient group-fix multi"><h1>[[+category_name]]</h1></header>
 	<div class="row h-group">
@@ -8,5 +7,3 @@
 	</div>
 </div>
 [[+list]]
-
-<!-- / REMOVEPRODUCTION category/discategoryli.chunk.tpl -->

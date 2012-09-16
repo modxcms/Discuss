@@ -1,4 +1,3 @@
-<!-- post/disthreadpost.chunk.tpl -->
 <li class="[[+class]] group-fix" id="dis-post-[[+id]]">
     <div class="dis-post-left">
         <ul>

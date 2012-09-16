@@ -1,4 +1,3 @@
-<!-- dismessageli.chunk.tpl -->
 <li class="Depth2  dis-category-[[+category]]">
     <div class="ItemContent">
     	<a href="[[~[[*id]]]]messages/view?thread=[[+thread]]#dis-board-post-[[+post_id]]" class="dis-cat-links [[+unread-cls]]">

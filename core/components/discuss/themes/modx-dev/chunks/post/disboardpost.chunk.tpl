@@ -1,4 +1,3 @@
-<!-- REMOVEPRODUCTION post/disboardpost.chunk.tpl -->
 <div class="row h-group dis-category-[[+category]] [[+class]] [[+locked:is=`1`:then=`locked`:else=`unlocked`]] [[+unreadCls]]">
     <a class="h-group" href="[[+url]]">
         <div class="f1-f7">

@@ -1,4 +1,3 @@
-<!-- dislogintpl.chunk.tpl -->
 <form class="dis-form dis-login" action="[[~[[*id]]]]login" method="post">
     <input class="loginLoginValue" type="hidden" name="service" value="login" />
     <input class="returnUrl" type="hidden" name="returnUrl" value="[[~[[*id]]]]" />

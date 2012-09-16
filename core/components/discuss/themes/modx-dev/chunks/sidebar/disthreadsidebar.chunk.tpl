@@ -1,4 +1,3 @@
-<!-- sidebar/disthreadsidebar.chunk.tpl -->
 <aside class="sidebar twenty12 f10-f12">
     [[!+discuss.user.id:is=``:then=`
         <div class="box first">

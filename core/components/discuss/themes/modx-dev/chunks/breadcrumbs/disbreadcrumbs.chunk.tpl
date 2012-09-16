@@ -1,4 +1,3 @@
-<!-- REMOVEDPRODUCTION breadcrumbs/disbreadcrumbs.chunk.tpl -->
  <div class="m-breadcrumbs f-padinfull l-horizontal_nav h-group">
     <nav class="container l-left">
 		<ul>
@@ -23,11 +22,10 @@
 			}, true);
 		</script>
 	</div>
-<!-- 	<form class="l-right m-search" action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
+[[- 	<form class="l-right m-search" action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
         <label for="search_form_input" class="hidden">Search</label>
         <input id="search_form_input" placeholder="Search keyphrase..." name="s" value="" title="Start typing and hit ENTER" type="text">
         <input value="Go" type="submit">
-    </form> -->
+    </form> ]]
     <!-- / remove out of breadcrumbs-->
 </div>
-<!-- / REMOVEDPRODUCTION breadcrumbs/disbreadcrumbs.chunk.tpl -->
