@@ -47,7 +47,10 @@ class DiscussThreadController extends DiscussController {
         $thread = $this->modx->getOption('thread',$this->scriptProperties,false);
         if (empty($thread)) $this->discuss->sendErrorPage();
         $this->thread = $this->modx->call('disThread', 'fetch', array(&$this->modx,$thread,'post',$integrated));
-        if (empty($this->thread)) $this->discuss->sendErrorPage();
+        if (empty($this->thread)) {
+            if ($this->discuss->user->isLoggedIn) $this->discuss->sendErrorPage();
+            else $this->discuss->sendUnauthorizedPage();
+        }
 
         $this->isModerator = $this->thread->isModerator();
         $this->isAdmin = $this->discuss->user->isAdmin();
