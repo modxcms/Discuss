@@ -36,8 +36,13 @@ class DiscussMessagesViewController extends DiscussController {
     public function initialize() {
         $thread = $this->getProperty('thread',false);
         if (empty($thread)) $this->discuss->sendErrorPage();
+        /* Ensure disThread is loaded to prevent issue when not logged in */
+        if (!class_exists('disThread')) $this->modx->loadClass('discuss.disThread', $this->discuss->config['modelPath']);
         $this->thread = $this->modx->call('disThread', 'fetch', array(&$this->modx,$thread,disThread::TYPE_MESSAGE));
-        if (empty($this->thread)) $this->modx->sendErrorPage();
+        if (empty($this->thread)) {
+            if ($this->discuss->user->isLoggedIn) $this->modx->sendErrorPage();
+            else $this->discuss->sendUnauthorizedPage();
+        }
         $this->modx->lexicon->load('discuss:post');
     }
 
@@ -51,7 +56,9 @@ class DiscussMessagesViewController extends DiscussController {
         return $this->thread->get('title');
     }
     public function getSessionPlace() {
-        return 'message:'.$this->thread->get('id');
+        return 'messages/view:thread='.
+            (($this->thread instanceof disThread) ? $this->thread->get('id') : $this->getProperty('thread',0)).
+            ':'.$this->getProperty('page',1);
     }
 
     public function process() {

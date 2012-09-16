@@ -108,7 +108,12 @@ if (!empty($discussPlace)) {
     $discussPlace = explode(':', $discussPlace);
     $params = array();
     if (isset($discussPlace[1])) {
-        $params = array($discussPlace[0] => $discussPlace[1]);
+        if (strpos($discussPlace[1],'=') !== false) {
+            $urlparam = explode('=', $discussPlace[1]);
+            $params = array($urlparam[0] => $urlparam[1]);
+        } else {
+            $params = array($discussPlace[0] => $discussPlace[1]);
+        }
     }
     if (isset($discussPlace[2]) && ($discussPlace[2] > 1)) {
         $params['page'] = $discussPlace[2];
