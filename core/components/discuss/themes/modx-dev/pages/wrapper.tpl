@@ -38,10 +38,10 @@
                 <div class="f1-f6 m-all">
                     <nav class="l-col_16">
                         <ul class="m-sm_nav_pod">
-                            <li><a href="#">Back to MODX.com</a></li>
-                            <li><a href="#">Forums</a></li>
-                            <li><a href="#">Docs</a></li>
-                            <li><a href="#">Bugs</a></li>
+                            <li><a href="http://modx.com/">Back to MODX.com</a></li>
+                            <li><a href="[[~[[*id]]]]">Forums</a></li>
+                            <li><a href="http://rtfm.modx.com/">Docs</a></li>
+                            <li><a href="http://tracker.modx.com/">Bugs</a></li>
                         </ul>
                     </nav>
                     <a class="h-ir" href="#">MODX Forums</a>
