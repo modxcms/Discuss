@@ -59,11 +59,23 @@ if (!empty($scriptProperties['board']) && empty($scriptProperties['thread'])) {
 $notifications = $modx->getCollection('disUserNotification',$c);
 
 /* build thread url */
-$url = $type == 'message' ? 'messages/view' : 'thread';
-$url = $modx->makeUrl($modx->resource->get('id'),'','','full').$url.'?thread='.$scriptProperties['thread'];
+$url = '';
+$type = ($type == 'message') ? 'messages/view' : 'thread/';
 if (!empty($scriptProperties['post'])) {
-    $url .= '#dis-post-'.$scriptProperties['post'];
+    /* @var disPost $post */
+    $post = $modx->getObject('disPost', (int)$scriptProperties['post']);
+    if ($post) {
+        $url = $post->getUrl($type);
+    }
 }
+if (empty($url)) {
+    /* @var disThread $thread */
+    $thread = $modx->getObject('disThread',(int)$scriptProperties['thread']);
+    if ($thread) {
+        $url = $thread->getUrl(true);
+    }
+}
+
 /* send out notifications */
 /** @var disUserNotification $notification */
 foreach ($notifications as $notification) {
