@@ -7,7 +7,7 @@
     <!--[if IE]><![endif]-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <base href="[[!++site_url]]">
-    <title>MODX :: [[!+discuss.pagetitle]]</title>
+    <title>[[!+discuss.pagetitle]] | MODX Community Forums </title>
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
     <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />
