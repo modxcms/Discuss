@@ -473,6 +473,22 @@ class disUser extends xPDOSimpleObject {
         ));
         return $this->xpdo->getCount('disThread',$c);
     }
+    /**
+     * Get the number of unread posts since last visit.
+     * @return int
+     */
+    public function countUnreadPosts() {
+        $response = $this->xpdo->call('disThread','fetchUnread',array(&$this->xpdo,'LastPost.createdon','DESC',10 ,0 ,true, true));
+        return number_format($response['total']);
+    }
+    /**
+     * Get the number of new replies to topics the user participates in since last visit.
+     * @return int
+     */
+    public function countNewReplies() {
+        $response = $this->xpdo->call('disThread','fetchNewReplies',array(&$this->xpdo,'post_last_on','DESC',10,0, true, true));
+        return number_format($response['total']);
+    }
 
     /**
      * Clear the cache for this User
