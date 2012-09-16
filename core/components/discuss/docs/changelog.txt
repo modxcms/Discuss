@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- Enable statistics globally (can be disabled in the manifest) so we can use it everywhere.
 - Fix url generation on notification emails.
 - Add new discuss.user.new_replies and discuss.user.unread_posts placeholders
 - #6584 Fix fatal error on messages/view and improve session place behavior for messages
