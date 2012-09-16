@@ -39,7 +39,7 @@
                     <nav class="l-col_16">
                         <ul class="m-sm_nav_pod">
                             <li><a href="http://modx.com/">Back to MODX.com</a></li>
-                            <li><a href="[[~[[*id]]]]">Forums</a></li>
+                            <li><a href="[[~[[++discuss.forums_resource_id]]]]">Forums</a></li>
                             <li><a href="http://rtfm.modx.com/">Docs</a></li>
                             <li><a href="http://tracker.modx.com/">Bugs</a></li>
                         </ul>
@@ -57,11 +57,13 @@
                             </div>
                             <div class="l-right">
                                 <h3>Welcome Back [[!+discuss.user.name_first]]</h3>
-                                <p>Since your last visit, there have been <a href="[[~[[*id]]]]thread/unread_last_visit">[[!+discuss.user.unread_posts]]</a>, <a href="[[~[[*id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]]</a> and <a href="[[~[[*id]]]]thread/new_replies_to_posts">[[!+discuss.user.new_replies]]</a> in subscribed threads.</p>
+                                <p>Since your last visit, there have been <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit">[[!+discuss.user.unread_posts]]</a>,
+                                    <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]]</a>
+                                    and <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts">[[!+discuss.user.new_replies]]</a> in subscribed threads.</p>
                                 <div class="m-user_tools">
                                     <ul class="m-user_tools_reg_links l-horiz_list">
                                         <li><a href="[[~[[++discuss.update_profile_resource_id]]]]">update profile</a></li>
-                                        <li><a href="#">update email notifications</a></li>
+                                        <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">update email notifications</a></li>
                                     </ul>
                                     <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]">Logout</a>
                                 </div>
