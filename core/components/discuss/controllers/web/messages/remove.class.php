@@ -59,7 +59,7 @@ class DiscussMessagesRemoveController extends DiscussController {
         return $this->modx->lexicon('discuss.remove_message_header',array('title' => $this->thread->get('title')));
     }
     public function getSessionPlace() {
-        return 'message-remove:'.$this->thread->get('id');
+        return 'messages/remove:thread='.$this->thread->get('id');
     }
     public function process() {
         $this->setPlaceholders($this->thread->toArray());

@@ -60,7 +60,7 @@ class DiscussMessagesReplyController extends DiscussController {
         return $this->modx->lexicon('discuss.reply_to_post',array('title' => $this->post->get('title')));
     }
     public function getSessionPlace() {
-        return 'message-new';
+        return 'messages/reply';
     }
     public function process() {
         /* setup default snippet properties */

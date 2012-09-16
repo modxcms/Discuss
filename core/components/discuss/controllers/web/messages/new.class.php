@@ -35,7 +35,7 @@ class DiscussMessagesNewController extends DiscussController {
         return $this->modx->lexicon('discuss.message_new');
     }
     public function getSessionPlace() {
-        return 'message-new';
+        return 'messages/new';
     }
     public function process() {
         $this->modx->lexicon->load('discuss:post');
