@@ -2,7 +2,7 @@
 <li class="[[+class]] group-fix" id="dis-post-[[+id]]">
     <div class="dis-post-left">
         <ul>
-            <li class="dis-usr-icon"><a href="[[+author.username_link]]" class="auth-avatar">[[+author.avatar]]</a></li>
+            <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar">[[+author.avatar]]</a></li>
             <li class="dis-usr-post-count">[[+author.posts]] posts</li>
         </ul>
     </div>
