@@ -250,6 +250,7 @@ class Discuss {
      * @access private
      */
     private function _initUser() {
+        $this->modx->lexicon->load('discuss:default');
         /* if no user, set id to 0 */
         $isLoggedIn = $this->modx->user->hasSessionContext($this->modx->context->get('key'));
         if (!$isLoggedIn) {
@@ -300,9 +301,23 @@ class Discuss {
             );
             $authphs = array_merge($this->user->toArray('user.'),$authphs);
             $authphs['user.avatar_url'] = $this->user->getAvatarUrl();
-            $authphs['user.unread_messages'] = $this->user->countUnreadMessages();
-            $authphs['user.unread_posts'] = $this->user->countUnreadPosts();
-            $authphs['user.new_replies'] = $this->user->countNewReplies();
+
+            /* Get counts */
+            $newMessages = $this->user->countUnreadMessages();
+            $unreadPosts = $this->user->countUnreadPosts();
+            $newReplies = $this->user->countNewReplies();
+            $authphs['user.unread_messages'] = ($newMessages > 1) ?
+                $this->modx->lexicon('discuss.user.new_messages',array('count' > $newMessages)) :
+                ($newMessages == 1) ? $this->modx->lexicon('discuss.user.one_new_message') :
+                    $this->modx->lexicon('discuss.user.no_new_messages');
+            $authphs['user.unread_posts'] = ($unreadPosts > 1) ?
+                $this->modx->lexicon('discuss.user.new_posts', array('count' => $unreadPosts)) :
+                ($unreadPosts == 1) ? $this->modx->lexicon('discuss.user.one_new_post') :
+                    $this->modx->lexicon('discuss.user.no_new_posts');
+            $authphs['user.new_replies'] = ($newReplies > 1) ?
+                $this->modx->lexicon('discuss.user.new_replies',array('count' => $newReplies)) :
+                ($newReplies == 1) ? $this->modx->lexicon('discuss.user.one_new_reply') :
+                    $this->modx->lexicon('discuss.user.no_new_replies');
             $this->user->isGlobalModerator();
             $this->user->isAdmin();
         } else {
