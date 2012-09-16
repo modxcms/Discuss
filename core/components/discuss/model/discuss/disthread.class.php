@@ -870,6 +870,29 @@ class disThread extends xPDOSimpleObject {
         } else {
             $class[] = $this->get('replies') < $threshold ? '' : 'dis-veryhot-thread';
         }
+
+        /* Q&A threads, and if answered */
+        if ($this->get('class_key') == 'disThreadQuestion') {
+            $class[] = 'dis-question-thread';
+            if ($this->get('answered')) {
+                $class[] = 'dis-answered-thread';
+            }
+        }
+
+        /* Locks */
+        if ((boolean)$this->get('locked')) {
+            $class[] = 'dis-locked-thread';
+        } else {
+            $class[] = 'dis-unlocked-thread';
+        }
+
+        /* Sticky */
+        if ((boolean)$this->get('sticky')) {
+            $class[] = 'dis-sticky-thread';
+        } else {
+            $class[] = 'dis-nonsticky-thread';
+        }
+
         $class = implode(' ',$class);
         $this->set('class',$class);
         return $class;
