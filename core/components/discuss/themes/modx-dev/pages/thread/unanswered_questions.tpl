@@ -1,8 +1,8 @@
-<!-- unread.tpl -->
+<!-- unanswered_questions.tpl -->
     [[+pagination]]
     <div class="dis-threads">
         <ul class="dis-list">
-            <li><h1>[[%discuss.unread_posts]]</h1></li>
+            <li><h1>[[%discuss.unanswered_questions]]</h1></li>
             [[+threads]]
         </ul>
         [[+pagination]]
@@ -24,7 +24,7 @@
         [[!+discuss.user.id:is=``:then=`
         <div class="Box">
             <h4>[[%discuss.actions]]</h4>
-            <p><a href="[[~[[*id]]]]login" class="Button">Login to Post</a></p>
+            <p><a href="[[~[[*id]]]]login" class="Button">[[%discuss.login_to_post]]</a></p>
         </div>
         `]]
         <div class="Box">
