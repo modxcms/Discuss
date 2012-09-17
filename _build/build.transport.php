@@ -37,8 +37,8 @@ define('PKG_NAME','Discuss');
 define('PKG_NAME_LOWER','discuss');
 
 /* do not forget to change in discuss.class.php too!! */
-define('PKG_VERSION','1.0.11');
-define('PKG_RELEASE','pl');
+define('PKG_VERSION','1.0.12');
+define('PKG_RELEASE','dev');
 
 /* override with your own defines here (see build.config.sample.php) */
 require_once dirname(__FILE__) . '/build.config.php';
