@@ -41,7 +41,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         return $this->modx->lexicon('discuss.new_replies_to_posts');
     }
     public function getSessionPlace() {
-        return 'new_replies_to_posts';
+        return 'thread/new_replies_to_posts::'.$this->getProperty('page',1);
     }
 
     public function getDefaultOptions() {
