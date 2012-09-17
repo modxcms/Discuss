@@ -30,6 +30,7 @@
 class DiscussThreadUnreadController extends DiscussController {
     /** @var array $threads */
     public $threads = array();
+    public $method = 'fetchUnread';
     
     public function getDefaultOptions() {
         return array(
@@ -59,7 +60,7 @@ class DiscussThreadUnreadController extends DiscussController {
         return $this->modx->lexicon('discuss.unread_posts');
     }
     public function getSessionPlace() {
-        return 'unread::'.$this->getProperty('page',1);
+        return 'thread/unread::'.$this->getProperty('page',1);
     }
     public function process() {
         /* setup default properties */
@@ -91,7 +92,7 @@ class DiscussThreadUnreadController extends DiscussController {
         $sortDir = $this->getProperty('sortDir','DESC');
 
         /* get unread threads */
-        $this->threads = $this->modx->call('disThread','fetchUnread',array(&$this->modx,$sortBy,$sortDir,$limit,$start));
+        $this->threads = $this->modx->call('disThread',$this->method,array(&$this->modx,$sortBy,$sortDir,$limit,$start));
         $this->threads['limit'] = $limit;
         $this->threads['start'] = $start;
     }

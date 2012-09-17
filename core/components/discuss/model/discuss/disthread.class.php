@@ -272,6 +272,215 @@ class disThread extends xPDOSimpleObject {
         return $response;
     }
 
+    /**
+     * Fetch all Question threads that are not marked as answered.
+     *
+     * @static
+     *
+     * @param xPDO $modx A reference to the modX instance
+     * @param string $sortBy The column to sort by
+     * @param string $sortDir The direction to sort
+     * @param int $limit The # of threads to limit
+     * @param int $start The index to start by
+     * @param boolean $sinceLastLogin
+     * @param boolean $countOnly Set to true to only return the count, and not actually run the query.
+     *
+     * @return array An array in results/total format
+     */
+    public static function fetchUnansweredQuestions(xPDO &$modx,$sortBy = 'post_last_on',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false, $countOnly = false) {
+        $response = array();
+        $c = $modx->newQuery('disThread');
+        $c->innerJoin('disBoard','Board');
+        $c->innerJoin('disPost','FirstPost');
+        $c->innerJoin('disPost','LastPost');
+        $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
+        $c->innerJoin('disUser','LastAuthor');
+        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
+        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+        $groups = $modx->discuss->user->getUserGroups();
+        if (!$modx->discuss->user->isAdmin()) {
+            if (!empty($groups)) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:IS'] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            } else {
+                $c->where(array(
+                    'UserGroups.usergroup:IS' => null,
+                ));
+            }
+        }
+        $c->where(array(
+            'disThread.class_key' => 'disThreadQuestion',
+            'AND:disThread.answered:=' => false,
+            'AND:Board.status:!=' => disBoard::STATUS_INACTIVE,
+        ));
+
+        /* ignore spam/recycle bin boards */
+        $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
+        if (!empty($spamBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $spamBoard,
+            ));
+        }
+        $trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
+        if (!empty($trashBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $trashBoard,
+            ));
+        }
+
+        /* usergroup protection */
+        if ($modx->discuss->user->isLoggedIn) {
+            if ($sinceLastLogin) {
+                $lastLogin = $modx->discuss->user->get('last_login');
+                if (!empty($lastLogin)) {
+                    $c->where(array(
+                        'disThread.post_last_on:>=' => is_int($lastLogin) ? $lastLogin : strtotime($lastLogin),
+                    ));
+                }
+            }
+            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
+            if (!empty($ignoreBoards)) {
+                $c->where(array(
+                    'Board.id:NOT IN' => explode(',',$ignoreBoards),
+                ));
+            }
+        }
+        $cc = clone $c;
+        $cc->select(array(
+            'COUNT(*) AS `total`',
+        ));
+        $stmt = $cc->prepare();
+        $response['total'] = $modx->getValue($stmt);
+        $c->select($modx->getSelectColumns('disThread','disThread'));
+        $c->select(array(
+            'board_name' => 'Board.name',
+            'title' => 'FirstPost.title',
+            'thread' => 'FirstPost.thread',
+            'author_username' => 'LastAuthor.username',
+
+            'post_id' => 'LastPost.id',
+            'createdon' => 'LastPost.createdon',
+            'author' => 'LastPost.author',
+            'last_post_replies' => 'LastPostThread.replies',
+        ));
+        $c->sortby($sortBy,$sortDir);
+        $c->limit($limit,$start);
+        if (!$countOnly) {
+            $response['results'] = $modx->getCollection('disThread',$c);
+        }
+        return $response;
+    }
+
+
+    /**
+     * Fetch all threads without replies.
+     *
+     * @static
+     *
+     * @param xPDO $modx A reference to the modX instance
+     * @param string $sortBy The column to sort by
+     * @param string $sortDir The direction to sort
+     * @param int $limit The # of threads to limit
+     * @param int $start The index to start by
+     * @param boolean $sinceLastLogin
+     * @param boolean $countOnly Set to true to only return the count, and not actually run the query.
+     *
+     * @return array An array in results/total format
+     */
+    public static function fetchWithoutReplies(xPDO &$modx,$sortBy = 'post_last_on',$sortDir = 'DESC',$limit = 20,$start = 0,$sinceLastLogin = false, $countOnly = false) {
+        $response = array();
+        $c = $modx->newQuery('disThread');
+        $c->innerJoin('disBoard','Board');
+        $c->innerJoin('disPost','FirstPost');
+        $c->innerJoin('disPost','LastPost');
+        $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
+        $c->innerJoin('disUser','LastAuthor');
+        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
+        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+        $groups = $modx->discuss->user->getUserGroups();
+        if (!$modx->discuss->user->isAdmin()) {
+            if (!empty($groups)) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:IS'] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            } else {
+                $c->where(array(
+                    'UserGroups.usergroup:IS' => null,
+                ));
+            }
+        }
+        $c->where(array(
+            'disThread.replies' => 0,
+            'AND:disThread.answered:=' => false,
+            'AND:Board.status:!=' => disBoard::STATUS_INACTIVE,
+        ));
+
+        /* ignore spam/recycle bin boards */
+        $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
+        if (!empty($spamBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $spamBoard,
+            ));
+        }
+        $trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
+        if (!empty($trashBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $trashBoard,
+            ));
+        }
+
+        /* usergroup protection */
+        if ($modx->discuss->user->isLoggedIn) {
+            if ($sinceLastLogin) {
+                $lastLogin = $modx->discuss->user->get('last_login');
+                if (!empty($lastLogin)) {
+                    $c->where(array(
+                        'disThread.post_last_on:>=' => is_int($lastLogin) ? $lastLogin : strtotime($lastLogin),
+                    ));
+                }
+            }
+            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
+            if (!empty($ignoreBoards)) {
+                $c->where(array(
+                    'Board.id:NOT IN' => explode(',',$ignoreBoards),
+                ));
+            }
+        }
+        $cc = clone $c;
+        $cc->select(array(
+            'COUNT(*) AS `total`',
+        ));
+        $stmt = $cc->prepare();
+        $response['total'] = $modx->getValue($stmt);
+        $c->select($modx->getSelectColumns('disThread','disThread'));
+        $c->select(array(
+            'board_name' => 'Board.name',
+            'title' => 'FirstPost.title',
+            'thread' => 'FirstPost.thread',
+            'author_username' => 'LastAuthor.username',
+
+            'post_id' => 'LastPost.id',
+            'createdon' => 'LastPost.createdon',
+            'author' => 'LastPost.author',
+            'last_post_replies' => 'LastPostThread.replies',
+        ));
+        $c->sortby($sortBy,$sortDir);
+        $c->limit($limit,$start);
+        if (!$countOnly) {
+            $response['results'] = $modx->getCollection('disThread',$c);
+        }
+        return $response;
+    }
+
 
     /**
      * Fetch all new replies in threads that the active user is a participant in
