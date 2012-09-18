@@ -72,7 +72,7 @@ class DiscussThreadReplyController extends DiscussController {
     }
 
     public function getSessionPlace() {
-        return 'thread-reply:'.$this->thread->get('id');
+        return 'thread/reply:thread='.$this->thread->get('id');
     }
 
     public function process() {

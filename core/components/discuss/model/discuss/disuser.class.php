@@ -489,6 +489,22 @@ class disUser extends xPDOSimpleObject {
         $response = $this->xpdo->call('disThread','fetchNewReplies',array(&$this->xpdo,'post_last_on','DESC',10,0, true, true));
         return number_format($response['total']);
     }
+    /**
+     * Get the number of threads without replies.
+     * @return int
+     */
+    public function countWithoutReplies() {
+        $response = $this->xpdo->call('disThread','fetchWithoutReplies',array(&$this->xpdo,'post_last_on','DESC',10,0, true, true));
+        return number_format($response['total']);
+    }
+    /**
+     * Get the number of unanswered questions.
+     * @return int
+     */
+    public function countUnansweredQuestions() {
+        $response = $this->xpdo->call('disThread','fetchUnansweredQuestions',array(&$this->xpdo,'post_last_on','DESC',10,0, true, true));
+        return number_format($response['total']);
+    }
 
     /**
      * Clear the cache for this User
