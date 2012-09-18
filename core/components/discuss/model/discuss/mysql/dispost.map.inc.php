@@ -324,14 +324,6 @@ $xpdo_meta_map['disPost']= array (
   ),
   'composites' => 
   array (
-    'Children' => 
-    array (
-      'class' => 'disPost',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
     'Ancestors' => 
     array (
       'class' => 'disPostClosure',
@@ -406,6 +398,14 @@ $xpdo_meta_map['disPost']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
+    ),
+    'Children' => 
+    array (
+      'class' => 'disPost',
+      'local' => 'id',
+      'foreign' => 'parent',
+      'cardinality' => 'many',
+      'owner' => 'local',
     ),
   ),
 );

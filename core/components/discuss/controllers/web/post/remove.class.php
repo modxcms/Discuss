@@ -65,7 +65,8 @@ class DiscussPostRemoveController extends DiscussController {
             $this->discuss->logActivity('post_remove',$this->post->toArray(),$this->post->getUrl());
         }
 
-        if ($this->thread->get('post_first') == $this->post->get('id')) {
+        /* If the thread no longer exists (last post in thread was removed), redirect to the board instead of thread */
+        if ($this->modx->getCount('disThread',$this->thread->get('id')) < 1) {
             $redirectTo = $this->discuss->request->makeUrl('board/',array('board' => $this->post->get('board')));
         } else {
             $redirectTo = $this->thread->getUrl();
