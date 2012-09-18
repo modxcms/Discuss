@@ -1,5 +1,6 @@
 Changelog for Discuss (MODX Theme).
 
+- #6544 Fix deleting of messages also deleting replies to that message.
 - Add settings to control date cutoff for no_replies and unanswered_questions views.
 - Add new discuss.debug_templates setting to throw in HTML comments for every loaded tpl chunk.
 - #4768 Ask user to login if thread not found to allow links to private forums to work through login

@@ -306,6 +306,7 @@ class disPost extends xPDOSimpleObject {
      * @param string $keyPrefix
      * @param bool $rawValues
      * @param bool $excludeLazy
+     * @param bool $includeRelated
      * @return array
      */
     public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated = false) {
@@ -440,20 +441,24 @@ class disPost extends xPDOSimpleObject {
                 $c->where(array(
                     'id:!=' => $this->get('id'),
                     'board' => $this->get('board'),
-                    'topic' => $this->get('topic')
+                    'thread' => $this->get('thread')
                 ));
                 $c->sortby($this->xpdo->escape('createdon'), 'ASC');
                 $c->limit(1);
+                /* @var disPost $oldestPost */
                 $oldestPost = $this->xpdo->getObject('disPost', $c);
                 if ($oldestPost) {
                     $oldestPost->set('parent', 0);
                     if ($oldestPost->save()) {
                         $parent = $oldestPost->get('id');
+                        $thread->set('post_first', $oldestPost->get('id'));
+                        $thread->save();
                     }
                 }
             }
             /* fix child posts' parent */
             foreach ($this->getMany('Children') as $child) {
+                /* @var disPost $child */
                 $child->set('parent', $parent);
                 $child->save();
             }
