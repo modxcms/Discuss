@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disLogActivity']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_log_activity',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'createdon' => NULL,

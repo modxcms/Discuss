@@ -433,6 +433,31 @@ class disPost extends xPDOSimpleObject {
         }
         if ($removed) {
             $parent = $this->get('parent');
+
+            if (empty($parent)) {
+                /* get oldest post and make it the new root post for the thread */
+                $c = $this->xpdo->newQuery('disPost');
+                $c->where(array(
+                    'id:!=' => $this->get('id'),
+                    'board' => $this->get('board'),
+                    'topic' => $this->get('topic')
+                ));
+                $c->sortby($this->xpdo->escape('createdon'), 'ASC');
+                $c->limit(1);
+                $oldestPost = $this->xpdo->getObject('disPost', $c);
+                if ($oldestPost) {
+                    $oldestPost->set('parent', 0);
+                    if ($oldestPost->save()) {
+                        $parent = $oldestPost->get('id');
+                    }
+                }
+            }
+            /* fix child posts' parent */
+            foreach ($this->getMany('Children') as $child) {
+                $child->set('parent', $parent);
+                $child->save();
+            }
+
             /* decrease profile posts */
             if ($author && !$isPrivateMessage) {
                 $author->set('posts',($author->get('posts')-1));

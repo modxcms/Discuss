@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disPost']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_posts',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'board' => 0,
@@ -320,6 +322,41 @@ $xpdo_meta_map['disPost']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Children' => 
+    array (
+      'class' => 'disPost',
+      'local' => 'id',
+      'foreign' => 'parent',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Ancestors' => 
+    array (
+      'class' => 'disPostClosure',
+      'local' => 'id',
+      'foreign' => 'ancestor',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Descendants' => 
+    array (
+      'class' => 'disPostClosure',
+      'local' => 'id',
+      'foreign' => 'descendant',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Attachments' => 
+    array (
+      'class' => 'disPostAttachment',
+      'local' => 'id',
+      'foreign' => 'post',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'Board' => 
@@ -369,41 +406,6 @@ $xpdo_meta_map['disPost']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Children' => 
-    array (
-      'class' => 'disPost',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'Ancestors' => 
-    array (
-      'class' => 'disPostClosure',
-      'local' => 'id',
-      'foreign' => 'ancestor',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'Descendants' => 
-    array (
-      'class' => 'disPostClosure',
-      'local' => 'id',
-      'foreign' => 'descendant',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'Attachments' => 
-    array (
-      'class' => 'disPostAttachment',
-      'local' => 'id',
-      'foreign' => 'post',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );

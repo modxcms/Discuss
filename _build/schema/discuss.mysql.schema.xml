@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model package="discuss" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">    
+<model package="discuss" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
     <!--
     <object class="disBanGroup" table="discuss_ban_groups" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
@@ -91,7 +91,7 @@
 
         <aggregate alias="Category" class="disCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Parent" class="disBoard" local="parent" foreign="id" cardinality="one" owner="foreign" />
-        <composite alias="Children" class="disBoard" local="id" foreign="parent" cardinality="many" owner="local" />
+        <aggregate alias="Children" class="disBoard" local="id" foreign="parent" cardinality="many" owner="local" />
         <composite alias="Moderators" class="disModerator" local="id" foreign="board" cardinality="many" owner="local" />
         <composite alias="UserGroups" class="disBoardUserGroup" local="id" foreign="board" cardinality="many" owner="local" />
         <composite alias="Ancestors" class="disBoardClosure" local="id" foreign="ancestor" cardinality="many" owner="local" />
