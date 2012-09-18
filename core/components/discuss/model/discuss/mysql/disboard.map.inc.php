@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disBoard']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_boards',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'category' => 0,
@@ -392,43 +394,8 @@ $xpdo_meta_map['disBoard']= array (
       ),
     ),
   ),
-  'aggregates' => 
-  array (
-    'Category' => 
-    array (
-      'class' => 'disCategory',
-      'local' => 'category',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'Parent' => 
-    array (
-      'class' => 'disBoard',
-      'local' => 'parent',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'LastPost' => 
-    array (
-      'class' => 'disPost',
-      'local' => 'last_post',
-      'foreign' => 'id',
-      'cardinality' => 'many',
-      'owner' => 'foreign',
-    ),
-  ),
   'composites' => 
   array (
-    'Children' => 
-    array (
-      'class' => 'disBoard',
-      'local' => 'id',
-      'foreign' => 'parent',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
     'Moderators' => 
     array (
       'class' => 'disModerator',
@@ -484,6 +451,41 @@ $xpdo_meta_map['disBoard']= array (
       'foreign' => 'board',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'Category' => 
+    array (
+      'class' => 'disCategory',
+      'local' => 'category',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Parent' => 
+    array (
+      'class' => 'disBoard',
+      'local' => 'parent',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'Children' => 
+    array (
+      'class' => 'disBoard',
+      'local' => 'id',
+      'foreign' => 'parent',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'LastPost' => 
+    array (
+      'class' => 'disPost',
+      'local' => 'last_post',
+      'foreign' => 'id',
+      'cardinality' => 'many',
+      'owner' => 'foreign',
     ),
   ),
 );

@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disUser']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_users',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'user' => 0,
@@ -396,41 +398,6 @@ $xpdo_meta_map['disUser']= array (
       ),
     ),
   ),
-  'aggregates' => 
-  array (
-    'User' => 
-    array (
-      'class' => 'modUser',
-      'local' => 'user',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'PrimaryGroup' => 
-    array (
-      'class' => 'modUserGroup',
-      'local' => 'primary_group',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'PrimaryDiscussGroup' => 
-    array (
-      'class' => 'disUserGroupProfile',
-      'local' => 'primary_group',
-      'foreign' => 'usergroup',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-    'ThreadLastVisited' => 
-    array (
-      'class' => 'disThread',
-      'local' => 'thread_last_visited',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-  ),
   'composites' => 
   array (
     'UserModerated' => 
@@ -472,6 +439,41 @@ $xpdo_meta_map['disUser']= array (
       'foreign' => 'user',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'User' => 
+    array (
+      'class' => 'modUser',
+      'local' => 'user',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'PrimaryGroup' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'primary_group',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'PrimaryDiscussGroup' => 
+    array (
+      'class' => 'disUserGroupProfile',
+      'local' => 'primary_group',
+      'foreign' => 'usergroup',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
+    ),
+    'ThreadLastVisited' => 
+    array (
+      'class' => 'disThread',
+      'local' => 'thread_last_visited',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
 );

@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disUserGroupProfile']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_usergroup_profiles',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'usergroup' => 0,
@@ -90,17 +92,6 @@ $xpdo_meta_map['disUserGroupProfile']= array (
       ),
     ),
   ),
-  'aggregates' => 
-  array (
-    'UserGroup' => 
-    array (
-      'class' => 'modUserGroup',
-      'local' => 'usergroup',
-      'foreign' => 'id',
-      'cardinality' => 'one',
-      'owner' => 'foreign',
-    ),
-  ),
   'composites' => 
   array (
     'Boards' => 
@@ -110,6 +101,17 @@ $xpdo_meta_map['disUserGroupProfile']= array (
       'foreign' => 'usergroup',
       'cardinality' => 'many',
       'owner' => 'local',
+    ),
+  ),
+  'aggregates' => 
+  array (
+    'UserGroup' => 
+    array (
+      'class' => 'modUserGroup',
+      'local' => 'usergroup',
+      'foreign' => 'id',
+      'cardinality' => 'one',
+      'owner' => 'foreign',
     ),
   ),
 );

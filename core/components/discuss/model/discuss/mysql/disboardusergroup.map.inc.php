@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disBoardUserGroup']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_board_usergroups',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'usergroup' => 0,

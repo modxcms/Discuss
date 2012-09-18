@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disPostAttachment']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_posts_attachments',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'post' => 0,
