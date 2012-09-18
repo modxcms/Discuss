@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disThreadRead']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_threads_read',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'user' => 0,

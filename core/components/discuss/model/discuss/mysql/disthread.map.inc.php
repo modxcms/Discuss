@@ -5,7 +5,9 @@
  */
 $xpdo_meta_map['disThread']= array (
   'package' => 'discuss',
+  'version' => '1.1',
   'table' => 'discuss_threads',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'class_key' => 'disThreadDiscussion',
@@ -423,6 +425,41 @@ $xpdo_meta_map['disThread']= array (
       ),
     ),
   ),
+  'composites' => 
+  array (
+    'Reads' => 
+    array (
+      'class' => 'disThreadRead',
+      'local' => 'id',
+      'foreign' => 'thread',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Posts' => 
+    array (
+      'class' => 'disPost',
+      'local' => 'id',
+      'foreign' => 'thread',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Notifications' => 
+    array (
+      'class' => 'disUserNotification',
+      'local' => 'id',
+      'foreign' => 'thread',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Users' => 
+    array (
+      'class' => 'disThreadUser',
+      'local' => 'id',
+      'foreign' => 'thread',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+  ),
   'aggregates' => 
   array (
     'FirstAuthor' => 
@@ -464,41 +501,6 @@ $xpdo_meta_map['disThread']= array (
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
-    ),
-  ),
-  'composites' => 
-  array (
-    'Reads' => 
-    array (
-      'class' => 'disThreadRead',
-      'local' => 'id',
-      'foreign' => 'thread',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'Posts' => 
-    array (
-      'class' => 'disPost',
-      'local' => 'id',
-      'foreign' => 'thread',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'Notifications' => 
-    array (
-      'class' => 'disUserNotification',
-      'local' => 'id',
-      'foreign' => 'thread',
-      'cardinality' => 'many',
-      'owner' => 'local',
-    ),
-    'Users' => 
-    array (
-      'class' => 'disThreadUser',
-      'local' => 'id',
-      'foreign' => 'thread',
-      'cardinality' => 'many',
-      'owner' => 'local',
     ),
   ),
 );
