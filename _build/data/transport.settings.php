@@ -342,6 +342,22 @@ $settings['discuss.new_replies_threshold']->fromArray(array(
     'namespace' => 'discuss',
     'area' => 'Threads',
 ),'',true,true);
+$settings['discuss.unanswered_questions_threshold']= $modx->newObject('modSystemSetting');
+$settings['discuss.unanswered_questions_threshold']->fromArray(array(
+    'key' => 'discuss.unanswered_questions_threshold',
+    'value' => 90,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Threads',
+),'',true,true);
+$settings['discuss.no_replies_threshold']= $modx->newObject('modSystemSetting');
+$settings['discuss.no_replies_threshold']->fromArray(array(
+    'key' => 'discuss.no_replies_threshold',
+    'value' => 90,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Threads',
+),'',true,true);
 
 $settings['discuss.notification_new_post_subject']= $modx->newObject('modSystemSetting');
 $settings['discuss.notification_new_post_subject']->fromArray(array(

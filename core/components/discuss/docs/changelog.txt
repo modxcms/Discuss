@@ -1,5 +1,6 @@
 Changelog for Discuss (MODX Theme).
 
+- Add settings to control date cutoff for no_replies and unanswered_questions views.
 - Add new discuss.debug_templates setting to throw in HTML comments for every loaded tpl chunk.
 - #4768 Ask user to login if thread not found to allow links to private forums to work through login
 - Enable statistics globally (can be disabled in the manifest) so we can use it everywhere.

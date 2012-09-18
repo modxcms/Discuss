@@ -313,8 +313,13 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
+
+        $startTime = $modx->getOption('discuss.unanswered_questions_threshold', null, 90);
+        $startTime = $startTime * 24 * 60 * 60;
+        $startTime = time() - $startTime;
         $c->where(array(
             'disThread.class_key' => 'disThreadQuestion',
+            'AND:disThread.post_last_on:>=' => $startTime,
             'AND:disThread.answered:=' => false,
             'AND:Board.status:!=' => disBoard::STATUS_INACTIVE,
         ));
@@ -418,8 +423,13 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
+
+        $startTime = $modx->getOption('discuss.no_replies_threshold', null, 90);
+        $startTime = $startTime * 24 * 60 * 60;
+        $startTime = time() - $startTime;
         $c->where(array(
             'disThread.replies' => 0,
+            'AND:disThread.post_last_on:>=' => $startTime,
             'AND:disThread.answered:=' => false,
             'AND:Board.status:!=' => disBoard::STATUS_INACTIVE,
         ));
