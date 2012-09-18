@@ -60,8 +60,21 @@
                                 <p>You have <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit">[[!+discuss.user.unread_posts]]</a>,
                                     <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]]</a>
                                     and <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts">[[!+discuss.user.new_replies]]</a> to read.<br />
-                                    Help out by answering <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions">[[!+discuss.user.unanswered_questions]]</a> or
-                                    replying to <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies">[[!+discuss.user.no_replies]]</a>.</p>
+                                    [[!+discuss.user.no_replies_count:gte=`1`:then=`
+                                        [[!+discuss.user.unanswered_questions_count:gte=`1`:then=`
+                                            Please help the community with <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions">[[!+discuss.user.unanswered_questions]]</a>
+                                            or <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies">[[!+discuss.user.no_replies]]</a>.
+                                        `:else=`
+                                            You can contribute to <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies">[[!+discuss.user.no_replies]]</a>.
+                                        `]]
+                                    `:else=`
+                                        [[!+discuss.user.unanswered_questions_count:gte=`1`:then=`
+                                            You can help answer <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions">[[!+discuss.user.unanswered_questions]]</a>.
+                                        `:else=`
+                                            Wow! No unanswered questions or discussions without replies.
+                                        `]]
+                                    `]]
+                                </p>
                                 <div class="m-user_tools">
                                     <ul class="m-user_tools_reg_links l-horiz_list">
                                         <li><a href="[[~[[++discuss.update_profile_resource_id]]]]">update profile</a></li>
