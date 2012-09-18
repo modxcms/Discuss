@@ -305,9 +305,13 @@ class Discuss {
             $authphs['user.avatar_url'] = $this->user->getAvatarUrl();
 
             /* Get counts */
-            $newMessages = $this->user->countUnreadMessages();
-            $unreadPosts = $this->user->countUnreadPosts();
-            $newReplies = $this->user->countNewReplies();
+            $authphs['user.unread_messages_count'] = $newMessages = $this->user->countUnreadMessages();
+            $authphs['user.unread_posts_count'] = $unreadPosts = $this->user->countUnreadPosts();
+            $authphs['user.new_replies_count'] = $newReplies = $this->user->countNewReplies();
+            $authphs['user.unanswered_questions_count'] = $unansweredQuestions = $this->user->countUnansweredQuestions();
+            $authphs['user.no_replies_count'] = $noReplies = $this->user->countWithoutReplies();
+
+            /* Format counts nicely */
             $authphs['user.unread_messages'] = ($newMessages > 1) ?
                 $this->modx->lexicon('discuss.user.new_messages',array('count' > $newMessages)) :
                 ($newMessages == 1) ? $this->modx->lexicon('discuss.user.one_new_message') :
@@ -320,6 +324,14 @@ class Discuss {
                 $this->modx->lexicon('discuss.user.new_replies',array('count' => $newReplies)) :
                 ($newReplies == 1) ? $this->modx->lexicon('discuss.user.one_new_reply') :
                     $this->modx->lexicon('discuss.user.no_new_replies');
+            $authphs['user.unanswered_questions'] = ($unansweredQuestions > 1) ?
+                $this->modx->lexicon('discuss.user.unanswered_questions',array('count' => $unansweredQuestions)) :
+                ($unansweredQuestions == 1) ? $this->modx->lexicon('discuss.user.one_unanswered_question') :
+                    $this->modx->lexicon('discuss.user.no_unanswered_questions');
+            $authphs['user.no_replies'] = ($noReplies > 1) ?
+                $this->modx->lexicon('discuss.user.no_replies',array('count' => $noReplies)) :
+                ($noReplies == 1) ? $this->modx->lexicon('discuss.user.one_no_reply') :
+                    $this->modx->lexicon('discuss.user.no_no_replies');
             $this->user->isGlobalModerator();
             $this->user->isAdmin();
         } else {
