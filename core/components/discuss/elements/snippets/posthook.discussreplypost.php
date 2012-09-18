@@ -90,7 +90,7 @@ if (!empty($canSave)) {
 }
 /* save post */
 if ($newPost->save() == false) {
-    $hook->addError('title','An error occurred while saving the post.');
+    $hook->addError('title',$modx->lexicon('discuss.post_err_save'));
     return false;
 }
 
