@@ -972,7 +972,7 @@ class disPost extends xPDOSimpleObject {
         /* check if author wants to show email */
         if ($this->Author->get('show_email') && $this->xpdo->discuss->user->canViewEmails()) {
             $this->loadParser();
-            $postArray['author.email'] = disBBCodeParser::encodeEmail($this->Author->get('email'),$this->xpdo->lexicon('discuss.email_author'));
+            $postArray['author.email'] = call_user_func(array($this->parser,'encodeEmail'),$this->Author->get('email'),$this->xpdo->lexicon('discuss.email_author'));
         } else {
             $postArray['author.email'] = '';
         }
