@@ -254,7 +254,7 @@ class disNewBBCodeParser extends disParser {
      * @return string
      */
     public static function parseCodeCallback($matches) {
-        $code = self::stripBRTags($matches[1]);
+        $code = $matches[1];
         return '<div class="dis-code"><pre class="brush: php; toolbar: false">'.$code.'</pre></div>';
     }
     /**
@@ -267,7 +267,7 @@ class disNewBBCodeParser extends disParser {
         $type = !empty($matches[1]) ? $matches[1] : 'php';
         $availableTypes = array('applescript','actionscript3','as3','bash','shell','coldfusion','cf','cpp','c','c#','c-sharp','csharp','css','delphi','pascal','diff','patch','pas','erl','erlang','groovy','java','jfx','javafx','js','jscript','javascript','perl','pl','php','text','plain','py','python','ruby','rails','ror','rb','sass','scss','scala','sql','vb','vbnet','xml','xhtml','xslt','html');
         if (!in_array($type,$availableTypes)) $type = 'php';
-        $code = self::stripBRTags($matches[2]);
+        $code = $matches[2];
         return '<div class="dis-code"><pre class="brush: '.$type.'; toolbar: false">'.$code.'</pre></div>';
     }
     /**
@@ -537,7 +537,6 @@ class disNewBBCodeParser extends disParser {
     public function cleanAndParse ($message) {
         /* leave only \n linebreaks */
 	    $message = strtr($message, array("\r" => ''));
-        $message = str_replace(array('<br>','<br />','<br/>'),"\n",$message);
 
 	    /* convert from smf imported tags, entities */
         $message = str_replace('&nbsp;',' ',$message);
@@ -578,6 +577,7 @@ class disNewBBCodeParser extends disParser {
             }
             if ($z == 0 || $z == 4) {
                 $z = 0;
+                $parts[$i] = str_replace(array('<br>','<br />','<br/>'),"\n",$parts[$i]);
 
                 /* Fix amount of open/closed link tags */
                 $listOpen = substr_count($parts[$i], '[list]') + substr_count($parts[$i], '[list ');
