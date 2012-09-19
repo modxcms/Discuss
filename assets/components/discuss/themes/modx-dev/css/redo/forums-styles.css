@@ -492,10 +492,11 @@ footer {
     opacity: 0.5; }
   /* line 44, ../../sass/lib/_masthead.sass */
   .masthead input {
+    color: white;
     margin: 5px 5px 5px 0;
     margin:  0.5rem 0.5rem 0.5rem 0;
     outline: none; }
-  /* line 47, ../../sass/lib/_masthead.sass */
+  /* line 48, ../../sass/lib/_masthead.sass */
   .masthead input[type="submit"] {
     color: white !important;
     font-weight: 500;
@@ -507,21 +508,21 @@ footer {
     background-image: -o-linear-gradient(#7dc3d6, #4fadc8);
     background-image: linear-gradient(#7dc3d6, #4fadc8);
     text-shadow: #18414c 0 1px 0; }
-    /* line 54, ../../sass/lib/_masthead.sass */
+    /* line 55, ../../sass/lib/_masthead.sass */
     .masthead input[type="submit"]:hover {
       background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #95cdde), color-stop(100%, #89c8da)) !important;
       background-image: -webkit-linear-gradient(#95cdde, #89c8da) !important;
       background-image: -moz-linear-gradient(#95cdde, #89c8da) !important;
       background-image: -o-linear-gradient(#95cdde, #89c8da) !important;
       background-image: linear-gradient(#95cdde, #89c8da) !important; }
-  /* line 56, ../../sass/lib/_masthead.sass */
+  /* line 57, ../../sass/lib/_masthead.sass */
   .masthead input[type="text"], .masthead input[type="password"] {
     background-color: #0f201e;
     border: solid 1px black;
     -webkit-box-shadow: #214643 0 1px 0, black 0 -1px 0;
     -moz-box-shadow: #214643 0 1px 0, black 0 -1px 0;
     box-shadow: #214643 0 1px 0, black 0 -1px 0; }
-    /* line 60, ../../sass/lib/_masthead.sass */
+    /* line 61, ../../sass/lib/_masthead.sass */
     .masthead input[type="text"]:focus, .masthead input[type="password"]:focus {
       color: black;
       background-color: white;
