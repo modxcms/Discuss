@@ -72,7 +72,7 @@ $manifest = array(
             'bypassUnreadCheck' => true,
             'checkUnread' => true,
             'showLogoutActionButton' => false,
-            'hideIndexBreadcrumbs' => true,
+            'hideIndexBreadcrumbs' => false,
             'subBoardSeparator' => '',
         ),
     ),
