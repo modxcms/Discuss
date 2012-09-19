@@ -77,7 +77,7 @@
                                 </p>
                                 <div class="m-user_tools">
                                     <ul class="m-user_tools_reg_links l-horiz_list">
-                                        <li><a href="[[~[[++discuss.update_profile_resource_id]]]]">update profile</a></li>
+                                        <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">my profile</a></li>
                                         <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">update email notifications</a></li>
                                     </ul>
                                     <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]">Logout</a>
