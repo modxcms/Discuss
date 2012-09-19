@@ -62,7 +62,6 @@ class DiscussThreadModifyController extends DiscussController {
         $placeholders['url'] = $this->post->getUrl();
         $placeholders['post'] = $this->post->get('id');
         $placeholders['buttons'] = $this->discuss->getChunk('disPostButtons',array('buttons_url' => $this->discuss->config['imagesUrl'].'buttons/'));
-        $placeholders['message'] = $this->post->br2nl($placeholders['message']);
         $placeholders['message'] = str_replace(array('[',']'),array('&#91;','&#93;'),$placeholders['message']);
 
         /* get thread root */
