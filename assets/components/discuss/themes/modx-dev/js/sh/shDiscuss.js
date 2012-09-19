@@ -32,7 +32,7 @@ $(function() {
       'vb vbnet               @shBrushVb.js',
       'xml xhtml xslt html    @shBrushXml.js'
     ));
-    SyntaxHighlighter.config.stripBrs = true;
+    SyntaxHighlighter.config.stripBrs = false;
     SyntaxHighlighter.config.toolbar = false;
     SyntaxHighlighter.all();
 });
