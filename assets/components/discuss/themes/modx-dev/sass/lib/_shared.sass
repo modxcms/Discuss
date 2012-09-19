@@ -51,12 +51,13 @@ a
 // mini navigation
 .m-sm_nav_pod
     a
-        +rem('padding', 7px 9px 7px 0)
+        +rem('padding', 7px 9px 7px 7px)
         +opacity(0.6)
         line-height: 1
     a:after
         content: "|"
         +rem('padding', 0 0 0 10px)
+        position: absolute
     li:last-child a:after
         content: ""
         padding: 0
