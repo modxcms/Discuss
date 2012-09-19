@@ -156,7 +156,7 @@ class DiscussHomeController extends DiscussController {
         $category = null;
         if (!empty($this->scriptProperties['category'])) {
             $category = $this->modx->getObject('disCategory',$this->scriptProperties['category']);
-        } else if ($this->getOption('hideIndexBreadcrumbs',true)) {
+        } else if ($this->getOption('hideIndexBreadcrumbs',true,'isset')) {
             return '';
         }
         if (!empty($category)) {
