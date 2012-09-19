@@ -51,12 +51,12 @@
                     <div class="m-welcome_box">
                         <div class="m-user_box h-group">
                             <div class="l-left">
-                                <img src="[[!+discuss.user.avatar_url]]">
+                                <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]"><img src="[[!+discuss.user.avatar_url]]"></a>
                                 <br />
                                 <span class="m-user_posts">[[!+discuss.user.posts_formatted]] [[%discuss.posts]]</span>
                             </div>
                             <div class="l-right">
-                                <h3>Welcome Back [[!+discuss.user.name_first]]</h3>
+                                <h3>Welcome Back <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">[[!+discuss.user.name_first]]</a></h3>
                                 <p>You have <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit">[[!+discuss.user.unread_posts]]</a>,
                                     <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]]</a>
                                     and <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts">[[!+discuss.user.new_replies]]</a> to read.<br />
@@ -78,7 +78,7 @@
                                 <div class="m-user_tools">
                                     <ul class="m-user_tools_reg_links l-horiz_list">
                                         <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">my profile</a></li>
-                                        <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">update email notifications</a></li>
+                                        <!--<li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">update email notifications</a></li>-->
                                     </ul>
                                     <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]">Logout</a>
                                 </div>
