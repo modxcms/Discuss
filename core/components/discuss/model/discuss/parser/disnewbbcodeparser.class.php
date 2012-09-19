@@ -39,9 +39,6 @@ class disNewBBCodeParser extends disParser {
         $message = $this->checkImageSizes($message);
         $message = $this->cleanAndParse($message);
 
-        /* auto-add br tags to linebreaks for pretty formatting */
-        $message = $this->_nl2br2($message);
-
         /* Parse code blocks separately */
         $message = $this->parseSandboxed($message);
 
@@ -610,6 +607,9 @@ class disNewBBCodeParser extends disParser {
                 /* Strip out possibly malicious html */
                 $parts[$i] = $this->stripHtml($parts[$i]);
                 $parts[$i] = $this->cleanupImg($parts[$i]);
+
+                /* Make linebreaks visible */
+                $parts[$i] = $this->_nl2br2($parts[$i]);
             }
 
             $z++;
