@@ -198,10 +198,10 @@ h3.forum
     // +border-radius($radius-sm)
     // border: solid 1px darken($c-base, 10%)
     // background-color: lighten($c-base, 4%)
-    +box-shadow(darken($c-base, 0%) 0 0 0)
+    +box-shadow(darken($c-base, 13%) 0 0 3px)
     +border-radius($radius-sm)
-    border: solid 1px darken($c-base, 0%)
-    background-color: lighten($c-base, 0%)
+    border: solid 1px darken($c-base, 10%)
+    background-color: lighten($c-base, 20%)
 
     .dis-post
         border-bottom: solid 1px darken($c-base, 13%)
@@ -229,6 +229,14 @@ h3.forum
                 padding: 1em 0 0 0
                 font-style: italic
                 color: darken($c-base, 50%)
+.solved
+    +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
+    +rem('padding', 6px 12px)
+    color: lighten($c-base, 80%)
+    +border-radius($radius-sm)
+    font-weight: 500
+    line-height: 1
+    text-transform: uppercase
 footer
     h3
         +rem('font-size', 13px)
