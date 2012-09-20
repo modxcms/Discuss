@@ -1137,7 +1137,7 @@ footer .m-modx_logo {
 
 /* line 281, ../../sass/_forums.sass */
 .dis-post-right {
-  float: left;
+  float: right;
   width: 86%;
   padding: 0 2% 2% 0;
   font-size: 15px;
