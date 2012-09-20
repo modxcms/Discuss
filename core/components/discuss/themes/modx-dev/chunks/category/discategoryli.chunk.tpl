@@ -3,7 +3,8 @@
 	<div class="row h-group">
 	    <div class="f1-f7">Name</div>
 	    <div class="f8-f10">Last Post</div>
-	    <div class="f11-f12">Stats</div>
+	    <div class="f11 l-txtcenter">Posts</div>
+	    <div class="f12 l-txtcenter">Topics</div>
 	</div>
 </div>
 [[+list]]
