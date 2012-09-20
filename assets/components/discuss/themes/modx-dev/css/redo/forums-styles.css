@@ -650,7 +650,7 @@ footer {
 .a-secondary-cta {
   line-height: 1;
   color: white;
-  padding: 10px 7px;
+  padding: 10px 10px;
   margin: 3px 2px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -658,36 +658,41 @@ footer {
   -o-border-radius: 3px;
   border-radius: 3px;
   background-color: lightgrey;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cbcbcb), color-stop(100%, #9b9b9b));
-  background-image: -webkit-linear-gradient(#cbcbcb, #9b9b9b);
-  background-image: -moz-linear-gradient(#cbcbcb, #9b9b9b);
-  background-image: -o-linear-gradient(#cbcbcb, #9b9b9b);
-  background-image: linear-gradient(#cbcbcb, #9b9b9b);
-  -webkit-box-shadow: #f9f9f9 0 1px 2px, ligten(#f9f9f9, 10%) 0 0 3px inset;
-  -moz-box-shadow: #f9f9f9 0 1px 2px, ligten(#f9f9f9, 10%) 0 0 3px inset;
-  box-shadow: #f9f9f9 0 1px 2px, ligten(#f9f9f9, 10%) 0 0 3px inset;
-  border: 1px solid #c6c6c6;
   display: block;
   font-size: 13px;
   font-size: 1.3rem;
-  text-align: center; }
-  /* line 62, ../../sass/lib/_buttons.sass */
+  text-align: center;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  background-color: #656565;
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #656565), color-stop(100%, #868686));
+  background-image: -webkit-linear-gradient(bottom, #656565 0%, #868686 100%);
+  background-image: -moz-linear-gradient(bottom, #656565 0%, #868686 100%);
+  background-image: -o-linear-gradient(bottom, #656565 0%, #868686 100%);
+  background-image: linear-gradient(bottom, #656565 0%, #868686 100%); }
+  /* line 64, ../../sass/lib/_buttons.sass */
   .a-secondary-cta span {
     font-size: 70%;
     white-space: nowrap; }
-  /* line 65, ../../sass/lib/_buttons.sass */
+  /* line 67, ../../sass/lib/_buttons.sass */
   .a-secondary-cta:hover {
     color: white;
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dadada), color-stop(100%, #acacac));
-    background-image: -webkit-linear-gradient(#dadada, #acacac);
-    background-image: -moz-linear-gradient(#dadada, #acacac);
-    background-image: -o-linear-gradient(#dadada, #acacac);
-    background-image: linear-gradient(#dadada, #acacac); }
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #818181), color-stop(100%, #9b9b9b));
+    background-image: -webkit-linear-gradient(bottom, #818181 0%, #9b9b9b 100%);
+    background-image: -moz-linear-gradient(bottom, #818181 0%, #9b9b9b 100%);
+    background-image: -o-linear-gradient(bottom, #818181 0%, #9b9b9b 100%);
+    background-image: linear-gradient(bottom, #818181 0%, #9b9b9b 100%); }
 
-/* line 70, ../../sass/lib/_buttons.sass */
+/* line 73, ../../sass/lib/_buttons.sass */
+.a-faux-btn-grp .a-secondary-cta {
+  margin: 0;
+  padding: 3%; }
+
+/* line 78, ../../sass/lib/_buttons.sass */
 .a-faux-btn.a-secondary-cta {
   padding: 0; }
-  /* line 72, ../../sass/lib/_buttons.sass */
+  /* line 80, ../../sass/lib/_buttons.sass */
   .a-faux-btn.a-secondary-cta a {
     display: inline-block;
     padding: 10px 15px;
@@ -697,7 +702,7 @@ footer {
     background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -moz-linear-gradient(#ececec, #cecece);
     background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -o-linear-gradient(#ececec, #cecece);
     background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, linear-gradient(#ececec, #cecece); }
-    /* line 77, ../../sass/lib/_buttons.sass */
+    /* line 85, ../../sass/lib/_buttons.sass */
     .a-faux-btn.a-secondary-cta a:hover {
       color: white;
       background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dadada), color-stop(100%, #acacac));
@@ -705,7 +710,7 @@ footer {
       background-image: -moz-linear-gradient(#dadada, #acacac);
       background-image: -o-linear-gradient(#dadada, #acacac);
       background-image: linear-gradient(#dadada, #acacac); }
-  /* line 80, ../../sass/lib/_buttons.sass */
+  /* line 88, ../../sass/lib/_buttons.sass */
   .a-faux-btn.a-secondary-cta:hover {
     color: white;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cbcbcb), color-stop(100%, #9b9b9b));
@@ -714,12 +719,12 @@ footer {
     background-image: -o-linear-gradient(#cbcbcb, #9b9b9b);
     background-image: linear-gradient(#cbcbcb, #9b9b9b); }
 
-/* line 83, ../../sass/lib/_buttons.sass */
+/* line 91, ../../sass/lib/_buttons.sass */
 .alt-1-cta {
   color: white;
   background-color: #89c8da !important; }
 
-/* line 86, ../../sass/lib/_buttons.sass */
+/* line 94, ../../sass/lib/_buttons.sass */
 .l-inline-btn {
   display: inline-block; }
 
@@ -1328,21 +1333,64 @@ footer .m-modx_logo {
       padding:  1rem 1.5rem 1rem 1.5rem;
       margin: -5px -15px 10px -15px;
       margin:  -0.5rem -1.5rem 1rem -1.5rem; }
-  /* line 412, ../../sass/_forums.sass */
+    /* line 412, ../../sass/_forums.sass */
+    .sidebar .panel-box .a-secondary-cta {
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 2%; }
+  /* line 416, ../../sass/_forums.sass */
   .sidebar .primary-cta {
     color: white;
     font-size: 17px;
     font-size: 1.7rem;
     margin-bottom: 5px;
     margin-bottom: 0.5rem; }
-    /* line 416, ../../sass/_forums.sass */
+    /* line 420, ../../sass/_forums.sass */
     .sidebar .primary-cta.login {
       display: block;
       margin-left: 0;
       text-align: center;
       padding: 0.5em; }
+  /* line 425, ../../sass/_forums.sass */
+  .sidebar .a-faux-btn-grp {
+    display: table;
+    width: 100%;
+    margin-top: 6%; }
+    /* line 429, ../../sass/_forums.sass */
+    .sidebar .a-faux-btn-grp .a-bug, .sidebar .a-faux-btn-grp .a-proposal {
+      display: table-cell;
+      vertical-align: middle; }
+    /* line 432, ../../sass/_forums.sass */
+    .sidebar .a-faux-btn-grp .a-bug {
+      width: 32%;
+      -webkit-border-radius: 3px 0 0 3px;
+      -moz-border-radius: 3px 0 0 3px;
+      -ms-border-radius: 3px 0 0 3px;
+      -o-border-radius: 3px 0 0 3px;
+      border-radius: 3px 0 0 3px;
+      background: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #656565), color-stop(100%, #868686));
+      background: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -webkit-linear-gradient(bottom, #656565 0%, #868686 100%);
+      background: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -moz-linear-gradient(bottom, #656565 0%, #868686 100%);
+      background: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -o-linear-gradient(bottom, #656565 0%, #868686 100%);
+      background: url(../../images/redo/bg/btn-divide.png) no-repeat right center, linear-gradient(bottom, #656565 0%, #868686 100%); }
+      /* line 437, ../../sass/_forums.sass */
+      .sidebar .a-faux-btn-grp .a-bug:hover {
+        background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #818181), color-stop(100%, #9b9b9b));
+        background-image: -webkit-linear-gradient(bottom, #818181 0%, #9b9b9b 100%);
+        background-image: -moz-linear-gradient(bottom, #818181 0%, #9b9b9b 100%);
+        background-image: -o-linear-gradient(bottom, #818181 0%, #9b9b9b 100%);
+        background-image: linear-gradient(bottom, #818181 0%, #9b9b9b 100%); }
+    /* line 439, ../../sass/_forums.sass */
+    .sidebar .a-faux-btn-grp .a-proposal {
+      width: 56%;
+      margin: 3% 0 0 -2%;
+      -webkit-border-radius: 0 3px 3px 0;
+      -moz-border-radius: 0 3px 3px 0;
+      -ms-border-radius: 0 3px 3px 0;
+      -o-border-radius: 0 3px 3px 0;
+      border-radius: 0 3px 3px 0; }
 
-/* line 421, ../../sass/_forums.sass */
+/* line 443, ../../sass/_forums.sass */
 .footer-stats {
   font-size: 14px;
   padding-top: 1.2em;
@@ -1350,19 +1398,19 @@ footer .m-modx_logo {
   margin: 0 0 2em 0;
   border-top: 2px solid #c6c6c6;
   border-bottom: 1px solid #c6c6c6; }
-  /* line 428, ../../sass/_forums.sass */
+  /* line 450, ../../sass/_forums.sass */
   .footer-stats strong {
     font-weight: 700; }
 
-/* line 430, ../../sass/_forums.sass */
+/* line 452, ../../sass/_forums.sass */
 .m-stats-title {
   display: block; }
 
-/* line 432, ../../sass/_forums.sass */
+/* line 454, ../../sass/_forums.sass */
 .m-stats-single {
   font-weight: 700; }
 
-/* line 434, ../../sass/_forums.sass */
+/* line 456, ../../sass/_forums.sass */
 .m-modx_logo {
   background: url(../../images/redo/elements/modx-logo-fixed.png) no-repeat 0 0;
   display: block;
@@ -1370,12 +1418,12 @@ footer .m-modx_logo {
   width: 130px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
   opacity: 0.4; }
-  /* line 440, ../../sass/_forums.sass */
+  /* line 462, ../../sass/_forums.sass */
   .m-modx_logo:hover {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
     opacity: 0.6; }
 
-/* line 443, ../../sass/_forums.sass */
+/* line 465, ../../sass/_forums.sass */
 .backgroundsize .m-modx_logo {
   width: 90%;
   height: 7.5em;

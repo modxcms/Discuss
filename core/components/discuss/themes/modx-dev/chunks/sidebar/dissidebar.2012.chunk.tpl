@@ -12,8 +12,10 @@
 [[+disection:is=`dis-support-opt`:then=`
 <div class="Box GuestBox">
 	<p>To file a bug or make a feature request <a href="http://bugs.modx.com">visit our issue tracker</a>, or you can also <a href="[[~10]]" title="MODX Direct Commercial Support">purchase commercial support</a>.</p>`]]
-	<a class="a-secondary-cta l-inline-btn" href="http://tracker.modx.com">Found a bug?</a>
-	<a class="a-secondary-cta l-inline-btn" href="http://tracker.modx.com/projects/modx-proposals">Have a feature request?</a>
+	<div class="a-faux-btn-grp">
+		<a class="a-secondary-cta l-inline-btn a-bug" href="http://tracker.modx.com">Found a bug?</a>
+		<a class="a-secondary-cta l-inline-btn a-proposal" href="http://tracker.modx.com/projects/modx-proposals">Have a feature request?</a>
+	</div>
 	<a class="a-secondary-cta" href="[[~10]]">Purchase Commercial Support <span>(from $50/month)</span></a>
 </div>
 <div class="Box GuestBox">

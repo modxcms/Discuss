@@ -409,6 +409,10 @@ footer
             +rem('margin', -5px -15px 10px -15px)
             // padding-top: 15px
             // margin-top: -6px
+        .a-secondary-cta
+            margin-left: 0
+            margin-right: 0
+            margin-top: 2%
     .primary-cta
         color: #fff
         +rem('font-size', 17px)
@@ -418,6 +422,24 @@ footer
             margin-left: 0
             text-align: center
             padding: .5em
+    .a-faux-btn-grp
+        display: table
+        width: 100%
+        margin-top: 6%
+        .a-bug, .a-proposal
+            display: table-cell
+            vertical-align: middle
+        .a-bug
+            width: 32%
+            +border-radius($radius-sm 0 0 $radius-sm)
+            // background: url(../../images/redo/bg/btn-divide.png) no-repeat right center
+            +background(url(../../images/redo/bg/btn-divide.png) no-repeat right center, linear-gradient(bottom, darken($c-base, 58%) 0%, darken($c-base, 45%) 100%)) // gradient overlay
+            &:hover
+                +background-image(linear-gradient(bottom, darken($c-base, 47%) 0%, darken($c-base, 37%) 100%)) // gradient overlay
+        .a-proposal
+            width: 56%
+            margin: 3% 0 0 -2%
+            +border-radius(0 $radius-sm $radius-sm 0)
 .footer-stats
     font-size: 14px
     padding-top: 1.2em

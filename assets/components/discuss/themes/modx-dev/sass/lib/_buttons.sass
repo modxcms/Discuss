@@ -49,22 +49,30 @@
 .a-secondary-cta
     line-height: 1
     color: lighten($c-base, 60%)
-    padding: 10px 7px
+    padding: 10px 10px
     margin: 3px 2px
     +border-radius($radius-sm)
     background-color: darken($c-base, 15%)
-    +background-image(linear-gradient(darken($c-base, 18%), darken($c-base, 37%)))
-    +box-shadow(darken($c-base, 0%) 0 1px 2px, ligten($c-base, 10%) 0 0 3px inset)
-    border: 1px solid darken($c-base, 20%)
+    // +box-shadow(darken($c-base, 0%) 0 1px 2px, ligten($c-base, 10%) 0 0 3px inset)
+    // border: 1px solid darken($c-base, 20%)
     display: block
     +rem('font-size', 13px)
     text-align: center
+    +background-clip() // prevents bg color from leaking outside the border
+    background-color: darken($c-base, 58%) // layer fill content
+    +background-image(linear-gradient(bottom, darken($c-base, 58%) 0%, darken($c-base, 45%) 100%)) // gradient overlay
     span
         font-size: 70%
         white-space: nowrap
     &:hover
         color: lighten($c-base, 90%)
-        +background-image(linear-gradient(darken($c-base, 12%), darken($c-base, 30%)))
+        +background-image(linear-gradient(bottom, darken($c-base, 47%) 0%, darken($c-base, 37%) 100%)) // gradient overlay
+
+// wrap combo buttons
+.a-faux-btn-grp
+    .a-secondary-cta
+        margin: 0
+        padding: 3%
 
 // if wrapped in a faux button
 .a-faux-btn.a-secondary-cta
