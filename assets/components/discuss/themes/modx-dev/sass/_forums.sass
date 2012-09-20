@@ -475,3 +475,65 @@ footer
         height: 7.5em
         background: url(../../images/redo/elements/modx-logo-sizeable.png) no-repeat 0 0
         background-size: 100% auto
+
+// buttons
+
+.wysi-buttons
+    margin: 0
+    height: 35px
+.toolbar-btns
+    background-color: #666
+    +background(linear-gradient(lighten($c-dark-cool-bg, 9%), lighten($c-dark-cool-bg, 1%)))
+    border-radius: 3px 3px 0 0
+    margin: 0 !important
+    a
+        float: left
+        height: 35px
+        width: 37px
+        overflow: hidden
+        white-space: nowrap
+        text-indent: 101%
+        background: url(../../images/redo/icons/forums-bb-icons.png) no-repeat -35px -36px
+        border-right: 1px solid darken($c-dark-cool-bg, 5%)
+        border-left: 1px solid lighten($c-dark-cool-bg, 12%)
+        opacity: .8
+        &:hover
+            opacity: 1
+            background-color: darken($c-dark-cool-bg, 5%)
+        &:first-child
+            border-left: none
+a
+    &.italics
+        background-position: -397px -35px
+    &.underline
+        background-position: -335px -35px
+    &.strikethrough
+        background-position: -274px -36px
+    &.insert-image
+        background-position: -572px -34px
+    &.url
+        background-position: -453px -35px
+    &.code
+        background-position: -203px -36px
+    &.pre
+        background-position-x: -208px
+    &.insert-quote
+        background-position: -512px -34px
+    &.ul-list
+        background-position-x: -93px
+    &.ol-list
+        background-position-x: -151px
+.dis-form
+    textarea
+        width: 100% !important
+        margin: 0 !important
+        padding: 1.6% !important
+        font-size: 1em
+        border: 1px solid  desaturate(lighten($c-dark-cool-bg, 50%), 50%)
+        border-top:  none
+        border-radius: 0 0 3px 3px
+        &:focus
+            outline: none
+            border-top: none
+        &:hover
+            border-top: none

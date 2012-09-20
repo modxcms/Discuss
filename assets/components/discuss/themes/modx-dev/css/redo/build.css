@@ -1,5 +1,7 @@
 /* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/build.css */
 
+/* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/build.css */
+
 
 
 /*body {font-family:"proxima-nova",sans-serif;
@@ -44,3 +46,5 @@ header.dis-cat-header.dark-gradient.group-fix.multi {
 .dis-unread .wrap {
    background: url(../../images/redo/icons/i-unread.png) no-repeat 0 5px !important; 
 }
+
+
