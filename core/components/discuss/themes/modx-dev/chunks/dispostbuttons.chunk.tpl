@@ -11,9 +11,13 @@ function bbc_highlight(something, mode) {
 	<a class="insert-image" href="javascript:void(0);" onclick="surroundText('[img]', '[/img]'); return false;" class="format_buttons first">Image</a>
 	<a class="url" href="javascript:void(0);" onclick="surroundText('[url]', '[/url]'); return false;" class="format_buttons">URL</a>
 	<a class="code" href="javascript:void(0);" onclick="surroundText('[code]', '[/code]'); return false;" class="format_buttons">Insert Code</a>
-	<!-- <a class="pre" href="javascript:void(0);" onclick="surroundText('[pre]', '[/pre]'); return false;" class="format_buttons">Preformatted Text</a> -->
+	[[-<a class="pre" href="javascript:void(0);" onclick="surroundText('[pre]', '[/pre]'); return false;" class="format_buttons">Preformatted Text</a>]]
 	<a class="insert-quote" href="javascript:void(0);" onclick="surroundText('[quote]', '[/quote]'); return false;" class="format_buttons">Insert Quote</a>
-	<a class="list" href="javascript:void(0);" onclick="surroundText('[list]\n[li]', '[/li]\n[li][/li]\n[/list]'); return false;" class="format_buttons last">Insert List</a>
+	[[-<a class="list" href="javascript:void(0);" onclick="surroundText('[list]\n[li]', '[/li]\n[li][/li]\n[/list]'); return false;" class="format_buttons last">Insert List</a>]]
 	<a class="ul-list" href="javascript:void(0);" onclick="surroundText('[ul]\n[li]', '[/li]\n[li][/li]\n[/ul]'); return false;" class="format_buttons last">Unordered List</a>
 	<a class="ol-list" href="javascript:void(0);" onclick="surroundText('[ol]\n[li]', '[/li]\n[li][/li]\n[/ol]'); return false;" class="format_buttons last">Ordered List</a>
+
+	<div class="right preview_toggle">
+		<a href="#" class="preview" id="dis-preview-btn">Preview</a>
+	</div>
 </div>

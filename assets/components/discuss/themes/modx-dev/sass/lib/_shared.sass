@@ -171,3 +171,15 @@ footer
             &:hover
                 +background-image(linear-gradient(lighten($c-dark-cool-bg, 16%), lighten($c-dark-cool-bg, 11%)))
 
+// Color and pattern modules
+.m-raised-dark-bg
+    cursor: pointer
+    +border-radius($radius-sm)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 7%), lighten($c-dark-cool-bg, 5%)))
+    +box-shadow(darken($c-dark-cool-bg, 10%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 12%) 0 1px 0 inset)
+    color: lighten($c-dark-cool-bg, 80%) !important
+    &:hover, &.active
+        +opacity(1.0)
+        +background-image(linear-gradient(lighten($c-dark-cool-bg, 22%), lighten($c-dark-cool-bg, 14%)))
+        +box-shadow(darken($c-dark-cool-bg, 40%) 0 0 3px, darken($c-dark-cool-bg, 40%) 0 1px 0, lighten($c-dark-cool-bg, 32%) 0 1px 0 inset)
+

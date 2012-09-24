@@ -1,3 +1,7 @@
+/* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/index.css */
+
+/* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/index.css */
+
 #frame {
  	margin: 20px auto;
  	text-align: left;
@@ -545,7 +549,7 @@ form input[type="radio"] {
 	}
 	
 /* Main List Display  */
-.dis-threads-header h2 {
+/*.dis-threads-header h2 {
  	background-color: #E3F4FF;
  	border-width: 1px 0;
  	color: #555555;
@@ -553,7 +557,7 @@ form input[type="radio"] {
  	margin: 0;
  	padding: 5px 8px;
  	position: relative;
-	}
+	}*/
 
 div.dis-threads {
  	width: 100%;
@@ -641,27 +645,27 @@ span.DiscussionCount {
     font-size: 13px;
 	}
 	
-.dis-read {
+/*.dis-read {
 	opacity:.40;
 	filter: alpha(opacity=40);
-	/* Firefox */
+	/* Firefox *!/
 	-moz-transition-property: opacity;
 	-moz-transition-duration: .3s;
 	-moz-transition-delay: 0s;
-	/* WebKit */
+	/* WebKit *!/
 	-webkit-transition-property: opacity;
 	-webkit-transition-duration: .3s;
 	-webkit-transition-delay: 0s;
-	/* Opera */
+	/* Opera *!/
 	-o-transition-property: opacity;
 	-o-transition-duration: .3s;
 	-o-transition-delay: 0s;
-	/* Standard */
+	/* Standard *!/
 	transition-property: opacity;
 	transition-duration: .3s;
 	transition-delay: 0s;
  	behavior:url(pie.htc);
-	}
+	}*/
 
 p.dis-board-subs:hover,
 a.dis-read:hover {
@@ -1119,7 +1123,7 @@ h4 a.normal-type {
 	font-size: 12px;
 	}
 
-.preview_toggle {
+/*.preview_toggle {
 	border-radius: 4px 4px 0px 0px;
 	position: relative;
 	top: -8px;
@@ -1131,7 +1135,7 @@ h4 a.normal-type {
     z-index: 900;
     margin: 10px 0 5px 25px;
  	behavior:url(pie.htc);
-	}
+	}*/
 
 .dis-post-preview {
     margin: 0 0 15px;
