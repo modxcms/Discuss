@@ -1,3 +1,5 @@
+/* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/redo/index.css */
+
 /* @override http://discuss.modx.localhost/assets/components/discuss/themes/modx-dev/css/index.css */
 
 #frame {
@@ -1121,7 +1123,7 @@ h4 a.normal-type {
 	font-size: 12px;
 	}
 
-.preview_toggle {
+/*.preview_toggle {
 	border-radius: 4px 4px 0px 0px;
 	position: relative;
 	top: -8px;
@@ -1133,7 +1135,7 @@ h4 a.normal-type {
     z-index: 900;
     margin: 10px 0 5px 25px;
  	behavior:url(pie.htc);
-	}
+	}*/
 
 .dis-post-preview {
     margin: 0 0 15px;
