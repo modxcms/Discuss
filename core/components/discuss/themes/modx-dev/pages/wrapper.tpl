@@ -9,23 +9,18 @@
     <title>[[!+discuss.pagetitle]] | MODX Community Forums </title>
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
-
-    [[- <!-- @todo merge these into one --> ]]
-    <link href="[[+discuss.config.cssUrl]]redo/index.css" rel="stylesheet" type="text/css">
-    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">
-    <link href="[[+discuss.config.cssUrl]]redo/build.css" rel="stylesheet" type="text/css">
-    <link href="[[+discuss.config.cssUrl]]jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">
-    <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />
-
+    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">[[-
+    Commenting out
+    <!-- imorted as scss now --> <link href="[[+discuss.config.cssUrl]]redo/index.css" rel="stylesheet" type="text/css">
+    <!-- imorted as scss now --> <link href="[[+discuss.config.cssUrl]]jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">]]
+    <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />[[- Will eventually download and combine]]
     [[*cssjs]]
-
     [[- Live Typekit call
     [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
     <script src="http://use.typekit.com/zub5doo.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>`]]
     ]]
     <script src="[[+discuss.config.jsUrl]]LABjs/LAB.min.js"></script>
-
     [[- local typekit call]]
     <script type="text/javascript" src="//use.typekit.net/ukf1ncb.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
