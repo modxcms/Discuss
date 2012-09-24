@@ -115,6 +115,9 @@ abstract class DiscussController {
         foreach ($this->config as $k => $v) {
             $this->setPlaceholder('controller.'.$k,$v);
         }
+        foreach ($this->discuss->config as $k => $v) {
+            $this->setPlaceholder('discuss.config.'.$k,$v);
+        }
         
         $this->initialize();
 
