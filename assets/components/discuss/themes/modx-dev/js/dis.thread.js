@@ -10,7 +10,7 @@ DIS.Thread = function() {
     
     return {
         init: function() {
-            $('.dis-preview').click(this.preview);
+            $('#dis-preview-btn').click(this.preview);
             $('.dis-message-write').click(this.message);
             $("#dis-message-preview").delegate(".dis-message-cancel", "click", this.message);
             $('.dis-post-title').click(this.togglePost);
@@ -20,7 +20,8 @@ DIS.Thread = function() {
             $('.dis-add-attachment').click(this.addAttachment);
         }
         
-        ,preview: function() {
+        ,preview: function(event) {
+            event.preventDefault();
             var f = $('#dis-quick-reply-form');
             var p = f.serialize()+'&action=thread/preview';
 

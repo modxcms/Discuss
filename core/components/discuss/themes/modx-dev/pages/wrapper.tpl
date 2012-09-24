@@ -214,12 +214,12 @@
       .script("[[+discuss.config.jsUrl]]jquery-ui-1.8.16.custom.min.js").wait()
       .script("[[+discuss.config.jsUrl]]redo/forums-2012.js")
       .script("[[+discuss.config.jsUrl]]discuss.js").wait()
-      .script("[[+discuss.config.jsUrl]]sh/shCore.js").wait()
-      .script("[[+discuss.config.jsUrl]]sh/shAutoloader.js")
-      .script("[[+discuss.config.jsUrl]]sh/shDiscuss.js")
       .script("[[+discuss.config.jsUrl]]dis.sticky.js")
       .script("[[+discuss.config.jsUrl]]redo/modernizr.custom.07525.js")
       [[+discuss.js.footer:notempty=`.script([[+discuss.js.footer]])`]]
+      .script("[[+discuss.config.jsUrl]]sh/shCore.js").wait()
+      .script("[[+discuss.config.jsUrl]]sh/shAutoloader.js")
+      .script("[[+discuss.config.jsUrl]]sh/shDiscuss.js")
 
       [[*lastJSinherit]] [[*lastJS]] ;
     </script>
