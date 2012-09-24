@@ -15,7 +15,6 @@
     <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">
     <link href="[[+discuss.config.cssUrl]]redo/build.css" rel="stylesheet" type="text/css">
     <link href="[[+discuss.config.cssUrl]]jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">
-    [[- broken link? <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">]]
     <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />
 
     [[*cssjs]]
