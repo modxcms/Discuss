@@ -143,7 +143,7 @@ if ($total < $limit) {
 			$list[] = $discuss->getChunk($tplLink, array('url' => $currentResourceUrl.'&page='.(2), 'text' => '2'));
 			$list[] = $truncateText;
 			
-			for ($i = $total - (2 + ($adj * 2)); $i <= $total; $i++) {
+			for ($i = $total - 2; $i <= $total; $i++) {
 				$list[] = ($i == $current) ?
 					$discuss->getChunk($tplActive, array('class' => 'active', 'text' => $i)) :
 					$discuss->getChunk($tplLink, array('url' => $currentResourceUrl.'&page='.($i), 'text' => $i));

@@ -105,12 +105,11 @@ class DiscussMessagesModifyController extends DiscussController {
         $placeholders['max_attachments'] = $this->modx->getOption('discuss.attachments_max_per_post',null,5);
         $placeholders['attachmentCurIdx'] = count($attachments)+1;
         $this->modx->regClientHTMLBlock('<script type="text/javascript">
-        var DISModifyMessage = $(function() {
             DIS.config.attachments_max_per_post = '.$placeholders['max_attachments'].';
             DIS.DISModifyMessage.init({
                 attachments: '.(count($attachments)+1).'
             });
-        });</script>');
+        </script>');
 
     }
 

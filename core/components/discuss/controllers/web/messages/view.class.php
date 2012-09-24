@@ -141,8 +141,8 @@ class DiscussMessagesViewController extends DiscussController {
         } else {
             $this->setPlaceholder('attachment_fields','');
         }
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
-        $(function() { DIS.config.attachments_max_per_post = '.$this->getPlaceholder('max_attachments').'; });
+        $this->modx->regClientHTMLBlock('<script type="text/javascript">
+        DIS.config.attachments_max_per_post = '.$this->getPlaceholder('max_attachments').';
         </script>');
     }
     
