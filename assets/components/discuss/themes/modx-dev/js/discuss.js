@@ -48,6 +48,7 @@ var DISBoard = {
     toggleCategory: function() {
         var id = $(this).parent().attr('id');
         $('div.'+id).slideToggle();
+        $(this).parent().toggleClass('dis-collapsed');
     }
 };
 
