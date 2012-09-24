@@ -207,17 +207,19 @@
 [[*template:ne=`12`:then=`
     <script>
       $LAB
+      [[+discuss.js.header:notempty=`.script([[+discuss.js.header]])`]]
       .setOptions({"AlwaysPreserveOrder":true})
       .script("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js").wait()
       .script("[[+discuss.config.jsUrl]]jquery.scrollTo-min.js")
       .script("[[+discuss.config.jsUrl]]jquery-ui-1.8.16.custom.min.js").wait()
       .script("[[+discuss.config.jsUrl]]redo/forums-2012.js")
-      .script("[[+discuss.config.jsUrl]]discuss.js")
+      .script("[[+discuss.config.jsUrl]]discuss.js").wait()
       .script("[[+discuss.config.jsUrl]]sh/shCore.js").wait()
       .script("[[+discuss.config.jsUrl]]sh/shAutoloader.js")
       .script("[[+discuss.config.jsUrl]]sh/shDiscuss.js")
       .script("[[+discuss.config.jsUrl]]dis.sticky.js")
       .script("[[+discuss.config.jsUrl]]redo/modernizr.custom.07525.js")
+      [[+discuss.js.footer:notempty=`.script([[+discuss.js.footer]])`]]
 
       [[*lastJSinherit]] [[*lastJS]] ;
     </script>

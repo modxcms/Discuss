@@ -34,6 +34,9 @@ $manifest = array(
         'js' => array(
             'inline' => 'var DIS = {config: {}}; DIS.url = "'.$this->discuss->request->makeUrl().'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";DIS.config.connector = "'.$this->discuss->config['connectorUrl'].'"',
         ),
+        'options' => array(
+            'registerJsToScriptTags' => false,
+        )
     ),
     'print' => array(
         'css' => array(
