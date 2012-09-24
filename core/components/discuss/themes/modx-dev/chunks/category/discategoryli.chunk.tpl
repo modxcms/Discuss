@@ -1,4 +1,4 @@
-<div class="m-section_title">
+<div class="m-section_title" id="dis-category-[[+category]]">
 	<header class="dis-cat-header dark-gradient group-fix multi"><h1>[[+category_name]]</h1></header>
 	<div class="row h-group">
 	    <div class="f1-f7">Name</div>

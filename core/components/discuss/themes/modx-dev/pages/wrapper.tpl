@@ -1,5 +1,4 @@
 <!doctype html>
-<!-- wrapper.tpl -->
 
 <html lang="en" class="no-js">
 <head>
@@ -10,16 +9,23 @@
     <title>[[!+discuss.pagetitle]] | MODX Community Forums </title>
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
+
+    [[- <!-- @todo merge these into one --> ]]
+    <link href="[[+discuss.config.cssUrl]]redo/index.css" rel="stylesheet" type="text/css">
+    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">
+    <link href="[[+discuss.config.cssUrl]]redo/build.css" rel="stylesheet" type="text/css">
+    <link href="[[+discuss.config.cssUrl]]jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">
+    [[- broken link? <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">]]
     <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />
-    [[-<link rel="stylesheet" href="http://modx.com/assets/css/forums.css?v=101">]]
-    <link href="//get.pictos.cc/fonts/2455/2" rel="stylesheet" type="text/css">
+
     [[*cssjs]]
+
     [[- Live Typekit call
     [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
     <script src="http://use.typekit.com/zub5doo.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>`]]
-    <script src="[[++modx.assets.url]]js/LABjs/LAB.min.js"></script> 
     ]]
+    <script src="[[+discuss.config.jsUrl]]LABjs/LAB.min.js"></script>
 
     [[- local typekit call]]
     <script type="text/javascript" src="//use.typekit.net/ukf1ncb.js"></script>
@@ -204,11 +210,16 @@
     <script>
       $LAB
       .setOptions({"AlwaysPreserveOrder":true})
-      .script("http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js").wait()
-      .script("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js")
-      .script("[[++modx.assets.url]]js/modernizr-1.6.min.js")
-      .script("[[++modx.assets.url]]js/jquery.cycle.all.min.js").wait()
-      .script("[[++modx.assets.url]]js/script.js") 
+      .script("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js").wait()
+      .script("[[+discuss.config.jsUrl]]jquery.scrollTo-min.js")
+      .script("[[+discuss.config.jsUrl]]jquery-ui-1.8.16.custom.min.js").wait()
+      .script("[[+discuss.config.jsUrl]]discuss.js")
+      .script("[[+discuss.config.jsUrl]]sh/shCore.js").wait()
+      .script("[[+discuss.config.jsUrl]]sh/shAutoloader.js")
+      .script("[[+discuss.config.jsUrl]]sh/shDiscuss.js")
+      .script("[[+discuss.config.jsUrl]]dis.sticky.js")
+      .script("[[+discuss.config.jsUrl]]redo/modernizr.custom.07525.js")
+
       [[*lastJSinherit]] [[*lastJS]] ;
     </script>
     <script>

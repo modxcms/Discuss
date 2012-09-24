@@ -29,25 +29,12 @@ $manifest = array(
     'global' => array(
         'css' => array(
             'header' => array(
-                'redo/index.css',
-                'redo/forums-styles.css',
-                'redo/build.css',
-                'jquery-ui-1.8.16.custom.css',
             ),
         ),
         'js' => array(
             'header' => array(
-                'jquery-1.6.2.min.js',
-                'jquery.scrollTo-min.js',
-                'jquery-ui-1.8.16.custom.min.js',
-                'discuss.js',
-                'sh/shCore.js',
-                'sh/shAutoloader.js',
-                'sh/shDiscuss.js',
-                'dis.sticky.js',
-                'redo/modernizr.custom.07525.js'
             ),
-            'inline' => 'DIS.url = "'.$this->discuss->request->makeUrl().'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";DIS.config.connector = "'.$this->discuss->config['connectorUrl'].'"',
+            'inline' => 'var DIS = {config: {}}; DIS.url = "'.$this->discuss->request->makeUrl().'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";DIS.config.connector = "'.$this->discuss->config['connectorUrl'].'"',
         ),
     ),
     'print' => array(
@@ -60,7 +47,6 @@ $manifest = array(
     'home' => array(
         'js' => array(
             'header' => array(
-                'dis.home.js',
             ),
         ),
         'options' => array(
@@ -79,7 +65,6 @@ $manifest = array(
     'board' => array(
         'js' => array(
             'header' => array(
-                'dis.board.js',
             ),
         ),
         'options' => array(
@@ -105,7 +90,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'dis.thread.js',
-                'dis.post.buttons.js',
             )
         ),
         'options' => array(
@@ -125,7 +109,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'dis.thread.new.js',
-                'dis.post.buttons.js',
             ),
         ),
     ),
@@ -133,7 +116,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'dis.post.reply.js',
-                'dis.post.buttons.js',
             ),
         ),
         'options' => array(
@@ -144,7 +126,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'dis.post.modify.js',
-                'dis.post.buttons.js',
             ),
         ),
         'options' => array(
@@ -207,11 +188,6 @@ $manifest = array(
                 'dis.search.js',
             ),
         ),
-        'css' => array(
-            'header' => array(
-                'search.css',
-            ),
-        )
     ),
     'user' => array(
         'options' => array(
@@ -246,7 +222,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'messages/dis.message.new.js',
-                'dis.post.buttons.js',
             ),
         ),
     ),
@@ -254,7 +229,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'messages/dis.message.reply.js',
-                'dis.post.buttons.js',
             ),
         ),
     ),
@@ -262,7 +236,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'messages/dis.message.modify.js',
-                'dis.post.buttons.js',
             ),
         ),
     ),
@@ -270,7 +243,6 @@ $manifest = array(
         'js' => array(
             'header' => array(
                 'dis.thread.js',
-                'dis.post.buttons.js',
             )
         ),
         'options' => array(
