@@ -52,8 +52,7 @@
                         <div class="m-user_box h-group">
                             <div class="l-left">
                                 <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]"><img src="[[!+discuss.user.avatar_url]]"></a>
-                                <br />
-                                <span class="m-user_posts">[[!+discuss.user.posts_formatted]] [[%discuss.posts]]</span>
+                                <span class="m-user_posts"></span>
                             </div>
                             <div class="l-right">
                                 <div class="m-user_opts group-vis"><h3>Welcome Back <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">[[!+discuss.user.name_first]]</a></h3>
@@ -63,6 +62,7 @@
                                             <ul id="F-Toggle-List">
                                                 <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">My Profile</a></li>
                                                 <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">My Email Notifications</a></li>
+                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]user/recent_posts">My [[!+discuss.user.posts_formatted]] [[%discuss.posts]]</a></li>
                                             </ul>
                                         </li>
                                     </ul>
