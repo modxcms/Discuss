@@ -56,7 +56,18 @@
                                 <span class="m-user_posts">[[!+discuss.user.posts_formatted]] [[%discuss.posts]]</span>
                             </div>
                             <div class="l-right">
-                                <h3>Welcome Back <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">[[!+discuss.user.name_first]]</a></h3>
+                                <div class="m-user_opts group-vis"><h3>Welcome Back <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">[[!+discuss.user.name_first]]</a></h3>
+                                    <ul class="options-select">
+                                        <li id="F-Toggle-Options">
+                                            <a href="#" class="a-options"><span>Options</span></a>
+                                            <ul id="F-Toggle-List">
+                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">My Profile</a></li>
+                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">My Email Notifications</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]">Logout</a>
+                                </div>
                                 <p>You have <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit">[[!+discuss.user.unread_posts]]</a>,
                                     <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]]</a>
                                     and <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts">[[!+discuss.user.new_replies]]</a> to read.<br />
@@ -75,13 +86,6 @@
                                         `]]
                                     `]]
                                 </p>
-                                <div class="m-user_tools">
-                                    <ul class="m-user_tools_reg_links l-horiz_list">
-                                        <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">my profile</a></li>
-                                        <!--<li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">update email notifications</a></li>-->
-                                    </ul>
-                                    <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]">Logout</a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -207,6 +211,7 @@
       .script("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js").wait()
       .script("[[+discuss.config.jsUrl]]jquery.scrollTo-min.js")
       .script("[[+discuss.config.jsUrl]]jquery-ui-1.8.16.custom.min.js").wait()
+      .script("[[+discuss.config.jsUrl]]redo/forums-2012.js")
       .script("[[+discuss.config.jsUrl]]discuss.js")
       .script("[[+discuss.config.jsUrl]]sh/shCore.js").wait()
       .script("[[+discuss.config.jsUrl]]sh/shAutoloader.js")

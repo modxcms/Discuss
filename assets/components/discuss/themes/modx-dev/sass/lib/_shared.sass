@@ -130,14 +130,16 @@ footer
             background-position-x: -185px
 
 // user modules
+.m-user_opts
+    width: 100%
 .m-user_box
     padding: 1em
     h3
         +rem('font-size', 17px)
         +rem('margin', 0 0 5px 0)
     p
-        color: desaturate(lighten($c-dark-cool-bg, 35%), 20%)
-        line-height: 1.3
+        color: desaturate(lighten($c-dark-cool-bg, 45%), 20%)
+        line-height: 1.4
     a
         color: lighten($c-dark-cool-bg, 90%)
         text-decoration: underline
@@ -157,6 +159,14 @@ footer
         display: inline-block
     a
         padding: 6px 10px
+.m-user_tools_logout
+    @extend .m-raised-dark-bg
+    float: right
+    +rem(padding, 3px 12px)
+    +rem(margin, 0 10px 0 0)
+    +border-radius(30px  !important)
+    &:hover
+        text-decoration: none !important
 .m-user_tools_reg_links
     +border-radius($radius-sm)
     li
@@ -171,6 +181,70 @@ footer
             &:hover
                 +background-image(linear-gradient(lighten($c-dark-cool-bg, 16%), lighten($c-dark-cool-bg, 11%)))
 
+// user options
+.m-user_box
+    width: 100%
+    h3
+        float: left
+        color: desaturate(lighten($c-dark-cool-bg, 45%), 20%)
+    a
+        text-decoration: none
+        &:hover
+            text-decoration: underline
+
+ul.options-select
+    float: left
+#F-Toggle-Options
+    position: relative
+    a.a-options
+        @extend .m-raised-dark-bg
+        margin: 0 0 0 10px
+        display: block
+        background-color: #000
+        height: 20px
+        width: 20px
+        overflow: hidden
+        text-indent: 101%
+        span
+            +opacity(.7)
+            height: 20px
+            width: 20px
+            display: block
+            background: url(../../images/redo/icons/down-arrow.png) no-repeat center -21px
+        &:hover
+            span
+                +opacity(1.0)
+#F-Toggle-List
+    @extend .m-raised-dark-bg-nh
+    display: none
+    position: absolute
+    right: 0
+    top: 22px
+    padding: 6px 10px
+    min-width: 150px
+    &:after
+        content: ""
+        +border-radius($radius-sm $radius-sm 0 0)
+        background: url(../../images/redo/icons/down-arrow.png) no-repeat center -21px
+        display: block
+        width: 20px
+        height: 24px
+        background-color: #224946
+        position: absolute
+        top: -22px
+        right: 0
+        cursor: pointer
+    a
+        color: desaturate(lighten($c-dark-cool-bg, 57%), 20%)
+        text-decoration: none
+        padding: 5px 0
+        display: block
+        border-bottom: dotted 1px desaturate(lighten($c-dark-cool-bg, 17%), 10%)
+        &:hover
+            color: desaturate(lighten($c-dark-cool-bg, 100%), 20%)
+    li:last-child a
+        border-bottom: none
+
 // Color and pattern modules
 .m-raised-dark-bg
     cursor: pointer
@@ -183,3 +257,10 @@ footer
         +background-image(linear-gradient(lighten($c-dark-cool-bg, 22%), lighten($c-dark-cool-bg, 14%)))
         +box-shadow(darken($c-dark-cool-bg, 40%) 0 0 3px, darken($c-dark-cool-bg, 40%) 0 1px 0, lighten($c-dark-cool-bg, 32%) 0 1px 0 inset)
 
+// without pseudo classes, could remove using later versions of SASS
+.m-raised-dark-bg-nh
+    cursor: pointer
+    +border-radius($radius-sm)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 7%), lighten($c-dark-cool-bg, 5%)))
+    +box-shadow(darken($c-dark-cool-bg, 10%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 12%) 0 1px 0 inset)
+    color: lighten($c-dark-cool-bg, 80%) !important
