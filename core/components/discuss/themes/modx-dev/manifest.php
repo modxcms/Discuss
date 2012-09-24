@@ -32,8 +32,6 @@ $manifest = array(
             ),
         ),
         'js' => array(
-            'header' => array(
-            ),
             'inline' => 'var DIS = {config: {}}; DIS.url = "'.$this->discuss->request->makeUrl().'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";DIS.config.connector = "'.$this->discuss->config['connectorUrl'].'"',
         ),
     ),
@@ -45,10 +43,6 @@ $manifest = array(
         ),
     ),
     'home' => array(
-        'js' => array(
-            'header' => array(
-            ),
-        ),
         'options' => array(
             'showBoards' => true,
             'showBreadcrumbs' => true,
@@ -63,10 +57,6 @@ $manifest = array(
         ),
     ),
     'board' => array(
-        'js' => array(
-            'header' => array(
-            ),
-        ),
         'options' => array(
             'showSubBoards' => true,
             'showPosts' => true,
@@ -88,7 +78,7 @@ $manifest = array(
     ),
     'thread' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
@@ -107,14 +97,14 @@ $manifest = array(
     ),
     'thread/new' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.new.js',
             ),
         ),
     ),
     'thread/reply' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.post.reply.js',
             ),
         ),
@@ -124,7 +114,7 @@ $manifest = array(
     ),
     'thread/modify' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.post.modify.js',
             ),
         ),
@@ -134,7 +124,7 @@ $manifest = array(
     ),
     'thread/move' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
@@ -144,7 +134,7 @@ $manifest = array(
     ),
     'thread/spam' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
@@ -154,7 +144,7 @@ $manifest = array(
     ),
     'thread/remove' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
@@ -164,7 +154,7 @@ $manifest = array(
     ),
     'post/report' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
@@ -174,7 +164,7 @@ $manifest = array(
     ),
     'post/spam' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
@@ -184,7 +174,7 @@ $manifest = array(
     ),
     'search' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.search.js',
             ),
         ),
@@ -196,14 +186,14 @@ $manifest = array(
     ),
     'user/subscriptions' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'user/dis.user.subscriptions.js',
             )
         ),
     ),
     'user/ignoreboards' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'user/dis.user.ignoreboards.js',
             )
         ),
@@ -220,28 +210,28 @@ $manifest = array(
     ),
     'messages/new' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'messages/dis.message.new.js',
             ),
         ),
     ),
     'messages/reply' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'messages/dis.message.reply.js',
             ),
         ),
     ),
     'messages/modify' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'messages/dis.message.modify.js',
             ),
         ),
     ),
     'messages/view' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
