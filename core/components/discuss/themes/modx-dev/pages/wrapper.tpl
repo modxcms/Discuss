@@ -59,7 +59,7 @@
                                 <div class="m-user_opts group-vis"><h3>Welcome Back <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">[[!+discuss.user.name_first]]</a></h3>
                                     <ul class="options-select">
                                         <li id="F-Toggle-Options">
-                                            <a href="#" class="a-options"><span>Options</span></a>
+                                            <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]" class="a-options"><span>Options</span></a>
                                             <ul id="F-Toggle-List">
                                                 <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">My Profile</a></li>
                                                 <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">My Email Notifications</a></li>
