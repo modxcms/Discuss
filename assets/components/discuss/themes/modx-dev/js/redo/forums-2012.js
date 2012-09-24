@@ -1,6 +1,6 @@
 // Forum Functions
 $(function() {
-    $('#F-Toggle-Options').click(function(event) {
+    $('#F-Toggle-Options a.a-options').click(function(event) {
         event.preventDefault();
         $('#F-Toggle-List').slideToggle('fast');
     });
