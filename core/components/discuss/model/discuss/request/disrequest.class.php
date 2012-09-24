@@ -216,9 +216,16 @@ class DisRequest {
 				/* Load global forum JS */
 				if(array_key_exists('js', $global)){
 					$js = $global['js'];
-					foreach($js['header'] as $val){
-						$this->modx->regClientStartupScript($this->discuss->config['jsUrl'].$val);
-					}
+                    if (isset($js['header']) && !empty($js['header'])) {
+                        foreach($js['header'] as $val){
+                            $this->modx->regClientStartupScript($this->discuss->config['jsUrl'].$val);
+                        }
+                    }
+                    if (isset($js['footer']) && !empty($js['footer'])) {
+                        foreach($js['footer'] as $val){
+                            $this->modx->regClientScript($this->discuss->config['jsUrl'].$val);
+                        }
+                    }
 					if(isset($js['inline'])){
 						$this->modx->regClientStartupHTMLBlock('<script type="text/javascript">// <![CDATA['."\n".$js['inline']."\n".'// ]]></script>');
 					}
@@ -244,9 +251,16 @@ class DisRequest {
 				/* Load specific forum JS */
 				if(array_key_exists('js', $specific)){
 					$js = $specific['js'];
-					foreach($js['header'] as $val){
-						$this->modx->regClientStartupScript($this->discuss->config['jsUrl'].$val);
-					}
+                    if (isset($js['header'])  && !empty($js['header'])) {
+                        foreach($js['header'] as $val){
+                            $this->modx->regClientStartupScript($this->discuss->config['jsUrl'].$val);
+                        }
+                    }
+                    if (isset($js['footer'])  && !empty($js['footer'])) {
+                        foreach($js['footer'] as $val){
+                            $this->modx->regClientScript($this->discuss->config['jsUrl'].$val);
+                        }
+                    }
 					if(isset($js['inline'])){
 						$this->modx->regClientHTMLBlock('<script type="text/javascript">'.$js['inline'].'</script>');
 					}
