@@ -3271,7 +3271,7 @@ footer {
 
 /* line 135, ../../sass/lib/_shared.sass */
 .m-user_box {
-  padding: 1em; }
+  padding: 1em 1em 0 1em; }
   /* line 137, ../../sass/lib/_shared.sass */
   .m-user_box h3 {
     font-size: 17px;
