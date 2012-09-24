@@ -185,9 +185,11 @@ class DisRequest {
         $f = $this->discuss->config['themePath'].'manifest.php';
         if (file_exists($f)) {
             $manifest = require $f;
+            $registerJs = array('header' => array(), 'footer' => array());
 
             if (is_array($manifest) && array_key_exists('print', $manifest) && !empty($_REQUEST['print'])) {
                 $print = $manifest['print'];
+
 
 				/* Load global print CSS */
 				if (array_key_exists('css', $print)){
@@ -218,12 +220,12 @@ class DisRequest {
 					$js = $global['js'];
                     if (isset($js['header']) && !empty($js['header'])) {
                         foreach($js['header'] as $val){
-                            $this->modx->regClientStartupScript($this->discuss->config['jsUrl'].$val);
+                            $registerJs['header'][] = $this->discuss->config['jsUrl'].$val;
                         }
                     }
                     if (isset($js['footer']) && !empty($js['footer'])) {
                         foreach($js['footer'] as $val){
-                            $this->modx->regClientScript($this->discuss->config['jsUrl'].$val);
+                            $registerJs['footer'][] = $this->discuss->config['jsUrl'].$val;
                         }
                     }
 					if(isset($js['inline'])){
@@ -253,12 +255,12 @@ class DisRequest {
 					$js = $specific['js'];
                     if (isset($js['header'])  && !empty($js['header'])) {
                         foreach($js['header'] as $val){
-                            $this->modx->regClientStartupScript($this->discuss->config['jsUrl'].$val);
+                            $registerJs['header'][] = $this->discuss->config['jsUrl'].$val;
                         }
                     }
                     if (isset($js['footer'])  && !empty($js['footer'])) {
                         foreach($js['footer'] as $val){
-                            $this->modx->regClientScript($this->discuss->config['jsUrl'].$val);
+                            $registerJs['footer'][] = $this->discuss->config['jsUrl'].$val;
                         }
                     }
 					if(isset($js['inline'])){
@@ -271,6 +273,21 @@ class DisRequest {
 					$this->pageOptions = array_merge($this->pageOptions,$specific['options']);
                 }
 			}
+
+            $registerToScript = (isset($manifest['global']['options']['registerJsToScriptTags'])) ? $manifest['global']['options']['registerJsToScriptTags'] : true;
+            if ($registerToScript) {
+                foreach ($registerJs['header'] as $script) {
+                    $this->modx->regClientStartupScript($script);
+                }
+                foreach ($registerJs['footer'] as $script) {
+                    $this->modx->regClientScript($script);
+                }
+            } else {
+                $this->modx->setPlaceholders(array(
+                    'discuss.js.header' => (!empty($registerJs['header'])) ? $this->modx->toJSON($registerJs['header']) : '',
+                    'discuss.js.footer' => (!empty($registerJs['footer'])) ? $this->modx->toJSON($registerJs['footer']) : '',
+                ));
+            }
         } else {
             $this->modx->regClientCSS($this->discuss->config['cssUrl'].'index.css');
             $this->modx->regClientStartupScript($this->discuss->config['jsUrl'].'web/discuss.js');

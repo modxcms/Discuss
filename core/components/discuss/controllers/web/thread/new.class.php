@@ -128,8 +128,8 @@ class DiscussThreadNewController extends DiscussController {
      */
     public function handleAttachments() {
         $this->setPlaceholder('max_attachments',$this->modx->getOption('discuss.attachments_max_per_post',null,5));
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">
-        $(function() { DIS.config.attachments_max_per_post = '.$this->getPlaceholder('max_attachments').'; });
+        $this->modx->regClientHTMLBlock('<script type="text/javascript">
+        DIS.config.attachments_max_per_post = '.$this->getPlaceholder('max_attachments').';
         </script>');
         if ($this->board->canPostAttachments()) {
             $this->setPlaceholders(array(

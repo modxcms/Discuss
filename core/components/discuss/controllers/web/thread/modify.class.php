@@ -121,12 +121,11 @@ class DiscussThreadModifyController extends DiscussController {
 
         /* output form to browser */
         $this->modx->regClientHTMLBlock('<script type="text/javascript">
-        var DISModifyPost = $(function() {
             DIS.config.attachments_max_per_post = '.$placeholders['max_attachments'].';
             DIS.DISModifyPost.init({
                 attachments: '.(count($attachments)+1).'
             });
-        });</script>');
+        </script>');
         $this->modx->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('disError'));
         $this->modx->setPlaceholders($placeholders,'fi.');
         $this->setPlaceholders($placeholders);
