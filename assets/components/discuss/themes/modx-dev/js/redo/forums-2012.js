@@ -17,7 +17,12 @@ $(function() {
 	// move labels inside inputs
 	$(".masthead-login label").inFieldLabels();
 
+	// options toggle
     $('#F-Toggle-Options a.a-options').click(function(event) {
+        event.preventDefault();
+        $('#F-Toggle-List').slideToggle('fast');
+    });
+    $('#F-Toggle-List').click(function(event) {
         event.preventDefault();
         $('#F-Toggle-List').slideToggle('fast');
     });

@@ -159,76 +159,6 @@ html[xmlns] .group-vis {
 .cell {
   *display: inline; }
 
-/* line 1, ../../sass/lib/_index-css.scss */
-#frame {
-  margin: 20px auto;
-  text-align: left;
-  width: 960px; }
-
-/* line 7, ../../sass/lib/_index-css.scss */
-#body {
-  width: 100%;
-  float: left;
-  background: #ffffff;
-  border: 1px solid #e3e3e3;
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  box-shadow: 0 0 2px #ddd;
-  -moz-box-shadow: 0 1px 2px #ddd;
-  -webkit-box-shadow: 0 0 2px #ddd;
-  behavior: url(pie.htc); }
-
-/* line 21, ../../sass/lib/_index-css.scss */
-#Content {
-  position: relative;
-  float: left;
-  width: 710px;
-  margin: 0 0 40px;
-  padding: 0 0 30px; }
-
-/* line 29, ../../sass/lib/_index-css.scss */
-#crumbs li.last {
-  background: url("../images/bg-sprite.png") no-repeat scroll 4px -142px transparent; }
-
-/* line 33, ../../sass/lib/_index-css.scss */
-#crumbs li.last a {
-  background: url("../images/bg-sprite.png") repeat-x 3px -170px transparent;
-  margin: 0 0;
-  padding: 0 0; }
-
-/* line 40, ../../sass/lib/_index-css.scss */
-input[type="submit"],
-input[type="button"] {
-  -moz-transition: all 0.4s ease 0s;
-  background: none;
-  border: 1px solid #CCCCCC;
-  border-radius: 2px 2px 2px 2px;
-  color: #555555 !important;
-  text-shadow: none;
-  box-shadow: none;
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  behavior: url(pie.htc); }
-
-/* line 53, ../../sass/lib/_index-css.scss */
-input[type="submit"]:hover {
-  -moz-transition: all 0.4s ease 0s;
-  background: none;
-  border: 1px solid #CCCCCC;
-  border-radius: 2px 2px 2px 2px;
-  color: #fff;
-  box-shadow: none;
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  behavior: url(pie.htc); }
-
-/* line 65, ../../sass/lib/_index-css.scss */
-.hide {
-  text-indent: -2000px;
-  font-size: 0px;
-  line-height: 0px; }
-
 /* line 71, ../../sass/lib/_index-css.scss */
 .clearfix:after {
   content: ".";
@@ -247,10 +177,6 @@ br.clearfix {
   height: 0;
   clear: both;
   visibility: hidden; }
-
-/* line 75, ../../sass/lib/_index-css.scss */
-ul, ol {
-  list-style-type: none; }
 
 /* line 80, ../../sass/lib/_index-css.scss */
 .wysi-buttons {

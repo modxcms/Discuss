@@ -1,80 +1,80 @@
-#frame {
- 	margin: 20px auto;
- 	text-align: left;
- 	width: 960px;
-	}
+// #frame {
+//  	margin: 20px auto;
+//  	text-align: left;
+//  	width: 960px;
+// 	}
 
-#body {
-	width: 100%;
-	float: left;
-	background: #ffffff;
-	border: 1px solid #e3e3e3;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	box-shadow: 0 0 2px #ddd;
-	-moz-box-shadow: 0 1px 2px #ddd;
-	-webkit-box-shadow: 0 0 2px #ddd;
- 	behavior:url(pie.htc);
-	}
+// #body {
+// 	width: 100%;
+// 	float: left;
+// 	background: #ffffff;
+// 	border: 1px solid #e3e3e3;
+// 	border-radius: 6px;
+// 	-moz-border-radius: 6px;
+// 	-webkit-border-radius: 6px;
+// 	box-shadow: 0 0 2px #ddd;
+// 	-moz-box-shadow: 0 1px 2px #ddd;
+// 	-webkit-box-shadow: 0 0 2px #ddd;
+//  	behavior:url(pie.htc);
+// 	}
 
-#Content {
-	position: relative;
-	float: left;
-	width: 710px;
-	margin: 0 0 40px;
-	padding: 0 0 30px;
-	}
+// #Content {
+// 	position: relative;
+// 	float: left;
+// 	width: 710px;
+// 	margin: 0 0 40px;
+// 	padding: 0 0 30px;
+// 	}
 
-#crumbs li.last {
-	background: url("../images/bg-sprite.png") no-repeat scroll 4px -142px transparent;
-	}
+// #crumbs li.last {
+// 	background: url("../images/bg-sprite.png") no-repeat scroll 4px -142px transparent;
+// 	}
 
-#crumbs li.last a {
-	background: url("../images/bg-sprite.png") repeat-x 3px -170px transparent;
-	margin: 0 0;
-	padding: 0 0;
-	}
+// #crumbs li.last a {
+// 	background: url("../images/bg-sprite.png") repeat-x 3px -170px transparent;
+// 	margin: 0 0;
+// 	padding: 0 0;
+// 	}
 
-input[type="submit"],
-input[type="button"] {
-	-moz-transition: all 0.4s ease 0s;
-    background: none;
-    border: 1px solid #CCCCCC;
-    border-radius: 2px 2px 2px 2px;
-    color: #555555 !important;
-    text-shadow: none;
-	box-shadow: none;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
- 	behavior:url(pie.htc);
-	}
+// input[type="submit"],
+// input[type="button"] {
+// 	-moz-transition: all 0.4s ease 0s;
+//     background: none;
+//     border: 1px solid #CCCCCC;
+//     border-radius: 2px 2px 2px 2px;
+//     color: #555555 !important;
+//     text-shadow: none;
+// 	box-shadow: none;
+// 	-moz-box-shadow: none;
+// 	-webkit-box-shadow: none;
+//  	behavior:url(pie.htc);
+// 	}
 
-input[type="submit"]:hover {
-	-moz-transition: all 0.4s ease 0s;
-    background: none;
-    border: 1px solid #CCCCCC;
-    border-radius: 2px 2px 2px 2px;
-    color: #fff;
-	box-shadow: none;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
- 	behavior:url(pie.htc);
-	}
+// input[type="submit"]:hover {
+// 	-moz-transition: all 0.4s ease 0s;
+//     background: none;
+//     border: 1px solid #CCCCCC;
+//     border-radius: 2px 2px 2px 2px;
+//     color: #fff;
+// 	box-shadow: none;
+// 	-moz-box-shadow: none;
+// 	-webkit-box-shadow: none;
+//  	behavior:url(pie.htc);
+// 	}
 	
-.hide {
-	text-indent: -2000px;
-	font-size: 0px;
-	line-height: 0px;
-	}
+// .hide {
+// 	text-indent: -2000px;
+// 	font-size: 0px;
+// 	line-height: 0px;
+// 	}
 
 .clearfix:after  { content:"."; display:block; height:0; clear:both; visibility:hidden; }
 .clearfix { zoom:1; }
 br.clearfix  {display:block; height:0; clear:both; visibility:hidden; }
 
-ul, ol {
-	list-style-type: none;
-	}
+// ul, ol {
+// 	list-style-type: none;
+// 	}
 
 
 .wysi-buttons {
