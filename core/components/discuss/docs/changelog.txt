@@ -1,5 +1,6 @@
-Changelog for Discuss (MODX Theme).
+Changelog for Discuss.
 
+- Add new user/posts view
 - #5625 Fix issue with board feed and absolute urls
 - #6544 Fix deleting of messages also deleting replies to that message.
 - Add settings to control date cutoff for no_replies and unanswered_questions views.
@@ -14,7 +15,6 @@ Changelog for Discuss (MODX Theme).
 - Ensure action buttons have specific and consistent class names for styling (dis-action-name_of_action)
 - Make length of post excerpt configurable.
 - Fix bug in mgr processor board/getnodes causing issues in CMP.
-- Split up the topics and replies count in disboardli chunk.
 - Add ability to discussLogin post login hook to redirect back to prior location based on sessionPlace
 - Update sessionPlace to include page number on boards, threads.
 - Refactor disBoard.getLastPostTitle to disBoard.getLastPostTitleSlug

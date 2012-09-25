@@ -168,6 +168,7 @@ $_lang['discuss.user_new'] = 'New User';
 $_lang['discuss.user_remove'] = 'Remove User';
 $_lang['discuss.user_remove_confirm'] = 'Are you sure you want to remove this user? This will remove them from the MODx installation as well.';
 $_lang['discuss.user_perms.intro_msg'] = 'Here you can set permissions for this user.';
+$_lang['discuss.user_posts'] = '[[+user]]\'s Posts ([[+count]])';
 $_lang['discuss.user_posts.intro_msg'] = 'These are all the Posts made by this user.';
 $_lang['discuss.user_show_email'] = 'Show Email';
 $_lang['discuss.user_show_online'] = 'Show Online';
