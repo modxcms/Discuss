@@ -42,7 +42,7 @@ class DiscussUserController extends DiscussController {
 
         $user = $this->getProperty('user',$this->discuss->user->get('id'));
         if (empty($user)) { $this->discuss->sendErrorPage(); }
-        $user = trim($this->scriptProperties['user'],' /');
+        $user = trim($user,' /');
         $key = intval($user) <= 0 ? 'username' : 'id';
         $c = array();
         $c[!empty($this->scriptProperties['i']) ? 'integrated_id' : $key] = $user;
@@ -56,7 +56,7 @@ class DiscussUserController extends DiscussController {
         return $this->user->get('username');
     }
     public function getSessionPlace() {
-        return 'user:'.$this->user->get('id');
+        return 'user:'.(($this->user) ? $this->user->get('id') : $this->getProperty('user', 0));
     }
 
     public function checkPermissions() {
