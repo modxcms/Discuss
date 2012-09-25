@@ -31,7 +31,7 @@
            <h4>[[+username]]'s Profile</h4>
             <ul class="panel_info">
 
-                <li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
+                <li class="Heading"><a href="https://en.gravatar.com/site/login#your-images"><img src="[[+avatarUrl]]" alt="[[+username]]" /></a>
             <br /><span class="small">[[+title]]</span></li>
             </ul>
 

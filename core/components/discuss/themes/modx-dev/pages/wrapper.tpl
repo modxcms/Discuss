@@ -25,7 +25,7 @@
     <script type="text/javascript" src="//use.typekit.net/ukf1ncb.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
-<body id="body-[[+controller.controller]]">
+<body id="forumbody-[[+controller.controller]]">
 
 [[+discuss.user.isModerator:is=`1`:then=`
     <div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div><!-- / moderator bar-->
