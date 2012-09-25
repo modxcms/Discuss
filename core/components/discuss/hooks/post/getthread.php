@@ -57,7 +57,7 @@ $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptPropertie
 $isAdmin = $discuss->user->isAdmin();
 $isModerator = $thread->isModerator();
 $sortDir = $modx->getOption('discuss.post_sort_dir',$scriptProperties,'ASC');
-
+$sortAnswerFirst = $modx->getOption('sortAnswerFirst', $scriptProperties, false);
 /* get posts */
 $post = $modx->getOption('post',$scriptProperties,false);
 $posts = $thread->fetchPosts($post,array(
@@ -65,6 +65,7 @@ $posts = $thread->fetchPosts($post,array(
     'start' => $start,
     'flat' => $flat,
     'sortDir' => $sortDir,
+    'sortAnswerFirst' => $sortAnswerFirst,
 ));
 
 /* setup basic settings/permissions */

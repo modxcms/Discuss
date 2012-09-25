@@ -40,14 +40,18 @@ class disThreadQuestion extends disThread {
             $sortBy = $this->xpdo->getOption('sortBy',$options,'createdon');
             $sortDir = $this->xpdo->getOption('sortDir',$options,'ASC');
             $c->sortby($this->xpdo->escape('thread_first'),'DESC');
-            $c->sortby($this->xpdo->escape('answer'),'DESC');
+            if ($this->xpdo->getOption('sortAnswerFirst', $options, false)) {
+                $c->sortby($this->xpdo->escape('answer'),'DESC');
+            }
             $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array($sortBy)),$sortDir);
             if (empty($_REQUEST['print'])) {
                 $c->limit($limit, $start);
             }
         } else {
             $c->sortby($this->xpdo->escape('thread_first'),'DESC');
-            $c->sortby($this->xpdo->escape('answer'),'DESC');
+            if ($this->xpdo->getOption('sortAnswerFirst', $options, false)) {
+                $c->sortby($this->xpdo->escape('answer'),'DESC');
+            }
             $c->sortby($this->xpdo->getSelectColumns('disPost','disPost','',array('rank')),'ASC');
         }
 
