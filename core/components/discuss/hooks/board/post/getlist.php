@@ -113,6 +113,9 @@ if (empty($cache)) {
         $thread->buildCssClass('board-post');
         $thread->buildIcons();
         $threadArray = $thread->toArray();
+        if ($modx->getOption('buildThreadPagination', $scriptProperties, true)) {
+            $threadArray['thread_pagination'] = $thread->buildPagination();
+        }
         if ($mode != 'rss') {
             $threadArray['excerpt'] = '';
             $threadArray['views'] = number_format($threadArray['views']);
