@@ -97,15 +97,26 @@
                                 <input type="hidden" name="service" value="login" />
                                 <input type="hidden" name="discussPlace" value="[[!+discuss.place]]" />
                                 <div class="f7-f8">
-                                    <input type="text" name="username" id="login-username">
-                                    <label for="login-username">modx.com username</label>
+                                    <p>
+                                        <input type="text" name="username" id="login-username">
+                                        <label class="l-inline" for="login-username">modx.com username</label>
+                                    </p>
                                 </div>
                                 <div class="f9-f10">
-                                    <input type="password" name="password" id="login-password">
-                                    <label for="login-password">password</label>
+                                    <p>
+                                        <input type="password" name="password" id="login-password">
+                                        <label class="l-inline" for="login-password">password</label>
+                                    </p>
                                 </div>
                                 <div class="f11-f12">
                                     <input class="alt-1-cta" type="submit" value="Login">
+                                </div>
+                                <div class="group-vis f7-f12 m-login_block_uts">
+                                    <label for="dis-login-rememberme">[[%discuss.rememberme]]:
+                                        <span class="error">[[+error.rememberme]]</span>
+                                    </label>
+                                    <input type="checkbox" name="rememberme" id="dis-login-rememberme" value="1" [[+rememberme:FormItIsChecked=`1`]] />
+                                    <a href="[[~533]]">Forgot Login?</a>
                                 </div>
                             </form>
                     </div>

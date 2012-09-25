@@ -37,6 +37,24 @@
                 font-weight: 500
                 font-size: 1.2em
                 margin: 0 .2em 0 0
+        .m-login_block_uts
+            +rem('padding', 5px 0 0 0)
+            input
+                margin: 2px 10px 0 0
+            input, label, a
+                display: inline-block
+                vertical-align: top
+                line-height: 1
+                color: desaturate(lighten($c-dark-cool-bg, 40%), 33%)
+        form p
+            position: relative
+        label.l-inline
+            opactiy: .6
+            position: absolute
+            top: 4px
+            left: 4px
+            &.infield
+                padding: 7px 0 0 7px
     label
         font-family: georgia, times, serif
         font-style: italic
