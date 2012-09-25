@@ -15,7 +15,7 @@
     <br class="clear" />
 
     <div class="dis-form-buttons">
-    <input type="submit" class="dis-action-btn" value="Update" />
+        <input type="submit" class="dis-action-btn" name="submit" value="Update" />
     </div>
 
 </form>
