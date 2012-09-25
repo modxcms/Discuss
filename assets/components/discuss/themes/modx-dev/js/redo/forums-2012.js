@@ -20,10 +20,10 @@ $(function() {
 	// options toggle
     $('#F-Toggle-Options a.a-options').click(function(event) {
         event.preventDefault();
-        $('#F-Toggle-List').slideToggle('fast');
+        $('#F-Toggle-List').slideToggle(130);
     });
     $('#F-Toggle-List').click(function(event) {
         event.preventDefault();
-        $('#F-Toggle-List').slideToggle('fast');
+        $('#F-Toggle-List').slideToggle(130);
     });
 });
