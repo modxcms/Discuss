@@ -127,7 +127,7 @@ table {
   *zoom: 1; }
 
 /* line 7, ../../sass/_grid.scss */
-.group-vis:after {
+.group-vis:after, .dis-profile ul.profile li:after {
   content: ".";
   display: block;
   clear: both;
@@ -136,15 +136,15 @@ table {
   height: 0; }
 
 /* line 15, ../../sass/_grid.scss */
-.group-vis {
+.group-vis, .dis-profile ul.profile li {
   display: inline-block; }
 
 /* line 19, ../../sass/_grid.scss */
-html[xmlns] .group-vis {
+html[xmlns] .group-vis, html[xmlns] .dis-profile ul.profile li, .dis-profile ul.profile html[xmlns] li {
   display: block; }
 
 /* line 23, ../../sass/_grid.scss */
-* html .group-vis {
+* html .group-vis, * html .dis-profile ul.profile li, .dis-profile ul.profile * html li {
   height: 1%; }
 
 /* line 26, ../../sass/_grid.scss */
@@ -180,20 +180,6 @@ br.clearfix {
 
 /*  Header  */
 /* Sticky Actions */
-/* line 412, ../../sass/lib/_index-css.scss */
-.floatingHeader {
-  position: fixed;
-  top: 0;
-  visibility: hidden; }
-
-/* line 418, ../../sass/lib/_index-css.scss */
-.dis-sticky-actions {
-  display: none; }
-
-/* line 422, ../../sass/lib/_index-css.scss */
-body#body-thread .dis-sticky-actions {
-  display: block; }
-
 /*  Side Panel  */
 /* line 429, ../../sass/lib/_index-css.scss */
 aside {
@@ -627,10 +613,6 @@ div.auth-count {
 /* line 867, ../../sass/lib/_index-css.scss */
 .dis-profile {
   width: 100%; }
-
-/* line 871, ../../sass/lib/_index-css.scss */
-div.dis-profile ul.profile {
-  margin: 0 0 30px 30px; }
 
 /* line 875, ../../sass/lib/_index-css.scss */
 ul.dis-attachments {
@@ -4515,3 +4497,22 @@ a.dis-mark-as-answer-link,
 /* line 267, ../../sass/lib/_forums-toolbar.scss */
 body#body-thread .dis-sticky-actions {
   display: block; }
+
+/* line 2, ../../sass/lib/_forums-profile.sass */
+.dis-profile ul.profile {
+  margin: 0 0 30px 30px; }
+  /* line 4, ../../sass/lib/_forums-profile.sass */
+  .dis-profile ul.profile li {
+    padding: 2px 0;
+    display: block;
+    border-bottom: 1px dotted #cccccc; }
+    /* line 9, ../../sass/lib/_forums-profile.sass */
+    .dis-profile ul.profile li:last-child {
+      border-bottom: none; }
+/* line 11, ../../sass/lib/_forums-profile.sass */
+.dis-profile h1 {
+  font-size: 1.6em;
+  border-bottom: 1px dotted #cccccc; }
+/* line 14, ../../sass/lib/_forums-profile.sass */
+.dis-profile strong {
+  font-weight: 700; }
