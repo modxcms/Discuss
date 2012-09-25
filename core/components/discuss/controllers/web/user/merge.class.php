@@ -51,4 +51,20 @@ class DiscussUserMergeController extends DiscussController {
         $menuTpl = $this->getProperty('menuTpl','disUserMenu');
         $this->setPlaceholder('usermenu',$this->discuss->getChunk($menuTpl,$this->getPlaceholders()));
     }
+
+    public function getBreadcrumbs() {
+        $trail = array();
+        $trail[] = array(
+            'url' => $this->discuss->request->makeUrl(),
+            'text' => $this->modx->getOption('discuss.forum_title'),
+        );
+
+        $trail[] = array(
+            'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),
+            'url' => $this->discuss->request->makeUrl('user')
+        );
+
+        $trail[] = array('text' => $this->modx->lexicon('discuss.account_merge'),'active' => true);
+        return $trail;
+    }
 }

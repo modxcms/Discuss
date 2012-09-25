@@ -49,7 +49,7 @@ class DiscussUserEditController extends DiscussController {
         return $this->modx->lexicon('discuss.user_edit_header',array('user' => $this->discuss->user->get('username')));
     }
     public function getSessionPlace() {
-        return 'user-edit:'.$this->discuss->user->get('id');
+        return 'user/edit';
     }
     public function process() {
         $this->setPlaceholders($this->discuss->user->toArray());
@@ -61,5 +61,21 @@ class DiscussUserEditController extends DiscussController {
     public function getMenu() {
         $menuTpl = $this->getProperty('menuTpl','disUserMenu');
         $this->setPlaceholder('usermenu',$this->discuss->getChunk($menuTpl,$this->getPlaceholders()));
+    }
+
+    public function getBreadcrumbs() {
+        $trail = array();
+        $trail[] = array(
+            'url' => $this->discuss->request->makeUrl(),
+            'text' => $this->modx->getOption('discuss.forum_title'),
+        );
+
+        $trail[] = array(
+            'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),
+            'url' => $this->discuss->request->makeUrl('user')
+        );
+
+        $trail[] = array('text' => $this->modx->lexicon('discuss.edit'),'active' => true);
+        return $trail;
     }
 }
