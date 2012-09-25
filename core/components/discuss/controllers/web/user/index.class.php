@@ -119,4 +119,21 @@ class DiscussUserController extends DiscussController {
         ));
         $this->setPlaceholder('recent_posts',$recent['results']);
     }
+
+    public function getBreadcrumbs() {
+        $trail = array();
+        $trail[] = array(
+            'url' => $this->discuss->request->makeUrl(),
+            'text' => $this->modx->getOption('discuss.forum_title'),
+        );
+        $userParams = array();
+        if ($this->user->get('id') != $this->discuss->user->get('id')) {
+            $userParams = array('user' => $this->user->get('id'));
+        }
+        $trail[] = array(
+            'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),
+            'url' => $this->discuss->request->makeUrl('user', $userParams)
+        );
+        return $trail;
+    }
 }

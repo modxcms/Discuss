@@ -55,7 +55,7 @@ class DiscussUserBanController extends DiscussController {
         return $this->modx->lexicon('discuss.ban_user_header',array('user' => $this->user->get('username')));
     }
     public function getSessionPlace() {
-        return 'user-ban:'.$this->user->get('id');
+        return 'user/ban:'.$this->user->get('id');
     }
     public function process() {
         $this->setPlaceholders($this->user->toArray('fi.'));
@@ -89,6 +89,26 @@ class DiscussUserBanController extends DiscussController {
     public function getMenu() {
         $menuTpl = $this->getProperty('menuTpl','disUserMenu');
         $this->setPlaceholder('usermenu',$this->discuss->getChunk($menuTpl,$this->getPlaceholders()));
+    }
+
+    public function getBreadcrumbs() {
+        $trail = array();
+        $trail[] = array(
+            'url' => $this->discuss->request->makeUrl(),
+            'text' => $this->modx->getOption('discuss.forum_title'),
+        );
+
+        $userParams = array();
+        if ($this->user->get('id') != $this->discuss->user->get('id')) {
+            $userParams = array('user' => $this->user->get('id'));
+        }
+        $trail[] = array(
+            'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->user->get('username'))),
+            'url' => $this->discuss->request->makeUrl('user', $userParams)
+        );
+
+        $trail[] = array('text' => $this->modx->lexicon('discuss.ban'),'active' => true);
+        return $trail;
     }
 
 }

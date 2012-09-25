@@ -153,6 +153,7 @@ $_lang['discuss.threads.intro_msg'] = 'Search Threads and manage posts here.';
 $_lang['discuss.title'] = 'Title';
 $_lang['discuss.unanswered_questions'] = 'Unanswered Questions';
 $_lang['discuss.user'] = 'User';
+$_lang['discuss.user.trail'] = 'User: [[+user]]';
 $_lang['discuss.user_activity_msg'] = 'General information about the activity and source of the User.';
 $_lang['discuss.user_birthdate'] = 'Birthdate';
 $_lang['discuss.user_boards.intro_msg'] = 'Here you can manage the Boards this User Group can view.';
