@@ -41,7 +41,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
         return $this->modx->lexicon('discuss.user_ignore_boards_header',array('user' => $this->discuss->user->get('username')));
     }
     public function getSessionPlace() {
-        return 'user-ignore-boards:'.$this->discuss->user->get('id');
+        return 'user/ignoreboards';
     }
 
     public function process() {
