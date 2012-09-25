@@ -3,6 +3,7 @@
         <div class="f1-f7">
             <div class="wrap">
                 <strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong>
+                [[+thread_pagination]]
             </div>
         </div>
         <div class="f8">[[+views]]</div>
