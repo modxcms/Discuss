@@ -62,7 +62,7 @@
                                             <ul id="F-Toggle-List">
                                                 <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">My Profile</a></li>
                                                 <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">My Email Notifications</a></li>
-                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]user/recent_posts">My [[!+discuss.user.posts_formatted]] [[%discuss.posts]]</a></li>
+                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]user/posts">My [[!+discuss.user.posts_formatted]] [[%discuss.posts]]</a></li>
                                             </ul>
                                         </li>
                                     </ul>
