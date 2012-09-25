@@ -184,7 +184,7 @@ $manifest = array(
     ),
     'user' => array(
         'options' => array(
-            'showRecentPosts' => true,
+            'showRecentPosts' => false,
         ),
     ),
     'user/subscriptions' => array(

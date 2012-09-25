@@ -27,15 +27,6 @@
     </ul>
 </form>
 
-
-<div class="dis-threads">
-
-    <ul class="dis-list">
-    	<li><h1>[[%discuss.recent_posts]]</h1></li>
-        [[+recent_posts]]
-    </ul>
-</div>
-
 </div>
 
 </div><!-- Close Content From Wrapper -->
