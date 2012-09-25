@@ -26,4 +26,7 @@ $(function() {
         event.preventDefault();
         $('#F-Toggle-List').slideToggle(130);
     });
+    $('#F-Toggle-List a').click(function(event) {
+        event.stopPropagation();
+    });
 });
