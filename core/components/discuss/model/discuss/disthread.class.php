@@ -1597,4 +1597,18 @@ class disThread extends xPDOSimpleObject {
         }
         return $actions;
     }
+
+    public function buildPagination($view = 'thread/', $options = array()) {
+        $start = 0;
+        $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
+        return $this->xpdo->discuss->hooks->load('pagination/build',array(
+            'count' => $this->get('last_post_replies'),
+            'baseUrl' => $this->getUrl(false, array(), true),
+            'limit' => $perPage,
+            'showPaginationIfOnePage' => false,
+            'toPlaceholder' => '',
+            'includePrevNext' => false,
+            'outerClass' => 'dis-thread-pagination'
+        ));
+    }
 }
