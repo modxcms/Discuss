@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- Add option to sort answer first in Q&A threads; default to false.
 - Add new user/posts view
 - #5625 Fix issue with board feed and absolute urls
 - #6544 Fix deleting of messages also deleting replies to that message.
