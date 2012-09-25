@@ -220,6 +220,9 @@
       .script("[[+discuss.config.jsUrl]]sh/shCore.js").wait()
       .script("[[+discuss.config.jsUrl]]sh/shAutoloader.js")
       .script("[[+discuss.config.jsUrl]]sh/shDiscuss.js")
+      .wait(function() {
+          if (SyntaxHighlighter) { SyntaxHighlighter.highlight(); }
+      })
 
       [[*lastJSinherit]] [[*lastJS]] ;
     </script>
