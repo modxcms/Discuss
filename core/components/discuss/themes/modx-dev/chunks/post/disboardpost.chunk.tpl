@@ -1,8 +1,8 @@
 <div class="row h-group dis-category-[[+category]] [[+class]] [[+locked:is=`1`:then=`locked`:else=`unlocked`]] [[+unreadCls]]">
-    <a class="h-group" href="[[+url]]">
-        <div class="f1-f7">
+   [[- <a class="h-group" href="[[+url]]">]]
+        <div class="f1-f7 m-title">
             <div class="wrap">
-                <strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong>
+                <a class="h-group" href="[[+url]]"><strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong></a>
                 [[+thread_pagination]]
             </div>
         </div>
@@ -12,5 +12,5 @@
             <p class="posted-date">[[+createdon:ago]]</p>
             <p class="posted-by">[[+first_post_username]]</p>
         </div>
-    </a>
+    [[-</a>]]
 </div>
