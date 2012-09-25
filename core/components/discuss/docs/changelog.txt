@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- Add new user/posts view
 - #5625 Fix issue with board feed and absolute urls
 - #6544 Fix deleting of messages also deleting replies to that message.
 - Add settings to control date cutoff for no_replies and unanswered_questions views.
