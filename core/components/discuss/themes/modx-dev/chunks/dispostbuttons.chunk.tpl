@@ -17,8 +17,9 @@ function bbc_highlight(something, mode) {
 	<a class="ul-list" href="javascript:void(0);" onclick="surroundText('[ul]\n[li]', '[/li]\n[li][/li]\n[/ul]'); return false;" class="format_buttons last">Unordered List</a>
 	<a class="ol-list" href="javascript:void(0);" onclick="surroundText('[ol]\n[li]', '[/li]\n[li][/li]\n[/ol]'); return false;" class="format_buttons last">Ordered List</a>
 
-	<div id="dis-message-preview"></div>
+	
 	<div class="right preview_toggle">
 		<a href="#" class="preview" id="dis-preview-btn">Preview</a>
 	</div>
 </div>
+<div id="dis-message-preview"></div>

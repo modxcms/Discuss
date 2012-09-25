@@ -547,7 +547,6 @@ a#dis-preview-btn.preview
     &:hover
         background-color: lighten($c-dark-cool-bg, 28%)
         text-decoration: none
-
 .dis-form
     textarea
         width: 96.8% !important
@@ -562,3 +561,39 @@ a#dis-preview-btn.preview
             border-top: none
         &:hover
             border-top: none
+
+// Preivew
+.dis-post-content
+    font-size: 14px
+    line-height: 1.5
+    strong
+        font-weight: 700
+    em
+        font-style: italic
+    ul
+        list-style: disc
+    ol
+        list-style: decimal
+    ul, ol
+        padding: 0 0 0 1em
+.dis-post-preview
+    .dis-post-header
+        .dis-message-cancel.l-right
+            // @extend .m-raised-dark-bg-nh
+            float: right
+            margin: -.2em 1.2em 0 0
+            border: none
+            +box-shadow(none)
+
+#dis-message-preview
+    background-color: #FFFFFF
+    display: none
+    top: 0
+    left: 0px
+    margin: 0
+    // padding: 12px 0 20px
+    position: absolute
+    width: 100%
+    z-index: 700
+    +border-radius($radius-sm)
+    +box-shadow(lighten(#000, 45%) 0 1px 25px, (lighten(#000, 35%) 0 1px 5px))

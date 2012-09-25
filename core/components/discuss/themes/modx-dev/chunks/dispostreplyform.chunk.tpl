@@ -9,5 +9,5 @@
     <br />
 
     <input type="submit" class="dis-reply-submit" value="[[%discuss.post_reply]]" />
-    <input type="button" class="dis-reply-cancel" value="[[%discuss.cancel]]" onclick="DISThread.hideReplyForm([[+id]]);" />
+    [[-<input type="button" class="dis-reply-cancel" value="[[%discuss.cancel]]" onclick="DISThread.hideReplyForm([[+id]]);" />]]
 </form>

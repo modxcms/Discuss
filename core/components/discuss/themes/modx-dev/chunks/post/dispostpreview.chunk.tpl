@@ -1,6 +1,7 @@
 <li class="dis-post">
     <div class="dis-post-header">
-		<h1>[[+title]]</h1>
+		<!-- <h1>[[+title]]</h1> -->
+        <input type="button" name="Cancel" value="Edit" class="dis-message-cancel Button l-right">
         <div class="dis-post-author">
             <div class="auth-avatar">[[+author.avatar]]</div>
 		</div>
