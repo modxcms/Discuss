@@ -14,7 +14,7 @@
 		<br class="clearfix" />
 
 	    <div class="dis-form-buttons">
-	    	<input type="submit" value="Update" />
+	    	<input type="submit" name="submit" value="Update" />
 	    </div>
 
 	</form>
