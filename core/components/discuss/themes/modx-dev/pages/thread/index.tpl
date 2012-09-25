@@ -2,7 +2,7 @@
 [[+top]]
 
 [[+aboveThread]]
-<div class="f1-f12 h-group [[+answered:notempty=`answered`]]"><h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]" post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a> [[+answered:notempty=`<span class="tag solved">Solved</span>`]]</h1></div>
+<div class="f1-f12 h-group [[+answered:notempty=`answered`]]"><h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]" post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a> [[+answered:notempty=`<span class="tag solved">Solved</span>`:default=``]]</h1></div>
 <div class="f1-f9">
 <div>
 	
