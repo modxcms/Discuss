@@ -41,9 +41,9 @@ class DiscussUserIgnoreboardsController extends DiscussController {
         return $this->modx->lexicon('discuss.user_ignore_boards_header',array('user' => $this->discuss->user->get('username')));
     }
     public function getSessionPlace() {
-        return 'user-ignore-boards:'.$this->discuss->user->get('id');
+        return 'user/ignoreboards';
     }
-    
+
     public function process() {
         $this->setPlaceholders($this->discuss->user->toArray());
 
@@ -52,17 +52,21 @@ class DiscussUserIgnoreboardsController extends DiscussController {
         $this->getMenu();
     }
 
-    
+
     public function handleActions() {
         /* handle ignoring */
-        if (!empty($_POST) && !empty($this->scriptProperties['boards'])) {
-            $ignores = array();
-            foreach ($this->scriptProperties['boards'] as $board) {
-                $ignores[] = $board;
+        if (!empty($_POST)) {
+            if (!empty($this->scriptProperties['boards'])) {
+                $ignores = array();
+                foreach ($this->scriptProperties['boards'] as $board) {
+                    $ignores[] = $board;
+                }
+                $ignores = array_unique($ignores);
+                sort($ignores);
+                $this->discuss->user->set('ignore_boards',implode(',',$ignores));
+            } else {
+                $this->discuss->user->set('ignore_boards', '');
             }
-            $ignores = array_unique($ignores);
-            sort($ignores);
-            $this->discuss->user->set('ignore_boards',implode(',',$ignores));
             if ($this->discuss->user->save()) {
                 $this->discuss->user->clearCache();
                 $url = $this->discuss->request->makeUrl('user/ignoreboards');
@@ -73,7 +77,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
 
     /**
      * Get the list of boards to be able to ignore
-     * @return array 
+     * @return array
      */
     public function getBoards() {
         /* build query */
@@ -139,7 +143,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
             }
             $idx++;
         }
-        
+
         if (count($this->boards) > 0) {
             if (in_array($boardArray['id'],$ignores)) {
                 $boardArray['checked'] = 'checked="checked"';
