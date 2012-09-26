@@ -73,7 +73,7 @@
  *
  * @property disUserModerated $UserModerated
  * @property array $Posts
- * @property array $PostReads
+ * @property array $Reads
  * @property disSession $Session
  * @property array $Friends
  * 
