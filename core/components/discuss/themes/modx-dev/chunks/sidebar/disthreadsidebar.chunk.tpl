@@ -22,7 +22,7 @@
 
         </div>
 `]]
-[[!$post-sidebar-2012?disection=`dis-support-opt`]]
+[[$post-sidebar-2012?disection=`dis-support-opt`]]
 
         <div class="box">
             <h4>Who’s talking</h4>
