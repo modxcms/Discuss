@@ -250,7 +250,7 @@ class disUser extends xPDOSimpleObject {
                     break;
                 case 'age':
                     $v = strtotime($this->get('birthdate'));
-                    $v = round((time() - $v) / 60 / 60 / 24 / 365);
+                    $v = floor((time() - $v) / 60 / 60 / 24 / 365);
                     $v = !empty($v) ? $v : '';
                     break;
                 case 'ip':
