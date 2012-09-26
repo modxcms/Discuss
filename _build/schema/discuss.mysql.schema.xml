@@ -97,7 +97,7 @@
         <composite alias="Ancestors" class="disBoardClosure" local="id" foreign="ancestor" cardinality="many" owner="local" />
         <composite alias="Descendants" class="disBoardClosure" local="id" foreign="descendant" cardinality="many" owner="local" />
         <composite alias="Posts" class="disPost" local="id" foreign="board" cardinality="many" owner="local" />
-        <composite alias="PostReads" class="disPostRead" local="id" foreign="board" cardinality="many" owner="local" />
+        <composite alias="Reads" class="disThreadRead" local="id" foreign="board" cardinality="many" owner="local" />
         <aggregate alias="LastPost" class="disPost" local="last_post" foreign="id" cardinality="many" owner="foreign" />
         <composite alias="Notifications" class="disUserNotification" local="id" foreign="board" cardinality="many" owner="local" />
     </object>
@@ -485,7 +485,7 @@
 
         <composite alias="UserModerated" class="disUserModerated" local="id" foreign="user" cardinality="one" owner="local" />
         <composite alias="Posts" class="disPost" local="id" foreign="author" cardinality="many" owner="local" />
-        <composite alias="PostReads" class="disPostRead" local="id" foreign="user" cardinality="many" owner="local" />
+        <composite alias="Reads" class="disThreadRead" local="id" foreign="user" cardinality="many" owner="local" />
         <composite alias="Session" class="disSession" local="id" foreign="user" cardinality="one" owner="local" />
         <composite alias="Friends" class="disUserFriend" local="id" foreign="user" cardinality="many" owner="local" />
     </object>

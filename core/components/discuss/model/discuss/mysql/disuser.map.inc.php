@@ -416,9 +416,9 @@ $xpdo_meta_map['disUser']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
-    'PostReads' => 
+    'Reads' => 
     array (
-      'class' => 'disPostRead',
+      'class' => 'disThreadRead',
       'local' => 'id',
       'foreign' => 'user',
       'cardinality' => 'many',
