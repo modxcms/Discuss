@@ -3787,8 +3787,8 @@ footer .m-modx_logo {
       margin-right: 0.25em; }
     /* line 306, ../../sass/_forums.sass */
     .dis-post-right .title .dis-actions {
-      top: 0 !important;
-      right: 0 !important; }
+      top: 4px !important;
+      right: 4px !important; }
   /* line 309, ../../sass/_forums.sass */
   .dis-post-right blockquote {
     background-color: #fcfcfc;
@@ -4437,13 +4437,17 @@ div.dis-actions:hover {
 
 /* line 182, ../../sass/lib/_forums-toolbar.scss */
 div.dis-actions {
-  background: white url(../../images/buttons/10x10/gear.gif) no-repeat 6px 6px;
+  background: white url(../../images/redo/icons/gear-icon.png) no-repeat 3px 3px;
   position: absolute;
   top: 10px;
   right: 23px;
-  display: block; }
+  display: block;
+  border: none !important;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
 
-/* line 192, ../../sass/lib/_forums-toolbar.scss */
+/* line 194, ../../sass/lib/_forums-toolbar.scss */
 a.dis-mark-as-answer-link {
   background: transparent url(../images/buttons/10x10/check.gif) no-repeat 6px 6px;
   position: absolute;
@@ -4451,14 +4455,14 @@ a.dis-mark-as-answer-link {
   right: 50px;
   text-indent: -3000px; }
 
-/* line 200, ../../sass/lib/_forums-toolbar.scss */
+/* line 202, ../../sass/lib/_forums-toolbar.scss */
 a.quick-reply {
   display: block;
   position: absolute;
   top: 10px;
   right: 0px; }
 
-/* line 208, ../../sass/lib/_forums-toolbar.scss */
+/* line 210, ../../sass/lib/_forums-toolbar.scss */
 div.dis-actions:hover,
 .dis-sticky-actions a.action-buttons:hover {
   -moz-box-shadow: inset 2px 2px 7px #dedede;
@@ -4480,7 +4484,7 @@ div.dis-actions:hover,
   transition-delay: 0s;
   behavior: url(pie.htc); }
 
-/* line 232, ../../sass/lib/_forums-toolbar.scss */
+/* line 234, ../../sass/lib/_forums-toolbar.scss */
 div.dis-actions,
 .quick-reply.first,
 .wysi-buttons a.format_buttons.first,
@@ -4490,7 +4494,7 @@ div.dis-actions,
   -webkit-border-radius: 2px 0 0 2px;
   behavior: url(pie.htc); }
 
-/* line 241, ../../sass/lib/_forums-toolbar.scss */
+/* line 243, ../../sass/lib/_forums-toolbar.scss */
 .quick-reply.last,
 .wysi-buttons a.format_buttons.last,
 .dis-sticky-actions a.action-buttons:last-child {
@@ -4499,7 +4503,7 @@ div.dis-actions,
   -webkit-border-radius: 0 2px 2px 0;
   behavior: url(pie.htc); }
 
-/* line 250, ../../sass/lib/_forums-toolbar.scss */
+/* line 252, ../../sass/lib/_forums-toolbar.scss */
 a.dis-mark-as-answer-link,
 .quick-reply.first.last,
 .wysi-buttons a.format_buttons.first.last {
@@ -4508,17 +4512,17 @@ a.dis-mark-as-answer-link,
   -webkit-border-radius: 2px;
   behavior: url(pie.htc); }
 
-/* line 257, ../../sass/lib/_forums-toolbar.scss */
+/* line 259, ../../sass/lib/_forums-toolbar.scss */
 .floatingHeader {
   position: fixed;
   top: 0;
   visibility: hidden; }
 
-/* line 263, ../../sass/lib/_forums-toolbar.scss */
+/* line 265, ../../sass/lib/_forums-toolbar.scss */
 .dis-sticky-actions {
   display: none; }
 
-/* line 267, ../../sass/lib/_forums-toolbar.scss */
+/* line 269, ../../sass/lib/_forums-toolbar.scss */
 body#body-thread .dis-sticky-actions {
   display: block; }
 
