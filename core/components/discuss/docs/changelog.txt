@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- #7648 Fix certain topic replies and possible XSS hole.
 - #5742 Fix post page calculations
 - Add thread pagination in board view
 - Add option to sort answer first in Q&A threads; default to false.
