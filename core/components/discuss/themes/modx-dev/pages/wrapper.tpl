@@ -6,13 +6,10 @@
     <!--[if IE]><![endif]-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <base href="[[!++site_url]]">
-    <title>[[!+discuss.pagetitle]] | MODX Community Forums </title>
+    <title>[[!+discuss.pagetitle]] | MODX Community Forums</title>
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
-    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">[[-
-    Commenting out
-    <!-- imorted as scss now --> <link href="[[+discuss.config.cssUrl]]redo/index.css" rel="stylesheet" type="text/css">
-    <!-- imorted as scss now --> <link href="[[+discuss.config.cssUrl]]jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">]]
+    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">
     <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />[[- Will eventually download and combine]]
     [[*cssjs]]
     [[- Live Typekit call
@@ -44,43 +41,43 @@
                             <li><a href="http://tracker.modx.com/">Bugs</a></li>
                         </ul>
                     </nav>
-                    <a class="h-ir" href="#">MODX Forums</a>
+                    <a class="h-ir" href="[[~[[++discuss.forums_resource_id]]]]" title="MODX Community Forums">MODX Forums</a>
                 </div><!-- left side of masthead -->
                 <div class="masthead-right f7-f12 m-all">
                     [[!+discuss.user.id:notempty=`
                     <div class="m-welcome_box">
                         <div class="m-user_box h-group">
                             <div class="l-left">
-                                <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]"><img src="[[!+discuss.user.avatar_url]]"></a>
+                                <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]" title="[[%discuss.view_profile]]"><img src="[[!+discuss.user.avatar_url]]" alt="[[!+discuss.user.username]]'s Avatar"></a>
                                 <span class="m-user_posts"></span>
                             </div>
                             <div class="l-right">
-                                <div class="m-user_opts group-vis"><h3>Welcome Back <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">[[!+discuss.user.name_first]]</a></h3>
+                                <div class="m-user_opts group-vis"><h3>Welcome Back <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]"  title="[[%discuss.view_profile]]">[[!+discuss.user.name_first]]</a></h3>
                                     <ul class="options-select">
                                         <li id="F-Toggle-Options">
                                             <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]" class="a-options"><span>Options</span></a>
                                             <ul id="F-Toggle-List">
-                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]">My Profile</a></li>
-                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions">My Email Notifications</a></li>
-                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]user/posts">My [[!+discuss.user.posts_formatted]] [[%discuss.posts]]</a></li>
+                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]"  title="[[%discuss.view_profile]]">My Profile</a></li>
+                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]user/subscriptions"  title="[[%discuss.view_user_subscriptions]]">My Email Notifications</a></li>
+                                                <li><a href="[[~[[++discuss.forums_resource_id]]]]user/posts"  title="[[%discuss.view_user_posts]]">My [[!+discuss.user.posts_formatted]] [[%discuss.posts]]</a></li>
                                             </ul>
                                         </li>
                                     </ul>
-                                    <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]">Logout</a>
+                                    <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]" title="Logout [[!+discuss.user.username]]">Logout</a>
                                 </div>
-                                <p>You have <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit">[[!+discuss.user.unread_posts]]</a>,
-                                    <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="View Messages">[[!+discuss.user.unread_messages]]</a>
-                                    and <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts">[[!+discuss.user.new_replies]]</a> to read.<br />
+                                <p>You have <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit" title="[[!+discuss.user.unread_posts_count]] Unread Posts since your last visit">[[!+discuss.user.unread_posts]]</a>,
+                                    <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="View [[!+discuss.user.unread_messages_count]] new Private Messages">[[!+discuss.user.unread_messages]]</a>
+                                    and <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts" title="View [[!+discuss.user.new_replies_count]] replies to Subscribed Topics">[[!+discuss.user.new_replies]]</a> to read.<br />
                                     [[!+discuss.user.no_replies_count:gte=`1`:then=`
                                         [[!+discuss.user.unanswered_questions_count:gte=`1`:then=`
-                                            Please help the community with <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions">[[!+discuss.user.unanswered_questions]]</a>
-                                            or <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies">[[!+discuss.user.no_replies]]</a>.
+                                            Please help the community with <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions" title="View Unanswered Questions">[[!+discuss.user.unanswered_questions]]</a>
+                                            or <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies" title="View Threads without Replies">[[!+discuss.user.no_replies]]</a>.
                                         `:else=`
-                                            You can contribute to <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies">[[!+discuss.user.no_replies]]</a>.
+                                            You can contribute to <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies" title="View Threads without Replies">[[!+discuss.user.no_replies]]</a>.
                                         `]]
                                     `:else=`
                                         [[!+discuss.user.unanswered_questions_count:gte=`1`:then=`
-                                            You can help answer <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions">[[!+discuss.user.unanswered_questions]]</a>.
+                                            You can help answer <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions" title="View Unanswered Questions">[[!+discuss.user.unanswered_questions]]</a>.
                                         `:else=`
                                             Wow! No unanswered questions or discussions without replies.
                                         `]]
@@ -92,7 +89,7 @@
                     `]]
                     [[!+discuss.user.id:is=``:then=`
                     <div class="masthead-login m-login_box h-group">
-                        <div class="masthead-title"><strong>Login to MODX</strong> Don't have a MODX.com account? <a href="#">Create one</a></div>
+                        <div class="masthead-title"><strong>Login to MODX</strong> Don't have a MODX.com account? <a href="[[~[[++discuss.register_resource_id]]]]">Create one</a></div>
                             <form class="m-login_block" method="post" action="[[~[[++discuss.login_resource_id]]]]">
                                 <input type="hidden" name="service" value="login" />
                                 <input type="hidden" name="discussPlace" value="[[!+discuss.place]]" />
@@ -260,6 +257,3 @@
 <!-- remove for production--><script src="http://get.gridsetapp.com/2953/overlay/"></script>
 </body>
 </html>
-
-<!-- / end move -->
-

@@ -1,18 +1,18 @@
 <li class="[[+class]] group-fix" id="dis-post-[[+id]]">
     <div class="dis-post-left">
         <ul>
-            <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar">[[+author.avatar]]</a></li>
-            <li class="dis-usr-post-count">[[+author.posts]] posts</li>
+            <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>
+            <li class="dis-usr-post-count">[[+author.posts]] [[%discuss.posts]]</li>
         </ul>
     </div>
     <div class="dis-post-right">
         <div class="title">
-            <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]">Reply #[[+idx]]</a>, [[+createdon:ago]]
+            <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]]</a>, <span title="[[+createdon]]">[[+createdon:ago]]</span>
             <!-- tools -->
             <div class="dis-actions">
                 <div>
                     <ul>[[+actions]]
-                        <li><a href="[[+url]]">Link to this post<span class="idx">#[[+idx]]</span></a></li>
+                        <li><a href="[[+url]]">[[%discuss.post_link]]<span class="idx">#[[+idx]]</span></a></li>
                         <li>[[+report_link]]</li>
                     </ul>
                 </div>

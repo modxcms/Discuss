@@ -8,17 +8,8 @@
 
 
 <form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
-
-
-    <div class="preview_toggle">
-		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
-        <a href="#" class="dis-preview" id="dis-preview-btn">view</a>
-    </div>
 	<div id="dis-message-preview"></div>
-    
-    
-    
-		<h1>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
+	<h1>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
     
     <input type="hidden" name="board" value="[[!+fi.board]]" />
     <input type="hidden" name="post" value="[[!+fi.post]]" />
