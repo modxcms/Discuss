@@ -46,23 +46,18 @@ set_time_limit(0);
 @ob_end_clean();
 echo '<pre>';
 
-/* load and run importer */
-if ($discuss->loadImporter('disSmfImport')) {
 
-    /* fix num_topics */
-    $c = $modx->newQuery('disThreadRead');
-    $c->leftJoin('disThread','Thread');
-    $c->where(array(
-        'Thread.board != disThreadRead.board',
-    ));
-    $reads = $modx->getCollection('disThreadRead',$c);
+/* fix num_topics */
+$c = $modx->newQuery('disThreadRead');
+$c->leftJoin('disThread','Thread');
+$c->where(array(
+    'Thread.board != disThreadRead.board',
+));
+$reads = $modx->getCollection('disThreadRead',$c);
 
-    foreach ($reads as $read) {
-        $discuss->import->log('Removing orphaned disThreadRead ID: '.$read->get('id'));
-        $read->remove();
-    }
-} else {
-    $modx->log(xPDO::LOG_LEVEL_ERROR,'Failed to load Import class.');
+foreach ($reads as $read) {
+    $modx->log(modX::LOG_LEVEL_INFO,'Removing orphaned disThreadRead ID: '.$read->get('id'));
+    $read->remove();
 }
 
 $mtime= microtime();
