@@ -606,3 +606,22 @@ a#dis-preview-btn.preview
     z-index: 700
     +border-radius($radius-sm)
     +box-shadow(lighten(#000, 45%) 0 1px 25px, (lighten(#000, 35%) 0 1px 5px))
+
+// Reply
+.dis-form-buttons .a-reply
+    @extend .primary-cta
+    +rem('padding', 10px 15px)
+    +rem('font-size', 15px)
+    clear: both
+    display: inline-block
+    &:hover
+        +rem('padding', 10px 15px)
+.dis-profile .dis-cb, .dis-form .dis-cb
+    display: inline-block
+    vertical-align: top
+    font-weight: normal
+    clear: both
+    line-height: 22px
+    margin: 7px 10px 0 7px
+    color: #5a5a5a
+    width: auto

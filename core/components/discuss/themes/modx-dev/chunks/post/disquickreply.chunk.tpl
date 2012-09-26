@@ -22,7 +22,8 @@
     [[+sticky_cb]]
 
     <div class="dis-form-buttons">
-       <input type="submit" name="dis-post-reply" value="Reply" /> <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[+subscribed]] />Subscribe to replies via email</label>
+       <input class="a-reply" type="submit" name="dis-post-reply" value="Reply" />
+       <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[+subscribed]] />Subscribe to replies via email</label>
     </div>
     <br class="clearfix" />
 </form>

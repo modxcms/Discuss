@@ -12,8 +12,7 @@
 
 
 // Primary call to action to be used sparingly. Curently set to be green
-.primary-cta,
-.dis-cat-header .action-buttons
+.primary-cta
     color: #fff
     margin: 0 0 0 1em
     border: none // Can remove in future, resetting default styles
@@ -27,6 +26,8 @@
         +rem('padding', 5px)
         +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 9%)))
         +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+.dis-cat-header .action-buttons
+    @extend .primary-cta
 
 .secondary-cta
     color: darken($c-base, 60%)
