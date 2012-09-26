@@ -109,11 +109,15 @@
                                     <input class="alt-1-cta" type="submit" value="Login">
                                 </div>
                                 <div class="group-vis f7-f12 m-login_block_uts">
-                                    <label for="dis-login-rememberme">[[%discuss.rememberme]]:
-                                        <span class="error">[[+error.rememberme]]</span>
-                                    </label>
-                                    <input type="checkbox" name="rememberme" id="dis-login-rememberme" value="1" [[+rememberme:FormItIsChecked=`1`]] />
-                                    <a href="[[~533]]">Forgot Login?</a>
+                                    <div class="f7-f8">
+                                        <a href="[[~533]]">Forgot Login?</a>
+                                    </div>
+                                    <div class="f9-f10">
+                                        <label for="dis-login-rememberme">[[%discuss.rememberme]]:
+                                            <span class="error">[[+error.rememberme]]</span>
+                                        </label>
+                                        <input type="checkbox" name="rememberme" id="dis-login-rememberme" value="1" [[+rememberme:FormItIsChecked=`1`]] />
+                                    </div>
                                 </div>
                             </form>
                     </div>

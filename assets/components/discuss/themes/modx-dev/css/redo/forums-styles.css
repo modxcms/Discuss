@@ -3696,38 +3696,39 @@ h3.forum {
     border-bottom: solid 1px #d8d8d8;
     border-top: solid 1px white;
     margin: 0;
+    position: relative;
     width: 96%;
     padding: 1.75% 2% 3% 2%;
     float: right; }
-    /* line 227, ../../sass/_forums.sass */
+    /* line 228, ../../sass/_forums.sass */
     .dis-list .dis-post:first-child {
       border-top: none;
       padding-top: 3%; }
-    /* line 230, ../../sass/_forums.sass */
+    /* line 231, ../../sass/_forums.sass */
     .dis-list .dis-post:last-child {
       padding-bottom: 5%; }
-    /* line 232, ../../sass/_forums.sass */
+    /* line 233, ../../sass/_forums.sass */
     .dis-list .dis-post .dis-content {
       overflow: hidden; }
-      /* line 234, ../../sass/_forums.sass */
+      /* line 235, ../../sass/_forums.sass */
       .dis-list .dis-post .dis-content strong {
         font-weight: 700; }
-    /* line 236, ../../sass/_forums.sass */
+    /* line 237, ../../sass/_forums.sass */
     .dis-list .dis-post li {
       border: none; }
-    /* line 238, ../../sass/_forums.sass */
+    /* line 239, ../../sass/_forums.sass */
     .dis-list .dis-post .dis-post-footer {
       width: 88%;
       float: right;
       font-size: 12px;
       font-size: 1.2rem; }
-      /* line 242, ../../sass/_forums.sass */
+      /* line 243, ../../sass/_forums.sass */
       .dis-list .dis-post .dis-post-footer .dis-post-editedon {
         padding: 1em 0 0 0;
         font-style: italic;
         color: #797979; }
 
-/* line 246, ../../sass/_forums.sass */
+/* line 247, ../../sass/_forums.sass */
 .solved {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a5ca53), color-stop(100%, #7a9c30));
   background-image: -webkit-linear-gradient(#a5ca53, #7a9c30);
@@ -3746,39 +3747,39 @@ h3.forum {
   line-height: 1;
   text-transform: uppercase; }
 
-/* line 255, ../../sass/_forums.sass */
+/* line 256, ../../sass/_forums.sass */
 footer h3 {
   font-size: 13px;
   font-size: 1.3rem;
   font-weight: 700;
   color: black; }
-/* line 259, ../../sass/_forums.sass */
+/* line 260, ../../sass/_forums.sass */
 footer nav, footer h3 {
   margin: 0 0 10px 0;
   margin:  0 0 1rem 0; }
-/* line 261, ../../sass/_forums.sass */
+/* line 262, ../../sass/_forums.sass */
 footer .m-modx_logo {
   margin: 3px 0 0 0;
   margin:  0.3rem 0 0 0; }
 
-/* line 264, ../../sass/_forums.sass */
+/* line 265, ../../sass/_forums.sass */
 .dis-post .title a {
   color: black;
   text-decoration: none; }
-  /* line 267, ../../sass/_forums.sass */
+  /* line 268, ../../sass/_forums.sass */
   .dis-post .title a:hover {
     text-decoration: underline; }
-/* line 269, ../../sass/_forums.sass */
+/* line 270, ../../sass/_forums.sass */
 .dis-post .title strong {
   font-weight: 700;
   color: black; }
 
-/* line 272, ../../sass/_forums.sass */
+/* line 273, ../../sass/_forums.sass */
 .dis-post-left {
   float: left;
   text-align: left;
   width: 9%; }
-  /* line 277, ../../sass/_forums.sass */
+  /* line 278, ../../sass/_forums.sass */
   .dis-post-left img {
     width: 100%;
     max-width: 80px;
@@ -3787,27 +3788,27 @@ footer .m-modx_logo {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
     border-radius: 3px; }
-  /* line 281, ../../sass/_forums.sass */
+  /* line 282, ../../sass/_forums.sass */
   .dis-post-left .auth-avatar {
     display: block;
     border: none; }
-  /* line 284, ../../sass/_forums.sass */
+  /* line 285, ../../sass/_forums.sass */
   .dis-post-left .dis-usr-post-count, .dis-post-left .dis-usr-icon {
     margin: 0;
     font-size: 11px;
     font-size: 1.1rem; }
-  /* line 287, ../../sass/_forums.sass */
+  /* line 288, ../../sass/_forums.sass */
   .dis-post-left .dis-usr-post-count {
     margin: 0.3em 0.2em 0 0.35em; }
 
-/* line 290, ../../sass/_forums.sass */
+/* line 291, ../../sass/_forums.sass */
 .dis-post-right {
   float: right;
   width: 86%;
   padding: 0 2% 2% 0;
   font-size: 15px;
   font-size: 1.5rem; }
-  /* line 295, ../../sass/_forums.sass */
+  /* line 296, ../../sass/_forums.sass */
   .dis-post-right .title {
     font-size: 12px;
     font-size: 1.2rem;
@@ -3815,7 +3816,6 @@ footer .m-modx_logo {
     color: #797979;
     margin: 0 0 1em 0;
     padding: 0 0 0.8em 0;
-    position: relative;
     border-bottom: dotted 1px #dadada; }
     /* line 303, ../../sass/_forums.sass */
     .dis-post-right .title strong {
