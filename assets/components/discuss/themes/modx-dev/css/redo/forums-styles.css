@@ -3666,8 +3666,7 @@ h3.forum {
     float: right; }
     /* line 228, ../../sass/_forums.sass */
     .dis-list .dis-post:first-child {
-      border-top: none;
-      padding-top: 3%; }
+      border-top: none; }
     /* line 231, ../../sass/_forums.sass */
     .dis-list .dis-post:last-child {
       padding-bottom: 5%; }
