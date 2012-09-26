@@ -260,18 +260,24 @@ class DiscussThreadController extends DiscussController {
         /* @var array $actionButtons Thread action buttons */
         $actionButtons = array();
         if ($this->board->canPost() && $this->thread->canReply()) {
+            $this->setPlaceholder('actionlink_reply', $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))));
             $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'),'cls' => 'dis-action-reply dis-action-reply_to-thread');
         }
+        $this->setPlaceholder('actionlink_unread',$this->thread->getUrl(false,array('unread' => 1)));
         $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'));
+        $this->setPlaceholder('actionlink_subscribe', '');
+        $this->setPlaceholder('actionlink_unsubscribe', '');
         if ($this->thread->canUnsubscribe()) {
             if (!empty($this->options['showSubscribeOption'])) {
                 $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unsubscribe' => 1)), 'text' => $this->modx->lexicon('discuss.unsubscribe'),'cls' => 'dis-action-unsubscribe');
+                $this->setPlaceholder('actionlink_unsubscribe',$this->thread->getUrl(false,array('unsubscribe' => 1)));
             }
             $this->setPlaceholder('subscribed',true);
             $this->setPlaceholder('unsubscribeUrl',$this->thread->getUrl(false,array('unsubscribe' => 1)));
         } elseif ($this->thread->canSubscribe()) {
             if (!empty($this->options['showSubscribeOption'])) {
                 $actionButtons[] = array('url' => $this->thread->getUrl(false,array('subscribe' => 1)), 'text' => $this->modx->lexicon('discuss.subscribe'),'cls' => 'dis-action-subscribe');
+                $this->setPlaceholder('actionlink_subscribe',$this->thread->getUrl(false,array('subscribe' => 1)));
             }
             $this->setPlaceholder('subscribed',false);
             $this->setPlaceholder('subscribeUrl',$this->thread->getUrl(false,array('subscribe' => 1)));
@@ -283,6 +289,7 @@ class DiscussThreadController extends DiscussController {
          */
         if ($this->thread->canPrint() && !empty($this->options['showPrintOption'])) {
             $actionButtons[] = array('url' => $this->thread->getUrl(false,array('print' => 1)), 'text' => $this->modx->lexicon('discuss.print'),'cls' => 'dis-action-print');
+            $this->setPlaceholder('actionlink_print', $this->thread->getUrl(false,array('print' => 1)));
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
