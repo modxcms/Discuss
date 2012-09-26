@@ -30,6 +30,10 @@
 $userId = $discuss->user->get('id');
 if (empty($userId)) return false;
 
+/* setup some flexible mem limits in case of a huge board */
+ini_set('memory_limit','512M');
+set_time_limit(0);
+
 $c = $modx->newQuery('disThread');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
