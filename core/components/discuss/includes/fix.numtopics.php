@@ -46,42 +46,33 @@ set_time_limit(0);
 @ob_end_clean();
 echo '<pre>';
 
-/* load and run importer */
-if ($discuss->loadImporter('disSmfImport')) {
-
-    /* fix num_topics */
-    $sql = 'SELECT
-      disBoard.id,
-      disBoard.name,
-      disBoard.num_topics,
-      (
+/* fix num_topics */
+$sql = 'SELECT
+    disBoard.id,
+    disBoard.name,
+    disBoard.num_topics,
+    (
         SELECT COUNT(`Threads`.`id`) FROM '.$modx->getTableName('disThread').' AS `Threads`
         WHERE `Threads`.`board` = `disBoard`.`id`
     ) AS `real_count`
     FROM '.$modx->getTableName('disBoard').' `disBoard`
     ORDER BY `disBoard`.`map` ASC';
-    $stmt = $modx->query($sql);
-    if ($stmt) {
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if (!empty($row['real_count']) && $row['real_count'] != $row['num_topics']) {
-                $discuss->import->log('Setting "'.$row['name'].'" to '.$row['real_count'].' from '.$row['num_topics']);
-                $modx->exec('UPDATE '.$modx->getTableName('disBoard').'
-                    SET `num_topics` = '.$row['real_count'].'
-                    WHERE `id` = '.$row['id']);
-            }
-            if ($row['id'] == 8) {
-                $discuss->import->log('Board "'.$row['name'].'" has '.$row['real_count'].' topics.');
-            }
+$stmt = $modx->query($sql);
+if ($stmt) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if (!empty($row['real_count']) && $row['real_count'] != $row['num_topics']) {
+            $modx->log(modX::LOG_LEVEL_ERROR,'Setting "'.$row['name'].'" to '.$row['real_count'].' from '.$row['num_topics']);
+            $modx->exec('UPDATE '.$modx->getTableName('disBoard').'
+                SET `num_topics` = '.$row['real_count'].'
+                WHERE `id` = '.$row['id']);
         }
-        $stmt->closeCursor();
     }
-
-    /* fix num_replies */
-    /* fix total_posts */
-
-} else {
-    $modx->log(xPDO::LOG_LEVEL_ERROR,'Failed to load Import class.');
+    $stmt->closeCursor();
 }
+
+/* fix num_replies */
+/* fix total_posts */
+
 
 $mtime= microtime();
 $mtime= explode(" ", $mtime);
