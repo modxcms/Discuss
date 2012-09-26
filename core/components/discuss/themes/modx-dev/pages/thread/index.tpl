@@ -31,5 +31,5 @@
 
 [[+bottom]]
 
-[[!$thread-sidebar-2012]]
+[[$thread-sidebar-2012]]
 <!--close thread/index.html -->

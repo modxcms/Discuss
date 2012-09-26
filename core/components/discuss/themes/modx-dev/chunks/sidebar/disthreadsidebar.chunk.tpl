@@ -18,7 +18,7 @@
             <p>[[+moderators]]</p>
         </div>
         `]]
-        [[!$post-sidebar-2012?disection=`dis-support-opt`]]
+        [[$post-sidebar-2012?disection=`dis-support-opt`]]
         <div class="box">
             <h4>Information</h4>
             <p>Posted in this thread:<br />[[+participants_usernames]]</p>
