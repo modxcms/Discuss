@@ -199,7 +199,7 @@ $_lang['discuss.user_edit_header'] = 'Edit: [[+user]]';
 $_lang['discuss.user_ignore_boards_header'] = 'Ignore Preferences: [[+user]]';
 $_lang['discuss.user_statistics_header'] = 'Stats: [[+user]]';
 $_lang['discuss.user_subscriptions_header'] = 'Subscriptions: [[+user]]';
-$_lang['discuss.users_active_in_last'] = '[[+total]] members active in last [[+threshold]] minutes: [[+users]]';
+$_lang['discuss.users_active_in_last'] = '<strong class="m-stats-title">[[+total]] members active in last [[+threshold]] minutes:<strong><span class="m-stats-single">[[+users]]</span>';
 $_lang['discuss.views'] = 'Views';
 $_lang['discuss.view_author_profile'] = 'View Author Profile';
 $_lang['discuss.view_profile'] = 'View User Profile';
