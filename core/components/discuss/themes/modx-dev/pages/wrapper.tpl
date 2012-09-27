@@ -159,8 +159,8 @@
                     <span class="m-stats-single">[[%discuss.replies]]: [[+activity.replies]]</span>
                 </div>
                 <div class="f9-f12">
-                    <strong class="m-stats-title">[[+activeUsers]]</strong>
-                    <span class="m-stats-single">[[+users]]</span>
+                    <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]</strong>
+                    <span class="m-stats-single">[[+activeUsers.users]]</span>
                 </div>
             </div>
         </div>
