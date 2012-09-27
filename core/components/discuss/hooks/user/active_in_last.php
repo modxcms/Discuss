@@ -20,6 +20,8 @@
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package discuss
+ * @var modX $modx
+ * @var Discuss $discuss
  */
 /**
  * Get users active in last X time
@@ -35,6 +37,7 @@ $activeUsers = $modx->call('disUser','fetchActive',array(&$modx,$timeAgo));
 /* iterate */
 $as = array();
 foreach ($activeUsers['results'] as $activeUser) {
+    /* @var disUser $activeUser */
     $activeUser->getUrl();
     $activeUserArray = $activeUser->toArray();
     $activeUserArray['style'] = ' style="';
@@ -49,10 +52,10 @@ foreach ($activeUsers['results'] as $activeUser) {
     }
 }
 
-/* parse into lexicon */
-$list = $modx->lexicon('discuss.users_active_in_last',array(
+/* return array */
+$list = array(
     'users' => implode(', ',$as),
     'total' => $activeUsers['total'],
     'threshold' => $threshold,
-));
+);
 return $list;
