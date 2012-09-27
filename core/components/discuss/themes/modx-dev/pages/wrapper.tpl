@@ -159,7 +159,7 @@
                     <span class="m-stats-single">[[%discuss.replies]]: [[+activity.replies]]</span>
                 </div>
                 <div class="f9-f12">
-                    <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]</strong>
+                    <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>
                     <span class="m-stats-single">[[+activeUsers.users]]</span>
                 </div>
             </div>
@@ -220,7 +220,6 @@
     </div>
     <!-- / not sure what this is used for? -->
 
-[[*template:ne=`12`:then=`
     <script>
       $LAB
       [[+discuss.js.header:notempty=`.script([[+discuss.js.header]])`]]
@@ -260,7 +259,6 @@
       })(); 
     </script>
     <!--[if lt IE 7 ]><script src="[[++modx.assets.url]]js/dd_belatedpng.js?v=1"></script><![endif]-->
-`]]
 [[*beforeClose]]
 <!-- remove for production--><script src="http://get.gridsetapp.com/2953/overlay/"></script>
 </body>
