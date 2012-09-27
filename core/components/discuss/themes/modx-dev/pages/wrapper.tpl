@@ -195,7 +195,11 @@
                 <form id="newsletter" action="http://modxcms.list-manage.com/subscribe/post" method="post">
                     <input type="hidden" name="u" value="08b25a8de68a29fe03a483720" />
                     <input type="hidden" name="id" value="848cf40420" />
+<<<<<<< HEAD
                     <input type="hidden" name="MERGE9" value="forums" id="MERGE9">
+=======
+                    <input type="hidden" name="MERGE7" value="[[~[[*id]]? &scheme=`full`]]" id="MERGE7">
+>>>>>>> Updated Email Subscribe
                     <div class="field clearfix">
                         <label for="MERGE0" class="hidden">Your email</label>
                         <input type="text" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value="" class="textbox" />
