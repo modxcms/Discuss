@@ -312,7 +312,8 @@ class disNewBBCodeParser extends disParser {
     public function parseList($message) {
         /* convert [list]/[li] tags */
         $message = preg_replace("#\[li\](.*?)\[/li\]#si",'<li>\\1</li>',$message);
-        //$message = preg_replace("#\[[\*#]\](.*?)#", '<li>\\1</li>', $message);
+        $message = preg_replace("#\[[\*\#]\](.*?)\[\/[\*\#]\]#si", '<li>\\1</li>', $message);
+        $message = preg_replace("#\[[\*\#]\](.*?)(\n|\[/(list|ul|ol)\])#", '<li>\\1</li>\\2', $message);
         $message = preg_replace_callback("#\[list\](.*?)\[/list\]#si",array($this,'parseListCallback'),$message);
         $message = preg_replace_callback("#\[ul\](.*?)\[/ul\]#si",array($this,'parseListCallback'),$message);
         $message = preg_replace_callback("#\[olist\](.*?)\[/olist\]#si",array($this,'parseOListCallback'),$message);
@@ -542,7 +543,6 @@ class disNewBBCodeParser extends disParser {
         $message = str_replace('&nbsp;',' ',$message);
 	    $message = html_entity_decode($message,ENT_COMPAT,'UTF-8');
 	    $message = str_replace('&#039;',"'",$message);
-	    $message = str_replace('[*]','*',$message);
 
         /* nuke any extra [/quote] tags */
         while (substr($message, -7) == '[quote]') {
