@@ -116,7 +116,7 @@ if ($total < $limit) {
 } else {
 	switch($total){
 		/* If the current page near the beginning */
-		case $current <= 3:
+		case $current <= 4:
 			/* first page */
 			$list[] = ($current == 1)
 				? $discuss->getChunk($tplActive, array('url' => $currentResourceUrl,'class' => 'active', 'text' => 1))
@@ -128,6 +128,14 @@ if ($total < $limit) {
 				? $discuss->getChunk($tplActive, array('url' => $currentResourceUrl.$glue.'page='.$current,'class' => 'active', 'text' => $i))
 				: $discuss->getChunk($tplLink, array('url' => $currentResourceUrl.$glue.'page='.$i, 'text' => $i));
 			}
+            /* Special case for when current is bigger than 3 */
+            if ($current >= 3) {
+                for ($i = 4; $i <= $current+1; $i++) {
+                    $list[] = ($i == $current)
+                    ? $discuss->getChunk($tplActive, array('url' => $currentResourceUrl.$glue.'page='.$current,'class' => 'active', 'text' => $i))
+                    : $discuss->getChunk($tplLink, array('url' => $currentResourceUrl.$glue.'page='.$i, 'text' => $i));
+                }
+            }
                 
 			/* and the remaining pages */
 			$list[] = $truncateText;
@@ -157,7 +165,7 @@ if ($total < $limit) {
 			$list[] = $discuss->getChunk($tplLink, array('url' => $currentResourceUrl.$glue.'page='.(2), 'text' => '2'));
 			$list[] = $truncateText;
 			
-			for ($i = $total - 2; $i <= $total; $i++) {
+			for ($i = $current - 1; $i <= $total; $i++) {
 				$list[] = ($i == $current) ?
 					$discuss->getChunk($tplActive, array('url' => $currentResourceUrl.$glue.'page='.$current,'class' => 'active', 'text' => $i)) :
 					$discuss->getChunk($tplLink, array('url' => $currentResourceUrl.$glue.'page='.($i), 'text' => $i));
