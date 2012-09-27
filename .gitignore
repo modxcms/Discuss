@@ -7,3 +7,6 @@ core/components/discuss/test/config.inc.php
 core/components/discuss/test/properties.inc.php
 _build/build.config.php
 assets/components/discuss/themes/modx-dev/.sass-cache/*
+core/components/discuss/themes/modx-dev/.DS_Store
+
+core/components/discuss/themes/modx-dev/pages/.DS_Store
