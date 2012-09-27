@@ -39,6 +39,7 @@
                             <li><a href="[[~[[++discuss.forums_resource_id]]]]">Forums</a></li>
                             <li><a href="http://rtfm.modx.com/">Docs</a></li>
                             <li><a href="http://tracker.modx.com/">Bugs</a></li>
+                            <li><a href="[[~537]]">Blog</a></li>
                         </ul>
                     </nav>
                     <a class="h-ir" href="[[~[[++discuss.forums_resource_id]]]]" title="MODX Community Forums">MODX Forums</a>
@@ -168,10 +169,11 @@
             <div class="f1-f8">
                 <nav class="group">
                     <ul class="horiz-list">
-                        <li><a href="doc/">MODX Cloud User Guide</a></li>
-                        <li><a href="doc/api/">API Documentation</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="signup/">Sign-up now</a></li>
+                        <li><a href="[[~277]]">Get MODX Add-ons</a></li>
+                        [[- todo: <li><a href="[[~19]]">Help Spread MODX</a></li>]]
+                        <li><a href="[[~25]]">Contact Us</a></li>
+                        <li><a href="[[~18]]">Media Room</a></li>
+                        <li><a href="https://modxcloud.com">MODX Cloud</a></li>
                     </ul>
                 </nav>
                 <div class="group">
@@ -179,11 +181,11 @@
                         <a class="m-modx_logo h-ir" href="http://modx.com">MODX Creative Freedom</a>
                     </div>
                     <div class="group copy-info f3-f7">
-                        <p>&copy; MODX, LLC 2012. All Rights Reserved.</p>
+                        <p>&copy; 2004-2012, MODX, LLC. All Rights Reserved.</p>
                         <ul class="horiz-list">
-                            <li><a href="trademark.html">Trademark Policy</a></li>
-                            <li><a href="terms.html">Terms of Service</a></li>
-                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="[[~107]]">Terms of Service</a></li>
+                            <li><a href="[[~106]]">Privacy</a></li>
+                            <li><a href="[[~104]]">Trademarks</a></li>
                         </ul>
                     </div>
                 </div>
@@ -193,8 +195,7 @@
                 <form id="newsletter" action="http://modxcms.list-manage.com/subscribe/post" method="post">
                     <input type="hidden" name="u" value="08b25a8de68a29fe03a483720" />
                     <input type="hidden" name="id" value="848cf40420" />
-                    <input type="hidden" name="source" value="www_1" id="source">
-                    <input type="hidden" name="MERGE7" value="http://modx.com/" id="MERGE7">
+                    <input type="hidden" name="MERGE9" value="forums" id="MERGE9">
                     <div class="field clearfix">
                         <label for="MERGE0" class="hidden">Your email</label>
                         <input type="text" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value="" class="textbox" />
@@ -202,8 +203,9 @@
                     </div>
                 </form> 
                 <ul class="social-icons horiz-list">
-                    <li><a href="http://twitter.com/#!/modxcms" title="MODX on Twitter" class="twitter">Twitter</a></li>
+                    <li><a href="http://twitter.com/modxcms" title="MODX on Twitter" class="twitter">Twitter</a></li>
                     <li><a href="http://www.facebook.com/modxcms" title="MODX Facebook" class="facebook">Facebook</a></li>
+                    [[- todo: add LinkedIn]]
                     <li><a href="http://modx.com/feeds/" title="Subscribe to our Feeds" class="rss">RSS Feeds</a></li>
                 </ul>
             </div>
