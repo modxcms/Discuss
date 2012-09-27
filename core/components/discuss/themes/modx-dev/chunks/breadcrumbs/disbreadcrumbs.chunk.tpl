@@ -7,6 +7,8 @@
 	</nav>
 	<!-- remove out of breadcrumbs eventually-->
 	<div class="l-right m-search">
+		<a href="[[~[[*id]]]]thread/recent">[[%discuss.view_recent_posts]]</a> [[%discuss.or_search]]
+
 		<div id="cse-search-form" style="width:300px; display:inline-block; *zoom:1; height:26px;">Loading</div>
 		<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 		<script type="text/javascript"> 
