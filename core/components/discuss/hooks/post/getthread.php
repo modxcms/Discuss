@@ -45,13 +45,12 @@ if (!is_object($thread)) {
 $limit = $modx->getOption('limit',$scriptProperties,(int)$modx->getOption('discuss.post_per_page',$scriptProperties, 10));
 $page = !empty($_GET['page']) ? $_GET['page'] - 1 : 0;
 $start = $page * $limit;
-$tpl = !empty($_REQUEST['print']) ? 'post/disThreadPostPrint' : 'post/disThreadPost';
+$tpl = !empty($_REQUEST['print']) ? 'post/disThreadPostPrint' :  $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 
 /* Verify the posts output type - Flat or Threaded */
 $flat = $modx->getOption('flat',$scriptProperties,false);
 $flat = true;
 /* get default properties */
-$postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadPost');
 $postAttachmentRowTpl = $modx->getOption('postAttachmentRowTpl',$scriptProperties,'post/disPostAttachment');
 
 $isAdmin = $discuss->user->isAdmin();
