@@ -322,13 +322,16 @@ class disNewBBCodeParser extends disParser {
      */
     public function parseList($message) {
         /* convert [list]/[li] tags */
-        $message = preg_replace("#\[li\](.*?)\[/li\]#si",'<li>\\1</li>',$message);
-        $message = preg_replace("#\[[\*\#]\](.*?)\[\/[\*\#]\]#si", '<li>\\1</li>', $message);
-        $message = preg_replace("#\[[\*\#]\](.*?)(\n|\[/(list|ul|ol)\])#", '<li>\\1</li>\\2', $message);
         $message = preg_replace_callback("#\[list\](.*?)\[/list\]#si",array($this,'parseListCallback'),$message);
         $message = preg_replace_callback("#\[ul\](.*?)\[/ul\]#si",array($this,'parseListCallback'),$message);
         $message = preg_replace_callback("#\[olist\](.*?)\[/olist\]#si",array($this,'parseOListCallback'),$message);
         $message = preg_replace_callback("#\[ol\](.*?)\[/ol\]#si",array($this,'parseOListCallback'),$message);
+        return $message;
+    }
+    public static function parseListItems($message) {
+        $message = preg_replace("#\[li\](.*?)\[/li\]#si",'<li>\\1</li>',$message);
+        $message = preg_replace("#\[[\*\#]\](.*?)\[\/[\*\#]\]#si", '<li>\\1</li>', $message);
+        $message = preg_replace("#\[[\*\#]\](.*?)(\n|\[/(list|ul|ol)\])#", '<li>\\1</li>\\2', $message);
         return $message;
     }
     /**
@@ -340,6 +343,7 @@ class disNewBBCodeParser extends disParser {
     public static function parseListCallback($matches) {
         if (empty($matches[1])) return '';
         $message = str_replace(array('<br>','<br />','<br/>'),'',self::stripBRTags($matches[1]));
+        $message = self::parseListItems($message);
         $message = '<ul class="dis-ul">'.$message.'</ul>';
         return $message;
     }
@@ -352,6 +356,7 @@ class disNewBBCodeParser extends disParser {
     public static function parseOListCallback($matches) {
         if (empty($matches[1])) return '';
         $message = str_replace(array('<br>','<br />','<br/>'),'',self::stripBRTags($matches[1]));
+        $message = self::parseListItems($message);
         $message = '<ol class="dis-ol">'.$message.'</ol>';
         return $message;
     }
