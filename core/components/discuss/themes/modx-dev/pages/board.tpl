@@ -21,7 +21,7 @@
 		    [[- USER NOT LOGGED IN ]]
 		    [[!+discuss.user.id:is=``:then=`
 		    <div class="post-box">
-				<a href="[[~[[*id]]]]login" class="Button">Login to Post</a>
+				<a href="[[~[[*id]]]]login" class="Button dis-action-login" >Login to Post</a>
 			</div>
 			`]]
 		</header>

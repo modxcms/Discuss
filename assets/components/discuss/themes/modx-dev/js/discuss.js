@@ -1,6 +1,18 @@
 $(document).ready(function() {
     $('.dis-error').hide();
     $('.dis-cat-header').click(DISBoard.toggleCategory);
+    $('.dis-action-login').click(function(event) {
+        event.preventDefault();
+        var duration = ($('body').scrollTop() > 200) ? 500 : 100;
+        $('html, body').animate({scrollTop: 0}, duration, 'swing', function() {
+            $('.masthead-login').fadeOut(200, function() {
+                $(this).fadeIn(500, function() {
+                    $('#login-username').focus();
+                });
+            });
+        });
+
+    });
 });
 var DIS = {
     config: {}
