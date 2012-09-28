@@ -30,10 +30,12 @@
  * @subpackage parser
  */
 abstract class disParser {
-    /** @var modX\xPDO A reference to the modX object. */
+    /** @var modX|xPDO A reference to the modX object. */
     public $modx;
     /** @var Discuss $discuss A reference to the Discuss object. */
     public $discuss;
+    /** @var array $allowedTags bbcodes/tags that are allowed. */
+    public $allowedTags = array();
 
     /**
      * @param xPDO $modx A reference to the modX instance
@@ -49,9 +51,10 @@ abstract class disParser {
      *
      * @abstract
      * @param string $message
+     * @param $allowedTags
      * @return string The parsed content
      */
-    abstract public function parse($message);
+    abstract public function parse($message, array $allowedTags = array());
 
     /**
      * A better working nl2br
@@ -96,5 +99,17 @@ abstract class disParser {
             }
         }
         return $message;
+    }
+
+    /**
+     * @param string $tag Type of tag to check
+     * @return bool
+     */
+    public function isAllowed($tag) {
+        if (!empty($this->allowedTags)) {
+            if (in_array($tag, $this->allowedTags)) return true;
+            return false;
+        }
+        return true;
     }
 }

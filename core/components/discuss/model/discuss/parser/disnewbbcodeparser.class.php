@@ -33,14 +33,17 @@ class disNewBBCodeParser extends disParser {
      * Parse BBCode in post and return proper HTML. Supports SMF/Vanilla formats.
      *
      * @param string $message The string to parse
+     * @param mixed $allowedTags
      * @return string The parsed string with HTML instead of BBCode, and all code stripped
      */
-    public function parse($message) {
+    public function parse($message, array $allowedTags = array()) {
+        if (!is_array($allowedTags)) $allowedTags = array();
+        $this->allowedTags = $allowedTags;
         $message = $this->checkImageSizes($message);
         $message = $this->cleanAndParse($message);
 
         /* Parse code blocks separately */
-        $message = $this->parseSandboxed($message);
+        if ($this->isAllowed('code')) $message = $this->parseCodeBlocks($message);
 
         /* Escape all MODX tags */
         $message = str_replace(array('[',']'),array('&#91;','&#93;'),$message);
@@ -54,45 +57,53 @@ class disNewBBCodeParser extends disParser {
      * @return string
      */
     public function parseBasic($message) {
-        $message = preg_replace("#\[b\](.*?)\[/b\]#si",'<strong>\\1</strong>',$message);
-        $message = preg_replace("#\[i\](.*?)\[/i\]#si",'<em>\\1</em>',$message);
-        $message = preg_replace("#\[u\](.*?)\[/u\]#si",'<span style="text-decoration: underline;">\\1</span>',$message);
-        $message = preg_replace("#\[s\](.*?)\[/s\]#si",'<del>\\1</del>',$message);
-        $message = str_ireplace("[hr]",'<hr />',$message);
-        $message = preg_replace("#\[sup\](.*?)\[/sup\]#si",'<sup>\\1</sup>',$message);
-        $message = preg_replace("#\[sub\](.*?)\[/sub\]#si",'<sub>\\1</sub>',$message);
-        $message = preg_replace("#\[ryan\](.*?)\[/ryan\]#si",'<blink>\\1</blink>',$message);
-        $message = preg_replace("#\[tt\](.*?)\[/tt\]#si",'<tt>\\1</tt>',$message);
-        $message = preg_replace("#\[rtl\](.*?)\[/rtl\]#si",'<div dir="rtl">\\1</div>',$message);
+        if ($this->isAllowed('b')) $message = preg_replace("#\[b\](.*?)\[/b\]#si",'<strong>\\1</strong>',$message);
+        if ($this->isAllowed('i')) $message = preg_replace("#\[i\](.*?)\[/i\]#si",'<em>\\1</em>',$message);
+        if ($this->isAllowed('u')) $message = preg_replace("#\[u\](.*?)\[/u\]#si",'<span style="text-decoration: underline;">\\1</span>',$message);
+        if ($this->isAllowed('s')) $message = preg_replace("#\[s\](.*?)\[/s\]#si",'<del>\\1</del>',$message);
+        if ($this->isAllowed('hr')) $message = str_ireplace("[hr]",'<hr />',$message);
+        if ($this->isAllowed('sup')) $message = preg_replace("#\[sup\](.*?)\[/sup\]#si",'<sup>\\1</sup>',$message);
+        if ($this->isAllowed('sub')) $message = preg_replace("#\[sub\](.*?)\[/sub\]#si",'<sub>\\1</sub>',$message);
+        if ($this->isAllowed('ryan')) $message = preg_replace("#\[ryan\](.*?)\[/ryan\]#si",'<blink>\\1</blink>',$message);
+        if ($this->isAllowed('tt')) $message = preg_replace("#\[tt\](.*?)\[/tt\]#si",'<tt>\\1</tt>',$message);
+        if ($this->isAllowed('rtl')) $message = preg_replace("#\[rtl\](.*?)\[/rtl\]#si",'<div dir="rtl">\\1</div>',$message);
 
         /* align tags */
-        $message = preg_replace("#\[center\](.*?)\[/center\]#si",'<div style="text-align: center;">\\1</div>',$message);
-        $message = preg_replace("#\[right\](.*?)\[/right\]#si",'<div style="text-align: right;">\\1</div>',$message);
-        $message = preg_replace("#\[left\](.*?)\[/left\]#si",'<div style="text-align: left;">\\1</div>',$message);
+        if ($this->isAllowed('center')) $message = preg_replace("#\[center\](.*?)\[/center\]#si",'<div style="text-align: center;">\\1</div>',$message);
+        if ($this->isAllowed('right')) $message = preg_replace("#\[right\](.*?)\[/right\]#si",'<div style="text-align: right;">\\1</div>',$message);
+        if ($this->isAllowed('left')) $message = preg_replace("#\[left\](.*?)\[/left\]#si",'<div style="text-align: left;">\\1</div>',$message);
 
 
-        $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
+        if ($this->isAllowed('cite')) $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
         $message = preg_replace("#\[hide\](.*?)\[/hide\]#si",'\\1',$message);
-        $message = preg_replace_callback("#\[email=[\"']?(.*?)[\"']?\](.*?)\[/email\]#si",array($this,'parseComplexEmailCallback'),$message);
-        $message = preg_replace_callback("#\[email\]([^/]*?)\[/email\]#si",array($this,'parseEmailCallback'),$message);
-        $message = str_replace(array('[iurl','[/iurl]'),array('[url','[/url]'),$message);
-        $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
-        $message = preg_replace_callback("#\[url\](.*?)\[/url\]#si",array($this,'parseSimpleUrlCallback'),$message);
-        $message = preg_replace_callback("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",array($this,'parseUrlCallback'),$message);
-        $message = preg_replace("#\[magic\](.*?)\[/magic\]#si",'<marquee>\\1</marquee>',$message);
-        $message = preg_replace("#\[php\](.*?)\[/php\]#si",'<pre class="brush:php">\\1</pre>',$message);
-        $message = preg_replace("#\[mysql\](.*?)\[/mysql\]#si",'<pre class="brush:sql">\\1</pre>',$message);
-        $message = preg_replace("#\[css\](.*?)\[/css\]#si",'<pre class="brush:css">\\1</pre>',$message);
-        $message = preg_replace("#\[pre\](.*?)\[/pre\]#si",'<pre>\\1</pre>',$message);
+        if ($this->isAllowed('email')) {
+            $message = preg_replace_callback("#\[email=[\"']?(.*?)[\"']?\](.*?)\[/email\]#si",array($this,'parseComplexEmailCallback'),$message);
+            $message = preg_replace_callback("#\[email\]([^/]*?)\[/email\]#si",array($this,'parseEmailCallback'),$message);
+        }
+        if ($this->isAllowed('url')) {
+            $message = str_replace(array('[iurl','[/iurl]'),array('[url','[/url]'),$message);
+            $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
+            $message = preg_replace_callback("#\[url\](.*?)\[/url\]#si",array($this,'parseSimpleUrlCallback'),$message);
+            $message = preg_replace_callback("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",array($this,'parseUrlCallback'),$message);
+        }
+        if ($this->isAllowed('magic')) $message = preg_replace("#\[magic\](.*?)\[/magic\]#si",'<marquee>\\1</marquee>',$message);
+        if ($this->isAllowed('code')) {
+            $message = preg_replace("#\[php\](.*?)\[/php\]#si",'<pre class="brush:php">\\1</pre>',$message);
+            $message = preg_replace("#\[mysql\](.*?)\[/mysql\]#si",'<pre class="brush:sql">\\1</pre>',$message);
+            $message = preg_replace("#\[css\](.*?)\[/css\]#si",'<pre class="brush:css">\\1</pre>',$message);
+        }
+        if ($this->isAllowed('pre')) $message = preg_replace("#\[pre\](.*?)\[/pre\]#si",'<pre>\\1</pre>',$message);
 
-        $message = preg_replace_callback("#\[img\s[\"']?(.*?)[\"']?\](.*?)\[/img\]#si",array($this,'parseImageCallback'),$message);
-        $message = preg_replace("#\[img=[\"']?(.*?)[\"']?\](.*?)\[/img\]#si",'<img src="\\1" alt="\\2" />',$message);
-        $message = preg_replace("#\[img\](.*?)\[/img\]#si",'<img src="\\1" border="0" />',$message);
-        $message = str_ireplace(array('[indent]', '[/indent]'), array('<div class="Indent">', '</div>'), $message);
+        if ($this->isAllowed('img')) {
+            $message = preg_replace_callback("#\[img\s[\"']?(.*?)[\"']?\](.*?)\[/img\]#si",array($this,'parseImageCallback'),$message);
+            $message = preg_replace("#\[img=[\"']?(.*?)[\"']?\](.*?)\[/img\]#si",'<img src="\\1" alt="\\2" />',$message);
+            $message = preg_replace("#\[img\](.*?)\[/img\]#si",'<img src="\\1" border="0" />',$message);
+        }
+        if ($this->isAllowed('indent')) $message = str_ireplace(array('[indent]', '[/indent]'), array('<div class="Indent">', '</div>'), $message);
 
-        $message = preg_replace("#\[font=[\"']?(.*?)[\"']?\]#i",'<span style="font-family:\\1;">',$message);
-        $message = preg_replace("#\[color=[\"']?(.*?)[\"']?\]#i",'<span style="color:\\1;">',$message);
-        $message = preg_replace_callback("#\[size=[\"']?(.*?)[\"']?\]#si",array($this,'parseSizeCallback'),$message);
+        if ($this->isAllowed('font')) $message = preg_replace("#\[font=[\"']?(.*?)[\"']?\]#i",'<span style="font-family:\\1;">',$message);
+        if ($this->isAllowed('color')) $message = preg_replace("#\[color=[\"']?(.*?)[\"']?\]#i",'<span style="color:\\1;">',$message);
+        if ($this->isAllowed('size')) $message = preg_replace_callback("#\[size=[\"']?(.*?)[\"']?\]#si",array($this,'parseSizeCallback'),$message);
         $message = str_replace(array('[color]','[size]','[font]'),'<span>',$message);/* cleanup improper span/color/font tags */
         $message = str_ireplace(array("[/size]", "[/font]", "[/color]"), "</span>", $message);
 
@@ -297,7 +308,7 @@ class disNewBBCodeParser extends disParser {
      * @param string $message
      * @return mixed
      */
-    public function parseSandboxed($message) {
+    public function parseCodeBlocks($message) {
         $message = preg_replace_callback("#\[code\](.*?)\[/code\]#si",array($this,'parseCodeCallback'),$message);
         $message = preg_replace_callback("#\[code=[\"']?(.*?)[\"']?\](.*?)\[/code\]#si",array($this,'parseCodeSpecificCallback'),$message);
         return preg_replace('#\[/?code\]#si', '', $message);
@@ -600,12 +611,12 @@ class disNewBBCodeParser extends disParser {
                 $parts[$i] = htmlspecialchars($parts[$i], ENT_QUOTES, 'UTF-8');
 
                 /* Parse the rest of the BB Code stuff. */
-                $parts[$i] = $this->parseQuote($parts[$i]);
-                $parts[$i] = $this->parseList($parts[$i]);
+                if ($this->isAllowed('quote')) $parts[$i] = $this->parseQuote($parts[$i]);
+                if ($this->isAllowed('list')) $parts[$i] = $this->parseList($parts[$i]);
                 $parts[$i] = $this->parseBasic($parts[$i]);
-                $parts[$i] = $this->convertLinks($parts[$i]);
+                if ($this->isAllowed('url')) $parts[$i] = $this->convertLinks($parts[$i]);
                 $parts[$i] = $this->stripBadWords($parts[$i]);
-                $parts[$i] = $this->parseSmileys($parts[$i]);
+                if ($this->isAllowed('smileys')) $parts[$i] = $this->parseSmileys($parts[$i]);
 
                 /* Strip out possibly malicious html */
                 $parts[$i] = $this->stripHtml($parts[$i]);

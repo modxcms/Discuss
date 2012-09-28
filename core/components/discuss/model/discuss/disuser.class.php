@@ -358,6 +358,10 @@ class disUser extends xPDOSimpleObject {
      */
     public function parseSignature() {
         $message = $this->get('signature');
+        $maxLength = $this->xpdo->getOption('discuss.signatures.max_length', null, 2000);
+        if (strlen($message) > $maxLength) {
+            $message = substr($message, 0, $maxLength);
+        }
         if (!empty($message)) {
             $message = str_replace(array('&#91;','&#93;'),array('[',']'),$message);
 
@@ -429,7 +433,10 @@ class disUser extends xPDOSimpleObject {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR,'Error loading signature parser ' . $parserClass . ' from ' . $parserClassPath);
             return '';
         }
-        $message = $this->parser->parse($message);
+        $allowedBBCodes = $this->xpdo->getOption('discuss.signatures.allowed_bbcodes', null,'b,i,u,url,quote,list,smileys,rtl');
+        $allowedBBCodes = explode(',', $allowedBBCodes);
+        $message = $this->parser->parse($message, $allowedBBCodes);
+        $message = $this->stripBBCode($message);
         return $message;
     }
 
