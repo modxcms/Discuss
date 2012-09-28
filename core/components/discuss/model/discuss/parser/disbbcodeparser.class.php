@@ -33,9 +33,10 @@ class disBBCodeParser extends disParser {
      * Parse BBCode in post and return proper HTML. Supports SMF/Vanilla formats.
      *
      * @param string $message The string to parse
+     * @param array $allowedTags
      * @return string The parsed string with HTML instead of BBCode, and all code stripped
      */
-    public function parse($message) {
+    public function parse($message, array $allowedTags = array()) {
         $message = $this->checkImageSizes($message);
         $message = $this->preClean($message);
         
