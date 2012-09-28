@@ -509,6 +509,7 @@ class disNewBBCodeParser extends disParser {
         $smiley = array(
             ' ::)' => 'rolleyes',
             ' :)' => 'smiley',
+            ' :-)' => 'smiley',
             ' ;)' => 'wink',
             ' :D' => 'laugh',
             ' ;D' => 'grin',
@@ -520,27 +521,29 @@ class disNewBBCodeParser extends disParser {
             ' ???' => 'huh',
             ' :P' => 'tongue',
             ' :-[' => 'embarrassed',
+            ' :x' => 'lipsrsealed',
+            ' :X' => 'lipsrsealed',
             ' :-X' => 'lipsrsealed',
             ' :-*' => 'kiss',
             ' :-\\' => 'undecided',
             " :'(" => 'cry',
-            '[hug]' => 'bear2',
-            '[brew]' => 'brew',
-            '[ryan2]' => 'ryan2',
-            '[locke]' => 'locke',
-            '[zelda]' => 'zelda',
-            '[surrender]' => 'surrender',
-            '[ninja]' => 'ninja',
-            '[spam]' => 'spam',
-            '[welcome]' => 'welcome',
-            '[offtopic]' => 'offtopic',
-            '[hijack]' => 'hijack',
-            '[helpme]' => 'help',
-            '[banned]' => 'banned',
+            ' [hug]' => 'bear2',
+            ' [brew]' => 'brew',
+            ' [ryan2]' => 'ryan2',
+            ' [locke]' => 'locke',
+            ' [zelda]' => 'zelda',
+            ' [surrender]' => 'surrender',
+            ' [ninja]' => 'ninja',
+            ' [spam]' => 'spam',
+            ' [welcome]' => 'welcome',
+            ' [offtopic]' => 'offtopic',
+            ' [hijack]' => 'hijack',
+            ' [helpme]' => 'help',
+            ' [banned]' => 'banned',
         );
         $v = array_values($smiley);
         for ($i =0; $i < count($v); $i++) {
-            $v[$i] = '<img src="'.$imagesUrl.$v[$i].'.gif" alt="'.$v[$i].'" />';
+            $v[$i] = ' <img src="'.$imagesUrl.$v[$i].'.gif" alt="'.$v[$i].'" />';
         }
         return str_replace(array_keys($smiley),$v,$message);
     }
