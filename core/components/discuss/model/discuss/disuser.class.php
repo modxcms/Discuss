@@ -144,6 +144,11 @@ class disUser extends xPDOSimpleObject {
     public $xpdo;
 
     /**
+     * @var disParser $parser
+     */
+    public $parser;
+
+    /**
      * Initialize the user, setup basic metadata for them, and log their activity time.
      * @return bool
      */
@@ -372,8 +377,6 @@ class disUser extends xPDOSimpleObject {
                     $message = $parsed;
                 }
             } else if (true) {
-                //$message = str_replace(array('<br/>','<br />','<br>'),'',$message);
-                $message = $this->_nl2br2($message);
                 $message = $this->parseBBCode($message);
             }
 
@@ -391,7 +394,6 @@ class disUser extends xPDOSimpleObject {
             } else if (!empty($rs)) {
                 $message = $rs;
             }
-            $message = $this->stripBBCode($message);
         }
         return $message;
     }
@@ -414,34 +416,20 @@ class disUser extends xPDOSimpleObject {
      * @return string The parsed string with HTML instead of BBCode, and all code stripped
      */
     public function parseBBCode($message) {
-        /* handle quotes better, to allow for citing */
-        $message = $this->parseQuote($message);
-
-        /* parse bbcode from vanilla/smf boards bbcode formats */
-        $message = preg_replace("#\[b\](.*?)\[/b\]#si",'<b>\\1</b>',$message);
-        $message = preg_replace("#\[i\](.*?)\[/i\]#si",'<i>\\1</i>',$message);
-        $message = preg_replace("#\[u\](.*?)\[/u\]#si",'<u>\\1</u>',$message);
-        $message = preg_replace("#\[s\](.*?)\[/s\]#si",'<s>\\1</s>',$message);
-
-        $message = preg_replace("#\[quote\](.*?)\[/quote\]#si",'<blockquote>\\1</blockquote>',$message);
-        $message = preg_replace("#\[cite\](.*?)\[/cite\]#si",'<blockquote>\\1</blockquote>',$message);
-        $message = preg_replace("#\[code\](.*?)\[/code\]#si",'<div class="dis-code"><h5>Code</h5><pre>\\1</pre></div>',$message);
-        $message = preg_replace("#\[hide\](.*?)\[/hide\]#si",'\\1',$message);
-        $message = preg_replace("#\[url\]([^/]*?)\[/url\]#si",'<a href="http://\\1">\\1</a>',$message);
-        $message = preg_replace("#\[url\](.*?)\[/url\]#si",'\\1',$message);
-        $message = preg_replace("#\[url=[\"']?(.*?)[\"']?\](.*?)\[/url\]#si",'<a href="\\1">\\2</a>',$message);
-        $message = preg_replace("#\[php\](.*?)\[/php\]#si",'<code>\\1</code>',$message);
-        $message = preg_replace("#\[mysql\](.*?)\[/mysql\]#si",'<code>\\1</code>',$message);
-        $message = preg_replace("#\[css\](.*?)\[/css\]#si",'<code>\\1</code>',$message);
-        $message = preg_replace("#\[img=[\"']?(.*?)[\"']?\](.*?)\[/img\]#si",'<img src="\\1" alt="\\2" />',$message);
-        $message = preg_replace("#\[img\](.*?)\[/img\]#si",'<img src="\\1" border="0" />',$message);
-        $message = str_ireplace(array('[indent]', '[/indent]'), array('<div class="Indent">', '</div>'), $message);
-        $message = preg_replace('#\[/?left\]#si', '', $message);
-
-        /* strip all remaining bbcode */
-        $message = $this->stripBBCode($message);
-        /* strip MODX tags */
-        $message = str_replace(array('[',']'),array('&#91;','&#93;'),$message);
+        $parserClass = $this->xpdo->getOption('discuss.parser_class',null,'disBBCodeParser');
+        $parserClassPath = $this->xpdo->getOption('discuss.parser_class_path');
+        if (empty($this->parser)) {
+            if (empty($parserClassPath)) {
+                $parserClassPath = $this->xpdo->discuss->config['modelPath'].'discuss/parser/';
+            }
+            $this->parser = $this->xpdo->getService('disParser',$parserClass,$parserClassPath);
+        }
+        if (empty($this->parser)) {
+            /* If we can't find the parser, log an error and return an empty message. */
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR,'Error loading signature parser ' . $parserClass . ' from ' . $parserClassPath);
+            return '';
+        }
+        $message = $this->parser->parse($message);
         return $message;
     }
 
