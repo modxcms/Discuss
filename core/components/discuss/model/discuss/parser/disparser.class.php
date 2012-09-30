@@ -65,7 +65,7 @@ abstract class disParser {
     protected function _nl2br2($str) {
         $str = str_replace("\r", '', $str);
         //return preg_replace('/(?<!>)\n/', "<br />\n", $str);
-        return preg_replace('/(?<!<\/li>|<\/code>|<\/pre>|<\/div>|<br \/>|<br\/>|<br>)\n/', "<br />\n", $str);
+        return preg_replace('/(?<!<\/li>|<\/ol>|<\/ul>|<\/cite>|<\/blockquote>|<\/code>|<\/pre>|<\/div>|<br \/>|<br\/>|<br>)\n/', "<br />\n", $str);
 
     }
 
