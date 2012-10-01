@@ -80,7 +80,7 @@
                                         [[!+discuss.user.unanswered_questions_count:gte=`1`:then=`
                                             You can help answer <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions" title="View Unanswered Questions">[[!+discuss.user.unanswered_questions]]</a>.
                                         `:else=`
-                                            Wow! No unanswered questions or discussions without replies.
+                                            [[%discuss.no_unanswered_questions_or_discussions]]
                                         `]]
                                     `]]
                                 </p>
