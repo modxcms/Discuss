@@ -60,9 +60,11 @@ class DiscussThreadRecentController extends DiscussController {
             'getTotal' => true,
             'postTpl' => $this->getOption('postTpl'),
         ));
+        echo 'total from placeholder: ' . $this->list['total'];
         $this->list['limit'] = $limit;
         $this->list['start'] = $start;
         $this->setPlaceholder('recent_posts',$this->list['results']);
+        $this->setPlaceholder('total', $this->list['total']);
 
         $this->buildPagination();
         $this->getActionButtons();
