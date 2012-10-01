@@ -3442,7 +3442,8 @@ h3.forum {
     font-weight: 500;
     border: 0;
     float: left;
-    padding: 7px 0 0 5px;
+    padding: 7px 0 9px 5px;
+    padding:  0.7rem 0 0.9rem 0.5rem;
     margin: 0;
     display: inline-block; }
   /* line 44, ../../sass/_forums.sass */
@@ -3647,25 +3648,25 @@ div.m-section_title + div.row {
 
 /* line 201, ../../sass/_forums.sass */
 .a-loggedin .dis-category .wrap {
-  padding-left: 45px;
+  padding-left: 35px;
   position: relative;
-  background-position: 22px 5px; }
+  background-position: 17px 5px; }
 /* line 206, ../../sass/_forums.sass */
 .a-loggedin .dis-category.dis-unread .wrap:before {
   content: "";
   display: block;
   position: absolute;
-  left: 2px;
+  left: 1px;
   top: 6px;
   height: 10px;
-  width: 10px;
+  width: 8px;
   background: url(../../images/redo/icons/unread-dot.png) no-repeat 0 0; }
 /* line 216, ../../sass/_forums.sass */
 .a-loggedin .board-post .wrap {
-  padding-left: 50px; }
+  padding-left: 30px; }
 /* line 219, ../../sass/_forums.sass */
 .a-loggedin .board-post.dis-unread .wrap {
-  background: url(../../images/redo/icons/unread-dot.png) no-repeat 30px 3px; }
+  background: url(../../images/redo/icons/unread-dot.png) no-repeat 11px 4px; }
 
 /* line 224, ../../sass/_forums.sass */
 .boards + .forum-grid {
