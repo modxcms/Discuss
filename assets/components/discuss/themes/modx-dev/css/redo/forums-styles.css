@@ -1,6 +1,6 @@
 /* line 17, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre, .dis-content,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, .dis-content pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -60,7 +60,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
    USE WITH CAUTION AND TEST WITH ABANDON */
 /* line 17, ../../sass/lib/_reset.scss */
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre, .dis-content,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, .dis-content pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -2626,7 +2626,7 @@ a {
     text-decoration: underline; }
 
 /* line 11, ../../sass/lib/_shared.sass */
-pre, .dis-content {
+pre, .dis-content pre {
   font-family: "Courier New", Courier, mono; }
 
 /* line 14, ../../sass/lib/_shared.sass */
