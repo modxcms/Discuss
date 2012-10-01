@@ -134,6 +134,7 @@ $_lang['discuss.posted_on'] = 'Posted On';
 $_lang['discuss.posts'] = 'Posts';
 $_lang['discuss.print'] = 'Print';
 $_lang['discuss.question_and_answer'] = 'Question and Answer';
+$_lang['discuss.no_unanswered_questions_or_discussions'] = 'No unanswered questions or discussions without replies in the last 90 days.';
 $_lang['discuss.quote'] = 'Quote';
 $_lang['discuss.recent_posts'] = 'Recent Posts';
 $_lang['discuss.view_recent_posts'] = 'View Latest Posts';
