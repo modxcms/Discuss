@@ -330,7 +330,7 @@ class disNewBBCodeParser extends disParser {
     public static function parseListItems($message) {
         $message = preg_replace("#\[li\](.*?)\[/li\]#si",'<li>\\1</li>',$message);
         $message = preg_replace("#\[[\*\#]\](.*?)\[\/[\*\#]\]#si", '<li>\\1</li>', $message);
-        $message = preg_replace("#\[[\*\#]\](.*?)(\n|\[\/(list|ul|ol)\])#", '<li>\\1</li>\\2', $message);
+        $message = preg_replace("#\[[\*\#]\](.*?)($|\n|\[\/(list|ul|ol)\])#", '<li>\\1</li>\\2', $message);
         return $message;
     }
     /**
