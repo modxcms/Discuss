@@ -22,7 +22,7 @@
     <script type="text/javascript" src="//use.typekit.net/ukf1ncb.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
-<body id="forumbody-[[+controller.controller]]">
+<body id="forumbody-[[+controller.controller]]" class="forums[[!+discuss.user.id:notempty=` a-loggedin`]]">
 
 [[+discuss.user.isModerator:is=`1`:then=`
     <div class="dis-sticky-actions"><div class="full-width">[[+threadactionbuttons]]</div></div><!-- / moderator bar-->
