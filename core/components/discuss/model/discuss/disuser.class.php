@@ -433,9 +433,10 @@ class disUser extends xPDOSimpleObject {
             $this->xpdo->log(modX::LOG_LEVEL_ERROR,'Error loading signature parser ' . $parserClass . ' from ' . $parserClassPath);
             return '';
         }
-        $allowedBBCodes = $this->xpdo->getOption('discuss.signatures.allowed_bbcodes', null,'b,i,u,url,quote,list,smileys,rtl');
+        $allowedBBCodes = $this->xpdo->getOption('discuss.signatures.allowed_bbcodes', null,'b,i,u,s,url,quote,pre,ul,ol,list,smileys,rtl,hr,color,size');
         $allowedBBCodes = explode(',', $allowedBBCodes);
         $message = $this->parser->parse($message, $allowedBBCodes);
+        $message = str_replace('&#39;','’',$message);
         $message = $this->stripBBCode($message);
         return $message;
     }
