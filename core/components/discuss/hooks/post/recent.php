@@ -52,6 +52,8 @@ if (!empty($cache)) {
 $c = $modx->newQuery('disPost');
 $c->innerJoin('disUser','Author');
 $c->innerJoin('disThread','Thread');
+$c->innerJoin('disUser','ThreadAuthorFirst', 'Thread.author_first = ThreadAuthorFirst.id');
+$c->innerJoin('disUser','ThreadAuthorLast', 'Thread.author_last = ThreadAuthorLast.id');
 $c->innerJoin('disBoard','Board','Board.id = Thread.board');
 $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
 $c->where(array(
@@ -103,6 +105,8 @@ $c->select($modx->getSelectColumns('disPost','disPost'));
 $c->select($modx->getSelectColumns('disUser','Author', 'author_'));
 $c->select($modx->getSelectColumns('disBoard','Board','board_'));
 $c->select($modx->getSelectColumns('disThread','Thread','thread_'));
+$c->select($modx->getSelectColumns('disUser','ThreadAuthorFirst','thread_author_first_'));
+$c->select($modx->getSelectColumns('disUser','ThreadAuthorLast','thread_author_last_'));
 
 $total = $modx->getCount('disPost',$c);
 
