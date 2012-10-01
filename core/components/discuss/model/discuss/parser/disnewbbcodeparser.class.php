@@ -42,8 +42,9 @@ class disNewBBCodeParser extends disParser {
         $message = $this->checkImageSizes($message);
         $message = $this->cleanAndParse($message);
 
-        /* Parse code blocks separately */
+        /* Parse code & pre blocks separately */
         if ($this->isAllowed('code')) $message = $this->parseCodeBlocks($message);
+        if ($this->isAllowed('pre')) $message = $this->parsePreBlocks($message);
 
         /* Escape all MODX tags */
         $message = str_replace(array('[',']'),array('&#91;','&#93;'),$message);
@@ -311,6 +312,16 @@ class disNewBBCodeParser extends disParser {
         $message = preg_replace_callback("#\[code\](.*?)\[/code\]#si",array($this,'parseCodeCallback'),$message);
         $message = preg_replace_callback("#\[code=[\"']?(.*?)[\"']?\](.*?)\[/code\]#si",array($this,'parseCodeSpecificCallback'),$message);
         return preg_replace('#\[/?code\]#si', '', $message);
+    }
+    /**
+     * Parse pre blocks
+     *
+     * @param string $message
+     * @return mixed
+     */
+    public function parsePreBlocks($message) {
+        $message = preg_replace("#\[pre\](.*?)\[/pre\]#si","<pre>\\1</pre>",$message);
+        return preg_replace('#\[/?pre\]#si', '', $message);
     }
 
     /**
@@ -580,7 +591,7 @@ class disNewBBCodeParser extends disParser {
             $message = str_repeat('[code]', $codeclose - $codeopen) . $message;
 
         /* Fix tags outside of [code] tags */
-        $parts = preg_split('~(\[/code\]|\[code(?:=[^\]]+)?\])~i', $message, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $parts = preg_split('~(\[/code|pre\]|\[code|pre(?:=[^\]]+)?\])~i', $message, -1, PREG_SPLIT_DELIM_CAPTURE);
 
         $nbs = '\xA0';
         $charset = $this->modx->getOption('modx_charset',null,'UTF-8');

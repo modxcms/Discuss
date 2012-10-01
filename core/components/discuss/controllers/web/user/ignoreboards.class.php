@@ -177,7 +177,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
             'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),
             'url' => $this->discuss->request->makeUrl('user')
         );
-        $trail[] = array('text' => $this->modx->lexicon('discuss.edit'),'active' => true);
+        $trail[] = array('text' => $this->modx->lexicon('discuss.ignore_preferences'),'active' => true);
         return $trail;
     }
 }
