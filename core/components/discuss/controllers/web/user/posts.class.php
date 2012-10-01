@@ -80,18 +80,6 @@ class DiscussUserPostsController extends DiscussController {
         $this->setPlaceholder('usermenu',$this->discuss->getChunk('disUserMenu',$this->getPlaceholders()));
     }
 
-    public function _getPosts() {
-        $this->posts = array('total' => 0,'limit' => 0);
-        if (!empty($this->options['showPosts'])) {
-            $options = array_merge($this->options,array(
-                'thread' => &$this->thread,
-                'controller' => &$this,
-            ));
-            $this->posts = $this->discuss->hooks->load('post/getThread',$options);
-            $this->setPlaceholder('posts',$this->posts['results']);
-        }
-    }
-
     public function getPosts() {
         $perPage = $this->modx->getOption('discuss.num_recent_posts',null,10);
         $start = (isset($this->scriptProperties['page']) && !empty($this->scriptProperties['page'])) ?

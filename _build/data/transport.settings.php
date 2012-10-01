@@ -358,6 +358,14 @@ $settings['discuss.no_replies_threshold']->fromArray(array(
     'namespace' => 'discuss',
     'area' => 'Threads',
 ),'',true,true);
+$settings['discuss.recent_threshold_days']= $modx->newObject('modSystemSetting');
+$settings['discuss.recent_threshold_days']->fromArray(array(
+    'key' => 'discuss.recent_threshold_days',
+    'value' => 42,
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Threads',
+),'',true,true);
 
 $settings['discuss.notification_new_post_subject']= $modx->newObject('modSystemSetting');
 $settings['discuss.notification_new_post_subject']->fromArray(array(

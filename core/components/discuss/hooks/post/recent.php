@@ -28,6 +28,7 @@
 /* get default options */
 $limit = $modx->getOption('limit',$scriptProperties,$modx->getOption('discuss.num_recent_posts',null,10));
 $start = $modx->getOption('start',$scriptProperties,0);
+$fromDays = $modx->getOption('discuss.recent_threshold_days', null, 42);
 
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
@@ -37,13 +38,15 @@ $cacheKey = 'discuss/recent/'.$discuss->user->get('id').'.'.md5(serialize($scrip
 $cache = $modx->cacheManager->get($cacheKey);
 if (!empty($cache)) return $cache;
 
-/* get latest 10 posts */
+/* get posts */
 $c = $modx->newQuery('disPost');
+$c->innerJoin('modUser','User');
 $c->innerJoin('disThread','Thread');
 $c->innerJoin('disBoard','Board','Board.id = Thread.board');
 $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
 $c->where(array(
     'Board.status:!=' => 0,
+    'AND:disPost.createdon:>=' => strftime(Discuss::DATETIME_FORMATTED, time() - ($fromDays * 24 * 60 * 60)),
 ));
 /* ignore spam/recycle bin boards */
 
@@ -85,107 +88,44 @@ if ($discuss->user->isLoggedIn) {
         ));
     }
 }
-/* if showing only recent posts for a user */
-if (!empty($scriptProperties['user'])) {
-    $c->where(array(
-        'disPost.author' => $scriptProperties['user'],
-    ));
-}
-$c->groupby('disPost.thread');
-/* if requesting total */
-if (!empty($scriptProperties['getTotal'])) {
-    $total = $modx->getCount('disPost',$c);
-}
-$c->select(array(
-    'id' => 'disPost.thread',
-));
+
+$c->select($modx->getSelectColumns('disPost','disPost'));
+$c->select($modx->getSelectColumns('disPost','disPost'));
+$c->select($modx->getSelectColumns('disBoard','Board','board_'));
+$c->select($modx->getSelectColumns('disThread','Thread','thread_'));
+
+$total = $modx->getCount('disPost',$c);
+
 $c->sortby('disPost.createdon','DESC');
 $c->limit($limit,$start);
-$c->prepare();
-$sql = $c->toSql();
-$stmt = $modx->query($sql);
-$ids = array();
-if ($stmt) {
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $ids[] = $row['id'];
-    }
-    $stmt->closeCursor();
-}
 
-/* recent posts */
-if (!empty($ids)) {
-    $c = $modx->newQuery('disThread');
-    $c->innerJoin('disBoard','Board');
-    $c->innerJoin('disPost','FirstPost');
-    $c->innerJoin('disPost','LastPost');
-    $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
-    $c->innerJoin('disUser','LastAuthor');
-    $c->select(array(
-        'disThread.id',
-        'disThread.replies',
-        'disThread.views',
-        'disThread.sticky',
-        'disThread.locked',
-        'disThread.board',
-        'disThread.answered',
-        'disThread.class_key',
-        'disThread.participants',
-        'FirstPost.title',
-        'board_name' => 'Board.name',
-        'post_id' => 'LastPost.id',
-        'LastPost.thread',
-        'LastPost.author',
-        'LastPost.createdon',
-        'last_post_replies' => 'LastPostThread.replies',
-        'author_username' => 'LastAuthor.username',
-        'author_udn' => 'LastAuthor.use_display_name',
-        'author_display_name' => 'LastAuthor.display_name',
-    ));
-    $c->where(array(
-        'disThread.id:IN' => $ids,
-    ));
-    //$c->sortby('FIELD(disThread.id,'.implode(',',$ids).')','');
-    $c->sortby('LastPost.createdon','DESC');
-    $recentThreads = $modx->getCollection('disThread',$c);
-} else {
-    $recentThreads = array();
-    $total = 0;
-}
+$posts = $modx->getCollection('disPost', $c);
 
 /* iterate */
 $list = array();
 $idx = 0;
-/** @var disThread $thread */
-foreach ($recentThreads as $thread) {
-    $thread->buildIcons();
-    $thread->buildCssClass('board-post');
-    $thread->calcLastPostPage();
-    $thread->getUrl();
-    $threadArray = $thread->toArray();
-    $threadArray['idx'] = $idx;
-    $threadArray['createdon'] = strftime($discuss->dateFormat,strtotime($threadArray['createdon']));
-    $username = $threadArray['author_username'];
-    if (!empty($threadArray['author_udn']) && !empty($threadArray['author_display_name'])) {
-        $username = $threadArray['author_display_name'];
-    }
-    $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$discuss->request->makeUrl('u/'.$threadArray['author_username']).'">'.$username.'</a>' : $username;
-    $threadArray['views'] = '';
-    $threadArray['replies'] = number_format($threadArray['replies']);
-    $threadArray['unread'] = false;
-    $threadArray['unread-cls'] = '';
+/** @var disPost $post */
+foreach ($posts as $post) {
+    $post->getUrl();
+    $postArray = $post->toArray();
+    $postArray['idx'] = $idx;
+    $postArray['createdon'] = strftime($discuss->dateFormat,strtotime($postArray['createdon']));
+    $postArray['unread'] = false;
+    $postArray['unread-cls'] = '';
 
-    /* unread class */
-    $list[] = $discuss->getChunk($postTpl,$threadArray);
+    $list[] = $discuss->getChunk($postTpl,$postArray);
     $idx++;
 }
 $list = implode("\n",$list);
 
 $output = array(
     'results' => $list,
-    'total' => isset($total) ? $total : null,
+    'total' => $total,
     'start' => $start,
     'limit' => $limit,
+    'cachedon' => time(),
 );
+
 
 $modx->cacheManager->set($cacheKey,$output,$modx->getOption('discuss.cache_time',null,3600));
 
