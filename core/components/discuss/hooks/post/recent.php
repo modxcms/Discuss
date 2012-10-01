@@ -36,7 +36,17 @@ $postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disPostLi');
 
 $cacheKey = 'discuss/recent/'.$discuss->user->get('id').'.'.md5(serialize($scriptProperties));
 $cache = $modx->cacheManager->get($cacheKey);
-if (!empty($cache)) return $cache;
+if (!empty($cache)) {
+    if (!empty($cache['cachedon'])) {
+        $c = $modx->newQuery('disPost');
+        $c->where(array(
+            'disPost.createdon:>=' => strftime(Discuss::DATETIME_FORMATTED, $cache['cachedon']),
+        ));
+        if ($modx->getCount('disPost', $c) < 1) {
+            return $cache;
+        }
+    }
+};
 
 /* get posts */
 $c = $modx->newQuery('disPost');
