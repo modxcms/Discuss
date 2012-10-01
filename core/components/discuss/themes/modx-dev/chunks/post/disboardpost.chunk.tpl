@@ -1,5 +1,5 @@
 <div class="row h-group dis-category-[[+category]] [[+class]] [[+locked:is=`1`:then=`locked`:else=`unlocked`]] [[+unreadCls]]">
-   [[- <a class="h-group" href="[[+url]]">]]
+   <a class="h-group" href="[[+url]]">
         <div class="f1-f7 m-title">
             <div class="wrap">
                 [[+answered:notempty=`<span class="answered">solved</span>`]]
@@ -13,5 +13,5 @@
             <p class="posted-date">[[+createdon:ago]]</p>
             <p class="posted-by">[[+first_post_username]]</p>
         </div>
-    [[-</a>]]
+    </a>
 </div>
