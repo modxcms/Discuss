@@ -66,7 +66,6 @@ abstract class disParser {
         $str = str_replace("\r", '', $str);
         //return preg_replace('/(?<!>)\n/', "<br />\n", $str);
         return preg_replace('/(?<!<\/li>|<\/ol>|<\/ul>|<hr \/>|<\/cite>|<\/blockquote>|<\/code>|<\/pre>|<\/div>|<br \/>|<br\/>|<br>)\n/', "<br />\n", $str);
-
     }
 
     /**
