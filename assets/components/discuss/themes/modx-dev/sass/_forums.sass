@@ -73,15 +73,7 @@ h3.forum
         margin-top: 2em
 
 // status styling
-.answered
-    display: inline-block
-    @extend .a-primary-cta
-    text-transform: uppercase
-    +rem('font-size', 10px)
-    line-height: 1
-    +box-shadow(none)
-    &:hover
-        +box-shadow(none)
+
 // Sub topics styling
 .forum-grid
     .dis-board-subs
@@ -113,6 +105,17 @@ h3.forum
     .m-title
         .dis-thread-pagination li, .dis-thread-pagination, a.h-group
             display: inline-block
+    .answered
+        @extend .a-primary-cta
+        display: inline-block
+        text-transform: uppercase
+        +rem('font-size', 10px)
+        +rem('padding', 4px 6px)
+        +rem('margin', 0 5px 0 0)
+        line-height: 1
+        +box-shadow(none)
+        &:hover
+            +box-shadow(none)
 .dis-threads.forum-grid
     background-color: lighten($c-base, 90%)
 
@@ -182,18 +185,40 @@ h3.forum
     .posted-date, .posted-by
         color: lighten($c-copy, 30%)
 
-
+div.m-section_title + div.row
+    padding-top: 10px
 // status on threads and categories
 .board-post .wrap
     padding-left: 20px
 
 .dis-category .wrap
-    background: url(../../images/redo/icons/i-category.png) no-repeat 4px 7px !important
-    padding-left: 31px !important
-.dis-unread .wrap
-    background: url(../../images/redo/icons/i-unread.png) no-repeat 0 5px !important
-.dis-category.dis-unread .wrap
-    background: url(../../images/redo/icons/i-category-unread.png) no-repeat 2px 2px !important
+    background: url(../../images/redo/icons/sm-folder.png) no-repeat 2px 5px
+    padding-left: 22px
+
+
+// status when user is logged in
+.a-loggedin
+    .dis-category .wrap
+        padding-left: 45px
+        position: relative
+        background-position: 22px 5px
+    .dis-category.dis-unread .wrap
+        &:before
+            content: ""
+            display: block
+            position: absolute
+            left: 2px
+            top: 6px
+            height: 10px
+            width: 10px
+            background: url(../../images/redo/icons/unread-dot.png) no-repeat 0 0
+    .board-post
+        .wrap
+            padding-left: 50px
+        &.dis-unread
+            .wrap
+                background: url(../../images/redo/icons/unread-dot.png) no-repeat 30px 3px
+
 
 
 .boards+.forum-grid
@@ -264,6 +289,7 @@ h3.forum
 .solved
     +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
     +rem('padding', 6px 12px)
+    +rem('margin', 0 10px 7px 0)
     color: lighten($c-base, 80%)
     +border-radius($radius-sm)
     font-weight: 500
@@ -436,6 +462,7 @@ footer
             margin: 1.4em 0 -1.4em 0
         &.bottom
             +border-radius(0 0 $radius-sm+2 $radius-sm+2)
+            margin-top: 7px
 // horizonatl list
 .horiz-list
     li
