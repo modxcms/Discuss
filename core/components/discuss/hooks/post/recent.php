@@ -40,7 +40,7 @@ if (!empty($cache)) return $cache;
 
 /* get posts */
 $c = $modx->newQuery('disPost');
-$c->innerJoin('modUser','User');
+$c->innerJoin('disUser','Author');
 $c->innerJoin('disThread','Thread');
 $c->innerJoin('disBoard','Board','Board.id = Thread.board');
 $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
@@ -90,7 +90,7 @@ if ($discuss->user->isLoggedIn) {
 }
 
 $c->select($modx->getSelectColumns('disPost','disPost'));
-$c->select($modx->getSelectColumns('disPost','disPost'));
+$c->select($modx->getSelectColumns('disUser','Author', 'author_'));
 $c->select($modx->getSelectColumns('disBoard','Board','board_'));
 $c->select($modx->getSelectColumns('disThread','Thread','thread_'));
 
