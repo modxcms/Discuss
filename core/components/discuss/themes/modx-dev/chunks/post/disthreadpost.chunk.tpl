@@ -23,6 +23,7 @@
         <div class="dis-content">
             [[+content]]
         </div>
+        <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
     </div>
     [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
     <div class="dis-post-footer">
