@@ -267,3 +267,16 @@ ul.options-select
     +background-image(linear-gradient(lighten($c-dark-cool-bg, 7%), lighten($c-dark-cool-bg, 5%)))
     +box-shadow(darken($c-dark-cool-bg, 10%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 12%) 0 1px 0 inset)
     color: lighten($c-dark-cool-bg, 80%) !important
+
+// Green button/tag background
+.a-primary-cta
+    color: #fff
+    margin: 0 0 0 1em
+    border: none // Can remove in future, resetting default styles
+    +rem('padding', 6px)
+    +border-radius($radius-sm)
+    +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
+    +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+    &:hover
+        +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
+        +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)

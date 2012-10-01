@@ -48,17 +48,8 @@ h3.forum
     .action-buttons+.action-buttons
         margin-left: .25em
     .post-box a.Button
-        color: #fff
-        margin: 0 0 0 1em
-        border: none // Can remove in future, resetting default styles
-        +rem('padding', 6px)
-        +border-radius($radius-sm)
-        +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
-        +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
-        &:hover
-            +rem('padding', 5px)
-            +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
-            +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+        @extend .a-primary-cta
+
 
 .row+.dis-cat-header
     margin-top: 1em
@@ -81,7 +72,16 @@ h3.forum
     .dis-cat-header
         margin-top: 2em
 
-
+// status styling
+.answered
+    display: inline-block
+    @extend .a-primary-cta
+    text-transform: uppercase
+    +rem('font-size', 10px)
+    line-height: 1
+    +box-shadow(none)
+    &:hover
+        +box-shadow(none)
 // Sub topics styling
 .forum-grid
     .dis-board-subs
@@ -113,6 +113,8 @@ h3.forum
     .m-title
         .dis-thread-pagination li, .dis-thread-pagination, a.h-group
             display: inline-block
+.dis-threads.forum-grid
+    background-color: lighten($c-base, 90%)
 
 .dis-thread-pagination
     margin: 0 0 0 5px
