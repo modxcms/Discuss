@@ -4,7 +4,7 @@
       &hooks=`postHook.DiscussNewThread`
       &validate=`title:required,message:required:allowTags`
     ]]
-    <div class="f1-f9">
+    <div class="f1-f9 twelve-form">
         <form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form dis-thread-form h-group" id="dis-new-thread-form" enctype="multipart/form-data">
             [[-<div class="preview_toggle">
         		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>

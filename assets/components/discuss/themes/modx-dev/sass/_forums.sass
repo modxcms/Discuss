@@ -469,7 +469,8 @@ footer
     zoom: 1
 
 // pagination 2012
-.paginate
+.paginate.stand-alone ul,
+.dis-cat-header .paginate
     float: right
     +background-image(linear-gradient(lighten($c-dark-cool-bg, 3%), $c-dark-cool-bg))
     +border-radius($radius-sm+2)
@@ -501,10 +502,17 @@ footer
         &.bottom
             +border-radius(0 0 $radius-sm+2 $radius-sm+2)
             margin-top: 7px
+.paginate.stand-alone
+    @extend .h-group
+    @extend .dis-cat-header
+    &.bottom
+        margin-top: 0
+        +border-radius(0 0 $radius-sm+2 $radius-sm+2 !important)
 
 #forumbody-thread
     .paginate.stand-alone
         margin-top: 0
+
 // horizonatl list
 .horiz-list
     li
