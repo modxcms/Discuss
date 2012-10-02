@@ -4458,6 +4458,31 @@ a#dis-preview-btn.preview {
   color: #5a5a5a;
   width: auto; }
 
+/* line 761, ../../sass/_forums.sass */
+.ignore li {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 20px;
+  display: inline-block;
+  padding-right: 20px;
+  margin-right: 20px;
+  border-left: 1px dotted #cccccc;
+  vertical-align: top; }
+  /* line 770, ../../sass/_forums.sass */
+  .ignore li label {
+    margin-left: 20px; }
+/* line 772, ../../sass/_forums.sass */
+.ignore ul {
+  padding-left: 20px; }
+  /* line 774, ../../sass/_forums.sass */
+  .ignore ul li {
+    font-size: 1.3rem;
+    font-weight: normal;
+    margin-top: 0;
+    float: none;
+    border-left: none;
+    display: block; }
+
 /* line 4, ../../sass/lib/_forums-toolbar.scss */
 a.dis-mark-as-answer-link,
 div.dis-actions,

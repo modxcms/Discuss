@@ -5,7 +5,7 @@
 
 	<form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post" class="dis-form">
 
-		<ul>
+		<ul class="ignore">
 			[[+boards]]
 		</ul>
 			
