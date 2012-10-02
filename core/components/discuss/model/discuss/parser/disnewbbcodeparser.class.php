@@ -378,7 +378,7 @@ class disNewBBCodeParser extends disParser {
      * @return string
      */
     public function convertLinks($message) {
-        return preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftp):\/\/)([\@a-z0-9\x21\x23-\x27\x2a-\x2e\x3a\x3b\/;\x3f-\x7a\x7e\x3d]+)/msxi",array($this, 'parseLinksCallback'),$message);
+        return preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftp):\/\/)([\@a-z0-9\/\?=\-_#]+\.[\@a-z0-9\/\?=\-_#\.]+)/msxi",array($this, 'parseLinksCallback'),$message);
     }
     /**
      * Parse [url] tags
@@ -388,13 +388,8 @@ class disNewBBCodeParser extends disParser {
      */
     public static function parseLinksCallback($matches) {
         $url = $matches[1].$matches[2];
-        $hasQuote = false;
-        if (substr($url, -strlen('&quot;')) == '&quot;') {
-            $hasQuote = true;
-            $url = substr($url, 0, strlen($url) - strlen('&quot;'));
-        }
         $noFollow = ' rel="nofollow"';
-        return '<a href="'.$url.'" target="_blank"'.$noFollow.'>'.$url.'</a>'. (($hasQuote) ? '&quot;' : '');
+        return '<a href="'.$url.'" target="_blank"'.$noFollow.'>'.$url.'</a>';
     }
 
     /**
