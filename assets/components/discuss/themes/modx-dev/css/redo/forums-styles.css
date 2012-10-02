@@ -4483,6 +4483,29 @@ a#dis-preview-btn.preview {
     border-left: none;
     display: block; }
 
+/* line 784, ../../sass/_forums.sass */
+.twelve-form h1 {
+  font-size: 15px;
+  font-weight: bold; }
+/* line 787, ../../sass/_forums.sass */
+.twelve-form .dis-title {
+  margin: 10px 0; }
+  /* line 789, ../../sass/_forums.sass */
+  .twelve-form .dis-title label, .twelve-form .dis-title input#dis-new-thread-title {
+    display: inline-block; }
+  /* line 791, ../../sass/_forums.sass */
+  .twelve-form .dis-title label {
+    margin: 0 0 0 0;
+    padding-right: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    color: black; }
+  /* line 797, ../../sass/_forums.sass */
+  .twelve-form .dis-title input {
+    padding: 3px;
+    margin: 5px 0 10px 0;
+    font-size: 15px; }
+
 /* line 4, ../../sass/lib/_forums-toolbar.scss */
 a.dis-mark-as-answer-link,
 div.dis-actions,

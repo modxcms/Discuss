@@ -20,11 +20,14 @@
             	<label>
                     <input type="radio" name="class_key" value="disThreadQuestion" /> [[%discuss.question_and_answer]]
                 </label>
-                <label for="dis-new-thread-title">[[%discuss.title]]:
-                    <span class="error">[[!+fi.error.title]]</span>
-                </label>
+                <div class="h-group dis-title">
+                    <label for="dis-new-thread-title">[[%discuss.title]]:
+                        <span class="error">[[!+fi.error.title]]</span>
+                    </label>
+                    <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
+                </div>
             </div>
-            <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
+            
             <div class="wysi-buttons">[[+buttons]]</div>
             <div id="dis-message-preview"></div>
 
