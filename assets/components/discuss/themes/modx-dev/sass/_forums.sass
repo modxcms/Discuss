@@ -191,7 +191,16 @@ header.dis-cat-header
             border-bottom: 1px solid darken($c-base, 7%)
             &:hover, a:hover
                 background-color: lighten($c-base, 1%)
-    .row.dis-sticky-thread + .row.dis-nonsticky-thread
+        &:hover, a:hover
+            background-color: desaturate(lighten($c-dark-cool-bg, 82%), 20%)
+            +background-image(linear-gradient(top, (desaturate(lighten($c-dark-cool-bg, 84%), 60%)), (desaturate(lighten($c-dark-cool-bg, 81%), 60%))))
+            border-bottom-color: darken($c-base, 19.1%)
+            border-top-color: lighten($c-base, 4.1%)
+        &:hover
+            // +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+            +box-shadow(lighten($c-dark-bg, 16%) 0 0 5px, lighten($c-dark-bg, 3%) 0 0 2px)
+            position: relative
+            z-index: 20
         padding-top: 10px
 
     .heading
