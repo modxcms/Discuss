@@ -105,7 +105,7 @@ h3.forum
     .m-title
         .dis-thread-pagination li, .dis-thread-pagination, a.h-group
             display: inline-block
-    .answered
+    .tag, .solved
         @extend .a-primary-cta
         display: inline-block
         text-transform: uppercase
@@ -176,8 +176,8 @@ header.dis-cat-header
         border-bottom: 1px solid darken($c-base, 3%)
         border-top:  1px solid lighten($c-base, 80%)
         &:hover
-            border-bottom-color: darken($c-base, 13%)
-            border-top-color: lighten($c-base, 80%)
+            border-bottom-color: darken($c-base, 23%)
+            border-top-color: lighten($c-base, 50%)
         &.header-row
             font-weight: bold
             color: #000
@@ -187,6 +187,9 @@ header.dis-cat-header
             &:hover
                 background-color: #fff
                 text-decoration: underline
+        &.dis-sticky-thread
+            background-color: darken($c-base, 3%)
+            border-bottom: 1px solid darken($c-base, 7%)
 
     .heading
         color: darken($c-base, 65%)
@@ -306,7 +309,7 @@ div.m-section_title + div.row
                 padding: 1em 0 0 0
                 font-style: italic
                 color: darken($c-base, 50%)
-.solved
+.tag
     +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
     +rem('padding', 6px 12px)
     +rem('margin', 0 10px 7px 0)
@@ -315,6 +318,9 @@ div.m-section_title + div.row
     font-weight: 500
     line-height: 1
     text-transform: uppercase
+    &.sticky
+        +background-image(linear-gradient(lighten(#000, 80%), lighten(#000, 70%)))
+
 footer
     h3
         +rem('font-size', 13px)
