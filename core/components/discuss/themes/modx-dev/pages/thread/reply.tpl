@@ -32,7 +32,7 @@
                 </div>
                 <div class="dis-form-buttons l-right">
                     <label class="dis-cb"><input type="checkbox" name="notify" value="1" />[[%discuss.notify_of_replies]]</label>
-                    <input type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+                    <input class="cancel" type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
                     <input type="submit" name="dis-post-reply" value="[[%discuss.post_reply]]" />
                 </div>
             </div>

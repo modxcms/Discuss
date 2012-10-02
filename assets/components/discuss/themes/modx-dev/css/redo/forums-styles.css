@@ -322,45 +322,6 @@ ul.dis-list li h3 {
   padding: 0 0;
   font-weight: normal; }
 
-/* line 587, ../../sass/lib/_index-css.scss */
-.dis-profile h1,
-.dis-threads h1,
-.dis-form h1,
-.dis-list li h1,
-.dis-list h1 {
-  border-bottom: 1px solid #999999;
-  padding: 0 0 5px 5px;
-  margin: 25px; }
-
-/* line 593, ../../sass/lib/_index-css.scss */
-.dis-form h1 {
-  margin: 5px 25px 0 25px; }
-
-/* line 597, ../../sass/lib/_index-css.scss */
-.dis-list li h1 {
-  margin: 25px 0 0 0; }
-
-/* line 602, ../../sass/lib/_index-css.scss */
-.ItemContent {
-  position: relative;
-  padding: 0;
-  margin: 0; }
-
-/* line 608, ../../sass/lib/_index-css.scss */
-.ItemContent a.dis-cat-links {
-  display: block;
-  margin: 0 0;
-  padding: 10px 0 10px 5px;
-  width: 657px; }
-
-/* line 615, ../../sass/lib/_index-css.scss */
-.ItemContent a.dis-cat-links:hover {
-  background-color: #efefef;
-  -moz-transition: all .4s ease;
-  -webkit-transition: all .4s ease;
-  transition: all .4s ease;
-  behavior: url(pie.htc); }
-
 /* line 623, ../../sass/lib/_index-css.scss */
 a:hover span.Title {
   color: #d9742a;
