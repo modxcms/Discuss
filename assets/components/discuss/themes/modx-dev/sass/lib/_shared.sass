@@ -32,6 +32,8 @@ pre
         vertical-align: top
         display: inline-block
         margin-top: 0
+.btn-reset
+    line-height: 1
 
 // bread crumbs
 .m-breadcrumbs
@@ -280,3 +282,34 @@ ul.options-select
     &:hover
         +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
         +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+
+// Light gray action button
+.btn-secondary-alt-cta
+    @extend .btn-reset
+    display: block
+    margin: .9em 0
+    padding: .3em .3em
+    color: #000
+    text-decoration: none
+    border-radius: 3px
+    // straight export from PS, need to better convert
+    font-size: 11px
+    font-weight: bold
+    @include text-shadow(0 1px 0 rgba(255,255,255,.9)) // drop shadow
+    border: 1px solid rgba(15,15,15,.2) // stroke
+    @include border-radius(3px) // border radius
+    @include background-clip() // prevents bg color from leaking outside the border
+    background-color: #ececec // layer fill content
+    @include box-shadow(0 1px 0 rgba(255,255,255,.7), inset 0 1px 0 #fff) // drop shadow and inner shadow
+    @include background-image(linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%)) // gradient overlay
+
+    &:hover
+        background-color: #fff
+        @include text-shadow(0 1px 0 rgba(255,255,255,.9)) // drop shadow
+        border: 1px solid rgba(15,15,15,.2) // stroke
+        @include border-radius(3px) // border radius
+        @include background-clip() // prevents bg color from leaking outside the border
+        background-color: #000 // layer fill content
+        @include box-shadow(0 1px 0 rgba(255,255,255,.7), inset 0 1px 0 #fff) // drop shadow and inner shadow
+        @include background-image(linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%)) // gradient overlay
+

@@ -1,9 +1,4 @@
-	    [[+pagination:notempty=`[[+pagination]]`]]
-
-
-
-
-
+[[+pagination:notempty=`[[+pagination]]`]]
 [[- <!-- old
 <div class="dis-threads">
 	<ul class="dis-list">
@@ -29,9 +24,7 @@
 		[[!$post-sidebar?disection=`dis-support-opt`]]
 
 
-</aside> -->
-]]
-
+</aside> -->]]
 
 <!-- recent.tpl -->
 <div class="f1-f9">

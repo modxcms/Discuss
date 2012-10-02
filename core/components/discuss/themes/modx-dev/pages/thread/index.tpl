@@ -9,20 +9,39 @@
     </h1>
 </div>
 <div class="f1-f9">
-<div>
-	
-	[[+pagination:notempty=`<div class="paginate stand-alone top horiz-list"> [[+pagination]]</div>`]]
-
-
-	<ul class="dis-list group-fix">
-        [[+posts]]
-    </ul>
-	[[+pagination:notempty=`<div class="paginate stand-alone bottom horiz-list"> [[+pagination]]</div>`]]
-	[[$thread-login-post]]
-    [[+quick_reply_form]]
-
-    <br class="clearfix" />
+    <div class="a-dis-actionbuttons h-group">
+        [[+actionbuttons]]
+    </div>
 </div>
+<div class="f1-f9">
+
+    <div>
+
+        <header class="dis-cat-header dark-gradient group-fix sticky-bar">
+    	[[+pagination:notempty=`<div class="paginate horiz-list"> [[+pagination]]</div>`]]
+        [[- USER LOGGED IN ]]
+            [[!+discuss.user.id:notempty=`<div class="post-box h-group">
+                [[+actionbuttons]]
+                [[+moderators]]
+            </div>`]]
+
+            [[- USER NOT LOGGED IN ]]
+            [[!+discuss.user.id:is=``:then=`
+            <div class="post-box">
+                <a href="[[~[[*id]]]]login" class="Button dis-action-login" >Login to Post</a>
+            </div>
+            `]]
+        </header>
+
+
+
+    	<ul class="dis-list h-group">
+            [[+posts]]
+        </ul>
+    	[[+pagination:notempty=`<div class="paginate stand-alone bottom horiz-list"> [[+pagination]]</div>`]]
+    	[[$thread-login-post]]
+        [[+quick_reply_form]]
+    </div>
 
 	[[+belowThread]]
 	<br class="clearfix" />

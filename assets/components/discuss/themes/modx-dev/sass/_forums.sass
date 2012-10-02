@@ -124,6 +124,19 @@ h3.forum
     font-size: 12px
 
 
+// Thread action tools
+.a-dis-actionbuttons
+    float: right
+    margin: -5px 0 8px 0
+    a
+        @extend .btn-secondary-alt-cta
+        padding: 3px 6px
+        display: inline-block
+        margin: 0 3px 0 0
+        &:hover
+            background-color: #fff
+
+
 // Faux table grid for 5 columns. This later will be able to be
 // converted to a responsive table
 .panel-stack
@@ -463,6 +476,10 @@ footer
         &.bottom
             +border-radius(0 0 $radius-sm+2 $radius-sm+2)
             margin-top: 7px
+
+#forumbody-thread
+    .paginate.stand-alone
+        margin-top: 0
 // horizonatl list
 .horiz-list
     li
