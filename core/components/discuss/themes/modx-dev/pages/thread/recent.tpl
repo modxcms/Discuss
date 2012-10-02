@@ -7,18 +7,6 @@
 				[[+pagination:notempty=`
 				<nav id="key-Paginate" class="paginate horiz-list">[[+pagination]]</nav>
 				`]]
-				[[- USER LOGGED IN ]]
-		        [[!+discuss.user.id:notempty=`<div class="post-box h-group">
-					[[+actionbuttons]]
-					[[+moderators]]
-			    </div>`]]
-
-			    [[- USER NOT LOGGED IN ]]
-			    [[!+discuss.user.id:is=``:then=`
-			    <div class="post-box">
-					<a href="[[~[[*id]]]]login" class="Button dis-action-login" >Login to Post</a>
-				</div>
-				`]]
 			</header>
 			<div class="row h-group header-row">
 			    <div class="f1-f2 f-padinall">
