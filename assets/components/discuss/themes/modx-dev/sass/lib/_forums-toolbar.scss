@@ -2,34 +2,34 @@ a.dis-mark-as-answer-link,
 div.dis-actions,
 .quick-reply,
 .dis-sticky-actions {
-	z-index: 2000;
-	height: 24px;
 	position: relative;
-	padding: 0;
+	z-index: 2000;
 	margin: 0;
+	padding: 0;
+	height: 24px;
 	background:-webkit-gradient(linear, center bottom, center top, from(#ffffff), to(#f3f3f3));
 	background:-moz-linear-gradient(top, #f3f3f3, #ffffff);
-	-pie-background:linear-gradient(top, #f3f3f3, #ffffff);
 	background:linear-gradient(top, #f3f3f3, #ffffff);
-	box-shadow: 1px 1px 2px #999999;
-	-moz-box-shadow: 1px 1px 2px #999999;
 	-webkit-box-shadow: 1px 1px 2px #999999;
+	-moz-box-shadow: 1px 1px 2px #999999;
+	box-shadow: 1px 1px 2px #999999;
+	-pie-background:linear-gradient(top, #f3f3f3, #ffffff);
  	behavior:url(pie.htc);
 	}
 
 .dis-sticky-actions a.action-buttons {
 	float: left;
-	line-height: 12px;
-	font-weight: normal;
-	height: 14px;
-	padding: 2px 4px;
 	margin: 2px 0 0 -1px;
-	background-color: #fefefe;
+	padding: 2px 4px;
+	height: 14px;
 	border: 1px solid #ccc;
-	color: #aaa;
-	border-radius: 0;
-	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	background-color: #fefefe;
+	color: #aaa;
+	font-weight: normal;
+	line-height: 12px;
  	behavior:url(pie.htc);
 	}
 
@@ -44,26 +44,26 @@ div.dis-actions,
 .dis-action-stick,
 .dis-action-unstick {
 	position: relative;
-	display: block;
-	height: 15px;
-	width: 15px;
-	border: 1px solid #555;
 	z-index: 100;
 	display: block;
+	display: block;
+	width: 15px;
+	height: 15px;
+	border: 1px solid #555;
 	text-indent: -3000px;
-	-moz-transition-duration: .3s;
-	-moz-transition-delay: 0s;
-	/* WebKit */
-	-webkit-transition-duration: .3s;
-	-webkit-transition-delay: 0s;
-	/* Opera */
-	-o-transition-duration: .3s;
-	-o-transition-delay: 0s;
-	/* Standard */
-	transition-duration: .3s;
-	transition-delay: 0s;
 	opacity: .5;
 	filter: alpha(opacity=50);
+	-webkit-transition-delay: 0s;
+	/* Opera */
+	-moz-transition-delay: 0s;
+	/* WebKit */
+	-o-transition-delay: 0s;
+	/* Standard */
+	transition-delay: 0s;
+	-webkit-transition-duration: .3s;
+	-moz-transition-duration: .3s;
+	-o-transition-duration: .3s;
+	transition-duration: .3s;
  	behavior:url(pie.htc);
 	}
 
@@ -86,38 +86,38 @@ div.dis-actions:hover,
 .dis-action-unstick:hover {
 	z-index: 2000;
 	border: 1px solid #555;
-	-moz-transition-duration: .3s;
-	-moz-transition-delay: 0s;
-	/* WebKit */
-	-webkit-transition-duration: .3s;
-	-webkit-transition-delay: 0s;
-	/* Opera */
-	-o-transition-duration: .3s;
-	-o-transition-delay: 0s;
-	/* Standard */
-	transition-duration: .3s;
-	transition-delay: 0s;
 	opacity: 1;
 	filter: alpha(opacity=100);
+	-webkit-transition-delay: 0s;
+	/* Opera */
+	-moz-transition-delay: 0s;
+	/* WebKit */
+	-o-transition-delay: 0s;
+	/* Standard */
+	transition-delay: 0s;
+	-webkit-transition-duration: .3s;
+	-moz-transition-duration: .3s;
+	-o-transition-duration: .3s;
+	transition-duration: .3s;
  	behavior:url(pie.htc);
  	}
  
  a.dis-mark-as-answer-link:hover,
   a.dis-mark-as-answer-link.dis-solved {
   	background-color: #cdebbf;
-	-moz-transition-duration: .3s;
-	-moz-transition-delay: 0s;
-	/* WebKit */
-	-webkit-transition-duration: .3s;
-	-webkit-transition-delay: 0s;
-	/* Opera */
-	-o-transition-duration: .3s;
-	-o-transition-delay: 0s;
-	/* Standard */
-	transition-duration: .3s;
-	transition-delay: 0s;
 	opacity: 1;
 	filter: alpha(opacity=100);
+	-webkit-transition-delay: 0s;
+	/* Opera */
+	-moz-transition-delay: 0s;
+	/* WebKit */
+	-o-transition-delay: 0s;
+	/* Standard */
+	transition-delay: 0s;
+	-webkit-transition-duration: .3s;
+	-moz-transition-duration: .3s;
+	-o-transition-duration: .3s;
+	transition-duration: .3s;
  	behavior:url(pie.htc);
    	}
    	
@@ -241,9 +241,9 @@ div.dis-actions,
 .quick-reply.last,
 .wysi-buttons a.format_buttons.last,
 .dis-sticky-actions a.action-buttons:last-child {
-	border-radius: 0 2px 2px 0;
-	-moz-border-radius: 0 2px 2px 0;
 	-webkit-border-radius: 0 2px 2px 0;
+	-moz-border-radius: 0 2px 2px 0;
+	border-radius: 0 2px 2px 0;
  	behavior:url(pie.htc);
 	}
 
