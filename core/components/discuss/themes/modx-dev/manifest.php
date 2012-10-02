@@ -101,14 +101,14 @@ $manifest = array(
     'thread/new' => array(
         'js' => array(
             'footer' => array(
-                'dis.thread.new.js',
+                'dis.thread.js',
             ),
         ),
     ),
     'thread/reply' => array(
         'js' => array(
             'footer' => array(
-                'dis.post.reply.js',
+                'dis.thread.js',
             ),
         ),
         'options' => array(
@@ -118,7 +118,7 @@ $manifest = array(
     'thread/modify' => array(
         'js' => array(
             'footer' => array(
-                'dis.post.modify.js',
+                'dis.thread.js',
             ),
         ),
         'options' => array(

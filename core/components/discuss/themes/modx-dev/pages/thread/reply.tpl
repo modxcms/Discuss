@@ -5,7 +5,7 @@
       &validate=`title:required,message:required:allowTags`
     ]]
     <div class="f1-f9">
-        <form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
+        <form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form dis-thread-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
             [[-<div class="preview_toggle">
         		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>

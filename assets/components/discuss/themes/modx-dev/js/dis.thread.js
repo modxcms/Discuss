@@ -22,7 +22,7 @@ DIS.Thread = function() {
         
         ,preview: function(event) {
             event.preventDefault();
-            var f = $('#dis-quick-reply-form');
+            var f = $('.dis-thread-form');
             var p = f.serialize()+'&action=thread/preview';
 
             var a = $.extend({},DIS.baseAjax,{

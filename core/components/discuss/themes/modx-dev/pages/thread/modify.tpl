@@ -7,7 +7,7 @@
 
 
 
-<form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form dis-thread-form" id="dis-modify-post-form" enctype="multipart/form-data">
 	<div id="dis-message-preview"></div>
 	<h1>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
     

@@ -1,4 +1,4 @@
-<form action="[[~[[*id]]]][[+view]]" method="post" class="dis-form [[+locked:notempty=`locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
+<form action="[[~[[*id]]]][[+view]]" method="post" class="dis-form dis-thread-form [[+locked:notempty=`locked`]]" id="dis-quick-reply-form" enctype="multipart/form-data">
     [[-<div class="preview_toggle">
 		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
         <a href="#" class="dis-preview" id="dis-preview-btn">view</a>

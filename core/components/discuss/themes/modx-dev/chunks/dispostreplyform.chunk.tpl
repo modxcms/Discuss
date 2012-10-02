@@ -1,4 +1,4 @@
-<form action="#" method="post" class="dis-reply-form" id="dis-reply-form-[[+id]]" onsubmit="DISThread.postReply([[+id]]); return false;">
+<form action="#" method="post" class="dis-thread-form" id="dis-reply-form-[[+id]]" onsubmit="DISThread.postReply([[+id]]); return false;">
     <input type="hidden" name="post" value="[[+id]]" />
 
     <label class="dis-reply-title">[[%discuss.title]]:
