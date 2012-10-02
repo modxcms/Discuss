@@ -3689,7 +3689,7 @@ header.dis-cat-header .post-box .read {
         background-color: #fcfcfc; }
   /* line 195, ../../sass/_forums.sass */
   .forum-grid .row.dis-sticky-thread + .row.dis-nonsticky-thread {
-    padding-top: 20px; }
+    padding-top: 15px; }
   /* line 198, ../../sass/_forums.sass */
   .forum-grid .heading {
     color: #535353;
