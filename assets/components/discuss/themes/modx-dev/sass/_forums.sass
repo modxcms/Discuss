@@ -201,7 +201,7 @@ header.dis-cat-header
             +box-shadow(lighten($c-dark-bg, 16%) 0 0 5px, lighten($c-dark-bg, 3%) 0 0 2px)
             position: relative
             z-index: 20
-        padding-top: 10px
+        // padding-top: 10px
 
     .heading
         color: darken($c-base, 65%)
@@ -737,6 +737,19 @@ a#dis-preview-btn.preview
     +border-radius($radius-sm)
     +box-shadow(lighten(#000, 45%) 0 1px 25px, (lighten(#000, 35%) 0 1px 5px))
 
+
+// General action buttons for submit forms
+.a-primary-btn
+    @extend .primary-cta
+    +rem('padding', 10px 15px)
+    +rem('font-size', 15px)
+    clear: both
+    display: inline-block
+    cursor: pointer
+    &:hover
+        +rem('padding', 10px 15px)
+
+
 // Reply
 .dis-form-buttons .a-reply
     @extend .primary-cta
@@ -781,6 +794,15 @@ a#dis-preview-btn.preview
 
 // new thread view
 .twelve-form
+    input[type="submit"]
+        @extend .primary-cta
+        +rem('padding', 10px 15px)
+        +rem('font-size', 15px)
+        clear: both
+        display: inline-block
+        cursor: pointer
+        &:hover
+            +rem('padding', 10px 15px)
     h1
         font-size: 15px
         font-weight: bold

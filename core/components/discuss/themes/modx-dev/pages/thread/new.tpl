@@ -12,7 +12,6 @@
             </div>]]
         	<h1>[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
             <input type="hidden" name="board" value="[[+id]]" />
-            
             <div class="h-group">
             	<label>
                     <input type="radio" name="class_key" value="disThreadDiscussion" checked="checked" /> [[%discuss.discussion]]
@@ -27,7 +26,6 @@
                     <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
                 </div>
             </div>
-            
             <div class="wysi-buttons">[[+buttons]]</div>
             <div id="dis-message-preview"></div>
 
@@ -46,7 +44,7 @@
                         <input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]
                     </label>
                     <input class="cancel" type="button" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
-                    <input type="submit" name="dis-post-reply" value="[[%discuss.thread_post_new]]" />
+                    <input type="submit" class="a-primary-btn" name="dis-post-reply" value="[[%discuss.thread_post_new]]" />
                 </div>
             </div>
         </form>

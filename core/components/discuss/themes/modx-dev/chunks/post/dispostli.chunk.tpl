@@ -7,6 +7,13 @@
             <div class="wrap">
                 [[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<span class="sticky tag">sticky</span>`]]
                 [[+answered:notempty=`<span class="answered tag">solved</span>`]]
+
+
+                
+
+
+
+                [[+question:notempty=`<span class="answered tag">question</span>`]]
                 <a class="h-group" href="[[+url]]"><strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong></a>
             </div>
         </div>

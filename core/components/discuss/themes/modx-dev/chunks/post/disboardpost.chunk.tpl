@@ -4,6 +4,16 @@
             <div class="wrap">
                 [[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<span class="sticky tag">sticky</span>`]]
                 [[+answered:notempty=`<span class="answered tag">solved</span>`]]
+
+
+
+                New testing [[+answered]]
+
+                [[+answered:is=`1`:then=`<span class="tag solved">Solved</span>`:default=``]]
+                [[+answered:is=`false`:then=`<span class="tag solved">Not Solved</span>`]]
+
+
+
                 <strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong>
                 [[- [[+thread_pagination]] ]]
             </div>
