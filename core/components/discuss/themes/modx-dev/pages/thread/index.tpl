@@ -10,18 +10,24 @@
 </div>
 <div class="f1-f9">
     <div class="a-dis-actionbuttons h-group">
-        [[+actionbuttons]]
+        Subscribe: <a href="[[~[[*id]]]]thread/feed.xml?thread=[[+id]]">RSS</a>
+                [[+actionlink_subscribe:notempty=`
+                <a href="[[+actionlink_subscribe]]">By email</a>`]]
+                [[+actionlink_unsubscribe:notempty=`
+                <a href="[[+actionlink_unsubscribe]]">Stop emails</a>
+                `]]
     </div>
 </div>
 <div class="f1-f9">
 
     <div>
 
-        <header class="dis-cat-header dark-gradient group-fix sticky-bar">
+        <header class="dis-cat-header dark-gradient group-fix sticky-bar top">
     	[[+pagination:notempty=`<div class="paginate horiz-list"> [[+pagination]]</div>`]]
         [[- USER LOGGED IN ]]
             [[!+discuss.user.id:notempty=`<div class="post-box h-group">
-                [[+actionbuttons]]
+                <a class="reply Button" href="[[+actionlink_reply]]">Reply to thread</a>
+                <a class="read" href="[[+actionlink_unread]]">Mark as unread</a>
                 [[+moderators]]
             </div>`]]
 
@@ -61,8 +67,7 @@
 
 [[!+discuss.user.id:notempty=`
         <div class="box">
-            <h4>Actions</h4>
-            [[- limit this to just the mark unread button, or move that somewhere ]]
+            [[- <h4>Actions</h4>
             <p>[[+actionbuttons]]</p>
 
             <p>Subscribe: <a href="[[~[[*id]]]]thread/feed.xml?thread=[[+id]]">RSS</a>
@@ -72,7 +77,7 @@
                 <a href="[[+actionlink_unsubscribe]]">Stop emails</a>
                 `]]
             </p>
-
+            ]]
             <p>[[+moderators]]</p>
 
         </div>
