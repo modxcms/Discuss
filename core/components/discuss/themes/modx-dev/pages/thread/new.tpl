@@ -5,36 +5,34 @@
       &validate=`title:required,message:required:allowTags`
     ]]
     <div class="f1-f9">
-        <form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form" id="dis-new-thread-form" enctype="multipart/form-data">
+        <form action="[[~[[*id]]]]thread/new?board=[[+id]]" method="post" class="dis-form h-group" id="dis-new-thread-form" enctype="multipart/form-data">
             [[-<div class="preview_toggle">
         		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
                 <a href="#" class="dis-preview" id="dis-preview-btn">view</a>
             </div>]]
         	<h1>[[%discuss.start_new_thread? &namespace=`discuss` &topic=`post`]]</h1>
-            <div id="dis-message-preview"></div>
-
             <input type="hidden" name="board" value="[[+id]]" />
+            
+            <div class="h-group">
             	<label>
                     <input type="radio" name="class_key" value="disThreadDiscussion" checked="checked" /> [[%discuss.discussion]]
                 </label>
             	<label>
                     <input type="radio" name="class_key" value="disThreadQuestion" /> [[%discuss.question_and_answer]]
                 </label>
-
-
-            <label for="dis-new-thread-title">[[%discuss.title]]:
-                <span class="error">[[!+fi.error.title]]</span>
-            </label><br class="clearfix" />
-
+                <label for="dis-new-thread-title">[[%discuss.title]]:
+                    <span class="error">[[!+fi.error.title]]</span>
+                </label>
+            </div>
             <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
             <div class="wysi-buttons">[[+buttons]]</div>
-
+            <div id="dis-message-preview"></div>
 
 
                 <span class="error">[[!+fi.error.message]]</span>
             <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
 
-            <div class="f1-f9 h-group">
+            <div class="h-group">
                 <div class="l-left">
                     [[+attachment_fields]]
                 </div>
@@ -61,10 +59,3 @@
 
 [[+bottom]]
 
-
-
-<aside>
-	<hr class="line" />
-    <div class="PanelBox">
-	[[!$post-sidebar?disection=`new-message`]]
-</aside>
