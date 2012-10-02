@@ -15,15 +15,14 @@
 
     <textarea name="message" id="dis-thread-message">[[+message]]</textarea>
 
-    [[+attachment_fields]]
-    <br class="clearfix" />
-
+    <div class="l-left">
+        [[+attachment_fields]]
+    </div>
     [[+locked_cb]]
     [[+sticky_cb]]
 
-    <div class="dis-form-buttons">
-       <input class="a-reply" type="submit" name="dis-post-reply" value="Reply" />
+    <div class="dis-form-buttons l-right">
        <label class="dis-cb"><input type="checkbox" name="notify" value="1" [[+subscribed]] />Subscribe to replies via email</label>
+       <input class="a-reply" type="submit" name="dis-post-reply" value="Reply" />
     </div>
-    <br class="clearfix" />
 </form>

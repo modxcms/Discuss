@@ -45,6 +45,17 @@
             [[+posts]]
         </ul>
     	[[+pagination:notempty=`<div class="paginate stand-alone bottom horiz-list"> [[+pagination]]</div>`]]
+        <div class="f1-f9">
+            <div class="a-dis-actionbuttons h-group">
+                Subscribe: <a href="[[~[[*id]]]]thread/feed.xml?thread=[[+id]]">RSS</a>
+                        [[+actionlink_subscribe:notempty=`
+                        <a href="[[+actionlink_subscribe]]">By email</a>`]]
+                        [[+actionlink_unsubscribe:notempty=`
+                        <a href="[[+actionlink_unsubscribe]]">Stop emails</a>
+                        `]]
+            </div>
+        </div>
+        
     	[[$thread-login-post]]
         [[+quick_reply_form]]
     </div>
