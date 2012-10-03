@@ -50,32 +50,6 @@
 
 [[+bottom]]
 
-<aside class="sidebar twenty12 f10-f12">
-    [[!+discuss.user.id:is=``:then=`
-        <div class="box first">
-           <p><a href="[[~[[*id]]]]login" class="primary-cta login dis-action-login">Login to Post</a>/p>
-           <p>Don't have a MODX.com account? <a href="#">Create one</a></p>
-    </div>
-    `]]
-    <div class="panel-box">
-        [[!+discuss.user.id:notempty=`
-        <div class="box">
-            <p>[[+moderators]]</p>
-        </div>`]]
+[[$post-sidebar]]
 
-        <div class="Box GuestBox">
-            <div class="a-faux-btn-grp">
-                <a class="a-secondary-cta l-inline-btn a-bug" href="http://tracker.modx.com">Found a ug?</a>
-                <a class="a-secondary-cta l-inline-btn a-proposal" href="http://tracker.modx.om/projects/modx-proposals">Have a feature request?</a>
-            </div>
-            <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support <span>(Priority Support rom the Source)</span></a>
-        </div>
-
-        <div class="box">
-            <h4>Who’s talking</h4>
-            <p>Posted in this thread:<br />[[+participants_usernames]]</p>
-            <p>[[+readers]]</p>
-        </div>
-    </div>
-</aside>
 <!--close thread/index.html -->
