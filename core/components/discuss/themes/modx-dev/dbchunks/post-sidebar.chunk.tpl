@@ -1,7 +1,7 @@
 <aside class="sidebar twenty12 f10-f12">
     [[!+discuss.user.id:is=``:then=`
     <div class="box first">
-           <p><a href="[[~[[*id]]]]login" class="primary-cta login dis-action-login">Login to Post</a>/p>
+           <p><a href="[[~[[*id]]]]login" class="primary-cta login dis-action-login">Login to Post</a></p>
            <p>Don't have a MODX.com account? <a href="#">Create one</a></p>
     </div>`]]
 
