@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    var hiddenCategories = DisCookie.read('categories_hidden');
+    hiddenCategories = (hiddenCategories) ? hiddenCategories.split('|') : [];
+    $.each(hiddenCategories, function(index, value) {
+        $('div.'+value).slideUp(200);
+    });
+
     $('.dis-error').hide();
     $('.dis-cat-header').click(DISBoard.toggleCategory);
     $('.dis-action-login').click(function(event) {
@@ -11,7 +17,6 @@ $(document).ready(function() {
                 });
             });
         });
-
     });
 });
 var DIS = {
@@ -59,7 +64,25 @@ var DISBar = {
 var DISBoard = {
     toggleCategory: function() {
         var id = $(this).parent().attr('id');
-        $('div.'+id).slideToggle();
+        var cookieContents = DisCookie.read('categories_hidden');
+        if (cookieContents) { cookieContents = cookieContents.split('|'); }
+        else { cookieContents = []; }
+        var indexOf = cookieContents.indexOf(id);
+
+        var isVisible = $($('div.'+id)[0]).is(':visible');
+        if (isVisible) {
+            $('div.'+id).slideUp();
+            if (indexOf == -1) {
+                cookieContents.push(id);
+            }
+        } else {
+            $('div.'+id).slideDown();
+            if (indexOf != -1) {
+                cookieContents.splice(indexOf, 1);
+            }
+        }
+        cookieContents = cookieContents.join('|');
+        DisCookie.create('categories_hidden',cookieContents);
         $(this).parent().toggleClass('dis-collapsed');
     }
 };
@@ -177,3 +200,30 @@ function replaceText(text)
 		textarea.focus(textarea.value.length - 1);
 	}
 }
+
+var DisCookie = {
+    create: function (name,value,days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime()+(days*24*60*60*1000));
+            var expires = "; expires="+date.toGMTString();
+        }
+        else var expires = "";
+        document.cookie = name+"="+value+expires+"; path=/";
+    },
+
+    read: function(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    },
+
+    erase: function(name) {
+        this.create(name,"",-1);
+    }
+};
