@@ -1,3 +1,1 @@
-		<ul class="[[+class]]">
-			[[+content]]
-		</ul>
+<div class="paginate [[+add_css]] horiz-list">[[+content]]</div>
