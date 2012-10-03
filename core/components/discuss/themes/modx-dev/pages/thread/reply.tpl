@@ -24,7 +24,7 @@
                 <span class="error">[[!+fi.error.message]]</span>
             </label>
             <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
-            <div class="f1-f9 h-group">
+            <div class="h-group">
                 <div class="l-left">
                     [[+attachment_fields]]
                     [[+locked_cb]]
