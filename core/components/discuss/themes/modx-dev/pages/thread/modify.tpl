@@ -4,9 +4,8 @@
   &hooks=`postHook.DiscussModifyPost`
   &validate=`title:required,message:required:allowTags`
 ]]
-
-
-    <div class="f1-f9 twelve-form">
+<div class="f1-f9 twelve-form">
+    <div>
         <form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form dis-thread-form" id="dis-modify-post-form" enctype="multipart/form-data">
         	<div id="dis-message-preview"></div>
         	<h1>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
@@ -41,8 +40,8 @@
                     </div>`]]
                 </div>
                 <div class="dis-form-buttons l-right">
-                [[+locked_cb]]
-                [[+sticky_cb]]
+                    [[+locked_cb]]
+                    [[+sticky_cb]]
                     <label class="dis-cb">
                         <input type="checkbox" name="notify" value="1" [[!+fi.notify:FormItIsChecked=`1`]] />[[%discuss.notify_of_replies]]
                     </label>
