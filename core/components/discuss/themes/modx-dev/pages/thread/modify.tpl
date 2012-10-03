@@ -26,12 +26,6 @@
             </label>
             <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
 
-
-
-
-
-
-
             <div class="h-group">
                 <div class="l-left">
                     <label for="dis-attachment">[[%discuss.attachments]]:
@@ -68,12 +62,10 @@
         </div>
     </div>
     [[+discuss.error_panel]]
-    <aside class="f10-f12">
-        <hr class="line" />
-        <div class="PanelBox">
-        [[!$post-sidebar?disection=`new-message`]]
-    </aside>
 </div><!-- Close Content From Wrapper -->
+
 [[+bottom]]
 
+[[$post-sidebar?disection=`new-message`]]
 
+<!-- close thread/modify.tpl -->
