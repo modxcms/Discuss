@@ -20,7 +20,7 @@
 <div class="f1-f9">
     <div>
         <header class="dis-cat-header dark-gradient group-fix sticky-bar top">
-            [[+pagination:notempty=`[[+pagination]]`]]
+            [[+pagination:default=``]]
             [[- USER LOGGED IN ]]
             [[!+discuss.user.id:notempty=`
             <div class="post-box h-group">
@@ -39,7 +39,7 @@
             [[+posts]]
         </ul>
 
-        [[+pagination:notempty=`[[+pagination]]?add_css=`stand-alone bottom``]]
+        [[+pagination?add_css=`stand-alone bottom`:default=``]]
     	[[$thread-login-post]]
         [[+quick_reply_form]]
     </div>
