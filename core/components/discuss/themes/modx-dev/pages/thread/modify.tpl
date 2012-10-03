@@ -5,7 +5,6 @@
   &validate=`title:required,message:required:allowTags`
 ]]
 <div class="f1-f9 twelve-form">
-    <div>
         <form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form dis-thread-form" id="dis-modify-post-form" enctype="multipart/form-data">
         	<div id="dis-message-preview"></div>
         	<h1>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
@@ -51,15 +50,12 @@
             </div>
         </form>
 
-        <div class="dis-thread-posts">
-    		<ul class="dis-list">
-    			<li>
-                    <h1>[[%discuss.thread_summary]]</h1>
-                </li>
-    			[[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
-    		</ul>
-        </div>
-    </div>
+    	<ul class="dis-list h-group">
+    		<li>
+                <h1>[[%discuss.thread_summary]]</h1>
+            </li>
+    		[[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
+    	</ul>
     [[+discuss.error_panel]]
 </div><!-- Close Content From Wrapper -->
 
