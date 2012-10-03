@@ -1608,7 +1608,11 @@ class disThread extends xPDOSimpleObject {
             'showPaginationIfOnePage' => false,
             'toPlaceholder' => '',
             'includePrevNext' => false,
-            'outerClass' => 'dis-thread-pagination'
+            'activePage' => 0,
+            'outerClass' => 'dis-thread-pagination',
+            'tplActive' => 'pagination/thread/paginationLink',
+            'tplLink' => 'pagination/thread/paginationLink',
+            'tplWrapper' => 'pagination/thread/paginationWrapper',
         ));
     }
 }

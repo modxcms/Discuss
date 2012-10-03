@@ -38,8 +38,12 @@ $previousTextTpl = $modx->getOption('tplPreviousText',$scriptProperties,'paginat
 $nextTextTpl = $modx->getOption('tplNextText',$scriptProperties,'pagination/paginationNext');
 $showPaginationIfOnePage = $modx->getOption('showPaginationIfOnePage',$scriptProperties,true);
 
-$current = (!empty($_GET['page']) && is_numeric($_GET['page'])) ? intval($_GET['page']) : 1;
-$current = $current <= 0 ? 1 : $current;
+if (!isset($scriptProperties['activePage'])) {
+    $current = (!empty($_GET['page']) && is_numeric($_GET['page'])) ? intval($_GET['page']) : 1;
+    $current = $current <= 0 ? 1 : $current;
+} else {
+    $current = $scriptProperties['activePage'];
+}
 $limit = $modx->getOption('limit',$scriptProperties,20);
 $limit = $limit == 0 ? 1 : $limit;
 $count = $modx->getOption('count',$scriptProperties,0);
