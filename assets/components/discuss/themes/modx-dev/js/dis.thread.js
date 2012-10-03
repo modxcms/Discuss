@@ -18,6 +18,7 @@ DIS.Thread = function() {
             $('.dis-post-remove').click(this.removePost);
             $('.quick-reply').click(this.quickReply);
             $('.dis-add-attachment').click(this.addAttachment);
+            $('.dis-post-reply').click(this.quickQuote);
         }
         
         ,preview: function(event) {
@@ -53,7 +54,29 @@ DIS.Thread = function() {
 			$.scrollTo($('.preview_toggle'),500);
 			$('#dis-thread-message').focus();
 			return false;
-		}
+		},
+
+        quickQuote: function(event) {
+            event.preventDefault();
+            var val = $('#dis-thread-message').val();
+            var data = $(this).parents('li.dis-post').data();
+
+            /* To convert our htmlentities() processed message, we throw it in a div
+                and request the innerHTML of that.
+             */
+            var temp = document.createElement("div");
+            temp.innerHTML = data.message;
+            data.message = temp.innerHTML;
+
+            val = val + ((val.length > 0) ? '\n\n' : '') + '[quote author='+data.author+' date='+data.date+']'+data.message+'[/quote]';
+            $('#dis-thread-message').val(val);
+
+            $('html,body').animate({'scrollTop': $('.dis-thread-form').position().top}, 500, function() {
+                $('#dis-thread-message').focus();
+            });
+
+            return false;
+        }
 
         ,pollPosts: function() {
              var a = $.extend({},DIS.baseAjax,{
