@@ -3905,14 +3905,14 @@ footer .m-modx_logo {
     margin: 0.3em 0.2em 0 0.35em; }
 
 /* line 373, ../../sass/_forums.sass */
-.dis-post-right {
+.dis-post-right, #dis-message-preview {
   float: right;
   width: 86%;
   padding: 0 2% 2% 0;
   font-size: 15px;
   font-size: 1.5rem; }
   /* line 378, ../../sass/_forums.sass */
-  .dis-post-right .title {
+  .dis-post-right .title, #dis-message-preview .title {
     font-size: 12px;
     font-size: 1.2rem;
     line-height: 1;
@@ -3921,16 +3921,16 @@ footer .m-modx_logo {
     padding: 0 0 0.8em 0;
     border-bottom: dotted 1px #dadada; }
     /* line 385, ../../sass/_forums.sass */
-    .dis-post-right .title strong {
+    .dis-post-right .title strong, #dis-message-preview .title strong {
       font-size: 15px;
       font-size: 1.5rem;
       margin-right: 0.25em; }
     /* line 388, ../../sass/_forums.sass */
-    .dis-post-right .title .dis-actions {
+    .dis-post-right .title .dis-actions, #dis-message-preview .title .dis-actions {
       top: 4px !important;
       right: 4px !important; }
   /* line 391, ../../sass/_forums.sass */
-  .dis-post-right blockquote {
+  .dis-post-right blockquote, #dis-message-preview blockquote {
     background-color: #fcfcfc;
     border: none;
     border: 1px dotted #eaeaea;
@@ -3941,17 +3941,17 @@ footer .m-modx_logo {
     font-size: 0.9em;
     color: black; }
     /* line 400, ../../sass/_forums.sass */
-    .dis-post-right blockquote blockquote {
+    .dis-post-right blockquote blockquote, #dis-message-preview blockquote blockquote {
       font-size: 1em; }
   /* line 403, ../../sass/_forums.sass */
-  .dis-post-right cite {
+  .dis-post-right cite, #dis-message-preview cite {
     padding-left: 15px;
     padding-left: 1.5rem;
     margin-top: 1em;
     display: block;
     font-style: italics; }
   /* line 408, ../../sass/_forums.sass */
-  .dis-post-right cite + blockquote {
+  .dis-post-right cite + blockquote, #dis-message-preview cite + blockquote {
     margin-top: 0.6em; }
 
 /* line 412, ../../sass/_forums.sass */
@@ -4433,7 +4433,7 @@ a#dis-preview-btn.preview {
   -moz-box-shadow: #737373 0 1px 25px, #595959 0 1px 5px;
   box-shadow: #737373 0 1px 25px, #595959 0 1px 5px; }
 
-/* line 742, ../../sass/_forums.sass */
+/* line 743, ../../sass/_forums.sass */
 .a-primary-btn {
   padding: 10px 15px;
   padding:  1rem 1.5rem;
@@ -4442,12 +4442,12 @@ a#dis-preview-btn.preview {
   clear: both;
   display: inline-block;
   cursor: pointer; }
-  /* line 749, ../../sass/_forums.sass */
+  /* line 750, ../../sass/_forums.sass */
   .a-primary-btn:hover {
     padding: 10px 15px;
     padding:  1rem 1.5rem; }
 
-/* line 754, ../../sass/_forums.sass */
+/* line 755, ../../sass/_forums.sass */
 .dis-form-buttons .a-reply {
   padding: 10px 15px;
   padding:  1rem 1.5rem;
@@ -4455,12 +4455,12 @@ a#dis-preview-btn.preview {
   font-size: 1.5rem;
   clear: both;
   display: inline-block; }
-  /* line 760, ../../sass/_forums.sass */
+  /* line 761, ../../sass/_forums.sass */
   .dis-form-buttons .a-reply:hover {
     padding: 10px 15px;
     padding:  1rem 1.5rem; }
 
-/* line 762, ../../sass/_forums.sass */
+/* line 763, ../../sass/_forums.sass */
 .dis-profile .dis-cb, .dis-form .dis-cb {
   display: inline-block;
   vertical-align: top;
@@ -4471,7 +4471,7 @@ a#dis-preview-btn.preview {
   color: #5a5a5a;
   width: auto; }
 
-/* line 774, ../../sass/_forums.sass */
+/* line 775, ../../sass/_forums.sass */
 .ignore li {
   font-size: 1.8rem;
   font-weight: bold;
@@ -4481,13 +4481,13 @@ a#dis-preview-btn.preview {
   margin-right: 20px;
   border-left: 1px dotted #cccccc;
   vertical-align: top; }
-  /* line 783, ../../sass/_forums.sass */
+  /* line 784, ../../sass/_forums.sass */
   .ignore li label {
     margin-left: 20px; }
-/* line 785, ../../sass/_forums.sass */
+/* line 786, ../../sass/_forums.sass */
 .ignore ul {
   padding-left: 20px; }
-  /* line 787, ../../sass/_forums.sass */
+  /* line 788, ../../sass/_forums.sass */
   .ignore ul li {
     font-size: 1.3rem;
     font-weight: normal;
@@ -4496,7 +4496,7 @@ a#dis-preview-btn.preview {
     border-left: none;
     display: block; }
 
-/* line 797, ../../sass/_forums.sass */
+/* line 798, ../../sass/_forums.sass */
 .twelve-form input[type="submit"] {
   padding: 10px 15px;
   padding:  1rem 1.5rem;
@@ -4505,28 +4505,28 @@ a#dis-preview-btn.preview {
   clear: both;
   display: inline-block;
   cursor: pointer; }
-  /* line 804, ../../sass/_forums.sass */
+  /* line 805, ../../sass/_forums.sass */
   .twelve-form input[type="submit"]:hover {
     padding: 10px 15px;
     padding:  1rem 1.5rem; }
-/* line 806, ../../sass/_forums.sass */
+/* line 807, ../../sass/_forums.sass */
 .twelve-form h1 {
   font-size: 15px;
   font-weight: bold; }
-/* line 809, ../../sass/_forums.sass */
+/* line 810, ../../sass/_forums.sass */
 .twelve-form .dis-title {
   margin: 10px 0; }
-  /* line 811, ../../sass/_forums.sass */
+  /* line 812, ../../sass/_forums.sass */
   .twelve-form .dis-title label, .twelve-form .dis-title input#dis-new-thread-title {
     display: inline-block; }
-  /* line 813, ../../sass/_forums.sass */
+  /* line 814, ../../sass/_forums.sass */
   .twelve-form .dis-title label {
     margin: 0 0 0 0;
     padding-right: 5px;
     font-size: 15px;
     font-weight: bold;
     color: black; }
-  /* line 819, ../../sass/_forums.sass */
+  /* line 820, ../../sass/_forums.sass */
   .twelve-form .dis-title input {
     padding: 3px;
     margin: 5px 0 10px 0;
