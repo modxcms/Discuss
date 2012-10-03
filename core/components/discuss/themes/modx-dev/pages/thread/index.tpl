@@ -18,32 +18,28 @@
     </div>
 </div>
 <div class="f1-f9">
-    <div>
-        <header class="dis-cat-header dark-gradient group-fix sticky-bar top">
-            [[+pagination:default=``]]
-            [[- USER LOGGED IN ]]
-            [[!+discuss.user.id:notempty=`
-            <div class="post-box h-group">
-                <a class="reply Button" href="[[+actionlink_reply]]">Reply to thread</a>
-                <a class="read" href="[[+actionlink_unread]]">Mark as unread</a>
-                [[+moderators]]
-            </div>`]]
-            [[- USER NOT LOGGED IN ]]
-            [[!+discuss.user.id:is=``:then=`
-            <div class="post-box">
-                <a href="[[~[[*id]]]]login" class="Button dis-action-login" >Login to Post</a>
-            </div>`]]
-        </header>
-
-    	<ul class="dis-list h-group">
-            [[+posts]]
-        </ul>
-        [[+pagination:notempty=`
-        <div class="stand-alone bottom">[[+pagination]]</div>`]]
-
-    	[[$thread-login-post]]
-        [[+quick_reply_form]]
-    </div>
+    <header class="dis-cat-header dark-gradient group-fix sticky-bar top">
+        [[+pagination:default=``]]
+        [[- USER LOGGED IN ]]
+        [[!+discuss.user.id:notempty=`
+        <div class="post-box h-group">
+            <a class="reply Button" href="[[+actionlink_reply]]">Reply to thread</a>
+            <a class="read" href="[[+actionlink_unread]]">Mark as unread</a>
+            [[+moderators]]
+        </div>`]]
+        [[- USER NOT LOGGED IN ]]
+        [[!+discuss.user.id:is=``:then=`
+        <div class="post-box">
+            <a href="[[~[[*id]]]]login" class="Button dis-action-login" >Login to Post</a>
+        </div>`]]
+    </header>
+	<ul class="dis-list h-group">
+        [[+posts]]
+    </ul>
+    [[+pagination:notempty=`
+    <div class="stand-alone bottom">[[+pagination]]</div>`]]
+	[[$thread-login-post]]
+    [[+quick_reply_form]]
 	[[+belowThread]]
 	[[+discuss.error_panel]]
 </div><!-- Close Content From Wrapper -->
