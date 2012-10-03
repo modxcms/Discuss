@@ -39,7 +39,7 @@
             [[+posts]]
         </ul>
 
-        [[+pagination:notempty=`[[+pagination]]`?add_css=`stand-alone bottom`]]
+        [[+pagination:notempty=`[[+pagination]]?add_css=`stand-alone bottom``]]
     	[[$thread-login-post]]
         [[+quick_reply_form]]
     </div>
