@@ -38,14 +38,13 @@
     	<ul class="dis-list h-group">
             [[+posts]]
         </ul>
+        [[+pagination:notempty=`
+        <div class="stand-alone bottom">[[+pagination]]</div>`]]
 
-        [[+pagination?add_css=`stand-alone bottom`:default=``]]
     	[[$thread-login-post]]
         [[+quick_reply_form]]
     </div>
-
 	[[+belowThread]]
-	<br class="clearfix" />
 	[[+discuss.error_panel]]
 </div><!-- Close Content From Wrapper -->
 
