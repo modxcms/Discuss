@@ -6,7 +6,7 @@
                 [[+answered:notempty=`<span class="answered tag">solved</span>`]]
 
                 <strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong>
-                [[- [[+thread_pagination]] ]]
+                [[+thread_pagination]]
             </div>
         </div>
         <div class="f8">[[+views]]</div>
