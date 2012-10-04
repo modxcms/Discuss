@@ -2,10 +2,12 @@
    <a class="h-group" href="[[+url]]">
         <div class="f1-f7 m-title">
             <div class="wrap">
-                [[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<span class="sticky tag">sticky</span>`]]
-                [[+answered:notempty=`<span class="answered tag">solved</span>`]]
+                [[+sticky:eq=`1`:then=`<span class="sticky tag">sticky</span>`]]
+                [[+answered:eq=`1`:then=`<span class="answered tag">solved</span>`:default=`
+                    [[+class_key:eq=`disThreadQuestion`:then=`<span class="question tag">question</span>`:else=``]]
+                `]]
 
-                <strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong>
+                <strong>[[+title]]</strong>
                 [[+thread_pagination]]
             </div>
         </div>
