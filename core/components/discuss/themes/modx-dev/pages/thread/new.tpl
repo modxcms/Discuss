@@ -37,8 +37,8 @@
             <input class="cancel" type="button" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]board/?board=[[+id]]';" />
             <input type="submit" class="a-primary-btn" name="dis-post-reply" value="[[%discuss.thread_post_new]]" />
         </div>
+        [[+discuss.error_panel]]
     </form>
-    [[+discuss.error_panel]]
 </div><!-- Close Content From Wrapper -->
 
 [[+bottom]]

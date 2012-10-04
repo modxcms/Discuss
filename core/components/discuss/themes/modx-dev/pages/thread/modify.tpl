@@ -5,14 +5,17 @@
   &validate=`title:required,message:required:allowTags`
 ]]
 <div class="f1-f9 twelve-form">
+
+    <h1>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
+
     <form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form dis-thread-form" id="dis-modify-post-form" enctype="multipart/form-data">
-    	<div id="dis-message-preview"></div>
-    	<h1>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h1>
         <input type="hidden" name="board" value="[[!+fi.board]]" />
         <input type="hidden" name="post" value="[[!+fi.post]]" />
         <input type="hidden" name="thread" value="[[!+fi.thread]]" />
+
         [[+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" /> [[%discuss.discussion]]</label>
         	<label><input type="radio" name="class_key" value="disThreadQuestion" />[[%discuss.question_and_answer]]</label>`]]
+
         <label for="dis-new-thread-title">[[%discuss.title]]:
             <span class="error">[[!+fi.error.title]]</span>
         </label>
