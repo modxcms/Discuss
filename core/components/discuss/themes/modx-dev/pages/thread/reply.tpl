@@ -14,7 +14,7 @@
         <input type="hidden" name="post"   value="[[!+fi.post]]" />
         <input type="hidden" name="title"  value="[[!+fi.title]]" id="dis-reply-post-title" />
 
-        <div class="wysi-buttons">[[+reply_buttons]]</div>
+        <div class="wysi-buttons">[[+buttons]]</div>
         <textarea name="message" id="dis-thread-message">[[+!fi.message]]</textarea>
         <span class="error">[[!+fi.error.message]]</span>
 
