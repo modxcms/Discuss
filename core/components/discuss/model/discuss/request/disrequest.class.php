@@ -38,6 +38,11 @@ class DisRequest {
      * @var array $pageOptions
      */
     public $pageOptions = array();
+    /**
+     * Any page-specific modules for the loaded controller
+     * @var array $pageOptions
+     */
+    public $modules = array();
 
     /**
      * @param Discuss $discuss A reference to the Discuss instance
@@ -114,6 +119,7 @@ class DisRequest {
 
             $this->discuss->controller->scriptProperties = array_merge($_REQUEST,$_GET,$_POST);
             $this->discuss->controller->setOptions($this->pageOptions);
+            $this->discuss->controller->setModules($this->modules);
             $output = $this->discuss->controller->render();
             
         } else {
@@ -237,6 +243,10 @@ class DisRequest {
 				if (array_key_exists('options', $global)){
 					$this->pageOptions = array_merge($this->pageOptions,$global['options']);
                 }
+				/* load global page modules */
+				if (array_key_exists('modules', $global)){
+					$this->modules = array_merge($this->modules, $global['modules']);
+                }
 			}
 
 			if (isset($additional) && is_array($manifest) && array_key_exists($additional, $manifest)){
@@ -271,6 +281,10 @@ class DisRequest {
 				/* load page-specific options */
 				if (array_key_exists('options', $specific)){
 					$this->pageOptions = array_merge($this->pageOptions,$specific['options']);
+                }
+				/* load global page modules */
+				if (array_key_exists('modules', $specific)){
+					$this->modules = array_merge($this->modules, $specific['modules']);
                 }
 			}
 

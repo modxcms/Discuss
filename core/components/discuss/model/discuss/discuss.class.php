@@ -121,6 +121,7 @@ class Discuss {
             'modelPath' => $corePath.'model/',
             'themePath' => $corePath.'themes/'.$theme.'/',
             'chunksPath' => $corePath.'themes/'.$theme.'/chunks/',
+            'modulesPath' => $corePath.'themes/'.$theme.'/modules/',
             'pagesPath' => $corePath.'themes/'.$theme.'/pages/',
             'controllersPath' => $corePath.'controllers/',
             'snippetsPath' => $corePath.'elements/snippets/',
@@ -460,14 +461,15 @@ class Discuss {
      * @access public
      * @param string $name The name of the Chunk
      * @param array $properties The properties for the Chunk
+     * @param string $path The config's path property to use for file based Chunks
      * @return string The processed content of the Chunk
      */
-    public function getChunk($name,array $properties = array()) {
+    public function getChunk($name,array $properties = array(), $path = 'chunksPath') {
         $chunk = null;
         if (!isset($this->chunks[$name])) {
             /*$chunk = $this->modx->getObject('modChunk',array('name' => $name),true);*/
             if (empty($chunk)) {
-                $chunk = $this->_getTplChunk($name);
+                $chunk = $this->_getTplChunk($name, '.chunk.tpl', $path);
                 if ($chunk == false) return false;
             }
             $this->chunks[$name] = $chunk->getContent();
@@ -489,9 +491,9 @@ class Discuss {
      * @return modChunk/boolean Returns the modChunk object if found, otherwise
      * false.
      */
-    private function _getTplChunk($name,$postFix = '.chunk.tpl') {
+    private function _getTplChunk($name,$postFix = '.chunk.tpl', $path = 'chunksPath') {
         $chunk = false;
-        $f = $this->config['chunksPath'].strtolower($name).$postFix;
+        $f = $this->config[$path].strtolower($name).$postFix;
         if (file_exists($f)) {
             $o = file_get_contents($f);
             if ($this->config['debugTemplates']) {
