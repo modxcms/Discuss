@@ -1,31 +1,4 @@
-[[+pagination:notempty=`[[+pagination]]`]]
-[[- <!-- old
-<div class="dis-threads">
-	<ul class="dis-list">
-		<li><h1>Private Messages</h1></li>
-		[[+messages]]
-	</ul>
-</div>
-	    [[+pagination:notempty=`[[+pagination]]`]]
-
-				</div>Close Content From Wrapper
-[[+bottom]]
-
-
-<aside>
-				<hr class="line" />
-    <div class="PanelBox">
-
-        [[!+discuss.user.id:notempty=`<div class="Box">
-            <h4>Actions</h4>
-			<p>[[+actionbuttons]]</p>
-			[[+belowThreads]]
-	    </div>`]]
-		[[!$post-sidebar?disection=`dis-support-opt`]]
-
-
-</aside> -->]]
-
+[[+pagination:default=``]]
 <!-- recent.tpl -->
 <div class="f1-f9">
 	<div class="dis-threads forum-grid">
@@ -51,7 +24,7 @@
 		[[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list"> [[+pagination]]</nav>`]]
 	</div>
 </div>
-	<aside class="f10-f12">
+	<aside class="sidebar twenty12 f10-f12">
 		<div class="PanelBox">
 		[[!$post-sidebar?disection=`new-message`]]
 	</aside>
