@@ -14,12 +14,12 @@
         [[+disection:is=`new-message`:then=`
         <div class="box">
             <h4>Don't Be That Guy</h4>
-            <p>Be nice, respectful and patient. Inflamatory or inappropriate posts will get your post nuked and flood your life ith bans and bad karma.</p>
+            <p>Be nice, respectful and patient. Inflammatory or inappropriate posts will get your post nuked and flood your life with bans and bad karma.</p>
         </div>
        
         <div class="box">
             <h4>Help Us Help You</h4>
-            <p>Use a title that gives insight into your post and limit your posts to 1. Remember, this is an open source project nd folks aren't paid to help you here. If you're experiencing problems, please supply adequate technical details.</p>
+            <p>Use a title that gives insight into your post and limit your posts to 1. Remember, this is an open source project and folks aren't paid to help you here. If you're experiencing problems, please supply adequate technical details.</p>
         </div>`]]
 
         <div class="Box GuestBox">

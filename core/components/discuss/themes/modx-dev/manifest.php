@@ -97,12 +97,28 @@ $manifest = array(
             'showTitleInBreadcrumbs' => false,
             'showPaginationIfOnePage' => false,
         ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'thread-index',
+                )
+            )
+        ),
     ),
     'thread/new' => array(
         'js' => array(
             'footer' => array(
                 'dis.thread.js',
             ),
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'new-message',
+                )
+            )
         ),
     ),
     'thread/reply' => array(
@@ -114,6 +130,14 @@ $manifest = array(
         'options' => array(
             'showTitleInBreadcrumbs' => true,
         ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'new-message',
+                )
+            )
+        ),
     ),
     'thread/modify' => array(
         'js' => array(
@@ -123,6 +147,14 @@ $manifest = array(
         ),
         'options' => array(
             'showTitleInBreadcrumbs' => true,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'new-message',
+                )
+            )
         ),
     ),
     'thread/move' => array(
@@ -186,11 +218,25 @@ $manifest = array(
         'options' => array(
             'showRecentPosts' => false,
         ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
     ),
     'user/subscriptions' => array(
         'js' => array(
             'footer' => array(
                 'user/dis.user.subscriptions.js',
+            )
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
             )
         ),
     ),
@@ -200,8 +246,60 @@ $manifest = array(
                 'user/dis.user.ignoreboards.js',
             )
         ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
     ),
-    'messages/index' => array(
+    'user/ban' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'user/edit' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'user/merge' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'user/posts' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'user/statistics' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'messages' => array(
         'options' => array(
             'showSubBoards' => true,
             'showPosts' => true,
@@ -210,12 +308,28 @@ $manifest = array(
             'showModerators' => true,
             'showPaginationIfOnePage' => false,
         ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'new-message',
+                )
+            )
+        ),
     ),
     'messages/new' => array(
         'js' => array(
             'footer' => array(
                 'messages/dis.message.new.js',
             ),
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'new-message',
+                )
+            )
         ),
     ),
     'messages/reply' => array(
@@ -224,12 +338,28 @@ $manifest = array(
                 'messages/dis.message.reply.js',
             ),
         ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'new-message',
+                )
+            )
+        ),
     ),
     'messages/modify' => array(
         'js' => array(
             'footer' => array(
                 'messages/dis.message.modify.js',
             ),
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'new-message',
+                )
+            )
         ),
     ),
     'messages/view' => array(
@@ -250,11 +380,27 @@ $manifest = array(
             'showTitleInBreadcrumbs' => false,
             'showPaginationIfOnePage' => false,
         ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'new-message',
+                )
+            )
+        ),
     ),
     'thread/recent' => array(
         'options' => array(
             'showTitleInBreadcrumbs' => true,
             'showPaginationIfOnePage' => false,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'recent',
+                )
+            )
         ),
     ),
     'thread/unread' => array(
@@ -262,11 +408,27 @@ $manifest = array(
             'showTitleInBreadcrumbs' => true,
             'showPaginationIfOnePage' => false,
         ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'unread',
+                )
+            )
+        ),
     ),
     'thread/unread_last_visit' => array(
         'options' => array(
             'showTitleInBreadcrumbs' => true,
             'showPaginationIfOnePage' => false,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'unread_last_visit',
+                )
+            )
         ),
     ),
 );

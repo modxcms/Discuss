@@ -46,6 +46,6 @@
 
 [[+bottom]]
 
-[[$post-sidebar]]
+[[+sidebar]]
 
 <!--close thread/index.html -->

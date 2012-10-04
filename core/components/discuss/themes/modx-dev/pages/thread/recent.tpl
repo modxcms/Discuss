@@ -25,6 +25,6 @@
 
 [[+bottom]]
 
-[[$post-sidebar?dissection=`recent`]]
+[[+sidebar]]
 
 <!-- end thread/recent.tpl -->

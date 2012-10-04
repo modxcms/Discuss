@@ -93,25 +93,7 @@
 </div>
 	
 
+[[+sidebar]]
 </div><!-- Close Content From Wrapper -->
 	[[+bottom]]
 
-
-<aside>
-				<hr class="line" />
-    <div class="PanelBox">
-
-        <div class="Box">
-           <h4>[[+username]]'s Profile</h4>
-            <ul class="panel_info">
-
-                <li class="Heading"><img src="[[+avatarUrl]]" alt="[[+username]]" />
-            <br /><span class="small">[[+title]]</span></li>
-            </ul>
-
-        </div>
-        <div class="Box">
-            [[+usermenu]]
-        </div>
-
-</aside>

@@ -10,4 +10,4 @@
 
 [[+bottom]]
 
-[[$post-sidebar]]
+[[+sidebar]]

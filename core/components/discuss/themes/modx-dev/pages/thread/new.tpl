@@ -43,5 +43,5 @@
 
 [[+bottom]]
 
-[[$post-sidebar?disection=`new-message`]]
+[[+sidebar]]
 <!-- end threads/new.tpl -->

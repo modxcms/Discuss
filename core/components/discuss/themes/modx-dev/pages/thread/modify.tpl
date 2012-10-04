@@ -64,6 +64,6 @@
 
 [[+bottom]]
 
-[[$post-sidebar?disection=`new-message`]]
+[[+sidebar]]
 
 <!-- close thread/modify.tpl -->

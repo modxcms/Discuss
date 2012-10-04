@@ -27,7 +27,4 @@
 
 [[+bottom]]
 
-<aside class="sidebar twenty12 f10-f12">
-	<div class="PanelBox">
-	[[!$post-sidebar?disection=`new-message`]]
-</aside>
+[[+sidebar]]
