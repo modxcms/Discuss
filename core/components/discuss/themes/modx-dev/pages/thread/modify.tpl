@@ -12,17 +12,15 @@
         <input type="hidden" name="post" value="[[!+fi.post]]" />
         <input type="hidden" name="thread" value="[[!+fi.thread]]" />
         [[+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" /> [[%discuss.discussion]]</label>
-        	<label><input type="radio" name="class_key" value="disThreadQuestion" /> [[%discuss.question_and_answer]]</label>`]]
+        	<label><input type="radio" name="class_key" value="disThreadQuestion" />[[%discuss.question_and_answer]]</label>`]]
         <label for="dis-new-thread-title">[[%discuss.title]]:
             <span class="error">[[!+fi.error.title]]</span>
         </label>
         <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
 
         <div class="wysi-buttons">[[+buttons]]</div>
-        <label for="dis-thread-message">
-            <span class="error">[[!+fi.error.message]]</span>
-        </label>
         <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea>
+        <span class="error">[[!+fi.error.message]]</span>
 
         <div class="h-group">
             <div class="l-left">
@@ -53,10 +51,12 @@
     [[+discuss.error_panel]]
     </form>
 
-	<ul class="dis-list h-group">
-		<li><h1>[[%discuss.thread_summary]]</h1></li>
-		[[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
-	</ul>
+    [[+thread_posts:notempty=`
+        <h1>[[%discuss.thread_summary]]</h1>
+    	<ul class="dis-list h-group">
+    		[[+thread_posts]]
+    	</ul>
+    `]]
 </div><!-- Close Content From Wrapper -->
 
 [[+bottom]]
