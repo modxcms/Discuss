@@ -3,9 +3,10 @@
 
     <li class="Heading">[[%discuss.forum_profile]]</li>
 
-    <li class="Depth2"><strong><a href="[[~[[*id]]]]user?user=[[+id]]">[[%discuss.view]]</a></strong><span class="Count">&nbsp;</span></li>
+    <li class="Depth2"><strong><a href="[[~[[*id]]]]u/[[+id]]/">[[%discuss.view]]</a></strong><span class="Count">&nbsp;</span></li>
     [[+canEdit:notempty=`<li class="Depth2"><strong><a href="[[~[[*id]]]]user/edit">[[%discuss.edit]]</a></strong><span class="Count">&nbsp;</span></li>`]]
-    <li class="Depth2"><strong><a href="[[~[[*id]]]]user/statistics?user=[[+id]]">[[%discuss.stats]]</a></strong><span class="Count">&nbsp;</span></li>
+    <li class="Depth2"><strong><a href="[[~[[*id]]]]u/[[+id]]/statistics">[[%discuss.stats]]</a></strong><span class="Count">&nbsp;</span></li>
+    <li class="Depth2"><strong><a href="[[~[[*id]]]]u/[[+id]]/posts">[[%discuss.posts]]</a></strong><span class="Count">&nbsp;</span></li>
 
 
     <li class="Heading">[[%discuss.account_settings]]</li>
@@ -18,4 +19,3 @@
     [[+discuss.user.isAdmin:notempty=`<li class="Depth2"><strong><a href="[[~[[*id]]]]user/ban?u=[[+id]]">[[%discuss.ban_user]]</a></strong><span class="Count">&nbsp;</span></li>`]]
 </ul>
 
-							
