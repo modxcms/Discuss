@@ -29,12 +29,12 @@
         [[+discuss.error_panel]]
     </form>
 
-    <div class="dis-thread-posts">
+    [[+thread_posts:notempty=`
+        <h1>[[%discuss.thread_summary]]</h1>
         <ul class="dis-list h-group">
-            <li><h1>[[%discuss.thread_summary]]</h1></li>
             [[+thread_posts]]
         </ul>
-    </div>
+    `]]
 </div><!-- Close Content From Wrapper -->
 
 [[+bottom]]
