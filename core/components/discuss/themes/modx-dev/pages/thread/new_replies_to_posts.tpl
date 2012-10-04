@@ -21,14 +21,10 @@
 		[[+threads]]
 		[[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list"> [[+pagination]]</nav>`]]
 	</div>
-</div>
-	<aside class="f10-f12">
-		<div class="PanelBox">
-		[[!$post-sidebar?disection=`new-message`]]
-	</aside>
-
 </div><!-- Close Content From Wrapper -->
 [[+bottom]]
+
+[[$post-sidebar?disection=`new-message`]]
 
 [[-
 <!-- recent.tpl -->
