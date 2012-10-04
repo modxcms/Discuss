@@ -32,7 +32,9 @@
                     <span class="error">[[+error.attachments]]</span>
                 </label>
                 <input type="file" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
+
                 <br class="clearfix" />
+
                 <div id="dis-attachments"></div>
                 [[+attachments:notempty=`<div class="dis-existing-attachments">
                     <ul class="dis-attachments">[[+attachments]]</ul>
@@ -48,15 +50,13 @@
                 <input type="submit" class="a-primary-btn" name="dis-post-reply" value="[[%discuss.save_changes]]" />
             </div>
         </div>
+    [[+discuss.error_panel]]
     </form>
 
 	<ul class="dis-list h-group">
-		<li>
-            <h1>[[%discuss.thread_summary]]</h1>
-        </li>
+		<li><h1>[[%discuss.thread_summary]]</h1></li>
 		[[+thread_posts:default=`<p>[[%discuss.thread_no_posts]]</p>`]]
 	</ul>
-    [[+discuss.error_panel]]
 </div><!-- Close Content From Wrapper -->
 
 [[+bottom]]

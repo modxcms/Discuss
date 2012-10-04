@@ -169,6 +169,7 @@ $_lang['discuss.stats_today'] = 'Today&apos;s Total - Visitors: [[+hits]], Topic
 $_lang['discuss.subboards'] = 'Sub-Boards';
 $_lang['discuss.subforums'] = 'Sub-Forums';
 $_lang['discuss.subscribe'] = 'Subscribe';
+$_lang['discuss.subscribe_by_email'] = 'Email me new replies';
 $_lang['discuss.subscriptions'] = 'Subscriptions';
 $_lang['discuss.thread'] = 'Thread';
 $_lang['discuss.thread_lock'] = 'Lock';
