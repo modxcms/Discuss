@@ -66,9 +66,12 @@
                                     </ul>
                                     <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]" title="Logout [[!+discuss.user.username]]">Logout</a>
                                 </div>
-                                <p>You have <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit" title="[[!+discuss.user.unread_posts_count]] Unread Posts since your last visit">[[!+discuss.user.unread_posts]]</a>,
-                                    <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="View [[!+discuss.user.unread_messages_count]] new Private Messages">[[!+discuss.user.unread_messages]]</a>
-                                    and <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts" title="View [[!+discuss.user.new_replies_count]] replies to Subscribed Topics">[[!+discuss.user.new_replies]]</a> to read.<br />
+                                <p>[[%discuss.view]] 
+                                    <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread" title="[[%discuss.view]] [[!+discuss.user.unread_posts_count]] [[%discuss.unread_posts]]">[[!+discuss.user.unread_posts]]</a>[[%discuss.sep]] 
+
+                                    <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="[[%discuss.view]] [[!+discuss.user.unread_messages_count]] [[discuss.messages_new]]">[[!+discuss.user.unread_messages]]</a> [[%discuss.or]]                                    
+                                    <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts" title="[[%discuss.view]] [[!+discuss.user.new_replies_count]] [[%discuss.new_replies_to_posts]]">[[!+discuss.user.new_replies]]</a><br />
+
                                     [[!+discuss.user.no_replies_count:gte=`1`:then=`
                                         [[!+discuss.user.unanswered_questions_count:gte=`1`:then=`
                                             Please help the community with <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions" title="View Unanswered Questions">[[!+discuss.user.unanswered_questions]]</a>
