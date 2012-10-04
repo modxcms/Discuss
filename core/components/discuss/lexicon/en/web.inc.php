@@ -25,6 +25,9 @@
  * @package discuss
  * @subpackage lexicon
  */
+$_lang['discuss.and'] = 'and';
+$_lang['discuss.or'] = 'or';
+$_lang['discuss.sep'] = ',';
 $_lang['discuss.account_merge'] = 'Merge Account';
 $_lang['discuss.account_merge_msg'] = 'Here you can merge 2 existing accounts of yours. This is useful if you are wanting to merge your MODX account with an older system account, such as SMF. Simply enter your old account username and password below, and Discuss will automatically merge that old account into your current one.';
 $_lang['discuss.account_merge_success'] = 'Account successfully merged! Please logout and back in to refresh your permissions.';
@@ -105,6 +108,7 @@ $_lang['discuss.mark_unread'] = 'Mark Unread';
 $_lang['discuss.message'] = 'Message';
 $_lang['discuss.message_modify'] = 'Edit Message';
 $_lang['discuss.message_new'] = 'New Message';
+$_lang['discuss.messages_new'] = 'new Messages';
 $_lang['discuss.message_remove'] = 'Delete Message';
 $_lang['discuss.message_remove_confirm'] = 'Are you sure you want to remove this private discussion entirely?';
 $_lang['discuss.message_send'] = 'Send Message';
@@ -204,6 +208,7 @@ $_lang['discuss.user_ignore_boards_header'] = 'Ignore Preferences: [[+user]]';
 $_lang['discuss.user_statistics_header'] = 'Stats: [[+user]]';
 $_lang['discuss.user_subscriptions_header'] = 'Subscriptions: [[+user]]';
 $_lang['discuss.users_active'] = 'Active Users ([[+total]])';
+$_lang['discuss.view'] = 'View:';
 $_lang['discuss.views'] = 'Views';
 $_lang['discuss.view_author_profile'] = 'View Author Profile';
 $_lang['discuss.view_profile'] = 'View User Profile';
