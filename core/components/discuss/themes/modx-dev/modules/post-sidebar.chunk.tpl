@@ -30,11 +30,11 @@
             <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support <span>(Priority Support rom the Source)</span></a>
         </div>
 
-       [[+disection:isnot=`recent`:then=`
+       [[+disection:neq=`recent`:then=`
         <div class="box">
             <h4>Who’s talking</h4>
             <p>Posted in this thread:<br />[[+participants_usernames]]</p>
             <p>[[+readers]]</p>
-        </div>`]]
+        </div>`:else=``]]
     </div>
 </aside>

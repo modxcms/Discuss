@@ -7,37 +7,18 @@
             <div class="wrap">
                 [[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<span class="sticky tag">sticky</span>`]]
                 [[+answered:notempty=`<span class="answered tag">solved</span>`]]
-
-
-                
-
-
-
-                [[+question:notempty=`<span class="answered tag">question</span>`]]
-                <a class="h-group" href="[[+url]]"><strong>[[+sticky:if=`[[+sticky]]`:eq=`1`:then=`[[+title]]`:else=`[[+title]]`]]</strong></a>
+                [[+question:notempty=`<span class="question tag">question</span>`]]
+                <!--<a class="h-group" href="[[+url]]">--><strong>[[+title]]</strong><!--</a>-->
             </div>
         </div>
         <div class="f7">
-          [[+thread_author_first_username]] on [[+thread_post_last_on:strtotime:date=`%Y-%m-%d`]]
+            [[+author_username]]
         </div>
         <div class="f8">
-          [[+thread_author_last_username]]
+            [[+createdon:ago]]
         </div>
         <div class="f9">
-          [[+thread_replies]]
+            [[+thread_replies]]
         </div>
     </a>
 </div>
-
-
-[[-<li class="Depth2 [[+class]]">
-    <div class="ItemContent">
-      <a href="[[+url]]" class="dis-cat-links [[+unread-cls]]">
-        <h3 class="[[+locked:is=`1`:then=`locked`:else=`unlocked`]]"><span class="dis-post-board-name">[[+board_name]]</span>
-        <span class="Title">[[+sticky:eq=`1`:then=`<strong>[[+title]]</strong>`:else=`[[+title]]`]]</span><br />
-        </h3>
-        <p class="CategoryDescription">[[+first_post_username:notempty=`Started by [[+first_post_username]] - `]] Last post by [[+author_username]] [[+createdon:ago]] - [[+replies]] replies</p>
-      </a>
-  </div>
-</li>
-]]

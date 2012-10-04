@@ -3,19 +3,19 @@
 	<div class="dis-threads forum-grid">
 		<div class="m-section_title">
 			<header class="dis-cat-header dark-gradient group-fix sticky-bar">
-				<h1>Recent Posts</h1>
+				<h1>[[+discuss.pagetitle]]</h1>
 				[[+pagination:notempty=`
-				<nav id="key-Paginate" class="paginate horiz-list">[[+pagination]]</nav>
+				<nav id="key-Paginate" class="horiz-list">[[+pagination]]</nav>
 				`]]
 			</header>
 			<div class="row h-group header-row">
 			    <div class="f1-f2 f-padinall">
-			    	<div class="wrap">Board</div>
+			    	<div class="wrap">[[%discuss.board]]</div>
 			    </div>
-			    <div class="f3-f5 f-padinall">Post</div>
-			    <div class="f6 f-padinall">Last post by</div>
-			    <div class="f7 f-padinall">Created</div>
-			    <div class="f8-f9 f-padinall">Author</div>
+			    <div class="f3-f6 f-padinall">[[%discuss.post]]</div>
+                <div class="f7 f-padinall">[[%discuss.author]]</div>
+                <div class="f8 f-padinall">[[%discuss.posted_on]]</div>
+			    <div class="f9 f-padinall">[[%discuss.thread]] [[%discuss.replies]]</div>
 			</div>
 		</div> <!-- / m-section_title -->
 		[[+recent_posts]]
@@ -26,6 +26,3 @@
 [[+bottom]]
 
 [[+sidebar]]
-[[$post-sidebar?disection=`recent`]]
-
-<!-- end thread/recent.tpl -->
