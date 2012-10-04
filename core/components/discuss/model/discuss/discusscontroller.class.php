@@ -29,6 +29,11 @@ abstract class DiscussController {
      */
     public $options = array();
     /**
+     * An array of theme-specific modules for this controller
+     * @var array $options
+     */
+    public $modules = array();
+    /**
      * An array of set placeholders for this controller to load into the template
      * @var array $placeholders
      */
@@ -148,7 +153,8 @@ abstract class DiscussController {
         }
         
         $this->_renderBreadcrumbs();
-        //$this->postProcess();
+        $this->_renderModules();
+
         $output = $this->_renderTemplate($this->config['tpl'],$this->placeholders);
 
         $output = $this->afterRender($output);
@@ -427,6 +433,47 @@ abstract class DiscussController {
         $totalTime = $this->getDebugTime();
         $this->debugTimer = false;
         return $totalTime;
+    }
+
+    /**
+     * @return array
+     */
+    public function getModules() {
+        return $this->modules;
+    }
+
+    /**
+     * @param array $modules
+     */
+    public function setModules(array $modules = array()) {
+        $this->modules = $modules;
+    }
+
+    /**
+     * Renders modules defined in the manifest
+     *
+     * @access private
+     * @return void
+     */
+    private function _renderModules() {
+        $modules = $this->getModules();
+        if (!empty($modules) && is_array($modules)) {
+            $placeholders = $this->getPlaceholders();
+            foreach ($modules as $key => $config) {
+                $tpl = (isset($config['tpl']) && !empty($config['tpl'])) ? $config['tpl'] : false;
+                if (!$tpl) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR,"[DiscussController] Error: no tpl passed for module {$key}.",'','_renderModules',__FILE__,__LINE__);
+                    continue;
+                }
+                $phs = (isset($config['options']) && is_array($config['options'])) ? array_merge($placeholders, $config['options']) : $placeholders;
+                $tpl = $this->discuss->getChunk($tpl, $phs, 'modulesPath');
+                if (!$tpl) {
+                    $this->modx->log(modX::LOG_LEVEL_ERROR,"[DiscussController] Error: tpl for module {$key} is empty.",'','_renderModules',__FILE__,__LINE__);
+                    continue;
+                }
+                $this->setPlaceholder($key, $tpl);
+            }
+        }
     }
 }
 
