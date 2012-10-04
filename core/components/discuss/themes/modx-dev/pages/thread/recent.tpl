@@ -19,13 +19,12 @@
 			</div>
 		</div> <!-- / m-section_title -->
 		[[+recent_posts]]
-		[[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list"> [[+pagination]]</nav>`]]
+		[[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list">[[+pagination]]</nav>`]]
 	</div>
-</div>
-	<aside class="f10-f12">
-		<div class="PanelBox">
-		[[!$post-sidebar?disection=`new-message`]]
-	</aside>
-
 </div><!-- Close Content From Wrapper -->
+
 [[+bottom]]
+
+[[$post-sidebar?dissection=`recent`]]
+
+<!-- end thread/recent.tpl -->
