@@ -37,7 +37,7 @@
         [[+posts]]
     </ul>
     [[+pagination:notempty=`
-    <div class="stand-alone bottom">[[+pagination]]</div>`]]
+    <div class="paginate stand-alone bottom horiz-list">[[+pagination]]</div>`]]
 	[[$thread-login-post]]
     [[+quick_reply_form]]
 	[[+belowThread]]

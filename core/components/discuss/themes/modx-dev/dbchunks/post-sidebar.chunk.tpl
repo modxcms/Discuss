@@ -11,16 +11,17 @@
             <p>[[+moderators]]</p>
         </div>`]]
 
-       [[+disection:is=`new-message`:then=`
-       <div class="box">
+        [[+disection:is=`new-message`:then=`
+        <div class="box">
             <h4>Don't Be That Guy</h4>
             <p>Be nice, respectful and patient. Inflamatory or inappropriate posts will get your post nuked and flood your life ith bans and bad karma.</p>
-       </div>
+        </div>
        
-       <div class="box">
+        <div class="box">
             <h4>Help Us Help You</h4>
             <p>Use a title that gives insight into your post and limit your posts to 1. Remember, this is an open source project nd folks aren't paid to help you here. If you're experiencing problems, please supply adequate technical details.</p>
-       </div>`:else=`
+        </div>`]]
+
         <div class="Box GuestBox">
             <div class="a-faux-btn-grp">
                 <a class="a-secondary-cta l-inline-btn a-bug" href="http://tracker.modx.com">Found a Bug?</a>
@@ -29,6 +30,7 @@
             <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support <span>(Priority Support rom the Source)</span></a>
         </div>
 
+       [[+disection:isnot=`new-message`:then=`
         <div class="box">
             <h4>Who’s talking</h4>
             <p>Posted in this thread:<br />[[+participants_usernames]]</p>
