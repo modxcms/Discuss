@@ -18,13 +18,15 @@
         <textarea name="message" id="dis-thread-message">[[+!fi.message]]</textarea>
         <span class="error">[[!+fi.error.message]]</span>
 
-        <div class="l-left">[[+attachment_fields]]</div>
-        <div class="dis-form-buttons l-right">
-            [[+locked_cb]]
-            [[+sticky_cb]]
-            <label class="dis-cb"><input type="checkbox" name="notify" value="1" />[[%discuss.subscribe_by_email]]</label>
-            <input class="cancel" type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
-            <input type="submit" name="dis-post-reply" value="[[%discuss.post_reply]]" />
+        <div class="h-group">
+            <div class="l-left">[[+attachment_fields]]</div>
+            <div class="dis-form-buttons l-right">
+                [[+locked_cb]]
+                [[+sticky_cb]]
+                <label class="dis-cb"><input type="checkbox" name="notify" value="1" />[[%discuss.subscribe_by_email]]</label>
+                <input class="cancel" type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+                <input type="submit" name="dis-post-reply" value="[[%discuss.post_reply]]" />
+            </div>
         </div>
         [[+discuss.error_panel]]
     </form>
