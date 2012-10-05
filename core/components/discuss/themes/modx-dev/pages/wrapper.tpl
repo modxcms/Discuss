@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8">
@@ -161,9 +160,15 @@
                     <span class="m-stats-single">[[%discuss.threads]]: [[+activity.topics]]</span><br />
                     <span class="m-stats-single">[[%discuss.replies]]: [[+activity.replies]]</span>
                 </div>
-                <div class="f9-f12">
+                <div class="f9-f10">
                     <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>
                     <span class="m-stats-single">[[+activeUsers.users]]</span>
+                </div>
+                <div class="f11-f12">
+                    <a class="modx-live" href="/live">
+                        <img src="[[+discuss.config.imagesUrl]]redo/icons/modx-live.png">
+                        <p>modx.com/live</p>
+                    </a>
                 </div>
             </div>
         </div>
