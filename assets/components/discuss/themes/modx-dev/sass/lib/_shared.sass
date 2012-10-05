@@ -57,13 +57,37 @@ pre
         &:hover
             color: darken($c-base, 90%)
 
+// search box alignment fixes
+#cse-search-form
+    width: 300px
+    display: inline-block
+    vertical-align: top
+    height: 33px
+
+.m-search-label
+    padding-top: 1px
+    display: inline-block
+    vertical-align: middle
+    em
+        display: inline-block
+        vertical-align: middle
+        padding: 7px
+        color: darken($c-base, 30%)
+    a
+        line-height: 1
+
 // view latest posts button
 .l-right.m-search
     a
-        background-color: #ebebeb
+        background-color: darken($c-base, 6%)
         display: inline-block
-        padding: 5px 16px
+        padding: 7px 16px
         border-radius: 20px
+        color: darken($c-base, 50%)
+        line-height: 1
+        &:hover
+            color: darken($c-base, 60%)
+            background-color: darken($c-base, 3%)
 
 // mini navigation
 .m-sm_nav_pod

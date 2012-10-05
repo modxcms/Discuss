@@ -7,9 +7,9 @@
 	</nav>
 	<!-- remove out of breadcrumbs eventually-->
 	<div class="l-right m-search">
-		<a href="[[~[[*id]]]]thread/recent">[[%discuss.view_recent_posts]]</a> [[%discuss.or_search]]
+		<div class="m-search-label"><a href="[[~[[*id]]]]thread/recent">[[%discuss.view_recent_posts]]</a><em>[[%discuss.or_search]]</em></div>
 
-		<div id="cse-search-form" style="width:300px; display:inline-block; *zoom:1; height:26px;">Loading</div>
+		<div id="cse-search-form">Loading</div>
 		<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 		<script type="text/javascript"> 
 			google.load('search', '1', {language : 'en', style : google.loader.themes.V2_DEFAULT});
