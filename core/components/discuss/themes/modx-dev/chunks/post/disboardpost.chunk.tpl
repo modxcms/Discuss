@@ -2,9 +2,9 @@
    <a class="h-group" href="[[+url]]">
         <div class="f1-f7 m-title">
             <div class="wrap">
-                [[+sticky:eq=`1`:then=`<span class="sticky tag">sticky</span>`]]
-                [[+answered:eq=`1`:then=`<span class="answered tag">solved</span>`:default=`
-                    [[+class_key:eq=`disThreadQuestion`:then=`<span class="question tag">question</span>`:else=``]]
+                [[+sticky:eq=`1`:then=`<span class="sticky tag">[[%discuss.sticky]]</span>`]]
+                [[+answered:eq=`1`:then=`<span class="answered tag">[[%discuss.solved]]</span>`:default=`
+                    [[+class_key:eq=`disThreadQuestion`:then=`<span class="question tag">[[%discuss.question]]</span>`:else=``]]
                 `]]
 
                 <strong>[[+title]]</strong>
