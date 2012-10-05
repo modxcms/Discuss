@@ -43,6 +43,7 @@ $_lang['discuss.post_err_remove'] = 'An error occurred while trying to remove th
 $_lang['discuss.post_err_reply'] = 'An error occurred while trying to post a reply.';
 $_lang['discuss.post_err_save'] = 'An error occurred while trying to save the post.';
 $_lang['discuss.post_modify'] = 'Modify Post';
+$_lang['discuss.post_new'] = 'Start new Thread';
 $_lang['discuss.post_reply'] = 'Reply to Post';
 $_lang['discuss.preview'] = 'Preview';
 $_lang['discuss.save_changes'] = 'Save Changes';
