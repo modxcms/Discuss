@@ -107,7 +107,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
             /* unread class */
             $threadArray['unread'] = false;
             $threadArray['unread-cls'] = '';
-            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl(array('action' => 'user'),array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
             $list[] = $this->discuss->getChunk($this->getOption('tpl','post/disPostLi'),$threadArray);
         }
@@ -137,7 +137,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
     public function getActionButtons() {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/new_replies_to_posts',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'new_replies_to_posts'),array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }

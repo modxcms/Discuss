@@ -140,7 +140,7 @@ class DiscussThreadReplyController extends DiscussController {
         if (!empty($this->options['showTitleInBreadcrumbs'])) {
             $defaults[] = array(
                 'text' => $this->modx->lexicon('discuss.reply_to_post',array(
-                    'post' => '<a class="active" href="'.$this->discuss->url.'thread?thread='.$this->thread->get('id').'">'.$this->post->get('title').'</a>',
+                    'post' => '<a class="active" href="'.$this->discuss->request->makeUrl(array('action' => 'thread'), array('thread' => $this->thread->get('id')).'">'.$this->post->get('title').'</a>',
                 )),
                 'active' => true,
             );

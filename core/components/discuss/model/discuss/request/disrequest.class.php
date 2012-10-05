@@ -301,12 +301,77 @@ class DisRequest {
      * @param array $params
      * @return string
      */
-    public function makeUrl($action = '',array $params = array()) {
+    public function makeUrl(array $action = array(),array $params = array()) {
+        if (is_array($action)) {
+            if (empty($action[$this->config["actionVar"]])) {
+                $action[$this->config["actionVar"]] = "home";
+            }
+            if ($modx->request->getResourceMethod()!="alias") {
+                $action = http_build_query($action);
+            }
+            else {
+                $action_name = $action[$this->config["actionVar"]];
+                switch ($action_name) {
+                    case "home":
+                        if (!empty($action["category"]) {
+                            $action_suffix = "";
+                            if (!empty($action["category_name"]) {
+                                $action_suffix = "/" . $action["category_name"];
+                            }
+                            $action = "category/" . $action["category"] . $action_suffix;
+                        }
+                        else {
+                            $action = "";
+                        }
+                        break;
+                    default:
+                        if (!empty($action[$action_name]) {
+                            $action_suffix = "";
+                            if(!empty($action[$action_name . "_name"])) {
+                                $action_suffix = "/" . $action[$action_name . "_name"];
+                            }
+                            $action = $action_name . "/" . $action[$action_name] . $action_suffix;
+                        }
+                        else {
+                            $action = $action_name;
+                        }
+                        break;
+                }
+            }
+        }
+        else {
+            $action = '';
+        }
+        $url = $this->discuss->url;
         if (is_array($params)) {
             $params = http_build_query($params);
-            if (!empty($params)) $params = '?'.$params;
         }
-        $url = $this->discuss->url.$action.$params;
+        if ($this->modx->request->getResourceMethod() != 'alias') {
+            if (!empty($action) || !empty($params)) {
+                $trim_character = '&';
+                $question_mark = strrpos($url, '?');
+                if ($question_mark === strlen($url)-1 || $question_mark === false) {
+                    $trim_character = '?';
+                }
+                $url = rtrim($url, $trim_character) . $trim_character . $action;
+                if(!empty($params)) {
+                    $url.= empty($action) ? '' : '&' . $params;
+                }
+            }
+        }
+        else {
+            $url_chunks = explode('?', $url, 2);
+            $url = rtrim( rtrim($url_chunks[0],'/') . '/' . $action , '/');
+            $url = rtrim($url,'/');
+            $question_mark = false;
+            if (count($url_chunks) >= 2) {
+                $question_mark = true;
+                $url.= '?' . rtrim($url_chunks[1], '&');
+            }
+            if(!empty($params)) {
+                $url.= $question_mark ? '&' : '?' . $params;
+            }
+        }
         if ($this->modx->getOption('discuss.absolute_urls',null,true)) {
             $url = $this->modx->getOption('site_url',null,MODX_SITE_URL).ltrim($url,'/');
         }

@@ -260,8 +260,8 @@ class DiscussThreadController extends DiscussController {
         /* @var array $actionButtons Thread action buttons */
         $actionButtons = array();
         if ($this->board->canPost() && $this->thread->canReply()) {
-            $this->setPlaceholder('actionlink_reply', $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))));
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'),'cls' => 'dis-action-reply dis-action-reply_to-thread');
+            $this->setPlaceholder('actionlink_reply', $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'reply'),array('thread' => $this->thread->get('id'))));
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'reply'),array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_thread'),'cls' => 'dis-action-reply dis-action-reply_to-thread');
         }
         $this->setPlaceholder('actionlink_unread',$this->thread->getUrl(false,array('unread' => 1)));
         $actionButtons[] = array('url' => $this->thread->getUrl(false,array('unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'));
@@ -297,12 +297,12 @@ class DiscussThreadController extends DiscussController {
     public function getModeratorActionButtons() {
         $actionButtons = array();
         if ($this->thread->canMove()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/move',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_move'),'cls' => 'dis-action-move dis-action-thread_move');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'move'),array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_move'),'cls' => 'dis-action-move dis-action-thread_move');
         }
         if ($this->thread->canRemove()) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_remove'),'cls' => 'dis-action-remove-thread dis-action-thread_remove');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'remove'),array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_remove'),'cls' => 'dis-action-remove-thread dis-action-thread_remove');
             if (!empty($this->options['showMarkAsSpamOption'])) {
-                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/spam',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_spam'),'cls' => 'dis-action-spam dis-action-thread_spam');
+                $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'spam'),array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_spam'),'cls' => 'dis-action-spam dis-action-thread_spam');
             }
         }
 

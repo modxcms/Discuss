@@ -122,7 +122,7 @@ if (!empty($discussPlace)) {
     /* Load the request handler, set the URL (cause we're out of Discuss here) and redirect back. */
     $discuss->loadRequest();
     $discuss->url = $modx->makeUrl($modx->getOption('discuss.forums_resource_id'));
-    $url = $discuss->request->makeUrl($discussPlace[0],$params);
+    $url = $discuss->request->makeUrl($discussPlace[0],$params); /* TODO - TO FIX TO THE NEW MAKEURL SYNTAX! */
     if (!empty($url)) {
         $modx->sendRedirect($url);
     }

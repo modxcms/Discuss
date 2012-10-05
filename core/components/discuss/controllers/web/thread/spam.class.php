@@ -62,7 +62,7 @@ class DiscussThreadSpamController extends DiscussController {
             if ($this->thread->remove(array(),true,true)) {
                 $this->discuss->logActivity('thread_spam_remove',$this->thread->toArray(),$this->thread->getUrl());
 
-                $url = $this->discuss->request->makeUrl('board',array('board' => $this->thread->get('board')));
+                $url = $this->discuss->request->makeUrl(array('action' => 'board'),array('board' => $this->thread->get('board')));
                 $this->modx->sendRedirect($url);
             }
         }

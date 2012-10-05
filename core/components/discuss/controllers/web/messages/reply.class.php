@@ -132,10 +132,10 @@ class DiscussMessagesReplyController extends DiscussController {
             'text' => $this->modx->getOption('discuss.forum_title'),
         ),array(
             'text' => $this->modx->lexicon('discuss.messages'),
-            'url' => $this->discuss->request->makeUrl('messages'),
+            'url' => $this->discuss->request->makeUrl(array('action' => 'messages')),
         ),array(
             'text' => $this->post->get('title'),
-            'url' => $this->discuss->request->makeUrl('messages/view',array('thread' => $this->thread->get('id'))),
+            'url' => $this->discuss->request->makeUrl(array('action' => 'messages', 'messages' => 'view'),array('thread' => $this->thread->get('id'))),
         ),array(
             'text' => $this->modx->lexicon('discuss.reply'),
             'active' => true,

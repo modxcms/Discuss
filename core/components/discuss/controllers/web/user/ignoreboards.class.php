@@ -69,7 +69,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
             }
             if ($this->discuss->user->save()) {
                 $this->discuss->user->clearCache();
-                $url = $this->discuss->request->makeUrl('user/ignoreboards');
+                $url = $this->discuss->request->makeUrl(array('action' => 'user', 'user' => 'ignoreboards'));
                 $this->modx->sendRedirect($url);
             }
         }
@@ -175,7 +175,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
         );
         $trail[] = array(
             'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),
-            'url' => $this->discuss->request->makeUrl('user')
+            'url' => $this->discuss->request->makeUrl(array('action' => 'user'))
         );
         $trail[] = array('text' => $this->modx->lexicon('discuss.ignore_preferences'),'active' => true);
         return $trail;

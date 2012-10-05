@@ -71,7 +71,7 @@ class DiscussThreadRecentController extends DiscussController {
 
     public function getActionButtons() {
         $rssIcon = $this->discuss->getChunk('disLink',array(
-            'url' => $this->discuss->request->makeUrl('thread/recent.xml'),
+            'url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'recent.xml')),
             'text' => $this->getOption('rssIconLinkText',''),
             'class' => $this->getOption('rssIconLinkCls','dis-recent-rss'),
             'id' => $this->getOption('rssIconLinkId',''),

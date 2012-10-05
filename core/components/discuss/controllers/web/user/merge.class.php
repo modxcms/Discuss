@@ -61,7 +61,7 @@ class DiscussUserMergeController extends DiscussController {
 
         $trail[] = array(
             'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),
-            'url' => $this->discuss->request->makeUrl('user')
+            'url' => $this->discuss->request->makeUrl(array('action' => 'user'))
         );
 
         $trail[] = array('text' => $this->modx->lexicon('discuss.account_merge'),'active' => true);

@@ -120,7 +120,7 @@ class DiscussUserPostsController extends DiscussController {
         }
         $trail[] = array(
             'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->user->get('username'))),
-            'url' => $this->discuss->request->makeUrl('user', $userParams)
+            'url' => $this->discuss->request->makeUrl(array('action' => 'user'), $userParams)
         );
 
         $trail[] = array('text' => $this->modx->lexicon('discuss.posts'),'active' => true);
