@@ -38,7 +38,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         return $this->discuss->user->isLoggedIn;
     }
     public function getPageTitle() {
-        return $this->modx->lexicon('discuss.new_replies_to_posts');
+        return $this->modx->lexicon('discuss.new_replies_to_posts').' ('.number_format($this->threads['total']).')';
     }
     public function getSessionPlace() {
         return 'thread/new_replies_to_posts::'.$this->getProperty('page',1);
@@ -122,12 +122,12 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
      * @return void
      */
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->threads['total'],
             'id' => 0,
             'view' => 'thread/new_replies_to_posts',
             'limit' => $this->threads['limit'],
-        ));
+        ), $this->options));
     }
 
     /**
