@@ -3,6 +3,9 @@
 		<div class="m-section_title">
 			<header class="dis-cat-header dark-gradient group-fix sticky-bar">
 				<h1>[[+discuss.pagetitle]]</h1>
+                <div class="post-box h-group">
+                    <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit" class="action-buttons dis-action-unread_last_visit" title="[[%discuss.unread_posts_last_visit]]">[[%discuss.unread_posts_last_visit]]</a>
+                </div>
 				[[+pagination:notempty=`<nav id="key-Paginate" class="horiz-list">[[+pagination]]</nav>`]]
 			</header>
 			<div class="row h-group header-row">
