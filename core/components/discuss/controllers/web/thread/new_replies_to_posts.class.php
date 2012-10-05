@@ -46,7 +46,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
 
     public function getDefaultOptions() {
         return array(
-            'tpl' => 'post/disPostLi',
+            'tpl' => 'post/disThreadLi',
             'dateFormat' => $this->discuss->dateFormat,
             'rowSeparator' => "\n",
         );
@@ -109,7 +109,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
             $threadArray['unread-cls'] = '';
             $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
-            $list[] = $this->discuss->getChunk($this->getOption('tpl','post/disPostLi'),$threadArray);
+            $list[] = $this->discuss->getChunk($this->getOption('tpl','post/disThreadLi'),$threadArray);
         }
         $this->setPlaceholder('threads',implode($this->getOption('rowSeparator',"\n"),$list));
 

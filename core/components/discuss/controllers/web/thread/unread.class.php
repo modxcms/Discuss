@@ -34,7 +34,7 @@ class DiscussThreadUnreadController extends DiscussController {
     
     public function getDefaultOptions() {
         return array(
-            'postTpl' => 'post/disPostLi',
+            'postTpl' => 'post/disThreadLi',
             'dateFormat' => $this->discuss->dateFormat,
 
             'textButtonMarkAllRead' => $this->modx->lexicon('discuss.mark_all_as_read'),
@@ -57,7 +57,7 @@ class DiscussThreadUnreadController extends DiscussController {
         return $this->discuss->user->isLoggedIn;
     }
     public function getPageTitle() {
-        return $this->modx->lexicon('discuss.unread_posts');
+        return $this->modx->lexicon('discuss.unread_posts').' ('.number_format($this->threads['total']).')';
     }
     public function getSessionPlace() {
         return 'thread/unread::'.$this->getProperty('page',1);
@@ -98,13 +98,13 @@ class DiscussThreadUnreadController extends DiscussController {
     }
 
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->threads['total'],
             'id' => 0,
             'view' => 'thread/unread',
             'limit' => $this->threads['limit'],
             'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
-        ));
+        ), $this->options));
     }
 
     public function getActionButtons() {
