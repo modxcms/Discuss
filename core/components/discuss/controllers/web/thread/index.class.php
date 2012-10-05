@@ -246,13 +246,13 @@ class DiscussThreadController extends DiscussController {
 
     public function buildPagination() {
         if (empty($this->scriptProperties['print'])) {
-            $this->discuss->hooks->load('pagination/build',array(
+            $this->discuss->hooks->load('pagination/build',array_merge(array(
                 'count' => $this->posts['total'],
                 'id' => $this->thread->get('id'),
                 'view' => 'thread/',
                 'limit' => $this->posts['limit'],
                 'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
-            ));
+            ),$this->options));
         }
     }
 
