@@ -412,7 +412,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'unread',
+                    'disection' => 'recent',
                 )
             )
         ),
@@ -426,7 +426,33 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'unread_last_visit',
+                    'disection' => 'recent',
+                )
+            )
+        ),
+    ),
+    'thread/no_replies' => array(
+        'options' => array(
+            'showPaginationIfOnePage' => false,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'recent',
+                )
+            )
+        ),
+    ),
+    'thread/unanswered_questions' => array(
+        'options' => array(
+            'showPaginationIfOnePage' => false,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'recent',
                 )
             )
         ),

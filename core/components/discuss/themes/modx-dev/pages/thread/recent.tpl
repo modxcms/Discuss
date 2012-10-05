@@ -21,7 +21,7 @@
 		[[+recent_posts]]
 		[[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list">[[+pagination]]</nav>`]]
 	</div>
-</div><!-- Close Content From Wrapper -->
+</div>
 
 [[+bottom]]
 
