@@ -61,7 +61,7 @@ class DiscussThreadNewController extends DiscussController {
     }
 
     public function getSessionPlace() {
-        return 'thread-new:'.$this->board->get('id');
+        return 'thread/new:board='.$this->board->get('id');
     }
 
     public function process() {

@@ -293,6 +293,112 @@ class DisRequest {
             $this->modx->regClientStartupScript($this->discuss->config['jsUrl'].'web/discuss.js');
         }
 	}
+    
+    private function urlManifestParse($action, $params, $manifest) {
+        $bestmatch = null;
+        $result = null;
+        if (count($manifest[$action]['furl'])>0) {
+            foreach ($manifest[$action]['furl'] as $value) {
+                if (count($value["condition"])>0) {
+                    $conditionscount = 0;
+                    $conditionsmatched = 0;
+                    $conditionsparams = array();
+                    foreach ($value["condition"] as $paramname => $paramvalue) {
+                        $conditionscount++;
+                        if (!empty($params[$paramname]) && $params[$paramname] === $paramvalue) {
+                            $conditionsparams[] = $paramname;
+                            $conditionsmatched++;
+                        }
+                    }
+                    if ($conditionsmatched === $conditionscount) {
+                        $haveneededparams = true;
+                        foreach ($value["data"] as $data => $mode) {
+                            if (($mode === 'variable' || $mode === 'parameter-required') && empty($params[$data])) {
+                                $haveneededparams = false;
+                                break;
+                            }
+                        }
+                        if (!$haveneededparams) {
+                            continue; // The match isn't valid because the match requires having more required parameters.
+                        }
+                        foreach ($conditionsparams as $paramname) {
+                            unset($params[$paramname]);
+                        }
+                        $bestmatch = $value;
+                        break; // If we found the match from checking conditionals assume it the best
+                    }
+                }
+                else {
+                    $bestmatch = $value; // If we found a match without conditionals consider it a "weak" match (and try to search other matches, for example with conditionals)
+                }
+            }
+        }
+        if ($bestmatch === null && $action != 'global') {
+            $result = urlManifestParse('global', $params, $manifest); // check in global space if not found in action space
+        }
+        if ($bestmatch === null && $result === null) {
+            return null;
+        }
+        if ($bestmatch === null) {
+            return $result;
+        }
+        $path = '';
+        $request = array();
+        foreach ($bestmatch['data'] as $data => $type) {
+            switch ($type) {
+                case 'action':
+                    $path.= $action . '/';
+                    break;
+                case 'variable':
+                    if  (empty($params[$data])) {
+                        $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data);
+                        return null;
+                    }
+                    $path.= $params[$data] . '/';
+                    unset($params[$data]);
+                    break;
+                case 'constant':
+                    $path.= $data . '/';
+                    break;
+                case 'parameter-required':
+                    if  (empty($params[$data])) {
+                        $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data);
+                        return null;
+                    } // No break here is intentional. The assignement itself is like the non-required parameter.
+                case 'parameter':
+                    if  (!empty($params[$data])) {
+                        $request[$data] = $params[$data];
+                        unset($params[$data]);
+                    }
+                    break;
+                case 'parameter-constant':
+                    $param = explode("=", $data, 2);
+                    if (count($param)>1) {
+                        $request[$param[0]] = $param[1];
+                    }
+                    else {
+                        $request[$data] = $data;
+                    }
+                    break;
+                case 'allparameters':
+                    $request = array_merge($params, $request);
+                    $params = array(); // Because we passed all parameters to the $request array, $params is now void
+                    break;
+            }
+        }
+        trim($path, '/');
+        $url = $this->discuss->url;
+        $urlparts = explode('?', $url, 2);
+        if (count($urlparts)>1) {
+            $urlrequest = array();
+            parse_str($urlparts[1], $urlrequest);
+            $request = array_merge($urlrequest, $request);
+        }
+        $result = rtrim($urlparts[0], '/') . '/' . $path;
+        if (!empty($request))
+            $result .= '?' . http_build_query($request);
+        return $result;
+    }
 
     /**
      * Makes a proper URL for the Discuss system
@@ -301,76 +407,115 @@ class DisRequest {
      * @param array $params
      * @return string
      */
-    public function makeUrl(array $action = array(),array $params = array()) {
-        if (is_array($action)) {
-            if (empty($action[$this->config["actionVar"]])) {
-                $action[$this->config["actionVar"]] = "home";
-            }
-            if ($modx->request->getResourceMethod()!="alias") {
-                $action = http_build_query($action);
-            }
-            else {
-                $action_name = $action[$this->config["actionVar"]];
-                switch ($action_name) {
-                    case "home":
-                        if (!empty($action["category"]) {
-                            $action_suffix = "";
-                            if (!empty($action["category_name"]) {
-                                $action_suffix = "/" . $action["category_name"];
-                            }
-                            $action = "category/" . $action["category"] . $action_suffix;
-                        }
-                        else {
-                            $action = "";
-                        }
-                        break;
-                    default:
-                        if (!empty($action[$action_name]) {
-                            $action_suffix = "";
-                            if(!empty($action[$action_name . "_name"])) {
-                                $action_suffix = "/" . $action[$action_name . "_name"];
-                            }
-                            $action = $action_name . "/" . $action[$action_name] . $action_suffix;
-                        }
-                        else {
-                            $action = $action_name;
-                        }
-                        break;
-                }
+    public function makeUrl($action = '',array $params = array()) {
+        if (is_string($action) && !empty($action)) {
+            $controller = getControllerFile($action);
+            if (!file_exists($controller["file"]) || is_dir($controller["file"])) {
+                $action = ''; // Reset the action if we don't have the related controller
             }
         }
         else {
             $action = '';
         }
-        $url = $this->discuss->url;
-        if (is_array($params)) {
-            $params = http_build_query($params);
-        }
+        $url = '';
         if ($this->modx->request->getResourceMethod() != 'alias') {
-            if (!empty($action) || !empty($params)) {
-                $trim_character = '&';
-                $question_mark = strrpos($url, '?');
-                if ($question_mark === strlen($url)-1 || $question_mark === false) {
-                    $trim_character = '?';
-                }
-                $url = rtrim($url, $trim_character) . $trim_character . $action;
-                if(!empty($params)) {
-                    $url.= empty($action) ? '' : '&' . $params;
-                }
+            $url = $this->discuss->url;
+            if(!empty($action))
+                $params['action'] = $action;
+            $urlparts = explode('?', $url, 2);
+            if (count($urlparts)>1) {
+                $urlrequest = array();
+                parse_str($urlparts[1], $urlrequest);
+                $params = array_merge($urlrequest, $params);
             }
+            $url = rtrim($urlparts[0], '/');
+            if (!empty($params))
+                $url .= '?' . http_build_query($params);
         }
         else {
-            $url_chunks = explode('?', $url, 2);
-            $url = rtrim( rtrim($url_chunks[0],'/') . '/' . $action , '/');
-            $url = rtrim($url,'/');
-            $question_mark = false;
-            if (count($url_chunks) >= 2) {
-                $question_mark = true;
-                $url.= '?' . rtrim($url_chunks[1], '&');
-            }
-            if(!empty($params)) {
-                $url.= $question_mark ? '&' : '?' . $params;
-            }
+            
+            /* BEGIN example manifest */
+            $manifestexmpl = array(
+                'global' => array(
+                    'furl' => array(
+                        array(
+                            'condition' => array(
+                                'type' => 'category'
+                            )
+                            'data' => array(
+                                'category' => 'constant',
+                                'category_id' => 'variable',
+                                'category_name' => 'variable',
+                                'add' => 'allparameters'
+                            )
+                        ),
+                        array(
+                            'condition' => array()
+                            'data' => array(
+                                'action' => 'action',
+                                'add' => 'allparameters'
+                            )
+                        )
+                    )
+                ),
+                'thread' => array(
+                    'furl' => array(
+                        array(
+                            'condition' => array()
+                            'data' => array(
+                                'thread' => 'constant',
+                                'thread_id' => 'variable',
+                                'thread_name' => 'variable',
+                                'add' => 'allparameters'
+                            )
+                        )
+                    )
+                ),
+                'board' => array(
+                    'furl' => array(
+                        array(
+                            'condition' => array()
+                            'data' => array(
+                                'board' => 'constant',
+                                'board_id' => 'variable',
+                                'board_name' => 'variable',
+                                'add' => 'allparameters'
+                            )
+                        )
+                    )
+                ),
+                'user' => array(
+                    'furl' => array(
+                        array(
+                            'condition' => array(
+                                'type' => 'username'
+                            )
+                            'data' => array(
+                                'u' => 'constant',
+                                'name' => 'variable',
+                                'add' => 'allparameters'
+                            )
+                        ),
+                        array(
+                            'condition' => array(
+                                'type' => 'userid'
+                            )
+                            'data' => array(
+                                'user' => 'constant',
+                                'id' => 'variable',
+                                'add' => 'allparameters'
+                            )
+                        )
+                    )
+                )
+            );
+            /* END example manifest */
+            
+            /* Now parsing the manifest for FURLs rules */
+            $manifest = $manifestexmpl;
+            
+            $url = $this->urlManifestParse($action, $params, $manifest);
+            
         }
         if ($this->modx->getOption('discuss.absolute_urls',null,true)) {
             $url = $this->modx->getOption('site_url',null,MODX_SITE_URL).ltrim($url,'/');
