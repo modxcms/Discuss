@@ -118,6 +118,14 @@ $manifest = array(
                 'options' => array(
                     'disection' => 'new-message',
                 )
+            ),
+            'form' => array(
+                'tpl' => 'replyform',
+                'options' => array(
+                    'hook' => 'DiscussNewThread',
+                    'action' => 'new',
+                    'actionvar' => 'board',
+                )
             )
         ),
     ),
@@ -136,6 +144,14 @@ $manifest = array(
                 'options' => array(
                     'disection' => 'new-message',
                 )
+            ),
+            'form' => array(
+                'tpl' => 'replyform',
+                'options' => array(
+                    'hook' => 'DiscussReplyPost',
+                    'action' => 'reply',
+                    'actionvar' => 'post',
+                )
             )
         ),
     ),
@@ -153,6 +169,14 @@ $manifest = array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
                     'disection' => 'new-message',
+                )
+            ),
+            'form' => array(
+                'tpl' => 'replyform',
+                'options' => array(
+                    'hook' => 'DiscussModifyPost',
+                    'action' => 'modify',
+                    'actionvar' => 'post',
                 )
             )
         ),
