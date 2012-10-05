@@ -165,7 +165,7 @@
                     <span class="m-stats-single">[[+activeUsers.users]]</span>
                 </div>
                 <div class="f11-f12">
-                    <a class="modx-live" href="/live">
+                    <a class="modx-live" href="http://www.modx.com/live">
                         <img src="[[+discuss.config.imagesUrl]]redo/icons/modx-live.png">
                         <p>modx.com/live</p>
                     </a>
