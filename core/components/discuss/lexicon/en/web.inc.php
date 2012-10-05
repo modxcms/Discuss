@@ -137,6 +137,7 @@ $_lang['discuss.post_link'] = 'Link to this Post';
 $_lang['discuss.posted_on'] = 'Posted On';
 $_lang['discuss.posts'] = 'Posts';
 $_lang['discuss.print'] = 'Print';
+$_lang['discuss.sticky'] = 'sticky';
 $_lang['discuss.question'] = 'Question?';
 $_lang['discuss.answered'] = 'Answered';
 $_lang['discuss.question_and_answer'] = 'Question and Answer';

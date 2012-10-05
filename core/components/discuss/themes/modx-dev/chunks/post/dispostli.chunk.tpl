@@ -5,10 +5,10 @@
    		</div>
         <div class="f3-f6 m-title">
             <div class="wrap">
-                [[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<span class="sticky tag">sticky</span>`]]
-                [[+answered:notempty=`<span class="answered tag">solved</span>`]]
-                [[+question:notempty=`<span class="question tag">question</span>`]]
-                <!--<a class="h-group" href="[[+url]]">--><strong>[[+title]]</strong><!--</a>-->
+                [[+sticky:if=`[[+sticky]]`:eq=`1`:then=`<span class="sticky tag">[[%discuss.sticky]]</span>`]]
+                [[+answered:notempty=`<span class="answered tag">[[%discuss.answered]]</span>`]]
+                [[+question:notempty=`<span class="question tag">[[%discuss.question]]</span>`]]
+                <strong>[[+title]]</strong>
             </div>
         </div>
         <div class="f7">
