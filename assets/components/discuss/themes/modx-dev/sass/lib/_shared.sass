@@ -326,6 +326,15 @@ ul.options-select
         +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
         +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
 
+// orange button
+.a-tertiary-cta
+    @extend .a-primary-cta
+    +background-image(linear-gradient(lighten($c-tertiary, 1%), darken($c-tertiary, 15%)))
+    +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+    &:hover
+        +background-image(linear-gradient(lighten($c-tertiary, 3%), darken($c-tertiary, 15%)))
+        +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+
 // Light gray action button
 .btn-secondary-alt-cta
     @extend .btn-reset
