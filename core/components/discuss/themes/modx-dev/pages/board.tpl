@@ -7,7 +7,7 @@
 [[+belowBoards]]
 <div class="dis-threads forum-grid">
 	<div class="m-section_title">
-		<header class="dis-cat-header dark-gradient group-fix sticky-bar">
+		<header class="dis-cat-header dark-gradient group-fix sticky-bar top">
 			<h1>[[+name]]</h1>
 			[[+pagination:notempty=`
 			<nav id="key-Paginate" class="horiz-list">[[+pagination]]</nav>
