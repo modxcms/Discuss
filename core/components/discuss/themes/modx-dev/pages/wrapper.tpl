@@ -52,7 +52,7 @@
                                 <span class="m-user_posts"></span>
                             </div>
                             <div class="l-right">
-                                <div class="m-user_opts group-vis"><h3>[[%disucss.welcome_back]] <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]"  title="[[%discuss.view_profile]]">[[!+discuss.user.name_first]].</a></h3>
+                                <div class="m-user_opts group-vis"><h3>[[%discuss.welcome_back]] <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]"  title="[[%discuss.view_profile]]">[[!+discuss.user.name_first]].</a></h3>
                                     <ul class="options-select">
                                         <li id="F-Toggle-Options">
                                             <a href="[[~[[++discuss.forums_resource_id]]]]u/[[!+discuss.user.username]]" class="a-options"><span>&#x2193;</span></a>
