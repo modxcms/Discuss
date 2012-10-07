@@ -314,7 +314,7 @@ class Discuss {
 
             /* Format counts nicely */
             $authphs['user.unread_messages'] = ($newMessages > 1) ?
-                $this->modx->lexicon('discuss.user.new_messages',array('count' > $newMessages)) :
+                $this->modx->lexicon('discuss.user.new_messages',array('count' => $newMessages)) :
                 ($newMessages == 1) ? $this->modx->lexicon('discuss.user.one_new_message') :
                     $this->modx->lexicon('discuss.user.no_new_messages');
             $authphs['user.unread_posts'] = ($unreadPosts > 1) ?
