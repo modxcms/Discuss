@@ -176,21 +176,6 @@ $_lang['discuss.user_show_online'] = 'Show Online';
 $_lang['discuss.user_signature'] = 'Signature';
 $_lang['discuss.user_update'] = 'Update User';
 $_lang['discuss.user_website'] = 'Website';
-$_lang['discuss.user.no_new_posts'] = 'no new posts';
-$_lang['discuss.user.one_new_post'] = '1 new post';
-$_lang['discuss.user.new_posts'] = '[[+total]] new posts';
-$_lang['discuss.user.no_new_messages'] = 'no private messages';
-$_lang['discuss.user.one_new_message'] = '1 private message';
-$_lang['discuss.user.new_messages'] = '[[+total]] private messages';
-$_lang['discuss.user.no_new_replies'] = 'no replies';
-$_lang['discuss.user.one_new_reply'] = '1 reply';
-$_lang['discuss.user.new_replies'] = '[[+total]] unread replies';
-$_lang['discuss.user.no_unanswered_questions'] = 'no unanswered questions';
-$_lang['discuss.user.one_unanswered_question'] = '1 unanswered question';
-$_lang['discuss.user.new_unanswered_questions'] = '[[+total]] unanswered questions';
-$_lang['discuss.user.no_no_replies'] = 'no discussions';
-$_lang['discuss.user.one_no_reply'] = '1 discussion';
-$_lang['discuss.user.no_replies'] = '[[+total]] discussions';
 $_lang['discuss.usergroup'] = 'User Group';
 $_lang['discuss.usergroup_access'] = 'User Group Access';
 $_lang['discuss.usergroup_add'] = 'Add User Group';
@@ -419,6 +404,19 @@ $_lang['setting_discuss.user_active_threshold_desc'] = 'The number of minutes a 
 /* SSO Mode */
 $_lang['setting_discuss.sso_mode'] = 'SSO Mode';
 $_lang['setting_discuss.sso_mode_desc'] = 'If set to yes, Discuss will attempt to redirect Profile, Login, Logout and other SSO functionality to external MODX pages to allow you to integrate into the MODX user system. This is recommended.';
+
+$_lang['setting_discuss.forums_resource_id'] = 'Forums Resource ID';
+$_lang['setting_discuss.forums_resource_id_desc'] = 'The ID of the Resource your Discuss call is on.';
+
+$_lang['setting_discuss.login_resource_id'] = 'Login Resource ID';
+$_lang['setting_discuss.login_resource_id_desc'] = 'The ID of the Resource your Login call is on.';
+
+$_lang['setting_discuss.register_resource_id'] = 'Register Resource ID';
+$_lang['setting_discuss.register_resource_id_desc'] = 'The ID of the Resource your Register call is on.';
+
+$_lang['setting_discuss.update_profile_resource_id'] = 'Update Profile Resource ID';
+$_lang['setting_discuss.update_profile_resource_id_desc'] = 'The ID of the Resource your UpdateProfile call is on.';
+_mode_desc'] = 'If set to yes, Discuss will attempt to redirect Profile, Login, Logout and other SSO functionality to external MODX pages to allow you to integrate into the MODX user system. This is recommended.';
 
 $_lang['setting_discuss.forums_resource_id'] = 'Forums Resource ID';
 $_lang['setting_discuss.forums_resource_id_desc'] = 'The ID of the Resource your Discuss call is on.';
