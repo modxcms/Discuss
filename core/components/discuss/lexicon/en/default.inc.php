@@ -416,16 +416,3 @@ $_lang['setting_discuss.register_resource_id_desc'] = 'The ID of the Resource yo
 
 $_lang['setting_discuss.update_profile_resource_id'] = 'Update Profile Resource ID';
 $_lang['setting_discuss.update_profile_resource_id_desc'] = 'The ID of the Resource your UpdateProfile call is on.';
-_mode_desc'] = 'If set to yes, Discuss will attempt to redirect Profile, Login, Logout and other SSO functionality to external MODX pages to allow you to integrate into the MODX user system. This is recommended.';
-
-$_lang['setting_discuss.forums_resource_id'] = 'Forums Resource ID';
-$_lang['setting_discuss.forums_resource_id_desc'] = 'The ID of the Resource your Discuss call is on.';
-
-$_lang['setting_discuss.login_resource_id'] = 'Login Resource ID';
-$_lang['setting_discuss.login_resource_id_desc'] = 'The ID of the Resource your Login call is on.';
-
-$_lang['setting_discuss.register_resource_id'] = 'Register Resource ID';
-$_lang['setting_discuss.register_resource_id_desc'] = 'The ID of the Resource your Register call is on.';
-
-$_lang['setting_discuss.update_profile_resource_id'] = 'Update Profile Resource ID';
-$_lang['setting_discuss.update_profile_resource_id_desc'] = 'The ID of the Resource your UpdateProfile call is on.';
