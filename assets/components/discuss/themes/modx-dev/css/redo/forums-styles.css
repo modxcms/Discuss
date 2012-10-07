@@ -2603,14 +2603,18 @@ pre, .dis-content pre {
   text-align: right; }
 
 /* line 20, ../../sass/lib/_shared.sass */
+.center {
+  text-align: center; }
+
+/* line 22, ../../sass/lib/_shared.sass */
 .l-txtcenter {
   text-align: center; }
 
-/* line 24, ../../sass/lib/_shared.sass */
+/* line 26, ../../sass/lib/_shared.sass */
 .l-horiz_list li {
   display: inline-block; }
 
-/* line 27, ../../sass/lib/_shared.sass */
+/* line 29, ../../sass/lib/_shared.sass */
 .m-login_block input[type="text"], .m-login_block input[type="password"] {
   display: block;
   width: 100%;
@@ -2622,66 +2626,66 @@ pre, .dis-content pre {
   -o-border-radius: 3px;
   border-radius: 3px;
   border: none; }
-/* line 33, ../../sass/lib/_shared.sass */
+/* line 35, ../../sass/lib/_shared.sass */
 .m-login_block input {
   vertical-align: top;
   display: inline-block;
   margin-top: 0; }
 
-/* line 37, ../../sass/lib/_shared.sass */
+/* line 39, ../../sass/lib/_shared.sass */
 .btn-reset, .btn-secondary-alt-cta, .a-dis-actionbuttons a {
   line-height: 1; }
 
-/* line 41, ../../sass/lib/_shared.sass */
+/* line 43, ../../sass/lib/_shared.sass */
 .m-breadcrumbs {
   padding-bottom: 2px !important;
   padding-top: 2px !important; }
-  /* line 44, ../../sass/lib/_shared.sass */
+  /* line 46, ../../sass/lib/_shared.sass */
   .m-breadcrumbs li {
     display: inline-block;
     line-height: 1;
     vertical-align: bottom;
     padding: 3px 0; }
-    /* line 49, ../../sass/lib/_shared.sass */
+    /* line 51, ../../sass/lib/_shared.sass */
     .m-breadcrumbs li:after {
       content: "\2192 ";
       padding-left: 3px;
       padding-right: 3px;
       color: #cccccc; }
-    /* line 54, ../../sass/lib/_shared.sass */
+    /* line 56, ../../sass/lib/_shared.sass */
     .m-breadcrumbs li:last-child:after {
       content: ""; }
-  /* line 56, ../../sass/lib/_shared.sass */
+  /* line 58, ../../sass/lib/_shared.sass */
   .m-breadcrumbs a {
     color: #939393;
     text-decoration: none; }
-    /* line 59, ../../sass/lib/_shared.sass */
+    /* line 61, ../../sass/lib/_shared.sass */
     .m-breadcrumbs a:hover {
       color: #131313; }
 
-/* line 63, ../../sass/lib/_shared.sass */
+/* line 65, ../../sass/lib/_shared.sass */
 #cse-search-form {
   width: 300px;
   display: inline-block;
   vertical-align: top;
   height: 33px; }
 
-/* line 69, ../../sass/lib/_shared.sass */
+/* line 71, ../../sass/lib/_shared.sass */
 .m-search-label {
   padding-top: 1px;
   display: inline-block;
   vertical-align: middle; }
-  /* line 73, ../../sass/lib/_shared.sass */
+  /* line 75, ../../sass/lib/_shared.sass */
   .m-search-label em {
     display: inline-block;
     vertical-align: middle;
     padding: 7px;
     color: #acacac; }
-  /* line 78, ../../sass/lib/_shared.sass */
+  /* line 80, ../../sass/lib/_shared.sass */
   .m-search-label a {
     line-height: 1; }
 
-/* line 83, ../../sass/lib/_shared.sass */
+/* line 85, ../../sass/lib/_shared.sass */
 .l-right.m-search a {
   background-color: #eaeaea;
   display: inline-block;
@@ -2689,100 +2693,100 @@ pre, .dis-content pre {
   border-radius: 20px;
   color: #797979;
   line-height: 1; }
-  /* line 90, ../../sass/lib/_shared.sass */
+  /* line 92, ../../sass/lib/_shared.sass */
   .l-right.m-search a:hover {
     color: #606060;
     background-color: #f1f1f1; }
 
-/* line 96, ../../sass/lib/_shared.sass */
+/* line 98, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod a {
   padding: 7px 9px 7px 7px;
   padding:  0.7rem 0.9rem 0.7rem 0.7rem;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
   line-height: 1; }
-/* line 100, ../../sass/lib/_shared.sass */
+/* line 102, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod a:after {
   content: "|";
   padding: 0 0 0 10px;
   padding:  0 0 0 1rem;
   position: absolute; }
-/* line 104, ../../sass/lib/_shared.sass */
+/* line 106, ../../sass/lib/_shared.sass */
 .m-sm_nav_pod li:last-child a:after {
   content: "";
   padding: 0; }
 
-/* line 109, ../../sass/lib/_shared.sass */
+/* line 111, ../../sass/lib/_shared.sass */
 footer {
   background: url(../../images/bg/section-border-medy-repeat.png) repeat-x left top;
   padding: 1.5em 0;
   margin: 5em 0 0 0; }
-  /* line 113, ../../sass/lib/_shared.sass */
+  /* line 115, ../../sass/lib/_shared.sass */
   footer a {
     white-space: nowrap; }
-  /* line 115, ../../sass/lib/_shared.sass */
+  /* line 117, ../../sass/lib/_shared.sass */
   footer .copy-info {
     display: inline-block;
     font-size: 13px;
     font-size: 1.3rem;
     padding: 0.5em 0 0 1.3em; }
-    /* line 119, ../../sass/lib/_shared.sass */
+    /* line 121, ../../sass/lib/_shared.sass */
     footer .copy-info p, footer .copy-info ul {
       margin: 0 0 0.25em 0; }
-    /* line 121, ../../sass/lib/_shared.sass */
+    /* line 123, ../../sass/lib/_shared.sass */
     footer .copy-info p, footer .copy-info a {
       opacity: 0.6; }
-    /* line 123, ../../sass/lib/_shared.sass */
+    /* line 125, ../../sass/lib/_shared.sass */
     footer .copy-info p {
       padding-top: 0.7em; }
-    /* line 125, ../../sass/lib/_shared.sass */
+    /* line 127, ../../sass/lib/_shared.sass */
     footer .copy-info a:hover {
       opacity: 0.8; }
-    /* line 127, ../../sass/lib/_shared.sass */
+    /* line 129, ../../sass/lib/_shared.sass */
     footer .copy-info li:first-child {
       padding-left: 0; }
-  /* line 129, ../../sass/lib/_shared.sass */
+  /* line 131, ../../sass/lib/_shared.sass */
   footer .horiz-list li a {
     padding: 0.25em 0.75em;
     text-decoration: none;
     color: black; }
-  /* line 134, ../../sass/lib/_shared.sass */
+  /* line 136, ../../sass/lib/_shared.sass */
   footer nav ul.horiz-list {
     margin: 0; }
-    /* line 138, ../../sass/lib/_shared.sass */
+    /* line 140, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list li a:after {
       content: "|";
       padding: 0 0.75em;
       margin-right: -1.25em; }
-    /* line 142, ../../sass/lib/_shared.sass */
+    /* line 144, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list li:last-child a:after {
       content: ""; }
-    /* line 144, ../../sass/lib/_shared.sass */
+    /* line 146, ../../sass/lib/_shared.sass */
     footer nav ul.horiz-list a, footer nav ul.horiz-list h3 {
       font-size: 13px;
       font-weight: bold; }
-  /* line 147, ../../sass/lib/_shared.sass */
+  /* line 149, ../../sass/lib/_shared.sass */
   footer .row .stay-connected {
     padding-left: 1.75em;
     border-left: 1px dotted silver;
     margin-left: 0; }
 
-/* line 152, ../../sass/lib/_shared.sass */
+/* line 154, ../../sass/lib/_shared.sass */
 .modx-live {
   opacity: 0.8;
   color: black; }
-  /* line 155, ../../sass/lib/_shared.sass */
+  /* line 157, ../../sass/lib/_shared.sass */
   .modx-live:hover {
     opacity: 1;
     text-decoration: none; }
-  /* line 158, ../../sass/lib/_shared.sass */
+  /* line 160, ../../sass/lib/_shared.sass */
   .modx-live img {
     width: 60%; }
 
-/* line 161, ../../sass/lib/_shared.sass */
+/* line 163, ../../sass/lib/_shared.sass */
 .social-icons.horiz-list {
   margin: 1em 0 0 0; }
-  /* line 163, ../../sass/lib/_shared.sass */
+  /* line 165, ../../sass/lib/_shared.sass */
   .social-icons.horiz-list li a {
     display: block;
     height: 38px;
@@ -2794,62 +2798,62 @@ footer {
     overflow: hidden;
     margin: 0 5px 0 0;
     opacity: 0.8; }
-    /* line 174, ../../sass/lib/_shared.sass */
+    /* line 176, ../../sass/lib/_shared.sass */
     .social-icons.horiz-list li a:hover {
       opacity: 1;
       background-position-y: -40px; }
-    /* line 177, ../../sass/lib/_shared.sass */
+    /* line 179, ../../sass/lib/_shared.sass */
     .social-icons.horiz-list li a.twitter {
       background-position-x: -257px; }
-    /* line 179, ../../sass/lib/_shared.sass */
+    /* line 181, ../../sass/lib/_shared.sass */
     .social-icons.horiz-list li a.facebook {
       background-position-x: -185px; }
 
-/* line 183, ../../sass/lib/_shared.sass */
+/* line 185, ../../sass/lib/_shared.sass */
 .m-user_opts {
   width: 100%; }
 
-/* line 185, ../../sass/lib/_shared.sass */
+/* line 187, ../../sass/lib/_shared.sass */
 .m-user_box {
   padding: 1em 1em 0 1em; }
-  /* line 187, ../../sass/lib/_shared.sass */
+  /* line 189, ../../sass/lib/_shared.sass */
   .m-user_box h3 {
     font-size: 17px;
     font-size: 1.7rem;
     margin: 0 0 5px 0;
     margin:  0 0 0.5rem 0; }
-  /* line 190, ../../sass/lib/_shared.sass */
+  /* line 192, ../../sass/lib/_shared.sass */
   .m-user_box p {
     color: #86a8a5;
     line-height: 1.4; }
-  /* line 193, ../../sass/lib/_shared.sass */
+  /* line 195, ../../sass/lib/_shared.sass */
   .m-user_box a {
     color: white;
     text-decoration: underline; }
-  /* line 196, ../../sass/lib/_shared.sass */
+  /* line 198, ../../sass/lib/_shared.sass */
   .m-user_box .l-left {
     width: 12%; }
-    /* line 198, ../../sass/lib/_shared.sass */
+    /* line 200, ../../sass/lib/_shared.sass */
     .m-user_box .l-left img {
       width: 100%;
       border: 2px solid rgba(255, 255, 255, 0.3);
       border-radius: 3px;
       max-width: 100px; }
-  /* line 203, ../../sass/lib/_shared.sass */
+  /* line 205, ../../sass/lib/_shared.sass */
   .m-user_box .l-right {
     width: 84%; }
 
-/* line 206, ../../sass/lib/_shared.sass */
+/* line 208, ../../sass/lib/_shared.sass */
 .m-user_tools {
   margin: 1em 0 0 0; }
-  /* line 208, ../../sass/lib/_shared.sass */
+  /* line 210, ../../sass/lib/_shared.sass */
   .m-user_tools ul, .m-user_tools a {
     display: inline-block; }
-  /* line 210, ../../sass/lib/_shared.sass */
+  /* line 212, ../../sass/lib/_shared.sass */
   .m-user_tools a {
     padding: 6px 10px; }
 
-/* line 212, ../../sass/lib/_shared.sass */
+/* line 214, ../../sass/lib/_shared.sass */
 .m-user_tools_logout {
   float: right;
   padding: 3px 12px;
@@ -2861,35 +2865,35 @@ footer {
   -ms-border-radius: 30px !important;
   -o-border-radius: 30px !important;
   border-radius: 30px !important; }
-  /* line 218, ../../sass/lib/_shared.sass */
+  /* line 220, ../../sass/lib/_shared.sass */
   .m-user_tools_logout:hover {
     text-decoration: none !important; }
 
-/* line 220, ../../sass/lib/_shared.sass */
+/* line 222, ../../sass/lib/_shared.sass */
 .m-user_tools_reg_links {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px; }
-  /* line 222, ../../sass/lib/_shared.sass */
+  /* line 224, ../../sass/lib/_shared.sass */
   .m-user_tools_reg_links li {
     margin-left: -4px; }
-    /* line 224, ../../sass/lib/_shared.sass */
+    /* line 226, ../../sass/lib/_shared.sass */
     .m-user_tools_reg_links li:first-child a {
       -webkit-border-radius: 3px 0 0 3px;
       -moz-border-radius: 3px 0 0 3px;
       -ms-border-radius: 3px 0 0 3px;
       -o-border-radius: 3px 0 0 3px;
       border-radius: 3px 0 0 3px; }
-    /* line 226, ../../sass/lib/_shared.sass */
+    /* line 228, ../../sass/lib/_shared.sass */
     .m-user_tools_reg_links li:last-child a {
       -webkit-border-radius: 0 3px 3px 0;
       -moz-border-radius: 0 3px 3px 0;
       -ms-border-radius: 0 3px 3px 0;
       -o-border-radius: 0 3px 3px 0;
       border-radius: 0 3px 3px 0; }
-    /* line 228, ../../sass/lib/_shared.sass */
+    /* line 230, ../../sass/lib/_shared.sass */
     .m-user_tools_reg_links li a {
       background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2b5b57), color-stop(100%, #244d4a));
       background-image: -webkit-linear-gradient(#2b5b57, #244d4a);
@@ -2897,7 +2901,7 @@ footer {
       background-image: -o-linear-gradient(#2b5b57, #244d4a);
       background-image: linear-gradient(#2b5b57, #244d4a);
       text-decoration: none; }
-      /* line 231, ../../sass/lib/_shared.sass */
+      /* line 233, ../../sass/lib/_shared.sass */
       .m-user_tools_reg_links li a:hover {
         background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #316964), color-stop(100%, #295754));
         background-image: -webkit-linear-gradient(#316964, #295754);
@@ -2905,28 +2909,28 @@ footer {
         background-image: -o-linear-gradient(#316964, #295754);
         background-image: linear-gradient(#316964, #295754); }
 
-/* line 235, ../../sass/lib/_shared.sass */
+/* line 237, ../../sass/lib/_shared.sass */
 .m-user_box {
   width: 100%; }
-  /* line 237, ../../sass/lib/_shared.sass */
+  /* line 239, ../../sass/lib/_shared.sass */
   .m-user_box h3 {
     float: left;
     color: #86a8a5; }
-  /* line 240, ../../sass/lib/_shared.sass */
+  /* line 242, ../../sass/lib/_shared.sass */
   .m-user_box a {
     text-decoration: none; }
-    /* line 242, ../../sass/lib/_shared.sass */
+    /* line 244, ../../sass/lib/_shared.sass */
     .m-user_box a:hover {
       text-decoration: underline; }
 
-/* line 245, ../../sass/lib/_shared.sass */
+/* line 247, ../../sass/lib/_shared.sass */
 ul.options-select {
   float: left; }
 
-/* line 247, ../../sass/lib/_shared.sass */
+/* line 249, ../../sass/lib/_shared.sass */
 #F-Toggle-Options {
   position: relative; }
-  /* line 249, ../../sass/lib/_shared.sass */
+  /* line 251, ../../sass/lib/_shared.sass */
   #F-Toggle-Options a.a-options {
     margin: 0 0 0 10px;
     display: block;
@@ -2935,7 +2939,7 @@ ul.options-select {
     width: 20px;
     overflow: hidden;
     text-indent: 101%; }
-    /* line 258, ../../sass/lib/_shared.sass */
+    /* line 260, ../../sass/lib/_shared.sass */
     #F-Toggle-Options a.a-options span {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
       opacity: 0.7;
@@ -2943,12 +2947,12 @@ ul.options-select {
       width: 20px;
       display: block;
       background: url(../../images/redo/icons/down-arrow.png) no-repeat center -21px; }
-    /* line 265, ../../sass/lib/_shared.sass */
+    /* line 267, ../../sass/lib/_shared.sass */
     #F-Toggle-Options a.a-options:hover span {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
       opacity: 1; }
 
-/* line 267, ../../sass/lib/_shared.sass */
+/* line 269, ../../sass/lib/_shared.sass */
 #F-Toggle-List {
   display: none;
   position: absolute;
@@ -2956,7 +2960,7 @@ ul.options-select {
   top: 22px;
   padding: 6px 10px;
   min-width: 150px; }
-  /* line 275, ../../sass/lib/_shared.sass */
+  /* line 277, ../../sass/lib/_shared.sass */
   #F-Toggle-List:after {
     content: "";
     -webkit-border-radius: 3px 3px 0 0;
@@ -2973,21 +2977,21 @@ ul.options-select {
     top: -22px;
     right: 0;
     cursor: pointer; }
-  /* line 287, ../../sass/lib/_shared.sass */
+  /* line 289, ../../sass/lib/_shared.sass */
   #F-Toggle-List a {
     color: #a9c1bf;
     text-decoration: none;
     padding: 5px 0;
     display: block;
     border-bottom: dotted 1px #3b6461; }
-    /* line 293, ../../sass/lib/_shared.sass */
+    /* line 295, ../../sass/lib/_shared.sass */
     #F-Toggle-List a:hover {
       color: white; }
-  /* line 295, ../../sass/lib/_shared.sass */
+  /* line 297, ../../sass/lib/_shared.sass */
   #F-Toggle-List li:last-child a {
     border-bottom: none; }
 
-/* line 299, ../../sass/lib/_shared.sass */
+/* line 301, ../../sass/lib/_shared.sass */
 .m-raised-dark-bg, .m-user_tools_logout, #F-Toggle-Options a.a-options, .paginate a, a.preview, a#dis-preview-btn.preview {
   cursor: pointer;
   -webkit-border-radius: 3px;
@@ -3004,7 +3008,7 @@ ul.options-select {
   -moz-box-shadow: #070e0e 0 0 3px, black 0 1px 0, #2b5b57 0 1px 0 inset;
   box-shadow: #070e0e 0 0 3px, black 0 1px 0, #2b5b57 0 1px 0 inset;
   color: #ebf5f5 !important; }
-  /* line 305, ../../sass/lib/_shared.sass */
+  /* line 307, ../../sass/lib/_shared.sass */
   .m-raised-dark-bg:hover, .m-user_tools_logout:hover, #F-Toggle-Options a.a-options:hover, .paginate a:hover, a.preview:hover, a#dis-preview-btn.preview:hover, .m-raised-dark-bg.active, .active.m-user_tools_logout, #F-Toggle-Options a.active.a-options, .paginate a.active, a.active.preview, a.active#dis-preview-btn.preview {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     opacity: 1;
@@ -3017,7 +3021,7 @@ ul.options-select {
     -moz-box-shadow: black 0 0 3px, black 0 1px 0, #4ba09a 0 1px 0 inset;
     box-shadow: black 0 0 3px, black 0 1px 0, #4ba09a 0 1px 0 inset; }
 
-/* line 311, ../../sass/lib/_shared.sass */
+/* line 313, ../../sass/lib/_shared.sass */
 .m-raised-dark-bg-nh, #F-Toggle-List {
   cursor: pointer;
   -webkit-border-radius: 3px;
@@ -3035,7 +3039,7 @@ ul.options-select {
   box-shadow: #070e0e 0 0 3px, black 0 1px 0, #2b5b57 0 1px 0 inset;
   color: #ebf5f5 !important; }
 
-/* line 319, ../../sass/lib/_shared.sass */
+/* line 321, ../../sass/lib/_shared.sass */
 .a-primary-cta, .a-tertiary-cta, .forum-grid .question, .dis-cat-header .post-box a.Button, .paginate.stand-alone .post-box a.Button, .forum-grid .tag, .forum-grid .solved {
   color: white;
   margin: 0 0 0 1em;
@@ -3055,7 +3059,7 @@ ul.options-select {
   -webkit-box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   -moz-box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0; }
-  /* line 327, ../../sass/lib/_shared.sass */
+  /* line 329, ../../sass/lib/_shared.sass */
   .a-primary-cta:hover, .a-tertiary-cta:hover, .forum-grid .question:hover, .dis-cat-header .post-box a.Button:hover, .paginate.stand-alone .post-box a.Button:hover, .forum-grid .tag:hover, .forum-grid .solved:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #a9cd5b), color-stop(100%, #7a9c30));
     background-image: -webkit-linear-gradient(#a9cd5b, #7a9c30);
@@ -3066,7 +3070,7 @@ ul.options-select {
     -moz-box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0;
     box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0; }
 
-/* line 332, ../../sass/lib/_shared.sass */
+/* line 334, ../../sass/lib/_shared.sass */
 .a-tertiary-cta, .forum-grid .question {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f3af3f), color-stop(100%, #d4880d));
   background-image: -webkit-linear-gradient(#f3af3f, #d4880d);
@@ -3076,7 +3080,7 @@ ul.options-select {
   -webkit-box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   -moz-box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0; }
-  /* line 336, ../../sass/lib/_shared.sass */
+  /* line 338, ../../sass/lib/_shared.sass */
   .a-tertiary-cta:hover, .forum-grid .question:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f4b348), color-stop(100%, #d4880d));
     background-image: -webkit-linear-gradient(#f4b348, #d4880d);
@@ -3087,7 +3091,7 @@ ul.options-select {
     -moz-box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0;
     box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0; }
 
-/* line 341, ../../sass/lib/_shared.sass */
+/* line 343, ../../sass/lib/_shared.sass */
 .btn-secondary-alt-cta, .a-dis-actionbuttons a {
   display: block;
   margin: 0.9em 0;
@@ -3116,7 +3120,7 @@ ul.options-select {
   background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%); }
-  /* line 360, ../../sass/lib/_shared.sass */
+  /* line 362, ../../sass/lib/_shared.sass */
   .btn-secondary-alt-cta:hover, .a-dis-actionbuttons a:hover {
     background-color: white;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
