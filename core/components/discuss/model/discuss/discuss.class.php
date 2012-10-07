@@ -314,31 +314,31 @@ class Discuss {
 
             /* Format counts nicely */
             $authphs['user.unread_messages'] = ($newMessages > 1) ?
-                $this->modx->lexicon('discuss.user.new_messages',array('count' => $newMessages)) : (
+                $this->modx->lexicon('discuss.user.new_messages',array('total' => $newMessages)) : (
                     ($newMessages == 1) ?
                     $this->modx->lexicon('discuss.user.one_new_message') :
                     $this->modx->lexicon('discuss.user.no_new_messages')
                 );
             $authphs['user.unread_posts'] = ($unreadPosts > 1) ?
-                $this->modx->lexicon('discuss.user.new_posts', array('count' => $unreadPosts)) : (
+                $this->modx->lexicon('discuss.user.new_posts', array('total' => $unreadPosts)) : (
                     ($unreadPosts == 1) ?
                     $this->modx->lexicon('discuss.user.one_new_post') :
                     $this->modx->lexicon('discuss.user.no_new_posts')
                 );
             $authphs['user.new_replies'] = ($newReplies > 1) ?
-                $this->modx->lexicon('discuss.user.new_replies',array('count' => $newReplies)) : (
+                $this->modx->lexicon('discuss.user.new_replies',array('total' => $newReplies)) : (
                     ($newReplies == 1) ?
                     $this->modx->lexicon('discuss.user.one_new_reply') :
                     $this->modx->lexicon('discuss.user.no_new_replies')
                 );
             $authphs['user.unanswered_questions'] = ($unansweredQuestions > 1) ?
-                $this->modx->lexicon('discuss.user.unanswered_questions',array('count' => $unansweredQuestions)) : (
+                $this->modx->lexicon('discuss.user.unanswered_questions',array('total' => $unansweredQuestions)) : (
                     ($unansweredQuestions == 1) ?
                     $this->modx->lexicon('discuss.user.one_unanswered_question') :
                     $this->modx->lexicon('discuss.user.no_unanswered_questions')
                 );
             $authphs['user.no_replies'] = ($noReplies > 1) ?
-                $this->modx->lexicon('discuss.user.no_replies',array('count' => $noReplies)) : (
+                $this->modx->lexicon('discuss.user.no_replies',array('total' => $noReplies)) : (
                     ($noReplies == 1) ?
                     $this->modx->lexicon('discuss.user.one_no_reply') :
                     $this->modx->lexicon('discuss.user.no_no_replies')
