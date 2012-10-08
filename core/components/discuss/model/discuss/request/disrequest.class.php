@@ -296,9 +296,9 @@ class DisRequest {
     
     private function urlManifestParse($action, $params, $manifest) {
         $bestmatch = null;
-        $result = $this->discuss->url;
+        $result = null;
         if ($action === '' && empty($params)) {
-            return $result; // Fast check for makeUrl without parameters
+            return $this->discuss->url; // Fast check for makeUrl without parameters
         }
         if (count($manifest[$action]['furl'])>0) {
             foreach ($manifest[$action]['furl'] as $value) {
@@ -349,6 +349,9 @@ class DisRequest {
         if ($bestmatch === null && $action != 'global') {
             $result = urlManifestParse('global', $params, $manifest); // check in global space if not found in action space
         }
+        if ($bestmatch === null && $result === null) {
+            return $this->makeUrl($action, $params, true); // Fallback to nonFURL generation in case if FURL generation failed
+        }
         if ($bestmatch === null) {
             return $result;
         }
@@ -362,7 +365,7 @@ class DisRequest {
                 case 'variable-required':
                     if (empty($params[$data['key']])) {
                         $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data['key']);
-                        return $result;
+                        return $this->makeUrl($action, $params, true); // Fallback to nonFURL generation in case if FURL generation failed
                     } // No break here is intentional. The assignement itself is like the non-required variable.
                 case 'variable':
                     if (!empty($params[$data['key']])) {
@@ -376,7 +379,7 @@ class DisRequest {
                 case 'parameter-required':
                     if  (empty($params[$data['key']])) {
                         $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data['key']);
-                        return $result;
+                        return $this->makeUrl($action, $params, true); // Fallback to nonFURL generation in case if FURL generation failed
                     } // No break here is intentional. The assignement itself is like the non-required parameter.
                 case 'parameter':
                     if  (!empty($params[$data['key']])) {
@@ -406,7 +409,7 @@ class DisRequest {
             }
         }
         trim($path, '/');
-        $urlparts = explode('?', $result, 2);
+        $urlparts = explode('?', $this->discuss->url, 2);
         if (count($urlparts)>1) {
             $urlrequest = array();
             parse_str($urlparts[1], $urlrequest);
@@ -425,7 +428,7 @@ class DisRequest {
      * @param array $params
      * @return string
      */
-    public function makeUrl($action = '',array $params = array()) {
+    public function makeUrl($action = '',array $params = array(), $forcenofurls = false) {
         if (is_string($action) && !empty($action)) {
             $controller = $this->getControllerFile($action);
             if (!file_exists($controller["file"]) || is_dir($controller["file"])) {
@@ -436,7 +439,8 @@ class DisRequest {
             $action = '';
         }
         $url = '';
-        if ($this->modx->request->getResourceMethod() != 'alias') {
+        $nofurls = ($forcenofurls || $this->modx->request->getResourceMethod() != 'alias');
+        if ($nofurls) {
             $url = $this->discuss->url;
             if(!empty($action))
                 $params['action'] = $action;
