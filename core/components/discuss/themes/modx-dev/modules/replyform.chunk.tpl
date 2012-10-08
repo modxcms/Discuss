@@ -8,17 +8,17 @@
 [[!+fi.error.test]]
 <form action="[[~[[*id]]]]thread/[[+action]]?[[+actionvar]]=[[+id]]" method="post" class="dis-form dis-thread-form" id="dis-post-form" enctype="multipart/form-data">
     <input type="hidden" name="board"  value="[[!+fi.board]]" />
+    <input type="hidden" name="thread" value="[[!+fi.thread]]" />
+    <input type="hidden" name="post"   value="[[!+fi.post]]" />
 
-    [[!+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" /> [[%discuss.discussion]]</label>
-        <label><input type="radio" name="class_key" value="disThreadQuestion" /> [[%discuss.question_and_answer]]</label>
+    [[!+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" [[!+fi.class_key:eq=`disThreadDiscussion`:then=`checked="checked"`:else=``]] /> [[%discuss.discussion]]</label>
+        <label><input type="radio" name="class_key" value="disThreadQuestion" [[!+fi.class_key:eq=`disThreadQuestion`:then=`checked="checked"`:else=``]] /> [[%discuss.question_and_answer]]</label>
         <label for="dis-new-thread-title">[[%discuss.title]]:
             <span class="error">[[!+fi.error.title]]</span>
         </label>
         <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
     `:else=`
         <input type="hidden" name="title" value="[[!+fi.title]]" />
-        <input type="hidden" name="thread" value="[[!+fi.thread]]" />
-        <input type="hidden" name="post"   value="[[!+fi.post]]" />
     `]]
 
     <div class="wysi-buttons">[[+buttons]]</div>
