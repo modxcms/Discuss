@@ -296,14 +296,17 @@ class DisRequest {
     
     private function urlManifestParse($action, $params, $manifest) {
         $bestmatch = null;
-        $result = null;
+        $result = $this->discuss->url;
+        if ($action === '' && empty($params)) {
+            return $result; // Fast check for makeUrl without parameters
+        }
         if (count($manifest[$action]['furl'])>0) {
             foreach ($manifest[$action]['furl'] as $value) {
-                if (count($value["condition"])>0) {
+                if (count($value['condition'])>0) {
                     $conditionscount = 0;
                     $conditionsmatched = 0;
                     $conditionsparams = array();
-                    foreach ($value["condition"] as $paramname => $paramvalue) {
+                    foreach ($value['condition'] as $paramname => $paramvalue) {
                         $conditionscount++;
                         if (!empty($params[$paramname]) && $params[$paramname] === $paramvalue) {
                             $conditionsparams[] = $paramname;
@@ -312,8 +315,8 @@ class DisRequest {
                     }
                     if ($conditionsmatched === $conditionscount) {
                         $haveneededparams = true;
-                        foreach ($value["data"] as $data => $mode) {
-                            if (($mode === 'variable' || $mode === 'parameter-required') && empty($params[$data])) {
+                        foreach ($value['data'] as $data) {
+                            if (($data['type'] === 'variable-required' || $data['type'] === 'parameter-required') && empty($params[$data['key']])) {
                                 $haveneededparams = false;
                                 break;
                             }
@@ -329,6 +332,16 @@ class DisRequest {
                     }
                 }
                 else {
+                    $haveneededparams = true;
+                    foreach ($value['data'] as $data) {
+                        if (($data['type'] === 'variable-required' || $data['type'] === 'parameter-required') && empty($params[$data['key']])) {
+                            $haveneededparams = false;
+                            break;
+                        }
+                    }
+                    if (!$haveneededparams) {
+                        continue; // The match isn't valid because the match requires having more required parameters.
+                    }
                     $bestmatch = $value; // If we found a match without conditionals consider it a "weak" match (and try to search other matches, for example with conditionals)
                 }
             }
@@ -336,49 +349,55 @@ class DisRequest {
         if ($bestmatch === null && $action != 'global') {
             $result = urlManifestParse('global', $params, $manifest); // check in global space if not found in action space
         }
-        if ($bestmatch === null && $result === null) {
-            return null;
-        }
         if ($bestmatch === null) {
             return $result;
         }
         $path = '';
         $request = array();
-        foreach ($bestmatch['data'] as $data => $type) {
-            switch ($type) {
+        foreach ($bestmatch['data'] as $data) {
+            switch ($data['type']) {
                 case 'action':
                     $path.= $action . '/';
                     break;
+                case 'variable-required':
+                    if (empty($params[$data['key']])) {
+                        $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data['key']);
+                        return $result;
+                    } // No break here is intentional. The assignement itself is like the non-required variable.
                 case 'variable':
-                    if  (empty($params[$data])) {
-                        $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data);
-                        return null;
+                    if (!empty($params[$data['key']])) {
+                        $path.= $params[$data['key']] . '/';
+                        unset($params[$data['key']]);
                     }
-                    $path.= $params[$data] . '/';
-                    unset($params[$data]);
                     break;
                 case 'constant':
-                    $path.= $data . '/';
+                    $path.= $data['value'] . '/';
                     break;
                 case 'parameter-required':
-                    if  (empty($params[$data])) {
-                        $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data);
-                        return null;
+                    if  (empty($params[$data['key']])) {
+                        $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data['key']);
+                        return $result;
                     } // No break here is intentional. The assignement itself is like the non-required parameter.
                 case 'parameter':
-                    if  (!empty($params[$data])) {
-                        $request[$data] = $params[$data];
-                        unset($params[$data]);
+                    if  (!empty($params[$data['key']])) {
+                        $request[$data['key']] = $params[$data['key']];
+                        unset($params[$data['key']]);
                     }
                     break;
                 case 'parameter-constant':
-                    $param = explode("=", $data, 2);
-                    if (count($param)>1) {
-                        $request[$param[0]] = $param[1];
+                    $param = $data['value'];
+                    if (!is_array($data['value'])) {
+                        $paramexpl = explode("=", $data, 2);
+                        if (count($paramexpl)>1) {
+                            $param['key'] = $paramexpl[0];
+                            $param['value'] = $paramexpl[1];
+                        }
+                        else {
+                            $param['key'] = $data['value'];
+                            $param['value'] = $data['value'];
+                        }
                     }
-                    else {
-                        $request[$data] = $data;
-                    }
+                    $request[$param['key']] = $param['value'];
                     break;
                 case 'allparameters':
                     $request = array_merge($params, $request);
@@ -387,8 +406,7 @@ class DisRequest {
             }
         }
         trim($path, '/');
-        $url = $this->discuss->url;
-        $urlparts = explode('?', $url, 2);
+        $urlparts = explode('?', $result, 2);
         if (count($urlparts)>1) {
             $urlrequest = array();
             parse_str($urlparts[1], $urlrequest);
@@ -443,17 +461,17 @@ class DisRequest {
                                 'type' => 'category'
                             )
                             'data' => array(
-                                'category' => 'constant',
-                                'category_id' => 'variable',
-                                'category_name' => 'variable',
-                                'add' => 'allparameters'
+                                array('type' => 'constant', 'value' => 'category'),
+                                array('type' => 'variable-required', 'key' => 'category'),
+                                array('type' => 'variable', 'key' => 'category_name'),
+                                array('type' => 'allparameters')
                             )
                         ),
                         array(
                             'condition' => array()
                             'data' => array(
-                                'action' => 'action',
-                                'add' => 'allparameters'
+                                array('type' => 'action'),
+                                array('type' => 'allparameters')
                             )
                         )
                     )
@@ -463,10 +481,10 @@ class DisRequest {
                         array(
                             'condition' => array()
                             'data' => array(
-                                'thread' => 'constant',
-                                'thread_id' => 'variable',
-                                'thread_name' => 'variable',
-                                'add' => 'allparameters'
+                                array('type' => 'constant', 'value' => 'thread'),
+                                array('type' => 'variable-required', 'key' => 'thread'),
+                                array('type' => 'variable', 'key' => 'thread_name'),
+                                array('type' => 'allparameters')
                             )
                         )
                     )
@@ -476,10 +494,10 @@ class DisRequest {
                         array(
                             'condition' => array()
                             'data' => array(
-                                'board' => 'constant',
-                                'board_id' => 'variable',
-                                'board_name' => 'variable',
-                                'add' => 'allparameters'
+                                array('type' => 'constant', 'value' => 'board'),
+                                array('type' => 'variable-required', 'key' => 'board'),
+                                array('type' => 'variable', 'key' => 'board_name'),
+                                array('type' => 'allparameters')
                             )
                         )
                     )
@@ -491,9 +509,9 @@ class DisRequest {
                                 'type' => 'username'
                             )
                             'data' => array(
-                                'u' => 'constant',
-                                'name' => 'variable',
-                                'add' => 'allparameters'
+                                array('type' => 'constant', 'value' => 'u'),
+                                array('type' => 'variable-required', 'key' => 'user'),
+                                array('type' => 'allparameters')
                             )
                         ),
                         array(
@@ -501,9 +519,9 @@ class DisRequest {
                                 'type' => 'userid'
                             )
                             'data' => array(
-                                'user' => 'constant',
-                                'id' => 'variable',
-                                'add' => 'allparameters'
+                                array('type' => 'constant', 'value' => 'user'),
+                                array('type' => 'parameter', 'key' => 'user'),
+                                array('type' => 'allparameters')
                             )
                         )
                     )
