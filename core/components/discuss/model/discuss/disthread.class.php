@@ -246,12 +246,7 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
-        $cc = clone $c;
-        $cc->select(array(
-            'COUNT(*) AS `total`',
-        ));
-        $stmt = $cc->prepare();
-        $response['total'] = $modx->getValue($stmt);
+        $response['total'] = $modx->getCount('disThread', $c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
             'board_name' => 'Board.name',
@@ -355,12 +350,7 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
-        $cc = clone $c;
-        $cc->select(array(
-            'COUNT(*) AS `total`',
-        ));
-        $stmt = $cc->prepare();
-        $response['total'] = $modx->getValue($stmt);
+        $response['total'] = $modx->getCount('disThread', $c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
             'board_name' => 'Board.name',
@@ -465,11 +455,6 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
-        /*$cc = clone $c;
-        $cc->select(array(
-            'COUNT(*) AS `total`',
-        ));
-        $stmt = $cc->prepare();*/
         $response['total'] = $modx->getCount('disThread', $c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
