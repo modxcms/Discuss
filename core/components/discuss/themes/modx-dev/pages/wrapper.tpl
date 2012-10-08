@@ -68,12 +68,12 @@
                                 <p>[[%discuss.recent_activity]][[%discuss.ndash]] 
                                     <a href="[[~[[++discuss.forums_resource_id]]]]thread/unread" title="[[%discuss.view]] [[!+discuss.user.unread_posts_count]] [[%discuss.unread_posts]]">[[!+discuss.user.unread_posts]]</a>[[%discuss.sep]] 
 
-                                    <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="[[%discuss.view]] [[!+discuss.user.unread_messages_count]] [[%discuss.messages_new]]">[[!+discuss.user.unread_messages]]</a> [[%discuss.sep]]                                    
+                                    <a href="[[~[[++discuss.forums_resource_id]]]]messages/" title="[[%discuss.view]] [[!+discuss.user.unread_messages_count]] [[%discuss.messages_new]]">[[!+discuss.user.unread_messages]]</a>[[%discuss.sep]]
                                     <a href="[[~[[++discuss.forums_resource_id]]]]thread/new_replies_to_posts" title="[[%discuss.view]] [[!+discuss.user.new_replies_count]] [[%discuss.new_replies_to_posts]]">[[!+discuss.user.new_replies]]</a><br />
 
                                     [[!+discuss.user.no_replies_count:gte=`1`:then=`
                                         [[!+discuss.user.unanswered_questions_count:gte=`1`:then=`
-                                            [[%discuss.help_answer]] <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions" title="[[%discuss.view_unanswered]]">[[!+discuss.user.new_unanswered_questions]]</a>
+                                            [[%discuss.help_answer]] <a href="[[~[[++discuss.forums_resource_id]]]]thread/unanswered_questions" title="[[%discuss.view_unanswered]]">[[!+discuss.user.unanswered_questions]]</a>
                                             [[%discuss.participate_discussions]] <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies" title="[[%discuss.no_replies_to_discussions]]">[[!+discuss.user.no_replies]]</a>.
                                         `:else=`
                                             [[%discuss.participate_discussions_solo]] <a href="[[~[[++discuss.forums_resource_id]]]]thread/no_replies" title="[[%discuss.no_replies_to_discussions]]">[[!+discuss.user.no_replies]]</a>.
