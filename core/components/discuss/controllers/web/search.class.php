@@ -116,7 +116,7 @@ class DiscussSearchController extends DiscussController {
                         $postArray['message'] = substr($postArray['message'],0,100).($length > 100 ? '...' : '');
                     }
                     if (empty($postArray['url'])) {
-                        $postArray['url'] = $this->discuss->request->makeUrl(array('action' => 'thread'),array('thread' => $postArray['thread'])).'#dis-post-'.$postArray['id'];
+                        $postArray['url'] = $this->discuss->request->makeUrl('thread',array('thread' => $postArray['thread'])).'#dis-post-'.$postArray['id'];
                     }
                     $postArray['replies'] = number_format($postArray['replies'],0);
 

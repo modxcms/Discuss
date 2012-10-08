@@ -60,9 +60,9 @@ class DiscussMessagesRemovePostController extends DiscussController {
 
             $posts = $this->thread->getMany('Posts');
             if (count($posts) <= 0) {
-                $url = $this->discuss->request->makeUrl(array('action' => 'messages'));
+                $url = $this->discuss->request->makeUrl('messages');
             } else {
-                $url = $this->discuss->request->makeUrl(array('action' => 'messages', 'messages' => 'view'),array('thread' => $this->thread->get('id')));
+                $url = $this->discuss->request->makeUrl('messages/view',array('thread' => $this->thread->get('id')));
             }
             $this->modx->sendRedirect($url);
         }

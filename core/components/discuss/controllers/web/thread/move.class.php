@@ -103,7 +103,7 @@ class DiscussThreadMoveController extends DiscussController {
             if ($this->thread->move($this->getProperty('board'))) {
                 $this->discuss->logActivity('thread_move',$this->thread->toArray());
 
-                $url = $this->discuss->request->makeUrl(array('action' => 'board'),array('board' => $this->thread->get('board')));
+                $url = $this->discuss->request->makeUrl('board',array('board' => $this->thread->get('board')));
                 $this->modx->sendRedirect($url);
             }
         }

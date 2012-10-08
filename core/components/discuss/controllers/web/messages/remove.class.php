@@ -76,7 +76,7 @@ class DiscussMessagesRemoveController extends DiscussController {
                 /* log activity */
                 $this->discuss->logActivity('message_thread_remove',$this->thread->toArray(),$this->thread->getUrl());
 
-                $url = $this->discuss->request->makeUrl(array('action' => 'messages'));
+                $url = $this->discuss->request->makeUrl('messages');
                 $this->modx->sendRedirect($url);
             }
         }

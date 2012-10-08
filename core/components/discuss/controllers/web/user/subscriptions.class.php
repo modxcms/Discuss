@@ -58,7 +58,7 @@ class DiscussUserSubscriptionsController extends DiscussController {
                 if ($notification == null) continue;
                 $notification->remove();
             }
-            $url = $this->discuss->request->makeUrl(array('action' => 'user', 'user' => 'subscriptions'));
+            $url = $this->discuss->request->makeUrl('user/subscriptions');
             $this->modx->sendRedirect($url);
         }
     }
@@ -125,7 +125,7 @@ class DiscussUserSubscriptionsController extends DiscussController {
 
         $trail[] = array(
             'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),
-            'url' => $this->discuss->request->makeUrl(array('action' => 'user'))
+            'url' => $this->discuss->request->makeUrl('user')
         );
 
         $trail[] = array('text' => $this->modx->lexicon('discuss.subscriptions'),'active' => true);

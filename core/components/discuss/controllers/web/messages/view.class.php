@@ -158,11 +158,11 @@ class DiscussMessagesViewController extends DiscussController {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
             if ($this->modx->hasPermission('discuss.pm_send')) {
-                $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'messages', 'messages' => 'reply'),array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_message'), 'cls' => 'dis-action-reply_to_message');
+                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_message'), 'cls' => 'dis-action-reply_to_message');
             }
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'messages', 'messages' => 'view'),array('thread' => $this->thread->get('id'),'unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'), 'cls' => 'dis-action-mark_unread');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages/view',array('thread' => $this->thread->get('id'),'unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'), 'cls' => 'dis-action-mark_unread');
             if ($this->modx->hasPermission('discuss.pm_remove')) {
-                $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'messages', 'messages' => 'remove'),array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.message_remove'), 'cls' => 'dis-action-message_remove');
+                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.message_remove'), 'cls' => 'dis-action-message_remove');
             }
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
@@ -209,7 +209,7 @@ class DiscussMessagesViewController extends DiscussController {
         /* handle actions */
         if (!empty($this->scriptProperties['unread'])) {
             if ($this->thread->unread($this->discuss->user->get('id'))) {
-                $this->modx->sendRedirect($this->discuss->request->makeUrl(array('action' => 'messages')));
+                $this->modx->sendRedirect($this->discuss->request->makeUrl('messages'));
             }
         }
     }
@@ -219,7 +219,7 @@ class DiscussMessagesViewController extends DiscussController {
             'url' => $this->discuss->request->makeUrl(),
             'text' => $this->modx->getOption('discuss.forum_title'),
         ),array(
-            'url' => $this->discuss->request->makeUrl(array('action' => 'messages')),
+            'url' => $this->discuss->request->makeUrl('messages'),
             'text' => $this->modx->lexicon('discuss.messages'),
         )));
     }

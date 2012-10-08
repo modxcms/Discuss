@@ -118,13 +118,13 @@ class DiscussHomeController extends DiscussController {
         if ($this->discuss->user->isLoggedIn) { /* if logged in */
             $actionButtons[] = array('url' => $this->discuss->request->makeUrl('',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'));
             if ($this->getOption('showLogoutActionButton',false,'!empty')) {
-                $authLink = $this->discuss->request->makeUrl(array('action' => 'logout'));
+                $authLink = $this->discuss->request->makeUrl('logout');
                 $authMsg = $this->modx->lexicon('discuss.logout');
                 $this->modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
                 $actionButtons[] = array('url' => $authLink, 'text' => $authMsg, 'cls' => 'dis-action-logout');
             }
         } else { /* if logged out */
-            $authLink = $this->discuss->request->makeUrl(array('action' => 'login'));
+            $authLink = $this->discuss->request->makeUrl('login');
             $authMsg = $this->modx->lexicon('discuss.login');
             $this->modx->setPlaceholder('discuss.authLink','<a href="'.$authLink.'">'.$authMsg.'</a>');
 

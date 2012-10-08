@@ -179,7 +179,7 @@ foreach ($cache['results'] as $threadArray) {
             'createdon' => strftime($modx->getOption('discuss.date_format'),strtotime($threadArray['createdon'])),
             'user' => $threadArray['author'],
             'username' => $threadArray['last_post_username'],
-            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('u/'.$threadArray['last_post_username']).'">'.$threadArray['post.username'].'</a>' : $threadArray['post.username'],
+            'author_link' => $canViewProfiles ? '<a class="dis-last-post-by" href="'.$discuss->request->makeUrl('user', array('type' => 'username', 'user' => $threadArray['last_post_username'])).'">'.$threadArray['post.username'].'</a>' : $threadArray['post.username'],
         );
         $latestText = $discuss->getChunk($lastPostTpl,$phs);
         $threadArray['author_link'] = $phs['author_link'];

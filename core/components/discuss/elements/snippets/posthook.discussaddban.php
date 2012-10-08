@@ -127,7 +127,7 @@ $modx->invokeEvent('OnDiscussBanUser',array(
 $discuss->logActivity('ban_add',$ban->toArray());
 
 /* redirect */
-$url = $discuss->request->makeUrl(array('action' => 'user', 'user' => 'ban'),array(
+$url = $discuss->request->makeUrl('user/ban',array(
     'u' => $fields['disUser'],
     'success' => true,
 ));

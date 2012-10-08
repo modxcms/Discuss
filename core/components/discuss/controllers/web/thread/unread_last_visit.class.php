@@ -84,7 +84,7 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
             /* unread class */
             $threadArray['unread'] = true;
             $threadArray['unread-cls'] = 'dis-unread';
-            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl(array('action' => 'u', 'u' => $threadArray['author_username'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user', array('type' => 'username', 'user' => $threadArray['author_username'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
             $list[] = $this->discuss->getChunk($postTpl,$threadArray);
         }
@@ -97,9 +97,9 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
 
     public function getActionButtons() {
         $actionButtons = array();
-        $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'unread')), 'text' => $this->modx->lexicon('discuss.unread_posts_all'), 'cls' => 'dis-action-unread_posts_all');
+        $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread'), 'text' => $this->modx->lexicon('discuss.unread_posts_all'), 'cls' => 'dis-action-unread_posts_all');
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'unread_last_visit'),array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }

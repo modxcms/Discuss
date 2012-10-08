@@ -59,7 +59,7 @@ class DiscussThreadNoRepliesController extends DiscussThreadUnreadController {
     public function getActionButtons() {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
-            //$actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'new_replies_to_posts'),array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
+            //$actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/new_replies_to_posts',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }

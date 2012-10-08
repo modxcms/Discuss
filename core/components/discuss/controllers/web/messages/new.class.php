@@ -65,7 +65,7 @@ class DiscussMessagesNewController extends DiscussController {
             'url' => $this->discuss->request->makeUrl(),
             'text' => $this->modx->getOption('discuss.forum_title'),
         );
-        $trail[] = array('text' => $this->modx->lexicon('discuss.messages'),'url' => $this->discuss->request->makeUrl(array('action' => 'messages')));
+        $trail[] = array('text' => $this->modx->lexicon('discuss.messages'),'url' => $this->discuss->request->makeUrl('messages'));
         $trail[] = array('text' => $this->modx->lexicon('discuss.message_new'),'active' => true);
         return $trail;
     }

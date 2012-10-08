@@ -110,7 +110,7 @@ class DiscussThreadUnreadController extends DiscussController {
     public function getActionButtons() {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl(array('action' => 'thread', 'thread' => 'unread'),array('read' => 1)), 'text' => $this->getOption('textButtonMarkAllRead'), 'cls' => 'dis-action-mark_all_as_read');
+            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread',array('read' => 1)), 'text' => $this->getOption('textButtonMarkAllRead'), 'cls' => 'dis-action-mark_all_as_read');
         }
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
@@ -172,7 +172,7 @@ class DiscussThreadUnreadController extends DiscussController {
         /* unread class */
         $threadArray['unread'] = true;
         $threadArray['unread-cls'] = $this->getOption('clsUnread');
-        $threadArray['author_link'] = $this->getOption('canViewProfiles') ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl(array('action' => 'u', 'u' => $threadArray['author_username'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+        $threadArray['author_link'] = $this->getOption('canViewProfiles') ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user', array('type' => 'username', 'user' => $threadArray['author_username'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
         return $threadArray;
     }
 }

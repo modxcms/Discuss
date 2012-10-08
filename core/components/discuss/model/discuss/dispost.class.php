@@ -908,7 +908,7 @@ class disPost extends xPDOSimpleObject {
      * @param boolean $last
      * @return string
      */
-    public function getUrl($view = 'thread/',$last = false) {
+    public function getUrl($action = 'thread',$last = false) {
         $params = array();
         $params['thread'] = $this->get('thread');
         $page = $this->getThreadPage($last);
@@ -917,9 +917,8 @@ class disPost extends xPDOSimpleObject {
         }
 
         $thread = $this->getOne('Thread');
-        if ($thread && $view == 'thread/') {
-            $view = 'thread/'.$this->get('thread').'/'.$thread->getUrlTitle();
-            unset($params['thread']);
+        if ($thread && $action == 'thread') {
+            $params['thread_name'] = $thread->getUrlTitle();
         }
 
         $url = $this->xpdo->discuss->request->makeUrl($view,$params);
