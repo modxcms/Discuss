@@ -1,13 +1,10 @@
-[[+pagination:default=``]]
 <!-- recent.tpl -->
 <div class="f1-f9">
 	<div class="dis-threads forum-grid">
 		<div class="m-section_title">
 			<header class="dis-cat-header dark-gradient group-fix sticky-bar">
 				<h1>Private Messages</h1>
-				[[+pagination:notempty=`
-				<nav id="key-Paginate" class="horiz-list right">[[+pagination]]</nav>
-				`]]
+				[[+pagination:default=``]]
 				[[!+discuss.user.id:notempty=`<div class="post-box h-group">[[+actionbuttons]]</div>`]]
 			</header>
 			<div class="row h-group header-row">
