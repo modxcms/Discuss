@@ -490,7 +490,7 @@ class disUser extends xPDOSimpleObject {
      * @return int
      */
     public function countWithoutReplies() {
-        $response = $this->xpdo->call('disThread','fetchWithoutReplies',array(&$this->xpdo,'post_last_on','DESC',10,0, true, true));
+        $response = $this->xpdo->call('disThread','fetchWithoutReplies',array(&$this->xpdo,'post_last_on','DESC',10,0, false, true));
         return number_format($response['total']);
     }
     /**
@@ -498,7 +498,7 @@ class disUser extends xPDOSimpleObject {
      * @return int
      */
     public function countUnansweredQuestions() {
-        $response = $this->xpdo->call('disThread','fetchUnansweredQuestions',array(&$this->xpdo,'post_last_on','DESC',10,0, true, true));
+        $response = $this->xpdo->call('disThread','fetchUnansweredQuestions',array(&$this->xpdo,'post_last_on','DESC',10,0, false, true));
         return number_format($response['total']);
     }
 
