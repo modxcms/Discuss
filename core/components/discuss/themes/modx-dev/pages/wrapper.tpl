@@ -186,10 +186,10 @@
                     </ul>
                 </nav>
                 <div class="group">
-                    <div class="f1-f2">
+                    <div class="inline logo">
                         <a class="m-modx_logo h-ir" href="http://modx.com">MODX Creative Freedom</a>
                     </div>
-                    <div class="group copy-info f3-f7">
+                    <div class="group copy-info inline">
                         <p>&copy; 2004-2012, MODX, LLC. All Rights Reserved.</p>
                         <ul class="horiz-list">
                             <li><a href="[[~107]]">Terms of Service</a></li>
