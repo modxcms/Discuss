@@ -155,7 +155,9 @@ abstract class DiscussController {
         $this->_renderBreadcrumbs();
         $this->_renderModules();
 
-        $output = $this->_renderTemplate($this->config['tpl'],$this->placeholders);
+        $tpl = $this->getOption('pageTpl',false);
+        $tpl = ($tpl) ? $this->discuss->config['pagesPath'] . $tpl . '.tpl' : $this->config['tpl'];
+        $output = $this->_renderTemplate($tpl,$this->placeholders);
 
         $output = $this->afterRender($output);
 
