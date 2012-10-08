@@ -1,1 +1,1 @@
-<a href="[[~[[*id]]]]board/?board=[[+id]]">[[+title]]</a>
+<a href="[[DiscussUrlMaker? &action=`board` &params=`{"board":"[[+id]]"}`]]">[[+title]]</a>

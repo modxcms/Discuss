@@ -6,7 +6,7 @@
 
     <a href="[[+url]]">[[+title]]</a>
     <p class="dis-post-li-desc">
-        [[%discuss.by? &author=`<a href="[[~[[*id]]]]u/[[+author_username]]">[[+author_username]]</a>`]]
-        (<a href="[[~[[*id]]]]board/?board=[[+board]]">[[+board_name]]</a>)
+        [[%discuss.by? &author=`<a href="[[DiscussUrlMaker? &action=`user` &params=`{"type":"username","user":"[[+author_username]]"}`]]">[[+author_username]]</a>`]]
+        (<a href="[[DiscussUrlMaker? &action=`board` &params=`{"board":"[[+board]]"}`]]">[[+board_name]]</a>)
     </p>
 </li>
