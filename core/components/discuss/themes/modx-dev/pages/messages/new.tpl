@@ -1,26 +1,11 @@
-
 [[!FormIt?
   &submitVar=`dis-message-new`
   &hooks=`postHook.DiscussNewMessage`
   &validate=`title:required,message:required:allowTags,participants_usernames:required`
 ]]
 
-
-
-
 <form action="[[~[[*id]]]]messages/new" method="post" class="dis-form" id="dis-message-new-form" enctype="multipart/form-data">
-    
-    <div class="preview_toggle">
-		<a href="#" class="dis-message-write selected" id="dis-edit-btn">edit</a>
-        <a href="#" class="dis-preview" id="dis-preview-btn">view</a>
-    </div>
-	<div id="dis-message-preview"></div>
-    
-    
-    
-	<h1>[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h1>
-
-
+    <h1>[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h1>
 
     <label for="dis-message-title">[[%discuss.title]]:
         <span class="error">[[!+fi.error.title]]</span>
@@ -33,9 +18,7 @@
     </label><br class="clearfix" />
     <input type="text" name="participants_usernames" id="dis-message-participants" value="[[!+fi.participants_usernames]]" /><br class="clearfix" />
 
-
     <div class="wysi-buttons">[[+buttons]]</div>
-
 
     <label for="dis-thread-message">
         <span class="error">[[!+fi.error.message]]</span>
@@ -47,7 +30,9 @@
         <span class="error">[[+error.attachments]]</span>
     </label><br class="clearfix" />
     <input type="file" name="attachment1" id="dis-message-attachment" />
+
 <br class="clearfix" />
+
     <div id="dis-attachments"></div>
     <br class="clearfix" />
 
@@ -55,10 +40,10 @@
         <input type="submit" class="dis-action-btn" name="dis-message-new" value="[[%discuss.message_send]]" />
         <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages';" />
     </div>
+
 </form>
 
-[[+sidebar]]
-
-			</div><!-- Close Content From Wrapper -->
 [[+bottom]]
+
+[[+sidebar]]
 

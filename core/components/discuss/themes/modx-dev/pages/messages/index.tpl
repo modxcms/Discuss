@@ -6,7 +6,7 @@
 			<header class="dis-cat-header dark-gradient group-fix sticky-bar">
 				<h1>Private Messages</h1>
 				[[+pagination:notempty=`
-				<nav id="key-Paginate" class="paginate horiz-list right">[[+pagination]]</nav>
+				<nav id="key-Paginate" class="horiz-list right">[[+pagination]]</nav>
 				`]]
 				[[!+discuss.user.id:notempty=`<div class="post-box h-group">[[+actionbuttons]]</div>`]]
 			</header>
