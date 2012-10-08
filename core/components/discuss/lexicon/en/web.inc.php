@@ -164,6 +164,7 @@ $_lang['discuss.user.one_no_reply'] = '1 discussion';
 $_lang['discuss.user.no_replies'] = '[[+total]] discussions';
 $_lang['discuss.help_answer'] = 'Please help answer';
 $_lang['discuss.participate_discussions'] = 'or participate in';
+$_lang['discuss.participate_discussions_solo'] = 'Participate in';
 $_lang['discuss.view'] = 'View';
 $_lang['discuss.view_unanswered'] = 'View Unanswered Quesitons';
 $_lang['discuss.no_replies_to_discussions'] = 'View Orphaned Discussions';
