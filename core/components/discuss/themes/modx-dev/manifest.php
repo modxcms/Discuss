@@ -431,6 +431,7 @@ $manifest = array(
         'options' => array(
             'showTitleInBreadcrumbs' => true,
             'showPaginationIfOnePage' => false,
+            'pageTpl' => 'common/thread-table',
         ),
         'modules' => array(
             'sidebar' => array(
@@ -457,6 +458,7 @@ $manifest = array(
     ),
     'thread/no_replies' => array(
         'options' => array(
+            'pageTpl' => 'common/thread-table',
             'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
@@ -470,6 +472,7 @@ $manifest = array(
     ),
     'thread/unanswered_questions' => array(
         'options' => array(
+            'pageTpl' => 'common/thread-table',
             'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
@@ -483,6 +486,7 @@ $manifest = array(
     ),
     'thread/new_replies_to_posts' => array(
         'options' => array(
+            'pageTpl' => 'common/thread-table',
             'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
