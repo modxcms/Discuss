@@ -3808,7 +3808,7 @@ div.m-section_title + div.row {
 .a-loggedin .board-post .wrap {
   padding-left: 30px; }
 /* line 256, ../../sass/_forums.sass */
-.a-loggedin .board-post.dis-unread .wrap {
+.a-loggedin .board-post.dis-unread .wrap, .a-loggedin .board-post.dis-post-unread .wrap {
   background: url(../../images/redo/icons/unread-dot.png) no-repeat 11px 4px; }
 
 /* line 261, ../../sass/_forums.sass */
