@@ -427,7 +427,7 @@ class DisRequest {
      */
     public function makeUrl($action = '',array $params = array()) {
         if (is_string($action) && !empty($action)) {
-            $controller = getControllerFile($action);
+            $controller = $this->getControllerFile($action);
             if (!file_exists($controller["file"]) || is_dir($controller["file"])) {
                 $action = ''; // Reset the action if we don't have the related controller
             }
