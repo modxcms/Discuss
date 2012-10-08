@@ -481,5 +481,18 @@ $manifest = array(
             )
         ),
     ),
+    'thread/new_replies_to_posts' => array(
+        'options' => array(
+            'showPaginationIfOnePage' => false,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'disection' => 'recent',
+                )
+            )
+        ),
+    ),
 );
 return $manifest;
