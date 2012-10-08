@@ -200,7 +200,7 @@ if ($total < $limit) {
 		/* If current page is near the end */
 		case $total - $current <= 3:
 		
-			$list[] = $discuss->getChunk($tplLink, array('url' => urlAddPagination(1)', 'text' => '1'));
+			$list[] = $discuss->getChunk($tplLink, array('url' => urlAddPagination(1), 'text' => '1'));
 			$list[] = $discuss->getChunk($tplLink, array('url' => urlAddPagination(2), 'text' => '2'));
 			$list[] = $truncateText;
 			

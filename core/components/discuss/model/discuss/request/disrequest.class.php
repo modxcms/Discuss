@@ -459,7 +459,7 @@ class DisRequest {
                         array(
                             'condition' => array(
                                 'type' => 'category'
-                            )
+                            ),
                             'data' => array(
                                 array('type' => 'constant', 'value' => 'category'),
                                 array('type' => 'variable-required', 'key' => 'category'),
@@ -468,7 +468,7 @@ class DisRequest {
                             )
                         ),
                         array(
-                            'condition' => array()
+                            'condition' => array(),
                             'data' => array(
                                 array('type' => 'action'),
                                 array('type' => 'allparameters')
@@ -479,7 +479,7 @@ class DisRequest {
                 'thread' => array(
                     'furl' => array(
                         array(
-                            'condition' => array()
+                            'condition' => array(),
                             'data' => array(
                                 array('type' => 'constant', 'value' => 'thread'),
                                 array('type' => 'variable-required', 'key' => 'thread'),
@@ -492,7 +492,7 @@ class DisRequest {
                 'board' => array(
                     'furl' => array(
                         array(
-                            'condition' => array()
+                            'condition' => array(),
                             'data' => array(
                                 array('type' => 'constant', 'value' => 'board'),
                                 array('type' => 'variable-required', 'key' => 'board'),
@@ -507,7 +507,7 @@ class DisRequest {
                         array(
                             'condition' => array(
                                 'type' => 'username'
-                            )
+                            ),
                             'data' => array(
                                 array('type' => 'constant', 'value' => 'u'),
                                 array('type' => 'variable-required', 'key' => 'user'),
@@ -517,7 +517,7 @@ class DisRequest {
                         array(
                             'condition' => array(
                                 'type' => 'userid'
-                            )
+                            ),
                             'data' => array(
                                 array('type' => 'constant', 'value' => 'user'),
                                 array('type' => 'parameter', 'key' => 'user'),
