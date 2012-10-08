@@ -534,9 +534,15 @@ class DisRequest {
             /* END example manifest */
             
             /* Now parsing the manifest for FURLs rules */
-            $manifest = $manifestexmpl;
-            
-            $url = $this->urlManifestParse($action, $params, $manifest);
+            //$f = $this->discuss->config['themePath'].'manifest.php';
+            //if (file_exists($f)) {
+            //    $manifest = require $f;
+                $manifest = $manifestexmpl;
+                $url = $this->urlManifestParse($action, $params, $manifest);
+            //}
+            //else {
+            //    return $this->makeUrl($action, $params, true); // Fallback to nonFURL generaton if we couldn't load manifest
+            //}
             
         }
         if ($this->modx->getOption('discuss.absolute_urls',null,true)) {
