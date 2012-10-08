@@ -109,18 +109,29 @@ pre
 
 // Footer 2012
 footer
+    .m-modx_logo
+        +rem('margin', 3px 0 0 0)
     background: url(../../images/bg/section-border-medy-repeat.png) repeat-x left top
     padding: 1.5em 0
     margin: 5em 0 0 0
     a
         white-space: nowrap
         font-weight: normal
+    nav, h3
+        +rem('margin', 0 0 10px 0 )
+        +rem('font-size', 15px)
+    h3
+        font-weight: 700
+        color: #000
+    h4
+        font-weight: bold
+        margin: 22px 0 .6em 0
     .copy-info
         display: inline-block
         +rem('font-size', 13px)
         padding: .5em 0 0 1.3em
         p, ul
-            margin: 0 0 .25em 0
+            margin: 1px 0 0 0
         p, a
             opacity: .6
         p
@@ -129,10 +140,22 @@ footer
             opacity: .8
         li:first-child
             padding-left: 0
-    .horiz-list li a
-        padding: .25em .75em
-        text-decoration: none
-        color: #000
+    .horiz-list
+        li a
+            padding: .25em .75em
+            text-decoration: none
+            color: #000
+            &:after
+                content: "|"
+                padding: 0 .75em
+                margin-right: -1.25em
+        li:first-child
+            a
+                padding-left: 0
+        li:last-child
+            a
+                &:after
+                    content: ""
     nav
         ul.horiz-list
             margin: 0
@@ -151,6 +174,28 @@ footer
         padding-left: 1.75em
         border-left: 1px dotted #c0c0c0
         margin-left: 0
+
+form#newsletter
+    background-color: #fff
+    border-radius: 5px
+    border: 1px solid #dbdbdb
+    display: inline-block
+    padding: 3px
+    margin-bottom: .5em
+
+    input
+        border: none
+        box-shadow: 0
+        margin: 0
+        padding-left: 5px
+
+    input[type="submit"]
+        background-color: #73b049
+        color: #fff
+        padding: 5px 10px
+        border-width: 0
+        float: none
+
 
 .modx-live
     opacity: .8

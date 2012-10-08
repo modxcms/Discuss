@@ -201,6 +201,7 @@
             </div>
             <div class="f9-f12 stay-connected">
                 <h3>Stay Connected</h3>
+                <h4>Join Our Mailing List</h4>
                 <form id="newsletter" action="http://modxcms.list-manage.com/subscribe/post" method="post">
                     <input type="hidden" name="u" value="08b25a8de68a29fe03a483720" />
                     <input type="hidden" name="id" value="848cf40420" />
