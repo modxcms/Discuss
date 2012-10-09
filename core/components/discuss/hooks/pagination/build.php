@@ -31,37 +31,38 @@
  * @package discuss
  * @subpackage hooks
  */
-
-function urlAddPagination($page = null, &$discussSet = null, $actionSet = null, $paramsSet = null) {
-    static $discuss = null;
-    static $action = null;
-    static $params = null;
-    
-    static $baseUrl = null;
-    
-    if ($discussSet!==null) {
-        $discuss = &$discussSet;
-    }
-    if ($actionSet!==null) {
-        $action = $actionSet;
-    }
-    if ($paramsSet!==null) {
-        $params = $paramsSet;
-    }
-    
-    $paramsTemp = $params;
-    
-    if ($page!==null) {
-        $paramsTemp['page'] = $page;
-        return $discuss->request->makeUrl($action, $paramsTemp);
-    }
-    
-    if ($baseUrl!==null) {
+if(!function_exists('urlAddPagination') {
+    function urlAddPagination($page = null, &$discussSet = null, $actionSet = null, $paramsSet = null) {
+        static $discuss = null;
+        static $action = null;
+        static $params = null;
+        
+        static $baseUrl = null;
+        
+        if ($discussSet!==null) {
+            $discuss = &$discussSet;
+        }
+        if ($actionSet!==null) {
+            $action = $actionSet;
+        }
+        if ($paramsSet!==null) {
+            $params = $paramsSet;
+        }
+        
+        $paramsTemp = $params;
+        
+        if ($page!==null) {
+            $paramsTemp['page'] = $page;
+            return $discuss->request->makeUrl($action, $paramsTemp);
+        }
+        
+        if ($baseUrl!==null) {
+            return $baseUrl;
+        }
+        $baseUrl = $discuss->request->makeUrl($action,$paramsTemp);
         return $baseUrl;
     }
-    $baseUrl = $discuss->request->makeUrl($action,$paramsTemp);
-    return $baseUrl;
-} 
+}
 
 $tplActive = $modx->getOption('tplActive',$scriptProperties,'pagination/paginationActive');
 $tplWrapper = $modx->getOption('tplWrapper',$scriptProperties,'pagination/paginationWrapper');

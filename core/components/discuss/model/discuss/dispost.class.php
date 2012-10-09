@@ -904,7 +904,7 @@ class disPost extends xPDOSimpleObject {
     /**
      * Get the URL of this post
      *
-     * @param string $view
+     * @param string $action
      * @param boolean $last
      * @return string
      */
@@ -921,7 +921,7 @@ class disPost extends xPDOSimpleObject {
             $params['thread_name'] = $thread->getUrlTitle();
         }
 
-        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+        $url = $this->xpdo->discuss->request->makeUrl($action,$params);
         $url .= '#dis-post-'.$this->get('id');
         $this->set('url',$url);
         return $url;
