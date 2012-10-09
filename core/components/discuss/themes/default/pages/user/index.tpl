@@ -1,7 +1,7 @@
 [[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 
-<form action="[[~[[*id]]]]user/?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
+<form action="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-user-edit-form" style="border: 0;">
 
 <h2>[[+name]]</h2>
 

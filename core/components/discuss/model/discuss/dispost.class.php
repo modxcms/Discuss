@@ -709,7 +709,7 @@ class disPost extends xPDOSimpleObject {
             $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members[] = '<a href="[[DiscussUrlMaker? &action=`user` &params=`'.$modx->toJSON(array('type' => 'userid', 'user' => str_replace('%20','',$r[0]))).'`]]">'.$r[1].'</a>';
+                $members[] = '<a href="[[DiscussUrlMaker? &action=`user` &params=`'.$modx->toJSON(array('user' => str_replace('%20','',$r[0]))).'`]]">'.$r[1].'</a>';
             }
             $members = array_unique($members);
             $members = implode(',',$members);

@@ -107,7 +107,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
             /* unread class */
             $threadArray['unread'] = false;
             $threadArray['unread-cls'] = '';
-            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user',array('type' => 'userid', 'user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
             $list[] = $this->discuss->getChunk($this->getOption('tpl','post/disPostLi'),$threadArray);
         }

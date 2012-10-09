@@ -519,9 +519,7 @@ class DisRequest {
                             )
                         ),
                         array(
-                            'condition' => array(
-                                'type' => 'userid'
-                            ),
+                            'condition' => array(),
                             'data' => array(
                                 array('type' => 'constant', 'value' => 'user'),
                                 array('type' => 'parameter', 'key' => 'user'),

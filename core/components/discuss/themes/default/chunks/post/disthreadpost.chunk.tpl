@@ -6,7 +6,7 @@
                 [[+actions]]
             </div>
             <div class="dis-author">
-                <a href="[[DiscussUrlMaker? &action=`user` &params=`{"type":"userid","user":"[[+author.id]]"}`]]">[[+author.avatar]]</a>
+                <a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+author.id]]"}`]]">[[+author.avatar]]</a>
                 <span class="right">
                     [[+createdon]]
                     <br />[[+author.email]]
@@ -33,7 +33,7 @@
             [[+attachments:notempty=`<ul class="dis-attachments">[[+attachments]]</ul>`]]
             </div>
             <div class="dis-post-ip">
-                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[DiscussUrlMaker? &action=`user` &params=`{"type":"userid","user":"[[+editedby]]"}`]]">[[+editedby.username]]</a></span>`]]
+                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+editedby]]"}`]]">[[+editedby.username]]</a></span>`]]
                 [[+report_link]]
                 <a href="[[DiscussUrlMaker? &action=`post/track` &params=`{"ip":"[[+ip]]"}`]]">[[+ip]]</a>
             </div>

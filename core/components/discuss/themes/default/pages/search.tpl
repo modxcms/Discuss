@@ -1,7 +1,7 @@
 [[+trail]]
 <br />
 
-<form class="dis-form" action="[[~[[*id]]]]search/" method="get">
+<form class="dis-form" action="[[DiscussUrlMaker? &action=`search`]]" method="get">
     <h2>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h2>
     
     <label for="dis-search">[[%discuss.search]]:</label>
