@@ -180,13 +180,13 @@ class DiscussMessagesViewController extends DiscussController {
     }
 
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->list['total'],
             'id' => $this->thread->get('id'),
             'view' => 'messages/view',
             'limit' => $this->list['limit'],
             'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
-        ));
+        ), $this->options));
     }
 
     /**

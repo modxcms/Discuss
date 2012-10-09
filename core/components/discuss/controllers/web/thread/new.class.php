@@ -67,6 +67,10 @@ class DiscussThreadNewController extends DiscussController {
     public function process() {
         /* setup defaults */
         $this->setPlaceholders($this->board->toArray());
+        $this->setPlaceholders(array(
+            'is_root' => 1,
+            'board' => $this->board->get('id'),
+        ));
 
         $this->getButtons();
         $this->checkThreadPermissions();

@@ -38,7 +38,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         return $this->discuss->user->isLoggedIn;
     }
     public function getPageTitle() {
-        return $this->modx->lexicon('discuss.new_replies_to_posts');
+        return $this->modx->lexicon('discuss.new_replies_to_posts').' ('.number_format($this->threads['total']).')';
     }
     public function getSessionPlace() {
         return 'thread/new_replies_to_posts::'.$this->getProperty('page',1);
@@ -46,7 +46,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
 
     public function getDefaultOptions() {
         return array(
-            'tpl' => 'post/disPostLi',
+            'tpl' => 'post/disThreadLi',
             'dateFormat' => $this->discuss->dateFormat,
             'rowSeparator' => "\n",
         );
@@ -107,9 +107,9 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
             /* unread class */
             $threadArray['unread'] = false;
             $threadArray['unread-cls'] = '';
-            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user',array('type' => 'userid', 'user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+            $threadArray['author_link'] = $canViewProfiles ? '<a class="dis-last-post-by" href="'.$this->discuss->request->makeUrl('user',array('user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
 
-            $list[] = $this->discuss->getChunk($this->getOption('tpl','post/disPostLi'),$threadArray);
+            $list[] = $this->discuss->getChunk($this->getOption('tpl','post/disThreadLi'),$threadArray);
         }
         $this->setPlaceholder('threads',implode($this->getOption('rowSeparator',"\n"),$list));
 
@@ -122,12 +122,12 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
      * @return void
      */
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->threads['total'],
             'id' => 0,
             'view' => 'thread/new_replies_to_posts',
             'limit' => $this->threads['limit'],
-        ));
+        ), $this->options));
     }
 
     /**

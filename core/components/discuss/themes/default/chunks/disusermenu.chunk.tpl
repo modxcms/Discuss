@@ -1,11 +1,11 @@
 <p class="dis-breadcrumbs">
-    <a href="[[DiscussUrlMaker]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
+    <a href="[[~[[*id]]]]">[[++discuss.forum_title]]</a> / [[%discuss.profile]]
 </p>
 
 <div class="dis-menu left" style="padding-right: 10px; width: 18%;">
     <h4>[[%discuss.forum_profile]]</h4>
     <ul>
-        <li><a href="[[DiscussUrlMaker? &action=`user` &params=`{"type":"userid","user":"[[+id]]"}`]]">[[%discuss.view]]</a></li>
+        <li><a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+id]]"}`]]">[[%discuss.view]]</a></li>
         [[+canEdit:notempty=`<li><a href="[[DiscussUrlMaker? &action=`user/edit`]]">[[%discuss.edit]]</a></li>`]]
         <li><a href="[[DiscussUrlMaker? &action=`user/statistics` &params=`{"user":"[[+id]]"}`]]">[[%discuss.stats]]</a></li>
     </ul>

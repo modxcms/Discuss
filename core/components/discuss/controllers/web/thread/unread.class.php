@@ -34,7 +34,7 @@ class DiscussThreadUnreadController extends DiscussController {
     
     public function getDefaultOptions() {
         return array(
-            'postTpl' => 'post/disPostLi',
+            'postTpl' => 'post/disThreadLi',
             'dateFormat' => $this->discuss->dateFormat,
 
             'textButtonMarkAllRead' => $this->modx->lexicon('discuss.mark_all_as_read'),
@@ -57,7 +57,7 @@ class DiscussThreadUnreadController extends DiscussController {
         return $this->discuss->user->isLoggedIn;
     }
     public function getPageTitle() {
-        return $this->modx->lexicon('discuss.unread_posts');
+        return $this->modx->lexicon('discuss.unread_posts').' ('.number_format($this->threads['total']).')';
     }
     public function getSessionPlace() {
         return 'thread/unread::'.$this->getProperty('page',1);
@@ -98,20 +98,23 @@ class DiscussThreadUnreadController extends DiscussController {
     }
 
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->threads['total'],
             'id' => 0,
             'view' => 'thread/unread',
             'limit' => $this->threads['limit'],
             'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
-        ));
+        ), $this->options));
     }
 
     public function getActionButtons() {
         $actionButtons = array();
+        $links = array();
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread',array('read' => 1)), 'text' => $this->getOption('textButtonMarkAllRead'), 'cls' => 'dis-action-mark_all_as_read');
+            $links['actionlink_mark_read'] = $this->discuss->request->makeUrl('thread/unread',array('read' => 1));
+            $actionButtons[] = array('url' => $links['actionlink_mark_read'], 'text' => $this->getOption('textButtonMarkAllRead'), 'cls' => 'dis-action-mark_all_as_read');
         }
+        $this->setPlaceholders($links);
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
 

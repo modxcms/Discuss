@@ -8,7 +8,7 @@
 
 <div id="dis-reply-post-preview"></div>
 <br />
-<form action="[[~[[*id]]]]thread/reply?post=[[+id]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
+<form action="[[DiscussUrlMaker? &action=`thread/reply` &params=`{"post":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
     

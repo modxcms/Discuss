@@ -41,10 +41,10 @@ class DiscussThreadRecentController extends DiscussController {
         );
     }
     public function getPageTitle() {
-        return $this->modx->lexicon('discuss.recent_posts');
+        return $this->modx->lexicon('discuss.recent_posts').' ('.number_format($this->list['total']).')';
     }
     public function getSessionPlace() {
-        return 'recent::'.$this->getProperty('page',1);
+        return 'thread/recent::'.$this->getProperty('page',1);
     }
     public function process() {
         /* get default options */
@@ -91,12 +91,12 @@ class DiscussThreadRecentController extends DiscussController {
     }
 
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->list['total'],
             'id' => 0,
             'view' => 'thread/recent',
             'limit' => $this->list['limit'],
             'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
-        ));
+        ), $this->options));
     }
 }

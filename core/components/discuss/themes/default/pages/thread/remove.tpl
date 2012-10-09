@@ -1,7 +1,7 @@
 [[+trail]]
 
 <br />
-<form action="[[~[[*id]]]]thread/remove?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">
+<form action="[[DiscussUrlMaker? &action=`thread/remove` &params=`{"thread":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-remove-thread-form">
 
     <h2>[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h2>
     

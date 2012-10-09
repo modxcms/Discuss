@@ -66,8 +66,15 @@ class DiscussMessagesController extends DiscussController {
             'Users.user' => $this->discuss->user->get('id'),
         ));
         $total = $this->modx->getCount('disThread',$c);
-        $c->select($this->modx->getSelectColumns('disPost','LastPost'));
+        $c->select($this->modx->getSelectColumns('disThread','disThread'));
+        $c->select($this->modx->getSelectColumns('disPost','LastPost','last_post_'));
+        $c->select($this->modx->getSelectColumns('disPost','FirstPost','first_post_'));
+        $c->select($this->modx->getSelectColumns('disUser','LastAuthor','last_author_'));
+        $c->select($this->modx->getSelectColumns('disUser','FirstAuthor','first_author_'));
         $c->select(array(
+            'Reads.thread as viewed'
+        ));
+        /*$c->select(array(
             'disThread.id',
             'disThread.replies',
             'disThread.views',
@@ -80,7 +87,7 @@ class DiscussMessagesController extends DiscussController {
             'FirstAuthor.id AS author_first',
             'FirstAuthor.username AS author_first_username',
             'Reads.thread AS viewed',
-        ));
+        ));*/
         $c->sortby('LastPost.createdon','DESC');
         $c->limit($limit,$start);
         $messages = $this->modx->getCollection('disThread',$c);
@@ -94,9 +101,8 @@ class DiscussMessagesController extends DiscussController {
             $message->buildCssClass('board-post');
             $threadArray = $message->toArray();
             $threadArray['idx'] = $idx;
-            $threadArray['createdon'] = strftime($this->discuss->dateFormat,strtotime($threadArray['createdon']));
-
-            $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$this->discuss->request->makeUrl('user', array('type' => 'userid', 'user' => $threadArray['author'])).'">'.$threadArray['author_username'].'</a>' : $threadArray['author_username'];
+            $threadArray['createdon'] = strftime($this->discuss->dateFormat,strtotime($threadArray['first_post_createdon']));
+            $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$this->discuss->request->makeUrl('user', array('user' => $threadArray['last_author_username'])).'">'.$threadArray['last_author_username'].'</a>' : $threadArray['last_author_username'];
             $threadArray['views'] = number_format($threadArray['views']);
             $threadArray['replies'] = number_format($threadArray['replies']);
             $threadArray['read'] = 1;
@@ -107,7 +113,7 @@ class DiscussMessagesController extends DiscussController {
             $threadArray['unread-cls'] = 'dis-post-read';
             if (!$threadArray['viewed'] && $this->discuss->user->isLoggedIn) {
                 $threadArray['unread'] = true;
-                $threadArray['unread-cls'] = 'dis-post-read';
+                $threadArray['unread-cls'] = 'dis-post-unread';
             }
 
             $this->list['results'][] = $this->discuss->getChunk('message/disMessageLi',$threadArray);
@@ -128,13 +134,13 @@ class DiscussMessagesController extends DiscussController {
     }
 
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->list['total'],
             'id' => 0,
             'view' => 'messages',
             'limit' => $this->list['limit'],
             'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
-        ));
+        ), $this->options));
     }
 
     public function handleActions() {

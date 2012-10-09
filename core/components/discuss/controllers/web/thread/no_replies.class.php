@@ -32,7 +32,7 @@ class DiscussThreadNoRepliesController extends DiscussThreadUnreadController {
     public $method = 'fetchWithoutReplies';
 
     public function getPageTitle() {
-        return $this->modx->lexicon('discuss.threads_no_replies');
+        return $this->modx->lexicon('discuss.threads_no_replies') . ' ('.number_format($this->threads['total']).')';
     }
 
     public function getSessionPlace() {
@@ -44,12 +44,12 @@ class DiscussThreadNoRepliesController extends DiscussThreadUnreadController {
      * @return void
      */
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->threads['total'],
             'id' => 0,
             'view' => 'thread/no_replies',
             'limit' => $this->threads['limit'],
-        ));
+        ), $this->options));
     }
 
     /**

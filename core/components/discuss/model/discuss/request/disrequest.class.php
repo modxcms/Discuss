@@ -38,6 +38,11 @@ class DisRequest {
      * @var array $pageOptions
      */
     public $pageOptions = array();
+    /**
+     * Any page-specific modules for the loaded controller
+     * @var array $pageOptions
+     */
+    public $modules = array();
 
     /**
      * @param Discuss $discuss A reference to the Discuss instance
@@ -114,6 +119,7 @@ class DisRequest {
 
             $this->discuss->controller->scriptProperties = array_merge($_REQUEST,$_GET,$_POST);
             $this->discuss->controller->setOptions($this->pageOptions);
+            $this->discuss->controller->setModules($this->modules);
             $output = $this->discuss->controller->render();
             
         } else {
@@ -237,6 +243,10 @@ class DisRequest {
 				if (array_key_exists('options', $global)){
 					$this->pageOptions = array_merge($this->pageOptions,$global['options']);
                 }
+				/* load global page modules */
+				if (array_key_exists('modules', $global)){
+					$this->modules = array_merge($this->modules, $global['modules']);
+                }
 			}
 
 			if (isset($additional) && is_array($manifest) && array_key_exists($additional, $manifest)){
@@ -271,6 +281,10 @@ class DisRequest {
 				/* load page-specific options */
 				if (array_key_exists('options', $specific)){
 					$this->pageOptions = array_merge($this->pageOptions,$specific['options']);
+                }
+				/* load global page modules */
+				if (array_key_exists('modules', $specific)){
+					$this->modules = array_merge($this->modules, $specific['modules']);
                 }
 			}
 
@@ -454,95 +468,16 @@ class DisRequest {
             if (!empty($params))
                 $url .= '?' . http_build_query($params);
         }
-        else {
-            
-            /* BEGIN example manifest */
-            $manifestexmpl = array(
-                'global' => array(
-                    'furl' => array(
-                        array(
-                            'condition' => array(
-                                'type' => 'category'
-                            ),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'category'),
-                                array('type' => 'variable-required', 'key' => 'category'),
-                                array('type' => 'variable', 'key' => 'category_name'),
-                                array('type' => 'allparameters')
-                            )
-                        ),
-                        array(
-                            'condition' => array(),
-                            'data' => array(
-                                array('type' => 'action'),
-                                array('type' => 'allparameters')
-                            )
-                        )
-                    )
-                ),
-                'thread' => array(
-                    'furl' => array(
-                        array(
-                            'condition' => array(),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'thread'),
-                                array('type' => 'variable-required', 'key' => 'thread'),
-                                array('type' => 'variable', 'key' => 'thread_name'),
-                                array('type' => 'allparameters')
-                            )
-                        )
-                    )
-                ),
-                'board' => array(
-                    'furl' => array(
-                        array(
-                            'condition' => array(),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'board'),
-                                array('type' => 'variable-required', 'key' => 'board'),
-                                array('type' => 'variable', 'key' => 'board_name'),
-                                array('type' => 'allparameters')
-                            )
-                        )
-                    )
-                ),
-                'user' => array(
-                    'furl' => array(
-                        array(
-                            'condition' => array(
-                                'type' => 'username'
-                            ),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'u'),
-                                array('type' => 'variable-required', 'key' => 'user'),
-                                array('type' => 'allparameters')
-                            )
-                        ),
-                        array(
-                            'condition' => array(
-                                'type' => 'userid'
-                            ),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'user'),
-                                array('type' => 'parameter', 'key' => 'user'),
-                                array('type' => 'allparameters')
-                            )
-                        )
-                    )
-                )
-            );
-            /* END example manifest */
-            
+        else {            
             /* Now parsing the manifest for FURLs rules */
-            //$f = $this->discuss->config['themePath'].'manifest.php';
-            //if (file_exists($f)) {
-            //    $manifest = require $f;
-                $manifest = $manifestexmpl;
+            $f = $this->discuss->config['themePath'].'manifest.php';
+            if (file_exists($f)) {
+                $manifest = require $f;
                 $url = $this->urlManifestParse($action, $params, $manifest);
-            //}
-            //else {
-            //    return $this->makeUrl($action, $params, true); // Fallback to nonFURL generaton if we couldn't load manifest
-            //}
+            }
+            else {
+                return $this->makeUrl($action, $params, true); // Fallback to nonFURL generaton if we couldn't load manifest
+            }
             
         }
         if ($this->modx->getOption('discuss.absolute_urls',null,true)) {

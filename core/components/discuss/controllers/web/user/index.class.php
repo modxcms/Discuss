@@ -128,7 +128,7 @@ class DiscussUserController extends DiscussController {
         );
         $userParams = array();
         if ($this->user->get('id') != $this->discuss->user->get('id')) {
-            $userParams = array('user' => $this->user->get('id'), 'type' => 'userid');
+            $userParams = array('user' => $this->user->get('id'));
         }
         $trail[] = array(
             'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),

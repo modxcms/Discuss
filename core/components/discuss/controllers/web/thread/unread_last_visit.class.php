@@ -29,6 +29,9 @@ require_once dirname(__FILE__).'/unread.class.php';
  * @subpackage controllers
  */
 class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadController {
+    public function getPageTitle() {
+        return $this->modx->lexicon('discuss.unread_posts_last_visit').' ('.number_format($this->threads['total']).')';
+    }
      public function process() {
         /* setup default properties */
         $limit = !empty($this->scriptProperties['limit']) ? $this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
@@ -38,7 +41,7 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
 
         $sortBy = $this->modx->getOption('sortBy',$this->scriptProperties,'LastPost.createdon');
         $sortDir = $this->modx->getOption('sortDir',$this->scriptProperties,'DESC');
-        $postTpl = $this->modx->getOption('postTpl',$this->options,'post/disPostLi');
+        $postTpl = $this->modx->getOption('postTpl',$this->options,'post/disThreadLi');
 
         /* get unread threads */
         $this->threads = $this->modx->call('disThread','fetchUnread',array(&$this->modx,$sortBy,$sortDir,$limit,$start,true));
@@ -96,11 +99,16 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
 
 
     public function getActionButtons() {
+        $links = array();
         $actionButtons = array();
-        $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread'), 'text' => $this->modx->lexicon('discuss.unread_posts_all'), 'cls' => 'dis-action-unread_posts_all');
+
+        $links['actionlink_all_unread'] = $this->discuss->request->makeUrl('thread/unread');
+        $actionButtons[] = array('url' => $links['actionlink_all_unread'], 'text' => $this->modx->lexicon('discuss.unread_posts_all'), 'cls' => 'dis-action-unread_posts_all');
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
+            $links['actionlink_mark_read'] = $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1));
+            $actionButtons[] = array('url' => $links['actionlink_mark_read'], 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }
+        $this->setPlaceholders($links);
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
 
@@ -125,12 +133,12 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
     }
 
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->threads['total'],
             'id' => 0,
             'view' => 'thread/unread_last_visit',
             'limit' => $this->threads['limit'],
             'showPaginationIfOnePage' => $this->getOption('showPaginationIfOnePage',true,'isset'),
-        ));
+        ), $this->options));
     }
 }

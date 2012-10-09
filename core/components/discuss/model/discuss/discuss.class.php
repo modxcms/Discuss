@@ -121,6 +121,7 @@ class Discuss {
             'modelPath' => $corePath.'model/',
             'themePath' => $corePath.'themes/'.$theme.'/',
             'chunksPath' => $corePath.'themes/'.$theme.'/chunks/',
+            'modulesPath' => $corePath.'themes/'.$theme.'/modules/',
             'pagesPath' => $corePath.'themes/'.$theme.'/pages/',
             'controllersPath' => $corePath.'controllers/',
             'snippetsPath' => $corePath.'elements/snippets/',
@@ -313,25 +314,35 @@ class Discuss {
 
             /* Format counts nicely */
             $authphs['user.unread_messages'] = ($newMessages > 1) ?
-                $this->modx->lexicon('discuss.user.new_messages',array('count' > $newMessages)) :
-                ($newMessages == 1) ? $this->modx->lexicon('discuss.user.one_new_message') :
-                    $this->modx->lexicon('discuss.user.no_new_messages');
+                $this->modx->lexicon('discuss.user.new_messages',array('total' => $newMessages)) : (
+                    ($newMessages == 1) ?
+                    $this->modx->lexicon('discuss.user.one_new_message') :
+                    $this->modx->lexicon('discuss.user.no_new_messages')
+                );
             $authphs['user.unread_posts'] = ($unreadPosts > 1) ?
-                $this->modx->lexicon('discuss.user.new_posts', array('count' => $unreadPosts)) :
-                ($unreadPosts == 1) ? $this->modx->lexicon('discuss.user.one_new_post') :
-                    $this->modx->lexicon('discuss.user.no_new_posts');
+                $this->modx->lexicon('discuss.user.new_posts', array('total' => $unreadPosts)) : (
+                    ($unreadPosts == 1) ?
+                    $this->modx->lexicon('discuss.user.one_new_post') :
+                    $this->modx->lexicon('discuss.user.no_new_posts')
+                );
             $authphs['user.new_replies'] = ($newReplies > 1) ?
-                $this->modx->lexicon('discuss.user.new_replies',array('count' => $newReplies)) :
-                ($newReplies == 1) ? $this->modx->lexicon('discuss.user.one_new_reply') :
-                    $this->modx->lexicon('discuss.user.no_new_replies');
+                $this->modx->lexicon('discuss.user.new_replies',array('total' => $newReplies)) : (
+                    ($newReplies == 1) ?
+                    $this->modx->lexicon('discuss.user.one_new_reply') :
+                    $this->modx->lexicon('discuss.user.no_new_replies')
+                );
             $authphs['user.unanswered_questions'] = ($unansweredQuestions > 1) ?
-                $this->modx->lexicon('discuss.user.unanswered_questions',array('count' => $unansweredQuestions)) :
-                ($unansweredQuestions == 1) ? $this->modx->lexicon('discuss.user.one_unanswered_question') :
-                    $this->modx->lexicon('discuss.user.no_unanswered_questions');
+                $this->modx->lexicon('discuss.user.unanswered_questions',array('total' => $unansweredQuestions)) : (
+                    ($unansweredQuestions == 1) ?
+                    $this->modx->lexicon('discuss.user.one_unanswered_question') :
+                    $this->modx->lexicon('discuss.user.no_unanswered_questions')
+                );
             $authphs['user.no_replies'] = ($noReplies > 1) ?
-                $this->modx->lexicon('discuss.user.no_replies',array('count' => $noReplies)) :
-                ($noReplies == 1) ? $this->modx->lexicon('discuss.user.one_no_reply') :
-                    $this->modx->lexicon('discuss.user.no_no_replies');
+                $this->modx->lexicon('discuss.user.no_replies',array('total' => $noReplies)) : (
+                    ($noReplies == 1) ?
+                    $this->modx->lexicon('discuss.user.one_no_reply') :
+                    $this->modx->lexicon('discuss.user.no_no_replies')
+            );
             $this->user->isGlobalModerator();
             $this->user->isAdmin();
         } else {
@@ -460,14 +471,15 @@ class Discuss {
      * @access public
      * @param string $name The name of the Chunk
      * @param array $properties The properties for the Chunk
+     * @param string $path The config's path property to use for file based Chunks
      * @return string The processed content of the Chunk
      */
-    public function getChunk($name,array $properties = array()) {
+    public function getChunk($name,array $properties = array(), $path = 'chunksPath') {
         $chunk = null;
         if (!isset($this->chunks[$name])) {
             /*$chunk = $this->modx->getObject('modChunk',array('name' => $name),true);*/
             if (empty($chunk)) {
-                $chunk = $this->_getTplChunk($name);
+                $chunk = $this->_getTplChunk($name, '.chunk.tpl', $path);
                 if ($chunk == false) return false;
             }
             $this->chunks[$name] = $chunk->getContent();
@@ -489,9 +501,9 @@ class Discuss {
      * @return modChunk/boolean Returns the modChunk object if found, otherwise
      * false.
      */
-    private function _getTplChunk($name,$postFix = '.chunk.tpl') {
+    private function _getTplChunk($name,$postFix = '.chunk.tpl', $path = 'chunksPath') {
         $chunk = false;
-        $f = $this->config['chunksPath'].strtolower($name).$postFix;
+        $f = $this->config[$path].strtolower($name).$postFix;
         if (file_exists($f)) {
             $o = file_get_contents($f);
             if ($this->config['debugTemplates']) {

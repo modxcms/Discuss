@@ -32,7 +32,7 @@ $fromDays = $modx->getOption('discuss.recent_threshold_days', null, 42);
 
 /* setup perms */
 $canViewProfiles = $modx->hasPermission('discuss.view_profiles');
-$postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disPostLi');
+$postTpl = $modx->getOption('postTpl',$scriptProperties,'post/disThreadLi');
 
 $cacheKey = 'discuss/recent/'.$discuss->user->get('id').'.'.md5(serialize($scriptProperties));
 $cache = $modx->cacheManager->get($cacheKey);

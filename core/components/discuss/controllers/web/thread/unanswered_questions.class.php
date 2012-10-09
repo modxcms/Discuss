@@ -32,7 +32,7 @@ class DiscussThreadUnansweredQuestionsController extends DiscussThreadUnreadCont
     public $method = 'fetchUnansweredQuestions';
 
     public function getPageTitle() {
-        return $this->modx->lexicon('discuss.unanswered_questions');
+        return $this->modx->lexicon('discuss.unanswered_questions') . ' ('.number_format($this->threads['total']).')';
     }
 
     public function getSessionPlace() {
@@ -44,12 +44,12 @@ class DiscussThreadUnansweredQuestionsController extends DiscussThreadUnreadCont
      * @return void
      */
     public function buildPagination() {
-        $this->discuss->hooks->load('pagination/build',array(
+        $this->discuss->hooks->load('pagination/build',array_merge(array(
             'count' => $this->threads['total'],
             'id' => 0,
             'view' => 'thread/unanswered_questions',
             'limit' => $this->threads['limit'],
-        ));
+        ), $this->options));
     }
 
     /**

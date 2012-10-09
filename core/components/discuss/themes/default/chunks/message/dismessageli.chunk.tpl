@@ -9,6 +9,6 @@
     <div class="dis-thread-body dis-message-li-body">
         <a href="[[DiscussUrlMaker? &action=`messages/view` &params=`{"thread":"[[+thread]]"}`]]#dis-post-[[+post_id]]">[[+title]]</a>
         [[+unread]]<br />
-        <span class="dis-message-author" style="font-size: 10px;">[[%discuss.by? &author=`<a href="[[DiscussUrlMaker? &action=`user` &params=`{"type":"userid","user":"[[+author_first]]"}`]]">[[+author_first_username]]</a>`]]</span>
+        <span class="dis-message-author" style="font-size: 10px;">[[%discuss.by? &author=`<a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+author_first]]"}`]]">[[+author_first_username]]</a>`]]</span>
     </div>
 </li>
