@@ -347,7 +347,7 @@ class Discuss {
             $this->user->isAdmin();
         } else {
             $authphs = array(
-                'authLink' => '<a href="'.$this->request->makeUrl('login').">Login</a>',
+                'authLink' => '<a href="'.$this->request->makeUrl('login').'">Login</a>',
                 'user.avatar_url' => '',
                 'user.unread_messages' => '',
             );
