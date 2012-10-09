@@ -99,11 +99,16 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
 
 
     public function getActionButtons() {
+        $links = array();
         $actionButtons = array();
-        $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread'), 'text' => $this->modx->lexicon('discuss.unread_posts_all'), 'cls' => 'dis-action-unread_posts_all');
+
+        $links['actionlink_all_unread'] = $this->discuss->request->makeUrl('thread/unread');
+        $actionButtons[] = array('url' => $links['actionlink_all_unread'], 'text' => $this->modx->lexicon('discuss.unread_posts_all'), 'cls' => 'dis-action-unread_posts_all');
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
+            $links['actionlink_mark_read'] = $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1));
+            $actionButtons[] = array('url' => $links['actionlink_mark_read'], 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }
+        $this->setPlaceholders($links);
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
 

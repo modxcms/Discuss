@@ -109,9 +109,12 @@ class DiscussThreadUnreadController extends DiscussController {
 
     public function getActionButtons() {
         $actionButtons = array();
+        $links = array();
         if ($this->discuss->user->isLoggedIn) {
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/unread',array('read' => 1)), 'text' => $this->getOption('textButtonMarkAllRead'), 'cls' => 'dis-action-mark_all_as_read');
+            $links['actionlink_mark_read'] = $this->discuss->request->makeUrl('thread/unread',array('read' => 1));
+            $actionButtons[] = array('url' => $links['actionlink_mark_read'], 'text' => $this->getOption('textButtonMarkAllRead'), 'cls' => 'dis-action-mark_all_as_read');
         }
+        $this->setPlaceholders($links);
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
 
