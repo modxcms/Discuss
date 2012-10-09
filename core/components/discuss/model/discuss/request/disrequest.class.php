@@ -307,6 +307,133 @@ class DisRequest {
             $this->modx->regClientStartupScript($this->discuss->config['jsUrl'].'web/discuss.js');
         }
 	}
+    
+    private function urlManifestParse($action, $params, $manifest) {
+        $bestmatch = null;
+        $result = null;
+        if ($action === '' && empty($params)) {
+            return $this->discuss->url; // Fast check for makeUrl without parameters
+        }
+        if (count($manifest[$action]['furl'])>0) {
+            foreach ($manifest[$action]['furl'] as $value) {
+                if (count($value['condition'])>0) {
+                    $conditionscount = 0;
+                    $conditionsmatched = 0;
+                    $conditionsparams = array();
+                    foreach ($value['condition'] as $paramname => $paramvalue) {
+                        $conditionscount++;
+                        if (!empty($params[$paramname]) && $params[$paramname] === $paramvalue) {
+                            $conditionsparams[] = $paramname;
+                            $conditionsmatched++;
+                        }
+                    }
+                    if ($conditionsmatched === $conditionscount) {
+                        $haveneededparams = true;
+                        foreach ($value['data'] as $data) {
+                            if (($data['type'] === 'variable-required' || $data['type'] === 'parameter-required') && empty($params[$data['key']])) {
+                                $haveneededparams = false;
+                                break;
+                            }
+                        }
+                        if (!$haveneededparams) {
+                            continue; // The match isn't valid because the match requires having more required parameters.
+                        }
+                        foreach ($conditionsparams as $paramname) {
+                            unset($params[$paramname]);
+                        }
+                        $bestmatch = $value;
+                        break; // If we found the match from checking conditionals assume it the best
+                    }
+                }
+                else {
+                    $haveneededparams = true;
+                    foreach ($value['data'] as $data) {
+                        if (($data['type'] === 'variable-required' || $data['type'] === 'parameter-required') && empty($params[$data['key']])) {
+                            $haveneededparams = false;
+                            break;
+                        }
+                    }
+                    if (!$haveneededparams) {
+                        continue; // The match isn't valid because the match requires having more required parameters.
+                    }
+                    $bestmatch = $value; // If we found a match without conditionals consider it a "weak" match (and try to search other matches, for example with conditionals)
+                }
+            }
+        }
+        if ($bestmatch === null && $action != 'global') {
+            $result = urlManifestParse('global', $params, $manifest); // check in global space if not found in action space
+        }
+        if ($bestmatch === null && $result === null) {
+            return $this->makeUrl($action, $params, true); // Fallback to nonFURL generation in case if FURL generation failed
+        }
+        if ($bestmatch === null) {
+            return $result;
+        }
+        $path = '';
+        $request = array();
+        foreach ($bestmatch['data'] as $data) {
+            switch ($data['type']) {
+                case 'action':
+                    $path.= $action . '/';
+                    break;
+                case 'variable-required':
+                    if (empty($params[$data['key']])) {
+                        $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data['key']);
+                        return $this->makeUrl($action, $params, true); // Fallback to nonFURL generation in case if FURL generation failed
+                    } // No break here is intentional. The assignement itself is like the non-required variable.
+                case 'variable':
+                    if (!empty($params[$data['key']])) {
+                        $path.= $params[$data['key']] . '/';
+                        unset($params[$data['key']]);
+                    }
+                    break;
+                case 'constant':
+                    $path.= $data['value'] . '/';
+                    break;
+                case 'parameter-required':
+                    if  (empty($params[$data['key']])) {
+                        $this->modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not find required parameter when creating URL: '.$data['key']);
+                        return $this->makeUrl($action, $params, true); // Fallback to nonFURL generation in case if FURL generation failed
+                    } // No break here is intentional. The assignement itself is like the non-required parameter.
+                case 'parameter':
+                    if  (!empty($params[$data['key']])) {
+                        $request[$data['key']] = $params[$data['key']];
+                        unset($params[$data['key']]);
+                    }
+                    break;
+                case 'parameter-constant':
+                    $param = $data['value'];
+                    if (!is_array($data['value'])) {
+                        $paramexpl = explode("=", $data, 2);
+                        if (count($paramexpl)>1) {
+                            $param['key'] = $paramexpl[0];
+                            $param['value'] = $paramexpl[1];
+                        }
+                        else {
+                            $param['key'] = $data['value'];
+                            $param['value'] = $data['value'];
+                        }
+                    }
+                    $request[$param['key']] = $param['value'];
+                    break;
+                case 'allparameters':
+                    $request = array_merge($params, $request);
+                    $params = array(); // Because we passed all parameters to the $request array, $params is now void
+                    break;
+            }
+        }
+        trim($path, '/');
+        $urlparts = explode('?', $this->discuss->url, 2);
+        if (count($urlparts)>1) {
+            $urlrequest = array();
+            parse_str($urlparts[1], $urlrequest);
+            $request = array_merge($urlrequest, $request);
+        }
+        $result = rtrim($urlparts[0], '/') . '/' . $path;
+        if (!empty($request))
+            $result .= '?' . http_build_query($request);
+        return $result;
+    }
 
     /**
      * Makes a proper URL for the Discuss system
@@ -315,12 +442,121 @@ class DisRequest {
      * @param array $params
      * @return string
      */
-    public function makeUrl($action = '',array $params = array()) {
-        if (is_array($params)) {
-            $params = http_build_query($params);
-            if (!empty($params)) $params = '?'.$params;
+    public function makeUrl($action = '',array $params = array(), $forcenofurls = false) {
+        if (is_string($action) && !empty($action)) {
+            $controller = $this->getControllerFile($action);
+            if (!file_exists($controller["file"]) || is_dir($controller["file"])) {
+                $action = ''; // Reset the action if we don't have the related controller
+            }
         }
-        $url = $this->discuss->url.$action.$params;
+        else {
+            $action = '';
+        }
+        $url = '';
+        $nofurls = ($forcenofurls || $this->modx->request->getResourceMethod() != 'alias');
+        if ($nofurls) {
+            $url = $this->discuss->url;
+            if(!empty($action))
+                $params['action'] = $action;
+            $urlparts = explode('?', $url, 2);
+            if (count($urlparts)>1) {
+                $urlrequest = array();
+                parse_str($urlparts[1], $urlrequest);
+                $params = array_merge($urlrequest, $params);
+            }
+            $url = rtrim($urlparts[0], '/');
+            if (!empty($params))
+                $url .= '?' . http_build_query($params);
+        }
+        else {
+            
+            /* BEGIN example manifest */
+            $manifestexmpl = array(
+                'global' => array(
+                    'furl' => array(
+                        array(
+                            'condition' => array(
+                                'type' => 'category'
+                            ),
+                            'data' => array(
+                                array('type' => 'constant', 'value' => 'category'),
+                                array('type' => 'variable-required', 'key' => 'category'),
+                                array('type' => 'variable', 'key' => 'category_name'),
+                                array('type' => 'allparameters')
+                            )
+                        ),
+                        array(
+                            'condition' => array(),
+                            'data' => array(
+                                array('type' => 'action'),
+                                array('type' => 'allparameters')
+                            )
+                        )
+                    )
+                ),
+                'thread' => array(
+                    'furl' => array(
+                        array(
+                            'condition' => array(),
+                            'data' => array(
+                                array('type' => 'constant', 'value' => 'thread'),
+                                array('type' => 'variable-required', 'key' => 'thread'),
+                                array('type' => 'variable', 'key' => 'thread_name'),
+                                array('type' => 'allparameters')
+                            )
+                        )
+                    )
+                ),
+                'board' => array(
+                    'furl' => array(
+                        array(
+                            'condition' => array(),
+                            'data' => array(
+                                array('type' => 'constant', 'value' => 'board'),
+                                array('type' => 'variable-required', 'key' => 'board'),
+                                array('type' => 'variable', 'key' => 'board_name'),
+                                array('type' => 'allparameters')
+                            )
+                        )
+                    )
+                ),
+                'user' => array(
+                    'furl' => array(
+                        array(
+                            'condition' => array(
+                                'type' => 'username'
+                            ),
+                            'data' => array(
+                                array('type' => 'constant', 'value' => 'u'),
+                                array('type' => 'variable-required', 'key' => 'user'),
+                                array('type' => 'allparameters')
+                            )
+                        ),
+                        array(
+                            'condition' => array(),
+                            'data' => array(
+                                array('type' => 'constant', 'value' => 'user'),
+                                array('type' => 'parameter', 'key' => 'user'),
+                                array('type' => 'allparameters')
+                            )
+                        )
+                    )
+                )
+            );
+            /* END example manifest */
+            
+            /* Now parsing the manifest for FURLs rules */
+            //$f = $this->discuss->config['themePath'].'manifest.php';
+            //if (file_exists($f)) {
+            //    $manifest = require $f;
+                $manifest = $manifestexmpl;
+                $url = $this->urlManifestParse($action, $params, $manifest);
+            //}
+            //else {
+            //    return $this->makeUrl($action, $params, true); // Fallback to nonFURL generaton if we couldn't load manifest
+            //}
+            
+        }
         if ($this->modx->getOption('discuss.absolute_urls',null,true)) {
             $url = $this->modx->getOption('site_url',null,MODX_SITE_URL).ltrim($url,'/');
         }

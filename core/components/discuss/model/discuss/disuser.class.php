@@ -913,7 +913,7 @@ class disUser extends xPDOSimpleObject {
      * @return string
      */
     public function getUrl() {
-        $url = $this->xpdo->discuss->request->makeUrl('u/'.$this->get('username'));
+        $url = $this->xpdo->discuss->request->makeUrl('user', array('type' => 'username', 'user' => $this->get('username')));
         $this->set('url',$url);
         return $url;
     }

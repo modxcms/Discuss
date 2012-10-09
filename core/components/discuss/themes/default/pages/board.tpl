@@ -1,6 +1,6 @@
 [[+top]]
 <div class="right">
-    <form action="[[~[[*id]]]]search" method="GET">
+    <form action="[[DiscussUrlMaker? &action=`search`]]" method="GET">
         <input type="hidden" name="board" value="[[+id]]" />
         <input type="text" name="s" value="" class="dis-form-field-solo" style="width: 200px; margin-right: 5px;" placeholder="[[%discuss.search_this_board]]" />
 

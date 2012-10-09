@@ -4,7 +4,7 @@
         <div class="dis-post-author" id="dis-post-author-0">
             <div class="dis-post-actions"></div>
             <div class="dis-author">
-                <a href="[[~[[*id]]]]user/?user=[[+author.id]]">[[+author.avatar]]</a>
+                <a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+author.id]]"}`]]">[[+author.avatar]]</a>
                 <span class="right">
                     [[+createdon]]
                     <br />[[+author.email]]

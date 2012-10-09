@@ -154,13 +154,12 @@ class disThread extends xPDOSimpleObject {
         /** @var disThread $thread */
         $thread = $modx->getObject('disThread',$c);
         if ($thread) {
-            $userUrl = $modx->discuss->request->makeUrl('u');
             $participants = $thread->get('participants_usernames');
             if (!empty($participants)) {
                 $pu = array_unique(explode(',',$participants));
                 asort($pu);
                 foreach ($pu as &$username) {
-                    $username = '<a href="'.$userUrl.'/'.$username.'/">'.$username.'</a>';
+                    $username = '<a href="'.$modx->discuss->request->makeUrl('user', array('type' => 'username', 'user' => $username)).'">'.$username.'</a>';
                 }
                 $pu = implode(', ',$pu);
                 $thread->set('participants_usernames',trim($pu));
@@ -814,6 +813,7 @@ class disThread extends xPDOSimpleObject {
             foreach ($sessions as $member) {
                 $r = explode(':',$member->get('reader'));
                 $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array(
+                    'type' => 'username',
                     'user' => str_replace('%20','',$r[0])
                 )).'">'.$r[1].'</a>' : $r[1];
             }
@@ -1044,7 +1044,7 @@ class disThread extends xPDOSimpleObject {
                 $category = $ancestor->getOne('Category');
                 if ($category) {
                     $trail[] = array(
-                        'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
+                        'url' => $this->xpdo->discuss->request->makeUrl('',array('type' => 'category', 'category' => $category->get('id'))),
                         'text' => $category->get('name'),
                         'last' => false,
                     );
@@ -1362,7 +1362,9 @@ class disThread extends xPDOSimpleObject {
     public function getUrl($lastPost = true,array $params = array(),$regenerate = false) {
         $url = $this->get('url');
         if (empty($url) || $regenerate || !empty($params)) {
-            $view = 'thread/'.$this->get('id').'/'.$this->getUrlTitle();
+            $action = 'thread';
+            $params['thread'] = $this->get('id');
+            $params['thread_name'] = $this->getUrlTitle();
 
             if ($lastPost) {
                 $page = $this->calcLastPostPage();
@@ -1372,7 +1374,7 @@ class disThread extends xPDOSimpleObject {
                 }
             }
 
-            $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+            $url = $this->xpdo->discuss->request->makeUrl($action,$params);
             if ($this->get('post_id') && $lastPost) {
                 $url .= '#dis-post-'.$this->get('post_id');
             }

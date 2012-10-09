@@ -66,7 +66,7 @@ class DiscussPostSpamController extends DiscussController {
         }
 
         if ($this->thread->get('post_first') == $this->post->get('id')) {
-            $redirectTo = $this->discuss->request->makeUrl('board/',array('board' => $this->post->get('board')));
+            $redirectTo = $this->discuss->request->makeUrl('board',array('board' => $this->post->get('board')));
         } else {
             $redirectTo = $this->thread->getUrl();
         }

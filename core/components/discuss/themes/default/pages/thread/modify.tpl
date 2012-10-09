@@ -8,7 +8,7 @@
 
 <div id="dis-modify-post-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]]]thread/modify?post=[[+id]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
+<form action="[[DiscussUrlMaker? &action=`thread/modify` &params=`{"post":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-modify-post-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.post_modify? &namespace=`discuss` &topic=`post`]]</h2>
     

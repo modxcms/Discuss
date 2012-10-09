@@ -89,7 +89,7 @@ $parser = $modx->getService('disParser','disBBCodeParser',$discuss->config['mode
 $stmt = $modx->query($sql);
 if ($stmt) {
     while ($postArray = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $postArray['url'] = $forumsResourceUrl.'thread/?thread='.$postArray['thread'];
+        $postArray['url'] = $discuss->request->makeUrl('thread', array('thread' => $postArray['thread']));
         $page = 1;
         if ($postArray['replies'] > $perPage) {
             $page = ceil($postArray['replies'] / $perPage);
