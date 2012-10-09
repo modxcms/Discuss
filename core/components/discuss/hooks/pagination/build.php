@@ -31,7 +31,7 @@
  * @package discuss
  * @subpackage hooks
  */
-if(!function_exists('urlAddPagination') {
+if(!function_exists('urlAddPagination')) {
     function urlAddPagination($page = null, &$discussSet = null, $actionSet = null, $paramsSet = null) {
         static $discuss = null;
         static $action = null;
