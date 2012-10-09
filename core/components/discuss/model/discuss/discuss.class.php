@@ -299,7 +299,7 @@ class Discuss {
         /* topbar profile links. @TODO: Move this somewhere else. */
         if ($this->user->isLoggedIn) {
             $authphs = array(
-                'authLink' => '<a href="'.$this->url.'logout">Logout</a>',
+                'authLink' => '<a href="'.$this->request->makeUrl('logout').'">Logout</a>',
             );
             $authphs = array_merge($this->user->toArray('user.'),$authphs);
             $authphs['user.avatar_url'] = $this->user->getAvatarUrl();
@@ -336,7 +336,7 @@ class Discuss {
             $this->user->isAdmin();
         } else {
             $authphs = array(
-                'authLink' => '<a href="'.$this->url.'login">Login</a>',
+                'authLink' => '<a href="'.$this->request->makeUrl('login').">Login</a>',
                 'user.avatar_url' => '',
                 'user.unread_messages' => '',
             );
