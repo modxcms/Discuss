@@ -314,9 +314,9 @@ class DisRequest {
         if ($action === '' && empty($params)) {
             return $this->discuss->url; // Fast check for makeUrl without parameters
         }
-        if (count($manifest[$action]['furl'])>0) {
+        if (array_key_exists($action, $manifest) && array_key_exists('furl', $manifest[$action]) && count($manifest[$action]['furl'])>0) {
             foreach ($manifest[$action]['furl'] as $value) {
-                if (count($value['condition'])>0) {
+                if (array_key_exists('condition', $value) && count($value['condition'])>0) {
                     $conditionscount = 0;
                     $conditionsmatched = 0;
                     $conditionsparams = array();
@@ -327,7 +327,7 @@ class DisRequest {
                             $conditionsmatched++;
                         }
                     }
-                    if ($conditionsmatched === $conditionscount) {
+                    if ($conditionsmatched === $conditionscount && array_key_exists('data', $value) && count($value['data'])>0) {
                         $haveneededparams = true;
                         foreach ($value['data'] as $data) {
                             if (($data['type'] === 'variable-required' || $data['type'] === 'parameter-required') && empty($params[$data['key']])) {
@@ -361,7 +361,7 @@ class DisRequest {
             }
         }
         if ($bestmatch === null && $action != 'global') {
-            $result = urlManifestParse('global', $params, $manifest); // check in global space if not found in action space
+            $result = $this->urlManifestParse('global', $params, $manifest); // check in global space if not found in action space
         }
         if ($bestmatch === null && $result === null) {
             return $this->makeUrl($action, $params, true); // Fallback to nonFURL generation in case if FURL generation failed
