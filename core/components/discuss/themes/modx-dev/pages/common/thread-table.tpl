@@ -4,7 +4,8 @@
 			<header class="dis-cat-header dark-gradient group-fix sticky-bar">
 				<h1>[[+discuss.pagetitle]]</h1>
 				[[+pagination:notempty=`<nav id="key-Paginate" class="horiz-list">[[+pagination]]</nav>`]]
-			</header>
+			    [[+navbar_extra]]
+            </header>
 			<div class="row h-group header-row">
 			    <div class="f1-f2 f-padinall">
 			    	<div class="wrap">[[%discuss.board]]</div>

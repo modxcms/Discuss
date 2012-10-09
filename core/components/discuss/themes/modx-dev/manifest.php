@@ -439,6 +439,13 @@ $manifest = array(
                 'options' => array(
                     'disection' => 'recent',
                 )
+            ),
+            'navbar_extra' => array(
+                'tpl' => 'navbar_extra-wrapper',
+                'options' => array(
+                    'content' => '<a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit" class="action-buttons dis-action-unread_last_visit" title="[[%discuss.unread_posts_last_visit]]">[[%discuss.unread_posts_last_visit]]</a>
+                        <a class="read" href="[[+actionlink_mark_read]]" title="[[%discuss.mark_all_as_read]]">[[%discuss.mark_all_as_read]]</a>'
+                )
             )
         ),
     ),
@@ -446,6 +453,7 @@ $manifest = array(
         'options' => array(
             'showTitleInBreadcrumbs' => true,
             'showPaginationIfOnePage' => false,
+            'pageTpl' => 'common/thread-table',
         ),
         'modules' => array(
             'sidebar' => array(
@@ -453,8 +461,15 @@ $manifest = array(
                 'options' => array(
                     'disection' => 'recent',
                 )
+            ),
+            'navbar_extra' => array(
+                'tpl' => 'navbar_extra-wrapper',
+                'options' => array(
+                    'content' => '<a href="[[~[[++discuss.forums_resource_id]]]]thread/unread" class="action-buttons dis-action-unread" title="[[%discuss.unread_posts_all]]">[[%discuss.unread_posts_all]]</a>
+                        <a class="read" href="[[+actionlink_mark_read]]" title="[[%discuss.mark_all_as_read]]">aaa[[%discuss.mark_all_as_read]]</a>'
+                )
             )
-        ),
+        )
     ),
     'thread/no_replies' => array(
         'options' => array(
