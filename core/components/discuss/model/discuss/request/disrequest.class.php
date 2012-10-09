@@ -468,93 +468,16 @@ class DisRequest {
             if (!empty($params))
                 $url .= '?' . http_build_query($params);
         }
-        else {
-            
-            /* BEGIN example manifest */
-            $manifestexmpl = array(
-                'global' => array(
-                    'furl' => array(
-                        array(
-                            'condition' => array(
-                                'type' => 'category'
-                            ),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'category'),
-                                array('type' => 'variable-required', 'key' => 'category'),
-                                array('type' => 'variable', 'key' => 'category_name'),
-                                array('type' => 'allparameters')
-                            )
-                        ),
-                        array(
-                            'condition' => array(),
-                            'data' => array(
-                                array('type' => 'action'),
-                                array('type' => 'allparameters')
-                            )
-                        )
-                    )
-                ),
-                'thread' => array(
-                    'furl' => array(
-                        array(
-                            'condition' => array(),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'thread'),
-                                array('type' => 'variable-required', 'key' => 'thread'),
-                                array('type' => 'variable', 'key' => 'thread_name'),
-                                array('type' => 'allparameters')
-                            )
-                        )
-                    )
-                ),
-                'board' => array(
-                    'furl' => array(
-                        array(
-                            'condition' => array(),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'board'),
-                                array('type' => 'variable-required', 'key' => 'board'),
-                                array('type' => 'variable', 'key' => 'board_name'),
-                                array('type' => 'allparameters')
-                            )
-                        )
-                    )
-                ),
-                'user' => array(
-                    'furl' => array(
-                        array(
-                            'condition' => array(
-                                'type' => 'username'
-                            ),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'u'),
-                                array('type' => 'variable-required', 'key' => 'user'),
-                                array('type' => 'allparameters')
-                            )
-                        ),
-                        array(
-                            'condition' => array(),
-                            'data' => array(
-                                array('type' => 'constant', 'value' => 'user'),
-                                array('type' => 'parameter', 'key' => 'user'),
-                                array('type' => 'allparameters')
-                            )
-                        )
-                    )
-                )
-            );
-            /* END example manifest */
-            
+        else {            
             /* Now parsing the manifest for FURLs rules */
-            //$f = $this->discuss->config['themePath'].'manifest.php';
-            //if (file_exists($f)) {
-            //    $manifest = require $f;
-                $manifest = $manifestexmpl;
+            $f = $this->discuss->config['themePath'].'manifest.php';
+            if (file_exists($f)) {
+                $manifest = require $f;
                 $url = $this->urlManifestParse($action, $params, $manifest);
-            //}
-            //else {
-            //    return $this->makeUrl($action, $params, true); // Fallback to nonFURL generaton if we couldn't load manifest
-            //}
+            }
+            else {
+                return $this->makeUrl($action, $params, true); // Fallback to nonFURL generaton if we couldn't load manifest
+            }
             
         }
         if ($this->modx->getOption('discuss.absolute_urls',null,true)) {
