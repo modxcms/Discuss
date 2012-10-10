@@ -357,6 +357,9 @@ $manifest = array(
         ),
     ),
     'messages/reply' => array(
+        'options' => array(
+            'pageTpl' => 'common/messages-with-form',
+        ),
         'js' => array(
             'footer' => array(
                 'messages/dis.message.reply.js',
@@ -368,7 +371,17 @@ $manifest = array(
                 'options' => array(
                     'disection' => 'new-message',
                 )
-            )
+            ),
+            'form' => array(
+                'tpl' => 'message-form',
+                'options' => array(
+                    'hook' => 'DiscussReplyMessage',
+                    'action' => 'reply',
+                    'formaction' => 'reply?thread=[[!+fi.thread]]',
+                    'submit_message' => '[[%discuss.message_send]]',
+                    'cancel_link' => 'messages/view?thread=[[+thread]]'
+                )
+            ),
         ),
     ),
     'messages/modify' => array(
@@ -396,7 +409,7 @@ $manifest = array(
                     'submit_message' => '[[%discuss.save_changes]]',
                     'cancel_link' => 'messages/view?message=[[+thread]]#dis-post-[[+id]]'
                 )
-            )
+            ),
         ),
     ),
     'messages/view' => array(

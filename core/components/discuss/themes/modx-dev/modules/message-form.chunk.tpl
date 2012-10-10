@@ -11,6 +11,10 @@
             <input type="hidden" name="post" value="[[!+fi.id]]" />
             <input type="hidden" name="thread" value="[[!+fi.thread]]" />
         `]]
+        [[+action:eq=`reply`:then=`
+            <input type="hidden" name="post" value="[[!+fi.post]]" />
+            <input type="hidden" name="thread" value="[[!+fi.thread]]" />
+        `]]
 
         <label for="dis-message-title">[[%discuss.title]]:
             <span class="error">[[!+fi.error.title]]</span>
