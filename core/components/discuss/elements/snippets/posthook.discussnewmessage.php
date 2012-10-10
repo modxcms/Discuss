@@ -40,7 +40,7 @@ unset($fields[$submitVar]);
 
 /* first check attachments for validity */
 $attachments = array();
-if (!empty($_FILES) && $_FILES['attachment1']['error'] == 0) {
+if (!empty($_FILES) && ($_FILES['attachment']['error'] === 0)) {
     $result = $discuss->hooks->load('post/attachment/verify',array(
         'attachments' => &$_FILES,
     ));

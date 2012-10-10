@@ -342,6 +342,9 @@ $manifest = array(
         ),
     ),
     'messages/new' => array(
+        'options' => array(
+            'pageTpl' => 'common/messages-with-form',
+        ),
         'js' => array(
             'footer' => array(
                 'messages/dis.message.new.js',
@@ -353,7 +356,17 @@ $manifest = array(
                 'options' => array(
                     'disection' => 'new-message',
                 )
-            )
+            ),
+            'form' => array(
+                'tpl' => 'message-form',
+                'options' => array(
+                    'hook' => 'DiscussNewMessage',
+                    'action' => 'new',
+                    'formaction' => 'new',
+                    'submit_message' => '[[%discuss.message_send]]',
+                    'cancel_link' => 'messages'
+                )
+            ),
         ),
     ),
     'messages/reply' => array(
