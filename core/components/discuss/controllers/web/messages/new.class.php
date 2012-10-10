@@ -53,6 +53,7 @@ class DiscussMessagesNewController extends DiscussController {
 
         /* set max attachment limit */
         $this->setPlaceholder('max_attachments',$this->modx->getOption('discuss.attachments_max_per_post',null,5));
+        $this->setPlaceholder('attachmentCurIdx',1);
 
         $this->modx->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('Error'));
         $this->modx->toPlaceholders($this->getPlaceholders(),'fi');
