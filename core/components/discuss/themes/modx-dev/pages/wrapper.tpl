@@ -239,6 +239,7 @@
       .script("[[+discuss.config.jsUrl]]redo/forums-2012.js")
       .script("[[+discuss.config.jsUrl]]discuss.js").wait()
       .script("[[+discuss.config.jsUrl]]dis.sticky.js")
+      .script("[[+discuss.config.jsUrl]]dis.keyboard.js")
       .script("[[+discuss.config.jsUrl]]redo/modernizr.custom.07525.js")
       [[+discuss.js.footer:notempty=`.script([[+discuss.js.footer]])`]]
       .script("[[+discuss.config.jsUrl]]sh/shCore.js").wait()
