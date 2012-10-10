@@ -83,6 +83,7 @@ class DiscussMessagesReplyController extends DiscussController {
 
         $this->handleQuote();
         $this->handleAttachments();
+        $this->getButtons();
 
         /* output form to browser */
         $this->modx->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('disError'));

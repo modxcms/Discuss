@@ -163,7 +163,7 @@ class disThread extends xPDOSimpleObject {
                     $username = '<a href="'.$userUrl.'/'.$username.'/">'.$username.'</a>';
                 }
                 $pu = implode(', ',$pu);
-                $thread->set('participants_usernames',trim($pu));
+                $thread->set('participants_usernames_linked',trim($pu));
             }
         }
         return $thread;
@@ -709,6 +709,7 @@ class disThread extends xPDOSimpleObject {
      * @param string $keyPrefix
      * @param bool $rawValues
      * @param bool $excludeLazy
+     * @param bool $includeRelated
      * @return array
      */
     public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated = false) {

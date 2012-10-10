@@ -56,7 +56,7 @@ class DiscussMessagesModifyController extends DiscussController {
         return $this->modx->lexicon('discuss.message_modify');
     }
     public function getSessionPlace() {
-        return 'message-modify:'.$this->post->get('id');
+        return 'messages/modify:post='.$this->post->get('id');
     }
     public function process() {
         $this->setPlaceholders($this->post->toArray());

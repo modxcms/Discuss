@@ -111,6 +111,7 @@ $_lang['discuss.mark_unread'] = 'Mark Unread';
 $_lang['discuss.message'] = 'Message';
 $_lang['discuss.message_modify'] = 'Edit Message';
 $_lang['discuss.message_new'] = 'New Message';
+$_lang['discuss.message_reply'] = 'Reply to Message';
 $_lang['discuss.messages_new'] = 'new Messages';
 $_lang['discuss.message_remove'] = 'Delete Message';
 $_lang['discuss.message_remove_confirm'] = 'Are you sure you want to remove this private discussion entirely?';

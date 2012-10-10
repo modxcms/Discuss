@@ -49,6 +49,8 @@ class DiscussMessagesNewController extends DiscussController {
             asort($participants);
             $this->setPlaceholder('participants_usernames',implode(',',array_unique($participants)));
         }
+        $this->getButtons();
+
         /* set max attachment limit */
         $this->setPlaceholder('max_attachments',$this->modx->getOption('discuss.attachments_max_per_post',null,5));
 
@@ -65,7 +67,7 @@ class DiscussMessagesNewController extends DiscussController {
             'url' => $this->discuss->request->makeUrl(),
             'text' => $this->modx->getOption('discuss.forum_title'),
         );
-        $trail[] = array('text' => $this->modx->lexicon('discuss.messages'),'url' => $this->discuss->request->makeUrl().'messages');
+        $trail[] = array('text' => $this->modx->lexicon('discuss.messages'),'url' => $this->discuss->request->makeUrl('messages'));
         $trail[] = array('text' => $this->modx->lexicon('discuss.message_new'),'active' => true);
         return $trail;
     }
