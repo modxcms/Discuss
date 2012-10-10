@@ -156,16 +156,21 @@ class DiscussMessagesViewController extends DiscussController {
     }
 
     public function getActionButtons() {
+        $links = array();
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
             if ($this->modx->hasPermission('discuss.pm_send')) {
-                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages/reply',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.reply_to_message'), 'cls' => 'dis-action-reply_to_message');
+                $links['actionlink_reply'] = $this->discuss->request->makeUrl('messages/reply',array('thread' => $this->thread->get('id')));
+                $actionButtons[] = array('url' => $links['actionlink_reply'], 'text' => $this->modx->lexicon('discuss.reply_to_message'), 'cls' => 'dis-action-reply_to_message');
             }
-            $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages/view',array('thread' => $this->thread->get('id'),'unread' => 1)), 'text' => $this->modx->lexicon('discuss.mark_unread'), 'cls' => 'dis-action-mark_unread');
+            $links['actionlink_unread'] = $this->discuss->request->makeUrl('messages/view',array('thread' => $this->thread->get('id'),'unread' => 1));
+            $actionButtons[] = array('url' => $links['actionlink_unread'], 'text' => $this->modx->lexicon('discuss.mark_unread'), 'cls' => 'dis-action-mark_unread');
             if ($this->modx->hasPermission('discuss.pm_remove')) {
-                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('messages/remove',array('thread' => $this->thread->get('id'))), 'text' => $this->modx->lexicon('discuss.message_remove'), 'cls' => 'dis-action-message_remove');
+                $links['actionlink_remove'] = $this->discuss->request->makeUrl('messages/remove',array('thread' => $this->thread->get('id')));
+                $actionButtons[] = array('url' => $links['actionlink_remove'], 'text' => $this->modx->lexicon('discuss.message_remove'), 'cls' => 'dis-action-message_remove');
             }
         }
+        $this->setPlaceholders($links);
         $this->setPlaceholder('actionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
     }
 
