@@ -1,5 +1,5 @@
 [[!FormIt?
-  &submitVar=`dis-message-post`
+  &submitVar=`dis-post-reply`
   &hooks=`postHook.[[+hook]]`
   &validate=`title:required,message:required:allowTags,participants_usernames:required`
 ]]
@@ -60,7 +60,7 @@
 
             <div class="dis-form-buttons l-right">
                 <input type="button" class="cancel" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]][[+cancel_link]]';" />
-                <input type="submit" class="" name="dis-message-post" value="[[+submit_message]]" />
+                <input type="submit" class="" name="dis-post-reply" value="[[+submit_message]]" />
             </div>
         </div>
     </form>
