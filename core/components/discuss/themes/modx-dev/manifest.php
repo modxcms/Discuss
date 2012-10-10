@@ -372,6 +372,9 @@ $manifest = array(
         ),
     ),
     'messages/modify' => array(
+        'options' => array(
+            'pageTpl' => 'common/messages-with-form',
+        ),
         'js' => array(
             'footer' => array(
                 'messages/dis.message.modify.js',
@@ -382,6 +385,16 @@ $manifest = array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
                     'disection' => 'new-message',
+                )
+            ),
+            'form' => array(
+                'tpl' => 'message-form',
+                'options' => array(
+                    'hook' => 'DiscussModifyMessage',
+                    'action' => 'modify',
+                    'formaction' => 'modify?post=[[!+fi.id]]',
+                    'submit_message' => '[[%discuss.save_changes]]',
+                    'cancel_link' => 'messages/view?message=[[+thread]]#dis-post-[[+id]]'
                 )
             )
         ),
