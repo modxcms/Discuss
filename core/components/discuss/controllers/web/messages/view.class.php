@@ -68,6 +68,7 @@ class DiscussMessagesViewController extends DiscussController {
         $this->getQuickReplyForm();
         
         $threadArray = $this->thread->toArray();
+        $threadArray['url'] = $this->thread->getUrl(false);
         $threadArray['views'] = number_format($threadArray['views']);
         $threadArray['replies'] = number_format($threadArray['replies']);
         $this->setPlaceholders($threadArray);
