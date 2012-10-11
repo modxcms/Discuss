@@ -1,7 +1,25 @@
 $(function() {
     $('.dis-poll-refresh').hide();
     DIS.Thread.init();
-    //setTimeout('DIS.Thread.pollPosts();',DIS.config.pollingInterval);
+
+	$(".m-dis-thread-type li").click(function(){
+        var isActive = $(this).hasClass('current');
+        if (!isActive) {
+            var allInfos = $('.dis-thread-info li:visible'),
+                allLabels = $('.m-dis-thread-type li'),
+                target = $($(this).data('target')),
+                clickTarget = $(this);
+
+            allInfos.fadeOut('slow',function() {
+                allInfos.removeClass('current');
+                allLabels.removeClass('current');
+                clickTarget.addClass('current');
+                target.fadeIn('slow',function() {
+                    target.addClass('current');
+                });
+            });
+        }
+    });
 });
 
 DIS.Thread = function() {
