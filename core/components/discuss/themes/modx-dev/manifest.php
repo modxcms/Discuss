@@ -36,6 +36,12 @@ $manifest = array(
         ),
         'options' => array(
             'registerJsToScriptTags' => false,
+            'showBreadcrumbs' => true,
+            'showTitleInBreadcrumbs' => true,
+            'showReaders' => true,
+            'showModerators' => true,
+            'showPaginationIfOnePage' => false,
+            'showPrintOption' => false,
         )
     ),
     'print' => array(
@@ -48,7 +54,6 @@ $manifest = array(
     'home' => array(
         'options' => array(
             'showBoards' => true,
-            'showBreadcrumbs' => true,
             'showRecentPosts' => false,
             'showStatistics' => true,
             'showLoginForm' => false,
@@ -63,10 +68,6 @@ $manifest = array(
         'options' => array(
             'showSubBoards' => true,
             'showPosts' => true,
-            'showBreadcrumbs' => true,
-            'showReaders' => true,
-            'showModerators' => true,
-            'showPaginationIfOnePage' => false,
         ),
     ),
     'board.xml' => array(
@@ -87,15 +88,12 @@ $manifest = array(
         ),
         'options' => array(
             'showPosts' => true,
-            'showBreadcrumbs' => true,
+            'showTitleInBreadcrumbs' => false,
             'showViewing' => true,
             'showSubscribeOption' => true,
-            'showPrintOption' => true,
             'showStickOption' => true,
             'showLockOption' => true,
             'showMarkAsSpamOption' => true,
-            'showTitleInBreadcrumbs' => false,
-            'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
             'sidebar' => array(
@@ -136,7 +134,6 @@ $manifest = array(
             ),
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
         'modules' => array(
             'sidebar' => array(
@@ -162,7 +159,6 @@ $manifest = array(
             ),
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
         'modules' => array(
             'sidebar' => array(
@@ -188,7 +184,6 @@ $manifest = array(
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'thread/spam' => array(
@@ -198,7 +193,6 @@ $manifest = array(
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'thread/remove' => array(
@@ -208,7 +202,6 @@ $manifest = array(
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'post/report' => array(
@@ -218,7 +211,6 @@ $manifest = array(
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'post/spam' => array(
@@ -228,7 +220,6 @@ $manifest = array(
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'search' => array(
@@ -327,10 +318,6 @@ $manifest = array(
         'options' => array(
             'showSubBoards' => true,
             'showPosts' => true,
-            'showBreadcrumbs' => true,
-            'showReaders' => true,
-            'showModerators' => true,
-            'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
             'sidebar' => array(
@@ -433,15 +420,12 @@ $manifest = array(
         ),
         'options' => array(
             'showPosts' => true,
-            'showBreadcrumbs' => true,
             'showViewing' => true,
             'showSubscribeOption' => false,
-            'showPrintOption' => false,
             'showStickOption' => true,
             'showLockOption' => true,
             'showMarkAsSpamOption' => true,
             'showTitleInBreadcrumbs' => false,
-            'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
             'sidebar' => array(
@@ -454,8 +438,6 @@ $manifest = array(
     ),
     'thread/recent' => array(
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
-            'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
             'sidebar' => array(
@@ -468,8 +450,6 @@ $manifest = array(
     ),
     'thread/unread' => array(
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
-            'showPaginationIfOnePage' => false,
             'pageTpl' => 'common/thread-table',
         ),
         'modules' => array(
@@ -490,8 +470,6 @@ $manifest = array(
     ),
     'thread/unread_last_visit' => array(
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
-            'showPaginationIfOnePage' => false,
             'pageTpl' => 'common/thread-table',
         ),
         'modules' => array(
@@ -513,7 +491,6 @@ $manifest = array(
     'thread/no_replies' => array(
         'options' => array(
             'pageTpl' => 'common/thread-table',
-            'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
             'sidebar' => array(
@@ -527,7 +504,6 @@ $manifest = array(
     'thread/unanswered_questions' => array(
         'options' => array(
             'pageTpl' => 'common/thread-table',
-            'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
             'sidebar' => array(
@@ -541,7 +517,6 @@ $manifest = array(
     'thread/new_replies_to_posts' => array(
         'options' => array(
             'pageTpl' => 'common/thread-table',
-            'showPaginationIfOnePage' => false,
         ),
         'modules' => array(
             'sidebar' => array(
