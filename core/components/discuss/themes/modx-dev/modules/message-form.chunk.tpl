@@ -1,7 +1,7 @@
 [[!FormIt?
   &submitVar=`dis-post-reply`
   &hooks=`postHook.[[+hook]]`
-  &validate=`title:required,message:required:allowTags,participants_usernames:required`
+  &validate=`title:required,message:required:allowTags[[+extra_validation]]`
 ]]
 
 <div class="f1-f9 twelve-form">
@@ -23,11 +23,11 @@
         <input type="text" name="title" id="dis-message-title" value="[[!+fi.title]]" />
         <br class="clearfix" />
 
-        <label for="dis-reply-participants">[[%discuss.participants]]: [[!+fi.participants_usernames_linked]]
+        <label for="dis-reply-participants">[[%discuss.participants]]: [[+participants_usernames]]
             <span class="error">[[!+fi.error.participants_usernames]]</span>
             <span class="small">[[%discuss.participants_desc]]</span>
         </label><br class="clearfix" />
-        <input type="text" name="participants_usernames" id="dis-reply-participants" value="[[!+fi.participants_usernames]]" />
+        <input type="text" name="add_participants" id="dis-reply-participants" value="[[!+fi.add_participants]]" />
 
         <br class="clearfix" />
 

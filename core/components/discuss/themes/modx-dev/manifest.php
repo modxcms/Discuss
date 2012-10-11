@@ -351,7 +351,8 @@ $manifest = array(
                     'action' => 'new',
                     'formaction' => 'new',
                     'submit_message' => '[[%discuss.message_send]]',
-                    'cancel_link' => 'messages'
+                    'cancel_link' => 'messages',
+                    'extra_validation' => ',add_participants:required',
                 )
             ),
         ),
@@ -379,7 +380,8 @@ $manifest = array(
                     'action' => 'reply',
                     'formaction' => 'reply?thread=[[!+fi.thread]]',
                     'submit_message' => '[[%discuss.message_send]]',
-                    'cancel_link' => 'messages/view?thread=[[+thread]]'
+                    'cancel_link' => 'messages/view?thread=[[+thread]]',
+                    'extra_validation' => '',
                 )
             ),
         ),
@@ -407,7 +409,8 @@ $manifest = array(
                     'action' => 'modify',
                     'formaction' => 'modify?post=[[!+fi.id]]',
                     'submit_message' => '[[%discuss.save_changes]]',
-                    'cancel_link' => 'messages/view?message=[[+thread]]#dis-post-[[+id]]'
+                    'cancel_link' => 'messages/view?message=[[+thread]]#dis-post-[[+id]]',
+                    'extra_validation' => '',
                 )
             ),
         ),
