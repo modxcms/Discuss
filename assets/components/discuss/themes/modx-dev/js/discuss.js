@@ -2,7 +2,7 @@ $(document).ready(function() {
     var hiddenCategories = DisCookie.read('categories_hidden');
     hiddenCategories = (hiddenCategories) ? hiddenCategories.split('|') : [];
     $.each(hiddenCategories, function(index, value) {
-        $('div.'+value).slideUp(200);
+        $('.category div.'+value).slideUp(200);
     });
 
     $('.dis-error').hide();
