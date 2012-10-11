@@ -16,7 +16,7 @@ h4
 b, strong
     font-weight: bold
 em, i
-    font-style: italics
+    font-style: italics 
 // basic formatting
 a
     color: saturate(lighten($c-dark-cool-bg, 10%), 10%)
@@ -379,6 +379,18 @@ ul.options-select
     &:hover, &.active
         +opacity(1.0)
         +background-image(linear-gradient(lighten($c-dark-cool-bg, 22%), lighten($c-dark-cool-bg, 14%)))
+        +box-shadow(darken($c-dark-cool-bg, 40%) 0 0 3px, darken($c-dark-cool-bg, 40%) 0 1px 0, lighten($c-dark-cool-bg, 32%) 0 1px 0 inset)
+
+.m-raised-dark-bg-alt
+    cursor: pointer
+    +border-radius($radius-sm)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 49%), lighten($c-dark-cool-bg, 10%)))
+    background-color: lighten($c-dark-cool-bg, 10%)
+    +box-shadow(darken($c-dark-cool-bg, 3%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 15%) 0 1px 0 inset)
+    color: lighten($c-dark-cool-bg, 80%) !important
+    &:hover, &.active
+        +opacity(1.0)
+        // +background-image(linear-gradient(lighten($c-dark-cool-bg, 22%), lighten($c-dark-cool-bg, 14%)))
         +box-shadow(darken($c-dark-cool-bg, 40%) 0 0 3px, darken($c-dark-cool-bg, 40%) 0 1px 0, lighten($c-dark-cool-bg, 32%) 0 1px 0 inset)
 
 // without pseudo classes, could remove using later versions of SASS

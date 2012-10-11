@@ -670,16 +670,15 @@ a
     &.ol-list
         background-position: -151px -36px
     &.preview
-        @extend .m-raised-dark-bg
+        @extend .m-raised-dark-bg-alt
         text-indent: 0
         background-image: none
         color: lighten($c-dark-cool-bg, 82%)
         width: 100px
 
 a#dis-preview-btn.preview
-    @extend .m-raised-dark-bg
-    +box-shadow(none)
-    background-color: lighten($c-dark-cool-bg, 22%)
+    @extend .m-raised-dark-bg-alt
+    background-color: lighten($c-dark-cool-bg, 10%)
     border-radius: 30px
     height: 16px
     margin: 5px 5px 0 5px
@@ -688,7 +687,7 @@ a#dis-preview-btn.preview
     float: right
     opacity: 1
     &:hover
-        background-color: lighten($c-dark-cool-bg, 28%)
+        background-color: lighten($c-dark-cool-bg, 15%)
         text-decoration: none
 .dis-form
     textarea
