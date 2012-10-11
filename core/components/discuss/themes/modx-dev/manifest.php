@@ -110,6 +110,9 @@ $manifest = array(
                 'dis.thread.js',
             ),
         ),
+        'options' => array(
+            'pageTpl' => 'common/thread-with-form',
+        ),
         'modules' => array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
@@ -134,6 +137,7 @@ $manifest = array(
             ),
         ),
         'options' => array(
+            'pageTpl' => 'common/thread-with-form',
         ),
         'modules' => array(
             'sidebar' => array(
@@ -159,6 +163,7 @@ $manifest = array(
             ),
         ),
         'options' => array(
+            'pageTpl' => 'common/thread-with-form',
         ),
         'modules' => array(
             'sidebar' => array(
