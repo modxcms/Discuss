@@ -13,6 +13,10 @@ h3
 h4
     +rem('font-size', 16px)
 
+b, strong
+    font-weight: bold
+em, i
+    font-style: italics
 // basic formatting
 a
     color: saturate(lighten($c-dark-cool-bg, 10%), 10%)
@@ -410,6 +414,7 @@ ul.options-select
 
 // Gray despressed button / toggle
 .btn-toggle-normal
+    border: 1px solid rgba(0,0,0,.34)
     @include border-radius(3px)
     @include background-clip()
     background-color: #d5d5d5
