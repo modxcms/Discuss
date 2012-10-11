@@ -413,14 +413,18 @@ ul.options-select
 // Green button/tag background
 .a-primary-cta
     color: #fff
+    +rem('font-size', 13px)
     margin: 0 0 0 1em
     border: none // Can remove in future, resetting default styles
     +rem('padding', 6px)
     +border-radius($radius-sm)
     +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
     +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+    +text-shadow(rgba(black, .8) 0 0 3px, rgba(black, .6) 0 1px 0 )
+    font-weight: 500
     &:hover
-        +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 15%)))
+        text-decoration: none
+        +background-image(linear-gradient(lighten($c-dark-bg, 6%), darken($c-dark-bg, 7%)))
         +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
 
 // orange button
