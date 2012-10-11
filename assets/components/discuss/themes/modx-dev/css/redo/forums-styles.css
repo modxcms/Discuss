@@ -4710,9 +4710,6 @@ a#dis-preview-btn.preview {
   margin: 0;
   padding: 5px 10px;
   cursor: pointer; }
-  /* line 814, ../../sass/_forums.sass */
-  .m-dis-discussion label input, .m-dis-question label input {
-    display: none; }
 
 /* line 818, ../../sass/_forums.sass */
 .twelve-form input[type="submit"] {
