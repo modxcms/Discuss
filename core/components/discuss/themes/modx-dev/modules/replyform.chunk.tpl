@@ -11,8 +11,30 @@
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     <input type="hidden" name="post"   value="[[!+fi.post]]" />
 
-    [[!+fi.is_root:is=`1`:then=`<label><input type="radio" name="class_key" value="disThreadDiscussion" [[!+fi.class_key:eq=`disThreadDiscussion`:then=`checked="checked"`:else=``]] /> [[%discuss.discussion]]</label>
-        <label><input type="radio" name="class_key" value="disThreadQuestion" [[!+fi.class_key:eq=`disThreadQuestion`:then=`checked="checked"`:else=``]] /> [[%discuss.question_and_answer]]</label>
+    [[!+fi.is_root:is=`1`:then=`
+        <section class="group">
+            <ul class="m-dis-thread-type horiz-list l-left">
+                <li class="m-dis-discussion"><!-- MARK: Would like to add class here of current if this is selected or not. Probably should read if the value is checked too though that could be added using conditional below-->
+                    <label>
+                        <input type="radio" name="class_key" value="disThreadDiscussion" [[!+fi.class_key:eq=`disThreadDiscussion`:then=`checked="checked"`:else=``]] />
+                        [[%discuss.discussion]]
+                    </label>
+                </li>
+                <li class="m-dis-question"><!-- of course this one too-->
+                    <label>
+                        <input type="radio" name="class_key" value="disThreadQuestion" [[!+fi.class_key:eq=`disThreadQuestion`:then=`checked="checked"`:else=``]] />
+                        [[%discuss.question]]
+                    </label>
+                </li>
+            </ul>
+            <div class="dis-thread-info l-right">
+                <ul>
+                    <li class="m-dis-discussion"><p>[[%discuss.discussion_instructions]] [[%discuss.discussion_links]]</p></li><!-- Add class corresponding to radio button selected. Could be nice to do a quick toggle fade if it isnt much more work -->
+                    <li class="m-dis-question"><p>[[%discuss.question_instructions]]<p><p>[[%discuss.question_links]]</p></li>
+                </ul>
+            </div>
+        </section>
+
         <label for="dis-new-thread-title">[[%discuss.title]]:
             <span class="error">[[!+fi.error.title]]</span>
         </label>
