@@ -13,21 +13,23 @@
 
     [[!+fi.is_root:is=`1`:then=`
         <section class="group">
-            <ul class="m-dis-thread-type horiz-list l-left">
-                <li class="m-dis-discussion" data-target=".m-dis-discussion-info">
-                    <label>
-                        <input type="radio" name="class_key" value="disThreadDiscussion" [[!+fi.class_key:eq=`disThreadDiscussion`:then=`checked="checked"`:else=``]] />
-                        [[%discuss.discussion]]
-                    </label>
-                </li>
-                <li class="m-dis-question" data-target=".m-dis-question-info">
-                    <label>
-                        <input type="radio" name="class_key" value="disThreadQuestion" [[!+fi.class_key:eq=`disThreadQuestion`:then=`checked="checked"`:else=``]] />
-                        [[%discuss.question]]
-                    </label>
-                </li>
-            </ul>
-            <div class="dis-thread-info l-right">
+            <div class="m-dis-thread-type-wrap">
+                <ul class="m-dis-thread-type horiz-list">
+                    <li class="m-dis-discussion" data-target=".m-dis-discussion-info">
+                        <label>
+                            <input type="radio" name="class_key" value="disThreadDiscussion" [[!+fi.class_key:eq=`disThreadDiscussion`:then=`checked="checked"`:else=``]] />
+                            [[%discuss.discussion]]
+                        </label>
+                    </li>
+                    <li class="m-dis-question" data-target=".m-dis-question-info">
+                        <label>
+                            <input type="radio" name="class_key" value="disThreadQuestion" [[!+fi.class_key:eq=`disThreadQuestion`:then=`checked="checked"`:else=``]] />
+                            [[%discuss.question]]
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="dis-thread-info">
                 <ul>
                     <li class="m-dis-discussion-info"><p>[[%discuss.discussion_instructions]] [[%discuss.discussion_links]]</p></li><!-- Add class corresponding to radio button selected. Could be nice to do a quick toggle fade if it isnt much more work -->
                     <li class="m-dis-question-info"><p>[[%discuss.question_instructions]]<p><p>[[%discuss.question_links]]</p></li>
@@ -38,7 +40,7 @@
         <label for="dis-new-thread-title">[[%discuss.title]]:
             <span class="error">[[!+fi.error.title]]</span>
         </label>
-        <input type="text" name="title" id="dis-new-thread-title" value="[[!+fi.title]]" />
+        <input type="text" name="title" id="dis-new-thread-title" class="dis-new-thread-title" value="[[!+fi.title]]" />
     `:else=`
         <input type="hidden" name="title" value="[[!+fi.title]]" />
     `]]

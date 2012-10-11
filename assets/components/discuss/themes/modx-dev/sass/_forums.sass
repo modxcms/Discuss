@@ -799,12 +799,43 @@ a#dis-preview-btn.preview
 
 // thread reply
 .m-dis-thread-type, .dis-thread-info
-    display: inline-block
+    position: relative
+.m-dis-thread-type-wrap
+    width: 250px
+    position: absolute
+
+section.group
+    width: 100%
+
+.dis-thread-info
+    margin: 5px 0 0 260px
+    float: left
+    color: #000
+    +rem('font-size', 13px)
+    position: relative
+    overflow: hidden
+    p
+        color: #000
+
 .m-dis-thread-type
     @extend .btn-toggle-bg
     padding: 5px
     margin: 10px 0
 
+.dis-form
+    .dis-new-thread-title
+        display: block
+        width: 99% !important
+        margin: 5px 0 10px 0
+        border: 1px solid darken($c-base, 20%)
+        +rem('font-size', 15px)
+        padding: 5px
+.twelve-form
+    .dis-form
+        label
+            margin: 0
+            font-weight: bold
+            +rem('font-size', 15px)
 .m-dis-discussion, .m-dis-question
     @extend .btn-toggle-normal
     @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, #bfbfbf 0%, #cacaca 100%))
@@ -822,6 +853,10 @@ a#dis-preview-btn.preview
         +rem('font-size', 14px)
         input
             display: none
+
+.m
+
+
 // new thread view
 .twelve-form
     input[type="submit"]
