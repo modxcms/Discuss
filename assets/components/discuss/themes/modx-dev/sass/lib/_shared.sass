@@ -1,6 +1,18 @@
 body
     background-color: $c-base
 
+h1
+    font-size: 2em
+    +rem('font-size', 27px)
+    font-weight: bold
+    color: #183030
+h2
+    +rem('font-size', 22px)
+h3
+    +rem('font-size', 19px)
+h4
+    +rem('font-size', 16px)
+
 // basic formatting
 a
     color: saturate(lighten($c-dark-cool-bg, 10%), 10%)
@@ -394,6 +406,30 @@ ul.options-select
     &:hover
         +background-image(linear-gradient(lighten($c-tertiary, 3%), darken($c-tertiary, 15%)))
         +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+
+
+// Gray despressed button / toggle
+.btn-toggle-normal
+    @include border-radius(3px)
+    @include background-clip()
+    background-color: #d5d5d5
+    @include box-shadow(0 1px 0 rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.76))
+    @include background-image(linear-gradient(bottom, #bfbfbf 0%, #cacaca 100%))
+
+.btn-toggle-active
+    border: 1px solid rgba(0,0,0,.64)
+    @include border-radius(3px)
+    @include background-clip()
+    background-color: #d5d5d5
+    @include box-shadow(inset 0 0 0 rgba(255,255,255,.76), inset 0 0 5px rgba(0,0,0,.28))
+    @include background-image(linear-gradient(bottom, #8c8c8c 0%, #737373 100%))
+
+.btn-toggle-bg
+    @include border-radius(247px 3px 3px 3px / 4px 3px 3px 3px)
+    @include background-clip()
+    background-color: #ebebeb
+    @include box-shadow(0 1px 0 #fff, inset 0 1px 0 rgba(0,0,0,.05), inset 0 0 5px rgba(0,0,0,.1))
+
 
 // Light gray action button
 .btn-secondary-alt-cta
