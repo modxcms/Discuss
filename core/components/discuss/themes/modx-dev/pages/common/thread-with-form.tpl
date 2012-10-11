@@ -1,4 +1,3 @@
-<p>Using common page tpl</p>
 <div class="f1-f9 twelve-form">
     [[+form]]
     [[+thread_posts:notempty=`
