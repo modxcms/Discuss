@@ -282,16 +282,13 @@ div.m-section_title + div.row
         +rem('font-size', 32px)
 
 .dis-list
+    @extend .m-raised-panel-box
     // margin: 1em 0 0 0
     line-height: 1.4
     // +box-shadow(darken($c-base, 5%) 0 0 3px)
     // +border-radius($radius-sm)
     // border: solid 1px darken($c-base, 10%)
     // background-color: lighten($c-base, 4%)
-    +box-shadow(darken($c-base, 13%) 0 0 3px)
-    +border-radius($radius-sm)
-    border: solid 1px darken($c-base, 10%)
-    background-color: lighten($c-base, 20%)
     border-top: 0
 
     .dis-post
@@ -535,13 +532,10 @@ div.m-section_title + div.row
             // a
             //     color: darken($c-base, 50%)
     .panel-box
+        @extend .m-raised-panel-box
         +rem('font-size',14px)
         line-height: 1.3
         +rem('padding', 10px 15px)
-        background-color: lighten($c-base, 11%)
-        +border-radius($radius-sm)
-        +box-shadow(darken($c-base, 10%) 0 2px 3px)
-        border: 1px solid darken($c-base, 8%)
         h4
             +rem('font-size', 16px)
             +rem('margin', 0 -17px 5px -17px )
@@ -691,11 +685,11 @@ a#dis-preview-btn.preview
         text-decoration: none
 .dis-form
     textarea
+        @extend .m-raised-panel-box
         width: 96.8% !important
         margin: 0 !important
         padding: 1.6% !important
         font-size: 1em
-        border: 1px solid darken($c-base, 20%)
         border-top:  none
         border-radius: 0 0 3px 3px
         &:focus

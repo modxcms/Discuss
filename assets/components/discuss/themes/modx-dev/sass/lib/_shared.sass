@@ -305,6 +305,14 @@ form#newsletter
             &:hover
                 +background-image(linear-gradient(lighten($c-dark-cool-bg, 16%), lighten($c-dark-cool-bg, 11%)))
 
+// raised panel
+.m-raised-panel-box
+    background-color: lighten($c-base, 11%)
+    +border-radius($radius-sm)
+    +box-shadow(darken($c-base, 10%) 0 2px 3px)
+    border: 1px solid darken($c-base, 8%)
+
+
 // user options
 .m-user_box
     width: 100%
