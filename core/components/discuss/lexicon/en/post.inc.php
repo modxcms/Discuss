@@ -29,11 +29,20 @@ $_lang['discuss.attachment_err_upload'] = 'An error occurred while trying to upl
 $_lang['discuss.attachment_add'] = 'Add Attachment';
 $_lang['discuss.attachments'] = 'Attachments';
 $_lang['discuss.attachments_max'] = 'max of [[+max]]';
-$_lang['discuss.cancel'] = 'Cancel';
-$_lang['discuss.correct_errors'] = 'Please correct the errors in your form.';
+$_lang['discuss.attachment_bad_type'] = 'Attachment [[+idx]] is not an allowed file type.';
+$_lang['discuss.attachment_err_upload'] = 'An error occurred while trying to upload attachment [[+idx]].';
+$_lang['discuss.attachment_too_large'] = 'Attachment [[+idx]] cannot be larger than [[+maxSize]] bytes; this one is [[+size]] bytes. Please specify a smaller attachment.';
+
 $_lang['discuss.message'] = 'Message';
+$_lang['discuss.question_instructions'] = '<b>Help us help you</b>. If you’re having technical problems, please supply adequate details: web server type and version; PHP version, configuration and how it runs; MySQL details and <em>especially</em> the MODX version and list of Add-ons installed.';
+$_lang['discuss.question_links'] = '[[++discuss.questions_link]]" title="See our handy post on the best ways and types of things to consider when requesting help">Learn how to get help</a> <a href="[[+insert_question_template]]" title="A super-handy template so you won’t forget important bits">Insert suggested tech question template</a>';
+$_lang['discuss.question_template'] = '[b]PHP Version:[/b] \n[b]PHP CGI/mod_php/etc.:[/b] \n';
+$_lang['discuss.discussion_instructions'] = '<b>Be Clear and concise, and stay on topic</b>. Use a discussion title that gives insight into your topic without having to read the entire message. Also, limit your topics to a single one per thread if possible.';
+$_lang['discuss.discussion_links'] = '<a href="[[++discuss.guidelines_link]]" title="Learn what we allow at MODX for appropriate topics">See our Forums policy…</a>';
 $_lang['discuss.new_post_made'] = 'A New Post Has Been Made';
 $_lang['discuss.notify_of_replies'] = 'Notify of Replies';
+
+$_lang['discuss.correct_errors'] = 'Please correct the errors in your form.';
 $_lang['discuss.post_err_create'] = 'An error occurred while trying to save the new thread.';
 $_lang['discuss.post_err_nf'] = 'Post not found!';
 $_lang['discuss.post_err_ns'] = 'Post not specified!';
@@ -42,21 +51,24 @@ $_lang['discuss.post_err_ns_title'] = 'Please enter a valid post title.';
 $_lang['discuss.post_err_remove'] = 'An error occurred while trying to remove the post.';
 $_lang['discuss.post_err_reply'] = 'An error occurred while trying to post a reply.';
 $_lang['discuss.post_err_save'] = 'An error occurred while trying to save the post.';
+$_lang['discuss.thread_err_nf'] = 'Thread not found.';
+
 $_lang['discuss.post_modify'] = 'Modify Post';
 $_lang['discuss.post_new'] = 'Start new Thread';
 $_lang['discuss.post_reply'] = 'Reply to Post';
 $_lang['discuss.preview'] = 'Preview';
 $_lang['discuss.save_changes'] = 'Save Changes';
+
+$_lang['discuss.thread_post_new'] = 'Post New Thread';
 $_lang['discuss.start_new_thread'] = 'Start New Thread';
 $_lang['discuss.solve'] = 'Solve';
 $_lang['discuss.solved'] = 'Solved';
-$_lang['discuss.thread'] = 'Thread';
-$_lang['discuss.thread_err_nf'] = 'Thread not found.';
-$_lang['discuss.thread_post_new'] = 'Post New Thread';
+$_lang['discuss.unsolve'] = 'Unsolve';
+$_lang['discuss.unsolved'] = 'Unsolved';
 $_lang['discuss.thread_remove'] = 'Remove Thread';
+
+$_lang['discuss.thread'] = 'Thread';
 $_lang['discuss.thread_remove_confirm'] = 'Are you sure you want to permanently remove the thread "[[+thread]]"?';
 $_lang['discuss.thread_summary'] = 'Thread Summary';
 $_lang['discuss.title'] = 'Title';
-$_lang['discuss.unsolve'] = 'Unsolve';
-$_lang['discuss.unsolved'] = 'Unsolved';
 $_lang['discuss.views'] = 'Views';
