@@ -3612,7 +3612,7 @@ h3.forum {
     margin: 0;
     display: inline-block; }
   /* line 44, ../../sass/_forums.sass */
-  .dis-cat-header .action-buttons, .paginate.stand-alone .action-buttons {
+  .dis-cat-header .action-buttons, .paginate.stand-alone .action-buttons, .dis-cat-header .post-box .dis-action-login, .paginate.stand-alone .post-box .dis-action-login {
     font-size: 13px;
     font-size: 1.3rem;
     display: inline-block;
