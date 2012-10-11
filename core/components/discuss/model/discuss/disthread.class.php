@@ -163,7 +163,7 @@ class disThread extends xPDOSimpleObject {
                     $username = '<a href="'.$userUrl.'/'.$username.'/">'.$username.'</a>';
                 }
                 $pu = implode(', ',$pu);
-                $thread->set('participants_usernames_linked',trim($pu));
+                $thread->set('participants_usernames',trim($pu));
             }
         }
         return $thread;

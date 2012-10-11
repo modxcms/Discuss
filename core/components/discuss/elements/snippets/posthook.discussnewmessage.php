@@ -64,7 +64,8 @@ if ($maxSize > 0) {
 
 /* get participants */
 $participantsIds = array();
-$participants = explode(',',$fields['participants_usernames']);
+$participantsIds[] = $modx->discuss->user->get('id');
+$participants = explode(',',$fields['add_participants']);
 foreach ($participants as $participant) {
     /** @var disUser $user */
     $user = $modx->getObject('disUser',array('username' => $participant));
