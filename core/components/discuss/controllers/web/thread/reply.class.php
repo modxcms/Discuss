@@ -173,6 +173,7 @@ class DiscussThreadReplyController extends DiscussController {
         } else {
             $this->setPlaceholder('attachment_fields','');
         }
+        $this->setPlaceholder('attachmentCurIdx', 1);
         $this->modx->regClientHTMLBlock('<script type="text/javascript">
         DIS.config.attachments_max_per_post = '.$this->getPlaceholder('max_attachments').';
         </script>');
