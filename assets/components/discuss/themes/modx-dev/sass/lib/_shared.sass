@@ -410,6 +410,14 @@ ul.options-select
     +box-shadow(darken($c-dark-cool-bg, 10%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 12%) 0 1px 0 inset)
     color: lighten($c-dark-cool-bg, 80%) !important
 
+// medium gray gradient
+.m-raised-med-gray
+    +background-image(linear-gradient(top left, rgba(white, .2), rgba(black, .02)), linear-gradient(darken($c-base, 15%), darken($c-base, 30%)))
+    //+background-image(linear-gradient(lighten($c-dark-cool-bg, 9%), lighten($c-dark-cool-bg, 1%)) !important)
+    +box-shadow(darken($c-base, 9%) 0 1px 0 inset !important)
+    border-top: 1px solid darken($c-base, 15%)
+
+
 // Green button/tag background
 .a-primary-cta
     color: #fff

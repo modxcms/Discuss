@@ -19,21 +19,22 @@ h3.forum
 .dis-cat-header
     +border-radius($radius-sm $radius-sm 0 0)
     +background-clip(padding-box)
-    padding: 5px 10px
+    padding: 3px 10px
     line-height: 1
     background-color: #194b47
-    +box-shadow(darken($c-dark-cool-bg, 30%) 0 1px 3px inset !important)
-    +background-image(linear-gradient(lighten($c-dark-cool-bg, 9%), lighten($c-dark-cool-bg, 1%)) !important)
+    // +box-shadow(darken($c-dark-cool-bg, 30%) 0 1px 3px inset !important)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 9%), lighten($c-dark-cool-bg, 1%)))
     +border-radius($radius-sm $radius-sm 0 0 !important)
     border-bottom: solid 1px $c-dark-cool-bg
     color: #fff
-    line-height: 1
 
     h1
-        +rem('font-size', 17px)
-        line-height: 1
+        +rem('font-size', 19px)
+        +text-shadow(rgba(black, .4) 0 1px 0 )
+        opacity: .99 // stops webkit rendering heavy
         color: #fff
-        font-weight: 500
+        line-height: 1
+        font-weight: 700
         border: 0
         float: left
         +rem('padding', 7px 0 9px 5px)
@@ -56,7 +57,7 @@ h3.forum
 
 // Headings below category titles
 .m-section_title
-    background-color: #ececec
+    background-color: darken($c-base, 12%)
     border-radius: 5px
     // h1
     //     font-size: 15px
@@ -69,7 +70,7 @@ h3.forum
         line-height: 1
         padding: 7px 6px 7px 8px
     .dis-cat-header
-        margin-top: 2em
+        margin-top: .2em
 
 // status styling
 
@@ -147,11 +148,14 @@ h3.forum
             background-color: #fff
 header.dis-cat-header
     .post-box
-        .reply
-            margin: 5px 5px 0 0
+        .Button
+            margin: 5px 5px 5px 0
+            &.dis-action-login
+                margin-left: 10px
         .read
             color: #fff
             color: rgba(255,255,255,.5)
+
 
 
 // Faux table grid for 5 columns. This later will be able to be
@@ -165,7 +169,7 @@ header.dis-cat-header
     +rem('font-size',13px)
     line-height: 1.1
     color: lighten($c-copy, 20%)
-    +rem('margin-top', 25px)
+    +rem('margin-top', 15px)
     p
         color: darken($c-copy, 30%)
         line-height: 1.1
