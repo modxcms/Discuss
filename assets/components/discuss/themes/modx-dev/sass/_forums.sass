@@ -280,10 +280,31 @@ div.m-section_title + div.row
 // Single post styling
 .Category
     +rem('padding', 5px 20px 0 0)
+    vertical-align: top
     a
         color: $c-dark-cool-bg
         text-decoration: none
         +rem('font-size', 32px)
+        line-height: 1.2
+        display: inline-block
+        vertical-align: top
+    .tag
+        font-size: 13px
+        display: inline-block
+        vertical-align: top
+        margin: 6px 6px 5px 0
+        &.solved
+            padding-left: 28px
+            position: relative
+            &:after
+                content: ""
+                width: 22px
+                position: absolute
+                height: 22px
+                top: 1px
+                left: 1px
+                display: block
+                background: url(../../images/redo/elements/answered-star.png) no-repeat 0 0
 
 .dis-list
     @extend .m-raised-panel-box
