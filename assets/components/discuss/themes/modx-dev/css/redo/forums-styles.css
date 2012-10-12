@@ -2925,19 +2925,16 @@ form#newsletter {
   border: 1px solid #e5e5e5;
   border-bottom: 0; }
 
-/* line 320, ../../sass/lib/_shared.sass */
-.m-user_box {
-  width: 100%; }
-  /* line 322, ../../sass/lib/_shared.sass */
-  .m-user_box h3 {
-    float: left;
-    color: #86a8a5; }
-  /* line 325, ../../sass/lib/_shared.sass */
-  .m-user_box a {
-    text-decoration: none; }
-    /* line 327, ../../sass/lib/_shared.sass */
-    .m-user_box a:hover {
-      text-decoration: underline; }
+/* line 322, ../../sass/lib/_shared.sass */
+.m-user_box h3 {
+  float: left;
+  color: #86a8a5; }
+/* line 325, ../../sass/lib/_shared.sass */
+.m-user_box a {
+  text-decoration: none; }
+  /* line 327, ../../sass/lib/_shared.sass */
+  .m-user_box a:hover {
+    text-decoration: underline; }
 
 /* line 330, ../../sass/lib/_shared.sass */
 ul.options-select {
@@ -3037,7 +3034,7 @@ ul.options-select {
     -moz-box-shadow: black 0 0 3px, black 0 1px 0, #4ba09a 0 1px 0 inset;
     box-shadow: black 0 0 3px, black 0 1px 0, #4ba09a 0 1px 0 inset; }
 
-/* line 396, ../../sass/lib/_shared.sass */
+/* line 395, ../../sass/lib/_shared.sass */
 .m-raised-dark-bg-alt, a.preview, a#dis-preview-btn.preview {
   cursor: pointer;
   -webkit-border-radius: 3px;
@@ -3055,7 +3052,7 @@ ul.options-select {
   -moz-box-shadow: #122725 0 0 3px, black 0 1px 0, #2f6561 0 1px 0 inset;
   box-shadow: #122725 0 0 3px, black 0 1px 0, #2f6561 0 1px 0 inset;
   color: #ebf5f5 !important; }
-  /* line 403, ../../sass/lib/_shared.sass */
+  /* line 402, ../../sass/lib/_shared.sass */
   .m-raised-dark-bg-alt:hover, a.preview:hover, a#dis-preview-btn.preview:hover, .m-raised-dark-bg-alt.active, a.active.preview, a.active#dis-preview-btn.preview {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     opacity: 1;
@@ -3063,7 +3060,7 @@ ul.options-select {
     -moz-box-shadow: black 0 0 3px, black 0 1px 0, #4ba09a 0 1px 0 inset;
     box-shadow: black 0 0 3px, black 0 1px 0, #4ba09a 0 1px 0 inset; }
 
-/* line 409, ../../sass/lib/_shared.sass */
+/* line 408, ../../sass/lib/_shared.sass */
 .m-raised-dark-bg-nh, #F-Toggle-List {
   cursor: pointer;
   -webkit-border-radius: 3px;
@@ -3081,7 +3078,7 @@ ul.options-select {
   box-shadow: #070e0e 0 0 3px, black 0 1px 0, #2b5b57 0 1px 0 inset;
   color: #ebf5f5 !important; }
 
-/* line 417, ../../sass/lib/_shared.sass */
+/* line 416, ../../sass/lib/_shared.sass */
 .m-raised-med-gray {
   background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, rgba(255, 255, 255, 0.2)), color-stop(100%, rgba(0, 0, 0, 0.02))), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #d3d3d3), color-stop(100%, #acacac));
   background-image: -webkit-linear-gradient(top left, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.02)), -webkit-linear-gradient(#d3d3d3, #acacac);
@@ -3093,7 +3090,7 @@ ul.options-select {
   box-shadow: #e2e2e2 0 1px 0 inset !important;
   border-top: 1px solid lightgrey; }
 
-/* line 425, ../../sass/lib/_shared.sass */
+/* line 424, ../../sass/lib/_shared.sass */
 .a-primary-cta, .a-tertiary-cta, .forum-grid .question, .dis-cat-header .post-box a.Button, .paginate.stand-alone .post-box a.Button, .forum-grid .tag, .forum-grid .solved {
   color: white;
   font-size: 13px;
@@ -3117,7 +3114,7 @@ ul.options-select {
   box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   text-shadow: rgba(0, 0, 0, 0.8) 0 0 3px, rgba(0, 0, 0, 0.6) 0 1px 0;
   font-weight: 500; }
-  /* line 436, ../../sass/lib/_shared.sass */
+  /* line 435, ../../sass/lib/_shared.sass */
   .a-primary-cta:hover, .a-tertiary-cta:hover, .forum-grid .question:hover, .dis-cat-header .post-box a.Button:hover, .paginate.stand-alone .post-box a.Button:hover, .forum-grid .tag:hover, .forum-grid .solved:hover {
     text-decoration: none;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #afd066), color-stop(100%, #93bb39));
@@ -3129,7 +3126,7 @@ ul.options-select {
     -moz-box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0;
     box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0; }
 
-/* line 442, ../../sass/lib/_shared.sass */
+/* line 441, ../../sass/lib/_shared.sass */
 .a-tertiary-cta, .forum-grid .question {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f3af3f), color-stop(100%, #d4880d));
   background-image: -webkit-linear-gradient(#f3af3f, #d4880d);
@@ -3139,7 +3136,7 @@ ul.options-select {
   -webkit-box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   -moz-box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0; }
-  /* line 446, ../../sass/lib/_shared.sass */
+  /* line 445, ../../sass/lib/_shared.sass */
   .a-tertiary-cta:hover, .forum-grid .question:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f4b348), color-stop(100%, #d4880d));
     background-image: -webkit-linear-gradient(#f4b348, #d4880d);
@@ -3150,7 +3147,7 @@ ul.options-select {
     -moz-box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0;
     box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0; }
 
-/* line 452, ../../sass/lib/_shared.sass */
+/* line 451, ../../sass/lib/_shared.sass */
 .btn-toggle-normal {
   border: 1px solid rgba(0, 0, 0, 0.34);
   -webkit-border-radius: 3px;
@@ -3171,7 +3168,7 @@ ul.options-select {
   background-image: -o-linear-gradient(bottom, #bfbfbf 0%, #cacaca 100%);
   background-image: linear-gradient(bottom, #bfbfbf 0%, #cacaca 100%); }
 
-/* line 460, ../../sass/lib/_shared.sass */
+/* line 459, ../../sass/lib/_shared.sass */
 .btn-toggle-active, .m-dis-discussion.current, .m-dis-question.current, .m-dis-discussion.current:hover, .m-dis-question.current:hover {
   border: 1px solid rgba(0, 0, 0, 0.64);
   -webkit-border-radius: 3px;
@@ -3192,7 +3189,7 @@ ul.options-select {
   background-image: -o-linear-gradient(bottom, #8c8c8c 0%, #737373 100%);
   background-image: linear-gradient(bottom, #8c8c8c 0%, #737373 100%); }
 
-/* line 468, ../../sass/lib/_shared.sass */
+/* line 467, ../../sass/lib/_shared.sass */
 .btn-toggle-bg {
   -webkit-border-radius: 247px 3px 3px 3px/4px 3px 3px 3px;
   -moz-border-radius: 247px 3px 3px 3px/4px 3px 3px 3px;
@@ -3207,7 +3204,7 @@ ul.options-select {
   -moz-box-shadow: 0 1px 0 white, inset 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 0 5px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 0 white, inset 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 0 5px rgba(0, 0, 0, 0.1); }
 
-/* line 476, ../../sass/lib/_shared.sass */
+/* line 475, ../../sass/lib/_shared.sass */
 .btn-secondary-alt-cta, .a-dis-actionbuttons a, .dis-post .dis-pm-btn, .m-dis-discussion, .m-dis-question {
   display: block;
   margin: 0.9em 0;
@@ -3236,7 +3233,7 @@ ul.options-select {
   background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%); }
-  /* line 495, ../../sass/lib/_shared.sass */
+  /* line 494, ../../sass/lib/_shared.sass */
   .btn-secondary-alt-cta:hover, .a-dis-actionbuttons a:hover, .dis-post .dis-pm-btn:hover, .m-dis-discussion:hover, .m-dis-question:hover {
     background-color: white;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -7701,9 +7698,17 @@ body#body-thread .dis-sticky-actions {
     transform: scale(1) rotate(0); } }
 
 /* line 2, ../../sass/lib/_transitions.sass */
-.quick-fade-in, .dis-post:hover .dis-action-btn, .dis-post:hover .dis-pm-btn {
+.quick-fade-in-all, .dis-post:hover .dis-action-btn, .dis-post:hover .dis-pm-btn {
   -webkit-animation: fadeIn 0.3s 0s ease both;
   -moz-animation: fadeIn 0.3s 0s ease both;
   -ms-animation: fadeIn 0.3s 0s ease both;
   -o-animation: fadeIn 0.3s 0s ease both;
   animation: fadeIn 0.3s 0s ease both; }
+
+/* line 5, ../../sass/lib/_transitions.sass */
+.quick-fade-in-bg {
+  -webkit-transition: background-image 0.7s linear;
+  -moz-transition: background-image 0.7s linear;
+  -ie-transition: background-image 0.7s linear;
+  -o-transition: background-image 0.7s linear;
+  transition: "background-image" 0.7s linear; }
