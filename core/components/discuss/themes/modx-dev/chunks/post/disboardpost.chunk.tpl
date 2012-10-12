@@ -11,8 +11,8 @@
                 [[+thread_pagination]]
             </div>
         </div>
-        <div class="f8">[[+views]]</div>
-        <div class="f9">[[+replies]]</div>
+        <div class="f8 l-txtcenter">[[+views]]</div>
+        <div class="f9 l-txtcenter">[[+replies]]</div>
         <div class="f10-f12">
             <p class="posted-date">[[+createdon:ago]]</p>
             <p class="posted-by">[[+first_post_username]]</p>
