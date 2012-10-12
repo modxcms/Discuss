@@ -22,14 +22,15 @@
         </div>
         <div class="dis-content">
             [[+content]]
+            [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
     </div>
     [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
     <div class="dis-post-footer">
             [[+attachments:notempty=`<div class="dis-post-attachments"><ul class="dis-attachments">[[+attachments]]</ul></div>`]]
-        <div class="dis-post-ip">
-            [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
-        </div>
+        [[-<div class="dis-post-ip">
+            
+        </div>]]
     </div>
 </li>
