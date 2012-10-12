@@ -333,6 +333,18 @@ div.m-section_title + div.row
                 padding: 1em 0 0 0
                 font-style: italic
                 color: darken($c-base, 50%)
+.dis-post-answer
+    position: relative
+    &:after
+        content: ""
+        position: absolute
+        top: -1px
+        left: -2px
+        display: block
+        width: 43px
+        height: 43px
+        background: url(../../images/redo/elements/answered-post.png) left top
+
 .tag
     +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
     +rem('padding', 6px 12px)
