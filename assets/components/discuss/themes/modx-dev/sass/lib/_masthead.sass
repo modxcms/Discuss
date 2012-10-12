@@ -6,21 +6,20 @@
     a
         color: #fff
     & > div
-        padding-bottom: 10px
-        +rem('padding', 0 0 20px 0)
+        +rem('padding', 0 0 17px 0)
     a.h-ir
         background: url(../../images/redo/elements/forums-logo.png) no-repeat left top
         height: 42px
         text-indent: 105%
     .m-sm_nav_pod
         background: url(../../images/redo/bg/masthead-nav-highlight.png) no-repeat left bottom
-        +rem('padding', 6px 0)
-        +rem('margin', 0 0 18px 0)
+        +rem('padding', 4px 0)
+        +rem('margin', 0 0 14px 0)
         a
             +opacity(1.0)
-            color: desaturate(lighten($c-dark-cool-bg, 40%), 13%)
+            color: $txt-color-lightblue
             &:hover
-                color: desaturate(lighten($c-dark-cool-bg, 90%), 13%)
+                color: $txt-color-lightblue-over
                 text-decoration: underline
             &:after
                 color: desaturate(lighten($c-dark-cool-bg, 40%), 13%)
@@ -28,12 +27,13 @@
                 text-decoration: none
     // Masthead Login
     .m-login_box
-        +rem('padding', 17px 0 8px 17px)
+        +rem('padding', 8px 0 2px 17px)
         .masthead-title
             +rem('margin-bottom', 10px)
-            color: desaturate(lighten($c-dark-cool-bg, 40%), 13%)
+            color: $txt-color-lightblue
             strong
                 color: #fff
+                opacity: .99
                 font-weight: 500
                 font-size: 1.2em
                 margin: 0 .2em 0 0
@@ -45,7 +45,7 @@
                 display: inline-block
                 vertical-align: top
                 line-height: 1
-                color: desaturate(lighten($c-dark-cool-bg, 40%), 33%)
+                color: desaturate($txt-color-lightblue, 10%)
         form p
             position: relative
         label.l-inline
@@ -58,7 +58,7 @@
     label
         font-family: georgia, times, serif
         font-style: italic
-        +opacity(.5)
+        color: desaturate($txt-color-lightblue, 10%)
     input
         color: white
         +rem('margin', 5px 5px 5px 0)
