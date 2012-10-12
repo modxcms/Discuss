@@ -852,14 +852,21 @@ section.group
             opacity: .99
             +rem('font-size', 15px)
 .m-dis-discussion, .m-dis-question
-    @extend .btn-toggle-normal
-    @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, #bfbfbf 0%, #cacaca 100%))
-    background-repeat: no-repeat
+    @extend .btn-secondary-alt-cta
+    @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%))
     padding-left: 23px
+    &:hover
+        background-color: #fff
+        @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, rgba(255,255,255,.3) 0%, rgba(255,255,255,.3) 100%))
     &.current
         @extend .btn-toggle-active
         @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px -109px, linear-gradient(bottom, #8c8c8c 0%, #737373 100%))
         color: #fff
+        +text-shadow(none)
+    &.current:hover
+        @extend .btn-toggle-active
+        @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px -109px, linear-gradient(bottom, #8c8c8c 0%, #737373 100%))
+
     label
         margin: 0
         padding: 5px 10px
