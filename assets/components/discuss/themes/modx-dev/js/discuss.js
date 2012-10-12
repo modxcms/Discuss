@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    /* Automatically hide categories the user has hidden before */
     var hiddenCategories = DisCookie.read('categories_hidden');
     hiddenCategories = (hiddenCategories) ? hiddenCategories.split('|') : [];
     $.each(hiddenCategories, function(index, value) {
@@ -18,6 +19,12 @@ $(document).ready(function() {
             });
         });
     });
+
+    /* Enable link-in-link thread pagination */
+    $('.dis-thread-pagination span').click(function(event) {
+        event.preventDefault();
+        window.location.href = $(this).data('link');
+    })
 });
 var DIS = {
     config: {}
