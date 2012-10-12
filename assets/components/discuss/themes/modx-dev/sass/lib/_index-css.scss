@@ -426,83 +426,83 @@ br.clearfix  {display:block; height:0; clear:both; visibility:hidden; }
 
 
 /*  Side Panel  */
-aside {
-	position: relative;
-	width: 250px;
-	float: right;
-	background:-webkit-gradient(linear, center bottom, center top, from(#ffffff), to(#f3f3f3));
-	background:-moz-linear-gradient(top, #f3f3f3, #ffffff);
-	-pie-background:linear-gradient(top, #f3f3f3, #ffffff);
-	background:linear-gradient(top, #f3f3f3, #ffffff);
-	border-top-right-radius: 6px;
-	-moz-border-top-right-radius: 6px;
-	-webkit-border-top-right-radius: 6px;
- 	behavior:url(pie.htc);
- 	margin: 0 0;
- 	padding: 0 0;
-	}
+// aside {
+// 	position: relative;
+// 	width: 250px;
+// 	float: right;
+// 	background:-webkit-gradient(linear, center bottom, center top, from(#ffffff), to(#f3f3f3));
+// 	background:-moz-linear-gradient(top, #f3f3f3, #ffffff);
+// 	-pie-background:linear-gradient(top, #f3f3f3, #ffffff);
+// 	background:linear-gradient(top, #f3f3f3, #ffffff);
+// 	border-top-right-radius: 6px;
+// 	-moz-border-top-right-radius: 6px;
+// 	-webkit-border-top-right-radius: 6px;
+//  	behavior:url(pie.htc);
+//  	margin: 0 0;
+//  	padding: 0 0;
+// 	}
 
-aside hr.line {
-   position:absolute;
-   top:-15px;
-   left:0;
-   width:1px;
-   height:100%;
-   background:#EAEAEA;
-   background:-moz-linear-gradient(top, #EAEAEA 0%, #FFFFFF 100%);
-   background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#EAEAEA), color-stop(100%,#FFFFFF));
-   -pie-background:linear-gradient(top, #EAEAEA, #FFFFFF);
-   background:linear-gradient(top, #EAEAEA 0%, #FFFFFF 100%);
-   border-width: 0 0 0;
-   behavior:url(pie.htc);
-   }	
+// aside hr.line {
+//    position:absolute;
+//    top:-15px;
+//    left:0;
+//    width:1px;
+//    height:100%;
+//    background:#EAEAEA;
+//    background:-moz-linear-gradient(top, #EAEAEA 0%, #FFFFFF 100%);
+//    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#EAEAEA), color-stop(100%,#FFFFFF));
+//    -pie-background:linear-gradient(top, #EAEAEA, #FFFFFF);
+//    background:linear-gradient(top, #EAEAEA 0%, #FFFFFF 100%);
+//    border-width: 0 0 0;
+//    behavior:url(pie.htc);
+//    }	
 
-aside div.Box a {
-	text-decoration: none;
-	}
+// aside div.Box a {
+// 	text-decoration: none;
+// 	}
 
-div.PanelBox div.Photo img {
-	max-width: 237px;
-	}
+// div.PanelBox div.Photo img {
+// 	max-width: 237px;
+// 	}
 
-ul.panel_info {
-	margin: 0 0 0 10px;
-	padding: 0 0;
-	}
+// ul.panel_info {
+// 	margin: 0 0 0 10px;
+// 	padding: 0 0;
+// 	}
 
-ul.panel_info li.Heading {
-	font-weight: bold;
-	margin: 10px 0 5px 0;
-	}
+// ul.panel_info li.Heading {
+// 	font-weight: bold;
+// 	margin: 10px 0 5px 0;
+// 	}
 
-ul.panel_info li {
-	margin: 0 0 5px 5px;
-	}
+// ul.panel_info li {
+// 	margin: 0 0 5px 5px;
+// 	}
 
-div.Box {
-	margin: 0 0 20px;
-	}
+// div.Box {
+// 	margin: 0 0 20px;
+// 	}
 
-div.Box p {
-	letter-spacing: -.01em;
-	padding: 0 10px 4px;
-	}
+// div.Box p {
+// 	letter-spacing: -.01em;
+// 	padding: 0 10px 4px;
+// 	}
 
-div.Box h4 {
-	background: #eef5f7;
-	background:-webkit-gradient(linear, center bottom, center top, from(#eef5f7), to(#ffffff));
-	background:-moz-linear-gradient(top, #ffffff, #eef5f7);
-	-pie-background:linear-gradient(top, #ffffff, #eef5f7);
-	background:linear-gradient(top, #ffffff, #eef5f7);
-	color: #494949;
-	font-size: 18px;
-	padding: 10px;
-	border-radius: 0 6px 0 0;
-	-moz-border-radius: 0 6px 0 0;
-	-webkit-border-radius: 0 6px 0 0;
- 	behavior:url(pie.htc);
- 	margin: 0 0 5px;
-	}
+// div.Box h4 {
+// 	background: #eef5f7;
+// 	background:-webkit-gradient(linear, center bottom, center top, from(#eef5f7), to(#ffffff));
+// 	background:-moz-linear-gradient(top, #ffffff, #eef5f7);
+// 	-pie-background:linear-gradient(top, #ffffff, #eef5f7);
+// 	background:linear-gradient(top, #ffffff, #eef5f7);
+// 	color: #494949;
+// 	font-size: 18px;
+// 	padding: 10px;
+// 	border-radius: 0 6px 0 0;
+// 	-moz-border-radius: 0 6px 0 0;
+// 	-webkit-border-radius: 0 6px 0 0;
+//  	behavior:url(pie.htc);
+//  	margin: 0 0 5px;
+// 	}
 
 // .dis-reply-cancel,
 // input[type="button"],
