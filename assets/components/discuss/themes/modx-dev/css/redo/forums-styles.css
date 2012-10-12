@@ -4646,7 +4646,7 @@ a#dis-preview-btn.preview {
     border-top: none; }
   /* line 739, ../../sass/_forums.sass */
   .dis-form textarea:hover {
-    border-top: none; }
+    border: none; }
 
 /* line 743, ../../sass/_forums.sass */
 .dis-post-content {
