@@ -3274,7 +3274,7 @@ ul.options-select {
   padding-top: 0.5%;
   padding-bottom: 0.5%;
   background-color: white;
-  border-bottom: 1px solid #cccccc; }
+  border-bottom: solid 1px #e0e0e0; }
   /* line 16, ../../sass/lib/_layout.sass */
   .m-breadcrumbs ul {
     margin-top: 7px; }
