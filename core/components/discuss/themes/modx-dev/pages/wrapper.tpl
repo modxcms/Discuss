@@ -44,7 +44,6 @@
                     <a class="h-ir" href="[[+discuss.config.url]]" title="MODX Community Forums">MODX Forums</a>
                 </div><!-- left side of masthead -->
                 <div class="masthead-right f7-f12 m-all">
-                    [[+discuss.config.url]]
                     [[+discuss.user.id:notempty=`
                     <div class="m-welcome_box">
                         <div class="m-user_box h-group">
