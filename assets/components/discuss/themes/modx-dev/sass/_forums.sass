@@ -138,7 +138,7 @@ h3.forum
 // Thread action tools
 .a-dis-actionbuttons
     float: right
-    margin: -5px 0 8px 0
+    margin: 0 0 8px 0
     a
         @extend .btn-secondary-alt-cta
         padding: 3px 6px
@@ -280,7 +280,6 @@ div.m-section_title + div.row
 // Single post styling
 .Category
     +rem('padding', 5px 20px 0 0)
-    +rem('margin-top', 5px)
     a
         color: $c-dark-cool-bg
         text-decoration: none
@@ -575,7 +574,7 @@ div.m-section_title + div.row
     .a-faux-btn-grp
         display: table
         width: 100%
-        margin-top: 6%
+        margin-top: 1.8%
         .a-bug, .a-proposal
             display: table-cell
             vertical-align: middle
@@ -805,6 +804,11 @@ a#dis-preview-btn.preview
 section.group
     width: 100%
 
+.dis-thread-form
+    section
+        margin-bottom: 10px
+        padding-bottom: 10px
+
 .dis-thread-info
     margin: 1px 0 0 240px
     float: left
@@ -814,6 +818,20 @@ section.group
     overflow: hidden
     p
         color: #000
+    a
+        display: inline-block
+        padding: 4px 10px
+        background-color: rgba(black, .09)
+        +border-radius($radius-sm)
+        &:hover
+            text-decoration: none
+            background-color: rgba(black, .05)
+
+.m-dis-choose-info
+    font-size: 16px
+    font-weight: normal
+    margin: 10px 25px 10px 0px
+
 
 .m-dis-thread-type
     margin: 10px 0
