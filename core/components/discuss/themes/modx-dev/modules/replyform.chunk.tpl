@@ -31,10 +31,12 @@
             </div>
             <div class="dis-thread-info">
                 <ul>
-                    <li class="m-dis-discussion-info"><p>[[%discuss.discussion_instructions]] [[%discuss.discussion_links]]</p></li><!-- Add class corresponding to radio button selected. Could be nice to do a quick toggle fade if it isnt much more work -->
-                    <li class="m-dis-question-info"><p>[[%discuss.question_instructions]]<p><p>[[%discuss.question_links]]</p></li>
+                    <li class="m-dis-choose-info"><p>&laquo; [[%discuss.new_post_type_instructions]] </p></li>
+                    <li class="m-dis-discussion-info" style="display: none;"><p>[[%discuss.discussion_instructions]] [[%discuss.discussion_links]]</p></li>
+                    <li class="m-dis-question-info" style="display: none;"><p>[[%discuss.question_instructions]]<p><p>[[%discuss.question_links]]</p></li>
                 </ul>
             </div>
+            <br class="clearfix" />
         </section>
 
         <label for="dis-new-thread-title">[[%discuss.title]]:
