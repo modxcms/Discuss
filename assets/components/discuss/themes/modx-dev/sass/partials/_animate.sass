@@ -1,3 +1,13 @@
+// Transition only
+@mixin transition($property: all, $duration: 0.2s, $timing: linear)
+  -webkit-transition: #{$property} $duration $timing
+  -moz-transition: #{$property} $duration $timing
+  -ie-transition: #{$property} $duration $timing
+  -o-transition: #{$property} $duration $timing
+  transition: $property $duration $timing
+
+
+
 //Animate Mixin Plugin
 
 =animate($name: fadeIn, $duration: 1s, $delay: .2s, $function: ease, $mode: both)
