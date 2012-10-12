@@ -18,12 +18,12 @@
     </div>
 </div>
 <div class="f1-f9">
-    <header class="dis-cat-header dark-gradient group-fix sticky-bar top">
+    <header class="dis-cat-header dark-gradient h-group sticky-bar top">
         [[+pagination:default=``]]
         [[- USER LOGGED IN ]]
         [[!+discuss.user.id:notempty=`
-        <div class="post-box h-group">
-            <a class="reply Button" href="[[+actionlink_reply]]">Reply to thread</a>
+        <div class="post-box">
+            <a class="dis-action-reply Button" href="[[+actionlink_reply]]">Reply to thread</a>
             <a class="read" href="[[+actionlink_unread]]">Mark as unread</a>
             [[+moderators]]
         </div>`]]
