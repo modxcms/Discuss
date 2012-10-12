@@ -397,9 +397,11 @@ div.m-section_title + div.row
             color: #000
     .dis-action-btn, .dis-pm-btn
         visibility: hidden
-        @extend .quick-fade-in
+
     &:hover
         .dis-action-btn, .dis-pm-btn
+            @extend .quick-fade-in
+            opacity: .99
             visibility: visible
     .dis-pm-btn
         @extend .btn-secondary-alt-cta
