@@ -35,7 +35,7 @@ $_lang['discuss.attachment_too_large'] = 'Attachment [[+idx]] cannot be larger t
 
 $_lang['discuss.message'] = 'Message';
 $_lang['discuss.question_instructions'] = '<b>Help us help you</b>. If you’re having technical problems, please supply adequate details: web server type and version; PHP version, configuration and how it runs; MySQL details and <em>especially</em> the MODX version and list of Add-ons installed.';
-$_lang['discuss.question_links'] = '[[++discuss.questions_link]]" title="See our handy post on the best ways and types of things to consider when requesting help">Learn how to get help</a> <a href="[[+insert_question_template]]" title="A super-handy template so you won’t forget important bits">Insert suggested tech question template</a>';
+$_lang['discuss.question_links'] = '<a href="[[++discuss.questions_link]]" title="See our handy post on the best ways and types of things to consider when requesting help">Learn how to get help</a> <a href="[[+insert_question_template]]" title="A super-handy template so you won’t forget important bits">Insert suggested tech question template</a>';
 $_lang['discuss.question_template'] = '[b]PHP Version:[/b] \n[b]PHP CGI/mod_php/etc.:[/b] \n';
 $_lang['discuss.discussion_instructions'] = '<b>Be Clear and concise, and stay on topic</b>. Use a discussion title that gives insight into your topic without having to read the entire message. Also, limit your topics to a single one per thread if possible.';
 $_lang['discuss.discussion_links'] = '<a href="[[++discuss.guidelines_link]]" title="Learn what we allow at MODX for appropriate topics">See our Forums policy…</a>';
