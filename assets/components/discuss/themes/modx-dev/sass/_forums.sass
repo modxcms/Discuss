@@ -385,15 +385,29 @@ div.m-section_title + div.row
             +background-image(linear-gradient(lighten(#000, 80%), lighten(#000, 70%)))
 
 
-.dis-post .title
-    a
-        color: #000
-        text-decoration: none
+.dis-post
+    .title
+        a
+            color: #000
+            text-decoration: none
+            &:hover
+                text-decoration: underline
+        strong
+            font-weight: 700
+            color: #000
+    .dis-action-btn, .dis-pm-btn
+        visibility: hidden
+        @extend .quick-fade-in
+    &:hover
+        .dis-action-btn, .dis-pm-btn
+            visibility: visible
+    .dis-pm-btn
+        @extend .btn-secondary-alt-cta
+        display: inline-block
+        +rem('padding', 4px 7px)
         &:hover
-            text-decoration: underline
-    strong
-        font-weight: 700
-        color: #000
+            background-color: #fff
+
 .dis-post-left
     // font-size: 11px
     float: left
