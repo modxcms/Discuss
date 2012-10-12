@@ -2,13 +2,13 @@ $(function() {
     $('.dis-poll-refresh').hide();
     DIS.Thread.init();
 
-	$(".m-dis-thread-type li").click(function(){
-        var isActive = $(this).hasClass('current');
+	$(".m-dis-thread-type li label").click(function(){
+        var isActive = $(this).parent('li').hasClass('current');
         if (!isActive) {
             var allInfos = $('.dis-thread-info li:visible'),
                 allLabels = $('.m-dis-thread-type li'),
-                target = $($(this).data('target')),
-                clickTarget = $(this);
+                clickTarget = $(this).parent('li'),
+                target = $(clickTarget.data('target'));
 
             allInfos.fadeOut('slow',function() {
                 allInfos.removeClass('current');
@@ -20,6 +20,7 @@ $(function() {
             });
         }
     });
+    $('input:radio[name=class_key]:checked').parent('label').click()
 });
 
 DIS.Thread = function() {
