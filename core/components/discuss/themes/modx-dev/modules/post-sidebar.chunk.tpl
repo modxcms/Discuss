@@ -16,8 +16,8 @@
             <p>Be nice, respectful and patient. Inflammatory or inappropriate posts will get your post nuked and flood your life with bans and bad karma.</p>
         </div>
         <div class="box">
-            <h4>Help Us Help You</h4>
-            <p>Use a title that gives insight into your post and limit your posts to 1. Remember, this is an open source project and folks aren't paid to help you here. If you're experiencing problems, please supply adequate technical details.</p>
+            <h4>Thank the People that Help</h4>
+            <p>Remember, this is an Open Source project and the volunteers here assist out of love for the project and a desire to help others.</p>
         </div>`]]
 
         <div class="Box GuestBox">
@@ -25,7 +25,7 @@
                 <a class="a-secondary-cta l-inline-btn a-bug" href="http://tracker.modx.com">Found a Bug?</a>
                 <a class="a-secondary-cta l-inline-btn a-proposal" href="http://tracker.modx.om/projects/modx-proposals">Have a feature request?</a>
             </div>
-            <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support <span>(Priority Support rom the Source)</span></a>
+            <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support <span>(Priority Support from the Source)</span></a>
         </div>
 
        [[+disection:neq=`recent`:then=`
