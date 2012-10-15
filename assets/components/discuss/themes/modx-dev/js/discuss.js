@@ -149,6 +149,7 @@ function surroundText(text1, text2) {
 		textarea.value += text1 + text2;
 		textarea.focus(textarea.value.length - 1);
 	}
+    textarea.trigger('autosize');
 }
 
 // Checks if the passed input's value is nothing.
