@@ -367,7 +367,7 @@ abstract class DiscussController {
      */
     protected function getStatistics() {
         $this->setPlaceholder('totalPosts',number_format((int)$this->modx->getCount('disPost')));
-        $this->setPlaceholder('totalTopics',number_format((int)$this->modx->getCount('disPost',array('parent' => 0))));
+        $this->setPlaceholder('totalTopics',number_format((int)$this->modx->getCount('disThread')));
         $this->setPlaceholder('totalMembers',number_format((int)$this->modx->getCount('disUser')));
 
         /* active in last 40 */
