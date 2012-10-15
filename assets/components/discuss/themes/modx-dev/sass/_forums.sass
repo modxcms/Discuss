@@ -392,15 +392,21 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
         display: inline-block
         overflow: hidden
         text-indent: 100%
+        white-space: nowrap
     span
         width: $dis-post-span
         height: $dis-post-span
         background: url(../../images/redo/elements/answered-post.png) no-repeat left top
-        margin-left: -3px
+    &.dis-post-notanswer span
+        background-position: left -257px
+        opacity: .4
+        &:hover
+            opacity: 1
     nav
         width: $dis-post-nav-width
         height: $dis-post-nav-height
         border-right: $dis-post-nav-border solid #6b8d1d
+        margin-right: -3px
         background: #7aa020 url(../../images/redo/bg/answer-nav.png) no-repeat right center
         a
             display: block

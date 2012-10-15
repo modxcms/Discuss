@@ -1,10 +1,10 @@
 <li class="[[+class]] group-fix" id="dis-post-[[+id]]" data-author="[[+author.username:htmlent]]" data-date="[[+createdon_raw]]" data-message="[[+content_raw]]">
     [[+answer:isequal=`1`:then=`
-    <div class="dis-post-answer-marker tooltip" title="Click to Unmark as Answer">
+    <div class="dis-post-answer-marker">
         <!-- load this only if more than one answer?--><nav><a href="#">Previous</a><a class="next" href="#">Next</a></nav>
-        <span>Answer</span>
+        <span class="tooltip" title="Unmark as Answer">Answer</span>
     </div>`:else=`
-    <a href="#" class="dis-post-answer-marker dis-post-notanswer tooltip" title="Click to Mark as Answer!"><span>Mark as Answer</span></a>
+    <div class="dis-post-answer-marker dis-post-notanswer"><a href="#" class="tooltip" title="Mark as Answer!"><span>Mark as Answer</span></a></div>
     `]]
 
     <div class="dis-post-left">
