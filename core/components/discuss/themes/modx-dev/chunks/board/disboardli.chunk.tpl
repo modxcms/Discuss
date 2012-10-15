@@ -6,7 +6,10 @@
                 <p class="dis-board-description">[[+description]]</p>
             </div>
         </div>
-        <div class="f8-f10">[[+last_post_title:default=`&nbsp;`]]</div>
+        <div class="f8-f10">[[+last_post_id:neq=``:then=`
+            <span class="clickable" data-link="[[+last_post_url]]">[[+last_post_title:default=`&nbsp;`]]</span>
+            `:else=`&nbsp;`]]
+        </div>
         <div class="f11 l-txtcenter">[[+num_replies]]</div>
         <div class="f12 l-txtcenter">[[+num_topics]]</div>
     </a>

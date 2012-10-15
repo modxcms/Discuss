@@ -21,7 +21,7 @@ $(document).ready(function() {
     });
 
     /* Enable link-in-link thread pagination */
-    $('.dis-thread-pagination span').click(function(event) {
+    $('.dis-thread-pagination span, .dis-category span.clickable').click(function(event) {
         event.preventDefault();
         window.location.href = $(this).data('link');
     });
