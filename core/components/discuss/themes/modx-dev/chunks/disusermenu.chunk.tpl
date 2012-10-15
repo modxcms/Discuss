@@ -3,10 +3,10 @@
 
     <li class="Heading">[[%discuss.forum_profile]]</li>
 
-    <li class="Depth2"><strong><a href="[[~[[*id]]]]u/[[+id]]/">[[%discuss.view]]</a></strong><span class="Count">&nbsp;</span></li>
+    <li class="Depth2"><strong><a href="[[~[[*id]]]]u/[[+username]]/">[[%discuss.view]]</a></strong><span class="Count">&nbsp;</span></li>
     [[+canEdit:notempty=`<li class="Depth2"><strong><a href="[[~[[*id]]]]user/edit">[[%discuss.edit]]</a></strong><span class="Count">&nbsp;</span></li>`]]
-    <li class="Depth2"><strong><a href="[[~[[*id]]]]u/[[+id]]/statistics">[[%discuss.stats]]</a></strong><span class="Count">&nbsp;</span></li>
-    <li class="Depth2"><strong><a href="[[~[[*id]]]]u/[[+id]]/posts">[[%discuss.posts]]</a></strong><span class="Count">&nbsp;</span></li>
+    <li class="Depth2"><strong><a href="[[~[[*id]]]]user/statistics?user=[[+id]]">[[%discuss.stats]]</a></strong><span class="Count">&nbsp;</span></li>
+    <li class="Depth2"><strong><a href="[[~[[*id]]]]user/posts?user=[[+id]]">[[%discuss.posts]]</a></strong><span class="Count">&nbsp;</span></li>
 
 
     <li class="Heading">[[%discuss.account_settings]]</li>
