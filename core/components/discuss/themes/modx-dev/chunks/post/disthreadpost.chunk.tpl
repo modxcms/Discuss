@@ -9,7 +9,7 @@
     </div>`:else=`
     <div class="dis-post-answer-marker dis-post-notanswer"><a href="#" class="tooltip" title="Mark as Answer!"><span>Mark as Answer</span></a></div>
     `]]
-
+    [[+url_mark_as_answer]]<!-- mark answer-->
     <div class="dis-post-left">
         <ul>
             <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>
