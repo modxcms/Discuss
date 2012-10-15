@@ -1,7 +1,10 @@
 <li class="[[+class]] group-fix" id="dis-post-[[+id]]" data-author="[[+author.username:htmlent]]" data-date="[[+createdon_raw]]" data-message="[[+content_raw]]">
     [[+answer:isequal=`1`:then=`
     <div class="dis-post-answer-marker">
-        <!-- load this only if more than one answer?--><nav><a href="#">Previous</a><a class="next" href="#">Next</a></nav>
+        <nav>
+            [[+answer_prev.id:notempty=`<a href="[[+answer_prev.url]]">Previous</a>`]]
+            [[+answer_next.id:notempty=`<a href="[[+answer_next.url]]" class="next">Next</a>`]]
+        </nav>
         <span class="tooltip" title="Unmark as Answer">Answer</span>
     </div>`:else=`
     <div class="dis-post-answer-marker dis-post-notanswer"><a href="#" class="tooltip" title="Mark as Answer!"><span>Mark as Answer</span></a></div>
