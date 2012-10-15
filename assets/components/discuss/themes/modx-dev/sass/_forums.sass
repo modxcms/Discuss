@@ -360,15 +360,46 @@ div.m-section_title + div.row
                 color: darken($c-base, 45%)
 .dis-post-answer
     position: relative
-    &:after
-        content: ""
-        position: absolute
-        top: -1px
-        left: -1px
-        display: block
+    // &:after
+    //     content: ""
+    //     position: absolute
+    //     top: -1px
+    //     left: -1px
+    //     display: block
+    //     width: 43px
+    //     height: 43px
+    //     background: url(../../images/redo/elements/answered-post.png) left top
+.dis-post-answer-marker
+    position: absolute
+    top: -1px
+    left: -1px
+    display: block
+    width: 70px
+    height: 43px
+    vertical-align: top
+    span
         width: 43px
         height: 43px
         background: url(../../images/redo/elements/answered-post.png) left top
+        display: inline-block
+        text-indent: 100%
+        vertical-align: top
+        overflow: hidden
+        margin-left: -3px
+    nav
+        width: 20px
+        display: inline-block
+        height: 43px
+        background-color: #7aa020
+        vertical-align: top
+        border-right: 1px solid #6b8d1d
+        a
+            display: block
+            width: 19px
+            text-indent: 100%
+            overflow: hidden
+
+
 
 .tag
     +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
