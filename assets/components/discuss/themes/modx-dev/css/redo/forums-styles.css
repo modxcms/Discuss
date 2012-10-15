@@ -4351,8 +4351,7 @@ div.m-section_title + div.row {
   font-size: 1.4rem;
   line-height: 1.3;
   padding: 0 15px 0 15px;
-  padding:  0 1.5rem 0 1.5rem;
-  border-left: solid 1px #e0e0e0; }
+  padding:  0 1.5rem 0 1.5rem; }
   /* line 597, ../../sass/_forums.sass */
   .sidebar .panel-box h4 {
     font-size: 16px;
