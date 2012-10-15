@@ -23,7 +23,7 @@
         <div class="Box GuestBox">
             <div class="a-faux-btn-grp">
                 <a class="a-secondary-cta l-inline-btn a-bug" href="http://tracker.modx.com">Found a Bug?</a>
-                <a class="a-secondary-cta l-inline-btn a-proposal" href="http://tracker.modx.om/projects/modx-proposals">Have a feature request?</a>
+                <a class="a-secondary-cta l-inline-btn a-proposal" href="http://tracker.modx.com/projects/modx-proposals">Have a feature request?</a>
             </div>
             <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support <span>(Priority Support from the Source)</span></a>
         </div>
