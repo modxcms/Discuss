@@ -302,6 +302,9 @@ $manifest = array(
         ),
     ),
     'user/posts' => array(
+        'options' => array(
+            'postTpl' => 'post/disPostLi'
+        ),
         'modules' => array(
             'sidebar' => array(
                 'tpl' => 'user-sidebar',

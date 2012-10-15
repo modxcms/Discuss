@@ -1,15 +1,26 @@
 [[+top]]
-
-    <div class="dis-user-recent_posts f1-f9">
-        <div class="dis-threads">
-            [[+pagination:notempty=`<div class="paginate stand-alone horiz-list"> [[+pagination]]</div>`]]
-            <ul class="dis-list">
-                <li><h1>[[%discuss.user_posts? &user=`[[+name]]` &count=`[[+posts.total]]`]]</h1></li>
-                [[+posts]]
-            </ul>
-        </div>
+<div class="dis-user-recent_posts f1-f9">
+    <div class="dis-threads forum-grid">
+		<div class="m-section_title">
+			<header class="dis-cat-header dark-gradient group-fix sticky-bar">
+				<h1>[[+discuss.pagetitle]]</h1>
+				[[+pagination:notempty=`
+				<nav id="key-Paginate" class="horiz-list">[[+pagination]]</nav>
+				`]]
+			</header>
+			<div class="row h-group header-row">
+			    <div class="f1-f2 f-padinall">
+			    	<div class="wrap">[[%discuss.board]]</div>
+			    </div>
+			    <div class="f3-f6 f-padinall">[[%discuss.post]]</div>
+                <div class="f7 f-padinall">[[%discuss.author]]</div>
+                <div class="f8 f-padinall">[[%discuss.posted_on]]</div>
+			    <div class="f9 f-padinall">[[%discuss.thread]] [[%discuss.replies]]</div>
+			</div>
+		</div> <!-- / m-section_title -->
+        [[+posts]]
+        [[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list">[[+pagination]]</nav>`]]
     </div>
-
-    [[+sidebar]]
-</div><!-- Close Content From Wrapper -->
+</div>
+[[+sidebar]]
 [[+bottom]]
