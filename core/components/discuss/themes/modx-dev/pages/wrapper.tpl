@@ -10,6 +10,11 @@
     <meta name="author" content="MODX Systems, LLC">
     <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">
     <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />[[- Will eventually download and combine]]
+    [[- toggles in progress breakpoint work]]
+    [[++forums_css_framework:notempty=`
+    <link href="[[+discuss.config.cssUrl]]redo/forums-bp-styles.css" rel="stylesheet" type="text/css">
+    <link href="https://get.gridsetapp.com/7032/" rel="stylesheet" />
+    `:default=``]]
     [[*cssjs]]
     [[- Live Typekit call
     [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
@@ -270,6 +275,8 @@
     </script>
     <!--[if lt IE 7 ]><script src="[[++modx.assets.url]]js/dd_belatedpng.js?v=1"></script><![endif]-->
 [[*beforeClose]]
-<!-- remove for production--><script src="http://get.gridsetapp.com/2953/overlay/"></script>
+[[++forums_css_framework:notempty=`
+    <script src="https://get.gridsetapp.com/7032/overlay/"></script>
+    `]]
 </body>
 </html>

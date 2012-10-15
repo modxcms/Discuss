@@ -29,9 +29,9 @@
 		    <div class="f1-f7 f-padinall">
 		    	<div class="wrap">Title</div>
 		    </div>
-		    <div class="f8 f-padinall">Views</div>
-		    <div class="f9 f-padinall">Replies</div>
-		    <div class="f10-f12 f-padinall">Info</div>
+		    <div class="f8">Views</div>
+		    <div class="f9">Replies</div>
+		    <div class="f10-f12">Info</div>
 		</div>
 	</div> <!-- / m-section_title -->
 	[[+posts]]
