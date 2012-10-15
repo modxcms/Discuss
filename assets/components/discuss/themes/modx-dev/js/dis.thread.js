@@ -77,8 +77,9 @@ DIS.Thread = function() {
 
         quickQuote: function(event) {
             event.preventDefault();
-            var val = $('#dis-thread-message').val();
-            var data = $(this).parents('li.dis-post').data();
+            var msgObj = $('#dis-thread-message'),
+                val = msgObj.val(),
+                data = $(this).parents('li.dis-post').data();
 
             /* To convert our htmlentities() processed message, we throw it in a div
                 and request the innerHTML of that.
@@ -88,7 +89,7 @@ DIS.Thread = function() {
             data.message = temp.innerHTML;
 
             val = val + ((val.length > 0) ? '\n\n' : '') + '[quote author='+data.author+' date='+data.date+']'+data.message+'[/quote]';
-            $('#dis-thread-message').val(val);
+            msgObj.val(val).trigger('autosize');
 
             $('html,body').animate({'scrollTop': $('.dis-thread-form').position().top}, 500, function() {
                 $('#dis-thread-message').focus();

@@ -24,7 +24,9 @@ $(document).ready(function() {
     $('.dis-thread-pagination span').click(function(event) {
         event.preventDefault();
         window.location.href = $(this).data('link');
-    })
+    });
+
+    $('textarea').autosize();
 });
 var DIS = {
     config: {}
