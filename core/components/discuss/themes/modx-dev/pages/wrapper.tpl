@@ -9,12 +9,15 @@
     <meta name="title" content="[[+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
     <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">
-    <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />[[- Will eventually download and combine]]
+
     [[- toggles in progress breakpoint work]]
-    [[++forums_css_framework:notempty=`
+    [[++forums_css_framework:is=`1`:then=`
     <link href="[[+discuss.config.cssUrl]]redo/forums-bp-styles.css" rel="stylesheet" type="text/css">
-    <link href="https://get.gridsetapp.com/7032/" rel="stylesheet" />
-    `:default=``]]
+    <link href="https://get.gridsetapp.com/7032/gzip/" rel="stylesheet" />
+    `:else=`
+    <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />[[- Will eventually download and combine]]
+    `]]
+
     [[*cssjs]]
     [[- Live Typekit call
     [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
@@ -36,7 +39,7 @@
     <header class="masthead">
         <div class="wrapper h-group">
             <div class="f-padinfull f-all m-all">
-                <div class="f1-f6 m-all">
+                <div class="f1-f6 t1-t3 m-all">
                     <nav class="l-col_16">
                         <ul class="m-sm_nav_pod">
                             <li><a href="http://modx.com/">Back to MODX.com</a></li>
@@ -48,7 +51,7 @@
                     </nav>
                     <a class="h-ir" href="[[+discuss.config.url]]" title="MODX Community Forums">MODX Forums</a>
                 </div><!-- left side of masthead -->
-                <div class="masthead-right f7-f12 m-all">
+                <div class="masthead-right f7-f12 t4-t6 m-all">
                     [[+discuss.user.id:notempty=`
                     <div class="m-welcome_box">
                         <div class="m-user_box h-group">
