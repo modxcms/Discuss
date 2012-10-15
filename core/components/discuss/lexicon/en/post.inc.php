@@ -62,11 +62,11 @@ $_lang['discuss.save_changes'] = 'Save Changes';
 
 $_lang['discuss.thread_post_new'] = 'Post New Thread';
 $_lang['discuss.start_new_thread'] = 'Start New Thread';
-$_lang['discuss.solve'] = 'Solve';
-$_lang['discuss.solved'] = 'Solved';
-$_lang['discuss.unsolve'] = 'Unsolve';
-$_lang['discuss.unsolved'] = 'Unsolved';
 $_lang['discuss.thread_remove'] = 'Remove Thread';
+$_lang['discuss.solve'] = 'Answer';
+$_lang['discuss.solved'] = 'Answered';
+$_lang['discuss.unsolve'] = 'Remove Answer';
+$_lang['discuss.unsolved'] = 'No Answers';
 
 $_lang['discuss.thread'] = 'Thread';
 $_lang['discuss.thread_remove_confirm'] = 'Are you sure you want to permanently remove the thread "[[+thread]]"?';

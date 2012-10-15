@@ -144,7 +144,7 @@ $_lang['discuss.answered'] = 'Answered';
 $_lang['discuss.question_and_answer'] = 'Question';
 
 $_lang['discuss.welcome_back'] = 'Welcome back,';
-$_lang['discuss.recent_activity'] = 'Recent activity';
+$_lang['discuss.recent_activity'] = 'Since your last visit';
 $_lang['discuss.user.no_new_posts'] = 'no new posts';
 $_lang['discuss.user.one_new_post'] = '1 new post';
 $_lang['discuss.user.new_posts'] = '[[+total]] new posts';
