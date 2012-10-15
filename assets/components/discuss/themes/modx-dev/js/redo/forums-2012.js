@@ -29,4 +29,13 @@ $(function() {
     $('#F-Toggle-List a').click(function(event) {
         event.stopPropagation();
     });
+
+
+});
+
+
+
+$(document).ready(function() {
+    // Tipster load
+    $('.tooltip').tooltipster();
 });

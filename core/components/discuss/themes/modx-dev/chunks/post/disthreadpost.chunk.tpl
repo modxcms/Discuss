@@ -4,8 +4,8 @@
         <!-- load this only if more than one answer?--><nav><a href="#">Previous</a><a class="next" href="#">Next</a></nav>
         <span>Answer</span>
     </div>`]]
-    <div class="div-post-answer-marker" title="Click to mark as answer">
-        Click to mark as answer
+    <div class="tooltip div-ppost-answer-marker" title="Click to mark as answer">
+        <p>Click to mark as answer</p>
     </div>
     <div class="dis-post-left">
         <ul>
