@@ -4068,7 +4068,7 @@ div.m-section_title + div.row {
   .dis-post-answer-marker span {
     width: 43px;
     height: 43px;
-    background: url(../../images/redo/elements/answered-post.png) left top;
+    background: url(../../images/redo/elements/answered-post.png) no-repeat left top;
     margin-left: -3px; }
   /* line 400, ../../sass/_forums.sass */
   .dis-post-answer-marker nav {
