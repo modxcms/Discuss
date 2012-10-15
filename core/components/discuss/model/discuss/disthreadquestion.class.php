@@ -237,6 +237,25 @@ class disThreadQuestion extends disThread {
         if (!empty($postArray['answer'])) {
             $postArray['class'][] = 'dis-post-answer';
             $postArray['title'] .= ' ('.$this->xpdo->lexicon('discuss.best_answer').')';
+            $postArray['answer_next'] = array('id' => '');
+            $postArray['answer_prev'] = array('id' => '');
+            if (!empty($postArray['answers_raw'])) {
+                $nextIsNext = false;
+                $last = array();
+                foreach ($postArray['answers_raw'] as $id => $details) {
+                    if ($nextIsNext) {
+                        $postArray['answer_next'] = $details;
+                        break;
+                    }
+                    if ($id == $postArray['id']) {
+                        if (!empty($last)) {
+                            $postArray['answer_prev'] = $last;
+                        }
+                        $nextIsNext = true;
+                    }
+                    $last = $details;
+                }
+            }
         } else {
 
         }

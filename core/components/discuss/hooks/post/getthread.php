@@ -41,6 +41,7 @@ if (!is_object($thread)) {
     $thread = $modx->call('disThread', 'fetch', array(&$modx,$thread));
     if (empty($thread)) return false;
 }
+$answers = $modx->getOption('answers',$scriptProperties,array());
 
 $limit = $modx->getOption('limit',$scriptProperties,(int)$modx->getOption('discuss.post_per_page',$scriptProperties, 10));
 $page = !empty($_GET['page']) ? $_GET['page'] - 1 : 0;
@@ -93,6 +94,7 @@ foreach ($posts['results'] as $post) {
     $postArray = $post->toArray();
     $postArray['url'] = $post->getUrl();
     $postArray['children'] = '';
+    $postArray['answers_raw'] = $answers;
 
     if (!empty($post->EditedBy)) {
         $postArray = array_merge($postArray,$post->EditedBy->toArray('editedby.'));

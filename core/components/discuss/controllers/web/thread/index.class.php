@@ -33,13 +33,15 @@ class DiscussThreadController extends DiscussController {
     /** @var disBoard $board */
     public $board;
     /** @var array $posts */
-    public $posts;
+    public $posts = array();
     /** @var boolean $isModerator */
     public $isModerator = false;
     /** @var boolean $isAdmin */
     public $isAdmin = false;
     /** @var disPost $lastPost */
     public $lastPost;
+    /** @var array $answerPosts */
+    public $answerPosts = array();
 
     public function initialize() {
         $integrated = $this->modx->getOption('i',$this->scriptProperties,false);
@@ -63,9 +65,16 @@ class DiscussThreadController extends DiscussController {
         $this->modx->lexicon->load('discuss:post');
     }
 
+    /**
+     * @return string
+     */
     public function getPageTitle() {
         return $this->thread->get('title');
     }
+
+    /**
+     * @return string
+     */
     public function getSessionPlace() {
         return 'thread:'. ( ($this->thread instanceof disThread) ? $this->thread->get('id') : $this->getProperty('thread') ).':'.$this->getProperty('page',1);
     }
@@ -76,6 +85,7 @@ class DiscussThreadController extends DiscussController {
         $this->markRead();
         
         /* get posts */
+        $this->getAnswers();
         $this->getPosts();
         $this->getLastPost();
 
@@ -186,6 +196,7 @@ class DiscussThreadController extends DiscussController {
             $options = array_merge($this->options,array(
                 'thread' => &$this->thread,
                 'controller' => &$this,
+                'answers' => $this->answerPosts
             ));
             $this->posts = $this->discuss->hooks->load('post/getThread',$options);
             $this->setPlaceholder('posts',$this->posts['results']);
@@ -237,6 +248,9 @@ class DiscussThreadController extends DiscussController {
         }
     }
 
+    /**
+     * @return string
+     */
     public function getBreadcrumbs() {
         if (!empty($this->options['showBreadcrumbs']) && empty($this->scriptProperties['print'])) {
             return $this->thread->buildBreadcrumbs(array(),$this->options['showTitleInBreadcrumbs']);
@@ -321,5 +335,30 @@ class DiscussThreadController extends DiscussController {
          * $actionButtons[] = array('url' => 'javascript:void(0);', 'text' => $this->modx->lexicon('discuss.thread_merge'));
          */
         $this->setPlaceholder('threadactionbuttons',$this->discuss->buildActionButtons($actionButtons,'dis-action-btns right'));
+    }
+
+    public function getAnswers() {
+        if (($this->thread->get('class_key') == 'disThreadQuestion') && $this->thread->get('answered')) {
+            $c = $this->modx->newQuery('disPost');
+            $c->where(array(
+                'board' => $this->thread->get('board'),
+                'thread' => $this->thread->get('id'),
+                'answer' => 1,
+            ));
+            $c->sortby('createdon', 'ASC');
+
+            $answers = $this->modx->getCollection('disPost', $c);
+            if (empty($answers)) {
+                $this->setPlaceholder('answers','');
+            } else {
+                $urls = array();
+                foreach ($answers as $post) {
+                    /* @var disPost $post */
+                    $urls[$post->get('id')] = $post->toArray();
+                    $urls[$post->get('id')]['url'] = $post->getUrl();
+                }
+                $this->answerPosts = $urls;
+            }
+        }
     }
 }
