@@ -174,7 +174,7 @@
                 </div>
                 <div class="f11-f12 center">
                     <a class="modx-live" href="http://www.modx.com/live">
-                        <img src="[[+discuss.config.imagesUrl]]redo/icons/modx-live.png">
+                        <img src="[[+discuss.config.imagesUrl]]redo/icons/modx-live.png" alt="View Live MODX Activity">
                         <p>modx.com/live</p>
                     </a>
                 </div>
