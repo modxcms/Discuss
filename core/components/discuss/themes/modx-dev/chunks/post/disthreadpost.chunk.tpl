@@ -4,9 +4,10 @@
         <!-- load this only if more than one answer?--><nav><a href="#">Previous</a><a class="next" href="#">Next</a></nav>
         <span>Answer</span>
     </div>`]]
-    <div class="tooltip div-ppost-answer-marker" title="Click to mark as answer">
+    <a href="http://test.com" class="tooltip" title="This is my link's tooltip message!">Link</a>
+    [[-<div class="tooltip div-ppost-answer-marker" title="Click to mark as answer">
         <p>Click to mark as answer</p>
-    </div>
+    </div>]]
     <div class="dis-post-left">
         <ul>
             <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>

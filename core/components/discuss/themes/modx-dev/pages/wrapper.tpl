@@ -236,7 +236,7 @@
         <div class="contentWrap"></div>
     </div>
     <!-- / not sure what this is used for? -->
-
+    
     <script>
       $LAB
       [[+discuss.js.header:notempty=`.script([[+discuss.js.header]])`]]

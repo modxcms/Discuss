@@ -30,12 +30,7 @@ $(function() {
         event.stopPropagation();
     });
 
-
-});
-
-
-
-$(document).ready(function() {
     // Tipster load
-    $('.tooltip').tooltipster();
+    $('.tooltip').tooltipster({tooltipTheme: '.tooltipster-smoke'});
+
 });
