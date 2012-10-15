@@ -134,7 +134,7 @@ class disPost extends xPDOSimpleObject {
             if (!defined('DISCUSS_IMPORT_MODE')) {
                 $this->set('depth',$cgps);
             }
-            $this->save();
+            parent :: save();
 
             /* adjust board total replies/posts, and last post */
             $board = $this->getOne('Board');
@@ -178,7 +178,7 @@ class disPost extends xPDOSimpleObject {
                 $thread->save();
 
                 $this->set('thread',$thread->get('id'));
-                $this->save();
+                parent :: save();
             }
 
             /* adjust forum activity */
