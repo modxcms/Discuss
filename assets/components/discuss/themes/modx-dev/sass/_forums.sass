@@ -399,7 +399,7 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
         background: url(../../images/redo/elements/answered-post.png) no-repeat left top
     &.dis-post-notanswer span
         background-position: left -257px
-        opacity: .4
+        opacity: 0
         &:hover
             opacity: 1
     nav
@@ -457,7 +457,7 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
         visibility: hidden
 
     &:hover
-        .dis-action-btn, .dis-pm-btn
+        .dis-action-btn, .dis-pm-btn, .dis-post-notanswer span
             @extend .quick-fade-in-all
             opacity: .99
             visibility: visible
