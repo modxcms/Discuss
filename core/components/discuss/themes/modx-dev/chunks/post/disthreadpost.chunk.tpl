@@ -5,11 +5,11 @@
             [[+answer_prev.id:notempty=`<a href="[[+answer_prev.url]]">Previous</a>`]]
             [[+answer_next.id:notempty=`<a href="[[+answer_next.url]]" class="next">Next</a>`]]
         </nav>
-        <span class="tooltip" title="Unmark as Answer">Answer</span>
+        <a href="[[+url_mark_as_answer]]"><span class="tooltip" title="Unmark as Answer">Answer</span></a>
     </div>`:else=`
-    <div class="dis-post-answer-marker dis-post-notanswer"><a href="#" class="tooltip" title="Mark as Answer!"><span>Mark as Answer</span></a></div>
+    <div class="dis-post-answer-marker dis-post-notanswer"><a href="[[+url_mark_as_answer]]" class="tooltip" title="Mark as Answer!"><span>Mark as Answer</span></a></div>
     `]]
-    [[+url_mark_as_answer]]<!-- mark answer-->
+    <!-- mark answer-->
     <div class="dis-post-left">
         <ul>
             <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>
