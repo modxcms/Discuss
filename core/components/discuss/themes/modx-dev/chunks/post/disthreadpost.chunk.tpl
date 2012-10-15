@@ -4,6 +4,9 @@
         <!-- load this only if more than one answer?--><nav><a href="#">Previous</a><a class="next" href="#">Next</a></nav>
         <span>Answer</span>
     </div>`]]
+    <div class="div-post-answer-marker" title="Click to mark as answer">
+        Click to mark as answer
+    </div>
     <div class="dis-post-left">
         <ul>
             <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>
