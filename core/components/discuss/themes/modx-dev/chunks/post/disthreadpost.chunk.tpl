@@ -1,13 +1,12 @@
 <li class="[[+class]] group-fix" id="dis-post-[[+id]]" data-author="[[+author.username:htmlent]]" data-date="[[+createdon_raw]]" data-message="[[+content_raw]]">
-    [[+answer:notempty=`
-    <div class="dis-post-answer-marker">
+    [[+answer:isequal=`1`:then=`
+    <div class="dis-post-answer-marker tooltip" title="Click to Unmark as Answer">
         <!-- load this only if more than one answer?--><nav><a href="#">Previous</a><a class="next" href="#">Next</a></nav>
         <span>Answer</span>
-    </div>`]]
-    <a href="http://test.com" class="tooltip" title="This is my link's tooltip message!">Link</a>
-    [[-<div class="tooltip div-ppost-answer-marker" title="Click to mark as answer">
-        <p>Click to mark as answer</p>
-    </div>]]
+    </div>`:else=`
+    <a href="#" class="dis-post-answer-marker dis-post-notanswer tooltip" title="Click to Mark as Answer!"><span>Mark as Answer</span></a>
+    `]]
+
     <div class="dis-post-left">
         <ul>
             <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>

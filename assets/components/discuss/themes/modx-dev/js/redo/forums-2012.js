@@ -31,6 +31,9 @@ $(function() {
     });
 
     // Tipster load
-    $('.tooltip').tooltipster({tooltipTheme: '.tooltipster-smoke'});
+    $('.tooltip').tooltipster({
+        tooltipTheme: '.modx-tipster',
+        position: 'left'
+    });
 
 });
