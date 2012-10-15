@@ -4079,8 +4079,8 @@ div.m-section_title + div.row {
   .dis-post-answer-marker nav {
     width: 20px;
     height: 42px;
-    background-color: #7aa020;
-    border-right: 1px solid #6b8d1d; }
+    border-right: 1px solid #6b8d1d;
+    background: #7aa020 url(../../images/redo/bg/answer-nav.png) no-repeat right center; }
     /* line 405, ../../sass/_forums.sass */
     .dis-post-answer-marker nav a {
       display: block;
