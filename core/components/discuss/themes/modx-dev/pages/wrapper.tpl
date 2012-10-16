@@ -74,7 +74,7 @@
                                     <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]" title="[[%discuss.logout]] [[+discuss.user.username]]">[[%discuss.logout]]</a>
                                 </div>
                                 <p>[[%discuss.recent_activity]][[%discuss.ndash]] 
-                                    <a href="[[+discuss.config.url]]thread/unread_last_visit" title="[[%discuss.view]] [[+discuss.user.unread_posts_count]] [[%discuss.unread_posts]] [[%discuss.unread_posts_period">[[+discuss.user.unread_posts]]</a>[[%discuss.sep]] 
+                                    <a href="[[+discuss.config.url]]thread/unread_last_visit" title="[[%discuss.view]] [[+discuss.user.unread_posts_count]] [[%discuss.unread_posts]] [[%discuss.user.unread_posts_period]]">[[+discuss.user.unread_posts]]</a>[[%discuss.sep]] 
 
                                     <a href="[[+discuss.config.url]]messages/" title="[[%discuss.view]] [[+discuss.user.unread_messages_count]] [[%discuss.messages_new]]">[[+discuss.user.unread_messages]]</a>[[%discuss.sep]]
                                     <a href="[[+discuss.config.url]]thread/new_replies_to_posts" title="[[%discuss.view]] [[+discuss.user.new_replies_count]] [[%discuss.new_replies_to_posts]]">[[+discuss.user.new_replies]]</a><br />
