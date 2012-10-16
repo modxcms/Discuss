@@ -976,11 +976,19 @@ section.group
 .dis-form
     .dis-new-thread-title
         display: block
-        width: 99% !important
+        width: 97% !important
         margin: 5px 0 10px 0
         border: 1px solid darken($c-base, 20%)
-        +rem('font-size', 15px)
-        padding: 5px
+        +rem('font-size', 20px)
+        padding: 1.5%
+        &:focus
+            border-color: darken($c-base, 50%)
+    .dis-new-thread-title-wrapper
+        position: relative
+        label
+            position: absolute
+            top: 24px !important
+            left: 14px !important
 .twelve-form
     .dis-form
         label
