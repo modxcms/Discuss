@@ -403,10 +403,12 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
         text-indent: 100%
         white-space: nowrap
         float: right
+        position: relative
     span
         width: $dis-post-span
         height: $dis-post-span
         background: url(../../images/redo/elements/answered-post-right.png) no-repeat left top
+        z-index: 20
     &.dis-post-notanswer span
         background-position: right -342px
         opacity: 0
@@ -416,9 +418,10 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
     nav
         width: $dis-post-nav-width
         height: $dis-post-nav-height
-        border-right: $dis-post-nav-border solid #6b8d1d
-        margin-right: -3px
-        background: #7aa020 url(../../images/redo/bg/answer-nav.png) no-repeat right center
+        border-left: $dis-post-nav-border solid #6b8d1d
+        margin-left: -1px
+        z-index: 30
+        background: #7aa020 url(../../images/redo/bg/answer-nav-right.png) no-repeat left center
         a
             display: block
             width: 100%
@@ -444,7 +447,7 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
             position: absolute
             right: (($dis-post-marker-width - $dis-post-nav-width) + 10) // adding in a bit of space for the animation
             top: 7px
-            width: 140px
+            width: 100px
             +rem('padding', 6px 12px)
             +opacity(0)
             +border-radius($radius-sm)
