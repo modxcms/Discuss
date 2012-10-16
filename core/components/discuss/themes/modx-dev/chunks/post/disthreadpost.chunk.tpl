@@ -53,6 +53,15 @@
         </div>
         <div class="dis-content">
             [[+content]]
+
+            [[+answered:neq=`1`:then=`
+                [[+idx:eq=`1`:then=`
+                    [[+discuss.user.canMarkAsAnswer:notempty=`
+                        <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
+                    `:default=``]]
+                `:else=``]]
+            `:else=``]]
+
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>

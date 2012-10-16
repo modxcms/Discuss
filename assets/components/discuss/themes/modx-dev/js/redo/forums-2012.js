@@ -23,6 +23,8 @@
 function(){a.checkForEmpty()})};a.fadeOnFocus=function(){a.showing&&a.setOpacity(a.options.fadeOpacity)};a.setOpacity=function(c){a.$label.stop().animate({opacity:c},a.options.fadeDuration);a.showing=c>0};a.checkForEmpty=function(c){if(a.$field.val()===""){a.prepForShow();a.setOpacity(c?1:a.options.fadeOpacity)}else a.setOpacity(0)};a.prepForShow=function(){if(!a.showing){a.$label.css({opacity:0}).show();a.$field.bind("keydown.infieldlabel",function(c){a.hideOnChange(c)})}};a.hideOnChange=function(c){if(!(c.keyCode===
 16||c.keyCode===9)){if(a.showing){a.$label.hide();a.showing=false}a.$field.unbind("keydown.infieldlabel")}};a.init()};d.InFieldLabels.defaultOptions={fadeOpacity:0.5,fadeDuration:300};d.fn.inFieldLabels=function(e){return this.each(function(){var b=d(this).attr("for");if(b){b=d("input#"+b+"[type='text'],input#"+b+"[type='search'],input#"+b+"[type='tel'],input#"+b+"[type='url'],input#"+b+"[type='email'],input#"+b+"[type='password'],textarea#"+b);b.length!==0&&new d.InFieldLabels(this,b[0],e)}})}})(jQuery);
 
+
+
 // Forum Functions
 $(function() {
 	// move labels inside inputs
@@ -48,16 +50,34 @@ $(function() {
     });
 
     // Opacity control on paragraph tips
+    var answerMarkerMargin = "-10px";    // Margin
+    var answerMarkerStartMargin = "0px";
+
     $('ul.dis-list li.dis-post').mouseenter(
     function(){
-        $(this).find('.dis-post-answer-marker p').stop().animate({marginLeft: '-15px', opacity: .99}, 200).delay(800).animate({opacity: .0}, 500)
+        $(this).find('.dis-post-answer-marker p').stop().animate({marginRight: answerMarkerMargin, opacity: .99}, 200).delay(800).animate({opacity: .0}, 500)
     });
     $('ul.dis-list li.dis-post').mouseleave(
     function(){
-        $(this).find('.dis-post-answer-marker p').css('opacity', 0).stop().animate({marginLeft: '0px', opacity: 0}, 200)
+        $(this).find('.dis-post-answer-marker p').css('opacity', 0).stop().animate({marginRight: answerMarkerStartMargin, opacity: 0}, 200)
     });
     $('.dis-post-notanswer a span').mouseenter(
         function(){
-            $(this).closest('div').find('p').stop().animate({marginLeft: '-15px', opacity: .99}, 100)
+            $(this).closest('div').find('p').stop().animate({marginRight: answerMarkerMargin, opacity: .99}, 100)
     });
+
+    // scroll to and animate link for help
+    $('#Show-answer-link').click(
+        function(e){
+            e.preventDefault();
+            $('.dis-post-answer-marker p').css('visibility', 'hidden');
+            $('html, body').animate({
+                scrollTop: $("ul.dis-list li.dis-post:nth-child(2)").offset().top
+            }, 500, function(){
+                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-answer-marker p').css('visibility', 'visible').animate({marginRight: answerMarkerMargin, opacity: .99}, 200).animate({opacity: .5}, 200).animate({opacity: .99}, 200, function(){
+                    $('.dis-post-answer-marker p').css('visibility', 'visible');
+                });
+                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-notanswer a span').animate({opacity: .99}, 200);
+            });
+        });
 });
