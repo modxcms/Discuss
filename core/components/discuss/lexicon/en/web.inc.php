@@ -222,12 +222,14 @@ $_lang['discuss.thread_unstick'] = 'Unstick';
 $_lang['discuss.thread_viewing'] = '[[+members]] and [[+guests]] guests are viewing this thread.';
 $_lang['discuss.title'] = 'Title';
 $_lang['discuss.track_ip'] = 'Track IP';
-$_lang['discuss.unmark_as_answer'] = 'Un-mark As Solution';
+
+$_lang['discuss.flag_answer'] = 'Flag as Answer';
+$_lang['discuss.unflag_answer'] = 'Unflag as Answer';
+
 $_lang['discuss.unread_posts'] = 'Unread Posts';
 $_lang['discuss.unread_posts_all'] = 'View All Unread Posts';
 $_lang['discuss.unread_posts_last_visit'] = 'Unread Posts Since Last Visit';
 $_lang['discuss.unsubscribe'] = 'Unsubscribe';
-$_lang['discuss.unsolved'] = 'Mark as Solved';
 $_lang['discuss.username'] = 'Username';
 $_lang['discuss.usernames'] = 'Usernames';
 $_lang['discuss.user_account_header'] = 'Account: [[+user]]';
@@ -243,4 +245,4 @@ $_lang['discuss.view_user_subscriptions'] = 'My Email Notifications';
 $_lang['discuss.view_user_posts'] = 'My Posts';
 $_lang['discuss.my_profile'] = 'My Profile';
 $_lang['discuss.website'] = 'Website';
-$_lang['discuss.zero_members'] = '0 members';
+$_lang['discuss.zero_members'] = 'No members';

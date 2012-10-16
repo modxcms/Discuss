@@ -58,9 +58,7 @@ $_lang['discuss.post_modify'] = 'Modify Post';
 $_lang['discuss.post_new'] = 'Start a New Post';
 $_lang['discuss.post_reply'] = 'Reply to Post';
 
-$_lang['discuss.solve'] = 'Answer';
 $_lang['discuss.solved'] = 'Answered';
-$_lang['discuss.unsolve'] = 'Remove Answer';
 $_lang['discuss.unsolved'] = 'No Answers';
 
 $_lang['discuss.thread_remove'] = 'Remove Thread';
