@@ -176,10 +176,10 @@ class disThreadQuestion extends disThread {
     public function get($k,$format = '',$formatTemplate = '') {
         $v = parent::get($k,$format,$formatTemplate);
 
-        if ($k == 'title' && $this->xpdo->lexicon) {
+        if ($k == 'title' && $this->xpdo->lexicon && $this->xpdo->getOption('discuss.title_suffix_if_answered')) {
             $answered = $this->get('answered');
             if (!empty($answered)) {
-                $v .= ' ['.$this->xpdo->lexicon('discuss.solved').']';
+                $v .= $this->xpdo->lexicon($this->xpdo->getOption('discuss.title_suffix_if_answered'));
             }
         }
         return $v;
