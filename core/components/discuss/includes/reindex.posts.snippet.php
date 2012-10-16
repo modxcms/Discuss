@@ -72,7 +72,7 @@ $c->select(array(
     'Thread.private AS private',
 ));
 $c->sortby('id','ASC');
-$c->limit(1000, 1999);
+$c->limit(25, 0);
 
 $posts = $modx->getIterator('disPost', $c);
 /** @var disPost $post */
@@ -116,7 +116,7 @@ $tend= $mtime;
 $totalTime= ($tend - $tstart);
 $totalTime= sprintf("%2.4f s", $totalTime);
 
-$modx->log(modX::LOG_LEVEL_INFO,"\nExecution time: {$totalTime}\n");
+$modx->log(modX::LOG_LEVEL_ERROR,"\nExecution time: {$totalTime}\n");
 
 @session_write_close();
 die();
