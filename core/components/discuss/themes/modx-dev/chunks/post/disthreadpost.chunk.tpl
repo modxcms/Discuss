@@ -54,11 +54,13 @@
         <div class="dis-content">
             [[+content]]
 
-            [[- MARK: This would show up IF the thread isn't marked as answer and IF you are the author and IF it has atleast one post (or at very least the show how link wouldn't show up.) I am not sure how much value it will add but thought it could be useful in promoting properly marking solutions.]]
-            [[- COMMENTED OUT FOR NOW UNTIL MARK LOOKS AT IT
-            <div class="dis-info"><p>If a community memeber answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
-            ]]
-
+            [[+answered:neq=`1`:then=`
+                [[+idx:eq=`1`:then=`
+                    [[+discuss.user.canMarkAsAnswer:notempty=`
+                        <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
+                    `:default=``]]
+                `:else=``]]
+            `:else=``]]
 
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
         </div>
