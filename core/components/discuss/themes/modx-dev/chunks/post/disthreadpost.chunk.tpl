@@ -5,9 +5,18 @@
             [[+answer_prev.id:notempty=`<a href="[[+answer_prev.url]]">Previous</a>`]]
             [[+answer_next.id:notempty=`<a href="[[+answer_next.url]]" class="next">Next</a>`]]
         </nav>
-        [[+url_mark_as_answer:notempty=`<a href="[[+url_mark_as_answer]]"><span class="tooltip" title="Unmark as Answer">Answer</span></a>`]]
+        [[+url_mark_as_answer:notempty=`
+        <a href="[[+url_mark_as_answer]]">
+            <span class="tooltip" title="Unmark as Answer">Answer</span>
+        </a>`]]
     </div>`:else=`
-    [[+url_mark_as_answer:notempty=`<div class="dis-post-answer-marker dis-post-notanswer"><a href="[[+url_mark_as_answer]]" class="tooltip" title="Mark as Answer!"><span>Mark as Answer</span></a></div>`]]
+    [[+url_mark_as_answer:notempty=`
+    <div class="dis-post-answer-marker dis-post-notanswer">
+        <p>Mark As Answer</p>
+        <a href="[[+url_mark_as_answer]]" title="Mark as Answer!">
+            <span>Mark as Answer</span>
+        </a>
+    </div>`]]
     `]]
     <!-- mark answer-->
     <div class="dis-post-left">

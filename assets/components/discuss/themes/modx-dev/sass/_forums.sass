@@ -426,6 +426,27 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
                 border-bottom: none
                 border-top: $dis-post-nav-border solid rgba(139, 180, 47, 0.77)
                 background-position: -1px -164px
+    &.dis-post-notanswer
+        p
+            background-color: darken($c-base, 89%)
+            color: $c-base
+            position: absolute
+            left: $dis-post-marker-width
+            top: 10px
+            width: 140px
+            +rem('padding', 6px 12px)
+            +opacity(0)
+            +border-radius($radius-sm)
+            &:before
+                content: ""
+                display: block
+                position: absolute
+                width: 12px
+                height: 19px
+                top: 7px
+                left: -12px
+                background: url(../../images/redo/elements/dark-arrow.png) no-repeat top right
+                +opacity(.94)
 
 
 .tag
@@ -806,6 +827,7 @@ a#dis-preview-btn.preview
         margin: 0 !important
         padding: 1.6% !important
         +rem('font-size', 15px)
+        line-height: 1.4
         border-top:  none
         border-radius: 0 0 3px 3px
         transition: height 0.2s
