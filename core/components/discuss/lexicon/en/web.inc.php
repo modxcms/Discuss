@@ -148,6 +148,7 @@ $_lang['discuss.recent_activity'] = 'Since your last visit';
 $_lang['discuss.user.no_new_posts'] = 'no new posts';
 $_lang['discuss.user.one_new_post'] = '1 new post';
 $_lang['discuss.user.new_posts'] = '[[+total]] new posts';
+$_lang['discuss.user.unread_posts_period'] = 'in [[+unread_days:default=`42`]] days';
 $_lang['discuss.user.no_new_messages'] = 'no private messages';
 $_lang['discuss.user.one_new_message'] = '1 private message';
 $_lang['discuss.user.new_messages'] = '[[+total]] private messages';
