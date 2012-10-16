@@ -50,17 +50,20 @@ $(function() {
     });
 
     // Opacity control on paragraph tips
+    var answerMarkerMargin = "-10px";    // Margin
+    var answerMarkerStartMargin = "0px";
+
     $('ul.dis-list li.dis-post').mouseenter(
     function(){
-        $(this).find('.dis-post-answer-marker p').stop().animate({marginLeft: '-15px', opacity: .99}, 200).delay(800).animate({opacity: .0}, 500)
+        $(this).find('.dis-post-answer-marker p').stop().animate({marginRight: answerMarkerMargin, opacity: .99}, 200).delay(800).animate({opacity: .0}, 500)
     });
     $('ul.dis-list li.dis-post').mouseleave(
     function(){
-        $(this).find('.dis-post-answer-marker p').css('opacity', 0).stop().animate({marginLeft: '0px', opacity: 0}, 200)
+        $(this).find('.dis-post-answer-marker p').css('opacity', 0).stop().animate({marginRight: answerMarkerStartMargin, opacity: 0}, 200)
     });
     $('.dis-post-notanswer a span').mouseenter(
         function(){
-            $(this).closest('div').find('p').stop().animate({marginLeft: '-15px', opacity: .99}, 100)
+            $(this).closest('div').find('p').stop().animate({marginRight: answerMarkerMargin, opacity: .99}, 100)
     });
 
     // scroll to and animate link for help
@@ -71,7 +74,7 @@ $(function() {
             $('html, body').animate({
                 scrollTop: $("ul.dis-list li.dis-post:nth-child(2)").offset().top
             }, 500, function(){
-                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-answer-marker p').css('visibility', 'visible').animate({marginLeft: '-15px', opacity: .99}, 200).animate({opacity: .5}, 200).animate({opacity: .99}, 200, function(){
+                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-answer-marker p').css('visibility', 'visible').animate({marginRight: answerMarkerMargin, opacity: .99}, 200).animate({opacity: .5}, 200).animate({opacity: .99}, 200, function(){
                     $('.dis-post-answer-marker p').css('visibility', 'visible');
                 });
                 $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-notanswer a span').animate({opacity: .99}, 200);
