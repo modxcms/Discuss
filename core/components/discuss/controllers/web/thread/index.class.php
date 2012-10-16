@@ -348,9 +348,7 @@ class DiscussThreadController extends DiscussController {
             $c->sortby('createdon', 'ASC');
 
             $answers = $this->modx->getCollection('disPost', $c);
-            if (empty($answers)) {
-                $this->setPlaceholder('answers','');
-            } else {
+            if (!empty($answers)) {
                 $urls = array();
                 foreach ($answers as $post) {
                     /* @var disPost $post */
@@ -359,6 +357,7 @@ class DiscussThreadController extends DiscussController {
                 }
                 $this->answerPosts = $urls;
             }
+            $this->setPlaceholder('answer_count', count($this->answerPosts));
         }
     }
 }
