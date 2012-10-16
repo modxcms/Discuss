@@ -34,6 +34,7 @@ class disSolrSearch extends disSearch {
      * @var array $_connectionOptions
      */
     private $_connectionOptions = array();
+    private $_searchOptions = array();
     /**
      * The client API for the Solr instance
      * @var SolrClient $client
@@ -64,6 +65,10 @@ class disSolrSearch extends disSearch {
             'proxy_password' => $this->modx->getOption('discuss.solr.proxy_password',null,''),
         );
 
+        $this->_searchOptions = array(
+            'requestHandler' => $this->modx->getOption('discuss.solr.requestHandler',null,''),
+        );
+
         try {
             $this->client = new SolrClient($this->_connectionOptions);
         } catch (Exception $e) {
@@ -89,13 +94,13 @@ class disSolrSearch extends disSearch {
         $query->setQuery($string);
         $query->setStart($start);
         $query->setRows($limit);
-        $query->addField('id')
+/*        $query->addField('id')
               ->addField('title')
               ->addField('message')
               ->addField('thread')
               ->addField('board')
-              ->addField('category')
-              ->addField('category_name')
+              //->addField('category')
+              //->addField('category_name')
               ->addField('author')
               ->addField('username')
               ->addField('replies')
@@ -103,7 +108,13 @@ class disSolrSearch extends disSearch {
               ->addField('board_name')
               ->addField('url')
               ->addField('private')
-              ->addField('score');
+              //->addField('score');
+        ;*/
+
+        // allow for non-default Solr requestHandler
+        if(isset($this->_searchOptions['requestHandler']) && !empty($this->_searchOptions['requestHandler'])) {
+            $this->client->setServlet(SolrClient::SEARCH_SERVLET_TYPE, $this->_searchOptions['requestHandler']);
+        }
 
         foreach ($conditions as $k => $v) {
             $query->addFilterQuery($k.':'.$v);
