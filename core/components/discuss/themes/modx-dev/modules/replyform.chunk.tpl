@@ -32,8 +32,8 @@
             <div class="dis-thread-info">
                 <ul>
                     <li class="m-dis-choose-info"><p>[[%discuss.new_post_type_instructions]] </p></li>
-                    <li class="m-dis-discussion-info" style="display: none;"><p>[[%discuss.discussion_instructions]] [[%discuss.discussion_links]]</p></li>
-                    <li class="m-dis-question-info" style="display: none;"><p>[[%discuss.question_instructions]]<p><p>[[%discuss.question_links]]</p></li>
+                    <li class="m-dis-discussion-info" style="display: none;"><p>[[%discuss.discussion_instructions]]</p><p>[[%discuss.discussion_links]]</p></li>
+                    <li class="m-dis-question-info" style="display: none;"><p>[[%discuss.question_instructions]]</p><p>[[%discuss.question_links]]</p></li>
                 </ul>
                 <br class="clearfix" />
             </div>
