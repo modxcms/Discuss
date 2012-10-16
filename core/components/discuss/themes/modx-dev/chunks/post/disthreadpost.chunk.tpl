@@ -3,9 +3,6 @@
     <div class="dis-post-answer-marker">
     `:default=`
     <div class="dis-post-answer-marker dis-post-notanswer">
-        <p>Mark As Answer</p>
-        <a href="[[+url_mark_as_answer]]" title="Mark as Answer!"><span>Mark as Answer</span></a>
-    </div>`]]
     `]]
         [[+answer_count:gt=`1`:then=`
             [[+answer:notempty=`<nav>
@@ -56,8 +53,8 @@
         </div>
         <div class="dis-content">
             [[+content]]
+            <div class="dis-info"><p>If a community memeber answers your question please mark post as the answer. <a href="#">Show How</a></p></div>
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
-            <div class="dis-info"><p>If a community memeber helps solve your issue please mark post as solution. <a id="Show-answer-link" href="#">Show how</a></p></div>
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
     </div>
