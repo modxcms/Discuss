@@ -39,11 +39,15 @@ $(function() {
     // Opacity control on paragraph tips
     $('ul.dis-list li.dis-post').mouseenter(
     function(){
-        $(this).find('.dis-post-answer-marker p').stop().animate({marginLeft: '-10px', opacity: .99}, 200).delay(800).animate({opacity: .0}, 500)
+        $(this).find('.dis-post-answer-marker p').stop().animate({marginLeft: '-15px', opacity: .99}, 200).delay(800).animate({opacity: .0}, 500)
     });
     $('ul.dis-list li.dis-post').mouseleave(
     function(){
         $(this).find('.dis-post-answer-marker p').css('opacity', 0).stop().animate({marginLeft: '0px', opacity: 0}, 200)
+    });
+    $('.dis-post-notanswer a span').mouseenter(
+        function(){
+            $(this).closest('div').find('p').stop().animate({marginLeft: '-15px', opacity: .99}, 100)
     });
 
 });
