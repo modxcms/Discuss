@@ -38,6 +38,8 @@ class DiscussThreadController extends DiscussController {
     public $isModerator = false;
     /** @var boolean $isAdmin */
     public $isAdmin = false;
+    /** @var boolean $isAuthor */
+    public $isAuthor = false;
     /** @var disPost $lastPost */
     public $lastPost;
     /** @var array $answerPosts */
@@ -56,7 +58,13 @@ class DiscussThreadController extends DiscussController {
 
         $this->isModerator = $this->thread->isModerator();
         $this->isAdmin = $this->discuss->user->isAdmin();
-        
+
+        $this->isAuthor = ($this->discuss->user->isLoggedIn && ($this->thread->get('author_first') == $this->discuss->user->get('id')));
+        $this->setPlaceholder('discuss.user.isAuthor', $this->isAuthor);
+        $canMarkAsAnswer = (($this->isAuthor || $this->isModerator || $this->isAdmin) &&
+            ($this->thread->get('class_key') == 'disThreadQuestion'));
+        $this->setPlaceholder('discuss.user.canMarkAsAnswer', $canMarkAsAnswer);
+
         $this->board = $this->thread->getOne('Board');
         if ($this->board) {
             $isModerator = $this->discuss->user->isModerator($this->board->get('id'));
