@@ -4637,7 +4637,8 @@ a#dis-preview-btn.preview {
   width: 96.8% !important;
   margin: 0 !important;
   padding: 1.6% !important;
-  font-size: 1em;
+  font-size: 15px;
+  font-size: 1.5rem;
   border-top: none;
   border-radius: 0 0 3px 3px;
   transition: height 0.2s;
