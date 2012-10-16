@@ -38,10 +38,10 @@
                 <br class="clearfix" />
             </div>
         </section>
-
-        <label for="dis-new-thread-title">[[%discuss.title]]:
-            <span class="error">[[!+fi.error.title]]</span>
-        </label>
+        <div id="dis-new-thread-title-wrapper" class="dis-new-thread-title-wrapper">
+        <label for="dis-new-thread-title">[[%discuss.title]]:</label>
+        <span class="error">[[!+fi.error.title]]</span>
+        </div>
         <input type="text" name="title" id="dis-new-thread-title" class="dis-new-thread-title" value="[[!+fi.title]]" />
     `:else=`
         <input type="hidden" name="title" value="[[!+fi.title]]" />
