@@ -68,6 +68,7 @@ $_lang['discuss.thread_remove_confirm'] = 'Are you sure you want to permanently 
 $_lang['discuss.thread_summary'] = 'Thread Summary';
 
 $_lang['discuss.title'] = 'Title';
+$_lang['discuss.title_helper'] = 'Enter a descriptive post title…';
 $_lang['discuss.views'] = 'Views';
 $_lang['discuss.preview'] = 'Preview';
 $_lang['discuss.save_changes'] = 'Save Changes';
