@@ -7767,11 +7767,11 @@ body#body-thread .dis-sticky-actions {
 
 /* line 2, ../../sass/lib/_transitions.sass */
 .quick-fade-in-all, .dis-post:hover .dis-action-btn, .dis-post:hover .dis-pm-btn, .dis-post:hover .dis-post-notanswer span {
-  -webkit-animation: fadeIn 0.3s 0s ease both;
-  -moz-animation: fadeIn 0.3s 0s ease both;
-  -ms-animation: fadeIn 0.3s 0s ease both;
-  -o-animation: fadeIn 0.3s 0s ease both;
-  animation: fadeIn 0.3s 0s ease both; }
+  -webkit-animation: fadeIn 0.4s 0.25s ease both;
+  -moz-animation: fadeIn 0.4s 0.25s ease both;
+  -ms-animation: fadeIn 0.4s 0.25s ease both;
+  -o-animation: fadeIn 0.4s 0.25s ease both;
+  animation: fadeIn 0.4s 0.25s ease both; }
 
 /* line 5, ../../sass/lib/_transitions.sass */
 .quick-fade-in-bg {
