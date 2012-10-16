@@ -1,23 +1,32 @@
 <li class="[[+class]] group-fix" id="dis-post-[[+id]]" data-author="[[+author.username:htmlent]]" data-date="[[+createdon_raw]]" data-message="[[+content_raw]]">
-    [[+answer:isequal=`1`:then=`
+    [[+answer:notempty=`
     <div class="dis-post-answer-marker">
-        <nav>
-            [[+answer_prev.id:notempty=`<a href="[[+answer_prev.url]]">Previous</a>`]]
-            [[+answer_next.id:notempty=`<a href="[[+answer_next.url]]" class="next">Next</a>`]]
-        </nav>
-        [[+url_mark_as_answer:notempty=`
-        <a href="[[+url_mark_as_answer]]">
-            <span class="tooltip" title="Unmark as Answer">Answer</span>
-        </a>`]]
-    </div>`:else=`
-    [[+url_mark_as_answer:notempty=`
+    `:default=`
     <div class="dis-post-answer-marker dis-post-notanswer">
-        <p>Mark As Answer</p>
-        <a href="[[+url_mark_as_answer]]" title="Mark as Answer!">
-            <span>Mark as Answer</span>
-        </a>
-    </div>`]]
     `]]
+        [[+answer_count:gt=`1`:then=`
+            [[+answer:notempty=`<nav>
+                [[+answer_prev.id:notempty=`<a href="[[+answer_prev.url]]">Previous</a>`]]
+                [[+answer_next.id:notempty=`<a href="[[+answer_next.url]]" class="next">Next</a>`]]
+            </nav>`]]
+        `:else=``]]
+
+
+        [[+url_mark_as_answer:notempty=`
+            [[+answer:notempty=`
+                <a href="[[+url_mark_as_answer]]">
+                    <span class="tooltip" title="Unmark as Answer">Answer</span>
+                </a>
+            `:default=`
+                <div class="dis-post-answer-marker dis-post-notanswer">
+                    <p>Mark As Answer</p>
+                    <a href="[[+url_mark_as_answer]]" title="Mark as Answer!">
+                        <span>Mark as Answer</span>
+                    </a>
+                </div>
+            `]]
+        `]]
+    </div>
     <!-- mark answer-->
     <div class="dis-post-left">
         <ul>
