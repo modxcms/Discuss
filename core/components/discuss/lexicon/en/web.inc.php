@@ -120,7 +120,6 @@ $_lang['discuss.move_thread_header'] = 'Move Entire Thread: [[+title]]';
 $_lang['discuss.name'] = 'Name';
 $_lang['discuss.new_post_made'] = 'New Reply Posted';
 $_lang['discuss.new_replies_to_posts'] = 'New Replies to Posts';
-$_lang['discuss.new_thread'] = 'New Thread';
 $_lang['discuss.no_replies_yet'] = 'No Replies Yet';
 $_lang['discuss.notify'] = 'Notify';
 $_lang['discuss.on'] = 'on';
