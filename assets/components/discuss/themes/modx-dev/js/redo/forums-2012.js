@@ -63,14 +63,18 @@ $(function() {
             $(this).closest('div').find('p').stop().animate({marginLeft: '-15px', opacity: .99}, 100)
     });
 
-    
-
+    // scroll to and animate link for help
     $('#Show-answer-link').click(
         function(e){
             e.preventDefault();
-            $('ul.dis-list li:first-child').next().find('.dis-post-answer-marker p').animate({marginLeft: '-15px', opacity: .99}, 200);
-            $('ul.dis-list li:first-child').next().find('.dis-post-notanswer a span').animate({opacity: .99}, 200);
-
+            $('.dis-post-answer-marker p').css('visibility', 'hidden');
+            $('html, body').animate({
+                scrollTop: $("ul.dis-list li.dis-post:nth-child(2)").offset().top
+            }, 500, function(){
+                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-answer-marker p').css('visibility', 'visible').animate({marginLeft: '-15px', opacity: .99}, 200).animate({opacity: .5}, 200).animate({opacity: .99}, 200, function(){
+                    $('.dis-post-answer-marker p').css('visibility', 'visible');
+                });
+                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-notanswer a span').animate({opacity: .99}, 200);
+            });
         });
-
 });

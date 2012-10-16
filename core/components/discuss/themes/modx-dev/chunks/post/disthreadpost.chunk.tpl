@@ -53,7 +53,7 @@
         </div>
         <div class="dis-content">
             [[+content]]
-            <div class="dis-info"><p>If a community memeber answers your question please mark post as the answer. <a href="#">Show How</a></p></div>
+            <div class="dis-info"><p>If a community memeber answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
