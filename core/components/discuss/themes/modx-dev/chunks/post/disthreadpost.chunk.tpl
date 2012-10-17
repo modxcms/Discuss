@@ -60,7 +60,7 @@
                     <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
                 `:else=``]]
             `:else=``]]
-            [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">[[%discuss.editedon_post]]</span>`]]
+            [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">[[%discuss.editedon_post? &on=`[[+editedon:ago]]` &user=`[[+editedby.username]]`]]</span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
     </div>
