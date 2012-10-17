@@ -55,6 +55,7 @@
         </div>
         <div class="dis-content">
             [[+content]]
+            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]]</ul>`]]
             [[+answered:eq=`0`:then=`
                 [[+idx:eq=`1`:then=`
                     [[+discuss.user.canMarkAsAnswer:eq=`1`:then=`
@@ -62,7 +63,6 @@
                     `:else=``]]
                 `:else=``]]
             `:else=``]]
-            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]]</ul>`]]
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
