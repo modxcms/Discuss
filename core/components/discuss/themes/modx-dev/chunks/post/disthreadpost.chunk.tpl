@@ -55,7 +55,6 @@
         </div>
         <div class="dis-content">
             [[+content]]
-[[+discuss.user.isAuthor]]/[[+answered]]/[[+idx]]/[[+discuss.user.canMarkAsAnswer]]
             [[+answered:eq=`0`:then=`
                 [[+idx:eq=`1`:then=`
                     [[+discuss.user.canMarkAsAnswer:eq=`1`:then=`
