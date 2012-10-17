@@ -40,6 +40,7 @@
         <div class="title">
             <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]]</a>, <span title="[[+createdon]]">[[+createdon:ago]]</span>
             <!-- tools -->
+            [[+discuss.user.isModerator:is=`1`:then=`
             <div class="dis-actions">
                 <div>
                     <ul>[[+actions]]
@@ -48,6 +49,7 @@
                     </ul>
                 </div>
             </div>
+            `]]
             <!-- /tools -->
 
         </div>
