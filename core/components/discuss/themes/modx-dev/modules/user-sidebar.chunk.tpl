@@ -1,11 +1,12 @@
-<aside class="f10-f12">
+<aside class="f10-f12 m-profile-box">
     <div class="PanelBox">
         <div class="Box">
-           <h4>[[+username]]'s Profile</h4>
+           <h2>[[+username]]'s Profile</h2>
             <ul class="panel_info">
                 <li class="Heading">
-                    <a href="https://en.gravatar.com/site/login#your-images">
+                    <a class="PanelBox-avatar" href="https://en.gravatar.com/site/login#your-images">
                         <img src="[[+avatarUrl]]" alt="[[+username]]" />
+                        <span>[[%discuss.modify]]</span>
                     </a>
                     <span class="small">[[+title]]</span>
                 </li>
