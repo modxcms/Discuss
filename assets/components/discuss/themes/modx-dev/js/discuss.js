@@ -27,6 +27,13 @@ $(document).ready(function() {
     });
 
     $('textarea').autosize();
+
+    $('.surroundText').click(function(event) {
+        event.preventDefault();
+        var before = $(this).data('text'),
+            after  = $(this).data('text-after');
+        surroundText(before, (after) ? after : '');
+    })
 });
 var DIS = {
     config: {}
@@ -150,6 +157,7 @@ function surroundText(text1, text2) {
 		textarea.focus(textarea.value.length - 1);
 	}
     textarea.trigger('autosize');
+    return false;
 }
 
 // Checks if the passed input's value is nothing.
