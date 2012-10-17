@@ -11,18 +11,22 @@
             </nav>`]]
         `:else=``]]
 
-        [[+url_mark_as_answer:notempty=`
-            [[+answer:notempty=`
-                <a href="[[+url_mark_as_answer]]">
-                    <span title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
-                </a>
+        [[+answer:notempty=`
+            [[+url_mark_as_answer:notempty=`
+            <a href="[[+url_mark_as_answer]]">
+                <span title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
+            </a>
             `:default=`
-                <div class="dis-post-answer-marker dis-post-notanswer">
-                    <p>[[%discuss.flag_answer]]</p>
-                    <a href="[[+url_mark_as_answer]]" title="[[%discuss.flag_answer]]">
-                        <span>[[%discuss.flag_answer]]</span>
-                    </a>
-                </div>
+                <span title="[[%discuss.answer]]">[[%discuss.answer]]</span>
+            `]]
+        `:default=`
+            [[+url_mark_as_answer:notempty=`
+            <div class="dis-post-answer-marker dis-post-notanswer">
+                <p>[[%discuss.flag_answer]]</p>
+                <a href="[[+url_mark_as_answer]]" title="[[%discuss.flag_answer]]">
+                    <span>[[%discuss.flag_answer]]</span>
+                </a>
+            </div>
             `]]
         `]]
     </div>
