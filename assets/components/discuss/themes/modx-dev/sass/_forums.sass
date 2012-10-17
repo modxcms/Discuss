@@ -395,7 +395,7 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
     width: $dis-post-marker-width
     height: $dis-post-span
     vertical-align: top
-    z-index: 1000 // just for cog, can remove
+    z-index: 100 // just for cog, can remove
     span, nav
         vertical-align: top
         display: inline-block
@@ -524,17 +524,28 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
 .dis-content pre
     @extend pre
 
-.dis-content
-    .dis-post-modify
-        font-style: italic
-        background: url(../../images/redo/icons/modify-sm.png) no-repeat left center
-        padding-left: 18px
-        color: darken($c-base, 45%)
-        +rem('font-size', 12px)
-        margin: 20px 0 3px
-        display: block
-        &:hover
-            color: #000
+.title
+    .dis-content-actions
+        padding-right: 0
+        display: inline-block
+        float: right
+        position: relative
+        z-index: 300
+        li
+            margin-right: 0
+
+.dis-post-modify
+    background: url(../../images/redo/icons/modify-sm.png) no-repeat left center
+    padding-left: 18px
+    float: right
+    text-align: right
+    color: darken($c-base, 35%) !important
+    +rem('font-size', 12px)
+    margin: 0 0 3px 0
+    display: inline-block
+    vertical-align: top
+    &:hover
+        color: #000
 
 .dis-post-right
     float: right

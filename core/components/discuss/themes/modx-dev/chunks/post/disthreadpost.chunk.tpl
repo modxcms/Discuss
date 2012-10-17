@@ -51,11 +51,11 @@
             </div>
             `]]
             <!-- /tools -->
-
+            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]]</ul>`]]
         </div>
         <div class="dis-content">
             [[+content]]
-            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]]</ul>`]]
+            
             [[+answered:eq=`0`:then=`
                 [[+idx:eq=`1`:then=`
                     [[+discuss.user.canMarkAsAnswer:eq=`1`:then=`
