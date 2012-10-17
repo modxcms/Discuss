@@ -54,11 +54,11 @@
         <div class="dis-content">
             [[+content]]
 
-            [[+answered:neq=`1`:then=`
+            [[+answered:eq=`0`:then=`
                 [[+idx:eq=`1`:then=`
-                    [[+discuss.user.canMarkAsAnswer:notempty=`
+                    [[+discuss.user.canMarkAsAnswer:eq=`1`:then=`
                         <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
-                    `:default=``]]
+                    `:else=``]]
                 `:else=``]]
             `:else=``]]
             [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]]</ul>`]]
