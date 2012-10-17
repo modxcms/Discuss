@@ -94,26 +94,27 @@ class disSolrSearch extends disSearch {
         $query->setQuery($string);
         $query->setStart($start);
         $query->setRows($limit);
-/*        $query->addField('id')
-              ->addField('title')
-              ->addField('message')
-              ->addField('thread')
-              ->addField('board')
-              //->addField('category')
-              //->addField('category_name')
-              ->addField('author')
-              ->addField('username')
-              ->addField('replies')
-              ->addField('createdon')
-              ->addField('board_name')
-              ->addField('url')
-              ->addField('private')
-              //->addField('score');
-        ;*/
 
         // allow for non-default Solr requestHandler
         if(isset($this->_searchOptions['requestHandler']) && !empty($this->_searchOptions['requestHandler'])) {
             $this->client->setServlet(SolrClient::SEARCH_SERVLET_TYPE, $this->_searchOptions['requestHandler']);
+        } else {
+            $query->addField('id')
+                ->addField('title')
+                ->addField('message')
+                ->addField('thread')
+                ->addField('board')
+                //->addField('category')
+                //->addField('category_name')
+                ->addField('author')
+                ->addField('username')
+                ->addField('replies')
+                ->addField('createdon')
+                ->addField('board_name')
+                ->addField('url')
+                ->addField('private')
+                //->addField('score');
+            ;
         }
 
         foreach ($conditions as $k => $v) {
