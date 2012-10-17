@@ -1,8 +1,3 @@
-<script type="text/javascript"><!-- // --><![CDATA[
-function bbc_highlight(something, mode) {
-    something.style.backgroundImage = "url(" + '[[+buttons_url]]10x10/' + (mode ? "bbc_hoverbg.gif)" : "bbc_bg.gif)");
-}
-// ]]></script>
 <div class="toolbar-btns group">
 	<a class="bold" href="javascript:void(0);" onclick="surroundText('[b]', '[/b]'); return false;" class="format_buttons first" title="[[%discuss.bb.bold]]">[[%discuss.bb.bold]]</a>
 	<a class="italics" href="javascript:void(0);" onclick="surroundText('[i]', '[/i]'); return false;" class="format_buttons" title="[[%discuss.bb.italics]]">[[%discuss.bb.italics]]</a>
@@ -17,7 +12,7 @@ function bbc_highlight(something, mode) {
 	<a class="ul-list" href="javascript:void(0);" onclick="surroundText('[ul]\n[li]', '[/li]\n[li][/li]\n[/ul]'); return false;" class="format_buttons last" title="[[%discuss.bb.ul]]">[[%discuss.bb.ul]]</a>
 	<a class="ol-list" href="javascript:void(0);" onclick="surroundText('[ol]\n[li]', '[/li]\n[li][/li]\n[/ol]'); return false;" class="format_buttons last" title="[[%discuss.bb.ol]]">[[%discuss.bb.ol]]</a>
 
-	
+
 	<div class="right preview_toggle">
 		<a href="#" class="preview" id="dis-preview-btn" title="[[%discuss.preview]]">[[%discuss.preview]]</a>
 	</div>

@@ -503,6 +503,7 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
         &:hover
             background-color: #fff
 
+
 .dis-post-left
     // font-size: 11px
     float: left
@@ -522,6 +523,19 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
         margin: .3em .2em 0 .35em
 .dis-content pre
     @extend pre
+
+.dis-content
+    .dis-post-modify
+        font-style: italic
+        background: url(../../images/redo/icons/modify-sm.png) no-repeat left center
+        padding-left: 18px
+        color: darken($c-base, 45%)
+        +rem('font-size', 12px)
+        margin: 20px 0 3px
+        display: block
+        &:hover
+            color: #000
+
 .dis-post-right
     float: right
     width: 86%
@@ -538,8 +552,9 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
             +rem('font-size', 15px)
             margin-right: .25em
         .dis-actions
-            top: 4px !important
-            right: 4px !important
+            top: 8px
+            right: -23px
+            background-color: darken($c-base, 12%)
     blockquote
         background-color: lighten($c-base, 1%)
         border: none

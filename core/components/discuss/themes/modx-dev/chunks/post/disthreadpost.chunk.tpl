@@ -15,13 +15,13 @@
         [[+url_mark_as_answer:notempty=`
             [[+answer:notempty=`
                 <a href="[[+url_mark_as_answer]]">
-                    <span class="tooltip" title="Unmark as Answer">Answer</span>
+                    <span class="tooltip" title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
                 </a>
             `:default=`
                 <div class="dis-post-answer-marker dis-post-notanswer">
-                    <p>Mark As Answer</p>
-                    <a href="[[+url_mark_as_answer]]" title="Mark as Answer!">
-                        <span>Mark as Answer</span>
+                    <p>[[%discuss.flag_answer]]</p>
+                    <a href="[[+url_mark_as_answer]]" title="[[%discuss.flag_answer]]">
+                        <span>[[%discuss.flag_answer]]</span>
                     </a>
                 </div>
             `]]
@@ -40,6 +40,7 @@
         <div class="title">
             <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]]</a>, <span title="[[+createdon]]">[[+createdon:ago]]</span>
             <!-- tools -->
+            [[+discuss.user.isModerator:is=`1`:then=`
             <div class="dis-actions">
                 <div>
                     <ul>[[+actions]]
@@ -48,20 +49,20 @@
                     </ul>
                 </div>
             </div>
+            `]]
             <!-- /tools -->
 
         </div>
         <div class="dis-content">
             [[+content]]
-
-            [[+answered:neq=`1`:then=`
+            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]]</ul>`]]
+            [[+answered:eq=`0`:then=`
                 [[+idx:eq=`1`:then=`
-                    [[+discuss.user.canMarkAsAnswer:notempty=`
+                    [[+discuss.user.canMarkAsAnswer:eq=`1`:then=`
                         <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
-                    `:default=``]]
+                    `:else=``]]
                 `:else=``]]
             `:else=``]]
-
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
