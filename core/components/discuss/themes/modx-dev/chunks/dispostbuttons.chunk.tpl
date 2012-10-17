@@ -1,8 +1,8 @@
-<script type="text/javascript"><!-- // --><![CDATA[
+[[-<script type="text/javascript"><!-- // --><![CDATA[
 function bbc_highlight(something, mode) {
     something.style.backgroundImage = "url(" + '[[+buttons_url]]10x10/' + (mode ? "bbc_hoverbg.gif)" : "bbc_bg.gif)");
 }
-// ]]></script>
+// ]]></script>]]
 <div class="toolbar-btns group">
 	<a class="bold" href="javascript:void(0);" onclick="surroundText('[b]', '[/b]'); return false;" class="format_buttons first" title="[[%discuss.bb.bold]]">[[%discuss.bb.bold]]</a>
 	<a class="italics" href="javascript:void(0);" onclick="surroundText('[i]', '[/i]'); return false;" class="format_buttons" title="[[%discuss.bb.italics]]">[[%discuss.bb.italics]]</a>

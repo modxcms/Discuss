@@ -15,13 +15,13 @@
         [[+url_mark_as_answer:notempty=`
             [[+answer:notempty=`
                 <a href="[[+url_mark_as_answer]]">
-                    <span class="tooltip" title="Unmark as Answer">Answer</span>
+                    <span class="tooltip" title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
                 </a>
             `:default=`
                 <div class="dis-post-answer-marker dis-post-notanswer">
-                    <p>Mark As Answer</p>
-                    <a href="[[+url_mark_as_answer]]" title="Mark as Answer!">
-                        <span>Mark as Answer</span>
+                    <p>[[%discuss.flag_answer]]</p>
+                    <a href="[[+url_mark_as_answer]]" title="[[%discuss.flag_answer]]">
+                        <span>[[%discuss.flag_answer]]</span>
                     </a>
                 </div>
             `]]
@@ -61,7 +61,7 @@
                     `:default=``]]
                 `:else=``]]
             `:else=``]]
-
+            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]]</ul>`]]
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
