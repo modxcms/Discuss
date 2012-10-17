@@ -1,0 +1,96 @@
+// Marks answer on thread view
+.dis-post-answer
+    position: relative
+    // &:after
+    //     content: ""
+    //     position: absolute
+    //     top: -1px
+    //     left: -1px
+    //     display: block
+    //     width: 43px
+    //     height: 43px
+    //     background: url(../../images/redo/elements/answered-post.png) left top
+
+
+// Variables for navigation for answers
+$dis-post-nav-width: 20px
+$dis-post-nav-a-height: 20px
+$dis-post-nav-border: 1px
+$dis-post-nav-height: ($dis-post-nav-a-height * 2) + ($dis-post-nav-border * 2)
+$dis-post-span: 43px
+$dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-border * 2)
+
+.dis-post-answer-marker
+    position: absolute
+    top: -1px
+    right: -1px
+    display: block
+    width: $dis-post-marker-width
+    height: $dis-post-span
+    vertical-align: top
+    z-index: 100 // just for cog, can remove
+    span, nav
+        vertical-align: top
+        display: inline-block
+        overflow: hidden
+        text-indent: 100%
+        white-space: nowrap
+        float: right
+        position: relative
+    span
+        width: $dis-post-span
+        height: $dis-post-span
+        background: url(../../images/redo/elements/answered-post-right.png) no-repeat left top
+        z-index: 20
+    &.dis-post-notanswer span
+        background-position: right -342px
+        opacity: 0
+        &:hover
+            background-position: right -150px
+            opacity: 1
+    nav
+        width: $dis-post-nav-width
+        height: $dis-post-nav-height
+        border-left: $dis-post-nav-border solid #6b8d1d
+        margin-left: -1px
+        z-index: 30
+        background: #7aa020 url(../../images/redo/bg/answer-nav-right.png) no-repeat left center
+        a
+            display: block
+            width: 100%
+            height: $dis-post-nav-a-height
+            text-indent: 100%
+            overflow: hidden
+            background: url(../../images/redo/icons/up-down-arrows.png) no-repeat -1px 7px
+            border-bottom: $dis-post-nav-border solid #5d7e11
+            opacity: .9
+            &:hover
+                background-color: #87b127
+                opacity: 1.0
+            &.disabled
+                opacity: .3
+            &.next
+                border-bottom: none
+                border-top: $dis-post-nav-border solid rgba(139, 180, 47, 0.77)
+                background-position: -1px -164px
+    &.dis-post-notanswer
+        p
+            background-color: darken($c-base, 89%)
+            color: $c-base
+            position: absolute
+            right: (($dis-post-marker-width - $dis-post-nav-width) + 10) // adding in a bit of space for the animation
+            top: 7px
+            width: 100px
+            +rem('padding', 6px 12px)
+            +opacity(0)
+            +border-radius($radius-sm)
+            &:after
+                content: ""
+                display: block
+                position: absolute
+                width: 12px
+                height: 19px
+                top: 7px
+                right: -8px
+                background: url(../../images/redo/elements/dark-arrow-right.png) no-repeat top right
+                +opacity(.94)

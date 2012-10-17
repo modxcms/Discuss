@@ -1,0 +1,275 @@
+// Categroy headings for grids
+.dis-cat-header
+    +border-radius($radius-sm $radius-sm 0 0)
+    +background-clip(padding-box)
+    padding: 3px 10px
+    line-height: 1
+    background-color: #194b47
+    // +box-shadow(darken($c-dark-cool-bg, 30%) 0 1px 3px inset !important)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 9%), lighten($c-dark-cool-bg, 1%)))
+    +border-radius($radius-sm $radius-sm 0 0 !important)
+    border-bottom: solid 1px $c-dark-cool-bg
+    color: #fff
+
+    h1
+        +rem('font-size', 19px)
+        +text-shadow(rgba(black, .4) 0 1px 0 )
+        opacity: .99 // stops webkit rendering heavy
+        color: #fff
+        line-height: 1
+        font-weight: 700
+        border: 0
+        float: left
+        +rem('padding', 7px 0 9px 5px)
+        margin: 0
+        display: inline-block
+
+    // Green button used to either just to post or jump to login
+    .action-buttons, .Button, .post-box .dis-action-login
+        +rem('font-size', 13px)
+        display: inline-block
+        margin-top: .4em
+    .action-buttons+.action-buttons
+        margin-left: .25em
+    .post-box a.Button
+        @extend .a-primary-cta
+
+
+.row+.dis-cat-header
+    margin-top: 1em
+
+// Headings below category titles
+.m-section_title
+    background-color: darken($c-base, 12%)
+    border-radius: 5px
+    // h1
+    //     font-size: 15px
+    //     padding: 10px
+    .row
+        color: #000
+        font-weight: 700
+        border-bottom: px solid #fff
+        border-radius: 0 0 3px 3px
+        line-height: 1
+        padding: 7px 6px 7px 8px
+    .dis-cat-header
+        margin-top: .2em
+
+// status styling
+
+// Sub topics styling
+.forum-grid
+    .dis-board-subs
+        color: #fff
+        padding: 5px 5px 5px 57px
+        background: url(../../images/redo/icons/arrow.png) no-repeat 39px 11px
+        strong, a
+            +rem('font-size', 12px)
+        strong
+            color: #000
+        a
+            color: darken($c-base, 70%)
+            +background-image(linear-gradient(darken($c-base, 7%), darken($c-base, 10%)))
+            border: solid 1px darken($c-base, 10%)
+            display: inline-block
+            padding: 3px 6px
+            margin-top: 2px
+            line-height: 1
+            // border: solid 1px darken($c-base, 3%)
+            border-radius: 3px
+            &:hover
+                color: darken($c-base, 90%)
+                +background-image(linear-gradient(darken($c-base, 3%), darken($c-base, 7%)))
+                border: solid 1px darken($c-base, 7%)
+                text-decoration: none
+            &:active
+                +box-shadow(darken($c-base, 27%) 0 0 1px inset)
+
+    .m-title
+        .dis-thread-pagination li, .dis-thread-pagination, a.h-group
+            display: inline-block
+    .tag, .solved
+        @extend .a-primary-cta
+        +text-shadow(none)
+        display: inline-block
+        text-transform: uppercase
+        +rem('font-size', 10px)
+        +rem('padding', 4px 6px)
+        +rem('margin', 0 5px 0 0)
+        line-height: 1
+        +box-shadow(none)
+        &:hover
+            +box-shadow(none)
+    .question
+        @extend .a-tertiary-cta
+// .dis-threads.forum-grid
+//     background-color: lighten($c-base, 90%)
+
+.dis-thread-pagination
+    margin: 0 0 0 5px
+    font-size: 12px
+
+    li
+        padding: 3px 2px
+        opacity: .5
+        margin-right: -3px
+
+        &:hover
+            opacity: 1
+            background-color: #fff
+
+// Thread action tools
+.a-dis-actionbuttons
+    float: right
+    margin: 0 0 8px 0
+    a
+        @extend .btn-secondary-alt-cta
+        padding: 3px 6px
+        display: inline-block
+        margin: 0 3px 0 0
+        &:hover
+            background-color: #fff
+header.dis-cat-header
+    .post-box
+        .Button
+            margin: 5px 5px 5px 0
+            &.dis-action-login
+                margin-left: 10px
+        .read
+            color: #fff
+            color: rgba(255,255,255,.5)
+
+
+
+// Faux table grid for 5 columns. This later will be able to be
+// converted to a responsive table
+.panel-stack
+    // +box-shadow(darken($c-base, 5%) 0 0 3px)
+    +border-radius($radius-sm)
+    // border: solid 1px darken($c-base, 5%)
+
+.forum-grid
+    +rem('font-size',13px)
+    line-height: 1.1
+    color: lighten($c-copy, 20%)
+    +rem('margin-top', 15px)
+    p
+        color: darken($c-copy, 30%)
+        line-height: 1.1
+        margin: 0 0 .25em 0
+    a
+        text-decoration: none
+        color: darken($c-copy, 20%)
+    a.h-group
+        display: block
+        cursor: pointer
+    .dis-board-description
+        margin: .25em 0
+        color: lighten($c-copy, 20%)
+
+    // Faux Grids
+    .row
+        // padding: .5em
+        border-bottom: 1px solid darken($c-base, 11%)
+        border-top:  1px solid lighten($c-base, 85%)
+        &:hover
+            border-bottom-color: darken($c-base, 23%)
+            border-top-color: lighten($c-base, 50%)
+        &.header-row
+            font-weight: bold
+            color: #000
+            border-bottom: 2px solid darken($c-base, 15%)
+        > a
+            padding: .5em
+            &:hover
+                background-color: #fff
+                text-decoration: underline
+        &.dis-sticky-thread
+            background-color: darken($c-base, 3.2%)
+            border-bottom: 1px solid darken($c-base, 15%)
+            &:hover, a:hover
+                background-color: lighten($c-base, 1%)
+        &:hover, a:hover
+            // background-color: desaturate(lighten($c-dark-cool-bg, 82%), 20%)
+            // +background-image(linear-gradient(top, (desaturate(lighten($c-dark-cool-bg, 84%), 60%)), (desaturate(lighten($c-dark-cool-bg, 81%), 60%))))
+            border-bottom-color: darken($c-base, 19.1%)
+            border-top-color: lighten($c-base, 4.1%)
+        &:hover
+            // +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+            +box-shadow(lighten($c-dark-bg, 16%) 0 0 5px, lighten($c-dark-bg, 3%) 0 0 2px)
+            position: relative
+            z-index: 20
+        // padding-top: 10px
+
+
+    .heading
+        color: darken($c-base, 65%)
+        background-color: darken($c-base, 35%)
+        margin: 0 0 .4em 0
+        +background(linear-gradient($g-low-contrast))
+        +border-radius($radius-sm)
+        .cell
+            padding-top: .2em
+            padding-bottom: .2em
+    strong
+        +rem('font-size',16px)
+        color: #000
+        font-weight: bold
+        line-height: 1.1
+    .posted-date, .posted-by
+        color: lighten($c-copy, 30%)
+
+// grid when entire row not clickable
+.forum-grid.no-hover
+    .row
+        +rem('padding-top', 5px)
+        +rem('padding-bottom', 5px)
+        &:hover
+            +box-shadow(none)
+            border-bottom: 1px solid darken($c-base, 11%)
+            border-top:  1px solid lighten($c-base, 85%)
+        a
+            &:hover
+                text-decoration: underline
+        &.header-row
+            &:hover
+                border-bottom: 2px solid darken($c-base, 15%)
+
+
+div.m-section_title + div.row
+    padding-top: 10px
+// status on threads and categories
+.board-post .wrap
+    padding-left: 20px
+
+.dis-category .wrap
+    background: url(../../images/redo/icons/sm-folder.png) no-repeat 2px 5px
+    padding-left: 22px
+
+// status when user is logged in
+.a-loggedin
+    .dis-category .wrap
+        padding-left: 35px
+        position: relative
+        background-position: 17px 5px
+    .dis-category.dis-unread .wrap
+        &:before
+            content: ""
+            display: block
+            position: absolute
+            left: 1px
+            top: 6px
+            height: 10px
+            width: 8px
+            background: url(../../images/redo/icons/unread-dot.png) no-repeat 0 0
+    .board-post
+        .wrap
+            padding-left: 30px
+        &.dis-unread, &.dis-post-unread
+            .wrap
+                background: url(../../images/redo/icons/unread-dot.png) no-repeat 11px 4px
+.boards+.forum-grid
+    margin-top: 0
+.boards .row:last-child
+    border: none
+    padding-bottom: 0
