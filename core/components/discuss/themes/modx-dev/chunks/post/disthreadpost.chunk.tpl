@@ -55,12 +55,9 @@
         </div>
         <div class="dis-content">
             [[+content]]
-            
-            [[+answered:eq=`0`:then=`
+            [[+discuss.user.shouldMarkAnAnswer:eq=`1`:then=`
                 [[+idx:eq=`1`:then=`
-                    [[+discuss.user.canMarkAsAnswer:eq=`1`:then=`
-                        <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
-                    `:else=``]]
+                    <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
                 `:else=``]]
             `:else=``]]
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
