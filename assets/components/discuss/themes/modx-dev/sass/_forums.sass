@@ -218,6 +218,7 @@ header.dis-cat-header
             z-index: 20
         // padding-top: 10px
 
+
     .heading
         color: darken($c-base, 65%)
         background-color: darken($c-base, 35%)
@@ -234,6 +235,23 @@ header.dis-cat-header
         line-height: 1.1
     .posted-date, .posted-by
         color: lighten($c-copy, 30%)
+
+// grid when entire row not clickable
+.forum-grid.no-hover
+    .row
+        +rem('padding-top', 5px)
+        +rem('padding-bottom', 5px)
+        &:hover
+            +box-shadow(none)
+            border-bottom: 1px solid darken($c-base, 11%)
+            border-top:  1px solid lighten($c-base, 85%)
+        a
+            &:hover
+                text-decoration: underline
+        &.header-row
+            &:hover
+                border-bottom: 2px solid darken($c-base, 15%)
+
 
 div.m-section_title + div.row
     padding-top: 10px
