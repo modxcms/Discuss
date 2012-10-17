@@ -4766,14 +4766,24 @@ div.m-section_title + div.row {
 .m-profile-box {
   display: none;
   padding: 0 0 0 15px;
-  padding:  0 0 0 1.5rem; }
-  /* line 70, ../../sass/forums/_sidebar.sass */
+  padding:  0 0 0 1.5rem;
+  font-size: 15px;
+  font-size: 1.5rem; }
+  /* line 71, ../../sass/forums/_sidebar.sass */
   .m-profile-box h2 {
     font-weight: bold !important;
     color: black;
     margin: 0 0 10px 0;
     margin:  0 0 1rem 0; }
-  /* line 74, ../../sass/forums/_sidebar.sass */
+  /* line 75, ../../sass/forums/_sidebar.sass */
+  .m-profile-box h4 {
+    font-weight: bold;
+    font-size: 15px;
+    font-size: 1.5rem;
+    color: black;
+    border-bottom: 1px dotted #c6c6c6;
+    width: 90%; }
+  /* line 81, ../../sass/forums/_sidebar.sass */
   .m-profile-box .PanelBox-avatar {
     display: inline-block;
     padding: 5px;
@@ -4783,7 +4793,7 @@ div.m-section_title + div.row {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
     border-radius: 3px; }
-    /* line 78, ../../sass/forums/_sidebar.sass */
+    /* line 85, ../../sass/forums/_sidebar.sass */
     .m-profile-box .PanelBox-avatar span {
       font-size: 12px;
       font-size: 1.2rem;
@@ -4793,20 +4803,28 @@ div.m-section_title + div.row {
       margin: 0 auto;
       padding: 2px 4px;
       padding:  0.2rem 0.4rem; }
-    /* line 85, ../../sass/forums/_sidebar.sass */
+    /* line 92, ../../sass/forums/_sidebar.sass */
     .m-profile-box .PanelBox-avatar:hover {
       text-decoration: none;
       background-color: #ececec; }
-      /* line 88, ../../sass/forums/_sidebar.sass */
+      /* line 95, ../../sass/forums/_sidebar.sass */
       .m-profile-box .PanelBox-avatar:hover span {
         display: block;
         visibility: visible; }
-  /* line 92, ../../sass/forums/_sidebar.sass */
+  /* line 99, ../../sass/forums/_sidebar.sass */
   .m-profile-box li.Heading {
-    font-weight: strong !important; }
-  /* line 95, ../../sass/forums/_sidebar.sass */
+    font-weight: bold;
+    color: black;
+    margin-top: 8px;
+    margin-top: 0.8rem; }
+  /* line 103, ../../sass/forums/_sidebar.sass */
+  .m-profile-box li a, .m-profile-box li strong, .m-profile-box li .Count, .m-profile-box li span {
+    display: inline-block; }
+  /* line 105, ../../sass/forums/_sidebar.sass */
   .m-profile-box li a {
-    display: block; }
+    font-weight: normal;
+    padding: 2px 0;
+    padding:  0.2rem 0; }
 
 /* line 2, ../../sass/forums/_forums-profile.sass */
 .dis-profile ul.profile {

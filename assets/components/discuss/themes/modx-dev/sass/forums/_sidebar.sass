@@ -67,10 +67,17 @@
 .m-profile-box
     display: none
     +rem('padding', 0 0 0 15px)
+    +rem('font-size', 15px)
     h2
         font-weight: bold !important
         color: #000
         +rem('margin', 0 0 10px 0)
+    h4
+        font-weight: bold
+        +rem('font-size', 15px)
+        color: #000
+        border-bottom: 1px dotted darken($c-base, 20%)
+        width: 90%
     .PanelBox-avatar
         display: inline-block
         +rem('padding', 5px)
@@ -90,7 +97,14 @@
                 visibility: visible
     li
         &.Heading
-            font-weight: strong !important
-
+            font-weight: bold
+            color: #000
+            +rem('margin-top', 8px)
+        a, strong, .Count, span
+            display: inline-block
         a
-            display: block
+            font-weight: normal
+            +rem('padding', 2px 0)
+
+
+

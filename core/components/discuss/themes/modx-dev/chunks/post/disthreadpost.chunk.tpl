@@ -11,11 +11,10 @@
             </nav>`]]
         `:else=``]]
 
-
         [[+url_mark_as_answer:notempty=`
             [[+answer:notempty=`
                 <a href="[[+url_mark_as_answer]]">
-                    <span class="tooltip" title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
+                    <span title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
                 </a>
             `:default=`
                 <div class="dis-post-answer-marker dis-post-notanswer">

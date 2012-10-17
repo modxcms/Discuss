@@ -6,7 +6,6 @@
                 [[+answered:eq=`1`:then=`<span class="answered tag">[[%discuss.solved]]</span>`:default=`
                     [[+class_key:eq=`disThreadQuestion`:then=`<span class="question tag">[[%discuss.question]]</span>`:else=``]]
                 `]]
-
                 <strong>[[+title]]</strong>
                 [[+thread_pagination]]
             </div>
