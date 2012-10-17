@@ -62,8 +62,11 @@ class DiscussThreadController extends DiscussController {
         $this->isAuthor = ($this->discuss->user->isLoggedIn && ($this->thread->get('author_first') == $this->discuss->user->get('id')));
         $this->setPlaceholder('discuss.user.isAuthor', $this->isAuthor);
         $canMarkAsAnswer = (($this->isAuthor || $this->isModerator || $this->isAdmin) &&
-            ($this->thread->get('class_key') == 'disThreadQuestion'));
-        $this->setPlaceholder('discuss.user.canMarkAsAnswer', $canMarkAsAnswer);
+            ($this->thread->get('class_key') == 'disThreadQuestion') &&
+            ($this->thread->get('replies') > 0) &&
+            (!$this->thread->get('answered'))
+        );
+        $this->setPlaceholder('discuss.user.shouldMarkAnAnswer', ($canMarkAsAnswer) ? '1' : '0');
 
         $this->board = $this->thread->getOne('Board');
         if ($this->board) {
