@@ -332,10 +332,17 @@ class DisRequest {
      * @return mixed
      */
     public function getManifest() {
+        static $retrievedmanifest = false;
+        if ($retrievedmanifest!== false) {
+            return $retrievedmanifest;
+        }
         $f = $this->discuss->config['themePath'].'manifest.php';
         if (file_exists($f) || !is_dir($f)) {
-            return require $f;
+            $retrievedmanifest = require $f;
         }
-        return null;
+        else {
+            $retrievedmanifest = null;
+        }
+        return $retrievedmanifest;
     }
 }
