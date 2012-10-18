@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Discuss
  *
@@ -87,7 +87,7 @@ if (!function_exists('url_parser')) {
                                     $file = $discuss->request->getControllerFile($action);
                                     if (file_exists($file["file"]) && !is_dir($file["file"])) {
                                         $parameters['action'] = $action;
-                                        $request = trim(substr($request, $position), '/');
+                                        $request = trim(substr($request, strlen($action)), '/');
                                         $matched++;
                                     }
                                 }
@@ -97,7 +97,7 @@ if (!function_exists('url_parser')) {
                                         $file = $discuss->request->getControllerFile($actionname);
                                         if (file_exists($file["file"]) && !is_dir($file["file"])) {
                                             $parameters['action'] = $actionname;
-                                            $request = trim(substr($request, strpos($request, $actionname)), '/');
+                                            $request = trim(substr($request, strlen($actionname)), '/');
                                             $matched++;
                                             break;
                                         }
@@ -119,7 +119,7 @@ if (!function_exists('url_parser')) {
                             case 'constant':
                                 $position = strpos($request, $param['value']);
                                 if ($position===0) {
-                                    $request = trim(substr($request, $position), '/');
+                                    $request = trim(substr($request, strlen($param['value'])), '/');
                                     $matched++;
                                 }
                                 break;
@@ -132,8 +132,10 @@ if (!function_exists('url_parser')) {
                         }
                     }
                     if ($paramnumber === $matched) {
+                        if (!array_key_exists('action', $parameters)) {
+                            $parameters['action'] = $action;
+                        }
                         return $parameters;
-                        break;
                     }
                 }
             }
@@ -148,6 +150,9 @@ foreach ($manifest as $key => $value) {
     }
     if (array_key_exists('furl', $value) && count($value['furl'])>0) {
         $parsed = url_parser($key, $request, $value['furl'], $discuss);
+        if (is_array($parsed)) {
+            break;
+        }
     }
 }
 if (!is_array($parsed)) {
