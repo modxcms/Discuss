@@ -5022,7 +5022,7 @@ a#dis-preview-btn.preview {
   width: 65px;
   height: 43px;
   vertical-align: top;
-  z-index: 100; }
+  z-index: 400; }
   /* line 32, ../../sass/forums/_thread-answer-marker.sass */
   .dis-post-answer-marker span, .dis-post-answer-marker nav {
     vertical-align: top;
@@ -5081,9 +5081,11 @@ a#dis-preview-btn.preview {
     background-color: #161616;
     color: #f9f9f9;
     position: absolute;
+    z-index: 200;
     right: 55px;
     top: 7px;
     width: 100px;
+    display: none;
     padding: 6px 12px;
     padding:  0.6rem 1.2rem;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -5093,7 +5095,7 @@ a#dis-preview-btn.preview {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
     border-radius: 3px; }
-    /* line 87, ../../sass/forums/_thread-answer-marker.sass */
+    /* line 89, ../../sass/forums/_thread-answer-marker.sass */
     .dis-post-answer-marker.dis-post-notanswer p:after {
       content: "";
       display: block;

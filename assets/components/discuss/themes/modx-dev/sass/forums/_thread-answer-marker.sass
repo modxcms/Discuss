@@ -28,7 +28,7 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
     width: $dis-post-marker-width
     height: $dis-post-span
     vertical-align: top
-    z-index: 100 // just for cog, can remove
+    z-index: 400
     span, nav
         vertical-align: top
         display: inline-block
@@ -78,9 +78,11 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
             background-color: darken($c-base, 89%)
             color: $c-base
             position: absolute
+            z-index: 200
             right: (($dis-post-marker-width - $dis-post-nav-width) + 10) // adding in a bit of space for the animation
             top: 7px
             width: 100px
+            display: none
             +rem('padding', 6px 12px)
             +opacity(0)
             +border-radius($radius-sm)

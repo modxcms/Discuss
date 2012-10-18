@@ -63,11 +63,11 @@ $(function() {
     // });
     $('.dis-post-notanswer a span').mouseenter(
         function(){
-            $(this).closest('div').find('p').stop().animate({marginRight: answerMarkerMargin, opacity: .99}, 100)
+            $(this).closest('div').find('p').stop().css('display', 'block').animate({marginRight: answerMarkerMargin, opacity: .99}, 100)
     });
     $('.dis-post-notanswer a span').mouseleave(
         function(){
-            $(this).closest('div').find('p').stop().animate({marginRight: answerMarkerMargin, opacity: 0}, 100)
+            $(this).closest('div').find('p').stop().animate({marginRight: answerMarkerMargin, opacity: 0}, 100).css('display', 'none')
     });
 
     // scroll to and animate link for help
@@ -78,8 +78,8 @@ $(function() {
             $('html, body').animate({
                 scrollTop: $("ul.dis-list li.dis-post:nth-child(2)").offset().top
             }, 500, function(){
-                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-answer-marker p').css('visibility', 'visible').animate({marginRight: answerMarkerMargin, opacity: .99}, 200).animate({opacity: .5}, 200).animate({opacity: .99}, 200, function(){
-                    $('.dis-post-answer-marker p').css('visibility', 'visible');
+                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-answer-marker p').css('visibility', 'visible').css('display', 'block').animate({marginRight: answerMarkerMargin, opacity: .99}, 200).animate({opacity: .5}, 200).animate({opacity: .99}, 200, function(){
+                    $('.dis-post-answer-marker p').css('visibility', 'visible').css('display', 'none');
                 });
                 $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-notanswer a span').animate({opacity: .99}, 200);
             });
