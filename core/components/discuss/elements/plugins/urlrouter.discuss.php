@@ -52,7 +52,7 @@ while (!empty($chunk)) {
     $chunk = substr($chunk, 0, strrpos($chunk, $containersuffix));
 }
 // Now lets check that we have a valid manifest
-$manifest = $discuss->request->getManifest()
+$manifest = $discuss->request->getManifest();
 if (!is_array($manifest)) {
     return;
 }
@@ -69,7 +69,7 @@ uksort($manifest, "sorter");
 // Here I am sure that the URL is the one we need. Now lets search it for the actions.
 $request = ltrim(substr($request, strlen($discuss->url)), '/');
 if (!function_exists('url_parser')) {
-    function url_parser($action, $requested, $furls)
+    function url_parser($action, $requested, $furls, &$discuss)
     {
         foreach($furls as $furl) {
             if (array_key_exists('data', $furl)) {
@@ -77,27 +77,27 @@ if (!function_exists('url_parser')) {
                 if ($paramnumber > 0) {
                     $parameters = array();
                     $matched = 0;
-                    $request = $requested;
+                    $request = trim($requested, '/');
                     foreach ($furl['data'] as $param) {
                         $previousmatch = $matched;
                         switch ($param['type']) {
                             case 'action':
-                                $position = strpos($request, $key);
+                                $position = strpos($request, $action);
                                 if ($position===0) {
-                                    $file = $discuss->request->getControllerFile($key);
-                                    if (file_exists($file) && !is_dir($file)) {
-                                        $parameters['action'] = $key;
-                                        $request = ltrim(substr($request, $position), '/');
+                                    $file = $discuss->request->getControllerFile($action);
+                                    if (file_exists($file["file"]) && !is_dir($file["file"])) {
+                                        $parameters['action'] = $action;
+                                        $request = trim(substr($request, $position), '/');
                                         $matched++;
                                     }
                                 }
-                                else if ($key === 'global') {
+                                else if ($action === 'global') {
                                     $actionname = $request;
                                     while (!empty($actionname)) {
                                         $file = $discuss->request->getControllerFile($actionname);
-                                        if (file_exists($file) && !is_dir($file)) {
-                                            $parameters['action'] = $key;
-                                            $request = ltrim(substr($request, strpos($request, $actionname)), '/');
+                                        if (file_exists($file["file"]) && !is_dir($file["file"])) {
+                                            $parameters['action'] = $actionname;
+                                            $request = trim(substr($request, strpos($request, $actionname)), '/');
                                             $matched++;
                                             break;
                                         }
@@ -113,13 +113,13 @@ if (!function_exists('url_parser')) {
                                 }
                                 $data = substr($request, 0, $position);
                                 $parameters[$param['key']] = $data;
-                                $request = ltrim(substr($request, $position), '/');
+                                $request = trim(substr($request, $position), '/');
                                 $matched++;
                                 break;
                             case 'constant':
                                 $position = strpos($request, $param['value']);
                                 if ($position===0) {
-                                    $request = ltrim(substr($request, $position), '/');
+                                    $request = trim(substr($request, $position), '/');
                                     $matched++;
                                 }
                                 break;
@@ -132,7 +132,7 @@ if (!function_exists('url_parser')) {
                         }
                     }
                     if ($paramnumber === $matched) {
-                        return parameters;
+                        return $parameters;
                         break;
                     }
                 }
@@ -147,11 +147,11 @@ foreach ($manifest as $key => $value) {
         continue;
     }
     if (array_key_exists('furl', $value) && count($value['furl'])>0) {
-        $parsed = url_parser($key, $request, $value['furl']);
+        $parsed = url_parser($key, $request, $value['furl'], $discuss);
     }
 }
 if (!is_array($parsed)) {
-    $parsed = url_parser('global', $request, $manifest['global']['furl']);
+    $parsed = url_parser('global', $request, $manifest['global']['furl'], $discuss);
 }
 if (!is_array($parsed)) {
     return;
@@ -159,7 +159,10 @@ if (!is_array($parsed)) {
 
 foreach($parsed as $paramkey => $paramvalue) {
     $modx->request->parameters['GET'][$paramkey]=$paramvalue;
-    if(empty($modx->request->parameters['POST'][$paramkey]))
+    $_GET[$paramkey]=$paramvalue;
+    if(empty($modx->request->parameters['POST'][$paramkey])) {
         $modx->request->parameters['REQUEST'][$paramkey]=$paramvalue;
+        $_REQUEST[$paramkey]=$paramvalue;
+    }
 }
 $modx->sendForward($modx->getOption('discuss.forums_resource_id'));
