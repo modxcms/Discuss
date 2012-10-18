@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Discuss
  *
@@ -28,39 +28,34 @@
  * @var Discuss $discuss
  * @package discuss
  */
- 
-if ($modx->event->name != 'OnPageNotFound' || $modx->request->getResourceMethod() != 'alias' || $modx->context->key == 'mgr') {
-    return true;
+if ($modx->event->name != 'OnHandleRequest' || $modx->request->getResourceMethod() != 'alias' || $modx->context->key == 'mgr') {
+    return;
 }
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
-if (!($discuss instanceof Discuss)) return true;
+if (!($discuss instanceof Discuss)) return;
 
 $discuss->loadRequest();
 $discuss->url = $modx->makeUrl($modx->getOption('discuss.forums_resource_id'));
 
-$request = $modx->request->getResourceIdentifier('alias');
-
+$request = trim($modx->request->getResourceIdentifier('alias'), '/');
 // Checking to stop everything if we are sure that this is not our path or it doesn't have any parameters to parse (exact match of alias to the base resource alias)
 if (strpos($request, $discuss->url) !== 0 || strlen($request) === strlen($discuss->url) || array_key_exists($request, $modx->aliasMap)) {
-    return true;
+    return;
 }
-
 $containersuffix = $modx->getOption('container_suffix', null, '/');
 
 $chunk = substr($request, 0, strrpos($request, $containersuffix));
 while (!empty($chunk)) {
     if (array_key_exists($request, $modx->aliasMap)) {
-        return true;
+        return;
     }
     $chunk = substr($chunk, 0, strrpos($chunk, $containersuffix));
 }
-
 // Now lets check that we have a valid manifest
-$f = $discuss->config['themePath'].'manifest.php';
-if (!file_exists($f)) {
-    return true;
+$manifest = $discuss->request->getManifest()
+if (!is_array($manifest)) {
+    return;
 }
-$manifest = require $f;
 
 // Now we sort the manifest array just to make sure that the actions of maximum length are checked first
 if (!function_exists('sorter')) {
@@ -159,7 +154,7 @@ if (!is_array($parsed)) {
     $parsed = url_parser('global', $request, $manifest['global']['furl']);
 }
 if (!is_array($parsed)) {
-    return true;
+    return;
 }
 
 foreach($parsed as $paramkey => $paramvalue) {
@@ -167,5 +162,4 @@ foreach($parsed as $paramkey => $paramvalue) {
     if(empty($modx->request->parameters['POST'][$paramkey]))
         $modx->request->parameters['REQUEST'][$paramkey]=$paramvalue;
 }
-
 $modx->sendForward($modx->getOption('discuss.forums_resource_id'));

@@ -37,7 +37,7 @@ $plugins[0]->set('plugincode', getSnippetContent($sources['source_core'].'/eleme
 $events = array();
 
 $e = array(
-    'OnPageNotFound',
+    'OnHandleRequest',
 );
 
 foreach ($e as $ev) {

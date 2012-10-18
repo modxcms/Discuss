@@ -188,9 +188,8 @@ class DisRequest {
 	public function loadThemeOptions() {
         $additional = $this->controller['controller'];
         
-        $f = $this->discuss->config['themePath'].'manifest.php';
-        if (file_exists($f)) {
-            $manifest = require $f;
+        $manifest = $this->getManifest();
+        if (is_array(manifest)) {
             $registerJs = array('header' => array(), 'footer' => array());
 
             if (is_array($manifest) && array_key_exists('print', $manifest) && !empty($_REQUEST['print'])) {
@@ -327,4 +326,16 @@ class DisRequest {
         return $url;
     }
     
+    /**
+     * Gets the correct manifest for the theme. Returns null if fail to retrieve manifest
+     * 
+     * @return mixed
+     */
+    public function getManifest() {
+        $f = $this->discuss->config['themePath'].'manifest.php';
+        if (file_exists($f) || !is_dir($f)) {
+            return require $f;
+        }
+        return null;
+    }
 }
