@@ -144,11 +144,11 @@ h3.forum
 
     &:hover
         .dis-action-btn, .dis-pm-btn, .dis-post-notanswer span
-            @extend .quick-fade-in-all
+            @extend %quick-fade-in-all
             opacity: .99
             visibility: visible
     .dis-pm-btn
-        @extend .btn-secondary-alt-cta
+        @extend %btn-secondary-alt-cta
         display: inline-block
         +rem('padding', 4px 7px)
         &:hover
@@ -503,7 +503,7 @@ section.group
             opacity: .99
             +rem('font-size', 15px)
 .m-dis-discussion, .m-dis-question
-    @extend .btn-secondary-alt-cta
+    @extend %btn-secondary-alt-cta
     @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%))
     padding-left: 23px
     &:hover

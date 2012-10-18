@@ -2578,7 +2578,7 @@ pre, .dis-content pre {
   border: none; }
 
 /* line 62, ../../sass/lib/_shared.sass */
-.btn-reset, .btn-secondary-alt-cta, .dis-post .dis-pm-btn, .m-dis-discussion, .m-dis-question, .a-dis-actionbuttons a {
+.btn-reset, .dis-post .dis-pm-btn, .m-dis-discussion, .m-dis-question, .a-dis-actionbuttons a {
   line-height: 1; }
 
 /* line 66, ../../sass/lib/_shared.sass */
@@ -3223,7 +3223,7 @@ ul.options-select {
   box-shadow: 0 1px 0 white, inset 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 0 5px rgba(0, 0, 0, 0.1); }
 
 /* line 495, ../../sass/lib/_shared.sass */
-.btn-secondary-alt-cta, .dis-post .dis-pm-btn, .m-dis-discussion, .m-dis-question, .a-dis-actionbuttons a {
+.dis-post .dis-pm-btn, .m-dis-discussion, .m-dis-question, .a-dis-actionbuttons a {
   display: block;
   margin: 0.9em 0;
   padding: 0.3em 0.3em;
@@ -3252,7 +3252,7 @@ ul.options-select {
   background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%); }
   /* line 514, ../../sass/lib/_shared.sass */
-  .btn-secondary-alt-cta:hover, .dis-post .dis-pm-btn:hover, .m-dis-discussion:hover, .m-dis-question:hover, .a-dis-actionbuttons a:hover {
+  .dis-post .dis-pm-btn:hover, .m-dis-discussion:hover, .m-dis-question:hover, .a-dis-actionbuttons a:hover {
     background-color: white;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(15, 15, 15, 0.2);
@@ -7947,7 +7947,7 @@ body#body-thread .dis-sticky-actions {
     transform: scale(1) rotate(0); } }
 
 /* line 2, ../../sass/lib/_transitions.sass */
-.quick-fade-in-all, .dis-post:hover .dis-action-btn, .dis-post:hover .dis-pm-btn, .dis-post:hover .dis-post-notanswer span {
+.dis-post:hover .dis-action-btn, .dis-post:hover .dis-pm-btn, .dis-post:hover .dis-post-notanswer span {
   -webkit-animation: fadeIn 0.4s 0.1s ease both;
   -moz-animation: fadeIn 0.4s 0.1s ease both;
   -ms-animation: fadeIn 0.4s 0.1s ease both;

@@ -59,7 +59,7 @@ pre
         +border-radius($radius-sm)
         +rem('padding', 6px 7px)
         border: none
-.btn-reset
+.btn-reset, %btn-reset
     line-height: 1
 
 // bread crumbs
@@ -492,8 +492,8 @@ ul.options-select
 
 
 // Light gray action button
-.btn-secondary-alt-cta
-    @extend .btn-reset
+%btn-secondary-alt-cta
+    @extend %btn-reset
     display: block
     margin: .9em 0
     padding: .3em .3em
