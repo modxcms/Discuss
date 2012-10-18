@@ -78,7 +78,7 @@ $(function() {
             $('html, body').animate({
                 scrollTop: $("ul.dis-list li.dis-post:nth-child(2)").offset().top
             }, 500, function(){
-                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-answer-marker p').css('visibility', 'visible').css('display', 'block').animate({marginRight: answerMarkerMargin, opacity: .99}, 200).animate({opacity: .5}, 200).animate({opacity: .99}, 200, function(){
+                $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-answer-marker p').css('visibility', 'visible').css('display', 'block').animate({marginRight: answerMarkerMargin, opacity: .99}, 200).animate({opacity: .5}, 200).animate({opacity: .99}, 700).animate({opacity: .99}, 200, function(){
                     $('.dis-post-answer-marker p').css('visibility', 'visible').css('display', 'none');
                 });
                 $('ul.dis-list li.dis-post:nth-child(2)').find('.dis-post-notanswer a span').animate({opacity: .99}, 200);
