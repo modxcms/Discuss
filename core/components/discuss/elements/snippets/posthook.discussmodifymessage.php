@@ -58,7 +58,7 @@ if ($maxSize > 0) {
 
 /* get participants */
 $participantsIds = array();
-$participants = explode(',',$fields['participants_usernames']);
+$participants = explode(',',$fields['add_participants']);
 foreach ($participants as $participant) {
     $user = $modx->getObject('disUser',array('username' => $participant));
     if ($user) {
@@ -114,24 +114,12 @@ if (!$post->save()) {
 }
 
 /* set participants, add notifications */
-$thread->set('users',implode(',',$participantsIds));
+$users = $thread->get('users');
+$users = explode(',', $users);
+$users = array_merge($users, $participantsIds);
+$users = array_unique($users);
+$thread->set('users',implode(',',$users));
 $thread->save();
-$c = $modx->newQuery('disThreadUser');
-$c->where(array(
-    'thread' => $thread->get('id'),
-));
-$tus = $modx->getCollection('disThreadUser',$c);
-foreach ($tus as $tu) {
-    $tu->remove();
-}
-$c = $modx->newQuery('disUserNotification');
-$c->where(array(
-    'thread' => $thread->get('id'),
-));
-$tus = $modx->getCollection('disUserNotification',$c);
-foreach ($tus as $tu) {
-    $tu->remove();
-}
 foreach ($participantsIds as $participant) {
     $threadUser = $modx->newObject('disThreadUser');
     $threadUser->set('thread',$thread->get('id'));

@@ -176,10 +176,10 @@ class disThreadQuestion extends disThread {
     public function get($k,$format = '',$formatTemplate = '') {
         $v = parent::get($k,$format,$formatTemplate);
 
-        if ($k == 'title' && $this->xpdo->lexicon) {
+        if ($k == 'title' && $this->xpdo->lexicon && $this->xpdo->getOption('discuss.title_suffix_if_answered')) {
             $answered = $this->get('answered');
             if (!empty($answered)) {
-                $v .= ' <span class="dis-solved-title">['.$this->xpdo->lexicon('discuss.solved').']</span>';
+                $v .= $this->xpdo->lexicon($this->xpdo->getOption('discuss.title_suffix_if_answered'));
             }
         }
         return $v;
@@ -237,6 +237,25 @@ class disThreadQuestion extends disThread {
         if (!empty($postArray['answer'])) {
             $postArray['class'][] = 'dis-post-answer';
             $postArray['title'] .= ' ('.$this->xpdo->lexicon('discuss.best_answer').')';
+            $postArray['answer_next'] = array('id' => '');
+            $postArray['answer_prev'] = array('id' => '');
+            if (!empty($postArray['answers_raw'])) {
+                $nextIsNext = false;
+                $last = array();
+                foreach ($postArray['answers_raw'] as $id => $details) {
+                    if ($nextIsNext) {
+                        $postArray['answer_next'] = $details;
+                        break;
+                    }
+                    if ($id == $postArray['id']) {
+                        if (!empty($last)) {
+                            $postArray['answer_prev'] = $last;
+                        }
+                        $nextIsNext = true;
+                    }
+                    $last = $details;
+                }
+            }
         } else {
 
         }

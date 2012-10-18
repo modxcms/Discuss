@@ -708,6 +708,7 @@ class disThread extends xPDOSimpleObject {
      * @param string $keyPrefix
      * @param bool $rawValues
      * @param bool $excludeLazy
+     * @param bool $includeRelated
      * @return array
      */
     public function toArray($keyPrefix= '', $rawValues= false, $excludeLazy= false, $includeRelated = false) {

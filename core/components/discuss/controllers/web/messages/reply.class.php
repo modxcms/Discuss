@@ -71,6 +71,7 @@ class DiscussMessagesReplyController extends DiscussController {
         $postArray['participants_usernames'] = $this->thread->get('participants_usernames');
         $postArray['post'] = $postArray['id'];
         $postArray['thread'] = $this->thread->get('id');
+        $postArray['attachmentCurIdx'] = 1;
         $postArray['is_author'] = ($this->thread->get('author_first') == $this->discuss->user->get('id')) ? true : false;
         $this->setPlaceholders($postArray);
 
@@ -83,6 +84,7 @@ class DiscussMessagesReplyController extends DiscussController {
 
         $this->handleQuote();
         $this->handleAttachments();
+        $this->getButtons();
 
         /* output form to browser */
         $this->modx->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('disError'));

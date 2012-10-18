@@ -167,7 +167,7 @@ class Discuss {
                 $this->modx->lexicon->load('discuss:web');
                 $this->loadRequest();
                 if (!defined('DISCUSS_IMPORT_MODE')) {
-                    $this->url = $this->modx->makeUrl($this->modx->getOption('discuss.forums_resource_id'));
+                    $this->url = $this->config['url'] = $this->modx->makeUrl($this->modx->getOption('discuss.forums_resource_id'));
                     $this->_initUser();
                     $this->_initSession();
                 }

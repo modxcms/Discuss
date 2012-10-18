@@ -47,7 +47,7 @@ if ($thread == null) return false;
 
 /* first check attachments for validity */
 $attachments = array();
-if (!empty($_FILES) && $_FILES['attachment1']['error'] == 0) {
+if (!empty($_FILES) && ($_FILES['attachment1']['error'] === 0)) {
     $result = $discuss->hooks->load('post/attachment/verify',array(
         'attachments' => &$_FILES,
     ));
@@ -71,8 +71,8 @@ if ($maxSize > 0) {
 
 /* get participants */
 $participantsIds = array();
-if (isset($fields['participants_usernames']) && !empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
-    $participants = explode(',',$fields['participants_usernames']);
+if (isset($fields['add_participants']) && !empty($fields['add_participants']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
+    $participants = explode(',',$fields['add_participants']);
     foreach ($participants as $participant) {
         /** @var disUser $user */
         $user = $modx->getObject('disUser',array('username' => $participant));
@@ -110,28 +110,14 @@ if ($newPost->save() == false) {
     return $modx->error->failure($modx->lexicon('discuss.post_err_reply'));
 }
 
-/* set participants, add notifications */
-if (isset($fields['participants_usernames']) && !empty($fields['participants_usernames']) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
-    $thread->set('users',implode(',',$participantsIds));
+/* add participants, add notifications */
+if (isset($participantsIds) && !empty($participantsIds) && $modx->discuss->user->get('id') == $thread->get('author_first')) {
+    $users = $thread->get('users');
+    $users = explode(',', $users);
+    $users = array_merge($users, $participantsIds);
+    $users = array_unique($users);
+    $thread->set('users',implode(',',$users));
     $thread->save();
-    $c = $modx->newQuery('disThreadUser');
-    $c->where(array(
-        'thread' => $thread->get('id'),
-    ));
-    $tus = $modx->getCollection('disThreadUser',$c);
-    /** @var disThreadUser $tu */
-    foreach ($tus as $tu) {
-        $tu->remove();
-    }
-    $c = $modx->newQuery('disUserNotification');
-    $c->where(array(
-        'thread' => $thread->get('id'),
-    ));
-    $notifications = $modx->getCollection('disUserNotification',$c);
-    /** @var disUserNotification $notify */
-    foreach ($notifications as $notify) {
-        $notify->remove();
-    }
     foreach ($participantsIds as $participant) {
         /** @var disThreadUser $threadUser */
         $threadUser = $modx->newObject('disThreadUser');

@@ -120,6 +120,9 @@ foreach ($posts as $post) {
         }
     }
 
+    /* Get stuff for quick reply */
+    $postArray['content_raw'] = htmlentities($post->br2nl($discuss->convertMODXTags($post->get('message'))), ENT_QUOTES, 'UTF-8');
+    $postArray['createdon_raw'] = strtotime($post->get('createdon'));
     /* format bbcode */
     $postArray['content'] = $post->getContent();
 
