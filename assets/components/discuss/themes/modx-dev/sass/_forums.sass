@@ -178,19 +178,24 @@ h3.forum
         z-index: 300
         li
             margin-right: 0
+            display: inline-block
+            vertical-align: top
+            a
+                padding: 0 5px
+                display: inline-block
+                margin: 0 0 3px 0
+                vertical-align: top
+                +rem('font-size', 12px)
+                color: darken($c-base, 35%) !important
+                float: right
+                text-align: right
+                &:hover
+                    color: #000
+            .dis-post-modify
+                background: url(../../images/redo/icons/modify-sm.png) no-repeat left center
+                padding-left: 18px
 
-.dis-post-modify
-    background: url(../../images/redo/icons/modify-sm.png) no-repeat left center
-    padding-left: 18px
-    float: right
-    text-align: right
-    color: darken($c-base, 35%) !important
-    +rem('font-size', 12px)
-    margin: 0 0 3px 0
-    display: inline-block
-    vertical-align: top
-    &:hover
-        color: #000
+
 
 .dis-post-right
     float: right

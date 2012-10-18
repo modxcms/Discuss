@@ -42,19 +42,7 @@
     <div class="dis-post-right">
         <div class="title">
             <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]]</a>, <span title="[[+createdon]]">[[+createdon:ago]]</span>
-            <!-- tools -->
-            [[+discuss.user.isModerator:is=`1`:then=`
-            <div class="dis-actions">
-                <div>
-                    <ul>[[+actions]]
-                        <li><a href="[[+url]]">[[%discuss.post_link]]<span class="idx">#[[+idx]]</span></a></li>
-                        <li>[[+report_link]]</li>
-                    </ul>
-                </div>
-            </div>
-            `]]
-            <!-- /tools -->
-            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]]</ul>`]]
+            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]][[+action_remove]][[+action_spam]]</ul>`]]
         </div>
         <div class="dis-content">
             [[+content]]
