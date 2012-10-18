@@ -36,8 +36,15 @@
     font-size: 1em !important
     min-height: inherit !important
     min-height: auto !important
+// shCore colors
+$c-sh-black: black
+$c-sh-blue: blue
+$c-sh-red: red
 
-//
+// extend colors to combine selectors
+%sh-black
+    color: $c-sh-black !important
+
 
 .syntaxhighlighter
     a, div, code
@@ -243,23 +250,23 @@
             .number
                 color: #bbbbbb !important
             .content
-                color: black !important
+                @extend %sh-black
         .toolbar
             display: none !important
         a
             text-decoration: none !important
         .plain
-            color: black !important
+            @extend %sh-black
             a
-                color: black !important
+                color: $c-sh-black !important
         .comments
             color: #008200 !important
             a
                 color: #008200 !important
         .string
-            color: blue !important
+            color: $c-sh-blue !important
             a
-                color: blue !important
+                color: $c-sh-blue !important
         .keyword
             color: #006699 !important
             font-weight: bold !important
@@ -284,13 +291,13 @@
             a
                 color: #ff1493 !important
         .color3
-            color: red !important
+            color: $c-sh-red !important
             a
-                color: red !important
+                color: $c-sh-red !important
         .break
-            color: black !important
+            color: $c-sh-black !important
             a
-                color: black !important
+                color: $c-sh-black !important
     width: auto
     .line.highlighted
         &.alt1, &.alt2
@@ -307,7 +314,7 @@
     &.collapsed
         overflow: visible !important
         .toolbar
-            color: blue !important
+            color: $c-sh-blue !important
             background: white !important
             border: 1px solid #6ce26c !important
     .toolbar
@@ -338,25 +345,25 @@
         &.alt1, &.alt2
             background-color: white !important
         &.highlighted.number
-            color: black !important
+            color: $c-sh-black !important
     table caption, .toolbar a:hover
-        color: black !important
+        color: $c-sh-black !important
     .plain
-        color: black !important
+        color: $c-sh-black !important
         a
-            color: black !important
+            color: $c-sh-black !important
     &.collapsed .toolbar a
-        color: blue !important
+        color: $c-sh-blue !important
     .string
-        color: blue !important
+        color: $c-sh-blue !important
         a
-            color: blue !important
+            color: $c-sh-blue !important
     &.collapsed .toolbar a:hover
-        color: red !important
+        color: $c-sh-red !important
     .color3
-        color: red !important
+        color: $c-sh-red !important
         a
-            color: red !important
+            color: $c-sh-red !important
     .preprocessor
         color: gray !important
     .color1
