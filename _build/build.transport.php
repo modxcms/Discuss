@@ -81,6 +81,12 @@ $snippets = include $sources['data'].'transport.snippets.php';
 if (empty($snippets)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
 $category->addMany($snippets);
 
+/* add plugins */
+$modx->log(modX::LOG_LEVEL_INFO,'Packaging in plugins...');
+$plugins = include $sources['data'].'transport.plugins.php';
+if (empty($plugins)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in plugins.');
+$category->addMany($plugins);
+
 /* add chunks */
 /*$modx->log(modX::LOG_LEVEL_INFO,'Packaging in chunks...');
 $chunks = include $sources['data'].'transport.chunks.php';
