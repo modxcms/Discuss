@@ -43,11 +43,6 @@ $(function() {
         event.stopPropagation();
     });
 
-    // Tipster load
-    $('.tooltip').tooltipster({
-        tooltipTheme: '.modx-tipster',
-        position: 'left'
-    });
 
     // Opacity control on paragraph tips
     var answerMarkerMargin = "-10px";    // Margin
