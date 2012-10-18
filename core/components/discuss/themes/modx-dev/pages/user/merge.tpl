@@ -5,7 +5,7 @@
    &successMessage=``
 ]]
 
-<div class="dis-profile">
+<div class="dis-profile f1-f9">
 
 
 

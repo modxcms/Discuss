@@ -5,7 +5,7 @@
     &successMessage=`Ban added.`
 ]]
 
-<div class="dis-profile">
+<div class="dis-profile f1-f9">
 <form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-formz">
 
 	<h1>[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</h1>
