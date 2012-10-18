@@ -421,40 +421,6 @@ div#overlay-20 {
   z-index: 540;
   display: none; }
 
-/* line 1223, ../../sass/lib/_index-css.scss */
-.dis-post-header h1 {
-  margin: 0 25px 10px 25px; }
-
-/* line 1227, ../../sass/lib/_index-css.scss */
-#logo_search input[type="submit"], #main #results_search input[type="submit"], .go_search input[type="submit"] {
-  background-color: #56A9C2;
-  background-image: -moz-linear-gradient(center top, #9ccad8, #56a9c2);
-  border-bottom: 1px solid #76B7CB;
-  border-radius: 0 6px 6px 0;
-  border-top: 1px solid #93BBC8;
-  box-shadow: none;
-  color: #FFFFFF !important;
-  font-size: 14px;
-  font-weight: bold;
-  position: relative;
-  text-shadow: 1px 1px 2px #666666;
-  width: 37px; }
-
-/* line 1242, ../../sass/lib/_index-css.scss */
-#subscribe input[type="submit"] {
-  background: -moz-linear-gradient(center top, #9ccad8, #56a9c2) repeat scroll 0 0 transparent;
-  border-bottom: 1px solid #76B7CB;
-  border-radius: 0 6px 6px 0;
-  border-top: 1px solid #93BBC8;
-  box-shadow: none;
-  color: #FFFFFF !important;
-  font-size: 14px;
-  font-weight: bold;
-  height: 30px;
-  position: relative;
-  text-shadow: 1px 1px 2px #666666;
-  width: 80px; }
-
 /* syntax-highlighter shCore.css */
 /* line 1269, ../../sass/lib/_index-css.scss */
 .syntaxhighlighter a, .syntaxhighlighter div, .syntaxhighlighter code, .syntaxhighlighter table, .syntaxhighlighter table td, .syntaxhighlighter table tr, .syntaxhighlighter table tbody, .syntaxhighlighter table thead, .syntaxhighlighter table caption, .syntaxhighlighter textarea {
