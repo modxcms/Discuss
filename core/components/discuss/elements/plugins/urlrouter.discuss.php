@@ -35,6 +35,7 @@ if ($modx->event->name != 'OnPageNotFound' || $modx->request->getResourceMethod(
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
 if (!($discuss instanceof Discuss)) return true;
 
+$discuss->loadRequest();
 $discuss->url = $modx->makeUrl($modx->getOption('discuss.forums_resource_id'));
 
 $request = $modx->request->getResourceIdentifier('alias');
@@ -61,6 +62,110 @@ if (!file_exists($f)) {
 }
 $manifest = require $f;
 
-// Here I am sure that the URL is the one we need. Now lets break it into chunks (delimited by '/') and check against the manifest.
-$chunks = explode('/', $request);
+// Now we sort the manifest array just to make sure that the actions of maximum length are checked first
+if (!function_exists('sorter')) {
+    function sorter($a, $b)
+    {
+        return strlen($a) - strlen($b);    
+    }
+}
+uksort($manifest, "sorter");
 
+// Here I am sure that the URL is the one we need. Now lets search it for the actions.
+$request = ltrim(substr($request, strlen($discuss->url)), '/');
+if (!function_exists('url_parser')) {
+    function url_parser($action, $requested, $furls)
+    {
+        foreach($furls as $furl) {
+            if (array_key_exists('data', $furl)) {
+                $paramnumber = count($furl['data']);
+                if ($paramnumber > 0) {
+                    $parameters = array();
+                    $matched = 0;
+                    $request = $requested;
+                    foreach ($furl['data'] as $param) {
+                        $previousmatch = $matched;
+                        switch ($param['type']) {
+                            case 'action':
+                                $position = strpos($request, $key);
+                                if ($position===0) {
+                                    $file = $discuss->request->getControllerFile($key);
+                                    if (file_exists($file) && !is_dir($file)) {
+                                        $parameters['action'] = $key;
+                                        $request = ltrim(substr($request, $position), '/');
+                                        $matched++;
+                                    }
+                                }
+                                else if ($key === 'global') {
+                                    $actionname = $request;
+                                    while (!empty($actionname)) {
+                                        $file = $discuss->request->getControllerFile($actionname);
+                                        if (file_exists($file) && !is_dir($file)) {
+                                            $parameters['action'] = $key;
+                                            $request = ltrim(substr($request, strpos($request, $actionname)), '/');
+                                            $matched++;
+                                            break;
+                                        }
+                                        $actionname = substr($actionname, 0, strrpos($actionname, '/'));
+                                    }
+                                }
+                                break;
+                            case 'variable':
+                            case 'variable-required':
+                                $position = strpos($request, '/');
+                                if ($position===false) {
+                                    $position = strlen($request);
+                                }
+                                $data = substr($request, 0, $position);
+                                $parameters[$param['key']] = $data;
+                                $request = ltrim(substr($request, $position), '/');
+                                $matched++;
+                                break;
+                            case 'constant':
+                                $position = strpos($request, $param['value']);
+                                if ($position===0) {
+                                    $request = ltrim(substr($request, $position), '/');
+                                    $matched++;
+                                }
+                                break;
+                            default:
+                                $matched++;
+                                break;
+                        }
+                        if ($previousmatch>=$matched) {
+                            break;
+                        }
+                    }
+                    if ($paramnumber === $matched) {
+                        return parameters;
+                        break;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
+$parsed = false;
+foreach ($manifest as $key => $value) {
+    if ($key == 'global' || $key == 'preview' || $key == 'print') {
+        continue;
+    }
+    if (array_key_exists('furl', $value) && count($value['furl'])>0) {
+        $parsed = url_parser($key, $request, $value['furl']);
+    }
+}
+if (!is_array($parsed)) {
+    $parsed = url_parser('global', $request, $manifest['global']['furl']);
+}
+if (!is_array($parsed)) {
+    return true;
+}
+
+foreach($parsed as $paramkey => $paramvalue) {
+    $modx->request->parameters['GET'][$paramkey]=$paramvalue;
+    if(empty($modx->request->parameters['POST'][$paramkey]))
+        $modx->request->parameters['REQUEST'][$paramkey]=$paramvalue;
+}
+
+$modx->sendForward($modx->getOption('discuss.forums_resource_id'));
