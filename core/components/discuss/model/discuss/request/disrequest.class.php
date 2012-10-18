@@ -189,7 +189,7 @@ class DisRequest {
         $additional = $this->controller['controller'];
         
         $manifest = $this->getManifest();
-        if (is_array(manifest)) {
+        if (is_array($manifest)) {
             $registerJs = array('header' => array(), 'footer' => array());
 
             if (is_array($manifest) && array_key_exists('print', $manifest) && !empty($_REQUEST['print'])) {
