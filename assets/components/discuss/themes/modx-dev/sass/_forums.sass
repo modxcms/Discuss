@@ -437,6 +437,23 @@ h3.forum
             border-left: none
             display: block
 
+.ignore > li
+    height: 300px
+    overflow-y: scroll
+    margin-bottom: 20px
+    padding-bottom: 40px
+    position: relative
+    width: 21%
+    &:after
+        content: url(../../images/redo/icons/scroll-indicator.png)
+        text-align: center
+        position: absolute
+        bottom: 0
+        width: 100%
+        padding-top: 25px
+        height: 22px
+        background: url(../../images/redo/bg/scroll-fade.png) repeat-x 0 bottom
+
 // thread reply
 .m-dis-thread-type, .dis-thread-info
     position: relative

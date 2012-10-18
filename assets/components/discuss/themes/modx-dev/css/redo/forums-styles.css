@@ -3427,25 +3427,44 @@ h3.forum {
     border-left: none;
     display: block; }
 
-/* line 441, ../../sass/_forums.sass */
+/* line 440, ../../sass/_forums.sass */
+.ignore > li {
+  height: 300px;
+  overflow-y: scroll;
+  margin-bottom: 20px;
+  padding-bottom: 40px;
+  position: relative;
+  width: 21%; }
+  /* line 447, ../../sass/_forums.sass */
+  .ignore > li:after {
+    content: url(../../images/redo/icons/scroll-indicator.png);
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-top: 25px;
+    height: 22px;
+    background: url(../../images/redo/bg/scroll-fade.png) repeat-x 0 bottom; }
+
+/* line 458, ../../sass/_forums.sass */
 .m-dis-thread-type, .dis-thread-info {
   position: relative; }
 
-/* line 443, ../../sass/_forums.sass */
+/* line 460, ../../sass/_forums.sass */
 .m-dis-thread-type-wrap {
   width: 250px;
   position: absolute; }
 
-/* line 447, ../../sass/_forums.sass */
+/* line 464, ../../sass/_forums.sass */
 section.group {
   width: 100%; }
 
-/* line 451, ../../sass/_forums.sass */
+/* line 468, ../../sass/_forums.sass */
 .dis-thread-form section {
   margin-bottom: 10px;
   padding-bottom: 10px; }
 
-/* line 455, ../../sass/_forums.sass */
+/* line 472, ../../sass/_forums.sass */
 .dis-thread-info {
   margin: 1px 0 0 240px;
   float: left;
@@ -3454,10 +3473,10 @@ section.group {
   font-size: 1.3rem;
   position: relative;
   overflow: hidden; }
-  /* line 462, ../../sass/_forums.sass */
+  /* line 479, ../../sass/_forums.sass */
   .dis-thread-info p {
     color: black; }
-  /* line 464, ../../sass/_forums.sass */
+  /* line 481, ../../sass/_forums.sass */
   .dis-thread-info a {
     display: inline-block;
     padding: 4px 10px;
@@ -3467,22 +3486,22 @@ section.group {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
     border-radius: 3px; }
-    /* line 469, ../../sass/_forums.sass */
+    /* line 486, ../../sass/_forums.sass */
     .dis-thread-info a:hover {
       text-decoration: none;
       background-color: rgba(0, 0, 0, 0.05); }
 
-/* line 473, ../../sass/_forums.sass */
+/* line 490, ../../sass/_forums.sass */
 .m-dis-choose-info {
   font-size: 16px;
   font-weight: normal;
   margin: 10px 25px 10px 0px; }
 
-/* line 479, ../../sass/_forums.sass */
+/* line 496, ../../sass/_forums.sass */
 .m-dis-thread-type {
   margin: 10px 0; }
 
-/* line 483, ../../sass/_forums.sass */
+/* line 500, ../../sass/_forums.sass */
 .dis-form .dis-new-thread-title {
   display: block;
   width: 97% !important;
@@ -3491,19 +3510,19 @@ section.group {
   font-size: 20px;
   font-size: 2rem;
   padding: 1.5%; }
-  /* line 490, ../../sass/_forums.sass */
+  /* line 507, ../../sass/_forums.sass */
   .dis-form .dis-new-thread-title:focus {
     border-color: #797979; }
-/* line 492, ../../sass/_forums.sass */
+/* line 509, ../../sass/_forums.sass */
 .dis-form .dis-new-thread-title-wrapper {
   position: relative; }
-  /* line 494, ../../sass/_forums.sass */
+  /* line 511, ../../sass/_forums.sass */
   .dis-form .dis-new-thread-title-wrapper label {
     position: absolute;
     top: 24px !important;
     left: 14px !important; }
 
-/* line 500, ../../sass/_forums.sass */
+/* line 517, ../../sass/_forums.sass */
 .twelve-form .dis-form label {
   margin: 0;
   font-weight: bold;
@@ -3511,7 +3530,7 @@ section.group {
   font-size: 15px;
   font-size: 1.5rem; }
 
-/* line 505, ../../sass/_forums.sass */
+/* line 522, ../../sass/_forums.sass */
 .m-dis-discussion, .m-dis-question {
   background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px 5px, -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(0, 0, 0, 0.06)), color-stop(100%, rgba(255, 255, 255, 0.06)));
   background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px 5px, -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
@@ -3519,7 +3538,7 @@ section.group {
   background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px 5px, -o-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px 5px, linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   padding-left: 23px; }
-  /* line 509, ../../sass/_forums.sass */
+  /* line 526, ../../sass/_forums.sass */
   .m-dis-discussion:hover, .m-dis-question:hover {
     background-color: white;
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px 5px, -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(255, 255, 255, 0.3)), color-stop(100%, rgba(255, 255, 255, 0.3)));
@@ -3527,7 +3546,7 @@ section.group {
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px 5px, -moz-linear-gradient(bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px 5px, -o-linear-gradient(bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px 5px, linear-gradient(bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%); }
-  /* line 512, ../../sass/_forums.sass */
+  /* line 529, ../../sass/_forums.sass */
   .m-dis-discussion.current, .m-dis-question.current {
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px -109px, -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #8c8c8c), color-stop(100%, #737373));
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px -109px, -webkit-linear-gradient(bottom, #8c8c8c 0%, #737373 100%);
@@ -3536,14 +3555,14 @@ section.group {
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px -109px, linear-gradient(bottom, #8c8c8c 0%, #737373 100%);
     color: white;
     text-shadow: none; }
-  /* line 517, ../../sass/_forums.sass */
+  /* line 534, ../../sass/_forums.sass */
   .m-dis-discussion.current:hover, .m-dis-question.current:hover {
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px -109px, -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #8c8c8c), color-stop(100%, #737373));
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px -109px, -webkit-linear-gradient(bottom, #8c8c8c 0%, #737373 100%);
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px -109px, -moz-linear-gradient(bottom, #8c8c8c 0%, #737373 100%);
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px -109px, -o-linear-gradient(bottom, #8c8c8c 0%, #737373 100%);
     background: url('../../images/redo/../../images/redo/icons/selected.png?1350061224') no-repeat 3px -109px, linear-gradient(bottom, #8c8c8c 0%, #737373 100%); }
-  /* line 521, ../../sass/_forums.sass */
+  /* line 538, ../../sass/_forums.sass */
   .m-dis-discussion label, .m-dis-question label {
     margin: 0;
     padding: 5px 10px;
@@ -3551,11 +3570,11 @@ section.group {
     font-weight: bold;
     font-size: 14px;
     font-size: 1.4rem; }
-    /* line 527, ../../sass/_forums.sass */
+    /* line 544, ../../sass/_forums.sass */
     .m-dis-discussion label input, .m-dis-question label input {
       display: none; }
 
-/* line 535, ../../sass/_forums.sass */
+/* line 552, ../../sass/_forums.sass */
 .twelve-form input[type="submit"] {
   padding: 10px 15px;
   padding:  1rem 1.5rem;
@@ -3564,27 +3583,27 @@ section.group {
   clear: both;
   display: inline-block;
   cursor: pointer; }
-  /* line 542, ../../sass/_forums.sass */
+  /* line 559, ../../sass/_forums.sass */
   .twelve-form input[type="submit"]:hover {
     padding: 10px 15px;
     padding:  1rem 1.5rem; }
-/* line 544, ../../sass/_forums.sass */
+/* line 561, ../../sass/_forums.sass */
 .twelve-form h1 {
   font-weight: bold; }
-/* line 547, ../../sass/_forums.sass */
+/* line 564, ../../sass/_forums.sass */
 .twelve-form .dis-title {
   margin: 10px 0; }
-  /* line 549, ../../sass/_forums.sass */
+  /* line 566, ../../sass/_forums.sass */
   .twelve-form .dis-title label, .twelve-form .dis-title input#dis-new-thread-title {
     display: inline-block; }
-  /* line 551, ../../sass/_forums.sass */
+  /* line 568, ../../sass/_forums.sass */
   .twelve-form .dis-title label {
     margin: 0 0 0 0;
     padding-right: 5px;
     font-size: 15px;
     font-weight: bold;
     color: black; }
-  /* line 557, ../../sass/_forums.sass */
+  /* line 574, ../../sass/_forums.sass */
   .twelve-form .dis-title input {
     padding: 3px;
     margin: 5px 0 10px 0;
@@ -4407,10 +4426,18 @@ a#dis-preview-btn.preview {
   min-height: auto !important; }
 
 /* line 45, ../../sass/forums/_shCore.sass */
-.syntaxhighlighter.printing .line .content, .syntaxhighlighter.printing .plain {
+.syntaxhighlighter.printing .line .content, .syntaxhighlighter.printing .plain, .syntaxhighlighter.printing .plain a, .syntaxhighlighter.printing .break, .syntaxhighlighter.printing .break a, .syntaxhighlighter .line.highlighted.number, .syntaxhighlighter table caption, .syntaxhighlighter .toolbar a:hover, .syntaxhighlighter .plain, .syntaxhighlighter .plain a {
   color: black !important; }
 
+/* line 47, ../../sass/forums/_shCore.sass */
+.syntaxhighlighter.printing .string, .syntaxhighlighter.printing .string a, .syntaxhighlighter.collapsed .toolbar a, .syntaxhighlighter .string, .syntaxhighlighter .string a {
+  color: blue !important; }
+
 /* line 49, ../../sass/forums/_shCore.sass */
+.syntaxhighlighter.printing .color3, .syntaxhighlighter.printing .color3 a, .syntaxhighlighter.collapsed .toolbar a:hover, .syntaxhighlighter .color3, .syntaxhighlighter .color3 a {
+  color: red !important; }
+
+/* line 53, ../../sass/forums/_shCore.sass */
 .syntaxhighlighter {
   margin: 1em 0 1em 0 !important;
   position: relative !important;
@@ -4419,32 +4446,32 @@ a#dis-preview-btn.preview {
   width: auto;
   background-color: white !important;
   background-color: transparent !important; }
-  /* line 162, ../../sass/forums/_shCore.sass */
+  /* line 166, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.source {
     overflow: hidden !important; }
-  /* line 164, ../../sass/forums/_shCore.sass */
+  /* line 168, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .bold {
     font-weight: bold !important; }
-  /* line 166, ../../sass/forums/_shCore.sass */
+  /* line 170, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .italic {
     font-style: italic !important; }
-  /* line 168, ../../sass/forums/_shCore.sass */
+  /* line 172, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .line {
     white-space: pre !important; }
-  /* line 170, ../../sass/forums/_shCore.sass */
+  /* line 174, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter table {
     width: 100% !important; }
-    /* line 172, ../../sass/forums/_shCore.sass */
+    /* line 176, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter table caption {
       text-align: left !important;
       padding: 0.5em 0 0.5em 1em !important; }
-    /* line 176, ../../sass/forums/_shCore.sass */
+    /* line 180, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter table td.code {
       width: 100% !important; }
-      /* line 178, ../../sass/forums/_shCore.sass */
+      /* line 182, ../../sass/forums/_shCore.sass */
       .syntaxhighlighter table td.code .container {
         position: relative !important; }
-        /* line 180, ../../sass/forums/_shCore.sass */
+        /* line 184, ../../sass/forums/_shCore.sass */
         .syntaxhighlighter table td.code .container textarea {
           box-sizing: border-box !important;
           position: absolute !important;
@@ -4457,41 +4484,41 @@ a#dis-preview-btn.preview {
           padding-left: 1em !important;
           overflow: hidden !important;
           white-space: pre !important; }
-    /* line 192, ../../sass/forums/_shCore.sass */
+    /* line 196, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter table td.gutter .line {
       text-align: right !important;
       padding: 0 0.5em 0 1em !important; }
-    /* line 195, ../../sass/forums/_shCore.sass */
+    /* line 199, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter table td.code .line {
       padding: 0 1em !important; }
-  /* line 198, ../../sass/forums/_shCore.sass */
+  /* line 202, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
     padding-left: 0em !important; }
-  /* line 200, ../../sass/forums/_shCore.sass */
+  /* line 204, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.show {
     display: block !important; }
-  /* line 203, ../../sass/forums/_shCore.sass */
+  /* line 207, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.collapsed table {
     display: none !important; }
-  /* line 205, ../../sass/forums/_shCore.sass */
+  /* line 209, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.collapsed .toolbar {
     padding: 0.1em 0.8em 0em 0.8em !important;
     font-size: 1em !important;
     position: static !important;
     width: auto !important;
     height: auto !important; }
-    /* line 211, ../../sass/forums/_shCore.sass */
+    /* line 215, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter.collapsed .toolbar span {
       display: inline !important;
       margin-right: 1em !important; }
-      /* line 214, ../../sass/forums/_shCore.sass */
+      /* line 218, ../../sass/forums/_shCore.sass */
       .syntaxhighlighter.collapsed .toolbar span a {
         padding: 0 !important;
         display: none !important; }
-        /* line 217, ../../sass/forums/_shCore.sass */
+        /* line 221, ../../sass/forums/_shCore.sass */
         .syntaxhighlighter.collapsed .toolbar span a.expandSource {
           display: inline !important; }
-  /* line 219, ../../sass/forums/_shCore.sass */
+  /* line 223, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .toolbar {
     position: absolute !important;
     right: 1px !important;
@@ -4500,220 +4527,169 @@ a#dis-preview-btn.preview {
     height: 11px !important;
     font-size: 10px !important;
     z-index: 10 !important; }
-    /* line 227, ../../sass/forums/_shCore.sass */
+    /* line 231, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter .toolbar span.title {
       display: inline !important; }
-    /* line 229, ../../sass/forums/_shCore.sass */
+    /* line 233, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter .toolbar a {
       display: block !important;
       text-align: center !important;
       text-decoration: none !important;
       padding-top: 1px !important; }
-      /* line 234, ../../sass/forums/_shCore.sass */
+      /* line 238, ../../sass/forums/_shCore.sass */
       .syntaxhighlighter .toolbar a.expandSource {
         display: none !important; }
-  /* line 236, ../../sass/forums/_shCore.sass */
+  /* line 240, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.ie {
     font-size: 0.9em !important;
     padding: 1px 0 1px 0 !important; }
-    /* line 239, ../../sass/forums/_shCore.sass */
+    /* line 243, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter.ie .toolbar {
       line-height: 8px !important; }
-      /* line 241, ../../sass/forums/_shCore.sass */
+      /* line 245, ../../sass/forums/_shCore.sass */
       .syntaxhighlighter.ie .toolbar a {
         padding-top: 0px !important; }
-  /* line 245, ../../sass/forums/_shCore.sass */
+  /* line 249, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .line.alt1 .content, .syntaxhighlighter.printing .line.alt2 .content {
     background: none !important; }
-  /* line 248, ../../sass/forums/_shCore.sass */
+  /* line 252, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .line.highlighted .number, .syntaxhighlighter.printing .line.highlighted.alt1 .content, .syntaxhighlighter.printing .line.highlighted.alt2 .content {
     background: none !important; }
-  /* line 250, ../../sass/forums/_shCore.sass */
+  /* line 254, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .line .number {
     color: #bbbbbb !important; }
-  /* line 254, ../../sass/forums/_shCore.sass */
+  /* line 258, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .toolbar {
     display: none !important; }
-  /* line 256, ../../sass/forums/_shCore.sass */
+  /* line 260, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing a {
     text-decoration: none !important; }
-  /* line 260, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter.printing .plain a {
-    color: black !important; }
-  /* line 262, ../../sass/forums/_shCore.sass */
+  /* line 266, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .comments {
     color: #008200 !important; }
-    /* line 264, ../../sass/forums/_shCore.sass */
+    /* line 268, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter.printing .comments a {
       color: #008200 !important; }
-  /* line 266, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter.printing .string {
-    color: blue !important; }
-    /* line 268, ../../sass/forums/_shCore.sass */
-    .syntaxhighlighter.printing .string a {
-      color: blue !important; }
-  /* line 270, ../../sass/forums/_shCore.sass */
+  /* line 274, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .keyword {
     color: #006699 !important;
     font-weight: bold !important; }
-  /* line 273, ../../sass/forums/_shCore.sass */
+  /* line 277, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .preprocessor {
     color: gray !important; }
-  /* line 275, ../../sass/forums/_shCore.sass */
+  /* line 279, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .variable {
     color: #aa7700 !important; }
-  /* line 277, ../../sass/forums/_shCore.sass */
+  /* line 281, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .value {
     color: #009900 !important; }
-  /* line 279, ../../sass/forums/_shCore.sass */
+  /* line 283, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .functions {
     color: deeppink !important; }
-  /* line 281, ../../sass/forums/_shCore.sass */
+  /* line 285, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .constants {
     color: #0066cc !important; }
-  /* line 283, ../../sass/forums/_shCore.sass */
+  /* line 287, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .script {
     font-weight: bold !important; }
-  /* line 285, ../../sass/forums/_shCore.sass */
+  /* line 289, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .color1 {
     color: gray !important; }
-    /* line 287, ../../sass/forums/_shCore.sass */
+    /* line 291, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter.printing .color1 a {
       color: gray !important; }
-  /* line 289, ../../sass/forums/_shCore.sass */
+  /* line 293, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .color2 {
     color: deeppink !important; }
-    /* line 291, ../../sass/forums/_shCore.sass */
+    /* line 295, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter.printing .color2 a {
       color: deeppink !important; }
-  /* line 293, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter.printing .color3 {
-    color: red !important; }
-    /* line 295, ../../sass/forums/_shCore.sass */
-    .syntaxhighlighter.printing .color3 a {
-      color: red !important; }
-  /* line 297, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter.printing .break {
-    color: black !important; }
-    /* line 299, ../../sass/forums/_shCore.sass */
-    .syntaxhighlighter.printing .break a {
-      color: black !important; }
-  /* line 303, ../../sass/forums/_shCore.sass */
+  /* line 307, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .line.highlighted.alt1, .syntaxhighlighter .line.highlighted.alt2 {
     background-color: #e0e0e0 !important; }
-  /* line 305, ../../sass/forums/_shCore.sass */
+  /* line 309, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .gutter {
     color: #afafaf !important; }
-    /* line 307, ../../sass/forums/_shCore.sass */
+    /* line 311, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter .gutter .line {
       border-right: 3px solid #6ce26c !important; }
-      /* line 309, ../../sass/forums/_shCore.sass */
+      /* line 313, ../../sass/forums/_shCore.sass */
       .syntaxhighlighter .gutter .line.highlighted {
         background-color: #6ce26c !important;
         color: white !important; }
-  /* line 312, ../../sass/forums/_shCore.sass */
+  /* line 316, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.printing .line .content {
     border: none !important; }
-  /* line 314, ../../sass/forums/_shCore.sass */
+  /* line 318, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter.collapsed {
     overflow: visible !important; }
-    /* line 316, ../../sass/forums/_shCore.sass */
+    /* line 320, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter.collapsed .toolbar {
       color: blue !important;
       background: white !important;
       border: 1px solid #6ce26c !important; }
-  /* line 320, ../../sass/forums/_shCore.sass */
+  /* line 324, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .toolbar {
     color: white !important;
     background: #6ce26c !important;
     border: none !important; }
-    /* line 324, ../../sass/forums/_shCore.sass */
+    /* line 328, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter .toolbar a {
       color: white !important; }
-  /* line 326, ../../sass/forums/_shCore.sass */
+  /* line 330, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .comments {
     color: #008200 !important; }
-    /* line 328, ../../sass/forums/_shCore.sass */
+    /* line 332, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter .comments a {
       color: #008200 !important; }
-  /* line 330, ../../sass/forums/_shCore.sass */
+  /* line 334, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .keyword {
     color: #006699 !important;
     font-weight: 700 !important; }
-  /* line 333, ../../sass/forums/_shCore.sass */
+  /* line 337, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .variable {
     color: #aa7700 !important; }
-  /* line 335, ../../sass/forums/_shCore.sass */
+  /* line 339, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .value {
     color: #009900 !important; }
-  /* line 337, ../../sass/forums/_shCore.sass */
+  /* line 341, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .constants {
     color: #0066cc !important; }
-  /* line 339, ../../sass/forums/_shCore.sass */
+  /* line 343, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .script {
     font-weight: 700 !important;
     color: #006699 !important;
     background-color: none !important; }
-  /* line 345, ../../sass/forums/_shCore.sass */
+  /* line 349, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .line.alt1, .syntaxhighlighter .line.alt2 {
     background-color: white !important; }
-  /* line 347, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter .line.highlighted.number {
-    color: black !important; }
-  /* line 349, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter table caption, .syntaxhighlighter .toolbar a:hover {
-    color: black !important; }
-  /* line 351, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter .plain {
-    color: black !important; }
-    /* line 353, ../../sass/forums/_shCore.sass */
-    .syntaxhighlighter .plain a {
-      color: black !important; }
-  /* line 355, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter.collapsed .toolbar a {
-    color: blue !important; }
-  /* line 357, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter .string {
-    color: blue !important; }
-    /* line 359, ../../sass/forums/_shCore.sass */
-    .syntaxhighlighter .string a {
-      color: blue !important; }
-  /* line 361, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter.collapsed .toolbar a:hover {
-    color: red !important; }
-  /* line 363, ../../sass/forums/_shCore.sass */
-  .syntaxhighlighter .color3 {
-    color: red !important; }
-    /* line 365, ../../sass/forums/_shCore.sass */
-    .syntaxhighlighter .color3 a {
-      color: red !important; }
-  /* line 367, ../../sass/forums/_shCore.sass */
+  /* line 371, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .preprocessor {
     color: gray !important; }
-  /* line 369, ../../sass/forums/_shCore.sass */
+  /* line 373, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .color1 {
     color: gray !important; }
-    /* line 371, ../../sass/forums/_shCore.sass */
+    /* line 375, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter .color1 a {
       color: gray !important; }
-  /* line 373, ../../sass/forums/_shCore.sass */
+  /* line 377, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .functions {
     color: deeppink !important; }
-  /* line 375, ../../sass/forums/_shCore.sass */
+  /* line 379, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .color2 {
     color: deeppink !important; }
-    /* line 377, ../../sass/forums/_shCore.sass */
+    /* line 381, ../../sass/forums/_shCore.sass */
     .syntaxhighlighter .color2 a {
       color: deeppink !important; }
-  /* line 381, ../../sass/forums/_shCore.sass */
+  /* line 385, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter .line.alt1, .syntaxhighlighter .line.alt2 {
     background-color: transparent !important; }
-  /* line 383, ../../sass/forums/_shCore.sass */
+  /* line 387, ../../sass/forums/_shCore.sass */
   .syntaxhighlighter table {
     overflow: hidden;
     overflow-x: auto; }
 
-/* line 388, ../../sass/forums/_shCore.sass */
+/* line 392, ../../sass/forums/_shCore.sass */
 .dis-code {
   overflow: hidden;
   overflow-x: auto; }

@@ -44,6 +44,10 @@ $c-sh-red: red
 // extend colors to combine selectors
 %sh-black
     color: $c-sh-black !important
+%sh-blue
+    color: $c-sh-blue !important
+%sh-red
+    color: $c-sh-red !important
 
 
 .syntaxhighlighter
@@ -258,15 +262,15 @@ $c-sh-red: red
         .plain
             @extend %sh-black
             a
-                color: $c-sh-black !important
+                @extend %sh-black
         .comments
             color: #008200 !important
             a
                 color: #008200 !important
         .string
-            color: $c-sh-blue !important
+            @extend %sh-blue
             a
-                color: $c-sh-blue !important
+                @extend %sh-blue
         .keyword
             color: #006699 !important
             font-weight: bold !important
@@ -291,13 +295,13 @@ $c-sh-red: red
             a
                 color: #ff1493 !important
         .color3
-            color: $c-sh-red !important
+            @extend %sh-red
             a
-                color: $c-sh-red !important
+                @extend %sh-red
         .break
-            color: $c-sh-black !important
+            @extend %sh-black
             a
-                color: $c-sh-black !important
+                @extend %sh-black
     width: auto
     .line.highlighted
         &.alt1, &.alt2
@@ -345,25 +349,25 @@ $c-sh-red: red
         &.alt1, &.alt2
             background-color: white !important
         &.highlighted.number
-            color: $c-sh-black !important
+            @extend %sh-black
     table caption, .toolbar a:hover
-        color: $c-sh-black !important
+        @extend %sh-black
     .plain
-        color: $c-sh-black !important
+        @extend %sh-black
         a
-            color: $c-sh-black !important
+            @extend %sh-black
     &.collapsed .toolbar a
-        color: $c-sh-blue !important
+        @extend %sh-blue
     .string
-        color: $c-sh-blue !important
+        @extend %sh-blue
         a
-            color: $c-sh-blue !important
+            @extend %sh-blue
     &.collapsed .toolbar a:hover
-        color: $c-sh-red !important
+        @extend %sh-red
     .color3
-        color: $c-sh-red !important
+        @extend %sh-red
         a
-            color: $c-sh-red !important
+            @extend %sh-red
     .preprocessor
         color: gray !important
     .color1
