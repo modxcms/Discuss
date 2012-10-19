@@ -33,7 +33,7 @@ $plugins[0]->set('id',1);
 $plugins[0]->set('name','DiscussUrlRouter');
 $plugins[0]->set('description','The plugin that routes the Discuss URLs.');
 $plugins[0]->set('plugincode', getSnippetContent($sources['source_core'].'/elements/plugins/urlrouter.discuss.php'));
-$plugins[0]->set('category', PKG_NAME);
+$plugins[0]->set('category', 0);
 
 $events = array();
 
