@@ -1867,17 +1867,19 @@ body {
   cursor: pointer; }
   /* line 74, ../../sass/partials/_color-patterns.sass */
   .dis-cat-header .action-buttons:hover, .paginate.stand-alone .action-buttons:hover, .dis-cat-header .post-box a.Button:hover, .paginate.stand-alone .post-box a.Button:hover, .primary-cta:hover, .dis-form-buttons .a-reply:hover, .twelve-form input[type="submit"]:hover {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.9);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
     background-color: #9fc54f;
-    -webkit-box-shadow: 0 0 5px rgba(170, 208, 86, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.49);
-    -moz-box-shadow: 0 0 5px rgba(170, 208, 86, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.49);
-    box-shadow: 0 0 5px rgba(170, 208, 86, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.49);
-    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #83a733), color-stop(73%, #a3c94f), color-stop(100%, #a3c94f));
-    background-image: -webkit-linear-gradient(bottom, #83a733 0%, #a3c94f 73%, #a3c94f 100%);
-    background-image: -moz-linear-gradient(bottom, #83a733 0%, #a3c94f 73%, #a3c94f 100%);
-    background-image: -o-linear-gradient(bottom, #83a733 0%, #a3c94f 73%, #a3c94f 100%);
-    background-image: linear-gradient(bottom, #83a733 0%, #a3c94f 73%, #a3c94f 100%);
+    -webkit-box-shadow: 0 0 7px rgba(172, 224, 56, 0.96), inset 0 1px 0 rgba(255, 255, 255, 0.49);
+    -moz-box-shadow: 0 0 7px rgba(172, 224, 56, 0.96), inset 0 1px 0 rgba(255, 255, 255, 0.49);
+    box-shadow: 0 0 7px rgba(172, 224, 56, 0.96), inset 0 1px 0 rgba(255, 255, 255, 0.49);
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #8cb337), color-stop(73%, #b7d576), color-stop(100%, #b7d576));
+    background-image: -webkit-linear-gradient(bottom, #8cb337 0%, #b7d576 73%, #b7d576 100%);
+    background-image: -moz-linear-gradient(bottom, #8cb337 0%, #b7d576 73%, #b7d576 100%);
+    background-image: -o-linear-gradient(bottom, #8cb337 0%, #b7d576 73%, #b7d576 100%);
+    background-image: linear-gradient(bottom, #8cb337 0%, #b7d576 73%, #b7d576 100%);
     text-decoration: none; }
-  /* line 79, ../../sass/partials/_color-patterns.sass */
+  /* line 81, ../../sass/partials/_color-patterns.sass */
   .dis-cat-header .action-buttons:active, .paginate.stand-alone .action-buttons:active, .dis-cat-header .post-box a.Button:active, .paginate.stand-alone .post-box a.Button:active, .primary-cta:active, .dis-form-buttons .a-reply:active, .twelve-form input[type="submit"]:active {
     background-color: #9fc54f;
     -webkit-box-shadow: 0 0 5px rgba(170, 208, 86, 0.56), inset 0 -1px 4px rgba(0, 0, 0, 0.2);
@@ -1894,20 +1896,20 @@ body {
     background-image: -o-linear-gradient(bottom, #a3c94f 0%, #89af36 73%, #83a733 100%);
     background-image: linear-gradient(bottom, #a3c94f 0%, #89af36 73%, #83a733 100%); }
 
-/* line 86, ../../sass/partials/_color-patterns.sass */
+/* line 88, ../../sass/partials/_color-patterns.sass */
 .dis-cat-header .action-buttons, .paginate.stand-alone .action-buttons, .dis-cat-header .post-box a.Button, .paginate.stand-alone .post-box a.Button {
   -webkit-box-shadow: 0 0 5px rgba(46, 58, 18, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.49);
   -moz-box-shadow: 0 0 5px rgba(46, 58, 18, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.49);
   box-shadow: 0 0 5px rgba(46, 58, 18, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.49);
   border: 1px solid black; }
-  /* line 90, ../../sass/partials/_color-patterns.sass */
+  /* line 92, ../../sass/partials/_color-patterns.sass */
   .dis-cat-header .action-buttons:hover, .paginate.stand-alone .action-buttons:hover, .dis-cat-header .post-box a.Button:hover, .paginate.stand-alone .post-box a.Button:hover {
     -webkit-box-shadow: 0 0 5px rgba(46, 58, 18, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.49);
     -moz-box-shadow: 0 0 5px rgba(46, 58, 18, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.49);
     box-shadow: 0 0 5px rgba(46, 58, 18, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.49);
     border: 1px solid black; }
 
-/* line 95, ../../sass/partials/_color-patterns.sass */
+/* line 97, ../../sass/partials/_color-patterns.sass */
 .a-tertiary-cta, .forum-grid .question {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f3af3f), color-stop(100%, #d4880d));
   background-image: -webkit-linear-gradient(#f3af3f, #d4880d);
@@ -1917,7 +1919,7 @@ body {
   -webkit-box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   -moz-box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0;
   box-shadow: #a9cd5b 0 1px 0 inset, black 0 1px 0; }
-  /* line 99, ../../sass/partials/_color-patterns.sass */
+  /* line 101, ../../sass/partials/_color-patterns.sass */
   .a-tertiary-cta:hover, .forum-grid .question:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f4b348), color-stop(100%, #d4880d));
     background-image: -webkit-linear-gradient(#f4b348, #d4880d);
@@ -1928,7 +1930,7 @@ body {
     -moz-box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0;
     box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0; }
 
-/* line 105, ../../sass/partials/_color-patterns.sass */
+/* line 107, ../../sass/partials/_color-patterns.sass */
 .btn-toggle-normal {
   border: 1px solid rgba(0, 0, 0, 0.34);
   -webkit-border-radius: 3px;
@@ -1949,7 +1951,7 @@ body {
   background-image: -o-linear-gradient(bottom, #bfbfbf 0%, #cacaca 100%);
   background-image: linear-gradient(bottom, #bfbfbf 0%, #cacaca 100%); }
 
-/* line 113, ../../sass/partials/_color-patterns.sass */
+/* line 115, ../../sass/partials/_color-patterns.sass */
 .btn-toggle-active, .m-dis-discussion.current, .m-dis-question.current, .m-dis-discussion.current:hover, .m-dis-question.current:hover {
   border: 1px solid rgba(0, 0, 0, 0.64);
   -webkit-border-radius: 3px;
@@ -1970,7 +1972,7 @@ body {
   background-image: -o-linear-gradient(bottom, #8c8c8c 0%, #737373 100%);
   background-image: linear-gradient(bottom, #8c8c8c 0%, #737373 100%); }
 
-/* line 121, ../../sass/partials/_color-patterns.sass */
+/* line 123, ../../sass/partials/_color-patterns.sass */
 .btn-toggle-bg {
   -webkit-border-radius: 247px 3px 3px 3px/4px 3px 3px 3px;
   -moz-border-radius: 247px 3px 3px 3px/4px 3px 3px 3px;
@@ -1985,7 +1987,7 @@ body {
   -moz-box-shadow: 0 1px 0 white, inset 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 0 5px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 0 white, inset 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 0 5px rgba(0, 0, 0, 0.1); }
 
-/* line 129, ../../sass/partials/_color-patterns.sass */
+/* line 131, ../../sass/partials/_color-patterns.sass */
 .dis-post .dis-pm-btn, .m-dis-discussion, .m-dis-question, .a-dis-actionbuttons a {
   display: block;
   margin: 0.9em 0;
@@ -2014,7 +2016,7 @@ body {
   background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%);
   background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.06) 0%, rgba(255, 255, 255, 0.06) 100%); }
-  /* line 148, ../../sass/partials/_color-patterns.sass */
+  /* line 150, ../../sass/partials/_color-patterns.sass */
   .dis-post .dis-pm-btn:hover, .m-dis-discussion:hover, .m-dis-question:hover, .a-dis-actionbuttons a:hover {
     background-color: white;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
