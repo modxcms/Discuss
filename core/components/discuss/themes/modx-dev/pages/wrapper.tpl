@@ -176,7 +176,7 @@
                 </div>
                 <div class="f8-f12 m-stats-liveg">
                     <div class="m-stats-group">
-                        <strong class="m-stats-title full">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>
+                        <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>
                         <span class="m-stats-single">[[+activeUsers.users]]</span>
                     </div>
                     <a class="modx-live" href="http://www.modx.com/live">

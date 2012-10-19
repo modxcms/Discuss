@@ -3207,8 +3207,8 @@ ul.dis-attachments {
 .footer-stats {
   font-size: 14px;
   font-size: 1.4rem;
-  padding: 10px 0;
-  padding:  1rem 0;
+  padding: 10px 0 35px 0;
+  padding:  1rem 0 3.5rem 0;
   margin-bottom: 20px;
   margin-bottom: 2rem;
   border-bottom: 1px dotted #c6c6c6; }
@@ -3246,15 +3246,17 @@ ul.dis-attachments {
 
 /* line 402, ../../sass/_forums.sass */
 .m-stats-liveg {
-  position: relative;
-  width: 150px;
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0; }
+  position: relative; }
   /* line 404, ../../sass/_forums.sass */
   .m-stats-liveg .m-stats-group {
     margin-right: 160px; }
+  /* line 406, ../../sass/_forums.sass */
+  .m-stats-liveg .modx-live {
+    width: 150px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0; }
 
 /* line 414, ../../sass/_forums.sass */
 .m-modx_logo {
