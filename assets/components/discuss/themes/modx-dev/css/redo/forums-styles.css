@@ -310,14 +310,6 @@ ul.dis-attachments {
 .dis-form textarea:hover {
   border: solid 1px #02475A; }
 
-/* line 1025, ../../sass/lib/_index-css.scss */
-.dis-form span.error {
-  display: block;
-  color: red;
-  font-size: .8em;
-  padding-bottom: .5em;
-  line-height: 10px; }
-
 /* line 1036, ../../sass/lib/_index-css.scss */
 .loginLegend {
   display: none; }
@@ -2525,8 +2517,9 @@ ul.options-select {
 
 /* line 351, ../../sass/lib/_shared.sass */
 #F-Toggle-Options {
-  position: relative; }
-  /* line 353, ../../sass/lib/_shared.sass */
+  position: relative;
+  z-index: 20; }
+  /* line 354, ../../sass/lib/_shared.sass */
   #F-Toggle-Options a.a-options {
     margin: 0 0 0 10px;
     display: block;
@@ -2535,7 +2528,7 @@ ul.options-select {
     width: 20px;
     overflow: hidden;
     text-indent: 101%; }
-    /* line 362, ../../sass/lib/_shared.sass */
+    /* line 363, ../../sass/lib/_shared.sass */
     #F-Toggle-Options a.a-options span {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
       opacity: 0.7;
@@ -2543,12 +2536,12 @@ ul.options-select {
       width: 20px;
       display: block;
       background: url(../../images/redo/icons/down-arrow.png) no-repeat center -21px; }
-    /* line 369, ../../sass/lib/_shared.sass */
+    /* line 370, ../../sass/lib/_shared.sass */
     #F-Toggle-Options a.a-options:hover span {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
       opacity: 1; }
 
-/* line 371, ../../sass/lib/_shared.sass */
+/* line 372, ../../sass/lib/_shared.sass */
 #F-Toggle-List {
   display: none;
   position: absolute;
@@ -2556,7 +2549,7 @@ ul.options-select {
   top: 22px;
   padding: 6px 10px;
   min-width: 150px; }
-  /* line 379, ../../sass/lib/_shared.sass */
+  /* line 380, ../../sass/lib/_shared.sass */
   #F-Toggle-List:after {
     content: "";
     -webkit-border-radius: 3px 3px 0 0;
@@ -2573,21 +2566,21 @@ ul.options-select {
     top: -22px;
     right: 0;
     cursor: pointer; }
-  /* line 391, ../../sass/lib/_shared.sass */
+  /* line 392, ../../sass/lib/_shared.sass */
   #F-Toggle-List a {
     color: #a9c1bf;
     text-decoration: none;
     padding: 5px 0;
     display: block;
     border-bottom: dotted 1px #3b6461; }
-    /* line 397, ../../sass/lib/_shared.sass */
+    /* line 398, ../../sass/lib/_shared.sass */
     #F-Toggle-List a:hover {
       color: white; }
-  /* line 399, ../../sass/lib/_shared.sass */
+  /* line 400, ../../sass/lib/_shared.sass */
   #F-Toggle-List li:last-child a {
     border-bottom: none; }
 
-/* line 405, ../../sass/lib/_shared.sass */
+/* line 406, ../../sass/lib/_shared.sass */
 .m-breadcrumbs form.l-right {
   background-color: #f9f9f9;
   margin: 2px 0;
@@ -2597,8 +2590,9 @@ ul.options-select {
   position: relative;
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.28);
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.28);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.28); }
-  /* line 416, ../../sass/lib/_shared.sass */
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.28);
+  z-index: 5; }
+  /* line 418, ../../sass/lib/_shared.sass */
   .m-breadcrumbs form.l-right input[type=text] {
     border: none;
     background-color: #f9f9f9;
@@ -2607,7 +2601,7 @@ ul.options-select {
     margin-right: 20px;
     width: 95%;
     padding: 3px 2% 3px 3%; }
-  /* line 424, ../../sass/lib/_shared.sass */
+  /* line 426, ../../sass/lib/_shared.sass */
   .m-breadcrumbs form.l-right input[type=submit] {
     position: absolute;
     top: 3px;
@@ -2629,7 +2623,7 @@ ul.options-select {
   padding-top: 0.5%;
   padding-bottom: 0.5%;
   background-color: white;
-  border-bottom: solid 1px #e0e0e0; }
+  border-bottom: dotted 1px #e0e0e0; }
   /* line 16, ../../sass/lib/_layout.sass */
   .m-breadcrumbs ul {
     margin: 7px 0;
@@ -4388,6 +4382,24 @@ a#dis-preview-btn.preview {
   -webkit-box-shadow: #737373 0 1px 25px, #595959 0 1px 5px;
   -moz-box-shadow: #737373 0 1px 25px, #595959 0 1px 5px;
   box-shadow: #737373 0 1px 25px, #595959 0 1px 5px; }
+
+/* line 152, ../../sass/forums/_reply-editor.sass */
+span.error .error {
+  display: block;
+  color: #ff3232;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1;
+  padding: 10px;
+  padding: 1rem;
+  margin: 15px 0;
+  margin:  1.5rem 0;
+  background-color: rgba(255, 50, 50, 0.11); }
 
 /* line 2, ../../sass/forums/_thread-answer-marker.sass */
 .dis-post-answer {
