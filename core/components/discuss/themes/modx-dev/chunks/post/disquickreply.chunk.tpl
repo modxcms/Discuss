@@ -24,37 +24,3 @@
     </div>
     [[+discuss.error_panel]]
 </form>
-
-
-
-
-
-[[- <!--<div class="h-group below-wysi">
-        <div class="l-left">
-            <label for="dis-attachment">[[%discuss.attachments]]:
-                <span class="error">[[+error.attachments]]</span>
-            </label>
-            <input type="file" class="dis-attachment-input" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
-
-            <div id="dis-attachments"></div>
-            [[+attachments:notempty=`
-                <div class="dis-existing-attachments">
-                    <ul class="dis-attachments">[[+attachments]]</ul>
-                </div>
-            `]]
-
-            <a href="javascript:void(0);" class="dis-add-attachment">[[%discuss.attachment_add]] <span>([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span></a>
-        </div>
-
-        <div class="dis-form-buttons l-right">
-            <a class="cancel" onclick="location.href='[[+url]]';" />[[%discuss.cancel]]</a>
-            <input type="submit" name="dis-post-reply" value="[[%discuss.post_[[+action]]]]" />
-            <div class="group">
-                [[+locked_cb]]
-                [[+sticky_cb]]
-                <label class="dis-cb">
-                    <input type="checkbox" name="notify" value="1" checked="checked" />[[%discuss.subscribe_by_email]]
-                </label>
-            </div>
-        </div>
-    </div> -->]]
