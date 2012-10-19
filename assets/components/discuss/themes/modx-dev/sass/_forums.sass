@@ -468,7 +468,7 @@ section.group
         padding-bottom: 10px
 
 .dis-thread-info
-    margin: 1px 0 0 240px
+    margin: 1px 0 0 260px
     float: left
     color: #000
     +rem('font-size', 13px)
@@ -492,7 +492,7 @@ section.group
 
 
 .m-dis-thread-type
-    margin: 10px 0
+    +rem('margin', 5px 0 10px 0)
 
 .dis-form
     .dis-new-thread-title
@@ -508,8 +508,8 @@ section.group
         position: relative
         label
             position: absolute
-            top: 24px !important
-            left: 14px !important
+            top: 16px
+            left: 14px
 .twelve-form
     .dis-form
         label
@@ -518,6 +518,7 @@ section.group
             opacity: .99
             +rem('font-size', 15px)
 .m-dis-discussion, .m-dis-question
+    +rem('margin', 0px)
     @extend %btn-secondary-alt-cta
     @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%))
     padding-left: 23px
@@ -542,7 +543,6 @@ section.group
         input
             display: none
 
-.m
 
 
 // new thread view
