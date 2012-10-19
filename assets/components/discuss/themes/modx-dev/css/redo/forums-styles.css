@@ -288,11 +288,6 @@ ul.dis-attachments {
   background-color: transparent;
   overflow-x: auto; }
 
-/* line 902, ../../sass/lib/_index-css.scss */
-.dis-ul {
-  margin-top: 0;
-  margin-bottom: 0; }
-
 /* line 1036, ../../sass/lib/_index-css.scss */
 .loginLegend {
   display: none; }
@@ -301,72 +296,15 @@ ul.dis-attachments {
 .dis-form .dis-cb input {
   margin: 5px; }
 
-/* line 1045, ../../sass/lib/_index-css.scss */
-.dis-form input,
-.dis-form label {
-  margin: 5px 0 0 25px;
-  display: inline-block;
-  float: none;
-  clear: both; }
-
-/* line 1052, ../../sass/lib/_index-css.scss */
-.dis-form label {
-  margin: 10px 0 0 25px; }
-
 /* line 1056, ../../sass/lib/_index-css.scss */
 .dis-form input.dis-action-btn {
   clear: none;
   float: none;
   display: inline-block; }
 
-/* line 1062, ../../sass/lib/_index-css.scss */
-input[type="checkbox"] {
-  display: inline-block;
-  margin: 0 5px 0 0; }
-
-/* line 1067, ../../sass/lib/_index-css.scss */
-.dis-thread-posts p {
-  margin: 5px 0 20px 20px; }
-
-/* line 1071, ../../sass/lib/_index-css.scss */
-.dis-form p {
-  color: #666666;
-  padding: 5px 20px; }
-
-/* line 1076, ../../sass/lib/_index-css.scss */
-.dis-form hr {
-  float: left;
-  margin: 20px 0 30px; }
-
-/* line 1081, ../../sass/lib/_index-css.scss */
-.label-inline-td {
-  margin-left: 5px; }
-
-/* line 1085, ../../sass/lib/_index-css.scss */
-.label-inline-th {
-  width: 150px;
-  text-align: right; }
-
-/* line 1090, ../../sass/lib/_index-css.scss */
-.dis-post-body {
-  text-align: left; }
-
 /* line 1094, ../../sass/lib/_index-css.scss */
 .dis-existing-attachments {
   margin: 10px 20px; }
-
-/* line 1099, ../../sass/lib/_index-css.scss */
-.dis-profile textarea,
-#dis-thread-message {
-  display: block;
-  height: 150px;
-  width: 600px;
-  margin: 0 0 0 26px; }
-
-/* line 1106, ../../sass/lib/_index-css.scss */
-h4 a.normal-type {
-  font-weight: normal;
-  font-size: 12px; }
 
 /*.preview_toggle {
 	border-radius: 4px 4px 0px 0px;
@@ -381,17 +319,6 @@ h4 a.normal-type {
     margin: 10px 0 5px 25px;
  	behavior:url(pie.htc);
 	}*/
-/* line 1212, ../../sass/lib/_index-css.scss */
-div#overlay-20 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: transparent url(../images/20-percent.png) repeat 0 0;
-  width: 100%;
-  height: 100%;
-  z-index: 540;
-  display: none; }
-
 /* syntax-highlighter shCore.css */
 /* line 13, ../../sass/lib/_jquery-ui-1.8.16.custom.scss */
 .ui-helper-hidden {
@@ -2570,7 +2497,18 @@ ul.options-select {
   #F-Toggle-List li:last-child a {
     border-bottom: none; }
 
-/* line 406, ../../sass/lib/_shared.sass */
+/* line 405, ../../sass/lib/_shared.sass */
+.dis-form label, .dis-form input {
+  display: block;
+  float: none;
+  clear: both; }
+
+/* line 409, ../../sass/lib/_shared.sass */
+input[type="checkbox"] {
+  display: inline-block;
+  margin: 0 5px 0 0; }
+
+/* line 415, ../../sass/lib/_shared.sass */
 .m-breadcrumbs form.l-right {
   background-color: #f9f9f9;
   margin: 2px 0;
@@ -2582,7 +2520,7 @@ ul.options-select {
   -moz-box-shadow: inset 1px 1px 0, 0, 0, rgba(0, 0, 0, 0.28);
   box-shadow: inset 1px 1px 0, 0, 0, rgba(0, 0, 0, 0.28);
   z-index: 5; }
-  /* line 418, ../../sass/lib/_shared.sass */
+  /* line 427, ../../sass/lib/_shared.sass */
   .m-breadcrumbs form.l-right input[type=text] {
     border: none;
     background-color: #f9f9f9;
@@ -2591,10 +2529,10 @@ ul.options-select {
     margin-right: 20px;
     width: 95%;
     padding: 3px 2% 3px 3%; }
-    /* line 426, ../../sass/lib/_shared.sass */
+    /* line 435, ../../sass/lib/_shared.sass */
     .m-breadcrumbs form.l-right input[type=text]:focus {
       outline: none; }
-  /* line 428, ../../sass/lib/_shared.sass */
+  /* line 437, ../../sass/lib/_shared.sass */
   .m-breadcrumbs form.l-right input[type=submit] {
     position: absolute;
     top: 3px;
@@ -4276,6 +4214,7 @@ a#dis-preview-btn.preview {
 /* line 72, ../../sass/forums/_reply-editor.sass */
 .dis-form textarea {
   width: 96.8% !important;
+  height: 2500px;
   margin: 0 !important;
   padding: 1.6% !important;
   font-size: 15px;
@@ -4286,37 +4225,37 @@ a#dis-preview-btn.preview {
   transition: height 0.2s;
   -webkit-transition: height 0.2s;
   -moz-transition: height 0.2s; }
-  /* line 84, ../../sass/forums/_reply-editor.sass */
+  /* line 85, ../../sass/forums/_reply-editor.sass */
   .dis-form textarea:focus {
     outline: none;
     border-top: none; }
-  /* line 87, ../../sass/forums/_reply-editor.sass */
+  /* line 88, ../../sass/forums/_reply-editor.sass */
   .dis-form textarea:hover {
     border: none; }
 
-/* line 90, ../../sass/forums/_reply-editor.sass */
+/* line 91, ../../sass/forums/_reply-editor.sass */
 .below-wysi {
   padding: 7px 0;
   padding:  0.7rem 0; }
-  /* line 92, ../../sass/forums/_reply-editor.sass */
+  /* line 93, ../../sass/forums/_reply-editor.sass */
   .below-wysi .dis-form-buttons {
     text-align: right; }
-    /* line 94, ../../sass/forums/_reply-editor.sass */
+    /* line 95, ../../sass/forums/_reply-editor.sass */
     .below-wysi .dis-form-buttons .group {
       margin: 7px 0;
       margin:  0.7rem 0; }
-  /* line 96, ../../sass/forums/_reply-editor.sass */
+  /* line 97, ../../sass/forums/_reply-editor.sass */
   .below-wysi .dis-attachment-input {
     clear: both;
     display: block;
     margin: 5px 0 5px 0; }
 
-/* line 101, ../../sass/forums/_reply-editor.sass */
+/* line 102, ../../sass/forums/_reply-editor.sass */
 #dis-attachments input {
   margin-left: 0;
   margin-bottom: 5px; }
 
-/* line 104, ../../sass/forums/_reply-editor.sass */
+/* line 105, ../../sass/forums/_reply-editor.sass */
 .dis-add-attachment {
   background: url(../../images/redo/icons/plus-icon.png) no-repeat 0 5px;
   font-size: 15px;
@@ -4327,33 +4266,33 @@ a#dis-preview-btn.preview {
   padding:  0.1rem 0 0.1rem 1.8rem;
   display: block;
   font-weight: bold; }
-  /* line 111, ../../sass/forums/_reply-editor.sass */
+  /* line 112, ../../sass/forums/_reply-editor.sass */
   .dis-add-attachment span {
     font-weight: normal;
     font-size: 12px;
     font-size: 1.2rem; }
 
-/* line 115, ../../sass/forums/_reply-editor.sass */
+/* line 116, ../../sass/forums/_reply-editor.sass */
 .dis-post-content {
   font-size: 14px;
   line-height: 1.5; }
-  /* line 118, ../../sass/forums/_reply-editor.sass */
+  /* line 119, ../../sass/forums/_reply-editor.sass */
   .dis-post-content strong {
     font-weight: 700; }
-  /* line 120, ../../sass/forums/_reply-editor.sass */
+  /* line 121, ../../sass/forums/_reply-editor.sass */
   .dis-post-content em {
     font-style: italic; }
-  /* line 122, ../../sass/forums/_reply-editor.sass */
+  /* line 123, ../../sass/forums/_reply-editor.sass */
   .dis-post-content ul {
     list-style: disc; }
-  /* line 124, ../../sass/forums/_reply-editor.sass */
+  /* line 125, ../../sass/forums/_reply-editor.sass */
   .dis-post-content ol {
     list-style: decimal; }
-  /* line 126, ../../sass/forums/_reply-editor.sass */
+  /* line 127, ../../sass/forums/_reply-editor.sass */
   .dis-post-content ul, .dis-post-content ol {
     padding: 0 0 0 1em; }
 
-/* line 130, ../../sass/forums/_reply-editor.sass */
+/* line 131, ../../sass/forums/_reply-editor.sass */
 .dis-post-preview .dis-post-header .dis-message-cancel.l-right {
   float: right;
   margin: -0.2em 1.2em 0 0;
@@ -4362,7 +4301,7 @@ a#dis-preview-btn.preview {
   -moz-box-shadow: none;
   box-shadow: none; }
 
-/* line 137, ../../sass/forums/_reply-editor.sass */
+/* line 138, ../../sass/forums/_reply-editor.sass */
 #dis-message-preview {
   background-color: white;
   display: none;
@@ -4381,7 +4320,7 @@ a#dis-preview-btn.preview {
   -moz-box-shadow: #737373 0 1px 25px, #595959 0 1px 5px;
   box-shadow: #737373 0 1px 25px, #595959 0 1px 5px; }
 
-/* line 152, ../../sass/forums/_reply-editor.sass */
+/* line 153, ../../sass/forums/_reply-editor.sass */
 span.error .error {
   display: block;
   color: #ff3232;
