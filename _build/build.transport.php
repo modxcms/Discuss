@@ -85,7 +85,24 @@ $category->addMany($snippets);
 $modx->log(modX::LOG_LEVEL_INFO,'Packaging in plugins...');
 $plugins = include $sources['data'].'transport.plugins.php';
 if (empty($plugins)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in plugins.');
-$category->addMany($plugins);
+
+$attributes= array(
+    xPDOTransport::UNIQUE_KEY => 'name',
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+        'PluginEvents' => array(
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false,
+            xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
+        ),
+    ),
+);
+foreach ($plugins as $plugin) {
+    $vehicle = $builder->createVehicle($plugin, $attributes);
+    $builder->putVehicle($vehicle);
+}
 
 /* add chunks */
 /*$modx->log(modX::LOG_LEVEL_INFO,'Packaging in chunks...');

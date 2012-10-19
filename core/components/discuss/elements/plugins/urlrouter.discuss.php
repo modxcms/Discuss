@@ -61,7 +61,7 @@ if (!is_array($manifest)) {
 if (!function_exists('sorter')) {
     function sorter($a, $b)
     {
-        return strlen($a) - strlen($b);    
+        return strlen($b) - strlen($a);
     }
 }
 uksort($manifest, "sorter");
