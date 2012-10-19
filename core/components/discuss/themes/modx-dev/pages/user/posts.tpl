@@ -12,10 +12,10 @@
 			    <div class="f1-f2 f-padinall">
 			    	<div class="wrap">[[%discuss.board]]</div>
 			    </div>
-			    <div class="f3-f6 f-padinall">[[%discuss.post]]</div>
-                <div class="f7 f-padinall">[[%discuss.author]]</div>
-                <div class="f8 f-padinall">[[%discuss.posted_on]]</div>
-			    <div class="f9 f-padinall">[[%discuss.thread]] [[%discuss.replies]]</div>
+			    <div class="f3-f6">[[%discuss.post]]</div>
+                <div class="f7">[[%discuss.author]]</div>
+                <div class="f8">[[%discuss.posted_on]]</div>
+			    <div class="f9">[[%discuss.thread]] [[%discuss.replies]]</div>
 			</div>
 		</div> <!-- / m-section_title -->
         [[+posts]]
