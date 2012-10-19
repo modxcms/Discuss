@@ -153,20 +153,20 @@
                 </div>
                 <div class="f2-f3 m-stats">
                     <strong class="m-stats-title">Total:</strong>
-                    <span class="m-stats-single">[[+totalPosts]]</span> [[%discuss.posts]]<br />
-                    <span class="m-stats-single">[[+totalTopics]]</span> [[%discuss.threads]]<br />
-                    <span class="m-stats-single">[[+totalMembers]]</span> [[%discuss.members]]
+                    <span class="m-stats-single">[[%discuss.posts]]:</span> [[+totalPosts]]<br />
+                    <span class="m-stats-single">[[%discuss.threads]]:</span> [[+totalTopics]]<br />
+                    <span class="m-stats-single">[[%discuss.members]]:</span> [[+totalMembers]]
                 </div>
                 <div class="f4-f5 m-stats">
                     <strong class="m-stats-title">Online:</strong>
-                    <span class="m-stats-single">Visitors: [[+totalVisitorsActive]]</span><br />
-                    <span class="m-stats-single">Members: [[+totalMembersActive]]</span><br />
+                    <span class="m-stats-single">Visitors:</span> [[+totalVisitorsActive]]<br />
+                    <span class="m-stats-single">Members:</span> [[+totalMembersActive]]<br />
                 </div>
                 <div class="f6-f7 m-stats">
                     <strong class="m-stats-title">Today:</strong>
-                    <span class="m-stats-single">Visitors: [[+activity.visitors]]</span><br />
-                    <span class="m-stats-single">[[%discuss.threads]]: [[+activity.topics]]</span><br />
-                    <span class="m-stats-single">[[%discuss.replies]]: [[+activity.replies]]</span>
+                    <span class="m-stats-single">Visitors:</span> [[+activity.visitors]]<br />
+                    <span class="m-stats-single">[[%discuss.threads]]:</span> [[+activity.topics]]<br />
+                    <span class="m-stats-single">[[%discuss.replies]]:</span> [[+activity.replies]]
                 </div>
                 <div class="f8-f10">
                     <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>

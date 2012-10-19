@@ -152,13 +152,16 @@ pre
 
 // Footer 2012
 footer
+    background: darken($c-base, 2.5%)
+    border-top: 1px solid lighten($c-base, 10%)
+    +box-shadow(darken($c-base, 35%) 0 0 1px inset, darken($c-base, 15%) 0 2px 2px inset)
     .logo
         width: 170px
     .m-modx_logo
         +rem('margin', 3px 0 0 0)
     // background: url(../../images/bg/section-border-medy-repeat.png) repeat-x left top
     padding: 1.5em 0
-    margin: 5em 0 0 0
+    margin: 8em 0 0 0
     a
         white-space: nowrap
         font-weight: normal

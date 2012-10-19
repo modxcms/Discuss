@@ -371,18 +371,26 @@ ul.dis-attachments
         display: block
 
 .footer-stats
-    font-size: 14px
-    padding-top: 1.2em
-    padding-bottom: 2em
-    margin: 0 0 2em 0
-    border-top: 2px solid darken($c-base, 20%)
-    border-bottom: 1px solid darken($c-base, 20%)
+    +rem('font-size', 14px)
+    +rem('padding', 10px 0)
+    +rem('margin-bottom', 20px)
+    border-bottom: 1px dotted darken($c-base, 20%)
     strong
         font-weight: 700
 .m-stats-title
     display: block
-.m-stats-single
     font-weight: 700
+    color: darken($c-base, 90%)
+    border-bottom: 1px dotted darken($c-base, 20%)
+    +rem('padding-bottom', 2px)
+    +rem('margin-bottom', 5px)
+.m-stats-single
+    color: darken($c-base, 40%)
+    display: inline-block
+    +rem('width', 70px)
+    +rem('margin-right', 6px)
+    +rem('padding', 1px 0)
+
 .m-modx_logo
     background: url(../../images/redo/elements/modx-logo-fixed.png) no-repeat 0 0
     display: block
