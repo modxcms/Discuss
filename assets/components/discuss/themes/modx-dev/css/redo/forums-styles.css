@@ -2402,7 +2402,7 @@ form#newsletter {
 
 /* line 281, ../../sass/lib/_shared.sass */
 .m-user_box {
-  padding: 1em 1em 0 1em; }
+  padding: 1em 0 0 1em; }
   /* line 283, ../../sass/lib/_shared.sass */
   .m-user_box h3 {
     font-size: 17px;
@@ -2445,42 +2445,40 @@ form#newsletter {
   float: right;
   padding: 3px 12px;
   padding:  0.3rem 1.2rem;
-  margin: 0 10px 0 0;
-  margin:  0 1rem 0 0;
   -webkit-border-radius: 30px !important;
   -moz-border-radius: 30px !important;
   -ms-border-radius: 30px !important;
   -o-border-radius: 30px !important;
   border-radius: 30px !important; }
-  /* line 314, ../../sass/lib/_shared.sass */
+  /* line 313, ../../sass/lib/_shared.sass */
   .m-user_tools_logout:hover {
     text-decoration: none !important; }
 
-/* line 316, ../../sass/lib/_shared.sass */
+/* line 315, ../../sass/lib/_shared.sass */
 .m-user_tools_reg_links {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px; }
-  /* line 318, ../../sass/lib/_shared.sass */
+  /* line 317, ../../sass/lib/_shared.sass */
   .m-user_tools_reg_links li {
     margin-left: -4px; }
-    /* line 320, ../../sass/lib/_shared.sass */
+    /* line 319, ../../sass/lib/_shared.sass */
     .m-user_tools_reg_links li:first-child a {
       -webkit-border-radius: 3px 0 0 3px;
       -moz-border-radius: 3px 0 0 3px;
       -ms-border-radius: 3px 0 0 3px;
       -o-border-radius: 3px 0 0 3px;
       border-radius: 3px 0 0 3px; }
-    /* line 322, ../../sass/lib/_shared.sass */
+    /* line 321, ../../sass/lib/_shared.sass */
     .m-user_tools_reg_links li:last-child a {
       -webkit-border-radius: 0 3px 3px 0;
       -moz-border-radius: 0 3px 3px 0;
       -ms-border-radius: 0 3px 3px 0;
       -o-border-radius: 0 3px 3px 0;
       border-radius: 0 3px 3px 0; }
-    /* line 324, ../../sass/lib/_shared.sass */
+    /* line 323, ../../sass/lib/_shared.sass */
     .m-user_tools_reg_links li a {
       background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2b5b57), color-stop(100%, #244d4a));
       background-image: -webkit-linear-gradient(#2b5b57, #244d4a);
@@ -2488,7 +2486,7 @@ form#newsletter {
       background-image: -o-linear-gradient(#2b5b57, #244d4a);
       background-image: linear-gradient(#2b5b57, #244d4a);
       text-decoration: none; }
-      /* line 327, ../../sass/lib/_shared.sass */
+      /* line 326, ../../sass/lib/_shared.sass */
       .m-user_tools_reg_links li a:hover {
         background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #316964), color-stop(100%, #295754));
         background-image: -webkit-linear-gradient(#316964, #295754);
@@ -2496,7 +2494,7 @@ form#newsletter {
         background-image: -o-linear-gradient(#316964, #295754);
         background-image: linear-gradient(#316964, #295754); }
 
-/* line 331, ../../sass/lib/_shared.sass */
+/* line 330, ../../sass/lib/_shared.sass */
 .m-raised-panel-box, .dis-list, .dis-form textarea {
   background-color: white;
   -webkit-border-radius: 3px;
@@ -2510,25 +2508,25 @@ form#newsletter {
   border: 1px solid #e5e5e5;
   border-bottom: 0; }
 
-/* line 342, ../../sass/lib/_shared.sass */
+/* line 341, ../../sass/lib/_shared.sass */
 .m-user_box h3 {
   float: left;
   color: #86a8a5; }
-/* line 345, ../../sass/lib/_shared.sass */
+/* line 344, ../../sass/lib/_shared.sass */
 .m-user_box a {
   text-decoration: none; }
-  /* line 347, ../../sass/lib/_shared.sass */
+  /* line 346, ../../sass/lib/_shared.sass */
   .m-user_box a:hover {
     text-decoration: underline; }
 
-/* line 350, ../../sass/lib/_shared.sass */
+/* line 349, ../../sass/lib/_shared.sass */
 ul.options-select {
   float: left; }
 
-/* line 352, ../../sass/lib/_shared.sass */
+/* line 351, ../../sass/lib/_shared.sass */
 #F-Toggle-Options {
   position: relative; }
-  /* line 354, ../../sass/lib/_shared.sass */
+  /* line 353, ../../sass/lib/_shared.sass */
   #F-Toggle-Options a.a-options {
     margin: 0 0 0 10px;
     display: block;
@@ -2537,7 +2535,7 @@ ul.options-select {
     width: 20px;
     overflow: hidden;
     text-indent: 101%; }
-    /* line 363, ../../sass/lib/_shared.sass */
+    /* line 362, ../../sass/lib/_shared.sass */
     #F-Toggle-Options a.a-options span {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
       opacity: 0.7;
@@ -2545,12 +2543,12 @@ ul.options-select {
       width: 20px;
       display: block;
       background: url(../../images/redo/icons/down-arrow.png) no-repeat center -21px; }
-    /* line 370, ../../sass/lib/_shared.sass */
+    /* line 369, ../../sass/lib/_shared.sass */
     #F-Toggle-Options a.a-options:hover span {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
       opacity: 1; }
 
-/* line 372, ../../sass/lib/_shared.sass */
+/* line 371, ../../sass/lib/_shared.sass */
 #F-Toggle-List {
   display: none;
   position: absolute;
@@ -2558,7 +2556,7 @@ ul.options-select {
   top: 22px;
   padding: 6px 10px;
   min-width: 150px; }
-  /* line 380, ../../sass/lib/_shared.sass */
+  /* line 379, ../../sass/lib/_shared.sass */
   #F-Toggle-List:after {
     content: "";
     -webkit-border-radius: 3px 3px 0 0;
@@ -2575,17 +2573,17 @@ ul.options-select {
     top: -22px;
     right: 0;
     cursor: pointer; }
-  /* line 392, ../../sass/lib/_shared.sass */
+  /* line 391, ../../sass/lib/_shared.sass */
   #F-Toggle-List a {
     color: #a9c1bf;
     text-decoration: none;
     padding: 5px 0;
     display: block;
     border-bottom: dotted 1px #3b6461; }
-    /* line 398, ../../sass/lib/_shared.sass */
+    /* line 397, ../../sass/lib/_shared.sass */
     #F-Toggle-List a:hover {
       color: white; }
-  /* line 400, ../../sass/lib/_shared.sass */
+  /* line 399, ../../sass/lib/_shared.sass */
   #F-Toggle-List li:last-child a {
     border-bottom: none; }
 
