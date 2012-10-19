@@ -86,7 +86,9 @@ if (!function_exists('url_parser')) {
                                 if ($position===0) {
                                     $file = $discuss->request->getControllerFile($action);
                                     if (file_exists($file["file"]) && !is_dir($file["file"])) {
-                                        $parameters['action'] = $action;
+                                        if (!empty($action)) {
+                                            $parameters['action'] = $action;
+                                        }
                                         $request = trim(substr($request, strlen($action)), '/');
                                         $matched++;
                                     }
@@ -96,7 +98,9 @@ if (!function_exists('url_parser')) {
                                     while (!empty($actionname)) {
                                         $file = $discuss->request->getControllerFile($actionname);
                                         if (file_exists($file["file"]) && !is_dir($file["file"])) {
-                                            $parameters['action'] = $actionname;
+                                            if (!empty($actionname)) {
+                                                $parameters['action'] = $actionname;
+                                            }
                                             $request = trim(substr($request, strlen($actionname)), '/');
                                             $matched++;
                                             break;
@@ -112,7 +116,9 @@ if (!function_exists('url_parser')) {
                                     $position = strlen($request);
                                 }
                                 $data = substr($request, 0, $position);
-                                $parameters[$param['key']] = $data;
+                                if (!empty($data)) {
+                                    $parameters[$param['key']] = $data;
+                                }
                                 $request = trim(substr($request, $position), '/');
                                 $matched++;
                                 break;
@@ -154,6 +160,12 @@ foreach ($manifest as $key => $value) {
             break;
         }
     }
+    elseif (strpos($request, $key)===0) {
+        $parsed = url_parser($key, $request, $manifest['global']['furl'], $discuss);
+        if (is_array($parsed)) {
+            break;
+        }
+    }
 }
 if (!is_array($parsed)) {
     $parsed = url_parser('global', $request, $manifest['global']['furl'], $discuss);
@@ -164,10 +176,8 @@ if (!is_array($parsed)) {
 
 foreach($parsed as $paramkey => $paramvalue) {
     $modx->request->parameters['GET'][$paramkey]=$paramvalue;
-    $_GET[$paramkey]=$paramvalue;
     if(empty($modx->request->parameters['POST'][$paramkey])) {
         $modx->request->parameters['REQUEST'][$paramkey]=$paramvalue;
-        $_REQUEST[$paramkey]=$paramvalue;
     }
 }
 $modx->sendForward($modx->getOption('discuss.forums_resource_id'));
