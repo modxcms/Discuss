@@ -234,7 +234,10 @@ class disPost extends xPDOSimpleObject {
     public function index() {
         if (defined('DISCUSS_IMPORT_MODE') && DISCUSS_IMPORT_MODE) return true;
         $indexed = false;
-        if ($this->xpdo->discuss->loadSearch()) {
+        if(!isset($this->xpdo->discuss->search)) {
+            $this->xpdo->discuss->loadSearch();
+        }
+        if (isset($this->xpdo->discuss->search) && is_object(isset($this->xpdo->discuss->search))) {
             $postArray = $this->toArray();
             $postArray['url'] = $this->getUrl();
             if (empty($postArray['username'])) {
