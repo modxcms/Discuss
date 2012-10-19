@@ -67,19 +67,19 @@
     border: 1px solid #5b7f10
     @include border-radius($radius-sm)
     @include background-clip()
-    background-color: #9fc54f
-    @include box-shadow(0 0 5px rgba($c-dark-bg,.56), inset 0 1px 0 rgba(255,255,255,.49))
+    background-color: $c-dark-bg
+    @include box-shadow(inset 0 1px 0 rgba(255,255,255,.49))
     @include background-image(linear-gradient(bottom, darken($c-dark-bg, 15%) 0%, $c-dark-bg 73%, $c-dark-bg 100%))
     cursor: pointer
     &:hover
         @include text-shadow(0 1px 0 rgba(0,0,0,.9))
         @include text-shadow(0 0 3px rgba(0,0,0,.8))
-        background-color: #9fc54f
+        background-color: lighten($c-dark-bg, 10%)
         @include box-shadow(0 0 7px rgba(saturate($c-dark-bg, 20%),.96), inset 0 1px 0 rgba(255,255,255,.49))
         @include background-image(linear-gradient(bottom, darken($c-dark-bg, 9%) 0%, lighten($c-dark-bg, 10%) 73%, lighten($c-dark-bg, 10%) 100%))
         text-decoration: none
     &:active
-        background-color: #9fc54f
+        background-color: darken($c-dark-bg, 10%)
         @include box-shadow(0 0 5px rgba(170,208,86,.56), inset 0 -1px 4px rgba(0,0,0,.2))
         @include background-image(linear-gradient(bottom, #9fc54f 0%, #9fc54f 27%, #7da133 100%))
         @include background-image(linear-gradient(bottom, darken($c-dark-bg, 0%) 0%, darken($c-dark-bg, 10%) 73%, darken($c-dark-bg, 12%) 100%))
