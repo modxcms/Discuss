@@ -68,9 +68,9 @@
 // 	line-height: 0px;
 // 	}
 
-.clearfix:after  { content:"."; display:block; height:0; clear:both; visibility:hidden; }
-.clearfix { zoom:1; }
-br.clearfix  {display:block; height:0; clear:both; visibility:hidden; }
+// .clearfix:after  { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+// .clearfix { zoom:1; }
+// br.clearfix  {display:block; height:0; clear:both; visibility:hidden; }
 
 // ul, ol {
 // 	list-style-type: none;
@@ -539,9 +539,9 @@ br.clearfix  {display:block; height:0; clear:both; visibility:hidden; }
 // 	}
 
 	
-form input[type="radio"] {
-	margin: 0 0;
-	}
+// form input[type="radio"] {
+// 	margin: 0 0;
+// 	}
 	
 /* Main List Display  */
 /*.dis-threads-header h2 {
@@ -554,31 +554,31 @@ form input[type="radio"] {
  	position: relative;
 	}*/
 
-div.dis-threads {
- 	width: 100%;
- 	}
+// div.dis-threads {
+//  	width: 100%;
+//  	}
 
-ul.dis-post-preview,	
-ul.dis-list {
-	list-style-type: none;
-	}
+// ul.dis-post-preview,	
+// ul.dis-list {
+// 	list-style-type: none;
+// 	}
 
-ul.dis-list li { 
-    border-bottom: 1px solid #eee;
-    margin: 0 25px 0 0;
-    padding: 0 0;
-    }
+// ul.dis-list li { 
+//     border-bottom: 1px solid #eee;
+//     margin: 0 25px 0 0;
+//     padding: 0 0;
+//     }
     
-ul.dis-list li.Item {
-	margin: 0;
-	padding: 4px 0;
-	}
+// ul.dis-list li.Item {
+// 	margin: 0;
+// 	padding: 4px 0;
+// 	}
 
-ul.dis-list li h3 {
-	margin: 0 0;
-	padding: 0 0;
-	font-weight: normal;
-	}
+// ul.dis-list li h3 {
+// 	margin: 0 0;
+// 	padding: 0 0;
+// 	font-weight: normal;
+// 	}
 
 // .dis-profile h1,
 // .dis-threads h1,
@@ -620,25 +620,25 @@ ul.dis-list li h3 {
 //  	behavior:url(pie.htc);
 // 	}
 
-a:hover span.Title {
-	color: #d9742a;
-    -moz-transition:all .4s ease;
-    -webkit-transition:all .4s ease;
-    transition:all .4s ease;
- 	behavior:url(pie.htc);
-	}
+// a:hover span.Title {
+// 	color: #d9742a;
+//     -moz-transition:all .4s ease;
+//     -webkit-transition:all .4s ease;
+//     transition:all .4s ease;
+//  	behavior:url(pie.htc);
+// 	}
 
-.message-description,
-.CategoryDescription {
-	color: #555;
-	padding: 4px 0 0;
-	margin: 0 0;
-	}
+// .message-description,
+// .CategoryDescription {
+// 	color: #555;
+// 	padding: 4px 0 0;
+// 	margin: 0 0;
+// 	}
 	
-span.DiscussionCount {
-	color: #aaa;
-    font-size: 13px;
-	}
+// span.DiscussionCount {
+// 	color: #aaa;
+//     font-size: 13px;
+// 	}
 	
 /*.dis-read {
 	opacity:.40;
@@ -872,31 +872,31 @@ span.DiscussionCount {
 // 	margin: 0 0 30px 30px;
 // 	}
 	
-ul.dis-attachments {
-	display: block;
-	padding: 5px 0;
-	border-top: 1px solid #dedede;
-	border-bottom: 1px solid #dedede;
-	}	
+// ul.dis-attachments {
+// 	display: block;
+// 	padding: 5px 0;
+// 	border-top: 1px solid #dedede;
+// 	border-bottom: 1px solid #dedede;
+// 	}	
 	
-.dis-attachments li {
-	text-align: left;
-	}
+// .dis-attachments li {
+// 	text-align: left;
+// 	}
 	
-.dis-attachments li a {
-	margin: 20px 0 0 0;
-	padding-left: 15px;
-	background: transparent url(../images/attachment.png) no-repeat 0 2px;
-	}
+// .dis-attachments li a {
+// 	margin: 20px 0 0 0;
+// 	padding-left: 15px;
+// 	background: transparent url(../images/attachment.png) no-repeat 0 2px;
+// 	}
 	
-#dis-attachments label {
-	display: none;
-	}
+// #dis-attachments label {
+// 	display: none;
+// 	}
 
-.dis-code {
-	background-color: transparent;
-	overflow-x: auto;
-	}
+// .dis-code {
+// 	background-color: transparent;
+// 	overflow-x: auto;
+// 	}
 
 
 // .dis-ul {
@@ -1033,13 +1033,13 @@ ul.dis-attachments {
 // 	margin: 20px 0 0 0;
 // 	}
 	
-.loginLegend {
-	display: none;
-	}
+// .loginLegend {
+// 	display: none;
+// 	}
 
 
  	
-.dis-form .dis-cb input { margin: 5px; }
+// .dis-form .dis-cb input { margin: 5px; }
 
 // .dis-form input,
 // .dis-form label {
@@ -1053,11 +1053,11 @@ ul.dis-attachments {
 // 	margin: 10px 0 0 25px;
 // 	}
 
-.dis-form input.dis-action-btn {
-	clear: none;
-	float: none;
-	display: inline-block;
-	}
+// .dis-form input.dis-action-btn {
+// 	clear: none;
+// 	float: none;
+// 	display: inline-block;
+// 	}
 
 // input[type="checkbox"] {
 // 	display: inline-block;
@@ -1091,9 +1091,9 @@ ul.dis-attachments {
 // 	text-align: left;
 // 	}
 
-.dis-existing-attachments {
-	margin: 10px 20px;
-	}
+// .dis-existing-attachments {
+// 	margin: 10px 20px;
+// 	}
 
 // .dis-profile textarea,
 // #dis-thread-message {
