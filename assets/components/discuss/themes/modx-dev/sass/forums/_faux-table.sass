@@ -25,14 +25,19 @@
         display: inline-block
 
     // Green button used to either just to post or jump to login
-    .action-buttons, .Button, .post-box .dis-action-login
+    .Button, .post-box .dis-action-login
+        display: inline-block
+    .action-buttons
+        @extend %p-raised-green-dark
         +rem('font-size', 13px)
         display: inline-block
-        margin-top: .4em
+        +rem('margin', 5px 0 0 10px)
+        font-weight: 500
     .action-buttons+.action-buttons
         margin-left: .25em
     .post-box a.Button
-        @extend .a-primary-cta
+        @extend %p-raised-green-dark
+
 
 
 .row+.dis-cat-header
@@ -234,6 +239,24 @@ header.dis-cat-header
         &.header-row
             &:hover
                 border-bottom: 2px solid darken($c-base, 15%)
+
+
+
+// Atempt to vertical align titles
+// .l-table a
+//     display: table
+//     width: 100%
+
+// .l-vmiddle
+//     display: table-cell !important
+//     vertical-align: middle !important
+//     background-color: #eee
+//     float: none !important
+// .l-table
+//     .f1-f7
+//         width: 63% !important
+
+
 
 
 div.m-section_title + div.row

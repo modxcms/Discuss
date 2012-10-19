@@ -244,7 +244,7 @@
       .script("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js").wait()
       .script("[[+discuss.config.jsUrl]]jquery.scrollTo-min.js")
 
-      .script("[[+discuss.config.jsUrl]]jquery-ui-1.8.16.custom.min.js")
+
       .script("[[+discuss.config.jsUrl]]jquery.autosize.js").wait()
       .script("[[+discuss.config.jsUrl]]redo/forums-2012.js")
       .script("[[+discuss.config.jsUrl]]discuss.js").wait()

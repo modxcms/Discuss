@@ -48,19 +48,15 @@
     `]]
 
     <div class="wysi-buttons">[[+buttons]]</div>
-    <textarea name="message" id="dis-thread-message">[[!+fi.message]]</textarea>
+    <div class="h-group"><textarea name="message" id="dis-thread-message">[[!+fi.message]]</textarea></div>
     <span class="error">[[!+fi.error.message]]</span>
 
-    <div class="h-group">
+    <div class="h-group below-wysi">
         <div class="l-left">
             <label for="dis-attachment">[[%discuss.attachments]]:
-                <span class="small"><a href="javascript:void(0);" class="dis-add-attachment">[[%discuss.attachment_add]]</a>
-                <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
                 <span class="error">[[+error.attachments]]</span>
             </label>
-            <input type="file" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
-
-            <br class="clearfix" />
+            <input type="file" class="dis-attachment-input" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
 
             <div id="dis-attachments"></div>
             [[+attachments:notempty=`
@@ -68,16 +64,20 @@
                     <ul class="dis-attachments">[[+attachments]]</ul>
                 </div>
             `]]
+
+            <a href="javascript:void(0);" class="dis-add-attachment">[[%discuss.attachment_add]] <span>([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span></a>
         </div>
 
         <div class="dis-form-buttons l-right">
-            [[+locked_cb]]
-            [[+sticky_cb]]
-            <label class="dis-cb">
-                <input type="checkbox" name="notify" value="1" checked="checked" />[[%discuss.subscribe_by_email]]
-            </label>
-            <input class="cancel" type="button" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+            <a class="cancel" onclick="location.href='[[+url]]';" />[[%discuss.cancel]]</a>
             <input type="submit" name="dis-post-reply" value="[[%discuss.post_[[+action]]]]" />
+            <div class="group">
+                [[+locked_cb]]
+                [[+sticky_cb]]
+                <label class="dis-cb">
+                    <input type="checkbox" name="notify" value="1" checked="checked" />[[%discuss.subscribe_by_email]]
+                </label>
+            </div>
         </div>
     </div>
     [[+discuss.error_panel]]

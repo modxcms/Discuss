@@ -13,21 +13,10 @@
 
 // Primary call to action to be used sparingly. Curently set to be green
 .primary-cta
-    color: #fff
+    @extend %p-raised-green
     margin: 0 0 0 1em
-    border: none // Can remove in future, resetting default styles
     +rem('padding', 5px)
-    +text-shadow(darken($c-dark-bg, 30%) 0 1px 0)
     line-height: 1
-    +border-radius($radius-sm)
-    +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
-    +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
-    &:hover
-        +rem('padding', 5px)
-        +background-image(linear-gradient(lighten($c-dark-bg, 3%), darken($c-dark-bg, 9%)))
-        +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
-.dis-cat-header .action-buttons
-    @extend .primary-cta
 
 .secondary-cta
     color: darken($c-base, 60%)
