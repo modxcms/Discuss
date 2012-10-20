@@ -4,7 +4,6 @@
 
     <input type="hidden" name="thread" value="[[+id]]" />
 
-
     <label for="dis-report-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>
     </label>
@@ -16,9 +15,6 @@
         <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
-
-
-</div><!-- Close Content From Wrapper -->
 
 [[+bottom]]
 
