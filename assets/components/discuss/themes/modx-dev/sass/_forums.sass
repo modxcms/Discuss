@@ -242,6 +242,23 @@ h3.forum
     cite+blockquote
         margin-top: .6em
 
+// attachments
+ul.dis-attachments
+    display: block
+    padding: 5px 0
+    border-top: 1px solid #dedede
+    border-bottom: 1px solid #dedede
+    li
+        text-align: left
+        a
+            margin: 20px 0 0 0
+            padding-left: 15px
+            background: transparent url(../images/attachment.png) no-repeat 0 2px
+
+.dis-code
+    background-color: transparent
+    overflow-x: auto
+
 // Single button actions
 .dis-action-btn
     float: right
@@ -252,7 +269,7 @@ h3.forum
         a
             display: block
         a.dis-post-reply
-            @extend .a-secondary-cta
+            @extend %a-secondary-cta
             +rem('padding', 7px 12px 7px 28px)
             position: relative
             +rem('font-size', 12px)
@@ -354,18 +371,49 @@ h3.forum
         display: block
 
 .footer-stats
-    font-size: 14px
-    padding-top: 1.2em
-    padding-bottom: 2em
-    margin: 0 0 2em 0
-    border-top: 2px solid darken($c-base, 20%)
-    border-bottom: 1px solid darken($c-base, 20%)
+    +rem('font-size', 14px)
+    +rem('padding', 10px 0 35px 0)
+    +rem('margin-bottom', 20px)
+    border-bottom: 1px dotted darken($c-base, 20%)
     strong
         font-weight: 700
+.m-stats
+    li
+        color: darken($c-base, 40%)
+        width: 88%
+        +rem('padding', 1px 0)
+        border-bottom: 1px dotted darken($c-base, 12%)
+        &:last-child
+            border-bottom: none
+        span
+            float: right
+            color: darken($c-base, 90%)
+            font-weight: 700
+
 .m-stats-title
     display: block
-.m-stats-single
     font-weight: 700
+    color: darken($c-base, 90%)
+    border-bottom: 1px dotted darken($c-base, 30%)
+    +rem('padding-bottom', 2px)
+    +rem('margin-bottom', 5px)
+    width: 88%
+
+.m-stats-liveg
+    position: relative
+    .m-stats-group
+        margin-right: 120px
+    .modx-live
+        width: 110px
+        display: block
+        position: absolute
+        top: 0
+        right: 0
+        margin-right: 12px
+        img
+            width: 100%
+
+
 .m-modx_logo
     background: url(../../images/redo/elements/modx-logo-fixed.png) no-repeat 0 0
     display: block
@@ -385,14 +433,12 @@ h3.forum
 
 // General action buttons for submit forms
 .a-primary-btn
-    @extend .primary-cta
+    @extend %a-primary-cta-raised
     +rem('padding', 10px 15px)
     +rem('font-size', 15px)
     clear: both
     display: inline-block
     cursor: pointer
-    &:hover
-        +rem('padding', 10px 15px)
 
 
 // Reply
@@ -470,7 +516,7 @@ section.group
         padding-bottom: 10px
 
 .dis-thread-info
-    margin: 1px 0 0 240px
+    margin: 1px 0 0 260px
     float: left
     color: #000
     +rem('font-size', 13px)
@@ -494,7 +540,7 @@ section.group
 
 
 .m-dis-thread-type
-    margin: 10px 0
+    +rem('margin', 5px 0 10px 0)
 
 .dis-form
     .dis-new-thread-title
@@ -510,8 +556,8 @@ section.group
         position: relative
         label
             position: absolute
-            top: 24px !important
-            left: 14px !important
+            top: 16px
+            left: 14px
 .twelve-form
     .dis-form
         label
@@ -520,6 +566,7 @@ section.group
             opacity: .99
             +rem('font-size', 15px)
 .m-dis-discussion, .m-dis-question
+    +rem('margin', 0px)
     @extend %btn-secondary-alt-cta
     @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%))
     padding-left: 23px
@@ -544,7 +591,6 @@ section.group
         input
             display: none
 
-.m
 
 
 // new thread view

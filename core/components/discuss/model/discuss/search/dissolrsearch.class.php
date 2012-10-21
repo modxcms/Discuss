@@ -162,7 +162,7 @@ class disSolrSearch extends disSearch {
      * @param array $fields
      * @return bool
      */
-    public function index($fields = array()) {
+    public function index(array $fields = array()) {
         $document = new SolrInputDocument();
         $document->addField('id',$fields['id']);
         $document->addField('thread',$fields['thread']);

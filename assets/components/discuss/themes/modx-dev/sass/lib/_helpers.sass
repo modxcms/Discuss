@@ -11,3 +11,18 @@
         display: table
     &:after
         clear: both
+
+.clearfix
+    &:after
+        content: "."
+        display: block
+        height: 0
+        clear: both
+        visibility: hidden
+    zoom: 1
+
+br.clearfix
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden

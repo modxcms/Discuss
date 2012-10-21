@@ -1,0 +1,164 @@
+// Background Patterns
+
+// Color and pattern modules
+.m-raised-dark-bg
+    cursor: pointer
+    +border-radius($radius-sm)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 7%), lighten($c-dark-cool-bg, 5%)))
+    +box-shadow(darken($c-dark-cool-bg, 10%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 12%) 0 1px 0 inset)
+    color: lighten($c-dark-cool-bg, 80%) !important
+    &:hover, &.active
+        +opacity(1.0)
+        +background-image(linear-gradient(lighten($c-dark-cool-bg, 22%), lighten($c-dark-cool-bg, 14%)))
+        +box-shadow(darken($c-dark-cool-bg, 40%) 0 0 3px, darken($c-dark-cool-bg, 40%) 0 1px 0, lighten($c-dark-cool-bg, 32%) 0 1px 0 inset)
+
+.m-raised-dark-bg-alt
+    cursor: pointer
+    +border-radius($radius-sm)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 49%), lighten($c-dark-cool-bg, 10%)))
+    background-color: lighten($c-dark-cool-bg, 10%)
+    +box-shadow(darken($c-dark-cool-bg, 3%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 15%) 0 1px 0 inset)
+    color: lighten($c-dark-cool-bg, 80%) !important
+    &:hover, &.active
+        +opacity(1.0)
+        // +background-image(linear-gradient(lighten($c-dark-cool-bg, 22%), lighten($c-dark-cool-bg, 14%)))
+        +box-shadow(darken($c-dark-cool-bg, 40%) 0 0 3px, darken($c-dark-cool-bg, 40%) 0 1px 0, lighten($c-dark-cool-bg, 32%) 0 1px 0 inset)
+
+// without pseudo classes, could remove using later versions of SASS
+.m-raised-dark-bg-nh
+    cursor: pointer
+    +border-radius($radius-sm)
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 7%), lighten($c-dark-cool-bg, 5%)))
+    +box-shadow(darken($c-dark-cool-bg, 10%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 12%) 0 1px 0 inset)
+    color: lighten($c-dark-cool-bg, 80%) !important
+
+// medium gray gradient
+%m-raised-med-gray,
+.m-raised-med-gray
+    +background-image(linear-gradient(top left, rgba(white, .2), rgba(black, .02)), linear-gradient(darken($c-base, 15%), darken($c-base, 30%)))
+    //+background-image(linear-gradient(lighten($c-dark-cool-bg, 9%), lighten($c-dark-cool-bg, 1%)) !important)
+    +box-shadow(darken($c-base, 9%) 0 1px 0 inset !important)
+    border-top: 1px solid darken($c-base, 15%)
+
+// Green button/tag background
+.a-primary-cta
+    color: #fff
+    +rem('font-size', 13px)
+    margin: 0 0 0 1em
+    border: none // Can remove in future, resetting default styles
+    +rem('padding', 6px)
+    +border-radius($radius-sm)
+    +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
+    +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+    +text-shadow(rgba(black, .8) 0 0 3px, rgba(black, .6) 0 1px 0 )
+    font-weight: 500
+    &:hover
+        text-decoration: none
+        +background-image(linear-gradient(lighten($c-dark-bg, 6%), darken($c-dark-bg, 7%)))
+        +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+
+// Green raised button
+%p-raised-green
+    color: #fff
+    +rem('padding', 6px)
+    font-weight: 500
+    @include text-shadow(0 1px 0 rgba(0,0,0,.52))
+    @include text-shadow(0 0 2px rgba(0,0,0,.3))
+    border: 1px solid #5b7f10
+    @include border-radius($radius-sm)
+    @include background-clip()
+    background-color: $c-dark-bg
+    @include box-shadow(inset 0 1px 0 rgba(255,255,255,.49))
+    @include background-image(linear-gradient(bottom, darken($c-dark-bg, 15%) 0%, $c-dark-bg 73%, $c-dark-bg 100%))
+    cursor: pointer
+    &:hover
+        @include text-shadow(0 1px 0 rgba(0,0,0,.9))
+        @include text-shadow(0 0 3px rgba(0,0,0,.8))
+        background-color: lighten($c-dark-bg, 10%)
+        @include box-shadow(0 0 7px rgba(saturate($c-dark-bg, 20%),.96), inset 0 1px 0 rgba(255,255,255,.49))
+        @include background-image(linear-gradient(bottom, darken($c-dark-bg, 9%) 0%, lighten($c-dark-bg, 10%) 73%, lighten($c-dark-bg, 10%) 100%))
+        text-decoration: none
+    &:active
+        background-color: darken($c-dark-bg, 10%)
+        @include box-shadow(0 0 5px rgba(170,208,86,.56), inset 0 -1px 4px rgba(0,0,0,.2))
+        @include background-image(linear-gradient(bottom, #9fc54f 0%, #9fc54f 27%, #7da133 100%))
+        @include background-image(linear-gradient(bottom, darken($c-dark-bg, 0%) 0%, darken($c-dark-bg, 10%) 73%, darken($c-dark-bg, 12%) 100%))
+
+// Green raised button on dark
+%p-raised-green-dark
+    @extend %p-raised-green
+    @include box-shadow(0 0 5px rgba(darken($c-dark-bg, 40%),.46), inset 0 1px 0 rgba(255,255,255,.49))
+    border: 1px solid darken($c-dark-bg, 60%)
+    &:hover
+        @include box-shadow(0 0 5px rgba(darken($c-dark-bg, 40%),.56), inset 0 1px 0 rgba(255,255,255,.49))
+        border: 1px solid darken($c-dark-bg, 60%)
+
+// orange button
+.a-tertiary-cta
+    @extend .a-primary-cta
+    +background-image(linear-gradient(lighten($c-tertiary, 1%), darken($c-tertiary, 15%)))
+    +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+    &:hover
+        +background-image(linear-gradient(lighten($c-tertiary, 3%), darken($c-tertiary, 15%)))
+        +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+
+
+// Gray despressed button / toggle
+.btn-toggle-normal
+    border: 1px solid rgba(0,0,0,.34)
+    @include border-radius(3px)
+    @include background-clip()
+    background-color: #d5d5d5
+    @include box-shadow(0 1px 0 rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.76))
+    @include background-image(linear-gradient(bottom, #bfbfbf 0%, #cacaca 100%))
+
+.btn-toggle-active
+    border: 1px solid rgba(0,0,0,.64)
+    @include border-radius(3px)
+    @include background-clip()
+    background-color: #d5d5d5
+    @include box-shadow(inset 0 0 0 rgba(255,255,255,.76), inset 0 0 5px rgba(0,0,0,.28))
+    @include background-image(linear-gradient(bottom, #8c8c8c 0%, #737373 100%))
+
+.btn-toggle-bg
+    @include border-radius(247px 3px 3px 3px / 4px 3px 3px 3px)
+    @include background-clip()
+    background-color: #ebebeb
+    @include box-shadow(0 1px 0 #fff, inset 0 1px 0 rgba(0,0,0,.05), inset 0 0 5px rgba(0,0,0,.1))
+
+
+// Green Glow
+%green-glow
+    border: 1px solid darken(saturate($c-dark-bg, 20%), 10%) !important
+    @include box-shadow(0 0 7px rgba(saturate($c-dark-bg, 20%),.96), inset 0 1px 0 rgba(255,255,255,.49))
+
+
+// Light gray action button
+%btn-secondary-alt-cta
+    @extend %btn-reset
+    display: block
+    margin: .9em 0
+    padding: .3em .3em
+    color: #000
+    text-decoration: none
+    border-radius: 3px
+    // straight export from PS, need to better convert
+    font-size: 11px
+    font-weight: bold
+    @include text-shadow(0 1px 0 rgba(255,255,255,.9)) // drop shadow
+    border: 1px solid rgba(15,15,15,.2) // stroke
+    @include border-radius(3px) // border radius
+    @include background-clip() // prevents bg color from leaking outside the border
+    background-color: #ececec // layer fill content
+    @include box-shadow(0 1px 0 rgba(255,255,255,.7), inset 0 1px 0 #fff) // drop shadow and inner shadow
+    @include background-image(linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%)) // gradient overlay
+
+    &:hover
+        background-color: #fff
+        @include text-shadow(0 1px 0 rgba(255,255,255,.9)) // drop shadow
+        border: 1px solid rgba(15,15,15,.2) // stroke
+        @include border-radius(3px) // border radius
+        @include background-clip() // prevents bg color from leaking outside the border
+        background-color: #000 // layer fill content
+        @include box-shadow(0 1px 0 rgba(255,255,255,.7), inset 0 1px 0 #fff) // drop shadow and inner shadow
+        @include background-image(linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%)) // gradient overlay

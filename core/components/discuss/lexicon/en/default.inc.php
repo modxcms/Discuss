@@ -177,6 +177,8 @@ $_lang['discuss.user_show_online'] = 'Show Online';
 $_lang['discuss.user_signature'] = 'Signature';
 $_lang['discuss.user_update'] = 'Update User';
 $_lang['discuss.user_website'] = 'Website';
+
+/* commenting out in prep for moving to proper lexicon file
 $_lang['discuss.user.no_new_posts'] = 'no new posts';
 $_lang['discuss.user.one_new_post'] = '1 new post';
 $_lang['discuss.user.new_posts'] = '[[+total]] new posts';
@@ -192,6 +194,8 @@ $_lang['discuss.user.new_unanswered_questions'] = '[[+total]] unanswered questio
 $_lang['discuss.user.no_no_replies'] = 'no discussions';
 $_lang['discuss.user.one_no_reply'] = '1 discussion';
 $_lang['discuss.user.no_replies'] = '[[+total]] discussions';
+*/
+
 $_lang['discuss.usergroup'] = 'User Group';
 $_lang['discuss.usergroup_access'] = 'User Group Access';
 $_lang['discuss.usergroup_add'] = 'Add User Group';

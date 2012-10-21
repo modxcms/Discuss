@@ -11,10 +11,10 @@
 			    <div class="f1-f2 f-padinall">
 			    	<div class="wrap">From</div>
 			    </div>
-			    <div class="f3-f6 f-padinall">[[%discuss.title]]</div>
-			    <div class="f7 f-padinall">[[%discuss.last_post]]</div>
-			    <div class="f8 f-padinall">Created</div>
-			    <div class="f9 f-padinall">[[%discuss.replies]]</div>
+			    <div class="f3-f6">[[%discuss.title]]</div>
+			    <div class="f7">[[%discuss.last_post]]</div>
+			    <div class="f8">Created</div>
+			    <div class="f9">[[%discuss.replies]]</div>
 			</div>
 		</div> <!-- / m-section_title -->
 		[[+messages]]

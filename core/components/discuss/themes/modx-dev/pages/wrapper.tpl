@@ -154,26 +154,32 @@
                 </div>
                 <div class="f2-f3 m-stats">
                     <strong class="m-stats-title">Total:</strong>
-                    <span class="m-stats-single">[[+totalPosts]]</span> [[%discuss.posts]]<br />
-                    <span class="m-stats-single">[[+totalTopics]]</span> [[%discuss.threads]]<br />
-                    <span class="m-stats-single">[[+totalMembers]]</span> [[%discuss.members]]
+                    <ul>
+                        <li>[[%discuss.posts]]: <span>[[+totalPosts]]</span></li>
+                        <li>[[%discuss.threads]]: <span>[[+totalTopics]]</span></li>
+                        <li>[[%discuss.members]]: <span>[[+totalMembers]]</span></li>
+                    </ul>
                 </div>
                 <div class="f4-f5 m-stats">
                     <strong class="m-stats-title">Online:</strong>
-                    <span class="m-stats-single">Visitors: [[+totalVisitorsActive]]</span><br />
-                    <span class="m-stats-single">Members: [[+totalMembersActive]]</span><br />
+                    <ul>
+                        <li>Visitors: <span>[[+totalVisitorsActive]]</span></li>
+                        <li>Members: <span>[[+totalMembersActive]]</span></li>
+                    </ul>
                 </div>
                 <div class="f6-f7 m-stats">
                     <strong class="m-stats-title">Today:</strong>
-                    <span class="m-stats-single">Visitors: [[+activity.visitors]]</span><br />
-                    <span class="m-stats-single">[[%discuss.threads]]: [[+activity.topics]]</span><br />
-                    <span class="m-stats-single">[[%discuss.replies]]: [[+activity.replies]]</span>
+                    <ul>
+                        <li>Visitors: <span>[[+activity.visitors]]</span></li>
+                        <li>[[%discuss.threads]]: <span>[[+activity.topics]]</span></li>
+                        <li>[[%discuss.replies]]: <span>[[+activity.replies]]</span></li>
+                    </ul>
                 </div>
-                <div class="f8-f10">
-                    <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>
-                    <span class="m-stats-single">[[+activeUsers.users]]</span>
-                </div>
-                <div class="f11-f12 center">
+                <div class="f8-f12 m-stats-liveg">
+                    <div class="m-stats-group">
+                        <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>
+                        <span class="m-stats-single">[[+activeUsers.users]]</span>
+                    </div>
                     <a class="modx-live" href="http://www.modx.com/live">
                         <img src="[[+discuss.config.imagesUrl]]redo/icons/modx-live.png" alt="View Live MODX Activity">
                         <p>modx.com/live</p>
@@ -244,7 +250,6 @@
       .setOptions({"AlwaysPreserveOrder":true})
       .script("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js").wait()
       .script("[[+discuss.config.jsUrl]]jquery.scrollTo-min.js")
-
       .script("[[+discuss.config.jsUrl]]jquery-ui-1.9.0.custom.min.js")
       .script("[[+discuss.config.jsUrl]]jquery.autosize.js").wait()
       .script("[[+discuss.config.jsUrl]]redo/forums-2012.js")

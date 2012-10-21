@@ -72,6 +72,7 @@ a#dis-preview-btn.preview
     textarea
         @extend .m-raised-panel-box
         width: 96.8% !important
+        height: 250px
         margin: 0 !important
         padding: 1.6% !important
         +rem('font-size', 15px)
@@ -87,6 +88,30 @@ a#dis-preview-btn.preview
         &:hover
             border: none
 
+.below-wysi
+    +rem('padding', 7px 0)
+    .dis-form-buttons
+        text-align: right
+        .group
+            +rem('margin', 7px 0)
+    .dis-attachment-input
+        clear: both
+        display: block
+        margin: 5px 0 5px 0
+#dis-attachments
+    input
+        margin-left: 0
+        margin-bottom: 5px
+.dis-add-attachment
+    background: url(../../images/redo/icons/plus-icon.png) no-repeat 0 5px
+    +rem('font-size', 15px)
+    +rem('margin-top', 18px)
+    +rem('padding', 1px 0 1px 18px)
+    display: block
+    font-weight: bold
+    span
+        font-weight: normal
+        +rem('font-size', 12px)
 // Preivew
 .dis-post-content
     font-size: 14px
@@ -123,3 +148,19 @@ a#dis-preview-btn.preview
     z-index: 700
     +border-radius($radius-sm)
     +box-shadow(lighten(#000, 45%) 0 1px 25px, (lighten(#000, 35%) 0 1px 5px))
+
+// error
+span.error .error
+    display: block
+    color: #ff3232
+    +border-radius($radius-sm)
+    +rem('font-size', 13px)
+    line-height: 1
+    +rem('padding', 10px)
+    +rem('margin', 0 0 15px 0)
+    background-color: rgba(#ff3232, .11)
+
+.dis-existing-attachments
+    margin: 10px 20px
+
+
