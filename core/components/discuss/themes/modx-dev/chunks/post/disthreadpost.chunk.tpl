@@ -1,35 +1,33 @@
 <li class="[[+class]] group-fix" id="dis-post-[[+id]]" data-author="[[+author.username:htmlent]]" data-date="[[+createdon_raw]]" data-message="[[+content_raw]]">
-    [[+answer:notempty=`
+    [[+answer:neq=``:then=`
     <div class="dis-post-answer-marker">
-    `:default=`
-    <div class="dis-post-answer-marker dis-post-notanswer">
-    `]]
         [[+answer_count:gt=`1`:then=`
-            [[+answer:notempty=`<nav>
-                [[+answer_prev.id:notempty=`<a href="[[+answer_prev.url]]">Previous</a>`]]
-                [[+answer_next.id:notempty=`<a href="[[+answer_next.url]]" class="next">Next</a>`]]
-            </nav>`]]
+            <nav>
+            [[+answer_prev.link]]
+            [[+answer_next.link]]
+            </nav>
         `:else=``]]
 
-        [[+answer:notempty=`
-            [[+url_mark_as_answer:notempty=`
-            <a href="[[+url_mark_as_answer]]">
-                <span title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
-            </a>
-            `:default=`
-                <span title="[[%discuss.answer]]">[[%discuss.answer]]</span>
-            `]]
-        `:default=`
-            [[+url_mark_as_answer:notempty=`
+        [[+url_mark_as_answer:eq=``:then=`
+            <span title="[[%discuss.answer]]">[[%discuss.answer]]</span>
+        `:else=`
+        <a href="[[+url_mark_as_answer]]">
+            <span title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
+        </a>
+        `]]
+    </div>
+    `:else=`
+        <div class="dis-post-answer-marker dis-post-notanswer">
+            [[+url_mark_as_answer:neq=``:then=`
             <div class="dis-post-answer-marker dis-post-notanswer">
                 <p>[[%discuss.flag_answer]]</p>
-                <a href="[[+url_mark_as_answer]]" title="[[%discuss.flag_answer]]">
+                <a href="[[+url_mark_as_answer]]">
                     <span>[[%discuss.flag_answer]]</span>
                 </a>
             </div>
             `]]
-        `]]
-    </div>
+        </div>
+    `]]
     <!-- mark answer-->
     <div class="dis-post-left">
         <ul>
@@ -57,8 +55,6 @@
     </div>
     [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
     <div class="dis-post-footer">
-            [[+attachments:notempty=`<div class="dis-post-attachments"><ul class="dis-attachments">[[+attachments]]</ul></div>`]]
-        [[-<div class="dis-post-ip">
-        </div>]]
+        [[+attachments:notempty=`<div class="dis-post-attachments"><ul class="dis-attachments">[[+attachments]]</ul></div>`]]
     </div>
 </li>
