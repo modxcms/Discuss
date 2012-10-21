@@ -82,7 +82,14 @@ $(document).ready(function() {
             this.value = terms.join( ", " );
             return false;
         }
-    })
+    });
+
+    $('.dis-cat-header .dis-action-reply').click(function(event) {
+        event.preventDefault();
+        $('html,body').animate({'scrollTop': $('.dis-thread-form').position().top}, 500, function() {
+            $('#dis-thread-message').focus();
+        });
+    });
 });
 
 var DIS = {
