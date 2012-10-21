@@ -1,7 +1,7 @@
 <label for="dis-attachment">[[%discuss.attachments]]:
     <span class="error">[[+error.attachments]]</span>
 </label>
-<input type="file" class="dis-attachment-input" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
+<input type="file" class="dis-attachment-input" name="attachment[[+attachmentCurIdx:default=`1`]]" id="dis-attachment" />
 
 <div id="dis-attachments"></div>
 [[+attachments:notempty=`
