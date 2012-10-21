@@ -142,30 +142,32 @@ $_lang['discuss.question'] = 'Question?';
 $_lang['discuss.answered'] = 'Answered';
 $_lang['discuss.question_and_answer'] = 'Question';
 
+//should this go in user since it requires a login to display?
 $_lang['discuss.welcome_back'] = 'Welcome back,';
 $_lang['discuss.recent_activity'] = 'Since your last visit';
 $_lang['discuss.user.no_new_posts'] = 'no new posts';
 $_lang['discuss.user.one_new_post'] = '1 new post';
 $_lang['discuss.user.new_posts'] = '[[+total]] new posts';
 $_lang['discuss.user.unread_posts_period'] = 'in [[+unread_days:default=`42`]] days';
-$_lang['discuss.user.no_new_messages'] = 'no private messages';
-$_lang['discuss.user.one_new_message'] = '1 private message';
-$_lang['discuss.user.new_messages'] = '[[+total]] private messages';
-$_lang['discuss.user.no_new_replies'] = 'no replies';
-$_lang['discuss.user.one_new_reply'] = '1 reply';
+$_lang['discuss.user.no_new_messages'] = 'no new PMs';
+$_lang['discuss.user.one_new_message'] = '1 new PM';
+$_lang['discuss.user.new_messages'] = '[[+total]] new PMs';
+$_lang['discuss.user.no_new_replies'] = 'no unread replies';
+$_lang['discuss.user.one_new_reply'] = '1 unread reply';
 $_lang['discuss.user.new_replies'] = '[[+total]] unread replies';
-$_lang['discuss.user.no_unanswered_questions'] = 'no unanswered questions';
-$_lang['discuss.user.one_unanswered_question'] = '1 unanswered question';
-$_lang['discuss.user.unanswered_questions'] = '[[+total]] unanswered questions';
-$_lang['discuss.user.no_no_replies'] = 'no discussions';
-$_lang['discuss.user.one_no_reply'] = '1 discussion';
-$_lang['discuss.user.no_replies'] = '[[+total]] discussions';
-$_lang['discuss.help_answer'] = 'Please help answer';
-$_lang['discuss.participate_discussions'] = 'or participate in';
 $_lang['discuss.view'] = 'View';
-$_lang['discuss.view_unanswered'] = 'View Unanswered Quesitons';
-$_lang['discuss.no_replies_to_discussions'] = 'View Orphaned Discussions';
-$_lang['discuss.no_unanswered_questions_or_discussions'] = 'No unanswered questions or discussions without replies in the last 90 days.';
+
+$_lang['discuss.help_answer'] = 'Please help answer';
+$_lang['discuss.user.no_unanswered_questions'] = 'no open questions';
+$_lang['discuss.user.one_unanswered_question'] = '1 open question';
+$_lang['discuss.user.unanswered_questions'] = '[[+total]] open questions';
+$_lang['discuss.view_unanswered'] = 'View Open Quesitons';
+$_lang['discuss.participate_discussions'] = 'or participate in';
+$_lang['discuss.user.no_no_replies'] = 'no open discussions';
+$_lang['discuss.user.one_no_reply'] = '1 open discussion';
+$_lang['discuss.user.no_replies'] = '[[+total]] open discussions';
+$_lang['discuss.no_replies_to_discussions'] = 'View Open Discussions';
+$_lang['discuss.no_unanswered_questions_or_discussions'] = 'No unanswered questions or discussions without replies in the last [[+horizon:default=`90`]] days.';
 
 $_lang['discuss.quote'] = 'Quote';
 $_lang['discuss.recent_posts'] = 'Recent Posts';

@@ -37,19 +37,19 @@ $_lang['discuss.message'] = 'Message';
 $_lang['discuss.new_post_type_instructions'] = '&larr; Is this a general discussion or are you looking for a specific answer?';
 $_lang['discuss.question_instructions'] = '<b>Help us help you</b>. If you’re having technical problems, please supply adequate details: web server type and version; PHP version, configuration and how it runs; MySQL details and <em>especially</em> the MODX version and list of Add-ons installed.';
 $_lang['discuss.question_links'] = '<a href="[[++discuss.questions_link]]" title="See our handy post on the best ways and types of things to consider when requesting help">Learn how to get help</a> <a href="" class="surroundText" data-text="[[%discuss.question_template]]" title="A super-handy template so you won’t forget important bits">Insert suggested tech question template</a>';
-$_lang['discuss.question_template'] = '[b]Description of Problem:[/b]
+$_lang['discuss.question_template'] = '[b]Description of Problem:[/b] 
 
-[b]Steps to Reproduce:[/b]
+[b]Steps to Reproduce:[/b] 
 
-[b]Expected Outcome:[/b]
+[b]Expected Outcome:[/b] 
 
 [ul]
-[*][b]MODX Version:[/b]
-[*][b]PHP Version:[/b]
-[*][b]Database (MySQL, SQL Server, etc) Version:[/b]
-[*][b]Additional Server Info:[/b]
-[*][b]Installed MODX Add-ons:[/b]
-[*][b]Error Log Contents:[/b] [i](attach as file if it’s too large)[/i]
+[*][b]MODX Version:[/b] 
+[*][b]PHP Version:[/b] 
+[*][b]Database (MySQL, SQL Server, etc) Version:[/b] 
+[*][b]Additional Server Info:[/b] 
+[*][b]Installed MODX Add-ons:[/b] 
+[*][b]Error Log Contents:[/b] [i](attach as file if it’s too large)[/i] 
 [/ul]
 ';
 $_lang['discuss.discussion_instructions'] = '<b>Be clear, concise, and stay on topic</b>. Use a discussion title that gives insight into your topic without having to read the entire message. Also, limit your topics to a single one per thread if possible.';
