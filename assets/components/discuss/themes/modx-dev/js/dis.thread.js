@@ -2,6 +2,7 @@ $(function() {
     $('.dis-poll-refresh').hide();
     DIS.Thread.init();
 
+    /* Question/Discussion selectors (class_key input) */
 	$(".m-dis-thread-type li label").click(function(){
         var isActive = $(this).parent('li').hasClass('current');
         if (!isActive) {
@@ -20,6 +21,9 @@ $(function() {
             });
         }
     });
+    /* Make sure the class_key radio button triggers the above click handler
+    on loading the page.
+     */
     $('input:radio[name=class_key]:checked').parent('label').click()
 });
 

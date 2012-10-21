@@ -92,6 +92,7 @@ $_lang['discuss.category_remove_confirm'] = 'Are you sure you want to remove thi
 $_lang['discuss.category_update'] = 'Update Category';
 $_lang['discuss.custom_title'] = 'Custom Title';
 $_lang['discuss.editedon_post'] = '[ed. note: [[+user]] last edited this post [[+on]].]';
+$_lang['discuss.error_no_term_passed'] = 'Error: no valid term was passed.';
 $_lang['discuss.inactive'] = 'Inactive';
 $_lang['discuss.ip'] = 'IP';
 $_lang['discuss.information'] = 'Information';

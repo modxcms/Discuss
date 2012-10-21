@@ -9,6 +9,7 @@
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
     <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">
+    <link href="[[+discuss.config.cssUrl]]redo/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css">
 
     [[- toggles in progress breakpoint work]]
     [[++forums_css_framework:notempty=`
@@ -244,7 +245,7 @@
       .script("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js").wait()
       .script("[[+discuss.config.jsUrl]]jquery.scrollTo-min.js")
 
-      .script("[[+discuss.config.jsUrl]]jquery-ui-1.8.16.custom.min.js")
+      .script("[[+discuss.config.jsUrl]]jquery-ui-1.9.0.custom.min.js")
       .script("[[+discuss.config.jsUrl]]jquery.autosize.js").wait()
       .script("[[+discuss.config.jsUrl]]redo/forums-2012.js")
       .script("[[+discuss.config.jsUrl]]discuss.js").wait()

@@ -33,10 +33,60 @@ $(document).ready(function() {
         var before = $(this).data('text'),
             after  = $(this).data('text-after');
         surroundText(before, (after) ? after : '');
+    });
+
+    /* Setup autocomplete */
+    $.ui.autocomplete.prototype._renderItem = function( ul, item){
+        var term = this.term.split(' ').join('|');
+        var re = new RegExp("(" + term + ")", "gi") ;
+        var t = item.label.replace(re,"<span class=\"ui-autocomplete-highlight\">$1</span>");
+        return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( "<a>" + t + "</a>" )
+            .appendTo( ul );
+    };
+    $('.autocomplete').autocomplete({
+        minLength: 2,
+        source: function(request, response) {
+            var term = request.term,
+                action = $(this.element).attr('data-autocomplete-action'),
+                thisCp = this;
+
+            request.term = term = term.split(/,\s*/).pop();
+
+            if (!this.cache) this.cache = {};
+            if (this.cache[term]) {
+                response(this.cache[term]);
+            } else {
+                request.action = action;
+
+                $.getJSON(DIS.config.connector, request, function (data, status, xhr) {
+                    var result = data['data'];
+                    thisCp.cache[term] = result;
+                    response(result);
+                })
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+            var terms = this.value.split(/,\s*/);
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push( ui.item.value );
+            // add placeholder to get the comma-and-space at the end
+            terms.push( "" );
+            this.value = terms.join( ", " );
+            return false;
+        }
     })
 });
+
 var DIS = {
-    config: {}
+    config: DIS.config || {}
     ,baseAjax: {
         type: 'POST'
         ,dataType: 'json'
