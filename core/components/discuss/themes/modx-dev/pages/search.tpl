@@ -49,6 +49,7 @@
         [[+results]]
     </ul>
 </div>
+<div class="paginate stand-alone bottom horiz-list">
 [[+pagination]]
-
+</div>
 [[+bottom]]
