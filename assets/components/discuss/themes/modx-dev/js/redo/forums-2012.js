@@ -66,6 +66,12 @@ $(function() {
         function(){
             $(this).closest('div').find('p').stop().animate({marginRight: answerMarkerMargin, opacity: 0}, 100).css('display', 'none')
     });
+    // Slide toggle advanced search options
+    $('#dis-search-advanced-toggle').click(function() {
+        $('#dis-search-advanced').toggle('fast', function() {
+        // Animation complete.
+        });
+    });
 
     // scroll to and animate link for help
     $('#Show-answer-link').click(
