@@ -67,10 +67,9 @@ $(function() {
             $(this).closest('div').find('p').stop().animate({marginRight: answerMarkerMargin, opacity: 0}, 100).css('display', 'none')
     });
     // Slide toggle advanced search options
-    $('#dis-search-advanced-toggle').click(function() {
-        $('#dis-search-advanced').toggle('fast', function() {
-        // Animation complete.
-        });
+    $('#dis-search-advanced-toggle').click(function(e) {
+        e.preventDefault();
+        $('#dis-search-advanced').slideToggle('fast');
     });
 
     // scroll to and animate link for help
