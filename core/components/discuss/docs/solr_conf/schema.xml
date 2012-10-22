@@ -243,23 +243,28 @@
             when adding a document.
         -->
 
-
+        <!-- required -->
         <field name="id" type="int" indexed="true" stored="true" required="true"/>
-        <field name="private" type="boolean" indexed="true" stored="true" required="true"/>
-        <field name="board" type="int" indexed="true" stored="true" required="true"/>
-        <field name="author" type="int" indexed="true" stored="true" required="true"/>
-
+        <!-- required: indexed, not stored -->
+        <field name="private" type="boolean" indexed="true" stored="false" required="true"/>
+        <field name="username" type="string" indexed="true" stored="false" required="true"/>
+        <field name="createdon" type="date" indexed="true" stored="false" required="true"/>
+        <field name="board" type="int" indexed="true" stored="false" required="true"/>
+        <field name="author" type="int" indexed="true" stored="false" required="true"/>
         <field name="thread" type="int" indexed="false" stored="true" required="true"/>
+
+        <!-- required: stored, not indexed -->
         <field name="title" type="string" indexed="false" stored="true" required="true"/>
         <field name="message" type="text" indexed="false" stored="true" required="true"/>
+        <field name="url" type="textgen" indexed="false" stored="true" required="true"/>
 
         <!--optional >>> -->
-        <field name="username" type="string" indexed="false" stored="true"/>
-        <field name="board_name" type="string" indexed="false" stored="true"/>
-        <field name="url" type="textgen" indexed="false" stored="true"/>
+        <field name="answered_question" type="boolean" indexed="false" stored="true" />
         <field name="replies" type="int" indexed="false" stored="true"/>
+        <field name="category" type="int" indexed="false" stored="true"/>
+        <!--<field name="category_name" type="string" indexed="true" stored="false"/>-->
+        <field name="board_name" type="string" indexed="false" stored="false"/>
 
-        <field name="createdon" type="date" indexed="true" stored="true"/>
         <!-- <<< optional -->
 
         <!-- Uncommenting the following will create a "timestamp" field using
@@ -269,11 +274,6 @@
         <field name="indexedon" type="date" indexed="true" stored="true" default="NOW" multiValued="false"/>
          -->
 
-
-        <!-- category and category_name are not sent in indexing request
-        <field name="category" type="string" indexed="false" stored="true"/>
-        <field name="category_name" type="string" indexed="false" stored="true"/>
-        -->
         <!-- not part of disSolrSearch search or indexing code
           <field name="users" type="string" indexed="false" stored="true" />
         -->
@@ -298,5 +298,6 @@
     <copyField source="title" dest="search"/>
     <copyField source="message" dest="search"/>
     <copyField source="username" dest="search"/>
+    <copyField source="board_name" dest="search"/>
 
 </schema>

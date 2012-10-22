@@ -228,16 +228,17 @@ class disPost extends xPDOSimpleObject {
 
     /**
      * Index the post into the search system
-     * 
+     *
+     * @param array $options
      * @return bool
      */
-    public function index() {
+    public function index(array $options = array()) {
         if (defined('DISCUSS_IMPORT_MODE') && DISCUSS_IMPORT_MODE) return true;
         $indexed = false;
         if(!isset($this->xpdo->discuss->search)) {
             $this->xpdo->discuss->loadSearch();
         }
-        if (isset($this->xpdo->discuss->search) && is_object(isset($this->xpdo->discuss->search))) {
+        if (isset($this->xpdo->discuss->search) && is_object($this->xpdo->discuss->search)) {
             $postArray = $this->toArray();
             $postArray['url'] = $this->getUrl();
             if (empty($postArray['username'])) {
@@ -246,7 +247,7 @@ class disPost extends xPDOSimpleObject {
                     $postArray['username'] = $this->Author->get('username');
                 }
             }
-            if (empty($postArray['board_name'])) {
+            if (empty($postArray['board_name']) || empty($postArray['category_name'])) {
                 $this->getOne('Board');
                 if ($this->Board) {
                     $postArray['board_name'] = $this->Board->get('name');
@@ -262,9 +263,14 @@ class disPost extends xPDOSimpleObject {
                 $postArray['private'] = $this->Thread->get('private');
                 $postArray['users'] = $this->Thread->get('users');
                 $postArray['replies'] = $this->Thread->get('replies');
+                // first post of answered thread?
+                if($this->Thread->answered && $this->Thread->post_first == $this->get('id')) {
+                    $postArray['answered_question'] = true;
+                }
             }
+            // index post
             $postArray['message'] = $this->getContent();
-            $indexed = $this->xpdo->discuss->search->index($postArray);
+            $indexed = $this->xpdo->discuss->search->index($postArray, $options);
         }
         return $indexed;
     }

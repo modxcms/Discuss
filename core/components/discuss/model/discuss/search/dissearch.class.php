@@ -56,7 +56,7 @@ class disSearch {
      * @param array $fields
      * @return bool
      */
-    public function index(array $fields = array()) {
+    public function index(array $fields = array(), array $options = array()) {
         return true;
     }
     

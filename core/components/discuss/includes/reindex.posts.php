@@ -30,13 +30,30 @@ set_time_limit(0);
 $forumsResourceUrl = 'forums/';
 
 /* override with your own defines here (see build.config.sample.php) */
-require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/config.core.php';
-require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
-require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
-$modx= new modX();
-$modx->initialize('mgr');
-$modx->setLogLevel(modX::LOG_LEVEL_INFO);
-$modx->setLogTarget('ECHO');
+include 'config.core.php';
+include MODX_CORE_PATH . 'model/modx/modx.class.php';
+//$modx = modX::getInstance('foo');
+$modx = new modX;
+
+if (version_compare($modx->version['full_version'], '2.2.1-pl', '>=')) {
+    $modx->initialize('foo', array(
+        'transient_context' => true,
+        'foo_results' => array(
+            'config' => array(
+                'session_enabled' => false,
+                'log_target' => XPDO_CLI_MODE ? 'ECHO' : 'HTML',
+                'log_level' => xPDO::LOG_LEVEL_INFO,
+                'debug' => -1,
+            ),
+            'policies' => array(),
+        )
+    ));
+} else {
+    $modx->initialize('foo');
+    $modx->setLogLevel(xPDO::LOG_LEVEL_INFO);
+    $modx->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
+    $modx->setDebug(-1);
+}
 
 /* load Discuss */
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
@@ -60,8 +77,9 @@ $c->innerJoin('disBoard','Board');
 $c->innerJoin('disThread','Thread');
 $c->innerJoin('disUser','Author');
 $c->where(array(
-    'Thread.private' => 0,
+    //'Thread.private' => 0,
     'Board.status:!=' => 0,
+    'Thread.answered:=' => 1,
 ));
 $c->select($modx->getSelectColumns('disPost','disPost'));
 $c->select(array(
@@ -72,41 +90,19 @@ $c->select(array(
     'Thread.private AS private',
 ));
 $c->sortby('id','ASC');
+$c->limit(100, 0);
 
-$posts = $modx->getIterator('disPost');
+$count = 0;
+$posts = $modx->getIterator('disPost', $c);
 /** @var disPost $post */
 foreach ($posts as $post) {
-    echo 'Indexing: '.$post->get('title')."\n"; flush();
-    $post->index();
-}
-
-//$c->prepare(); $sql = $c->toSql();
-
-$perPage = $modx->getOption('discuss.post_per_page',null, 10);
-$parser = $modx->getService('disParser','disBBCodeParser',$discuss->config['modelPath'].'discuss/parser/');
-
-/*
-$stmt = $modx->query($sql);
-if ($stmt) {
-    while ($postArray = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $postArray['url'] = $forumsResourceUrl.'thread/?thread='.$postArray['thread'];
-        $page = 1;
-        if ($postArray['replies'] > $perPage) {
-            $page = ceil($postArray['replies'] / $perPage);
-        }
-        if ($page != 1) { $postArray['url'] .= '&page='.$page; }
-        $postArray['url'] .= '#dis-post-'.$postArray['id'];
-
-        $message = $parser->parse($postArray['message']);
-        $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
-        $replace = '';
-        $postArray['message'] = preg_replace($pattern, $replace, $message);
-        echo 'Indexing: '.$postArray['title']."\n"; flush();
-        $discuss->search->index($postArray);
+    $modx->log(modX::LOG_LEVEL_INFO, 'Indexing: ' . $count++ . ' ' . $post->get('title') . ' (' . $post->get('id') . ")\n");
+    $response = $post->index();
+    if($response instanceof SolrUpdateResponse) {
+        $modx->log(modX::LOG_LEVEL_INFO, ' (result): ' . $response->getRawResponse() . "\n");
     }
-    $stmt->closeCursor();
-}*/
-
+}
+$discuss->search->commit();
 
 $mtime= microtime();
 $mtime= explode(" ", $mtime);
