@@ -38,12 +38,14 @@
         </div>
     </div>
 </form>
+<header class="dis-cat-header dark-gradient h-group sticky-bar top">
+    [[+results:notempty=`<h1>Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]
+    [[+pagination]]
+</header>
 
 
-[[+pagination]]
 <div class="dis-threads">
     <ul class="dis-list search-results">
-        <li>[[+results:notempty=`<h1>Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]</li>
         [[+results]]
     </ul>
 </div>
