@@ -103,6 +103,13 @@ pre
     a
         line-height: 1
 
+#dis-search-advanced
+    padding: 1.5%
+    border: 1px dotted darken($c-base, 30%)
+    width: 97%
+    background-color: darken($c-base, 1%)
+
+
 // view latest posts button
 .l-right.m-search
     a
@@ -415,6 +422,7 @@ form input[type="radio"]
     margin: 0 0
 
 
+
 // Search inputs and results
 .m-breadcrumbs form.l-right
     background-color: #f9f9f9
@@ -459,3 +467,11 @@ form input[type="radio"]
     &.m-styled-form
         input[type=text]
             width: 97%
+.m-styled-form, .m-fullw-form
+    input.m-datepicker, input.m-datepicker[type=text]
+        background-image: url(../../images/redo/icons/calendar.png)
+        background-position-x: 7px
+        background-position-y: 7px
+        background-repeat: no-repeat
+        padding: 1.5% 1.5% 1.5% 28px
+        width: 80%
