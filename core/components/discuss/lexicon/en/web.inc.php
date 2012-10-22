@@ -189,6 +189,7 @@ $_lang['discuss.report_to_mod'] = 'Report';
 $_lang['discuss.report_to_mod_confirm'] = 'This will open a discussion with the forum moderators and admins, including disclosing your full contact details. Please describe why this post abusive or violates the forum guidelines.';
 $_lang['discuss.save_changes'] = 'Save Changes';
 $_lang['discuss.search'] = 'Search';
+$_lang['discuss.search_advanced_options'] = 'Advanced Search Options';
 $_lang['discuss.or_search'] = 'or Search:';
 $_lang['discuss.search_this_board'] = 'Search this Board...';
 $_lang['discuss.search_forums'] = 'Search Forums';

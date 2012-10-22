@@ -7,7 +7,7 @@
             <input class="search" type="text" id="dis-search" name="s" value="[[+search]]" />
         </div>
         <div class="f-all f-pad  h-group">
-            <a id="dis-search-advanced-toggle" href="a-search-adavnaced">Advanced Search Options</a>
+            <a id="dis-search-advanced-toggle" href="a-search-adavnaced">[[%discuss.search_advanced_options]]</a>
         </div>
         <div id="dis-search-advanced" class="f-all m-grouped-content">
             <div class="f-full">
