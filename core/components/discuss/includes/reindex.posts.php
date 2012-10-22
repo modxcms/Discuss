@@ -37,7 +37,7 @@ include 'config.core.php';
 include MODX_CORE_PATH . 'model/modx/modx.class.php';
 //$modx = modX::getInstance('foo');
 $modx = new modX;
-
+$modx->getVersionData();
 if (version_compare($modx->version['full_version'], '2.2.1-pl', '>=')) {
     $modx->initialize('foo', array(
         'transient_context' => true,
@@ -82,7 +82,7 @@ $c->innerJoin('disUser','Author');
 $c->where(array(
     //'Thread.private' => 0,
     'Board.status:!=' => 0,
-    'Thread.answered:=' => 1,
+    //'Thread.answered:=' => 1,
 ));
 $c->select($modx->getSelectColumns('disPost','disPost'));
 $c->select(array(
