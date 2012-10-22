@@ -468,6 +468,7 @@ form input[type="radio"]
         padding: 0.5% 1.6% 1.1% 1.6%
         border-bottom: 1px solid #333333
         margin-bottom: 1%
+        font-size: 17px
     .Item
         padding: 0.5% 1.6% 1.5% 1.6%
         border-bottom: 1px solid #d9d9d9
@@ -495,6 +496,10 @@ form input[type="radio"]
         display: block
         font-weight: bold
         +rem('margin', 8px 0 1px 0)
+    input[type=submit]
+        @extend %p-raised-green
+        line-height: 1
+        +rem('padding', 5px 9px 5px 9px)
 .m-fullw-form
     input[type=text]
         width: 100%
