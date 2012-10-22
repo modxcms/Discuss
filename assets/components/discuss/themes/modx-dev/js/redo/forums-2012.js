@@ -27,6 +27,8 @@ function(){a.checkForEmpty()})};a.fadeOnFocus=function(){a.showing&&a.setOpacity
 
 // Forum Functions
 $(function() {
+    // date picker
+    $( ".m-datepicker" ).datepicker();
 	// move labels inside inputs
 	$(".masthead-login label").inFieldLabels();
     $(".dis-new-thread-title-wrapper label").inFieldLabels();

@@ -443,3 +443,16 @@ form input[type="radio"]
             top: 3px
             right: 3px
             cursor: pointer
+
+
+// Form base styling
+.m-styled-form
+    label, input
+        +rem('font-size', 15px)
+    input[type=text]
+        +rem('margin', 5px 0 10px 0)
+        border: 1px solid #c6c6c6
+        padding: 1.5%
+.m-fullw-form
+    input[type=text]
+        width: 100%
