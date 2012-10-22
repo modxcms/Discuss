@@ -1,5 +1,5 @@
 
-<form class="dis-form pretty-form h-group" action="[[~[[*id]]]]search/" method="get">
+<form class="dis-form styled-form h-group" action="[[~[[*id]]]]search/" method="get">
 	<h1>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h1>
     <div class="m-panel f1-f5">
         <div class="f1-f5 f-pad">
