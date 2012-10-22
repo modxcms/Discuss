@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="f1-f8 f-pad">
-            <input type="submit" class="dis-action-btn" value="[[%discuss.search]]" />
+            <input type="submit" value="[[%discuss.search]]" />
         </div>
     </div>
 </form>
