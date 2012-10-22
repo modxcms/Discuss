@@ -1,4 +1,7 @@
 <?php
+define('IX_LIMIT', 101);
+define('IX_OFFSET', 0);
+
 /**
  * Discuss
  *
@@ -90,7 +93,7 @@ $c->select(array(
     'Thread.private AS private',
 ));
 $c->sortby('id','ASC');
-$c->limit(100, 0);
+$c->limit(IX_LIMIT, IX_OFFSET);
 
 $count = 0;
 $posts = $modx->getIterator('disPost', $c);
