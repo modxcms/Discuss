@@ -3271,7 +3271,7 @@ ul.dis-attachments {
     text-align: right;
     float: none;
     position: relative;
-    z-index: 20;
+    z-index: 1;
     -webkit-box-shadow: white 0 1px 0, black 0 -1px 0;
     -moz-box-shadow: white 0 1px 0, black 0 -1px 0;
     box-shadow: white 0 1px 0, black 0 -1px 0; }
