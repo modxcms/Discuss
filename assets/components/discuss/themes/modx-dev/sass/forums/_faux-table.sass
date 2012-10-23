@@ -23,6 +23,19 @@
         +rem('padding', 7px 0 9px 5px)
         margin: 0
         display: inline-block
+    .a-toggle-view
+        @extend %m-raised-dark-bg
+        display: block
+        +rem('margin', 7px 0 0 0)
+        span
+            +opacity(.8)
+            display: block
+            +rem('height', 20px)
+            +rem('width', 20px)
+            background: url(../../images/redo/icons/arrows.png) no-repeat center 6px
+            &:hover
+                +opacity(1)
+
 
     // Green button used to either just to post or jump to login
     .Button, .post-box .dis-action-login
@@ -37,8 +50,11 @@
         margin-left: .25em
     .post-box a.Button
         @extend %p-raised-green-dark
-
-
+.dis-collapsed
+    .dis-cat-header
+        .a-toggle-view
+            span
+                background: url(../../images/redo/icons/arrows.png) no-repeat center -85px
 
 .row+.dis-cat-header
     margin-top: 1em
