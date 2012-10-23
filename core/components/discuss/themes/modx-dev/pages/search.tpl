@@ -17,7 +17,7 @@
                     </label>
                     <select name="board" id="dis-search-qa">
                         <option value="1">(All Posts)</option>
-                        <option value="2">Discussion</option>
+                        <option value="2">Discussions</option>
                         <option value="3" id="QA">Questions</option>
                     </select>
                 </div>
