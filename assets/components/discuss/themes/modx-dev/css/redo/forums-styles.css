@@ -1592,7 +1592,7 @@ body {
     box-shadow: #c6dd91 0 1px 0 inset, black 0 1px 0; }
 
 /* line 62, ../../sass/partials/_color-patterns.sass */
-.dis-cat-header .action-buttons, .paginate.stand-alone .action-buttons, .dis-cat-header .post-box a.Button, .paginate.stand-alone .post-box a.Button, .m-styled-form input[type=submit], .primary-cta, .dis-form-buttons .a-reply, .twelve-form input[type="submit"] {
+.dis-cat-header .action-buttons, .paginate.stand-alone .action-buttons, .dis-cat-header .post-box a.Button, .paginate.stand-alone .post-box a.Button, .m-styled-form input[type=submit], .primary-cta, .dis-form-buttons .a-reply, .twelve-form input[type="submit"], #dis-message-preview input.dis-message-cancel.Button.l-right {
   color: white;
   padding: 6px;
   padding: 0.6rem;
@@ -1619,7 +1619,7 @@ body {
   background-image: linear-gradient(bottom, #7a9c30 0%, #a3c94f 73%, #a3c94f 100%);
   cursor: pointer; }
   /* line 75, ../../sass/partials/_color-patterns.sass */
-  .dis-cat-header .action-buttons:hover, .paginate.stand-alone .action-buttons:hover, .dis-cat-header .post-box a.Button:hover, .paginate.stand-alone .post-box a.Button:hover, .m-styled-form input[type=submit]:hover, .primary-cta:hover, .dis-form-buttons .a-reply:hover, .twelve-form input[type="submit"]:hover {
+  .dis-cat-header .action-buttons:hover, .paginate.stand-alone .action-buttons:hover, .dis-cat-header .post-box a.Button:hover, .paginate.stand-alone .post-box a.Button:hover, .m-styled-form input[type=submit]:hover, .primary-cta:hover, .dis-form-buttons .a-reply:hover, .twelve-form input[type="submit"]:hover, #dis-message-preview input.dis-message-cancel.Button.l-right:hover {
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.9);
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
     background-color: #b7d576;
@@ -1633,7 +1633,7 @@ body {
     background-image: linear-gradient(bottom, #8cb337 0%, #b7d576 73%, #b7d576 100%);
     text-decoration: none; }
   /* line 82, ../../sass/partials/_color-patterns.sass */
-  .dis-cat-header .action-buttons:active, .paginate.stand-alone .action-buttons:active, .dis-cat-header .post-box a.Button:active, .paginate.stand-alone .post-box a.Button:active, .m-styled-form input[type=submit]:active, .primary-cta:active, .dis-form-buttons .a-reply:active, .twelve-form input[type="submit"]:active {
+  .dis-cat-header .action-buttons:active, .paginate.stand-alone .action-buttons:active, .dis-cat-header .post-box a.Button:active, .paginate.stand-alone .post-box a.Button:active, .m-styled-form input[type=submit]:active, .primary-cta:active, .dis-form-buttons .a-reply:active, .twelve-form input[type="submit"]:active, #dis-message-preview input.dis-message-cancel.Button.l-right:active {
     background-color: #89af36;
     -webkit-box-shadow: 0 0 5px rgba(170, 208, 86, 0.56), inset 0 -1px 4px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 0 5px rgba(170, 208, 86, 0.56), inset 0 -1px 4px rgba(0, 0, 0, 0.2);
@@ -4386,8 +4386,17 @@ a#dis-preview-btn.preview {
   -webkit-box-shadow: #737373 0 1px 25px, #595959 0 1px 5px;
   -moz-box-shadow: #737373 0 1px 25px, #595959 0 1px 5px;
   box-shadow: #737373 0 1px 25px, #595959 0 1px 5px; }
+  /* line 158, ../../sass/forums/_reply-editor.sass */
+  #dis-message-preview input.dis-message-cancel.Button.l-right {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    padding:  0.6rem 1rem; }
 
-/* line 159, ../../sass/forums/_reply-editor.sass */
+/* line 173, ../../sass/forums/_reply-editor.sass */
 span.error .error {
   display: block;
   color: #ff3232;
@@ -4405,7 +4414,7 @@ span.error .error {
   margin:  0 0 1.5rem 0;
   background-color: rgba(255, 50, 50, 0.11); }
 
-/* line 169, ../../sass/forums/_reply-editor.sass */
+/* line 183, ../../sass/forums/_reply-editor.sass */
 .dis-existing-attachments {
   margin: 10px 20px; }
 
