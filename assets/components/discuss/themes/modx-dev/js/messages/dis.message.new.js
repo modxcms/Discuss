@@ -49,7 +49,7 @@ DIS.NewMessage = function() {
             var d = $('#dis-attachments');
             var i = attachments+1;
             if (i > DIS.config.attachments_max_per_post) return false;
-            var tpl = '<label><span>&nbsp;</span></label><input type="file" name="attachment'+i+'" /><br class="clear" />';
+            var tpl = '<input type="file" name="attachment'+i+'" />';
             
             d.append(tpl);
             attachments = attachments+1;
