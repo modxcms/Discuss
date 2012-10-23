@@ -58,19 +58,28 @@ $(function() {
     // function(){
     //     $(this).find('.dis-post-answer-marker p').css('opacity', 0).stop().animate({marginRight: answerMarkerStartMargin, opacity: 0}, 200)
     // });
-    $('.dis-post-notanswer a span').mouseenter(
+    var disPostNotAnswer = $('.dis-post-notanswer a span');
+    disPostNotAnswer.mouseenter(
         function(){
             $(this).closest('div').find('p').stop().css('display', 'block').animate({marginRight: answerMarkerMargin, opacity: .99}, 100)
     });
-    $('.dis-post-notanswer a span').mouseleave(
+    disPostNotAnswer.mouseleave(
         function(){
             $(this).closest('div').find('p').stop().animate({marginRight: answerMarkerMargin, opacity: 0}, 100).css('display', 'none')
     });
-    // Slide toggle advanced search options
-    $('#dis-search-advanced-toggle').click(function(e) {
+    // Slide toggle advanced search options, store state in cookie.
+    var advancedToggle = $('#dis-search-advanced-toggle'),
+        advancedOptions = $('#dis-search-advanced');
+    advancedToggle.click(function(e) {
         e.preventDefault();
-        $('#dis-search-advanced').slideToggle('fast');
+        advancedOptions.slideToggle('fast', function() {
+            DisCookie.create('search-advanced',$(advancedOptions).is(':visible'));
+        });
     });
+    // If we have the cookie set; toggle a click to open the options box.
+    if (DisCookie.read('search-advanced') == 'true') {
+        advancedToggle.click();
+    }
 
     // Toggle select options
 
@@ -83,6 +92,7 @@ $(function() {
     // });
 
 
+    // If user selects questions in the post type box, show extra options.
     $('#dis-search-qa').change(function(){
         if($('#dis-search-qa').val() == "3") {
             $("#SubOptions").css('opacity', 0).addClass('show').animate({opacity: .99}, 200);
@@ -91,10 +101,7 @@ $(function() {
                 $(this).removeClass('show');
             });
         }
-    })
-
-
-
+    });
 
     // scroll to and animate link for help
     $('#Show-answer-link').click(
