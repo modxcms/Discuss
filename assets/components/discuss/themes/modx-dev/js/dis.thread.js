@@ -227,6 +227,9 @@ DIS.Thread = function() {
 
             d.append(tpl);
             attachments = attachments+1;
+            if (i == DIS.config.attachments_max_per_post) {
+                $('.dis-add-attachment').animate({opacity: .3}, 300).addClass('disabled');
+            }
             return false;
         }
     };
