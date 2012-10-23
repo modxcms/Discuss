@@ -40,7 +40,7 @@
                 </div>
                 <div class="f5-f8 f-pad">
                     <label for="dis-author">[[%discuss.author]]:</label>
-                    <input type="text" id="dis-author" name="user" value="[[+user]]" />
+                    <input type="text" id="dis-author" name="user" value="[[+user]]" class="autocomplete" data-autocomplete-action="web/user/find" data-autocomplete-single="true" />
                 </div>
             </div>
 

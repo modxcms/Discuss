@@ -50,9 +50,12 @@ $(document).ready(function() {
         source: function(request, response) {
             var term = request.term,
                 action = $(this.element).attr('data-autocomplete-action'),
-                thisCp = this;
+                thisCp = this,
+                single = $(this.element).attr('data-autocomplete-single');
 
-            request.term = term = term.split(/,\s*/).pop();
+            if (!single || single == 'false') {
+                request.term = term = term.split(/,\s*/).pop();
+            }
 
             if (!this.cache) this.cache = {};
             if (this.cache[term]) {
@@ -72,14 +75,19 @@ $(document).ready(function() {
             return false;
         },
         select: function( event, ui ) {
-            var terms = this.value.split(/,\s*/);
-            // remove the current input
-            terms.pop();
-            // add the selected item
-            terms.push( ui.item.value );
-            // add placeholder to get the comma-and-space at the end
-            terms.push( "" );
-            this.value = terms.join( ", " );
+            var single = $(this).attr('data-autocomplete-single');
+            if (!single || single == 'false') {
+                var terms = this.value.split(/,\s*/);
+                // remove the current input
+                terms.pop();
+                // add the selected item
+                terms.push( ui.item.value );
+                // add placeholder to get the comma-and-space at the end
+                terms.push( "" );
+                this.value = terms.join( ", " );
+            } else {
+                this.value = ui.item.value;
+            }
             return false;
         }
     });
