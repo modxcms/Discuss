@@ -85,8 +85,9 @@ a#dis-preview-btn.preview
         &:focus
             outline: none
             border-top: none
-        &:hover
-            border: none
+            +box-shadow(darken($c-base, 42%) 0 1px 0, darken($c-base, 35%) 0 2px 5px)
+            border-color: darken($c-base, 17%)
+
 
 .below-wysi
     +rem('padding', 7px 0)
