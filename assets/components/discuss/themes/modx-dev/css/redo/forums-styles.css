@@ -3600,7 +3600,11 @@ section.group {
     .m-dis-discussion label input, .m-dis-question label input {
       display: none; }
 
-/* line 598, ../../sass/_forums.sass */
+/* line 595, ../../sass/_forums.sass */
+#ui-datepicker-div {
+  z-index: 30; }
+
+/* line 601, ../../sass/_forums.sass */
 .twelve-form input[type="submit"] {
   padding: 10px 15px;
   padding:  1rem 1.5rem;
@@ -3609,27 +3613,27 @@ section.group {
   clear: both;
   display: inline-block;
   cursor: pointer; }
-  /* line 605, ../../sass/_forums.sass */
+  /* line 608, ../../sass/_forums.sass */
   .twelve-form input[type="submit"]:hover {
     padding: 10px 15px;
     padding:  1rem 1.5rem; }
-/* line 607, ../../sass/_forums.sass */
+/* line 610, ../../sass/_forums.sass */
 .twelve-form h1 {
   font-weight: bold; }
-/* line 610, ../../sass/_forums.sass */
+/* line 613, ../../sass/_forums.sass */
 .twelve-form .dis-title {
   margin: 10px 0; }
-  /* line 612, ../../sass/_forums.sass */
+  /* line 615, ../../sass/_forums.sass */
   .twelve-form .dis-title label, .twelve-form .dis-title input#dis-new-thread-title {
     display: inline-block; }
-  /* line 614, ../../sass/_forums.sass */
+  /* line 617, ../../sass/_forums.sass */
   .twelve-form .dis-title label {
     margin: 0 0 0 0;
     padding-right: 5px;
     font-size: 15px;
     font-weight: bold;
     color: black; }
-  /* line 620, ../../sass/_forums.sass */
+  /* line 623, ../../sass/_forums.sass */
   .twelve-form .dis-title input {
     padding: 3px;
     margin: 5px 0 10px 0;
