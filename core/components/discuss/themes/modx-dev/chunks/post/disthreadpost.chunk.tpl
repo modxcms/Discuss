@@ -49,6 +49,9 @@
                     <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
                 `:else=``]]
             `:else=``]]
+            [[+idx:eq=`1`:then=`
+                [[+jump_to_first_answer.link]]
+            `]]
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">[[%discuss.editedon_post? &on=`[[+editedon:ago]]` &user=`[[+editedby.username]]`]]</span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
