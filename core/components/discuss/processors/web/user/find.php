@@ -5,7 +5,7 @@
  */
 $search = trim($modx->getOption('term', $scriptProperties, ''));
 
-if (empty($search)) {
+if (empty($search) || strlen($search) < 2) {
     return $modx->toJSON(array(
         'success' => false,
         'message' => $modx->lexicon('discuss.error_no_term_passed'),
