@@ -252,7 +252,7 @@ class disThreadQuestion extends disThread {
                     if ($id == $postArray['id']) {
                         if (!empty($last)) {
                             $postArray['answer_prev'] = $last;
-                            $postArray['answer_prev']['link'] = '<a href="'.$details['url'].'" class="prev">[[%discuss.prev]]</a>';
+                            $postArray['answer_prev']['link'] = '<a href="'.$last['url'].'" class="prev">[[%discuss.prev]]</a>';
                         }
                         $nextIsNext = true;
                     }
