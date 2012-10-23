@@ -46,32 +46,6 @@ require_once $disCorePath.'model/discuss/discuss.class.php';
 $modx->discuss = new Discuss($modx);
 
 $modx->lexicon->load('discuss:default');
-$webActions = array(
-    'web/post/loadthread',
-    'web/post/notify',
-    'web/post/pollrefresh',
-    'web/post/preview',
-    'web/post/remove',
-    'web/post/reply',
-    'web/post/replyform',
-    'web/user/login',
-    'web/user/register',
-    'web/user/find',
-);
-if (in_array($_REQUEST['action'], $webActions)) {
-    $version = $modx->getVersionData();
-    if (version_compare($version['full_version'],'2.1.1-pl') >= 0) {
-        if ($modx->user->hasSessionContext($modx->context->get('key'))) {
-            $_SERVER['HTTP_MODAUTH'] = $_SESSION["modx.{$modx->context->get('key')}.user.token"];
-        } else {
-            $_SESSION["modx.{$modx->context->get('key')}.user.token"] = 0;
-            $_SERVER['HTTP_MODAUTH'] = 0;
-        }
-    } else {
-        $_SERVER['HTTP_MODAUTH'] = $modx->site_id;
-    }
-    $_REQUEST['HTTP_MODAUTH'] = $_SERVER['HTTP_MODAUTH'];
-}
 
 if (!empty($_REQUEST['action']) && in_array($_REQUEST['action'], $webActions)) {
     $version = $modx->getVersionData();
