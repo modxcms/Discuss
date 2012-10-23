@@ -248,7 +248,7 @@
         <!-- required: indexed and stored -->
         <field name="createdon" type="date" indexed="true" stored="true" required="true"/>
         <!-- required: indexed, not stored -->
-        <!--<field name="private" type="boolean" indexed="true" stored="false" required="true"/>-->
+        <field name="private" type="boolean" indexed="true" stored="false" default="false"/>
         <field name="board" type="int" indexed="true" stored="false" required="true"/>
         <field name="author" type="int" indexed="true" stored="false" required="true"/>
         <field name="username" type="string" indexed="true" stored="false" required="true"/>
