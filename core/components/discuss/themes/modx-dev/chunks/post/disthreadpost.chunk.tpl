@@ -18,7 +18,7 @@
     </div>
     `:else=`
         <div class="dis-post-answer-marker dis-post-notanswer">
-            [[+url_mark_as_answer:neq=``:then=`
+            [[+url_mark_as_answer:eq=``:then=``:else=`
             <div class="dis-post-answer-marker dis-post-notanswer">
                 <p>[[%discuss.flag_answer]]</p>
                 <a href="[[+url_mark_as_answer]]">
