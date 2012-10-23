@@ -109,6 +109,10 @@ pre
     width: 97%
     background-color: darken($c-base, 1%)
 
+    .sub-options
+        display: none
+        &.show
+            display: block
 
 // view latest posts button
 .l-right.m-search
@@ -503,6 +507,9 @@ form input[type="radio"]
         @extend %p-raised-green
         line-height: 1
         +rem('padding', 5px 9px 5px 9px)
+    input[type=radio]
+        +rem('margin', 0 4px 0 10px)
+
 .m-fullw-form
     input[type=text]
         width: 100%

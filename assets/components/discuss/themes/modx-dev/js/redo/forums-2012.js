@@ -72,6 +72,30 @@ $(function() {
         $('#dis-search-advanced').slideToggle('fast');
     });
 
+    // Toggle select options
+
+    // $('#dis-search-qa').change(function(){
+    //     if('#dis-search-qa').val() == "3") {
+    //         $('#SubOptions').addClass('show');
+    //     } else {
+    //         $('#SubOptions').removeClass('show');
+    //     }
+    // });
+
+
+    $('#dis-search-qa').change(function(){
+        if($('#dis-search-qa').val() == "3") {
+            $("#SubOptions").css('opacity', 0).addClass('show').animate({opacity: .99}, 200);
+        } else {
+            $("#SubOptions").animate({opacity: 0}, 200, function(){
+                $(this).removeClass('show');
+            });
+        }
+    })
+
+
+
+
     // scroll to and animate link for help
     $('#Show-answer-link').click(
         function(e){
