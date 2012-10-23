@@ -259,8 +259,11 @@ class disThreadQuestion extends disThread {
                     $last = $details;
                 }
             }
-        } else {
+        }
 
+        if (!empty($postArray['answers_raw'])) {
+            $postArray['jump_to_first_answer'] = reset($postArray['answers_raw'])['url'];
+            $postArray['jump_to_first_answer.link'] = '<a href="'.$postArray['jump_to_first_answer'].'" class="jump-to-first">[[%discuss.jump_to_first_answer]]</a>';
         }
         return $postArray;
     }
