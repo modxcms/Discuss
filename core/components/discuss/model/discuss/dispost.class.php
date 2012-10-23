@@ -263,9 +263,23 @@ class disPost extends xPDOSimpleObject {
                 $postArray['private'] = $this->Thread->get('private');
                 $postArray['users'] = $this->Thread->get('users');
                 $postArray['replies'] = $this->Thread->get('replies');
-                // first post of answered thread?
-                if($this->Thread->answered && $this->Thread->post_first == $this->get('id')) {
-                    $postArray['answered_question'] = true;
+
+                // first post in thread?
+                if($this->Thread->post_first == $this->get('id')) {
+                    // question?
+                    if($this->Thread->class_key == 'disThreadQuestion') {
+                        $postArray['question'] = true;
+                    }
+                    // answered?
+                    if($this->Thread->answered) {
+                        $postArray['answered'] = true;
+                    }
+                }
+                // is answer?
+                // (already set)
+                // in answered thread?
+                if($this->Thread->answer_ed) {
+                    $postArray['in_answered_thread'] = true;
                 }
             }
             // index post
