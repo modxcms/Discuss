@@ -18,16 +18,16 @@
                     <select name="board" id="dis-search-qa">
                         <option value="1">(All Posts)</option>
                         <option value="2">Discussion</option>
-                        <option value="3" id="QA">Question and Answer</option>
+                        <option value="3" id="QA">Questions</option>
                     </select>
                 </div>
                 <div id="SubOptions" class="f5-f8 sub-options">
-                    <label for="dis-search-board">Question and Answer Type:
+                    <label for="dis-search-board">Question options:
                         <span class="error">[[+error.board]]</span>
                     </label>
-                    <input type="radio" name="qa-options" value="Both" checked>All Q&A
-                    <input type="radio" name="qa-options" value="Solved">Solved Only
-                    <input type="radio" name="qa-options" value="Unsolved">Unsolved Only
+                    <input type="radio" name="qa-options" value="Both" checked>All Questions
+                    <input type="radio" name="qa-options" value="Solved">Answered
+                    <input type="radio" name="qa-options" value="Unsolved">Without Answer
                 </div>
             </div>
 
