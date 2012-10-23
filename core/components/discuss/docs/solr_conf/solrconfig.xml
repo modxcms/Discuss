@@ -576,7 +576,7 @@
                 username replies
             </str>
             <str name="fl">
-                id,title,message,thread,board,author,username,replies,boardname,url,private,createdon
+                id,thread,category,createdon,replies,title,url,message,question,answered,answer,score
             </str>
             <str name="mm">
                 2&lt;-1 5&lt;-2 6&lt;90%

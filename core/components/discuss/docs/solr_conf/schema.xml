@@ -245,21 +245,28 @@
 
         <!-- required -->
         <field name="id" type="int" indexed="true" stored="true" required="true"/>
+        <!-- required: indexed and stored -->
+        <field name="createdon" type="date" indexed="true" stored="true" required="true"/>
         <!-- required: indexed, not stored -->
         <field name="private" type="boolean" indexed="true" stored="false" required="true"/>
-        <field name="username" type="string" indexed="true" stored="false" required="true"/>
-        <field name="createdon" type="date" indexed="true" stored="false" required="true"/>
         <field name="board" type="int" indexed="true" stored="false" required="true"/>
         <field name="author" type="int" indexed="true" stored="false" required="true"/>
-        <field name="thread" type="int" indexed="false" stored="true" required="true"/>
-
+        <field name="username" type="string" indexed="true" stored="false" required="true"/>
         <!-- required: stored, not indexed -->
+        <field name="thread" type="int" indexed="false" stored="true" required="true"/>
         <field name="title" type="string" indexed="false" stored="true" required="true"/>
-        <field name="message" type="text" indexed="false" stored="true" required="true"/>
         <field name="url" type="textgen" indexed="false" stored="true" required="true"/>
+        <field name="message" type="text" indexed="false" stored="true" required="true"/>
 
-        <!--optional >>> -->
-        <field name="answered_question" type="boolean" indexed="false" stored="true" />
+        <!-- optional: indexed and stored -->
+        <field name="question" type="boolean" indexed="true" stored="true" />
+
+        <!-- optional: indexed, not stored -->
+        <field name="in_answered_thread" type="boolean" indexed="true" stored="false" />
+
+        <!-- optional: stored, not indexed -->
+        <field name="answered" type="boolean" indexed="false" stored="true" />
+        <field name="answer" type="boolean" indexed="false" stored="true" />
         <field name="replies" type="int" indexed="false" stored="true"/>
         <field name="category" type="int" indexed="false" stored="true"/>
         <!--<field name="category_name" type="string" indexed="true" stored="false"/>-->
