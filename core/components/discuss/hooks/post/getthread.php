@@ -215,7 +215,7 @@ foreach ($posts['results'] as $post) {
 
     /* prepare thread view for derivative thread types */
     $postArray['answer_count'] = 0;
-    $postArray['url_mark_as_answer'] = '';
+    $postArray['url_mark_as_answer'] = $postArray['jump_to_first_answer'] = $postArray['jump_to_first_answer.link'] = '';
     $postArray['class_key'] = $thread->get('class_key');
     $postArray = $thread->prepareThreadView($postArray);
 

@@ -93,6 +93,7 @@ $_lang['discuss.excerpt'] = 'Excerpt';
 $_lang['discuss.groups'] = 'Groups';
 $_lang['discuss.home'] = 'Home';
 $_lang['discuss.ip'] = 'IP';
+$_lang['discuss.jump_to_first_answer'] = 'Jump to Answer';
 $_lang['discuss.last_online'] = 'Last Online';
 $_lang['discuss.last_post'] = 'Last Post';
 $_lang['discuss.last_reading'] = 'Last Reading';
