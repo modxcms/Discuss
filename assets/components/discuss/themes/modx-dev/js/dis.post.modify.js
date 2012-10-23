@@ -47,7 +47,9 @@ DIS.DISModifyPost = function() {
         ,addAttachment: function() {
             var d = $('#dis-attachments');
             var i = attachments+1;
-            if (i > DIS.config.attachments_max_per_post) return false;
+            if (i > DIS.config.attachments_max_per_post) {
+                return false;
+            }
             var tpl = '<input type="file" name="attachment'+i+'" />';
 
             d.append(tpl);
