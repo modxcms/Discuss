@@ -263,8 +263,9 @@ class disThreadQuestion extends disThread {
         if (!empty($postArray['answers_raw'])) {
             $firstAnswer = reset($postArray['answers_raw']);
             if (!empty($firstAnswer)) {
-                $postArray['jump_to_first_answer'] = $firstAnswer['url'];
-                $postArray['jump_to_first_answer.link'] = '<a href="'.$postArray['jump_to_first_answer'].'" class="jump-to-first">[[%discuss.jump_to_first_answer]]</a>';
+                $postArray['jump_to_first_answer'] = $firstAnswer;
+                $postArray['jump_to_first_answer']['explanation'] = ($postArray['answer_count'] > 1) ? '[[%discuss.mult_answers_explanation? &count=`'.$postArray['answer_count'].'`]]' : '[[%discuss.one_answer_explanation]]';
+                $postArray['jump_to_first_answer']['link'] = '<a href="'.$postArray['jump_to_first_answer']['url'].'" class="jump-to-first">[[%discuss.answered_link]]</a>';
             }
         }
         return $postArray;
