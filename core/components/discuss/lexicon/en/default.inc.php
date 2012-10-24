@@ -71,6 +71,7 @@ $_lang['discuss.board_usergroup_remove_title'] = 'Remove User Group Access?';
 $_lang['discuss.board_usergroups_msg'] = 'This is a list of all the User Groups that can access this current board. If none are specified, the Board will be globally accessible.';
 $_lang['discuss.boards'] = 'Boards';
 $_lang['discuss.boards.intro_msg'] = 'Manage all the boards for your forum. First, create a Category for each board; then you can create boards (and sub-boards) within the Category. You can also drag and drop boards to re-arrange them.';
+$_lang['discuss.by'] = 'By';
 $_lang['discuss.categories'] = 'Categories';
 $_lang['discuss.category'] = 'Category';
 $_lang['discuss.category_create'] = 'Create Category';
