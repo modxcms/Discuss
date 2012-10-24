@@ -6,7 +6,7 @@
 
 <div class="f1-f9 twelve-form">
     <h1>[[%discuss.message_[[+action]]? &namespace=`discuss` &topic=`post`]]</h1>
-    <form action="[[~[[*id]]]]messages/[[+formaction]]" method="post" class="dis-form m-styled-form dis-message-form" id="dis-modify-message-form" enctype="multipart/form-data">
+    <form action="[[~[[*id]]]]messages/[[+formaction]]" method="post" class="dis-form m-styled-form dis-message-form dis-thread-form" id="dis-modify-message-form" enctype="multipart/form-data">
         [[+action:eq=`modify`:then=`
             <input type="hidden" name="post" value="[[!+fi.id]]" />
             <input type="hidden" name="thread" value="[[!+fi.thread]]" />

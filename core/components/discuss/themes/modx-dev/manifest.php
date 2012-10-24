@@ -342,7 +342,7 @@ $manifest = array(
         ),
         'js' => array(
             'footer' => array(
-                'messages/dis.message.new.js',
+                'dis.thread.js',
             ),
         ),
         'modules' => array(
@@ -371,7 +371,7 @@ $manifest = array(
         ),
         'js' => array(
             'footer' => array(
-                'messages/dis.message.reply.js',
+                'dis.thread.js',
             ),
         ),
         'modules' => array(
@@ -400,7 +400,7 @@ $manifest = array(
         ),
         'js' => array(
             'footer' => array(
-                'messages/dis.message.modify.js',
+                'dis.thread.js',
             ),
         ),
         'modules' => array(
