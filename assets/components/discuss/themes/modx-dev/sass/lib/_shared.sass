@@ -39,7 +39,7 @@ pre
     text-align: center
 .hidden
     display: none
-.inline
+.inline, .l-inline
     display: inline-block
     vertical-align: top
 // Login module
@@ -115,7 +115,9 @@ pre
             display: block
 
 // view latest posts button
-.l-right.m-search
+.m-search
+    width: 35%
+    text-align: right
     a
         background-color: darken($c-base, 6%)
         display: inline-block
@@ -126,6 +128,13 @@ pre
         &:hover
             color: darken($c-base, 60%)
             background-color: darken($c-base, 3%)
+    form
+        width: 60% !important
+        margin-left: 4px
+        input[type=text]
+            padding: 5px
+        input
+            margin: 0 !important
 
 // mini navigation
 .m-sm_nav_pod
@@ -428,7 +437,7 @@ form input[type="radio"]
 
 
 // Search inputs and results
-.m-breadcrumbs form.l-right
+.m-breadcrumbs form
     background-color: #f9f9f9
     margin: 2px 0
     border-radius: 3px
