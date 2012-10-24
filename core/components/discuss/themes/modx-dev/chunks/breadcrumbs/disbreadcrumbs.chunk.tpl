@@ -1,5 +1,4 @@
-<!-- REMOVEDPRODUCTION breadcrumbs/disbreadcrumbs.chunk.tpl -->
- <div class="m-breadcrumbs f-padinfull l-horizontal_nav h-group">
+<div class="m-breadcrumbs f-padinfull l-horizontal_nav h-group">
     <nav class="container l-left">
 		<ul>
 			[[+items]]
@@ -12,6 +11,6 @@
         <input id="search_form_input" placeholder="Search keyphrase..." name="s" value="" title="Start typing and hit ENTER" type="text">
         <input value="Go" type="submit">
     </form>
+    <div class="m-search-label l-right"><a href="[[~[[*id]]]]thread/recent">[[%discuss.view_recent_posts]]</a></div>
     <!-- / remove out of breadcrumbs-->
 </div>
-<!-- / REMOVEDPRODUCTION breadcrumbs/disbreadcrumbs.chunk.tpl -->
