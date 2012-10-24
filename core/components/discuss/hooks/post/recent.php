@@ -109,7 +109,7 @@ $c->select($modx->getSelectColumns('disUser','ThreadAuthorFirst','thread_author_
 $c->select($modx->getSelectColumns('disUser','ThreadAuthorLast','thread_author_last_'));
 
 $total = $modx->getCount('disPost',$c);
-
+$c->groupby('disPost.id');
 $c->sortby('disPost.createdon','DESC');
 $c->limit($limit,$start);
 
