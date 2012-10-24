@@ -48,8 +48,9 @@
     `]]
     <div id="dis-quick-reply-form">
         <div class="wysi-buttons">[[+buttons]]</div>
-        <div class="h-group"><textarea name="message" id="dis-thread-message">[[!+fi.message]]</textarea></div>
-        <span class="error">[[!+fi.error.message]]</span>
+        <div class="h-group">
+            <textarea name="message" id="dis-thread-message">[[+message]]</textarea>
+        </div>
     </div>
     <div class="h-group below-wysi">
         <div class="l-left">

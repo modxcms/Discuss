@@ -29,39 +29,38 @@
         </label><br class="clearfix" />
         <input class="autocomplete" data-autocomplete-action="web/user/find" type="text" name="add_participants" id="dis-reply-participants" value="[[!+fi.add_participants]]" />
 
-        <br class="clearfix" />
-
-        <label for="dis-thread-message">
+        <div id="dis-quick-reply-form">
+            <div class="wysi-buttons">[[+buttons]]</div>
+            <div class="h-group">
+                <textarea name="message" id="dis-thread-message">[[!+fi.message]]</textarea>
+            </div>
             <span class="error">[[!+fi.error.message]]</span>
-        </label><br class="clearfix" />
-        <div class="wysi-buttons">[[+buttons]]</div>
-        <textarea name="message" id="dis-thread-message" cols="80" rows="7">[[!+fi.message]]</textarea><br class="clearfix" />
+        </div>
 
 
-
-        <div class="h-group">
+        <div class="h-group below-wysi">
             <div class="l-left">
                 <label for="dis-attachment">[[%discuss.attachments]]:
-                    <span class="small"><a href="javascript:void(0);" class="dis-add-attachment">[[%discuss.attachment_add]]</a>
-                    <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
                     <span class="error">[[+error.attachments]]</span>
                 </label>
-                <input type="file" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
-
-                <br class="clearfix" />
+                <input type="file" class="dis-attachment-input" name="attachment[[+attachmentCurIdx]]" id="dis-attachment" />
 
                 <div id="dis-attachments"></div>
                 [[+attachments:notempty=`
                     <div class="dis-existing-attachments">
-                        <ul>[[+attachments]]</ul>
+                        <ul class="dis-attachments">[[+attachments]]</ul>
                     </div>
                 `]]
+
+                <a href="javascript:void(0);" class="dis-add-attachment">[[%discuss.attachment_add]] <span>([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span></a>
             </div>
 
             <div class="dis-form-buttons l-right">
-                <input type="button" class="cancel" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]][[+cancel_link]]';" />
-                <input type="submit" class="" name="dis-post-reply" value="[[+submit_message]]" />
+                <a class="cancel" onclick="location.href='[[+url]]';" />[[%discuss.cancel]]</a>
+                <input type="submit" name="dis-post-reply" value="[[+submit_message]]" />
             </div>
         </div>
+        [[+discuss.error_panel]]
+
     </form>
 </div>
