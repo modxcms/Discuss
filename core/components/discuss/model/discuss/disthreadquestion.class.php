@@ -240,7 +240,6 @@ class disThreadQuestion extends disThread {
             $postArray['answer_next'] = array('id' => '', 'url' => '', 'link' => '');
             $postArray['answer_prev'] = array('id' => '', 'url' => '', 'link' => '');
             if (!empty($postArray['answers_raw'])) {
-                $postArray['answer_count'] = count($postArray['answers_raw']);
                 $nextIsNext = false;
                 $last = array();
                 foreach ($postArray['answers_raw'] as $id => $details) {
