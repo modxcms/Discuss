@@ -44,13 +44,12 @@
     padding: 10px 10px
     margin: 3px 2px
     +border-radius($radius-sm)
-    background-color: darken($c-base, 15%)
-    // +box-shadow(darken($c-base, 0%) 0 1px 2px, ligten($c-base, 10%) 0 0 3px inset)
-    // border: 1px solid darken($c-base, 20%)
+    border: 1px solid darken($c-base, 55%)
     display: block
     +rem('font-size', 13px)
     text-align: center
     +background-clip() // prevents bg color from leaking outside the border
+    +box-shadow(darken($c-base, 35%) 0 1px 0 inset)
     background-color: darken($c-base, 58%) // layer fill content
     +background-image(linear-gradient(bottom, darken($c-base, 58%) 0%, darken($c-base, 45%) 100%)) // gradient overlay
     span

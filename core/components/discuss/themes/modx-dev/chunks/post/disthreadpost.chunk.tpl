@@ -46,11 +46,11 @@
             [[+content]]
             [[+discuss.user.shouldMarkAnAnswer:eq=`1`:then=`
                 [[+idx:eq=`1`:then=`
-                    <div class="dis-info"><p>If a community member answers your question please mark post as the answer. <a id="Show-answer-link" href="#">Show How</a></p></div>
+                    <div class="dis-info"><p>[[%discuss.mark_answer_instructions]]</p></div>
                 `:else=``]]
             `:else=``]]
             [[+idx:eq=`1`:then=`
-                [[+jump_to_first_answer.link]]
+                <div class="dis-info"><p>[[+jump_to_first_answer.link]]</p></div>
             `]]
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">[[%discuss.editedon_post? &on=`[[+editedon:ago]]` &user=`[[+editedby.username]]`]]</span>`]]
         </div>
