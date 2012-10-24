@@ -46,11 +46,11 @@
     `:else=`
         <input type="hidden" name="title" value="[[!+fi.title]]" />
     `]]
-
-    <div class="wysi-buttons">[[+buttons]]</div>
-    <div class="h-group"><textarea name="message" id="dis-thread-message">[[!+fi.message]]</textarea></div>
-    <span class="error">[[!+fi.error.message]]</span>
-
+    <div id="dis-quick-reply-form">
+        <div class="wysi-buttons">[[+buttons]]</div>
+        <div class="h-group"><textarea name="message" id="dis-thread-message">[[!+fi.message]]</textarea></div>
+        <span class="error">[[!+fi.error.message]]</span>
+    </div>
     <div class="h-group below-wysi">
         <div class="l-left">
             <label for="dis-attachment">[[%discuss.attachments]]:
