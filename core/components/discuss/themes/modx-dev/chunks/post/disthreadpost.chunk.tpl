@@ -46,7 +46,7 @@
             [[+content]]
             [[+discuss.user.shouldMarkAnAnswer:eq=`1`:then=`
                 [[+idx:eq=`1`:then=`
-                    <div class="dis-info"><p>[[%discuss.mark_answer_instructions]]</p></div>
+                    <div class="dis-info"><p>[[%discuss.mark_answer_instructions]] <a id="Show-answer-link" href="#">[[%discuss.mark_answer_link]]</a>]]</p></div>
                 `:else=``]]
             `:else=``]]
             [[+idx:eq=`1`:then=`
