@@ -6,7 +6,7 @@
 
 <div class="f1-f9 twelve-form">
     <h1>[[%discuss.message_[[+action]]? &namespace=`discuss` &topic=`post`]]</h1>
-    <form action="[[~[[*id]]]]messages/[[+formaction]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
+    <form action="[[~[[*id]]]]messages/[[+formaction]]" method="post" class="dis-form m-styled-form dis-message-form" id="dis-modify-message-form" enctype="multipart/form-data">
         [[+action:eq=`modify`:then=`
             <input type="hidden" name="post" value="[[!+fi.id]]" />
             <input type="hidden" name="thread" value="[[!+fi.thread]]" />
@@ -22,10 +22,11 @@
         </div>
         <input type="text" name="title" id="dis-new-thread-title" class="dis-new-thread-title" value="[[!+fi.title]]" />
 
-        <label for="dis-reply-participants">[[%discuss.participants]]: [[+participants_usernames]]
+        <h4 class="participants">[[%discuss.participants]]: [[+participants_usernames]]</h4>
+        <label for="dis-reply-participants">
             <span class="error">[[!+fi.error.participants_usernames]]</span>
             <span class="small">[[%discuss.participants_desc]]</span>
-        </label><br class="clearfix" />
+
         <input class="autocomplete" data-autocomplete-action="web/user/find" type="text" name="add_participants" id="dis-reply-participants" value="[[!+fi.add_participants]]" />
 
         <div id="dis-quick-reply-form">
