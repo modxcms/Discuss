@@ -26,6 +26,7 @@
         <label for="dis-reply-participants">
             <span class="error">[[!+fi.error.participants_usernames]]</span>
             <span class="small">[[%discuss.participants_desc]]</span>
+        </label>
 
         <input class="autocomplete" data-autocomplete-action="web/user/find" type="text" name="add_participants" id="dis-reply-participants" value="[[!+fi.add_participants]]" />
 
