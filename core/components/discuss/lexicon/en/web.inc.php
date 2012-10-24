@@ -228,10 +228,9 @@ $_lang['discuss.track_ip'] = 'Track IP';
 
 $_lang['discuss.mark_answer_instructions'] = 'If community members answer your question, flag one or more responses as answers.';
 $_lang['discuss.mark_answer_link'] = 'Show how.';
-$_lang['discuss.one_answer_explanation'] = 'This question has been answered by [[+author:default=`one reply`]].';
+$_lang['discuss.one_answer_explanation'] = 'This question has been answered by [[+author:default=`one person`]].';
 $_lang['discuss.mult_answers_explanation'] = 'This question has been answered by [[+count:default=`multiple`]] community members.';
-$_lang['discuss.answered_link'] = 'See the first resposne.';
-$_lang['discuss.flag_answer'] = 'Flag as Answer';
+$_lang['discuss.answered_link'] = 'See the first response.';
 $_lang['discuss.flag_answer'] = 'Flag as Answer';
 $_lang['discuss.unflag_answer'] = 'Remove Answer Flag';
 
