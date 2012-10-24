@@ -10,6 +10,9 @@
 		<div class="m-search-label l-inline">
 			<a href="[[~[[*id]]]]thread/recent">[[%discuss.view_recent_posts]]</a>
 		</div>
+		<div class="l-inline">
+			<p>[[%discuss.or_search]]</p>
+		</div>
 		<form class="l-inline" action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
 	        <label for="search_form_input" class="hidden">Search</label>
 	        <input id="search_form_input" placeholder="Search keyphrase..." name="s" value="" title="Start typing and hit ENTER" type="text">

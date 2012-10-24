@@ -2762,11 +2762,8 @@ br.clearfix {
     -moz-box-shadow: #464646 0 1px 3px inset;
     box-shadow: #464646 0 1px 3px inset;
     border: 1px solid #797979; }
-  /* line 38, ../../sass/lib/_buttons.sass */
-  .secondary-cta:visited {
-    color: #797979; }
 
-/* line 40, ../../sass/lib/_buttons.sass */
+/* line 38, ../../sass/lib/_buttons.sass */
 .dis-action-btn li a.dis-post-reply,
 .a-secondary-cta {
   line-height: 1;
@@ -2795,12 +2792,12 @@ br.clearfix {
   background-image: -moz-linear-gradient(bottom, #656565 0%, #868686 100%);
   background-image: -o-linear-gradient(bottom, #656565 0%, #868686 100%);
   background-image: linear-gradient(bottom, #656565 0%, #868686 100%); }
-  /* line 55, ../../sass/lib/_buttons.sass */
+  /* line 53, ../../sass/lib/_buttons.sass */
   .dis-action-btn li a.dis-post-reply span,
   .a-secondary-cta span {
     font-size: 70%;
     white-space: nowrap; }
-  /* line 58, ../../sass/lib/_buttons.sass */
+  /* line 56, ../../sass/lib/_buttons.sass */
   .dis-action-btn li a.dis-post-reply:hover,
   .a-secondary-cta:hover {
     color: white;
@@ -2810,15 +2807,15 @@ br.clearfix {
     background-image: -o-linear-gradient(bottom, #818181 0%, #9b9b9b 100%);
     background-image: linear-gradient(bottom, #818181 0%, #9b9b9b 100%); }
 
-/* line 64, ../../sass/lib/_buttons.sass */
+/* line 62, ../../sass/lib/_buttons.sass */
 .a-faux-btn-grp .a-secondary-cta {
   margin: 0;
   padding: 3%; }
 
-/* line 69, ../../sass/lib/_buttons.sass */
+/* line 67, ../../sass/lib/_buttons.sass */
 .a-faux-btn.a-secondary-cta {
   padding: 0; }
-  /* line 71, ../../sass/lib/_buttons.sass */
+  /* line 69, ../../sass/lib/_buttons.sass */
   .a-faux-btn.a-secondary-cta a {
     display: inline-block;
     padding: 10px 15px;
@@ -2828,7 +2825,7 @@ br.clearfix {
     background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -moz-linear-gradient(#ececec, #cecece);
     background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, -o-linear-gradient(#ececec, #cecece);
     background-image: url(../../images/redo/bg/btn-divide.png) no-repeat right center, linear-gradient(#ececec, #cecece); }
-    /* line 76, ../../sass/lib/_buttons.sass */
+    /* line 74, ../../sass/lib/_buttons.sass */
     .a-faux-btn.a-secondary-cta a:hover {
       color: white;
       background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dadada), color-stop(100%, #acacac));
@@ -2836,7 +2833,7 @@ br.clearfix {
       background-image: -moz-linear-gradient(#dadada, #acacac);
       background-image: -o-linear-gradient(#dadada, #acacac);
       background-image: linear-gradient(#dadada, #acacac); }
-  /* line 79, ../../sass/lib/_buttons.sass */
+  /* line 77, ../../sass/lib/_buttons.sass */
   .a-faux-btn.a-secondary-cta:hover {
     color: white;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cbcbcb), color-stop(100%, #9b9b9b));
@@ -2845,12 +2842,12 @@ br.clearfix {
     background-image: -o-linear-gradient(#cbcbcb, #9b9b9b);
     background-image: linear-gradient(#cbcbcb, #9b9b9b); }
 
-/* line 82, ../../sass/lib/_buttons.sass */
+/* line 80, ../../sass/lib/_buttons.sass */
 .alt-1-cta {
   color: white;
   background-color: #89c8da !important; }
 
-/* line 85, ../../sass/lib/_buttons.sass */
+/* line 83, ../../sass/lib/_buttons.sass */
 .l-inline-btn {
   display: inline-block; }
 
