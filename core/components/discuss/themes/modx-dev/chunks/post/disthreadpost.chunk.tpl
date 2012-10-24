@@ -50,8 +50,10 @@
                 `:else=``]]
             `:else=``]]
             [[+idx:eq=`1`:then=`
-                <div class="dis-info"><p>[[+jump_to_first_answer.link]]</p></div>
-            `]]
+                [[+answer_count:neq=`0`:then=`
+                    <div class="dis-info"><p>[[+jump_to_first_answer.link]]</p></div>
+                `:else=``]]
+            `:else=``]]
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">[[%discuss.editedon_post? &on=`[[+editedon:ago]]` &user=`[[+editedby.username]]`]]</span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
