@@ -5,7 +5,7 @@
 <div class="f1-f12 h-group [[+answered:notempty=`answered`]]">
     <h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]" post="[[+id]]">
         [[+answered:notempty=`<span class="tag solved">[[%discuss.solved]]</span>`:default=``]]
-        <a href="[[+url]]" title="[[+title]]">[[+title]]<span class="idx">#[[+idx]]</span></a>
+        <a href="[[+url]]" title="[[+title]]">[[+title]]</a>
     </h1>
 </div>
 <div class="f1-f9">
