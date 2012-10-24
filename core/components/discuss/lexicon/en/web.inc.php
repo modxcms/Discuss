@@ -32,7 +32,7 @@ $_lang['discuss.sep'] = ',';
 $_lang['discuss.ndash'] = ' – ';
 $_lang['discuss.mdash'] = '—';
 $_lang['discuss.account_merge'] = 'Merge Account';
-$_lang['discuss.account_merge_msg'] = 'Here you can merge 2 existing accounts of yours. This is useful if you are wanting to merge your MODX account with an older system account, such as SMF. Simply enter your old account username and password below, and Discuss will automatically merge that old account into your current one.';
+$_lang['discuss.account_merge_msg'] = 'If you have multiple MODX accounts, you can merge them. This is useful if you are wanting to merge your MODX account with an older account, or you created another one on accident. Enter your old account username and password below, and Discuss will automatically merge it into your current one.';
 $_lang['discuss.account_merge_success'] = 'Account successfully merged! Please logout and back in to refresh your permissions.';
 $_lang['discuss.actions'] = 'Actions';
 $_lang['discuss.age'] = 'Age';
@@ -227,6 +227,11 @@ $_lang['discuss.thread_viewing'] = '[[+members]] and [[+guests]] guests are view
 $_lang['discuss.title'] = 'Title';
 $_lang['discuss.track_ip'] = 'Track IP';
 
+$_lang['discuss.mark_answer_instructions'] = 'If you’re satisfied with the answers, flag one or more responses as solving your question.';
+$_lang['discuss.mark_answer_link'] = 'Show me how.';
+$_lang['discuss.one_answer_explanation'] = 'This question has been answered by [[+author:default=`one person`]].';
+$_lang['discuss.mult_answers_explanation'] = 'This question has been answered by [[+count:default=`multiple`]] community members.';
+$_lang['discuss.answered_link'] = 'See the first response.';
 $_lang['discuss.flag_answer'] = 'Flag as Answer';
 $_lang['discuss.unflag_answer'] = 'Remove Answer Flag';
 
