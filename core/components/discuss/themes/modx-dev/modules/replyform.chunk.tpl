@@ -39,8 +39,8 @@
             </div>
         </section>
         <div id="dis-new-thread-title-wrapper" class="dis-new-thread-title-wrapper">
-        <label for="dis-new-thread-title">[[%discuss.title]]:</label>
-        <span class="error">[[!+fi.error.title]]</span>
+            <label for="dis-new-thread-title">[[%discuss.title]]:</label>
+            <span class="error">[[!+fi.error.title]]</span>
         </div>
         <input type="text" name="title" id="dis-new-thread-title" class="dis-new-thread-title" value="[[!+fi.title]]" />
     `:else=`

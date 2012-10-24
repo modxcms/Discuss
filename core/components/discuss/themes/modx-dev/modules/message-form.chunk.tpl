@@ -16,12 +16,11 @@
             <input type="hidden" name="thread" value="[[!+fi.thread]]" />
         `]]
 
-        <label for="dis-message-title">[[%discuss.title]]:
+        <div id="dis-new-thread-title-wrapper" class="dis-new-thread-title-wrapper">
+            <label for="dis-new-thread-title">[[%discuss.title]]:</label>
             <span class="error">[[!+fi.error.title]]</span>
-        </label>
-        <br class="clearfix" />
-        <input type="text" name="title" id="dis-message-title" value="[[!+fi.title]]" />
-        <br class="clearfix" />
+        </div>
+        <input type="text" name="title" id="dis-new-thread-title" class="dis-new-thread-title" value="[[!+fi.title]]" />
 
         <label for="dis-reply-participants">[[%discuss.participants]]: [[+participants_usernames]]
             <span class="error">[[!+fi.error.participants_usernames]]</span>
