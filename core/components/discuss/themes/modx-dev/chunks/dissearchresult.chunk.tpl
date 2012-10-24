@@ -1,9 +1,11 @@
 <li class="Item Depth2 dis-category-1 [[+class]]">
+	<a href="[[+url]]">
     <div class="ItemContent Category">
-    	<a href="[[+url]]" class="Title">[[+title]]<span class="DiscussionCount"> [[+replies]] replies</span>
-    	</a>
+    	<h3 class="Title">[[+title]]<span class="DiscussionCount"> [[+replies]] replies</span></h3>
+    	<div class="dis-item-info">[[+createdon]] [[+username]]</div>
     	<div class="CategoryDescription">
     		<p>[[+message]]</p>
     	</div>
     </div>
+	</a>
 </li>
