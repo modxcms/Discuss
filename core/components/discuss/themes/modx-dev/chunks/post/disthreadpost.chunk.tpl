@@ -51,7 +51,7 @@
             `:else=``]]
             [[+idx:eq=`1`:then=`
                 [[+answer_count:neq=`0`:then=`
-                    <div class="dis-info"><p>[[+jump_to_first_answer.link]]</p></div>
+                    <div class="dis-info"><p>[[+jump_to_first_answer.explanation]] [[+jump_to_first_answer.link]]</p></div>
                 `:else=``]]
             `:else=``]]
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">[[%discuss.editedon_post? &on=`[[+editedon:ago]]` &user=`[[+editedby.username]]`]]</span>`]]
