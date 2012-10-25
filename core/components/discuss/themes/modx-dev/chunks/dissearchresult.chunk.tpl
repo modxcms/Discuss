@@ -2,7 +2,7 @@
 	<a href="[[+url]]">
     <div class="ItemContent Category">
     	<h3 class="Title">[[+title]]</h3>
-    	<div class="dis-item-info">[[%discuss.posted_on]] <strong>[[+createdon]]</strong> [[%discuss.by]] <strong>[[+username]]</strong></div>
+    	<div class="dis-item-info">[[%discuss.posted_on]] <strong>[[+createdon]]</strong> [[%discuss.by]] <strong>[[+author]]</strong></div>
     	<div class="CategoryDescription">
     		<p>[[+message]]</p>
     	</div>
