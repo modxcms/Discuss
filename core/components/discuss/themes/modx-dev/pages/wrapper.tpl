@@ -16,7 +16,7 @@
     <link href="[[+discuss.config.cssUrl]]redo/forums-bp-styles.css" rel="stylesheet" type="text/css">
     <link href="https://get.gridsetapp.com/7032/gzip/" rel="stylesheet" />
     `:default=`
-    <link href="http://get.gridsetapp.com/2953/" rel="stylesheet" />[[- Will eventually download and combine]]
+    <link href="[[+discuss.config.cssUrl]]redo/lib/gridset.css" rel="stylesheet" />[[- Will eventually download and combine]]
     `]]
 
     [[*cssjs]]
