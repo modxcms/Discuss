@@ -139,7 +139,7 @@ foreach ($posts as $post) {
         if ($post->canReply()) {
             $postArray['action_reply'] = $discuss->getChunk('disActionLink',array(
                 'url' => $discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'))),
-                'text' => $modx->lexicon('discuss.reply'),
+                'text' => $modx->lexicon('discuss.reply_with_quote'),
                 'class' => 'dis-post-reply',
                 'id' => '',
                 'attributes' => '',
