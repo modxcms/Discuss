@@ -39,7 +39,7 @@
 
     <div class="dis-post-right">
         <div class="title">
-            <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]]</a>, <span title="[[+createdon]]">[[+createdon:ago]]</span>
+            <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]], <span title="[[+createdon]]">[[+createdon:ago]]</span></a>
             [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]][[+action_remove]][[+action_spam]]</ul>`]]
         </div>
         <div class="dis-content">
