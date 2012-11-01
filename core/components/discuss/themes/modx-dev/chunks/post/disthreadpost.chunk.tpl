@@ -54,12 +54,10 @@
                     <div class="dis-info"><p>[[+jump_to_first_answer.explanation]] [[+jump_to_first_answer.link]]</p></div>
                 `:else=``]]
             `:else=``]]
+            [[+attachments:notempty=`<div class="dis-post-attachments"><ul class="dis-attachments">[[+attachments]]</ul></div>`]]
             [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">[[%discuss.editedon_post? &on=`[[+editedon:ago]]` &user=`[[+editedby.username]]`]]</span>`]]
         </div>
         <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
     </div>
     [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
-    <div class="dis-post-footer">
-        [[+attachments:notempty=`<div class="dis-post-attachments"><ul class="dis-attachments">[[+attachments]]</ul></div>`]]
-    </div>
 </li>

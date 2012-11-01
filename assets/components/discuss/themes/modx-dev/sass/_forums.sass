@@ -251,16 +251,31 @@ h3.forum
 
 // attachments
 ul.dis-attachments
+    +rem('font-size', 13px)
+    +rem('margin', 10px 0)
     display: block
     padding: 5px 0
-    border-top: 1px solid #dedede
-    border-bottom: 1px solid #dedede
+    border: 1px solid darken($c-base, 2%)
+    background-color: darken($c-base, 0%)
     li
+        +rem('font-size', 11px)
+        color: darken($c-base, 40%)
+        border-top: 1px solid darken($c-base, 5%)
         text-align: left
         a
-            margin: 20px 0 0 0
-            padding-left: 15px
-            background: transparent url(../images/attachment.png) no-repeat 0 2px
+            +rem('font-size', 15px)
+            display: inline-block
+            font-weight: bold
+            margin: 0 0 0 0
+            padding: 0 3px 0 25px
+            background: transparent url(../../images/redo/icons/attachments.png) no-repeat 8px 4px
+            &[title $='.css'], &[title $='.js'], &[title $='.php'], &[title $='.html']
+                background-position: 8px -62px
+            &[title $='.jpg'], &[title $='.jpeg'], &[title $='.png'], &[title $='.gif'], &[title $='.tif']
+                background-position: 8px -126px
+        &:first-child
+            border-top: 0
+
 
 .dis-code
     background-color: transparent
@@ -601,6 +616,8 @@ section.group
 
 #ui-datepicker-div
     z-index: 30
+
+
 
 
 // new thread view
