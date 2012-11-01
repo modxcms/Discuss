@@ -31,7 +31,7 @@
        [[+disection:neq=`recent`:then=`
         <div class="box">
             <h4>Who’s talking</h4>
-            <p>Posted in this thread:<br />[[+participants_usernames_linked]]</p>
+            <p>Posted in this thread:<br />[[+participants_usernames]]</p>
             <p>[[+readers]]</p>
         </div>`:else=``]]
     </div>
