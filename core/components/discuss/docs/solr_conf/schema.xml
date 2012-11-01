@@ -247,21 +247,21 @@
         <field name="id" type="int" indexed="true" stored="true" required="true"/>
         <!-- required: indexed and stored -->
         <field name="createdon" type="date" indexed="true" stored="true" required="true"/>
+        <field name="username" type="string" indexed="true" stored="true" required="true"/>
         <!-- required: indexed, not stored -->
         <field name="private" type="boolean" indexed="true" stored="false" default="false"/>
         <field name="board" type="int" indexed="true" stored="false" required="true"/>
-        <field name="author" type="int" indexed="true" stored="false" required="true"/>
-        <field name="username" type="string" indexed="true" stored="false" required="true"/>
         <!-- required: stored, not indexed -->
         <field name="thread" type="int" indexed="false" stored="true" required="true"/>
         <field name="title" type="text" indexed="false" stored="true" required="true"/>
         <field name="url" type="string" indexed="false" stored="true" required="true"/>
+        <field name="author" type="int" indexed="false" stored="true" required="true"/>
         <field name="message" type="text" indexed="false" stored="true" required="true"/>
 
         <!-- optional: indexed and stored -->
 
         <!-- optional: indexed, not stored -->
-        <field name="in_answered_thread" type="boolean" indexed="true" stored="false" />
+        <!--<field name="in_answered_thread" type="boolean" indexed="true" stored="false" />-->
 
         <!-- optional: stored, not indexed -->
         <field name="answered" type="boolean" indexed="false" stored="true" />
