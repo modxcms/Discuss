@@ -186,6 +186,7 @@ $_lang['discuss.reply'] = 'Reply';
 $_lang['discuss.reply_to_post'] = 'Reply: [[+title]]';
 $_lang['discuss.reply_to_thread'] = 'Reply to Thread';
 $_lang['discuss.reply_to_message'] = 'Reply to Message';
+$_lang['discuss.reply_with_quote'] = 'Reply with Quote';
 $_lang['discuss.report_to_mod'] = 'Report';
 $_lang['discuss.report_to_mod_confirm'] = 'This will open a discussion with the forum moderators and admins, including disclosing your full contact details. Please describe why this post abusive or violates the forum guidelines.';
 $_lang['discuss.save_changes'] = 'Save Changes';
