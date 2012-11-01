@@ -230,8 +230,8 @@ $_lang['discuss.track_ip'] = 'Track IP';
 
 $_lang['discuss.mark_answer_instructions'] = 'If you’re satisfied with the answers, flag one or more responses as solving your question.';
 $_lang['discuss.mark_answer_link'] = 'Show me how.';
-$_lang['discuss.one_answer_explanation'] = 'This question has been answered by [[+author:default=`one person`]].';
-$_lang['discuss.mult_answers_explanation'] = 'This question has been answered by [[+count:default=`multiple`]] community members.';
+$_lang['discuss.one_answer_explanation'] = 'This question has been answered by [[+author]].';
+$_lang['discuss.mult_answers_explanation'] = 'This question has been answered by multiple community members.';
 $_lang['discuss.answered_link'] = 'See the first response.';
 $_lang['discuss.flag_answer'] = 'Flag as Answer';
 $_lang['discuss.unflag_answer'] = 'Remove Answer Flag';
