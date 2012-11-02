@@ -81,6 +81,7 @@ $_lang['discuss.by'] = 'by [[+author]]';
 $_lang['discuss.cancel'] = 'Cancel';
 $_lang['discuss.close'] = 'Close';
 $_lang['discuss.close_bar'] = 'Close Bar';
+$_lang['discuss.created'] = 'Started by';
 $_lang['discuss.date_end'] = 'End Date';
 $_lang['discuss.date_registered'] = 'Date Registered';
 $_lang['discuss.date_start'] = 'Start Date';
