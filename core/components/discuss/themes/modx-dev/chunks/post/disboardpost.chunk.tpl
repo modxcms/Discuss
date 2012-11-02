@@ -6,14 +6,14 @@
                 [[+answered:eq=`1`:then=`<span class="answered tag">[[%discuss.solved]]</span>`:default=`
                     [[+class_key:eq=`disThreadQuestion`:then=`<span class="question tag">[[%discuss.question]]</span>`:else=``]]
                 `]]
-                <strong>[[+title]]</strong>, <span title="[[%discuss.created]] [[+first_post_username]]" class="posted-date">[[+createdon:ago]]</span>
+                <strong>[[+title]]</strong>, <span title="[[%discuss.created]] [[+first_post_username]]" class="posted-date">[[+first_post_createdon:ago]]</span>
                 [[+thread_pagination]]
             </div>
         </div>
         <div class="f8 l-vmiddle l-txtcenter">[[+views]]</div>
         <div class="f9 l-vmiddle l-txtcenter">[[+replies]]</div>
         <div class="f10-f12">
-            <p class="posted-by">[[+last_post_username]], [[+last_post_createdon:ago]]</p>
+            <p class="posted-by">[[+last_post_username]], [[+createdon:ago]]</p>
             </p>
         </div>
     </a>
