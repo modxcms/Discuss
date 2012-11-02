@@ -1,67 +1,38 @@
-// Keyboard shortcuts for browsing pages of lists
-// $(document).keyup(handleKey);
-// function handleKey(e){
-//     var left_arrow = 37;
-//     var right_arrow = 39;
 
-//     if (e.target.localName == 'body' || e.target.localName == 'html') {
-//             var code = e.which;
-//       if (code == left_arrow)
-//                 prevPage();
-//       else if (code == right_arrow)
-//                 nextPage();
-//         }
-// }
-
-// var newLocation;
-
-// function prevPage(){
-//     var href = $('#key-Paginate ul li:first-child a').attr('href');
-//     if (href && href != newLocation) {
-//         document.location = href;
-//         newLocation = href;
-//     }
-// }
-
-// function nextPage(){
-//     var href = $('#key-Paginate ul li:last-child a').attr('href');
-//     if (href && href != newLocation) {
-//         document.location = href;
-//         newLocation = href;
-//     }
-// }
-
-
-$(document).keyup(handleKey);
-function handleKey(e){
-    var left_arrow = 37;
-    var right_arrow = 39;
-
-    if (e.target.localName == 'body' || e.target.localName == 'html') {
-        if (!e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
-            var code = e.which;
-      if (code == left_arrow)
-                prevPage();
-      else if (code == right_arrow)
-                nextPage();
+$(document).keyup(keyTrigger);
+function keyTrigger(kbkey){
+    var lkey = 37;
+    var rkey = 39;
+    var replyKey = 82;
+    if (kbkey.target.localName == 'body' || kbkey.target.localName == 'html') {
+        var code = kbkey.which;
+        if (code == lkey)
+            prevP();
+        else if (code == rkey)
+            nextP();
+        else if (code == replyKey)
+            replyL();
         }
     }
-}
-
-var newLocation;
-
-function prevPage(){
+var newPage;
+function prevP(){
     var href = $('ul.paginate li:first-child a').attr('href');
-    if (href && href != newLocation) {
+    if (href && href != newPage) {
         document.location = href;
-        newLocation = href;
+        newPage = href;
     }
 }
-
-function nextPage(){
+function nextP(){
     var href = $('ul.paginate li:last-child a').attr('href');
-    if (href && href != newLocation) {
+    if (href && href != newPage) {
         document.location = href;
-        newLocation = href;
+        newPage = href;
     }
+}
+function replyL(){
+    var quickReply;
+    quickReply = $('#dis-quick-reply-form').offset().top;
+    $('html,body').animate({scrollTop:quickReply}, 200, function(){
+        $('#dis-thread-message').focus();
+    });
 }
