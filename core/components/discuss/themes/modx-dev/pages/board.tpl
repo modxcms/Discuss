@@ -29,8 +29,8 @@
 		    <div class="f1-f7 f-padinall">
 		    	<div class="wrap">[[%discuss.title]]</div>
 		    </div>
-		    <div class="f8">[[%discuss.views]]</div>
-		    <div class="f9">[[%discuss.replies]]</div>
+		    <div class="f8 l-txtcenter">[[%discuss.views]]</div>
+		    <div class="f9 l-txtcenter">[[%discuss.replies]]</div>
 		    <div class="f10-f12">[[%discuss.last_post]]</div>
 		</div>
 	</div> <!-- / m-section_title -->
