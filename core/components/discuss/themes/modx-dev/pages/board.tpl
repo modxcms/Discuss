@@ -27,11 +27,11 @@
 		</header>
 		<div class="row h-group header-row">
 		    <div class="f1-f7 f-padinall">
-		    	<div class="wrap">Title</div>
+		    	<div class="wrap">[[%discuss.title]]</div>
 		    </div>
-		    <div class="f8">Views</div>
-		    <div class="f9">Replies</div>
-		    <div class="f10-f12">Info</div>
+		    <div class="f8-f10">[[%discuss.views]]</div>
+		    <div class="f1">[[%discuss.replies]]</div>
+		    <div class="f10-f12">[[%discuss.last_post]]</div>
 		</div>
 	</div> <!-- / m-section_title -->
 	[[+posts]]
