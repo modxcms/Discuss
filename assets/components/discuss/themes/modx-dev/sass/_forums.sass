@@ -626,6 +626,19 @@ section.group
     z-index: 30
 
 
+// Syntax Highlighter overflow
+.syntaxhighlighter
+    max-height: 600px
+    overflow: auto !important
+.syntaxhighlighter::-webkit-scrollbar
+    -webkit-appearance: none !important
+    width: 7px !important
+
+.syntaxhighlighter::-webkit-scrollbar-thumb
+    border-radius: 4px
+    background-color: rgba(0,0,0,.5)
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5)
+
 
 
 // new thread view

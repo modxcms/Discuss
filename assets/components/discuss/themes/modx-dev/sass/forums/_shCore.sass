@@ -388,7 +388,41 @@ $c-sh-red: red
         overflow: hidden
         overflow-x: auto
 
+// Syntax Highlighter overflow
+$sh-height: 600px
+$sh-scroll-dimensions: 7px
+$sh-padding: 15px
+$sh-fade-height: 25px
 
+.syntaxhighlighter
+    max-height: $sh-height
+    overflow: auto !important
+    position: relative
+    padding: $sh-padding 0
+    &::-webkit-scrollbar
+        -webkit-appearance: none
+        width: $sh-scroll-dimensions
+        height: $sh-scroll-dimensions
+    &::-webkit-scrollbar-thumb
+        border-radius: ($sh-scroll-dimensions/2)
+        background-color: rgba(0,0,0,.5)
+        -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5)
 .dis-code
-    overflow: hidden
-    overflow-x: auto
+    border: 1px solid darken($c-base, 2%)
+    position: relative
+    max-height: ($sh-scroll-dimensions + $sh-height + ($sh-padding *2) + $sh-fade-height)
+    &:before
+        content: ""
+        display: block
+        +background-clip()
+        +background-image(linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%))
+        position: absolute
+        bottom: ($sh-scroll-dimensions + $sh-padding - 1px)
+        left: 0px
+        width: 100%
+        height: $sh-fade-height
+        z-index: 50
+
+// .dis-code
+//     overflow: hidden
+//     overflow-x: auto
