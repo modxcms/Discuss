@@ -111,7 +111,7 @@ if ($includePrevNext) {
     }
 }
 /* If total pages under limit, don't truncate */
-if ($total < $pageLimit) {
+if ($total <= $pageLimit) {
 	for ($i = 1; $i <= $total; $i++) {
 		$list[] = ($i == $current)
 			? $discuss->getChunk($tplActive, array('url' => $currentResourceUrl.$glue.'page='.$current,'class' => 'active', 'text' => $i))
