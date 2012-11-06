@@ -49,7 +49,6 @@ class disSetup {
             'searchable' => false,
             'cacheable' => true,
             'createdby' => $this->modx->user->get('id'),
-            'published' => false,
             'hidemenu' => false,
             'menutitle' => 'Forums',
             'class_key' => 'modDocument',
