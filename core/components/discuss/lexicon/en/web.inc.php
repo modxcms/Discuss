@@ -213,6 +213,7 @@ $_lang['discuss.subscribe_by_email'] = 'Email me new replies';
 $_lang['discuss.subscriptions'] = 'Subscriptions';
 $_lang['discuss.thread'] = 'Thread';
 $_lang['discuss.thread_lock'] = 'Lock';
+$_lang['discuss.thread_locked'] = 'This thread is locked and replies are no longer allowed.';
 $_lang['discuss.thread_merge'] = 'Merge Thread';
 $_lang['discuss.thread_move'] = 'Move';
 $_lang['discuss.thread_move_message'] = 'Select a desination board.';

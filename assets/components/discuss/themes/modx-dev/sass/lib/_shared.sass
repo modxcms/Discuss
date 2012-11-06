@@ -26,7 +26,6 @@ a
         text-decoration: underline
 pre
     font-family: "Courier New", Courier, mono
-
 .l-right
     float: right
 .l-left
@@ -43,6 +42,24 @@ pre
     display: inline-block
     vertical-align: top
 // Login module
+
+// notices
+.m-notice
+    padding: 10px
+    background-color: darken($c-base, 6%)
+    border: solid 1px darken($c-base, 12%)
+    display: block
+    margin: 10px 0
+    text-align: center
+    +border-radius($radius-sm)
+    &.reg
+        background-color: lighten($c-dark-bg, 26%)
+        border-color: lighten($c-dark-bg, 16%)
+    &.urgent
+        background-color: lighten(red, 47%)
+        border-color: lighten(red, 37%)
+        color: red
+
 .l-horiz_list
     li
         display: inline-block

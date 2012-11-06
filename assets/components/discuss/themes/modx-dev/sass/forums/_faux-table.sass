@@ -295,11 +295,12 @@ div.m-section_title + div.row
 // status when user is logged in
 .dis-category .wrap
     padding-left: 35px
-.board-post.locked
-    background: url(../../images/redo/icons/i-lock-read.png) no-repeat 7px 8px
+.board-post.locked, .board-post.locked:hover
+    background: url(../../images/redo/icons/i-lock-read.png) no-repeat 2px 8px
 .m-section_title+.row
-    &.board-post.locked
-        background-position: 7px 19px
+    &.board-post.locked, &.board-post.locked:hover
+        background-position: 2px 19px
+
 .a-loggedin
     .dis-category .wrap
         padding-left: 35px

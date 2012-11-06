@@ -8,7 +8,7 @@ images_dir = "images/redo"
 javascripts_dir = "js/redo"
 
 output_style = :compressed
-# output_style = :nested
+output_style = :nested
 environment = :development
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
