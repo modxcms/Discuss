@@ -63,6 +63,8 @@ if (empty($cache)) {
     ));
     $cache['total'] = $modx->getCount('disThread',$c);
     $c->select($modx->getSelectColumns('disPost','LastPost'));
+    $c->select($modx->getSelectColumns('disPost','FirstPost','first_post_'));
+    $c->select($modx->getSelectColumns('disThread','disThread'));
     $c->select(array(
         'last_post_id' => 'LastPost.id',
         'post_id' => 'LastPost.id',
