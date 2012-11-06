@@ -7,7 +7,8 @@
                     [[+class_key:eq=`disThreadQuestion`:then=`<span class="question tag">[[%discuss.question]]</span>`:else=``]]
                 `]]
                 <strong>[[+title]]</strong>, <span title="[[%discuss.created]] [[+first_post_username]]" class="posted-date">[[+first_post_createdon:ago]]</span>
-                [[+thread_pagination]]
+                [[+thread_pagination]]<br />
+                <span class="posted-by">[[+first_post_username]], [[+first_post_createdon:ago]]</span>
             </div>
         </div>
         <div class="f8 l-vmiddle l-txtcenter">[[+views]]</div>
