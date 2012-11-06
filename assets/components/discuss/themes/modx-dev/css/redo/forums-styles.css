@@ -4114,24 +4114,16 @@ div.m-section_title + div.row {
   background: url(../../images/redo/icons/sm-folder.png) no-repeat 2px 5px;
   padding-left: 22px; }
 
-/* line 296, ../../sass/forums/_faux-table.sass */
-.dis-category .wrap {
-  padding-left: 35px; }
-
-/* line 298, ../../sass/forums/_faux-table.sass */
-.board-post.locked, .board-post.locked:hover {
-  background: url(../../images/redo/icons/i-lock-read.png) no-repeat 2px 8px; }
-
-/* line 301, ../../sass/forums/_faux-table.sass */
+/* line 297, ../../sass/forums/_faux-table.sass */
 .m-section_title + .row.board-post.locked, .m-section_title + .row.board-post.locked:hover {
   background-position: 2px 19px; }
 
-/* line 305, ../../sass/forums/_faux-table.sass */
+/* line 301, ../../sass/forums/_faux-table.sass */
 .a-loggedin .dis-category .wrap {
   padding-left: 35px;
   position: relative;
   background-position: 17px 5px; }
-/* line 310, ../../sass/forums/_faux-table.sass */
+/* line 306, ../../sass/forums/_faux-table.sass */
 .a-loggedin .dis-category.dis-unread .wrap:before {
   content: "";
   display: block;
@@ -4141,18 +4133,18 @@ div.m-section_title + div.row {
   height: 10px;
   width: 8px;
   background: url(../../images/redo/icons/unread-dot.png) no-repeat 0 0; }
-/* line 320, ../../sass/forums/_faux-table.sass */
+/* line 316, ../../sass/forums/_faux-table.sass */
 .a-loggedin .board-post .wrap {
   padding-left: 30px; }
-/* line 323, ../../sass/forums/_faux-table.sass */
+/* line 319, ../../sass/forums/_faux-table.sass */
 .a-loggedin .board-post.dis-unread .wrap, .a-loggedin .board-post.dis-post-unread .wrap {
   background: url(../../images/redo/icons/unread-dot.png) no-repeat 11px 4px; }
 
-/* line 325, ../../sass/forums/_faux-table.sass */
+/* line 321, ../../sass/forums/_faux-table.sass */
 .boards + .forum-grid {
   margin-top: 0; }
 
-/* line 327, ../../sass/forums/_faux-table.sass */
+/* line 323, ../../sass/forums/_faux-table.sass */
 .boards .row:last-child {
   border: none;
   padding-bottom: 0; }
