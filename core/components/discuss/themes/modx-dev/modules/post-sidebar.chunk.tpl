@@ -20,12 +20,14 @@
             <p>Remember, this is an Open Source project and the volunteers here assist out of love for the project and a desire to help others.</p>
         </div>`]]
 
+        [[- MODX Cloud ad will go here … ]]
+
         <div class="Box GuestBox">
             <div class="a-faux-btn-grp">
                 <a class="a-secondary-cta l-inline-btn a-bug" href="http://tracker.modx.com">Found a Bug?</a>
                 <a class="a-secondary-cta l-inline-btn a-proposal" href="http://tracker.modx.com/projects/modx-proposals">Have a feature request?</a>
             </div>
-            <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support <span>(Priority Support from the Source)</span></a>
+            <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support Now</a>
         </div>
 
        [[+disection:neq=`recent`:then=`
