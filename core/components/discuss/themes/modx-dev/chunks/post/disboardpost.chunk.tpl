@@ -3,7 +3,7 @@
         <div class="f1-f7 l-vmiddle m-title">
             <div class="wrap">
                 [[+sticky:eq=`1`:then=`<span class="sticky tag">[[%discuss.sticky]]</span>`]]
-                [[+locked:is=`1`:then=`<span class="sticky tag">[[%discuss.thread_locked]]</span>`:else=``]]
+                [[+locked:is=`1`:then=`<span class="locked tag">[[%discuss.thread_locked]]</span>`:else=``]]
                 [[+answered:eq=`1`:then=`<span class="answered tag">[[%discuss.solved]]</span>`:default=`
                     [[+class_key:eq=`disThreadQuestion`:then=`<span class="question tag">[[%discuss.question]]</span>`:else=``]]
                 `]]

@@ -104,6 +104,21 @@
         +box-shadow(lighten($c-dark-bg, 17%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
 
 
+// yellow/caution pattern
+%p-raised-yellow-light
+    +background-image(linear-gradient(lighten(yellow, 1%), darken(yellow, 15%)))
+    +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+
+// blue
+%p-raised-blue-light
+    +background-image(linear-gradient(lighten(#528ad0, 1%), darken(#528ad0, 15%)))
+    +box-shadow(lighten(#528ad0, 3%) 0 1px 0 inset, darken(#528ad0, 30%) 0 1px 0)
+
+// gray sunken
+%p-sunk-gray-light
+    +background-image(linear-gradient(darken($c-base, 30%), darken($c-base, 20%)))
+    +box-shadow(darken($c-base, 44%) 0 1px 0 inset, darken($c-base, 44%) 0 0 2px inset, lighten($c-base, 44%) 0 1px 0)
+
 // Gray despressed button / toggle
 .btn-toggle-normal
     border: 1px solid rgba(0,0,0,.34)
