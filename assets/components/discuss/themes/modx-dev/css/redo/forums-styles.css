@@ -1679,9 +1679,9 @@ em, i {
   background-image: -moz-linear-gradient(#acacac, #c6c6c6);
   background-image: -o-linear-gradient(#acacac, #c6c6c6);
   background-image: linear-gradient(#acacac, #c6c6c6);
-  -webkit-box-shadow: #898989 0 1px 0 inset, #898989 0 0 2px inset, white 0 1px 0;
-  -moz-box-shadow: #898989 0 1px 0 inset, #898989 0 0 2px inset, white 0 1px 0;
-  box-shadow: #898989 0 1px 0 inset, #898989 0 0 2px inset, white 0 1px 0; }
+  -webkit-box-shadow: #6f6f6f 0 0 4px inset, white 0 1px 0;
+  -moz-box-shadow: #6f6f6f 0 0 4px inset, white 0 1px 0;
+  box-shadow: #6f6f6f 0 0 4px inset, white 0 1px 0; }
 
 /* line 123, ../../sass/partials/_color-patterns.sass */
 .btn-toggle-normal {
