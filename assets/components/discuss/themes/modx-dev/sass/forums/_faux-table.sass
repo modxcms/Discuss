@@ -111,6 +111,8 @@
             display: inline-block
     .tag, .solved
         @extend .a-primary-cta
+        +rem('min-width', 55px)
+        text-align: center
         +text-shadow(none)
         display: inline-block
         text-transform: uppercase
@@ -125,6 +127,8 @@
             @extend %p-sunk-gray-light
     .question
         @extend .a-tertiary-cta
+    .question, .solved
+        +rem('min-width', 63px)
 // .dis-threads.forum-grid
 //     background-color: lighten($c-base, 90%)
 

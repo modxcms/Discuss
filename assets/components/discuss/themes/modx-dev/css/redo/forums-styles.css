@@ -3925,6 +3925,9 @@ section.group {
   display: inline-block; }
 /* line 112, ../../sass/forums/_faux-table.sass */
 .forum-grid .tag, .forum-grid .solved {
+  min-width: 55px;
+  min-width: 5.5rem;
+  text-align: center;
   text-shadow: none;
   display: inline-block;
   text-transform: uppercase;
@@ -3938,51 +3941,55 @@ section.group {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none; }
-  /* line 122, ../../sass/forums/_faux-table.sass */
+  /* line 124, ../../sass/forums/_faux-table.sass */
   .forum-grid .tag:hover, .forum-grid .solved:hover {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none; }
+/* line 130, ../../sass/forums/_faux-table.sass */
+.forum-grid .question, .forum-grid .solved {
+  min-width: 63px;
+  min-width: 6.3rem; }
 
-/* line 131, ../../sass/forums/_faux-table.sass */
+/* line 135, ../../sass/forums/_faux-table.sass */
 .dis-thread-pagination {
   margin: 0 0 0 5px;
   font-size: 12px; }
-  /* line 135, ../../sass/forums/_faux-table.sass */
+  /* line 139, ../../sass/forums/_faux-table.sass */
   .dis-thread-pagination li {
     padding: 3px 2px;
     opacity: 0.5;
     margin-right: -3px; }
-    /* line 140, ../../sass/forums/_faux-table.sass */
+    /* line 144, ../../sass/forums/_faux-table.sass */
     .dis-thread-pagination li:hover {
       opacity: 1;
       background-color: white; }
 
-/* line 145, ../../sass/forums/_faux-table.sass */
+/* line 149, ../../sass/forums/_faux-table.sass */
 .a-dis-actionbuttons {
   float: right;
   margin: 0 0 8px 0; }
-  /* line 148, ../../sass/forums/_faux-table.sass */
+  /* line 152, ../../sass/forums/_faux-table.sass */
   .a-dis-actionbuttons a {
     padding: 3px 6px;
     display: inline-block;
     margin: 0 3px 0 0; }
-    /* line 153, ../../sass/forums/_faux-table.sass */
+    /* line 157, ../../sass/forums/_faux-table.sass */
     .a-dis-actionbuttons a:hover {
       background-color: white; }
 
-/* line 157, ../../sass/forums/_faux-table.sass */
+/* line 161, ../../sass/forums/_faux-table.sass */
 header.dis-cat-header .post-box .Button, header.paginate.stand-alone .post-box .Button {
   margin: 5px 5px 5px 0; }
-  /* line 159, ../../sass/forums/_faux-table.sass */
+  /* line 163, ../../sass/forums/_faux-table.sass */
   header.dis-cat-header .post-box .Button.dis-action-login, header.paginate.stand-alone .post-box .Button.dis-action-login {
     margin-left: 10px; }
-/* line 161, ../../sass/forums/_faux-table.sass */
+/* line 165, ../../sass/forums/_faux-table.sass */
 header.dis-cat-header .post-box .read, header.paginate.stand-alone .post-box .read {
   color: white;
   color: rgba(255, 255, 255, 0.5); }
 
-/* line 169, ../../sass/forums/_faux-table.sass */
+/* line 173, ../../sass/forums/_faux-table.sass */
 .panel-stack {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -3990,7 +3997,7 @@ header.dis-cat-header .post-box .read, header.paginate.stand-alone .post-box .re
   -o-border-radius: 3px;
   border-radius: 3px; }
 
-/* line 174, ../../sass/forums/_faux-table.sass */
+/* line 178, ../../sass/forums/_faux-table.sass */
 .forum-grid {
   font-size: 13px;
   font-size: 1.3rem;
@@ -3998,67 +4005,67 @@ header.dis-cat-header .post-box .read, header.paginate.stand-alone .post-box .re
   color: #777777;
   margin-top: 15px;
   margin-top: 1.5rem; }
-  /* line 179, ../../sass/forums/_faux-table.sass */
+  /* line 183, ../../sass/forums/_faux-table.sass */
   .forum-grid p {
     color: black;
     line-height: 1.1;
     margin: 0 0 0.25em 0; }
-  /* line 183, ../../sass/forums/_faux-table.sass */
+  /* line 187, ../../sass/forums/_faux-table.sass */
   .forum-grid a {
     text-decoration: none;
     color: #111111; }
-  /* line 186, ../../sass/forums/_faux-table.sass */
+  /* line 190, ../../sass/forums/_faux-table.sass */
   .forum-grid a.h-group, .forum-grid a.paginate.stand-alone {
     display: block;
     cursor: pointer; }
-  /* line 189, ../../sass/forums/_faux-table.sass */
+  /* line 193, ../../sass/forums/_faux-table.sass */
   .forum-grid .dis-board-description {
     margin: 0.25em 0;
     color: #777777; }
-  /* line 194, ../../sass/forums/_faux-table.sass */
+  /* line 198, ../../sass/forums/_faux-table.sass */
   .forum-grid .row {
     border-bottom: 1px solid #dddddd;
     border-top: 1px solid white; }
-    /* line 198, ../../sass/forums/_faux-table.sass */
+    /* line 202, ../../sass/forums/_faux-table.sass */
     .forum-grid .row:hover {
       border-bottom-color: #bebebe;
       border-top-color: white; }
-    /* line 201, ../../sass/forums/_faux-table.sass */
+    /* line 205, ../../sass/forums/_faux-table.sass */
     .forum-grid .row.header-row {
       font-weight: bold;
       color: black;
       border-bottom: 2px solid lightgrey; }
-      /* line 205, ../../sass/forums/_faux-table.sass */
+      /* line 209, ../../sass/forums/_faux-table.sass */
       .forum-grid .row.header-row:hover {
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none; }
-    /* line 207, ../../sass/forums/_faux-table.sass */
+    /* line 211, ../../sass/forums/_faux-table.sass */
     .forum-grid .row > a {
       padding: 0.5em; }
-      /* line 209, ../../sass/forums/_faux-table.sass */
+      /* line 213, ../../sass/forums/_faux-table.sass */
       .forum-grid .row > a:hover {
         background-color: white;
         text-decoration: underline; }
-    /* line 212, ../../sass/forums/_faux-table.sass */
+    /* line 216, ../../sass/forums/_faux-table.sass */
     .forum-grid .row.dis-sticky-thread {
       background-color: #f1f1f1;
       border-bottom: 1px solid lightgrey; }
-      /* line 215, ../../sass/forums/_faux-table.sass */
+      /* line 219, ../../sass/forums/_faux-table.sass */
       .forum-grid .row.dis-sticky-thread:hover, .forum-grid .row.dis-sticky-thread a:hover {
         background-color: #fcfcfc; }
-    /* line 217, ../../sass/forums/_faux-table.sass */
+    /* line 221, ../../sass/forums/_faux-table.sass */
     .forum-grid .row:hover, .forum-grid .row a:hover {
       border-bottom-color: #c8c8c8;
       border-top-color: white; }
-    /* line 222, ../../sass/forums/_faux-table.sass */
+    /* line 226, ../../sass/forums/_faux-table.sass */
     .forum-grid .row:hover {
       -webkit-box-shadow: #c4dc8d 0 0 5px, #a9cd5b 0 0 2px;
       -moz-box-shadow: #c4dc8d 0 0 5px, #a9cd5b 0 0 2px;
       box-shadow: #c4dc8d 0 0 5px, #a9cd5b 0 0 2px;
       position: relative;
       z-index: 20; }
-  /* line 230, ../../sass/forums/_faux-table.sass */
+  /* line 234, ../../sass/forums/_faux-table.sass */
   .forum-grid .heading {
     color: #535353;
     background-color: #a0a0a0;
@@ -4073,68 +4080,68 @@ header.dis-cat-header .post-box .read, header.paginate.stand-alone .post-box .re
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
     border-radius: 3px; }
-    /* line 236, ../../sass/forums/_faux-table.sass */
+    /* line 240, ../../sass/forums/_faux-table.sass */
     .forum-grid .heading .cell {
       padding-top: 0.2em;
       padding-bottom: 0.2em; }
-  /* line 239, ../../sass/forums/_faux-table.sass */
+  /* line 243, ../../sass/forums/_faux-table.sass */
   .forum-grid strong {
     font-size: 16px;
     font-size: 1.6rem;
     color: black;
     font-weight: bold;
     line-height: 1.1; }
-  /* line 244, ../../sass/forums/_faux-table.sass */
+  /* line 248, ../../sass/forums/_faux-table.sass */
   .forum-grid .posted-date, .forum-grid .posted-by {
     color: #919191; }
 
-/* line 248, ../../sass/forums/_faux-table.sass */
+/* line 252, ../../sass/forums/_faux-table.sass */
 .clickable:hover {
   text-decoration: underline; }
 
-/* line 254, ../../sass/forums/_faux-table.sass */
+/* line 258, ../../sass/forums/_faux-table.sass */
 .forum-grid.no-hover .row {
   padding-top: 5px;
   padding-top: 0.5rem;
   padding-bottom: 5px;
   padding-bottom: 0.5rem; }
-  /* line 257, ../../sass/forums/_faux-table.sass */
+  /* line 261, ../../sass/forums/_faux-table.sass */
   .forum-grid.no-hover .row:hover {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     border-bottom: 1px solid #dddddd;
     border-top: 1px solid white; }
-  /* line 262, ../../sass/forums/_faux-table.sass */
+  /* line 266, ../../sass/forums/_faux-table.sass */
   .forum-grid.no-hover .row a:hover {
     text-decoration: underline; }
-  /* line 265, ../../sass/forums/_faux-table.sass */
+  /* line 269, ../../sass/forums/_faux-table.sass */
   .forum-grid.no-hover .row.header-row:hover {
     border-bottom: 2px solid lightgrey; }
 
-/* line 287, ../../sass/forums/_faux-table.sass */
+/* line 291, ../../sass/forums/_faux-table.sass */
 div.m-section_title + div.row {
   padding-top: 10px; }
 
-/* line 290, ../../sass/forums/_faux-table.sass */
+/* line 294, ../../sass/forums/_faux-table.sass */
 .board-post .wrap {
   padding-left: 20px; }
 
-/* line 293, ../../sass/forums/_faux-table.sass */
+/* line 297, ../../sass/forums/_faux-table.sass */
 .dis-category .wrap {
   background: url(../../images/redo/icons/sm-folder.png) no-repeat 2px 5px;
   padding-left: 22px; }
 
-/* line 299, ../../sass/forums/_faux-table.sass */
+/* line 303, ../../sass/forums/_faux-table.sass */
 .m-section_title + .row.board-post.locked, .m-section_title + .row.board-post.locked:hover {
   background-position: 2px 19px; }
 
-/* line 303, ../../sass/forums/_faux-table.sass */
+/* line 307, ../../sass/forums/_faux-table.sass */
 .a-loggedin .dis-category .wrap {
   padding-left: 35px;
   position: relative;
   background-position: 17px 5px; }
-/* line 308, ../../sass/forums/_faux-table.sass */
+/* line 312, ../../sass/forums/_faux-table.sass */
 .a-loggedin .dis-category.dis-unread .wrap:before {
   content: "";
   display: block;
@@ -4144,18 +4151,18 @@ div.m-section_title + div.row {
   height: 10px;
   width: 8px;
   background: url(../../images/redo/icons/unread-dot.png) no-repeat 0 0; }
-/* line 318, ../../sass/forums/_faux-table.sass */
+/* line 322, ../../sass/forums/_faux-table.sass */
 .a-loggedin .board-post .wrap {
   padding-left: 30px; }
-/* line 321, ../../sass/forums/_faux-table.sass */
+/* line 325, ../../sass/forums/_faux-table.sass */
 .a-loggedin .board-post.dis-unread .wrap, .a-loggedin .board-post.dis-post-unread .wrap {
   background: url(../../images/redo/icons/unread-dot.png) no-repeat 11px 4px; }
 
-/* line 323, ../../sass/forums/_faux-table.sass */
+/* line 327, ../../sass/forums/_faux-table.sass */
 .boards + .forum-grid {
   margin-top: 0; }
 
-/* line 325, ../../sass/forums/_faux-table.sass */
+/* line 329, ../../sass/forums/_faux-table.sass */
 .boards .row:last-child {
   border: none;
   padding-bottom: 0; }
