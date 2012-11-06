@@ -58,6 +58,11 @@ if (!empty($fields['signature'])) {
     $disUser->set('signature',$fields['signature']);
 }
 
+if (!empty($fields['birthdate'])) {
+    $unixBirthdate = strtotime($fields['birthdate']);
+    $disUser->set('birthdate',($unixBirthdate !== false) ? $unixBirthdate : '');
+}
+
 if (!$disUser->save()) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not sync profile information during UpdateProfile snippet posthook: '.print_r($fields,true));
 }
