@@ -45,6 +45,7 @@ unset($fields['user']);
 
 $fields['show_email'] = !empty($fields['show_email']) ? 1 : 0;
 $fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
+$fields['use_display_name'] = !empty($fields['use_display_name']) ? 1 : 0;
 
 if (isset($fields['fullname']) && empty($fields['name_first'])) {
     $name = explode(' ',$fields['fullname']);
