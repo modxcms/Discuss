@@ -295,8 +295,31 @@ div.m-section_title + div.row
     padding-left: 20px
 
 .dis-category .wrap
-    background: url(../../images/redo/icons/sm-folder.png) no-repeat 2px 5px
+    position: relative
     padding-left: 22px
+    .folder
+        display: block
+        background: url(../../images/redo/icons/large-folder.png) no-repeat 0 -102px
+        position: absolute
+        height: 17px
+        width: 22px
+        font-weight: 700
+        +rem('font-size', 10px)
+        +text-shadow(rgba(black, .4) 0 1px 0, rgba(black, .6) 1px 0 1px)
+        color: #fff
+        line-height: 21px
+        left: 1px
+        top: 1px
+        text-align: center
+        vertical-align: center
+        overflow: hidden
+        text-indent: 100%
+.dis-unread
+    .wrap
+        .folder
+            background-position: 0 0
+            text-indent: 0
+
 
 // status when user is logged in
 .m-section_title+.row
