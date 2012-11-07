@@ -24,8 +24,8 @@
             [[- USER LOGGED IN ]]
             [[!+discuss.user.id:notempty=`
             <div class="post-box">
-                <a class="dis-action-reply Button" href="[[+actionlink_reply]]">Reply to thread</a>
-                <a class="read" href="[[+actionlink_unread]]">Mark as unread</a>
+                [[+locked:is=`1`:then=``:else=`<a class="dis-action-reply Button" href="[[+actionlink_reply]]">Reply to thread</a>`]]
+                <a class="Button" href="[[+actionlink_unread]]">Mark as unread</a>
                 [[+moderators]]
             </div>`]]
             [[- USER NOT LOGGED IN ]]
