@@ -30,10 +30,18 @@
  */
 class DiscussHomeController extends DiscussController {
 
+    /**
+     * {@inheritdoc}
+     * @return string
+     */
     public function getSessionPlace() {
         return 'home';
     }
 
+    /**
+     * {@inheritdoc}
+     * @return mixed
+     */
     public function getPageTitle() {
         return $this->modx->getOption('discuss.forum_title');
     }
