@@ -2,7 +2,7 @@
     <a href="[[+url]]" class="h-group">
         <div class="f1-f7">
             <div class="wrap">
-                <span class="folder">[[+unread-count:gt=`100`:then=`100+`:else=`[[+unread-count]]`]]</span>
+                <span class="folder">[[+unread-count:gt=`99`:then=`99+`:else=`[[+unread-count]]`]]</span>
                 <strong>[[+name]]</strong>
                 <p class="dis-board-description">[[+description]]</p>
             </div>
