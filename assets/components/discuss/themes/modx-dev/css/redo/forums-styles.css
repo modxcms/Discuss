@@ -4124,19 +4124,20 @@ header.dis-cat-header .post-box .read, header.paginate.stand-alone .post-box .re
   .forum-grid.no-hover .row.header-row:hover {
     border-bottom: 2px solid lightgrey; }
 
-/* line 291, ../../sass/forums/_faux-table.sass */
+/* line 275, ../../sass/forums/_faux-table.sass */
 div.m-section_title + div.row {
   padding-top: 5px; }
 
-/* line 294, ../../sass/forums/_faux-table.sass */
+/* line 278, ../../sass/forums/_faux-table.sass */
 .board-post .wrap {
   padding-left: 20px; }
 
-/* line 297, ../../sass/forums/_faux-table.sass */
+/* line 281, ../../sass/forums/_faux-table.sass */
 .dis-category .wrap {
   position: relative;
-  padding-left: 22px; }
-  /* line 300, ../../sass/forums/_faux-table.sass */
+  padding-left: 22px;
+  padding-left: 35px; }
+  /* line 285, ../../sass/forums/_faux-table.sass */
   .dis-category .wrap .folder {
     display: block;
     background: url(../../images/redo/icons/large-folder.png) no-repeat 0 -102px;
@@ -4156,21 +4157,19 @@ div.m-section_title + div.row {
     overflow: hidden;
     text-indent: 100%; }
 
-/* line 319, ../../sass/forums/_faux-table.sass */
-.dis-unread .wrap .folder {
-  background-position: 0 0;
-  text-indent: 0; }
-
-/* line 326, ../../sass/forums/_faux-table.sass */
+/* line 308, ../../sass/forums/_faux-table.sass */
 .m-section_title + .row.board-post.locked, .m-section_title + .row.board-post.locked:hover {
   background-position: 2px 19px; }
 
-/* line 330, ../../sass/forums/_faux-table.sass */
+/* line 314, ../../sass/forums/_faux-table.sass */
+.a-loggedin .dis-unread .wrap .folder {
+  background-position: 0 0;
+  text-indent: 0; }
+/* line 317, ../../sass/forums/_faux-table.sass */
 .a-loggedin .dis-category .wrap {
-  padding-left: 35px;
   position: relative;
   background-position: 17px 5px; }
-/* line 335, ../../sass/forums/_faux-table.sass */
+/* line 321, ../../sass/forums/_faux-table.sass */
 .a-loggedin .dis-category.dis-unread .wrap:before {
   content: "";
   display: block;
@@ -4180,18 +4179,18 @@ div.m-section_title + div.row {
   height: 10px;
   width: 8px;
   background: url(../../images/redo/icons/unread-dot.png) no-repeat 0 0; }
-/* line 345, ../../sass/forums/_faux-table.sass */
+/* line 331, ../../sass/forums/_faux-table.sass */
 .a-loggedin .board-post .wrap {
   padding-left: 30px; }
-/* line 348, ../../sass/forums/_faux-table.sass */
+/* line 334, ../../sass/forums/_faux-table.sass */
 .a-loggedin .board-post.dis-unread .wrap, .a-loggedin .board-post.dis-post-unread .wrap {
   background: url(../../images/redo/icons/unread-dot.png) no-repeat 11px 4px; }
 
-/* line 350, ../../sass/forums/_faux-table.sass */
+/* line 336, ../../sass/forums/_faux-table.sass */
 .boards + .forum-grid {
   margin-top: 0; }
 
-/* line 352, ../../sass/forums/_faux-table.sass */
+/* line 338, ../../sass/forums/_faux-table.sass */
 .boards .row:last-child {
   border: none;
   padding-bottom: 0; }

@@ -271,22 +271,6 @@ header.dis-cat-header
 
 
 
-// Atempt to vertical align titles
-// .l-table a
-//     display: table
-//     width: 100%
-
-// .l-vmiddle
-//     display: table-cell !important
-//     vertical-align: middle !important
-//     background-color: #eee
-//     float: none !important
-// .l-table
-//     .f1-f7
-//         width: 63% !important
-
-
-
 
 div.m-section_title + div.row
     padding-top: 5px
@@ -297,6 +281,7 @@ div.m-section_title + div.row
 .dis-category .wrap
     position: relative
     padding-left: 22px
+    padding-left: 35px
     .folder
         display: block
         background: url(../../images/redo/icons/large-folder.png) no-repeat 0 -102px
@@ -314,11 +299,8 @@ div.m-section_title + div.row
         vertical-align: center
         overflow: hidden
         text-indent: 100%
-.dis-unread
-    .wrap
-        .folder
-            background-position: 0 0
-            text-indent: 0
+
+
 
 
 // status when user is logged in
@@ -327,8 +309,12 @@ div.m-section_title + div.row
         background-position: 2px 19px
 
 .a-loggedin
+    .dis-unread
+        .wrap
+            .folder
+                background-position: 0 0
+                text-indent: 0
     .dis-category .wrap
-        padding-left: 35px
         position: relative
         background-position: 17px 5px
     .dis-category.dis-unread .wrap
