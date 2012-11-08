@@ -155,8 +155,9 @@ h3.forum
             font-weight: 700
             color: #000
     .dis-action-btn, .dis-pm-btn
-        visibility: hidden
-
+        // visibility: hidden
+        opacity: 0
+        @extend %quick-fade-out-all
     &:hover
         .dis-action-btn, .dis-pm-btn, .dis-post-notanswer span
             @extend %quick-fade-in-all
