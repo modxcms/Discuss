@@ -1,3 +1,8 @@
+#header {
+    background: whiteSmoke url(../images/bg-sprite.png) 0 -2px repeat-x;
+    height: 105px;
+    border-top: 2px solid #010101;
+}
 #frame {
  	margin: 20px auto;
  	text-align: left;
@@ -1249,7 +1254,11 @@ div#overlay-20 {
     text-shadow: 1px 1px 2px #666666;
     width: 37px;
 }
-
+#logo_search #search {
+    position: absolute;
+    top: 24px;
+    right: 0;
+}
 #subscribe input[type="submit"] {
     background: -moz-linear-gradient(center top , #9CCAD8, #56A9C2) repeat scroll 0 0 transparent;
     border-bottom: 1px solid #76B7CB;
