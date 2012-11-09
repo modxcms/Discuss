@@ -15,7 +15,7 @@
 			[[- USER LOGGED IN ]]
 	        [[!+discuss.user.id:notempty=`<div class="post-box h-group">
 				[[+actionbuttons]]
-				[[+moderators]]
+				<span class="m-section_title-mods">[[+moderators]]</span>
 		    </div>`]]
 
 		    [[- USER NOT LOGGED IN ]]
