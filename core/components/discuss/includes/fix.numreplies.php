@@ -61,9 +61,9 @@ $stmt = $modx->query($sql);
 if ($stmt) {
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $row['real_count'] = $row['real_count'] -1; // First post does not count as reply
-        $modx->log(modX::LOG_LEVEL_ERROR,$row['title'] . ' Real: ' . $row['real_count'] . ' Set: '.$row['replies']);
+        //$modx->log(modX::LOG_LEVEL_ERROR,$row['title'] . ' Real: ' . $row['real_count'] . ' Set: '.$row['replies']);
         if (!empty($row['real_count']) && $row['real_count'] != $row['replies']) {
-            //$modx->log(modX::LOG_LEVEL_ERROR,'Setting "'.$row['title'].'" to '.$row['real_count'].' from '.$row['replies']);
+            $modx->log(modX::LOG_LEVEL_ERROR,'Setting "'.$row['title'].'" to '.$row['real_count'].' from '.$row['replies']);
             $modx->exec('UPDATE '.$modx->getTableName('disThread').'
                 SET `replies` = '.$row['real_count'].'
                 WHERE `id` = '.$row['id']);
