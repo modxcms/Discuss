@@ -40,7 +40,7 @@
         [[+pagination:notempty=`
         <div class="paginate stand-alone bottom horiz-list">[[+pagination]]</div>`]]
     	[[$thread-login-post]]
-        [[+locked:notempty=`<p class="m-notice">[[%discuss.thread_lock_msg]]</p>`:default=`[[+quick_reply_form]]`]]
+        [[+locked:notempty=`<p class="m-notice">[[%discuss.thread_locked]]</p>`:default=`[[+quick_reply_form]]`]]
     	[[+belowThread]]
     	[[+discuss.error_panel]]
     </div><!-- Close Content From Wrapper -->
