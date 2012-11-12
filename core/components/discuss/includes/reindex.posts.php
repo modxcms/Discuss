@@ -11,7 +11,7 @@ $tstart = $mtime;
 set_time_limit(0);
 
 define('IX_OFFSET_DEFAULT', 0);
-define('IX_LIMIT_DEFAULT', 1000);
+define('IX_LIMIT_DEFAULT', 1500);
 define('FORUMS_RESOURCE_URL', 'forums/');
 
 /* override with your own defines here (see build.config.sample.php) */
@@ -40,8 +40,14 @@ if (version_compare($modx->version['full_version'], '2.2.1-pl', '>=')) {
     $modx->setDebug(-1);
 }
 
+$modx->config['discuss.search_class'] = 'disSolrSearch';
+
+$cacheOptions = array(
+    xPDO::OPT_CACHE_KEY => 'discuss_indexing'
+);
+
 // get last indexed offset
-$di = $modx->cacheManager->get('discuss_index');
+$di = $modx->cacheManager->get('discuss_index', $cacheOptions);
 if(empty($di)) {
     $di['offset'] = IX_OFFSET_DEFAULT;
 }
@@ -96,7 +102,7 @@ foreach ($posts as $post) {
         $modx->log(modX::LOG_LEVEL_INFO, ' (result): ' . $response->getRawResponse() . "\n");
     }
     $di['offset'] = $offset + ++$count;
-    $modx->cacheManager->set('discuss_index', $di);
+    $modx->cacheManager->set('discuss_index', $di, $cacheOptions);
 }
 $discuss->search->commit();
 
