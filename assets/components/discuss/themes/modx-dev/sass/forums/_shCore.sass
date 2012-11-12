@@ -417,11 +417,14 @@ $sh-fade-height: 25px
         +background-clip()
         +background-image(linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%))
         position: absolute
-        bottom: ($sh-scroll-dimensions + $sh-padding - 1px)
+        bottom: ($sh-scroll-dimensions + $sh-padding - 2px)
         left: 0px
         width: 100%
-        height: $sh-fade-height
+        height: $sh-fade-height - 4px
         z-index: 50
+    &:hover
+        &:before
+            display: none
 
 // .dis-code
 //     overflow: hidden
