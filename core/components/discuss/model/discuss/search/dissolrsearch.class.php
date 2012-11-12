@@ -96,6 +96,15 @@ class disSolrSearch extends disSearch {
         $query->setStart($start);
         $query->setRows($limit);
 
+        // turn board array into solr-compatible OR argument
+        if(isset($conditions['board']) && is_array($conditions['board'])) {
+            $c = array();
+            foreach($conditions['board'] as $board) {
+                $c[] = $board['id'];
+            }
+            $conditions['board'] = '(' . implode(' OR ', $c) . ')';
+        }
+
         // allow for non-default Solr requestHandler
         if(isset($this->_searchOptions['requestHandler']) && !empty($this->_searchOptions['requestHandler'])) {
             $this->client->setServlet(SolrClient::SEARCH_SERVLET_TYPE, $this->_searchOptions['requestHandler']);
