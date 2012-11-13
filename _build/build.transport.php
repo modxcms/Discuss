@@ -37,8 +37,8 @@ define('PKG_NAME','Discuss');
 define('PKG_NAME_LOWER','discuss');
 
 /* do not forget to change in discuss.class.php too!! */
-define('PKG_VERSION','1.0.12');
-define('PKG_RELEASE','dev');
+define('PKG_VERSION','1.1.0');
+define('PKG_RELEASE','pl');
 
 /* override with your own defines here (see build.config.sample.php) */
 require_once dirname(__FILE__) . '/build.config.php';
@@ -67,6 +67,7 @@ $modx->setLogTarget('ECHO');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
+$builder->directory = dirname(dirname(__FILE__)).'/_packages/';
 $builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
 $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/discuss/');
 
