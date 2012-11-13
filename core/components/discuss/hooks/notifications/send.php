@@ -60,12 +60,12 @@ $notifications = $modx->getCollection('disUserNotification',$c);
 
 /* build thread url */
 $url = '';
-$type = ($type == 'message') ? 'messages/view' : 'thread/';
+$view = ($type == 'message') ? 'messages/view' : 'thread/';
 if (!empty($scriptProperties['post'])) {
     /* @var disPost $post */
     $post = $modx->getObject('disPost', (int)$scriptProperties['post']);
     if ($post) {
-        $url = $post->getUrl($type);
+        $url = $post->getUrl($view);
     }
 }
 if (empty($url)) {
@@ -86,7 +86,7 @@ foreach ($notifications as $notification) {
     $thread = $modx->getObject('disThread',$notification->get('thread'));
     if ($thread == null) { continue; }
     /* dont notify on own posts! */
-    if ($thread->get('author_last') == $notification->get('user')) { continue; }
+    //if ($thread->get('author_last') == $notification->get('user')) { continue; }
 
     $emailProperties = array_merge($scriptProperties,$user->toArray());
     $emailProperties['tpl'] = $tpl;

@@ -519,7 +519,7 @@ class disThread extends xPDOSimpleObject {
             }
         }
         $daysAgo = time() - ($modx->getOption('discuss.new_replies_threshold',null,14) * 24 * 60 * 60);
-        $modx->setLogTarget('ECHO');
+
         $c->where(array(
             'Reads.thread:IS' => null,
             'Board.status:!=' => disBoard::STATUS_INACTIVE,
