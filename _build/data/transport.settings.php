@@ -725,7 +725,7 @@ $settings['discuss.solr.proxy_password']->fromArray(array(
 $settings['discuss.post_excerpt_length']= $modx->newObject('modSystemSetting');
 $settings['discuss.post_excerpt_length']->fromArray(array(
     'key' => 'discuss.post_excerpt_length',
-    'value' => '',
+    'value' => '500',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Posts',
