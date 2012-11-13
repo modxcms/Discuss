@@ -86,7 +86,7 @@ foreach ($notifications as $notification) {
     $thread = $modx->getObject('disThread',$notification->get('thread'));
     if ($thread == null) { continue; }
     /* dont notify on own posts! */
-    //if ($thread->get('author_last') == $notification->get('user')) { continue; }
+    if ($thread->get('author_last') == $notification->get('user')) { continue; }
 
     $emailProperties = array_merge($scriptProperties,$user->toArray());
     $emailProperties['tpl'] = $tpl;
