@@ -498,6 +498,7 @@ class Discuss {
      * @access private
      * @param string $name The name of the Chunk. Will parse to name.chunk.tpl
      * @param string $postFix
+     * @param string $path What config path variable to use for the base of the path.
      * @return modChunk/boolean Returns the modChunk object if found, otherwise
      * false.
      */
@@ -545,9 +546,8 @@ class Discuss {
      */
     public function sendEmail($email,$name,$subject,array $properties = array()) {
         if (empty($properties['tpl'])) return false;
-        if (empty($properties['tplType'])) $properties['tplType'] = 'modChunk';
 
-        $msg = $this->getChunk($properties['tpl'],$properties,$properties['tplType']);
+        $msg = $this->getChunk($properties['tpl'],$properties);
 
         $this->modx->getService('mail', 'mail.modPHPMailer');
         $this->modx->mail->set(modMail::MAIL_BODY, $msg);

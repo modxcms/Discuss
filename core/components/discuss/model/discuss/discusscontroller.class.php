@@ -112,7 +112,7 @@ abstract class DiscussController {
      * @return string
      */
     public function render() {
-        if ($this->modx->getOption('discuss.debug',$this->config,true)) {
+        if ($this->modx->getOption('discuss.debug', null, true)) {
             $this->modx->setLogTarget('ECHO');
             $this->startDebugTimer();
         }
