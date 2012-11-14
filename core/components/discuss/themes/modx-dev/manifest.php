@@ -537,6 +537,12 @@ $manifest = array(
                 'options' => array(
                     'show_be_nice_box' => '1',
                 )
+            ),
+            'navbar_extra' => array(
+                'tpl' => 'navbar_extra-wrapper',
+                'options' => array(
+                    'content' => '<a class="action-buttons" href="[[+actionlink_mark_read]]" title="[[%discuss.mark_all_as_read]]">[[%discuss.mark_all_as_read]]</a>'
+                )
             )
         ),
     ),
