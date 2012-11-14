@@ -34,6 +34,7 @@
 $tplActive = $modx->getOption('tplActive',$scriptProperties,'pagination/paginationActive');
 $tplWrapper = $modx->getOption('tplWrapper',$scriptProperties,'pagination/paginationWrapper');
 $tplLink = $modx->getOption('tplLink',$scriptProperties,'pagination/paginationLink');
+$tplDisabled = $modx->getOption('tplDisabled',$scriptProperties,'pagination/paginationDisabled');
 $previousTextTpl = $modx->getOption('tplPreviousText',$scriptProperties,'pagination/paginationPrevious');
 $nextTextTpl = $modx->getOption('tplNextText',$scriptProperties,'pagination/paginationNext');
 $showPaginationIfOnePage = $modx->getOption('showPaginationIfOnePage',$scriptProperties,true);
@@ -106,7 +107,7 @@ if ($includePrevNext) {
             $list[] = $discuss->getChunk($tplLink,array('url' => $currentResourceUrl.$glue.'page='.$prev, 'text' => $previousText));
         break;
         default:
-            $list[] = $discuss->getChunk($tplActive,array('class' => 'inactive', 'text' => $previousText));
+            $list[] = $discuss->getChunk($tplDisabled,array('class' => 'inactive', 'text' => $previousText));
         break;
     }
 }
@@ -183,7 +184,7 @@ if ($total <= $pageLimit) {
 /* Next button */
 if ($includePrevNext) {
     if ($current == $total) {
-        $list[] = $discuss->getChunk($tplActive,array('class' => 'inactive', 'text' => $nextText));
+        $list[] = $discuss->getChunk($tplDisabled,array('class' => 'inactive', 'text' => $nextText));
     } else {
         $list[] = $discuss->getChunk($tplLink,array('url' => $currentResourceUrl.$glue.'page='.($current+1), 'text' => $nextText));
     }
