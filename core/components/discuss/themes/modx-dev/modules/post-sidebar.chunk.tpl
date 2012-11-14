@@ -10,7 +10,7 @@
             <p>[[+moderators]]</p>
         </div>`]]
 
-        [[+disection:is=`new-message`:then=`
+        [[+show_be_nice_box:is=`1`:then=`
         <div class="box">
             <h4>Don't Be That Guy</h4>
             <p>Be nice, respectful and patient. Inflammatory or inappropriate posts will get your post nuked and flood your life with bans and bad karma.</p>
@@ -30,7 +30,7 @@
             <a class="a-secondary-cta" href="[[~316]]">Buy Emergency Support Now</a>
         </div>
 
-       [[+disection:neq=`recent`:then=`
+       [[+show_talking:eq=`1`:then=`
         <div class="box">
             <h4>Who’s talking</h4>
             <p>Posted in this thread:<br />[[+participants_usernames]]</p>

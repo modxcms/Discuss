@@ -99,7 +99,8 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'thread-index',
+                    'show_talking' => '1',
+                    'show_be_nice_box' => '1',
                 )
             )
         ),
@@ -117,7 +118,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'new-message',
+                    'show_be_nice_box' => '1',
                 )
             ),
             'form' => array(
@@ -143,7 +144,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'new-message',
+                    'show_be_nice_box' => '1',
                 )
             ),
             'form' => array(
@@ -169,7 +170,8 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'new-message',
+                    'show_be_nice_box' => '1',
+                    'show_talking' => '1',
                 )
             ),
             'form' => array(
@@ -331,7 +333,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'new-message',
+                    'show_be_nice_box' => '1',
                 )
             )
         ),
@@ -349,7 +351,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'new-message',
+                    'show_be_nice_box' => '1',
                 )
             ),
             'form' => array(
@@ -378,7 +380,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'new-message',
+                    'show_be_nice_box' => '1',
                 )
             ),
             'form' => array(
@@ -407,7 +409,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'new-message',
+                    'show_be_nice_box' => '1',
                 )
             ),
             'form' => array(
@@ -442,7 +444,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'new-message',
+                    'show_be_nice_box' => '1',
                 )
             )
         ),
@@ -454,7 +456,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'recent',
+                    'show_be_nice_box' => '1',
                 )
             )
         ),
@@ -467,7 +469,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'recent',
+                    'show_be_nice_box' => '1',
                 )
             ),
             'navbar_extra' => array(
@@ -487,7 +489,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'recent',
+                    'show_be_nice_box' => '1',
                 )
             ),
             'navbar_extra' => array(
@@ -507,7 +509,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'recent',
+                    'show_be_nice_box' => '1',
                 )
             )
         ),
@@ -520,7 +522,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'recent',
+                    'show_be_nice_box' => '1',
                 )
             )
         ),
@@ -533,7 +535,7 @@ $manifest = array(
             'sidebar' => array(
                 'tpl' => 'post-sidebar',
                 'options' => array(
-                    'disection' => 'recent',
+                    'show_be_nice_box' => '1',
                 )
             )
         ),
