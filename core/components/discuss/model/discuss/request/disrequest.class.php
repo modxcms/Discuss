@@ -321,7 +321,7 @@ class DisRequest {
             if (!empty($params)) $params = '?'.$params;
         }
         $url = $this->discuss->url.$action.$params;
-        if ($this->modx->getOption('discuss.absolute_urls',null,true)) {
+        if ($this->modx->getOption('discuss.absolute_urls',null,true) && (substr($url,0,4) != 'http')) {
             $url = $this->modx->getOption('site_url',null,MODX_SITE_URL).ltrim($url,'/');
         }
         return $url;
