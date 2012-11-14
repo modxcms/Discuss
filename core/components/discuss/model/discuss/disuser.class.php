@@ -331,7 +331,11 @@ class disUser extends xPDOSimpleObject {
      */
     public function getUserGroupNames() {
         $this->getOne('User');
-        return $this->User->getUserGroupNames();
+        if ($this->User instanceof modUser) {
+            return $this->User->getUserGroupNames();
+        } else {
+            return array();
+        }
     }
 
     /**
