@@ -66,16 +66,12 @@ $xpdo_meta_map['disPost']= array (
       'phptype' => 'string',
       'default' => '',
       'null' => false,
-      'index' => 'fulltext',
-      'indexgrp' => 'search',
     ),
     'message' => 
     array (
-      'dbtype' => 'text',
+      'dbtype' => 'mediumtext',
       'phptype' => 'string',
       'null' => false,
-      'index' => 'fulltext',
-      'indexgrp' => 'search',
     ),
     'author' => 
     array (
@@ -296,28 +292,6 @@ $xpdo_meta_map['disPost']= array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
-        ),
-      ),
-    ),
-    'search' => 
-    array (
-      'alias' => 'search',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'FULLTEXT',
-      'columns' => 
-      array (
-        'title' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-        'message' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => true,
         ),
       ),
     ),

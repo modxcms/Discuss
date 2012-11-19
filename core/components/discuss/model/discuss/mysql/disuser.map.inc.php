@@ -80,6 +80,7 @@ $xpdo_meta_map['disUser']= array (
       'phptype' => 'string',
       'null' => false,
       'default' => '',
+      'index' => 'index',
     ),
     'ip' => 
     array (

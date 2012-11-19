@@ -277,8 +277,8 @@
         <field key="board" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="thread" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
-        <field key="title" dbtype="varchar" precision="255" phptype="string" default="" null="false" index="fulltext" indexgrp="search" />
-        <field key="message" dbtype="text" phptype="string" null="false" index="fulltext" indexgrp="search" />
+        <field key="title" dbtype="varchar" precision="255" phptype="string" default="" null="false" />
+        <field key="message" dbtype="mediumtext" phptype="string" null="false" />
         <field key="author" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" index="index" />
         <field key="editedby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" />
@@ -315,10 +315,12 @@
         <index alias="answer" name="answer" primary="false" unique="false" type="BTREE">
             <column key="answer" length="" collation="A" null="false" />
         </index>
+        <!--
         <index alias="search" name="search" primary="false" unique="false" type="FULLTEXT">
             <column key="title" length="" collation="A" null="false" />
             <column key="message" length="" collation="A" null="true" />
         </index>
+        -->
         
         <aggregate alias="Board" class="disBoard" local="board" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Thread" class="disThread" local="thread" foreign="id" cardinality="one" owner="foreign" />
