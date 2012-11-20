@@ -44,15 +44,18 @@ class DiscussThreadPreviewController extends DiscussController {
         $postArray['action_quote'] = '';
         $postArray['action_reply'] = '';
 
-        $author = $this->discuss->user->toArray();
-        foreach ($author as $k => $v) {
-            $postArray['author.'.$k] = $v;
-        }
-
         /** @var disPost $post */
-        $post = $this->modx->newObject('disPost');
+        $post = null;
+        $isUpdate = false;
+        if (isset($_GET['post']) && is_numeric($_GET['post'])) {
+            $post = $this->modx->getObject('disPost',(int)$_GET['post']);
+            if ($post) $isUpdate = true;
+        }
+        if (!$post) {
+            $post = $this->modx->newObject('disPost');
+        }
+        $post->Author = ($isUpdate) ? $post->getOne('Author') : $this->discuss->user;
         $post->fromArray($postArray);
-        $post->Author = $this->discuss->user;
         $postArray = $post->toArray();
         /* handle MODX tags */
         $post->set('message',str_replace(array('[[',']]'),array('&#91;&#91;','&#93;&#93;'),$postArray['message']));
