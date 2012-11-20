@@ -110,6 +110,7 @@ $_lang['discuss.mark_as_answer'] = 'Mark As Solution';
 $_lang['discuss.mark_read'] = 'Mark Read';
 $_lang['discuss.mark_unread'] = 'Mark Unread';
 $_lang['discuss.message'] = 'Message';
+$_lang['discuss.message.participants'] = 'In this Conversation: ';
 $_lang['discuss.message_modify'] = 'Edit Message';
 $_lang['discuss.message_new'] = 'New Message';
 $_lang['discuss.message_reply'] = 'Reply to Message';
