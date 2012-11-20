@@ -122,7 +122,17 @@ if (!empty($discussPlace)) {
     /* Load the request handler, set the URL (cause we're out of Discuss here) and redirect back. */
     $discuss->loadRequest();
     $discuss->url = $modx->makeUrl($modx->getOption('discuss.forums_resource_id'));
-    $url = $discuss->request->makeUrl($discussPlace[0],$params);
+    $url = '';
+    if (($discussPlace[0] == 'thread') && (is_numeric($discussPlace[1]))) {
+        $thread = $modx->getObject('disThread', (int)$discussPlace[1]);
+        if ($thread instanceof disThread) {
+            if (isset($params['thread'])) unset ($params['thread']);
+            $url = $thread->getUrl(false, $params, true);
+        }
+    }
+    if (empty($url)) {
+        $url = $discuss->request->makeUrl($discussPlace[0],$params);
+    }
     if (!empty($url)) {
         $modx->sendRedirect($url);
     }
