@@ -158,6 +158,7 @@ $_lang['discuss.user_activity_msg'] = 'General information about the activity an
 $_lang['discuss.user_birthdate'] = 'Birthdate';
 $_lang['discuss.user_boards.intro_msg'] = 'Here you can manage the Boards this User Group can view.';
 $_lang['discuss.user_create'] = 'Create User';
+$_lang['discuss.user_display_name'] = 'Display Name';
 $_lang['discuss.user_email'] = 'Email';
 $_lang['discuss.user_err_nf'] = 'User not found with ID [[+id]]';
 $_lang['discuss.user_err_ns'] = 'Please select a user.';
@@ -175,6 +176,7 @@ $_lang['discuss.user_show_email'] = 'Show Email';
 $_lang['discuss.user_show_online'] = 'Show Online';
 $_lang['discuss.user_signature'] = 'Signature';
 $_lang['discuss.user_update'] = 'Update User';
+$_lang['discuss.user_use_display_name'] = 'Use Display Name';
 $_lang['discuss.user_website'] = 'Website';
 
 /* commenting out in prep for moving to proper lexicon file
