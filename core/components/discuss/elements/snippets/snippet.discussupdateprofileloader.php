@@ -55,9 +55,11 @@ if ($disUser) {
     $fields = array_merge($disUser->toArray(),$fields);
     $fields['show_email'] = !empty($fields['show_email']) ? 1 : 0;
     $fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
+    $fields['use_display_name'] = !empty($fields['use_display_name']) ? 1 : 0;
     $fields['post_sort_dir'] = $disUser->getSetting('discuss.post_sort_dir','ASC');
     $fields['posts'] = number_format($fields['posts'],0);
     $fields['gender'] = $disUser->get('gender') == 'm' ? 'm' : 'f';
+    $fields['birthdate'] = (!empty($fields['birthdate'])) ? $fields['birthdate'] : '';
 }
 
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);
