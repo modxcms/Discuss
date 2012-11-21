@@ -40,6 +40,7 @@ if (!$user) return $modx->error->failure($modx->lexicon('discuss.user_err_nf',ar
 unset($scriptProperties['id']);
 $scriptProperties['show_email'] = !empty($scriptProperties['show_email']) ? true : false;
 $scriptProperties['show_online'] = !empty($scriptProperties['show_online']) ? true : false;
+$scriptProperties['use_display_name'] = !empty($scriptProperties['use_display_name']) ? true : false;
 $user->fromArray($scriptProperties);
 
 /* save user */

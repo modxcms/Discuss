@@ -64,6 +64,12 @@ Dis.panel.User = function(config) {
                             ,allowBlank: true
                         },{
                             xtype: 'textfield'
+                            ,fieldLabel: _('discuss.user_display_name')
+                            ,name: 'display_name'
+                            ,anchor: '100%'
+                            ,allowBlank: true
+                        },{
+                            xtype: 'textfield'
                             ,fieldLabel: _('discuss.user_website')
                             ,name: 'website'
                             ,anchor: '100%'
@@ -122,6 +128,13 @@ Dis.panel.User = function(config) {
                             ,boxLabel: _('discuss.user_show_online')
                             ,hideLabel: true
                             ,name: 'show_online'
+                            ,labelSeparator: ''
+                            ,inputValue: 1
+                        },{
+                            xtype: 'checkbox'
+                            ,boxLabel: _('discuss.user_use_display_name')
+                            ,hideLabel: true
+                            ,name: 'use_display_name'
                             ,labelSeparator: ''
                             ,inputValue: 1
                         }]
