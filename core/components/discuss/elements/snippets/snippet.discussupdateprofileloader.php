@@ -41,7 +41,12 @@ $fields = $profile->toArray();
 $useExtended = $modx->getOption('useExtended',$scriptProperties,true);
 if ($useExtended) {
     $extended = $fields['extended'];
-    if (!empty($extended)) {
+    if (!empty($extended) && is_array($extended)) {
+        $excludeExtended = $modx->getOption('excludeExtended', $scriptProperties, '');
+        $excludeExtended = explode(',', $excludeExtended);
+        foreach ($excludeExtended as $exclude) {
+            if (isset($extended[$exclude]))  unset ($extended[$exclude]);
+        }
         $fields = array_merge($extended,$fields);
     }
 }
