@@ -60,8 +60,9 @@ if (!empty($fields['signature'])) {
 }
 
 if (!empty($fields['birthdate'])) {
-    $unixBirthdate = strtotime($fields['birthdate']);
-    $disUser->set('birthdate',($unixBirthdate !== false) ? $unixBirthdate : '');
+    $date = explode('-', $fields['birthdate']);
+    $unixBirthdate = mktime(0, 0, 0, $date[1], $date[2], $date[0]);
+    $disUser->set('birthdate',date('Y-m-d', $unixBirthdate));
 }
 
 if (!$disUser->save()) {
