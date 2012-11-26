@@ -52,13 +52,24 @@ class DiscussUserController extends DiscussController {
         $this->modx->lexicon->load('discuss:user');
 
     }
+
+    /**
+     * @return mixed|string
+     */
     public function getPageTitle() {
         return $this->user->get('username');
     }
+
+    /**
+     * @return string
+     */
     public function getSessionPlace() {
         return 'user:'.(($this->user) ? $this->user->get('id') : $this->getProperty('user', 0));
     }
 
+    /**
+     * @return bool
+     */
     public function checkPermissions() {
         return $this->discuss->user->isLoggedIn;
     }
@@ -120,6 +131,9 @@ class DiscussUserController extends DiscussController {
         $this->setPlaceholder('recent_posts',$recent['results']);
     }
 
+    /**
+     * @return array
+     */
     public function getBreadcrumbs() {
         $trail = array();
         $trail[] = array(
@@ -131,7 +145,7 @@ class DiscussUserController extends DiscussController {
             $userParams = array('user' => $this->user->get('id'));
         }
         $trail[] = array(
-            'text' => $this->modx->lexicon('discuss.user.trail',array('user' => $this->discuss->user->get('username'))),
+            'text' => $this->modx->lexicon('discuss.user.trail',array('user' => ($this->user) ? $this->user->get('username') : $this->discuss->user->get('username'))),
             'url' => $this->discuss->request->makeUrl('user', $userParams)
         );
         return $trail;
