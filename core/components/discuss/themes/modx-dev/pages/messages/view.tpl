@@ -1,6 +1,6 @@
 <div class="f1-f12 h-group">
     <h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]" post="[[+id]]">
-        <a href="[[+url]]" title="[[+title]]">[[+title]]</a>
+        <a href="[[+url]]" title="[[+title]]">[[+title]] WHAT</a>
     </h1>
     <p class="pm-participants">[[%discuss.message.participants]] [[+participants_usernames]]</p>
 </div>
