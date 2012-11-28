@@ -14,6 +14,7 @@
                 [[+actionlink_unsubscribe:notempty=`
                 <a href="[[+actionlink_unsubscribe]]">Stop emails</a>`]]
     </div>
+    [[+pagination:default=``]]
 </div>
 
 <div class="f1-f9">
@@ -30,9 +31,7 @@
 	<ul class="dis-list h-group">
         [[+posts]]
     </ul>
-    [[+pagination:notempty=`
-        <div class="paginate stand-alone bottom horiz-list">[[+pagination]]</div>
-    `]]
+    [[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list"> [[+pagination]]</nav>`]]
     [[+quick_reply_form]]
 	[[+belowThread]]
 	[[+discuss.error_panel]]
