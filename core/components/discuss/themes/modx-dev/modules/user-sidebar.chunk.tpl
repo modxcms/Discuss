@@ -8,7 +8,7 @@
                         <img src="[[+avatarUrl]]" alt="[[+username]]" />
                         <span>[[%discuss.modify]]</span>
                     </a>
-                    <span class="small">[[+title]]</span>
+                    <span class="dis-usr-title">[[+title]]</span>
                 </li>
             </ul>
         </div>
