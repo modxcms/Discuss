@@ -8,8 +8,8 @@
                         <img src="[[+avatarUrl]]" alt="[[+username]]" />
                         <span>[[%discuss.modify]]</span>
                     </a>
-                    <span class="dis-usr-title">[[+title]]</span>
                 </li>
+                <li class="dis-usr-title">[[+title]]</li>
             </ul>
         </div>
         <div class="Box">
