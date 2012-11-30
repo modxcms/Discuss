@@ -9,7 +9,7 @@
                         <span>[[%discuss.modify]]</span>
                     </a>
                 </li>
-                <li class="dis-usr-title">[[+title]]</li>
+                [[+title:notempty=`<li class="dis-usr-title">[[+title]]</li>`]]
             </ul>
         </div>
         <div class="Box">
