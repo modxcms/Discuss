@@ -76,6 +76,7 @@ class DiscussMessagesViewController extends DiscussController {
         $this->getThreadPosts();
         $this->getLastPost();
         $this->getViewing();
+        $this->buildPagination();
 
         $this->getActionButtons();
         $this->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('Error'));
