@@ -31,10 +31,14 @@
     <!-- mark answer-->
     <div class="dis-post-left">
         <ul>
-            <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>
-            [[+author.title:notempty=`<li class="dis-usr-title">[[+author.title]]</li>`]]
+            <li class="dis-usr-icon">
+                <a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">
+                    [[+author.avatar]]
+                    [[+author.title:notempty=`<span class="dis-usr-title">[[+author.title]]</span>`]]
+                </a>
+            </li>
             <li class="dis-usr-post-count">[[+author.posts]] [[%discuss.posts]]</li>
-            <a href="[[~[[*id]]]]messages/new?user=[[+author.username]]" class="dis-pm-btn" href="">Send PM</a>
+            <a href="[[~[[*id]]]]messages/new?user=[[+author.username]]" class="dis-pm-btn">Send PM</a>
         </ul>
     </div>
 

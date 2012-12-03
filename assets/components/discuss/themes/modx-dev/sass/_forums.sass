@@ -59,61 +59,63 @@ h3.forum
     // background-color: lighten($c-base, 4%)
     border-top: 0
 
-    .dis-post
-        border-bottom: solid 1px darken($c-base, 13%)
-        border-top: solid 1px lighten($c-base, 55%)
-        margin: 0
-        position: relative
-        width: 96% // not sure why this is needed but if not occasionaly post doesnt span the right width
-        padding: 1.75% 2% 3% 2%
-        float: right
-        &:first-child
-            border-top: none
+.dis-post
+    border-bottom: solid 1px darken($c-base, 13%)
+    border-top: solid 1px lighten($c-base, 55%)
+    min-height: 120px
+    margin: 0
+    position: relative
+    // width: 96% // not sure why this is needed but if not occasionally post doesn't span the right width
+    // padding: 1.75% 2% 3% 2%
+    +rem('padding', 20px 15px 30px 15px)
+    // float: right
+    &:first-child
+        border-top: none
 
-        &:last-child
-            padding-bottom: 5%
-        .dis-content
-            overflow: hidden
-            a
-                text-decoration: underline
-                text-decoration-line: underline
-                text-decoration-style: dotted
-                &:hover
-                    background-color: #f1f8fb
-            strong
-                font-weight: 700
-                color: #000
-            // .jump-to-first
-            //     @extend %p-raised-green
-            //     display: block
-            //     text-align: center
-            //     text-decoration: none
-            //     +rem('width', 125px)
-            //     +rem('margin', 10px 0)
-        ul.dis-ul, ol.dis-ol
-            padding-left: 20px
-            vertical-align: middle
-            list-style: disc
-            li
-                padding: 2px 0
-                vertical-align: middle
-        ol.dis-ol
-            list-style: decimal
-
+    &:last-child
+        padding-bottom: 5%
+    .dis-content
+        overflow: hidden
+        a
+            text-decoration: underline
+            text-decoration-line: underline
+            text-decoration-style: dotted
+            &:hover
+                background-color: #f1f8fb
+        strong
+            font-weight: 700
+            color: #000
+        // .jump-to-first
+        //     @extend %p-raised-green
+        //     display: block
+        //     text-align: center
+        //     text-decoration: none
+        //     +rem('width', 125px)
+        //     +rem('margin', 10px 0)
+    ul.dis-ul, ol.dis-ol
+        padding-left: 20px
+        vertical-align: middle
+        list-style: disc
         li
-            border: none
-        .dis-post-footer
-            width: 88%
-            float: right
-            +rem('font-size', 12px)
-        .dis-post-editedon
-            padding: 1em 0 0 0
-            font-style: italic
+            padding: 2px 0
+            vertical-align: middle
+    ol.dis-ol
+        list-style: decimal
+
+    li
+        border: none
+    .dis-post-footer
+        width: 88%
+        float: right
+        +rem('font-size', 12px)
+    .dis-post-editedon
+        padding: 1em 0 0 0
+        font-style: italic
+        color: darken($c-base, 45%)
+        display: block
+        +rem('font-size', 12px)
+        a
             color: darken($c-base, 45%)
-            display: block
-            +rem('font-size', 12px)
-            a
-                color: darken($c-base, 45%)
 .dis-info
     color: darken($c-dark-bg, 15%)
     margin: 30px 0 10px 0
@@ -173,9 +175,9 @@ h3.forum
 
 .dis-post-left
     // font-size: 11px
-    float: left
+    position: absolute
     text-align: left
-    width: 9%
+    width: 85px
     img
         width: 100%
         max-width: 80px
@@ -183,6 +185,14 @@ h3.forum
     .auth-avatar
         display: block
         border: none
+        padding: 5px
+        background-color: darken($c-base, 1%)
+        +box-shadow(darken($c-base, 12%) 0 1px 2px inset)
+        border-radius: $radius-sm + 2px
+        border-top: solid 1px darken($c-base, 10%)
+        border-bottom: solid 1px lighten($c-base, 8%)
+        &:hover
+            text-decoration: none
     .dis-usr-post-count, .dis-usr-icon // REMOVE FUTURE prexsiting styling
         margin: 0
         +rem('font-size', 11px)
@@ -220,10 +230,13 @@ h3.forum
 
 
 
-.dis-post-right
-    float: right
-    width: 86%
+.dis-signature, .dis-post-right
+    margin-left: 110px
     padding: 0 2% 2% 0
+
+.dis-post-right
+    // float: right
+    // width: 86%
     +rem('font-size', 15px)
     .title
         +rem('font-size', 12px)
@@ -330,9 +343,10 @@ ul.dis-attachments
 
 
 .dis-signature
-    width: 86%
-    padding: 2% 2% 0 0 !important
-    float: right
+    // width: 86%
+    // padding: 2% 2% 0 0 !important
+    padding-top: 2%
+    // float: right
     border-top: 1px dotted darken($c-base, 10%) !important //override, remove eventually
     +rem('font-size', 11px)
     +opacity(.7)
