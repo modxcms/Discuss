@@ -163,12 +163,14 @@ h3.forum
     &:hover
         .dis-action-btn, .dis-pm-btn, .dis-post-notanswer span
             @extend %quick-fade-in-all
-            opacity: .99
+            opacity: .98
             visibility: visible
     .dis-pm-btn
         @extend %btn-secondary-alt-cta
         display: inline-block
         +rem('padding', 4px 7px)
+        margin-left: 4px
+        margin-top: 5px
         &:hover
             background-color: #fff
 
@@ -198,7 +200,7 @@ h3.forum
         +rem('font-size', 11px)
     .dis-usr-post-count
         color: $c-copy-med
-        margin: .3em .2em 0 5px
+        margin: 5px .2em 0 12px
 .dis-content pre
     @extend pre
 
