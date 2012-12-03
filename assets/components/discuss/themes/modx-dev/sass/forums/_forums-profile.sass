@@ -18,18 +18,24 @@
         margin-bottom: 10px
 
 .dis-usr-title
-    color: desaturate(lighten($c-dark-cool-bg, 40%), 20%)
+    color: desaturate(lighten($c-dark-cool-bg, 35%), 20%)
     line-height: 1
     border-radius: $radius-sm $radius-sm
     padding: 4px 5px
     text-align: center
     text-shadow: 0px 1px 0px #ffffff
-    border: 1px solid desaturate(lighten($c-dark-cool-bg, 65%), 20%)
+    border: 1px solid desaturate(lighten($c-dark-cool-bg, 68%), 20%)
     border-bottom-width: 2px
     border-top-color: desaturate(lighten($c-dark-cool-bg, 72%), 20%)
+    border-bottom-color: desaturate(lighten($c-dark-cool-bg, 60%), 20%)
     background-color: desaturate(lighten($c-dark-cool-bg, 75%), 20%)
+    border-left: none
     font-size: 12px
     display: block
     margin: 3px 0 0 0
     max-width: 70px
     min-width: 60px
+
+.auth-avatar
+    .dis-usr-title
+        margin-top: 4px
