@@ -9,7 +9,7 @@
     <meta name="title" content="[[!+discuss.pagetitle]]">
     <meta name="author" content="MODX Systems, LLC">
     <link rel="shortcut icon" href="[[!++site_url]]favicon.ico" type="image/x-icon" />
-    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css" rel="stylesheet" type="text/css">
+    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css?v=20121203" rel="stylesheet" type="text/css">
     <link href="[[+discuss.config.cssUrl]]redo/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css">
 
     [[- toggles in progress breakpoint work]]
