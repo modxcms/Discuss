@@ -59,11 +59,12 @@
         </div>
     </div>
 </form>
+
+[[+search:notempty=`
 <header class="dis-cat-header dark-gradient h-group sticky-bar top">
     [[+results:notempty=`<h1>Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]
     [[+pagination]]
 </header>
-
 
 <div class="dis-threads">
     <ul class="dis-list search-results">
@@ -73,4 +74,5 @@
 <div class="paginate stand-alone bottom horiz-list">
 [[+pagination]]
 </div>
+`]]
 [[+bottom]]
