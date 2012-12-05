@@ -239,7 +239,7 @@
                     </div>
                 </form> 
                 <ul class="social-icons horiz-list">
-                    <li><a href="http://twitter.com/modxcms" title="MODX on Twitter" class="twitter">Twitter</a></li>
+                    <li><a href="http://twitter.com/modx" title="MODX on Twitter" class="twitter">Twitter</a></li>
                     <li><a href="http://www.facebook.com/modxcms" title="MODX Facebook" class="facebook">Facebook</a></li>
                     [[- todo: add LinkedIn]]
                     <li><a href="http://modx.com/feeds/" title="Subscribe to our Feeds" class="rss">RSS Feeds</a></li>
