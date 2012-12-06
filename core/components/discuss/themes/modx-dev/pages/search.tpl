@@ -67,9 +67,9 @@
 </header>
 
 <div class="dis-threads">
-    <ul class="dis-list search-results">
+    <ul class="dis-list search-results">`]]
         [[+results]]
-    </ul>
+    [[+search:notempty=`</ul>
 </div>
 <div class="paginate stand-alone bottom horiz-list">
 [[+pagination]]
