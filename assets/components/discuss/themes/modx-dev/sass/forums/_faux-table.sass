@@ -38,7 +38,7 @@
 
 
     // Green button used to either just to post or jump to login
-    .Button, .post-box .dis-action-login
+    .Button, header .dis-action-login
         display: inline-block
     .action-buttons
         @extend %p-raised-green-dark
@@ -48,7 +48,7 @@
         font-weight: 500
     .action-buttons+.action-buttons
         margin-left: .25em
-    .post-box a.Button
+    a.Button
         @extend %p-raised-green-dark
 .dis-collapsed
     .dis-cat-header
@@ -168,15 +168,13 @@
         &:hover
             background-color: #fff
 header.dis-cat-header
-    .post-box
-        .Button
-            margin: 5px 5px 5px 0
-            &.dis-action-login
-                margin-left: 10px
-        .read
-            color: #fff
-            color: rgba(255,255,255,.5)
-
+    .Button
+        margin: 5px 5px 5px 0
+        &.dis-action-login
+            margin-left: 10px
+    .read
+        color: #fff
+        color: rgba(255,255,255,.5)
 
 
 // Faux table grid for 5 columns. This later will be able to be

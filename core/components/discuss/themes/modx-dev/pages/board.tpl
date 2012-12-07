@@ -13,17 +13,16 @@
 			<nav id="key-Paginate" class="horiz-list">[[+pagination]]</nav>
 			`]]
 			[[- USER LOGGED IN ]]
-	        [[!+discuss.user.id:notempty=`<div class="post-box h-group">
+	        [[!+discuss.user.id:notempty=`
 				[[+actionbuttons]]
 				<span class="m-section_title-mods">[[+moderators]]</span>
-		    </div>`]]
+		    `]]
 
 		    [[- USER NOT LOGGED IN ]]
 		    [[!+discuss.user.id:is=``:then=`
-		    <div class="post-box">
 				<a href="[[~[[*id]]]]login" class="Button dis-action-login" >Login to Post</a>
-			</div>
 			`]]
+			<a class="rss-link Button" href="#">RSS <span class="icon">Subscribe</span></a>
 		</header>
 		<div class="row h-group header-row">
 		    <div class="f1-f7 f-padinall">

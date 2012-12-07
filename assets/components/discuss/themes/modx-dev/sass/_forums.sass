@@ -15,6 +15,18 @@ h3.forum
     font-weight: bold
     padding: 0 0 0 .8em
 
+.rss-link, a.Button.rss-link
+    @include background-image(linear-gradient(bottom, darken($c-dark-bg, 15%) 0%, $c-dark-bg 73%, $c-dark-bg 100%))
+    .icon
+        background-image: url(../../images/redo/icons/rss.png)
+        background-repeat: no-repeat
+        width: 14px
+        margin-top: -3px
+        display: inline-block
+        overflow: hidden
+        text-indent: 100%
+        white-space: no-wrap
+
 .locked
     h1
         background: url(../../images/redo/icons/lrg-lock.png) no-repeat 0 12px
