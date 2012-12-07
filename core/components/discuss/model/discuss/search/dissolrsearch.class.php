@@ -104,6 +104,12 @@ class disSolrSearch extends disSearch {
             }
             $conditions['board'] = '(' . implode(' OR ', $c) . ')';
         }
+        // @todo rectify this workaround
+        // convert author (id) lookup to username (name) lookup
+        if(isset($conditions['author']) && isset($_REQUEST['user'])) {
+            unset($conditions['author']);
+            $conditions['username'] = trim($_REQUEST['user']);
+        }
 
         // allow for non-default Solr requestHandler
         if(isset($this->_searchOptions['requestHandler']) && !empty($this->_searchOptions['requestHandler'])) {
