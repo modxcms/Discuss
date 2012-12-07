@@ -263,7 +263,7 @@
       .script("[[+discuss.config.jsUrl]]jquery-ui-1.9.0.custom.min.js")
       .script("[[+discuss.config.jsUrl]]jquery.autosize.js").wait()
       .script("[[+discuss.config.jsUrl]]redo/forums-2012.js")
-      .script("[[+discuss.config.jsUrl]]discuss.js").wait()
+      .script("[[+discuss.config.jsUrl]]discuss.js?lu=20121207").wait()
       .script("[[+discuss.config.jsUrl]]dis.sticky.js")
       .script("[[+discuss.config.jsUrl]]dis.keyboard.js")
       .script("[[+discuss.config.jsUrl]]redo/modernizr.custom.07525.js")
