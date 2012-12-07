@@ -28,7 +28,7 @@
             <span class="small">[[%discuss.participants_desc]]</span>
         </label>
 
-        <input class="autocomplete" data-autocomplete-action="web/user/find" type="text" name="add_participants" id="dis-reply-participants" value="[[!+fi.add_participants]]" />
+        <input class="autocomplete" data-autocomplete-action="rest/find_user" type="text" name="add_participants" id="dis-reply-participants" value="[[!+fi.add_participants]]" />
 
         <div id="dis-quick-reply-form">
             <div class="wysi-buttons">[[+buttons]]</div>

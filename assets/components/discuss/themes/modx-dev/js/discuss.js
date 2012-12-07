@@ -62,8 +62,8 @@ $(document).ready(function() {
                 response(this.cache[term]);
             } else {
                 request.action = action;
-
-                $.getJSON(DIS.config.connector, request, function (data, status, xhr) {
+                var url = DIS.config.forum_url + action;
+                $.getJSON(url, request, function (data, status, xhr) {
                     var result = data['data'];
                     thisCp.cache[term] = result;
                     response(result);
