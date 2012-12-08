@@ -522,7 +522,7 @@ class disPost extends xPDOSimpleObject {
                 $c = $this->xpdo->newQuery('disPost');
                 $c->where(array(
                     'id:!=' => $this->get('id'),
-                    'thread:=' => $thread->get('id'),
+                    'AND:thread:=' => $thread->get('id'),
                 ));
                 $c->sortby('createdon','DESC');
                 $c->limit(1);
