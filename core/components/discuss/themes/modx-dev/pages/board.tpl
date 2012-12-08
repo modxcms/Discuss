@@ -22,7 +22,7 @@
 		    [[!+discuss.user.id:is=``:then=`
 				<a href="[[~[[*id]]]]login" class="Button dis-action-login" >Login to Post</a>
 			`]]
-			<a class="rss-link Button" href="#">RSS <span class="icon">Subscribe</span></a>
+			<a class="rss-link Button" href="[[+discuss.config.url]]board.xml?board=[[+id]]">RSS <span class="icon">Subscribe</span></a>
 		</header>
 		<div class="row h-group header-row">
 		    <div class="f1-f7 f-padinall">
