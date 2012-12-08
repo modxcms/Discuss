@@ -134,6 +134,7 @@ if (empty($cache)) {
                 if (strlen($threadArray['excerpt']) > 500) {
                     $threadArray['excerpt'] = substr($threadArray['excerpt'],0,500).'...';
                 }
+                $threadArray['content'] = $lastPost->getContent();
             }
         } else {
             $threadArray['title'] = strip_tags($threadArray['title']);
@@ -150,6 +151,7 @@ if (empty($cache)) {
                 if (strlen($threadArray['excerpt']) > $modx->getOption('discuss.post_excerpt_length', null, 500)) {
                     $threadArray['excerpt'] = substr($threadArray['excerpt'],0,$modx->getOption('discuss.post_excerpt_length', null, 500)).'...';
                 }
+                $threadArray['content'] = $post->getContent();
             }
         }
         $cache['results'][] = $threadArray;
