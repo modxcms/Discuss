@@ -1,7 +1,7 @@
 <item>
     <title>[[+title:cdata]]</title>
     <link>[[+url]]</link>
-    <description>[[+message:cdata]]</description>
+    <description>[[+content:cdata]]</description>
     <author>[[+author_username:cdata]]</author>
     <category>[[+board_name:cdata]]</category>
     <comments>[[+url]]</comments>
