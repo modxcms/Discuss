@@ -1,11 +1,11 @@
-// Categroy headings for grids
+// Category headings for grids
+
 .dis-cat-header
     +border-radius($radius-sm $radius-sm 0 0)
     +background-clip(padding-box)
     padding: 3px 10px
     line-height: 1
     background-color: #194b47
-    // +box-shadow(darken($c-dark-cool-bg, 30%) 0 1px 3px inset !important)
     +background-image(linear-gradient(lighten($c-dark-cool-bg, 9%), lighten($c-dark-cool-bg, 1%)))
     +border-radius($radius-sm $radius-sm 0 0 !important)
     border-bottom: solid 1px $c-dark-cool-bg
@@ -35,7 +35,6 @@
             background: url(../../images/redo/icons/arrows.png) no-repeat center 6px
             &:hover
                 +opacity(1)
-
 
     // Green button used to either just to post or jump to login
     .Button, header .dis-action-login
@@ -176,13 +175,8 @@ header.dis-cat-header
         color: #fff
         color: rgba(255,255,255,.5)
 
-
-// Faux table grid for 5 columns. This later will be able to be
-// converted to a responsive table
 .panel-stack
-    // +box-shadow(darken($c-base, 5%) 0 0 3px)
     +border-radius($radius-sm)
-    // border: solid 1px darken($c-base, 5%)
 
 .forum-grid
     +rem('font-size',13px)
@@ -262,6 +256,7 @@ header.dis-cat-header
     text-decoration: underline
 
 
+
 // grid when entire row not clickable
 .forum-grid.no-hover
     .row
@@ -279,6 +274,10 @@ header.dis-cat-header
                 border-bottom: 2px solid darken($c-base, 15%)
 
 
+// handle overflow for longer non-breaking cells
+.f7
+    overflow: hidden
+    text-overflow: ellipsis
 
 div.m-section_title + div.row
     padding-top: 5px
@@ -307,9 +306,6 @@ div.m-section_title + div.row
         vertical-align: center
         overflow: hidden
         text-indent: 100%
-
-
-
 
 // status when user is logged in
 .m-section_title+.row
