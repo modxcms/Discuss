@@ -28,12 +28,14 @@ require dirname(__FILE__).'/dissearch.class.php';
  * @extends disSearch
  */
 class disSolrSearch extends disSearch {
+
     /**
      * An array of connection configuration options for the Solr client
      * 
      * @var array $_connectionOptions
      */
     private $_connectionOptions = array();
+    private $_searchOptions = array();
     /**
      * The client API for the Solr instance
      * @var SolrClient $client
@@ -64,6 +66,10 @@ class disSolrSearch extends disSearch {
             'proxy_password' => $this->modx->getOption('discuss.solr.proxy_password',null,''),
         );
 
+        $this->_searchOptions = array(
+            'requestHandler' => $this->modx->getOption('discuss.solr.requestHandler',null,''),
+        );
+
         try {
             $this->client = new SolrClient($this->_connectionOptions);
         } catch (Exception $e) {
@@ -89,21 +95,43 @@ class disSolrSearch extends disSearch {
         $query->setQuery($string);
         $query->setStart($start);
         $query->setRows($limit);
-        $query->addField('id')
-              ->addField('title')
-              ->addField('message')
-              ->addField('thread')
-              ->addField('board')
-              ->addField('category')
-              ->addField('category_name')
-              ->addField('author')
-              ->addField('username')
-              ->addField('replies')
-              ->addField('createdon')
-              ->addField('board_name')
-              ->addField('url')
-              ->addField('private')
-              ->addField('score');
+
+        // turn board array into solr-compatible OR argument
+        if(isset($conditions['board']) && is_array($conditions['board'])) {
+            $c = array();
+            foreach($conditions['board'] as $board) {
+                $c[] = $board['id'];
+            }
+            $conditions['board'] = '(' . implode(' OR ', $c) . ')';
+        }
+        // @todo rectify this workaround
+        // convert author (id) lookup to username (name) lookup
+        if(isset($conditions['author']) && isset($_REQUEST['user'])) {
+            unset($conditions['author']);
+            $conditions['username'] = trim($_REQUEST['user']);
+        }
+
+        // allow for non-default Solr requestHandler
+        if(isset($this->_searchOptions['requestHandler']) && !empty($this->_searchOptions['requestHandler'])) {
+            $this->client->setServlet(SolrClient::SEARCH_SERVLET_TYPE, $this->_searchOptions['requestHandler']);
+        } else {
+            $query->addField('id')
+                ->addField('title')
+                ->addField('message')
+                ->addField('thread')
+                ->addField('board')
+                ->addField('category')
+                //->addField('category_name')
+                ->addField('author')
+                ->addField('username')
+                ->addField('replies')
+                ->addField('createdon')
+                ->addField('board_name')
+                ->addField('url')
+                ->addField('private')
+                //->addField('score');
+            ;
+        }
 
         foreach ($conditions as $k => $v) {
             $query->addFilterQuery($k.':'.$v);
@@ -150,37 +178,45 @@ class disSolrSearch extends disSearch {
      * @param array $fields
      * @return bool
      */
-    public function index($fields = array()) {
+    public function index(array $fields = array(), array $options = array()) {
         $document = new SolrInputDocument();
         $document->addField('id',$fields['id']);
+        $document->addField('private',$fields['private']);
+        $document->addField('username',$fields['username']);
+        $document->addField('createdon',''.strftime('%Y-%m-%dT%H:%M:%SZ',strtotime($fields['createdon'])));
+        $document->addField('board',$fields['board']);
+        $document->addField('author',$fields['author']);
         $document->addField('thread',$fields['thread']);
+
         $document->addField('title',$fields['title'],2);
         $document->addField('message',$fields['message'],2);
-        $document->addField('board',$fields['board']);
+        $document->addField('url',$fields['url']);
+
         if (!empty($fields['replies'])) {
             $document->addField('replies',$fields['replies']);
-        }
-        if (!empty($fields['url'])) {
-            $document->addField('url',$fields['url']);
         }
         if (!empty($fields['board_name'])) {
             $document->addField('board_name',$fields['board_name']);
         }
-        if (!empty($fields['username'])) {
-            $document->addField('username',$fields['username']);
+        if (!empty($fields['category'])) {
+            $document->addField('category',$fields['category']);
         }
-        $document->addField('author',$fields['author']);
-        if (!empty($fields['createdon'])) {
-            $document->addField('createdon',''.strftime('%Y-%m-%dT%H:%M:%SZ',strtotime($fields['createdon'])));
+        if (!empty($fields['category_name'])) {
+            $document->addField('category_name',$fields['category_name']);
         }
-        $document->addField('private',$fields['private']);
+        if (!empty($fields['answered_question'])) {
+            $document->addField('answered_question',$fields['answered_question']);
+        }
 
         $response = false;
         try {
             $response = $this->client->addDocument($document);
+            if(isset($options['commit']) && $options['commit'] !== false) {
+                $this->commit();
+            }
         } catch (Exception $e) {
+            $response = $e->getMessage();
         }
-        $this->commit();
         return $response;
     }
 
