@@ -56,7 +56,7 @@ class disSearch {
      * @param array $fields
      * @return bool
      */
-    public function index(array $fields = array()) {
+    public function index(array $fields = array(), array $options = array()) {
         return true;
     }
     
@@ -100,7 +100,7 @@ class disSearch {
                 ));
             }
         }
-        if (!empty($conditions['board'])) $c->where(array('Board.id' => $conditions['board']));
+        if (!empty($conditions['board'])) $c->where(array('Board.id:IN' => $conditions['board']));
         if (!empty($conditions['user'])) $c->where(array('disPost.author' => $conditions['user']));
                 
         $response['total'] = $this->modx->getCount('disPost',$c);
