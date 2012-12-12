@@ -278,7 +278,7 @@
         <field key="thread" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="parent" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="title" dbtype="varchar" precision="255" phptype="string" default="" null="false" index="fulltext" indexgrp="search" />
-        <field key="message" dbtype="text" phptype="string" null="false" index="fulltext" indexgrp="search" />
+        <field key="message" dbtype="mediumtext" phptype="string" null="false" index="fulltext" indexgrp="search" />
         <field key="author" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" index="index" />
         <field key="createdon" dbtype="datetime" phptype="datetime" null="true" index="index" />
         <field key="editedby" dbtype="int" precision="10" phptype="integer" attributes="unsigned" default="0" null="false" />
