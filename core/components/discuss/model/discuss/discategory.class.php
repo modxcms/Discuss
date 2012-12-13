@@ -43,7 +43,7 @@ class disCategory extends xPDOSimpleObject {
      * @return string
      */
     public function getUrl() {
-        $url = $this->xpdo->discuss->request->makeUrl('',array('category' => $this->get('id')));
+        $url = $this->xpdo->discuss->request->makeUrl('',array('type' => 'category', 'category' => $this->get('id')));
         $this->set('url',$url);
         return $url;
     }

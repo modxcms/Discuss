@@ -9,7 +9,7 @@
 
 <div id="dis-reply-post-preview"></div>
 <br />
-<form action="[[~[[*id]]]]messages/reply?thread=[[!+fi.thread]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
+<form action="[[DiscussUrlMaker? &action=`messages/reply` &params=`{"thread":"[[!+fi.thread]]"}`]]" method="post" class="dis-form" id="dis-reply-post-form" enctype="multipart/form-data">
     <h2>[[%discuss.post_reply? &namespace=`discuss` &topic=`post`]]</h2>
     <input type="hidden" name="thread" value="[[!+fi.thread]]" />
     <input type="hidden" name="post" value="[[!+fi.post]]" />
@@ -54,7 +54,7 @@
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-post-reply" value="[[%discuss.message_send]]" />
         <input type="button" class="dis-action-btn dis-reply-post-preview" name="dis-post-preview" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages/view?thread=[[+thread]]';" />
+        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[DiscussUrlMaker? &action=`messages/view` &params=`{"thread":"[[+thread]]"}`]]';" />
     </div>
 </form>
 

@@ -368,7 +368,7 @@ class disBoard extends xPDOSimpleObject {
                 if (empty($username)) {
                     $username = $moderator->get('username');
                 }
-                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('u/'.$moderator->get('username')).'">'.$username.'</a>' : $username;
+                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user', array('type' => 'username', 'user' => $moderator->get('username'))).'">'.$username.'</a>' : $username;
             }
             $mods = array_unique($mods);
             $mods = implode(',',$mods);
@@ -408,7 +408,7 @@ class disBoard extends xPDOSimpleObject {
             $sbs = array();
             foreach ($subboards as $subboard) {
                 $sb = explode(':',$subboard);
-                $sbs[] = '<a href="'.$this->xpdo->discuss->request->makeUrl('board/',array('board' => $sb[0])).'">'.$sb[1].'</a>';
+                $sbs[] = '<a href="'.$this->xpdo->discuss->request->makeUrl('board',array('board' => $sb[0])).'">'.$sb[1].'</a>';
             }
             $sbl = $this->xpdo->lexicon('discuss.subforums').': '.implode(',',$sbs);
         }
@@ -446,7 +446,7 @@ class disBoard extends xPDOSimpleObject {
             $category = $this->getOne('Category');
             if ($category) {
                 $trail[] = array(
-                    'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
+                    'url' => $this->xpdo->discuss->request->makeUrl('',array('type' => 'category', 'category' => $category->get('id'))),
                     'text' => $category->get('name'),
                 );
             }
@@ -462,7 +462,7 @@ class disBoard extends xPDOSimpleObject {
                 'text' => $this->get('name').($this->get('locked') ? $this->xpdo->lexicon('discuss.board_is_locked') : ''),
             );
             if ($linkToSelf) {
-                $self['url'] = $this->xpdo->discuss->request->makeUrl('board/',array('board' => $this->get('id')));
+                $self['url'] = $this->xpdo->discuss->request->makeUrl('board',array('board' => $this->get('id')));
             }
             if (empty($additional)) { $self['active'] = true; }
             $trail[] = $self;
@@ -800,14 +800,16 @@ class disBoard extends xPDOSimpleObject {
      * @return string
      */
     public function getLastPostUrl() {
-        $view = 'thread/'.$this->get('last_post_thread').'/'.$this->getLastPostTitleSlug();
+        $action = 'thread';
 
         $params = array();
+        $params['thread'] = $this->get('last_post_thread');
+        $params['thread_name'] = $this->getLastPostTitleSlug();
         $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
         if ($this->get('last_post_page') > 1 && $sortDir == 'ASC') {
             $params['page'] = $this->get('last_post_page');
         }
-        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+        $url = $this->xpdo->discuss->request->makeUrl($action,$params);
 
         $url = $url.'#dis-post-'.$this->get('last_post_id');
         $this->set('last_post_url',$url);
@@ -837,7 +839,7 @@ class disBoard extends xPDOSimpleObject {
      * @return string
      */
     public function getUrl() {
-        return $this->xpdo->discuss->request->makeUrl('board/'.$this->get('id').'/'.$this->getSlug());
+        return $this->xpdo->discuss->request->makeUrl('board', array('board' => $this->get('id'), 'board_name' => $this->getSlug()));
     }
 
     /**

@@ -1,4 +1,4 @@
-<form class="dis-form dis-login" action="[[~[[*id]]]]login" method="post">
+<form class="dis-form dis-login" action="[[DiscussUrlMaker? &action=`login`]]" method="post">
     <input class="loginLoginValue" type="hidden" name="service" value="login" />
     <input class="returnUrl" type="hidden" name="returnUrl" value="[[~[[*id]]]]" />
 
@@ -21,6 +21,6 @@
 
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" value="[[%discuss.login]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.register]]" onclick="location.href='[[~[[*id]]]]register';" />
+        <input type="button" class="dis-action-btn" value="[[%discuss.register]]" onclick="location.href='[[DiscussUrlMaker? &action=`register`]]';" />
     </div>
 </form>

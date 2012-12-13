@@ -1,7 +1,7 @@
 [[+usermenu]]
 <div class="dis-profile left" style="width: 80%;">
 
-<form class="dis-form" action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post" style="border: 0;">
+<form class="dis-form" action="[[DiscussUrlMaker? &action=`user/ignoreboards` &params=`{"user":"[[+id]]"}`]]" method="post" style="border: 0;">
     <h2>
         <span class="right" style="padding: 4px;"><input type="checkbox" class="dis-ignore-all" /></span>
         Ignore Boards

@@ -8,7 +8,7 @@
 
 <div id="dis-message-preview"></div>
 <br />
-<form action="[[~[[*id]]]]messages/new" method="post" class="dis-form" id="dis-message-new-form" enctype="multipart/form-data">
+<form action="[[DiscussUrlMaker? &action=`messages/new`]]" method="post" class="dis-form" id="dis-message-new-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.message_new? &namespace=`discuss` &topic=`post`]]</h2>
 
@@ -47,6 +47,6 @@
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-message-new" value="[[%discuss.message_send]]" />
         <input type="button" class="dis-action-btn dis-message-preview" id="dis-message-preview-btn" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages';" />
+        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[DiscussUrlMaker? &action=`messages`]]';" />
     </div>
 </form>

@@ -1,7 +1,7 @@
 [[+trail]]
 
 <br />
-<form action="[[~[[*id]]]]thread/spam?thread=[[+id]]" method="post" class="dis-form" id="dis-spam-thread-form">
+<form action="[[DiscussUrlMaker? &action=`thread/spam` &params=`{"thread":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-spam-thread-form">
 
     <h2>[[%discuss.thread_spam? &namespace=`discuss` &topic=`post`]]</h2>
 

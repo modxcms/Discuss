@@ -50,7 +50,7 @@ class DiscussUserPostsController extends DiscussController {
         return $this->modx->lexicon('discuss.user_posts',array('user' => $this->user->get('username'), 'count' => $this->posts['total']));
     }
     public function getSessionPlace() {
-        return 'user/posts:'.(($this->user) ? $this->user->get('id') : (int)$this->scriptProperties['user']);
+        return 'user/posts:user='.(($this->user) ? $this->user->get('id') : (int)$this->scriptProperties['user']);
     }
 
     public function checkPermissions() {

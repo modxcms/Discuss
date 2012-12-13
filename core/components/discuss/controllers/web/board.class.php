@@ -144,7 +144,7 @@ class DiscussBoardController extends DiscussController {
         $actionButtons = array();
         if ($this->discuss->user->isLoggedIn) {
             if ($this->modx->hasPermission('discuss.thread_create') && $this->board->canPost()) {
-                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/new',array('board' => $this->board->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_new'), 'cls' => 'dis-action-thread_new');
+                $actionButtons[] = array('url' => $this->discuss->request->makeUrl('thread/new', array('board' => $this->board->get('id'))), 'text' => $this->modx->lexicon('discuss.thread_new'), 'cls' => 'dis-action-thread_new');
             }
             $actionButtons[] = array('url' => $this->discuss->request->makeUrl('board',array('board' => $this->board->get('id'),'read' => 1)), 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }

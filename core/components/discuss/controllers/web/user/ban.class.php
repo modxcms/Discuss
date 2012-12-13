@@ -55,7 +55,7 @@ class DiscussUserBanController extends DiscussController {
         return $this->modx->lexicon('discuss.ban_user_header',array('user' => $this->user->get('username')));
     }
     public function getSessionPlace() {
-        return 'user/ban:'.$this->user->get('id');
+        return 'user/ban:u='.$this->user->get('id');
     }
     public function process() {
         $this->setPlaceholders($this->user->toArray('fi.'));

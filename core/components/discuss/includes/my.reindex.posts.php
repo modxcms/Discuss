@@ -27,7 +27,7 @@ $mtime = $mtime[1] + $mtime[0];
 $tstart = $mtime;
 set_time_limit(0);
 
-$forumsResourceUrl = '';
+$forumsResourceUrl = ''; // What is that?!
 
 /* override with your own defines here (see build.config.sample.php) */
 //require_once '/var/www/stage.modx.com/config.core.php';
@@ -49,7 +49,7 @@ set_time_limit(0);
 echo '<pre>';
 
 $discuss->loadRequest();
-$discuss->url = $forumsResourceUrl;
+$discuss->url = $forumsResourceUrl; // And that?!
 if (!$discuss->loadSearch()) {
     die('No search class!');
 }
@@ -90,12 +90,13 @@ $parser = $modx->getService('disParser','disBBCodeParser',$discuss->config['mode
 $stmt = $modx->query($sql);
 if ($stmt) {
     while ($postArray = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $postArray['url'] = $forumsResourceUrl.'thread/?thread='.$postArray['thread'];
+        $urlparams = array('thread' => $postArray['thread']);
         $page = 1;
         if ($postArray['replies'] > $perPage) {
             $page = ceil($postArray['replies'] / $perPage);
         }
-        if ($page != 1) { $postArray['url'] .= '&page='.$page; }
+        if ($page != 1) { $urlparams['page'] = $page; }
+        $postArray['url'] = $discuss->request->makeUrl('thread', $urlparams);
         $postArray['url'] .= '#dis-post-'.$postArray['id'];
 
         $message = $parser->parse($postArray['message']);

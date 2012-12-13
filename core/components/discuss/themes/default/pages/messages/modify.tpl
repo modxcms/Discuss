@@ -8,7 +8,7 @@
 
 <div id="dis-modify-message-preview">[[+preview]]</div>
 <br />
-<form action="[[~[[*id]]]]messages/modify?post=[[!+fi.id]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
+<form action="[[DiscussUrlMaker? &action=`messages/modify` &params=`{"post":"[[!+fi.id]]"}`]]" method="post" class="dis-form" id="dis-modify-message-form" enctype="multipart/form-data">
 
     <h2>[[%discuss.message_modify? &namespace=`discuss` &topic=`post`]]</h2>
 
@@ -55,7 +55,7 @@
     <div class="dis-form-buttons">
         <input type="submit" class="dis-action-btn" name="dis-message-modify" value="[[%discuss.save_changes]]" />
         <input type="button" class="dis-action-btn dis-modify-message-preview-btn" id="dis-modify-message-preview-btn" value="[[%discuss.preview]]" />
-        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]messages/view?message=[[+thread]]#dis-post-[[+id]]';" />
+        <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[DiscussUrlMaker? &action=`messages/view` &params=`{"message":"[[+thread]]"}`]]#dis-post-[[+id]]';" />
     </div>
 </form>
 
