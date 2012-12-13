@@ -67,6 +67,7 @@ if(!function_exists('urlAddPagination')) {
 $tplActive = $modx->getOption('tplActive',$scriptProperties,'pagination/paginationActive');
 $tplWrapper = $modx->getOption('tplWrapper',$scriptProperties,'pagination/paginationWrapper');
 $tplLink = $modx->getOption('tplLink',$scriptProperties,'pagination/paginationLink');
+$tplDisabled = $modx->getOption('tplDisabled',$scriptProperties,'pagination/paginationDisabled');
 $previousTextTpl = $modx->getOption('tplPreviousText',$scriptProperties,'pagination/paginationPrevious');
 $nextTextTpl = $modx->getOption('tplNextText',$scriptProperties,'pagination/paginationNext');
 $showPaginationIfOnePage = $modx->getOption('showPaginationIfOnePage',$scriptProperties,true);
@@ -77,6 +78,8 @@ if (!isset($scriptProperties['activePage'])) {
 } else {
     $current = $scriptProperties['activePage'];
 }
+$pageLimit = $modx->getOption('pageLimit',$scriptProperties,5);
+
 $limit = $modx->getOption('limit',$scriptProperties,20);
 $limit = $limit == 0 ? 1 : $limit;
 $count = $modx->getOption('count',$scriptProperties,0);
@@ -140,12 +143,12 @@ if ($includePrevNext) {
             $list[] = $discuss->getChunk($tplLink,array('url' => urlAddPagination($prev), 'text' => $previousText));
         break;
         default:
-            $list[] = $discuss->getChunk($tplActive,array('class' => 'inactive', 'text' => $previousText));
+            $list[] = $discuss->getChunk($tplDisabled,array('class' => 'inactive', 'text' => $previousText));
         break;
     }
 }
 /* If total pages under limit, don't truncate */
-if ($total < $limit) {
+if ($total <= $pageLimit) {
 	for ($i = 1; $i <= $total; $i++) {
 		$list[] = ($i == $current)
 			? $discuss->getChunk($tplActive, array('url' => urlAddPagination($current),'class' => 'active', 'text' => $i))
@@ -217,7 +220,7 @@ if ($total < $limit) {
 /* Next button */
 if ($includePrevNext) {
     if ($current == $total) {
-        $list[] = $discuss->getChunk($tplActive,array('class' => 'inactive', 'text' => $nextText));
+        $list[] = $discuss->getChunk($tplDisabled,array('class' => 'inactive', 'text' => $nextText));
     } else {
         $list[] = $discuss->getChunk($tplLink,array('url' => urlAddPagination($current+1), 'text' => $nextText));
     }

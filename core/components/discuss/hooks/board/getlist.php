@@ -101,9 +101,11 @@ foreach ($boards as $board) {
     if ($checkUnread) {
         $board['unread'] = $discuss->user->isLoggedIn ? $discuss->user->isBoardRead($board['id']) : 1;
         $board['unread-cls'] = $board['unread'] ? 'dis-unread' : 'dis-read';
+        $board['unread-count'] = $discuss->user->isLoggedIn ? $discuss->user->getUnreadCount($board['id']) : 0;
     } else {
         $board['unread'] = $discuss->user->isLoggedIn ? 0 : 1;
         $board['unread-cls'] = $discuss->user->isLoggedIn ? 'dis-read' : 'dis-unread';
+        $board['unread-count'] = 0;
     }
 
     if (!empty($board['last_post_createdon'])) {

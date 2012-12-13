@@ -378,7 +378,7 @@ class disNewBBCodeParser extends disParser {
      * @return string
      */
     public function convertLinks($message) {
-        return preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftp):\/\/)([\@a-z0-9\/\?=\-_#]+\.[\@a-z0-9\/\?=\-_#\.\+]+)/msxi",array($this, 'parseLinksCallback'),$message);
+        return preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftp):\/\/)([\@a-z0-9\/\?=\-_#]+\.[\@a-z0-9\/\?=\-_#\.,\+]+)/msxi",array($this, 'parseLinksCallback'),$message);
     }
     /**
      * Parse [url] tags

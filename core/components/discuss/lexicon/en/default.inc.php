@@ -59,6 +59,15 @@ $_lang['discuss.board_locked'] = 'Locked';
 $_lang['discuss.board_locked_desc'] = 'If true, only Administrators can post on this board.';
 $_lang['discuss.board_moderators_msg'] = 'This is a list of all the Moderators for this current board.';
 $_lang['discuss.board_name_desc'] = 'A name for the board.';
+$_lang['discuss.board_merge'] = 'Merge Board';
+$_lang['discuss.board_merge.boardaction'] = 'Board Action';
+$_lang['discuss.board_merge.merge_into'] = 'Merge Board Into';
+$_lang['discuss.board_merge.name'] = 'Board to Merge';
+$_lang['discuss.board_merge.start'] = 'Starting Board Merge process...';
+$_lang['discuss.board_merge.remove'] = 'Remove Board';
+$_lang['discuss.board_merge.deactivate'] = 'Mark Board as Inactive';
+$_lang['discuss.board_merge.archive'] = 'Mark Board as Archived';
+$_lang['discuss.board_merge.nothing'] = 'Do Nothing';
 $_lang['discuss.board_new'] = 'New Board';
 $_lang['discuss.board_remove'] = 'Remove Board';
 $_lang['discuss.board_remove_confirm'] = 'Are you sure you want to remove this board and all its subboards entirely?';
@@ -158,6 +167,7 @@ $_lang['discuss.user_activity_msg'] = 'General information about the activity an
 $_lang['discuss.user_birthdate'] = 'Birthdate';
 $_lang['discuss.user_boards.intro_msg'] = 'Here you can manage the Boards this User Group can view.';
 $_lang['discuss.user_create'] = 'Create User';
+$_lang['discuss.user_display_name'] = 'Display Name';
 $_lang['discuss.user_email'] = 'Email';
 $_lang['discuss.user_err_nf'] = 'User not found with ID [[+id]]';
 $_lang['discuss.user_err_ns'] = 'Please select a user.';
@@ -175,7 +185,10 @@ $_lang['discuss.user_show_email'] = 'Show Email';
 $_lang['discuss.user_show_online'] = 'Show Online';
 $_lang['discuss.user_signature'] = 'Signature';
 $_lang['discuss.user_update'] = 'Update User';
+$_lang['discuss.user_use_display_name'] = 'Use Display Name';
 $_lang['discuss.user_website'] = 'Website';
+
+/* commenting out in prep for moving to proper lexicon file
 $_lang['discuss.user.no_new_posts'] = 'no new posts';
 $_lang['discuss.user.one_new_post'] = '1 new post';
 $_lang['discuss.user.new_posts'] = '[[+total]] new posts';
@@ -191,6 +204,8 @@ $_lang['discuss.user.new_unanswered_questions'] = '[[+total]] unanswered questio
 $_lang['discuss.user.no_no_replies'] = 'no discussions';
 $_lang['discuss.user.one_no_reply'] = '1 discussion';
 $_lang['discuss.user.no_replies'] = '[[+total]] discussions';
+*/
+
 $_lang['discuss.usergroup'] = 'User Group';
 $_lang['discuss.usergroup_access'] = 'User Group Access';
 $_lang['discuss.usergroup_add'] = 'Add User Group';

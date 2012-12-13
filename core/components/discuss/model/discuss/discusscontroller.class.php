@@ -112,7 +112,7 @@ abstract class DiscussController {
      * @return string
      */
     public function render() {
-        if ($this->modx->getOption('discuss.debug',$this->config,true)) {
+        if ($this->modx->getOption('discuss.debug', null, true)) {
             $this->modx->setLogTarget('ECHO');
             $this->startDebugTimer();
         }
@@ -371,7 +371,7 @@ abstract class DiscussController {
         $this->setPlaceholder('totalMembers',number_format((int)$this->modx->getCount('disUser')));
 
         /* active in last 40 */
-        if ($this->modx->getOption('discuss.show_whos_online',null,true) && $this->modx->hasPermission('discuss.view_online')) {
+        if ($this->modx->getOption('discuss.show_whos_online',null,true)) {
             $this->setPlaceholder('activeUsers', $this->discuss->hooks->load('user/active_in_last'));
         } else {
             $this->setPlaceholder('activeUsers', '');

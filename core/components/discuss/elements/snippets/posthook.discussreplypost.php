@@ -47,7 +47,7 @@ if ($thread == null) return false;
 
 /* first check attachments for validity */
 $attachments = array();
-if (!empty($_FILES) && !empty($_FILES['attachment']['tmp_name'])) {
+if (!empty($_FILES) && !empty($_FILES['attachment1']['tmp_name'])) {
     $result = $discuss->hooks->load('post/attachment/verify',array(
         'attachments' => &$_FILES,
     ));

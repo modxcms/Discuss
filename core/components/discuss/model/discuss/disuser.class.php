@@ -76,7 +76,7 @@
  * @property array $Reads
  * @property disSession $Session
  * @property array $Friends
- * 
+ *
  * @package discuss
  */
 class disUser extends xPDOSimpleObject {
@@ -147,6 +147,10 @@ class disUser extends xPDOSimpleObject {
      * @var disParser $parser
      */
     public $parser;
+    /**
+     * @var array $unreadBoardsCount
+     */
+    public $unreadBoardsCount = array();
 
     /**
      * Initialize the user, setup basic metadata for them, and log their activity time.
@@ -185,6 +189,7 @@ class disUser extends xPDOSimpleObject {
             GROUP BY `board`');
             if ($stmt) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $this->unreadBoardsCount[$row['board']] = $row['threads'] - $row['read'];
                     $this->readBoards[$row['board']] = $row['threads'] - $row['read'] > 0;
                 }
                 $stmt->closeCursor();
@@ -326,7 +331,11 @@ class disUser extends xPDOSimpleObject {
      */
     public function getUserGroupNames() {
         $this->getOne('User');
-        return $this->User->getUserGroupNames();
+        if ($this->User instanceof modUser) {
+            return $this->User->getUserGroupNames();
+        } else {
+            return array();
+        }
     }
 
     /**
@@ -992,5 +1001,17 @@ class disUser extends xPDOSimpleObject {
      */
     public function canViewEmails() {
         return $this->isLoggedIn && $this->xpdo->hasPermission('discuss.view_emails');
+    }
+
+    /**
+     * @param int $boardId
+     * @return int
+     */
+    public function getUnreadCount($boardId = 0) {
+        $this->prepareReadBoards();
+        if (isset($this->unreadBoardsCount[$boardId])) {
+            return $this->unreadBoardsCount[$boardId];
+        }
+        return 0;
     }
 }

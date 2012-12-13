@@ -43,9 +43,7 @@ class DiscussMessagesRemovePostController extends DiscussController {
     }
 
     public function checkPermissions() {
-        $users = explode(',',$this->thread->get('users'));
-        $inMessage = in_array($this->discuss->user->get('id'),$users);
-        return $inMessage && $this->discuss->user->isLoggedIn;
+        return $this->discuss->user->isLoggedIn && ($this->post->get('author') == $this->discuss->user->get('id'));
     }
     public function getPageTitle() {
         return $this->modx->lexicon('discuss.remove_message_header',array('title' => $this->thread->get('title')));

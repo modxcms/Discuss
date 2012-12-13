@@ -237,27 +237,36 @@ class disThreadQuestion extends disThread {
         if (!empty($postArray['answer'])) {
             $postArray['class'][] = 'dis-post-answer';
             $postArray['title'] .= ' ('.$this->xpdo->lexicon('discuss.best_answer').')';
-            $postArray['answer_next'] = array('id' => '');
-            $postArray['answer_prev'] = array('id' => '');
+            $postArray['answer_next'] = array('id' => '', 'url' => '', 'link' => '');
+            $postArray['answer_prev'] = array('id' => '', 'url' => '', 'link' => '');
             if (!empty($postArray['answers_raw'])) {
                 $nextIsNext = false;
                 $last = array();
                 foreach ($postArray['answers_raw'] as $id => $details) {
                     if ($nextIsNext) {
                         $postArray['answer_next'] = $details;
+                        $postArray['answer_next']['link'] = '<a href="'.$details['url'].'" class="next">[[%discuss.next]]</a>';
                         break;
                     }
                     if ($id == $postArray['id']) {
                         if (!empty($last)) {
                             $postArray['answer_prev'] = $last;
+                            $postArray['answer_prev']['link'] = '<a href="'.$last['url'].'" class="prev">[[%discuss.prev]]</a>';
                         }
                         $nextIsNext = true;
                     }
                     $last = $details;
                 }
             }
-        } else {
+        }
 
+        if (!empty($postArray['answers_raw'])) {
+            $firstAnswer = reset($postArray['answers_raw']);
+            if (!empty($firstAnswer)) {
+                $postArray['jump_to_first_answer'] = $firstAnswer;
+                $postArray['jump_to_first_answer']['explanation'] = ($postArray['answer_count'] > 1) ? '[[%discuss.mult_answers_explanation? &count=`'.$postArray['answer_count'].'`]]' : '[[%discuss.one_answer_explanation? &author=`'.$firstAnswer['author_username'].'`]]';
+                $postArray['jump_to_first_answer']['link'] = '<a href="'.$postArray['jump_to_first_answer']['url'].'" class="jump-to-first">[[%discuss.answered_link]]</a>';
+            }
         }
         return $postArray;
     }

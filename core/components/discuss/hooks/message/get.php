@@ -139,7 +139,7 @@ foreach ($posts as $post) {
         if ($post->canReply()) {
             $postArray['action_reply'] = $discuss->getChunk('disActionLink',array(
                 'url' => $discuss->request->makeUrl('messages/reply',array('post' => $post->get('id'))),
-                'text' => $modx->lexicon('discuss.reply'),
+                'text' => $modx->lexicon('discuss.reply_with_quote'),
                 'class' => 'dis-post-reply',
                 'id' => '',
                 'attributes' => '',
@@ -202,6 +202,9 @@ foreach ($posts as $post) {
     $postArray['idx'] = $idx+1;
 
     /* prepare thread view for derivative thread types */
+    $postArray['answer_count'] = 0;
+    $postArray['url_mark_as_answer'] = '';
+    $postArray['class_key'] = $thread->get('class_key');
     $postArray = $thread->prepareThreadView($postArray);
 
     /* fire OnDiscussPostBeforeRender */

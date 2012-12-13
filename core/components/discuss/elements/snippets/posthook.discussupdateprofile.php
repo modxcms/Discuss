@@ -43,8 +43,9 @@ if (!$disUser) return true;
 unset($fields['id']);
 unset($fields['user']);
 
-$fields['show_email'] = !empty($fields['show_email']) ? 1 : 0;
-$fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
+$fields['show_email'] = !empty($fields['show_email']) ? true : false;
+$fields['show_online'] = !empty($fields['show_online']) ? true : false;
+$fields['use_display_name'] = !empty($fields['use_display_name']) ? true : false;
 
 if (isset($fields['fullname']) && empty($fields['name_first'])) {
     $name = explode(' ',$fields['fullname']);
@@ -56,6 +57,11 @@ $disUser->fromArray($fields);
 if (!empty($fields['signature'])) {
     $fields['signature'] = str_replace(array('&#91;','&#93;'),array('[',']'),$fields['signature']);
     $disUser->set('signature',$fields['signature']);
+}
+
+if (!empty($fields['birthdate'])) {
+    $unixBirthdate = strtotime($fields['birthdate']);
+    $disUser->set('birthdate',($unixBirthdate !== false) ? $unixBirthdate : '');
 }
 
 if (!$disUser->save()) {

@@ -41,7 +41,12 @@ $fields = $profile->toArray();
 $useExtended = $modx->getOption('useExtended',$scriptProperties,true);
 if ($useExtended) {
     $extended = $fields['extended'];
-    if (!empty($extended)) {
+    if (!empty($extended) && is_array($extended)) {
+        $excludeExtended = $modx->getOption('excludeExtended', $scriptProperties, '');
+        $excludeExtended = explode(',', $excludeExtended);
+        foreach ($excludeExtended as $exclude) {
+            if (isset($extended[$exclude]))  unset ($extended[$exclude]);
+        }
         $fields = array_merge($extended,$fields);
     }
 }
@@ -55,9 +60,11 @@ if ($disUser) {
     $fields = array_merge($disUser->toArray(),$fields);
     $fields['show_email'] = !empty($fields['show_email']) ? 1 : 0;
     $fields['show_online'] = !empty($fields['show_online']) ? 1 : 0;
+    $fields['use_display_name'] = !empty($fields['use_display_name']) ? 1 : 0;
     $fields['post_sort_dir'] = $disUser->getSetting('discuss.post_sort_dir','ASC');
     $fields['posts'] = number_format($fields['posts'],0);
     $fields['gender'] = $disUser->get('gender') == 'm' ? 'm' : 'f';
+    $fields['birthdate'] = (!empty($fields['birthdate'])) ? $fields['birthdate'] : '';
 }
 
 $forumsResourceId = $modx->getOption('discuss.forums_resource_id',null,0);

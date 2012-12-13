@@ -60,12 +60,12 @@ $notifications = $modx->getCollection('disUserNotification',$c);
 
 /* build thread url */
 $url = '';
-$type = ($type == 'message') ? 'messages/view' : 'thread/';
+$view = ($type == 'message') ? 'messages/view' : 'thread/';
 if (!empty($scriptProperties['post'])) {
     /* @var disPost $post */
     $post = $modx->getObject('disPost', (int)$scriptProperties['post']);
     if ($post) {
-        $url = $post->getUrl($type);
+        $url = $post->getUrl($view);
     }
 }
 if (empty($url)) {

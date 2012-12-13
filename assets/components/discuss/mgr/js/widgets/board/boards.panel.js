@@ -68,6 +68,11 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
         var id = this.cm.activeNode ? this.cm.activeNode.attributes.pk : 0;
         location.href = '?a='+MODx.request.a+'&board='+id+'&action=mgr/board/update';
     }
+
+    ,mergeBoard: function(btn,e) {
+        var id = this.cm.activeNode ? this.cm.activeNode.attributes.pk : 0;
+        location.href = '?a='+MODx.request.a+'&board='+id+'&action=mgr/board/merge';
+    }
     
     ,createBoard: function(btn,e) {
         var r = {};
@@ -188,6 +193,11 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
                 m.push({
                     text: _('discuss.board_create_here')
                     ,handler: this.createBoard
+                });
+                m.push('-');
+                m.push({
+                    text: _('discuss.board_merge')
+                    ,handler: this.mergeBoard
                 });
                 m.push('-');
                 m.push({

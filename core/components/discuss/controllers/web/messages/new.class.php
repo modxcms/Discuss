@@ -43,8 +43,8 @@ class DiscussMessagesNewController extends DiscussController {
         if (empty($_POST)) {
             $participants = array($this->modx->user->get('username'));
             if (!empty($this->scriptProperties['user'])) {
-                $ps = explode(',',$this->scriptProperties['user']);
-                $participants = array_merge($ps,$participants);
+                $ps = explode(',',$this->modx->stripTags($this->scriptProperties['user']));
+                $this->setPlaceholder('add_participants',implode(',',$ps));
             }
             asort($participants);
             $this->setPlaceholder('participants_usernames',implode(',',array_unique($participants)));

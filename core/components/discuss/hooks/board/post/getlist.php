@@ -63,6 +63,8 @@ if (empty($cache)) {
     ));
     $cache['total'] = $modx->getCount('disThread',$c);
     $c->select($modx->getSelectColumns('disPost','LastPost'));
+    $c->select($modx->getSelectColumns('disPost','FirstPost','first_post_'));
+    $c->select($modx->getSelectColumns('disThread','disThread'));
     $c->select(array(
         'last_post_id' => 'LastPost.id',
         'post_id' => 'LastPost.id',
@@ -132,6 +134,7 @@ if (empty($cache)) {
                 if (strlen($threadArray['excerpt']) > 500) {
                     $threadArray['excerpt'] = substr($threadArray['excerpt'],0,500).'...';
                 }
+                $threadArray['content'] = $lastPost->getContent();
             }
         } else {
             $threadArray['title'] = strip_tags($threadArray['title']);
@@ -148,6 +151,7 @@ if (empty($cache)) {
                 if (strlen($threadArray['excerpt']) > $modx->getOption('discuss.post_excerpt_length', null, 500)) {
                     $threadArray['excerpt'] = substr($threadArray['excerpt'],0,$modx->getOption('discuss.post_excerpt_length', null, 500)).'...';
                 }
+                $threadArray['content'] = $post->getContent();
             }
         }
         $cache['results'][] = $threadArray;

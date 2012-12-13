@@ -351,12 +351,15 @@ class DiscussThreadController extends DiscussController {
     public function getAnswers() {
         if (($this->thread->get('class_key') == 'disThreadQuestion') && $this->thread->get('answered')) {
             $c = $this->modx->newQuery('disPost');
+            $c->innerJoin('disUser','Author');
             $c->where(array(
                 'board' => $this->thread->get('board'),
                 'thread' => $this->thread->get('id'),
                 'answer' => 1,
             ));
             $c->sortby('createdon', 'ASC');
+            $c->select($this->modx->getSelectColumns('disPost','disPost'));
+            $c->select($this->modx->getSelectColumns('disUser','Author','author_', array('password','hash_class'), true));
 
             $answers = $this->modx->getCollection('disPost', $c);
             if (!empty($answers)) {
