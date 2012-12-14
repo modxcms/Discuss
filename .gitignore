@@ -6,3 +6,4 @@ core/components/discuss/includes/import.config.inc.php
 core/components/discuss/includes/config.core.php
 core/components/discuss/test/config.inc.php
 core/components/discuss/test/properties.inc.php
+assets/components/discuss/themes/default/.sass-cache/*
