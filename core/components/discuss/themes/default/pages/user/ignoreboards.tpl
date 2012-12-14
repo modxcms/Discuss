@@ -1,22 +1,28 @@
-[[+usermenu]]
-<div class="dis-profile left" style="width: 80%;">
 
-<form class="dis-form" action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post" style="border: 0;">
-    <h2>
-        <span class="right" style="padding: 4px;"><input type="checkbox" class="dis-ignore-all" /></span>
-        Ignore Boards
-    </h2>
-    <div class="dis-board-ignores">
-        <ul>
-            [[+boards]]
-        </ul>
-    </div>
+<div class="dis-profile">
 
-    <br class="clear" />
+	<h1>Ignore Boards</h1>
 
-    <div class="dis-form-buttons">
-        <input type="submit" class="dis-action-btn" name="submit" value="Update" />
-    </div>
+	<form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post" class="dis-form">
 
-</form>
+		<ul class="ignore">
+			[[+boards]]
+		</ul>
+			
+		<label class="dis-cb"><input type="checkbox" class="dis-ignore-all" /><strong>Ignore All</strong></label>
+
+		<br class="clearfix" />
+
+	    <div class="dis-form-buttons">
+	    	<input type="submit" name="submit" value="Update" />
+	    </div>
+
+	</form>
+	
 </div>
+[[+sidebar]]
+
+</div><!-- Close Content From Wrapper -->
+	[[+bottom]]
+
+

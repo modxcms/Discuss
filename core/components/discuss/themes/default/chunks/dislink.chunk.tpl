@@ -1,1 +1,1 @@
-<a [[+id]] href="[[+url]]" class="[[+class]]" [[+attributes]]>[[+text]]</a>
+<a [[+id]] href="[[+url]]" class="[[+class]] hide" [[+attributes]]><span>[[+text]]</span></a>

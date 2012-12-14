@@ -1,25 +1,14 @@
-[[+usermenu]]
-<div class="dis-profile dis-form left" style="width: 80%; border: 0;">
-    <h2>[[%discuss.general_stats? &user=`[[+name]]`]]</h2>
-    
-    <dl class="dis-datalist">
-        <dh>[[%discuss.joined]]:</dh>
-        <dt>[[+confirmedon:strtotime:date=`%b %d, %Y %I:%M %p`]]</dt>
-        
-        <dh>[[%discuss.post_count]]:</dh>
-        <dt>[[+posts]]</dt>
-        
-        <dh>[[%discuss.threads_started]]:</dh>
-        <dt>[[+topics]]</dt>
-
-        <dh>[[%discuss.replies]]:</dh>
-        <dt>[[+replies]]</dt>
-        
-        <dh>[[%discuss.last_login]]:</dh>
-        <dt>[[+last_login:strtotime:date=`%b %d, %Y %I:%M %p`]]</dt>
-        
-        <dh>[[%discuss.last_active]]:</dh>
-        <dt>[[+last_active:strtotime:date=`%b %d, %Y %I:%M %p`]]</dt>
-    </dl>
-
+<div class="dis-profile f1-f9">
+    <h1>[[%discuss.general_stats? &user=`[[+name]]`]]</h1>
+    <ul class="profile">
+        <li>[[%discuss.joined]]: <strong>[[+confirmedon:strtotime:date=`%b %d, %Y %I:%M %p`]]</strong></li>
+        <li>[[%discuss.last_login]]: <strong>[[+last_login:strtotime:date=`%b %d, %Y %I:%M %p`]]</strong></li>
+        <li>[[%discuss.last_active]]: <strong>[[+last_active:strtotime:date=`%b %d, %Y %I:%M %p`]]</strong></li>
+        <li>[[%discuss.post_count]]: <strong>[[+posts]]</strong></li>
+        <li>[[%discuss.threads_started]]: <strong>[[+topics]]</strong></li>
+        <li>[[%discuss.replies]]: <strong>[[+replies]]</strong></li>
+        <li>[[%discuss.location]]: <strong>[[+location]]</strong></li>
+    </ul>
 </div>
+[[+sidebar]]
+[[+bottom]]

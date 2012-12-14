@@ -29,21 +29,20 @@ $manifest = array(
     'global' => array(
         'css' => array(
             'header' => array(
-                'index.css',
-                'jquery-ui-1.8.16.custom.css',
             ),
         ),
         'js' => array(
-            'header' => array(
-                'jquery-1.6.2.min.js',
-                'jquery-ui-1.8.16.custom.min.js',
-                'discuss.js',
-                'sh/shCore.js',
-                'sh/shAutoloader.js',
-                'sh/shDiscuss.js',
-            ),
-            'inline' => 'DIS.url = "'.$this->discuss->url.'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";',
+            'inline' => 'var DIS = {config: {}}; DIS.url = "'.$this->discuss->request->makeUrl().'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";DIS.config.connector = "'.$this->discuss->config['connectorUrl'].'"; DIS.config.forum_url = "'.$this->discuss->request->makeUrl().'"',
         ),
+        'options' => array(
+            'registerJsToScriptTags' => false,
+            'showBreadcrumbs' => true,
+            'showTitleInBreadcrumbs' => true,
+            'showReaders' => true,
+            'showModerators' => true,
+            'showPaginationIfOnePage' => false,
+            'showPrintOption' => false,
+        )
     ),
     'print' => array(
         'css' => array(
@@ -53,35 +52,22 @@ $manifest = array(
         ),
     ),
     'home' => array(
-        'js' => array(
-            'header' => array(
-                'dis.home.js',
-            ),
-        ),
         'options' => array(
             'showBoards' => true,
-            'showBreadcrumbs' => true,
-            'showRecentPosts' => true,
+            'showRecentPosts' => false,
             'showStatistics' => true,
             'showLoginForm' => false,
             'bypassUnreadCheck' => true,
             'checkUnread' => true,
-            'showLogoutActionButton' => true,
+            'showLogoutActionButton' => false,
+            'hideIndexBreadcrumbs' => false,
+            'subBoardSeparator' => '',
         ),
     ),
     'board' => array(
-        'js' => array(
-            'header' => array(
-                'dis.board.js',
-            ),
-        ),
         'options' => array(
             'showSubBoards' => true,
             'showPosts' => true,
-            'showBreadcrumbs' => true,
-            'showReaders' => true,
-            'showModerators' => true,
-            'showPaginationIfOnePage' => false,
         ),
     ),
     'board.xml' => array(
@@ -91,213 +77,473 @@ $manifest = array(
             'showBreadcrumbs' => false,
             'showReaders' => false,
             'showModerators' => false,
+            'useLastPost' => false,
         ),
     ),
     'thread' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
         'options' => array(
             'showPosts' => true,
-            'showBreadcrumbs' => true,
+            'showTitleInBreadcrumbs' => false,
             'showViewing' => true,
             'showSubscribeOption' => true,
-            'showPrintOption' => true,
             'showStickOption' => true,
             'showLockOption' => true,
             'showMarkAsSpamOption' => true,
-            'showTitleInBreadcrumbs' => true,
-            'showPaginationIfOnePage' => true,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_talking' => '1',
+                    'show_be_nice_box' => '1',
+                )
+            )
         ),
     ),
     'thread/new' => array(
         'js' => array(
-            'header' => array(
-                'dis.thread.new.js',
-                'dis.post.buttons.js',
+            'footer' => array(
+                'dis.thread.js',
             ),
+        ),
+        'options' => array(
+            'pageTpl' => 'common/thread-with-form',
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            ),
+            'form' => array(
+                'tpl' => 'replyform',
+                'options' => array(
+                    'hook' => 'DiscussNewThread',
+                    'action' => 'new',
+                    'actionvar' => 'board',
+                )
+            )
         ),
     ),
     'thread/reply' => array(
         'js' => array(
-            'header' => array(
-                'dis.post.reply.js',
-                'dis.post.buttons.js',
+            'footer' => array(
+                'dis.thread.js',
             ),
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
+            'pageTpl' => 'common/thread-with-form',
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            ),
+            'form' => array(
+                'tpl' => 'replyform',
+                'options' => array(
+                    'hook' => 'DiscussReplyPost',
+                    'action' => 'reply',
+                    'actionvar' => 'post',
+                )
+            )
         ),
     ),
     'thread/modify' => array(
         'js' => array(
-            'header' => array(
-                'dis.post.modify.js',
-                'dis.post.buttons.js',
+            'footer' => array(
+                'dis.thread.js',
             ),
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
+            'pageTpl' => 'common/thread-with-form',
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                    'show_talking' => '1',
+                )
+            ),
+            'form' => array(
+                'tpl' => 'replyform',
+                'options' => array(
+                    'hook' => 'DiscussModifyPost',
+                    'action' => 'modify',
+                    'actionvar' => 'post',
+                )
+            )
         ),
     ),
     'thread/move' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'thread/spam' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'thread/remove' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'post/report' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'post/spam' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
         ),
     ),
     'search' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.search.js',
             ),
-            'inline' => '$(".date-picker").datepicker();',
         ),
-        'css' => array(
-            'header' => array(
-                'search.css',
-            ),
-        )
     ),
     'user' => array(
         'options' => array(
-            'showRecentPosts' => true,
+            'showRecentPosts' => false,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
         ),
     ),
     'user/subscriptions' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'user/dis.user.subscriptions.js',
+            )
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
             )
         ),
     ),
     'user/ignoreboards' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'user/dis.user.ignoreboards.js',
             )
         ),
-    ),
-    'messages/index' => array(
-        'js' => array(
-            'header' => array(
-                'dis.board.js',
-            ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
         ),
+    ),
+    'user/ban' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'user/edit' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'user/merge' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'user/posts' => array(
+        'options' => array(
+            'postTpl' => 'post/disPostLi'
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'user/statistics' => array(
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'user-sidebar',
+                'options' => array(
+                )
+            )
+        ),
+    ),
+    'messages' => array(
         'options' => array(
             'showSubBoards' => true,
             'showPosts' => true,
-            'showBreadcrumbs' => true,
-            'showReaders' => true,
-            'showModerators' => true,
-            'showPaginationIfOnePage' => true,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            )
+        ),
+    ),
+    'messages/new' => array(
+        'options' => array(
+            'pageTpl' => 'common/messages-with-form',
+        ),
+        'js' => array(
+            'footer' => array(
+                'dis.thread.js',
+            ),
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            ),
+            'form' => array(
+                'tpl' => 'message-form',
+                'options' => array(
+                    'hook' => 'DiscussNewMessage',
+                    'action' => 'new',
+                    'formaction' => 'new',
+                    'submit_message' => '[[%discuss.message_send]]',
+                    'cancel_link' => 'messages',
+                    'extra_validation' => ',add_participants:required',
+                )
+            ),
+        ),
+    ),
+    'messages/reply' => array(
+        'options' => array(
+            'pageTpl' => 'common/messages-with-form',
+        ),
+        'js' => array(
+            'footer' => array(
+                'dis.thread.js',
+            ),
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            ),
+            'form' => array(
+                'tpl' => 'message-form',
+                'options' => array(
+                    'hook' => 'DiscussReplyMessage',
+                    'action' => 'reply',
+                    'formaction' => 'reply?thread=[[!+fi.thread]]',
+                    'submit_message' => '[[%discuss.message_send]]',
+                    'cancel_link' => 'messages/view?thread=[[+thread]]',
+                    'extra_validation' => '',
+                )
+            ),
+        ),
+    ),
+    'messages/modify' => array(
+        'options' => array(
+            'pageTpl' => 'common/messages-with-form',
+        ),
+        'js' => array(
+            'footer' => array(
+                'dis.thread.js',
+            ),
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            ),
+            'form' => array(
+                'tpl' => 'message-form',
+                'options' => array(
+                    'hook' => 'DiscussModifyMessage',
+                    'action' => 'modify',
+                    'formaction' => 'modify?post=[[!+fi.id]]',
+                    'submit_message' => '[[%discuss.save_changes]]',
+                    'cancel_link' => 'messages/view?message=[[+thread]]#dis-post-[[+id]]',
+                    'extra_validation' => '',
+                )
+            ),
         ),
     ),
     'messages/view' => array(
         'js' => array(
-            'header' => array(
+            'footer' => array(
                 'dis.thread.js',
             )
         ),
         'options' => array(
             'showPosts' => true,
-            'showBreadcrumbs' => true,
             'showViewing' => true,
-            'showSubscribeOption' => true,
-            'showPrintOption' => true,
+            'showSubscribeOption' => false,
             'showStickOption' => true,
             'showLockOption' => true,
             'showMarkAsSpamOption' => true,
-            'showTitleInBreadcrumbs' => true,
-            'showPaginationIfOnePage' => true,
+            'showTitleInBreadcrumbs' => false,
         ),
-    ),
-    'messages/new' => array(
-        'js' => array(
-            'header' => array(
-                'messages/dis.message.new.js',
-                'dis.post.buttons.js',
-            ),
-        ),
-    ),
-    'messages/reply' => array(
-        'js' => array(
-            'header' => array(
-                'messages/dis.message.reply.js',
-                'dis.post.buttons.js',
-            ),
-        ),
-    ),
-    'messages/modify' => array(
-        'js' => array(
-            'header' => array(
-                'messages/dis.message.modify.js',
-                'dis.post.buttons.js',
-            ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            )
         ),
     ),
     'thread/recent' => array(
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
-            'showPaginationIfOnePage' => true,
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            )
         ),
     ),
     'thread/unread' => array(
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
-            'showPaginationIfOnePage' => true,
+            'pageTpl' => 'common/thread-table',
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            ),
+            'navbar_extra' => array(
+                'tpl' => 'navbar_extra-wrapper',
+                'options' => array(
+                    'content' => '<a href="[[~[[++discuss.forums_resource_id]]]]thread/unread_last_visit" class="action-buttons dis-action-unread_last_visit" title="[[%discuss.unread_posts_last_visit]]">[[%discuss.unread_posts_last_visit]]</a>
+                        <a class="read" href="[[+actionlink_mark_read]]" title="[[%discuss.mark_all_as_read]]">[[%discuss.mark_all_as_read]]</a>'
+                )
+            )
         ),
     ),
     'thread/unread_last_visit' => array(
         'options' => array(
-            'showTitleInBreadcrumbs' => true,
-            'showPaginationIfOnePage' => true,
+            'pageTpl' => 'common/thread-table',
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            ),
+            'navbar_extra' => array(
+                'tpl' => 'navbar_extra-wrapper',
+                'options' => array(
+                    'content' => '<a href="[[~[[++discuss.forums_resource_id]]]]thread/unread" class="action-buttons dis-action-unread" title="[[%discuss.unread_posts_all]]">[[%discuss.unread_posts_all]]</a>
+                        <a class="read" href="[[+actionlink_mark_read]]" title="[[%discuss.mark_all_as_read]]">[[%discuss.mark_all_as_read]]</a>'
+                )
+            )
+        )
+    ),
+    'thread/no_replies' => array(
+        'options' => array(
+            'pageTpl' => 'common/thread-table',
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            )
+        ),
+    ),
+    'thread/unanswered_questions' => array(
+        'options' => array(
+            'pageTpl' => 'common/thread-table',
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            )
+        ),
+    ),
+    'thread/new_replies_to_posts' => array(
+        'options' => array(
+            'pageTpl' => 'common/thread-table',
+        ),
+        'modules' => array(
+            'sidebar' => array(
+                'tpl' => 'post-sidebar',
+                'options' => array(
+                    'show_be_nice_box' => '1',
+                )
+            ),
+            'navbar_extra' => array(
+                'tpl' => 'navbar_extra-wrapper',
+                'options' => array(
+                    'content' => '<a class="action-buttons" href="[[+actionlink_mark_read]]" title="[[%discuss.mark_all_as_read]]">[[%discuss.mark_all_as_read]]</a>'
+                )
+            )
         ),
     ),
 );

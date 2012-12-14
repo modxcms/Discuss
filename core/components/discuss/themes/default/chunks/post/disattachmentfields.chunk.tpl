@@ -1,10 +1,13 @@
-<label for="dis-thread-attachment1">[[%discuss.attachments]]:
-    <span class="small dis-add-attachment"><a href="javascript:void(0);">[[%discuss.attachment_add]]</a>
-    <br />([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span>
-    <span class="error">[[!+fi.error.attachments]]</span>
+<label for="dis-attachment">[[%discuss.attachments]]:
+    <span class="error">[[+error.attachments]]</span>
 </label>
-<input type="file" name="attachment1" id="dis-thread-attachment1" />
+<input type="file" class="dis-attachment-input" name="attachment[[+attachmentCurIdx:default=`1`]]" id="dis-attachment" />
+
 <div id="dis-attachments"></div>
-[[+attachments:notempty=`<div class="dis-existing-attachments">
-    <ul>[[+attachments]]</ul>
-</div>`]]
+[[+attachments:notempty=`
+    <div class="dis-existing-attachments">
+        <ul class="dis-attachments">[[+attachments]]</ul>
+    </div>
+`]]
+
+<a href="javascript:void(0);" class="dis-add-attachment">[[%discuss.attachment_add]] <span>([[%discuss.attachments_max? &max=`[[+max_attachments]]`]])</span></a>

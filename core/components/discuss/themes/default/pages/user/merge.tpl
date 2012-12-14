@@ -4,12 +4,14 @@
    &validate=`username:required,password:required`
    &successMessage=``
 ]]
-[[+usermenu]]
-<div class="dis-profile left" style="width: 80%;">
 
-<form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form" style="border: 0;">
+<div class="dis-profile f1-f9">
 
-    <h2>[[%discuss.account_merge? &namespace=`discuss` &topic=`user`]]: [[+name]]</h2>
+
+
+<form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form">
+
+	<h1>[[%discuss.account_merge? &namespace=`discuss` &topic=`user`]]: [[+name]]</h1>
 
     <p>[[%discuss.account_merge_msg]]</p>
 
@@ -17,15 +19,15 @@
 
     <label for="dis-username">[[%discuss.username]]:
         <span class="error">[[+fi.error.username]]</span>
-    </label>
+    </label><br class="clearfix" />
     <input type="text" name="username" id="dis-username" value="[[+fi.username]]" />
-
+<br class="clearfix" />
     <label for="dis-password">[[%discuss.password]]:
         <span class="error">[[+fi.error.password]]</span>
-    </label>
+    </label><br class="clearfix" />
     <input type="password" name="password" id="dis-password" value="[[+fi.password]]" />
 
-    <br class="clear" />
+    <br class="clearfix" />
 
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" name="dis-account-merge" value="[[%discuss.account_merge]]" />
@@ -33,4 +35,10 @@
     </div>
 
 </form>
+
+
 </div>
+	
+[[+sidebar]]
+</div><!-- Close Content From Wrapper -->
+[[+bottom]]

@@ -1,50 +1,78 @@
-[[+trail]]
-<br />
 
-<form class="dis-form" action="[[~[[*id]]]]search/" method="get">
-    <h2>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h2>
-    
-    <label for="dis-search">[[%discuss.search]]:</label>
-    <input type="text" id="dis-search" name="s" value="[[+search]]" />
+<form class="m-fullw-form m-styled-form h-group m-search" action="[[~[[*id]]]]search/" method="get">
+	<h1>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h1>
+    <div class="m-panel f1-f8">
+        <div class="f1-f5 f-pad h-group">
+            <label class="search" for="dis-search">[[%discuss.search]]:</label>
+            <input class="search" type="text" id="dis-search" name="s" value="[[+search]]" />
+        </div>
+        <div class="f-all f-pad  h-group">
+            <a id="dis-search-advanced-toggle" href="a-search-adavnaced">[[%discuss.search_advanced_options]]</a>
+        </div>
+        <div id="dis-search-advanced" class="f-all m-grouped-content">
+            <div class="f-full">
+                <div class="f1-f4 f-pad">
+                    <label for="dis-search-board">Post type:
+                        <span class="error">[[+error.board]]</span>
+                    </label>
+                    <select name="board" id="dis-search-qa">
+                        <option value="1">(All Posts)</option>
+                        <option value="2">Discussions</option>
+                        <option value="3" id="QA">Questions</option>
+                    </select>
+                </div>
+                <div id="SubOptions" class="f5-f8 sub-options">
+                    <label for="dis-search-board">Question options:
+                        <span class="error">[[+error.board]]</span>
+                    </label>
+                    <input type="radio" name="qa-options" value="Both" checked>All Questions
+                    <input type="radio" name="qa-options" value="Solved">Answered
+                    <input type="radio" name="qa-options" value="Unsolved">Without Answer
+                </div>
+            </div>
 
-    <label for="dis-search-board">[[%discuss.board]]:
-        <span class="error">[[+error.board]]</span>
-    </label>
-    <select name="board" id="dis-search-board">[[+boards]]</select>
+            <div class="f-full">
+                <div class="f1-f4 f-pad">
+                    <label for="dis-search-board">[[%discuss.board]]:
+                        <span class="error">[[+error.board]]</span>
+                    </label>
+                    <select name="board" id="dis-search-board">[[+boards]]</select>
+                </div>
+                <div class="f5-f8 f-pad">
+                    <label for="dis-author">[[%discuss.author]]:</label>
+                    <input type="text" id="dis-author" name="user" value="[[+user]]" class="autocomplete" data-autocomplete-action="rest/find_user" data-autocomplete-single="true" />
+                </div>
+            </div>
 
-    <label for="dis-author">[[%discuss.author]]:</label>
-    <input type="text" id="dis-author" name="user" value="[[+user]]" />
+            <div class="f1-f4 f-pad">
+                <label for="dis-date-start">[[%discuss.date_start]]:</label>
+                <input type="text" id="dis-date-start" class="m-datepicker" name="date_start" value="[[+date_start]]"/>
+            </div>
 
-    <label for="dis-date-start">[[%discuss.date_start]]:</label>
-    <input type="text" id="dis-date-start" name="date_start" class="date-picker" value="[[+date_start]]" />
-
-    <label for="dis-date-end">[[%discuss.date_end]]:</label>
-    <input type="text" id="dis-date-end" name="date_end" class="date-picker" value="[[+date_end]]" />
-
-    <br class="clear" />
-    
-    <div class="dis-form-buttons">
-    <input type="submit" class="dis-action-btn" value="[[%discuss.search]]" />
+            <div class="f5-f8 f-pad">
+                <label for="dis-date-end">[[%discuss.date_end]]:</label>
+                <input type="text" id="dis-date-end" class="m-datepicker" name="date_end" value="[[+date_end]]"/>
+            </div>
+        </div>
+        <div class="f1-f8 f-pad">
+            <input type="submit" value="[[%discuss.search]]" />
+        </div>
     </div>
 </form>
 
-<hr />
+[[+search:notempty=`
+<header class="dis-cat-header dark-gradient h-group sticky-bar top">
+    [[+results:notempty=`<h1>Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]
+    [[+pagination]]
+</header>
 
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
-
-[[+results:notempty=`<h2>Displaying [[+start]]-[[+end]] of [[+total]] Results</h2>`]]
-<table class="dis-search-results dis-table">
-<thead>
-<tr>
-    <th style="width: 18%;">[[%discuss.post]]</th>
-    <th style="width: 32%;">[[%discuss.excerpt]]</th>
-    <th style="width: 10%;">[[%discuss.author]]</th>
-    <th style="width: 10%;">[[%discuss.posted_on]]</th>
-</tr>
-</thead>
-<tbody>
-[[+results]]
-</tbody>
-</table>
-
-<div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
+<div class="dis-threads">
+    <ul class="dis-list search-results">`]]
+        [[+results]]
+    [[+search:notempty=`</ul>
+</div>
+<div class="paginate stand-alone bottom horiz-list">
+[[+pagination]]
+</div>
+`]]
+[[+bottom]]

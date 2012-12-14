@@ -1,18 +1,19 @@
 [[+usermenu]]
-<div class="dis-profile left" style="width: 80%;">
+<div class="dis-profile">
 
-<form action="[[~[[*id]]]]user/account?user=[[+id]]" method="post" class="dis-form" id="dis-user-account-form" style="border: 0;">
+<form action="[[~[[*id]]]]user/account?user=[[+id]]" class="dis-form" method="post" id="dis-user-account-form">
 
-    <h2>[[%discuss.account_edit? &namespace=`discuss` &topic=`user`]]: [[+name]]</h2>
+	<h1>[[%discuss.account_edit? &namespace=`discuss` &topic=`user`]]: [[+name]]</h1>
+
         
     <input type="hidden" name="user" value="[[+id]]" />
     
-    <label for="dis-username">[[%discuss.username]]:
+    <label for="dis-username">[[%discuss.username]]:<br />
         <span class="error">[[+error.name_first]]</span>
     </label>
     <input type="text" name="username" id="dis-username" value="[[+username]]" />
     
-    <label for="dis-email">[[%discuss.email]]:
+    <label for="dis-email">[[%discuss.email]]:<br />
         <span class="error">[[+error.email]]</span>
     </label>
     <input type="text" name="email" id="dis-email" value="[[+email]]" />
@@ -20,12 +21,12 @@
     <hr />
     
     
-    <label for="dis-password-new">[[%discuss.password]]:
+    <label for="dis-password-new">[[%discuss.password]]:<br />
         <span class="error">[[+error.password_new]]</span>
     </label>
     <input type="password" name="password_new" id="dis-password-new" />
     
-    <label for="dis-password-confirm">[[%discuss.password_confirm]]:
+    <label for="dis-password-confirm">[[%discuss.password_confirm]]:<br />
         <span class="error">[[+error.password_confirm]]</span>
     </label>
     <input type="password" name="password_confirm" id="dis-password-confirm" />
@@ -36,7 +37,7 @@
     
     <p>[[%discuss.provide_current_password]]</p>
     
-    <label for="dis-password">[[%discuss.password_current]]:
+    <label for="dis-password">[[%discuss.password_current]]:<br />
         <span class="error">[[+error.password]]</span>
     </label>
     <input type="password" name="password" id="dis-password" />
@@ -50,3 +51,9 @@
     
 </form>
 </div>
+
+[[+sidebar]]
+
+</div><!-- Close Content From Wrapper -->
+	[[+bottom]]
+

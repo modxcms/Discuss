@@ -1,44 +1,68 @@
-<li class="[[+class]]" id="dis-post-[[+id]]">
-    <div class="dis-post-header">
-        <h3 class="dis-post-title" post="[[+id]]"><a href="[[+url]]">[[+title]]<span class="idx">#[[+idx]]</span></a></h3>
-        <div class="dis-post-author" id="dis-post-author-[[+id]]">
-            <div class="dis-post-actions">
-                [[+actions]]
-            </div>
-            <div class="dis-author">
-                <a href="[[~[[*id]]]]user/?user=[[+author.id]]">[[+author.avatar]]</a>
-                <span class="right">
-                    [[+createdon]]
-                    <br />[[+author.email]]
-                </span>
-                <span>
-                    [[+author.username_link]]
-                    [[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
-                    [[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
-                    <br />
-                    [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
-                </span>
-                <br class="clear" />
-            </div>
-            <div class="dis-author dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
-                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]<div class="clear"></div></div><div class="clear"></div>`]]
-            </div>
-        </div>
+<li class="[[+class]] group-fix" id="dis-post-[[+id]]" data-author="[[+author.username:htmlent]]" data-date="[[+createdon_raw]]" data-message="[[+content_raw]]">
+    [[+answer:neq=``:then=`
+    <div class="dis-post-answer-marker">
+        [[+answer_count:gt=`1`:then=`
+            <nav>
+            [[+answer_prev.link]]
+            [[+answer_next.link]]
+            </nav>
+        `:else=``]]
+
+        [[+url_mark_as_answer:eq=``:then=`
+            <span title="[[%discuss.answer]]">[[%discuss.answer]]</span>
+        `:else=`
+        <a href="[[+url_mark_as_answer]]">
+            <span title="[[%discuss.unflag_answer]]">[[%discuss.unflag_answer]]</span>
+        </a>
+        `]]
     </div>
-    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]" [[+rtl:notempty=`dir="rtl"`]]>
-        <div class="dis-post-body">[[+content]]</div>
-        <div class="dis-post-footer">
-            <div class="dis-post-reply" id="dis-post-reply-[[+id]]">[[+action_reply]]</div>
-            <div class="dis-post-attachments">
-            [[+attachments:notempty=`<ul class="dis-attachments">[[+attachments]]</ul>`]]
+    `:else=`
+        <div class="dis-post-answer-marker dis-post-notanswer">
+            [[+url_mark_as_answer:eq=``:then=``:else=`
+            <div class="dis-post-answer-marker dis-post-notanswer">
+                <p>[[%discuss.flag_answer]]</p>
+                <a href="[[+url_mark_as_answer]]">
+                    <span>[[%discuss.flag_answer]]</span>
+                </a>
             </div>
-            <div class="dis-post-ip">
-                [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">Edited [[+editedon:ago]] by <a href="[[~[[*id]]]]user?user=[[+editedby]]">[[+editedby.username]]</a></span>`]]
-                [[+report_link]]
-                <a href="[[~[[*id]]]]post/track?ip=[[+ip]]">[[+ip]]</a>
-            </div>
+            `]]
         </div>
-        <br class="clear" />
-        [[+children:notempty=`<ol class="dis-board-thread [[+children_class]]">[[+children]]</ol>`]]
+    `]]
+    <!-- mark answer-->
+    <div class="dis-post-left">
+        <ul>
+            <li class="dis-usr-icon">
+                <a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">
+                    [[+author.avatar]]
+                    [[+author.title:notempty=`<span class="dis-usr-title">[[+author.title]]</span>`]]
+                </a>
+            </li>
+            <li class="dis-usr-post-count">[[+author.posts]] [[%discuss.posts]]</li>
+            <a href="[[~[[*id]]]]messages/new?user=[[+author.username]]" class="dis-pm-btn">Send PM</a>
+        </ul>
     </div>
+
+    <div class="dis-post-right">
+        <div class="title">
+            <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]], <span title="[[+createdon]]">[[+createdon:ago]]</span></a>
+            [[+action_modify:notempty=`<ul class="dis-content-actions">[[+action_modify]][[+action_remove]][[+action_spam]]</ul>`]]
+        </div>
+        <div class="dis-content">
+            [[+content]]
+            [[+discuss.user.shouldMarkAnAnswer:eq=`1`:then=`
+                [[+idx:eq=`1`:then=`
+                    <div class="dis-info"><p>[[%discuss.mark_answer_instructions]] <a id="Show-answer-link" href="#">[[%discuss.mark_answer_link]]</a></p></div>
+                `:else=``]]
+            `:else=``]]
+            [[+idx:eq=`1`:then=`
+                [[+answer_count:neq=`0`:then=`
+                    <div class="dis-info"><p>[[+jump_to_first_answer.explanation]] [[+jump_to_first_answer.link]]</p></div>
+                `:else=``]]
+            `:else=``]]
+            [[+attachments:notempty=`<div class="dis-post-attachments"><ul class="dis-attachments">[[+attachments]]</ul></div>`]]
+            [[+editedby:is=`0`:then=``:else=`<span class="dis-post-editedon">[[%discuss.editedon_post? &on=`[[+editedon:ago]]` &user=`[[+editedby.username]]`]]</span>`]]
+        </div>
+        <ul class="dis-action-btn">[[+report_link]][[+action_reply]]</ul>
+    </div>
+    [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
 </li>

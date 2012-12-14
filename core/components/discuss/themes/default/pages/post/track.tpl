@@ -1,25 +1,30 @@
-[[+trail]]
-
-<br class="clear" />
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
-<br class="clear" />
+<!-- post/track.tpl -->
+	    [[+pagination]]
 
 <div class="dis-threads">
-    <div class="dis-threads-header">
-        <div class="dis-threads-ct">
-            <div class="right" style="width: 25%">[[%discuss.last_post]]</div>
-            <div class="right" style="width: 10%">[[%discuss.replies]]</div>
-            <div class="right" style="width: 10%">[[%discuss.views]]</div>
-            <div class="dis-threads-body right" style="width: 55%;">[[%discuss.thread]]</div>
-        </div>
-        <br class="clear" />
-    </div>
-    <ol class="dis-board-list">
+
+	<h1>Track IP: [[+ip]]</h1>
+
+    <ul class="dis-list">
         [[+posts]]
-    </ol>
+    </ul>
 </div>
 
-<br class="clear" />
+<br class="clearfix" />
 
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
-[[+trail]]
+	    [[+pagination]]
+
+</div><!-- Close Content From Wrapper -->
+
+[[+bottom]]
+
+
+
+<aside>
+				<hr class="line" />
+    <div class="PanelBox">
+	[[!$post-sidebar?disection=`new-message`]]
+
+
+						
+</aside>

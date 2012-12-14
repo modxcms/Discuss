@@ -1,14 +1,21 @@
-<li class="dis-board-post [[+class]]" style="padding-bottom: 10px;">
-    <div class="right dis-latest" style="width: 25%"><a class="dis-last" href="[[~[[*id]]]]messages/view?thread=[[+thread]]#dis-board-post-[[+post_id]]"></a>
-        [[%discuss.last_post]] [[+createdon]]
-        <br />[[%discuss.by? &author=`[[+author_link]]`]]
-    </div>
-    <div class="right" style="width: 10%">[[+replies]]</div>
-    <div class="right" style="width: 10%">[[+views]]</div>
-    <div class="dis-thread-icons">[[+icons]]</div>
-    <div class="dis-thread-body dis-message-li-body">
-        <a href="[[~[[*id]]]]messages/view?thread=[[+thread]]#dis-post-[[+post_id]]">[[+title]]</a>
-        [[+unread]]<br />
-        <span class="dis-message-author" style="font-size: 10px;">[[%discuss.by? &author=`<a href="[[~[[*id]]]]user/?user=[[+author_first]]">[[+author_first_username]]</a>`]]</span>
-    </div>
-</li>
+<div class="row h-group dis-category-[[+category]] [[+class]] [[+locked:is=`1`:then=`locked`:else=`unlocked`]] [[+unread-cls]]">
+   <a class="h-group" href="[[~[[*id]]]]messages/view?thread=[[+id]]#dis-board-post-[[+post_last]]">
+   		<div class="f1-f2">
+            <div class="wrap">
+   		       [[+first_author_username]]
+            </div>
+   		</div>
+        <div class="f3-f6 m-title">
+            <strong>[[+title]]</strong>
+        </div>
+        <div class="f7">
+            [[+last_author_username]], [[+last_post_createdon:ago]]
+        </div>
+        <div class="f8">
+            [[+first_post_createdon:ago]]
+        </div>
+        <div class="f9">
+            [[+replies]]
+        </div>
+    </a>
+</div>

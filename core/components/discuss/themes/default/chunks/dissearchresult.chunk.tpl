@@ -1,11 +1,11 @@
-<tr class="[[+cls]]">
-    <td>
-        <a href="[[+url]]">[[+title]]</a>
-        <br />[[%discuss.on]] <a href="[[~[[*id]]]]board/?board=[[+board]]">[[+board_name]]</a>
-    </td>
-    <td>[[+message]]</td>
-    <td>[[+username]]</td>
-    <td>[[+createdon]]
-    <br /><em>[[+replies]] [[%discuss.replies]]</em>
-    </td>
-</tr>
+<li class="Item Depth2 dis-category-1 [[+class]]">
+	<a href="[[+url]]">
+    <div class="ItemContent Category">
+    	<h3 class="Title">[[+title:solrdecode]]</h3>
+    	<div class="dis-item-info">[[%discuss.posted_on]] <strong>[[+createdon]]</strong> [[%discuss.by]] <strong>[[+username]]</strong></div>
+    	<div class="CategoryDescription">
+    		<p>[[+message]]</p>
+    	</div>
+    </div>
+	</a>
+</li>

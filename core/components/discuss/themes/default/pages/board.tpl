@@ -1,54 +1,40 @@
+<!-- board.tpl -->
 [[+top]]
-<div class="right">
-    <form action="[[~[[*id]]]]search" method="GET">
-        <input type="hidden" name="board" value="[[+id]]" />
-        <input type="text" name="s" value="" class="dis-form-field-solo" style="width: 200px; margin-right: 5px;" placeholder="[[%discuss.search_this_board]]" />
-
-        <input type="submit" class="dis-action-btn-solo"  value="[[%discuss.search]]" />
-    </form>
-</div>
-[[+trail]]
-
 [[+aboveBoards]]
-<ol class="dis-board-list" style="[[+boards_toggle]]">
-[[+boards]]
-</ol>
-
+[[+boards:notempty=`
+<div class="dis-threads forum-grid category boards">[[+boards]]</div>
+`]]
 [[+belowBoards]]
+<div class="dis-threads forum-grid">
+	<div class="m-section_title">
+		<header class="dis-cat-header dark-gradient group-fix sticky-bar top">
+			<h1>[[+name]]</h1>
+			[[+pagination:notempty=`
+			<nav id="key-Paginate" class="horiz-list">[[+pagination]]</nav>
+			`]]
+			[[- USER LOGGED IN ]]
+	        [[!+discuss.user.id:notempty=`
+				[[+actionbuttons]]
+				<span class="m-section_title-mods">[[+moderators]]</span>
+		    `]]
 
-<br class="clear" />
-
-[[+actionbuttons]]
-
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
-
-<br class="clear" />
-
-<div class="dis-threads">
-<div class="dis-threads-header">
-    <div class="dis-threads-ct">
-        <div class="right" style="width: 25%">[[%discuss.last_post]]</div>
-        <div class="right" style="width: 10%">[[%discuss.replies]]</div>
-        <div class="right" style="width: 10%">[[%discuss.views]]</div>
-        <div class="dis-threads-body right" style="width: 55%;">[[%discuss.message]]</div>
-    </div>
-    <br class="clear" />
+		    [[- USER NOT LOGGED IN ]]
+		    [[!+discuss.user.id:is=``:then=`
+				<a href="[[~[[*id]]]]login" class="Button dis-action-login" >Login to Post</a>
+			`]]
+			<a class="rss-link Button" href="[[+discuss.config.url]]board.xml?board=[[+id]]">RSS <span class="icon">Subscribe</span></a>
+		</header>
+		<div class="row h-group header-row">
+		    <div class="f1-f7 f-padinall">
+		    	<div class="wrap">[[%discuss.title]]</div>
+		    </div>
+		    <div class="f8 l-txtcenter">[[%discuss.views]]</div>
+		    <div class="f9 l-txtcenter">[[%discuss.replies]]</div>
+		    <div class="f10-f12">[[%discuss.last_post]]</div>
+		</div>
+	</div> <!-- / m-section_title -->
+	[[+posts]]
+	[[+pagination:notempty=`<nav class="paginate stand-alone bottom horiz-list"> [[+pagination]]</nav>`]]
 </div>
-<ol>
-[[+posts]]
-</ol>
-</div>
-
-<br class="clear" />
-
-[[+actionbuttons]]
-
-<div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
-
-[[+belowThreads]]
-
-<p class="dis-thread-viewing clear">[[+readers]]</p>
-<p class="dis-moderators">[[+moderators]]</p>
-<p class="dis-breadcrumbs clear">[[+trail]]</p>
-
-[[+bottom]]
+<!-- bottom -->[[+bottom]] <!-- /bottom -->
+<!-- / board.tpl -->

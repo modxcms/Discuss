@@ -1,1 +1,1 @@
-<li class="[[+cls]]"><a href="[[+url]]" rel="nofollow" class="[[+acls]]">[[+text]]</a></li>
+<a href="[[+url]]" rel="nofollow" class="action-buttons [[+cls]]" title="[[+text]]">[[+text]]</a>
