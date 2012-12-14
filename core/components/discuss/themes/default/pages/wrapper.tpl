@@ -36,7 +36,7 @@
                             <li><a href="[[~537]]">Blog</a></li>
                         </ul>
                     </nav>
-                    <a href="[[+discuss.config.url]]" title="MODX Community Forums">MODX Forums</a>
+                    <a class="logo" href="[[+discuss.config.url]]" title="MODX Community Forums">MODX Forums</a>
                 </div><!-- left side of masthead -->
                 <div class="masthead-right f7-f12 t4-t6 m-all">
                     [[+discuss.user.id:notempty=`
