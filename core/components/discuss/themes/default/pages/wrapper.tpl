@@ -10,14 +10,6 @@
     <meta name="author" content="MODX Systems, LLC">
 
     <link rel="shortcut icon" href="[[!++site_url]]favicon.ico" type="image/x-icon" />
-	<link rel="apple-touch-icon" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon.png" />
-	<link rel="apple-touch-icon-precomposed" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon-57x57-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon-72x72-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon-114x114-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon-144x144-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="512x512" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon-512x512-precomposed.png" />
-
     <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css?v=20121203" rel="stylesheet" type="text/css">
     <link href="[[+discuss.config.cssUrl]]redo/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css">
 
