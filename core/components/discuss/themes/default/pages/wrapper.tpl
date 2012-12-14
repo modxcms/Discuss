@@ -22,18 +22,7 @@
     <link href="[[+discuss.config.cssUrl]]redo/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css">
 
     <link href="[[+discuss.config.cssUrl]]redo/lib/gridset.css" rel="stylesheet" type="text/css">
-
-
     [[*cssjs]]
-    [[- Live Typekit call
-    [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
-    <script src="http://use.typekit.com/zub5doo.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>`]]
-    ]]
-    <script src="[[+discuss.config.jsUrl]]LABjs/LAB.min.js"></script>
-    [[- local typekit call]]
-    <script type="text/javascript" src="//use.typekit.net/ukf1ncb.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body id="forumbody-[[+controller.controller]]" class="forums[[+discuss.user.id:notempty=` a-loggedin`]]">
 
