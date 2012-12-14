@@ -161,15 +161,11 @@
                         <li>[[%discuss.replies]]: <span>[[+activity.replies]]</span></li>
                     </ul>
                 </div>
-                <div class="f8-f12 m-stats-liveg">
+                <div class="f8-f12 m-stats-live">
                     <div class="m-stats-group">
                         <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>
                         <span class="m-stats-single">[[+activeUsers.users]]</span>
                     </div>
-                    <a class="modx-live" href="http://www.modx.com/live">
-                        <img src="[[+discuss.config.imagesUrl]]redo/icons/modx-live.png" alt="View Live MODX Activity">
-                        <p>modx.com/live</p>
-                    </a>
                 </div>
             </div>
         </div>
