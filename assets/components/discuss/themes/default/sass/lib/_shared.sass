@@ -1,0 +1,576 @@
+body
+    background-color: $c-base
+
+
+.l-right
+    float: right
+.l-left
+    float: left
+.right
+    text-align: right
+.center
+    text-align: center
+.l-txtcenter
+    text-align: center
+.hidden
+    display: none
+.inline, .l-inline
+    display: inline-block
+    vertical-align: top
+// Login module
+
+// notices
+.m-notice
+    padding: 10px
+    background-color: darken($c-base, 6%)
+    border: solid 1px darken($c-base, 12%)
+    display: block
+    margin: 10px 0
+    text-align: center
+    +border-radius($radius-sm)
+    &.reg
+        background-color: lighten($c-dark-bg, 26%)
+        border-color: lighten($c-dark-bg, 16%)
+    &.urgent
+        background-color: lighten(red, 47%)
+        border-color: lighten(red, 37%)
+        color: red
+
+.l-horiz_list
+    li
+        display: inline-block
+.m-login_block
+    input[type="text"], input[type="password"]
+        display: block
+        width: 97%
+        +border-radius($radius-sm)
+        border: none
+    input
+        vertical-align: top
+        display: inline-block
+        margin-top: 0
+        +border-radius($radius-sm)
+        +rem('padding-top', 6px)
+        +rem('padding-bottom', 6px)
+        padding-left: 3%
+        padding-right: 3%
+        border: none
+.btn-reset, %btn-reset
+    line-height: 1
+
+// bread crumbs
+.m-breadcrumbs
+    padding-bottom: 2px !important
+    padding-top: 2px !important
+    li
+        display:  inline-block
+        line-height: 1
+        vertical-align: bottom
+        padding: 3px 0
+        &:after
+            content: "\2192 "
+            padding-left: 3px
+            padding-right: 3px
+            color: #ccc
+        &:last-child:after
+            content: ""
+    a
+        color: darken($c-base, 40%)
+        text-decoration: none
+        &:hover
+            color: darken($c-base, 90%)
+
+// search box alignment fixes
+#cse-search-form
+    width: 300px
+    display: inline-block
+    vertical-align: top
+    height: 33px
+
+.m-search-label
+    padding-top: 1px
+    display: inline-block
+    vertical-align: middle
+    em
+        display: inline-block
+        vertical-align: middle
+        padding: 7px
+        color: darken($c-base, 30%)
+    a
+        line-height: 1
+
+#dis-search-advanced
+    padding: 1.5%
+    border: 1px dotted darken($c-base, 30%)
+    width: 97%
+    background-color: darken($c-base, 1%)
+
+    .sub-options
+        display: none
+        &.show
+            display: block
+
+// view latest posts button
+.m-breadcrumbs
+    .m-search
+        width: 50%
+        text-align: right
+        a
+            background-color: darken($c-base, 6%)
+            display: inline-block
+            padding: 7px 16px
+            border-radius: 20px
+            color: darken($c-base, 50%)
+            line-height: 1
+            &:hover
+                color: darken($c-base, 60%)
+                background-color: darken($c-base, 3%)
+        form
+            width: 60% !important
+            margin-left: 4px
+            input[type=text]
+                padding: 5px
+            input
+                margin: 0 !important
+        .l-inline
+            vertical-align: middle
+            p
+                color: darken($c-base, 40%)
+                +rem('margin', 0 6px)
+
+// mini navigation
+.m-sm_nav_pod
+    a
+        +rem('padding', 7px 9px 7px 7px)
+        +opacity(0.6)
+        line-height: 1
+    a:after
+        content: "|"
+        +rem('padding', 0 0 0 10px)
+        position: absolute
+    li:last-child a:after
+        content: ""
+        padding: 0
+
+// tool tips
+.modx-tipster
+    background-color: #111111
+    border: 2px solid black
+    border-radius: $radius-sm
+    // box-shadow: 5px 5px 7px #444444
+    opacity: 0.9
+    font-weight: bold
+    +rem('font-size', 15px)
+    line-height: 1
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90)
+    color: white
+    position: absolute
+    padding: 10px
+    text-align: center
+    z-index: 9999999
+    pointer-events: none
+    width: auto
+    overflow: visible
+
+// Footer 2012
+footer
+    background: darken($c-base, 2.5%)
+    border-top: 1px solid lighten($c-base, 10%)
+    +box-shadow(darken($c-base, 35%) 0 0 1px inset, darken($c-base, 15%) 0 2px 2px inset)
+    .logo
+        width: 170px
+    .m-modx_logo
+        +rem('margin', 3px 0 0 0)
+    // background: url(../../images/bg/section-border-medy-repeat.png) repeat-x left top
+    padding: 1.5em 0
+    margin: 8em 0 0 0
+    a
+        white-space: nowrap
+        font-weight: normal
+    nav, h3
+        +rem('margin', 0 0 10px 0 )
+        +rem('font-size', 15px)
+    h3
+        font-weight: 700
+        color: #000
+    h4
+        font-weight: bold
+        margin: 27px 0 .6em 0
+    .copy-info
+        display: inline-block
+        +rem('font-size', 13px)
+        padding: 4px 0 0 1.3em
+        width: 400px
+        p, ul
+            margin: 1px 0 0 0
+        p, a
+            opacity: .6
+        p
+            padding-top: .7em
+        a:hover
+            opacity: .8
+        li:first-child
+            padding-left: 0
+    .horiz-list
+        li a
+            padding: .25em .75em
+            text-decoration: none
+            color: #000
+            &:after
+                content: "|"
+                padding: 0 .75em
+                margin-right: -1.25em
+        li:first-child
+            a
+                padding-left: 0
+        li:last-child
+            a
+                &:after
+                    content: ""
+    nav
+        ul.horiz-list
+            margin: 0
+            li
+                a
+                    &:after
+                        content: "|"
+                        padding: 0 .75em
+                        margin-right: -1.25em
+                &:last-child a:after
+                    content: ""
+            a, h3
+                font-weight: bold
+    .row .stay-connected
+        padding-left: 1.75em
+        border-left: 1px dotted #c0c0c0
+        margin-left: 0
+
+form#newsletter
+    background-color: #fff
+    border-radius: 5px
+    border: 1px solid #dbdbdb
+    display: inline-block
+    padding: 3px
+    margin-bottom: .5em
+
+    input
+        border: none
+        box-shadow: 0
+        margin: 0
+        padding: 5px
+
+    input[type="submit"]
+        @extend %a-primary-cta-raised
+        color: #fff
+        padding: 5px 12px !important
+        border-width: 0
+        float: none
+
+    input[type="text"]
+        width: 180px
+
+
+.modx-live
+    opacity: .8
+    color: #000
+    &:hover
+        opacity: 1
+        text-decoration: none
+
+.social-icons.horiz-list
+    margin: 8px 0 0 0
+    li a
+        display: block
+        height: 38px
+        width: 32px
+        padding: 0
+        background: url(../../images/redo/icons/i-social-media.png) no-repeat -41px -36px
+        text-indent: 100%
+        white-space: nowrap
+        overflow: hidden
+        margin: 0 5px 0 0
+        opacity: .8
+        &:hover
+            opacity: 1
+        &.twitter
+            background-position: -257px -36px
+        &.facebook
+            background-position: -185px -36px
+
+// user modules
+.m-user_opts
+    width: 100%
+.m-user_box
+    padding: 1em 0 0 1em
+    h3
+        +rem('font-size', 17px)
+        +rem('margin', 0 0 5px 0)
+    p
+        color: desaturate(lighten($c-dark-cool-bg, 45%), 20%)
+        line-height: 1.4
+    a
+        color: lighten($c-dark-cool-bg, 90%)
+        text-decoration: underline
+    .l-left
+        width: 12%
+        img
+            width: 100%
+            border: 2px solid rgba(255,255,255,.3)
+            border-radius: 3px
+            max-width: 100px
+    .l-right
+        width: 84%
+
+.m-user_tools
+    margin: 1em 0 0 0
+    ul, a
+        display: inline-block
+    a
+        padding: 6px 10px
+.m-user_tools_logout
+    @extend %m-raised-dark-bg
+    float: right
+    +rem(padding, 3px 12px)
+    +border-radius(30px  !important)
+    &:hover
+        text-decoration: none !important
+.m-user_tools_reg_links
+    +border-radius($radius-sm)
+    li
+        margin-left: -4px // remove inline-block margin
+        &:first-child a
+            +border-radius($radius-sm 0 0 $radius-sm)
+        &:last-child a
+            +border-radius(0 $radius-sm $radius-sm 0)
+        a
+            +background-image(linear-gradient(lighten($c-dark-cool-bg, 12%), lighten($c-dark-cool-bg, 8%)))
+            text-decoration: none
+            &:hover
+                +background-image(linear-gradient(lighten($c-dark-cool-bg, 16%), lighten($c-dark-cool-bg, 11%)))
+
+// raised panel
+.m-raised-panel-box
+    background-color: lighten($c-base, 11%)
+    +border-radius($radius-sm)
+    +box-shadow(darken($c-base, 22%) 0 1px 0, darken($c-base, 10%) 0 2px 5px)
+    border: 1px solid darken($c-base, 8%)
+    border-bottom: 0
+
+
+// user options
+.m-user_box
+    // width: 100%
+    h3
+        float: left
+        color: desaturate(lighten($c-dark-cool-bg, 45%), 20%)
+    a
+        text-decoration: none
+        &:hover
+            text-decoration: underline
+
+ul.options-select
+    float: left
+#F-Toggle-Options
+    position: relative
+    z-index: 20
+    a.a-options
+        @extend %m-raised-dark-bg
+        margin: 0 0 0 10px
+        display: block
+        background-color: #000
+        height: 20px
+        width: 20px
+        overflow: hidden
+        text-indent: 101%
+        span
+            +opacity(.7)
+            height: 20px
+            width: 20px
+            display: block
+            background: url(../../images/redo/icons/down-arrow.png) no-repeat center -21px
+        &:hover
+            span
+                +opacity(1.0)
+#F-Toggle-List
+    @extend %m-raised-dark-bg-nh
+    display: none
+    position: absolute
+    right: 0
+    top: 22px
+    padding: 6px 10px
+    min-width: 150px
+    &:after
+        content: ""
+        +border-radius($radius-sm $radius-sm 0 0)
+        background: url(../../images/redo/icons/down-arrow.png) no-repeat center -21px
+        display: block
+        width: 20px
+        height: 24px
+        background-color: #224946
+        position: absolute
+        top: -22px
+        right: 0
+        cursor: pointer
+    a
+        color: desaturate(lighten($c-dark-cool-bg, 57%), 20%)
+        text-decoration: none
+        padding: 5px 0
+        display: block
+        border-bottom: dotted 1px desaturate(lighten($c-dark-cool-bg, 17%), 10%)
+        &:hover
+            color: desaturate(lighten($c-dark-cool-bg, 100%), 20%)
+    li:last-child a
+        border-bottom: none
+
+
+// FORMS
+.dis-form label, .dis-form input
+    display: block
+    float: none
+    clear: both
+input[type="checkbox"]
+    display: inline-block
+    margin: 0 5px 0 0
+
+form input[type="radio"]
+    margin: 0 0
+
+
+
+// Search inputs and results
+.m-breadcrumbs form
+    background-color: #f9f9f9
+    margin: 2px 0
+    border-radius: 3px
+    border: 1px solid #d2d2d2
+    width: 24%
+    position: relative
+    +box-shadow(inset 1px 1px 0, 0, 0, rgba(0, 0, 0, 0.28))
+    z-index: 5
+    &:focus
+        @extend %green-glow         // – partials/_color-patterns.sass
+    input
+        &[type=text]
+            border: none
+            background-color: #f9f9f9
+            font-size: 13px
+            display: block
+            margin-right: 20px
+            width: 95%
+            padding: 3px 2% 3px 3%
+            &:focus
+                outline: none
+        &[type=submit]
+            position: absolute
+            top: 3px
+            right: 3px
+            cursor: pointer
+#dis-search-advanced
+    display: none
+#dis-search-advanced-toggle
+    +rem('margin', 5px 0 10px 0)
+    display: block
+
+
+// Results listing
+.m-search
+    input[type=submit]
+        +rem('margin', 10px 0)
+
+.search-results
+    padding: 1% 0
+    background: none
+    box-shadow: none
+    border: none
+    h1
+        padding: 0.5% 1.6% 1.1% 1.6%
+        border-bottom: 1px solid #333333
+        margin-bottom: 1%
+        font-size: 17px
+    .Item
+        a
+            padding: 0.7% 1.6% 0.7% 1.6%
+            border-bottom: 1px solid #d9d9d9
+            display: block
+            &:hover
+                // +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
+                +box-shadow(lighten($c-dark-bg, 16%) 0 0 5px, lighten($c-dark-bg, 3%) 0 0 2px)
+                background-color: #fff
+                position: relative
+                z-index: 20
+                text-decoration: none
+    p
+        color: #666666
+    .Title
+        font-size: 17px
+        font-weight: bold
+        color: black
+        margin-bottom: 5px
+    .CategoryDescription p
+        font-size: 15px
+        line-height: 1.4
+.dis-item-info
+    +rem('margin', -5px 0 10px 0)
+    color: darken($c-base, 30%)
+    strong
+        color: darken($c-base, 50%)
+
+// Form base styling
+.m-styled-form
+    label, input
+        +rem('font-size', 15px)
+    input[type=text]
+        +rem('margin', 5px 0 10px 0)
+        border: 1px solid #c6c6c6
+        padding: 1.5%
+    label
+        display: block
+        font-weight: bold
+        +rem('margin', 8px 0 1px 0)
+    input[type=submit]
+        @extend %p-raised-green
+        line-height: 1
+        +rem('padding', 5px 9px 5px 9px)
+    input[type=radio]
+        +rem('margin', 0 4px 0 10px)
+
+.m-fullw-form
+    input[type=text]
+        width: 100%
+    &.m-styled-form
+        input[type=text]
+            width: 97%
+.m-styled-form, .m-fullw-form
+    input.m-datepicker, input.m-datepicker[type=text]
+        background-image: url(../../images/redo/icons/calendar.png)
+        background-position-x: 7px
+        background-position-y: 7px
+        background-repeat: no-repeat
+        padding: 1.5% 1.5% 1.5% 7.5%
+        width: 91%
+
+// Gradients Defined by Classes
+.dark-gradient
+    background-color: $c-dark-bg
+    +background-image(linear-gradient(left top, $c-dark-cool-bg, lighten($c-dark-cool-bg,10%)))
+    color: #fff
+
+.color
+    color: #efefef
+
+
+// new message form
+#dis-reply-participants
+    padding: 7px
+    margin:  0 0 10px 0
+
+.dis-message-form
+    h4
+        font-weight: bold
+        color: #000
+        margin:  0 0 3px 0
+
+    label span.small
+        font-weight: 500
+        display: block
+        margin: 0 0 5px 0

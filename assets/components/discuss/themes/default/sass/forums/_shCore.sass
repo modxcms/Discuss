@@ -1,0 +1,331 @@
+// Syntax highlighter
+// Shared reset
+%shCore-reset
+    +border-radius(0 !important)
+    background: none !important
+    border: 0 !important
+    bottom: auto !important
+    float: none !important
+    height: auto !important
+    left: auto !important
+    line-height: 1.1em !important
+    margin: 0 !important
+    outline: 0 !important
+    overflow: visible !important
+    background: none !important
+    border: 0 !important
+    bottom: auto !important
+    float: none !important
+    height: auto !important
+    left: auto !important
+    line-height: 1.1em !important
+    margin: 0 !important
+    outline: 0 !important
+    overflow: visible !important
+    padding: 0 !important
+    position: static !important
+    right: auto !important
+    text-align: left !important
+    top: auto !important
+    vertical-align: baseline !important
+    width: auto !important
+    box-sizing: content-box !important
+    font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important
+    font-weight: normal !important
+    font-style: normal !important
+    font-size: 1em !important
+    min-height: inherit !important
+    min-height: auto !important
+// shCore colors
+$c-sh-black: black
+$c-sh-blue: blue
+$c-sh-red: red
+
+// extend colors to combine selectors
+%sh-black
+    color: $c-sh-black !important
+%sh-blue
+    color: $c-sh-blue !important
+%sh-red
+    color: $c-sh-red !important
+
+
+.syntaxhighlighter
+    a, div, code
+        @extend %shCore-reset
+
+    table
+        @extend %shCore-reset
+
+        td, tr, tbody, thead, caption
+            @extend %shCore-reset
+
+    textarea
+        @extend %shCore-reset
+
+    margin: 1em 0 1em 0 !important
+    position: relative !important
+    overflow: visible !important
+    font-size: 1em !important
+    &.source
+        overflow: hidden !important
+    .bold
+        font-weight: bold !important
+    .italic
+        font-style: italic !important
+    .line
+        white-space: pre !important
+    table
+        width: 100% !important
+        caption
+            text-align: left !important
+            padding: 0.5em 0 0.5em 1em !important
+        td
+            &.code
+                width: 100% !important
+                .container
+                    position: relative !important
+                    textarea
+                        box-sizing: border-box !important
+                        position: absolute !important
+                        left: 0 !important
+                        top: 0 !important
+                        width: 100% !important
+                        height: 100% !important
+                        border: none !important
+                        background: white !important
+                        padding-left: 1em !important
+                        overflow: hidden !important
+                        white-space: pre !important
+            &.gutter .line
+                text-align: right !important
+                padding: 0 0.5em 0 1em !important
+            &.code .line
+                padding: 0 1em !important
+    &.nogutter td.code
+        .container textarea, .line
+            padding-left: 0em !important
+    &.show
+        display: block !important
+    &.collapsed
+        table
+            display: none !important
+        .toolbar
+            padding: 0.1em 0.8em 0em 0.8em !important
+            font-size: 1em !important
+            position: static !important
+            width: auto !important
+            height: auto !important
+            span
+                display: inline !important
+                margin-right: 1em !important
+                a
+                    padding: 0 !important
+                    display: none !important
+                    &.expandSource
+                        display: inline !important
+    .toolbar
+        position: absolute !important
+        right: 1px !important
+        top: 1px !important
+        width: 11px !important
+        height: 11px !important
+        font-size: 10px !important
+        z-index: 10 !important
+        span.title
+            display: inline !important
+        a
+            display: block !important
+            text-align: center !important
+            text-decoration: none !important
+            padding-top: 1px !important
+            &.expandSource
+                display: none !important
+    &.ie
+        font-size: 0.9em !important
+        padding: 1px 0 1px 0 !important
+        .toolbar
+            line-height: 8px !important
+            a
+                padding-top: 0px !important
+    &.printing
+        .line
+            &.alt1 .content, &.alt2 .content
+                background: none !important
+            &.highlighted
+                .number, &.alt1 .content, &.alt2 .content
+                    background: none !important
+            .number
+                color: #bbbbbb !important
+            .content
+                @extend %sh-black
+        .toolbar
+            display: none !important
+        a
+            text-decoration: none !important
+        .plain
+            @extend %sh-black
+            a
+                @extend %sh-black
+        .comments
+            color: #008200 !important
+            a
+                color: #008200 !important
+        .string
+            @extend %sh-blue
+            a
+                @extend %sh-blue
+        .keyword
+            color: #006699 !important
+            font-weight: bold !important
+        .preprocessor
+            color: gray !important
+        .variable
+            color: #aa7700 !important
+        .value
+            color: #009900 !important
+        .functions
+            color: #ff1493 !important
+        .constants
+            color: #0066cc !important
+        .script
+            font-weight: bold !important
+        .color1
+            color: gray !important
+            a
+                color: gray !important
+        .color2
+            color: #ff1493 !important
+            a
+                color: #ff1493 !important
+        .color3
+            @extend %sh-red
+            a
+                @extend %sh-red
+        .break
+            @extend %sh-black
+            a
+                @extend %sh-black
+    width: auto
+    .line.highlighted
+        &.alt1, &.alt2
+            background-color: #e0e0e0 !important
+    .gutter
+        color: #afafaf !important
+        .line
+            border-right: 3px solid #6ce26c !important
+            &.highlighted
+                background-color: #6ce26c !important
+                color: white !important
+    &.printing .line .content
+        border: none !important
+    &.collapsed
+        overflow: visible !important
+        .toolbar
+            color: $c-sh-blue !important
+            background: white !important
+            border: 1px solid #6ce26c !important
+    .toolbar
+        color: white !important
+        background: #6ce26c !important
+        border: none !important
+        a
+            color: white !important
+    .comments
+        color: #008200 !important
+        a
+            color: #008200 !important
+    .keyword
+        color: #006699 !important
+        font-weight: 700 !important
+    .variable
+        color: #aa7700 !important
+    .value
+        color: #009900 !important
+    .constants
+        color: #0066cc !important
+    .script
+        font-weight: 700 !important
+        color: #006699 !important
+        background-color: none !important
+    background-color: white !important
+    .line
+        &.alt1, &.alt2
+            background-color: white !important
+        &.highlighted.number
+            @extend %sh-black
+    table caption, .toolbar a:hover
+        @extend %sh-black
+    .plain
+        @extend %sh-black
+        a
+            @extend %sh-black
+    &.collapsed .toolbar a
+        @extend %sh-blue
+    .string
+        @extend %sh-blue
+        a
+            @extend %sh-blue
+    &.collapsed .toolbar a:hover
+        @extend %sh-red
+    .color3
+        @extend %sh-red
+        a
+            @extend %sh-red
+    .preprocessor
+        color: gray !important
+    .color1
+        color: gray !important
+        a
+            color: gray !important
+    .functions
+        color: #ff1493 !important
+    .color2
+        color: #ff1493 !important
+        a
+            color: #ff1493 !important
+    background-color: transparent !important
+    .line
+        &.alt1, &.alt2
+            background-color: transparent !important
+    table
+        overflow: hidden
+        overflow-x: auto
+
+// Syntax Highlighter overflow
+$sh-height: 490px
+$sh-scroll-dimensions: 7px
+$sh-padding: 15px
+$sh-fade-height: 25px
+
+.syntaxhighlighter
+    max-height: $sh-height
+    overflow: auto !important
+    position: relative
+    padding: $sh-padding 0
+    &::-webkit-scrollbar
+        -webkit-appearance: none
+        width: $sh-scroll-dimensions
+        height: $sh-scroll-dimensions
+    &::-webkit-scrollbar-thumb
+        border-radius: ($sh-scroll-dimensions/2)
+        background-color: rgba(0,0,0,.5)
+        -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5)
+.dis-code
+    border: 1px solid darken($c-base, 2%)
+    position: relative
+    max-height: ($sh-scroll-dimensions + $sh-height + ($sh-padding *2) + $sh-fade-height)
+    &:before
+        content: ""
+        display: block
+        +background-clip()
+        +background-image(linear-gradient(bottom, #fff 0%, rgba(255,255,255,0) 100%))
+        position: absolute
+        bottom: ($sh-scroll-dimensions + $sh-padding - 2px)
+        left: 0px
+        width: 100%
+        height: $sh-fade-height - 4px
+        z-index: 50
+    &:hover
+        &:before
+            display: none

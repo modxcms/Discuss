@@ -1,0 +1,83 @@
+// 2012 Masthead
+.masthead
+    background: url(../../images/redo/bg/masthead-highlight.png) no-repeat center, url(../../images/redo/bg/masthead-flourish.jpg) no-repeat center top
+    background-color: $c-dark-cool-bg
+    color: #fff
+    a
+        color: #fff
+    & > div
+        +rem('padding', 0 0 17px 0)
+    a.h-ir
+        background: url(../../images/redo/elements/forums-logo.png) no-repeat left top
+        height: 42px
+        text-indent: 105%
+    .m-sm_nav_pod
+        background: url(../../images/redo/bg/masthead-nav-highlight.png) no-repeat left bottom
+        +rem('padding', 4px 0)
+        +rem('margin', 0 0 14px 0)
+        a
+            +opacity(1.0)
+            color: $txt-color-lightblue
+            &:hover
+                color: $txt-color-lightblue-over
+                text-decoration: underline
+            &:after
+                color: desaturate(lighten($c-dark-cool-bg, 40%), 13%)
+            &:hover:after
+                text-decoration: none
+    // Masthead Login
+    .m-login_box
+        +rem('padding', 8px 0 2px 17px)
+        .masthead-title
+            +rem('margin-bottom', 10px)
+            color: $txt-color-lightblue
+            strong
+                color: #fff
+                opacity: .99
+                font-weight: 500
+                font-size: 1.2em
+                margin: 0 .2em 0 0
+        .m-login_block_uts
+            +rem('padding', 5px 0 0 0)
+            input
+                margin: 2px 10px 0 0
+            input, label, a
+                display: inline-block
+                vertical-align: top
+                line-height: 1
+                color: desaturate($txt-color-lightblue, 10%)
+        form p
+            position: relative
+        label.l-inline
+            opactiy: .6
+            position: absolute
+            top: 4px
+            left: 4px
+            &.infield
+                padding: 7px 0 0 7px
+    label
+        font-family: georgia, times, serif
+        font-style: italic
+        color: desaturate($txt-color-lightblue, 10%)
+    input
+        color: white
+        +rem('margin', 5px 5px 5px 0)
+        outline: none
+    input[type="submit"]
+        color: #fff !important
+        font-weight: 500
+        background-color: $c-alt-1
+        border-color: darken($c-alt-1, 25%)
+        +background-image(linear-gradient(darken($c-alt-1, 3%), darken($c-alt-1, 15%)))
+        +text-shadow(darken($c-alt-1, 50%) 0 1px 0)
+        &:hover
+            +background-image(linear-gradient(lighten($c-alt-1, 3%), lighten($c-alt-1, 0%)) !important)
+    input[type="text"], input[type="password"]
+        background-color: darken($c-dark-cool-bg, 5%)
+        border: solid 1px darken($c-dark-cool-bg, 25%)
+        +box-shadow(lighten($c-dark-cool-bg, 6%) 0 1px 0, darken($c-dark-cool-bg, 66%) 0 -1px 0 )
+        &:focus
+            color: darken($c-dark-cool-bg, 80%)
+            background-color: lighten($c-dark-cool-bg, 90%)
+            border: solid 1px lighten($c-dark-cool-bg, 24%)
+            +box-shadow(lighten($c-dark-cool-bg, 39%) 0 0 7px)

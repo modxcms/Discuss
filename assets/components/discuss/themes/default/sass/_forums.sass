@@ -1,0 +1,681 @@
+// Width and margin variables for grid
+$m-forum-grid: 10px 0 30px 0    // margin on primary forum grid
+$p-forum-grid: 15px             // padding for forum grid
+
+// TEMPORARY Setting temporary min width on body until we can properly address smaller screensize layout
+body
+    min-width: 800px
+
+body
+    color: $c-copy
+h3.forum
+    +rem('font-size',15px)
+    font-weight: bold
+    padding: 0 0 0 .8em
+
+.rss-link, a.Button.rss-link
+    @include background-image(linear-gradient(bottom, darken($c-dark-bg, 15%) 0%, $c-dark-bg 73%, $c-dark-bg 100%))
+    .icon
+        background-image: url(../../images/redo/icons/rss.png)
+        background-repeat: no-repeat
+        width: 14px
+        margin-top: -3px
+        display: inline-block
+        overflow: hidden
+        text-indent: 100%
+        white-space: no-wrap
+
+.locked
+    h1
+        background: url(../../images/redo/icons/lrg-lock.png) no-repeat 0 12px
+        padding-left: 30px
+
+// Single post styling
+.Category
+    +rem('padding', 5px 20px 0 0)
+    vertical-align: top
+    a
+        color: $c-dark-cool-bg
+        text-decoration: none
+        +rem('font-size', 32px)
+        line-height: 1.2
+        display: inline-block
+        vertical-align: top
+    .tag
+        font-size: 13px
+        display: inline-block
+        vertical-align: top
+        margin: 6px 6px 5px 0
+        &.solved
+            padding-left: 28px
+            position: relative
+            &:after
+                content: ""
+                width: 22px
+                position: absolute
+                height: 22px
+                top: 1px
+                left: 1px
+                display: block
+                background: url(../../images/redo/elements/answered-star.png) no-repeat 0 0
+
+.dis-list, .dis-post-preview
+    @extend .m-raised-panel-box
+    line-height: 1.4
+    border-top: 0
+
+.dis-post
+    border-bottom: solid 1px darken($c-base, 13%)
+    border-top: solid 1px lighten($c-base, 55%)
+    min-height: 120px
+    margin: 0
+    position: relative
+    +rem('padding', 20px 15px 30px 15px)
+    &:first-child
+        border-top: none
+
+    &:last-child
+        padding-bottom: 5%
+    .dis-content
+        overflow: hidden
+        a
+            text-decoration: underline
+            text-decoration-line: underline
+            text-decoration-style: dotted
+            &:hover
+                background-color: #f1f8fb
+        strong
+            font-weight: 700
+            color: #000
+    ul.dis-ul, ol.dis-ol
+        padding-left: 20px
+        vertical-align: middle
+        list-style: disc
+        li
+            padding: 2px 0
+            vertical-align: middle
+    ol.dis-ol
+        list-style: decimal
+
+    li
+        border: none
+    .dis-post-footer
+        width: 88%
+        float: right
+        +rem('font-size', 12px)
+    .dis-post-editedon
+        padding: 1em 0 0 0
+        font-style: italic
+        color: darken($c-base, 45%)
+        display: block
+        +rem('font-size', 12px)
+        a
+            color: darken($c-base, 45%)
+.dis-info
+    color: darken($c-dark-bg, 15%)
+    margin: 30px 0 10px 0
+    padding: 15px
+    text-align: center
+    border: 1px solid $c-dark-bg
+    background-color: lighten($c-dark-bg, 39%)
+
+.tag
+    +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
+    +rem('padding', 6px 12px)
+    +rem('margin', 0 10px 7px 0)
+    color: lighten($c-base, 80%)
+    border-radius: $radius-sm
+    font-weight: 500
+    line-height: 1
+    text-transform: uppercase
+    &.sticky
+        +background-image(linear-gradient(lighten(#000, 80%), lighten(#000, 70%)))
+        &:hover
+            +background-image(linear-gradient(lighten(#000, 80%), lighten(#000, 70%)))
+
+.dis-post
+    .title
+        a
+            color: #000
+            text-decoration: none
+            &:hover
+                text-decoration: underline
+                span
+                    color: #000
+            span
+                color: $c-copy-med
+        strong
+            font-weight: 700
+            color: #000
+    .dis-action-btn, .dis-pm-btn
+        opacity: 0
+        @extend %quick-fade-out-all
+    &:hover
+        .dis-action-btn, .dis-pm-btn, .dis-post-notanswer span
+            @extend %quick-fade-in-all
+            opacity: .98
+            visibility: visible
+    .dis-pm-btn
+        @extend %btn-secondary-alt-cta
+        display: inline-block
+        +rem('padding', 4px 7px)
+        margin-left: 4px
+        margin-top: 5px
+        &:hover
+            background-color: #fff
+
+
+.dis-post-left
+    // font-size: 11px
+    position: absolute
+    text-align: left
+    width: 85px
+    img
+        width: 100%
+        max-width: 80px
+        display: block
+        border-radius: $radius-sm
+    .auth-avatar
+        display: block
+        border: none
+        padding: 3px
+        background-color: darken($c-base, 1.5%)
+        border-radius: ($radius-sm + 2px)
+        border: solid 1px darken($c-base, 4%)
+        border-top: solid 1px darken($c-base, 10%)
+        &:hover
+            text-decoration: none
+    .dis-usr-post-count, .dis-usr-icon // REMOVE FUTURE prexsiting styling
+        margin: 0
+        +rem('font-size', 11px)
+    .dis-usr-post-count
+        color: $c-copy-med
+        margin: 5px .2em 0 12px
+.dis-content pre
+    @extend pre
+
+.title
+    .dis-content-actions
+        padding-right: 0
+        display: inline-block
+        float: right
+        position: relative
+        z-index: 300
+        li
+            margin-right: 0
+            display: inline-block
+            vertical-align: top
+            a
+                padding: 0 5px
+                display: inline-block
+                margin: 0 0 3px 0
+                vertical-align: top
+                +rem('font-size', 12px)
+                color: darken($c-base, 35%) !important
+                float: right
+                text-align: right
+                &:hover
+                    color: #000
+
+.dis-signature, .dis-post-right
+    margin-left: 110px
+    padding: 0 2% 35px 0
+
+.dis-post-right
+    +rem('font-size', 15px)
+    .title
+        +rem('font-size', 12px)
+        line-height: 1
+        color: darken($c-base, 50%)
+        margin: 0 0 1em 0
+        padding: 0 0 .8em 0
+        border-bottom: dotted 1px darken($c-base, 12%)
+        strong
+            +rem('font-size', 15px)
+            margin-right: .25em
+        .dis-actions
+            top: 8px
+            right: -23px
+            background-color: darken($c-base, 12%)
+    blockquote
+        background-color: lighten($c-base, 1%)
+        border: none
+        border: 1px dotted darken($c-base, 6%)
+        border-left: 3px solid darken($c-base, 40%)
+        +rem('padding', 6px 14px)
+        margin: 1rem 0
+        font-size: .9em
+        color: #000
+        blockquote
+            font-size: 1em
+    cite
+        +rem('padding-left', 15px)
+        margin-top: 1em
+        display: block
+        font-style: italics
+    cite+blockquote
+        margin-top: .6em
+
+// attachments
+ul.dis-attachments
+    +rem('font-size', 13px)
+    +rem('margin', 10px 0)
+    display: block
+    padding: 5px 0
+    border: 1px solid darken($c-base, 2%)
+    background-color: darken($c-base, 0%)
+    li
+        +rem('font-size', 11px)
+        color: darken($c-base, 40%)
+        border-top: 1px solid darken($c-base, 5%)
+        text-align: left
+        a
+            +rem('font-size', 15px)
+            display: inline-block
+            font-weight: bold
+            margin: 0 0 0 0
+            padding: 0 3px 0 25px
+            background: transparent url(../../images/redo/icons/attachments.png) no-repeat 8px 4px
+            &[title $='.css'], &[title $='.js'], &[title $='.php'], &[title $='.html']
+                background-position: 8px -62px
+            &[title $='.jpg'], &[title $='.jpeg'], &[title $='.png'], &[title $='.gif'], &[title $='.tif']
+                background-position: 8px -126px
+        &:first-child
+            border-top: 0
+
+
+.dis-code
+    background-color: transparent
+    overflow-x: auto
+
+// Single button actions
+.locked
+    .dis-action-btn
+        .dis-post-reply
+            display: none
+
+.dis-action-btn
+    float: right
+    +rem('font-size', 12px)
+    li
+        float: left
+        margin-right: 0 !important
+        a
+            display: block
+        a.dis-post-reply
+            @extend %a-secondary-cta
+            +rem('padding', 7px 12px 7px 28px)
+            position: relative
+            +rem('font-size', 12px)
+            &:hover
+                text-decoration: none
+            &:before
+                content: ""
+                background-color: #000
+                width: 20px
+                height: 20px
+                display: block
+                position: absolute
+                top: 5px
+                left: 5px
+                background: url(../../images/redo/icons/reply-arrow.png) no-repeat 2px 2px !important
+        a.dis-report-link
+            +rem('padding', 8px 12px 7px 12px)
+            color: darken($c-base, 35%)
+            &:hover
+                color: darken($c-base, 55%)
+
+
+.dis-signature
+    // width: 86%
+    // padding: 2% 2% 0 0 !important
+    padding-top: 2%
+    // float: right
+    border-top: 1px dotted darken($c-base, 10%) !important //override, remove eventually
+    +rem('font-size', 11px)
+    +opacity(.7)
+    a
+        color: #000
+        +opacity(.7)
+        text-decoration: underline
+        &:hover
+            +opacity(1.0)
+    &:hover
+        +opacity(1.0)
+
+
+// Used group-fix rather than my typical group because it already being used
+.group-fix
+    &:before,
+    &:after
+        content: ""
+        display: table
+    &:after
+        clear: both
+    zoom: 1
+
+// pagination 2012
+.paginate
+    float: right
+    +background-image(linear-gradient(lighten($c-dark-cool-bg, 3%), $c-dark-cool-bg))
+    border-radius: ($radius-sm + 2)
+    +background-clip(padding-box)
+    +box-shadow(lighten($c-dark-cool-bg, 15%) 0 1px 0, darken($c-dark-cool-bg, 30%) 0 -1px 0)
+    +rem('padding',4px)
+    +rem('font-size', 13px)
+    line-height: 1
+    li
+        margin: 0
+        padding: 0
+    a, li.inactive, li.active
+        @extend %m-raised-dark-bg
+        font-weight: 100
+        letter-spacing: 1px
+        +rem('padding', 7px 7px 5px 7px)
+        line-height: 1
+        margin: 0 1px 0 0
+        text-decoration: none
+        &.inactive
+            +opacity(.3)
+            cursor: default
+            &:hover
+                // pattern from m-raised-dark-bg to override hover
+                +background-image(linear-gradient(lighten($c-dark-cool-bg, 7%), lighten($c-dark-cool-bg, 5%)))
+                +box-shadow(darken($c-dark-cool-bg, 10%) 0 0 3px, darken($c-dark-cool-bg, 20%) 0 1px 0, lighten($c-dark-cool-bg, 12%) 0 1px 0 inset)
+
+    &.stand-alone
+        text-align: right
+        float: none
+        position: relative
+        z-index: 1
+        +box-shadow(lighten($c-dark-cool-bg, 95%) 0 1px 0, darken($c-dark-cool-bg, 60%) 0 -1px 0)
+        &.top
+            border-radius: $radius-sm+2 $radius-sm+2 0 0
+            margin: 1.4em 0 -1.4em 0
+        &.bottom
+            border-radius: 0 0 $radius-sm+2 $radius-sm+2
+            margin-top: 7px
+.paginate.stand-alone
+    @extend .h-group
+    @extend .dis-cat-header
+    &.bottom
+        margin-top: 0
+        border-radius: 0 0 $radius-sm+2 $radius-sm+2 !important
+
+#forumbody-thread
+    .paginate.stand-alone
+        margin-top: 0
+
+// horizonatl list
+.horiz-list
+    li
+        display: inline-block
+    a
+        display: block
+
+.footer-stats
+    +rem('font-size', 14px)
+    +rem('padding', 10px 0 35px 0)
+    +rem('margin-bottom', 20px)
+    border-bottom: 1px dotted darken($c-base, 20%)
+    strong
+        font-weight: 700
+.m-stats
+    li
+        color: darken($c-base, 40%)
+        width: 88%
+        +rem('padding', 1px 0)
+        border-bottom: 1px dotted darken($c-base, 12%)
+        &:last-child
+            border-bottom: none
+        span
+            float: right
+            color: darken($c-base, 90%)
+            font-weight: 700
+
+.m-stats-title
+    display: block
+    font-weight: 700
+    color: darken($c-base, 90%)
+    border-bottom: 1px dotted darken($c-base, 30%)
+    +rem('padding-bottom', 2px)
+    +rem('margin-bottom', 5px)
+    width: 88%
+
+.m-stats-liveg
+    position: relative
+    .m-stats-group
+        margin-right: 120px
+    .modx-live
+        width: 110px
+        display: block
+        position: absolute
+        top: 0
+        right: 0
+        margin-right: 12px
+        img
+            width: 100%
+
+
+.m-modx_logo
+    background: url(../../images/redo/elements/modx-logo-fixed.png) no-repeat 0 0
+    display: block
+    height: 50px
+    width: 130px
+    +opacity(0.4)
+    &:hover
+        +opacity(0.6)
+.backgroundsize
+    .m-modx_logo
+        width: 90%
+        height: 7.5em
+        background: url(../../images/redo/elements/modx-logo-sizeable.png) no-repeat 0 0
+        background-size: 100% auto
+
+
+
+// General action buttons for submit forms
+.a-primary-btn
+    @extend %a-primary-cta-raised
+    +rem('padding', 10px 15px)
+    +rem('font-size', 15px)
+    clear: both
+    display: inline-block
+    cursor: pointer
+
+
+// Reply
+.dis-form-buttons .a-reply
+    @extend .primary-cta
+    +rem('padding', 10px 15px)
+    +rem('font-size', 15px)
+    clear: both
+    display: inline-block
+    &:hover
+        +rem('padding', 10px 15px)
+.dis-profile .dis-cb, .dis-form .dis-cb
+    display: inline-block
+    vertical-align: top
+    font-weight: normal
+    clear: both
+    line-height: 22px
+    margin: 7px 10px 0 7px
+    color: #5a5a5a
+    width: auto
+
+// ignore view
+.ignore
+    li
+        font-size: 1.8rem
+        font-weight: bold
+        margin-top: 20px
+        display: inline-block
+        padding-right: 20px
+        margin-right: 20px
+        border-left: 1px dotted #cccccc
+        vertical-align: top
+        label
+            margin-left: 20px
+    ul
+        padding-left: 20px
+        li
+            font-size: 1.3rem
+            font-weight: normal
+            margin-top: 0
+            float: none
+            border-left: none
+            display: block
+
+.ignore > li
+    height: 300px
+    overflow-y: scroll
+    margin-bottom: 20px
+    padding-bottom: 40px
+    position: relative
+    width: 21%
+    &:after
+        content: url(../../images/redo/icons/scroll-indicator.png)
+        text-align: center
+        position: absolute
+        bottom: 0
+        width: 100%
+        padding-top: 25px
+        height: 22px
+        background: url(../../images/redo/bg/scroll-fade.png) repeat-x 0 bottom
+
+// thread reply
+.m-dis-thread-type, .dis-thread-info
+    position: relative
+.m-dis-thread-type-wrap
+    width: 250px
+    position: absolute
+
+section.group
+    width: 100%
+
+.dis-thread-form
+    section
+        margin-bottom: 10px
+        padding-bottom: 10px
+
+.dis-thread-info
+    margin: 1px 0 0 260px
+    float: left
+    color: #000
+    +rem('font-size', 13px)
+    position: relative
+    overflow: hidden
+    p
+        color: #000
+    a
+        display: inline-block
+        padding: 4px 10px
+        background-color: rgba(black, .09)
+        border-radius: $radius-sm
+        &:hover
+            text-decoration: none
+            background-color: rgba(black, .05)
+
+.m-dis-choose-info
+    font-size: 16px
+    font-weight: normal
+    margin: 10px 25px 10px 0px
+
+
+.m-dis-thread-type
+    +rem('margin', 5px 0 10px 0)
+
+.dis-form
+    .dis-new-thread-title
+        display: block
+        width: 97% !important
+        margin: 5px 0 10px 0
+        border: 1px solid darken($c-base, 20%)
+        +rem('font-size', 20px)
+        padding: 1.5%
+        &:focus
+            border-color: darken($c-base, 50%)
+    .dis-new-thread-title-wrapper
+        position: relative
+        label
+            position: absolute
+            top: 16px
+            left: 14px
+.twelve-form
+    .dis-form
+        label
+            margin: 0
+            font-weight: bold
+            opacity: .99
+            +rem('font-size', 15px)
+.m-dis-discussion, .m-dis-question
+    +rem('margin', 0px)
+    @extend %btn-secondary-alt-cta
+    @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, rgba(0,0,0,.06) 0%, rgba(255,255,255,.06) 100%))
+    padding-left: 23px
+    &:hover
+        background-color: #fff
+        @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px 5px, linear-gradient(bottom, rgba(255,255,255,.3) 0%, rgba(255,255,255,.3) 100%))
+    &.current
+        @extend .btn-toggle-active
+        @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px -109px, linear-gradient(bottom, #8c8c8c 0%, #737373 100%))
+        color: #fff
+        +text-shadow(none)
+    &.current:hover
+        @extend .btn-toggle-active
+        @include background(image-url("../../images/redo/icons/selected.png") no-repeat 3px -109px, linear-gradient(bottom, #8c8c8c 0%, #737373 100%))
+
+    label
+        margin: 0
+        padding: 5px 10px
+        cursor: pointer
+        font-weight: bold
+        +rem('font-size', 14px)
+        input
+            display: none
+
+#ui-datepicker-div
+    z-index: 30
+
+
+// Syntax Highlighter overflow
+.syntaxhighlighter
+    max-height: 600px
+    overflow: auto !important
+.syntaxhighlighter::-webkit-scrollbar
+    -webkit-appearance: none !important
+    width: 7px !important
+
+.syntaxhighlighter::-webkit-scrollbar-thumb
+    border-radius: 4px
+    background-color: rgba(0,0,0,.5)
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5)
+
+// new thread view
+.twelve-form
+    input[type="submit"]
+        @extend .primary-cta
+        +rem('padding', 10px 15px)
+        +rem('font-size', 15px)
+        clear: both
+        display: inline-block
+        cursor: pointer
+        &:hover
+            +rem('padding', 10px 15px)
+    h1
+        // font-size: 15px
+        font-weight: bold
+    .dis-title
+        margin: 10px 0
+        label, input#dis-new-thread-title
+            display: inline-block
+        label
+            margin: 0 0 0 0
+            padding-right: 5px
+            font-size: 15px
+            font-weight: bold
+            color: black
+        input
+            padding: 3px
+            margin: 5px 0 10px 0
+            font-size: 15px

@@ -1,0 +1,98 @@
+// SIDEBAR
+.sidebar
+    .box.first
+        p
+            margin: 0 0 1em 0
+            color: darken($c-base, 50%)
+    .panel-box
+        +rem('font-size',14px)
+        line-height: 1.3
+
+        h4
+            +rem('font-size', 16px)
+            +rem('margin', 17px 0 5px 0 )
+            +rem('padding', 0 0 7px 0 )
+            background: none
+            font-weight: 700
+            border-bottom: 1px solid darken($c-base, 10%)
+        p
+            padding: 0
+            color: #666
+        h4+p
+            border-top: solid 1px #fff
+            +rem('padding', 10px 15px 10px 15px)
+            +rem('margin', -5px -15px 10px -15px)
+        .a-secondary-cta
+            margin-left: 0
+            margin-right: 0
+            margin-top: 2%
+        .a-secondary-cta, .a-bug, .a-proposal
+            +rem('padding', 13px 6px)
+    .primary-cta
+        color: #fff
+        +rem('font-size', 17px)
+        +rem('margin-bottom', 5px)
+        &.login
+            display: block
+            margin-left: 0
+            text-align: center
+            padding: .5em
+    .a-faux-btn-grp
+        display: table
+        width: 100%
+        .a-bug, .a-proposal
+            display: table-cell
+            vertical-align: middle
+        .a-bug
+            width: 32%
+            border-radius: $radius-sm 0 0 $radius-sm
+            +background(url(../../images/redo/bg/btn-divide.png) no-repeat right center, linear-gradient(bottom, darken($c-base, 58%) 0%, darken($c-base, 45%) 100%)) // gradient overlay
+            &:hover
+                +background-image(linear-gradient(bottom, darken($c-base, 47%) 0%, darken($c-base, 37%) 100%)) // gradient overlay
+        .a-proposal
+            width: 56%
+            margin: 3% 0 0 -2%
+            border-radius: 0 $radius-sm $radius-sm 0
+
+// USER SIDEBAR
+.m-profile-box
+    display: none
+    +rem('padding', 0 0 0 15px)
+    +rem('font-size', 15px)
+    h2
+        font-weight: bold !important
+        color: #000
+        +rem('margin', 0 0 10px 0)
+    h4
+        font-weight: bold
+        +rem('font-size', 15px)
+        color: #000
+        border-bottom: 1px dotted darken($c-base, 20%)
+        width: 90%
+    li
+        &.Heading
+            font-weight: bold
+            color: #000
+            +rem('margin-top', 8px)
+        a, strong, .Count, span
+            display: inline-block
+        a
+            font-weight: normal
+            +rem('padding', 2px 0)
+.PanelBox-avatar
+    display: inline-block
+    +rem('padding', 5px)
+    border-radius: $radius-sm
+    span
+        +rem('font-size', 12px)
+        line-height: 1
+        display: block
+        visibility: hidden
+        margin: 0 auto
+        +rem('padding', 2px 4px)
+    &:hover
+        text-decoration: none
+        background-color: darken($c-base, 5%)
+        span
+            display: block
+            visibility: visible

@@ -1,0 +1,133 @@
+// Theme Settings
+// PIXELS TO REMS WITH FALLBACK
+// https://github.com/bitmanic/rem
+
+$baseline-px: 10px
+=rem($property, $px-values)
+    $baseline-rem: $baseline-px / 1rem
+    #{$property}: $px-values
+    @if type-of($px-values) == "number"
+        #{$property}: $px-values / $baseline-rem
+    @else
+        $rem-values: unquote("")
+        @each $value in $px-values
+            @if $value == 0
+                $rem-values: append($rem-values, $value)
+            @else
+                $rem-values: append($rem-values, $value / $baseline-rem)
+        #{$property}: $rem-values
+
+// RADIUS VARIABLES
+$radius-sm: 3px
+$radius-med: 5px
+$raidus-lrg: 8px
+
+// COLORS
+$c-base: #f9f9f9                                // Background color. Many elements are built from this base to achieve contrast
+$c-copy: #444                                   // Base copy color.
+$c-copy-med: darken($c-base, 30%)               // Used secondary copy areas
+$c-dark-bg: #a3c94f                             // Dark Green
+$c-dark-cool-bg: #17312f                        // Blueish Green
+$c-alt-1: #89c8da                               // Light blue
+$c-tertiary: #f3ad3a                            // Orange
+$c-tertiary-alt: saturate($c-tertiary, 10%)     // To be used with orange
+$txt-color-lightblue: desaturate(lighten($c-dark-cool-bg, 40%), 13%)
+$txt-color-lightblue-over: desaturate(lighten($c-dark-cool-bg, 90%), 13%)
+
+// GRADIENTS
+$g-low-contrast: darken($c-base, 7%), darken($c-base, 13%)
+$g-med-contrast: darken($c-base, 25%), darken($c-base, 37%)
+$g-high-contrast: darken($c-base, 55%), darken($c-base, 70%)
+
+
+// RESET http://meyerweb.com/eric/tools/css/reset/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video
+    margin: 0
+    padding: 0
+    border: 0
+    outline: 0
+    font-size: 100%
+    font: inherit
+    vertical-align: baseline
+
+// HTML5 display-role reset for older browsers
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section
+    display: block
+
+body
+    line-height: 1
+
+ol, ul
+    list-style: none
+
+blockquote, q
+    quotes: none
+
+blockquote:before, blockquote:after
+q:before, q:after
+    content: ''
+    content: none
+ins
+    text-decoration: none
+del
+    text-decoration: line-through
+
+table
+    border-collapse: collapse
+    border-spacing: 0
+
+// TYPOGRAPHY
+html
+    font-size: 62.5%
+
+body
+    font-family: "proxima-nova",sans-serif
+    background-color: #f9f9f9
+    +rem('font-size', 13px)
+    line-height: 1.4
+
+h1
+    font-size: 2em
+    +rem('font-size', 27px)
+    font-weight: bold
+    color: #183030
+h2
+    +rem('font-size', 22px)
+h3
+    +rem('font-size', 19px)
+h4
+    +rem('font-size', 16px)
+
+b, strong
+    font-weight: bold
+em, i
+    font-style: italic
+a
+    color: saturate(lighten($c-dark-cool-bg, 10%), 10%)
+    text-decoration: none
+    &:hover
+        color: #000
+        text-decoration: underline
+pre
+    font-family: "Courier New", Courier, mono
+
+// Transitions
+%quick-fade-in-all
+    +animate(fadeIn, .4s, .1s)
+%quick-fade-out-all
+    +animate(fadeOut, .2s, 0)
+
+.quick-fade-in-bg
+    +transition('background-image', .7s)
