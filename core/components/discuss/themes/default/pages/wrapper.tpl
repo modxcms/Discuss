@@ -183,9 +183,6 @@
                     </ul>
                 </nav>
                 <div class="group">
-                    <div class="inline logo">
-                        <a class="m-modx_logo h-ir" href="http://modx.com">MODX Creative Freedom</a>
-                    </div>
                     <div class="group copy-info inline">
                         <p>&copy; 2004-2012, MODX, LLC. All Rights Reserved.</p>
                         <ul class="horiz-list">
