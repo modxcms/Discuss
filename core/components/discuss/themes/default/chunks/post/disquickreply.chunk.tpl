@@ -6,18 +6,18 @@
 
     <div class="wysi-buttons">[[+reply_buttons]]</div>
     <div class="h-group">
-        <textarea name="message" id="dis-thread-message">[[+message]]</textarea>
+        <textarea name="message" id="dis-thread-message" tabindex="10">[[+message]]</textarea>
     </div>
     <span class="error">[[!+fi.error.message]]</span>
     <div class="h-group below-wysi">
         <div class="l-left">[[+attachment_fields]]</div>
         <div class="dis-form-buttons l-right">
-            <input class="a-reply" type="submit" name="dis-post-reply" value="Reply" />
+            <input class="a-reply" type="submit" name="dis-post-reply" value="Reply" tabindex="40"/>
             <div class="group">
                 [[+locked_cb]]
                 [[+sticky_cb]]
                 <label class="dis-cb">
-                    <input type="checkbox" name="notify" value="1" [[+subscribed]] />[[%discuss.subscribe_by_email]]
+                    <input type="checkbox" name="notify" value="1" [[+subscribed]]  tabindex="30"/>[[%discuss.subscribe_by_email]]
                 </label>
             </div>
         </div>
