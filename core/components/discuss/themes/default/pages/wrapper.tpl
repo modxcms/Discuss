@@ -203,8 +203,8 @@
                     <input type="hidden" name="MERGE7" value="[[~[[*id]]? &scheme=`full`]]" id="MERGE7">
                     <div class="field clearfix">
                         <label for="MERGE0" class="hidden">Your email</label>
-                        <input type="text" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value="" class="textbox" />
-                        <input  type="submit" name="Submit" value="Sign up" />
+                        <input type="text" placeholder="you@example.com" required id="MERGE0" name="MERGE0" value="" class="textbox" tabindex="100"/>
+                        <input  type="submit" name="Submit" value="Sign up" tabindex="101" />
                     </div>
                 </form> 
                 <ul class="social-icons horiz-list">

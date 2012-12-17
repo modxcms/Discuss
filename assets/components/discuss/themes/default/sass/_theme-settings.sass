@@ -117,6 +117,10 @@ a
     &:hover
         color: #000
         text-decoration: underline
+    &:focus
+        +box-shadow(lighten($c-dark-bg, 1%) 0 0 5px)
+        outline: lighten($c-dark-bg, 1%)
+        background-color: #fff
 pre
     font-family: "Courier New", Courier, mono
 
