@@ -8,10 +8,12 @@ body
 
 body
     color: $c-copy
-h3.forum
-    +rem('font-size',15px)
-    font-weight: bold
-    padding: 0 0 0 .8em
+
+// not sure if this is used anymore
+// h3.forum
+//     +rem('font-size',15px)
+//     font-weight: bold
+//     padding: 0 0 0 .8em
 
 .rss-link, a.Button.rss-link
     @include background-image(linear-gradient(bottom, darken($c-dark-bg, 15%) 0%, $c-dark-bg 73%, $c-dark-bg 100%))
@@ -30,7 +32,7 @@ h3.forum
         background: url(../../images/redo/icons/lrg-lock.png) no-repeat 0 12px
         padding-left: 30px
 
-// Single post styling
+// Single post in listing grid
 .Category
     +rem('padding', 5px 20px 0 0)
     vertical-align: top
@@ -185,7 +187,7 @@ h3.forum
         border-top: solid 1px darken($c-base, 10%)
         &:hover
             text-decoration: none
-    .dis-usr-post-count, .dis-usr-icon // REMOVE FUTURE prexsiting styling
+    .dis-usr-post-count
         margin: 0
         +rem('font-size', 11px)
     .dis-usr-post-count
