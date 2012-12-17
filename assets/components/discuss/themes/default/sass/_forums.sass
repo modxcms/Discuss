@@ -258,7 +258,7 @@ body
     cite+blockquote
         margin-top: .6em
 
-// attachments
+// Attachments that appear under post
 ul.dis-attachments
     +rem('font-size', 13px)
     +rem('margin', 10px 0)
@@ -294,7 +294,7 @@ ul.dis-attachments
 .locked
     .dis-action-btn
         .dis-post-reply
-            display: none
+            display: none //Hide button if the thread is locked
 
 .dis-action-btn
     float: right
@@ -329,11 +329,8 @@ ul.dis-attachments
 
 
 .dis-signature
-    // width: 86%
-    // padding: 2% 2% 0 0 !important
     padding-top: 2%
-    // float: right
-    border-top: 1px dotted darken($c-base, 10%) !important //override, remove eventually
+    border-top: 1px dotted darken($c-base, 10%)
     +rem('font-size', 11px)
     +opacity(.7)
     a
