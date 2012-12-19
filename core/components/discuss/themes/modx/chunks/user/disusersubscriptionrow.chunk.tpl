@@ -1,2 +1,0 @@
-<li><a href="[[~[[*id]]]]thread/?thread=[[+id]]#dis-post-[[+last_post_id]]">[[+title]]</a><strong><input type="checkbox" name="remove[]" class="dis-remove-cb" value="[[+id]]" /> | [[+createdon:ago]]</strong> | [[%discuss.by? &author=`<a href="[[~[[*id]]]]user/?user=[[+author]]">[[+author_username]]</a>`]]
-        (<a href="[[~[[*id]]]]board/?board=[[+board]]">[[+board_name]]</a>)</li>
