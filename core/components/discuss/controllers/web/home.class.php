@@ -38,6 +38,14 @@ class DiscussHomeController extends DiscussController {
         return 'home';
     }
 
+    public function getDefaultOptions() {
+        return array(
+            'showBoards' => true,
+            'showRecentPosts' => false,
+            'checkUnread' => true,
+        );
+    }
+
     /**
      * {@inheritdoc}
      * @return mixed
@@ -147,7 +155,7 @@ class DiscussHomeController extends DiscussController {
         $cacheKey = 'discuss/board/recent/'.$this->discuss->user->get('id');
         $recent = $this->modx->cacheManager->get($cacheKey);
         if (empty($recent)) {
-            $recent = $this->discuss->hooks->load('post/recent');
+            $recent = $this->discuss->hooks->load('post/recent', $this->options);
             $this->modx->cacheManager->set($cacheKey,$recent,$this->modx->getOption('discuss.cache_time',null,3600));
         }
         $this->setPlaceholder('recent_posts',$recent['results']);

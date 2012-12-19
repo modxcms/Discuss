@@ -29,9 +29,16 @@
  * @subpackage controllers
  */
 class DiscussLogoutController extends DiscussController {
+    /**
+     * @return null|string
+     */
     public function getPageTitle() {
         return $this->modx->lexicon('discuss.logout');
     }
+
+    /**
+     * @return string
+     */
     public function getSessionPlace() { return ''; }
 
     public function process() {

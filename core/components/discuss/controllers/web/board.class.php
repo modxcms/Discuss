@@ -44,7 +44,11 @@ class DiscussBoardController extends DiscussController {
         if ($this->board == null) $this->discuss->sendErrorPage();
         $this->setOptions();
     }
-    
+
+    /**
+     * {@inheritdoc}
+     * @return array
+     */
     public function getDefaultOptions() {
         return array(
             'tpl' => 'post/disBoardPost',
@@ -54,13 +58,25 @@ class DiscussBoardController extends DiscussController {
         );
     }
     
+    /**
+     * {@inheritdoc}
+     * @return array
+     */
     public function getSessionPlace() {
         return 'board:'.$this->board->get('id').':'.$this->getProperty('page',1);
     }
+    /**
+     * {@inheritdoc}
+     * @return array
+     */
     public function getPageTitle() {
         return $this->board->get('name');
     }
 
+    /**
+     * {@inheritdoc}
+     * @return array
+     */
     public function handleActions() {
         /* add user to board readers */
         if ($this->getProperty('read',false) && $this->discuss->user->isLoggedIn) {
@@ -68,6 +84,10 @@ class DiscussBoardController extends DiscussController {
         }
     }
 
+    /**
+     * {@inheritdoc}
+     * @return array
+     */
     public function process() {
         $this->setPlaceholders($this->board->toArray());
 
@@ -120,6 +140,9 @@ class DiscussBoardController extends DiscussController {
         $this->setPlaceholder('moderators',$this->board->getModeratorsList());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getViewing() {
         $this->setPlaceholder('readers',$this->board->getViewing());
     }
@@ -166,6 +189,9 @@ class DiscussBoardController extends DiscussController {
         }
     }
 
+    /**
+     * @return array
+     */
     public function getBreadcrumbs() {
         return $this->board->buildBreadcrumbs();
     }
