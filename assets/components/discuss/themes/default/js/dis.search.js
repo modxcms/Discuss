@@ -7,6 +7,7 @@ DIS.Search = function() {
         init: function() {
             //$('.dis-search-result').toggle();
             $('.dis-search-parent-result').click(this.toggleThread);
+            $(".date-picker").datepicker();
         }
         
         ,toggleThread: function() {

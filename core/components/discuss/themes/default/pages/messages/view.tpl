@@ -1,30 +1,43 @@
-[[+trail]]
-
-[[+actionbuttons]]
-
-<br class="clear" />
-<h2 class="[[+class]] dis-thread-title">
-    [[%discuss.message? &namespace=`discuss` &topic=`post`]]: [[+title]] ([[+views]] [[%discuss.views]])
-</h2>
-<h4 class="right">[[%discuss.participants]]: [[+participants_usernames]]</h4>
-
-<div class="dis-pagination"><span>[[%discuss.pages]]:</span> <ul>[[+pagination]]</ul></div>
-
-<br class="clear" />
-<div class="dis-posts">
-	<ol class="dis-board-thread">
-		[[+posts]]
-	</ol>
+<div class="f1-f12 h-group">
+    <h1 class="Category [[+locked:is=`1`:then=`locked`:else=`unlocked`]]" post="[[+id]]">
+        <a href="[[+url]]" title="[[+title]]">[[+title]]</a>
+    </h1>
+    <p class="pm-participants">[[%discuss.message.participants]] [[+participants_usernames]]</p>
 </div>
 
-[[+actionbuttons]]
 
-<div class="dis-thread-viewing">
-[[+readers]]
+<div class="f1-f9">
+    <div class="a-dis-actionbuttons h-group">
+        Subscribe: <a href="[[~[[*id]]]]thread/feed.xml?thread=[[+id]]">RSS</a>
+                [[+actionlink_subscribe:notempty=`
+                <a href="[[+actionlink_subscribe]]">By email</a>`]]
+                [[+actionlink_unsubscribe:notempty=`
+                <a href="[[+actionlink_unsubscribe]]">Stop emails</a>`]]
+    </div>
 </div>
-<br class="clear" />
 
-<div class="dis-pagination"><span>[[%discuss.pages? &namespace=`discuss` &topic=`web`]]:</span> <ul>[[+pagination]]</ul></div>
+<div class="f1-f9">
+    <header class="dis-cat-header dark-gradient group-fix sticky-bar top">
+        [[+pagination:default=``]]
+        [[!+discuss.user.id:notempty=`
+            <div class="post-box h-group">
+                <a class="reply Button" href="[[+actionlink_reply]]">Reply to thread</a>
+                <a class="read" href="[[+actionlink_unread]]">Mark as unread</a>
+                [[+moderators]]
+            </div>
+        `]]
+    </header>
+	<ul class="dis-list h-group">
+        [[+posts]]
+    </ul>
+    [[+pagination:notempty=`
+        <div class="paginate stand-alone bottom horiz-list">[[+pagination]]</div>
+    `]]
+    [[+quick_reply_form]]
+	[[+belowThread]]
+	[[+discuss.error_panel]]
+</div><!-- Close Content From Wrapper -->
 
-<br class="clear" />
-[[+discuss.error_panel]]
+[[+bottom]]
+
+[[+sidebar]]

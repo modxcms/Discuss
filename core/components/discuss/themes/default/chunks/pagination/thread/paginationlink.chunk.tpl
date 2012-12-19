@@ -1,1 +1,1 @@
-<li><span title="[[+text]]" onclick="javascript:window.location.href = [[+url]];">[[+text]]</span></li>
+<li><span title="[[+text]]" data-link="[[+url]]">[[+text]]</span></li>

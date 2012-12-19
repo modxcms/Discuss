@@ -27,120 +27,37 @@
  * @package discuss
  * @subpackage build
  */
+
+$eventsMap = array(
+    'OnDiscussAttachmentVerify' => array(),
+    'OnDiscussBeforePostSave' => array(),
+    'OnDiscussPostBeforeRemove' => array(),
+    'OnDiscussPostBeforeRender' => array(),
+    'OnDiscussPostCustomParser' => array(),
+    'OnDiscussPostFetchContent' => array(),
+    'OnDiscussPostRemove' => array(),
+    'OnDiscussPostSave' => array(),
+    'OnDiscussBeforeBanUser' => array(),
+    'OnDiscussBanUser' => array(),
+    'OnDiscussRenderHome' => array(),
+    'OnDiscussRenderBoard' => array(),
+    'OnDiscussRenderThread' => array(),
+    'OnDiscussBeforeMarkAsAnswer' => array(),
+    'OnDiscussBeforeUnmarkAsAnswer' => array(),
+    'OnDiscussMarkAsAnswer' => array(),
+    'OnDiscussUnmarkAsAnswer' => array(),
+);
+
+
 $events = array();
+$defaultService = 1;
+$defaultGroupname = 'Discuss';
 
-/* Attachment Verify */
-$events['OnDiscussAttachmentVerify']= $modx->newObject('modEvent');
-$events['OnDiscussAttachmentVerify']->fromArray(array (
-  'name' => 'OnDiscussAttachmentVerify',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-
-/* Post Render */
-$events['OnDiscussBeforePostSave']= $modx->newObject('modEvent');
-$events['OnDiscussBeforePostSave']->fromArray(array (
-  'name' => 'OnDiscussBeforePostSave',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussPostBeforeRemove']= $modx->newObject('modEvent');
-$events['OnDiscussPostBeforeRemove']->fromArray(array (
-  'name' => 'OnDiscussPostBeforeRemove',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussPostBeforeRender']= $modx->newObject('modEvent');
-$events['OnDiscussPostBeforeRender']->fromArray(array (
-  'name' => 'OnDiscussPostBeforeRender',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussPostCustomParser']= $modx->newObject('modEvent');
-$events['OnDiscussPostCustomParser']->fromArray(array (
-  'name' => 'OnDiscussPostCustomParser',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussPostFetchContent']= $modx->newObject('modEvent');
-$events['OnDiscussPostFetchContent']->fromArray(array (
-  'name' => 'OnDiscussPostFetchContent',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussPostRemove']= $modx->newObject('modEvent');
-$events['OnDiscussPostRemove']->fromArray(array (
-  'name' => 'OnDiscussPostRemove',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussPostSave']= $modx->newObject('modEvent');
-$events['OnDiscussPostSave']->fromArray(array (
-  'name' => 'OnDiscussPostSave',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-
-/* Ban/Moderation */
-$events['OnDiscussBeforeBanUser']= $modx->newObject('modEvent');
-$events['OnDiscussBeforeBanUser']->fromArray(array (
-  'name' => 'OnDiscussBeforeBanUser',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussBanUser']= $modx->newObject('modEvent');
-$events['OnDiscussBanUser']->fromArray(array (
-  'name' => 'OnDiscussBanUser',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-
-/* Page Render Events */
-$events['OnDiscussRenderHome']= $modx->newObject('modEvent');
-$events['OnDiscussRenderHome']->fromArray(array (
-  'name' => 'OnDiscussRenderHome',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussRenderBoard']= $modx->newObject('modEvent');
-$events['OnDiscussRenderBoard']->fromArray(array (
-  'name' => 'OnDiscussRenderBoard',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussRenderThread']= $modx->newObject('modEvent');
-$events['OnDiscussRenderThread']->fromArray(array (
-  'name' => 'OnDiscussRenderThread',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-
-/* Q&A Events */
-$events['OnDiscussBeforeMarkAsAnswer']= $modx->newObject('modEvent');
-$events['OnDiscussBeforeMarkAsAnswer']->fromArray(array (
-  'name' => 'OnDiscussBeforeMarkAsAnswer',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussBeforeUnmarkAsAnswer']= $modx->newObject('modEvent');
-$events['OnDiscussBeforeUnmarkAsAnswer']->fromArray(array (
-  'name' => 'OnDiscussBeforeUnmarkAsAnswer',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussMarkAsAnswer']= $modx->newObject('modEvent');
-$events['OnDiscussMarkAsAnswer']->fromArray(array (
-  'name' => 'OnDiscussMarkAsAnswer',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-$events['OnDiscussUnmarkAsAnswer']= $modx->newObject('modEvent');
-$events['OnDiscussUnmarkAsAnswer']->fromArray(array (
-  'name' => 'OnDiscussUnmarkAsAnswer',
-  'service' => 1,
-  'groupname' => 'Discuss',
-), '', true, true);
-
-
+foreach ($eventsMap as $key => $options) {
+    $events[$key] = $modx->newObject('modEvent');
+    $events[$key]->set('name', $key);
+    $events[$key]->set('service', (!empty($options['service'])) ? $options['service'] : $defaultService);
+    $events[$key]->set('groupname', (!empty($options['groupname'])) ? $options['groupname'] : $defaultGroupname);
+}
 
 return $events;

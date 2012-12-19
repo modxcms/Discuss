@@ -31,9 +31,16 @@
  * @subpackage controllers
  */
 class DiscussLoginController extends DiscussController {
+    /**
+     * @return null|string
+     */
     public function getPageTitle() {
         return $this->modx->lexicon('discuss.login');
     }
+
+    /**
+     * @return string
+     */
     public function getSessionPlace() { return ''; }
 
     public function process() {

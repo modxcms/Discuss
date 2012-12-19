@@ -1,20 +1,16 @@
-[[+trail]]
-
-<br />
 <form action="[[~[[*id]]]]thread/remove?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">
-
-    <h2>[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h2>
-    
-    <input type="hidden" name="thread" value="[[+id]]" />
-    
+	<h1>[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h1>
     <p>[[%discuss.thread_remove_confirm? &thread=`[[+title]]`]]</p>
-    
+        
+    <input type="hidden" name="thread" value="[[+id]]" />
     <span class="error">[[+error]]</span>
     
-    <br class="clear" />
-    
     <div class="dis-form-buttons">
-    <input type="submit" name="remove-thread" class="dis-action-btn" value="[[%discuss.thread_remove]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
+	    <input type="submit" class="dis-action-btn" value="[[%discuss.thread_remove]]" name="remove-thread"/>
+    	<input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[+url]]';" />
     </div>
 </form>
+
+[[+bottom]]
+
+[[+sidebar]]

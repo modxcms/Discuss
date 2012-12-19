@@ -1,3 +1,1 @@
-<ul class="pagination left">		
-	[[+content]]
-</ul>
+<ul class="paginate horiz-list">[[+content]]</ul>

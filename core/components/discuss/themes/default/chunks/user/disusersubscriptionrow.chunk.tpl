@@ -1,12 +1,6 @@
-<li class="[[+class]]" style="background-image: none;">
-    <div class="right" style="padding: 4px 10px; height: 20px; width: 30px;">
-        <input type="checkbox" name="remove[]" class="dis-remove-cb" value="[[+id]]" />
-    </div>
-    <div class="right" style="padding: 4px;">[[+createdon]]</div>
-
-    <a href="[[+url]]">[[+title]]</a>
-    <p class="dis-post-li-desc">
-        [[%discuss.by? &author=`<a href="[[~[[*id]]]]u/[[+author_username]]">[[+author_first]]</a>`]]
-        (<a href="[[~[[*id]]]]board/?board=[[+board]]">[[+board_name]]</a>)
-    </p>
-</li>
+<div class="row h-group">
+    <div class="f1-f4 f-padinall"><a href="[[~[[*id]]]]thread/?thread=[[+id]]#dis-post-[[+last_post_id]]"><input type="checkbox" name="remove[]" class="dis-remove-cb" value="[[+id]]" /></a><a href="[[~[[*id]]]]thread/?thread=[[+id]]#dis-post-[[+last_post_id]]">[[+title]]</a></div>
+    <div class="f5-f6 f-padinall">[[%discuss.by? &author=`<a href="[[~[[*id]]]]user/?user=[[+author]]">[[+author_username]]</a>`]]</div>
+    <div class="f7 f-padinall">[[+createdon:ago]]</div>
+    <div class="f8-f9 f-padinall">[[+board_name]]</div>
+</div>

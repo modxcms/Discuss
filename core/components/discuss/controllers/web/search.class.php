@@ -29,9 +29,16 @@
  * @subpackage controllers
  */
 class DiscussSearchController extends DiscussController {
+    /**
+     * @return null|string
+     */
     public function getPageTitle() {
         return $this->modx->lexicon('discuss.search_forums');
     }
+
+    /**
+     * @return string
+     */
     public function getSessionPlace() { return 'search'; }
 
     public function process() {
@@ -72,7 +79,6 @@ class DiscussSearchController extends DiscussController {
      * @return void
      */
     public function search($s) {
-        $placeholders = array();
         $resultRowTpl = $this->modx->getOption('resultRowTpl',$this->scriptProperties,'disSearchResult');
         $toggle = $this->modx->getOption('toggle',$this->scriptProperties,'+');
         $limit = !empty($this->scriptProperties['limit']) ? $this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
@@ -145,7 +151,6 @@ class DiscussSearchController extends DiscussController {
             ));
         }
         $this->setPlaceholders($this->scriptProperties);
-        $this->setPlaceholders($placeholders);
     }
 
     /**
@@ -191,7 +196,9 @@ class DiscussSearchController extends DiscussController {
     }
 
 
-
+    /**
+     * @return array
+     */
     public function getBreadcrumbs() {
         $trail = array();
         $trail[] = array(

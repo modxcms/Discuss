@@ -37,8 +37,8 @@ define('PKG_NAME','Discuss');
 define('PKG_NAME_LOWER','discuss');
 
 /* do not forget to change in discuss.class.php too!! */
-define('PKG_VERSION','1.1.1');
-define('PKG_RELEASE','pl9');
+define('PKG_VERSION','1.0.12');
+define('PKG_RELEASE','dev');
 
 /* override with your own defines here (see build.config.sample.php) */
 require_once dirname(__FILE__) . '/build.config.php';
@@ -67,7 +67,7 @@ $modx->setLogTarget('ECHO');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->directory = dirname(dirname(__FILE__)).'/_packages/';
+$builder->directory = dirname(dirname(__FILE__)) . '/_packages/';
 $builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
 $builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/discuss/');
 
@@ -213,9 +213,8 @@ unset ($userGroups,$userGroup,$attributes);
 $events = include $sources['data'].'transport.events.php';
 if (empty($events)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in events.');
 $attributes = array (
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::UNIQUE_KEY => array ('name'),
+    xPDOTransport::PRESERVE_KEYS => true,
+    xPDOTransport::UNIQUE_KEY => array('name'),
 );
 foreach ($events as $event) {
     $vehicle = $builder->createVehicle($event,$attributes);

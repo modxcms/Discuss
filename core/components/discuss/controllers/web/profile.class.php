@@ -27,10 +27,11 @@
  *
  * @package discuss
  * @subpackage controllers
+ * @deprecated 2012-12-18 Will be better to start isolating SMF redirects
  */
 class DiscussProfileController extends DiscussController {
     public function initialize() {
-        $params['action'] = 'user';
+        $params = array();
         if (!empty($_REQUEST['u'])) {
             $params['user'] = $_REQUEST['u'];
         }
@@ -41,10 +42,18 @@ class DiscussProfileController extends DiscussController {
             $params['user'] = substr($qs,$u+3);
             $params['i'] = true;
         }
-        $url = $this->modx->makeUrl($this->modx->resource->get('id'),'',$params,'full');
+        $url = $this->discuss->request->makeUrl('user',$params);
         $this->modx->sendRedirect($url);
     }
+
+    /**
+     * @return string
+     */
     public function getPageTitle() { return ''; }
+
+    /**
+     * @return string
+     */
     public function getSessionPlace() { return ''; }
     public function process() {}
 }

@@ -1,36 +1,22 @@
-<li class="dis-post" id="dis-post-[[+id]]">
-    <div class="dis-post-header">
-        <h3 class="dis-post-title" post="0">[[+title]]</h3>
-        <div class="dis-post-author" id="dis-post-author-0">
-            <div class="dis-post-actions"></div>
-            <div class="dis-author">
-                <a href="[[~[[*id]]]]user/?user=[[+author.id]]">[[+author.avatar]]</a>
-                <span class="right">
-                    [[+createdon]]
-                    <br />[[+author.email]]
-                </span>
-                <span>
-                    [[+author.username_link]]
-                    [[+author.group_badge:notempty=`<img class="group-badge" src="[[+author.group_badge]]" alt="" title="[[+author.group_name]]" />`]]
-                    [[+author.title:notempty=`<em class="dis-author-title"> - [[+author.title]]</em>`]]
-                    <br />
-                    [[%discuss.posts]]: <span class="dis-author-post-count">[[+author.posts]]</span>
-                </span>
-                <br class="clear" />
-            </div>
-            <div class="dis-author dis-hidden dis-sig-ct dis-sig-ct-[[+id]]">
-                [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]<div class="clear"></div></div><div class="clear"></div>`]]
-            </div>
+<li class="dis-post group-fix">
+    <input type="button" name="Cancel" value="Edit" class="dis-message-cancel Button l-right">
+    <div class="dis-post-left">
+        <ul>
+            <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>
+            <li class="dis-usr-post-count">[[+author.posts]] [[%discuss.posts]]</li>
+        </ul>
+    </div>
+
+    <div class="dis-post-right">
+        <div class="title">
+            <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]]</a>, <span title="[[+createdon]]">[[+createdon:ago]]</span>
+        </div>
+        <div class="dis-content">
+            [[+message]]
         </div>
     </div>
-    <div class="dis-post-ct" id="dis-thread-ct-[[+id]]">
-        <div class="dis-post-body">[[+message]]</div>
-        <div class="dis-post-footer">
-            <div class="dis-post-reply" id="dis-post-reply-[[+id]]"></div>
-            <div class="dis-post-attachments">
-            [[+attachments:notempty=`<ul class="dis-attachments">[[+attachments]]</ul>`]]
-            </div>
-        </div>
-        <br class="clear" />
+    [[+author.signature:notempty=`<div class="dis-signature">[[+author.signature]]</div>`]]
+    <div class="dis-post-footer">
+        [[+attachments:notempty=`<div class="dis-post-attachments"><ul class="dis-attachments">[[+attachments]]</ul></div>`]]
     </div>
 </li>

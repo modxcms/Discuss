@@ -4,12 +4,12 @@
         <div class="dis-post-author" id="dis-post-author-[[+id]]">
             <div class="dis-author">
                 <span class="right">
-                    [[+createdon]]
+                    [[+createdon:ago]]
                 </span>
                 <span>
                     [[+author.username]]
                 </span>
-                <br class="clear" />
+                <br class="clearfix" />
             </div>
         </div>
     </div>
@@ -24,6 +24,7 @@
             </div>
         </div>
         <br class="clear" />
-        [[+children:notempty=`<ol class="dis-board-thread [[+class]]">[[+children]]</ol>`]]
+        [[+children:notempty=`<ul class="dis-list [[+class]]">[[+children]]</ul>`]]
     </div>
+    <br class="clearfix" />
 </li>

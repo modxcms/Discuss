@@ -1,0 +1,22 @@
+.group {@include clearfix;}
+.group-vis:after {
+    content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+.group-vis {
+    display: inline-block;
+}
+
+html[xmlns] .group-vis {
+	display: block;
+}
+
+* html .group-vis {
+	height: 1%;
+}
+.cell { display: -moz-inline-box; -moz-box-orient: vertical; vertical-align: top; display: inline-block;white-space:normal;}
+.cell { *display: inline; }

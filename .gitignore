@@ -1,3 +1,4 @@
+_build/build.config.php
 config.core.php
 .idea
 nbproject
@@ -5,8 +6,5 @@ core/components/discuss/includes/import.config.inc.php
 core/components/discuss/includes/config.core.php
 core/components/discuss/test/config.inc.php
 core/components/discuss/test/properties.inc.php
-_build/build.config.php
-assets/components/discuss/themes/modx-dev/.sass-cache/*
-core/components/discuss/themes/modx-dev/.DS_Store
-
-core/components/discuss/themes/modx-dev/pages/.DS_Store
+assets/components/discuss/themes/default/.sass-cache/*
+assets/components/discuss/themes/modx-dev/.sass-cache/

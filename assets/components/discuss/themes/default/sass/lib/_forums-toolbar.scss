@@ -1,0 +1,21 @@
+// Admin Toolbar that is rendered for users that have access
+.dis-sticky-actions {
+	position: fixed;
+	bottom: 0;
+	padding: 0 20px;
+	width: 100%;
+	z-index: 100;
+	background: $c-dark-cool-bg;
+	a {
+		color: #fff;
+		display: inline-block;
+		padding: 4px 6px;
+		background: lighten($c-dark-cool-bg, 10%);
+		border: solid 1px lighten($c-dark-cool-bg, 12%);
+		margin: 5px 1px;
+		@include border-radius(3px);
+		&:hover {
+			background: lighten($c-dark-cool-bg, 15%);
+		};
+	}
+}

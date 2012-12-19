@@ -1,31 +1,7 @@
 body
     background-color: $c-base
 
-h1
-    font-size: 2em
-    +rem('font-size', 27px)
-    font-weight: bold
-    color: #183030
-h2
-    +rem('font-size', 22px)
-h3
-    +rem('font-size', 19px)
-h4
-    +rem('font-size', 16px)
 
-b, strong
-    font-weight: bold
-em, i
-    font-style: italics 
-// basic formatting
-a
-    color: saturate(lighten($c-dark-cool-bg, 10%), 10%)
-    text-decoration: none
-    &:hover
-        color: #000
-        text-decoration: underline
-pre
-    font-family: "Courier New", Courier, mono
 .l-right
     float: right
 .l-left
@@ -42,6 +18,8 @@ pre
     display: inline-block
     vertical-align: top
 // Login module
+.logo
+    +rem('font-size', 22px)
 
 // notices
 .m-notice
@@ -184,7 +162,7 @@ pre
     // box-shadow: 5px 5px 7px #444444
     opacity: 0.9
     font-weight: bold
-    font-size: 15px
+    +rem('font-size', 15px)
     line-height: 1
     filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90)
     color: white
@@ -304,22 +282,22 @@ form#newsletter
 .social-icons.horiz-list
     margin: 8px 0 0 0
     li a
-        display: block
-        height: 38px
-        width: 32px
+        // display: block
+        // height: 38px
+        // width: 32px
         padding: 0
-        background: url(../../images/redo/icons/i-social-media.png) no-repeat -41px -36px
-        text-indent: 100%
-        white-space: nowrap
-        overflow: hidden
+        // background: url(../../images/redo/icons/i-social-media.png) no-repeat -41px -36px
+        // text-indent: 100%
+        // white-space: nowrap
+        // overflow: hidden
         margin: 0 5px 0 0
-        opacity: .8
-        &:hover
-            opacity: 1
-        &.twitter
-            background-position: -257px -36px
-        &.facebook
-            background-position: -185px -36px
+        // opacity: .8
+        // &:hover
+        //     opacity: 1
+        // &.twitter
+        //     background-position: -257px -36px
+        // &.facebook
+        //     background-position: -185px -36px
 
 // user modules
 .m-user_opts
@@ -352,7 +330,7 @@ form#newsletter
     a
         padding: 6px 10px
 .m-user_tools_logout
-    @extend .m-raised-dark-bg
+    @extend %m-raised-dark-bg
     float: right
     +rem(padding, 3px 12px)
     +border-radius(30px  !important)
@@ -398,7 +376,7 @@ ul.options-select
     position: relative
     z-index: 20
     a.a-options
-        @extend .m-raised-dark-bg
+        @extend %m-raised-dark-bg
         margin: 0 0 0 10px
         display: block
         background-color: #000
@@ -416,7 +394,7 @@ ul.options-select
             span
                 +opacity(1.0)
 #F-Toggle-List
-    @extend .m-raised-dark-bg-nh
+    @extend %m-raised-dark-bg-nh
     display: none
     position: absolute
     right: 0
@@ -572,6 +550,15 @@ form input[type="radio"]
         background-repeat: no-repeat
         padding: 1.5% 1.5% 1.5% 7.5%
         width: 91%
+
+// Gradients Defined by Classes
+.dark-gradient
+    background-color: $c-dark-bg
+    +background-image(linear-gradient(left top, $c-dark-cool-bg, lighten($c-dark-cool-bg,10%)))
+    color: #fff
+
+.color
+    color: #efefef
 
 
 // new message form
