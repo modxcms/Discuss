@@ -559,9 +559,17 @@ form input[type="radio"]
 
 .color
     color: #efefef
+
+// quick fix for lack of theme settings
 a
     color: saturate(lighten($c-dark-cool-bg, 10%), 10%)
     text-decoration: none
+h1
+    font-size: 2em
+    +rem('font-size', 27px)
+    font-weight: bold
+    color: #183030
+
 
 // new message form
 #dis-reply-participants
