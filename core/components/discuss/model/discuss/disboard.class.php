@@ -697,7 +697,7 @@ class disBoard extends xPDOSimpleObject {
                 'MAX(Descendants.depth) AS depth',
                 'Category.name AS category_name',
             ));
-            $c->sortby('disBoard.category','ASC');
+            $c->sortby('Category.rank','ASC');
             $c->sortby('disBoard.map','ASC');
             $c->groupby('disBoard.id');
             $boardObjects = $modx->getCollection('disBoard',$c);

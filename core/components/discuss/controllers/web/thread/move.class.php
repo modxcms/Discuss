@@ -81,7 +81,7 @@ class DiscussThreadMoveController extends DiscussController {
         $boardOutput = array();
         foreach ($boards as $board) {
             $board['selected'] = !empty($this->scriptProperties['board']) && $this->scriptProperties['board'] == $board['id'] ? ' selected="selected"' : '';
-            $board['name'] = str_repeat('--',$board['depth']-1).$board['name'];
+            $board['name'] = (($board['depth'] >= 1) ? str_repeat('--',$board['depth']) : '').$board['name'];
             $boardOutput[] = $this->discuss->getChunk($this->getOption('tplBoardOption'),$board);
         }
         $this->setPlaceholder('boards',implode("\n",$boardOutput));
