@@ -8,3 +8,5 @@ core/components/discuss/test/config.inc.php
 core/components/discuss/test/properties.inc.php
 assets/components/discuss/themes/default/.sass-cache/*
 assets/components/discuss/themes/modx-dev/.sass-cache/
+assets/components/discuss/themes/modx/.sass-cache/*
+assets/components/discuss/themes/modx/.sass-cache/
