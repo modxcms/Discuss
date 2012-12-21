@@ -15,8 +15,8 @@
 		</div>
 		<form class="l-inline" action="[[~[[*id]]]]search" method="get" accept-charset="utf-8">
 	        <label for="search_form_input" class="hidden">Search</label>
-	        <input id="search_form_input" placeholder="Search keyphrase..." name="s" value="" title="Start typing and hit ENTER" type="text">
-	        <input value="Go" type="submit">
+	        <input id="search_form_input" placeholder="Search keyphrase..." name="s" value="" title="Start typing and hit ENTER" type="text" tabindex="1">
+	        <input value="Go" type="submit" tabindex="2">
 	    </form>
 	</div>
     <!-- / remove out of breadcrumbs-->
