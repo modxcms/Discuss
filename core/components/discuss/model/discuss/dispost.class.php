@@ -863,11 +863,11 @@ class disPost extends xPDOSimpleObject {
                 $idx = $this->calculateIdx();
             }
 
-            if ($sortDir == 'ASC') {
-                $page = ceil($idx / $perPage);
+            $page = $idx / $perPage;
+            if (ceil($page) == $page) { // idx 10 / 10 per page = 1, but needs to be on page 2.
+                $page = ceil($page) + 1;
             } else {
-                $page = ceil(($replies - $idx) / $perPage);
-                $page = $page < 1 ? 1 : $page;
+                $page = ceil($page);
             }
         }
         $this->set('page',$page);
