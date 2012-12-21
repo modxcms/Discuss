@@ -123,6 +123,8 @@ $discuss->hooks->load('notifications/send',array(
     'post' => $newPost->get('id'),
     'thread' => $thread->get('id'),
     'title' => $newPost->get('title'),
+    'message' => $newPost->getContent(),
+    'author' => $discuss->user->get('username'),
     'subject' => $modx->getOption('discuss.notification_new_post_subject',null,'New Post'),
     'tpl' => $modx->getOption('discuss.notification_new_post_chunk',null,'emails/disNotificationEmail'),
 ));
