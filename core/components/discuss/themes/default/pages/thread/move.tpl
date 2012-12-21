@@ -1,6 +1,6 @@
 <!-- move.tpl -->
 <form action="[[~[[*id]]]]thread/move?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">
-	<h1>[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h1>
+	<h1>[[%discuss.thread_move? &namespace=`discuss` &topic=`post`]]</h1>
     <p>[[%discuss.thread_move_message? &thread=`[[+title]]`]]</p>
     
     <input type="hidden" name="thread" value="[[+id]]" />
