@@ -4,10 +4,10 @@
            <h2>[[+username]]'s Profile</h2>
             <ul class="panel_info">
                 <li class="Heading">
-                    <a class="PanelBox-avatar" href="https://en.gravatar.com/site/login#your-images">
+                    [[!+discuss.user.username:eq=`[[+username]]`:then=`<a class="PanelBox-avatar" href="https://en.gravatar.com/site/login#your-images">`]]
                         <img src="[[+avatarUrl]]" alt="[[+username]]" />
-                        <span>[[%discuss.modify]]</span>
-                    </a>
+                    [[!+discuss.user.username:eq=`[[+username]]`:then=`<span>[[%discuss.modify]]</span>
+                    </a>`]]
                 </li>
                 [[+title:notempty=`<li class="dis-usr-title">[[+title]]</li>`]]
             </ul>
