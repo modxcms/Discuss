@@ -18,8 +18,6 @@ body
     display: inline-block
     vertical-align: top
 // Login module
-.logo
-    +rem('font-size', 22px)
 
 // notices
 .m-notice
@@ -115,7 +113,7 @@ body
 // view latest posts button
 .m-breadcrumbs
     .m-search
-        // width: 50%
+        width: 50%
         text-align: right
         a
             background-color: darken($c-base, 6%)
@@ -128,7 +126,7 @@ body
                 color: darken($c-base, 60%)
                 background-color: darken($c-base, 3%)
         form
-            min-width: 190px
+            width: 60% !important
             margin-left: 4px
             input[type=text]
                 padding: 5px
@@ -282,22 +280,22 @@ form#newsletter
 .social-icons.horiz-list
     margin: 8px 0 0 0
     li a
-        // display: block
-        // height: 38px
-        // width: 32px
+        display: block
+        height: 38px
+        width: 32px
         padding: 0
-        // background: url(../../images/redo/icons/i-social-media.png) no-repeat -41px -36px
-        // text-indent: 100%
-        // white-space: nowrap
-        // overflow: hidden
+        background: url(../../images/redo/icons/i-social-media.png) no-repeat -41px -36px
+        text-indent: 100%
+        white-space: nowrap
+        overflow: hidden
         margin: 0 5px 0 0
-        // opacity: .8
-        // &:hover
-        //     opacity: 1
-        // &.twitter
-        //     background-position: -257px -36px
-        // &.facebook
-        //     background-position: -185px -36px
+        opacity: .8
+        &:hover
+            opacity: 1
+        &.twitter
+            background-position: -257px -36px
+        &.facebook
+            background-position: -185px -36px
 
 // user modules
 .m-user_opts
@@ -559,16 +557,6 @@ form input[type="radio"]
 
 .color
     color: #efefef
-
-// quick fix for lack of theme settings
-a
-    color: saturate(lighten($c-dark-cool-bg, 10%), 10%)
-    text-decoration: none
-h1
-    font-size: 2em
-    +rem('font-size', 27px)
-    font-weight: bold
-    color: #183030
 
 
 // new message form

@@ -5,13 +5,11 @@ $p-forum-grid: 15px             // padding for forum grid
 // TEMPORARY Setting temporary min width on body until we can properly address smaller screensize layout
 body
     min-width: 800px
-// END TEMPORARY
 
 body
     color: $c-copy
 h3.forum
-    color: $c-primary-h
-    +rem('font-size',16px)
+    +rem('font-size',15px)
     font-weight: bold
     padding: 0 0 0 .8em
 
@@ -63,12 +61,7 @@ h3.forum
 
 .dis-list, .dis-post-preview
     @extend .m-raised-panel-box
-    // margin: 1em 0 0 0
     line-height: 1.4
-    // +box-shadow(darken($c-base, 5%) 0 0 3px)
-    // +border-radius($radius-sm)
-    // border: solid 1px darken($c-base, 10%)
-    // background-color: lighten($c-base, 4%)
     border-top: 0
 
 .dis-post
@@ -77,10 +70,7 @@ h3.forum
     min-height: 120px
     margin: 0
     position: relative
-    // width: 96% // not sure why this is needed but if not occasionally post doesn't span the right width
-    // padding: 1.75% 2% 3% 2%
     +rem('padding', 20px 15px 30px 15px)
-    // float: right
     &:first-child
         border-top: none
 
@@ -97,13 +87,6 @@ h3.forum
         strong
             font-weight: 700
             color: #000
-        // .jump-to-first
-        //     @extend %p-raised-green
-        //     display: block
-        //     text-align: center
-        //     text-decoration: none
-        //     +rem('width', 125px)
-        //     +rem('margin', 10px 0)
     ul.dis-ul, ol.dis-ol
         padding-left: 20px
         vertical-align: middle
@@ -136,15 +119,12 @@ h3.forum
     border: 1px solid $c-dark-bg
     background-color: lighten($c-dark-bg, 39%)
 
-
-
-
 .tag
     +background-image(linear-gradient(lighten($c-dark-bg, 1%), darken($c-dark-bg, 15%)))
     +rem('padding', 6px 12px)
     +rem('margin', 0 10px 7px 0)
     color: lighten($c-base, 80%)
-    +border-radius($radius-sm)
+    border-radius: $radius-sm
     font-weight: 500
     line-height: 1
     text-transform: uppercase
@@ -152,7 +132,6 @@ h3.forum
         +background-image(linear-gradient(lighten(#000, 80%), lighten(#000, 70%)))
         &:hover
             +background-image(linear-gradient(lighten(#000, 80%), lighten(#000, 70%)))
-
 
 .dis-post
     .title
@@ -169,7 +148,6 @@ h3.forum
             font-weight: 700
             color: #000
     .dis-action-btn, .dis-pm-btn
-        // visibility: hidden
         opacity: 0
         @extend %quick-fade-out-all
     &:hover
@@ -196,13 +174,13 @@ h3.forum
         width: 100%
         max-width: 80px
         display: block
-        +border-radius($radius-sm)
+        border-radius: $radius-sm
     .auth-avatar
         display: block
         border: none
         padding: 3px
         background-color: darken($c-base, 1.5%)
-        border-radius: $radius-sm + 2px
+        border-radius: ($radius-sm + 2px)
         border: solid 1px darken($c-base, 4%)
         border-top: solid 1px darken($c-base, 10%)
         &:hover
@@ -238,19 +216,12 @@ h3.forum
                 text-align: right
                 &:hover
                     color: #000
-            // .dis-post-modify
-            //     background: url(../../images/redo/icons/modify-sm.png) no-repeat left center
-            //    padding-left: 18px
-
-
 
 .dis-signature, .dis-post-right
     margin-left: 110px
     padding: 0 2% 35px 0
 
 .dis-post-right
-    // float: right
-    // width: 86%
     +rem('font-size', 15px)
     .title
         +rem('font-size', 12px)
@@ -277,7 +248,6 @@ h3.forum
         color: #000
         blockquote
             font-size: 1em
-        // line-height: 1.3
     cite
         +rem('padding-left', 15px)
         margin-top: 1em
@@ -388,7 +358,7 @@ ul.dis-attachments
 .paginate
     float: right
     +background-image(linear-gradient(lighten($c-dark-cool-bg, 3%), $c-dark-cool-bg))
-    +border-radius($radius-sm+2)
+    border-radius: ($radius-sm + 2)
     +background-clip(padding-box)
     +box-shadow(lighten($c-dark-cool-bg, 15%) 0 1px 0, darken($c-dark-cool-bg, 30%) 0 -1px 0)
     +rem('padding',4px)
@@ -420,17 +390,17 @@ ul.dis-attachments
         z-index: 1
         +box-shadow(lighten($c-dark-cool-bg, 95%) 0 1px 0, darken($c-dark-cool-bg, 60%) 0 -1px 0)
         &.top
-            +border-radius($radius-sm+2 $radius-sm+2 0 0)
+            border-radius: $radius-sm+2 $radius-sm+2 0 0
             margin: 1.4em 0 -1.4em 0
         &.bottom
-            +border-radius(0 0 $radius-sm+2 $radius-sm+2)
+            border-radius: 0 0 $radius-sm+2 $radius-sm+2
             margin-top: 7px
 .paginate.stand-alone
     @extend .h-group
     @extend .dis-cat-header
     &.bottom
         margin-top: 0
-        +border-radius(0 0 $radius-sm+2 $radius-sm+2 !important)
+        border-radius: 0 0 $radius-sm+2 $radius-sm+2 !important
 
 #forumbody-thread
     .paginate.stand-alone
@@ -601,7 +571,7 @@ section.group
         display: inline-block
         padding: 4px 10px
         background-color: rgba(black, .09)
-        +border-radius($radius-sm)
+        border-radius: $radius-sm
         &:hover
             text-decoration: none
             background-color: rgba(black, .05)
@@ -664,7 +634,6 @@ section.group
         input
             display: none
 
-
 #ui-datepicker-div
     z-index: 30
 
@@ -682,8 +651,6 @@ section.group
     background-color: rgba(0,0,0,.5)
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5)
 
-
-
 // new thread view
 .twelve-form
     input[type="submit"]
@@ -696,6 +663,7 @@ section.group
         &:hover
             +rem('padding', 10px 15px)
     h1
+        // font-size: 15px
         font-weight: bold
     .dis-title
         margin: 10px 0

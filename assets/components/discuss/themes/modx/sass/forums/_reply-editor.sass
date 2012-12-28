@@ -54,14 +54,14 @@ a
     &.ol-list
         background-position: -151px -36px
     &.preview
-        @extend .m-raised-dark-bg-alt
+        @extend %m-raised-dark-bg-alt
         text-indent: 0
         background-image: none
         color: lighten($c-dark-cool-bg, 82%)
         width: 100px
 
 a#dis-preview-btn.preview
-    @extend .m-raised-dark-bg-alt
+    @extend %m-raised-dark-bg-alt
     background-color: lighten($c-dark-cool-bg, 10%)
     border-radius: 30px
     height: 16px
@@ -139,7 +139,7 @@ a#dis-preview-btn.preview
 .dis-post-preview
     .dis-post-header
         .dis-message-cancel.l-right
-            // @extend .m-raised-dark-bg-nh
+            // @extend %m-raised-dark-bg-nh
             float: right
             margin: -.2em 1.2em 0 0
             border: none
@@ -166,11 +166,6 @@ a#dis-preview-btn.preview
         color: #fff
         border: none
         +rem('padding', 6px 10px)
-
-
-
-
-
 
 // error
 span.error .error

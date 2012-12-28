@@ -1,26 +1,23 @@
-// load compass modules
+// load compass and other partials
 @import compass/css3
 @import compass/css3/inline-block
 @import compass/css3/border-radius
 @import compass/reset
 @import compass/css3/images
 @import compass/utilities/general/clearfix
+@import partials/_animate.sass
 
-// Forums grid is using _rem.sass for setting sizes to provide
-// scalable font sizes using rem sizing while providing a
-// backup for browsers that do not support rems (< IE8).
-// As support is added we can convert to using just rem based
-// sizing.
-@import lib/_reset.scss
-@import lib/_rem.sass
+// THEME SETTINGS
+// Contains design patterns, typography and variables for theme
+@import theme-settings.sass
+
+// @import lib/_reset.scss
+// @import lib/_rem.sass
 @import _grid.scss
 
 // jquery UI from old theme
 @import lib/_jquery-ui-1.8.16.custom.scss
 
-// typography
-@import _typography.sass
-@import _brand-colors.sass
 @import partials/_color-patterns.sass
 @import lib/_shared.sass
 @import lib/_layout.sass
@@ -32,16 +29,12 @@
 
 // forums
 @import _forums.sass
-@import forums/_faux-table.sass
+@import forums/_grid-view.sass
 @import forums/_sidebar.sass
-@import forums/_forums-profile.sass
+@import forums/_profile.sass
 @import forums/_reply-editor.sass
 @import forums/_thread-answer-marker.sass
 @import forums/_shCore.sass
 
 // admin toolbar
 @import lib/_forums-toolbar.scss
-
-// transitions
-@import partials/_animate.sass
-@import lib/_transitions.sass

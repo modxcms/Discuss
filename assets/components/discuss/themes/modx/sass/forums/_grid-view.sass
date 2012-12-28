@@ -1,5 +1,4 @@
 // Category headings for grids
-
 .dis-cat-header
     +border-radius($radius-sm $radius-sm 0 0)
     +background-clip(padding-box)
@@ -62,9 +61,6 @@
 .m-section_title
     background-color: darken($c-base, 12%)
     border-radius: 5px
-    // h1
-    //     font-size: 15px
-    //     padding: 10px
     .row
         color: #000
         font-weight: 700
@@ -89,68 +85,63 @@
 // status styling
 
 // Sub topics styling
-.forum-grid
-    .dis-board-subs
-        color: #fff
-        padding: 5px 5px 5px 57px
-        background: url(../../images/redo/icons/arrow.png) no-repeat 39px 11px
-        strong, a
-            +rem('font-size', 12px)
-        strong
-            color: #000
-        a
-            color: darken($c-base, 70%)
-            +background-image(linear-gradient(darken($c-base, 7%), darken($c-base, 10%)))
-            border: solid 1px darken($c-base, 10%)
-            display: inline-block
-            padding: 3px 6px
-            margin-top: 2px
-            line-height: 1
-            // border: solid 1px darken($c-base, 3%)
-            border-radius: 3px
-            &:hover
-                color: darken($c-base, 90%)
-                +background-image(linear-gradient(darken($c-base, 3%), darken($c-base, 7%)))
-                border: solid 1px darken($c-base, 7%)
-                text-decoration: none
-            &:active
-                +box-shadow(darken($c-base, 27%) 0 0 1px inset)
-
-    .m-title
-        .dis-thread-pagination li, .dis-thread-pagination, a.h-group
-            display: inline-block
-    .tag, .solved
-        @extend .a-primary-cta
-        +rem('min-width', 55px)
-        text-align: center
-        +text-shadow(none)
+.dis-board-subs
+    color: #fff
+    padding: 5px 5px 5px 57px
+    background: url(../../images/redo/icons/arrow.png) no-repeat 39px 11px
+    strong, a
+        +rem('font-size', 12px)
+    strong
+        color: #000
+    a
+        color: darken($c-base, 70%)
+        +background-image(linear-gradient(darken($c-base, 7%), darken($c-base, 10%)))
+        border: solid 1px darken($c-base, 10%)
         display: inline-block
-        text-transform: uppercase
-        +rem('font-size', 10px)
-        +rem('padding', 4px 6px)
-        +rem('margin', 0 5px 0 0)
+        padding: 3px 6px
+        margin-top: 2px
         line-height: 1
-        +box-shadow(none)
+        border-radius: $radius-sm
         &:hover
-            +box-shadow(none)
-        &.locked
-            @extend %p-sunk-gray-light
-    .question
-        @extend .a-tertiary-cta
-    .question, .solved
-        +rem('min-width', 63px)
-// .dis-threads.forum-grid
-//     background-color: lighten($c-base, 90%)
+            color: darken($c-base, 90%)
+            +background-image(linear-gradient(darken($c-base, 3%), darken($c-base, 7%)))
+            border: solid 1px darken($c-base, 7%)
+            text-decoration: none
+        &:active
+            +box-shadow(darken($c-base, 27%) 0 0 1px inset)
+
+.m-title
+    .dis-thread-pagination li, .dis-thread-pagination, a.h-group
+        display: inline-block
+.tag, .solved
+    @extend .a-primary-cta
+    +rem('font-size', 10px)
+    line-height: 1
+    +rem('min-width', 55px)
+    text-align: center
+    +text-shadow(none)
+    display: inline-block
+    text-transform: uppercase
+    +rem('padding', 4px 6px)
+    +rem('margin', 0 5px 0 0)
+
+    +box-shadow(none)
+    &:hover
+        +box-shadow(none)
+    &.locked
+        @extend %p-sunk-gray-light
+.question
+    @extend .a-tertiary-cta
+.question, .solved
+    +rem('min-width', 63px)
 
 .dis-thread-pagination
-    margin: 0 0 0 5px
     font-size: 12px
-
+    margin: 0 0 0 5px
     li
         padding: 3px 2px
         opacity: .5
         margin-right: -3px
-
         &:hover
             opacity: 1
             background-color: #fff
@@ -197,9 +188,8 @@ header.dis-cat-header
         margin: .25em 0
         color: lighten($c-copy, 20%)
 
-    // Faux Grids
+    // Grid Row
     .row
-        // padding: .5em
         border-bottom: 1px solid darken($c-base, 11%)
         border-top:  1px solid lighten($c-base, 85%)
         &:hover
@@ -222,17 +212,12 @@ header.dis-cat-header
             &:hover, a:hover
                 background-color: lighten($c-base, 1%)
         &:hover, a:hover
-            // background-color: desaturate(lighten($c-dark-cool-bg, 82%), 20%)
-            // +background-image(linear-gradient(top, (desaturate(lighten($c-dark-cool-bg, 84%), 60%)), (desaturate(lighten($c-dark-cool-bg, 81%), 60%))))
             border-bottom-color: darken($c-base, 19.1%)
             border-top-color: lighten($c-base, 4.1%)
         &:hover
-            // +box-shadow(lighten($c-dark-bg, 3%) 0 1px 0 inset, darken($c-dark-cool-bg, 30%) 0 1px 0)
             +box-shadow(lighten($c-dark-bg, 16%) 0 0 5px, lighten($c-dark-bg, 3%) 0 0 2px)
             position: relative
             z-index: 20
-        // padding-top: 10px
-
 
     .heading
         color: darken($c-base, 65%)
@@ -251,11 +236,10 @@ header.dis-cat-header
     .posted-date, .posted-by
         color: lighten($c-copy, 30%)
 
-// faux clickable text
+// Clickable 
+ hover
 .clickable:hover
     text-decoration: underline
-
-
 
 // grid when entire row not clickable
 .forum-grid.no-hover
@@ -281,6 +265,7 @@ header.dis-cat-header
 
 div.m-section_title + div.row
     padding-top: 5px
+
 // status on threads and categories
 .board-post .wrap
     padding-left: 20px
@@ -289,23 +274,23 @@ div.m-section_title + div.row
     position: relative
     padding-left: 22px
     padding-left: 35px
-    .folder
-        display: block
-        background: url(../../images/redo/icons/large-folder.png) no-repeat 0 -102px
-        position: absolute
-        height: 17px
-        width: 22px
-        font-family: sans-serif
-        +rem('font-size', 9px)
-        +text-shadow(rgba(black, .4) 0 1px 0, rgba(black, .7) 1px 0 4px)
-        color: #fff
-        line-height: 21px
-        left: 1px
-        top: 1px
-        text-align: center
-        vertical-align: center
-        overflow: hidden
-        text-indent: 100%
+.folder
+    display: block
+    background: url(../../images/redo/icons/large-folder.png) no-repeat 0 -102px
+    position: absolute
+    height: 17px
+    width: 22px
+    font-family: sans-serif
+    +rem('font-size', 9px)
+    +text-shadow(rgba(black, .4) 0 1px 0, rgba(black, .7) 1px 0 4px)
+    color: #fff
+    line-height: 21px
+    left: 1px
+    top: 1px
+    text-align: center
+    vertical-align: center
+    overflow: hidden
+    text-indent: 100%
 
 // status when user is logged in
 .m-section_title+.row

@@ -1,16 +1,6 @@
 // Marks answer on thread view
 .dis-post-answer
     position: relative
-    // &:after
-    //     content: ""
-    //     position: absolute
-    //     top: -1px
-    //     left: -1px
-    //     display: block
-    //     width: 43px
-    //     height: 43px
-    //     background: url(../../images/redo/elements/answered-post.png) left top
-
 
 // Variables for navigation for answers
 $dis-post-nav-width: 20px
@@ -85,7 +75,7 @@ $dis-post-marker-width: $dis-post-span + $dis-post-nav-width + ($dis-post-nav-bo
             display: none
             +rem('padding', 6px 12px)
             +opacity(0)
-            +border-radius($radius-sm)
+            border-radius: $radius-sm
             &:after
                 content: ""
                 display: block
