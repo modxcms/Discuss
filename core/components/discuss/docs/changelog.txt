@@ -1,5 +1,9 @@
 Changelog for Discuss.
 
+- #9349 Fix errors in build
+
+Discuss 1.1.0, December 24, 2012
+====================================
 - #7648 Fix certain topic replies and possible XSS hole.
 - #5742 Fix post page calculations
 - Add thread pagination in board view
