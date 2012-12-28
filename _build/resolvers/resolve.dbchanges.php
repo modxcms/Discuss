@@ -30,7 +30,6 @@
  */
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-        case xPDOTransport::ACTION_INSTALL:
         case xPDOTransport::ACTION_UPGRADE:
             $modx =& $object->xpdo;
             $modelPath = $modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/';
@@ -38,9 +37,9 @@ if ($object->xpdo) {
 
             /** @var xPDOManager $manager */
             $manager = $modx->getManager();
-            
-            //$modx->query("ALTER TABLE ".$modx->getTableName('disUserProfile')." ADD COLUMN `use_gravatar` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' AFTER `avatar`");
-            //$modx->query("ALTER TABLE ".$modx->getTableName('disUserProfile')." ADD COLUMN `avatar_service` VARCHAR(255) NOT NULL DEFAULT 'gravatar' AFTER `avatar`");
+
+            /* Set log level to ERROR */
+            $logLevel = $modx->setLogLevel(xPDO::LOG_LEVEL_ERROR);
 
             $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD COLUMN `locked` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER `status`");
             $modx->query("ALTER TABLE ".$modx->getTableName('disBoard')." ADD INDEX `locked` (`locked`)");
@@ -74,13 +73,16 @@ if ($object->xpdo) {
             $manager->addIndex('disUserFriend','user');
             $manager->addIndex('disUserFriend','friend');
 
-            $manager->addField('disBoard','ltr');
-            $manager->addIndex('disBoard','ltr');
+            $manager->addField('disBoard','rtl');
+            $manager->addIndex('disBoard','rtl');
 
             $manager->addField('disThread','post_last_on');
             $manager->addIndex('disThread','post_last_on');
 
             $manager->addField('disThread','participants');
+
+            /* Set log level back to what it was */
+            $modx->setLogLevel($logLevel);
 
         break;
     }

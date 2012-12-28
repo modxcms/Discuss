@@ -36,8 +36,8 @@ if ($object->xpdo) {
 
             $manager = $modx->getManager();
 
-            $manager->createObjectContainer('disBanGroup');
-            $manager->createObjectContainer('disBanItem');
+            //$manager->createObjectContainer('disBanGroup');
+            //$manager->createObjectContainer('disBanItem');
             $manager->createObjectContainer('disBoard');
             $manager->createObjectContainer('disBoardClosure');
             $manager->createObjectContainer('disBoardUserGroup');
