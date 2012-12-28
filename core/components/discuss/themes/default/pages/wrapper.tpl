@@ -14,6 +14,7 @@
     <link href="[[+discuss.config.cssUrl]]redo/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css">
 
     <link href="[[+discuss.config.cssUrl]]redo/lib/gridset.css" rel="stylesheet" type="text/css">
+    <script src="[[+discuss.config.jsUrl]]LABjs/LAB.min.js"></script>
     [[*cssjs]]
 </head>
 <body id="forumbody-[[+controller.controller]]" class="forums[[+discuss.user.id:notempty=` a-loggedin`]]">

@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- #9350 Add missing javascript link for $lAB in default theme
 - #9349 Fix errors in build
 
 Discuss 1.1.0, December 24, 2012
