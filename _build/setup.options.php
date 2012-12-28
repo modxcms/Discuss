@@ -57,7 +57,7 @@ $output = '
 <br /><br />
 
 <label for="discuss-install_resource">Install Discuss Resource:</label>
-<input type="checkbox" name="install_demodata" id="discuss-install_resource" value="1"'.$demoDataChecked.' />
+<input type="checkbox" name="install_resource" id="discuss-install_resource" value="1"'.$demoDataChecked.' />
 <p>Checking this field will create a Resource in your site root with the alias "forums" with Discuss setup inside it.</p>
 <br /><br />
 ';

@@ -1,35 +1,15 @@
 ## Discuss
 
-A native, threaded forum solution for MODx Revolution.
+Discuss is a powerful native forum solution for MODX Revolution.
 
-This is an alpha prerelease. Therefore, things might break. But have fun. :)
-
-Feel free to suggest ideas/improvements/bugs.
+* [Source on Github](https://github.com/modxcms/Discuss)
+* [Documentation](http://rtfm.modx.com/display/ADDON/Discuss) (Requires a MODX.com account to update)
+* [Features & Bugs](http://tracker.modx.com/projects/discuss/issues) (Requires a MODX.com account to create issues)
 
 ## Installation
 
-Clone the Git repo in a directory outside of MODx.
+You do not need this Github repository to install Discuss, but it does help if you want to contribute back or if
+you want to maintain a custom theme.
 
-That'll let you develop and run it straight from your Git repo. Next, build it
-by copying the _build/build.config.sample.php to build.config.php, filling it out
-and running _build/build.transport.php. This will create a transport zip file.
-
-Go to Package Management, click 'Add New Package', and select 'Scan from Local'.
-This will load the local package you just built. Install it, which will setup
-the tables, Resources and other stuff.
-
-Then add these system settings:
-
-- discuss.core_path - point to path/of/yourdiscussrepo/core/components/discuss/
-- discuss.assets_path - point to path/of/yourdiscussrepo/assets/components/discuss/
-- discuss.assets_url - point to the web path to /url/of/yourdiscussrepo/assets/components/discuss/
-
-Put the Discuss snippet in an empty template Resource:
-
-`[[!Discuss]]`
-
-Then make sure you've installed the FormIt and Login Extras.
-
-Finally, create pages for registration, login, and updating profile, and turn discuss.sso_mode on. Map
-the System Settings for each resource. Set the appropriate preHooks and postHooks for each snippet,
-and you're ready to roll!
+* [Installation using the MODX Package Manager](http://rtfm.modx.com/display/ADDON/Discuss.Installation)
+* [Installation from Git](http://rtfm.modx.com/display/ADDON/Discuss.Installation+from+Git)
