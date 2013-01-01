@@ -14,7 +14,7 @@
 
 
 	<div class="right preview_toggle">
-		<a href="#" class="preview" id="dis-preview-btn" title="[[%discuss.preview]]">[[%discuss.preview]]</a>
+		<a href="javascript:void(0);" class="preview" id="dis-preview-btn" title="[[%discuss.preview]]">[[%discuss.preview]]</a>
 	</div>
 </div>
 <div id="dis-message-preview"></div>
