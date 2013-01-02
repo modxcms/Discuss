@@ -1,4 +1,4 @@
- <?php
+<?php
 /**
  * Discuss
  *
@@ -228,13 +228,17 @@ class disPost extends xPDOSimpleObject {
 
     /**
      * Index the post into the search system
-     * 
+     *
+     * @param array $options
      * @return bool
      */
-    public function index() {
+    public function index(array $options = array()) {
         if (defined('DISCUSS_IMPORT_MODE') && DISCUSS_IMPORT_MODE) return true;
         $indexed = false;
-        if ($this->xpdo->discuss->loadSearch()) {
+        if(!isset($this->xpdo->discuss->search)) {
+            $this->xpdo->discuss->loadSearch();
+        }
+        if (isset($this->xpdo->discuss->search) && is_object($this->xpdo->discuss->search)) {
             $postArray = $this->toArray();
             $postArray['url'] = $this->getUrl();
             if (empty($postArray['username'])) {
@@ -243,7 +247,7 @@ class disPost extends xPDOSimpleObject {
                     $postArray['username'] = $this->Author->get('username');
                 }
             }
-            if (empty($postArray['board_name'])) {
+            if (empty($postArray['board_name']) || empty($postArray['category_name'])) {
                 $this->getOne('Board');
                 if ($this->Board) {
                     $postArray['board_name'] = $this->Board->get('name');
@@ -259,9 +263,28 @@ class disPost extends xPDOSimpleObject {
                 $postArray['private'] = $this->Thread->get('private');
                 $postArray['users'] = $this->Thread->get('users');
                 $postArray['replies'] = $this->Thread->get('replies');
+
+                // first post in thread?
+                if($this->Thread->post_first == $this->get('id')) {
+                    // question?
+                    if($this->Thread->class_key == 'disThreadQuestion') {
+                        $postArray['question'] = true;
+                    }
+                    // answered?
+                    if($this->Thread->answered) {
+                        $postArray['answered'] = true;
+                    }
+                }
+                // is answer?
+                // (already set)
+                // in answered thread?
+                if($this->Thread->answer_ed) {
+                    $postArray['in_answered_thread'] = true;
+                }
             }
+            // index post
             $postArray['message'] = $this->getContent();
-            $indexed = $this->xpdo->discuss->search->index($postArray);
+            $indexed = $this->xpdo->discuss->search->index($postArray, $options);
         }
         return $indexed;
     }
