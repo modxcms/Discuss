@@ -8,9 +8,9 @@
             </div>
         </div>
         <div class="f8-f10">
-            [[+last_post_id:gte=`1`:then=`
+            [[+last_post_id:notempty=`
             <span class="clickable" data-link="[[+last_post_url]]">[[+last_post_title:default=`&nbsp;`]]</span>
-            `:else=`&nbsp;`]]
+            `]]
         </div>
         <div class="f11 l-txtcenter">[[+num_replies]]</div>
         <div class="f12 l-txtcenter">[[+num_topics]]</div>
