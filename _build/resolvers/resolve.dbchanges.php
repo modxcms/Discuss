@@ -81,6 +81,9 @@ if ($object->xpdo) {
 
             $manager->addField('disThread','participants');
 
+            /** 2013/01/03: change "message" dbtype from "text" to "mediumtext" for larger posts */
+            $manager->alterField('disPost','message');
+
             /* Set log level back to what it was */
             $modx->setLogLevel($logLevel);
 
