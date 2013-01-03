@@ -2,7 +2,7 @@
 [[+top]]
 [[+aboveBoards]]
 [[+boards:notempty=`
-<div class="dis-threads forum-grid category boards">[[+boards]]</div>
+    <div class="dis-threads forum-grid category boards">[[+boards]]</div>
 `]]
 [[+belowBoards]]
 <div class="dis-threads forum-grid">
