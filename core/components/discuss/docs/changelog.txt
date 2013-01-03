@@ -1,5 +1,8 @@
 Changelog for Discuss.
 
+- Increase size of disPost.message field to mediumtext.
+- Merge in various updates primarily related to search and solr.
+
 Discuss 1.1.1, December 28, 2012
 ====================================
 - #9350 Add missing javascript link for $lAB in default theme
