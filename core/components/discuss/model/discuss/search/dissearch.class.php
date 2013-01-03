@@ -54,6 +54,8 @@ class disSearch {
      * Index the current search result.
      *
      * @param array $fields
+     * @param array $options
+     *
      * @return bool
      */
     public function index(array $fields = array(), array $options = array()) {
