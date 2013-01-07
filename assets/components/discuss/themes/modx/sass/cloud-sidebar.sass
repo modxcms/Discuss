@@ -41,6 +41,8 @@ $r-border: 3px
     figcaption
         display: block
         margin: $spacing-single*2 0 0 0
+        padding-bottom: $spacing-single
+        background-image: url('../../images/temp/cloud-banners-012013/divide-cite.png')
         .wrap
             display: inline-block
             vertical-align: top
@@ -63,6 +65,13 @@ $r-border: 3px
         display: block
         margin: auto
         max-width: 240px
+.m-cloud-banner-msg
+    font-size: 1.5em
+    +rem('padding', $spacing-single)
+    +rem('margin', (-$spacing-single) (-$spacing-single) $spacing-single (-$spacing-single))
+    font-size: 1.4em
+    background-color: lighten($c-cloud, 10%)
+    border-radius: $r-border $r-border 0 0
 
 .m-cloud-banner-cta
     line-height: 1
@@ -71,9 +80,15 @@ $r-border: 3px
     font-size: 1.4em
     text-align: center
     +rem('padding', $spacing-single/2 0)
-    +rem('margin', ($spacing-single*2) 0 $spacing-single 0)
+    +rem('margin', ($spacing-single) 0 $spacing-single 0)
     @include border-radius($r-border)
     @include background-clip(padding-box)
+    @include text-shadow(0 0 2px rgba(0,0,0,.8))
     background-color: #66a747
     @include box-shadow(0 2px 1px rgba(0,1,1,.34), 0 0 7px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.51))
     @include background-image(linear-gradient(bottom, #66a747 0%, #66a747 27.76%, #9ec650 100%))
+    &:hover
+        background-color: #66a747
+        @include background-image(linear-gradient(bottom, #7db94f 0%, #7db94f 27.76%, #a6d055 100%))
+
+
