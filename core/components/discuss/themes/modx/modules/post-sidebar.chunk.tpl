@@ -38,34 +38,7 @@
         </div>`:else=``]]
     </div>
     [[$ad.cloud.ForumsSidebarTestimonial]]
-    [[- Start of Cloud Ad ]]
-    <section class="m-cloud-banner">
-        <figure>
-            <blockquote>
-                <p>MODX Cloud makes presenting to clients a breeze.  I can decide which website version to show at any time.</p>
-            </blockquote>
-             <figcaption class="attribution">
-                <div class="wrap left">
-                    <span class="avatar"><img src="[[+discuss.config.imagesUrl]]temp/cloud-banners-012013/ben-davis.jpg"></span>
-                </div>
-                <div class="wrap right">
-                    <span class="name">Ben Davis</span>
-                    <span class="organization">BD Creative</span>
-                </div>
-            </figcaption>
-        </figure>
-        <a class="m-cloud-banner-cta" href="https://modxcloud.com">Try Free 15 Days</a>
-        <img src="[[+discuss.config.imagesUrl]]temp/cloud-banners-012013/modx-cloud-logo.png">
-    </section>
-    [[- End of Cloud Ad ]]
-
-    [[- Start of Alt Cloud Ad ]]
-    <section class="m-cloud-banner">
-        <p class="m-cloud-banner-msg">Capture and reuse your MODX Projects with in MODX Cloud. </p>
-        <a class="m-cloud-banner-cta" href="https://modxcloud.com">Try Free 15 Days</a>
-        <img src="[[+discuss.config.imagesUrl]]temp/cloud-banners-012013/modx-cloud-logo.png">
-    </section>
-    [[- End of Alt Cloud Ad ]]
+    [[$ad.cloud.ForumsSidebar]]
 </aside>
 
 
