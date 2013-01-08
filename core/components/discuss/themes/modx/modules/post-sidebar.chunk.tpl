@@ -37,6 +37,7 @@
             <p>[[+readers]]</p>
         </div>`:else=``]]
     </div>
+    [[$ad.cloud.ForumsSidebarTestimonial]]
     [[- Start of Cloud Ad ]]
     <section class="m-cloud-banner">
         <figure>
