@@ -10,6 +10,14 @@
             <p>[[+moderators]]</p>
         </div>`]]
 
+
+        [[- MODX Cloud ad will go here … ]]
+
+        [[$ad.cloud.ForumsSidebar.launchSeconds]]
+        [[$ad.cloud.ForumsSidebar.sendSeconds]]
+        [[$ad.cloud.ForumsSidebar.timeRead]]
+
+
         [[+show_be_nice_box:is=`1`:then=`
         <div class="box">
             <h4>Don't Be That Guy</h4>
@@ -20,7 +28,6 @@
             <p>Remember, this is an Open Source project and the volunteers here assist out of love for the project and a desire to help others.</p>
         </div>`]]
 
-        [[- MODX Cloud ad will go here … ]]
 
         <div class="Box GuestBox">
             <div class="a-faux-btn-grp">
@@ -38,7 +45,7 @@
         </div>`:else=``]]
     </div>
     [[$ad.cloud.ForumsSidebarTestimonial]]
-    [[$ad.cloud.ForumsSidebar]]
+    
 </aside>
 
 
