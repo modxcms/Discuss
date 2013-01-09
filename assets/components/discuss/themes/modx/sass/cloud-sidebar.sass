@@ -25,7 +25,7 @@ $r-border: 3px
     blockquote
         +rem('padding', $spacing-single)
         +rem('margin', 0 -$spacing-single)
-        font-size: 1.4em
+        +rem('font-size', 17px)
         background-color: rgb(59,96,160)
         border-radius: $r-border $r-border 0 0
         position: relative
@@ -67,9 +67,8 @@ $r-border: 3px
         display: block
         margin: auto
         max-width: 240px
-p.m-cloud-banner-msg,
 .m-cloud-banner-msg
-    +rem('font-size', 14px)
+    +rem('font-size', 17px)
     +rem('padding', $spacing-single)
     padding: $spacing-single !important
     +rem('margin', (-$spacing-single) (-$spacing-single) $spacing-single (-$spacing-single))
@@ -80,7 +79,7 @@ p.m-cloud-banner-msg,
     line-height: 1
     width: 100%
     display: block
-    +rem('font-size', 14px)
+    +rem('font-size', 17px)
     text-align: center
     +rem('padding', $spacing-single/2 0)
     +rem('margin', ($spacing-single) 0 $spacing-single 0)
