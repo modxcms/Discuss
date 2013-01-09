@@ -12,9 +12,6 @@
 
 
         [[- MODX Cloud ad will go here … ]]
-
-        [[$ad.cloud.ForumsSidebar.launchSeconds]]
-        [[$ad.cloud.ForumsSidebar.sendSeconds]]
         [[$ad.cloud.ForumsSidebar.timeRead]]
 
 
