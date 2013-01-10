@@ -12,7 +12,13 @@
 
 
         [[- MODX Cloud ad will go here … ]]
-        [[$ad.cloud.ForumsSidebar.timeRead]]
+        [[!getCache?
+            &element=`RandomChunk`
+            &cacheKey=`RandomChunkAd`
+            &cacheExpires=`300`
+            &parents=`[[*id]]`
+            &chunks=`[[$ad.cloud.ForumsSidebar.RandomAdList]]`
+        ]]
 
 
         [[+show_be_nice_box:is=`1`:then=`
@@ -41,8 +47,13 @@
             <p>[[+readers]]</p>
         </div>`:else=``]]
     </div>
-    [[$ad.cloud.ForumsSidebarTestimonial]]
-    
+        [[!getCache?
+            &element=`RandomChunk`
+            &cacheKey=`RandomChunkTL`
+            &cacheExpires=`300`
+            &parents=`[[*id]]`
+            &chunks=`[[$ad.cloud.ForumsSidebar.RandomTestimonialList]]`
+        ]]    
 </aside>
 
 
