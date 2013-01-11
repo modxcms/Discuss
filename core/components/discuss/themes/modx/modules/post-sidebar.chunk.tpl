@@ -18,6 +18,7 @@
             &cacheExpires=`300`
             &parents=`[[*id]]`
             &chunks=`[[$ad.cloud.ForumsSidebar.RandomAdList]]`
+            &imageUrl=`[[+discuss.config.imagesUrl]]`
         ]]
 
 
@@ -53,6 +54,7 @@
             &cacheExpires=`300`
             &parents=`[[*id]]`
             &chunks=`[[$ad.cloud.ForumsSidebar.RandomTestimonialList]]`
+            &imageUrl=`[[+discuss.config.imagesUrl]]`
         ]]    
 </aside>
 
