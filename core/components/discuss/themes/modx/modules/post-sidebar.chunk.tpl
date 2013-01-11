@@ -46,14 +46,7 @@
             <p>Posted in this thread:<br />[[+participants_usernames]]</p>
             <p>[[+readers]]</p>
         </div>`:else=``]]
-    </div>
-        [[!getCache?
-            &element=`RandomChunk`
-            &cacheKey=`RandomChunkTL`
-            &cacheExpires=`300`
-            &parents=`[[*id]]`
-            &chunks=`[[$ad.cloud.ForumsSidebar.RandomTestimonialList]]`
-        ]]    
+    </div> 
 </aside>
 
 
