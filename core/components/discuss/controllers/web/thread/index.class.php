@@ -87,7 +87,7 @@ class DiscussThreadController extends DiscussController {
      * @return string
      */
     public function getSessionPlace() {
-        return 'thread:'. ( ($this->thread instanceof disThread) ? $this->thread->get('id') : $this->getProperty('thread') ).':'.$this->getProperty('page',1);
+        return 'thread:'. ( ($this->thread instanceof disThread) ? $this->thread->get('id') : (int)$this->getProperty('thread') ).':'.(int)$this->getProperty('page',1);
     }
 
     public function process() {
