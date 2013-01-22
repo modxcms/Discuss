@@ -47,7 +47,7 @@ class DiscussPostTrackController extends DiscussController {
         
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.post_per_page',null,10));
         //$start = $this->getProperty('start',0);
-        $page = $this->getProperty('page',1);
+        $page = (int)$this->getProperty('page',1);
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 

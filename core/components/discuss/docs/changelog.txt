@@ -1,7 +1,7 @@
 Changelog for Discuss.
 
-- Hot fix XSS in the search controller (date_start, date_end).
-- Hot fix XSS in the index controller (page).
+- Fix XSS in the search controller (date_start, date_end).
+- Fix XSS in the page variable.
 - Increase size of disPost.message field to mediumtext.
 - Merge in various updates primarily related to search and solr.
 

@@ -63,7 +63,7 @@ class DiscussBoardController extends DiscussController {
      * @return array
      */
     public function getSessionPlace() {
-        return 'board:'.$this->board->get('id').':'.$this->getProperty('page',1);
+        return 'board:'.$this->board->get('id').':'.(int)$this->getProperty('page',1);
     }
     /**
      * {@inheritdoc}
@@ -117,7 +117,7 @@ class DiscussBoardController extends DiscussController {
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.threads_per_page',null,20));
         $start = $this->getProperty('start',0);
         if (empty($start)) {
-            $page = $this->getProperty('page',1);
+            $page = (int)$this->getProperty('page',1);
             $page = $page <= 0 ? 1 : $page;
             $start = ($page-1) * $limit;
         }

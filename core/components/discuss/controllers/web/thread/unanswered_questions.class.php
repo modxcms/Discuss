@@ -36,7 +36,7 @@ class DiscussThreadUnansweredQuestionsController extends DiscussThreadUnreadCont
     }
 
     public function getSessionPlace() {
-        return 'thread/unanswered_questions::'.$this->getProperty('page',1);
+        return 'thread/unanswered_questions::'.(int)$this->getProperty('page',1);
     }
 
     /**

@@ -81,8 +81,8 @@ class DiscussSearchController extends DiscussController {
     public function search($s) {
         $resultRowTpl = $this->modx->getOption('resultRowTpl',$this->scriptProperties,'disSearchResult');
         $toggle = $this->modx->getOption('toggle',$this->scriptProperties,'+');
-        $limit = !empty($this->scriptProperties['limit']) ? $this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
-        $page = !empty($this->scriptProperties['page']) ? $this->scriptProperties['page'] : 1;
+        $limit = !empty($this->scriptProperties['limit']) ? (int)$this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
+        $page = !empty($this->scriptProperties['page']) ? (int)$this->scriptProperties['page'] : 1;
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
         $end = $start+$limit;

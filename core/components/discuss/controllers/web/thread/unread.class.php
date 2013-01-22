@@ -60,7 +60,7 @@ class DiscussThreadUnreadController extends DiscussController {
         return $this->modx->lexicon('discuss.unread_posts').' ('.number_format($this->threads['total']).')';
     }
     public function getSessionPlace() {
-        return 'thread/unread::'.$this->getProperty('page',1);
+        return 'thread/unread::'.(int)$this->getProperty('page',1);
     }
     public function process() {
         /* setup default properties */
@@ -84,7 +84,7 @@ class DiscussThreadUnreadController extends DiscussController {
 
     public function getData() {
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.threads_per_page',null,20),'!empty');
-        $page = $this->getProperty('page',1,'!empty');
+        $page = (int)$this->getProperty('page',1,'!empty');
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 
