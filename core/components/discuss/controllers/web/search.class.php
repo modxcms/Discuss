@@ -150,7 +150,11 @@ class DiscussSearchController extends DiscussController {
                 'results' => 'Could not load search class.',
             ));
         }
-        $this->setPlaceholders($this->scriptProperties);
+        $dateFormat = $this->modx->getOption('manager_date_format');
+        $this->setPlaceholders(array(
+            'date_start' => empty($this->scriptProperties['date_start']) ? strftime($dateFormat,strtotime($this->scriptProperties['date_start'])) : '',
+            'date_end' => empty($this->scriptProperties['date_end']) ? strftime($dateFormat,strtotime($this->scriptProperties['date_end'])) : '',
+        ));
     }
 
     /**
@@ -165,7 +169,9 @@ class DiscussSearchController extends DiscussController {
             $conditions['board'] = $this->modx->call('disBoard','fetchList',array(&$this->modx));
         }
 
-        if (!empty($this->scriptProperties['category'])) { $conditions['category'] = $this->scriptProperties['category']; }
+        if (!empty($this->scriptProperties['category'])) {
+            $conditions['category'] = (int)$this->scriptProperties['category'];
+        }
         if (!empty($this->scriptProperties['user'])) {
             if (intval($this->scriptProperties['user']) <= 0) {
                 /** @var disUser $user */
@@ -174,7 +180,7 @@ class DiscussSearchController extends DiscussController {
                     $conditions['author'] = $user->get('id');
                 }
             } else {
-                $conditions['author'] = $this->scriptProperties['user'];
+                $conditions['author'] = (int)$this->scriptProperties['user'];
             }
         }
         $dateFormat = '%Y-%m-%dT%H:%M:%S.999Z';
