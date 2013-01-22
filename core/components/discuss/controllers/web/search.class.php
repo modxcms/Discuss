@@ -152,8 +152,8 @@ class DiscussSearchController extends DiscussController {
         }
         $dateFormat = $this->modx->getOption('manager_date_format');
         $this->setPlaceholders(array(
-            'date_start' => empty($this->scriptProperties['date_start']) ? strftime($dateFormat,strtotime($this->scriptProperties['date_start'])) : '',
-            'date_end' => empty($this->scriptProperties['date_end']) ? strftime($dateFormat,strtotime($this->scriptProperties['date_end'])) : '',
+            'date_start' => !empty($this->scriptProperties['date_start']) ? strftime($dateFormat,strtotime($this->scriptProperties['date_start'])) : '',
+            'date_end' => !empty($this->scriptProperties['date_end']) ? strftime($dateFormat,strtotime($this->scriptProperties['date_end'])) : '',
         ));
     }
 
