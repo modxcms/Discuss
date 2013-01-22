@@ -36,7 +36,7 @@ class DiscussThreadNoRepliesController extends DiscussThreadUnreadController {
     }
 
     public function getSessionPlace() {
-        return 'thread/no_replies::'.$this->getProperty('page',1);
+        return 'thread/no_replies::'.(int)$this->getProperty('page',1);
     }
 
     /**

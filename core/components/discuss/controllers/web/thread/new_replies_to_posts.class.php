@@ -41,7 +41,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         return $this->modx->lexicon('discuss.new_replies_to_posts').' ('.number_format($this->threads['total']).')';
     }
     public function getSessionPlace() {
-        return 'thread/new_replies_to_posts::'.$this->getProperty('page',1);
+        return 'thread/new_replies_to_posts::'.(int)$this->getProperty('page',1);
     }
 
     public function getDefaultOptions() {
@@ -56,7 +56,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
         /* setup default properties */
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.threads_per_page',null,20),'empty');
         $limit = !empty($this->scriptProperties['limit']) ? $this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
-        $page = $this->getProperty('page',1);
+        $page = (int)$this->getProperty('page',1);
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 
