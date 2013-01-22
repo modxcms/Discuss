@@ -44,12 +44,12 @@ class DiscussThreadRecentController extends DiscussController {
         return $this->modx->lexicon('discuss.recent_posts').' ('.number_format($this->list['total']).')';
     }
     public function getSessionPlace() {
-        return 'thread/recent::'.$this->getProperty('page',1);
+        return 'thread/recent::'.(int)$this->getProperty('page',1);
     }
     public function process() {
         /* get default options */
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.num_recent_posts',null,10),'!empty');
-        $page = $this->getProperty('page',1);
+        $page = (int)$this->getProperty('page',1);
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 

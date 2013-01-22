@@ -38,7 +38,7 @@ class DiscussMessagesController extends DiscussController {
         return $this->modx->lexicon('discuss.messages');
     }
     public function getSessionPlace() {
-        return 'messages::'.$this->getProperty('page',1);
+        return 'messages::'.(int)$this->getProperty('page',1);
     }
     public function process() {
         $this->modx->lexicon->load('discuss:post');
@@ -49,7 +49,7 @@ class DiscussMessagesController extends DiscussController {
 
     public function getMessages() {
         $limit = $this->getProperty('limit',$this->modx->getOption('discuss.threads_per_page',null,20),'empty');
-        $page = $this->getProperty('page',1);
+        $page = (int)$this->getProperty('page',1);
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 

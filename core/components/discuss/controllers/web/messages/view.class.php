@@ -58,7 +58,7 @@ class DiscussMessagesViewController extends DiscussController {
     public function getSessionPlace() {
         return 'messages/view:thread='.
             (($this->thread instanceof disThread) ? $this->thread->get('id') : $this->getProperty('thread',0)).
-            ':'.$this->getProperty('page',1);
+            ':'.(int)$this->getProperty('page',1);
     }
 
     public function process() {
