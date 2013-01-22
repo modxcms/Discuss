@@ -150,10 +150,12 @@ class DiscussSearchController extends DiscussController {
                 'results' => 'Could not load search class.',
             ));
         }
-        $dateFormat = $this->modx->getOption('manager_date_format');
+        $dateFormat = '%m/%d/%Y';
         $this->setPlaceholders(array(
-            'date_start' => !empty($this->scriptProperties['date_start']) ? strftime($dateFormat,strtotime($this->scriptProperties['date_start'])) : '',
-            'date_end' => !empty($this->scriptProperties['date_end']) ? strftime($dateFormat,strtotime($this->scriptProperties['date_end'])) : '',
+            'date_start' => (!empty($this->scriptProperties['date_start']) && is_numeric(strtotime($this->scriptProperties['date_start'])))
+                ? strftime($dateFormat,strtotime($this->scriptProperties['date_start'])) : '',
+            'date_end' => (!empty($this->scriptProperties['date_end']) && is_numeric(strtotime($this->scriptProperties['date_start'])))
+                ? strftime($dateFormat,strtotime($this->scriptProperties['date_end'])) : '',
         ));
     }
 
