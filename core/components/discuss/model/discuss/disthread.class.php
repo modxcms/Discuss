@@ -951,7 +951,7 @@ class disThread extends xPDOSimpleObject {
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
-        ));
+        ),false);
         if (!$notify) {
             $notify = $this->xpdo->newObject('disUserNotification');
             $notify->set('user',$userId);
@@ -977,7 +977,7 @@ class disThread extends xPDOSimpleObject {
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
-        ));
+        ),false);
         if ($notify) {
             if (!$notify->remove()) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove notification: '.print_r($notify->toArray(),true));
