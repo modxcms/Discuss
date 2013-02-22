@@ -35,6 +35,13 @@ class DiscussThreadModifyController extends DiscussController {
     /** @var disBoard $board */
     public $board;
 
+    public function getDefaultOptions() {
+        return array(
+            'textCheckboxLocked' => $this->modx->lexicon('discuss.thread_lock'),
+            'textCheckboxSticky' => $this->modx->lexicon('discuss.thread_stick'),
+        );
+    }
+
     public function getPageTitle() {
         return $this->modx->lexicon('discuss.modify_post_header',array('title' => $this->post->get('title')));
     }
@@ -107,13 +114,23 @@ class DiscussThreadModifyController extends DiscussController {
         if ($this->thread->canLock()) {
             $checked = !empty($_POST) ? !empty($_POST['locked']) : $this->thread->get('locked');
             $placeholders['locked'] = $checked ? ' checked="checked"' : '';
-            $placeholders['locked_cb'] = '<label class="dis-cb"><input type="checkbox" name="locked" value="1" '.$placeholders['locked'].' />'.$this->modx->lexicon('discuss.thread_lock').'</label>';
+            $placeholders['locked_cb'] = $this->discuss->getChunk('form/disCheckbox',array(
+                'name' => 'locked',
+                'value' => 1,
+                'text' => $this->getOption('textCheckboxLocked'),
+                'attributes' => $locked,
+            ));
             $placeholders['can_lock'] = true;
         }
         if ($this->thread->canStick()) {
             $checked = !empty($_POST) ? !empty($_POST['sticky']) : $this->thread->get('sticky');
             $placeholders['sticky'] = $checked ? ' checked="checked"' : '';
-            $placeholders['sticky_cb'] = '<label class="dis-cb"><input type="checkbox" name="sticky" value="1" '.$placeholders['sticky'].' />'.$this->modx->lexicon('discuss.thread_stick').'</label>';
+            $placeholders['sticky_cb'] = $this->discuss->getChunk('form/disCheckbox',array(
+                'name' => 'sticky',
+                'value' => 1,
+                'text' => $this->getOption('textCheckboxSticky'),
+                'attributes' => $sticky,
+            ));
             $placeholders['can_stick'] = true;
         }
 
