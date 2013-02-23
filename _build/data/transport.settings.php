@@ -448,6 +448,15 @@ $settings['discuss.show_whos_online']->fromArray(array(
     'area' => 'General',
 ),'',true,true);
 
+$settings['discuss.users_can_remove_own_posts']= $modx->newObject('modSystemSetting');
+$settings['discuss.users_can_remove_own_posts']->fromArray(array(
+    'key' => 'discuss.users_can_remove_own_posts',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'General',
+),'',true,true);
+
 $settings['discuss.spam_bucket_board']= $modx->newObject('modSystemSetting');
 $settings['discuss.spam_bucket_board']->fromArray(array(
     'key' => 'discuss.spam_bucket_board',
