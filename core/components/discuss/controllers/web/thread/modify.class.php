@@ -137,7 +137,8 @@ class DiscussThreadModifyController extends DiscussController {
             }
         }
         /* If the editing user is the author, show him the subscribe checkbox */
-        if($this->discuss->user->get('id') == $this->post->get('author')) {
+        if($this->discuss->user->get('id') == $this->post->get('author') 
+            && ($this->thread->canSubscribe() || $this->thread->canUnsubscribe())) {
             $checked = !empty($_POST) ? !empty($_POST['notify']) : $this->thread->hasSubscription();
             $placeholders['notify']     = $checked ? ' checked="checked"' : '';
             $placeholders['notify_cb']  = $this->discuss->getChunk('form/disCheckbox',array(

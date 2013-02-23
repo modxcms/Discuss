@@ -104,7 +104,7 @@ foreach ($attachments as $file) {
     }
 }
 
-/* allow editing the values of actionbuttons */
+/* allow editing of actionbutton values */
 if (!empty($fields['notify']) && $fields['notify'] == 1) {
     $thread->addSubscription($discuss->user->get('id'));
 } else {

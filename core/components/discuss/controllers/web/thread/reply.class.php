@@ -36,6 +36,14 @@ class DiscussThreadReplyController extends DiscussController {
     public $author;
     /** @var disBoard $board */
     public $board;
+    
+    public function getDefaultOptions() {
+        return array(
+            'textCheckboxLocked' => $this->modx->lexicon('discuss.thread_lock'),
+            'textCheckboxSticky' => $this->modx->lexicon('discuss.thread_stick'),
+            'textCheckboxNotify' => $this->modx->lexicon('discuss.subscribe_by_email'),
+        );
+    }
 
     public function initialize() {
         $thread = $this->getProperty('thread',false);
@@ -103,21 +111,43 @@ class DiscussThreadReplyController extends DiscussController {
      * @return void
      */
     public function checkThreadPermissions() {
-        if ($this->thread->canLock()) {
-            $locked = !empty($_POST['locked']) ? ' checked="checked"' : '';
+        if ($this->thread->canLock() || $this->thread->canUnlock()) {
+            $locked = (!empty($_POST['locked']) ||  $this->thread->get('locked')) ? ' checked="checked"' : '';
             $this->setPlaceholders(array(
                 'locked' => $locked,
-                'locked_cb' => '<label class="dis-cb"><input type="checkbox" name="locked" value="1" '.$locked.' />'.$this->modx->lexicon('discuss.thread_lock').'</label>',
+                'locked_cb' => $this->discuss->getChunk('form/disCheckbox',array(
+                    'name' => 'locked',
+                    'value' => 1,
+                    'text' => $this->getOption('textCheckboxLocked'),
+                    'attributes' => $locked,
+                )),
                 'can_lock' => true,
             ));
         }
-        if ($this->thread->canStick()) {
-            $sticky = !empty($_POST['sticky']) ? ' checked="checked"' : '';
+        if ($this->thread->canStick() || $this->thread->canUnstick()) {
+            $sticky = (!empty($_POST['sticky']) || $this->thread->get('sticky')) ? ' checked="checked"' : '';
             $this->setPlaceholders(array(
                 'sticky' => $sticky,
-                'sticky_cb' => '<label class="dis-cb"><input type="checkbox" name="sticky" value="1" '.$sticky.' />'.$this->modx->lexicon('discuss.thread_stick').'</label>',
+                'sticky_cb' => $this->discuss->getChunk('form/disCheckbox',array(
+                    'name' => 'sticky',
+                    'value' => 1,
+                    'text' => $this->getOption('textCheckboxSticky'),
+                    'attributes' => $sticky,
+                )),
                 'can_stick' => true,
             ));
+        }
+        if ($this->thread->canSubscribe() || $this->thread->canUnsubscribe()) {
+            $notify = (!empty($_POST['notify']) || $this->thread->hasSubscription()) ? ' checked="checked"' : '';
+            $this->setPlaceholders(array(
+                'notify_cb' => $this->discuss->getChunk('form/disCheckbox',array(
+                    'name' => 'notify',
+                    'value' => 1,
+                    'text' => $this->getOption('textCheckboxNotify'),
+                    'attributes' => $notify,
+                )),
+                'can_subscribe' => true,
+            ));                     
         }
     }
 
