@@ -51,7 +51,7 @@ class DiscussPostRemoveController extends DiscussController {
 
     public function checkPermissions() {
         $isModerator = $this->thread->isModerator();
-        $canRemovePost = $this->discuss->user->get('id') == $this->post->get('author') || $isModerator;
+        $canRemovePost = $this->post->canRemove();
         if (!$canRemovePost) {
             return $this->thread->getUrl();
         }

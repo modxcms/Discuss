@@ -58,7 +58,9 @@ class DiscussPostReportController extends DiscussController {
 
     public function process() {
         /* get breadcrumb trail */
-        $this->setPlaceholders($this->post->toArray());
+        $postArray = $this->post->toArray();
+        $this->post->renderAuthorMeta($postArray);
+        $this->setPlaceholders($postArray);
         $this->setPlaceholder('url',$this->post->getUrl());
 
         /* output */
