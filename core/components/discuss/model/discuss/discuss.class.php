@@ -406,7 +406,10 @@ class Discuss {
         $this->session =& $session;
 
         /* remove old sessions */
-        $this->modx->query('DELETE FROM '.$this->modx->getTableName('disSession').' WHERE (access + ttl) < '.time());
+        $sessionTtl = $this->modx->getOption('discuss.session_ttl', null, 3600);
+        $this->modx->removeCollection('disSession', array(
+            'access:<' => time() - $sessionTtl,
+        ));
     }
 
     /**
