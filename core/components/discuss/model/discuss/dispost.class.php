@@ -643,9 +643,13 @@ class disPost extends xPDOSimpleObject {
      * @return mixed The cleansed content
      */
     public function stripBBCode($str) {
-         $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
-         $replace = '';
-         return preg_replace($pattern, $replace, $str);
+        $doStrip = (bool)$this->xpdo->getOption('discuss.strip_remaining_bbcode', null, false);
+        if ($doStrip) {
+            $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
+            $replace = '';
+            $str = preg_replace($pattern, $replace, $str);
+        }
+        return $str;
     }
 
     /**

@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- Add ability to bypass stripping remaining bbcode in disPost.getContent
 - Fix viewing stats due to changed session place in earlier version.
 - Improve performance of disSession GC
 - Get rid of MODX.com analytics code in default theme.
