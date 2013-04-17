@@ -18,15 +18,15 @@
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon-144x144-precomposed.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="512x512" href="[[+discuss.config.imagesUrl]]apple/apple-touch-icon-512x512-precomposed.png" />
 
-    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css?v=20121228" rel="stylesheet" type="text/css">
+    <link href="[[+discuss.config.cssUrl]]redo/forums-styles.css?v=20120111" rel="stylesheet" type="text/css">
     <link href="[[+discuss.config.cssUrl]]redo/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css">
 
     [[- toggles in progress breakpoint work]]
     [[++forums_css_framework:notempty=`
-    <link href="[[+discuss.config.cssUrl]]redo/forums-bp-styles.css" rel="stylesheet" type="text/css">
+    <link href="[[+discuss.config.cssUrl]]redo/forums-bp-styles.css?v=20120111" rel="stylesheet" type="text/css">
     <link href="https://get.gridsetapp.com/7032/gzip/" rel="stylesheet" />
     `:default=`
-    <link href="[[+discuss.config.cssUrl]]redo/lib/gridset.css" rel="stylesheet" />[[- Will eventually download and combine]]
+    <link href="[[+discuss.config.cssUrl]]redo/lib/gridset.css?v=20120111" rel="stylesheet" />[[- Will eventually download and combine]]
     `]]
 
     [[*cssjs]]

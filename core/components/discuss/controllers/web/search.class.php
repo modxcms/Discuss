@@ -81,8 +81,8 @@ class DiscussSearchController extends DiscussController {
     public function search($s) {
         $resultRowTpl = $this->modx->getOption('resultRowTpl',$this->scriptProperties,'disSearchResult');
         $toggle = $this->modx->getOption('toggle',$this->scriptProperties,'+');
-        $limit = !empty($this->scriptProperties['limit']) ? $this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
-        $page = !empty($this->scriptProperties['page']) ? $this->scriptProperties['page'] : 1;
+        $limit = !empty($this->scriptProperties['limit']) ? (int)$this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
+        $page = !empty($this->scriptProperties['page']) ? (int)$this->scriptProperties['page'] : 1;
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
         $end = $start+$limit;
@@ -150,7 +150,13 @@ class DiscussSearchController extends DiscussController {
                 'results' => 'Could not load search class.',
             ));
         }
-        $this->setPlaceholders($this->scriptProperties);
+        $dateFormat = '%m/%d/%Y';
+        $this->setPlaceholders(array(
+            'date_start' => (!empty($this->scriptProperties['date_start']) && is_numeric(strtotime($this->scriptProperties['date_start'])))
+                ? strftime($dateFormat,strtotime($this->scriptProperties['date_start'])) : '',
+            'date_end' => (!empty($this->scriptProperties['date_end']) && is_numeric(strtotime($this->scriptProperties['date_start'])))
+                ? strftime($dateFormat,strtotime($this->scriptProperties['date_end'])) : '',
+        ));
     }
 
     /**
@@ -165,7 +171,9 @@ class DiscussSearchController extends DiscussController {
             $conditions['board'] = $this->modx->call('disBoard','fetchList',array(&$this->modx));
         }
 
-        if (!empty($this->scriptProperties['category'])) { $conditions['category'] = $this->scriptProperties['category']; }
+        if (!empty($this->scriptProperties['category'])) {
+            $conditions['category'] = (int)$this->scriptProperties['category'];
+        }
         if (!empty($this->scriptProperties['user'])) {
             if (intval($this->scriptProperties['user']) <= 0) {
                 /** @var disUser $user */
@@ -174,7 +182,7 @@ class DiscussSearchController extends DiscussController {
                     $conditions['author'] = $user->get('id');
                 }
             } else {
-                $conditions['author'] = $this->scriptProperties['user'];
+                $conditions['author'] = (int)$this->scriptProperties['user'];
             }
         }
         $dateFormat = '%Y-%m-%dT%H:%M:%S.999Z';

@@ -1,0 +1,101 @@
+// MODX Cloud Sidebar Ad
+// 1/2013
+
+// Vars for ad only
+$spacing-single: 16px
+$c-cloud: #2f4a7b
+$r-border: 3px
+
+.m-cloud-banner-btn-wrap, .m-cloud-banner-btn-wrap:hover
+    text-decoration: none
+.m-cloud-banner
+    +rem('margin', ($spacing-single*1.6) 0 $spacing-single 0)
+    // margin-left: auto // needed to circumvent issue with rem converter using auto
+    // margin-right: auto
+    +rem('padding', $spacing-single)
+    border-radius: $r-border
+    background-color: $c-cloud
+    @include box-shadow(inset 0 0 5px rgba(0,0,0,.84))
+    color: #fff
+    max-width: 250px
+    a
+        color: #fff
+        &:hover
+            text-decoration: none
+    p
+        color: #fff !important
+    blockquote
+        +rem('padding', $spacing-single)
+        +rem('margin', 0 -$spacing-single)
+        +rem('font-size', 17px)
+        background-color: rgb(59,96,160)
+        border-radius: $r-border $r-border 0 0
+        position: relative
+
+        &:after
+            content: ""
+            position: absolute
+            width: 100%
+            height: 28px
+            background-image: url('../../images/temp/cloud-banners-012013/message-notch.png')
+            background-repeat: no-repeat
+            background-position: top right
+            left: 0
+            bottom: -28px
+    figcaption
+        display: block
+        margin: $spacing-single*2 0 0 0
+        padding-bottom: $spacing-single
+        background-image: url('../../images/temp/cloud-banners-012013/divide-cite.png')
+        .wrap
+            display: inline-block
+            vertical-align: top
+            &.left
+                width: 25%
+            &.right
+                width: 70%
+                margin-left: 3%
+        .organization, .name
+            display: block
+            text-align: left
+        .name
+            font-weight: 700
+            +rem('font-size', 17px)
+            opacity: .99
+        img
+            border-radius: $r-border
+    img
+        width: 100%
+        display: block
+        margin: auto
+        max-width: 240px
+.m-cloud-banner-msg
+    +rem('font-size', 17px)
+    +rem('padding', $spacing-single)
+    padding: $spacing-single !important
+    +rem('margin', (-$spacing-single) (-$spacing-single) $spacing-single (-$spacing-single))
+    background-color: lighten($c-cloud, 10%)
+    border-radius: $r-border $r-border 0 0
+
+.m-cloud-banner-cta
+    line-height: 1
+    width: 100%
+    display: block
+    +rem('font-size', 17px)
+    text-align: center
+    +rem('padding', $spacing-single/2 0)
+    +rem('margin', ($spacing-single) 0 $spacing-single 0)
+    @include border-radius($r-border)
+    @include background-clip(padding-box)
+    @include text-shadow(0 0 2px rgba(0,0,0,.8))
+    background-color: #66a747
+    @include box-shadow(0 2px 1px rgba(0,1,1,.34), 0 0 7px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.51))
+    @include background-image(linear-gradient(bottom, #66a747 0%, #66a747 27.76%, #9ec650 100%))
+
+.m-cloud-banner-btn-wrap
+    &:hover
+        .m-cloud-banner-cta
+            background-color: #66a747
+            @include background-image(linear-gradient(bottom, #7db94f 0%, #7db94f 27.76%, #a6d055 100%))
+
+
