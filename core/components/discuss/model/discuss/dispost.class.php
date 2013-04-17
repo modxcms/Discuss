@@ -643,9 +643,13 @@ class disPost extends xPDOSimpleObject {
      * @return mixed The cleansed content
      */
     public function stripBBCode($str) {
-         $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
-         $replace = '';
-         return preg_replace($pattern, $replace, $str);
+        $doStrip = (bool)$this->xpdo->getOption('discuss.strip_remaining_bbcode', null, false);
+        if ($doStrip) {
+            $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
+            $replace = '';
+            $str = preg_replace($pattern, $replace, $str);
+        }
+        return $str;
     }
 
     /**
@@ -722,7 +726,7 @@ class disPost extends xPDOSimpleObject {
             'GROUP_CONCAT(DISTINCT CONCAT_WS(":",User.id,User.username)) AS readers',
         ));
         $c->where(array(
-            'disSession.place' => 'thread:'.$this->get('id'),
+            'disSession.place:LIKE' => 'thread:'.$this->get('id').':%',
         ));
         $c->groupby('disSession.user');
         $members = $this->xpdo->getObject('disSession',$c);
@@ -740,8 +744,8 @@ class disPost extends xPDOSimpleObject {
 
         $c = $this->xpdo->newQuery('disSession');
         $c->where(array(
-            'place' => 'thread:'.$this->get('id'),
-            'user' => 0,
+            'place:LIKE' => 'thread:'.$this->get('id').':%',
+            'AND:user:=' => 0,
         ));
         $guests = $this->xpdo->getCount('disSession',$c);
 

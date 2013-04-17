@@ -805,7 +805,7 @@ class disThread extends xPDOSimpleObject {
             'CONCAT_WS(":",User.id,IF(User.use_display_name,User.display_name,User.username)) AS reader',
         ));
         $c->where(array(
-            'disSession.place' => $placePrefix.':'.$this->get('id'),
+            'disSession.place:LIKE' => $placePrefix.':'.$this->get('id').':%',
         ));
         $c->groupby('disSession.user');
         $sessions = $this->xpdo->getCollection('disSession',$c);
@@ -824,8 +824,8 @@ class disThread extends xPDOSimpleObject {
 
         $c = $this->xpdo->newQuery('disSession');
         $c->where(array(
-            'place' => $placePrefix.':'.$this->get('id'),
-            'user' => 0,
+            'place:LIKE' => $placePrefix.':'.$this->get('id').':%',
+            'AND:user:=' => 0,
         ));
         $guests = $this->xpdo->getCount('disSession',$c);
 

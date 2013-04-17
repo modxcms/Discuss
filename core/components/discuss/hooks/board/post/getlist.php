@@ -128,8 +128,7 @@ if (empty($cache)) {
             $lastPost = $thread->getOne('LastPost');
             if ($lastPost) {
                 $threadArray = array_merge($threadArray,$thread->toArray('post.'));
-                $threadArray['excerpt'] = $lastPost->get('message');
-                $threadArray['excerpt'] = $lastPost->stripBBCode($threadArray['excerpt']);
+                $threadArray['excerpt'] = $lastPost->getContent();
                 $threadArray['excerpt'] = strip_tags($threadArray['excerpt']);
                 if (strlen($threadArray['excerpt']) > 500) {
                     $threadArray['excerpt'] = substr($threadArray['excerpt'],0,500).'...';
@@ -145,8 +144,7 @@ if (empty($cache)) {
             $post = $thread->getOne($alias);
             if ($post) {
                 $threadArray = array_merge($threadArray,$thread->toArray('post.'));
-                $threadArray['excerpt'] = $post->get('message');
-                $threadArray['excerpt'] = $post->stripBBCode($threadArray['excerpt']);
+                $threadArray['excerpt'] = $post->getContent();
                 $threadArray['excerpt'] = strip_tags($threadArray['excerpt']);
                 if (strlen($threadArray['excerpt']) > $modx->getOption('discuss.post_excerpt_length', null, 500)) {
                     $threadArray['excerpt'] = substr($threadArray['excerpt'],0,$modx->getOption('discuss.post_excerpt_length', null, 500)).'...';

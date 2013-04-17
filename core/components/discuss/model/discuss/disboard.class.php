@@ -296,7 +296,7 @@ class disBoard extends xPDOSimpleObject {
             'GROUP_CONCAT(CONCAT_WS(":",User.id,User.username) SEPARATOR ",") AS readers',
         ));
         $c->where(array(
-            'disSession.place' => 'board:'.$this->get('id'),
+            'disSession.place:LIKE' => 'board:'.$this->get('id').':%',
         ));
         $c->groupby('disSession.user');
         $members = $this->xpdo->getObject('disSession',$c);
@@ -313,8 +313,8 @@ class disBoard extends xPDOSimpleObject {
 
         $c = $this->xpdo->newQuery('disSession');
         $c->where(array(
-            'place' => 'board:'.$this->get('id'),
-            'user' => 0,
+            'place:LIKE' => 'board:'.$this->get('id').':%',
+            'AND:user:=' => 0,
         ));
         $guests = $this->xpdo->getCount('disSession',$c);
 

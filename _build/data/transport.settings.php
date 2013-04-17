@@ -730,6 +730,22 @@ $settings['discuss.post_excerpt_length']->fromArray(array(
     'namespace' => 'discuss',
     'area' => 'Posts',
 ),'',true,true);
+$settings['discuss.session_ttl']= $modx->newObject('modSystemSetting');
+$settings['discuss.session_ttl']->fromArray(array(
+    'key' => 'discuss.session_ttl',
+    'value' => '3600',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Sessions',
+),'',true,true);
+$settings['discuss.strip_remaining_bbcode']= $modx->newObject('modSystemSetting');
+$settings['discuss.strip_remaining_bbcode']->fromArray(array(
+    'key' => 'discuss.strip_remaining_bbcode',
+    'value' => '0',
+    'xtype' => 'modx-combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'Sessions',
+),'',true,true);
 
 /*
 $settings['discuss.']= $modx->newObject('modSystemSetting');
