@@ -375,6 +375,7 @@
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />
         <field key="access" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="startedon" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
+        <!-- @deprecated 2013-04-17 session TTL is handled via system setting rather than column for performance reasons -->
         <field key="ttl" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="3600" />
         <field key="place" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="data" dbtype="text" phptype="text" null="false" default="" />
