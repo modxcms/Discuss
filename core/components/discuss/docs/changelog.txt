@@ -1,5 +1,6 @@
 Changelog for Discuss.
 
+- Fix viewing stats due to changed session place in earlier version.
 - Improve performance of disSession GC
 - Get rid of MODX.com analytics code in default theme.
 - Fix XSS in the search controller (date_start, date_end).
