@@ -17,7 +17,7 @@
             &cacheKey=`RandomChunkAd`
             &cacheExpires=`300`
             &parents=`[[*id]]`
-            &chunks=`[[$ad.cloud.ForumsSidebar.RandomAdList]]`
+            &chunks=`[[$ad.cloud.ForumsSidebar.RandomAdList]],[[$ad.sponsor.ForumsSidebar.a2]]`
             &imageUrl=`[[+discuss.config.imagesUrl]]`
         ]]
 
