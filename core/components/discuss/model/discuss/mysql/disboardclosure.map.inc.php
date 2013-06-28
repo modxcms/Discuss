@@ -46,6 +46,31 @@ $xpdo_meta_map['disBoardClosure']= array (
       'default' => 0,
     ),
   ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'ancestor' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+        'descendant' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+  ),
   'aggregates' => 
   array (
     'Ancestor' => 
