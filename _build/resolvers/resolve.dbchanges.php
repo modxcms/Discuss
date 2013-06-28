@@ -84,6 +84,11 @@ if ($object->xpdo) {
             /** 2013/01/03: change "message" dbtype from "text" to "mediumtext" for larger posts */
             $manager->alterField('disPost','message');
 
+            /** 2013/06/28: Add some indexes for often used queries */
+            $manager->addIndex('disBoardClosure','PRIMARY');
+            $manager->addIndex('disCategory','rank');
+            $manager->addIndex('disSession','PRIMARY');
+            $manager->addIndex('disSession','place');
             /* Set log level back to what it was */
             $modx->setLogLevel($logLevel);
 
