@@ -34,6 +34,41 @@ if (empty($userId)) return false;
 ini_set('memory_limit','512M');
 set_time_limit(0);
 
+
+$disReadSub = $modx->newQuery('disThreadRead');
+$disReadSub->setClassAlias('Read');
+$disReadSub->select(array($modx->getSelectColumns('disThreadRead', 'Read', '', array('thread'))));
+$disReadSub->where(array("{$modx->escape($disReadSub->getAlias())}.user" => $userId));
+$disReadSub->prepare();
+
+$disRead = $modx->getTableName('disThreadRead');
+$disThread = $modx->getTableName('disThread');
+$bindings = array();
+
+$sql = "INSERT INTO {$disRead} ({$modx->getSelectColumns('disThreadRead', '', '', array('user', 'board', 'thread'))}) ";
+$sqlSelect = "SELECT {$userId}, {$modx->getSelectColumns('disThread', 'disThread', '', array('board', 'id'))}
+    FROM $disThread AS {$modx->escape('disThread')}
+    WHERE ";
+$where = array();
+if (!empty($scriptProperties['lastLogin'])) {
+    $where[] = "{$modx->escape('disThread')}.{$modx->escape('post_last_on')} >= :lastlogin";
+    $bindings[':lastlogin'] = strtotime($scriptProperties['lastLogin']);
+}
+$where[] = "{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$disReadSub->toSQL()})";
+$sql .= $sqlSelect . implode(' AND ', $where);
+
+$criteria = new xPDOCriteria($modx, $sql);
+if ($criteria->prepare()) {
+    if (!empty ($bindings)) {
+        $criteria->bind($bindings, true, false);
+    }
+    if (!$criteria->stmt->execute()) {
+        $errorInfo= $criteria->stmt->errorInfo();
+        $modx->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement:\n" . $criteria->toSQL() . "\n" . print_r($errorInfo, true));
+        return false;
+    }
+}
+/*
 $c = $modx->newQuery('disThread');
 $c->innerJoin('disPost','FirstPost');
 $c->innerJoin('disPost','LastPost');
@@ -69,5 +104,5 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $idx++;
     $read->save();
 }
-$stmt->closeCursor();
+$stmt->closeCursor();*/
 return true;

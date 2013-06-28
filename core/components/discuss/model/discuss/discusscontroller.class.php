@@ -366,8 +366,8 @@ abstract class DiscussController {
      * @return void
      */
     protected function getStatistics() {
-        $this->setPlaceholder('totalPosts',number_format((int)$this->modx->getCount('disPost')));
-        $this->setPlaceholder('totalTopics',number_format((int)$this->modx->getCount('disThread')));
+        $this->setPlaceholder('totalPosts',number_format((int)$this->getPostCount()));
+        $this->setPlaceholder('totalTopics',number_format((int)$this->getThreadCount()));
         $this->setPlaceholder('totalMembers',number_format((int)$this->modx->getCount('disUser')));
 
         /* active in last 40 */
@@ -395,7 +395,61 @@ abstract class DiscussController {
         }
         $this->setPlaceholders($activity->toArray('activity.'));
     }
-
+	
+	/**
+	 * Get thread count for all boards or $boardId
+     * @param int $boardId
+	 * return int
+	*/
+	
+	public function getThreadCount($boardId = 0) {
+		$c = $this->modx->newQuery('disBoard');
+		$c->select(array('thread_count' => "SUM({$this->modx->escape('disBoard')}.{$this->modx->escape('num_topics')})"));
+		if ($boardId) {
+			$c->where(array('id' => (int)$boardId));	
+		}
+		if ($stmt= $c->prepare()) {
+			if ($stmt->execute()) {
+				if ($results= $stmt->fetchAll(PDO::FETCH_COLUMN)) {
+					$count= reset($results);
+					$count= intval($count);
+				}
+			}
+		}
+		return $count ? $count : 0;
+	}
+	
+	/**
+	 * Get total post count
+     * @param string $class
+     * @param int $id
+	 * return int
+	*/
+	
+	public function getPostCount($className = 'disBoard', $id = 0) {
+		$c = $this->modx->newQuery($className);
+		if ($className == 'disBoard') {
+			if (!$id) {
+				$c->select(array('post_count' => "SUM({$this->modx->escape('disBoard')}.{$this->modx->escape('total_posts')})"));	
+			} else {
+				$c->select(array($this->modx->getSelectColumns('disBoard', 'disBoard', '', array('post_count'))));
+				$c->where(array('id' => $id));
+			}
+		} else if ($className == 'disThread') {
+			$c->select(array($this->modx->getSelectColumns('disThread', 'disThread', '', array('replies'))));
+			$c->where(array('id' => $id));
+		}
+		if ($stmt= $c->prepare()) {
+			if ($stmt->execute()) {
+				if ($results= $stmt->fetchAll(PDO::FETCH_COLUMN)) {
+					$count= reset($results);
+					$count= intval($count);
+				}
+			}
+		}
+		return (!$results) ? 0 : ($className == 'disBoard') ? $count : ($count + 1); // +1 for original thread start post
+	}
+	
     /**
      * Starts the debug timer.
      *
