@@ -217,17 +217,6 @@ class disUser extends xPDOSimpleObject {
      */
     public function getUnreadThreadsForBoard($boardId) {
         $threads = array();
-        /*$stmt = $this->xpdo->query('
-            SELECT
-                GROUP_CONCAT(`disThread`.`id`) AS `threads`
-            FROM '.$this->xpdo->getTableName('disThread').' `disThread`
-                LEFT JOIN '.$this->xpdo->getTableName('disThreadRead').' `Read`
-                ON `Read`.`thread` = `disThread`.`id`
-                AND `Read`.`user` = '.$this->xpdo->discuss->user->get('id').'
-            WHERE `Read`.`id` IS NULL
-            AND `disThread`.`board` = '.$boardId.'
-            GROUP BY `disThread`.`board`
-        ');*/
 		$stmt = $this->xpdo->query("SELECT GROUP_CONCAT(`disThread`.`id` SEPARATOR ',') AS `threads`
 				FROM `modx_discuss_threads` `disThread`
 				WHERE NOT EXISTS(SELECT `read`.`thread` FROM modx_discuss_threads_read `read` WHERE `read`.`thread` = `disThread`.`id` AND `read`.`user` = {$this->xpdo->discuss->user->get('id')}) 

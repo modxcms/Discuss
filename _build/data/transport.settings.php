@@ -747,6 +747,32 @@ $settings['discuss.strip_remaining_bbcode']->fromArray(array(
     'area' => 'Sessions',
 ),'',true,true);
 
+$settings['discuss.group_by_thread']= $modx->newObject('modSystemSetting');
+$settings['discuss.group_by_thread']->fromArray(array(
+    'key' => 'discuss.group_by_thread',
+    'value' => '1',
+    'xtype' => 'modx-combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'Search',
+),'',true,true);
+
+$settings['discuss.max_search_results']= $modx->newObject('modSystemSetting');
+$settings['discuss.max_search_results']->fromArray(array(
+    'key' => 'discuss.max_search_results',
+    'value' => '500',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Search',
+),'',true,true);
+
+$settings['discuss.search_results_buffer']= $modx->newObject('modSystemSetting');
+$settings['discuss.search_results_buffer']->fromArray(array(
+    'key' => 'discuss.search_results_buffer',
+    'value' => '200',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Search',
+),'',true,true);
 /*
 $settings['discuss.']= $modx->newObject('modSystemSetting');
 $settings['discuss.']->fromArray(array(
