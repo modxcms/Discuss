@@ -364,6 +364,15 @@ $_lang['setting_discuss.search_class_desc'] = 'The PHP class to use for Search. 
 $_lang['setting_discuss.search_class_path'] = 'Search Class Path';
 $_lang['setting_discuss.search_class_path_desc'] = 'The absolute path to the Search Class, as set in the discuss.search_class setting. Leave blank to use the default path.';
 
+$_lang['setting_discuss.group_by_thread'] = 'Group by Thread';
+$_lang['setting_discuss.group_by_thread_desc'] = 'Group search results by thread.';
+
+$_lang['setting_discuss.max_search_results'] = 'Maximum Number of Search Results';
+$_lang['setting_discuss.max_search_results_desc'] = 'Limits how many results is fetched when using disSearch as search class. This setting improves MySQL fulltext searches.';
+
+$_lang['setting_discuss.search_results_buffer'] = 'Results buffer';
+$_lang['setting_discuss.search_results_buffer_desc'] = 'Sets how many extra rows is fetched with maximum number of search results. This is used when grouping results by thread to get maximum number of results as grouping is done outside of MySQL due to grouping limitations.';
+
 $_lang['setting_discuss.show_whos_online'] = 'Show Whos Online';
 $_lang['setting_discuss.show_whos_online_desc'] = 'If set to yes, will display the users currently online.';
 

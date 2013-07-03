@@ -43,7 +43,8 @@ class DiscussSearchController extends DiscussController {
 
     public function process() {
         $placeholders = array();
-
+        $this->setPlaceholder('qa_options', $this->scriptProperties['qa_options']);
+        $this->setPlaceholder('dis_search_qa', $this->scriptProperties['dis_search_qa']);
         $s = $this->getProperty('s',false);
         if (!empty($s)) {
             $this->search($s);
@@ -166,38 +167,51 @@ class DiscussSearchController extends DiscussController {
     public function getConditions() {
         $conditions = array();
         if (!empty($this->scriptProperties['board'])) {
-            $conditions['board'] = $this->scriptProperties['board'];
+            $conditions['board'] = array($this->scriptProperties['board']);
         } else {
-            $conditions['board'] = $this->modx->call('disBoard','fetchList',array(&$this->modx));
+            $conditions['board'] = array_keys($this->modx->call('disBoard','fetchList',array(&$this->modx)));
         }
 
         if (!empty($this->scriptProperties['category'])) {
             $conditions['category'] = (int)$this->scriptProperties['category'];
         }
+
         if (!empty($this->scriptProperties['user'])) {
             if (intval($this->scriptProperties['user']) <= 0) {
-                /** @var disUser $user */
-                $user = $this->modx->getObject('disUser',array('username' => $this->scriptProperties['user']));
-                if ($user) {
-                    $conditions['author'] = $user->get('id');
-                }
+                $conditions['author'] = $this->scriptProperties['user'];
+
             } else {
                 $conditions['author'] = (int)$this->scriptProperties['user'];
             }
         }
-        $dateFormat = '%Y-%m-%dT%H:%M:%S.999Z';
+        if (!empty($this->scriptProperties['dis_search_qa']) && $this->scriptProperties['dis_search_qa'] > 1) {
+            switch ($this->scriptProperties['dis_search_qa']) {
+                case 2 :
+                    $conditions['class_key'] = 'disThreadDiscussion';
+                    break;
+                case 3 :
+                    $conditions['class_key'] = 'disThreadQuestion';
+                    if ($this->scriptProperties['qa_options'] !== '') {
+                        $conditions['answered'] = (bool)$this->scriptProperties['qa_options'];
+                    }
+                    break;
+                default :
+                    $conditions['class_key'] = null;
+            }
+        }
+        $dateFormat = '%Y-%m-%dT%H:%M:%S';
         if (!empty($this->scriptProperties['date_start']) && !empty($this->scriptProperties['date_end'])) {
             $start = strftime($dateFormat,strtotime($this->scriptProperties['date_start'].' 00:00:00'));
             $end = strftime($dateFormat,strtotime($this->scriptProperties['date_end'].' 23:59:59'));
-            $conditions['createdon'] = '['.$start.' TO '.$end.']';
+            $conditions['createdon'] = "BETWEEN {$this->modx->quote($start, PDO::PARAM_STR)} AND {$this->modx->quote($end, PDO::PARAM_STR)}";
 
         } else if (!empty($this->scriptProperties['date_start'])) {
             $start = strftime($dateFormat,strtotime($this->scriptProperties['date_start'].' 00:00:00'));
-            $conditions['createdon'] = '['.$start.' TO *]';
+            $conditions['createdon'] = "> {$this->modx->quote($start, PDO::PARAM_STR)}";
 
         } else if (!empty($this->scriptProperties['date_end'])) {
             $end = strftime($dateFormat,strtotime($this->scriptProperties['date_end'].' 23:59:59'));
-            $conditions['createdon'] = '[* TO '.$end.']';
+            $conditions['createdon'] = "< {$this->modx->quote($end, PDO::PARAM_STR)}";
         }
         $conditions['private'] = 0;
         return $conditions;

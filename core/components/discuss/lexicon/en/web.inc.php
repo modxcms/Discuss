@@ -148,6 +148,15 @@ $_lang['discuss.question'] = 'Question?';
 $_lang['discuss.answered'] = 'Answered';
 $_lang['discuss.question_and_answer'] = 'Question';
 
+$_lang['discuss.post_type'] = 'Post type:';
+$_lang['discuss.all_posts'] = '(All Posts)';
+$_lang['discuss.discussions'] = 'Discussions';
+$_lang['discuss.questions'] = 'Questions';
+$_lang['discuss.question_options'] = 'Question Options';
+$_lang['discuss.all_questions'] = 'All Questions';
+$_lang['discuss.answered'] = 'Answered';
+$_lang['discuss.wo_answer'] = 'Without Answer';
+
 //should this go in user since it requires a login to display?
 $_lang['discuss.welcome_back'] = 'Welcome back,';
 $_lang['discuss.recent_activity'] = 'Since your last visit';
@@ -201,6 +210,7 @@ $_lang['discuss.or_search'] = 'or Search:';
 $_lang['discuss.search_this_board'] = 'Search this Board...';
 $_lang['discuss.search_forums'] = 'Search Forums';
 $_lang['discuss.search_no_results'] = 'No results found.';
+$_lang['discuss.search_results'] = 'Displaying [[+start]]-[[+end]] of [[+total]] Results';
 $_lang['discuss.send_pm'] = 'Send a Private Message';
 $_lang['discuss.show_email'] = 'Show Email to Public';
 $_lang['discuss.solved'] = 'Answered';

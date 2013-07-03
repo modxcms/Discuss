@@ -309,13 +309,6 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
-        $cRead = $modx->newQuery('disThreadRead');
-        $cRead->select(array($modx->getSelectColumns('disThreadRead', 'disThreadRead', '', array('thread'))));
-        $cRead->where(array('user' => $modx->discuss->user->get('id'),
-            "{$modx->escape('disThreadRead')}.{$modx->escape('thread')} = {$modx->escape('disThread')}.{$modx->escape('id')}"
-        ));
-        $cRead->prepare();
-        $c->WHERE(array("{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$cRead->toSQL()})"));
         if (!$modx->discuss->user->isAdmin()) {
             $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
             if (!empty($groups)) {
@@ -373,8 +366,6 @@ class disThread extends xPDOSimpleObject {
         $c->limit($limit,$start);
         if (!$countOnly) {
             $response['results'] = $modx->getCollection('disThread',$c);
-        } else {
-            $response = $modx->getCount('disThread', $c);
         }
         return $response;
     }
@@ -419,13 +410,6 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
-        $cRead = $modx->newQuery('disThreadRead');
-        $cRead->select(array($modx->getSelectColumns('disThreadRead', 'disThreadRead', '', array('thread'))));
-        $cRead->where(array('user' => $modx->discuss->user->get('id'),
-            "{$modx->escape('disThreadRead')}.{$modx->escape('thread')} = {$modx->escape('disThread')}.{$modx->escape('id')}"
-        ));
-        $cRead->prepare();
-        $c->WHERE(array("{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$cRead->toSQL()})"));
         if (!$modx->discuss->user->isAdmin()) {
             if (!empty($groups)) {
                 /* restrict boards by user group if applicable */
@@ -470,7 +454,6 @@ class disThread extends xPDOSimpleObject {
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
             'board_name' => "{$modx->escape('Board')}.{$modx->escape('name')}",
-            //'title' => 'FirstPost.title',
             'thread' => "{$modx->escape('disThread')}.{$modx->escape('id')}",
             'author_username' => 'LastAuthor.username',
             'post_id' => "{$modx->escape('disThread')}.{$modx->escape('post_last')}",
@@ -575,7 +558,6 @@ class disThread extends xPDOSimpleObject {
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
             'board_name' => "{$modx->escape('Board')}.{$modx->escape('name')}",
-            //'title' => 'FirstPost.title',
             'thread' => "{$modx->escape('disThread')}.{$modx->escape('id')}",
             'author_username' => 'LastAuthor.username',
             'post_id' => "{$modx->escape('disThread')}.{$modx->escape('post_last')}",

@@ -85,13 +85,14 @@ class disSearch {
             'results' => array(),
             'total' => 0,
         );
-        
+        $grouped = $this->modx->getOption('discuss.group_by_thread', '', 1);
+
         $c = $this->modx->newQuery('disPost');
         $c->innerJoin('disThread','Thread');
         $c->innerJoin('disBoard','Board');
         $c->innerJoin('disUser','Author');
         $c->where(array(
-            'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE)',
+            "MATCH (disPost.title,disPost.message) AGAINST ({$this->modx->quote($string, PDO::PARAM_STR)} IN BOOLEAN MODE)",
             'Thread.private' => 0,
         ));
         if ($this->discuss->user->isLoggedIn) {
@@ -102,30 +103,79 @@ class disSearch {
                 ));
             }
         }
-        if (!empty($conditions['board'])) $c->where(array('Board.id:IN' => $conditions['board']));
-        if (!empty($conditions['user'])) $c->where(array('disPost.author' => $conditions['user']));
-                
-        $response['total'] = $this->modx->getCount('disPost',$c);
-        $c->select($this->modx->getSelectColumns('disPost','disPost'));
+        if (!empty($conditions['board'])) {
+            $c->where(array('Board.id:IN' => $conditions['board']));
+        }
+        if (!empty($conditions['author'])) {
+            if (is_string($conditions['author'])) {
+                $c->where(array('Author.username' => $conditions['author']));
+            } else {
+                $c->where(array('author' => $conditions['author']));
+            }
+
+        }
+        if (!empty($conditions['class_key'])) {
+            $c->where(array('Thread.class_key' => $conditions['class_key']));
+            if (!empty($conditions['answered']) && !is_null($conditions['answered'])) {
+                $c->where(array('Thread.answered' => $conditions['answered']));
+            }
+        }
+        if (!empty($conditions['createdon'])) {
+            $c->where(array("{$this->modx->escape('disPost')}.{$this->modx->escape('createdon')} {$conditions['createdon']}"));
+        }
+
         $c->select(array(
+            $this->modx->getSelectColumns('disPost','disPost', 'group_', array('thread')),
+            'replies' => 'Thread.replies',
             'username' => 'Author.username',
             'board_name' => 'Board.name',
-            'replies' => 'Thread.replies',
-            'MATCH (disPost.title,disPost.message) AGAINST ("'.$string.'" IN BOOLEAN MODE) AS score',
+            "MATCH (disPost.title,disPost.message) AGAINST ({$this->modx->quote($string, PDO::PARAM_STR)} IN BOOLEAN MODE) AS score",
         ));
-        $c->groupby('disPost.thread');
-        $c->sortby('score','ASC');
-        $c->sortby('disPost.rank','ASC');
-        $c->limit($limit,$start);
-        $postObjects = $this->modx->getCollection('disPost',$c);
+        $c->select($this->modx->getSelectColumns('disPost','disPost'));
 
-        if (!empty($postObjects)) {
-            /** @var disPost $post */
-            foreach ($postObjects as $post) {
-                $postArray = $post->toArray();
-                $postArray['message'] = $post->getContent();
-                $response['results'][] = $postArray;
+        $c->sortby('score','DESC');
+        $rowsFetched = (int)$this->modx->getOption('discuss.max_search_results', '', 500);
+        if ($grouped) {
+            $rowsFetched += (int)$this->modx->getOption('discuss.search_results_buffer', '', 200);
+        }
+        $c->limit($rowsFetched);
+
+        $c->prepare();
+        if (!$c->stmt->execute()) {
+            $errorInfo= $c->stmt->errorInfo();
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Error " . $c->stmt->errorCode() . " executing statement:\n" . $c->toSQL() . "\n" . print_r($errorInfo, true));
+            return $response;
+        }
+        $threads = array();
+        $i = 0; // used for thread grouping
+        $skip = 0; // skip to start, if necessary
+        $posts = array();
+        if ($grouped) {
+            $rows = $c->stmt->fetchAll(PDO::FETCH_ASSOC|PDO::FETCH_GROUP);
+        } else {
+            $rows = $c->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        foreach($rows as $row) {
+            if ($skip < $start) { // Scroll to start or skip thread if found already
+                $skip++;
+                continue;
             }
+            if ($grouped){
+                $row = $row[0];
+            }
+            xPDOObject::_loadCollectionInstance($this->modx, $posts, 'disPost', $c, $row, false, false);
+            $i++;
+            if ($i == $limit || $i == count($rows)) { // $limit results found; get total row count, closeCursor (just in case) and exit while loop
+                $response['total'] = (count($rows) > (int)$this->modx->getOption('discuss.max_search_results', '', 500)) ? (int)$this->modx->getOption('discuss.max_search_results', '', 500) : count($rows);
+                $c->stmt->closeCursor();
+                break;
+            }
+        }
+
+        foreach($posts as $post) {
+            $postArray = $post->toArray('', true, true);
+            $postArray['message'] = $post->getContent();
+            $response['results'][] = $postArray;
         }
         return $response;
     }
