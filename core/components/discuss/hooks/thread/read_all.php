@@ -30,7 +30,9 @@
 $userId = $discuss->user->get('id');
 if (empty($userId)) return false;
 
-/* setup some flexible mem limits in case of a huge board */
+/* setup some flexible mem limits in case of a huge board
+ * setting changes can be removed most likely
+*/
 ini_set('memory_limit','512M');
 set_time_limit(0);
 
@@ -46,16 +48,28 @@ $disThread = $modx->getTableName('disThread');
 $bindings = array();
 
 $sql = "INSERT INTO {$disRead} ({$modx->getSelectColumns('disThreadRead', '', '', array('user', 'board', 'thread'))}) ";
-$sqlSelect = "SELECT {$userId}, {$modx->getSelectColumns('disThread', 'disThread', '', array('board', 'id'))}
-    FROM $disThread AS {$modx->escape('disThread')}
-    WHERE ";
-$where = array();
+$cSub = $modx->newQuery('disThread');
+$cSub->select(array(
+    1 => "({$userId})", // Parentheses  trick xPDO to not escape user id as column
+    $modx->getSelectColumns('disThread', 'disThread', '', array('board', 'id'))
+));
+
 if (!empty($scriptProperties['lastLogin'])) {
-    $where[] = "{$modx->escape('disThread')}.{$modx->escape('post_last_on')} >= :lastlogin";
-    $bindings[':lastlogin'] = strtotime($scriptProperties['lastLogin']);
+
+    $cSub->where(array('post_last_on:>=' => strtotime($scriptProperties['lastLogin'])));
+} else if (!empty($scriptProperties['replies'])) {
+    $cSub->innerJoin('disThreadParticipant', 'Participants', array(
+        "{$modx->escape('Participants')}.{$modx->escape('user')} = {$userId}",
+        "{$modx->escape('Participants')}.{$modx->escape('thread')} = {$modx->escape('disThread')}.{$modx->escape('id')}"
+    ));
+    $cSub->where(array('author_last:!=' => $userId));
 }
-$where[] = "{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$disReadSub->toSQL()})";
-$sql .= $sqlSelect . implode(' AND ', $where);
+
+$cSub->where(array("{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$disReadSub->toSQL()})"));
+
+$cSub->prepare();
+
+$sql .= $cSub->toSQL();
 
 $criteria = new xPDOCriteria($modx, $sql);
 if ($criteria->prepare()) {

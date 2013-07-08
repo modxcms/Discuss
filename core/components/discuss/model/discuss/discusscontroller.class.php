@@ -141,6 +141,9 @@ abstract class DiscussController {
         }
 
         $this->handleActions();
+        if ($this->discuss->user->isLoggedIn) {
+            $this->getUserTop();
+        }
         $this->process();
 
         if ($this->getOption('showStatistics', true)) {
@@ -151,7 +154,7 @@ abstract class DiscussController {
         if (!empty($title)) {
             $this->modx->setPlaceholder('discuss.pagetitle',$title);
         }
-        
+
         $this->_renderBreadcrumbs();
         $this->_renderModules();
 
@@ -169,7 +172,7 @@ abstract class DiscussController {
      * @return void
      */
     public function postProcess() {}
-    
+
     /**
      * Used to alter the output in a controller after rendering the template
      * @param string $output
@@ -230,11 +233,11 @@ abstract class DiscussController {
     /**
      * Check to see if the user can do the page's action. Return true to pass, otherwise return either a URL to
      * redirect to on an unsuccessful validation, or false to redirect to the unauthorized page.
-     * 
+     *
      * @return boolean
      */
     public function checkPermissions() { return true; }
-    
+
     /**
      * Set a placeholder for the controller to render into the template
      * @param string $key
@@ -337,7 +340,7 @@ abstract class DiscussController {
 
     /**
      * Override and return an array to automatically render breadcrumbs
-     * 
+     *
      * @return array|string
      */
     public function getBreadcrumbs() { return array(); }
@@ -395,18 +398,18 @@ abstract class DiscussController {
         }
         $this->setPlaceholders($activity->toArray('activity.'));
     }
-	
+
 	/**
 	 * Get thread count for all boards or $boardId
      * @param int $boardId
 	 * return int
 	*/
-	
+
 	public function getThreadCount($boardId = 0) {
 		$c = $this->modx->newQuery('disBoard');
 		$c->select(array('thread_count' => "SUM({$this->modx->escape('disBoard')}.{$this->modx->escape('num_topics')})"));
 		if ($boardId) {
-			$c->where(array('id' => (int)$boardId));	
+			$c->where(array('id' => (int)$boardId));
 		}
 		if ($stmt= $c->prepare()) {
 			if ($stmt->execute()) {
@@ -418,19 +421,19 @@ abstract class DiscussController {
 		}
 		return $count ? $count : 0;
 	}
-	
+
 	/**
 	 * Get total post count
      * @param string $class
      * @param int $id
 	 * return int
 	*/
-	
+
 	public function getPostCount($className = 'disBoard', $id = 0) {
 		$c = $this->modx->newQuery($className);
 		if ($className == 'disBoard') {
 			if (!$id) {
-				$c->select(array('post_count' => "SUM({$this->modx->escape('disBoard')}.{$this->modx->escape('total_posts')})"));	
+				$c->select(array('post_count' => "SUM({$this->modx->escape('disBoard')}.{$this->modx->escape('total_posts')})"));
 			} else {
 				$c->select(array($this->modx->getSelectColumns('disBoard', 'disBoard', '', array('post_count'))));
 				$c->where(array('id' => $id));
@@ -449,7 +452,66 @@ abstract class DiscussController {
 		}
 		return (!$results) ? 0 : ($className == 'disBoard') ? $count : ($count + 1); // +1 for original thread start post
 	}
-	
+
+    public function getUserTop() {
+        /* topbar profile links. Moved from class Discuss */
+        if ($this->discuss->user->isLoggedIn) {
+            $authphs = array(
+                'authLink' => '<a href="'.$this->discuss->url.'logout">Logout</a>',
+            );
+            $authphs = array_merge($this->discuss->user->toArray('user.'),$authphs);
+            $authphs['user.avatar_url'] = $this->discuss->user->getAvatarUrl();
+
+            /* Get counts */
+            $authphs['user.unread_messages_count'] = $newMessages = $this->discuss->user->countUnreadMessages();
+
+            $authphs['user.unread_posts_count'] = $unreadPosts = $this->discuss->user->countUnreadPosts();
+            $authphs['user.new_replies_count'] = $newReplies = $this->discuss->user->countNewReplies();
+            $authphs['user.unanswered_questions_count'] = $unansweredQuestions = $this->discuss->user->countUnansweredQuestions();
+            $authphs['user.no_replies_count'] = $noReplies = $this->discuss->user->countWithoutReplies();
+
+            /* Format counts nicely */
+            $authphs['user.unread_messages'] = ($newMessages > 1) ?
+                $this->modx->lexicon('discuss.user.new_messages',array('total' => $newMessages)) : (
+                ($newMessages == 1) ?
+                    $this->modx->lexicon('discuss.user.one_new_message') :
+                    $this->modx->lexicon('discuss.user.no_new_messages')
+                );
+            $authphs['user.unread_posts'] = ($unreadPosts > 1) ?
+                $this->modx->lexicon('discuss.user.new_posts', array('total' => $unreadPosts)) : (
+                ($unreadPosts == 1) ?
+                    $this->modx->lexicon('discuss.user.one_new_post') :
+                    $this->modx->lexicon('discuss.user.no_new_posts')
+                );
+            $authphs['user.new_replies'] = ($newReplies > 1) ?
+                $this->modx->lexicon('discuss.user.new_replies',array('total' => $newReplies)) : (
+                ($newReplies == 1) ?
+                    $this->modx->lexicon('discuss.user.one_new_reply') :
+                    $this->modx->lexicon('discuss.user.no_new_replies')
+                );
+            $authphs['user.unanswered_questions'] = ($unansweredQuestions > 1) ?
+                $this->modx->lexicon('discuss.user.unanswered_questions',array('total' => $unansweredQuestions)) : (
+                ($unansweredQuestions == 1) ?
+                    $this->modx->lexicon('discuss.user.one_unanswered_question') :
+                    $this->modx->lexicon('discuss.user.no_unanswered_questions')
+                );
+            $authphs['user.no_replies'] = ($noReplies > 1) ?
+                $this->modx->lexicon('discuss.user.no_replies',array('total' => $noReplies)) : (
+                ($noReplies == 1) ?
+                    $this->modx->lexicon('discuss.user.one_no_reply') :
+                    $this->modx->lexicon('discuss.user.no_no_replies')
+                );
+            $this->discuss->user->isGlobalModerator();
+            $this->discuss->user->isAdmin();
+        } else {
+            $authphs = array(
+                'authLink' => '<a href="'.$this->discuss->url.'login">Login</a>',
+                'user.avatar_url' => '',
+                'user.unread_messages' => '',
+            );
+        }
+        $this->modx->toPlaceholders($authphs,'discuss');
+    }
     /**
      * Starts the debug timer.
      *

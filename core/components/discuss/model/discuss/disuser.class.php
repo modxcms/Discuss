@@ -484,7 +484,7 @@ class disUser extends xPDOSimpleObject {
      * @return int
      */
     public function countNewReplies() {
-        $response = $this->xpdo->call('disThread','fetchNewReplies',array(&$this->xpdo,"{$this->xpdo->escape('disThread')}.{$this->xpdo->escape('post_last_on')}",'DESC',10,0, true, true));
+        $response = $this->xpdo->call('disThread','fetchNewReplies',array(&$this->xpdo,"{$this->xpdo->escape('disThread')}.{$this->xpdo->escape('post_last_on')}",'DESC',10,0, false, true));
         return number_format($response['total']);
     }
     /**
