@@ -89,6 +89,15 @@ if ($object->xpdo) {
             $manager->addIndex('disCategory','rank');
             $manager->addIndex('disSession','PRIMARY');
             $manager->addIndex('disSession','place');
+
+            /** 2014/07/08: Normalize participants for threads */
+            $manager->createObjectContainer('disThreadParticipant');
+            // Check if participants table has been filled
+            if ($modx->getCount('disThreadParticipant') == 0) {
+                $modx->query("INSERT INTO {$modx->getTableName('disThreadParticipants')} SELECT `thread`, `author` FROM {$modx->getTableName('disPost')}
+                    GROUP BY `thread`, `author` ORDER BY `thread` ASC, `id` ASC");
+                $manager->removeField('disThread', 'participants');
+            }
             /* Set log level back to what it was */
             $modx->setLogLevel($logLevel);
 

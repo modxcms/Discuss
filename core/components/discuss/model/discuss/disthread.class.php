@@ -490,7 +490,10 @@ class disThread extends xPDOSimpleObject {
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
         $c->innerJoin('disUser','LastAuthor');
-
+        $c->innerJoin('disThreadParticipant', 'Participants', array(
+            "{$modx->escape('Participants')}.{$modx->escape('user')} = {$modx->discuss->user->get('id')}",
+            "{$modx->escape('Participants')}.{$modx->escape('thread')} = {$modx->escape('disThread')}.{$modx->escape('id')}"
+        ));
         $groups = $modx->discuss->user->getUserGroups();
         /* usergroup protection */
         if ($modx->discuss->user->isLoggedIn) {
@@ -538,7 +541,6 @@ class disThread extends xPDOSimpleObject {
             'Board.status:>' => disBoard::STATUS_INACTIVE,
             'author_last:!=' => $modx->discuss->user->get('id'),
             //'disThread.post_last_on:>=' => $daysAgo,
-            'FIND_IN_SET('.$modx->discuss->user->get('id').',`disThread`.`participants`) > 0',
         ));
         /* ignore spam/recycle bin boards */
         $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
@@ -737,22 +739,34 @@ class disThread extends xPDOSimpleObject {
     }
 
     /**
-     * Add a User to the participants field
+     * Add a User to the list of participants if not participating
      * 
      * @param string|int $id
      * @return bool
      */
     public function addParticipant($id) {
-        $participants = explode(',',$this->get('participants'));
-        array_push($participants,$id);
-        $participants = array_unique($participants);
-        $participants = trim(implode(',',$participants),',');
-        $this->set('participants',$participants);
-        return $this->save();
+        $participates = false;
+        $participants = $this->getMany('Participants');
+        foreach($participants as $participant) {
+            if ($id == $participant->get('user')) {
+                $participates = true;
+                break;
+            }
+        }
+        unset($participants);
+        if (!$participates) {
+            $participant = $this->xpdo->newObject('disThreadParticipant');
+            $participant->fromArray(array(
+                'user' => $id,
+                'thread' => $this->get('id')
+            ));
+            $participates = $participant->save();
+        }
+        return $participates;
     }
 
     /**
-     * Remove a User from the participants field
+     * Remove a User from the participants
      * @param int|string $id
      * @param int|string $postId
      * @return bool
@@ -766,15 +780,8 @@ class disThread extends xPDOSimpleObject {
             'author' => $id,
         ));
         if (empty($userPostsInThread)) {
-            $id = (string)$id;
-            $participants = explode(',',$this->get('participants'));
-            $idx = array_search($id,$participants);
-            if ($idx !== false) {
-                $participants = array_splice($participants,$idx,$idx+1);
-                $participants = trim(implode(',',$participants),',');
-                $this->set('participants',$participants);
-                $removed = $this->save();
-            }
+            $removed = $this->xpdo->removeObject('disThreadParticipant', array('thread' => $this->get('id'),
+                'user' => $id));
         }
         return $removed;
     }

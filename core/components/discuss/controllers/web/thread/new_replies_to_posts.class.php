@@ -157,7 +157,7 @@ class DiscussThreadNewRepliesToPostsController extends DiscussController {
     public function handleActions() {
         /* handle marking all as read */
         if (!empty($this->scriptProperties['read']) && $this->discuss->user->isLoggedIn) {
-            $this->discuss->hooks->load('thread/read_all');
+            $this->discuss->hooks->load('thread/read_all', array('replies' => 1));
         }
     }
 }
