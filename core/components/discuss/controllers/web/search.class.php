@@ -43,8 +43,14 @@ class DiscussSearchController extends DiscussController {
 
     public function process() {
         $placeholders = array();
-        $this->setPlaceholder('qa_options', $this->scriptProperties['qa_options']);
-        $this->setPlaceholder('dis_search_qa', $this->scriptProperties['dis_search_qa']);
+        if (!empty($this->scriptProperties['dis_search_qa'])) {
+            $this->setPlaceholder('dis_search_qa', $this->scriptProperties['dis_search_qa']);
+        }
+        if (!empty($this->scriptProperties['qa_options'])) {
+            $this->setPlaceholder('qa_options', $this->scriptProperties['qa_options']);
+        }
+
+
         $s = $this->getProperty('s',false);
         if (!empty($s)) {
             $this->search($s);
@@ -191,7 +197,7 @@ class DiscussSearchController extends DiscussController {
                     break;
                 case 3 :
                     $conditions['class_key'] = 'disThreadQuestion';
-                    if ($this->scriptProperties['qa_options'] !== '') {
+                    if (!empty($this->scriptProperties['qa_options']) &&  $this->scriptProperties['qa_options'] !== '') {
                         $conditions['answered'] = (bool)$this->scriptProperties['qa_options'];
                     }
                     break;
