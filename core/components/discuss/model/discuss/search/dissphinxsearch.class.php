@@ -132,14 +132,13 @@ class disSphinxSearch extends disSearch {
         );
         $grouped = (int) $this->modx->getOption('discuss.group_by_thread', '', 1);
 
-        $this->setFilter('private', array($conditions['private']));
-
         if ($this->discuss->user->isLoggedIn) {
             $ignoreBoards = $this->discuss->user->get('ignore_boards');
             if (!empty($ignoreBoards)) {
                 $this->setFilter('board', explode(',',$ignoreBoards), true);
             }
         }
+        $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($conditions['board'], true));
         if (!empty($conditions['board'])) {
             if (is_string($conditions['board'])) {
                 if (stripos(',', $conditions['board']) !== false) {
@@ -173,7 +172,7 @@ class disSphinxSearch extends disSearch {
 
         $retry = 1;
         while(!$results && $retry <= $this->_connectionOptions['searchd_retries']) {
-            sleep($this->_connectionOptions['discuss.sphinx.searchd_retry_delay']);
+            sleep($this->_connectionOptions['searchd_retry_delay']);
             $results = $this->query($string);
             $retry++;
         }
