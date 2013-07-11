@@ -1,7 +1,5 @@
 Changelog for Discuss.
 
-<<<<<<< HEAD
-=======
 Discuss 1.2, July 11, 2013
 ====================================
 - Fix SQL Performance issues; new indexes and improved SQL queries
@@ -14,7 +12,7 @@ Discuss 1.2, July 11, 2013
 - #9525 Partially related to 9882 and is also fixed
 
 ====================================
->>>>>>> origin/develop
+
 - Add ability to bypass stripping remaining bbcode in disPost.getContent
 - Fix viewing stats due to changed session place in earlier version.
 - Improve performance of disSession GC
