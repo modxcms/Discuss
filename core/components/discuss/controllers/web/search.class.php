@@ -161,7 +161,7 @@ class DiscussSearchController extends DiscussController {
         $this->setPlaceholders(array(
             'date_start' => (!empty($this->scriptProperties['date_start']) && is_numeric(strtotime($this->scriptProperties['date_start'])))
                 ? strftime($dateFormat,strtotime($this->scriptProperties['date_start'])) : '',
-            'date_end' => (!empty($this->scriptProperties['date_end']) && is_numeric(strtotime($this->scriptProperties['date_start'])))
+            'date_end' => (!empty($this->scriptProperties['date_end']) && is_numeric(strtotime($this->scriptProperties['date_end'])))
                 ? strftime($dateFormat,strtotime($this->scriptProperties['date_end'])) : '',
         ));
     }
@@ -205,19 +205,9 @@ class DiscussSearchController extends DiscussController {
                     $conditions['class_key'] = null;
             }
         }
-        $dateFormat = '%Y-%m-%dT%H:%M:%S';
-        if (!empty($this->scriptProperties['date_start']) && !empty($this->scriptProperties['date_end'])) {
-            $start = strftime($dateFormat,strtotime($this->scriptProperties['date_start'].' 00:00:00'));
-            $end = strftime($dateFormat,strtotime($this->scriptProperties['date_end'].' 23:59:59'));
-            $conditions['createdon'] = "BETWEEN {$this->modx->quote($start, PDO::PARAM_STR)} AND {$this->modx->quote($end, PDO::PARAM_STR)}";
 
-        } else if (!empty($this->scriptProperties['date_start'])) {
-            $start = strftime($dateFormat,strtotime($this->scriptProperties['date_start'].' 00:00:00'));
-            $conditions['createdon'] = "> {$this->modx->quote($start, PDO::PARAM_STR)}";
-
-        } else if (!empty($this->scriptProperties['date_end'])) {
-            $end = strftime($dateFormat,strtotime($this->scriptProperties['date_end'].' 23:59:59'));
-            $conditions['createdon'] = "< {$this->modx->quote($end, PDO::PARAM_STR)}";
+        if (!empty($this->scriptProperties['date_start']) || !empty($this->scriptProperties['date_end'])) {
+            $this->discuss->search->createTimeRange($conditions, $this->scriptProperties['date_start'], $this->scriptProperties['date_end']);
         }
         $conditions['private'] = 0;
         return $conditions;
