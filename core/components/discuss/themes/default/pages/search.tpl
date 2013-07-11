@@ -61,7 +61,7 @@
 </form>
 [[+total:gte=`1`:then=`
     <header class="dis-cat-header dark-gradient h-group sticky-bar top">
-        [[+results:notempty=`<h1>[[%discuss.search_results]]</h1>`]]
+        [[+results:notempty=`<h1>[[%discuss.search_results?total=`[[+total]]`&start=`[[+start]]`&end=`[[+end]]`]]</h1>`]]
         [[+pagination]]
     </header>
 
