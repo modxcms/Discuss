@@ -141,10 +141,11 @@ abstract class DiscussController {
         }
 
         $this->handleActions();
+        $this->process();
+
         if ($this->discuss->user->isLoggedIn) {
             $this->getUserTop();
         }
-        $this->process();
 
         if ($this->getOption('showStatistics', true)) {
             $this->getStatistics();
