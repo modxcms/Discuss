@@ -68,7 +68,8 @@ if (!empty($scriptProperties['lastLogin'])) {
     $cSub->where(array('author_last:!=' => $userId));
 }
 
-$cSub->where(array("{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$disReadSub->toSQL()})"));
+$cSub->where(array("{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$disReadSub->toSQL()})",
+    'private' => 0));
 
 $cSub->prepare();
 
