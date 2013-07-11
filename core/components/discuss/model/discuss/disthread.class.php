@@ -411,6 +411,7 @@ class disThread extends xPDOSimpleObject {
             }
         }
         if (!$modx->discuss->user->isAdmin()) {
+            $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
             if (!empty($groups)) {
                 /* restrict boards by user group if applicable */
                 $g = array(
