@@ -3,47 +3,33 @@
  * @package discuss
  * @subpackage mysql
  */
-$xpdo_meta_map['disBoardClosure']= array (
+$xpdo_meta_map['disThreadParticipant']= array (
   'package' => 'discuss',
   'version' => '1.1',
-  'table' => 'discuss_boards_closure',
+  'table' => 'discuss_thread_participants',
   'extends' => 'xPDOObject',
   'fields' => 
   array (
-    'ancestor' => 0,
-    'descendant' => 0,
-    'depth' => 0,
+    'thread' => NULL,
+    'user' => NULL,
   ),
   'fieldMeta' => 
   array (
-    'ancestor' => 
+    'thread' => 
     array (
       'dbtype' => 'int',
-      'precision' => '10',
+      'precision' => '11',
       'phptype' => 'integer',
       'attributes' => 'unsigned',
       'null' => false,
-      'default' => 0,
-      'index' => 'pk',
     ),
-    'descendant' => 
+    'user' => 
     array (
       'dbtype' => 'int',
-      'precision' => '10',
+      'precision' => '11',
       'phptype' => 'integer',
       'attributes' => 'unsigned',
       'null' => false,
-      'default' => 0,
-      'index' => 'pk',
-    ),
-    'depth' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'attributes' => 'unsigned',
-      'null' => false,
-      'default' => 0,
     ),
   ),
   'indexes' => 
@@ -53,16 +39,15 @@ $xpdo_meta_map['disBoardClosure']= array (
       'alias' => 'PRIMARY',
       'primary' => true,
       'unique' => false,
-      'type' => 'BTREE',
       'columns' => 
       array (
-        'ancestor' => 
+        'thread' => 
         array (
           'length' => '',
           'collation' => 'A',
           'null' => false,
         ),
-        'descendant' => 
+        'user' => 
         array (
           'length' => '',
           'collation' => 'A',
@@ -73,18 +58,18 @@ $xpdo_meta_map['disBoardClosure']= array (
   ),
   'aggregates' => 
   array (
-    'Ancestor' => 
+    'Thread' => 
     array (
-      'class' => 'disBoard',
-      'local' => 'ancestor',
+      'class' => 'disThread',
+      'local' => 'thread',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',
     ),
-    'Descendant' => 
+    'User' => 
     array (
-      'class' => 'disBoard',
-      'local' => 'descendant',
+      'class' => 'disUser',
+      'local' => 'user',
       'foreign' => 'id',
       'cardinality' => 'one',
       'owner' => 'foreign',

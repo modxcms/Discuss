@@ -26,8 +26,9 @@ class disThreadQuestion extends disThread {
         $c->where(array(
             'thread' => $this->get('id'),
         ));
-        $cc = clone $c;
-        $response['total'] = $this->xpdo->getCount('disPost',$cc);
+        //$cc = clone $c;
+        //$response['total'] = $this->xpdo->getCount('disPost',$cc);
+		$response['total'] = $this->xpdo->discuss->controller->getPostCount('disThread', $this->get('id'));
         $c->select($this->xpdo->getSelectColumns('disPost','disPost'));
         $c->select(array(
             'IF(Thread.post_first = disPost.id,1,0) AS thread_first',

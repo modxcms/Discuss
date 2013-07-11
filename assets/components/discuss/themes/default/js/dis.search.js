@@ -1,5 +1,8 @@
 $(function() {
     DIS.Search.init();
+    if($('#dis-search-qa').val() == "3") {
+        $("#SubOptions").css('opacity', 0).addClass('show').animate({opacity: .99}, 200);
+    }
 });
 DIS.Search = function() {
     

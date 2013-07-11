@@ -30,44 +30,60 @@
 $userId = $discuss->user->get('id');
 if (empty($userId)) return false;
 
-/* setup some flexible mem limits in case of a huge board */
+/* setup some flexible mem limits in case of a huge board
+ * setting changes can be removed most likely
+*/
 ini_set('memory_limit','512M');
 set_time_limit(0);
 
-$c = $modx->newQuery('disThread');
-$c->innerJoin('disPost','FirstPost');
-$c->innerJoin('disPost','LastPost');
-$c->leftJoin('disThreadRead','Reads',array(
-    $modx->getSelectColumns('disThreadRead','Reads','',array('thread')).' = '.$modx->getSelectColumns('disThread','disThread','',array('id')),
-    'Reads.user' => $userId,
+
+$disReadSub = $modx->newQuery('disThreadRead');
+$disReadSub->setClassAlias('Read');
+$disReadSub->select(array($modx->getSelectColumns('disThreadRead', 'Read', '', array('thread'))));
+$disReadSub->where(array("{$modx->escape($disReadSub->getAlias())}.user" => $userId));
+$disReadSub->prepare();
+
+$disRead = $modx->getTableName('disThreadRead');
+$disThread = $modx->getTableName('disThread');
+$bindings = array();
+
+$sql = "INSERT INTO {$disRead} ({$modx->getSelectColumns('disThreadRead', '', '', array('user', 'board', 'thread'))}) ";
+$cSub = $modx->newQuery('disThread');
+$cSub->select(array(
+    1 => "({$userId})", // Parentheses  trick xPDO to not escape user id as column
+    $modx->getSelectColumns('disThread', 'disThread', '', array('board', 'id'))
 ));
-$c->where(array(
-    'Reads.id:IS' => null,
-));
+
 if (!empty($scriptProperties['lastLogin'])) {
-    $c->where(array(
-        'LastPost.createdon:>=' => $scriptProperties['lastLogin'],
+    $cSub->where(array('post_last_on:>=' => strtotime($scriptProperties['lastLogin'])));
+    $this->modx->log(modX::LOG_LEVEL_ERROR, $scriptProperties['ts']);
+    if ($scriptProperties['ts'] !== false) {
+        $cSub->where(array('post_last_on:<' => $scriptProperties['ts']));
+    }
+} else if (!empty($scriptProperties['replies'])) {
+    $cSub->innerJoin('disThreadParticipant', 'Participants', array(
+        "{$modx->escape('Participants')}.{$modx->escape('user')} = {$userId}",
+        "{$modx->escape('Participants')}.{$modx->escape('thread')} = {$modx->escape('disThread')}.{$modx->escape('id')}"
     ));
+    $cSub->where(array('author_last:!=' => $userId));
 }
-$c->select($modx->getSelectColumns('disThread','disThread','',array('id','board')));
-$c->sortby($modx->getSelectColumns('disThread','disThread','',array('id')));
-$c->prepare();
-$sql = $c->toSql();
-$stmt = $modx->query($sql);
-if (!$stmt) { return false; }
 
-$idx = 0;
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    if (!$row) continue;
+$cSub->where(array("{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$disReadSub->toSQL()})",
+    'private' => 0));
 
-    $read = $modx->newObject('disThreadRead');
-    $read->fromArray(array(
-        'thread' => $row['id'],
-        'board' => $row['board'],
-        'user' => $userId,
-    ));
-    $idx++;
-    $read->save();
+$cSub->prepare();
+
+$sql .= $cSub->toSQL();
+
+$criteria = new xPDOCriteria($modx, $sql);
+if ($criteria->prepare()) {
+    if (!empty ($bindings)) {
+        $criteria->bind($bindings, true, false);
+    }
+    if (!$criteria->stmt->execute()) {
+        $errorInfo= $criteria->stmt->errorInfo();
+        $modx->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement:\n" . $criteria->toSQL() . "\n" . print_r($errorInfo, true));
+        return false;
+    }
 }
-$stmt->closeCursor();
 return true;

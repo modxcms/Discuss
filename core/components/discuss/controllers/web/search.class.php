@@ -43,6 +43,13 @@ class DiscussSearchController extends DiscussController {
 
     public function process() {
         $placeholders = array();
+        if (!empty($this->scriptProperties['dis_search_qa'])) {
+            $this->setPlaceholder('dis_search_qa', $this->scriptProperties['dis_search_qa']);
+        }
+        if (!empty($this->scriptProperties['qa_options'])) {
+            $this->setPlaceholder('qa_options', $this->scriptProperties['qa_options']);
+        }
+
 
         $s = $this->getProperty('s',false);
         if (!empty($s)) {
@@ -154,7 +161,7 @@ class DiscussSearchController extends DiscussController {
         $this->setPlaceholders(array(
             'date_start' => (!empty($this->scriptProperties['date_start']) && is_numeric(strtotime($this->scriptProperties['date_start'])))
                 ? strftime($dateFormat,strtotime($this->scriptProperties['date_start'])) : '',
-            'date_end' => (!empty($this->scriptProperties['date_end']) && is_numeric(strtotime($this->scriptProperties['date_start'])))
+            'date_end' => (!empty($this->scriptProperties['date_end']) && is_numeric(strtotime($this->scriptProperties['date_end'])))
                 ? strftime($dateFormat,strtotime($this->scriptProperties['date_end'])) : '',
         ));
     }
@@ -166,38 +173,44 @@ class DiscussSearchController extends DiscussController {
     public function getConditions() {
         $conditions = array();
         if (!empty($this->scriptProperties['board'])) {
-            $conditions['board'] = $this->scriptProperties['board'];
+            $conditions['board'] = array($this->scriptProperties['board']);
         } else {
-            $conditions['board'] = $this->modx->call('disBoard','fetchList',array(&$this->modx));
+            $boards = $this->modx->call('disBoard','fetchList',array(&$this->modx));
+            foreach($boards as $board) {
+                $conditions['board'][] = $board['id'];
+            }
         }
 
         if (!empty($this->scriptProperties['category'])) {
             $conditions['category'] = (int)$this->scriptProperties['category'];
         }
+
         if (!empty($this->scriptProperties['user'])) {
             if (intval($this->scriptProperties['user']) <= 0) {
-                /** @var disUser $user */
-                $user = $this->modx->getObject('disUser',array('username' => $this->scriptProperties['user']));
-                if ($user) {
-                    $conditions['author'] = $user->get('id');
-                }
+                $conditions['author'] = $this->scriptProperties['user'];
+
             } else {
                 $conditions['author'] = (int)$this->scriptProperties['user'];
             }
         }
-        $dateFormat = '%Y-%m-%dT%H:%M:%S.999Z';
-        if (!empty($this->scriptProperties['date_start']) && !empty($this->scriptProperties['date_end'])) {
-            $start = strftime($dateFormat,strtotime($this->scriptProperties['date_start'].' 00:00:00'));
-            $end = strftime($dateFormat,strtotime($this->scriptProperties['date_end'].' 23:59:59'));
-            $conditions['createdon'] = '['.$start.' TO '.$end.']';
+        if (!empty($this->scriptProperties['dis_search_qa']) && $this->scriptProperties['dis_search_qa'] > 1) {
+            switch ($this->scriptProperties['dis_search_qa']) {
+                case 2 :
+                    $conditions['class_key'] = 'disThreadDiscussion';
+                    break;
+                case 3 :
+                    $conditions['class_key'] = 'disThreadQuestion';
+                    if (!empty($this->scriptProperties['qa_options']) &&  $this->scriptProperties['qa_options'] !== '') {
+                        $conditions['answered'] = (bool)$this->scriptProperties['qa_options'];
+                    }
+                    break;
+                default :
+                    $conditions['class_key'] = null;
+            }
+        }
 
-        } else if (!empty($this->scriptProperties['date_start'])) {
-            $start = strftime($dateFormat,strtotime($this->scriptProperties['date_start'].' 00:00:00'));
-            $conditions['createdon'] = '['.$start.' TO *]';
-
-        } else if (!empty($this->scriptProperties['date_end'])) {
-            $end = strftime($dateFormat,strtotime($this->scriptProperties['date_end'].' 23:59:59'));
-            $conditions['createdon'] = '[* TO '.$end.']';
+        if (!empty($this->scriptProperties['date_start']) || !empty($this->scriptProperties['date_end'])) {
+            $this->discuss->search->createTimeRange($conditions, $this->scriptProperties['date_start'], $this->scriptProperties['date_end']);
         }
         $conditions['private'] = 0;
         return $conditions;

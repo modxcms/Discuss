@@ -41,6 +41,7 @@ class DiscussMessagesReplyController extends DiscussController {
             if (empty($this->post)) $this->discuss->sendErrorPage();
             $this->scriptProperties['thread'] = $this->post->get('thread');
         }
+        if (!class_exists('disThread')) { $this->modx->loadClass('disThread'); }
         $this->thread = $this->modx->call('disThread', 'fetch', array(&$this->modx,$this->scriptProperties['thread'],disThread::TYPE_MESSAGE));
         if (empty($this->thread)) $this->modx->sendErrorPage();
         if (empty($this->post)) {

@@ -111,6 +111,15 @@ $thread->set('private',true);
 $thread->set('users',implode(',',$participantsIds));
 $thread->save();
 
+
+/** Set thread read for author */
+$threadRead = $modx->newObject('disThreadRead');
+$threadRead->fromArray(array(
+    'thread' => $thread->get('id'),
+    'board' => 0,
+    'user' => $modx->discuss->user->get('id')
+));
+$threadRead->save();
 /* set participants, add notifications */
 foreach ($participantsIds as $participant) {
     /** @var disThreadUser $threadUser */
