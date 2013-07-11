@@ -51,6 +51,28 @@ class disSearch {
     }
 
     /**
+     * create search class specific time range
+     * @param null $start
+     * @param null $end
+     */
+    public function createTimeRange(&$conditions, $start = '', $end = '') {
+        $dateFormat = '%Y-%m-%dT%H:%M:%S';
+        if ($start != '' && $end != '') {
+            $start = strftime($dateFormat,strtotime($start.' 00:00:00'));
+            $end = strftime($dateFormat,strtotime($end.' 23:59:59'));
+            $conditions['createdon'] = "BETWEEN {$this->modx->quote($start, PDO::PARAM_STR)} AND {$this->modx->quote($end, PDO::PARAM_STR)}";
+
+        } else if ($start != '') {
+            $start = strftime($dateFormat,strtotime($start.' 00:00:00'));
+            $conditions['createdon'] = ">= {$this->modx->quote($start, PDO::PARAM_STR)}";
+
+        } else if ($end != '') {
+            $end = strftime($dateFormat,strtotime($end.' 23:59:59'));
+            $conditions['createdon'] = "<= {$this->modx->quote($end, PDO::PARAM_STR)}";
+        }
+    }
+
+    /**
      * Index the current search result.
      *
      * @param array $fields

@@ -439,6 +439,24 @@ $_lang['setting_discuss.threads_per_page_desc'] = 'The default number of threads
 $_lang['setting_discuss.user_active_threshold'] = 'Active User Threshold';
 $_lang['setting_discuss.user_active_threshold_desc'] = 'The number of minutes a user must be active in to stay within the Active User threshold.';
 
+// Sphinx
+$_lang['setting_discuss.sphinx.connection_timeout'] = 'Sphinx Connection Timeout (seconds)';
+$_lang['setting_discuss.sphinx.connection_timeout_desc'] = 'Sets the time allowed to spend connecting to the server before giving up.';
+
+$_lang['setting_discuss.sphinx.host_name'] = 'Sphinx searchd Hostname';
+$_lang['setting_discuss.sphinx.host_name_desc'] = 'Sets Sphinx searchd hostname used for searches.';
+
+$_lang['setting_discuss.sphinx.port'] = 'Sphinx TCP Port';
+$_lang['setting_discuss.sphinx.port_desc'] = 'Sets Sphinx host TCP port.';
+
+$_lang['setting_discuss.sphinx.searchd_retries'] = 'Sphinx searchd Retries';
+$_lang['setting_discuss.sphinx.searchd_retries_desc'] = 'Sets distributed retry count on how many times searchd will attempt on failures.';
+
+$_lang['setting_discuss.sphinx.searchd_retry_delay'] = 'Sphinx searchd Retry Delay (milliseconds)';
+$_lang['setting_discuss.sphinx.searchd_retry_delay_desc'] = 'Sets retry delay for searchd.';
+
+$_lang['setting_discuss.sphinx.indexes'] = 'Indexes Used by Sphinx';
+$_lang['setting_discuss.sphinx.indexes_desc'] = 'Indexes can be semicolon, comma or space separated list of indexes.';
 
 /* SSO Mode */
 $_lang['setting_discuss.sso_mode'] = 'SSO Mode';
