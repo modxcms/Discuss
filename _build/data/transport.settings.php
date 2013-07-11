@@ -747,6 +747,87 @@ $settings['discuss.strip_remaining_bbcode']->fromArray(array(
     'area' => 'Sessions',
 ),'',true,true);
 
+$settings['discuss.group_by_thread']= $modx->newObject('modSystemSetting');
+$settings['discuss.group_by_thread']->fromArray(array(
+    'key' => 'discuss.group_by_thread',
+    'value' => '1',
+    'xtype' => 'modx-combo-boolean',
+    'namespace' => 'discuss',
+    'area' => 'Search',
+),'',true,true);
+
+$settings['discuss.max_search_results']= $modx->newObject('modSystemSetting');
+$settings['discuss.max_search_results']->fromArray(array(
+    'key' => 'discuss.max_search_results',
+    'value' => '500',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Search',
+),'',true,true);
+
+$settings['discuss.search_results_buffer']= $modx->newObject('modSystemSetting');
+$settings['discuss.search_results_buffer']->fromArray(array(
+    'key' => 'discuss.search_results_buffer',
+    'value' => '200',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Search',
+),'',true,true);
+
+// Sphinx
+$settings['discuss.sphinx.host_name']= $modx->newObject('modSystemSetting');
+$settings['discuss.sphinx.host_name']->fromArray(array(
+    'key' => 'discuss.sphinx.host_name',
+    'value' => 'localhost',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Sphinx',
+),'',true,true);
+
+$settings['discuss.sphinx.port']= $modx->newObject('modSystemSetting');
+$settings['discuss.sphinx.port']->fromArray(array(
+    'key' => 'discuss.sphinx.port',
+    'value' => '9312',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Sphinx',
+),'',true,true);
+
+$settings['discuss.sphinx.connection_timeout']= $modx->newObject('modSystemSetting');
+$settings['discuss.sphinx.connection_timeout']->fromArray(array(
+    'key' => 'discuss.sphinx.connection_timeout',
+    'value' => '30',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Sphinx',
+),'',true,true);
+
+$settings['discuss.sphinx.searchd_retries']= $modx->newObject('modSystemSetting');
+$settings['discuss.sphinx.searchd_retries']->fromArray(array(
+    'key' => 'discuss.sphinx.searchd_retries',
+    'value' => '3',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Sphinx',
+),'',true,true);
+
+$settings['discuss.sphinx.searchd_retry_delay']= $modx->newObject('modSystemSetting');
+$settings['discuss.sphinx.searchd_retry_delay']->fromArray(array(
+    'key' => 'discuss.sphinx.searchd_retry_delay',
+    'value' => '5000',
+    'xtype' => 'numberfield',
+    'namespace' => 'discuss',
+    'area' => 'Sphinx',
+),'',true,true);
+
+$settings['discuss.sphinx.indexes']= $modx->newObject('modSystemSetting');
+$settings['discuss.sphinx.indexes']->fromArray(array(
+    'key' => 'discuss.sphinx.indexes',
+    'value' => 'discuss_posts',
+    'xtype' => 'textfield',
+    'namespace' => 'discuss',
+    'area' => 'Sphinx',
+),'',true,true);
 /*
 $settings['discuss.']= $modx->newObject('modSystemSetting');
 $settings['discuss.']->fromArray(array(

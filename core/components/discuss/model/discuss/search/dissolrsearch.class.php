@@ -78,6 +78,28 @@ class disSolrSearch extends disSearch {
     }
 
     /**
+     * create search class specific time range
+     * @param null $start
+     * @param null $end
+     */
+    public function createTimeRange(&$conditions, $start = '', $end = '') {
+        $dateFormat = '%Y-%m-%dT%H:%M:%S.999Z';
+        if ($start != '' && $end != '') {
+            $start = strftime($dateFormat,strtotime($start.' 00:00:00'));
+            $end = strftime($dateFormat,strtotime($end.' 23:59:59'));
+            $conditions['createdon'] = '['.$start.' TO '.$end.']';
+
+        } else if ($start != '') {
+            $start = strftime($dateFormat,strtotime($start.' 00:00:00'));
+            $conditions['createdon'] = '['.$start.' TO *]';
+
+        } else if ($end != '') {
+            $end = strftime($dateFormat,strtotime($end.' 23:59:59'));
+            $conditions['createdon'] = '[* TO '.$end.']';
+        }
+    }
+
+    /**
      * Run the search based on the specified search string.
      *
      * @param string $string The string to run the search on.
