@@ -105,7 +105,7 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
         $links['actionlink_all_unread'] = $this->discuss->request->makeUrl('thread/unread');
         $actionButtons[] = array('url' => $links['actionlink_all_unread'], 'text' => $this->modx->lexicon('discuss.unread_posts_all'), 'cls' => 'dis-action-unread_posts_all');
         if ($this->discuss->user->isLoggedIn) {
-            $links['actionlink_mark_read'] = $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1));
+            $links['actionlink_mark_read'] = $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1, 'ts' => time()));
             $actionButtons[] = array('url' => $links['actionlink_mark_read'], 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }
         $this->setPlaceholders($links);
@@ -118,6 +118,7 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
         if (!empty($this->scriptProperties['read']) && $this->discuss->user->isLoggedIn) {
             $this->discuss->hooks->load('thread/read_all',array(
                 'lastLogin' => $this->discuss->user->get('last_login'),
+                'ts' => (int) $this->scriptProperties['ts']
             ));
         }
     }
