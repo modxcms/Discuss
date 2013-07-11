@@ -56,7 +56,6 @@ $cSub->select(array(
 
 if (!empty($scriptProperties['lastLogin'])) {
     $cSub->where(array('post_last_on:>=' => strtotime($scriptProperties['lastLogin'])));
-    $this->modx->log(modX::LOG_LEVEL_ERROR, $scriptProperties['ts']);
     if ($scriptProperties['ts'] !== false) {
         $cSub->where(array('post_last_on:<' => $scriptProperties['ts']));
     }

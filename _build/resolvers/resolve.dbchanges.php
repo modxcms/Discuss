@@ -79,8 +79,6 @@ if ($object->xpdo) {
             $manager->addField('disThread','post_last_on');
             $manager->addIndex('disThread','post_last_on');
 
-            $manager->addField('disThread','participants');
-
             /** 2013/01/03: change "message" dbtype from "text" to "mediumtext" for larger posts */
             $manager->alterField('disPost','message');
 
