@@ -387,7 +387,7 @@ class disBBCodeParser extends disParser {
      * @return string
      */
     public function convertLinks($message) {
-        return preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftp):\/\/)([\@a-z0-9\/\?=\-_#]+\.[\@a-z0-9\/\?=\-_#\.,\+]+)/msxi",array($this, 'parseLinksCallback'),$message);
+        return preg_replace_callback("/(?<!<a href=\")(?<!\")(?<!\">)((?:https?|ftps?):\/\/)(?:(?:[\w\.\-\+%!$&'\(\)*\+,;=]+:)*[\w\.\-\+%!$&'\(\)*\+,;=]+@)?(?:[a-z0-9\-\.%]+)(?::[0-9]+)?(?:[\/|\?][\w#!:\.\?\+=&%@!$'~*,;\/\(\)\[\]\-]*)?/msxi",array($this, 'parseLinksCallback'),$message);
     }
     /**
      * Parse [url] tags
@@ -396,9 +396,18 @@ class disBBCodeParser extends disParser {
      * @return string
      */
     public static function parseLinksCallback($matches) {
-        $url = $matches[1].$matches[2];
-        $noFollow = ' rel="nofollow"';
-        return '<a href="'.$url.'" target="_blank"'.$noFollow.'>'.$url.'</a>';
+        $url = $matches[0];
+        $trim = null;
+        // Remove trailing dots
+        preg_match("/[\.]+$/", $url, $trailingDots);
+        if (isset($trailingDots[0])) {
+            $url = rtrim($url, '.');
+            $trim = $trailingDots[0];
+        }
+        $link = '<a href="'.$url.'" target="_blank" rel="nofollow">'.$url;
+        $link .= ($trim !== null) ? "</a>{$trim}" : '</a>';
+        return $link;
+
     }
 
     /**
