@@ -27,7 +27,6 @@ $xpdo_meta_map['disThread']= array (
     'users' => '',
     'last_view_ip' => '',
     'integrated_id' => 0,
-    'participants' => '',
   ),
   'fieldMeta' => 
   array (
@@ -189,13 +188,6 @@ $xpdo_meta_map['disThread']= array (
       'attributes' => 'unsigned',
       'null' => false,
       'default' => 0,
-    ),
-    'participants' => 
-    array (
-      'dbtype' => 'text',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => '',
     ),
   ),
   'indexes' => 
@@ -454,6 +446,14 @@ $xpdo_meta_map['disThread']= array (
     'Users' => 
     array (
       'class' => 'disThreadUser',
+      'local' => 'id',
+      'foreign' => 'thread',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
+    'Participants' => 
+    array (
+      'class' => 'disThreadParticipant',
       'local' => 'id',
       'foreign' => 'thread',
       'cardinality' => 'many',

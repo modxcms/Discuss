@@ -100,6 +100,38 @@ $xpdo_meta_map['disSession']= array (
         ),
       ),
     ),
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'id' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
+    'place' => 
+    array (
+      'alias' => 'place',
+      'primary' => false,
+      'unique' => false,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'place' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
+    ),
   ),
   'aggregates' => 
   array (

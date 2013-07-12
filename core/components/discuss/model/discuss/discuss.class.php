@@ -105,7 +105,7 @@ class Discuss {
         }
 
         $this->config = array_merge(array(
-            'version' => '1.1.1',
+            'version' => '1.2-pl',
             'assetsUrl' => $assetsUrl,
 			'themesUrl' => $themesUrl,
             'theme' => $theme,
@@ -296,63 +296,6 @@ class Discuss {
             }
             $this->user->init();
         }
-
-        /* topbar profile links. @TODO: Move this somewhere else. */
-        if ($this->user->isLoggedIn) {
-            $authphs = array(
-                'authLink' => '<a href="'.$this->url.'logout">Logout</a>',
-            );
-            $authphs = array_merge($this->user->toArray('user.'),$authphs);
-            $authphs['user.avatar_url'] = $this->user->getAvatarUrl();
-
-            /* Get counts */
-            $authphs['user.unread_messages_count'] = $newMessages = $this->user->countUnreadMessages();
-            $authphs['user.unread_posts_count'] = $unreadPosts = $this->user->countUnreadPosts();
-            $authphs['user.new_replies_count'] = $newReplies = $this->user->countNewReplies();
-            $authphs['user.unanswered_questions_count'] = $unansweredQuestions = $this->user->countUnansweredQuestions();
-            $authphs['user.no_replies_count'] = $noReplies = $this->user->countWithoutReplies();
-
-            /* Format counts nicely */
-            $authphs['user.unread_messages'] = ($newMessages > 1) ?
-                $this->modx->lexicon('discuss.user.new_messages',array('total' => $newMessages)) : (
-                    ($newMessages == 1) ?
-                    $this->modx->lexicon('discuss.user.one_new_message') :
-                    $this->modx->lexicon('discuss.user.no_new_messages')
-                );
-            $authphs['user.unread_posts'] = ($unreadPosts > 1) ?
-                $this->modx->lexicon('discuss.user.new_posts', array('total' => $unreadPosts)) : (
-                    ($unreadPosts == 1) ?
-                    $this->modx->lexicon('discuss.user.one_new_post') :
-                    $this->modx->lexicon('discuss.user.no_new_posts')
-                );
-            $authphs['user.new_replies'] = ($newReplies > 1) ?
-                $this->modx->lexicon('discuss.user.new_replies',array('total' => $newReplies)) : (
-                    ($newReplies == 1) ?
-                    $this->modx->lexicon('discuss.user.one_new_reply') :
-                    $this->modx->lexicon('discuss.user.no_new_replies')
-                );
-            $authphs['user.unanswered_questions'] = ($unansweredQuestions > 1) ?
-                $this->modx->lexicon('discuss.user.unanswered_questions',array('total' => $unansweredQuestions)) : (
-                    ($unansweredQuestions == 1) ?
-                    $this->modx->lexicon('discuss.user.one_unanswered_question') :
-                    $this->modx->lexicon('discuss.user.no_unanswered_questions')
-                );
-            $authphs['user.no_replies'] = ($noReplies > 1) ?
-                $this->modx->lexicon('discuss.user.no_replies',array('total' => $noReplies)) : (
-                    ($noReplies == 1) ?
-                    $this->modx->lexicon('discuss.user.one_no_reply') :
-                    $this->modx->lexicon('discuss.user.no_no_replies')
-            );
-            $this->user->isGlobalModerator();
-            $this->user->isAdmin();
-        } else {
-            $authphs = array(
-                'authLink' => '<a href="'.$this->url.'login">Login</a>',
-                'user.avatar_url' => '',
-                'user.unread_messages' => '',
-            );
-        }
-        $this->modx->toPlaceholders($authphs,'discuss');
     }
 
     /**

@@ -34,12 +34,12 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
     }
      public function process() {
         /* setup default properties */
-        $limit = !empty($this->scriptProperties['limit']) ? (int)$this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
-        $page = !empty($this->scriptProperties['page']) ? (int)$this->scriptProperties['page'] : 1;
+        $limit = !empty($this->scriptProperties['limit']) ? $this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
+        $page = !empty($this->scriptProperties['page']) ? $this->scriptProperties['page'] : 1;
         $page = $page <= 0 ? 1 : $page;
         $start = ($page-1) * $limit;
 
-        $sortBy = $this->modx->getOption('sortBy',$this->scriptProperties,'LastPost.createdon');
+        $sortBy = $this->modx->getOption('sortBy',$this->scriptProperties,'disThread.post_last_on');
         $sortDir = $this->modx->getOption('sortDir',$this->scriptProperties,'DESC');
         $postTpl = $this->modx->getOption('postTpl',$this->options,'post/disThreadLi');
 
@@ -105,7 +105,7 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
         $links['actionlink_all_unread'] = $this->discuss->request->makeUrl('thread/unread');
         $actionButtons[] = array('url' => $links['actionlink_all_unread'], 'text' => $this->modx->lexicon('discuss.unread_posts_all'), 'cls' => 'dis-action-unread_posts_all');
         if ($this->discuss->user->isLoggedIn) {
-            $links['actionlink_mark_read'] = $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1));
+            $links['actionlink_mark_read'] = $this->discuss->request->makeUrl('thread/unread_last_visit',array('read' => 1, 'ts' => time()));
             $actionButtons[] = array('url' => $links['actionlink_mark_read'], 'text' => $this->modx->lexicon('discuss.mark_all_as_read'), 'cls' => 'dis-action-mark_all_as_read');
         }
         $this->setPlaceholders($links);
@@ -118,6 +118,7 @@ class DiscussThreadUnreadLastVisitController extends DiscussThreadUnreadControll
         if (!empty($this->scriptProperties['read']) && $this->discuss->user->isLoggedIn) {
             $this->discuss->hooks->load('thread/read_all',array(
                 'lastLogin' => $this->discuss->user->get('last_login'),
+                'ts' => (int) $this->scriptProperties['ts']
             ));
         }
     }

@@ -134,20 +134,10 @@ if (isset($participantsIds) && !empty($participantsIds) && $modx->discuss->user-
         $notify->set('board',0);
         $notify->save();
 
-        /* remove read status for all-non-replier participants */
-        if ($participant != $discuss->user->get('id')) {
-            /** @var disThreadRead $read */
-            $read = $modx->getObject('disThreadRead',array(
-                'thread' => $thread->get('id'),
-                'user' => $participant,
-            ));
-            if ($read) {
-                $read->remove();
-            }
-        }
     }
 }
-
+/* Remove read status for all other users */
+$modx->removeCollection('disThreadRead', array('thread' => $thread->get('id'), 'user:!=' => $discuss->user->get('id')));
 /* upload attachments */
 foreach ($attachments as $file) {
     /** @var disPostAttachment $attachment */

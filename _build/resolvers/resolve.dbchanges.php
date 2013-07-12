@@ -79,11 +79,23 @@ if ($object->xpdo) {
             $manager->addField('disThread','post_last_on');
             $manager->addIndex('disThread','post_last_on');
 
-            $manager->addField('disThread','participants');
-
             /** 2013/01/03: change "message" dbtype from "text" to "mediumtext" for larger posts */
             $manager->alterField('disPost','message');
 
+            /** 2013/06/28: Add some indexes for often used queries */
+            $manager->addIndex('disBoardClosure','PRIMARY');
+            $manager->addIndex('disCategory','rank');
+            $manager->addIndex('disSession','PRIMARY');
+            $manager->addIndex('disSession','place');
+
+            /** 2014/07/08: Normalize participants for threads */
+            $manager->createObjectContainer('disThreadParticipant');
+            // Check if participants table has been filled
+            if ($modx->getCount('disThreadParticipant') == 0) {
+                $modx->query("INSERT INTO {$modx->getTableName('disThreadParticipants')} SELECT `thread`, `author` FROM {$modx->getTableName('disPost')}
+                    GROUP BY `thread`, `author` ORDER BY `thread` ASC, `id` ASC");
+                $manager->removeField('disThread', 'participants');
+            }
             /* Set log level back to what it was */
             $modx->setLogLevel($logLevel);
 

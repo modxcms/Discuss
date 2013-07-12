@@ -72,7 +72,7 @@ class DiscussMessagesViewController extends DiscussController {
         $threadArray['views'] = number_format($threadArray['views']);
         $threadArray['replies'] = number_format($threadArray['replies']);
         $this->setPlaceholders($threadArray);
-
+        $this->markAsRead();
         $this->getThreadPosts();
         $this->getLastPost();
         $this->getViewing();

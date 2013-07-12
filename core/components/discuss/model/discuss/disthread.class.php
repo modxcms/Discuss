@@ -188,47 +188,9 @@ class disThread extends xPDOSimpleObject {
         $response = array();
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
-        $c->innerJoin('disPost','FirstPost');
-        $c->innerJoin('disPost','LastPost');
-        $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
         $c->innerJoin('disUser','LastAuthor');
-        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
-        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+
         $groups = $modx->discuss->user->getUserGroups();
-        if (!$modx->discuss->user->isAdmin()) {
-            if (!empty($groups)) {
-                /* restrict boards by user group if applicable */
-                $g = array(
-                    'UserGroups.usergroup:IN' => $groups,
-                );
-                $g['OR:UserGroups.usergroup:IS'] = null;
-                $where[] = $g;
-                $c->andCondition($where,null,2);
-            } else {
-                $c->where(array(
-                    'UserGroups.usergroup:IS' => null,
-                ));
-            }
-        }
-        $c->where(array(
-            'Reads.thread:IS' => null,
-            'Board.status:!=' => disBoard::STATUS_INACTIVE,
-        ));
-
-        /* ignore spam/recycle bin boards */
-        $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
-        if (!empty($spamBoard)) {
-            $c->where(array(
-                'Board.id:!=' => $spamBoard,
-            ));
-        }
-        $trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
-        if (!empty($trashBoard)) {
-            $c->where(array(
-                'Board.id:!=' => $trashBoard,
-            ));
-        }
-
         /* usergroup protection */
         if ($modx->discuss->user->isLoggedIn) {
             if ($sinceLastLogin) {
@@ -246,18 +208,59 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
+        $cRead = $modx->newQuery('disThreadRead');
+        $cRead->select(array($modx->getSelectColumns('disThreadRead', 'disThreadRead', '', array('thread'))));
+        $cRead->where(array('user' => $modx->discuss->user->get('id'),
+            "{$modx->escape('disThreadRead')}.{$modx->escape('thread')} = {$modx->escape('disThread')}.{$modx->escape('id')}"
+        ));
+        $cRead->prepare();
+        $c->WHERE(array("{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$cRead->toSQL()})"));
+        if (!$modx->discuss->user->isAdmin()) {
+            $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+            if (!empty($groups)) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:IS'] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            } else {
+                $c->where(array(
+                    'UserGroups.usergroup:IS' => null,
+                ));
+            }
+        }
+
+        $c->where(array(
+            'Board.status:>' => disBoard::STATUS_INACTIVE
+        ));
+
+
+        /* ignore spam/recycle bin boards */
+        $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
+        if (!empty($spamBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $spamBoard,
+            ));
+        }
+        $trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
+        if (!empty($trashBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $trashBoard,
+            ));
+        }
         $response['total'] = $modx->getCount('disThread', $c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
-            'board_name' => 'Board.name',
-            'title' => 'FirstPost.title',
-            'thread' => 'FirstPost.thread',
+            'board_name' => "{$modx->escape('Board')}.{$modx->escape('name')}",
+            //'title' => 'FirstPost.title',
+            'thread' => "{$modx->escape('disThread')}.{$modx->escape('id')}",
             'author_username' => 'LastAuthor.username',
-
-            'post_id' => 'LastPost.id',
-            'createdon' => 'LastPost.createdon',
-            'author' => 'LastPost.author',
-            'last_post_replies' => 'LastPostThread.replies',
+            'post_id' => "{$modx->escape('disThread')}.{$modx->escape('post_last')}",
+            "FROM_UNIXTIME({$modx->escape('disThread')}.{$modx->escape('post_last_on')}) AS {$modx->escape('createdon')}",
+            'author' =>  "{$modx->escape('disThread')}.{$modx->escape('author_last')}",
+            'last_post_replies' => "{$modx->escape('disThread')}.{$modx->escape('replies')}",
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);
@@ -286,14 +289,28 @@ class disThread extends xPDOSimpleObject {
         $response = array();
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
-        $c->innerJoin('disPost','FirstPost');
-        $c->innerJoin('disPost','LastPost');
-        $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
         $c->innerJoin('disUser','LastAuthor');
-        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
-        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+
         $groups = $modx->discuss->user->getUserGroups();
+        /* usergroup protection */
+        if ($modx->discuss->user->isLoggedIn) {
+            if ($sinceLastLogin) {
+                $lastLogin = $modx->discuss->user->get('last_login');
+                if (!empty($lastLogin)) {
+                    $c->where(array(
+                        'disThread.post_last_on:>=' => is_int($lastLogin) ? $lastLogin : strtotime($lastLogin),
+                    ));
+                }
+            }
+            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
+            if (!empty($ignoreBoards)) {
+                $c->where(array(
+                    'Board.id:NOT IN' => explode(',',$ignoreBoards),
+                ));
+            }
+        }
         if (!$modx->discuss->user->isAdmin()) {
+            $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
             if (!empty($groups)) {
                 /* restrict boards by user group if applicable */
                 $g = array(
@@ -316,7 +333,7 @@ class disThread extends xPDOSimpleObject {
             'disThread.class_key' => 'disThreadQuestion',
             'AND:disThread.post_last_on:>=' => $startTime,
             'AND:disThread.answered:=' => false,
-            'AND:Board.status:!=' => disBoard::STATUS_INACTIVE,
+            'AND:Board.status:>' => disBoard::STATUS_INACTIVE,
         ));
 
         /* ignore spam/recycle bin boards */
@@ -333,35 +350,17 @@ class disThread extends xPDOSimpleObject {
             ));
         }
 
-        /* usergroup protection */
-        if ($modx->discuss->user->isLoggedIn) {
-            if ($sinceLastLogin) {
-                $lastLogin = $modx->discuss->user->get('last_login');
-                if (!empty($lastLogin)) {
-                    $c->where(array(
-                        'disThread.post_last_on:>=' => is_int($lastLogin) ? $lastLogin : strtotime($lastLogin),
-                    ));
-                }
-            }
-            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
-            if (!empty($ignoreBoards)) {
-                $c->where(array(
-                    'Board.id:NOT IN' => explode(',',$ignoreBoards),
-                ));
-            }
-        }
         $response['total'] = $modx->getCount('disThread', $c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
-            'board_name' => 'Board.name',
-            'title' => 'FirstPost.title',
-            'thread' => 'FirstPost.thread',
+            'board_name' => "{$modx->escape('Board')}.{$modx->escape('name')}",
+            //'title' => 'FirstPost.title',
+            'thread' => "{$modx->escape('disThread')}.{$modx->escape('id')}",
             'author_username' => 'LastAuthor.username',
-
-            'post_id' => 'LastPost.id',
-            'createdon' => 'LastPost.createdon',
-            'author' => 'LastPost.author',
-            'last_post_replies' => 'LastPostThread.replies',
+            'post_id' => "{$modx->escape('disThread')}.{$modx->escape('post_last')}",
+            "FROM_UNIXTIME({$modx->escape('disThread')}.{$modx->escape('post_last_on')}) AS {$modx->escape('createdon')}",
+            'author' =>  "{$modx->escape('disThread')}.{$modx->escape('author_last')}",
+            'last_post_replies' => "{$modx->escape('disThread')}.{$modx->escape('replies')}",
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);
@@ -391,14 +390,28 @@ class disThread extends xPDOSimpleObject {
         $response = array();
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
-        $c->innerJoin('disPost','FirstPost');
-        $c->innerJoin('disPost','LastPost');
-        $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
         $c->innerJoin('disUser','LastAuthor');
-        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
-        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+
         $groups = $modx->discuss->user->getUserGroups();
+        /* usergroup protection */
+        if ($modx->discuss->user->isLoggedIn) {
+            if ($sinceLastLogin) {
+                $lastLogin = $modx->discuss->user->get('last_login');
+                if (!empty($lastLogin)) {
+                    $c->where(array(
+                        'disThread.post_last_on:>=' => is_int($lastLogin) ? $lastLogin : strtotime($lastLogin),
+                    ));
+                }
+            }
+            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
+            if (!empty($ignoreBoards)) {
+                $c->where(array(
+                    'Board.id:NOT IN' => explode(',',$ignoreBoards),
+                ));
+            }
+        }
         if (!$modx->discuss->user->isAdmin()) {
+            $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
             if (!empty($groups)) {
                 /* restrict boards by user group if applicable */
                 $g = array(
@@ -421,7 +434,7 @@ class disThread extends xPDOSimpleObject {
             'disThread.replies' => 0,
             'AND:disThread.post_last_on:>=' => $startTime,
             'AND:disThread.answered:=' => false,
-            'AND:Board.status:!=' => disBoard::STATUS_INACTIVE,
+            'AND:Board.status:>' => disBoard::STATUS_INACTIVE,
         ));
 
         /* ignore spam/recycle bin boards */
@@ -438,35 +451,16 @@ class disThread extends xPDOSimpleObject {
             ));
         }
 
-        /* usergroup protection */
-        if ($modx->discuss->user->isLoggedIn) {
-            if ($sinceLastLogin) {
-                $lastLogin = $modx->discuss->user->get('last_login');
-                if (!empty($lastLogin)) {
-                    $c->where(array(
-                        'disThread.post_last_on:>=' => is_int($lastLogin) ? $lastLogin : strtotime($lastLogin),
-                    ));
-                }
-            }
-            $ignoreBoards = $modx->discuss->user->get('ignore_boards');
-            if (!empty($ignoreBoards)) {
-                $c->where(array(
-                    'Board.id:NOT IN' => explode(',',$ignoreBoards),
-                ));
-            }
-        }
         $response['total'] = $modx->getCount('disThread', $c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
-            'board_name' => 'Board.name',
-            'title' => 'FirstPost.title',
-            'thread' => 'FirstPost.thread',
+            'board_name' => "{$modx->escape('Board')}.{$modx->escape('name')}",
+            'thread' => "{$modx->escape('disThread')}.{$modx->escape('id')}",
             'author_username' => 'LastAuthor.username',
-
-            'post_id' => 'LastPost.id',
-            'createdon' => 'LastPost.createdon',
-            'author' => 'LastPost.author',
-            'last_post_replies' => 'LastPostThread.replies',
+            'post_id' => "{$modx->escape('disThread')}.{$modx->escape('post_last')}",
+            "FROM_UNIXTIME({$modx->escape('disThread')}.{$modx->escape('post_last_on')}) AS {$modx->escape('createdon')}",
+            'author' =>  "{$modx->escape('disThread')}.{$modx->escape('author_last')}",
+            'last_post_replies' => "{$modx->escape('disThread')}.{$modx->escape('replies')}",
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);
@@ -496,51 +490,12 @@ class disThread extends xPDOSimpleObject {
         $response = array();
         $c = $modx->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
-        $c->innerJoin('disPost','FirstPost');
-        $c->innerJoin('disPost','LastPost');
-        $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
         $c->innerJoin('disUser','LastAuthor');
-        $c->leftJoin('disThreadRead','Reads','Reads.thread = disThread.id AND Reads.user = '.$modx->discuss->user->get('id'));
-        $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
-        $groups = $modx->discuss->user->getUserGroups();
-        if (!$modx->discuss->user->isAdmin()) {
-            if (!empty($groups)) {
-                /* restrict boards by user group if applicable */
-                $g = array(
-                    'UserGroups.usergroup:IN' => $groups,
-                );
-                $g['OR:UserGroups.usergroup:IS'] = null;
-                $where[] = $g;
-                $c->andCondition($where,null,2);
-            } else {
-                $c->where(array(
-                    'UserGroups.usergroup:IS' => null,
-                ));
-            }
-        }
-        $daysAgo = time() - ($modx->getOption('discuss.new_replies_threshold',null,14) * 24 * 60 * 60);
-
-        $c->where(array(
-            'Reads.thread:IS' => null,
-            'Board.status:!=' => disBoard::STATUS_INACTIVE,
-            'LastPost.author:!=' => $modx->discuss->user->get('id'),
-            //'disThread.post_last_on:>=' => $daysAgo,
-            'FIND_IN_SET('.$modx->discuss->user->get('id').',`disThread`.`participants`) > 0',
+        $c->innerJoin('disThreadParticipant', 'Participants', array(
+            "{$modx->escape('Participants')}.{$modx->escape('user')} = {$modx->discuss->user->get('id')}",
+            "{$modx->escape('Participants')}.{$modx->escape('thread')} = {$modx->escape('disThread')}.{$modx->escape('id')}"
         ));
-        /* ignore spam/recycle bin boards */
-        $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
-        if (!empty($spamBoard)) {
-            $c->where(array(
-                'Board.id:!=' => $spamBoard,
-            ));
-        }
-        $trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
-        if (!empty($trashBoard)) {
-            $c->where(array(
-                'Board.id:!=' => $trashBoard,
-            ));
-        }
-
+        $groups = $modx->discuss->user->getUserGroups();
         /* usergroup protection */
         if ($modx->discuss->user->isLoggedIn) {
             if ($sinceLastLogin) {
@@ -558,18 +513,60 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
+        $cRead = $modx->newQuery('disThreadRead');
+        $cRead->select(array($modx->getSelectColumns('disThreadRead', 'disThreadRead', '', array('thread'))));
+        $cRead->where(array('user' => $modx->discuss->user->get('id'),
+            "{$modx->escape('disThreadRead')}.{$modx->escape('thread')} = {$modx->escape('disThread')}.{$modx->escape('id')}"
+        ));
+        $cRead->prepare();
+        $c->WHERE(array("{$modx->escape('disThread')}.{$modx->escape('id')} NOT IN ({$cRead->toSQL()})"));
+        if (!$modx->discuss->user->isAdmin()) {
+            $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
+            if (!empty($groups)) {
+                /* restrict boards by user group if applicable */
+                $g = array(
+                    'UserGroups.usergroup:IN' => $groups,
+                );
+                $g['OR:UserGroups.usergroup:IS'] = null;
+                $where[] = $g;
+                $c->andCondition($where,null,2);
+            } else {
+                $c->where(array(
+                    'UserGroups.usergroup:IS' => null,
+                ));
+            }
+        }
+        $daysAgo = time() - ($modx->getOption('discuss.new_replies_threshold',null,14) * 24 * 60 * 60);
+
+        $c->where(array(
+            'Board.status:>' => disBoard::STATUS_INACTIVE,
+            'author_last:!=' => $modx->discuss->user->get('id'),
+            //'disThread.post_last_on:>=' => $daysAgo,
+        ));
+        /* ignore spam/recycle bin boards */
+        $spamBoard = $modx->getOption('discuss.spam_bucket_board',null,false);
+        if (!empty($spamBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $spamBoard,
+            ));
+        }
+        $trashBoard = $modx->getOption('discuss.recycle_bin_board',null,false);
+        if (!empty($trashBoard)) {
+            $c->where(array(
+                'Board.id:!=' => $trashBoard,
+            ));
+        }
+
         $response['total'] = $modx->getCount('disThread',$c);
         $c->select($modx->getSelectColumns('disThread','disThread'));
         $c->select(array(
-            'board_name' => 'Board.name',
-            'title' => 'FirstPost.title',
-            'thread' => 'FirstPost.thread',
+            'board_name' => "{$modx->escape('Board')}.{$modx->escape('name')}",
+            'thread' => "{$modx->escape('disThread')}.{$modx->escape('id')}",
             'author_username' => 'LastAuthor.username',
-
-            'post_id' => 'LastPost.id',
-            'createdon' => 'LastPost.createdon',
-            'author' => 'LastPost.author',
-            'last_post_replies' => 'LastPostThread.replies',
+            'post_id' => "{$modx->escape('disThread')}.{$modx->escape('post_last')}",
+            "FROM_UNIXTIME({$modx->escape('disThread')}.{$modx->escape('post_last_on')}) AS {$modx->escape('createdon')}",
+            'author' =>  "{$modx->escape('disThread')}.{$modx->escape('author_last')}",
+            'last_post_replies' => "{$modx->escape('disThread')}.{$modx->escape('replies')}",
         ));
         $c->sortby($sortBy,$sortDir);
         $c->limit($limit,$start);
@@ -743,22 +740,34 @@ class disThread extends xPDOSimpleObject {
     }
 
     /**
-     * Add a User to the participants field
+     * Add a User to the list of participants if not participating
      * 
      * @param string|int $id
      * @return bool
      */
     public function addParticipant($id) {
-        $participants = explode(',',$this->get('participants'));
-        array_push($participants,$id);
-        $participants = array_unique($participants);
-        $participants = trim(implode(',',$participants),',');
-        $this->set('participants',$participants);
-        return $this->save();
+        $participates = false;
+        $participants = $this->getMany('Participants');
+        foreach($participants as $participant) {
+            if ($id == $participant->get('user')) {
+                $participates = true;
+                break;
+            }
+        }
+        unset($participants);
+        if (!$participates) {
+            $participant = $this->xpdo->newObject('disThreadParticipant');
+            $participant->fromArray(array(
+                'user' => $id,
+                'thread' => $this->get('id')
+            ));
+            $participates = $participant->save();
+        }
+        return $participates;
     }
 
     /**
-     * Remove a User from the participants field
+     * Remove a User from the participants
      * @param int|string $id
      * @param int|string $postId
      * @return bool
@@ -772,15 +781,8 @@ class disThread extends xPDOSimpleObject {
             'author' => $id,
         ));
         if (empty($userPostsInThread)) {
-            $id = (string)$id;
-            $participants = explode(',',$this->get('participants'));
-            $idx = array_search($id,$participants);
-            if ($idx !== false) {
-                $participants = array_splice($participants,$idx,$idx+1);
-                $participants = trim(implode(',',$participants),',');
-                $this->set('participants',$participants);
-                $removed = $this->save();
-            }
+            $removed = $this->xpdo->removeObject('disThreadParticipant', array('thread' => $this->get('id'),
+                'user' => $id));
         }
         return $removed;
     }
@@ -805,7 +807,7 @@ class disThread extends xPDOSimpleObject {
             'CONCAT_WS(":",User.id,IF(User.use_display_name,User.display_name,User.username)) AS reader',
         ));
         $c->where(array(
-            'disSession.place:LIKE' => $placePrefix.':'.$this->get('id').':%',
+            'disSession.place' => $placePrefix.':'.$this->get('id'),
         ));
         $c->groupby('disSession.user');
         $sessions = $this->xpdo->getCollection('disSession',$c);
@@ -824,8 +826,8 @@ class disThread extends xPDOSimpleObject {
 
         $c = $this->xpdo->newQuery('disSession');
         $c->where(array(
-            'place:LIKE' => $placePrefix.':'.$this->get('id').':%',
-            'AND:user:=' => 0,
+            'place' => $placePrefix.':'.$this->get('id'),
+            'user' => 0,
         ));
         $guests = $this->xpdo->getCount('disSession',$c);
 
@@ -1179,9 +1181,8 @@ class disThread extends xPDOSimpleObject {
         $c->where(array(
             'thread' => $this->get('id'),
         ));
-        $cc = clone $c;
-        $response['total'] = $this->xpdo->getCount('disPost',$cc);
-        $flat = $this->xpdo->getOption('flat',$options,true);
+        $response['total'] = $this->xpdo->discuss->controller->getPostCount('disThread', $this->get('id'));
+		$flat = $this->xpdo->getOption('flat',$options,true);
         $limit = $this->xpdo->getOption('limit',$options,(int)$this->xpdo->getOption('discuss.post_per_page',$options, 10));
         $start = $this->xpdo->getOption('start',$options,0);
         if ($flat) {

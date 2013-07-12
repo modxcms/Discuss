@@ -12,22 +12,22 @@
         <div id="dis-search-advanced" class="f-all m-grouped-content">
             <div class="f-full">
                 <div class="f1-f4 f-pad">
-                    <label for="dis-search-board">Post type:
+                    <label for="dis-search-qa">[[%discuss.post_type]]
                         <span class="error">[[+error.board]]</span>
                     </label>
-                    <select name="board" id="dis-search-qa">
-                        <option value="1">(All Posts)</option>
-                        <option value="2">Discussions</option>
-                        <option value="3" id="QA">Questions</option>
+                    <select name="dis_search_qa" id="dis-search-qa">
+                        <option value="1" [[+dis_search_qa:eq=`1`:then=`selected="selected"`]]>[[%discuss.all_posts]]</option>
+                        <option value="2" [[+dis_search_qa:eq=`2`:then=`selected="selected"`]]>[[%discuss.discussions]]</option>
+                        <option value="3" id="QA" [[+dis_search_qa:eq=`3`:then=`selected="selected"`]]>[[%discuss.questions]]</option>
                     </select>
                 </div>
                 <div id="SubOptions" class="f5-f8 sub-options">
-                    <label for="dis-search-board">Question options:
+                    <label for="dis-search-qa-opt">[[%discuss.question_options]]
                         <span class="error">[[+error.board]]</span>
                     </label>
-                    <input type="radio" name="qa-options" value="Both" checked>All Questions
-                    <input type="radio" name="qa-options" value="Solved">Answered
-                    <input type="radio" name="qa-options" value="Unsolved">Without Answer
+                    <input type="radio" name="qa_options" value="" [[+qa_options:empty=`checked="checked"`]] id="qa-all-questions">[[%discuss.all_questions]]<!--<label for="qa-all-questions">[[%discuss.all_questions]]</label>-->
+                    <input type="radio" name="qa_options" value="1" [[+qa_options:eq=`1`:then=`checked="checked"`]] id="qa-answered">[[%discuss.answered]]<!--<label for="qa-all-questions">[[%discuss.answered]]</label>-->
+                    <input type="radio" name="qa_options" value="0" [[+qa_options:eq=`0`:then=`checked="checked"`]] id="qa-wo-answer">[[%discuss.wo_answer]]<!--<label for="qa-all-questions">[[%discuss.wo_answer]]</label>-->
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
 </form>
 [[+total:gte=`1`:then=`
     <header class="dis-cat-header dark-gradient h-group sticky-bar top">
-        [[+results:notempty=`<h1>Displaying [[+start]]-[[+end]] of [[+total]] Results</h1>`]]
+        [[+results:notempty=`<h1>[[%discuss.search_results?total=`[[+total]]`&start=`[[+start]]`&end=`[[+end]]`]]</h1>`]]
         [[+pagination]]
     </header>
 

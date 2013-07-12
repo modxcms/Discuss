@@ -1,5 +1,18 @@
 Changelog for Discuss.
 
+Discuss 1.2, July 11, 2013
+====================================
+- Fix SQL Performance issues; new indexes and improved SQL queries
+- New lexicon entries for default theme that had fixed English sentences
+- Sphinx search server implemented for search
+- #9525 Unread replies and unread posts are now accurate
+- #9882 SQL Search improved and has fixes
+- #9882 Private Message count refreshes correctly
+- #9393 Marking all read should not cause server stalls anymore
+- #9525 Partially related to 9882 and is also fixed
+
+====================================
+
 - Add ability to bypass stripping remaining bbcode in disPost.getContent
 - Fix viewing stats due to changed session place in earlier version.
 - Improve performance of disSession GC

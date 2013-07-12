@@ -366,6 +366,15 @@ $_lang['setting_discuss.search_class_desc'] = 'The PHP class to use for Search. 
 $_lang['setting_discuss.search_class_path'] = 'Search Class Path';
 $_lang['setting_discuss.search_class_path_desc'] = 'The absolute path to the Search Class, as set in the discuss.search_class setting. Leave blank to use the default path.';
 
+$_lang['setting_discuss.group_by_thread'] = 'Group by Thread';
+$_lang['setting_discuss.group_by_thread_desc'] = 'Group search results by thread.';
+
+$_lang['setting_discuss.max_search_results'] = 'Maximum Number of Search Results';
+$_lang['setting_discuss.max_search_results_desc'] = 'Limits how many results is fetched when using disSearch as search class. This setting improves MySQL fulltext searches.';
+
+$_lang['setting_discuss.search_results_buffer'] = 'Results buffer';
+$_lang['setting_discuss.search_results_buffer_desc'] = 'Sets how many extra rows is fetched with maximum number of search results. This is used when grouping results by thread to get maximum number of results as grouping is done outside of MySQL due to grouping limitations.';
+
 $_lang['setting_discuss.show_whos_online'] = 'Show Whos Online';
 $_lang['setting_discuss.show_whos_online_desc'] = 'If set to yes, will display the users currently online.';
 
@@ -432,6 +441,24 @@ $_lang['setting_discuss.threads_per_page_desc'] = 'The default number of threads
 $_lang['setting_discuss.user_active_threshold'] = 'Active User Threshold';
 $_lang['setting_discuss.user_active_threshold_desc'] = 'The number of minutes a user must be active in to stay within the Active User threshold.';
 
+// Sphinx
+$_lang['setting_discuss.sphinx.connection_timeout'] = 'Sphinx Connection Timeout (seconds)';
+$_lang['setting_discuss.sphinx.connection_timeout_desc'] = 'Sets the time allowed to spend connecting to the server before giving up.';
+
+$_lang['setting_discuss.sphinx.host_name'] = 'Sphinx searchd Hostname';
+$_lang['setting_discuss.sphinx.host_name_desc'] = 'Sets Sphinx searchd hostname used for searches.';
+
+$_lang['setting_discuss.sphinx.port'] = 'Sphinx TCP Port';
+$_lang['setting_discuss.sphinx.port_desc'] = 'Sets Sphinx host TCP port.';
+
+$_lang['setting_discuss.sphinx.searchd_retries'] = 'Sphinx searchd Retries';
+$_lang['setting_discuss.sphinx.searchd_retries_desc'] = 'Sets distributed retry count on how many times searchd will attempt on failures.';
+
+$_lang['setting_discuss.sphinx.searchd_retry_delay'] = 'Sphinx searchd Retry Delay (milliseconds)';
+$_lang['setting_discuss.sphinx.searchd_retry_delay_desc'] = 'Sets retry delay for searchd.';
+
+$_lang['setting_discuss.sphinx.indexes'] = 'Indexes Used by Sphinx';
+$_lang['setting_discuss.sphinx.indexes_desc'] = 'Indexes can be semicolon, comma or space separated list of indexes.';
 
 /* SSO Mode */
 $_lang['setting_discuss.sso_mode'] = 'SSO Mode';
