@@ -7,9 +7,7 @@
 
 <div class="dis-profile f1-f9">
 
-
-
-<form action="[[~[[*id]]]]user/merge" method="post" class="dis-form" id="dis-user-merge-form">
+<form action="[[DiscussUrlMaker? &action=`user/merge`]]" method="post" class="dis-form" id="dis-user-merge-form">
 
 	<h1>[[%discuss.account_merge? &namespace=`discuss` &topic=`user`]]: [[+name]]</h1>
 
@@ -31,7 +29,7 @@
 
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" name="dis-account-merge" value="[[%discuss.account_merge]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]user/?user=[[+id]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+id]]"}`]]';" />
     </div>
 
 </form>

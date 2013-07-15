@@ -1,5 +1,5 @@
 <!-- move.tpl -->
-<form action="[[~[[*id]]]]thread/move?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">
+<form action="[[DiscussUrlMaker? &action=`thread/move` &params=`{"thread":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-remove-thread-form">
 	<h1>[[%discuss.thread_move? &namespace=`discuss` &topic=`post`]]</h1>
     <p>[[%discuss.thread_move_message? &thread=`[[+title]]`]]</p>
     

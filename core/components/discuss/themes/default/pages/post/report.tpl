@@ -1,4 +1,4 @@
-<form action="[[~[[*id]]]]post/report?post=[[+id]]" method="post" class="dis-form" id="dis-report-thread-form">
+<form action="[[DiscussUrlMaker? &action=`post/report` &params=`{"post":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-report-thread-form">
     <h1>[[%discuss.report_to_mod? &namespace=`discuss` &topic=`post`]]</h1>
     <p>[[%discuss.report_to_mod_confirm? &thread=`[[+title]]`]]</p>
 

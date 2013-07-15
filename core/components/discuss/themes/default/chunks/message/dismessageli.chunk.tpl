@@ -1,5 +1,5 @@
 <div class="row h-group dis-category-[[+category]] [[+class]] [[+locked:is=`1`:then=`locked`:else=`unlocked`]] [[+unread-cls]]">
-   <a class="h-group" href="[[~[[*id]]]]messages/view?thread=[[+id]]#dis-board-post-[[+post_last]]">
+   <a class="h-group" href="[[DiscussUrlMaker? &action=`messages/view` &params=`{"thread":"[[+id]]"}`]]#dis-board-post-[[+post_last]]">
    		<div class="f1-f2">
             <div class="wrap">
    		       [[+first_author_username]]

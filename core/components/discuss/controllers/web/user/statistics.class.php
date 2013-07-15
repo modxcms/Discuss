@@ -47,7 +47,7 @@ class DiscussUserStatisticsController extends DiscussController {
         return $this->modx->lexicon('discuss.user_statistics_header',array('user' => $this->user->get('username')));
     }
     public function getSessionPlace() {
-        return 'user/statistics:'.(($this->user) ? $this->user->get('id') : $this->getProperty('user', 0));
+        return 'user/statistics:user='.(($this->user) ? $this->user->get('id') : $this->getProperty('user', 0));
     }
     public function process() {
         $this->setPlaceholders($this->user->toArray());

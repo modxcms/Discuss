@@ -8,7 +8,7 @@
 
 
 
-<form class="dis-form dis-register" action="[[~[[*id]]]]register" method="post">
+<form class="dis-form dis-register" action="[[DiscussUrlMaker? &action=`register`]]" method="post">
     <h2>[[%discuss.register? &namespace=`discuss` &topic=`web`]]</h2>
     <span class="error">[[+error.spam_empty]]</span>
     <input type="hidden" name="spam_empty" value="" />

@@ -736,7 +736,7 @@ class disPost extends xPDOSimpleObject {
             $members = array();
             foreach ($readers as $reader) {
                 $r = explode(':',$reader);
-                $members[] = '<a href="[[~[[*id]]]]user/?user='.str_replace('%20','',$r[0]).'">'.$r[1].'</a>';
+                $members[] = '<a href="[[DiscussUrlMaker? &action=`user` &params=`'.$this->xpdo->toJSON(array('user' => str_replace('%20','',$r[0]))).'`]]">'.$r[1].'</a>';
             }
             $members = array_unique($members);
             $members = implode(',',$members);
@@ -931,11 +931,11 @@ class disPost extends xPDOSimpleObject {
     /**
      * Get the URL of this post
      *
-     * @param string $view
+     * @param string $action
      * @param boolean $last
      * @return string
      */
-    public function getUrl($view = 'thread/',$last = false) {
+    public function getUrl($action = 'thread',$last = false) {
         $params = array();
         $params['thread'] = $this->get('thread');
         $page = $this->getThreadPage($last);
@@ -944,12 +944,11 @@ class disPost extends xPDOSimpleObject {
         }
 
         $thread = $this->getOne('Thread');
-        if ($thread && $view == 'thread/') {
-            $view = 'thread/'.$this->get('thread').'/'.$thread->getUrlTitle();
-            unset($params['thread']);
+        if ($thread && $action == 'thread') {
+            $params['thread_name'] = $thread->getUrlTitle();
         }
 
-        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+        $url = $this->xpdo->discuss->request->makeUrl($action,$params);
         $url .= '#dis-post-'.$this->get('id');
         $this->set('url',$url);
         return $url;

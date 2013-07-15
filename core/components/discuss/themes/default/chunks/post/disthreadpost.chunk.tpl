@@ -32,16 +32,15 @@
     <div class="dis-post-left">
         <ul>
             <li class="dis-usr-icon">
-                <a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">
+                <a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+author.username]]"}`]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">
                     [[+author.avatar]]
                     [[+author.title:notempty=`<span class="dis-usr-title">[[+author.title]]</span>`]]
                 </a>
             </li>
             <li class="dis-usr-post-count">[[+author.posts]] [[%discuss.posts]]</li>
-            <a href="[[~[[*id]]]]messages/new?user=[[+author.username]]" class="dis-pm-btn">Send PM</a>
+            <a href="[[DiscussUrlMaker? &action=`messages/new` &params=`{"user":"[[+author.username]]"}`]]" class="dis-pm-btn">Send PM</a>
         </ul>
     </div>
-
     <div class="dis-post-right">
         <div class="title">
             <strong>[[+author.username_link]]</strong> <a class="normal-type" href="[[+url]]" title="[[%discuss.post_link]]">Reply #[[+idx]], <span title="[[+createdon]]">[[+createdon:ago]]</span></a>

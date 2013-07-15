@@ -1,6 +1,6 @@
 <div class="dis-profile f1-f9">
 	<h1>[[%discuss.subscriptions? &user=`[[+name]]`]]</h1>
-	<form action="[[~[[*id]]]]user/subscriptions?user=[[+id]]" method="post" class="dis-form">
+	<form action="[[DiscussUrlMaker? &action=`user/subscriptions` &params=`{"user":"[[+id]]"}`]]" method="post" class="dis-form">
 		<div class="dis-threads forum-grid no-hover">
 			<div class="m-section_title">
 				<div class="row h-group header-row">
@@ -26,7 +26,3 @@
 </div>
 [[+sidebar]]
 [[+bottom]]
-
-
-
-

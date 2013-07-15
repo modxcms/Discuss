@@ -44,39 +44,39 @@
                     <div class="m-welcome_box">
                         <div class="m-user_box h-group">
                             <div class="l-left">
-                                <a href="[[+discuss.config.url]]u/[[+discuss.user.username]]" title="[[%discuss.view_profile]]"><img src="[[+discuss.user.avatar_url]]" alt="[[+discuss.user.username]]'s Avatar"></a>
+                                <a href="[[DiscussUrlMaker? &action=`user` &params=`{"u":"[[+discuss.user.username]]"}`]]" title="[[%discuss.view_profile]]"><img src="[[+discuss.user.avatar_url]]" alt="[[+discuss.user.username]]'s Avatar"></a>
                                 <span class="m-user_posts"></span>
                             </div>
                             <div class="l-right">
-                                <div class="m-user_opts group-vis"><h3>[[%discuss.welcome_back]] <a href="[[+discuss.config.url]]u/[[+discuss.user.username]]"  title="[[%discuss.view_profile]]">[[+discuss.user.name_first]].</a></h3>
+                                <div class="m-user_opts group-vis"><h3>[[%discuss.welcome_back]] <a href="[[DiscussUrlMaker? &action=`user` &params=`{"u":"[[+discuss.user.username]]"}`]]"  title="[[%discuss.view_profile]]">[[+discuss.user.name_first]].</a></h3>
                                     <ul class="options-select">
                                         <li id="F-Toggle-Options">
-                                            <a href="[[+discuss.config.url]]u/[[+discuss.user.username]]" class="a-options"><span>&#x2193;</span></a>
+                                            <a href="[[DiscussUrlMaker? &action=`user` &params=`{"u":"[[+discuss.user.username]]"}`]]" class="a-options"><span>&#x2193;</span></a>
                                             <ul id="F-Toggle-List">
-                                                <li><a href="[[+discuss.config.url]]u/[[+discuss.user.username]]"  title="[[%discuss.view_profile]]">[[%discuss.my_profile]]</a></li>
-                                                <li><a href="[[+discuss.config.url]]user/subscriptions"  title="[[%discuss.view_user_subscriptions]]">[[%discuss.view_user_subscriptions]]</a></li>
-                                                <li><a href="[[+discuss.config.url]]user/posts"  title="[[%discuss.view_user_posts]]">[[%discuss.my]] [[+discuss.user.posts_formatted]] [[%discuss.posts]]</a></li>
+                                                <li><a href="[[DiscussUrlMaker? &action=`user` &params=`{"u":"[[+discuss.user.username]]"}`]]"  title="[[%discuss.view_profile]]">[[%discuss.my_profile]]</a></li>
+                                                <li><a href="[[DiscussUrlMaker? &action=`user/subscriptions`]]"  title="[[%discuss.view_user_subscriptions]]">[[%discuss.view_user_subscriptions]]</a></li>
+                                                <li><a href="[[DiscussUrlMaker? &action=`user/posts`]]"  title="[[%discuss.view_user_posts]]">[[%discuss.my]] [[+discuss.user.posts_formatted]] [[%discuss.posts]]</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                     <a class="m-user_tools_logout" href="[[~[[++discuss.login_resource_id]]? &service=`logout` &discuss=`1`]]" title="[[%discuss.logout]] [[+discuss.user.username]]">[[%discuss.logout]]</a>
                                 </div>
                                 <p>[[%discuss.recent_activity]][[%discuss.ndash]] 
-                                    <a href="[[+discuss.config.url]]thread/unread_last_visit" title="[[%discuss.view]] [[+discuss.user.unread_posts_count]] [[%discuss.unread_posts]] [[%discuss.user.unread_posts_period]]">[[+discuss.user.unread_posts]]</a>[[%discuss.sep]] 
+                                    <a href="[[DiscussUrlMaker? &action=`thread/unread_last_visit`]]" title="[[%discuss.view]] [[+discuss.user.unread_posts_count]] [[%discuss.unread_posts]] [[%discuss.user.unread_posts_period]]">[[+discuss.user.unread_posts]]</a>[[%discuss.sep]]
 
-                                    <a href="[[+discuss.config.url]]messages/" title="[[%discuss.view]] [[+discuss.user.unread_messages_count]] [[%discuss.messages_new]]">[[+discuss.user.unread_messages]]</a>[[%discuss.sep]]
-                                    <a href="[[+discuss.config.url]]thread/new_replies_to_posts" title="[[%discuss.view]] [[+discuss.user.new_replies_count]] [[%discuss.new_replies_to_posts]]">[[+discuss.user.new_replies]]</a><br />
+                                    <a href="[[DiscussUrlMaker? &action=`messages`]]" title="[[%discuss.view]] [[+discuss.user.unread_messages_count]] [[%discuss.messages_new]]">[[+discuss.user.unread_messages]]</a>[[%discuss.sep]]
+                                    <a href="[[DiscussUrlMaker? &action=`thread/new_replies_to_posts`]]" title="[[%discuss.view]] [[+discuss.user.new_replies_count]] [[%discuss.new_replies_to_posts]]">[[+discuss.user.new_replies]]</a><br />
 
                                     [[+discuss.user.no_replies_count:gte=`1`:then=`
                                         [[+discuss.user.unanswered_questions_count:gte=`1`:then=`
-                                            [[%discuss.help_answer]] <a href="[[+discuss.config.url]]thread/unanswered_questions" title="[[%discuss.view_unanswered]]">[[+discuss.user.unanswered_questions]]</a>
-                                            [[%discuss.participate_discussions]] <a href="[[+discuss.config.url]]thread/no_replies" title="[[%discuss.no_replies_to_discussions]]">[[+discuss.user.no_replies]]</a>.
+                                            [[%discuss.help_answer]] <a href="[[DiscussUrlMaker? &action=`thread/unanswered_questions`]]" title="[[%discuss.view_unanswered]]">[[+discuss.user.unanswered_questions]]</a>
+                                            [[%discuss.participate_discussions]] <a href="[[DiscussUrlMaker? &action=`thread/no_replies`]]" title="[[%discuss.no_replies_to_discussions]]">[[+discuss.user.no_replies]]</a>.
                                         `:else=`
-                                            [[%discuss.participate_discussions_solo]] <a href="[[+discuss.config.url]]thread/no_replies" title="[[%discuss.no_replies_to_discussions]]">[[+discuss.user.no_replies]]</a>.
+                                            [[%discuss.participate_discussions_solo]] <a href="[[DiscussUrlMaker? &action=`thread/no_replies`]]" title="[[%discuss.no_replies_to_discussions]]">[[+discuss.user.no_replies]]</a>.
                                         `]]
                                     `:else=`
                                         [[+discuss.user.unanswered_questions_count:gte=`1`:then=`
-                                            [[%discuss.participate_discussions_solo]] <a href="[[+discuss.config.url]]thread/unanswered_questions" title="[[%discuss.view_unanswered]]">[[+discuss.user.new_unanswered_questions]]</a>.
+                                            [[%discuss.participate_discussions_solo]] <a href="[[DiscussUrlMaker? &action=`thread/unanswered_questions`]]" title="[[%discuss.view_unanswered]]">[[+discuss.user.new_unanswered_questions]]</a>.
                                         `:else=`
                                             [[%discuss.no_unanswered_questions_or_discussions]]
                                         `]]

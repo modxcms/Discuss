@@ -133,4 +133,12 @@ $snippets[11]->fromArray(array(
     'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/posthook.discussaddban.php'),
 ),'',true,true);
 
+$snippets[12]= $modx->newObject('modSnippet');
+$snippets[12]->fromArray(array(
+    'id' => 12,
+    'name' => 'DiscussUrlMaker',
+    'description' => '',
+    'snippet' => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.discussurlmaker.php'),
+),'',true,true);
+
 return $snippets;
