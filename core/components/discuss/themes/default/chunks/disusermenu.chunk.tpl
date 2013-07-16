@@ -2,7 +2,7 @@
 <ul class="panel_info">
     <li class="Heading">[[%discuss.forum_profile]]</li>
 
-    <li class="Depth2"><strong><a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+username]]"}`]]">[[%discuss.view]]</a></strong><span class="Count">&nbsp;</span></li>
+    <li class="Depth2"><strong><a href="[[DiscussUrlMaker? &action=`user` &params=`{"type":"username", "user":"[[+username]]"}`]]">[[%discuss.view]]</a></strong><span class="Count">&nbsp;</span></li>
     [[+canEdit:notempty=`<li class="Depth2"><strong><a href="[[DiscussUrlMaker? &action=`user/edit`]]">[[%discuss.edit]]</a></strong><span class="Count">&nbsp;</span></li>`]]
     <li class="Depth2"><strong><a href="[[DiscussUrlMaker? &action=`user/statistics` &params=`{"user":"[[+id]]"}`]]">[[%discuss.stats]]</a></strong><span class="Count">&nbsp;</span></li>
     <li class="Depth2"><strong><a href="[[DiscussUrlMaker? &action=`user/posts` &params=`{"user":"[[+id]]"}`]]">[[%discuss.posts]]</a></strong><span class="Count">&nbsp;</span></li>

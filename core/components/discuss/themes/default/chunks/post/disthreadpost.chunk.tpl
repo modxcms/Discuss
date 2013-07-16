@@ -32,7 +32,7 @@
     <div class="dis-post-left">
         <ul>
             <li class="dis-usr-icon">
-                <a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+author.username]]"}`]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">
+                <a href="[[DiscussUrlMaker? &action=`user` &params=`{"type":"username", "user":"[[+author.username]]"}`]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">
                     [[+author.avatar]]
                     [[+author.title:notempty=`<span class="dis-usr-title">[[+author.title]]</span>`]]
                 </a>

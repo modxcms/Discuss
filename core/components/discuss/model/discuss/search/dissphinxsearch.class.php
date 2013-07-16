@@ -138,7 +138,6 @@ class disSphinxSearch extends disSearch {
                 $this->setFilter('board', explode(',',$ignoreBoards), true);
             }
         }
-        $this->modx->log(modX::LOG_LEVEL_ERROR, print_r($conditions['board'], true));
         if (!empty($conditions['board'])) {
             if (is_string($conditions['board'])) {
                 if (stripos(',', $conditions['board']) !== false) {

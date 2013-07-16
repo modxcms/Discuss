@@ -45,6 +45,11 @@ class DisRequest {
     public $modules = array();
 
     /**
+     * Manifest file for theme
+     * @var mixed null/array $manifest
+     */
+    public $manifest = null;
+    /**
      * @param Discuss $discuss A reference to the Discuss instance
      * @param array $config An array of configuration properties
      */
@@ -63,6 +68,9 @@ class DisRequest {
      */
     public function getControllerValue() {
         $controller = !empty($_REQUEST[$this->config['actionVar']]) ? $_REQUEST[$this->config['actionVar']] : 'home';
+        if ($controller == 'global') {
+            $controller = 'home';
+        }
         $controller = str_replace(array('../','./'),'',$controller);
         $colon = strpos($controller,';');
         if ($colon !== false) {
@@ -101,7 +109,6 @@ class DisRequest {
         } else {
             $className = $this->getControllerClassName();
         }
-
         $output = '';
         if (file_exists($controller['file'])) {
             if (!empty($controller['isClass'])) {
@@ -491,17 +498,17 @@ class DisRequest {
      * @return mixed
      */
     public function getManifest() {
-        static $retrievedmanifest = false;
-        if ($retrievedmanifest!== false) {
-            return $retrievedmanifest;
+
+        if ($this->manifest !== null) {
+            return $this->manifest;
         }
         $f = $this->discuss->config['themePath'].'manifest.php';
         if (file_exists($f) || !is_dir($f)) {
-            $retrievedmanifest = require $f;
+            $this->manifest = require $f;
         }
         else {
-            $retrievedmanifest = null;
+            $this->manifest = null;
         }
-        return $retrievedmanifest;
+        return $this->manifest;
     }
 }
