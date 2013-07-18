@@ -694,16 +694,17 @@ class disBoard extends xPDOSimpleObject {
             }
             $c->select($modx->getSelectColumns('disBoard','disBoard'));
             $c->select(array(
-                'MAX(Descendants.depth) AS depth',
+                'Descendants.depth AS depth',
                 'Category.name AS category_name',
             ));
+            $c->where(array('Descendants.ancestor' => 0));
             $c->sortby('Category.rank','ASC');
             $c->sortby('disBoard.map','ASC');
             $c->groupby('disBoard.id');
             $boardObjects = $modx->getCollection('disBoard',$c);
             /** @var disBoard $board */
             foreach ($boardObjects as $board) {
-                $boards[] = $board->toArray();
+                $boards[] = $board->toArray('', false, true);
             }
             if (!empty($boards)) {
                 $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,3600));
