@@ -111,8 +111,33 @@ foreach ($attachments as $file) {
     }
 }
 
-if (!empty($fields['notify'])) {
-    $thread->addSubscription($discuss->user->get('id'));
+/* allow editing of actionbutton values */
+if ($thread->canSubscribe() || $thread->canUnsubscribe()) {
+    if(!empty($fields['notify']) && $fields['notify'] == 1) {
+        $thread->addSubscription($discuss->user->get('id'));
+    } else {
+        if($thread->hasSubscription($discuss->user->get('id'))) {
+            $thread->removeSubscription($discuss->user->get('id'));
+        }
+    }
+}
+if($thread->canStick() || $thread->canUnstick()) {
+    if (!empty($fields['sticky']) && $fields['sticky'] == 1) {
+        $thread->stick();
+    } else {
+        if($thread->get('sticky')) {
+            $thread->unstick();
+        }
+    }
+}
+if($thread->canLock() || $thread->canUnlock()) {
+    if (!empty($fields['locked']) && $fields['locked'] == 1) {
+        $thread->lock();
+    } else {
+        if($thread->get('locked')) {
+            $thread->unlock();
+        }
+    }
 }
 
 $discuss->user->checkForPostGroupAdvance();

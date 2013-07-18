@@ -2,7 +2,7 @@
     <h1>[[%discuss.report_to_mod? &namespace=`discuss` &topic=`post`]]</h1>
     <p>[[%discuss.report_to_mod_confirm? &thread=`[[+title]]`]]</p>
 
-    <input type="hidden" name="thread" value="[[+id]]" />
+    <input type="hidden" name="thread" value="[[+thread]]" />
 
     <label for="dis-report-message">[[%discuss.message]]:
         <span class="error">[[!+fi.error.message]]</span>

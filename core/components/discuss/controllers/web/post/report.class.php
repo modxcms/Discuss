@@ -58,7 +58,9 @@ class DiscussPostReportController extends DiscussController {
 
     public function process() {
         /* get breadcrumb trail */
-        $this->setPlaceholders($this->post->toArray());
+        $postArray = $this->post->toArray();
+        $this->post->renderAuthorMeta($postArray);
+        $this->setPlaceholders($postArray);
         $this->setPlaceholder('url',$this->post->getUrl());
 
         /* output */
@@ -71,7 +73,7 @@ class DiscussPostReportController extends DiscussController {
 
 
     public function handleActions() {
-        if (!empty($scriptProperties['report-thread'])) {
+        if ($this->getProperty('report-thread', false) !== false) { // todo: not filled out message slips through
             $this->report();
         }
     }
@@ -89,14 +91,14 @@ class DiscussPostReportController extends DiscussController {
         $tpl = $this->modx->getOption('tpl',$this->scriptProperties,$this->modx->getOption('discuss.email_reported_post_chunk',null,'emails/disReportedEmail'));
 
         /* build post url */
-        $url = $this->modx->getOption('site_url',null,MODX_SITE_URL).$this->post->getUrl();
+        $url = $this->post->getUrl();
 
         /* setup email properties */
         $emailProperties = array_merge($this->scriptProperties,$this->post->toArray());
         $emailProperties['tpl'] = $tpl;
         $emailProperties['title'] = $this->post->get('title');
         if ($author) {
-            $emailProperties['author'] = $author->get('title');
+            $emailProperties['author'] = $author->get('username');
         }
         $emailProperties['reporter'] = $this->discuss->user->get('username');
         $emailProperties['url'] = $url;

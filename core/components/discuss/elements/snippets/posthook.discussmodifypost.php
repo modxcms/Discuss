@@ -104,19 +104,49 @@ foreach ($attachments as $file) {
     }
 }
 
-if (!empty($fields['notify'])) {
+/* allow editing of actionbutton values */
+if (!empty($fields['notify']) && $fields['notify'] == 1) {
     $thread->addSubscription($discuss->user->get('id'));
+} else {
+    if($thread->hasSubscription($discuss->user->get('id'))) {
+        $thread->removeSubscription($discuss->user->get('id'));
+    }
+}
+if($thread->canStick() || $thread->canUnstick()) {
+    if (!empty($fields['sticky']) && $fields['sticky'] == 1) {
+        $thread->stick();
+    } else {
+        if($thread->get('sticky')) {
+            $thread->unstick();
+        }
+    }
+}
+if($thread->canLock() || $thread->canUnlock()) {
+    if (!empty($fields['locked']) && $fields['locked'] == 1) {
+        $thread->lock();
+    } else {
+        if($thread->get('locked')) {
+            $thread->unlock();
+        }
+    }
 }
 
+$class_key = '';
+switch($fields['class_key']) {
+    case 'disThreadQuestion':
+        $class_key = $fields['class_key'];
+        break;
+        
+    case 'disThreadDiscussion':
+    default:
+        $class_key = 'disThreadDiscussion';
+}
+$thread->set('class_key',$class_key);
+$thread->save();
 
 if (!$post->save()) {
     $hook->addError('title',$modx->lexicon('discuss.post_err_modify'));
     return false;
-}
-
-if (!empty($fields['class_key'])) {
-    $thread->set('class_key',$fields['class_key']);
-    $thread->save();
 }
 
 /* log activity */
