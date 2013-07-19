@@ -49,6 +49,7 @@ class DiscussThreadNewController extends DiscussController {
             'textBreadcrumbsThreadNew' => $this->modx->lexicon('discuss.thread_new'),
             'textCheckboxLocked' => $this->modx->lexicon('discuss.thread_lock'),
             'textCheckboxSticky' => $this->modx->lexicon('discuss.thread_stick'),
+            'textCheckboxNotify' => $this->modx->lexicon('discuss.subscribe_by_email'),
         );
     }
 
@@ -67,14 +68,36 @@ class DiscussThreadNewController extends DiscussController {
     public function process() {
         /* setup defaults */
         $this->setPlaceholders($this->board->toArray());
+        /* setup class_key - defaults to disThreadDiscussion */
+        $class_key = '';
+        switch($_POST['class_key']) {
+            case 'disThreadQuestion':
+                $class_key = $_POST['class_key'];
+                break;
+                
+            case 'disThreadDiscussion':
+            default:
+                $class_key = 'disThreadDiscussion';
+        }        
         $this->setPlaceholders(array(
             'is_root' => 1,
             'board' => $this->board->get('id'),
+            'class_key' => $class_key,
         ));
-
         $this->getButtons();
         $this->checkThreadPermissions();
         $this->handleAttachments();
+        
+        // show subscribe checkbox
+        $notify = !empty($_POST['notify']) ? ' checked="checked"' : '';
+        $this->setPlaceholders(array(
+            'notify_cb' => $this->discuss->getChunk('form/disCheckbox',array(
+                'name' => 'notify',
+                'value' => 1,
+                'text' => $this->getOption('textCheckboxNotify'),
+                'attributes' => $notify,
+            )),
+        ));
 
         $this->modx->setPlaceholder('discuss.error_panel',$this->discuss->getChunk('Error'));
         /* set placeholders for FormIt inputs */
@@ -84,7 +107,6 @@ class DiscussThreadNewController extends DiscussController {
     public function getButtons() {
         $this->setPlaceholder('buttons',$this->discuss->getChunk('disPostButtons',array('buttons_url' => $this->discuss->config['imagesUrl'].'buttons/')));
     }
-
     
     public function getBreadcrumbs() {
         return $this->board->buildBreadcrumbs(array(array(

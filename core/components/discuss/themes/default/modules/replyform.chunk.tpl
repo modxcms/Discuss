@@ -75,9 +75,7 @@
             <div class="group">
                 [[+locked_cb]]
                 [[+sticky_cb]]
-                <label class="dis-cb">
-                    <input type="checkbox" name="notify" value="1" checked="checked" />[[%discuss.subscribe_by_email]]
-                </label>
+                [[+notify_cb]]
             </div>
         </div>
     </div>

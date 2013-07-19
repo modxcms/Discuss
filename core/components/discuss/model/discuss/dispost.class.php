@@ -448,7 +448,6 @@ class disPost extends xPDOSimpleObject {
             }
         }
 
-
         if (!$removed) {
             $removed = parent::remove($ancestors);
         }
@@ -852,8 +851,10 @@ class disPost extends xPDOSimpleObject {
      * @return boolean
      */
     public function canRemove() {
+        $allowUserRemove = $this->xpdo->getOption('discuss.users_can_remove_own_posts',null,true);
+        
         $canRemove = $this->xpdo->discuss->user->isLoggedIn && $this->xpdo->hasPermission('discuss.thread_remove');
-        $canRemove = $this->xpdo->discuss->user->get('id') == $this->get('author') || ($this->isModerator() && $canRemove);
+        $canRemove = ($this->xpdo->discuss->user->get('id') == $this->get('author') && $allowUserRemove) || ($this->isModerator() && $canRemove);
 
         /** @var disThread $thread */
         $thread = $this->getOne('Thread');

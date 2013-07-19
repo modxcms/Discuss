@@ -953,7 +953,7 @@ class disThread extends xPDOSimpleObject {
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
-        ));
+        ),false);
         if (!$notify) {
             $notify = $this->xpdo->newObject('disUserNotification');
             $notify->set('user',$userId);
@@ -979,7 +979,7 @@ class disThread extends xPDOSimpleObject {
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
-        ));
+        ),false);
         if ($notify) {
             if (!$notify->remove()) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove notification: '.print_r($notify->toArray(),true));
@@ -1345,7 +1345,7 @@ class disThread extends xPDOSimpleObject {
             $page = 1;
             $replies = $this->get('last_post_replies');
             $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
-            if ($replies > $perPage) {
+            if ($replies >= $perPage) {
                 $page = ceil(($replies+1) / $perPage);
             }
             $this->set('last_post_page',$page);

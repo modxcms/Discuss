@@ -376,6 +376,9 @@ $_lang['setting_discuss.search_results_buffer_desc'] = 'Sets how many extra rows
 $_lang['setting_discuss.show_whos_online'] = 'Show Whos Online';
 $_lang['setting_discuss.show_whos_online_desc'] = 'If set to yes, will display the users currently online.';
 
+$_lang['setting_discuss.users_can_remove_own_posts'] = 'Can Users Delete Own Posts';
+$_lang['setting_discuss.users_can_remove_own_posts_desc'] = 'If set to yes, users will be able to delete their own posts.';
+
 $_lang['setting_discuss.solr.hostname'] = 'Solr Hostname';
 $_lang['setting_discuss.solr.hostname_desc'] = 'The hostname for the Solr server.';
 
