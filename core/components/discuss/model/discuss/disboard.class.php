@@ -791,7 +791,7 @@ class disBoard extends xPDOSimpleObject {
     public function getLastPostTitleSlug($key = 'last_post_title') {
         $title = $this->get($key);
         if (!empty($title)) {
-            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-').'/';
+            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
         }
         return $title;
     }
@@ -811,7 +811,6 @@ class disBoard extends xPDOSimpleObject {
             $params['page'] = $this->get('last_post_page');
         }
         $url = $this->xpdo->discuss->request->makeUrl($action,$params);
-
         $url = $url.'#dis-post-'.$this->get('last_post_id');
         $this->set('last_post_url',$url);
         return $url;
