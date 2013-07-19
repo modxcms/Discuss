@@ -1401,13 +1401,14 @@ class disThread extends xPDOSimpleObject {
         }
 
         if (!empty($title)) {
-            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
+            $title = $this->xpdo->resource->cleanAlias($title);
         } else {
             $title = $this->get('id');
         }
         return $title;
 
     }
+    
 
     /** can* methods */
 

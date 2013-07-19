@@ -791,7 +791,7 @@ class disBoard extends xPDOSimpleObject {
     public function getLastPostTitleSlug($key = 'last_post_title') {
         $title = $this->get($key);
         if (!empty($title)) {
-            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
+            $title = $this->xpdo->resource->cleanAlias($title);
         }
         return $title;
     }
@@ -849,11 +849,12 @@ class disBoard extends xPDOSimpleObject {
     public function getSlug() {
         $title = $this->get('name');
         if (!empty($title)) {
-            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
+            $title = $this->xpdo->resource->cleanAlias($title);
         } else {
             $title = $this->get('id');
         }
         return $title;
 
     }
+
 }
