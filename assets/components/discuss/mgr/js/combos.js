@@ -15,7 +15,8 @@ Dis.combo.Category = function(config) {
         ,baseParams: {
             action: 'mgr/category/getList'
             ,combo: true
-        }
+        },
+        mode : 'local'
     });
     Dis.combo.Category.superclass.constructor.call(this,config);
 };
