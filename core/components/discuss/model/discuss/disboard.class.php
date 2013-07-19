@@ -891,11 +891,6 @@ class disBoard extends xPDOSimpleObject {
         /* decode named entities to the appropriate character for the character set */
         $alias = html_entity_decode($alias, ENT_QUOTES, $charset);
 
-        /* replace any remaining & with a lexicon value if available */
-        if ($this->xpdo instanceof modX && $this->xpdo->getService('lexicon','modLexicon')) {
-            $alias = str_replace('&', $this->xpdo->lexicon('and') ? ' ' . $this->xpdo->lexicon('and') . ' ' : ' and ', $alias);
-        }
-
         /* apply transliteration as configured */
         switch ($translit) {
             case '':
@@ -915,6 +910,11 @@ class disBoard extends xPDOSimpleObject {
                     }
                 }
                 break;
+        }
+        
+        /* replace any remaining & with a lexicon value if available */
+        if ($this->xpdo instanceof modX && $this->xpdo->getService('lexicon','modLexicon')) {
+            $alias = str_replace('&', $this->xpdo->lexicon('and') ? ' ' . $this->xpdo->lexicon('and') . ' ' : ' and ', $alias);
         }
 
         /* restrict characters as configured */
