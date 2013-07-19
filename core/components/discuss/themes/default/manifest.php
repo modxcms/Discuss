@@ -604,5 +604,8 @@ $manifest = array(
             )
         ),
     ),
+    'thread/feed.xml' => array(
+
+    )
 );
 return $manifest;
