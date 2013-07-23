@@ -1,5 +1,20 @@
 Changelog for Discuss.
 
+Discuss 1.2.1, July 23, 2013
+====================================
+- Merged pull requests from Evengard : https://github.com/modxcms/Discuss/pull/2 and https://github.com/modxcms/Discuss/pull/3
+-- Discuss does not require furls
+-- Discuss furls work without extra rewrite rules in server config
+- Merged pull request from Eldanilo : https://github.com/modxcms/Discuss/pull/6
+-- Fixes variety of bugs and inconsistencies
+- Merged pull request from Chistiansteel : https://github.com/modxcms/Discuss/pull/9
+-- Url aliases are generated via modResource transliterate class
+- #9700 Thread removal via manager fixed
+- #9805 Drag 'n Drop boards and categories fixed in manager
+- #9804 Category field automatically set to correct category in manager when creating board
+- #9427 Feed fixed - courtesy Eldanilo
+- #9883 Ignore boards sorting and checkboxes fixed
+
 Discuss 1.2, July 11, 2013
 ====================================
 - Fix SQL Performance issues; new indexes and improved SQL queries
