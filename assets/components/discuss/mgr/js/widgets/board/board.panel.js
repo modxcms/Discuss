@@ -195,7 +195,10 @@ Dis.panel.Board = function(config) {
         ,listeners: {
             'setup': {fn:this.setup,scope:this}
             ,'beforeSubmit': {fn:this.beforeSubmit,scope:this}
-            ,'success': {fn:this.success,scope:this}
+            ,'success': {fn:this.success,scope:this},
+            render : function(panel) {
+                Ext.getCmp('dis-board-category').getStore().load();
+            }
         }
     });
     Dis.panel.Board.superclass.constructor.call(this,config);
