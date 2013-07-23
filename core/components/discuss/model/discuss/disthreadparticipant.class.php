@@ -3,4 +3,4 @@
  * @package discuss
  * [+phpdoc-subpackage+]
  */
-class disThreadParticipant extends xPDOObject {}
+class disThreadParticipant extends xPDOSimpleObject {}

@@ -948,7 +948,6 @@ class disPost extends xPDOSimpleObject {
         if ($thread && $action == 'thread') {
             $params['thread_name'] = $thread->getUrlTitle();
         }
-
         $url = $this->xpdo->discuss->request->makeUrl($action,$params);
         $url .= '#dis-post-'.$this->get('id');
         $this->set('url',$url);

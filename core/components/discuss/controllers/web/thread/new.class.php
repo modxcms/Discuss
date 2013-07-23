@@ -69,16 +69,19 @@ class DiscussThreadNewController extends DiscussController {
         /* setup defaults */
         $this->setPlaceholders($this->board->toArray());
         /* setup class_key - defaults to disThreadDiscussion */
-        $class_key = '';
-        switch($_POST['class_key']) {
-            case 'disThreadQuestion':
-                $class_key = $_POST['class_key'];
-                break;
-                
-            case 'disThreadDiscussion':
-            default:
+        $class_key = 'disThreadDiscussion';
+        if (isset($_POST['class_key'])) {
+            switch($_POST['class_key']) {
+                case 'disThreadQuestion':
+                    $class_key = $_POST['class_key'];
+                    break;
+
+                case 'disThreadDiscussion':
+                default:
                 $class_key = 'disThreadDiscussion';
-        }        
+            }
+        }
+
         $this->setPlaceholders(array(
             'is_root' => 1,
             'board' => $this->board->get('id'),

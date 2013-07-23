@@ -1400,7 +1400,7 @@ class disThread extends xPDOSimpleObject {
             }
         }
 
-        if (!empty($title)) {
+        if (!empty($title) && is_object($this->xpdo->resource)) {
             $title = $this->xpdo->resource->cleanAlias($title);
         } else {
             $title = $this->get('id');
