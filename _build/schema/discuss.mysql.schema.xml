@@ -92,6 +92,7 @@
         <aggregate alias="Category" class="disCategory" local="category" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Parent" class="disBoard" local="parent" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="Children" class="disBoard" local="id" foreign="parent" cardinality="many" owner="local" />
+        <aggregate alias="Siblings" class="disBoard" local="parent" foreign="parent" cardinality="many" owner="local" />
         <composite alias="Moderators" class="disModerator" local="id" foreign="board" cardinality="many" owner="local" />
         <composite alias="UserGroups" class="disBoardUserGroup" local="id" foreign="board" cardinality="many" owner="local" />
         <composite alias="Ancestors" class="disBoardClosure" local="id" foreign="ancestor" cardinality="many" owner="local" />

@@ -233,6 +233,9 @@ $_lang['discuss.username'] = 'Username';
 $_lang['discuss.users'] = 'Users';
 $_lang['discuss.users.intro_msg'] = 'Manage your Users across your Discuss installation.';
 
+$_lang['discuss.invalid_drop'] = 'Invalid Drop';
+$_lang['discuss.invalid_drop.disBoard'] = 'Placing board without category not allowed.';
+$_lang['discuss.invalid_drop.disCategory'] = 'Placing category under another category or board not allowed,';
 
 /* System Settings */
 $_lang['setting_discuss.reserved_usernames'] = 'Reserved Usernames';

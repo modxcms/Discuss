@@ -128,7 +128,7 @@ class DiscussUserIgnoreboardsController extends DiscussController {
             }
             $out .= $this->discuss->getChunk($boardTpl, $board);
             if (array_key_exists('boards', $board)) {
-                $out .= $this->_mapToHTML($board['boards']);
+                $out .= $this->_mapToLinear($board['boards']);
             }
         }
         return $out;

@@ -27,46 +27,48 @@
  * @package discuss
  * @subpackage processors
  */
-$data = urldecode($scriptProperties['data']);
-$data = $modx->fromJSON($data);
+
+$data = $modx->fromJSON($scriptProperties['data']);
 $nodes = array();
-getNodesFormatted($nodes,$data);
 
-/* readjust cache */
-foreach ($nodes as $nodeArray) {
-    $node = $modx->getObject($nodeArray['classKey'],$nodeArray['id']);
-    if ($node == null) continue;
+$target = $data['target'];
+$node = $data['node'];
+$action = $data['action'];
 
-    switch ($nodeArray['classKey']) {
-        case 'disCategory':
-            $node->set('rank',$nodeArray['rank']);
+unset ($data);
+
+$target['id'] = (int)substr($target['id'], strrpos($target['id'], '_') + 1);
+$node['id'] = (int)substr($node['id'], strrpos($node['id'], '_') + 1);
+if ($node['classKey'] == 'disBoard') {
+    switch ($action) {
+        case 'append' :
+            $board = $modx->getObject('disBoard', $node['id']);
+            $board->fromArray(array(
+                'category' => $target['cat'],
+                'parent' => ($target['classKey'] == 'disBoard') ? $target['id'] : 0
+            ));
+            $board->save();
             break;
-        default:
-            $oldParentId = $node->get('parent');
-            $node->set('parent',$nodeArray['parent']);
-            $node->set('rank',$nodeArray['rank']);
+        case 'below' :
+        case 'above' :
+            $board = $modx->getObject('disBoard', $node['id']);
+            if ($target['cat'] != $board->get('category') || $target['parent'] != $board->get('parent')) {
+                $board->fromArray(array(
+                    'category' => $target['cat'],
+                    'parent' => ($target['classKey'] == 'disBoard') ? $target['id'] : 0
+                ));
+                $board->save();
+            }
+            $board->reorder($action, $target['id']);
             break;
     }
-    $node->save();
+} else if ($node['classKey'] == 'disCategory') {
+    $category = $modx->getObject('disCategory', $node['id']);
+    $category->reorder($action, $target['id']);
+    // Clear "home" screen board cache
+    $del = $modx->cacheManager->delete('discuss/board/index/'.md5(serialize(array(
+        'board' => 0,
+        'category' => 0,
+    ))));
 }
-
-function getNodesFormatted(&$nodes,$cur_level,$parent = 0) {
-    $order = 0;
-    foreach ($cur_level as $id => $curNode) {
-
-        $ar = explode('_',$id);
-        if (isset($ar[1]) && $ar[1] != '0' && $ar[0] != 'root') {
-            $par = explode('_',$parent);
-            $nodes[] = array(
-                'id' => $ar[1],
-                'classKey' => 'dis'.ucfirst($ar[0]),
-                'parent' => $par[0] == 'board' ? $par[1] : 0,
-                'rank' => $order,
-            );
-            $order++;
-        }
-        getNodesFormatted($nodes,$curNode['children'],$id);
-    }
-}
-
 return $modx->error->success();

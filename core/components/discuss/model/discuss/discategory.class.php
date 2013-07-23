@@ -47,4 +47,32 @@ class disCategory extends xPDOSimpleObject {
         $this->set('url',$url);
         return $url;
     }
+
+    /**
+     * Reorder the category rank
+     * @param string $position
+     * @param $siblingId
+     */
+    public function reorder($position, $siblingId) {
+        $siblings = $this->xpdo->getCollection('disCategory');
+        unset($siblings[$this->get('id')]);
+        reset($siblings);
+        $i = 0;
+        $pos = array_search($siblingId, array_keys($siblings));
+        foreach($siblings as $sibling) {
+            if ($position == 'above' && $pos == $i) {
+                $this->set('rank', $i);
+                $this->save();
+                $i++;
+            }
+            $sibling->set('rank', $i);
+            $sibling->save();
+            $i++;
+            if ($position == 'below' && ($pos + 1) == $i) {
+                $this->set('rank', $i);
+                $this->save();
+                $i++;
+            }
+        }
+    }
 }

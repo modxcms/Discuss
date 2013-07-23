@@ -479,6 +479,14 @@ $xpdo_meta_map['disBoard']= array (
       'cardinality' => 'many',
       'owner' => 'local',
     ),
+    'Siblings' => 
+    array (
+      'class' => 'disBoard',
+      'local' => 'parent',
+      'foreign' => 'parent',
+      'cardinality' => 'many',
+      'owner' => 'local',
+    ),
     'LastPost' => 
     array (
       'class' => 'disPost',
