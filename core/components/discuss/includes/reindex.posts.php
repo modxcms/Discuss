@@ -96,10 +96,33 @@ $count = 0;
 $posts = $modx->getIterator('disPost', $c);
 /** @var disPost $post */
 foreach ($posts as $post) {
-    $modx->log(modX::LOG_LEVEL_INFO, 'Indexing: ' . $count . ' ' . $post->get('title') . ' (' . $post->get('id') . ")\n");
-    $response = $post->index();
-    if($response instanceof SolrUpdateResponse) {
-        $modx->log(modX::LOG_LEVEL_INFO, ' (result): ' . $response->getRawResponse() . "\n");
+    echo 'Indexing: '.$post->get('title')."\n"; flush();
+    $post->index();
+}
+
+//$c->prepare(); $sql = $c->toSql();
+
+$perPage = $modx->getOption('discuss.post_per_page',null, 10);
+$parser = $modx->getService('disParser','disBBCodeParser',$discuss->config['modelPath'].'discuss/parser/');
+
+/*
+$stmt = $modx->query($sql);
+if ($stmt) {
+    while ($postArray = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $postArray['url'] = $discuss->request->makeUrl('thread', array('thread' => $postArray['thread']));
+        $page = 1;
+        if ($postArray['replies'] > $perPage) {
+            $page = ceil($postArray['replies'] / $perPage);
+        }
+        if ($page != 1) { $postArray['url'] .= '&page='.$page; }
+        $postArray['url'] .= '#dis-post-'.$postArray['id'];
+
+        $message = $parser->parse($postArray['message']);
+        $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
+        $replace = '';
+        $postArray['message'] = preg_replace($pattern, $replace, $message);
+        echo 'Indexing: '.$postArray['title']."\n"; flush();
+        $discuss->search->index($postArray);
     }
     $di['offset'] = $offset + ++$count;
     $modx->cacheManager->set('discuss_index', $di, $cacheOptions);

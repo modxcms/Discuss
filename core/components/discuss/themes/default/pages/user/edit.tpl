@@ -9,7 +9,7 @@
     	&postHooks=`postHook.DiscussUpdateProfile`
     ]]
 
-    <form action="[[~[[*id]]]]user/edit?user=[[+id]]" method="post" class="dis-form" id="dis-user-edit-form">
+    <form action="[[DiscussUrlMaker? &action=`user/edit` &params=`{"user":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-user-edit-form">
         <input type="hidden" name="user" value="[[+id]]" />
         <label for="dis-name-first">[[%discuss.name_first]]:
             <span class="error">[[+error.name_first]]</span>
@@ -89,7 +89,7 @@
         <br class="clearfix" />
         <div class="dis-form-buttons">
             <input type="submit" class="dis-action-btn" value="[[%discuss.save_changes? &namespace=`discuss` &topic=`web`]]" />
-            <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]user?user=[[+id]]';" />
+            <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+id]]"}`]]';" />
         </div>
     </form>
 </div>
@@ -101,8 +101,3 @@
 
 </div><!-- Close Content From Wrapper -->
 	[[+bottom]]
-
-
-
-
-

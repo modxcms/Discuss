@@ -30,6 +30,7 @@
  */
 class DiscussUserIgnoreboardsController extends DiscussController {
     public $boards = array();
+    public $categoryMap = array();
 
     public function initialize() {
         $this->modx->lexicon->load('discuss:user');
@@ -86,76 +87,96 @@ class DiscussUserIgnoreboardsController extends DiscussController {
     }
 
     /**
+     * Adds board to category map in correct place in tree
+     * @param $board
+     * @param $map
+     */
+    public function mapRecursion($boards) {
+        $temp = array();
+        $tree = array();
+
+        foreach ($boards as $board) {
+            if (!isset($temp[$board['id']])) {
+                $temp[$board['id']] = $board;
+            }
+            if ($board['parent'] != 0) {
+                $temp[$board['parent']]['boards'][$board['id']] =& $temp[$board['id']];
+            } else {
+                $tree[$board['id']] =& $temp[$board['id']];
+            }
+        }
+        // Place each tree to right category
+        foreach ($tree as $boardTree) {
+            $this->categoryMap[$boardTree['category']]['boards'][] = $boardTree;
+        }
+    }
+
+    /**
+     * Linearizes board map
+     * @param $boards
+     * @return string
+     * @todo Better recursion to get full <ul><ul>... structure
+     */
+    private function _mapToLinear($boards) {
+        $boardTpl = $this->getOption('boardTpl','board/disBoardCheckbox');
+        $subBoardUl = $this->getOption('subBoardUl', 'board/disBoardChildUl');
+        $depth = null;
+        $out = '';
+        foreach ($boards as $board) {
+            if ($depth === null) {
+                $depth = $board['depth'];
+            }
+            $out .= $this->discuss->getChunk($boardTpl, $board);
+            if (array_key_exists('boards', $board)) {
+                $out .= $this->_mapToLinear($board['boards']);
+            }
+        }
+        return $out;
+    }
+    /**
      * Iterate through and list boards
      * @return void
      */
     public function prepareBoards() {
         $rowSeparator = $this->getOption('rowSeparator',"\n");
-        $categoryTpl = $this->getOption('categoryTpl','board/disBoardCategoryIb');
-        $boardTpl = $this->getOption('boardTpl','board/disBoardCheckbox');
         $subBoardPaddingString = $this->getOption('subBoardPaddingString','---');
+        $categoryTpl = $this->getOption('categoryTpl','board/disBoardCategoryIb');
+        $categories = array();
 
-        /* now loop through boards */
-        $list = array();
-        $currentCategory = 0;
-        $rowClass = 'even';
-        $boardList = array();
-        $categoryIgnoreList = array('checked' => array(),'all' => array());
         $ignores = $this->discuss->user->get('ignore_boards');
         $ignores = explode(',',$ignores);
-        $idx = 0;
-        foreach ($this->boards as $board) {
-            $boardArray = $board;
-            /* get current category */
-            $currentCategory = $board['category'];
-            if (!isset($lastCategory)) {
-                $lastCategory = $board['category'];
-                $lastCategoryName = $board['category_name'];
+        $boards = array();
+        foreach($this->boards as $board) {
+            if (!array_key_exists($board['category'], $this->categoryMap)) {
+                $this->categoryMap[$board['category']]['name'] = $board['category_name'];
+                $this->categoryMap[$board['category']]['boardscount'] = 0;
+                $this->categoryMap[$board['category']]['checked'] = 0;
             }
 
-            $boardArray['cls'] = 'dis-board-cb '.$rowClass;
-            if (in_array($boardArray['id'],$ignores)) {
-                $boardArray['checked'] = 'checked="checked"';
-                $categoryIgnoreList['checked'][] = $boardArray['id'];
+            if (in_array($board['id'],$ignores)) {
+                $board['checked'] = 'checked="checked"';
+                $this->categoryMap[$board['category']]['checked']++;
+            } else {
+                $board['checked'] = '';
             }
-            $categoryIgnoreList['all'][] = $boardArray['id'];
-
-            if ($currentCategory != $lastCategory) {
-                $ba['list'] = implode("\n",$boardList);
-                unset($ba['rowClass']);
-                $ba['checked'] = (count($categoryIgnoreList['all'])-1 == count($categoryIgnoreList['checked'])) ? ' checked="checked"' : '';
-                if (empty($ba['category_name'])) $ba['category_name'] = $lastCategoryName;
-                $list[] = $this->discuss->getChunk($categoryTpl,$ba);
-                $categoryIgnoreList = array('checked' => array(),'all' => array());
-
-                $ba = $boardArray;
-                $boardList = array(); /* reset current category board list */
-                $ba['cls'] = 'dis-board-cb '.$rowClass;
-                $lastCategory = $board['category'];
-                $boardList[] = $this->discuss->getChunk($boardTpl,$ba);
-
-            } else { /* otherwise add to temp board list */
-                if ($boardArray['depth'] - 1 > 0) {
-                    $boardArray['name'] = str_repeat($subBoardPaddingString,$boardArray['depth'] - 1).$boardArray['name'];
-                }
-                $boardList[] = $this->discuss->getChunk($boardTpl,$boardArray);
-                $rowClass = ($rowClass == 'alt') ? 'even' : 'alt';
+            $board['cls'] = 'dis-board-cb';
+            $board['cls'] .= " depth-{$board['depth']}";
+            if ($board['depth'] > 1) {
+                $board['name'] = str_repeat($subBoardPaddingString,$board['depth']).$board['name'];
             }
-            $idx++;
+            $this->categoryMap[$board['category']]['boardscount']++;
+            $boards[$board['id']] = $board;
         }
-
-        if (count($this->boards) > 0) {
-            if (in_array($boardArray['id'],$ignores)) {
-                $boardArray['checked'] = 'checked="checked"';
-            }
-            /* Last category */
-            $boardArray['list'] = implode("\n",$boardList);
-            $boardArray['rowClass'] = 'dis-board-cb '.$rowClass;
-            $list[] = $this->discuss->getChunk($categoryTpl,$boardArray);
+        $this->mapRecursion($boards);
+        foreach ($this->categoryMap as $catId => $category) {
+            $categories[] = $this->discuss->getChunk($categoryTpl, array(
+                'id' => $catId,
+                'category_name' => $category['name'],
+                'list' => $this->_mapToLinear($category['boards']),
+                'checked' => ($category['boardscount'] == $category['checked']) ? 'checked="checked"' : ''
+            ));
         }
-
-
-        $this->setPlaceholder('boards',implode($rowSeparator,$list));
+        $this->setPlaceholder('boards',implode($rowSeparator,$categories));
     }
 
     /**

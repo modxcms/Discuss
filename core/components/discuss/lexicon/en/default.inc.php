@@ -161,6 +161,9 @@ $_lang['discuss.thread_author'] = 'Thread Owner';
 $_lang['discuss.threads'] = 'Threads';
 $_lang['discuss.threads_no_replies'] = 'Threads Without Replies';
 $_lang['discuss.threads.intro_msg'] = 'Search Threads and manage posts here.';
+$_lang['discuss.thread_remove'] = 'Remove Thread';
+$_lang['discuss.thread_err_nf'] = 'Thread not found with id: [[+id]]';
+$_lang['discuss.thread_err_remove'] = 'An error occurred while trying to remove the Thread.';
 $_lang['discuss.title'] = 'Title';
 $_lang['discuss.unanswered_questions'] = 'Unanswered Questions';
 $_lang['discuss.user'] = 'User';
@@ -235,6 +238,9 @@ $_lang['discuss.username'] = 'Username';
 $_lang['discuss.users'] = 'Users';
 $_lang['discuss.users.intro_msg'] = 'Manage your Users across your Discuss installation.';
 
+$_lang['discuss.invalid_drop'] = 'Invalid Drop';
+$_lang['discuss.invalid_drop.disBoard'] = 'Placing board without category not allowed.';
+$_lang['discuss.invalid_drop.disCategory'] = 'Placing category under another category or board not allowed,';
 
 /* System Settings */
 $_lang['setting_discuss.reserved_usernames'] = 'Reserved Usernames';
@@ -377,6 +383,9 @@ $_lang['setting_discuss.search_results_buffer_desc'] = 'Sets how many extra rows
 
 $_lang['setting_discuss.show_whos_online'] = 'Show Whos Online';
 $_lang['setting_discuss.show_whos_online_desc'] = 'If set to yes, will display the users currently online.';
+
+$_lang['setting_discuss.users_can_remove_own_posts'] = 'Can Users Delete Own Posts';
+$_lang['setting_discuss.users_can_remove_own_posts_desc'] = 'If set to yes, users will be able to delete their own posts.';
 
 $_lang['setting_discuss.solr.hostname'] = 'Solr Hostname';
 $_lang['setting_discuss.solr.hostname_desc'] = 'The hostname for the Solr server.';

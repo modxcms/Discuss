@@ -37,7 +37,7 @@ define('PKG_NAME','Discuss');
 define('PKG_NAME_LOWER','discuss');
 
 /* do not forget to change in discuss.class.php too!! */
-define('PKG_VERSION','1.2');
+define('PKG_VERSION','1.2.1');
 define('PKG_RELEASE','pl');
 
 /* override with your own defines here (see build.config.sample.php) */
@@ -82,6 +82,12 @@ $snippets = include $sources['data'].'transport.snippets.php';
 if (empty($snippets)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in snippets.');
 $category->addMany($snippets);
 
+/* add plugins */
+$modx->log(modX::LOG_LEVEL_INFO,'Packaging in plugins...');
+$plugins = include $sources['data'].'transport.plugins.php';
+if (empty($plugins)) $modx->log(modX::LOG_LEVEL_ERROR,'Could not package in plugins.');
+$category->addMany($plugins);
+
 /* add chunks */
 /*$modx->log(modX::LOG_LEVEL_INFO,'Packaging in chunks...');
 $chunks = include $sources['data'].'transport.chunks.php';
@@ -117,6 +123,19 @@ $attr = array(
             xPDOTransport::PRESERVE_KEYS => false,
             xPDOTransport::UPDATE_OBJECT => true,
             xPDOTransport::UNIQUE_KEY => 'name',
+        ),
+        'Plugins' => array(
+            xPDOTransport::UNIQUE_KEY => 'name',
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::RELATED_OBJECTS => true,
+            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+                'PluginEvents' => array(
+                    xPDOTransport::PRESERVE_KEYS => true,
+                    xPDOTransport::UPDATE_OBJECT => false,
+                    xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
+                ),
+            ),
         ),
         'Chunks' => array (
             xPDOTransport::PRESERVE_KEYS => false,

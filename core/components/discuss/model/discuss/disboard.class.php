@@ -68,6 +68,11 @@ class disBoard extends xPDOSimpleObject {
     protected $parentChanged = false;
 
     /**
+     * @var boolean $categoryChanged Monitors whether category has been changed
+     */
+    protected $categoryChanged = false;
+
+    /**
      * Overrides xPDOObject::set to provide custom functionality and automation
      * for the closure tables that persist the board map.
      *
@@ -78,9 +83,13 @@ class disBoard extends xPDOSimpleObject {
      */
     public function set($k, $v= null, $vType= '') {
         $oldParentId = $this->get('parent');
+        $oldCategory = $this->get('category');
         $set = parent::set($k,$v,$vType);
         if ($set && $k == 'parent' && $v != $oldParentId && !$this->isNew()) {
             $this->parentChanged = true;
+        } else if ($set && $k == 'category' && $v != $oldCategory && !$this->isNew()) {
+            $this->categoryChanged = true;
+            $this->xpdo->log(modX::LOG_LEVEL_ERROR, print_r($this->get('category'), true));
         }
         return $set;
     }
@@ -174,7 +183,7 @@ class disBoard extends xPDOSimpleObject {
             $saved = parent::save();
         }
         /* if parent changed on existing object, rebuild closure table */
-        if (!$new && $this->parentChanged) {
+        if (!$new && ($this->parentChanged || $this->categoryChanged)) {
             /* first remove old tree path */
             $c = $this->xpdo->newQuery('disBoardClosure');
             $c->where(array(
@@ -194,6 +203,10 @@ class disBoard extends xPDOSimpleObject {
             $map = array();
             foreach ($parents as $parent) {
                 /** @var disBoardClosure $cl */
+                if ($parent == $this->get('id')) { // Do not update own id
+                    $idx++;
+                    continue;
+                }
                 $cl = $this->xpdo->newObject('disBoardClosure');
                 $cl->set('ancestor',$parent);
                 $cl->set('descendant',$this->get('id'));
@@ -206,9 +219,21 @@ class disBoard extends xPDOSimpleObject {
             }
             $this->set('depth',($idx-1));
             $this->set('map',implode('.',$map));
-
             /* save */
             $saved = parent::save();
+
+            // Update children also
+            $children = $this->getMany('Children');
+            if (count($children) > 0) {
+                foreach($children as $child) {
+                    $child->fromArray(array(
+                        'category' => $this->get('category'),
+                        'parent' => $this->get('id')
+                    ));
+                    $child->forceClosureUpdate();
+                    $child->save();
+                }
+            }
         }
 
         if ($saved) {
@@ -216,6 +241,31 @@ class disBoard extends xPDOSimpleObject {
         }
 
         return $saved;
+    }
+
+    /**
+     * Force closure update when ancestor changed board or category tree
+     */
+    public function forceClosureUpdate() {
+        $this->parentChanged = true;
+        $this->categoryChanged = true;
+    }
+    /**
+     * Get all descendant objects for board
+     * @return array
+     */
+    public function getDescendants() {
+        $c = $this->xpdo->newQuery('disBoard');
+        $c->innerJoin('disBoardClosure', 'c', 'c.descendant = disBoard.id');
+        $c->where(array('c.ancestor' => $this->get('id'),
+            'id:!=' => $this->get('id')
+        ));
+        $boards = $this->xpdo->getCollection('disBoard', $c);
+        $descendants = array();
+        foreach ($boards as $board) {
+            $descendants[] = $board;
+        }
+        return $descendants;
     }
 
     /**
@@ -368,7 +418,7 @@ class disBoard extends xPDOSimpleObject {
                 if (empty($username)) {
                     $username = $moderator->get('username');
                 }
-                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('u/'.$moderator->get('username')).'">'.$username.'</a>' : $username;
+                $mods[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user', array('type' => 'username', 'user' => $moderator->get('username'))).'">'.$username.'</a>' : $username;
             }
             $mods = array_unique($mods);
             $mods = implode(',',$mods);
@@ -408,7 +458,7 @@ class disBoard extends xPDOSimpleObject {
             $sbs = array();
             foreach ($subboards as $subboard) {
                 $sb = explode(':',$subboard);
-                $sbs[] = '<a href="'.$this->xpdo->discuss->request->makeUrl('board/',array('board' => $sb[0])).'">'.$sb[1].'</a>';
+                $sbs[] = '<a href="'.$this->xpdo->discuss->request->makeUrl('board',array('board' => $sb[0])).'">'.$sb[1].'</a>';
             }
             $sbl = $this->xpdo->lexicon('discuss.subforums').': '.implode(',',$sbs);
         }
@@ -446,7 +496,7 @@ class disBoard extends xPDOSimpleObject {
             $category = $this->getOne('Category');
             if ($category) {
                 $trail[] = array(
-                    'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
+                    'url' => $this->xpdo->discuss->request->makeUrl('',array('type' => 'category', 'category' => $category->get('id'))),
                     'text' => $category->get('name'),
                 );
             }
@@ -462,7 +512,7 @@ class disBoard extends xPDOSimpleObject {
                 'text' => $this->get('name').($this->get('locked') ? $this->xpdo->lexicon('discuss.board_is_locked') : ''),
             );
             if ($linkToSelf) {
-                $self['url'] = $this->xpdo->discuss->request->makeUrl('board/',array('board' => $this->get('id')));
+                $self['url'] = $this->xpdo->discuss->request->makeUrl('board',array('board' => $this->get('id')));
             }
             if (empty($additional)) { $self['active'] = true; }
             $trail[] = $self;
@@ -644,6 +694,8 @@ class disBoard extends xPDOSimpleObject {
         ));
         $c->sortby('Category.rank','ASC');
         $c->sortby('disBoard.rank','ASC');
+        $c->prepare();
+        $modx->log(modX::LOG_LEVEL_ERROR, $c->toSQL());
         $response['results'] = $modx->getCollection('disBoard',$c);
 
         return $response;
@@ -694,16 +746,17 @@ class disBoard extends xPDOSimpleObject {
             }
             $c->select($modx->getSelectColumns('disBoard','disBoard'));
             $c->select(array(
-                'MAX(Descendants.depth) AS depth',
+                'Descendants.depth AS depth',
                 'Category.name AS category_name',
             ));
+            $c->where(array('Descendants.ancestor' => 0));
             $c->sortby('Category.rank','ASC');
             $c->sortby('disBoard.map','ASC');
             $c->groupby('disBoard.id');
             $boardObjects = $modx->getCollection('disBoard',$c);
             /** @var disBoard $board */
             foreach ($boardObjects as $board) {
-                $boards[] = $board->toArray();
+                $boards[] = $board->toArray('', false, true);
             }
             if (!empty($boards)) {
                 $modx->cacheManager->set($cacheKey,$boards,$modx->getOption('discuss.cache_time',null,3600));
@@ -790,7 +843,7 @@ class disBoard extends xPDOSimpleObject {
     public function getLastPostTitleSlug($key = 'last_post_title') {
         $title = $this->get($key);
         if (!empty($title)) {
-            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-').'/';
+            $title = $this->xpdo->resource->cleanAlias($title);
         }
         return $title;
     }
@@ -800,15 +853,16 @@ class disBoard extends xPDOSimpleObject {
      * @return string
      */
     public function getLastPostUrl() {
-        $view = 'thread/'.$this->get('last_post_thread').'/'.$this->getLastPostTitleSlug();
+        $action = 'thread';
 
         $params = array();
+        $params['thread'] = $this->get('last_post_thread');
+        $params['thread_name'] = $this->getLastPostTitleSlug();
         $sortDir = $this->xpdo->getOption('discuss.post_sort_dir',null,'ASC');
         if ($this->get('last_post_page') > 1 && $sortDir == 'ASC') {
             $params['page'] = $this->get('last_post_page');
         }
-        $url = $this->xpdo->discuss->request->makeUrl($view,$params);
-
+        $url = $this->xpdo->discuss->request->makeUrl($action,$params);
         $url = $url.'#dis-post-'.$this->get('last_post_id');
         $this->set('last_post_url',$url);
         return $url;
@@ -837,7 +891,7 @@ class disBoard extends xPDOSimpleObject {
      * @return string
      */
     public function getUrl() {
-        return $this->xpdo->discuss->request->makeUrl('board/'.$this->get('id').'/'.$this->getSlug());
+        return $this->xpdo->discuss->request->makeUrl('board', array('board' => $this->get('id'), 'board_name' => $this->getSlug()));
     }
 
     /**
@@ -847,11 +901,44 @@ class disBoard extends xPDOSimpleObject {
     public function getSlug() {
         $title = $this->get('name');
         if (!empty($title)) {
-            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
+            $title = $this->xpdo->resource->cleanAlias($title);
         } else {
             $title = $this->get('id');
         }
         return $title;
 
     }
+
+    /**
+     * Reorder the board rank
+     * @param string $position
+     * @param $siblingId
+     */
+    public function reorder($position, $siblingId) {
+        $c = $this->xpdo->newQuery('disBoard');
+        $c->where(array('parent' => $this->get('parent'),
+            'category' => $this->get('category')));
+        $c->sortby('rank');
+        $siblings = $this->xpdo->getCollection('disBoard', $c);
+        unset($siblings[$this->get('id')]);
+        reset($siblings);
+        $i = 0;
+        $pos = array_search($siblingId, array_keys($siblings));
+        foreach($siblings as $sibling) {
+            if ($position == 'above' && $pos == $i) {
+                $this->set('rank', $i);
+                $this->save();
+                $i++;
+            }
+            $sibling->set('rank', $i);
+            $sibling->save();
+            $i++;
+            if ($position == 'below' && ($pos + 1) == $i) {
+                $this->set('rank', $i);
+                $this->save();
+                $i++;
+            }
+        }
+    }
+
 }

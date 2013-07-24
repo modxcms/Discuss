@@ -1,4 +1,4 @@
-<form action="[[~[[*id]]]]thread/remove?thread=[[+id]]" method="post" class="dis-form" id="dis-remove-thread-form">
+<form action="[[DiscussUrlMaker? &action=`thread/remove` &params=`{"thread":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-remove-thread-form">
 	<h1>[[%discuss.thread_remove? &namespace=`discuss` &topic=`post`]]</h1>
     <p>[[%discuss.thread_remove_confirm? &thread=`[[+title]]`]]</p>
         

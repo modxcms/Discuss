@@ -6,7 +6,7 @@ class disThreadGetListProcessor extends modProcessor {
 
     public function initialize() {
         $this->setDefaultProperties(array(
-            'sort' => 'title',
+            'sort' => 'post_last_on',
             'dir' => 'DESC',
             'start' => 0,
             'limit' => 10,
@@ -59,6 +59,7 @@ class disThreadGetListProcessor extends modProcessor {
         $data['total'] = $this->modx->getCount('disThread',$c);
         $c->select($this->modx->getSelectColumns('disThread','disThread'));
         $c->select($this->modx->getSelectColumns('disUser','FirstAuthor','',array('username')));
+        $c->sortby($this->getProperty('sort'), $this->getProperty('dir'));
         if ($isLimit) {
             $c->limit($this->getProperty('limit'),$this->getProperty('start'));
         }

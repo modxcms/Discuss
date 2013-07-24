@@ -1,11 +1,11 @@
 [[+usermenu]]
 <div class="dis-profile">
 
-<form action="[[~[[*id]]]]user/account?user=[[+id]]" class="dis-form" method="post" id="dis-user-account-form">
+
+<form action="[[DiscussUrlMaker? &action=`user/account` &params=`{"user":"[[+id]]"}`]]" method="post" class="dis-form" id="dis-user-account-form" style="border: 0;">
 
 	<h1>[[%discuss.account_edit? &namespace=`discuss` &topic=`user`]]: [[+name]]</h1>
 
-        
     <input type="hidden" name="user" value="[[+id]]" />
     
     <label for="dis-username">[[%discuss.username]]:<br />
@@ -46,7 +46,7 @@
     
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" value="[[%discuss.save_changes? &namespace=`discuss` &topic=`web`]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]user/?user=[[+id]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+id]]"}`]]';" />
     </div>
     
 </form>

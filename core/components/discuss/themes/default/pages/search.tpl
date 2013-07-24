@@ -1,5 +1,5 @@
 
-<form class="m-fullw-form m-styled-form h-group m-search" action="[[~[[*id]]]]search/" method="get">
+<form class="m-fullw-form m-styled-form h-group m-search" action="[[DiscussUrlMaker? &action=`search`]]" method="get">
 	<h1>[[%discuss.search? &namespace=`discuss` &topic=`web`]]</h1>
     <div class="m-panel f1-f8">
         <div class="f1-f5 f-pad h-group">

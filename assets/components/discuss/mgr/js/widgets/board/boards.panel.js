@@ -29,7 +29,8 @@ Dis.tree.Boards = function(config) {
         ,tbar: [{
             text: _('discuss.board_create')
             ,handler: this.createBoard
-            ,scope: this
+            ,scope: this,
+            id : 'btn-create-board'
         },'-',{
             text: _('discuss.category_create')
             ,handler: this.createCategory
@@ -40,7 +41,18 @@ Dis.tree.Boards = function(config) {
             ,scope: this
         }]
         //,enableDD: true
-        ,rootVisible: false
+        ,rootVisible: false,
+        listeners : {
+            beforenodedrop : function(e) {
+                // Do not allow board to root or category inside another
+                var constraints = new Array('above', 'below');
+                if ((e.data.node.attributes.classKey == 'disBoard' && e.target.attributes.classKey == 'disCategory' && constraints.indexOf(e.point) !== -1)
+                    || (e.data.node.attributes.classKey == 'disCategory' && (e.target.attributes.classKey == 'disCategory' || e.target.attributes.classKey == 'disBoard') && e.point == 'append')) {
+                    e.cancel = true;
+                    MODx.msg.alert(_('discuss.invalid_drop'), _('discuss.invalid_drop.' + e.data.node.attributes.classKey));
+                }
+            }
+        }
     });
     Dis.tree.Boards.superclass.constructor.call(this,config);
 };
@@ -76,7 +88,11 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
     
     ,createBoard: function(btn,e) {
         var r = {};
-        if (this.cm.activeNode) {
+        console.log(btn.id);
+        if (btn.id == 'btn-create-board') { // resets values when using "Create Board" button
+            r['parent'] = 0;
+            r.category = 1; // First category
+        } else {
             r['parent'] = this.cm.activeNode.attributes.classKey == 'disBoard' ? this.cm.activeNode.attributes.pk : 0;
             r.category = this.cm.activeNode.attributes.category;
         }
@@ -89,7 +105,19 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
                     'success': {fn:function() { this.refresh(); },scope:this}
                 }
             });
+            this.windows.createBoard.combo = this.windows.createBoard.findByType('dis-combo-category', true);
+        } else {
+            this.windows.createBoard.record = r;
         }
+
+
+        this.windows.createBoard.on('beforeShow', function(w) {
+            // Loads combobox from server to check if new categories exists
+            w.combo[0].getStore().load();
+        });
+        this.windows.createBoard.on('show', function(w){
+            w.combo[0].setValue(w.record.category);
+        });
         this.windows.createBoard.show(e.target);
     }
     
@@ -158,19 +186,34 @@ Ext.extend(Dis.tree.Boards,MODx.tree.Tree,{
         });
         return true;
     }
-    
-    ,_handleDrag: function(dropEvent) {
-        
-        var encNodes = this.encode();
+    /**
+     * var e dropEvent
+     */
+    ,_handleDrag: function(e) {
+        var move = {
+            target : {
+                id : e.target.attributes.id,
+                cat : e.target.attributes.category,
+                classKey : e.target.attributes.classKey,
+                parent : e.target.attributes.parent
+            },
+            node : {
+                id : e.data.node.attributes.id,
+                parent : e.data.node.attributes.parent,
+                classKey : e.data.node.attributes.classKey,
+                cat : e.data.node.attributes.category
+            },
+            action : e.point
+        };
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                data: encNodes
+                data: Ext.util.JSON.encode(move)
                 ,action: 'mgr/board/sort'
             }
             ,listeners: {
                 'success': {fn:function(r) {
-                    this.reloadNode(dropEvent.target.parentNode);
+                    //this.reloadNode(e.target.parentNode);
                 },scope:this}
                 ,'failure': {fn:function(r) {
                     MODx.form.Handler.errorJSON(r);

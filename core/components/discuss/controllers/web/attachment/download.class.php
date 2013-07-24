@@ -32,7 +32,7 @@ class DiscussAttachmentDownloadController extends DiscussController {
 
     }
     public function getSessionPlace() {
-        return 'downloadattachment:'.$this->getProperty('file','');
+        return 'attachment/download:file='.$this->getProperty('file','');
     }
 
     public function process() {

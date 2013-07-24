@@ -458,7 +458,7 @@ abstract class DiscussController {
         /* topbar profile links. Moved from class Discuss */
         if ($this->discuss->user->isLoggedIn) {
             $authphs = array(
-                'authLink' => '<a href="'.$this->discuss->url.'logout">Logout</a>',
+                'authLink' => '<a href="'.$this->discuss->request->makeUrl('logout').'">Logout</a>',
             );
             $authphs = array_merge($this->discuss->user->toArray('user.'),$authphs);
             $authphs['user.avatar_url'] = $this->discuss->user->getAvatarUrl();
@@ -506,7 +506,7 @@ abstract class DiscussController {
             $this->discuss->user->isAdmin();
         } else {
             $authphs = array(
-                'authLink' => '<a href="'.$this->discuss->url.'login">Login</a>',
+                'authLink' => '<a href="'.$this->discuss->request->makeUrl('login').'">Login</a>',
                 'user.avatar_url' => '',
                 'user.unread_messages' => '',
             );

@@ -2,7 +2,8 @@
     <input type="button" name="Cancel" value="Edit" class="dis-message-cancel Button l-right">
     <div class="dis-post-left">
         <ul>
-            <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>
+           <!-- Remove/Merge depending if DiscussUrlMaker works directly <li class="dis-usr-icon"><a href="[[~[[*id]]? &scheme=`full`]]u/[[+author.username]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>-->
+            <li class="dis-usr-icon"><a href="[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+author.id]]"}`]]" class="auth-avatar" title="[[%discuss.view_author_profile]]">[[+author.avatar]]</a></li>
             <li class="dis-usr-post-count">[[+author.posts]] [[%discuss.posts]]</li>
         </ul>
     </div>

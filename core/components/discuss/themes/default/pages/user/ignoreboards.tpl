@@ -3,7 +3,7 @@
 
 	<h1>Ignore Boards</h1>
 
-	<form action="[[~[[*id]]]]user/ignoreboards?user=[[+id]]" method="post" class="dis-form">
+	<form action="[[DiscussUrlMaker? &action=`user/ignoreboards` &params=`{"user":"[[+id]]"}`]]" method="post" class="dis-form">
 
 		<ul class="ignore">
 			[[+boards]]
@@ -18,7 +18,6 @@
 	    </div>
 
 	</form>
-	
 </div>
 [[+sidebar]]
 

@@ -102,8 +102,7 @@ class DiscussMessagesController extends DiscussController {
             $threadArray = $message->toArray();
             $threadArray['idx'] = $idx;
             $threadArray['createdon'] = strftime($this->discuss->dateFormat,strtotime($threadArray['first_post_createdon']));
-
-            $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$this->discuss->url.'user/?user='.$threadArray['last_author_username'].'">'.$threadArray['last_author_username'].'</a>' : $threadArray['last_author_username'];
+            $threadArray['author_link'] = $canViewProfiles ? '<a href="'.$this->discuss->request->makeUrl('user', array('user' => $threadArray['last_author_username'])).'">'.$threadArray['last_author_username'].'</a>' : $threadArray['last_author_username'];
             $threadArray['views'] = number_format($threadArray['views']);
             $threadArray['replies'] = number_format($threadArray['replies']);
             $threadArray['read'] = 1;

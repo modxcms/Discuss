@@ -7,7 +7,7 @@ $xpdo_meta_map['disThreadParticipant']= array (
   'package' => 'discuss',
   'version' => '1.1',
   'table' => 'discuss_thread_participants',
-  'extends' => 'xPDOObject',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'thread' => NULL,
@@ -34,11 +34,11 @@ $xpdo_meta_map['disThreadParticipant']= array (
   ),
   'indexes' => 
   array (
-    'PRIMARY' => 
+    'thread_user' => 
     array (
-      'alias' => 'PRIMARY',
-      'primary' => true,
-      'unique' => false,
+      'alias' => 'thread_user',
+      'primary' => false,
+      'unique' => true,
       'columns' => 
       array (
         'thread' => 

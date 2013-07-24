@@ -40,7 +40,7 @@ class DiscussUserMergeController extends DiscussController {
         return $this->modx->lexicon('discuss.account_merge');
     }
     public function getSessionPlace() {
-        return 'user-merge:'.$this->discuss->user->get('id');
+        return 'user/merge';
     }
     public function process() {
         $this->setPlaceholders($this->discuss->user->toArray());

@@ -6,7 +6,7 @@
 ]]
 
 <div class="dis-profile f1-f9">
-<form action="[[~[[*id]]]]user/ban?u=[[+fi.id]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-formz">
+<form action="[[DiscussUrlMaker? &action=`user/ban` &params=`{"u":"[[+id]]"}`]]" method="post" class="dis-form dis-ban-form" id="dis-user-ban-form" style="border: 0;">
 
 	<h1>[[%discuss.ban_user_header? &username=`[[+fi.username]]`]]</h1>
 
@@ -86,7 +86,7 @@
 
     <div class="dis-form-buttons">
     <input type="submit" class="dis-action-btn" name="dis-add-ban" value="[[%discuss.ban_add? &namespace=`discuss` &topic=`web`]]" />
-    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[~[[*id]]]]user?user=[[+id]]';" />
+    <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+id]]"}`]]';" />
     </div>
 </form>
 

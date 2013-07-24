@@ -105,7 +105,7 @@ class Discuss {
         }
 
         $this->config = array_merge(array(
-            'version' => '1.2-pl',
+            'version' => '1.2.1-pl',
             'assetsUrl' => $assetsUrl,
 			'themesUrl' => $themesUrl,
             'theme' => $theme,
@@ -165,12 +165,12 @@ class Discuss {
             break;
             default:
                 $this->modx->lexicon->load('discuss:web');
+                $this->loadRequest();
                 if (!defined('DISCUSS_IMPORT_MODE')) {
                     $this->url = $this->config['url'] = $this->modx->makeUrl($this->modx->getOption('discuss.forums_resource_id'));
                     $this->_initUser();
                     $this->_initSession();
                 }
-                $this->loadRequest();
             break;
         }
         return '';

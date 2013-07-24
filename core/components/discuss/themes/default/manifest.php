@@ -28,7 +28,7 @@ $manifest = array(
     'preview' => 'preview.png',
     'global' => array(
         'js' => array(
-            'inline' => 'var DIS = {config: {}}; DIS.url = "'.$this->discuss->request->makeUrl().'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";DIS.config.connector = "'.$this->discuss->config['connectorUrl'].'"; DIS.config.forum_url = "'.$this->discuss->request->makeUrl().'"',
+            'inline' => 'var DIS = {config: {}}; DIS.url = "'.$this->discuss->url.'";DIS.shJsUrl = "'.$this->discuss->config['jsUrl'].'sh/";DIS.config.connector = "'.$this->discuss->config['connectorUrl'].'"; DIS.config.forum_url = "'.$this->discuss->url.'"',
         ),
         'options' => array(
             'registerJsToScriptTags' => false,
@@ -38,7 +38,27 @@ $manifest = array(
             'showModerators' => true,
             'showPaginationIfOnePage' => false,
             'showPrintOption' => false,
-        )
+        ),
+        'furl' => array(
+            array(
+                'condition' => array(
+                    'type' => 'category',
+                ),
+                'data' => array(
+                    array('type' => 'constant', 'value' => 'category'),
+                    array('type' => 'variable-required', 'key' => 'category'),
+                    array('type' => 'variable', 'key' => 'category_name'),
+                    array('type' => 'allparameters'),
+                ),
+            ),
+            array(
+                'condition' => array(),
+                'data' => array(
+                    array('type' => 'action'),
+                    array('type' => 'allparameters'),
+                ),
+            ),
+        ),
     ),
     'print' => array(
         'css' => array(
@@ -64,6 +84,17 @@ $manifest = array(
         'options' => array(
             'showSubBoards' => true,
             'showPosts' => true,
+        ),
+        'furl' => array(
+            array(
+                'condition' => array(),
+                'data' => array(
+                    array('type' => 'constant', 'value' => 'board'),
+                    array('type' => 'variable-required', 'key' => 'board'),
+                    array('type' => 'variable', 'key' => 'board_name'),
+                    array('type' => 'allparameters'),
+                ),
+            ),
         ),
     ),
     'board.xml' => array(
@@ -99,6 +130,17 @@ $manifest = array(
                     'show_be_nice_box' => '1',
                 )
             )
+        ),
+        'furl' => array(
+            array(
+                'condition' => array(),
+                'data' => array(
+                    array('type' => 'constant', 'value' => 'thread'),
+                    array('type' => 'variable-required', 'key' => 'thread'),
+                    array('type' => 'variable', 'key' => 'thread_name'),
+                    array('type' => 'allparameters'),
+                ),
+            ),
         ),
     ),
     'thread/new' => array(
@@ -242,6 +284,26 @@ $manifest = array(
                 'options' => array(
                 )
             )
+        ),
+        'furl' => array(
+            array(
+                'condition' => array(
+                    'type' => 'username',
+                ),
+                'data' => array(
+                    array('type' => 'constant', 'value' => 'u'),
+                    array('type' => 'variable-required', 'key' => 'user'),
+                    array('type' => 'allparameters'),
+                ),
+            ),
+            array(
+                'condition' => array(),
+                'data' => array(
+                    array('type' => 'constant', 'value' => 'user'),
+                    array('type' => 'parameter', 'key' => 'user'),
+                    array('type' => 'allparameters'),
+                ),
+            ),
         ),
     ),
     'user/subscriptions' => array(
@@ -542,5 +604,8 @@ $manifest = array(
             )
         ),
     ),
+    'thread/feed.xml' => array(
+
+    )
 );
 return $manifest;

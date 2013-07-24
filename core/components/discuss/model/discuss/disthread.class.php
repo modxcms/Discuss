@@ -154,13 +154,12 @@ class disThread extends xPDOSimpleObject {
         /** @var disThread $thread */
         $thread = $modx->getObject('disThread',$c);
         if ($thread) {
-            $userUrl = $modx->discuss->request->makeUrl('u');
             $participants = $thread->get('participants_usernames');
             if (!empty($participants)) {
                 $pu = array_unique(explode(',',$participants));
                 asort($pu);
                 foreach ($pu as &$username) {
-                    $username = '<a href="'.$userUrl.'/'.$username.'/">'.$username.'</a>';
+                    $username = '<a href="'.$modx->discuss->request->makeUrl('user', array('type' => 'username', 'user' => $username)).'">'.$username.'</a>';
                 }
                 $pu = implode(', ',$pu);
                 $thread->set('participants_usernames',trim($pu));
@@ -817,6 +816,7 @@ class disThread extends xPDOSimpleObject {
             foreach ($sessions as $member) {
                 $r = explode(':',$member->get('reader'));
                 $members[] = $canViewProfiles ? '<a href="'.$this->xpdo->discuss->request->makeUrl('user',array(
+                    'type' => 'username',
                     'user' => str_replace('%20','',$r[0])
                 )).'">'.$r[1].'</a>' : $r[1];
             }
@@ -953,7 +953,7 @@ class disThread extends xPDOSimpleObject {
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
-        ));
+        ),false);
         if (!$notify) {
             $notify = $this->xpdo->newObject('disUserNotification');
             $notify->set('user',$userId);
@@ -979,7 +979,7 @@ class disThread extends xPDOSimpleObject {
         $notify = $this->xpdo->getObject('disUserNotification',array(
             'user' => $userId,
             'thread' => $this->get('id'),
-        ));
+        ),false);
         if ($notify) {
             if (!$notify->remove()) {
                 $this->xpdo->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not remove notification: '.print_r($notify->toArray(),true));
@@ -1047,7 +1047,7 @@ class disThread extends xPDOSimpleObject {
                 $category = $ancestor->getOne('Category');
                 if ($category) {
                     $trail[] = array(
-                        'url' => $this->xpdo->discuss->request->makeUrl('',array('category' => $category->get('id'))),
+                        'url' => $this->xpdo->discuss->request->makeUrl('',array('type' => 'category', 'category' => $category->get('id'))),
                         'text' => $category->get('name'),
                         'last' => false,
                     );
@@ -1345,7 +1345,7 @@ class disThread extends xPDOSimpleObject {
             $page = 1;
             $replies = $this->get('last_post_replies');
             $perPage = $this->xpdo->getOption('discuss.post_per_page',null, 10);
-            if ($replies > $perPage) {
+            if ($replies >= $perPage) {
                 $page = ceil(($replies+1) / $perPage);
             }
             $this->set('last_post_page',$page);
@@ -1364,7 +1364,9 @@ class disThread extends xPDOSimpleObject {
     public function getUrl($lastPost = true,array $params = array(),$regenerate = false) {
         $url = $this->get('url');
         if (empty($url) || $regenerate || !empty($params)) {
-            $view = 'thread/'.$this->get('id').'/'.$this->getUrlTitle();
+            $action = 'thread';
+            $params['thread'] = $this->get('id');
+            $params['thread_name'] = $this->getUrlTitle();
 
             if ($lastPost) {
                 $page = $this->calcLastPostPage();
@@ -1374,7 +1376,7 @@ class disThread extends xPDOSimpleObject {
                 }
             }
 
-            $url = $this->xpdo->discuss->request->makeUrl($view,$params);
+            $url = $this->xpdo->discuss->request->makeUrl($action,$params);
             if ($this->get('post_id') && $lastPost) {
                 $url .= '#dis-post-'.$this->get('post_id');
             }
@@ -1398,14 +1400,15 @@ class disThread extends xPDOSimpleObject {
             }
         }
 
-        if (!empty($title)) {
-            $title = trim(preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($title)),'-');
+        if (!empty($title) && is_object($this->xpdo->resource)) {
+            $title = $this->xpdo->resource->cleanAlias($title);
         } else {
             $title = $this->get('id');
         }
         return $title;
 
     }
+    
 
     /** can* methods */
 

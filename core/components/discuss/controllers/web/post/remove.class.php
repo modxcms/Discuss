@@ -51,7 +51,7 @@ class DiscussPostRemoveController extends DiscussController {
 
     public function checkPermissions() {
         $isModerator = $this->thread->isModerator();
-        $canRemovePost = $this->discuss->user->get('id') == $this->post->get('author') || $isModerator;
+        $canRemovePost = $this->post->canRemove();
         if (!$canRemovePost) {
             return $this->thread->getUrl();
         }
@@ -67,7 +67,7 @@ class DiscussPostRemoveController extends DiscussController {
 
         /* If the thread no longer exists (last post in thread was removed), redirect to the board instead of thread */
         if ($this->modx->getCount('disThread',$this->thread->get('id')) < 1) {
-            $redirectTo = $this->discuss->request->makeUrl('board/',array('board' => $this->post->get('board')));
+            $redirectTo = $this->discuss->request->makeUrl('board',array('board' => $this->post->get('board')));
         } else {
             $redirectTo = $this->thread->getUrl();
         }
