@@ -460,7 +460,7 @@ class DisRequest {
             $action = '';
         }
         $url = '';
-        $nofurls = ($forcenofurls || $this->modx->request->getResourceMethod() != 'alias');
+        $nofurls = ($forcenofurls || ($this->modx->request->getResourceMethod() != 'alias' && $this->discuss->url != '/'));
         if ($nofurls) {
             $url = $this->discuss->url;
             if(!empty($action))

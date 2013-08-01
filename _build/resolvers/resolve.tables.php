@@ -58,7 +58,7 @@ if ($object->xpdo) {
             $manager->createObjectContainer('disUserGroupProfile');
             $manager->createObjectContainer('disUserModerated');
             $manager->createObjectContainer('disUserNotification');
-            $manager->createObjectContainer('disParticipant');
+            $manager->createObjectContainer('disThreadParticipant');
             break;
         case xPDOTransport::ACTION_UPGRADE:
             break;
