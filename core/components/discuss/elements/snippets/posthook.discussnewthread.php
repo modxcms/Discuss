@@ -137,6 +137,6 @@ $discuss->logActivity('thread_new',$thread->toArray(),$thread->getUrl());
 /* clear recent posts cache */
 $modx->cacheManager->delete('discuss/board/recent/');
 
-$url = $post->getUrl('thread/',true);
+$url = $post->getUrl('thread',true);
 $modx->sendRedirect($url);
 return true;

@@ -694,8 +694,6 @@ class disBoard extends xPDOSimpleObject {
         ));
         $c->sortby('Category.rank','ASC');
         $c->sortby('disBoard.rank','ASC');
-        $c->prepare();
-        $modx->log(modX::LOG_LEVEL_ERROR, $c->toSQL());
         $response['results'] = $modx->getCollection('disBoard',$c);
 
         return $response;
