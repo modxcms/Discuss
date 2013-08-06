@@ -429,7 +429,7 @@ class DisRequest {
                     break;
             }
         }
-        trim($path, '/');
+        $path = trim($path, ' /');
         $urlparts = explode('?', $this->discuss->url, 2);
         if (count($urlparts)>1) {
             $urlrequest = array();
