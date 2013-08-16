@@ -247,53 +247,22 @@ class Discuss {
     }
 
     /**
-     * Initializes the user, tracks their ip and activity, and loads their
-     * profile. Also loads topbar information and links.
+     * Initializes the user, tracks their ip and activity, and loads their profile.
      *
      * @access private
      */
     private function _initUser() {
         $this->modx->lexicon->load('discuss:default');
         /* if no user, set id to 0 */
-        $isLoggedIn = $this->modx->user->hasSessionContext($this->modx->context->get('key'));
-        if (!$isLoggedIn) {
-            $this->user = $this->modx->newObject('disUser');
+        if (!$this->modx->user->hasSessionContext($this->modx->context->get('key'))) {
+            $this->user = $this->modx->newObject('disModUser');
             $this->user->set('id',0);
             $this->user->set('user',0);
             $this->user->set('username','(anonymous)');
             $this->user->isLoggedIn = false;
         } else {
             /* we are logged into MODX, check for user in Discuss */
-            $this->user = $this->modx->getObject('disUser',array('user' => $this->modx->user->get('id')));
-            if (empty($this->user)) {
-                /* if no disUser exists but there is a modUser, import! */
-                $profile = $this->modx->user->getOne('Profile');
-
-                $this->user = $this->modx->newObject('disUser');
-                $this->user->fromArray(array(
-                    'user' => $this->modx->user->get('id'),
-                    'username' => $this->modx->user->get('username'),
-                    'password' => $this->modx->user->get('password'),
-                    'salt' => $this->modx->user->get('salt'),
-                    'synced' => true,
-                    'syncedat' => date('Y-m-d H:I:S'),
-                    'confirmed' => true,
-                    'confirmedon' => date('Y-m-d H:I:S'),
-                    'source' => 'internal',
-                    'ip' => $this->getIp(),
-                    'status' => disUser::ACTIVE,
-                ));
-                if ($profile) {
-                    $this->user->fromArray($profile->toArray());
-                    $name = $profile->get('fullname');
-                    $name = explode(' ',$name);
-                    $this->user->fromArray(array(
-                        'name_first' => $name[0],
-                        'name_last' => isset($name[1]) ? $name[1] : '',
-                    ));
-                }
-                $this->user->save();
-            }
+            $this->user = $this->modx->getObject('disModUser', $this->modx->user->get('id'));
             $this->user->init();
         }
     }

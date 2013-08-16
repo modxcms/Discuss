@@ -14,11 +14,10 @@ $xpdo_meta_map = array (
     8 => 'disPostAttachment',
     9 => 'disUserFriend',
     10 => 'disUserGroupProfile',
-    11 => 'disUser',
-    12 => 'disUserModerated',
-    13 => 'disUserNotification',
-    14 => 'disForumActivity',
-    15 => 'disLogActivity',
+    11 => 'disUserModerated',
+    12 => 'disUserNotification',
+    13 => 'disForumActivity',
+    14 => 'disLogActivity',
   ),
   'xPDOObject' => 
   array (
@@ -27,10 +26,15 @@ $xpdo_meta_map = array (
     2 => 'disPostClosure',
     3 => 'disReservedUsername',
     4 => 'disSession',
+    5 => 'disProfile',
   ),
   'disThread' => 
   array (
     0 => 'disThreadDiscussion',
     1 => 'disThreadQuestion',
+  ),
+  'modUser' => 
+  array (
+    0 => 'disModUser',
   ),
 );
