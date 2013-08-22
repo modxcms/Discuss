@@ -18,6 +18,7 @@ $xpdo_meta_map = array (
     12 => 'disUserNotification',
     13 => 'disForumActivity',
     14 => 'disLogActivity',
+    15 => 'disUserDeprecated',
   ),
   'xPDOObject' => 
   array (
@@ -35,6 +36,6 @@ $xpdo_meta_map = array (
   ),
   'modUser' => 
   array (
-    0 => 'disModUser',
+    0 => 'disUser',
   ),
 );

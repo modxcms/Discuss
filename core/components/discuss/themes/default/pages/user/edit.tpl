@@ -2,7 +2,7 @@
 
 <div class="dis-profile">
     <h1>[[%discuss.edit_profile_for? &user=`[[+name]]` &namespace=`discuss` &topic=`user`]]</h1>
-    [[!include? &file=`[[++discuss.core_path]]elements/snippets/snippet.discussupdateprofileloader.php`]]
+    [[!DiscussUpdateProfileLoader]]
     [[!UpdateProfile?
     	&placeholderPrefix=`up`
     	&submitVar=`login-updprof-btn`
@@ -76,19 +76,19 @@
                 [[+signature]]
             </textarea>
             <br class="clearfix" />
-            <label for="dis-show-email"><input type="checkbox" name="show_email" id="dis-show-email" value="1" [[+show_email]] />[[%discuss.show_email_public]]
+            <label for="dis-show-email"><input type="checkbox" name="show_email" id="dis-show-email" value="[[+show_email]]">[[%discuss.show_email_public]]
                 <span class="error">
-                    [[+error.show_email]
+                    [[+error.show_email]]
                 </span>
             </label>
             <br class="clearfix" />
 
-        <label for="dis-show-online"><input type="checkbox" name="show_online" id="dis-show-online" value="1" [[+show_online]] />[[%discuss.show_online_status]]
+        <label for="dis-show-online"><input type="checkbox" name="show_online" id="dis-show-online" value="[[+show_online]]">[[%discuss.show_online_status]]
             <span class="error">[[+error.show_online]]</span>
         </label>
         <br class="clearfix" />
         <div class="dis-form-buttons">
-            <input type="submit" class="dis-action-btn" value="[[%discuss.save_changes? &namespace=`discuss` &topic=`web`]]" />
+            <input type="submit" name="login-updprof-btn" class="dis-action-btn" value="[[%discuss.save_changes? &namespace=`discuss` &topic=`web`]]" />
             <input type="button" class="dis-action-btn" value="[[%discuss.cancel]]" onclick="location.href='[[DiscussUrlMaker? &action=`user` &params=`{"user":"[[+id]]"}`]]';" />
         </div>
     </form>

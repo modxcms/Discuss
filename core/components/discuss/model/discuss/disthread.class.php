@@ -801,9 +801,10 @@ class disThread extends xPDOSimpleObject {
 
         $c = $this->xpdo->newQuery('disSession');
         $c->innerJoin('disUser','User');
+        $c->innerJoin('disProfile', 'disProfile', 'disProfile.internalKey = User.id');
         $c->select($this->xpdo->getSelectColumns('disSession','disSession','',array('id')));
         $c->select(array(
-            'CONCAT_WS(":",User.id,IF(User.use_display_name,User.display_name,User.username)) AS reader',
+            'CONCAT_WS(":",User.id,IF(disProfile.use_display_name,disProfile.display_name,User.username)) AS reader',
         ));
         $c->where(array(
             'disSession.place' => $placePrefix.':'.$this->get('id'),
@@ -1177,10 +1178,8 @@ class disThread extends xPDOSimpleObject {
     public function fetchPosts($post = false,array $options = array()) {
         $response = array();
         $c = $this->xpdo->newQuery('disPost');
-        $c->innerJoin('disThread','Thread');
-        $c->where(array(
-            'thread' => $this->get('id'),
-        ));
+        $c->where(array('thread' => $this->get('id')));
+
         $response['total'] = $this->xpdo->discuss->controller->getPostCount('disThread', $this->get('id'));
 		$flat = $this->xpdo->getOption('flat',$options,true);
         $limit = $this->xpdo->getOption('limit',$options,(int)$this->xpdo->getOption('discuss.post_per_page',$options, 10));
@@ -1206,11 +1205,9 @@ class disThread extends xPDOSimpleObject {
                 ));
             }
         }
-
-        $c->bindGraph('{"Author":{"PrimaryDiscussGroup":{},"PrimaryGroup":{}},"EditedBy":{}}');
-        //$c->prepare();
+        $c->bindGraph('{"Author":{"PrimaryDiscussGroup":{},"PrimaryGroup":{}, "Profile":{}, "disProfile":{}},"EditedBy":{}}');
         //$cacheKey = 'discuss/thread/'.$thread->get('id').'/'.md5($c->toSql());
-        $response['results'] = $this->xpdo->getCollectionGraph('disPost','{"Author":{"PrimaryDiscussGroup":{},"PrimaryGroup":{}},"EditedBy":{}}',$c);
+        $response['results'] = $this->xpdo->getCollectionGraph('disPost','{"Author":{"PrimaryDiscussGroup":{},"PrimaryGroup":{}, "Profile":{}, "disProfile":{}},"EditedBy":{}}',$c);
 
         return $response;
     }

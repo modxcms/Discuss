@@ -28,12 +28,14 @@ class DiscussRestFindUserController extends DiscussController {
         $c->where(array(
             'username:LIKE' => "%{$search}%",
             array(
-                'OR:display_name:LIKE' => "%{$search}%",
-                'AND:use_display_name:=' => true,
+                'OR:disProfile.display_name:LIKE' => "%{$search}%",
+                'AND:disProfile.use_display_name:=' => true,
             )
         ));
 
-        $c->select($this->modx->getSelectColumns('disUser','disUser','',array('id','username','display_name','use_display_name')));
+        $c->select($this->modx->getSelectColumns('disUser','disUser','',array('id','username')));
+        $c->select($this->modx->getSelectColumns('disProfile','disProfile','',array('internalKey','display_name','use_display_name')));
+        $c->innerJoin('disProfile', 'disProfile');
         $c->sortby('username','ASC');
         $c->limit(20);
 

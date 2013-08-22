@@ -1,9 +1,85 @@
 <?php
 /**
+ * Discuss
+ *
+ * Copyright 2010-11 by Shaun McCormick <shaun@modx.com>
+ *
+ * This file is part of Discuss, a native forum for MODx Revolution.
+ *
+ * Discuss is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * Discuss is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Discuss; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
+ *
  * @package discuss
- * [+phpdoc-subpackage+]
  */
-class disModUser extends modUser {
+/**
+ * The related object to modUser that stores Discuss-specific data for the User
+ *
+ * @property int $user
+ * @property string $username
+ * @property string $password
+ * @property string $email
+ * @property string $ip
+ *
+ * @property datetime $createdon
+ * @property string $name_first
+ * @property string $name_last
+ * @property string $gender
+ * @property date $birthdate
+ * @property string $website
+ * @property string $location
+ *
+ * @property int $status
+ * @property boolean $confirmed
+ * @property boolean $confirmedon
+ * @property datetime $last_login
+ * @property datetime $last_active
+ * @property string $ignore_boards
+ *
+ * @property string $signature
+ * @property string $title
+ * @property string $avatar
+ * @property string $avatar_service
+ *
+ * @property int $thread_last_visited
+ * @property int $posts
+ * @property boolean $show_email
+ * @property boolean $show_online
+ * @property int $primary_group
+ *
+ * @property boolean $synced
+ * @property string $source
+ * @property datetime $syncedat
+ * @property string $salt
+ * @property int $integrated_id
+ *
+ * @property string $display_name
+ * @property boolean $use_display_name
+ *
+ *
+ * @property modUser $User
+ * @property modUserGroup $PrimaryGroup
+ * @property disUserGroupProfile $PrimaryDiscussGroup
+ * @property disThread $ThreadLastVisited
+ *
+ * @property disUserModerated $UserModerated
+ * @property array $Posts
+ * @property array $Reads
+ * @property disSession $Session
+ * @property array $Friends
+ *
+ * @package discuss
+ */
+class disUserDeprecated extends xPDOSimpleObject {
     /**
      * If the user is inactive
      * @const INACTIVE
@@ -63,6 +139,11 @@ class disModUser extends modUser {
     public $moderatorships = array();
 
     /**
+     * @var modX $xpdo
+     */
+    public $xpdo;
+
+    /**
      * @var disParser $parser
      */
     public $parser;
@@ -71,258 +152,6 @@ class disModUser extends modUser {
      */
     public $unreadBoardsCount = array();
 
-    // Better debugging when query fails
-    public static function & _loadRows(& $xpdo, $className, $criteria) {
-        // Modify criteria partially. Loads all extra fields for disModUser
-        $criteria->query['columns'] = array();
-        $criteria->select(array(
-            $xpdo->getSelectColumns('disModUser', 'disModUser'),
-            $xpdo->getSelectColumns('modUserProfile', 'Profile'),
-            $xpdo->getSelectColumns('disProfile', 'disProfile', '', array('internalKey'), true)
-        ));
-        $criteria->leftJoin('modUserProfile', 'Profile');
-        $criteria->leftJoin('disProfile', 'disProfile');
-        $rows= null;
-        if ($criteria->prepare()) {
-            if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Attempting to execute query using PDO statement object: " . print_r($criteria->sql, true) . print_r($criteria->bindings, true));
-            $tstart= $xpdo->getMicroTime();
-            if (!$criteria->stmt->execute()) {
-                $tend= $xpdo->getMicroTime();
-                $totaltime= $tend - $tstart;
-                $xpdo->queryTime= $xpdo->queryTime + $totaltime;
-                $xpdo->executedQueries= $xpdo->executedQueries + 1;
-                $errorInfo= $criteria->stmt->errorInfo();
-                $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error ' . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($errorInfo, true). "\nUsing Query:\n" . $criteria->toSQL() . "\n");
-                if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $xpdo->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
-                    if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
-                        $tstart= $xpdo->getMicroTime();
-                        if (!$criteria->stmt->execute()) {
-                            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true) . "\nUsing Query:\n" . $criteria->toSQL() . "\n");
-                        }
-                        $tend= $xpdo->getMicroTime();
-                        $totaltime= $tend - $tstart;
-                        $xpdo->queryTime= $xpdo->queryTime + $totaltime;
-                        $xpdo->executedQueries= $xpdo->executedQueries + 1;
-                    } else {
-                        $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $xpdo->errorCode() . " attempting to create object container for class {$className}:\n" . print_r($xpdo->errorInfo(), true));
-                    }
-                }
-            }
-            $rows= & $criteria->stmt;
-        } else {
-            $errorInfo = $xpdo->errorInfo();
-            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
-            if (($errorInfo[1] == '1146' || $errorInfo[1] == '1') && $xpdo->getOption(xPDO::OPT_AUTO_CREATE_TABLES)) {
-                if ($xpdo->getManager() && $xpdo->manager->createObjectContainer($className)) {
-                    if (!$criteria->prepare()) {
-                        $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error preparing statement for query: {$criteria->sql} - " . print_r($errorInfo, true));
-                    } else {
-                        $tstart= $xpdo->getMicroTime();
-                        if (!$criteria->stmt->execute()) {
-                            $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $criteria->stmt->errorCode() . " executing statement: \n" . print_r($criteria->stmt->errorInfo(), true));
-                        }
-                        $tend= $xpdo->getMicroTime();
-                        $totaltime= $tend - $tstart;
-                        $xpdo->queryTime= $xpdo->queryTime + $totaltime;
-                        $xpdo->executedQueries= $xpdo->executedQueries + 1;
-                    }
-                } else {
-                    $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error " . $xpdo->errorCode() . " attempting to create object container for class {$className}:\n" . print_r($xpdo->errorInfo(), true));
-                }
-            }
-        }
-        return $rows;
-    }
-
-    /**
-     * Load an instance of an modDisUser or derivative class.
-     */
-    public static function load(xPDO & $xpdo, $className, $criteria, $cacheFlag= true) {
-        $instance= null;
-        $fromCache= false;
-        if ($className= $xpdo->loadClass($className)) {
-            if (!is_object($criteria)) {
-                $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
-                $criteria->prepare();
-            }
-            if (is_object($criteria)) {
-                //$criteria = $xpdo->addDerivativeCriteria($className, $criteria); Do not want to assign class_key
-                $row= null;
-                if ($xpdo->_cacheEnabled && $criteria->cacheFlag && $cacheFlag) {
-                    $row= $xpdo->fromCache($criteria, $className);
-                }
-                if ($row === null || !is_array($row)) {
-                    if ($rows= disModUser :: _loadRows($xpdo, $className, $criteria)) {
-                        $row= $rows->fetch(PDO::FETCH_ASSOC);
-                        $rows->closeCursor();
-                    }
-                } else {
-                    $fromCache= true;
-                }
-                if (!is_array($row)) {
-                    if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Fetched empty result set from statement: " . print_r($criteria->sql, true) . " with bindings: " . print_r($criteria->bindings, true));
-                } else {
-                    $instance= disModUser :: _loadInstance($xpdo, $className, $criteria, $row);
-                    if (is_object($instance)) {
-                        if (!$fromCache && $cacheFlag && $xpdo->_cacheEnabled) {
-                            $xpdo->toCache($criteria, $instance, $cacheFlag);
-                            if ($xpdo->getOption(xPDO::OPT_CACHE_DB_OBJECTS_BY_PK) && ($cacheKey= $instance->getPrimaryKey()) && !$instance->isLazy()) {
-                                $pkCriteria = $xpdo->newQuery($className, $cacheKey, $cacheFlag);
-                                $xpdo->toCache($pkCriteria, $instance, $cacheFlag);
-                            }
-                        }
-                        if ($xpdo->getDebug() === true) $xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Loaded object instance: " . print_r($instance->toArray('', true), true));
-                    }
-                }
-            } else {
-                $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'No valid statement could be found in or generated from the given criteria.');
-            }
-        } else {
-            $xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Invalid class specified: ' . $className);
-        }
-        return $instance;
-    }
-
-    /**
-     * Load a collection of modDisUser instances.
-     */
-    public static function loadCollection(xPDO & $xpdo, $className, $criteria= null, $cacheFlag= true) {
-        $objCollection= array ();
-        $fromCache = false;
-        if (!$className= $xpdo->loadClass($className)) return $objCollection;
-        $rows= false;
-        $fromCache= false;
-        $collectionCaching = (integer) $xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1);
-        if (!is_object($criteria)) {
-            $criteria= $xpdo->getCriteria($className, $criteria, $cacheFlag);
-        }
-        // No derivative wanted
-        if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
-            $rows= $xpdo->fromCache($criteria);
-            $fromCache = (is_array($rows) && !empty($rows));
-        }
-        if (!$fromCache && is_object($criteria)) {
-            $rows= disModUser :: _loadRows($xpdo, $className, $criteria);
-        }
-        if (is_array ($rows)) {
-            foreach ($rows as $row) {
-                disModUser :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
-            }
-        } elseif (is_object($rows)) {
-            $cacheRows = array();
-            while ($row = $rows->fetch(PDO::FETCH_ASSOC)) {
-                xPDOObject :: _loadCollectionInstance($xpdo, $objCollection, $className, $criteria, $row, $fromCache, $cacheFlag);
-                if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $cacheRows[] = $row;
-            }
-            if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag && !$fromCache) $rows =& $cacheRows;
-        }
-        if (!$fromCache && $xpdo->_cacheEnabled && $collectionCaching > 0 && $cacheFlag && !empty($rows)) {
-            $xpdo->toCache($criteria, $rows, $cacheFlag);
-        }
-        return $objCollection;
-    }
-
-    /**
-     * Load a collection of modDisUser instances and a graph of related objects.
-     */
-    public static function loadCollectionGraph(xPDO & $xpdo, $className, $graph, $criteria, $cacheFlag) {
-        $objCollection = array();
-        if ($query= $xpdo->newQuery($className, $criteria, $cacheFlag)) {
-            $query->bindGraph($graph);
-            $rows = array();
-            $fromCache = false;
-            $collectionCaching = (integer) $xpdo->getOption(xPDO::OPT_CACHE_DB_COLLECTIONS, array(), 1);
-            if ($collectionCaching > 0 && $xpdo->_cacheEnabled && $cacheFlag) {
-                $rows= $xpdo->fromCache($query);
-                $fromCache = !empty($rows);
-            }
-            if (!$fromCache) {
-                if ($query->prepare()) {
-                    if ($query->stmt->execute()) {
-                        $objCollection= $query->hydrateGraph($query->stmt, $cacheFlag);
-                    } else {
-                        $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error {$query->stmt->errorCode()} executing query: {$query->sql} - " . print_r($query->stmt->errorInfo(), true));
-                    }
-                } else {
-                    $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Error {$xpdo->errorCode()} preparing statement: {$query->sql} - " . print_r($xpdo->errorInfo(), true));
-                }
-            } elseif (!empty($rows)) {
-                $objCollection= $query->hydrateGraph($rows, $cacheFlag);
-            }
-        }
-        return $objCollection;
-    }
-
-    /**
-     * Loads an instance from an associative array.
-     *
-     * @static
-     * @param xPDO &$xpdo A valid xPDO instance.
-     * @param string $className Name of the class.
-     * @param xPDOQuery|string $criteria A valid xPDOQuery instance or relation alias.
-     * @param array $row The associative array containing the instance data.
-     * @return xPDOObject A new xPDOObject derivative representing a data row.
-     */
-    public static function _loadInstance(& $xpdo, $className, $criteria, $row) {
-        $rowPrefix= '';
-        if (is_object($criteria) && $criteria instanceof xPDOQuery) {
-            $alias = $criteria->getAlias();
-            $actualClass = $criteria->getClass();
-        } elseif (is_string($criteria) && !empty($criteria)) {
-            $alias = $criteria;
-            $actualClass = $className;
-        } else {
-            $alias = $className;
-            $actualClass= $className;
-        }
-        // Removed possibility to overload which class will be instantiated using class_key field
-        /** @var xPDOObject $instance */
-        $instance= $xpdo->newObject($actualClass);
-        if (is_object($instance) && $instance instanceof xPDOObject) {
-            $pk = $xpdo->getPK($actualClass);
-            if ($pk) {
-                if (is_array($pk)) $pk = reset($pk);
-                if (isset($row["{$alias}_{$pk}"])) {
-                    $rowPrefix= $alias . '_';
-                }
-                elseif ($actualClass !== $className && $actualClass !== $alias && isset($row["{$actualClass}_{$pk}"])) {
-                    $rowPrefix= $actualClass . '_';
-                }
-                elseif ($className !== $alias && isset($row["{$className}_{$pk}"])) {
-                    $rowPrefix= $className . '_';
-                }
-            } elseif (strpos(strtolower(key($row)), strtolower($alias . '_')) === 0) {
-                $rowPrefix= $alias . '_';
-            } elseif (strpos(strtolower(key($row)), strtolower($className . '_')) === 0) {
-                $rowPrefix= $className . '_';
-            }
-            $parentClass = $className;
-            $isSubPackage = strpos($className,'.');
-            if ($isSubPackage !== false) {
-                $parentClass = substr($className,$isSubPackage+1);
-            }
-            if (!$instance instanceof $parentClass) {
-                $xpdo->log(xPDO::LOG_LEVEL_ERROR, "Instantiated a derived class {$actualClass} that is not a subclass of the requested class {$className}");
-            }
-            $instance->_lazy= $actualClass !== $className ? array_keys($xpdo->getFieldMeta($actualClass)) : array_keys($instance->_fieldMeta);
-            $instance->fromArray($row, $rowPrefix, true, true);
-            $instance->_dirty= array ();
-            $instance->_new= false;
-        }
-        return $instance;
-    }
-
-    public function save($cacheFlag = false) {
-        $profileFields = $this->xpdo->getFields('modUserProfile');
-        $disProfileFields = $this->xpdo->getFields('disProfile');
-        $userFields = $this->xpdo->getFields('modUser');
-
-        foreach($this->_fields as $key => $value) {
-            if ($this->isDirty($key)) {
-
-            }
-        }
-    }
     /**
      * Initialize the user, setup basic metadata for them, and log their activity time.
      * @return bool
@@ -331,18 +160,10 @@ class disModUser extends modUser {
         $this->isLoggedIn = true;
 
         /* active user, update the disUser record */
-        if (!$activity = $this->getOne('Activity', array('internalKey' => $this->get('id')))) {
-            $activity = $this->xpdo->newObject('modActiveUser');
-        }
-        if ($activity->isNew()) {
-            $activity->set('internalKey', $this->get('id'));
-        }
-        $activity->fromArray(array(
-            'lasthit' => time(),
-            'ip' => $this->xpdo->discuss->getIp(),
-            'action' => 'discuss/' . $this->xpdo->discuss->request->getControllerValue() // Not really used at the moment. Just to make sure that actions do not interfere with manager logging
-        ));
-        $activity->save();
+        $this->set('last_active',strftime('%Y-%m-%d %H:%M:%S'));
+        $this->set('ip',$this->xpdo->discuss->getIp());
+        $this->save();
+
         $this->isAdmin();
 
         return true;
@@ -350,7 +171,7 @@ class disModUser extends modUser {
 
     /**
      * Prepare a cache of all read boards for this user
-     *
+     * 
      * @return array
      */
     public function prepareReadBoards() {
@@ -380,7 +201,7 @@ class disModUser extends modUser {
 
     /**
      * See if a board is read by this user
-     *
+     * 
      * @param int $boardId
      * @return bool
      */
@@ -396,9 +217,9 @@ class disModUser extends modUser {
      */
     public function getUnreadThreadsForBoard($boardId) {
         $threads = array();
-        $stmt = $this->xpdo->query("SELECT GROUP_CONCAT(`disThread`.`id` SEPARATOR ',') AS `threads`
+		$stmt = $this->xpdo->query("SELECT GROUP_CONCAT(`disThread`.`id` SEPARATOR ',') AS `threads`
 				FROM `modx_discuss_threads` `disThread`
-				WHERE NOT EXISTS(SELECT `read`.`thread` FROM modx_discuss_threads_read `read` WHERE `read`.`thread` = `disThread`.`id` AND `read`.`user` = {$this->get('id')})
+				WHERE NOT EXISTS(SELECT `read`.`thread` FROM modx_discuss_threads_read `read` WHERE `read`.`thread` = `disThread`.`id` AND `read`.`user` = {$this->xpdo->discuss->user->get('id')}) 
 				AND `disThread`.`board` = $boardId;");
         if ($stmt) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -474,7 +295,7 @@ class disModUser extends modUser {
 
     /**
      * Override toArray to provide more values
-     *
+     * 
      * @param string $keyPrefix
      * @param bool $rawValues
      * @param bool $excludeLazy
@@ -486,13 +307,28 @@ class disModUser extends modUser {
         $values[$keyPrefix.'age'] = $this->get('age');
         $values[$keyPrefix.'gender_formatted'] = $this->get('gender_formatted');
         $values[$keyPrefix.'avatarUrl'] = $this->getAvatarUrl();
-        $values[$keyPrefix.'isSelf'] = $this->get('id');
+        $values[$keyPrefix.'isSelf'] = $this->xpdo->user->get('id') == $this->get('user');
         $values[$keyPrefix.'canEdit'] = $values[$keyPrefix.'isSelf'];
         $values[$keyPrefix.'canAccount'] = $values[$keyPrefix.'isSelf'];
         $values[$keyPrefix.'canMerge'] = $values[$keyPrefix.'isSelf'];
         $values[$keyPrefix.'name'] = $this->get('name');
         $values[$keyPrefix.'posts_formatted'] = $this->get('posts_formatted');
         return $values;
+    }
+
+
+
+    /**
+     * Return an array of names of User Groups this user is in
+     * @return array
+     */
+    public function getUserGroupNames() {
+        $this->getOne('User');
+        if ($this->User instanceof modUser) {
+            return $this->User->getUserGroupNames();
+        } else {
+            return array();
+        }
     }
 
     /**
@@ -535,7 +371,7 @@ class disModUser extends modUser {
             if ($this->xpdo->getOption('discuss.use_custom_post_parser',null,false)) {
                 /* Load custom parser */
                 $parsed = $this->xpdo->invokeEvent('OnDiscussPostCustomParser', array(
-                    'content' => &$message,
+                        'content' => &$message,
                 ));
                 if (is_array($parsed)) {
                     foreach ($parsed as $msg) {
@@ -609,19 +445,19 @@ class disModUser extends modUser {
 
     /**
      * Strip BBCode from a string
-     *
+     * 
      * @param $str
      * @return mixed
      */
     public function stripBBCode($str) {
-        $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
-        $replace = '';
-        return preg_replace($pattern, $replace, $str);
+         $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
+         $replace = '';
+         return preg_replace($pattern, $replace, $str);
     }
-
+    
     /**
      * Get a count of # of unread messages for the user
-     *
+     * 
      * @return int
      */
     public function countUnreadMessages() {
@@ -670,7 +506,7 @@ class disModUser extends modUser {
 
     /**
      * Clear the cache for this User
-     *
+     * 
      * @return void
      */
     public function clearCache() {
@@ -730,6 +566,21 @@ class disModUser extends modUser {
     }
 
     /**
+     * Get user groups for the active user
+     *
+     * @return array An array of user groups
+     */
+    public function getUserGroups() {
+        $groups = array();
+        $this->getOne('User');
+        if ($this->User) {
+            $groups = $this->User->getUserGroups();
+            $this->isAdmin();
+        }
+        return $groups;
+    }
+
+    /**
      * Return whether or not the user is an Administrator
      * @return boolean
      */
@@ -742,7 +593,7 @@ class disModUser extends modUser {
             $adminGroups = $this->xpdo->getOption('discuss.admin_groups',null,'');
             $adminGroups = explode(',',$adminGroups);
             $level = 9999;
-            if ($this->isMember($adminGroups)) {
+            if ($this->xpdo->user->isMember($adminGroups)) {
                 $this->isAdmin = true;
             }
         }
@@ -766,7 +617,7 @@ class disModUser extends modUser {
             $this->isGlobalModerator = false;
             $moderators = $this->xpdo->getOption('discuss.global_moderators',null,'');
             $moderators = explode(',',$moderators);
-            if (in_array($this->get('username'),$moderators)) {
+            if (in_array($this->xpdo->user->get('username'),$moderators)) {
                 $this->isGlobalModerator = true;
             }
             $this->xpdo->setPlaceholder('discuss.user.isModerator',$this->isGlobalModerator);
@@ -781,7 +632,7 @@ class disModUser extends modUser {
      */
     public function isModerator($boardId) {
         if (!array_key_exists($boardId,$this->moderatorships)) {
-            if ($this->isGlobalModerator() || $this->isAdmin()) {
+            if ($this->xpdo->discuss->user->isGlobalModerator() || $this->xpdo->discuss->user->isAdmin()) {
                 $isModerator = true;
             } else {
                 $moderator = $this->xpdo->getCount('disModerator',array(
@@ -841,8 +692,8 @@ class disModUser extends modUser {
         $c = $this->xpdo->newQuery('disThread');
         $c->innerJoin('disBoard','Board');
         $c->leftJoin('disBoardUserGroup','UserGroups','Board.id = UserGroups.board');
-        $groups = $this->getUserGroups();
-        if (!empty($groups) && !$this->isAdmin()) {
+        $groups = $this->xpdo->discuss->user->getUserGroups();
+        if (!empty($groups) && !$this->xpdo->discuss->user->isAdmin()) {
             /* restrict boards by user group if applicable */
             $g = array(
                 'UserGroups.usergroup:IN' => $groups,
@@ -861,7 +712,7 @@ class disModUser extends modUser {
     /**
      * Check to see if the user qualifies for any post-based groups
      * and if so, grant it to them
-     *
+     * 
      * @return bool
      */
     public function checkForPostGroupAdvance() {
@@ -891,12 +742,12 @@ class disModUser extends modUser {
      */
     public function merge(disUser &$oldUser) {
         $success = true;
-        $user = $this;
+        $user = $this->getOne('User');
         if (empty($user)) return false;
 
-        $oldModxUser = &$oldUser;
+        $oldModxUser = $oldUser->getOne('User');
         if (empty($oldModxUser)) return false;
-
+        
         $this->xpdo->beginTransaction();
 
         /* merge post count */
@@ -949,7 +800,7 @@ class disModUser extends modUser {
         foreach ($ugs as $ug) {
             $user->joinGroup($ug);
         }
-
+        
         /* merge in posts, change authors */
         $sql = 'UPDATE '.$this->xpdo->getTableName('disPost').'
             SET `author` = '.$this->get('id').'
@@ -1033,6 +884,7 @@ class disModUser extends modUser {
         }
 
         /* remove old users */
+        $oldUser->remove();
         $oldModxUser->remove();
 
         /* check for post group advance */
@@ -1069,7 +921,7 @@ class disModUser extends modUser {
     }
 
     /**
-     * Gets a User Setting (bypasses cache)
+     * Gets a User Setting (bypasses cache) 
      * @param string $key
      * @param string $default
      * @return string
@@ -1077,7 +929,7 @@ class disModUser extends modUser {
     public function getSetting($key,$default = '') {
         $setting = $this->xpdo->getObject('modUserSetting',array(
             'key' => $key,
-            'user' => $this->get('id'),
+            'user' => $this->xpdo->user->get('id'),
         ));
         if ($setting) {
             $default = $setting->get('value');
@@ -1097,7 +949,7 @@ class disModUser extends modUser {
         $saved = false;
         $setting = $this->xpdo->getObject('modUserSetting',array(
             'key' => $key,
-            'user' => $this->get('id'),
+            'user' => $this->xpdo->user->get('id'),
         ));
         if ($setting) {
             if ($value == $default) {
@@ -1111,7 +963,7 @@ class disModUser extends modUser {
                 'key' => $key,
             ));
             $setting = $this->xpdo->newObject('modUserSetting');
-            $setting->set('user',$this->get('id'));
+            $setting->set('user',$this->xpdo->user->get('id'));
             $setting->set('key',$key);
             $setting->set('value',$value);
             $setting->set('namespace','discuss');

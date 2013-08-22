@@ -510,7 +510,9 @@
         <composite alias="Session" class="disSession" local="id" foreign="user" cardinality="one" owner="local" />
         <composite alias="Friends" class="disUserFriend" local="id" foreign="user" cardinality="many" owner="local" />
     </object> -->
-    <object class="disModUser" extends="modUser">
+    <object class="disUser" extends="modUser">
+        <alias key="user" field="id" />
+        <alias key="last_login" field="lastlogin" />
         <aggregate alias="PrimaryGroup" class="modUserGroup" local="primary_group" foreign="id" cardinality="one" owner="foreign" />
         <aggregate alias="PrimaryDiscussGroup" class="disUserGroupProfile" local="primary_group" foreign="usergroup" cardinality="one" owner="foreign" />
         <aggregate alias="ThreadLastVisited" class="disThread" local="thread_last_visited" foreign="id" cardinality="one" owner="foreign" />
@@ -525,7 +527,7 @@
         <aggregate alias="Activity" class="modActiveUser" local="id" foreign="internalKey" cardinality="one" owner="foreign" />
     </object>
     <object class="disProfile" table="discuss_user_profile" extends="xPDOObject">
-        <field key="internalKey" dbtype="int" precision="11" phptype="integer" attributes="unsigned" null="false" />
+        <field key="internalKey" dbtype="int" precision="11" phptype="integer" attributes="unsigned" null="false" index="pk"/>
         <field key="createdon" dbtype="int" precision="11" phptype="integer" attributes="unsigned" null="false" />
         <field key="name_first" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
         <field key="name_last" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
@@ -543,7 +545,6 @@
         <field key="posts" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
         <field key="show_email" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" />
         <field key="show_online" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="1" />
-        <field key="primary_group" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" />
 
         <!-- these fields are used for SSO integration, or imports from other systems -->
         <field key="synced" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" index="index" />
@@ -553,6 +554,9 @@
 
         <field key="display_name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="use_display_name" dbtype="tinyint" precision="1" phptype="boolean" null="false" default="0" />
+        <index alias="PRIMARY" name="PRIMARY" primary="true" unique="TRUE" type="BTREE">
+            <column key="internalKey" length="" collation="A" null="false" />
+        </index>
     </object>
     <object class="disUserModerated" table="discuss_user_moderated" extends="xPDOSimpleObject">
         <field key="user" dbtype="int" precision="10" phptype="integer" attributes="unsigned" null="false" default="0" index="index" />

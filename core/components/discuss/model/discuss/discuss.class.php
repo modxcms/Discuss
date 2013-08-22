@@ -255,14 +255,13 @@ class Discuss {
         $this->modx->lexicon->load('discuss:default');
         /* if no user, set id to 0 */
         if (!$this->modx->user->hasSessionContext($this->modx->context->get('key'))) {
-            $this->user = $this->modx->newObject('disModUser');
+            $this->user = $this->modx->newObject('disUser');
             $this->user->set('id',0);
-            $this->user->set('user',0);
             $this->user->set('username','(anonymous)');
             $this->user->isLoggedIn = false;
         } else {
             /* we are logged into MODX, check for user in Discuss */
-            $this->user = $this->modx->getObject('disModUser', $this->modx->user->get('id'));
+            $this->user = $this->modx->getObject('disUser', $this->modx->user->get('id'));
             $this->user->init();
         }
     }

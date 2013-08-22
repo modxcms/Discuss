@@ -43,6 +43,7 @@ $output = array();
 $idx = 0;
 $total = count($scriptProperties['items']);
 $alt = false;
+
 foreach ($scriptProperties['items'] as $item) {
     $cls = $idx == 0 ? $firstCls : ($idx == ($total-1) ? $lastCls : '');
     if ($alt) { $cls .= ' '.$altCls; }

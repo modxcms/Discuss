@@ -398,11 +398,12 @@ class disBoard extends xPDOSimpleObject {
 
         $c = $this->xpdo->newQuery('disModerator');
         $c->innerJoin('disUser','User');
+        $c->innerJoin('disProfile', 'disProfile', 'disProfile.internalKey = User.id');
         $c->select($this->xpdo->getSelectColumns('disModerator','disModerator','',array('id','user')));
         $c->select(array(
             'User.username',
-            'User.use_display_name',
-            'User.display_name',
+            'disProfile.use_display_name',
+            'disProfile.display_name',
         ));
         $c->where(array(
             'disModerator.board' => $this->get('id'),
@@ -648,6 +649,7 @@ class disBoard extends xPDOSimpleObject {
         $c->innerJoin('disBoardClosure','Descendants');
         $c->leftJoin('disPost','LastPost');
         $c->leftJoin('disUser','LastPostAuthor','LastPost.author = LastPostAuthor.id');
+        $c->leftJoin('disProfile','LastPostAuthorProfile','LastPost.author = LastPostAuthorProfile.internalKey');
         $c->leftJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
         $c->where(array(
             'disBoard.status:!=' => disBoard::STATUS_INACTIVE,
@@ -689,8 +691,8 @@ class disBoard extends xPDOSimpleObject {
             'LastPostThread.replies AS last_post_replies',
             'LastPostThread.title AS last_post_title',
             'LastPostAuthor.username AS last_post_username',
-            'LastPostAuthor.use_display_name AS last_post_udn',
-            'LastPostAuthor.display_name AS last_post_display_name',
+            'LastPostAuthorProfile.use_display_name AS last_post_udn',
+            'LastPostAuthorProfile.display_name AS last_post_display_name',
         ));
         $c->sortby('Category.rank','ASC');
         $c->sortby('disBoard.rank','ASC');

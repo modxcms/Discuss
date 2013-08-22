@@ -26,7 +26,6 @@ $xpdo_meta_map['disProfile']= array (
     'posts' => 0,
     'show_email' => 1,
     'show_online' => 1,
-    'primary_group' => 0,
     'synced' => 0,
     'source' => 'internal',
     'syncedat' => NULL,
@@ -43,6 +42,7 @@ $xpdo_meta_map['disProfile']= array (
       'phptype' => 'integer',
       'attributes' => 'unsigned',
       'null' => false,
+      'index' => 'pk',
     ),
     'createdon' => 
     array (
@@ -163,15 +163,6 @@ $xpdo_meta_map['disProfile']= array (
       'null' => false,
       'default' => 1,
     ),
-    'primary_group' => 
-    array (
-      'dbtype' => 'int',
-      'precision' => '10',
-      'phptype' => 'integer',
-      'attributes' => 'unsigned',
-      'null' => false,
-      'default' => 0,
-    ),
     'synced' => 
     array (
       'dbtype' => 'tinyint',
@@ -219,6 +210,25 @@ $xpdo_meta_map['disProfile']= array (
       'phptype' => 'boolean',
       'null' => false,
       'default' => 0,
+    ),
+  ),
+  'indexes' => 
+  array (
+    'PRIMARY' => 
+    array (
+      'alias' => 'PRIMARY',
+      'primary' => true,
+      'unique' => true,
+      'type' => 'BTREE',
+      'columns' => 
+      array (
+        'internalKey' => 
+        array (
+          'length' => '',
+          'collation' => 'A',
+          'null' => false,
+        ),
+      ),
     ),
   ),
 );

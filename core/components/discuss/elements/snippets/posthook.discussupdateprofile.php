@@ -35,11 +35,9 @@ if (!($discuss instanceof Discuss)) return true;
 $modx->lexicon->load('discuss:user');
 
 /** @var disUser $disUser */
-$disUser = $modx->getObject('disUser',array(
-    'user' => $modx->user->get('id'),
-));
-if (!$disUser) return true;
-
+$disUser = $modx->getObject('disUser',$modx->user->get('id'));
+//if (!$disUser) return true;
+$modx->log(xPDO::LOG_LEVEL_ERROR, print_r($disUser->toArray(), true));
 unset($fields['id']);
 unset($fields['user']);
 

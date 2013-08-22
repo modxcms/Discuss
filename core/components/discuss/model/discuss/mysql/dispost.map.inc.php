@@ -71,7 +71,7 @@ $xpdo_meta_map['disPost']= array (
     ),
     'message' => 
     array (
-      'dbtype' => 'mediumtext',
+      'dbtype' => 'text',
       'phptype' => 'string',
       'null' => false,
       'index' => 'fulltext',

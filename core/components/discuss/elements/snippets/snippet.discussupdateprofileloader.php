@@ -52,9 +52,7 @@ if ($useExtended) {
 }
 
 /** @var disUser $disUser */
-$disUser = $modx->getObject('disUser',array(
-   'user' => $modx->user->get('id'),
-));
+$disUser = $modx->getObject('disUser',$modx->user->get('id'));
 
 if ($disUser) {
     $fields = array_merge($disUser->toArray(),$fields);

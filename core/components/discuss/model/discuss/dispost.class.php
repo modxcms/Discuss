@@ -959,20 +959,13 @@ class disPost extends xPDOSimpleObject {
      * @return
      */
     public function renderAuthorMeta(array &$postArray) {
-        if (empty($this->Author)) {
-            $this->getOne('Author');
-            if (empty($this->Author)) {
-                return;
-            }
-        }
-
         /** @var array $authorArray */
-        $authorArray = $this->Author->toArray('author.');
+        $authorArray = $this->Author->toArray('author.', true, true);
         $postArray = array_merge($postArray,$authorArray);
+        $postArray = array_merge($postArray, $this->Author->Profile->toArray('author.', true, true), $this->Author->disProfile->toArray('author.', true, true));
         $postArray['author.signature'] = $this->Author->parseSignature();
         $postArray['author.posts'] = number_format($postArray['author.posts']);
         unset($postArray['author.password'],$postArray['author.cachepwd']);
-        
         if ($this->xpdo->discuss->user->canViewProfiles()) {
             $postArray['author.username_link'] = '<a href="'.$this->Author->getUrl().'">'.$this->Author->get('name').'</a>';
         } else {

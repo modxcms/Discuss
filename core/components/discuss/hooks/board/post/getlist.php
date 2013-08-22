@@ -63,6 +63,8 @@ if (empty($cache)) {
     $c->innerJoin('disPost','FirstPost');
     $c->innerJoin('disPost','LastPost');
     $c->innerJoin('disThread','LastPostThread','LastPostThread.id = LastPost.thread');
+    $c->innerJoin('disProfile', 'LastAuthorProfile', 'LastAuthorProfile.internalKey = LastAuthor.id');
+    $c->innerJoin('disProfile', 'FirstAuthorProfile', 'FirstAuthorProfile.internalKey = FirstAuthor.id');
     $c->select($modx->getSelectColumns('disPost','LastPost'));
     $c->select($modx->getSelectColumns('disPost','FirstPost','first_post_'));
     $c->select($modx->getSelectColumns('disThread','disThread'));
@@ -71,13 +73,13 @@ if (empty($cache)) {
         'post_id' => 'LastPost.id',
         'last_post_replies' => 'LastPostThread.replies',
         'last_post_username' => 'LastAuthor.username',
-        'last_post_udn' => 'LastAuthor.use_display_name',
-        'last_post_display_name' => 'LastAuthor.display_name',
+        'last_post_udn' => 'LastAuthorProfile.use_display_name',
+        'last_post_display_name' => 'LastAuthorProfile.display_name',
         'first_post_username' => 'FirstAuthor.username',
-        'first_post_udn' => 'FirstAuthor.use_display_name',
-        'first_post_display_name' => 'FirstAuthor.display_name',
+        'first_post_udn' => 'FirstAuthorProfile.use_display_name',
+        'first_post_display_name' => ' FirstAuthorProfile.display_name',
         'FirstPost.title',
-        'user' => 'LastAuthor.user',
+        'user' => 'LastAuthor.id',
         'disThread.id',
         'disThread.replies',
         'disThread.views',
@@ -87,11 +89,9 @@ if (empty($cache)) {
         'disThread.post_first',
         'disThread.answered',
         'disThread.class_key',
-        '(SELECT GROUP_CONCAT(pAuthor.id)
-            FROM '.$modx->getTableName('disPost').' AS pPost
-            INNER JOIN '.$modx->getTableName('disUser').' AS pAuthor ON pAuthor.id = pPost.author
-            WHERE pPost.thread = disThread.id
-         ) AS participants',
+        '(SELECT GROUP_CONCAT(threadParticipants.user)
+        FROM '. $modx->getTableName('disThreadParticipant').' AS `threadParticipants`
+        WHERE threadParticipants.thread = disThread.id) AS participants ',
     ));
     if ($modx->getOption('get_category_name',$scriptProperties,false)) {
         $c->innerJoin('disBoard','Board');
