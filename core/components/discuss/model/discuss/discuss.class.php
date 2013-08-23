@@ -105,7 +105,7 @@ class Discuss {
         }
 
         $this->config = array_merge(array(
-            'version' => '1.2.1-pl',
+            'version' => '1.2.2-dev',
             'assetsUrl' => $assetsUrl,
 			'themesUrl' => $themesUrl,
             'theme' => $theme,

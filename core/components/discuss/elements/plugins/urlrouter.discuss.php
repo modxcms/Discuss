@@ -28,7 +28,7 @@
  * @var Discuss $discuss
  * @package discuss
  */
-if ($modx->event->name != 'OnHandleRequest' || $modx->request->getResourceMethod() != 'alias' || $modx->context->key == 'mgr') {
+if ($modx->event->name != 'OnHandleRequest' || $modx->context->key == 'mgr') {
     return;
 }
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
@@ -39,9 +39,10 @@ $discuss->url = $modx->makeUrl($modx->getOption('discuss.forums_resource_id'));
 
 $request = trim($modx->request->getResourceIdentifier('alias'), '/');
 // Checking to stop everything if we are sure that this is not our path or it doesn't have any parameters to parse (exact match of alias to the base resource alias)
-if (strpos($request, $discuss->url) !== 0 || strlen($request) === strlen($discuss->url) || array_key_exists($request, $modx->aliasMap)) {
+if ((strpos($request, $discuss->url) !== 0 && $discuss->url != '/') ||strlen($request) === strlen($discuss->url) || array_key_exists($request, $modx->aliasMap)) {
     return;
 }
+
 $containersuffix = $modx->getOption('container_suffix', null, '/');
 
 $chunk = substr($request, 0, strrpos($request, $containersuffix));
@@ -67,7 +68,7 @@ if (!function_exists('sorter')) {
 uksort($manifest, "sorter");
 
 // Here I am sure that the URL is the one we need. Now lets search it for the actions.
-$request = ltrim(substr($request, strlen($discuss->url)), '/');
+$request = $discuss->url != '/' ? ltrim(substr($request, strlen($discuss->url)), '/') : ltrim($request);
 if (!function_exists('url_parser')) {
     function url_parser($action, $requested, $furls, &$discuss)
     {

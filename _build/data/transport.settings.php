@@ -379,7 +379,7 @@ $settings['discuss.notification_new_post_subject']->fromArray(array(
 $settings['discuss.notification_new_post_chunk']= $modx->newObject('modSystemSetting');
 $settings['discuss.notification_new_post_chunk']->fromArray(array(
     'key' => 'discuss.notification_new_post_chunk',
-    'value' => 'disNotificationEmail',
+    'value' => 'emails/disNotificationEmail',
     'xtype' => 'textfield',
     'namespace' => 'discuss',
     'area' => 'Notifications',

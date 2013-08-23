@@ -429,7 +429,7 @@ class DisRequest {
                     break;
             }
         }
-        trim($path, '/');
+        $path = trim($path, ' /');
         $urlparts = explode('?', $this->discuss->url, 2);
         if (count($urlparts)>1) {
             $urlrequest = array();
@@ -460,7 +460,7 @@ class DisRequest {
             $action = '';
         }
         $url = '';
-        $nofurls = ($forcenofurls || $this->modx->request->getResourceMethod() != 'alias');
+        $nofurls = ($forcenofurls || ($this->modx->request->getResourceMethod() != 'alias' && $this->discuss->url != '/'));
         if ($nofurls) {
             $url = $this->discuss->url;
             if(!empty($action))
