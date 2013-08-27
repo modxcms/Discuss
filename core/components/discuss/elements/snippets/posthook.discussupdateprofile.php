@@ -35,9 +35,8 @@ if (!($discuss instanceof Discuss)) return true;
 $modx->lexicon->load('discuss:user');
 
 /** @var disUser $disUser */
-$disUser = $modx->getObject('disUser',$modx->user->get('id'));
-//if (!$disUser) return true;
-$modx->log(xPDO::LOG_LEVEL_ERROR, print_r($disUser->toArray(), true));
+$disUser = $modx->discuss->user;
+
 unset($fields['id']);
 unset($fields['user']);
 
@@ -54,14 +53,13 @@ if (isset($fields['fullname']) && empty($fields['name_first'])) {
 $disUser->fromArray($fields);
 if (!empty($fields['signature'])) {
     $fields['signature'] = str_replace(array('&#91;','&#93;'),array('[',']'),$fields['signature']);
-    $disUser->set('signature',$fields['signature']);
 }
 
 if (!empty($fields['birthdate'])) {
     $unixBirthdate = strtotime($fields['birthdate']);
-    $disUser->set('birthdate',($unixBirthdate !== false) ? $unixBirthdate : '');
+    $fields['dob'] = ($unixBirthdate !== false) ? $unixBirthdate : '';
 }
-
+$disUser->fromArray($fields);
 if (!$disUser->save()) {
     $modx->log(modX::LOG_LEVEL_ERROR,'[Discuss] Could not sync profile information during UpdateProfile snippet posthook: '.print_r($fields,true));
 }

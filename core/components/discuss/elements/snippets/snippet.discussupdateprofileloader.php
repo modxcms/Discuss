@@ -31,28 +31,11 @@
 $discuss = $modx->getService('discuss','Discuss',$modx->getOption('discuss.core_path',null,$modx->getOption('core_path').'components/discuss/').'model/discuss/');
 if (!($discuss instanceof Discuss)) return true;
 $modx->lexicon->load('discuss:user');
-
-/** @var modUserProfile $profile */
-$profile = $modx->user->getOne('Profile');
-if (empty($profile)) return '';
-
-$fields = $profile->toArray();
-
-$useExtended = $modx->getOption('useExtended',$scriptProperties,true);
-if ($useExtended) {
-    $extended = $fields['extended'];
-    if (!empty($extended) && is_array($extended)) {
-        $excludeExtended = $modx->getOption('excludeExtended', $scriptProperties, '');
-        $excludeExtended = explode(',', $excludeExtended);
-        foreach ($excludeExtended as $exclude) {
-            if (isset($extended[$exclude]))  unset ($extended[$exclude]);
-        }
-        $fields = array_merge($extended,$fields);
-    }
+$disUser = $modx->discuss->user;
+$extended = $disUser->get('extended');
+if (!empty($extended)) {
+    $fields = $extended;
 }
-
-/** @var disUser $disUser */
-$disUser = $modx->getObject('disUser',$modx->user->get('id'));
 
 if ($disUser) {
     $fields = array_merge($disUser->toArray(),$fields);

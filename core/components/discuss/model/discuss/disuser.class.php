@@ -317,14 +317,24 @@ class disUser extends modUser {
             'modUserProfile' => self::_loadInstance($this->xpdo, 'modUserProfile', 'modUserProfile', array('internalKey' => $this->get('id'))),
             'disProfile' => self::_loadInstance($this->xpdo, 'disProfile', 'disProfile', array('internalKey' => $this->get('id')))
         );
+        $this->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($related['disProfile']->_fields, true));
         $values = array();
+        $extended = array();
         foreach($this->_fields as $key => $value) {
             // Find which object(s) has the field
             foreach($related as $k => $v) {
                 if (array_key_exists($key, $v->_fields)) {
                     $values[$k][$key] = $value;
+                } else {
+                    // Set field to extended for post processing after loop
+                    $extended[$key] = $value;
                 }
             }
+        }
+        // Remove modUser/disUser fields from extended
+        $extended = array_diff_assoc($extended, $this->xpdo->getFields($this->_class));
+        if (!empty($extended)) {
+            $values['modUserProfile']['extended'] = $extended;
         }
         $tempFields = $this->_fields;
         $this->_fields = array_intersect_key($this->_fields, $this->xpdo->getFields($this->_class));
