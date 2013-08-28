@@ -134,11 +134,27 @@ foreach ($boards as $board) {
         $ph = array();
         $sbl = array();
         foreach ($subBoards as $subboard) {
-            $sb = explode(':',$subboard);
-            $ph['id'] = $sb[0];
-            $ph['title'] = $sb[1];
+            $sb = explode(':',$subboard);            
+            $c = array(
+                'id' => $sb[0];
+            );
+            $sb = NULL;
+            $sbo = NULL;
 
-            $sbl[] = $discuss->getChunk($subBoardTpl,$ph);
+            $ck = 'discuss/board/index/'.md5(serialize($c));
+            $sb = $modx->cacheManager->get($ck);
+            if($sb === NULL) {
+                /* @var disBoard $board */
+                $sbo = $modx->getObject('disBoard', $c);
+                if($sbo !== NULL) {
+                    $sbo->calcLastPostPage();
+                    $sbo->getLastPostUrl();
+                    $sb = $sbo->toArray('', true, true);
+                    $modx->cacheManager->set($ck,$sb,$modx->getOption('discuss.cache_time',null,0));
+                }
+            }
+
+            $sbl[] = $discuss->getChunk($subBoardTpl,$sb);
         }
         $board['subforums'] = implode($subBoardSeparator,$sbl);
     }
