@@ -87,6 +87,7 @@ class DiscussSearchController extends DiscussController {
      */
     public function search($s) {
         $resultRowTpl = $this->modx->getOption('resultRowTpl',$this->scriptProperties,'disSearchResult');
+        $resultTextLength = $this->modx->getOption('resultTextLength',$this->scriptProperties,100);
         $toggle = $this->modx->getOption('toggle',$this->scriptProperties,'+');
         $limit = !empty($this->scriptProperties['limit']) ? (int)$this->scriptProperties['limit'] : $this->modx->getOption('discuss.threads_per_page',null,20);
         $page = !empty($this->scriptProperties['page']) ? (int)$this->scriptProperties['page'] : 1;
@@ -124,9 +125,9 @@ class DiscussSearchController extends DiscussController {
                     $position = intval(strpos($postArray['message'],$string));
                     $length = strlen($postArray['message']);
                     if ($position > 0 && $length > $position) {
-                        $postArray['message'] = ($position != 0 ? '...' : '').substr($postArray['message'],$position,$position+100).'...';
+                        $postArray['message'] = ($position != 0 ? '...' : '').substr($postArray['message'],$position,$position+$resultTextLength).'...';
                     } else {
-                        $postArray['message'] = substr($postArray['message'],0,100).($length > 100 ? '...' : '');
+                        $postArray['message'] = substr($postArray['message'],0,$resultTextLength).($length > $resultTextLength ? '...' : '');
                     }
                     if (empty($postArray['url'])) {
                         $postArray['url'] = $this->discuss->request->makeUrl('thread',array('thread' => $postArray['thread'])).'#dis-post-'.$postArray['id'];
