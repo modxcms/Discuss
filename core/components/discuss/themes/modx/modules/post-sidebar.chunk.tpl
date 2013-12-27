@@ -10,12 +10,10 @@
             <p>[[+moderators]]</p>
         </div>`]]
 
-<!--This is the chunk-->
-        [[- MODX Cloud ad will go here … ]]
         [[!getCache?
             &element=`RandomChunk`
             &cacheKey=`RandomChunkAd`
-            &cacheElementKey=`global-rca`
+            &cacheElementKey=`adidx`
             &cacheExpires=`300`
             &parents=`[[*id]]`
             &chunks=`[[$ad.cloud.ForumsSidebar.RandomAdList]]`
