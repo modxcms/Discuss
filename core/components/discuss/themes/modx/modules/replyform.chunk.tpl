@@ -23,7 +23,7 @@
                     </li>
                     <li class="m-dis-question" data-target=".m-dis-question-info">
                         <label>
-                            <input type="radio" name="class_key" value="disThreadQuestion" [[!+fi.class_key:eq=`disThreadQuestion`:then=`checked="checked"`:else=``]] />
+                            <input type="radio" name="class_key" value="disThreadQuestion" [[!+fi.class_key:eq=`disThreadQuestion`:then=`checked="checked"`:else=``]][[!+fi.class_key:default=` checked="checked"`]] />
                             [[%discuss.question]]
                         </label>
                     </li>
