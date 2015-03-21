@@ -17,7 +17,7 @@
                 [[+locked_cb]]
                 [[+sticky_cb]]
                 <label class="dis-cb">
-                    <input type="checkbox" name="notify" value="1" [[+subscribed]]  tabindex="38"/>[[%discuss.subscribe_by_email]]
+                    <input type="checkbox" name="notify" value="" [[+subscribed]]  tabindex="38"/>[[%discuss.subscribe_by_email]]
                 </label>
             </div>
         </div>
