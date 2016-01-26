@@ -32,7 +32,7 @@
     [[*cssjs]]
     [[- Live Typekit call
     [[++discuss.load_typekit:notempty=`<!-- TypeKit -->
-    <script src="http://use.typekit.com/zub5doo.js"></script>
+    <script src="//use.typekit.com/zub5doo.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>`]]
     ]]
     <script src="[[+discuss.config.jsUrl]]LABjs/LAB.min.js"></script>
@@ -53,10 +53,10 @@
                 <div class="f1-f6 t1-t3 m-all">
                     <nav class="l-col_16">
                         <ul class="m-sm_nav_pod">
-                            <li><a href="http://modx.com/">Back to MODX.com</a></li>
+                            <li><a href="//modx.com/">Back to MODX.com</a></li>
                             <li><a href="[[+discuss.config.url]]">Forums</a></li>
-                            <li><a href="http://rtfm.modx.com/">Docs</a></li>
-                            <li><a href="http://tracker.modx.com/">Bugs</a></li>
+                            <li><a href="//rtfm.modx.com/">Docs</a></li>
+                            <li><a href="//tracker.modx.com/">Bugs</a></li>
                             <li><a href="[[~537]]">Blog</a></li>
                         </ul>
                     </nav>
@@ -190,7 +190,7 @@
                         <strong class="m-stats-title">[[%discuss.users_active? &total=`[[+activeUsers.total]]`]]:</strong>
                         <span class="m-stats-single">[[+activeUsers.users]]</span>
                     </div>
-                    <a class="modx-live" href="http://www.modx.com/live">
+                    <a class="modx-live" href="//www.modx.com/live">
                         <img src="[[+discuss.config.imagesUrl]]redo/icons/modx-live.png" alt="View Live MODX Activity">
                         <p>modx.com/live</p>
                     </a>
@@ -212,7 +212,7 @@
                 </nav>
                 <div class="group">
                     <div class="inline logo">
-                        <a class="m-modx_logo h-ir" href="http://modx.com">MODX Creative Freedom</a>
+                        <a class="m-modx_logo h-ir" href="//modx.com">MODX Creative Freedom</a>
                     </div>
                     <div class="group copy-info inline">
                         <p>&copy; 2004-2012, MODX, LLC. All Rights Reserved.</p>
@@ -227,7 +227,7 @@
             <div class="f9-f12 stay-connected">
                 <h3>Stay Connected</h3>
                 <h4>Join Our Mailing List</h4>
-                <form id="newsletter" action="http://modxcms.list-manage.com/subscribe/post" method="post">
+                <form id="newsletter" action="//modxcms.list-manage.com/subscribe/post" method="post">
                     <input type="hidden" name="u" value="08b25a8de68a29fe03a483720" />
                     <input type="hidden" name="id" value="848cf40420" />
                     <input type="hidden" name="MERGE9" value="forums" id="MERGE9">
@@ -239,10 +239,10 @@
                     </div>
                 </form> 
                 <ul class="social-icons horiz-list">
-                    <li><a href="http://twitter.com/modx" title="MODX on Twitter" class="twitter">Twitter</a></li>
-                    <li><a href="http://www.facebook.com/modxcms" title="MODX Facebook" class="facebook">Facebook</a></li>
+                    <li><a href="//twitter.com/modx" title="MODX on Twitter" class="twitter">Twitter</a></li>
+                    <li><a href="//www.facebook.com/modxcms" title="MODX Facebook" class="facebook">Facebook</a></li>
                     [[- todo: add LinkedIn]]
-                    <li><a href="http://modx.com/feeds/" title="Subscribe to our Feeds" class="rss">RSS Feeds</a></li>
+                    <li><a href="//modx.com/feeds/" title="Subscribe to our Feeds" class="rss">RSS Feeds</a></li>
                 </ul>
             </div>
         </div>
@@ -258,7 +258,7 @@
       $LAB
       [[+discuss.js.header:notempty=`.script([[+discuss.js.header]])`]]
       .setOptions({"AlwaysPreserveOrder":true})
-      .script("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js").wait()
+      .script("//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js").wait()
       .script("[[+discuss.config.jsUrl]]jquery.scrollTo-min.js")
       .script("[[+discuss.config.jsUrl]]jquery-ui-1.9.0.custom.min.js")
       .script("[[+discuss.config.jsUrl]]jquery.autosize.js").wait()
@@ -289,7 +289,7 @@
         var ga = document.createElement('script');
         ga.type = 'text/javascript';
         ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : '//www') + '.google-analytics.com/ga.js'; 
         var s = document.getElementsByTagName('script')[0]; 
         s.parentNode.insertBefore(ga, s);
       })(); 
